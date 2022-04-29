@@ -1,0 +1,37 @@
+{
+  "name": "@obosbbl/grunnmuren-icons",
+  "version": "0.0.0",
+  "description": "Grunnmuren icons as SVGs",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "url": "https://github.com/code-obos/grunnmuren",
+    "directory": "packages/icons"
+  },
+  "exports": {
+    ".": {
+      "require": "./index.cjs",
+      "import": "./index.mjs"
+    },
+    "./svg/*": "./svg/*"
+  },
+  "files": [
+    "index.cjs",
+    "index.mjs",
+    "svg"
+  ],
+  "scripts": {
+    "optimize": "./scripts/optimize.js",
+    "update": "./scripts/figma-import.js"
+  },
+  "devDependencies": {
+    "@sindresorhus/slugify": "2.1.0",
+    "fs-extra": "10.1.0",
+    "glob": "8.0.1",
+    "node-fetch": "3.2.4",
+    "ora": "6.1.0",
+    "picocolors": "1.0.0",
+    "prompts": "2.4.2",
+    "svgo": "2.8.0"
+  }
+}
