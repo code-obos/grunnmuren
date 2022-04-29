@@ -1,0 +1,11 @@
+{
+  "name": "grunnmuren",
+  "description": "Monorepo for Grunnmuren, OBOS' design system",
+  "private": true,
+  "scripts": {
+    "lint:format": "prettier --list-different ."
+  },
+  "devDependencies": {
+    "prettier": "2.6.2"
+  }
+}
