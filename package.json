@@ -2,6 +2,9 @@
   "name": "grunnmuren",
   "description": "Monorepo for Grunnmuren, OBOS' design system",
   "private": true,
+  "repository": {
+    "url": "https://github.com/code-obos/grunnmuren"
+  },
   "scripts": {
     "lint:format": "prettier --list-different ."
   },
