@@ -6,10 +6,13 @@
     "url": "https://github.com/code-obos/grunnmuren"
   },
   "scripts": {
+    "ci:publish": "changeset publish",
+    "ci:version": "changeset version",
     "lint:format": "prettier --list-different .",
     "lint:js": "eslint . --ext \"js,cjs,mjs,tsx,ts\" --max-warnings 0 --ignore-path .gitignore"
   },
   "devDependencies": {
+    "@changesets/cli": "2.22.0",
     "@typescript-eslint/eslint-plugin": "5.21.0",
     "@typescript-eslint/parser": "5.21.0",
     "eslint": "8.14.0",
