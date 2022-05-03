@@ -1,0 +1,27 @@
+{
+  "name": "@obosbbl/grunnmuren-tailwind",
+  "version": "0.0.0",
+  "description": "Grunnmuren Tailwind preset",
+  "license": "MIT",
+  "type": "commonjs",
+  "repository": {
+    "url": "https://github.com/code-obos/grunnmuren",
+    "directory": "packages/tailwind"
+  },
+  "exports": {
+    ".": "./tailwind-base.cjs"
+  },
+  "files": [
+    "tailwind-base.cjs"
+  ],
+  "dependencies": {
+    "@tailwindcss/aspect-ratio": "0.4.0",
+    "@tailwindcss/typography": "0.5.2"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.0.24"
+  },
+  "peerDependencies": {
+    "tailwindcss": "^3"
+  }
+}
