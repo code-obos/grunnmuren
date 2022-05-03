@@ -5,7 +5,7 @@ Grunnmuren's icon set as SVGs.
 ## Install
 
 ```sh
-npm add @obosbbl/grunnmuren-icons
+npm install @obosbbl/grunnmuren-icons
 ```
 
 ## Updating the icons
