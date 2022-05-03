@@ -4,7 +4,6 @@ import fs from 'fs-extra';
 import path from 'path';
 import fetch from 'node-fetch';
 import prompts from 'prompts';
-import slugify from '@sindresorhus/slugify';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -153,9 +152,7 @@ async function downloadSvgIcon({ iconName, url }) {
   const res = await fetch(url);
   const svg = await res.text();
 
-  const name = slugify(iconName);
-
-  const path = `${__dirname}/../src/${name}.svg`;
+  const path = `${__dirname}/../src/${iconName}.svg`;
 
   return fs.outputFile(path, svg, 'utf8');
 }
