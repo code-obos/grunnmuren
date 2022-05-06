@@ -4,9 +4,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import fetch from 'node-fetch';
 import prompts from 'prompts';
-import { fileURLToPath } from 'url';
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+import { __dirname } from './utils.mjs';
 
 // The Figma project where we can find our icons
 const FIGMA_PROJECT_ID = 'XRHRRytz9DqrDkWpE4IKVB';
