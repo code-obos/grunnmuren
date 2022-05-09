@@ -1,7 +1,7 @@
 {
   "name": "@obosbbl/grunnmuren-icons",
   "version": "0.1.1",
-  "description": "Grunnmuren icons as SVGs",
+  "description": "Grunnmuren's icon set",
   "license": "MIT",
   "type": "module",
   "repository": {
@@ -9,28 +9,38 @@
     "directory": "packages/icons"
   },
   "exports": {
-    ".": {
-      "require": "./index.cjs",
-      "import": "./index.mjs"
-    },
+    "./react": "./dist/icons.es.js",
     "./svg/*": "./svg/*"
   },
   "files": [
-    "index.cjs",
-    "index.mjs",
+    "dist",
     "svg"
   ],
+  "types": "./dist/icons.d.ts",
   "scripts": {
-    "optimize": "./scripts/optimize.js",
-    "update": "./scripts/figma-import.js"
+    "build": "pnpm run build:make-react && pnpm run build:vite && pnpm run build:types",
+    "build:make-react": "node ./scripts/make-react-icons.mjs",
+    "build:types": "tsc --emitDeclarationOnly --declaration",
+    "build:vite": "vite build",
+    "update": "pnpm run update:download && pnpm run update:optimize",
+    "update:download": "node ./scripts/figma-import.mjs",
+    "update:optimize": "node ./scripts/optimize.mjs"
   },
   "devDependencies": {
+    "@svgr/core": "6.2.1",
+    "@svgr/plugin-jsx": "6.2.1",
+    "@svgr/plugin-svgo": "6.2.0",
+    "@types/react": "^18.0.0",
+    "@vitejs/plugin-react": "1.3.2",
     "fs-extra": "10.1.0",
-    "glob": "8.0.1",
     "node-fetch": "3.2.4",
     "ora": "6.1.0",
     "picocolors": "1.0.0",
     "prompts": "2.4.2",
-    "svgo": "2.8.0"
+    "svgo": "2.8.0",
+    "vite": "2.9.8"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0"
   }
 }

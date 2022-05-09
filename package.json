@@ -6,7 +6,8 @@
     "url": "https://github.com/code-obos/grunnmuren"
   },
   "scripts": {
-    "ci:publish": "changeset publish",
+    "build": "pnpm --filter './packages/*' build",
+    "ci:publish": "pnpm build && changeset publish",
     "ci:version": "changeset version",
     "lint:format": "prettier --list-different .",
     "lint:js": "eslint . --ext \"js,cjs,mjs,tsx,ts\" --max-warnings 0 --ignore-path .gitignore"

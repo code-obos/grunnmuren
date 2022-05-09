@@ -1,13 +1,10 @@
 #!/usr/bin/env node
 
 import { optimize } from 'svgo';
-import glob from 'glob';
 import path from 'path';
 import pc from 'picocolors';
 import fs from 'fs-extra';
-import { fileURLToPath } from 'url';
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+import { __dirname, listSvgs } from './utils.mjs';
 
 const SRC_DIR = path.join(__dirname, '../src');
 const DIST_DIR = path.join(__dirname, '../svg');
@@ -37,7 +34,7 @@ const config = {
   ],
 };
 
-const files = glob.sync(`${SRC_DIR}/**/*.svg`);
+const files = listSvgs(SRC_DIR);
 
 files.forEach(async (filePath) => {
   const rawData = await fs.readFile(filePath, 'utf-8');

@@ -1,2 +1,4 @@
 /src
 .FIGMA_TOKEN
+# the React icons are written to this file before bundling
+icons.tsx

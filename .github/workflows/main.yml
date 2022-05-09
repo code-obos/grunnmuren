@@ -36,3 +36,6 @@ jobs:
 
       - name: eslint
         run: pnpm lint:js
+
+      - name: Build packages
+        run: pnpm run build
