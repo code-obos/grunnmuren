@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-icons
 
+## 0.2.0
+
+### Minor Changes
+
+- 0cbbd64: Add React component versions of all icons
+
 ## 0.1.1
 
 ### Patch Changes
