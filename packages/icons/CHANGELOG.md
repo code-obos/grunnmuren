@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-icons
 
+## 0.3.0
+
+### Minor Changes
+
+- 08919a4: use default export for React icons
+
 ## 0.2.0
 
 ### Minor Changes
