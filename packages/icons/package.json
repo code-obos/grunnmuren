@@ -9,7 +9,7 @@
     "directory": "packages/icons"
   },
   "exports": {
-    "./react": "./dist/icons.es.js",
+    ".": "./dist/icons.es.js",
     "./svg/*": "./svg/*"
   },
   "files": [

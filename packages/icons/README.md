@@ -12,7 +12,7 @@ npm install @obosbbl/grunnmuren-icons
 
 ```jsx
 // React
-import { House } from '@obosbbl/grunnmuren-icons/react';
+import { House } from '@obosbbl/grunnmuren-icons';
 
 // SVG
 import House from '@obosbbl/grunnmuren-icons/svg/House.svg';
