@@ -305,34 +305,59 @@ module.exports = {
       boxShadow: {
         DEFAULT: '0 6px 4px 0 rgba(0, 33, 105, 0.25)',
       },
-      typography: (theme) => ({
-        DEFAULT: {
-          css: {
-            '--tw-prose-headings': theme('colors.black'),
-            '--tw-prose-lead': theme('colors.black'),
-            color: theme('colors.black'),
-            maxWidth: '48ch',
-            a: {
-              fontWeight: 400,
-            },
-            h1: {
-              fontWeight: 'bold',
-            },
-            h2: {
-              fontWeight: 'bold',
-            },
-            h3: {
-              fontWeight: 'bold',
-            },
-            h4: {
-              fontWeight: 'bold',
-            },
-            '[class~="lead"]': {
-              fontWeight: 500,
+      typography: (theme) => {
+        return {
+          DEFAULT: {
+            css: {
+              '--tw-prose-headings': theme('colors.black'),
+              '--tw-prose-lead': theme('colors.black'),
+              '--tw-prose-bullets': theme('colors.green.DEFAULT'),
+              color: theme('colors.black'),
+              maxWidth: '48ch',
+              a: {
+                fontWeight: 400,
+              },
+              h1: {
+                fontWeight: 'bold',
+              },
+              h2: {
+                fontWeight: 'bold',
+              },
+              h3: {
+                fontWeight: 'bold',
+              },
+              h4: {
+                fontWeight: 'bold',
+              },
+              '[class~="lead"]': {
+                fontWeight: 500,
+              },
+              li: {
+                marginTop: '1.5em',
+                marginBottom: '1.5em',
+              },
+              ul: {
+                listStyleType: 'none',
+              },
+              'ul > li::before': {
+                content: '"•"',
+                color: 'var(--tw-prose-bullets)',
+                // increase the size of the marker (to about 8px) without it affecting the line-height of the <li>
+                fontSize: '1.5em',
+                lineHeight: '0',
+                marginLeft: '-1em',
+                marginRight: '0.5em',
+              },
+              // 'ul > li::marker': {
+              //   // increase the size of the marker (to about 8px) without it affecting the line-height of the li
+              //   fontSize: '1.5em',
+              //   lineHeight: '0',
+              //   fontFamily: 'sans-serif',
+              // },
             },
           },
-        },
-      }),
+        };
+      },
     },
   },
 };
