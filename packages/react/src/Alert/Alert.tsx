@@ -1,0 +1,59 @@
+import { defu } from '../utils';
+import classNames from 'clsx';
+import { InfoCircle, Warning } from '@obosbbl/grunnmuren-icons';
+
+export interface AlertProps {
+  className?: string;
+  children: React.ReactNode;
+  heading: string;
+
+  /** @default alert */
+  severity?: 'alert' | 'info';
+}
+
+const defaultProps = {
+  severity: 'alert',
+} as const;
+
+export const Alert = (props: AlertProps) => {
+  const { className, children, heading, severity, ...rest } = defu(
+    props,
+    defaultProps,
+  );
+
+  return (
+    <section
+      className={classNames(className, 'p-4 md:py-8', {
+        'bg-orange-light': severity === 'info',
+        'bg-red-light': severity === 'alert',
+      })}
+      role="alert"
+      {...rest}
+    >
+      <div className="flex justify-center">
+        <AlertIcon
+          className="mr-4 flex-none md:mr-8 md:text-2xl"
+          /* @ts-expect-error this will fix itself once we fix the return types of defu */
+          severity={severity}
+        />
+        <div className="w-prose flex-initial">
+          <h2 className="gm-h4 mb-2">{heading}</h2>
+          {children}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+interface AlertIconProps {
+  className?: string;
+  severity: 'alert' | 'info';
+}
+
+const AlertIcon = ({ severity, className }: AlertIconProps) => {
+  if (severity === 'alert') {
+    return <Warning className={classNames(className, 'text-red')} />;
+  }
+
+  return <InfoCircle className={classNames(className, 'text-orange')} />;
+};
