@@ -1,7 +1,7 @@
 const plugin = require('tailwindcss/plugin');
 
 // naively assume all fonts are hosted at the following paths at the root of the app
-const fonts = [
+const gorditaFonts = [
   {
     fontWeight: 400,
     fontStyle: 'normal',
@@ -21,6 +21,29 @@ const fonts = [
     fontWeight: 700,
     fontStyle: 'normal',
     url: '/fonts/gorditabold-webfont.woff2',
+  },
+];
+
+const obosFonts = [
+  {
+    fontWeight: 400,
+    fontStyle: 'normal',
+    url: '/fonts/OBOSText-Regular.woff2',
+  },
+  {
+    fontWeight: 400,
+    fontStyle: 'italic',
+    url: '/fonts/OBOSText-Italic.woff2',
+  },
+  {
+    fontWeight: 500,
+    fontStyle: 'normal',
+    url: '/fonts/OBOSText-Medium.woff2',
+  },
+  {
+    fontWeight: 700,
+    fontStyle: 'normal',
+    url: '/fonts/OBOSText-Bold.woff2',
   },
 ];
 
@@ -134,205 +157,214 @@ const snackbar = plugin(function ({ addComponents, theme }) {
   });
 });
 
-module.exports = {
-  plugins: [
-    // TODO: Remove the aspect ratio plugin when Safari 14 usage is low enough
-    require('@tailwindcss/aspect-ratio'),
-    require('@tailwindcss/typography'),
-    button,
-    headings,
-    checkbox,
-    snackbar,
-    plugin(function ({ addBase, addUtilities, addComponents }) {
-      addBase({
-        html: {
-          '@apply text-black antialiased font-normal': {},
-        },
-        b: {
-          fontWeight: 500,
-        },
-        strong: {
-          fontWeight: 500,
-        },
-        a: {
-          '@apply underline': {},
-        },
-        '::selection': { '@apply bg-green-light text-black': {} },
-      });
-      addComponents({
-        '.container': {
-          width: '100%',
-          paddingLeft: '1rem',
-          paddingRight: '1rem',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          maxWidth: '90rem',
-        },
-        '.container-prose': {
-          width: '100%',
-          paddingLeft: '1rem',
-          paddingRight: '1rem',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          maxWidth: '37rem',
-        },
-        // that thin blue line at the top
-        '.gm-topline::before': {
-          display: 'block',
-          width: '100%',
-          height: '5px',
-          content: '""',
-          position: 'fixed',
-          left: '0',
-          top: '0',
-          right: '0',
-          // FIXME: Not sure why this doesn't work
-          //backgroundColor: theme('colors.blue'),
-          backgroundColor: '#0047BA',
-          zIndex: '100',
-        },
-        /**
-         * Round the corners of our main content.
-         * Protip: Use this together with navbar, footer and `bg-blue` class on the body.
-         */
-        '.gm-pagemain': {
-          backgroundColor: '#fff',
-          borderRadius: '2rem',
-          overflow: 'hidden',
-        },
-      });
-      addUtilities({
-        // imitates a bold font, but doesn't cause layout due to element width change like with font-weight
-        // Note that this CSS isn't standardized, but it works in Fx, Chrome, Safari and Edge
-        '.fake-font-bold': {
-          '-webkit-text-stroke': '1px',
-        },
-      });
-    }),
-    plugin(function ({ addBase }) {
-      addBase(
-        fonts.map((font) => ({
-          '@font-face': {
-            fontFamily: 'Gordita',
-            fontWeight: font.fontWeight,
-            fontStyle: font.fontStyle,
-            src: `url('${font.url}') format('woff2')`,
-            fontDisplay: 'swap',
+module.exports = (opts = { useLegacyFont: false }) => {
+  let fontFamily = 'OBOSFont';
+  let fonts = obosFonts;
+  if (opts.useLegacyFont) {
+    fontFamily = 'Gordita';
+    fonts = gorditaFonts;
+  }
+
+  return {
+    plugins: [
+      // TODO: Remove the aspect ratio plugin when Safari 14 usage is low enough
+      require('@tailwindcss/aspect-ratio'),
+      require('@tailwindcss/typography'),
+      button,
+      headings,
+      checkbox,
+      snackbar,
+      plugin(function ({ addBase, addUtilities, addComponents }) {
+        addBase({
+          html: {
+            '@apply text-black antialiased font-normal': {},
           },
-        })),
-      );
-    }),
-  ],
-  corePlugins: {
-    container: false,
-  },
-  theme: {
-    fontSize: {
-      sm: '0.875rem',
-      base: '1rem',
-      lg: '1.125rem', // 18px
-      xl: '1.25rem', // 20px
-      '2xl': '1.5rem', // 24px
-      '3xl': '1.875rem', // 28px
-      '4xl': '2rem', // 32px
-      '5xl': '2.5rem', // 40px
-    },
-    extend: {
-      maxWidth: {
-        // Override Tailwinds default prose width of 60 chars to 48. Roughly 590 pixels
-        prose: '48ch',
-      },
-      width: {
-        prose: '48ch',
-      },
-      screens: {
-        // replicate the smaller than breakpoint from Windi. Even though we are mobile first, it is really nice with an escape hatch sometimes
-        '<md': { max: '767.9px' },
-      },
-      spacing: {
-        18: '4.5rem',
-      },
-      colors: {
-        black: '#333',
-        white: '#fff',
-        gray: {
-          // TODO: Figure out how to work this into the color scale
-          concrete: '#f1f1f1',
-          // Gray
-          dark: '#595959',
-          // Medium gray
-          DEFAULT: '#818181',
-          // Light gray
-          light: '#E6E6E6',
-        },
-        blue: {
-          // light blue
-          lightest: '#DEEFF5',
-          // OBOS Sky
-          light: '#BEDFEC',
-          // OBOS Blue/Primary brand
-          DEFAULT: '#0047BA',
-          // OBOS Ocean
-          dark: '#002169',
-        },
-        green: {
-          // light green
-          lightest: '#E6F5F0',
-          // OBOS Mint
-          light: '#CDECE2',
-          // OBOS Green/Primary brand
-          DEFAULT: '#008761',
-          // OBOS Forest
-          dark: '#00524C',
-        },
-        red: {
-          // error red
-          light: '#faedef',
-          DEFAULT: '#cd465e',
-        },
-        orange: {
-          light: '#f8e5c9',
-          DEFAULT: '#e8a74a',
-        },
-        yellow: {
-          // open house
-          DEFAULT: '#fff5d2',
-        },
-      },
-      fontFamily: {
-        sans: ['Gordita', 'sans-serif'],
-      },
-      boxShadow: {
-        DEFAULT: '0 6px 4px 0 rgba(0, 33, 105, 0.25)',
-      },
-      typography: (theme) => ({
-        DEFAULT: {
-          css: {
-            '--tw-prose-headings': theme('colors.black'),
-            '--tw-prose-lead': theme('colors.black'),
-            color: theme('colors.black'),
-            maxWidth: '48ch',
-            a: {
-              fontWeight: 400,
-            },
-            h1: {
-              fontWeight: 'bold',
-            },
-            h2: {
-              fontWeight: 'bold',
-            },
-            h3: {
-              fontWeight: 'bold',
-            },
-            h4: {
-              fontWeight: 'bold',
-            },
-            '[class~="lead"]': {
-              fontWeight: 500,
-            },
+          b: {
+            fontWeight: 500,
           },
-        },
+          strong: {
+            fontWeight: 500,
+          },
+          a: {
+            '@apply underline': {},
+          },
+          '::selection': { '@apply bg-green-light text-black': {} },
+        });
+        addComponents({
+          '.container': {
+            width: '100%',
+            paddingLeft: '1rem',
+            paddingRight: '1rem',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            maxWidth: '90rem',
+          },
+          '.container-prose': {
+            width: '100%',
+            paddingLeft: '1rem',
+            paddingRight: '1rem',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            maxWidth: '37rem',
+          },
+          // that thin blue line at the top
+          '.gm-topline::before': {
+            display: 'block',
+            width: '100%',
+            height: '5px',
+            content: '""',
+            position: 'fixed',
+            left: '0',
+            top: '0',
+            right: '0',
+            // FIXME: Not sure why this doesn't work
+            //backgroundColor: theme('colors.blue'),
+            backgroundColor: '#0047BA',
+            zIndex: '100',
+          },
+          /**
+           * Round the corners of our main content.
+           * Protip: Use this together with navbar, footer and `bg-blue` class on the body.
+           */
+          '.gm-pagemain': {
+            backgroundColor: '#fff',
+            borderRadius: '2rem',
+            overflow: 'hidden',
+          },
+        });
+        addUtilities({
+          // imitates a bold font, but doesn't cause layout due to element width change like with font-weight
+          // Note that this CSS isn't standardized, but it works in Fx, Chrome, Safari and Edge
+          '.fake-font-bold': {
+            '-webkit-text-stroke': '1px',
+          },
+        });
       }),
+      plugin(function ({ addBase }) {
+        addBase(
+          fonts.map((font) => ({
+            '@font-face': {
+              fontFamily,
+              fontWeight: font.fontWeight,
+              fontStyle: font.fontStyle,
+              src: `url('${font.url}') format('woff2')`,
+              fontDisplay: 'swap',
+            },
+          })),
+        );
+      }),
+    ],
+    corePlugins: {
+      container: false,
     },
-  },
+    theme: {
+      fontSize: {
+        sm: '0.875rem',
+        base: '1rem',
+        lg: '1.125rem', // 18px
+        xl: '1.25rem', // 20px
+        '2xl': '1.5rem', // 24px
+        '3xl': '1.875rem', // 28px
+        '4xl': '2rem', // 32px
+        '5xl': '2.5rem', // 40px
+      },
+      extend: {
+        maxWidth: {
+          // Override Tailwinds default prose width of 60 chars to 48. Roughly 590 pixels
+          prose: '48ch',
+        },
+        width: {
+          prose: '48ch',
+        },
+        screens: {
+          // replicate the smaller than breakpoint from Windi. Even though we are mobile first, it is really nice with an escape hatch sometimes
+          '<md': { max: '767.9px' },
+        },
+        spacing: {
+          18: '4.5rem',
+        },
+        colors: {
+          black: '#333',
+          white: '#fff',
+          gray: {
+            // TODO: Figure out how to work this into the color scale
+            concrete: '#f1f1f1',
+            // Gray
+            dark: '#595959',
+            // Medium gray
+            DEFAULT: '#818181',
+            // Light gray
+            light: '#E6E6E6',
+          },
+          blue: {
+            // light blue
+            lightest: '#DEEFF5',
+            // OBOS Sky
+            light: '#BEDFEC',
+            // OBOS Blue/Primary brand
+            DEFAULT: '#0047BA',
+            // OBOS Ocean
+            dark: '#002169',
+          },
+          green: {
+            // light green
+            lightest: '#E6F5F0',
+            // OBOS Mint
+            light: '#CDECE2',
+            // OBOS Green/Primary brand
+            DEFAULT: '#008761',
+            // OBOS Forest
+            dark: '#00524C',
+          },
+          red: {
+            // error red
+            light: '#faedef',
+            DEFAULT: '#cd465e',
+          },
+          orange: {
+            light: '#f8e5c9',
+            DEFAULT: '#e8a74a',
+          },
+          yellow: {
+            // open house
+            DEFAULT: '#fff5d2',
+          },
+        },
+        fontFamily: {
+          sans: [fontFamily, 'sans-serif'],
+        },
+        boxShadow: {
+          DEFAULT: '0 6px 4px 0 rgba(0, 33, 105, 0.25)',
+        },
+        typography: (theme) => ({
+          DEFAULT: {
+            css: {
+              '--tw-prose-headings': theme('colors.black'),
+              '--tw-prose-lead': theme('colors.black'),
+              color: theme('colors.black'),
+              maxWidth: '48ch',
+              a: {
+                fontWeight: 400,
+              },
+              h1: {
+                fontWeight: 'bold',
+              },
+              h2: {
+                fontWeight: 'bold',
+              },
+              h3: {
+                fontWeight: 'bold',
+              },
+              h4: {
+                fontWeight: 'bold',
+              },
+              '[class~="lead"]': {
+                fontWeight: 500,
+              },
+            },
+          },
+        }),
+      },
+    },
+  };
 };
