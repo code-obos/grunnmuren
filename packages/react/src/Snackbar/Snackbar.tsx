@@ -20,12 +20,12 @@ export const Snackbar = (props: SnackbarProps) => {
   return (
     <div className="container max-w-[59rem]">
       <div className="bg-orange-light rounded-lg p-4">
-        <div className="gm-snackbar grid items-center">
-          <InfoCircle className="text-orange gm-snackbar-icon mr-4 md:mr-8 md:text-2xl" />
+        <div className="snackbar grid items-center">
+          <InfoCircle className="text-orange snackbar-icon mr-4 md:mr-8 md:text-2xl" />
 
           <h3
             className={classNames(
-              'gm-snackbar-header min-w-0 max-w-prose text-base font-medium',
+              'snackbar-header min-w-0 max-w-prose text-base font-medium',
               {
                 'overflow-hidden overflow-ellipsis whitespace-nowrap':
                   !isExpanded,
@@ -35,7 +35,7 @@ export const Snackbar = (props: SnackbarProps) => {
             {heading}
           </h3>
 
-          <div className="gm-snackbar-actions <md:mt-3 flex justify-end gap-4 md:ml-4">
+          <div className="snackbar-actions <md:mt-3 flex justify-end gap-4 md:ml-4">
             <SnackbarButton
               aria-expanded={isExpanded}
               onClick={() => setIsExpanded(!isExpanded)}
