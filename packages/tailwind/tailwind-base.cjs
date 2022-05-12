@@ -271,10 +271,10 @@ module.exports = (opts = { useLegacyFont: false }) => {
       extend: {
         maxWidth: {
           // Override Tailwinds default prose width of 60 chars to 48. Roughly 590 pixels
-          prose: '48ch',
+          prose: '590px',
         },
         width: {
-          prose: '48ch',
+          prose: '590px',
         },
         screens: {
           // replicate the smaller than breakpoint from Windi. Even though we are mobile first, it is really nice with an escape hatch sometimes
@@ -342,7 +342,7 @@ module.exports = (opts = { useLegacyFont: false }) => {
               '--tw-prose-headings': theme('colors.black'),
               '--tw-prose-lead': theme('colors.black'),
               color: theme('colors.black'),
-              maxWidth: '48ch',
+              maxWidth: theme('maxWidth.prose'),
               a: {
                 fontWeight: 400,
               },
