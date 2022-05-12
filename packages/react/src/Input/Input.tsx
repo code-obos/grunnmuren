@@ -1,0 +1,48 @@
+import { forwardRef } from 'react';
+import classNames from 'clsx';
+
+export interface InputProps extends React.ComponentPropsWithoutRef<'input'> {
+  as?: string;
+  prefix?: string;
+  /** Render input as invalid. Sets `aria-invalid` to true */
+  isInvalid?: boolean;
+
+  /* TODO: implement validation */
+  // valid?: boolean;
+}
+
+export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+  const { className, isInvalid, size, prefix, as, type, ...rest } = props;
+
+  const Component = as ?? 'input';
+
+  // if type isn't specified, and the component is input, we set it to `text`
+  const inputType = type ?? Component === 'input' ? 'text' : undefined;
+
+  return (
+    <div
+      className={classNames(
+        className,
+        'relative flex items-center rounded-md border-[1px] border-b-[3px] focus-within:-ml-[2px] focus-within:-mt-[2px] focus-within:border-[3px] focus-within:shadow',
+        {
+          'border-gray-dark focus-within:border-blue': !isInvalid,
+          'border-red focus-within:border-red': isInvalid,
+          'w-fit': size != null,
+          'w-full': size == null,
+        },
+      )}
+    >
+      {prefix && <span className="text-gray pl-4">{prefix}</span>}
+      <Component
+        aria-invalid={isInvalid}
+        // @ts-expect-error figure out how to get ref working with an `as` prop
+        ref={ref}
+        className="focus:none placeholder-gray w-full rounded-md border-none px-4 py-3 outline-none"
+        size={size}
+        type={inputType}
+        {...rest}
+      />
+      {/* {valid && <Icon className="text-green absolute right-1" name="check" />} */}
+    </div>
+  );
+});
