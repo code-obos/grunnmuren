@@ -28,7 +28,7 @@ export const Alert = (props: AlertProps) => {
           severity={severity}
         />
         <div className="w-prose flex-initial">
-          <h2 className="gm-h4 mb-2">{heading}</h2>
+          <h2 className="h4 mb-2">{heading}</h2>
           {children}
         </div>
       </div>

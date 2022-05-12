@@ -47,7 +47,7 @@ export const Button = forwardRef<
   const classes = classNames(
     className,
     buttonVariation,
-    'gm-button relative no-underline inline-block border-solid border-2 px-6 py-2 rounded-xl transition-all duration-200 font-medium w-fit disabled:pointer-events-none disabled:text-black disabled:bg-gray-light disabled:border-gray-light hover:rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-black ring-offset-2',
+    'button relative no-underline inline-block border-solid border-2 px-6 py-2 rounded-xl transition-all duration-200 font-medium w-fit disabled:pointer-events-none disabled:text-black disabled:bg-gray-light disabled:border-gray-light hover:rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-black ring-offset-2',
   );
 
   return (

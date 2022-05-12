@@ -22,7 +22,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         )}
       >
         <input
-          className="gm-checkbox border-gray-dark checked:bg-green checked:border-green mr-3 grid h-[1.25em] w-[1.25em] cursor-pointer appearance-none place-content-center rounded border-2 border-solid bg-white text-white focus:outline-none focus:ring-2 focus:ring-black"
+          className="checkbox border-gray-dark checked:bg-green checked:border-green mr-3 grid h-[1.25em] w-[1.25em] cursor-pointer appearance-none place-content-center rounded border-2 border-solid bg-white text-white focus:outline-none focus:ring-2 focus:ring-black"
           ref={ref}
           type="checkbox"
           {...rest}

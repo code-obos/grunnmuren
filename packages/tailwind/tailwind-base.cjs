@@ -52,7 +52,7 @@ const button = plugin(function ({ addComponents }) {
   // ideally this would be solved by just darkening the button background,
   // but that doesn't really work since some of the button variations have transparent backgrounds
   addComponents({
-    '.gm-button': {
+    '.button': {
       '&::after': {
         content: '""',
         position: 'absolute',
@@ -75,7 +75,7 @@ const button = plugin(function ({ addComponents }) {
 
 const checkbox = plugin(function ({ addComponents }) {
   addComponents({
-    '.gm-checkbox': {
+    '.checkbox': {
       '&::before': {
         content: '""',
         width: '0.65em',
@@ -115,16 +115,16 @@ const headings = plugin(function ({ addBase, addComponents }) {
   });
 
   addComponents({
-    '.gm-h1': {
+    '.h1': {
       [h1]: {},
     },
-    '.gm-h2': {
+    '.h2': {
       [h2]: {},
     },
-    '.gm-h3': {
+    '.h3': {
       [h3]: {},
     },
-    '.gm-h4': {
+    '.h4': {
       [h4]: {},
     },
   });
@@ -132,26 +132,26 @@ const headings = plugin(function ({ addBase, addComponents }) {
 
 const snackbar = plugin(function ({ addComponents, theme }) {
   addComponents({
-    '.gm-snackbar': {
+    '.snackbar': {
       'grid-template-columns': 'min-content auto',
       'grid-template-areas': '"icon header" ". content" "actions actions"',
     },
     [`@media(min-width: ${theme('screens.md')})`]: {
-      '.gm-snackbar': {
+      '.snackbar': {
         'grid-template-columns': 'min-content auto auto',
         'grid-template-areas': '"icon header actions" ". content content"',
       },
     },
-    '.gm-snackbar-icon': {
+    '.snackbar-icon': {
       'grid-area': 'icon',
     },
-    '.gm-snackbar-header': {
+    '.snackbar-header': {
       'grid-area': 'header',
     },
-    '.gm-snackbar-content': {
+    '.snackbar-content': {
       'grid-area': 'content',
     },
-    '.gm-snackbar-actions': {
+    '.snackbar-actions': {
       'grid-area': 'actions',
     },
   });
@@ -174,7 +174,7 @@ module.exports = (opts = { useLegacyFont: false }) => {
       headings,
       checkbox,
       snackbar,
-      plugin(function ({ addBase, addUtilities, addComponents }) {
+      plugin(function ({ addBase, addUtilities, addComponents, theme }) {
         addBase({
           html: {
             '@apply text-black antialiased font-normal': {},
@@ -208,7 +208,7 @@ module.exports = (opts = { useLegacyFont: false }) => {
             maxWidth: '37rem',
           },
           // that thin blue line at the top
-          '.gm-topline::before': {
+          '.topline::before': {
             display: 'block',
             width: '100%',
             height: '5px',
@@ -217,16 +217,14 @@ module.exports = (opts = { useLegacyFont: false }) => {
             left: '0',
             top: '0',
             right: '0',
-            // FIXME: Not sure why this doesn't work
-            //backgroundColor: theme('colors.blue'),
-            backgroundColor: '#0047BA',
+            backgroundColor: theme('colors.blue.DEFAULT'),
             zIndex: '100',
           },
           /**
            * Round the corners of our main content.
            * Protip: Use this together with navbar, footer and `bg-blue` class on the body.
            */
-          '.gm-pagemain': {
+          '.pagemain': {
             backgroundColor: '#fff',
             borderRadius: '2rem',
             overflow: 'hidden',

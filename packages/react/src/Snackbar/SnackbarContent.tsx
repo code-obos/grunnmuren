@@ -6,7 +6,7 @@ export interface SnackbarContentProps
 export const SnackbarContent = (props: SnackbarContentProps) => {
   return (
     <div
-      className="gm-snackbar-content my-4 max-h-[50vh] max-w-prose overflow-y-auto"
+      className="snackbar-content my-4 max-h-[50vh] max-w-prose overflow-y-auto"
       {...props}
     >
       {props.children}
