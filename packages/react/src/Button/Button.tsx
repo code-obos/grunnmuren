@@ -1,7 +1,6 @@
 import { forwardRef, Ref, useContext } from 'react';
 import classNames from 'clsx';
 import { ButtonColorContext } from '.';
-import { defu } from '../utils';
 
 export type ButtonColor = 'standard' | 'white' | 'light-green';
 
@@ -11,14 +10,11 @@ export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   color?: 'standard' | 'white' | 'light-green';
   disabled?: boolean;
   href?: string;
+  /** @default button */
   type?: 'button' | 'submit' | 'reset';
+  /** @default primary */
   variant?: 'primary' | 'secondary';
 }
-
-const defaultProps = {
-  type: 'button',
-  variant: 'primary',
-} as const;
 
 const buttonVariations = {
   'standard-primary': 'bg-green border-green text-white',
@@ -37,16 +33,15 @@ export const Button = forwardRef<
     className,
     color: colorFromProp,
     href,
-    type,
-    variant,
+    type = 'button',
+    variant = 'primary',
     ...rest
-  } = defu(props, defaultProps);
+  } = props;
 
   const colorFromContext = useContext(ButtonColorContext);
 
   const color = colorFromProp ?? colorFromContext;
 
-  // @ts-expect-error remove this when the return type of `defu` is fixed
   const buttonVariation = buttonVariations[`${color}-${variant}`];
 
   const classes = classNames(

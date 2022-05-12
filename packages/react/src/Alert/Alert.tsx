@@ -1,25 +1,17 @@
-import { defu } from '../utils';
 import classNames from 'clsx';
 import { InfoCircle, Warning } from '@obosbbl/grunnmuren-icons';
 
 export interface AlertProps {
   className?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   heading: string;
 
   /** @default alert */
   severity?: 'alert' | 'info';
 }
 
-const defaultProps = {
-  severity: 'alert',
-} as const;
-
 export const Alert = (props: AlertProps) => {
-  const { className, children, heading, severity, ...rest } = defu(
-    props,
-    defaultProps,
-  );
+  const { className, children, heading, severity = 'alert', ...rest } = props;
 
   return (
     <section
@@ -33,7 +25,6 @@ export const Alert = (props: AlertProps) => {
       <div className="flex justify-center">
         <AlertIcon
           className="mr-4 flex-none md:mr-8 md:text-2xl"
-          /* @ts-expect-error this will fix itself once we fix the return types of defu */
           severity={severity}
         />
         <div className="w-prose flex-initial">

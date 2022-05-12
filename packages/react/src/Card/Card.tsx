@@ -1,15 +1,11 @@
 import classNames from 'clsx';
-import { defu } from '../utils';
 
 export interface CardProps<T extends React.ElementType> {
+  /** @default div */
   as?: T;
   /** @default white */
   bgColor?: 'white' | 'gray';
 }
-
-const defaultProps = {
-  bgColor: 'white',
-} as const;
 
 export const Card = <T extends React.ElementType = 'div'>(
   props: CardProps<T> &
@@ -18,9 +14,9 @@ export const Card = <T extends React.ElementType = 'div'>(
   const {
     as: Component = 'div',
     className,
-    bgColor,
+    bgColor = 'white',
     ...rest
-  } = defu(props, defaultProps);
+  } = props;
 
   return (
     <Component

@@ -1,7 +1,6 @@
 import { createContext, useMemo } from 'react';
 import classNames from 'clsx';
 import { ButtonColorContext } from '../';
-import { defu } from '../utils';
 import { usesGridAreaPlacement } from './utils';
 
 export const HeroContext = createContext<{
@@ -35,33 +34,24 @@ export interface HeroProps {
   image?: React.ReactNode;
 }
 
-const defaultProps = {
-  bgColor: 'white',
-  contentPosition: 'below-center',
-} as const;
-
 export const Hero = (props: HeroProps) => {
   const {
-    bgColor,
+    bgColor = 'white',
     children,
     className,
-    contentPosition: contentPositionProp,
+    contentPosition: contentPositionProp = 'below-center',
     image,
     ...rest
-  } = defu(props, defaultProps);
+  } = props;
 
   const hasImage = image != null;
 
   // If there is no image, we fall back to a below-center, a traditional looking "content header"
-  // TODO: Remove casting once the return type of defu is fixed
-  const contentPosition = (
-    hasImage ? contentPositionProp : 'below-center'
-  ) as HeroContentPosition;
+  const contentPosition = hasImage ? contentPositionProp : 'below-center';
 
-  // TODO: Remove casting once the return type of defu is fixed
   const context = useMemo(
     () => ({
-      bgColor: bgColor as HeroColor,
+      bgColor,
       contentPosition,
       hasImage,
     }),

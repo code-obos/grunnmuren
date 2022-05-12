@@ -1,6 +1,5 @@
 import { forwardRef, useRef } from 'react';
 import classNames from 'clsx';
-import { defu } from '../utils';
 import { Input, FormLabel, FormHelperText, FormErrorMessage } from '..';
 import {
   useComposedRefs,
@@ -20,10 +19,6 @@ export interface TextFieldProps
   prefix?: string;
 }
 
-const defaultProps = {
-  type: 'text',
-};
-
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (props, ref) => {
     const {
@@ -32,8 +27,9 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       id: idProp,
       label,
       required,
+      type = 'text',
       ...rest
-    } = defu(props, defaultProps);
+    } = props;
 
     const ownRef = useRef(null);
 
@@ -53,6 +49,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           id={id}
           required={required}
           ref={useComposedRefs(ownRef, ref)}
+          type={type}
           {...rest}
           // for accessibility reasons these cannot be overriden
           isInvalid={!!error || validity === 'invalid'}
