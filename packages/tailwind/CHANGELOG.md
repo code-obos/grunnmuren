@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 0.2.1
+
+### Patch Changes
+
+- a4b49bc: fix bullet list colors and spacing in prose class
+
 ## 0.2.0
 
 ### Minor Changes
