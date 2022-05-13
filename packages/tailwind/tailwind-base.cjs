@@ -339,6 +339,8 @@ module.exports = (opts = { useLegacyFont: false }) => {
             css: {
               '--tw-prose-headings': theme('colors.black'),
               '--tw-prose-lead': theme('colors.black'),
+              // TODO: Increase bullet size. See design sketches
+              '--tw-prose-bullets': theme('colors.green.DEFAULT'),
               color: theme('colors.black'),
               maxWidth: theme('maxWidth.prose'),
               a: {
@@ -355,6 +357,10 @@ module.exports = (opts = { useLegacyFont: false }) => {
               },
               h4: {
                 fontWeight: 'bold',
+              },
+              li: {
+                marginTop: '1.5em',
+                marginBottom: '1.5em',
               },
               '[class~="lead"]': {
                 fontWeight: 500,
