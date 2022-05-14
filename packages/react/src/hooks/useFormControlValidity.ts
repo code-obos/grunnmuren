@@ -10,31 +10,40 @@ type Validity = 'indeterminate' | 'invalid' | 'valid';
  */
 export function useFormControlValidity(
   ref: RefObject<HTMLElement & { checkValidity(): boolean }>,
+  enabled = true,
 ) {
   const [validity, setValidity] = useState<Validity>('indeterminate');
+  const [validationMessage, setValidationMessage] = useState<string>();
 
   const onBlur = (event: FocusEvent) => {
     // this triggers an invalid event, so if it's invalid it's handled by the `onInvalid` handler
     const isValid = (event.target as HTMLInputElement).checkValidity();
 
-    if (isValid) {
+    if (isValid && enabled) {
       setValidity('valid');
+      setValidationMessage(undefined);
     }
   };
 
   const onInput = (event: Event) => {
-    if (validity !== 'indeterminate') {
+    if (enabled && validity !== 'indeterminate') {
       // this triggers an invalid event, so if it's invalid it's handled by the `onInvalid` handler
       const isValid = (event.target as HTMLInputElement).checkValidity();
 
       if (isValid) {
         setValidity('valid');
+        setValidationMessage(undefined);
       }
     }
   };
 
-  const onInvalid = (/*event: Event*/) => {
-    setValidity('invalid');
+  const onInvalid = (event: Event) => {
+    if (enabled) {
+      event.preventDefault();
+      const message = (event.target as HTMLInputElement).validationMessage;
+      setValidationMessage(message);
+      setValidity('invalid');
+    }
   };
 
   useEffect(() => {
@@ -50,5 +59,5 @@ export function useFormControlValidity(
     };
   });
 
-  return { validity };
+  return { validity, validationMessage };
 }
