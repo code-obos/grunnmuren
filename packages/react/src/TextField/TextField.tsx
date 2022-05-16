@@ -47,8 +47,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
     const errorMsg = error ?? validationMessage;
 
-    console.log(errorMsg);
-
     return (
       <div className="grid gap-2">
         <FormLabel htmlFor={id} isRequired={required}>
