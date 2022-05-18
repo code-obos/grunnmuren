@@ -17,6 +17,8 @@ export interface TextFieldProps
   /**  Label for the form control */
   label: string;
   prefix?: string;
+  /** Automatically valdiate the form control using the HTML constraint validation API. @default true */
+  validate?: boolean;
 }
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
@@ -28,16 +30,22 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       label,
       required,
       type = 'text',
+      validate = true,
       ...rest
     } = props;
 
     const ownRef = useRef(null);
 
-    const { validity } = useFormControlValidity(ownRef);
+    const { validity, validationMessage } = useFormControlValidity(
+      ownRef,
+      validate,
+    );
 
     const id = useFallbackId(idProp);
-    const helpTextId = id + '-help';
-    const errorMsgId = id + '-err';
+    const helpTextId = id + 'help';
+    const errorMsgId = id + 'err';
+
+    const errorMsg = error ?? validationMessage;
 
     return (
       <div className="grid gap-2">
@@ -62,7 +70,9 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         {description && (
           <FormHelperText id={helpTextId}>{description}</FormHelperText>
         )}
-        {error && <FormErrorMessage id={errorMsgId}>{error}</FormErrorMessage>}
+        {errorMsg && (
+          <FormErrorMessage id={errorMsgId}>{errorMsg}</FormErrorMessage>
+        )}
       </div>
     );
   },
