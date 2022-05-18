@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 0.2.0
+
+### Minor Changes
+
+- 9a478c6: add in built validation to TextField and TextArea using HTML validation constraint API
+
 ## 0.1.1
 
 ### Patch Changes
