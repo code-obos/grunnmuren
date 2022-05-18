@@ -42,7 +42,7 @@ jobs:
 
       # Even though we only deploy from main, it makes sense to do this on PRs to ensure the change didn't break the Storybook
       - name: Build storybook
-        run: pnpm run build:storybook
+        run: pnpm --filter "@obosbbl/grunnmuren-react" build:storybook
 
       - name: Deploy Storybook 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
