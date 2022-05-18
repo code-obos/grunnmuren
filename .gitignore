@@ -1,7 +1,8 @@
-# node/npm/next
+# node/npm/next/storybook
 node_modules
 dist/
 .next/
+storybook-static/
 
 # editors
 .idea/
