@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 0.3.1
+
+### Patch Changes
+
+- 1ec74a7: Fix handling default options
+
 ## 0.3.0
 
 ### Minor Changes
