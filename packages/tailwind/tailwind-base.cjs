@@ -189,7 +189,7 @@ module.exports = (opts = { useLegacyFont: false }) => {
             '@apply underline': {},
           },
           '::selection': { '@apply bg-green-light text-black': {} },
-          // Remove the disclosure triangle in Safari if apply the `list-none` utilit class to the summary element
+          // Remove the disclosure triangle in Safari if apply the `list-none` utility to the summary element
           'summary.list-none::-webkit-details-marker': {
             display: 'none',
           },
