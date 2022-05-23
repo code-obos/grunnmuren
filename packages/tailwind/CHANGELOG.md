@@ -1,5 +1,15 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 0.3.0
+
+### Minor Changes
+
+- 0d9f071: Add configuration option fontBasePath
+
+### Patch Changes
+
+- 0a0ffa8: hide discloure arrow in safari when `list-none` is applied to the `<summary>` element
+
 ## 0.2.1
 
 ### Patch Changes
