@@ -157,7 +157,10 @@ const snackbar = plugin(function ({ addComponents, theme }) {
   });
 });
 
-module.exports = (opts = { useLegacyFont: false, fontBasePath: '/fonts' }) => {
+const defaultOpts = { useLegacyFont: false, fontBasePath: '/fonts' };
+
+module.exports = (userOptions) => {
+  const opts = userOptions ? { ...defaultOpts, ...userOptions } : defaultOpts;
   let fontFamily = 'OBOSFont';
   let fonts = obosFonts;
   if (opts.useLegacyFont) {
