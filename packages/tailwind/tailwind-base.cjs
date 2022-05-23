@@ -5,22 +5,22 @@ const gorditaFonts = [
   {
     fontWeight: 400,
     fontStyle: 'normal',
-    url: '/fonts/gorditaregular-webfont.woff2',
+    url: '/gorditaregular-webfont.woff2',
   },
   {
     fontWeight: 400,
     fontStyle: 'italic',
-    url: '/fonts/gorditaregularitalic-webfont.woff2',
+    url: '/gorditaregularitalic-webfont.woff2',
   },
   {
     fontWeight: 500,
     fontStyle: 'normal',
-    url: '/fonts/gorditamedium-webfont.woff2',
+    url: '/gorditamedium-webfont.woff2',
   },
   {
     fontWeight: 700,
     fontStyle: 'normal',
-    url: '/fonts/gorditabold-webfont.woff2',
+    url: '/gorditabold-webfont.woff2',
   },
 ];
 
@@ -28,22 +28,22 @@ const obosFonts = [
   {
     fontWeight: 400,
     fontStyle: 'normal',
-    url: '/fonts/OBOSText-Regular.woff2',
+    url: '/OBOSText-Regular.woff2',
   },
   {
     fontWeight: 400,
     fontStyle: 'italic',
-    url: '/fonts/OBOSText-Italic.woff2',
+    url: '/OBOSText-Italic.woff2',
   },
   {
     fontWeight: 500,
     fontStyle: 'normal',
-    url: '/fonts/OBOSText-Medium.woff2',
+    url: '/OBOSText-Medium.woff2',
   },
   {
     fontWeight: 700,
     fontStyle: 'normal',
-    url: '/fonts/OBOSText-Bold.woff2',
+    url: '/OBOSText-Bold.woff2',
   },
 ];
 
@@ -157,7 +157,7 @@ const snackbar = plugin(function ({ addComponents, theme }) {
   });
 });
 
-module.exports = (opts = { useLegacyFont: false }) => {
+module.exports = (opts = { useLegacyFont: false, fontBasePath: '/fonts' }) => {
   let fontFamily = 'OBOSFont';
   let fonts = obosFonts;
   if (opts.useLegacyFont) {
@@ -245,7 +245,7 @@ module.exports = (opts = { useLegacyFont: false }) => {
               fontFamily,
               fontWeight: font.fontWeight,
               fontStyle: font.fontStyle,
-              src: `url('${font.url}') format('woff2')`,
+              src: `url('${opts.fontBasePath}${font.url}') format('woff2')`,
               fontDisplay: 'swap',
             },
           })),
