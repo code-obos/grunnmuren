@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 0.2.3
+
+### Patch Changes
+
+- b437225: fixed issue where you couldn't set another type attribute than `text` for TextField
+
 ## 0.2.2
 
 ### Patch Changes
