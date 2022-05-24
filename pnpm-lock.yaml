@@ -9,7 +9,7 @@ importers:
       '@typescript-eslint/parser': 5.22.0
       eslint: 8.15.0
       eslint-config-prettier: 8.5.0
-      eslint-plugin-react: 7.29.4
+      eslint-plugin-react: 7.30.0
       eslint-plugin-react-hooks: 4.5.0
       prettier: 2.6.2
       prettier-plugin-tailwindcss: 0.1.11
@@ -20,7 +20,7 @@ importers:
       '@typescript-eslint/parser': 5.22.0_hcfsmds2fshutdssjqluwm76uu
       eslint: 8.15.0
       eslint-config-prettier: 8.5.0_eslint@8.15.0
-      eslint-plugin-react: 7.29.4_eslint@8.15.0
+      eslint-plugin-react: 7.30.0_eslint@8.15.0
       eslint-plugin-react-hooks: 4.5.0_eslint@8.15.0
       prettier: 2.6.2
       prettier-plugin-tailwindcss: 0.1.11_prettier@2.6.2
@@ -6252,8 +6252,8 @@ packages:
       eslint: 8.15.0
     dev: true
 
-  /eslint-plugin-react/7.29.4_eslint@8.15.0:
-    resolution: {integrity: sha512-CVCXajliVh509PcZYRFyu/BoUEz452+jtQJq2b3Bae4v3xBUWPLCmtmBM+ZinG4MzwmxJgJ2M5rMqhqLVn7MtQ==}
+  /eslint-plugin-react/7.30.0_eslint@8.15.0:
+    resolution: {integrity: sha512-RgwH7hjW48BleKsYyHK5vUAvxtE9SMPDKmcPRQgtRCYaZA0XQPt5FSkrU3nhz5ifzMZcA8opwmRJ2cmOO8tr5A==}
     engines: {node: '>=4'}
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
