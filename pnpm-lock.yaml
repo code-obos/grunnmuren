@@ -66,7 +66,7 @@ importers:
       '@storybook/manager-webpack5': 6.5.5
       '@storybook/react': 6.5.5
       '@types/react': 18.0.9
-      '@types/react-dom': 18.0.3
+      '@types/react-dom': 18.0.5
       '@vitejs/plugin-react': 1.3.2
       clsx: 1.1.1
       postcss: 8.4.14
@@ -89,7 +89,7 @@ importers:
       '@storybook/manager-webpack5': 6.5.5_ef5jwxihqo6n7gxfmzogljlgcm
       '@storybook/react': 6.5.5_xim7ly6cvw4umt5wsc6mp7cccy
       '@types/react': 18.0.9
-      '@types/react-dom': 18.0.3
+      '@types/react-dom': 18.0.5
       '@vitejs/plugin-react': 1.3.2
       postcss: 8.4.14
       react: 18.1.0
@@ -3569,8 +3569,8 @@ packages:
     resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==}
     dev: true
 
-  /@types/react-dom/18.0.3:
-    resolution: {integrity: sha512-1RRW9kst+67gveJRYPxGmVy8eVJ05O43hg77G2j5m76/RFJtMbcfAs2viQ2UNsvvDg8F7OfQZx8qQcl6ymygaQ==}
+  /@types/react-dom/18.0.5:
+    resolution: {integrity: sha512-OWPWTUrY/NIrjsAPkAk1wW9LZeIjSvkXRhclsFO8CZcZGCOg2G0YZy4ft+rOyYxy8B7ui5iZzi9OkDebZ7/QSA==}
     dependencies:
       '@types/react': 18.0.9
     dev: true
