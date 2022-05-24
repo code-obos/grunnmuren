@@ -12,12 +12,19 @@ export interface InputProps extends React.ComponentPropsWithoutRef<'input'> {
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-  const { className, isInvalid, size, prefix, as, type, ...rest } = props;
+  const {
+    className,
+    isInvalid,
+    size,
+    prefix,
+    as,
+    type: typeProp,
+    ...rest
+  } = props;
 
   const Component = as ?? 'input';
 
-  // if type isn't specified, and the component is input, we set it to `text`
-  const inputType = type ?? Component === 'input' ? 'text' : undefined;
+  const type = getType(Component, typeProp);
 
   return (
     <div
@@ -39,10 +46,16 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         ref={ref}
         className="focus:none placeholder-gray w-full rounded-md border-none px-4 py-3 outline-none"
         size={size}
-        type={inputType}
+        type={type}
         {...rest}
       />
       {/* {valid && <Icon className="text-green absolute right-1" name="check" />} */}
     </div>
   );
 });
+
+function getType(Component: string, type?: string) {
+  if (type != null) return type;
+
+  if (Component === 'input') return 'text';
+}
