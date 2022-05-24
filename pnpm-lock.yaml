@@ -12,7 +12,7 @@ importers:
       eslint-plugin-react: 7.29.4
       eslint-plugin-react-hooks: 4.5.0
       prettier: 2.6.2
-      prettier-plugin-tailwindcss: 0.1.10
+      prettier-plugin-tailwindcss: 0.1.11
       typescript: 4.6.4
     devDependencies:
       '@changesets/cli': 2.22.0
@@ -23,7 +23,7 @@ importers:
       eslint-plugin-react: 7.29.4_eslint@8.15.0
       eslint-plugin-react-hooks: 4.5.0_eslint@8.15.0
       prettier: 2.6.2
-      prettier-plugin-tailwindcss: 0.1.10_prettier@2.6.2
+      prettier-plugin-tailwindcss: 0.1.11_prettier@2.6.2
       typescript: 4.6.4
 
   packages/icons:
@@ -4474,6 +4474,7 @@ packages:
 
   /bindings/1.5.0:
     resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
+    requiresBuild: true
     dependencies:
       file-uri-to-path: 1.0.0
     dev: true
@@ -6676,6 +6677,7 @@ packages:
 
   /file-uri-to-path/1.0.0:
     resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -8897,6 +8899,7 @@ packages:
 
   /nan/2.15.0:
     resolution: {integrity: sha512-8ZtvEnA2c5aYCZYd1cvgdnU6cqwixRoYg70xPLWUws5ORTa/lnw+u4amixRS/Ac5U5mQVgp9pnlSUnbNWFaWZQ==}
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -9817,8 +9820,8 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier-plugin-tailwindcss/0.1.10_prettier@2.6.2:
-    resolution: {integrity: sha512-ooDGNuXUjgCXfShliVYQ6+0iXqUFXn+zdNInPe0WZN9qINt9srbLGFGY5jeVL4MXtY20/4S8JaBcd8l6N6NfCQ==}
+  /prettier-plugin-tailwindcss/0.1.11_prettier@2.6.2:
+    resolution: {integrity: sha512-a28+1jvpIZQdZ/W97wOXb6VqI762MKE/TxMMuibMEHhyYsSxQA8Ek30KObd5kJI2HF1ldtSYprFayXJXi3pz8Q==}
     engines: {node: '>=12.17.0'}
     peerDependencies:
       prettier: '>=2.2.0'
