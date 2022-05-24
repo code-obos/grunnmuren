@@ -28,7 +28,11 @@
     "peerDependencyRules": {
       "ignoreMissing": [
         "typescript"
-      ]
+      ],
+      "allowedVersions": {
+        "react": "18",
+        "react-dom": "18"
+      }
     }
   }
 }
