@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-react
 
+## 0.3.0
+
+### Minor Changes
+
+- 9c74a8b: add `<Stepper>` component
+- abd07c8: make `@obosbbl/grunnmuren-tailwind` an optional peer dependency
+
 ## 0.2.3
 
 ### Patch Changes
