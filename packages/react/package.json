@@ -44,10 +44,15 @@
   },
   "dependencies": {
     "@obosbbl/grunnmuren-icons": "workspace:^",
-    "@obosbbl/grunnmuren-tailwind": "workspace:^",
     "clsx": "1.1.1"
   },
   "peerDependencies": {
-    "react": "^18"
+    "react": "^18",
+    "@obosbbl/grunnmuren-tailwind": "workspace:^"
+  },
+  "peerDependenciesMeta": {
+    "@obosbbl/grunnmuren-tailwind": {
+      "optional": true
+    }
   }
 }

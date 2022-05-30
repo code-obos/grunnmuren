@@ -58,7 +58,6 @@ importers:
     specifiers:
       '@babel/core': 7.18.2
       '@obosbbl/grunnmuren-icons': workspace:^
-      '@obosbbl/grunnmuren-tailwind': workspace:^
       '@storybook/addon-controls': 6.5.5
       '@storybook/addon-docs': 6.5.5
       '@storybook/addon-postcss': 2.0.0
@@ -78,7 +77,6 @@ importers:
       webpack: 5.72.1
     dependencies:
       '@obosbbl/grunnmuren-icons': link:../icons
-      '@obosbbl/grunnmuren-tailwind': link:../tailwind
       clsx: 1.1.1
     devDependencies:
       '@babel/core': 7.18.2
