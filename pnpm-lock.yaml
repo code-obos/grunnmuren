@@ -58,6 +58,7 @@ importers:
     specifiers:
       '@babel/core': 7.18.2
       '@obosbbl/grunnmuren-icons': workspace:^
+      '@obosbbl/grunnmuren-tailwind': workspace:^
       '@storybook/addon-controls': 6.5.5
       '@storybook/addon-docs': 6.5.5
       '@storybook/addon-postcss': 2.0.0
@@ -80,6 +81,7 @@ importers:
       clsx: 1.1.1
     devDependencies:
       '@babel/core': 7.18.2
+      '@obosbbl/grunnmuren-tailwind': link:../tailwind
       '@storybook/addon-controls': 6.5.5_ef5jwxihqo6n7gxfmzogljlgcm
       '@storybook/addon-docs': 6.5.5_ruxuzhcl46omz3jexqfnh4ihwq
       '@storybook/addon-postcss': 2.0.0_webpack@5.72.1
@@ -4881,7 +4883,7 @@ packages:
       mississippi: 3.0.0
       mkdirp: 0.5.6
       move-concurrently: 1.0.1
-      promise-inflight: 1.0.1
+      promise-inflight: 1.0.1_bluebird@3.7.2
       rimraf: 2.7.1
       ssri: 6.0.2
       unique-filename: 1.1.1
@@ -10050,6 +10052,17 @@ packages:
     peerDependenciesMeta:
       bluebird:
         optional: true
+    dev: true
+
+  /promise-inflight/1.0.1_bluebird@3.7.2:
+    resolution: {integrity: sha1-mEcocL8igTL8vdhoEputEsPAKeM=}
+    peerDependencies:
+      bluebird: '*'
+    peerDependenciesMeta:
+      bluebird:
+        optional: true
+    dependencies:
+      bluebird: 3.7.2
     dev: true
 
   /promise.allsettled/1.0.5:
