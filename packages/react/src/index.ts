@@ -6,7 +6,6 @@ export * from './Checkbox';
 export * from './Footer';
 export * from './Form';
 export * from './Hero';
-export * from './IconLegacy';
 export * from './Input';
 export * from './Link';
 export * from './Navbar';
