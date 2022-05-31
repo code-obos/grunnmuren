@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 0.4.0
+
+### Minor Changes
+
+- 21a0273: Add configuration option for container size (80rem or 90rem)
+
 ## 0.3.1
 
 ### Patch Changes
