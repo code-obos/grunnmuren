@@ -157,15 +157,24 @@ const snackbar = plugin(function ({ addComponents, theme }) {
   });
 });
 
-const defaultOpts = { useLegacyFont: false, fontBasePath: '/fonts' };
+const defaultOpts = {
+  useLegacyFont: false,
+  fontBasePath: '/fonts',
+  useLegacyContainerSize: false,
+};
 
 module.exports = (userOptions) => {
   const opts = userOptions ? { ...defaultOpts, ...userOptions } : defaultOpts;
   let fontFamily = 'OBOSFont';
   let fonts = obosFonts;
+  let containerSize = '90rem';
   if (opts.useLegacyFont) {
     fontFamily = 'Gordita';
     fonts = gorditaFonts;
+  }
+
+  if (opts.useLegacyContainerSize) {
+    containerSize = '80rem';
   }
 
   return {
@@ -204,7 +213,7 @@ module.exports = (userOptions) => {
             paddingRight: '1rem',
             marginLeft: 'auto',
             marginRight: 'auto',
-            maxWidth: '90rem',
+            maxWidth: containerSize,
           },
           '.container-prose': {
             width: '100%',
