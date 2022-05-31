@@ -1,5 +1,16 @@
 # @obosbbl/grunnmuren-react
 
+## 1.0.0
+
+### Minor Changes
+
+- ec522cd: remove deprecated IconLegacy component
+
+### Patch Changes
+
+- Updated dependencies [21a0273]
+  - @obosbbl/grunnmuren-tailwind@0.4.0
+
 ## 0.3.0
 
 ### Minor Changes
