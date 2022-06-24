@@ -24,7 +24,7 @@
     "build:storybook": "build-storybook"
   },
   "devDependencies": {
-    "@babel/core": "7.18.2",
+    "@babel/core": "7.18.5",
     "@obosbbl/grunnmuren-tailwind": "workspace:^",
     "@storybook/addon-controls": "6.5.9",
     "@storybook/addon-docs": "6.5.9",
