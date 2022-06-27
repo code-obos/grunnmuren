@@ -167,14 +167,14 @@ module.exports = (userOptions) => {
   const opts = userOptions ? { ...defaultOpts, ...userOptions } : defaultOpts;
   let fontFamily = 'OBOSFont';
   let fonts = obosFonts;
-  let containerSize = '90rem';
+  let containerSize = '92rem';
   if (opts.useLegacyFont) {
     fontFamily = 'Gordita';
     fonts = gorditaFonts;
   }
 
   if (opts.useLegacyContainerSize) {
-    containerSize = '80rem';
+    containerSize = '82rem';
   }
 
   return {
@@ -221,7 +221,7 @@ module.exports = (userOptions) => {
             paddingRight: '1rem',
             marginLeft: 'auto',
             marginRight: 'auto',
-            maxWidth: '37rem',
+            maxWidth: '39rem',
           },
           // that thin blue line at the top
           '.topline::before': {
