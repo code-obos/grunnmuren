@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-react
 
+## 1.0.1
+
+### Patch Changes
+
+- Updated dependencies [b0a849d]
+  - @obosbbl/grunnmuren-tailwind@0.4.1
+
 ## 1.0.0
 
 ### Minor Changes
