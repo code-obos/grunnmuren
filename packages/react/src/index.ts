@@ -1,6 +1,7 @@
 export * from './Alert';
 export * from './Banner';
 export * from './Button';
+export * from './Campaign';
 export * from './Card';
 export * from './Checkbox';
 export * from './Footer';
