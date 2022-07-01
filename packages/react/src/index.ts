@@ -10,7 +10,7 @@ export * from './Input';
 export * from './Link';
 export * from './Navbar';
 export * from './Snackbar';
-export * from './Stepper';
+export * from './StepList';
 export * from './TextArea';
 export * from './TextField';
 export * from './hooks';
