@@ -4,6 +4,8 @@ import classNames from 'clsx';
 interface CampaignProps<T extends React.ElementType> {
   /** @default div */
   as?: T;
+  /** A CampaignImage and a CampaignBody */
+  children: [React.ReactElement, React.ReactElement];
 }
 
 const Campaign = <T extends React.ElementType = 'div'>(
