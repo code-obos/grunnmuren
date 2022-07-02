@@ -39,7 +39,7 @@ importers:
       picocolors: 1.0.0
       prompts: 2.4.2
       svgo: 2.8.0
-      vite: 2.9.12
+      vite: 2.9.13
     devDependencies:
       '@svgr/core': 6.2.1
       '@svgr/plugin-jsx': 6.2.1_@svgr+core@6.2.1
@@ -52,7 +52,7 @@ importers:
       picocolors: 1.0.0
       prompts: 2.4.2
       svgo: 2.8.0
-      vite: 2.9.12
+      vite: 2.9.13
 
   packages/react:
     specifiers:
@@ -74,7 +74,7 @@ importers:
       react-dom: 18.2.0
       require-from-string: 2.0.2
       tailwindcss: 3.1.4
-      vite: 2.9.12
+      vite: 2.9.13
       webpack: 5.73.0
     dependencies:
       '@obosbbl/grunnmuren-icons': link:../icons
@@ -96,7 +96,7 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       require-from-string: 2.0.2
       tailwindcss: 3.1.4
-      vite: 2.9.12
+      vite: 2.9.13
       webpack: 5.73.0
 
   packages/tailwind:
@@ -4906,7 +4906,7 @@ packages:
       mississippi: 3.0.0
       mkdirp: 0.5.6
       move-concurrently: 1.0.1
-      promise-inflight: 1.0.1_bluebird@3.7.2
+      promise-inflight: 1.0.1
       rimraf: 2.7.1
       ssri: 6.0.2
       unique-filename: 1.1.1
@@ -10074,17 +10074,6 @@ packages:
         optional: true
     dev: true
 
-  /promise-inflight/1.0.1_bluebird@3.7.2:
-    resolution: {integrity: sha512-6zWPyEOFaQBJYcGMHBKTKJ3u6TBsnMFOIZSa6ce1e/ZrrsOlnHRHbabMjLiBYKp+n44X9eUI6VUPaukCXHuG4g==}
-    peerDependencies:
-      bluebird: '*'
-    peerDependenciesMeta:
-      bluebird:
-        optional: true
-    dependencies:
-      bluebird: 3.7.2
-    dev: true
-
   /promise.allsettled/1.0.5:
     resolution: {integrity: sha512-tVDqeZPoBC0SlzJHzWGZ2NKAguVq2oiYj7gbggbiTvH2itHohijTp7njOUA0aQ/nl+0lr/r6egmhoYu63UZ/pQ==}
     engines: {node: '>= 0.4'}
@@ -12134,8 +12123,8 @@ packages:
       vfile-message: 2.0.4
     dev: true
 
-  /vite/2.9.12:
-    resolution: {integrity: sha512-suxC36dQo9Rq1qMB2qiRorNJtJAdxguu5TMvBHOc/F370KvqAe9t48vYp+/TbPKRNrMh/J55tOUmkuIqstZaew==}
+  /vite/2.9.13:
+    resolution: {integrity: sha512-AsOBAaT0AD7Mhe8DuK+/kE4aWYFMx/i0ZNi98hJclxb4e0OhQcZYUrvLjIaQ8e59Ui7txcvKMiJC1yftqpQoDw==}
     engines: {node: '>=12.2.0'}
     hasBin: true
     peerDependencies:
