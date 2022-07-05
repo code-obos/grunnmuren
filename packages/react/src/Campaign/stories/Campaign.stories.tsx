@@ -15,38 +15,44 @@ export const Default = () => {
   return (
     <div className="container flex flex-col gap-16">
       {images.map((imageSrc, index) => (
-        <Campaign key={index}>
-          <Campaign.Image src={imageSrc} alt="" rightAlign={index % 2 !== 0} />
-          <Campaign.Body>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel
-            leo et metus aliquet egestas quis vel lorem. Pellentesque in
-            fermentum orci, eget pharetra ex. In maximus dolor id dolor
-            vulputate, a placerat nulla sollicitudin. Sed viverra nisl ac nisi
-            sodales, eu porttitor felis vulputate. Nulla volutpat rutrum dictum.
-            Mauris augue odio, dignissim ac nibh porttitor, accumsan facilisis
-            dui. Mauris ultrices elit in orci scelerisque feugiat.
-          </Campaign.Body>
-        </Campaign>
+        <Campaign
+          rightAlignBody={index % 2 === 0}
+          key={index}
+          body={
+            <Campaign.Body>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel
+              leo et metus aliquet egestas quis vel lorem. Pellentesque in
+              fermentum orci, eget pharetra ex. In maximus dolor id dolor
+              vulputate, a placerat nulla sollicitudin. Sed viverra nisl ac nisi
+              sodales, eu porttitor felis vulputate. Nulla volutpat rutrum
+              dictum. Mauris augue odio, dignissim ac nibh porttitor, accumsan
+              facilisis dui. Mauris ultrices elit in orci scelerisque feugiat.
+            </Campaign.Body>
+          }
+          image={<Campaign.Image src={imageSrc} alt="" />}
+        />
       ))}
     </div>
   );
 };
 
 export const WithCustomImageComponent = () => {
-  return (
-    <Campaign className="container">
-      <Campaign.Image>
-        <img src={images[0]} alt="" />
-      </Campaign.Image>
-      <Campaign.Body>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel leo
-        et metus aliquet egestas quis vel lorem. Pellentesque in fermentum orci,
-        eget pharetra ex. In maximus dolor id dolor vulputate, a placerat nulla
-        sollicitudin. Sed viverra nisl ac nisi sodales, eu porttitor felis
-        vulputate. Nulla volutpat rutrum dictum. Mauris augue odio, dignissim ac
-        nibh porttitor, accumsan facilisis dui. Mauris ultrices elit in orci
-        scelerisque feugiat.
-      </Campaign.Body>
-    </Campaign>
+  const image = (
+    <Campaign.Image>
+      <img src={images[0]} alt="" />
+    </Campaign.Image>
   );
+
+  const body = (
+    <Campaign.Body>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel leo et
+      metus aliquet egestas quis vel lorem. Pellentesque in fermentum orci, eget
+      pharetra ex. In maximus dolor id dolor vulputate, a placerat nulla
+      sollicitudin. Sed viverra nisl ac nisi sodales, eu porttitor felis
+      vulputate. Nulla volutpat rutrum dictum. Mauris augue odio, dignissim ac
+      nibh porttitor, accumsan facilisis dui. Mauris ultrices elit in orci
+      scelerisque feugiat.
+    </Campaign.Body>
+  );
+  return <Campaign className="container" body={body} image={image} />;
 };
