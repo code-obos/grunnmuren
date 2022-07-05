@@ -1,5 +1,19 @@
 # @obosbbl/grunnmuren-react
 
+## 1.1.0
+
+### Minor Changes
+
+- 78b1eff: add Campaign component
+- f4e98c3: rename Stepper component to StepList
+
+### Patch Changes
+
+- 6211f0c: CardLinkOverlay: forward className
+- 631d69e: Checkbox: Add optional FormErrorMessage box, using prop error?: string
+- 429606c: Add flex-none to Checkbox to avoid non-quadratic shape when used with text wrapping multiple lines
+- 6211f0c: CardLinkOverlay: remove unecessary custom before content class
+
 ## 1.0.1
 
 ### Patch Changes
