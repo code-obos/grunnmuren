@@ -73,6 +73,45 @@ const button = plugin(function ({ addComponents }) {
   });
 });
 
+// TODO: Focus styles
+const radio = plugin(function ({ addComponents, theme }) {
+  addComponents({
+    '.radio': {
+      // hide the native radio input
+      appearance: 'none',
+      // not removed via appeareance
+      margin: 0,
+      height: '1.25rem',
+      width: '1.25rem',
+      borderRadius: '50%',
+      border: `2px solid ${theme('colors.gray.dark')}`,
+      cursor: 'pointer',
+      marginRight: '0.75rem',
+      // use grid to handle the checked:before styles
+      display: 'inline-grid',
+      placeContent: 'center',
+      '&:checked': {
+        borderColor: theme('colors.green.DEFAULT'),
+      },
+      '&::before': {
+        content: '""',
+        display: 'block',
+        borderRadius: '50%',
+        transform: 'scale(0)',
+        width: '0.65em',
+        height: '0.65em',
+        transition: '120ms transform ease-in-out',
+        boxShadow: `inset 1em 1em ${theme('colors.green.DEFAULT')}`,
+        /* Windows High Contrast Mode */
+        backgroundColor: 'CanvasText',
+      },
+      '&:checked::before': {
+        transform: 'scale(1)',
+      },
+    },
+  });
+});
+
 const checkbox = plugin(function ({ addComponents }) {
   addComponents({
     '.checkbox': {
@@ -186,6 +225,7 @@ module.exports = (userOptions) => {
       headings,
       checkbox,
       snackbar,
+      radio,
       plugin(function ({ addBase, addUtilities, addComponents, theme }) {
         addBase({
           html: {

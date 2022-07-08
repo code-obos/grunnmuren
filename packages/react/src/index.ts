@@ -10,6 +10,7 @@ export * from './Hero';
 export * from './Input';
 export * from './Link';
 export * from './Navbar';
+export * from './Radio';
 export * from './Snackbar';
 export * from './StepList';
 export * from './TextArea';
