@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.1.1
+
+### Patch Changes
+
+- 105c8f9: Select: export component
+
 ## 1.1.0
 
 ### Minor Changes
