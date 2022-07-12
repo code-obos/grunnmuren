@@ -1409,10 +1409,10 @@ packages:
     dependencies:
       '@babel/core': 7.17.10
       '@babel/helper-annotate-as-pure': 7.16.7
-      '@babel/helper-module-imports': 7.16.7
+      '@babel/helper-module-imports': 7.18.6
       '@babel/helper-plugin-utils': 7.16.7
       '@babel/plugin-syntax-jsx': 7.16.7_@babel+core@7.17.10
-      '@babel/types': 7.17.10
+      '@babel/types': 7.18.7
     dev: true
 
   /@babel/plugin-transform-react-jsx/7.17.3_@babel+core@7.18.6:
