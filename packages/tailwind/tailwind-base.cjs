@@ -73,7 +73,7 @@ const button = plugin(function ({ addComponents }) {
   });
 });
 
-const checkbox = plugin(function ({ addComponents }) {
+const checkbox = plugin(function ({ addComponents, theme }) {
   addComponents({
     '.checkbox': {
       '&::before': {
@@ -82,6 +82,7 @@ const checkbox = plugin(function ({ addComponents }) {
         height: '0.65em',
         transform: 'scale(0)',
         transition: '120ms transform ease-in-out',
+        backgroundColor: theme('colors.white'),
         'box-shadow': 'inset 1em 1em currentColor',
         'clip-path':
           'polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%)',
