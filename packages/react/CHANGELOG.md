@@ -1,5 +1,13 @@
 # @obosbbl/grunnmuren-react
 
+## 1.1.2
+
+### Patch Changes
+
+- 20b2833: checkbox: fixed white background to checkbox that is checked
+- Updated dependencies [20b2833]
+  - @obosbbl/grunnmuren-tailwind@0.4.2
+
 ## 1.1.1
 
 ### Patch Changes
