@@ -23,10 +23,9 @@ export const NavbarContent = (props: NavbarContentProps) => {
       >
         {logo}
 
-        <div className="col-start-2 col-end-3 hidden md:flex md:flex-row md:justify-end">
+        <div className="col-start-2 col-end-3 hidden md:flex md:flex-row md:justify-self-end">
           {children}
         </div>
-
         {loginItems && (
           <div
             className={classNames(

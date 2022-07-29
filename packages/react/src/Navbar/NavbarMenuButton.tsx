@@ -21,7 +21,7 @@ export const NavbarMenuButton = () => {
     <button
       aria-controls={collapsibleId}
       aria-expanded={isExpanded}
-      className="inline-flex items-center justify-end gap-2 md:hidden"
+      className="ml-auto inline-flex items-center gap-2 md:hidden"
       onClick={() => setIsExpanded((val) => !val)}
     >
       {buttonText} <Icon />

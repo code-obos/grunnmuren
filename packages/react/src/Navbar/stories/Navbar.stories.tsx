@@ -36,7 +36,7 @@ const subItems = [
 ];
 
 const BliMedlemButton = () => (
-  <div className="<md:container">
+  <div className="container gap-8 self-end">
     <Button variant="secondary">Bli medlem</Button>
   </div>
 );
@@ -135,7 +135,7 @@ export const WithLogin = () => {
             variant="secondary"
             onClick={() => setActiveLogin((prev) => !prev)}
             className={classNames(
-              '<md:hidden flex items-center gap-2 border-0',
+              '<md:hidden flex items-center gap-2 whitespace-nowrap border-0',
               {
                 'bg-blue-dark': activeLogin,
               },
@@ -165,19 +165,22 @@ export const WithLogin = () => {
         <div className="bg-blue-dark <md:hidden -mb-14">
           <NavbarItems className="mt-0">{subItems}</NavbarItems>
         </div>
-        <NavbarExpandedMobileContent actionButtons={<BliMedlemButton />}>
-          <ul className="container relative my-8 overflow-hidden">
-            {navItems.map((item, index) => (
-              <li
-                key={index}
-                className="flex justify-between border-b border-[#0156E0] no-underline"
-              >
-                <a href="#" className="grow py-3 no-underline">
-                  {item}
-                </a>
-              </li>
-            ))}
-          </ul>
+        <NavbarExpandedMobileContent>
+          <>
+            <ul className="container relative my-8 overflow-hidden">
+              {navItems.map((item, index) => (
+                <li
+                  key={index}
+                  className="flex justify-between border-b border-[#0156E0] no-underline"
+                >
+                  <a href="#" className="grow py-3 no-underline">
+                    {item}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <BliMedlemButton />
+          </>
         </NavbarExpandedMobileContent>
       </NavbarCollapsible>
     </Navbar>

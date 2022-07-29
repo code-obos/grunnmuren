@@ -4,10 +4,6 @@ import { useScreenMaxWidthMd } from '../hooks';
 
 export interface NavbarExpandedMobileContentProps {
   children?: React.ReactNode;
-
-  globalSearch?: React.ReactNode;
-
-  actionButtons: React.ReactNode;
 }
 
 /**
@@ -22,11 +18,5 @@ export const NavbarExpandedMobileContent = (
 
   if (!isExpanded || !isMobileScreen) return null;
 
-  return (
-    <>
-      {props.globalSearch}
-      {props.children}
-      <div className="gap-8">{props.actionButtons}</div>
-    </>
-  );
+  return <>{props.children}</>;
 };
