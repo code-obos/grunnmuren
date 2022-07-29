@@ -26,7 +26,7 @@ export const Navbar = (props: NavbarProps) => {
           className={classNames(className, 'bg-blue py-6 text-white md:py-8')}
           {...rest}
         >
-          <div className="container">{children}</div>
+          {children}
         </div>
       </NavbarContext.Provider>
     </ButtonColorContext.Provider>

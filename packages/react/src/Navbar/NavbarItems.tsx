@@ -16,7 +16,7 @@ export const NavbarItems = (props: NavbarItemsProps) => {
     <nav
       className={classNames(
         className,
-        'my-8 flex flex-col md:mb-0 md:flex md:flex-row md:flex-wrap md:gap-x-8',
+        '<md:hidden container my-8 grid md:mb-0 md:flex md:flex-wrap md:gap-x-8',
         {
           hidden: !isExpanded,
         },

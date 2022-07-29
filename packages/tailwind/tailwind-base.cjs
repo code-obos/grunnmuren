@@ -70,6 +70,18 @@ const button = plugin(function ({ addComponents }) {
         transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
       },
     },
+    '.login': {
+      '&::after': {
+        content: '""',
+        display: 'block',
+        position: 'absolute',
+        left: '50%',
+        border: '1rem solid #002169',
+        transform: 'translateX(-50%)',
+        bottom: '-70%',
+        borderColor: '#002169 transparent transparent',
+      },
+    },
   });
 });
 
