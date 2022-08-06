@@ -73,7 +73,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0
       require-from-string: 2.0.2
-      tailwindcss: 3.1.7
+      tailwindcss: 3.1.8
       vite: 2.9.14
       webpack: 5.73.0
     dependencies:
@@ -95,7 +95,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       require-from-string: 2.0.2
-      tailwindcss: 3.1.7
+      tailwindcss: 3.1.8
       vite: 2.9.14
       webpack: 5.73.0
 
@@ -103,12 +103,12 @@ importers:
     specifiers:
       '@tailwindcss/aspect-ratio': 0.4.0
       '@tailwindcss/typography': 0.5.4
-      tailwindcss: 3.1.7
+      tailwindcss: 3.1.8
     dependencies:
-      '@tailwindcss/aspect-ratio': 0.4.0_tailwindcss@3.1.7
-      '@tailwindcss/typography': 0.5.4_tailwindcss@3.1.7
+      '@tailwindcss/aspect-ratio': 0.4.0_tailwindcss@3.1.8
+      '@tailwindcss/typography': 0.5.4_tailwindcss@3.1.8
     devDependencies:
-      tailwindcss: 3.1.7
+      tailwindcss: 3.1.8
 
 packages:
 
@@ -3521,15 +3521,15 @@ packages:
       svgo: 2.8.0
     dev: true
 
-  /@tailwindcss/aspect-ratio/0.4.0_tailwindcss@3.1.7:
+  /@tailwindcss/aspect-ratio/0.4.0_tailwindcss@3.1.8:
     resolution: {integrity: sha512-WJu0I4PpqNPuutpaA9zDUq2JXR+lorZ7PbLcKNLmb6GL9/HLfC7w3CRsMhJF4BbYd/lkY6CfXOvkYpuGnZfkpQ==}
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
     dependencies:
-      tailwindcss: 3.1.7
+      tailwindcss: 3.1.8
     dev: false
 
-  /@tailwindcss/typography/0.5.4_tailwindcss@3.1.7:
+  /@tailwindcss/typography/0.5.4_tailwindcss@3.1.8:
     resolution: {integrity: sha512-QEdg40EmGvE7kKoDei8zr5sf4D1pIayHj4R31bH3lX8x2BtTiR+jNejYPOkhbmy3DXgkMF9jC8xqNiGFAuL9Sg==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
@@ -3537,7 +3537,7 @@ packages:
       lodash.castarray: 4.4.0
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
-      tailwindcss: 3.1.7
+      tailwindcss: 3.1.8
     dev: false
 
   /@trysound/sax/0.2.0:
@@ -4990,7 +4990,7 @@ packages:
       mississippi: 3.0.0
       mkdirp: 0.5.6
       move-concurrently: 1.0.1
-      promise-inflight: 1.0.1
+      promise-inflight: 1.0.1_bluebird@3.7.2
       rimraf: 2.7.1
       ssri: 6.0.2
       unique-filename: 1.1.1
@@ -10158,6 +10158,17 @@ packages:
         optional: true
     dev: true
 
+  /promise-inflight/1.0.1_bluebird@3.7.2:
+    resolution: {integrity: sha512-6zWPyEOFaQBJYcGMHBKTKJ3u6TBsnMFOIZSa6ce1e/ZrrsOlnHRHbabMjLiBYKp+n44X9eUI6VUPaukCXHuG4g==}
+    peerDependencies:
+      bluebird: '*'
+    peerDependenciesMeta:
+      bluebird:
+        optional: true
+    dependencies:
+      bluebird: 3.7.2
+    dev: true
+
   /promise.allsettled/1.0.5:
     resolution: {integrity: sha512-tVDqeZPoBC0SlzJHzWGZ2NKAguVq2oiYj7gbggbiTvH2itHohijTp7njOUA0aQ/nl+0lr/r6egmhoYu63UZ/pQ==}
     engines: {node: '>= 0.4'}
@@ -11542,8 +11553,8 @@ packages:
     resolution: {integrity: sha512-k8uzYIkIVwmT+TcglpdN50pS2y1BDcUnBPK9iJeGu0Pl1lOI8pD6wtzgw91Pjpe+RxtTncw32tLxs/R0yNL2Mg==}
     dev: true
 
-  /tailwindcss/3.1.7:
-    resolution: {integrity: sha512-r7mgumZ3k0InfVPpGWcX8X/Ut4xBfv+1O/+C73ar/m01LxGVzWvPxF/w6xIUPEztrCoz7axfx0SMdh8FH8ZvRQ==}
+  /tailwindcss/3.1.8:
+    resolution: {integrity: sha512-YSneUCZSFDYMwk+TGq8qYFdCA3yfBRdBlS7txSq0LUmzyeqRe3a8fBQzbz9M3WS/iFT4BNf/nmw9mEzrnSaC0g==}
     engines: {node: '>=12.13.0'}
     hasBin: true
     dependencies:
