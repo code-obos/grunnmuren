@@ -2,5 +2,11 @@
   "extends": [
     "config:base"
   ],
-  "schedule": ["on saturday"]
+  "schedule": ["on saturday"],
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["^@svgr/"],
+      "groupName": "svgr packages"
+    }
+  ]
 }
