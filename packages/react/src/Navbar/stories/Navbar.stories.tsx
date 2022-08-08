@@ -86,7 +86,7 @@ export const Default = () => {
   );
 };
 
-export const WithLogin = () => {
+export const WithSubnav = () => {
   const [activeIndex, setActiveIndex] = useState<number>();
   const [activeLogin, setActiveLogin] = useState<boolean>(false);
 
@@ -127,10 +127,8 @@ export const WithLogin = () => {
             />
           </a>
         }
-        loginItems={<LoginMenuItem />}
-        isLoginOpen={activeLogin}
       >
-        <>
+        <div className="col-start-2 col-end-3 hidden md:flex md:flex-row md:justify-self-end">
           <Button
             variant="secondary"
             onClick={() => setActiveLogin((prev) => !prev)}
@@ -147,7 +145,21 @@ export const WithLogin = () => {
             <span className={activeLogin ? 'login' : ''}></span>
           </Button>
           <BliMedlemButton />
-        </>
+        </div>
+
+        <div
+          className={classNames(
+            '<md:hidden col-start-1 col-end-3 grid max-h-[0] overflow-hidden transition-all duration-200 ease-in-out',
+            {
+              'max-h-[1000px]': activeLogin,
+            },
+          )}
+          aria-hidden={!activeLogin}
+        >
+          <div className="bg-blue-dark container mt-2 grid grow grid-cols-3 gap-2 rounded-3xl">
+            <LoginMenuItem />
+          </div>
+        </div>
       </NavbarContent>
       <NavbarCollapsible>
         <NavbarItems>
@@ -166,21 +178,24 @@ export const WithLogin = () => {
           <NavbarItems className="mt-0">{subItems}</NavbarItems>
         </div>
         <NavbarExpandedMobileContent>
-          <>
-            <ul className="container relative my-8 overflow-hidden">
-              {navItems.map((item, index) => (
-                <li
-                  key={index}
-                  className="flex justify-between border-b border-[#0156E0] no-underline"
-                >
-                  <a href="#" className="grow py-3 no-underline">
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <ul className="container relative my-8 overflow-hidden">
+            {navItems.map((item, index) => (
+              <li
+                key={index}
+                className="flex justify-between border-b border-[#0156E0] no-underline"
+              >
+                <a href="#" className="grow py-3 no-underline">
+                  {item}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <div className="grid gap-8">
             <BliMedlemButton />
-          </>
+            <div className="container md:hidden">
+              <LoginMenuItem />
+            </div>
+          </div>
         </NavbarExpandedMobileContent>
       </NavbarCollapsible>
     </Navbar>
