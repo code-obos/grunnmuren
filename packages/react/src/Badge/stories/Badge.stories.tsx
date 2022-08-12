@@ -11,14 +11,10 @@ export default {
   title: 'Badge',
 };
 
-const Spacer = (props: { children: React.ReactNode }) => (
-  <div className="container my-8 flex flex-col gap-4" {...props} />
-);
-
 export const Default = () => {
   return (
     <>
-      <Spacer>
+      <div className="my-8 mx-4 flex flex-col gap-4">
         <Badge
           color="blue-light"
           icon={<InfoCircle className="text-blue-dark" />}
@@ -40,7 +36,7 @@ export const Default = () => {
         <Badge color="yellow" icon={<RealEstate />}>
           Visning 00. måned
         </Badge>
-      </Spacer>
+      </div>
     </>
   );
 };
