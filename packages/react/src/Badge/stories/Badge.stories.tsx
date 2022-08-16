@@ -19,7 +19,7 @@ export const Default = () => {
           Frist for forkjøp 00. måned
         </Badge>
         <Badge color="green" icon={<Check />}>
-          Salger er igang
+          Salget er i gang
         </Badge>
         <Badge color="green-light" icon={<Star />}>
           Medlemstilbud
