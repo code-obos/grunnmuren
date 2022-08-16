@@ -34,18 +34,12 @@ export const Badge = (props: BadgeProps) => {
   return (
     <div
       className={classNames(
-        'flex w-fit overflow-hidden rounded-3xl border-2',
+        'inline-flex w-fit items-center overflow-hidden rounded-3xl border-2',
         badgeVariation,
         className,
       )}
     >
-      <div
-        className={classNames(
-          'flex items-center justify-center rounded-l-3xl px-3 py-2',
-        )}
-      >
-        {icon}
-      </div>
+      <div className={classNames('px-3 py-2')}>{icon}</div>
       <div className="bg-white py-2 px-3 text-black">{children}</div>
     </div>
   );
