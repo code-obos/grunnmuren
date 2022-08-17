@@ -47,12 +47,30 @@ const obosFonts = [
   },
 ];
 
-const button = plugin(function ({ addComponents }) {
-  // adds a shade on the button when hovered
-  // ideally this would be solved by just darkening the button background,
-  // but that doesn't really work since some of the button variations have transparent backgrounds
+const button = plugin(function ({ addComponents, theme }) {
   addComponents({
     '.button': {
+      // The Tailwind utilities we use for focus styling are kinda hard to "translate", so using the @apply utility here, even though mixing styles are meh...
+      '@apply focus:outline-none focus-visible:ring-2 focus-visible:ring-black ring-offset-2':
+        {},
+      position: 'relative',
+      textDecorationLine: 'none',
+      display: 'inline-block',
+      border: '2px solid',
+      padding: `${theme('spacing.2')} ${theme('spacing.6')}`,
+      borderRadius: '0.75rem',
+      transition: `all 200ms ${theme('transitionTimingFunction.DEFAULT')}`,
+      fontWeight: theme('fontWeight.medium'),
+      width: 'fit-content',
+      '&:disabled': {
+        backgroundColor: theme('colors.gray.light'),
+        borderColor: theme('colors.gray.light'),
+        color: theme('colors.black'),
+        pointerEvents: 'none',
+      },
+      '&:hover': {
+        borderRadius: '0.375rem',
+      },
       '&::after': {
         content: '""',
         position: 'absolute',
@@ -64,10 +82,13 @@ const button = plugin(function ({ addComponents }) {
         bottom: '-2px',
         borderRadius: '0.75rem',
       },
+      // adds a shade on the button when hovered
+      // ideally this would be solved by just darkening the button background,
+      // but that doesn't really work since some of the button variations have transparent backgrounds
       '&:hover::after': {
         backgroundColor: 'rgba(0, 0, 0, 0.1)',
         borderRadius: '0.375rem',
-        transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
+        transition: `all 200ms ${theme('transitionTimingFunction.DEFAULT')}`,
       },
     },
   });
