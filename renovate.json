@@ -7,6 +7,10 @@
     {
       "matchPackagePatterns": ["^@svgr/"],
       "groupName": "svgr packages"
+    },
+    {
+      "matchPackagePatterns": ["^@vitejs/", "vite"],
+      "groupName": "vite packages"
     }
   ]
 }
