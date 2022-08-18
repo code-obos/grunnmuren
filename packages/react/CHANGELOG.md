@@ -1,5 +1,18 @@
 # @obosbbl/grunnmuren-react
 
+## 1.2.0
+
+### Minor Changes
+
+- 9cc644a: add radio group
+
+### Patch Changes
+
+- a3d49cf: refactor button styling to a Tailwind component
+- Updated dependencies [9cc644a]
+- Updated dependencies [a3d49cf]
+  - @obosbbl/grunnmuren-tailwind@0.5.0
+
 ## 1.1.2
 
 ### Patch Changes
