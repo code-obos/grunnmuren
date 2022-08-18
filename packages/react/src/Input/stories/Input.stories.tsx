@@ -34,7 +34,8 @@ export const Default = () => {
   );
 };
 
-const Div = ({ label, children }) => {
+const Div = (props: { label: string; children: React.ReactElement }) => {
+  const { label, children } = props;
   const id = useId();
   return (
     <div>
