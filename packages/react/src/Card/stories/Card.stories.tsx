@@ -1,4 +1,5 @@
 import {
+  CardProps,
   Card,
   CardContent,
   CardImage,
@@ -17,7 +18,7 @@ export default {
   },
 };
 
-export const Default = (props: unknown) => {
+export const Default = (props: CardProps<'div'>) => {
   return (
     <Card {...props}>
       <CardContent>
@@ -33,7 +34,7 @@ Default.args = {
   bgColor: 'white',
 };
 
-export const Link = (props: unknown) => {
+export const Link = (props: CardProps<'div'>) => {
   return (
     <Card {...props}>
       <CardContent>

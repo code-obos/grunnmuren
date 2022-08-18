@@ -1,4 +1,11 @@
-import { Button, Hero, HeroContent, HeroImage, HeroActions } from '../../';
+import {
+  Button,
+  Hero,
+  HeroProps,
+  HeroContent,
+  HeroImage,
+  HeroActions,
+} from '../../';
 
 const metadata = {
   title: 'Hero',
@@ -36,7 +43,7 @@ const image = {
   alt: 'To personer finner svar på spørsmål via kundeservicesidene',
 };
 
-export function WithImage(props: unknown) {
+export function WithImage(props: HeroProps) {
   const heroImage = <HeroImage {...image} />;
 
   return (
@@ -56,7 +63,7 @@ WithImage.args = {
   bgColor: 'white',
 };
 
-export function WithoutImage(props: unknown) {
+export function WithoutImage(props: HeroProps) {
   return (
     <Hero {...props}>
       <HeroContent heading={heading} description={description}>
