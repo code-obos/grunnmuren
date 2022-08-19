@@ -1,5 +1,17 @@
 # @obosbbl/grunnmuren-react
 
+## 1.2.1
+
+### Patch Changes
+
+- a999b86: Radio: added forwardRef to Radio and RadioGroup
+- 09c0177: change display from `inline-block` to `inline-flex` for Button component.
+
+  Makes rendering icons inside the button easier.
+
+- Updated dependencies [09c0177]
+  - @obosbbl/grunnmuren-tailwind@0.5.1
+
 ## 1.2.0
 
 ### Minor Changes
