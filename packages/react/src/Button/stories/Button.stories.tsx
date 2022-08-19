@@ -21,6 +21,11 @@ export default {
     },
     disabled: {
       control: 'boolean',
+      defaultValue: false,
+    },
+    loading: {
+      control: 'boolean',
+      defaultValue: false,
     },
   },
 };
@@ -28,8 +33,9 @@ export default {
 export const Default = (props: {
   composition: CompositionValue;
   disabled: boolean;
+  loading: boolean;
 }) => {
-  const { composition, disabled } = props;
+  const { composition, disabled, loading } = props;
 
   // Helper component that allows us to change the contentof the button when toggling the composition control in Storybook
   const ButtonContent = ({ children }: { children: React.ReactNode }) => {
@@ -68,16 +74,20 @@ export const Default = (props: {
 
   return (
     <>
-      <ButtonsDisplayer buttonProps={{ disabled }}>{buttons}</ButtonsDisplayer>
+      <ButtonsDisplayer buttonProps={{ disabled, loading }}>
+        {buttons}
+      </ButtonsDisplayer>
 
       <div className="bg-green-dark py-4">
-        <ButtonsDisplayer buttonProps={{ color: 'light-green', disabled }}>
+        <ButtonsDisplayer
+          buttonProps={{ color: 'light-green', disabled, loading }}
+        >
           {buttons}
         </ButtonsDisplayer>
       </div>
 
       <div className="bg-blue py-4">
-        <ButtonsDisplayer buttonProps={{ color: 'white', disabled }}>
+        <ButtonsDisplayer buttonProps={{ color: 'white', disabled, loading }}>
           {buttons}
         </ButtonsDisplayer>
       </div>
