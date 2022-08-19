@@ -1,5 +1,5 @@
 export * from './Alert';
-export * from './Badge';
+export * from './Chip';
 export * from './Banner';
 export * from './Button';
 export * from './Campaign';
