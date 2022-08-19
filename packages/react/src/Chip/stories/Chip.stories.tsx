@@ -1,11 +1,5 @@
 import { Chip } from '..';
-import {
-  Star,
-  Check,
-  Warning,
-  RealEstate,
-  InfoCircle,
-} from '@obosbbl/grunnmuren-icons';
+import { Star, Warning, InfoCircle } from '@obosbbl/grunnmuren-icons';
 
 export default {
   title: 'Chip',
