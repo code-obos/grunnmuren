@@ -1,12 +1,12 @@
 import classNames from 'clsx';
-import { useContext } from 'react';
+import { useContext, forwardRef } from 'react';
 import { RadioContext } from './RadioContext';
 
 export interface RadioProps extends React.ComponentPropsWithoutRef<'input'> {
   children: React.ReactNode;
 }
 
-export const Radio = (props: RadioProps) => {
+export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
   const { children, className, ...rest } = props;
 
   const { defaultValue, isControlled, name, onChange, required, value } =
@@ -22,9 +22,10 @@ export const Radio = (props: RadioProps) => {
         onChange={isControlled ? onChange : undefined}
         required={required}
         type="radio"
+        ref={ref}
         {...rest}
       />
       {children}
     </label>
   );
-};
+});
