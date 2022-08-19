@@ -1,5 +1,13 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 0.5.1
+
+### Patch Changes
+
+- 09c0177: change display from `inline-block` to `inline-flex` for Button component.
+
+  Makes rendering icons inside the button easier.
+
 ## 0.5.0
 
 ### Minor Changes
