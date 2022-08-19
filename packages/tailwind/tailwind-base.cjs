@@ -48,6 +48,8 @@ const obosFonts = [
 ];
 
 const button = plugin(function ({ addComponents, theme }) {
+  const hoverLoadingBgColor = 'rgba(0, 0, 0, 0.1)';
+
   addComponents({
     '.button': {
       // The Tailwind utilities we use for focus styling are kinda hard to "translate", so using the @apply utility here, even though mixing styles are meh...
@@ -88,8 +90,15 @@ const button = plugin(function ({ addComponents, theme }) {
       // ideally this would be solved by just darkening the button background,
       // but that doesn't really work since some of the button variations have transparent backgrounds
       '&:hover::after': {
-        backgroundColor: 'rgba(0, 0, 0, 0.1)',
+        backgroundColor: hoverLoadingBgColor,
         transition: `all 200ms ${theme('transitionTimingFunction.DEFAULT')}`,
+      },
+      // We use aria-busy to indicate loading state
+      '&[aria-busy="true"] > *': {
+        visibility: 'hidden',
+      },
+      '&[aria-busy="true"]::after': {
+        backgroundColor: hoverLoadingBgColor,
       },
     },
   });
