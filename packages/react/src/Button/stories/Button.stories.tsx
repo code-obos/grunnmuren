@@ -32,10 +32,8 @@ export const Default = (props: {
   const { composition, disabled } = props;
 
   // Helper component that allows us to change the contentof the button when toggling the composition control in Storybook
-  const ButtonContent = ({ children }) => {
+  const ButtonContent = ({ children }: { children: React.ReactNode }) => {
     switch (composition) {
-      case Composition.Text:
-        return children;
       case Composition.Icon:
         return <House />;
       case Composition.TextIcon:
@@ -52,14 +50,18 @@ export const Default = (props: {
             {children}
           </>
         );
+      default:
+        return children;
     }
   };
 
   const buttons = [
     <Button key="button">
+      {/* @ts-expect-error care */}
       <ButtonContent>Button</ButtonContent>
     </Button>,
     <Button key="link" href="#">
+      {/* @ts-expect-error care */}
       <ButtonContent>Link</ButtonContent>
     </Button>,
   ];
@@ -113,6 +115,6 @@ const ButtonsDisplayer = (props: {
   );
 };
 
-const ButtonSpacer = (props) => (
+const ButtonSpacer = (props: { children: React.ReactNode }) => (
   <div className="my-8 flex flex-row justify-center gap-8" {...props} />
 );
