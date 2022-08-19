@@ -1,4 +1,4 @@
-import { useMemo, useId, useCallback } from 'react';
+import { useMemo, useId, useCallback, forwardRef } from 'react';
 import classNames from 'clsx';
 import { RadioContext } from './RadioContext';
 import { FormHelperText, FormLabel } from '../';
@@ -21,63 +21,66 @@ export interface RadioGroupProps
   value?: string;
 }
 
-export const RadioGroup = (props: RadioGroupProps) => {
-  const isControlled = 'value' in props;
+export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
+  (props, ref) => {
+    const isControlled = 'value' in props;
 
-  const {
-    className,
-    defaultValue,
-    description,
-    children,
-    label,
-    name,
-    onChange: onChangeProp,
-    required,
-    value,
-    ...rest
-  } = props;
-
-  const onChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const nextValue = event.target.value;
-      onChangeProp?.(nextValue);
-    },
-    [onChangeProp],
-  );
-
-  const group = useMemo(
-    () => ({
+    const {
+      className,
       defaultValue,
-      isControlled,
+      description,
+      children,
+      label,
       name,
-      onChange,
+      onChange: onChangeProp,
       required,
       value,
-    }),
-    [defaultValue, isControlled, name, onChange, required, value],
-  );
+      ...rest
+    } = props;
 
-  const groupId = useId();
-  const labelId = `${groupId}:label`;
-  const helpId = `${groupId}:help`;
+    const onChange = useCallback(
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+        const nextValue = event.target.value;
+        onChangeProp?.(nextValue);
+      },
+      [onChangeProp],
+    );
 
-  return (
-    <RadioContext.Provider value={group}>
-      <div
-        aria-describedby={description ? helpId : undefined}
-        aria-labelledby={label ? labelId : undefined}
-        className={classNames(className, 'flex flex-col gap-4')}
-        role="radiogroup"
-        {...rest}
-      >
-        {label && (
-          <FormLabel id={labelId} isRequired={required}>
-            {label}
-          </FormLabel>
-        )}
-        {children}
-        <FormHelperText id={helpId}>{description}</FormHelperText>
-      </div>
-    </RadioContext.Provider>
-  );
-};
+    const group = useMemo(
+      () => ({
+        defaultValue,
+        isControlled,
+        name,
+        onChange,
+        required,
+        value,
+      }),
+      [defaultValue, isControlled, name, onChange, required, value],
+    );
+
+    const groupId = useId();
+    const labelId = `${groupId}:label`;
+    const helpId = `${groupId}:help`;
+
+    return (
+      <RadioContext.Provider value={group}>
+        <div
+          aria-describedby={description ? helpId : undefined}
+          aria-labelledby={label ? labelId : undefined}
+          className={classNames(className, 'flex flex-col gap-4')}
+          role="radiogroup"
+          ref={ref}
+          {...rest}
+        >
+          {label && (
+            <FormLabel id={labelId} isRequired={required}>
+              {label}
+            </FormLabel>
+          )}
+          {children}
+          <FormHelperText id={helpId}>{description}</FormHelperText>
+        </div>
+      </RadioContext.Provider>
+    );
+  },
+);
