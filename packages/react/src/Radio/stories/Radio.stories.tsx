@@ -23,14 +23,7 @@ export const Controlled = () => {
   const [value, setValue] = useState('2');
 
   return (
-    <RadioGroup
-      name="form-name"
-      value={value}
-      onChange={(item) => {
-        console.log(item);
-        setValue(item);
-      }}
-    >
+    <RadioGroup name="form-name" value={value} onChange={setValue}>
       <Radio value="1">Radio 1</Radio>
       <Radio value="2">Radio 2</Radio>
       <Radio value="3">Radio 3</Radio>
