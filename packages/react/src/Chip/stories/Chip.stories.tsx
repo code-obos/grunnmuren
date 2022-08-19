@@ -18,28 +18,31 @@ export const Default = () => {
         <Chip color="blue-light" icon={<InfoCircle />}>
           Frist for forkjøp 00. måned
         </Chip>
+        <Chip color="blue-light">Frist for forkjøp 00. måned</Chip>
         <Chip color="green" icon={<Check />}>
           Salget er i gang
         </Chip>
+        <Chip color="green">Salget er i gang</Chip>
         <Chip color="green-light" icon={<Star />}>
           Medlemstilbud
         </Chip>
+        <Chip color="green-light">Medlemstilbud</Chip>
         <Chip color="red-light" icon={<Warning />}>
           Alert
         </Chip>
+        <Chip color="red-light">Alert uten ikon</Chip>
         <Chip color="orange-light" icon={<InfoCircle />}>
           Informasjon
         </Chip>
+        <Chip color="orange-light">Informasjon uten ikon</Chip>
         <Chip color="yellow" icon={<RealEstate />}>
           Visning 00. måned
         </Chip>
+        <Chip color="yellow">Visning 00. måned</Chip>
         <Chip className="border-red bg-red" icon={<Warning />}>
-          Custom border color
+          Egendefinert farge
         </Chip>
-        <Chip>Custom border color</Chip>
-        <Chip color="blue-light">Custom border color</Chip>
-        <Chip color="red-light">Custom border color</Chip>
-        <Chip color="orange-light">Custom border color</Chip>
+        <Chip className="border-red bg-red">Egendefinert farge</Chip>
       </div>
     </>
   );
