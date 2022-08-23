@@ -82,14 +82,13 @@ const button = plugin(function ({ addComponents, theme }) {
         left: '-2px',
         right: '-2px',
         bottom: '-2px',
-        borderRadius: '0.75rem',
+        borderRadius: 'inherit',
       },
       // adds a shade on the button when hovered
       // ideally this would be solved by just darkening the button background,
       // but that doesn't really work since some of the button variations have transparent backgrounds
       '&:hover::after': {
         backgroundColor: 'rgba(0, 0, 0, 0.1)',
-        borderRadius: '0.375rem',
         transition: `all 200ms ${theme('transitionTimingFunction.DEFAULT')}`,
       },
     },
