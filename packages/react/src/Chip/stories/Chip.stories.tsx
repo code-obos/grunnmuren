@@ -25,7 +25,7 @@ export const Default = () => {
           <Chip
             className="border-red bg-red"
             variant="outline"
-            icon={<Warning />}
+            icon={<Warning className="text-white" />}
           >
             Egendefinert farge
           </Chip>
