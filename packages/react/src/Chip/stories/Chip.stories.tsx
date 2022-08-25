@@ -10,19 +10,23 @@ export const Default = () => {
     <>
       <div className="my-8 mx-4 flex gap-4">
         <div className="flex flex-col gap-4">
-          <Chip color="blue-light" icon={<InfoCircle />}>
+          <Chip color="blue-light" variant="outline" icon={<InfoCircle />}>
             Frist for forkjøp 00. måned
           </Chip>
-          <Chip color="green-light" icon={<Star />}>
+          <Chip color="green-light" variant="outline" icon={<Star />}>
             Medlemstilbud
           </Chip>
-          <Chip color="red-light" icon={<Warning />}>
+          <Chip color="red-light" variant="outline" icon={<Warning />}>
             Alert
           </Chip>
-          <Chip color="orange-light" icon={<InfoCircle />}>
+          <Chip color="orange-light" variant="outline" icon={<InfoCircle />}>
             Informasjon
           </Chip>
-          <Chip className="border-red bg-red" icon={<Warning />}>
+          <Chip
+            className="border-red bg-red"
+            variant="outline"
+            icon={<Warning />}
+          >
             Egendefinert farge
           </Chip>
         </div>

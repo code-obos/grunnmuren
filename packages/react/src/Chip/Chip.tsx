@@ -9,10 +9,12 @@ export type ChipColor =
 export interface ChipProps {
   icon?: React.ReactNode;
 
-  /* @default green */
   color?: ChipColor;
   className?: string;
   children: React.ReactNode;
+
+  /* @default 'outline' */
+  variant?: 'outline' | 'filled';
 }
 
 const chipVariations = {
@@ -30,7 +32,7 @@ const iconColors = {
 };
 
 export const Chip = (props: ChipProps) => {
-  const { className, color, icon, children } = props;
+  const { className, color, icon, children, variant = 'filled' } = props;
 
   const chipVariation = color && chipVariations[color];
   const iconColor = color && iconColors[color];
@@ -46,7 +48,7 @@ export const Chip = (props: ChipProps) => {
       {icon && <div className={classNames('px-3 py-2', iconColor)}>{icon}</div>}
       <div
         className={classNames('py-2 px-3 font-medium', {
-          'bg-white': icon,
+          'bg-white': variant === 'outline',
         })}
       >
         {children}
