@@ -13,7 +13,7 @@ export interface ChipProps {
   className?: string;
   children: React.ReactNode;
 
-  /* @default 'outline' */
+  /* @default 'filled' */
   variant?: 'outline' | 'filled';
 }
 
