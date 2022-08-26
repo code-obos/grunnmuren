@@ -1,5 +1,15 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 0.6.0
+
+### Minor Changes
+
+- 1656873: add `loading` modifier to Button component
+
+### Patch Changes
+
+- e678fb5: refactor button hover css to make it more flexible
+
 ## 0.5.1
 
 ### Patch Changes

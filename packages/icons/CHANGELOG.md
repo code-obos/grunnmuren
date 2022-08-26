@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-icons
 
+## 0.4.0
+
+### Minor Changes
+
+- e402a1b: add social media icons
+
 ## 0.3.0
 
 ### Minor Changes

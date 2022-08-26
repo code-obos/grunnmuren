@@ -1,5 +1,20 @@
 # @obosbbl/grunnmuren-react
 
+## 1.3.0
+
+### Minor Changes
+
+- e670cee: add Chip component
+- 1656873: add `loading` modifier to Button component
+
+### Patch Changes
+
+- Updated dependencies [e402a1b]
+- Updated dependencies [1656873]
+- Updated dependencies [e678fb5]
+  - @obosbbl/grunnmuren-icons@0.4.0
+  - @obosbbl/grunnmuren-tailwind@0.6.0
+
 ## 1.2.1
 
 ### Patch Changes
