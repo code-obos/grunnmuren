@@ -9,7 +9,7 @@ importers:
       '@typescript-eslint/parser': 5.33.1
       eslint: 8.21.0
       eslint-config-prettier: 8.5.0
-      eslint-plugin-react: 7.30.1
+      eslint-plugin-react: 7.31.6
       eslint-plugin-react-hooks: 4.6.0
       prettier: 2.7.1
       prettier-plugin-tailwindcss: 0.1.13
@@ -20,7 +20,7 @@ importers:
       '@typescript-eslint/parser': 5.33.1_qugx7qdu5zevzvxaiqyxfiwquq
       eslint: 8.21.0
       eslint-config-prettier: 8.5.0_eslint@8.21.0
-      eslint-plugin-react: 7.30.1_eslint@8.21.0
+      eslint-plugin-react: 7.31.6_eslint@8.21.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.21.0
       prettier: 2.7.1
       prettier-plugin-tailwindcss: 0.1.13_prettier@2.7.1
@@ -5432,7 +5432,7 @@ packages:
     dev: true
 
   /concat-map/0.0.1:
-    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
+    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
     dev: true
 
   /concat-stream/1.6.2:
@@ -6511,8 +6511,8 @@ packages:
       eslint: 8.21.0
     dev: true
 
-  /eslint-plugin-react/7.30.1_eslint@8.21.0:
-    resolution: {integrity: sha512-NbEvI9jtqO46yJA3wcRF9Mo0lF9T/jhdHqhCHXiXtD+Zcb98812wvokjWpU7Q4QH5edo6dmqrukxVvWWXHlsUg==}
+  /eslint-plugin-react/7.31.6_eslint@8.21.0:
+    resolution: {integrity: sha512-CXu4eu28sb8Sd2+cyUYsJVyDvpTlaXPG+bOzzpS9IzZKtye96AYX3ZmHQ6ayn/OAIQ/ufDJP8ElPWd63Pepn9w==}
     engines: {node: '>=4'}
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
