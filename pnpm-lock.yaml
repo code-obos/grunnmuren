@@ -31,7 +31,7 @@ importers:
       '@svgr/core': 6.3.1
       '@svgr/plugin-jsx': 6.3.1
       '@svgr/plugin-svgo': 6.3.1
-      '@types/react': 18.0.17
+      '@types/react': 18.0.18
       '@vitejs/plugin-react': 1.3.2
       fs-extra: 10.1.0
       node-fetch: 3.2.10
@@ -44,7 +44,7 @@ importers:
       '@svgr/core': 6.3.1
       '@svgr/plugin-jsx': 6.3.1_@svgr+core@6.3.1
       '@svgr/plugin-svgo': 6.3.1_@svgr+core@6.3.1
-      '@types/react': 18.0.17
+      '@types/react': 18.0.18
       '@vitejs/plugin-react': 1.3.2
       fs-extra: 10.1.0
       node-fetch: 3.2.10
@@ -65,7 +65,7 @@ importers:
       '@storybook/builder-webpack5': 6.5.10
       '@storybook/manager-webpack5': 6.5.10
       '@storybook/react': 6.5.10
-      '@types/react': 18.0.17
+      '@types/react': 18.0.18
       '@types/react-dom': 18.0.6
       '@vitejs/plugin-react': 1.3.2
       clsx: 1.2.1
@@ -89,7 +89,7 @@ importers:
       '@storybook/builder-webpack5': 6.5.10_biqbaboplfbrettd7655fr4n2y
       '@storybook/manager-webpack5': 6.5.10_biqbaboplfbrettd7655fr4n2y
       '@storybook/react': 6.5.10_xaniacv7q2m7zlcq4vtwgukhca
-      '@types/react': 18.0.17
+      '@types/react': 18.0.18
       '@types/react-dom': 18.0.6
       '@vitejs/plugin-react': 1.3.2
       postcss: 8.4.16
@@ -3694,11 +3694,11 @@ packages:
   /@types/react-dom/18.0.6:
     resolution: {integrity: sha512-/5OFZgfIPSwy+YuIBP/FgJnQnsxhZhjjrnxudMddeblOouIodEQ75X14Rr4wGSG/bknL+Omy9iWlLo1u/9GzAA==}
     dependencies:
-      '@types/react': 18.0.17
+      '@types/react': 18.0.18
     dev: true
 
-  /@types/react/18.0.17:
-    resolution: {integrity: sha512-38ETy4tL+rn4uQQi7mB81G7V1g0u2ryquNmsVIOKUAEIDK+3CUjZ6rSRpdvS99dNBnkLFL83qfmtLacGOTIhwQ==}
+  /@types/react/18.0.18:
+    resolution: {integrity: sha512-6hI08umYs6NaiHFEEGioXnxJ+oEhY3eRz8VCUaudZmGdtvPviCJB8mgaMxaDWAdPSYd4eFavrPk2QIolwbLYrg==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.2
