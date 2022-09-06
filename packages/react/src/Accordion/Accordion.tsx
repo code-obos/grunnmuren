@@ -1,4 +1,5 @@
 import { ChevronDown } from '@obosbbl/grunnmuren-icons';
+import classNames from 'clsx';
 
 export interface AccordionProps {
   heading: string;
@@ -13,7 +14,13 @@ export const Accordion = ({ heading, children, onClick }: AccordionProps) => {
     <section className="w-full" onClick={onClick}>
       <h3 className="sr-only">{heading}</h3>
       <details className="border-green open:border-green-dark group rounded-sm border-l-4 border-solid">
-        <summary className="border-gray-concrete group-open:bg-green-dark flex cursor-pointer select-none list-none items-center justify-between border-b-2 border-solid px-5 py-4 text-lg font-semibold hover:bg-gray-100 group-open:border-none group-open:text-white">
+        <summary
+          className={classNames(
+            'group-open:bg-green-dark group-open:border-b-transparent group-open:text-white',
+            'focus:border-blue-dark group-open:focus:border-b-blue-dark focus:border-2',
+            'border-gray-concrete flex cursor-pointer select-none list-none items-center justify-between border-2 border-solid border-x-transparent border-t-transparent px-4 py-4 text-lg font-semibold hover:bg-gray-100',
+          )}
+        >
           {heading}
           <ChevronDown className="duration-100 ease-linear group-open:rotate-180" />
         </summary>
