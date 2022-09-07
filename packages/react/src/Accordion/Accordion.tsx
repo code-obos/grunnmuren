@@ -17,8 +17,8 @@ export const Accordion = ({ heading, children, onClick }: AccordionProps) => {
         <summary
           className={classNames(
             'group-open:bg-green-dark group-open:border-b-transparent group-open:text-white',
-            'focus-visible:border-blue-dark group-open:focus-visible:border-b-blue-dark',
-            'border-gray-concrete flex cursor-pointer select-none list-none items-center justify-between border-2 border-solid border-x-transparent border-t-transparent px-4 py-4 text-lg font-semibold hover:bg-gray-100',
+            'focus-visible:border-blue-dark group-open:focus-visible:border-b-blue-dark focus-visible:border-[3px] focus-visible:p-[15px]',
+            'border-gray-concrete flex cursor-pointer select-none list-none items-center justify-between border-2 border-solid border-x-transparent border-t-transparent p-4 text-lg font-semibold hover:bg-gray-100',
           )}
         >
           {heading}
