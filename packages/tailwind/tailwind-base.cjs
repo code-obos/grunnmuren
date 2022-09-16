@@ -317,7 +317,7 @@ module.exports = (userOptions) => {
            */
           '.pagemain': {
             backgroundColor: '#fff',
-            borderRadius: '2rem',
+            borderRadius: '1.5rem',
             overflow: 'hidden',
           },
         });
