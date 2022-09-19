@@ -81,7 +81,11 @@ const CampaignImage = (props: CampaignImageProps) => {
   if (isValidElement(children)) {
     const child = Children.only(children);
 
-    return cloneElement(child, { className, ...rest });
+    return cloneElement(child, {
+      // @ts-expect-error assume className prop is allowed
+      className,
+      ...rest,
+    });
   }
 
   // Otherwise we fallback to rendering an img element ourselves.
