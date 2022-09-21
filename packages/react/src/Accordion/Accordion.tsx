@@ -81,7 +81,7 @@ export const AccordionHeader = <T extends React.ElementType = 'h3'>(
   props: AccordionHeaderProps<T> &
     Omit<React.ComponentPropsWithoutRef<T>, keyof AccordionHeaderProps<T>>,
 ) => {
-  const { className, as: Heading = 'h3', ...rest } = props;
+  const { children, className, as: Heading = 'h3', ...rest } = props;
 
   const { getToggleProps, onChange, isExpanded } = useContext(AccordionContext);
 
@@ -99,7 +99,7 @@ export const AccordionHeader = <T extends React.ElementType = 'h3'>(
         {...toggleProps}
         id={getToggleId(toggleProps['aria-controls'])}
       >
-        {props.children}
+        {children}
         <ChevronDown
           className={classNames(
             'shrink-0 text-sm',
