@@ -1,4 +1,4 @@
-import classNames from 'clsx';
+import { cx } from '@/utils';
 
 export interface LabelProps extends React.ComponentPropsWithoutRef<'label'> {
   children: React.ReactNode;
@@ -10,7 +10,7 @@ export const FormLabel = (props: LabelProps) => {
 
   return (
     <label
-      className={classNames(className, 'block cursor-pointer font-medium')}
+      className={cx(className, 'block cursor-pointer font-medium')}
       {...rest}
     >
       {children}

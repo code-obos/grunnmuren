@@ -1,4 +1,4 @@
-import classNames from 'clsx';
+import { cx } from '@/utils';
 
 interface StepListProps extends React.ComponentPropsWithoutRef<'ol'> {}
 
@@ -16,7 +16,7 @@ export const StepListItem = (props: StepListItemProps) => {
 
   return (
     <li
-      className={classNames(
+      className={cx(
         className,
         'group relative flex gap-4 pb-8 text-sm last:pb-0 md:gap-8 md:pb-12 md:text-base',
       )}

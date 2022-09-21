@@ -5,7 +5,7 @@ import {
   isValidElement,
   useContext,
 } from 'react';
-import classNames from 'clsx';
+import { cx } from '@/utils';
 
 // The context controls the alignment of the body vs the image
 const CampaignContext = createContext(true);
@@ -40,7 +40,7 @@ const Campaign = <T extends React.ElementType = 'div'>(
 
   return (
     <Component
-      className={classNames(
+      className={cx(
         className,
         'grid gap-8 md:grid-flow-col md:grid-cols-[50%,50%] md:gap-0',
       )}
@@ -58,9 +58,7 @@ interface CampaignBodyProps extends React.ComponentPropsWithoutRef<'div'> {}
 
 const CampaignBody = (props: CampaignBodyProps) => {
   const { className, ...rest } = props;
-  return (
-    <div className={classNames(className, 'md:mx-18 self-center')} {...rest} />
-  );
+  return <div className={cx(className, 'md:mx-18 self-center')} {...rest} />;
 };
 
 interface CampaignImageProps extends React.ComponentPropsWithoutRef<'img'> {}
@@ -70,7 +68,7 @@ const CampaignImage = (props: CampaignImageProps) => {
 
   const bodyIsRightAligned = useContext(CampaignContext);
 
-  const className = classNames(
+  const className = cx(
     classNameProp,
     '<md:rounded-b-3xl w-full',
     bodyIsRightAligned ? 'md:rounded-r-3xl' : 'md:rounded-l-3xl md:order-1',

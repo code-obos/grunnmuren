@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import classNames from 'clsx';
+import { cx } from '@/utils';
 import { HeroContext } from './Hero';
 
 interface HeroImageProps {
@@ -15,7 +15,7 @@ export const HeroImage = (props: HeroImageProps) => {
 
   return (
     <picture
-      className={classNames('aspect-w-6 aspect-h-7 block', {
+      className={cx('aspect-w-6 aspect-h-7 block', {
         'sm:aspect-w-8 sm:aspect-h-4': contentPosition !== 'vertical-split',
         // calculate a square aspect ratio
         'sm:aspect-w-8 sm:aspect-h-8': contentPosition === 'vertical-split',
@@ -30,7 +30,7 @@ export const HeroImage = (props: HeroImageProps) => {
     >
       <source media="(min-width: 768px)" srcSet={props.mdSrc} />
       <img
-        className={classNames(
+        className={cx(
           'overflow-hidden rounded-t-3xl object-cover md:rounded-3xl',
           { 'md:rounded-l-none': contentPosition === 'vertical-split' },
         )}

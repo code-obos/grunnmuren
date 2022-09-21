@@ -1,4 +1,4 @@
-import classNames from 'clsx';
+import { cx } from '@/utils';
 import { NavbarMenuButton } from './NavbarMenuButton';
 
 export interface NavbarContentProps {
@@ -11,10 +11,7 @@ export const NavbarContent = (props: NavbarContentProps) => {
   const { className, children, logo, ...rest } = props;
   return (
     <div
-      className={classNames(
-        className,
-        'flex items-center justify-between gap-8',
-      )}
+      className={cx(className, 'flex items-center justify-between gap-8')}
       {...rest}
     >
       {logo}

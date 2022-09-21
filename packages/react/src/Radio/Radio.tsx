@@ -1,4 +1,4 @@
-import classNames from 'clsx';
+import { cx } from '@/utils';
 import { useContext, forwardRef } from 'react';
 import { RadioContext } from './RadioContext';
 
@@ -13,7 +13,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
     useContext(RadioContext);
 
   return (
-    <label className={classNames(className, 'cursor-pointer')}>
+    <label className={cx(className, 'cursor-pointer')}>
       <input
         className="radio"
         defaultChecked={!isControlled ? rest.value === defaultValue : undefined}

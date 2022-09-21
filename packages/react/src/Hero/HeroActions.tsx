@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import classNames from 'clsx';
+import { cx } from '@/utils';
 import { HeroContext } from './Hero';
 
 interface HeroActionsProps {
@@ -14,7 +14,7 @@ export const HeroActions = (props: HeroActionsProps) => {
 
   return (
     <div
-      className={classNames(
+      className={cx(
         className,
         'grid items-center justify-center justify-items-center gap-4 md:grid-flow-col',
         // Left align actions/buttons

@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import classNames from 'clsx';
+import { cx } from '@/utils';
 import { ChevronDown } from '@obosbbl/grunnmuren-icons';
 
 export interface SelectProps extends React.ComponentPropsWithoutRef<'select'> {
@@ -13,7 +13,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const { children, className, ...rest } = props;
 
     return (
-      <div className={classNames('relative', className)}>
+      <div className={cx('relative', className)}>
         <select
           {...rest}
           className="focus:border-blue border-gray-dark w-full appearance-none rounded-lg border-2 border-solid bg-white px-4 py-3 focus:outline-none"

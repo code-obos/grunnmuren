@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import classNames from 'clsx';
+import { cx } from '@/utils';
 
 export interface InputProps extends React.ComponentPropsWithoutRef<'input'> {
   as?: string;
@@ -28,7 +28,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 
   return (
     <div
-      className={classNames(
+      className={cx(
         className,
         'relative flex items-center rounded-md border-[1px] border-b-[3px] focus-within:-ml-[2px] focus-within:-mt-[2px] focus-within:border-[3px] focus-within:shadow',
         {

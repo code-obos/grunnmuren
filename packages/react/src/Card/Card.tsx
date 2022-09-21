@@ -1,4 +1,4 @@
-import classNames from 'clsx';
+import { cx } from '@/utils';
 
 export interface CardProps<T extends React.ElementType> {
   /** @default div */
@@ -20,7 +20,7 @@ export const Card = <T extends React.ElementType = 'div'>(
 
   return (
     <Component
-      className={classNames(className, 'relative overflow-hidden rounded-3xl', {
+      className={cx(className, 'relative overflow-hidden rounded-3xl', {
         'border-gray-concrete border-2 border-solid bg-white':
           bgColor === 'white',
         'bg-gray-light': bgColor === 'gray',

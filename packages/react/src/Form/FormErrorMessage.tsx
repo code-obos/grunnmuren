@@ -1,4 +1,4 @@
-import classNames from 'clsx';
+import { cx } from '@/utils';
 import { Warning } from '@obosbbl/grunnmuren-icons';
 
 export interface FormErrorMessageProps
@@ -10,7 +10,7 @@ export const FormErrorMessage = (props: FormErrorMessageProps) => {
   const { children, className, ...rest } = props;
   return (
     <div
-      className={classNames(
+      className={cx(
         className,
         'bg-red-light text-red flex items-center gap-2 rounded-lg py-1 px-4 text-sm',
       )}

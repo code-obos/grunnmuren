@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import classNames from 'clsx';
+import { cx } from '@/utils';
 import { FormErrorMessage, useFallbackId } from '..';
 
 /**
@@ -23,14 +23,11 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     return (
       <div className="grid gap-2">
         <label
-          className={classNames(
-            className,
-            'inline-flex cursor-pointer items-center',
-          )}
+          className={cx(className, 'inline-flex cursor-pointer items-center')}
         >
           <input
             id={id}
-            className={classNames(
+            className={cx(
               'checkbox checked:bg-green checked:border-green mr-3 grid h-[1.25em] w-[1.25em] flex-none cursor-pointer appearance-none place-content-center rounded border-2 border-solid bg-white text-white focus:outline-none focus:ring-2',
               {
                 'border-gray-dark focus:ring-black': !error,
@@ -40,7 +37,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             ref={ref}
             type="checkbox"
             {...rest}
-            aria-describedby={classNames({
+            aria-describedby={cx({
               [errorMsgId]: !!error,
             })}
             aria-invalid={!!error}

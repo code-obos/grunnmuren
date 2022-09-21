@@ -1,4 +1,4 @@
-import classNames from 'clsx';
+import { cx } from '@/utils';
 import { InfoCircle, Warning } from '@obosbbl/grunnmuren-icons';
 
 export interface AlertProps {
@@ -15,7 +15,7 @@ export const Alert = (props: AlertProps) => {
 
   return (
     <section
-      className={classNames(className, 'p-4 md:py-8', {
+      className={cx(className, 'p-4 md:py-8', {
         'bg-orange-light': severity === 'info',
         'bg-red-light': severity === 'alert',
       })}
@@ -43,8 +43,8 @@ interface AlertIconProps {
 
 const AlertIcon = ({ severity, className }: AlertIconProps) => {
   if (severity === 'alert') {
-    return <Warning className={classNames(className, 'text-red')} />;
+    return <Warning className={cx(className, 'text-red')} />;
   }
 
-  return <InfoCircle className={classNames(className, 'text-orange')} />;
+  return <InfoCircle className={cx(className, 'text-orange')} />;
 };

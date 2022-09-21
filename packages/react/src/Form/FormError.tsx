@@ -1,4 +1,4 @@
-import classNames from 'clsx';
+import { cx } from '@/utils';
 
 export interface FormErrorProps extends React.ComponentPropsWithoutRef<'div'> {}
 
@@ -8,7 +8,7 @@ export const FormError = (props: FormErrorProps) => {
   return (
     <div
       aria-live="polite"
-      className={classNames(
+      className={cx(
         className,
         'border-red bg-red-light rounded-lg border-2 p-6 text-sm',
       )}

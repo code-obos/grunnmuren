@@ -1,4 +1,4 @@
-import classNames from 'clsx';
+import { cx } from '@/utils';
 
 export type ChipColor =
   | 'blue-light'
@@ -39,15 +39,15 @@ export const Chip = (props: ChipProps) => {
 
   return (
     <div
-      className={classNames(
+      className={cx(
         'inline-flex items-center overflow-hidden rounded-lg border-2 font-medium',
         chipVariation,
         className,
       )}
     >
-      {icon && <div className={classNames('px-3 py-2', iconColor)}>{icon}</div>}
+      {icon && <div className={cx('px-3 py-2', iconColor)}>{icon}</div>}
       <div
-        className={classNames('flex-1 py-2 px-3', {
+        className={cx('flex-1 py-2 px-3', {
           'bg-white': variant === 'outline',
         })}
       >

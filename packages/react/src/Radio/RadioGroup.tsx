@@ -1,5 +1,5 @@
 import { useMemo, useId, useCallback, forwardRef } from 'react';
-import classNames from 'clsx';
+import { cx } from '@/utils';
 import { RadioContext } from './RadioContext';
 import { FormHelperText, FormLabel } from '../';
 
@@ -67,7 +67,7 @@ export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
         <div
           aria-describedby={description ? helpId : undefined}
           aria-labelledby={label ? labelId : undefined}
-          className={classNames(className, 'flex flex-col gap-4')}
+          className={cx(className, 'flex flex-col gap-4')}
           role="radiogroup"
           ref={ref}
           {...rest}

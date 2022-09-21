@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import classNames from 'clsx';
+import { cx } from '@/utils';
 import { NavbarContext } from './NavbarContext';
 
 export interface NavbarCollapsibleProps {
@@ -15,7 +15,7 @@ export const NavbarCollapsible = (props: NavbarCollapsibleProps) => {
     <div
       {...rest}
       aria-hidden={!isExpanded}
-      className={classNames(className, 'md:-mb-8 md:block', {
+      className={cx(className, 'md:-mb-8 md:block', {
         hidden: !isExpanded,
       })}
       id={collapsibleId}

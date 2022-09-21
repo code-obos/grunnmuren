@@ -1,4 +1,4 @@
-import classNames from 'clsx';
+import { cx } from '@/utils';
 
 export interface FormHelperTextProps
   extends React.ComponentPropsWithoutRef<'div'> {
@@ -9,7 +9,7 @@ export const FormHelperText = (props: FormHelperTextProps) => {
   const { className, children, ...rest } = props;
 
   return (
-    <div className={classNames(className, 'text-gray-dark text-sm')} {...rest}>
+    <div className={cx(className, 'text-gray-dark text-sm')} {...rest}>
       {children}
     </div>
   );

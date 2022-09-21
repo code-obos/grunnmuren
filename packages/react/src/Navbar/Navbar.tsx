@@ -1,5 +1,5 @@
 import { useState, useMemo, useId } from 'react';
-import classNames from 'clsx';
+import { cx } from '@/utils';
 import { NavbarContext } from './NavbarContext';
 import { ButtonColorContext } from '..';
 
@@ -23,7 +23,7 @@ export const Navbar = (props: NavbarProps) => {
     <ButtonColorContext.Provider value="white">
       <NavbarContext.Provider value={expandedContext}>
         <div
-          className={classNames(className, 'bg-blue py-6 text-white md:py-8')}
+          className={cx(className, 'bg-blue py-6 text-white md:py-8')}
           {...rest}
         >
           <div className="container">{children}</div>

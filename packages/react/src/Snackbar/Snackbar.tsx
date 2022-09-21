@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import classNames from 'clsx';
+import { cx } from '@/utils';
 import { InfoCircle } from '@obosbbl/grunnmuren-icons';
 import { SnackbarButton } from '.';
 
@@ -24,7 +24,7 @@ export const Snackbar = (props: SnackbarProps) => {
           <InfoCircle className="text-orange snackbar-icon mr-4 md:mr-8 md:text-2xl" />
 
           <h3
-            className={classNames(
+            className={cx(
               'snackbar-header min-w-0 max-w-prose text-base font-medium',
               {
                 'overflow-hidden overflow-ellipsis whitespace-nowrap':

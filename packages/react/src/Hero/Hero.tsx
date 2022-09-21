@@ -1,5 +1,5 @@
 import { createContext, useMemo } from 'react';
-import classNames from 'clsx';
+import { cx } from '@/utils';
 import { ButtonColorContext } from '../';
 import { usesGridAreaPlacement } from './utils';
 
@@ -64,7 +64,7 @@ export const Hero = (props: HeroProps) => {
     >
       <HeroContext.Provider value={context}>
         <div
-          className={classNames(
+          className={cx(
             className,
             // disable padding on small screens so the hero image is flush with the screen edges
             '<md:px-0 container md:grid',
