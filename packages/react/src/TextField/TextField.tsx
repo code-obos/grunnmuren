@@ -1,8 +1,8 @@
 import { forwardRef, useRef } from 'react';
-import { cx } from '@/utils';
+import { cx, composeRefs } from '@/utils';
 import { useFallbackId } from '@/hooks';
 import { Input, FormLabel, FormHelperText, FormErrorMessage } from '..';
-import { useComposedRefs, useFormControlValidity } from '../hooks';
+import { useFormControlValidity } from '../hooks';
 
 export interface TextFieldProps
   extends React.ComponentPropsWithoutRef<'input'> {
@@ -53,7 +53,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         <Input
           id={id}
           required={required}
-          ref={useComposedRefs(ownRef, ref)}
+          ref={composeRefs(ownRef, ref)}
           type={type}
           {...rest}
           // for accessibility reasons these cannot be overriden

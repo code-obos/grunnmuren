@@ -1,8 +1,8 @@
 import { forwardRef, useRef } from 'react';
-import { cx } from '@/utils';
+import { cx, composeRefs } from '@/utils';
 import { useFallbackId } from '@/hooks';
 import { Input, FormLabel, FormHelperText, FormErrorMessage } from '..';
-import { useComposedRefs, useFormControlValidity } from '../hooks';
+import { useFormControlValidity } from '../hooks';
 
 export interface TextAreaProps
   extends React.ComponentPropsWithoutRef<'textarea'> {
@@ -48,10 +48,10 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           {label}
         </FormLabel>
 
-        {/* @ts-expect-error TODO: Add support to Input for `as` prop so this typechecks okay */}
         <Input
           as="textarea"
-          ref={useComposedRefs(ownRef, ref)}
+          // @ts-expect-error fix this later
+          ref={composeRefs(ownRef, ref)}
           id={id}
           required={required}
           {...rest}

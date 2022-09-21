@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "@obosbbl/grunnmuren-icons": "workspace:^",
+    "@seznam/compose-react-refs": "1.0.6",
     "clsx": "1.2.1"
   },
   "peerDependencies": {

@@ -59,6 +59,7 @@ importers:
       '@babel/core': 7.19.1
       '@obosbbl/grunnmuren-icons': workspace:^
       '@obosbbl/grunnmuren-tailwind': workspace:*
+      '@seznam/compose-react-refs': 1.0.6
       '@storybook/addon-controls': 6.5.12
       '@storybook/addon-docs': 6.5.12
       '@storybook/addon-postcss': 2.0.0
@@ -81,6 +82,7 @@ importers:
       webpack: 5.74.0
     dependencies:
       '@obosbbl/grunnmuren-icons': link:../icons
+      '@seznam/compose-react-refs': 1.0.6
       clsx: 1.2.1
     devDependencies:
       '@babel/core': 7.19.1
@@ -2326,6 +2328,10 @@ packages:
       estree-walker: 2.0.2
       picomatch: 2.3.1
     dev: true
+
+  /@seznam/compose-react-refs/1.0.6:
+    resolution: {integrity: sha512-izzOXQfeQLonzrIQb8u6LQ8dk+ymz3WXTIXjvOlTXHq6sbzROg3NWU+9TTAOpEoK9Bth24/6F/XrfHJ5yR5n6Q==}
+    dev: false
 
   /@storybook/addon-controls/6.5.12_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-UoaamkGgAQXplr0kixkPhROdzkY+ZJQpG7VFDU6kmZsIgPRNfX/QoJFR5vV6TpDArBIjWaUUqWII+GHgPRzLgQ==}
