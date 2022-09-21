@@ -13,7 +13,13 @@ export default defineConfig({
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
-      external: ['react', 'react-dom', 'clsx', 'react/jsx-runtime'],
+      external: [
+        'react',
+        'react-dom',
+        'clsx',
+        'react/jsx-runtime',
+        'react-collapsed',
+      ],
     },
   },
 });

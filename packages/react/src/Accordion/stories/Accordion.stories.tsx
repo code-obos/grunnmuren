@@ -1,25 +1,37 @@
+import { useState } from 'react';
 import { Accordion } from '..';
-import { Button } from '../../Button';
 
 export default {
   title: 'Accordion',
 };
 
-export const Default = () => {
+export const Controlled = () => {
+  const [isOpen, setIsOpen] = useState(true);
   return (
-    <>
-      <div className="my-8 mx-4 flex gap-4">
-        <Accordion heading="Tittel">This is a text</Accordion>
-      </div>
-      <div className="my-8 mx-4 flex w-1/3 flex-col gap-1">
-        <Accordion heading="Tittel">
-          <div className="flex flex-col py-6">
-            This is a text but with not a full width accordion. And it has a
-            button
-            <Button>Button!</Button>
-          </div>
-        </Accordion>
-      </div>
-    </>
+    <Accordion.Item open={isOpen}>
+      <Accordion.Header onClick={() => setIsOpen((val) => !val)}>
+        Section title
+      </Accordion.Header>
+      <Accordion.Content>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat.
+      </Accordion.Content>
+    </Accordion.Item>
+  );
+};
+
+export const Uncontrolled = () => {
+  return (
+    <Accordion.Item defaultOpen={true} className="m-4">
+      <Accordion.Header>Section title</Accordion.Header>
+      <Accordion.Content>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat.
+      </Accordion.Content>
+    </Accordion.Item>
   );
 };
