@@ -25,6 +25,7 @@ export default defineConfig({
         'clsx',
         'react/jsx-runtime',
         'react-collapsed',
+        'react-use',
       ],
     },
   },
