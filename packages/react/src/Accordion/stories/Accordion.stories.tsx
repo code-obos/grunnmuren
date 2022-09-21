@@ -8,7 +8,7 @@ export default {
 export const Controlled = () => {
   const [isOpen, setIsOpen] = useState(true);
   return (
-    <Accordion.Item open={isOpen}>
+    <Accordion.Item open={isOpen} onChange={(val) => setIsOpen(val)}>
       <Accordion.Header onClick={() => setIsOpen((val) => !val)}>
         Section title
       </Accordion.Header>
@@ -24,7 +24,7 @@ export const Controlled = () => {
 
 export const Uncontrolled = () => {
   return (
-    <Accordion.Item defaultOpen={true} className="m-4">
+    <Accordion.Item defaultOpen={true}>
       <Accordion.Header>Section title</Accordion.Header>
       <Accordion.Content>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod

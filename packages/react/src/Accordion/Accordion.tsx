@@ -1,67 +1,53 @@
-import { createContext, useContext } from 'react';
+import React, { createContext, useContext } from 'react';
 import { ChevronDown } from '@obosbbl/grunnmuren-icons';
 import useCollapse from 'react-collapsed';
 import classNames from 'clsx';
 
 import { usePrefersReducedMotion } from '../hooks';
-import { UseCollapseOutput } from 'react-collapsed/dist/types';
 
-export interface AccordionProps {
-  heading: string;
-  children: React.ReactNode;
-
-  /* This is mostly used for GA Tracking */
-  onClick?: () => void;
-}
-
-// export const Accordion = ({ heading, children, onClick }: AccordionProps) => {
-//   return (
-//     <section className="w-full" onClick={onClick}>
-//       <h3 className="sr-only">{heading}</h3>
-//       <details className="border-green open:border-green-dark group rounded-sm border-l-4 border-solid">
-//         <summary
-//           className={classNames(
-//             'group-open:bg-green-dark group-open:border-b-transparent group-open:text-white',
-//             'focus-visible:border-blue-dark group-open:focus-visible:border-b-blue-dark focus-visible:border-[3px] focus-visible:p-[15px]',
-//             'border-gray-concrete flex cursor-pointer select-none list-none items-center justify-between border-2 border-solid border-x-transparent border-t-transparent p-4 text-lg font-semibold hover:bg-gray-100',
-//           )}
-//         >
-//           {heading}
-//           <ChevronDown className="duration-100 ease-linear group-open:rotate-180" />
-//         </summary>
-//         <div className="border-gray-concrete border-solid px-4 group-open:border-b-2">
-//           {children}
-//         </div>
-//       </details>
-//     </section>
-//   );
-// };
+/**
+ * See https://www.w3.org/WAI/ARIA/apg/patterns/accordion/ for how to make an accordion/disclousre accessible
+ *
+ * React collapsed handles some of the accessibility aspects for us. However, we improve it by making
+ * sure the toggle is rendered inside a heading, and then we connect the heading to the panel/content using
+ * aria-labelledby and role="region"
+ */
 
 const DURATION_MS = 300;
 const DURATION_TW = 'duration-300';
 
+// Leaving this for now. In the future we might actually implement this to
+// create a root component that automatically handles if multiple accordions
+// can open or or only a single accordion.
 export const Accordion = () => {};
 
-const AccordionContext = createContext<UseCollapseOutput>({
+type AccordionContextType = ReturnType<typeof useCollapse> & {
+  onChange: (open: boolean) => void;
+};
+
+const AccordionContext = createContext<AccordionContextType>({
   isExpanded: false,
   setExpanded: () => {},
   // @ts-expect-error noop
   getCollapseProps: () => {},
   // @ts-expect-error noop
   getToggleProps: () => {},
+  onChange: () => {},
 });
 
-export interface AccordionItemProps {
+export interface AccordionItemProps
+  extends React.ComponentPropsWithoutRef<'div'> {
   className?: string;
-  children: React.ReactNode;
   defaultOpen?: boolean;
   open?: boolean;
+  onChange?: (open: boolean) => void;
 }
 
 export const AccordionItem = (props: AccordionItemProps) => {
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  const { className, defaultOpen, open, ...rest } = props;
+  const { className, defaultOpen, onChange = () => {}, open, ...rest } = props;
+
   const collapseContext = useCollapse({
     defaultExpanded: defaultOpen,
     isExpanded: open,
@@ -71,7 +57,7 @@ export const AccordionItem = (props: AccordionItemProps) => {
   });
 
   return (
-    <AccordionContext.Provider value={collapseContext}>
+    <AccordionContext.Provider value={{ onChange, ...collapseContext }}>
       <div
         className={classNames(
           className,
@@ -84,16 +70,28 @@ export const AccordionItem = (props: AccordionItemProps) => {
   );
 };
 
-interface AccordionHeaderProps {
+interface AccordionHeaderProps<T extends React.ElementType> {
+  /**
+   * The heading element that wraps the accordion item's button. Should always be an element with `role="heading"`
+   * or a HTML heading tag. Change this to an appropriate heading level for your page.
+   * @default h3 */
+  as?: T;
   children: React.ReactNode;
   className?: string;
 }
 
-export const AccordionHeader = (props: AccordionHeaderProps) => {
-  const { className, ...rest } = props;
-  const { getToggleProps, isExpanded } = useContext(AccordionContext);
+export const AccordionHeader = <T extends React.ElementType = 'h3'>(
+  props: AccordionHeaderProps<T> &
+    Omit<React.ComponentPropsWithoutRef<T>, keyof AccordionHeaderProps<T>>,
+) => {
+  const { className, as: Heading = 'h3', ...rest } = props;
+
+  const { getToggleProps, onChange, isExpanded } = useContext(AccordionContext);
+
+  const toggleProps = getToggleProps({ onClick: () => onChange(!isExpanded) });
+
   return (
-    <h3>
+    <Heading>
       <button
         className={classNames(
           className,
@@ -101,7 +99,8 @@ export const AccordionHeader = (props: AccordionHeaderProps) => {
           isExpanded ? 'bg-green-dark text-white' : undefined,
         )}
         {...rest}
-        {...getToggleProps()}
+        {...toggleProps}
+        id={getToggleId(toggleProps['aria-controls'])}
       >
         {props.children}
         <ChevronDown
@@ -112,25 +111,34 @@ export const AccordionHeader = (props: AccordionHeaderProps) => {
           )}
         />
       </button>
-    </h3>
+    </Heading>
   );
 };
 
-interface AccordionContentProps {
-  children: React.ReactNode;
-  className?: string;
-}
+interface AccordionContentProps extends React.ComponentPropsWithoutRef<'div'> {}
 
 export const AccordionContent = (props: AccordionContentProps) => {
   const { getCollapseProps } = useContext(AccordionContext);
 
   const { className, ...rest } = props;
+
+  const collapseProps = getCollapseProps();
+
   return (
-    <div {...getCollapseProps()}>
+    <div
+      {...collapseProps}
+      role="region"
+      aria-labelledby={getToggleId(collapseProps.id)}
+    >
       <div className={classNames(className, 'p-4')} {...rest} />
     </div>
   );
 };
+
+// We reuse the id create react-collapsed instead of making our own with useId.
+// It is simpler this way, as then we can simply pass the output of useCollapsed()
+// as context instead of dealing with memoization etc. ourselves
+const getToggleId = (id: string) => id + 'toggle';
 
 Accordion.Item = AccordionItem;
 Accordion.Header = AccordionHeader;
