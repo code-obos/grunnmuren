@@ -1,4 +1,4 @@
-import classNames from 'clsx';
+import { cx } from '@/utils';
 import { forwardRef } from 'react';
 
 export interface CardLinkOverlayProps
@@ -12,7 +12,7 @@ export const CardLinkOverlay = forwardRef<
 
   return (
     <a
-      className={classNames(
+      className={cx(
         className,
         'no-underline before:absolute before:top-0 before:left-0 before:block before:h-full before:w-full hover:underline',
       )}

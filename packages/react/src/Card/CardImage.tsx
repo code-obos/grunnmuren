@@ -1,4 +1,4 @@
-import classNames from 'clsx';
+import { cx } from '@/utils';
 
 interface CardImageProps extends React.ComponentPropsWithoutRef<'img'> {
   width: number;
@@ -10,7 +10,7 @@ export const CardImage = (props: CardImageProps) => {
 
   return (
     <img
-      className={classNames(className, 'w-full object-cover')}
+      className={cx(className, 'w-full object-cover')}
       loading="lazy"
       {...rest}
     />

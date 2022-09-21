@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import classNames from 'clsx';
+import { cx } from '@/utils';
 
 export interface NavbarItemProps extends React.ComponentPropsWithoutRef<'a'> {
   active?: boolean;
@@ -14,7 +14,7 @@ export const NavbarItem = forwardRef<HTMLAnchorElement, NavbarItemProps>(
     return (
       <a
         aria-current={active ? 'page' : undefined}
-        className={classNames(
+        className={cx(
           className,
           'border-b border-[#0156E0] py-3 no-underline md:border-b-2 md:border-transparent md:py-2 md:hover:border-white',
           {

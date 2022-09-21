@@ -1,4 +1,4 @@
-import classNames from 'clsx';
+import { cx } from '@/utils';
 
 export interface SnackbarButtonProps
   extends React.ComponentPropsWithoutRef<'button'> {
@@ -8,7 +8,7 @@ export interface SnackbarButtonProps
 
 export const SnackbarButton = (props: SnackbarButtonProps) => (
   <button
-    className={classNames(
+    className={cx(
       props.className,
       'focus-visible:ring-offset flex-shrink-0 underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black',
     )}

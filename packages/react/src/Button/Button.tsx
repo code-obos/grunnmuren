@@ -6,7 +6,7 @@ import React, {
   useContext,
   cloneElement,
 } from 'react';
-import classNames from 'clsx';
+import { cx } from '@/utils';
 import { ButtonColorContext } from '.';
 
 export type ButtonColor = 'standard' | 'white' | 'light-green';
@@ -55,7 +55,7 @@ export const Button = forwardRef<
 
   const buttonVariation = buttonVariations[`${color}-${variant}`];
 
-  const classes = classNames(className, buttonVariation, 'button');
+  const classes = cx(className, buttonVariation, 'button');
 
   const children = loading ? (
     <Loader>{childrenFromProp}</Loader>

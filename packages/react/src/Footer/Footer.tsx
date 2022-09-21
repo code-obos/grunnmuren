@@ -1,4 +1,4 @@
-import classNames from 'clsx';
+import { cx } from '@/utils';
 import { ButtonColorContext } from '..';
 
 interface FooterProps {
@@ -11,10 +11,7 @@ export const Footer = (props: FooterProps) => {
 
   return (
     <ButtonColorContext.Provider value="white">
-      <footer
-        className={classNames(className, 'bg-blue py-12 text-white')}
-        {...rest}
-      >
+      <footer className={cx(className, 'bg-blue py-12 text-white')} {...rest}>
         <div className="container">{children}</div>
       </footer>
     </ButtonColorContext.Provider>

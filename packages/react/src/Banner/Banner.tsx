@@ -1,4 +1,4 @@
-import classNames from 'clsx';
+import { cx } from '@/utils';
 import { useBlockBackgroundColor, BlockBackgroundColor } from '../hooks';
 
 interface BannerProps {
@@ -22,10 +22,7 @@ export const Banner = (props: BannerProps) => {
   const bgColor = useBlockBackgroundColor(bgColorProp);
 
   return (
-    <article
-      className={classNames(className, bgColor, 'py-8 px-4 md:py-14')}
-      {...rest}
-    >
+    <article className={cx(className, bgColor, 'py-8 px-4 md:py-14')} {...rest}>
       <div className="<md:flex-wrap container flex gap-4 md:flex-row md:gap-12">
         {image}
         <div className="w-prose">

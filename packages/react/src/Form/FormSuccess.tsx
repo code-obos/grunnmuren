@@ -1,4 +1,4 @@
-import classNames from 'clsx';
+import { cx } from '@/utils';
 
 export interface FormSuccessProps
   extends React.ComponentPropsWithoutRef<'div'> {
@@ -10,7 +10,7 @@ export const FormSuccess = (props: FormSuccessProps) => {
   const { className, heading, text, ...rest } = props;
   return (
     <div
-      className={classNames(
+      className={cx(
         className,
         'bg-gray-concrete flex flex-col gap-8 p-8 text-center',
       )}

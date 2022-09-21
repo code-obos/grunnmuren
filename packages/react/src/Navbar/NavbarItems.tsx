@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import classNames from 'clsx';
+import { cx } from '@/utils';
 import { NavbarContext } from './NavbarContext';
 
 export interface NavbarItemsProps {
@@ -14,7 +14,7 @@ export const NavbarItems = (props: NavbarItemsProps) => {
 
   return (
     <nav
-      className={classNames(
+      className={cx(
         className,
         'my-8 flex flex-col md:mb-0 md:flex md:flex-row md:flex-wrap md:gap-x-8',
         {

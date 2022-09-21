@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import classNames from 'clsx';
+import { cx } from '@/utils';
 import { HeroContext } from './Hero';
 import { usesGridAreaPlacement } from './utils';
 
@@ -19,7 +19,7 @@ export const HeroContent = (props: HeroContentProps) => {
 
   return (
     <div
-      className={classNames(
+      className={cx(
         className,
         '<md:mx-4 relative grid grid-flow-row grid-cols-[minmax(auto,_37rem)]  content-center gap-6 rounded-3xl py-10 px-6 text-center md:p-12',
         {

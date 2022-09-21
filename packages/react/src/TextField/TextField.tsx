@@ -1,5 +1,5 @@
 import { forwardRef, useRef } from 'react';
-import classNames from 'clsx';
+import { cx } from '@/utils';
 import { Input, FormLabel, FormHelperText, FormErrorMessage } from '..';
 import {
   useComposedRefs,
@@ -61,7 +61,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           {...rest}
           // for accessibility reasons these cannot be overriden
           isInvalid={!!error || validity === 'invalid'}
-          aria-describedby={classNames({
+          aria-describedby={cx({
             [errorMsgId]: !!error,
             [helpTextId]: description,
           })}

@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from 'react';
 import { ChevronDown } from '@obosbbl/grunnmuren-icons';
 import useCollapse from 'react-collapsed';
-import classNames from 'clsx';
+import { cx, noop } from '@/utils';
 
 import { usePrefersReducedMotion } from '../hooks';
 
@@ -27,12 +27,12 @@ type AccordionContextType = ReturnType<typeof useCollapse> & {
 
 const AccordionContext = createContext<AccordionContextType>({
   isExpanded: false,
-  setExpanded: () => {},
+  setExpanded: noop,
   // @ts-expect-error noop
-  getCollapseProps: () => {},
+  getCollapseProps: noop,
   // @ts-expect-error noop
-  getToggleProps: () => {},
-  onChange: () => {},
+  getToggleProps: noop,
+  onChange: noop,
 });
 
 export interface AccordionItemProps
@@ -45,7 +45,7 @@ export interface AccordionItemProps
 export const AccordionItem = (props: AccordionItemProps) => {
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  const { className, defaultOpen, onChange = () => {}, open, ...rest } = props;
+  const { className, defaultOpen, onChange = noop, open, ...rest } = props;
 
   const collapseContext = useCollapse({
     defaultExpanded: defaultOpen,
@@ -58,7 +58,7 @@ export const AccordionItem = (props: AccordionItemProps) => {
   return (
     <AccordionContext.Provider value={{ onChange, ...collapseContext }}>
       <div
-        className={classNames(
+        className={cx(
           className,
           'border-b-gray-concrete rounded-sm border-b-2 border-l-4 border-solid',
           collapseContext.isExpanded ? 'border-l-green-dark' : 'border-l-green',
@@ -90,7 +90,7 @@ export const AccordionHeader = <T extends React.ElementType = 'h3'>(
   return (
     <Heading>
       <button
-        className={classNames(
+        className={cx(
           className,
           'focus-visible:outline-blue-dark flex w-full items-center justify-between p-4 text-left text-lg font-semibold focus:outline-none focus-visible:outline-4 focus-visible:outline-offset-0',
           isExpanded ? 'bg-green-dark text-white' : undefined,
@@ -101,7 +101,7 @@ export const AccordionHeader = <T extends React.ElementType = 'h3'>(
       >
         {children}
         <ChevronDown
-          className={classNames(
+          className={cx(
             'shrink-0 text-sm',
             DURATION_TW,
             isExpanded ? 'rotate-180' : undefined,
@@ -128,7 +128,7 @@ export const AccordionContent = (props: AccordionContentProps) => {
       role="region"
       aria-labelledby={getToggleId(collapseProps.id)}
     >
-      <div className={classNames(className, 'p-4')} {...rest} />
+      <div className={cx(className, 'p-4')} {...rest} />
     </div>
   );
 };
