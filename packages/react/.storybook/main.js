@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
@@ -21,4 +23,11 @@ module.exports = {
     storyStoreV7: true,
   },
   staticDirs: ['../public'],
+  webpackFinal: async (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': path.resolve(__dirname, '../src/'),
+    };
+    return config;
+  },
 };
