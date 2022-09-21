@@ -2,6 +2,7 @@ import React, { createContext, useContext } from 'react';
 import { ChevronDown } from '@obosbbl/grunnmuren-icons';
 import useCollapse from 'react-collapsed';
 import classNames from 'clsx';
+import { noop } from '@/utils';
 
 import { usePrefersReducedMotion } from '../hooks';
 
@@ -27,12 +28,12 @@ type AccordionContextType = ReturnType<typeof useCollapse> & {
 
 const AccordionContext = createContext<AccordionContextType>({
   isExpanded: false,
-  setExpanded: () => {},
+  setExpanded: noop,
   // @ts-expect-error noop
-  getCollapseProps: () => {},
+  getCollapseProps: noop,
   // @ts-expect-error noop
-  getToggleProps: () => {},
-  onChange: () => {},
+  getToggleProps: noop,
+  onChange: noop,
 });
 
 export interface AccordionItemProps
@@ -45,7 +46,7 @@ export interface AccordionItemProps
 export const AccordionItem = (props: AccordionItemProps) => {
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  const { className, defaultOpen, onChange = () => {}, open, ...rest } = props;
+  const { className, defaultOpen, onChange = noop, open, ...rest } = props;
 
   const collapseContext = useCollapse({
     defaultExpanded: defaultOpen,

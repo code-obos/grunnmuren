@@ -1,4 +1,5 @@
 import { createContext } from 'react';
+import { noop } from '@/utils';
 
 export const RadioContext = createContext<{
   defaultValue?: string;
@@ -11,7 +12,7 @@ export const RadioContext = createContext<{
   defaultValue: undefined,
   isControlled: false,
   name: undefined,
-  onChange() {},
+  onChange: noop,
   required: false,
   value: undefined,
 });
