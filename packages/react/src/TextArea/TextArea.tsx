@@ -1,11 +1,8 @@
 import { forwardRef, useRef } from 'react';
 import { cx } from '@/utils';
+import { useFallbackId } from '@/hooks';
 import { Input, FormLabel, FormHelperText, FormErrorMessage } from '..';
-import {
-  useComposedRefs,
-  useFallbackId,
-  useFormControlValidity,
-} from '../hooks';
+import { useComposedRefs, useFormControlValidity } from '../hooks';
 
 export interface TextAreaProps
   extends React.ComponentPropsWithoutRef<'textarea'> {

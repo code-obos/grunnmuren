@@ -1,6 +1,8 @@
 import { forwardRef } from 'react';
 import { cx } from '@/utils';
-import { FormErrorMessage, useFallbackId } from '..';
+import { useFallbackId } from '@/hooks';
+
+import { FormErrorMessage } from '..';
 
 /**
  * CSS inspired by https://moderncss.dev/pure-css-custom-checkbox-style/

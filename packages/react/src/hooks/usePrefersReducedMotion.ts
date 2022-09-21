@@ -1,5 +1,6 @@
-import { useMedia } from './index';
+import { useMedia } from '@/hooks';
 
-const QUERY = '(prefers-reduced-motion: no-preference)';
+const QUERY = '(prefers-reduced-motion: reduce)';
 
-export const usePrefersReducedMotion = () => !useMedia(QUERY);
+export const usePrefersReducedMotion = (defaultState = false) =>
+  useMedia(QUERY, defaultState);
