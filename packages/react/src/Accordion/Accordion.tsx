@@ -121,6 +121,7 @@ export const AccordionContent = (props: AccordionContentProps) => {
 
   const collapseProps = getCollapseProps();
 
+  // Must use two divs here for the animation to work properly. See https://github.com/roginfarrer/react-collapsed#faq
   return (
     <div
       {...collapseProps}
