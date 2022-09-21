@@ -36,8 +36,7 @@ const AccordionContext = createContext<AccordionContextType>({
 });
 
 export interface AccordionItemProps
-  extends React.ComponentPropsWithoutRef<'div'> {
-  className?: string;
+  extends Omit<React.ComponentPropsWithoutRef<'div'>, 'onChange'> {
   defaultOpen?: boolean;
   open?: boolean;
   onChange?: (open: boolean) => void;
@@ -65,7 +64,7 @@ export const AccordionItem = (props: AccordionItemProps) => {
           collapseContext.isExpanded ? 'border-l-green-dark' : 'border-l-green',
         )}
         {...rest}
-      ></div>
+      />
     </AccordionContext.Provider>
   );
 };
@@ -76,8 +75,6 @@ interface AccordionHeaderProps<T extends React.ElementType> {
    * or a HTML heading tag. Change this to an appropriate heading level for your page.
    * @default h3 */
   as?: T;
-  children: React.ReactNode;
-  className?: string;
 }
 
 export const AccordionHeader = <T extends React.ElementType = 'h3'>(
