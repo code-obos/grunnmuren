@@ -18,6 +18,7 @@ module.exports = {
   framework: '@storybook/react',
   core: {
     builder: 'webpack5',
+    disableTelemetry: true,
   },
   features: {
     storyStoreV7: true,
