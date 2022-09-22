@@ -52,6 +52,10 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           {label}
         </FormLabel>
 
+        {description && (
+          <FormHelperText id={helpTextId}>{description}</FormHelperText>
+        )}
+
         <Input
           as="textarea"
           // @ts-expect-error fix this later
@@ -67,9 +71,6 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           })}
         />
 
-        {description && (
-          <FormHelperText id={helpTextId}>{description}</FormHelperText>
-        )}
         {errorMsg && (
           <FormErrorMessage id={errorMsgId}>{errorMsg}</FormErrorMessage>
         )}

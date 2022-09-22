@@ -13,7 +13,9 @@ export interface TextFieldProps
   error?: string;
   /**  Label for the form control */
   label: string;
+  /** Prefix a React node (ex. icon, text, component) */
   prefix?: React.ReactNode;
+  /** Suffix a React node (ex. icon, text, component) */
   suffix?: React.ReactNode;
   /** Automatically valdiate the form control using the HTML constraint validation API. @default true */
   validate?: boolean;

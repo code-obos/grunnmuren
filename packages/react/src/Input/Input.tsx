@@ -4,7 +4,9 @@ import { cx } from '@/utils';
 export interface InputProps
   extends Omit<React.ComponentPropsWithoutRef<'input'>, 'prefix'> {
   as?: string;
+  /** Prefix a React node (ex. icon, text, component) */
   prefix?: React.ReactNode;
+  /** Suffix a React node (ex. icon, text, component) */
   suffix?: React.ReactNode;
   /** Render input as invalid. Sets `aria-invalid` to true */
   isInvalid?: boolean;
