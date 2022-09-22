@@ -30,8 +30,8 @@ export const HeroContent = (props: HeroContentProps) => {
           'bg-blue-dark': bgColor === 'blue',
           'bg-white': bgColor === 'white',
           // vertical split
-          // vertically center the content, remove the border radius om the image side, left align the content
-          'md:-order-1 md:mt-0 md:justify-center md:rounded-r-none md:text-left':
+          // vertically center the content, remove the border radius on the edge, add some negative margin to pull the image beneath the hero content, left align the content
+          'md:z-10 md:-order-1 md:mt-0 md:-mr-5 md:justify-center md:rounded-l-none md:text-left':
             contentPosition === 'vertical-split',
           // below center/content header
           'justify-center md:mx-auto md:w-4/5':
