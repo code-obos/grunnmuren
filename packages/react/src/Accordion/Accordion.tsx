@@ -1,9 +1,9 @@
 import React, { createContext, useContext } from 'react';
 import { ChevronDown } from '@obosbbl/grunnmuren-icons';
 import useCollapse from 'react-collapsed';
-import { cx, noop } from '@/utils';
 
-import { usePrefersReducedMotion } from '../hooks';
+import { cx, noop } from '@/utils';
+import { usePrefersReducedMotion } from '@/hooks';
 
 /**
  * See https://www.w3.org/WAI/ARIA/apg/patterns/accordion/ for how to make an accordion/disclousre accessible

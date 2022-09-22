@@ -3,6 +3,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "paths": {
+      "@/hooks": ["./src/hooks/index"],
       "@/utils": ["./src/utils/index"]
     }
   },

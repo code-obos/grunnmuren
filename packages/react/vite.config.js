@@ -20,11 +20,13 @@ export default defineConfig({
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       external: [
+        '@seznam/compose-react-refs',
+        'clsx',
         'react',
         'react-dom',
-        'clsx',
         'react/jsx-runtime',
         'react-collapsed',
+        'react-use',
       ],
     },
   },

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { NavbarContext } from './NavbarContext';
-import { useScreenMaxWidthMd } from '../hooks';
+import { useScreenMaxWidthMd } from '@/hooks';
 
 export interface NavbarExpandedMobileContentProps {
   children: React.ReactNode;

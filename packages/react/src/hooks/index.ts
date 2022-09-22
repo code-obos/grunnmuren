@@ -1,7 +1,7 @@
-export * from './useComposedRefs';
+export { useMedia } from 'react-use';
+
 export * from './usePrefersReducedMotion';
 export * from './useBlockBackgroundColor';
-export * from './useMedia';
 export * from './useScreenMaxWidthMd';
 export * from './useFormControlValidity';
 export * from './useFallbackId';

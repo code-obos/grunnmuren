@@ -47,7 +47,9 @@
   },
   "dependencies": {
     "@obosbbl/grunnmuren-icons": "workspace:^",
-    "clsx": "1.2.1"
+    "@seznam/compose-react-refs": "1.0.6",
+    "clsx": "1.2.1",
+    "react-use": "17.4.0"
   },
   "peerDependencies": {
     "@obosbbl/grunnmuren-tailwind": "workspace:^0.6.0",
