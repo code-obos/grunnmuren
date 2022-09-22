@@ -1,9 +1,10 @@
 import { forwardRef } from 'react';
 import { cx } from '@/utils';
 
-export interface InputProps extends React.ComponentPropsWithoutRef<'input'> {
+export interface InputProps
+  extends Omit<React.ComponentPropsWithoutRef<'input'>, 'prefix'> {
   as?: string;
-  prefix?: string;
+  prefix: React.ReactNode;
   /** Render input as invalid. Sets `aria-invalid` to true */
   isInvalid?: boolean;
 
@@ -32,7 +33,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         className,
         'relative flex items-center rounded-md border-[1px] border-b-[3px] focus-within:-ml-[2px] focus-within:-mt-[2px] focus-within:border-[3px] focus-within:shadow',
         {
-          'border-gray-dark focus-within:border-blue': !isInvalid,
+          'focus-within:border-blue border-black': !isInvalid,
           'border-red focus-within:border-red': isInvalid,
           'w-fit': size != null,
           'w-full': size == null,
@@ -44,7 +45,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         aria-invalid={isInvalid}
         // @ts-expect-error figure out how to get ref working with an `as` prop
         ref={ref}
-        className="focus:none placeholder-gray w-full rounded-md border-none px-4 py-3 outline-none"
+        className="focus:none placeholder-gray w-full rounded-md border-none px-4 py-3.5 outline-none"
         size={size}
         type={type}
         {...rest}

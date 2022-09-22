@@ -30,7 +30,9 @@ export const HeroImage = (props: HeroImageProps) => {
     >
       <source media="(min-width: 768px)" srcSet={props.mdSrc} />
       <img
-        className="object-cover"
+        className={cx('overflow-hidden object-cover', {
+          'md:rounded-l-none': contentPosition === 'vertical-split',
+        })}
         decoding="async"
         src={props.src}
         alt={props.alt}
