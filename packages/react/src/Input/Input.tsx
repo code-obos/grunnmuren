@@ -35,7 +35,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         className,
         'relative flex items-center rounded-md border-[1px] border-b-[3px] focus-within:-ml-[2px] focus-within:-mt-[2px] focus-within:border-[3px] focus-within:shadow',
         {
-          'focus-within:border-blue border-black': !isInvalid,
+          'focus-within:border-blue-dark border-black': !isInvalid,
           'border-red focus-within:border-red': isInvalid,
           'w-fit': size != null,
           'w-full': size == null,
