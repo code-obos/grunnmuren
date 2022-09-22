@@ -61,7 +61,7 @@ export function WithImage(props: HeroProps) {
 WithImage.args = {
   contentPosition: 'below-center',
   bgColor: 'white',
-};
+} as const;
 
 export function WithoutImage(props: HeroProps) {
   return (
