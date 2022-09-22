@@ -4,7 +4,8 @@ import { cx } from '@/utils';
 export interface InputProps
   extends Omit<React.ComponentPropsWithoutRef<'input'>, 'prefix'> {
   as?: string;
-  prefix: React.ReactNode;
+  prefix?: React.ReactNode;
+  suffix?: React.ReactNode;
   /** Render input as invalid. Sets `aria-invalid` to true */
   isInvalid?: boolean;
 
@@ -18,6 +19,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     isInvalid,
     size,
     prefix,
+    suffix,
     as,
     type: typeProp,
     ...rest
@@ -40,7 +42,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         },
       )}
     >
-      {prefix && <span className="text-gray pl-4">{prefix}</span>}
+      {prefix}
+
       <Component
         aria-invalid={isInvalid}
         // @ts-expect-error figure out how to get ref working with an `as` prop
@@ -50,7 +53,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         type={type}
         {...rest}
       />
-      {/* {valid && <Icon className="text-green absolute right-1" name="check" />} */}
+
+      {suffix}
     </div>
   );
 });
