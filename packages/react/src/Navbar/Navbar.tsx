@@ -23,7 +23,10 @@ export const Navbar = (props: NavbarProps) => {
     <ButtonColorContext.Provider value="white">
       <NavbarContext.Provider value={expandedContext}>
         <div
-          className={cx(className, 'bg-blue py-6 text-white md:py-8')}
+          className={cx(
+            className,
+            'bg-blue relative pt-6 pb-12 text-white before:absolute before:bottom-0 before:left-0 before:right-0 before:h-6 before:rounded-t-3xl before:bg-white md:pt-8 md:pb-14',
+          )}
           {...rest}
         >
           <div className="container">{children}</div>

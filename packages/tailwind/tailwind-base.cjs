@@ -312,13 +312,22 @@ module.exports = (userOptions) => {
             zIndex: '100',
           },
           /**
-           * Round the corners of our main content.
-           * Protip: Use this together with navbar, footer and `bg-blue` class on the body.
+           * @deprecated use page-layout and page-layout-main instead
            */
           '.pagemain': {
             backgroundColor: '#fff',
             borderRadius: '1.5rem',
             overflow: 'hidden',
+          },
+
+          '.page-layout': {
+            display: 'flex',
+            flexDirection: 'column',
+            minHeight: '100vh',
+          },
+          '.page-layout-main': {
+            backgroundColor: '#fff',
+            flexGrow: '1',
           },
         });
         addUtilities({
