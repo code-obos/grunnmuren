@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-react
 
+## 1.4.2
+
+### Patch Changes
+
+- 12053e1: \* add `<Accordion>` wrapper for spacing multipe `<AccordionItem>`s.
+  - increase bottom padding of `<AccordionContent>`
+
 ## 1.4.1
 
 ### Patch Changes
