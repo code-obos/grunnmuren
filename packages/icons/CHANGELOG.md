@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-icons
 
+## 0.5.0
+
+### Minor Changes
+
+- b508b81: add Columns and LoadingSpinner icons
+
 ## 0.4.0
 
 ### Minor Changes

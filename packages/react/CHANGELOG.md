@@ -1,5 +1,23 @@
 # @obosbbl/grunnmuren-react
 
+## 1.4.0
+
+### Minor Changes
+
+- 9e2b9e6: added Accordion component
+- b508b81: add Columns and LoadingSpinner icons
+- c99454c: new layout classes to work with footer and navbar
+- 5576c0b: add leftAddon/rightAddon to input and update design
+
+### Patch Changes
+
+- bb2afc5: remove rounded corners for hero images
+- Updated dependencies [b508b81]
+- Updated dependencies [c99454c]
+- Updated dependencies [7fbded0]
+  - @obosbbl/grunnmuren-icons@0.5.0
+  - @obosbbl/grunnmuren-tailwind@0.7.0
+
 ## 1.3.0
 
 ### Minor Changes
