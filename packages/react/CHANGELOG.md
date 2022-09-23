@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.4.4
+
+### Patch Changes
+
+- a319da9: Move react-collapse from devDependencies to dependencies
+
 ## 1.4.3
 
 ### Patch Changes
