@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.4.1
+
+### Patch Changes
+
+- 97b9622: fix space between asterix and label
+
 ## 1.4.0
 
 ### Minor Changes
