@@ -18,7 +18,7 @@ export const FormLabel = (props: LabelProps) => {
         <span
           aria-hidden
           className={cx(
-            'mr-px select-none',
+            'mr-1 select-none',
             isInvalid ? 'text-red' : 'text-blue',
           )}
         >
