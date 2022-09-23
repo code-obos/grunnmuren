@@ -18,3 +18,4 @@ export * from './TextArea';
 export * from './TextField';
 export * from './hooks';
 export * from './Select';
+export * from './Accordion';
