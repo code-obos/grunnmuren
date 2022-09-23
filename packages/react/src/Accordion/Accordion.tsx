@@ -92,7 +92,7 @@ export const AccordionHeader = <T extends React.ElementType = 'h3'>(
       <button
         className={cx(
           className,
-          'focus-visible:outline-blue-dark flex min-h-[64px] w-full items-center justify-between px-5 py-4 text-left text-lg font-semibold focus:outline-none focus-visible:outline-4 focus-visible:outline-offset-0',
+          'focus-visible:outline-blue-dark flex min-h-[4rem] w-full items-center justify-between px-5 py-4 text-left text-lg font-semibold focus:outline-none focus-visible:outline-4 focus-visible:outline-offset-0',
           isExpanded ? 'bg-green-dark text-white' : undefined,
         )}
         {...rest}
