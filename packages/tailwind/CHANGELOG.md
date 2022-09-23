@@ -1,5 +1,15 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 0.7.0
+
+### Minor Changes
+
+- c99454c: new layout classes to work with footer and navbar
+
+### Patch Changes
+
+- 7fbded0: less rounded page corners. Matches figna spec
+
 ## 0.6.0
 
 ### Minor Changes
