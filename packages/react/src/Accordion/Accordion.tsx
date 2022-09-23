@@ -16,10 +16,15 @@ import { usePrefersReducedMotion } from '@/hooks';
 const DURATION_MS = 300;
 const DURATION_TW = 'duration-300';
 
+interface AccordionProps extends React.ComponentPropsWithoutRef<'div'> {}
+
 // Leaving this for now. In the future we might actually implement this to
 // create a root component that automatically handles if multiple accordions
 // can open or or only a single accordion.
-export const Accordion = () => {};
+export const Accordion = (props: AccordionProps) => {
+  const { className, ...rest } = props;
+  return <div className={cx(className, 'flex flex-col gap-2')} {...rest} />;
+};
 
 type AccordionContextType = ReturnType<typeof useCollapse> & {
   onChange: (open: boolean) => void;
@@ -128,7 +133,7 @@ export const AccordionContent = (props: AccordionContentProps) => {
       role="region"
       aria-labelledby={getToggleId(collapseProps.id)}
     >
-      <div className={cx(className, 'p-5')} {...rest} />
+      <div className={cx(className, 'p-5 pb-10')} {...rest} />
     </div>
   );
 };
