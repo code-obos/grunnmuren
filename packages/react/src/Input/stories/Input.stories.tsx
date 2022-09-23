@@ -1,5 +1,6 @@
 import React, { useId } from 'react';
 import { Input, FormLabel } from '../..';
+import { Search } from '@obosbbl/grunnmuren-icons';
 
 const metadata = { title: 'Input', parameters: { layout: 'padded' } };
 export default metadata;
@@ -16,11 +17,26 @@ export const Default = () => {
       </Div>
 
       <Div label="Prefix">
-        <Input prefix="kr" />
+        <Input leftAddon="kr" />
+      </Div>
+
+      <Div label="Prefix icon">
+        <Input leftAddon={<Search className="text-green" />} />
       </Div>
 
       <Div label="Prefixed placeholder">
-        <Input prefix="kr" placeholder="100 000" />
+        <Input leftAddon="kr" placeholder="100 000" />
+      </Div>
+
+      <Div label="Suffix icon">
+        <Input rightAddon={<Search className="text-green" />} />
+      </Div>
+
+      <Div label="Suffix and prefix icon">
+        <Input
+          rightAddon={<Search className="text-green" />}
+          leftAddon={<Search />}
+        />
       </Div>
 
       <Div label="Size: (10)">

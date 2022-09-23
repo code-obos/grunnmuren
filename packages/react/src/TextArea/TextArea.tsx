@@ -44,9 +44,17 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     return (
       <div className="grid gap-2">
-        <FormLabel htmlFor={id} isRequired={required}>
+        <FormLabel
+          htmlFor={id}
+          isRequired={required}
+          isInvalid={!!error || validity === 'invalid'}
+        >
           {label}
         </FormLabel>
+
+        {description && (
+          <FormHelperText id={helpTextId}>{description}</FormHelperText>
+        )}
 
         <Input
           as="textarea"
@@ -63,9 +71,6 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           })}
         />
 
-        {description && (
-          <FormHelperText id={helpTextId}>{description}</FormHelperText>
-        )}
         {errorMsg && (
           <FormErrorMessage id={errorMsgId}>{errorMsg}</FormErrorMessage>
         )}

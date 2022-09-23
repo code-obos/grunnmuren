@@ -3,7 +3,10 @@ import { cx } from '@/utils';
 
 export interface InputProps extends React.ComponentPropsWithoutRef<'input'> {
   as?: string;
-  prefix?: string;
+  /** React node on the left (ex. icon, text, component) */
+  leftAddon?: React.ReactNode;
+  /** React node on the left (ex. icon, text, component) */
+  rightAddon?: React.ReactNode;
   /** Render input as invalid. Sets `aria-invalid` to true */
   isInvalid?: boolean;
 
@@ -16,9 +19,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     className,
     isInvalid,
     size,
-    prefix,
     as,
     type: typeProp,
+    rightAddon,
+    leftAddon,
     ...rest
   } = props;
 
@@ -32,24 +36,28 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         className,
         'relative flex items-center rounded-md border-[1px] border-b-[3px] focus-within:-ml-[2px] focus-within:-mt-[2px] focus-within:border-[3px] focus-within:shadow',
         {
-          'border-gray-dark focus-within:border-blue': !isInvalid,
+          'focus-within:border-blue-dark border-black': !isInvalid,
           'border-red focus-within:border-red': isInvalid,
           'w-fit': size != null,
           'w-full': size == null,
+          'pl-4': leftAddon,
+          'pr-4': rightAddon,
         },
       )}
     >
-      {prefix && <span className="text-gray pl-4">{prefix}</span>}
+      {leftAddon}
+
       <Component
         aria-invalid={isInvalid}
         // @ts-expect-error figure out how to get ref working with an `as` prop
         ref={ref}
-        className="focus:none placeholder-gray w-full rounded-md border-none px-4 py-3 outline-none"
+        className="focus:none placeholder-gray w-full rounded-md border-none px-4 py-3.5 focus:outline-none"
         size={size}
         type={type}
         {...rest}
       />
-      {/* {valid && <Icon className="text-green absolute right-1" name="check" />} */}
+
+      {rightAddon}
     </div>
   );
 });

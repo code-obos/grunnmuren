@@ -3,22 +3,29 @@ import { cx } from '@/utils';
 export interface LabelProps extends React.ComponentPropsWithoutRef<'label'> {
   children: React.ReactNode;
   isRequired?: boolean;
+  isInvalid?: boolean;
 }
 
 export const FormLabel = (props: LabelProps) => {
-  const { className, children, isRequired, ...rest } = props;
+  const { className, children, isRequired, isInvalid, ...rest } = props;
 
   return (
     <label
-      className={cx(className, 'block cursor-pointer font-medium')}
+      className={cx(className, 'block cursor-pointer font-semibold')}
       {...rest}
     >
-      {children}
       {isRequired && (
-        <span aria-hidden className="ml-px select-none">
+        <span
+          aria-hidden
+          className={cx(
+            'mr-px select-none',
+            isInvalid ? 'text-red' : 'text-blue',
+          )}
+        >
           *
         </span>
       )}
+      {children}
     </label>
   );
 };
