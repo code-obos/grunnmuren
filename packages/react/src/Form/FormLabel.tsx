@@ -17,12 +17,12 @@ export const FormLabel = (props: LabelProps) => {
       {isRequired && (
         <span
           aria-hidden
-          className={cx('ml-px select-none', {
+          className={cx('mr-px select-none', {
             'text-red': isInvalid,
             'text-blue': !isInvalid,
           })}
         >
-          *{' '}
+          *
         </span>
       )}
       {children}

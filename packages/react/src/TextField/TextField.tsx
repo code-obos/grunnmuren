@@ -5,7 +5,7 @@ import { Input, FormLabel, FormHelperText, FormErrorMessage } from '..';
 import { useFormControlValidity } from '../hooks';
 
 export interface TextFieldProps
-  extends Omit<React.ComponentPropsWithoutRef<'input'>, 'prefix'> {
+  extends React.ComponentPropsWithoutRef<'input'> {
   children?: never;
   /** Help text for the form control */
   description?: string;
@@ -13,10 +13,10 @@ export interface TextFieldProps
   error?: string;
   /**  Label for the form control */
   label: string;
-  /** Prefix a React node (ex. icon, text, component) */
-  prefix?: React.ReactNode;
-  /** Suffix a React node (ex. icon, text, component) */
-  suffix?: React.ReactNode;
+  /** React node on the left (ex. icon, text, component) */
+  leftAddon?: React.ReactNode;
+  /** React node on the left (ex. icon, text, component) */
+  rightAddon?: React.ReactNode;
   /** Automatically valdiate the form control using the HTML constraint validation API. @default true */
   validate?: boolean;
 }

@@ -17,23 +17,26 @@ export const Default = () => {
       </Div>
 
       <Div label="Prefix">
-        <Input prefix="kr" />
+        <Input leftAddon="kr" />
       </Div>
 
       <Div label="Prefix icon">
-        <Input prefix={<Search className="text-green" />} />
+        <Input leftAddon={<Search className="text-green" />} />
       </Div>
 
       <Div label="Prefixed placeholder">
-        <Input prefix="kr" placeholder="100 000" />
+        <Input leftAddon="kr" placeholder="100 000" />
       </Div>
 
       <Div label="Suffix icon">
-        <Input suffix={<Search className="text-green" />} />
+        <Input rightAddon={<Search className="text-green" />} />
       </Div>
 
       <Div label="Suffix and prefix icon">
-        <Input suffix={<Search className="text-green" />} prefix={<Search />} />
+        <Input
+          rightAddon={<Search className="text-green" />}
+          leftAddon={<Search />}
+        />
       </Div>
 
       <Div label="Size: (10)">

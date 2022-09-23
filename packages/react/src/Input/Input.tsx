@@ -1,13 +1,12 @@
 import { forwardRef } from 'react';
 import { cx } from '@/utils';
 
-export interface InputProps
-  extends Omit<React.ComponentPropsWithoutRef<'input'>, 'prefix'> {
+export interface InputProps extends React.ComponentPropsWithoutRef<'input'> {
   as?: string;
-  /** Prefix a React node (ex. icon, text, component) */
-  prefix?: React.ReactNode;
-  /** Suffix a React node (ex. icon, text, component) */
-  suffix?: React.ReactNode;
+  /** React node on the left (ex. icon, text, component) */
+  leftAddon?: React.ReactNode;
+  /** React node on the left (ex. icon, text, component) */
+  rightAddon?: React.ReactNode;
   /** Render input as invalid. Sets `aria-invalid` to true */
   isInvalid?: boolean;
 
@@ -20,10 +19,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     className,
     isInvalid,
     size,
-    prefix,
-    suffix,
     as,
     type: typeProp,
+    rightAddon,
+    leftAddon,
     ...rest
   } = props;
 
@@ -41,22 +40,24 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
           'border-red focus-within:border-red': isInvalid,
           'w-fit': size != null,
           'w-full': size == null,
+          'pl-4': leftAddon,
+          'pr-4': rightAddon,
         },
       )}
     >
-      {prefix}
+      {leftAddon}
 
       <Component
         aria-invalid={isInvalid}
         // @ts-expect-error figure out how to get ref working with an `as` prop
         ref={ref}
-        className="focus:none placeholder-gray w-full rounded-md border-none px-4 py-3.5 outline-none"
+        className="focus:none placeholder-gray w-full rounded-md border-none px-4 py-3.5 focus:outline-none"
         size={size}
         type={type}
         {...rest}
       />
 
-      {suffix}
+      {rightAddon}
     </div>
   );
 });
