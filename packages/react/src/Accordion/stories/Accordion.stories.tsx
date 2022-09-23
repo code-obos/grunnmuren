@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Accordion } from '..';
+import { Accordion } from '../../';
 
 export default {
   title: 'Accordion',
