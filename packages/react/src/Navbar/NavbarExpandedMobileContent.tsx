@@ -14,7 +14,7 @@ export const NavbarExpandedMobileContent = (
   props: NavbarExpandedMobileContentProps,
 ) => {
   const { isExpanded } = useContext(NavbarContext);
-  const isMobileScreen = useScreenMaxWidthMd();
+  const isMobileScreen = useScreenMaxWidthMd(false);
 
   if (!isExpanded || !isMobileScreen) return null;
 
