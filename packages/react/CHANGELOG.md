@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.4.3
+
+### Patch Changes
+
+- 28abc9c: export `Accordion` component
+
 ## 1.4.2
 
 ### Patch Changes
