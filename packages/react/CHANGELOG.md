@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.4.5
+
+### Patch Changes
+
+- 42db773: Chip design 🤝 figma design
+
 ## 1.4.4
 
 ### Patch Changes
