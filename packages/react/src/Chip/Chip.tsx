@@ -40,14 +40,14 @@ export const Chip = (props: ChipProps) => {
   return (
     <div
       className={cx(
-        'inline-flex items-center overflow-hidden rounded-lg border-2 font-medium',
+        'inline-flex items-center gap-0.5 overflow-hidden rounded-lg border-2 text-sm font-semibold',
         chipVariation,
         className,
       )}
     >
       {icon && <div className={cx('px-3 py-2', iconColor)}>{icon}</div>}
       <div
-        className={cx('flex-1 py-2 px-3', {
+        className={cx('flex-1 py-2 px-4', {
           'bg-white': variant === 'outline',
         })}
       >
