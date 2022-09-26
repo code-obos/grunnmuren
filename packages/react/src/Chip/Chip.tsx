@@ -40,7 +40,7 @@ export const Chip = (props: ChipProps) => {
   return (
     <div
       className={cx(
-        'inline-flex items-center overflow-hidden rounded-lg border-2 font-medium',
+        'inline-flex items-center gap-0.5 overflow-hidden rounded-lg border-2 font-medium',
         chipVariation,
         className,
       )}
