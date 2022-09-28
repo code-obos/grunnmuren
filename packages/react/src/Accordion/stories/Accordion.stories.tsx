@@ -3,6 +3,9 @@ import { Accordion } from '../../';
 
 export default {
   title: 'Accordion',
+  parameters: {
+    layout: 'padded',
+  },
 };
 
 export const Controlled = () => {
