@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.4.7
+
+### Patch Changes
+
+- 0266845: fix footer rendering artifact that sometimes occurs on specific screen sizes and zoom levels
+
 ## 1.4.6
 
 ### Patch Changes
