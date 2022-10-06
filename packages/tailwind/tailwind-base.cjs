@@ -369,10 +369,10 @@ module.exports = (userOptions) => {
       extend: {
         maxWidth: {
           // Override Tailwinds default prose width of 60 chars to 48. Roughly 590 pixels
-          prose: '590px',
+          prose: '696px',
         },
         width: {
-          prose: '590px',
+          prose: '696px',
         },
         screens: {
           // replicate the smaller than breakpoint from Windi. Even though we are mobile first, it is really nice with an escape hatch sometimes
