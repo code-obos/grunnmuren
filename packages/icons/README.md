@@ -2,6 +2,8 @@
 
 Grunnmuren's icon set as React components and SVG files.
 
+See our [storybook for a showcase](https://code-obos.github.io/grunnmuren/?path=/story/icons--icons) of all the icons in this set.
+
 ## Install
 
 ```sh
