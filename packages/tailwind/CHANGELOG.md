@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 0.7.1
+
+### Patch Changes
+
+- a2cbbd1: changed maxwidth and width prose to 696px
+
 ## 0.7.0
 
 ### Minor Changes

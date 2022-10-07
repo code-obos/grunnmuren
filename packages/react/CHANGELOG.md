@@ -1,5 +1,13 @@
 # @obosbbl/grunnmuren-react
 
+## 1.4.8
+
+### Patch Changes
+
+- f0eaaac: ensure the content of StepListItem's bullet is centered
+- Updated dependencies [a2cbbd1]
+  - @obosbbl/grunnmuren-tailwind@0.7.1
+
 ## 1.4.7
 
 ### Patch Changes
