@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 0.7.2
+
+### Patch Changes
+
+- 0105b02: update `.container-prose` max-width to 696px
+
 ## 0.7.1
 
 ### Patch Changes
