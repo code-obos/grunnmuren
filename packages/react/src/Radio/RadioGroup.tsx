@@ -8,7 +8,7 @@ export interface RadioGroupProps
   /** The value of the radio button to be initially selected. For uncontrolled usage */
   defaultValue?: string;
   /** Help text for the radio group. */
-  description?: string;
+  description?: React.ReactNode;
   /** The `name` attribute for the radio buttons. */
   name: string;
   /** The label for the radio group. */

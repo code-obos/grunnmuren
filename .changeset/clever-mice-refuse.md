@@ -2,4 +2,4 @@
 '@obosbbl/grunnmuren-react': patch
 ---
 
-Textfield: support reactNode for description
+Forms: support reactNode for description in TextField/TextArea/RadioGroup
