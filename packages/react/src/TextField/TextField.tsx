@@ -8,7 +8,7 @@ export interface TextFieldProps
   extends React.ComponentPropsWithoutRef<'input'> {
   children?: never;
   /** Help text for the form control */
-  description?: string;
+  description?: React.ReactNode;
   /** Error message for the form control */
   error?: string;
   /**  Label for the form control */
