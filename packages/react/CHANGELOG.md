@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.4.9
+
+### Patch Changes
+
+- 2d2142b: Forms: support reactNode for description in TextField/TextArea/RadioGroup
+
 ## 1.4.8
 
 ### Patch Changes
