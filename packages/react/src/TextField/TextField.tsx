@@ -1,5 +1,5 @@
 import { forwardRef, useRef } from 'react';
-import { cx, composeRefs } from '@/utils';
+import { cx, composeRefs, getRequiredness } from '@/utils';
 import { useFallbackId } from '@/hooks';
 import { Input, FormLabel, FormHelperText, FormErrorMessage } from '..';
 import { useFormControlValidity } from '../hooks';
@@ -28,7 +28,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       error,
       id: idProp,
       label,
-      required,
       type = 'text',
       validate = true,
       ...rest
@@ -47,11 +46,13 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
     const errorMsg = error ?? validationMessage;
 
+    const isRequired = getRequiredness(props.required, props['aria-required']);
+
     return (
       <div className="grid gap-2">
         <FormLabel
           htmlFor={id}
-          isRequired={required}
+          isRequired={isRequired}
           isInvalid={!!error || validity === 'invalid'}
         >
           {label}
@@ -63,7 +64,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
         <Input
           id={id}
-          required={required}
           ref={composeRefs(ownRef, ref)}
           type={type}
           {...rest}
