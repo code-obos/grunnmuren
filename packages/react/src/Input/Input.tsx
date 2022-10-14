@@ -9,9 +9,6 @@ export interface InputProps extends React.ComponentPropsWithoutRef<'input'> {
   rightAddon?: React.ReactNode;
   /** Render input as invalid. Sets `aria-invalid` to true */
   isInvalid?: boolean;
-
-  /* TODO: implement validation */
-  // valid?: boolean;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
