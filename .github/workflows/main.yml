@@ -45,7 +45,7 @@ jobs:
         run: pnpm --filter "@obosbbl/grunnmuren-react" build:storybook
 
       - name: Deploy Storybook 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.4.0
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
         if: github.ref == 'refs/heads/main'
         with:
           branch: docs # The branch the action should deploy to.
