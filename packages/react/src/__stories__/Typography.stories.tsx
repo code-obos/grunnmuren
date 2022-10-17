@@ -42,6 +42,9 @@ export const Prose = () => {
         <li>List 2</li>
         <li>List 3</li>
       </ul>
+      <blockquote>
+        <p>Quote. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </blockquote>
     </div>
   );
 };
