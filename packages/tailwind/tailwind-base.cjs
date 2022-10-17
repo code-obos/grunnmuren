@@ -439,6 +439,8 @@ module.exports = (userOptions) => {
             css: {
               '--tw-prose-headings': theme('colors.black'),
               '--tw-prose-lead': theme('colors.black'),
+              '--tw-prose-quotes': theme('colors.blue.dark'),
+              '--tw-prose-quote-borders': theme('colors.green.DEFAULT'),
               // TODO: Increase bullet size. See design sketches
               '--tw-prose-bullets': theme('colors.green.DEFAULT'),
               color: theme('colors.black'),
@@ -461,6 +463,16 @@ module.exports = (userOptions) => {
               li: {
                 marginTop: '1.5em',
                 marginBottom: '1.5em',
+              },
+              blockquote: {
+                fontWeight: '700',
+                fontStyle: 'normal',
+              },
+              'blockquote p:first-of-type::before': {
+                content: '"«"',
+              },
+              'blockquote p:last-of-type::after': {
+                content: '"»"',
               },
               '[class~="lead"]': {
                 fontWeight: 500,
