@@ -1,5 +1,5 @@
 ---
-'@obosbbl/grunnmuren-react': patch
+'@obosbbl/grunnmuren-react': minor
 ---
 
-support `aria-required` in `<TextField>` and `<TextArea>`
+Better support for custom validation. Added `disableValidation` in `<TextField>` and `<TextArea>`, and support `noValidate` on the form element.
