@@ -1,6 +1,6 @@
-import { forwardRef } from 'react';
+import { forwardRef, useRef } from 'react';
 import { cx } from '@/utils';
-import { useFallbackId } from '@/hooks';
+import { useFallbackId, useFormControlValidity } from '@/hooks';
 
 import { FormErrorMessage } from '..';
 
@@ -13,14 +13,33 @@ export interface CheckboxProps extends React.ComponentPropsWithRef<'input'> {
   className?: string;
   /** Error message for the form control */
   error?: string;
+
+  /** Disables the built in HTML5 validation. If using custom validation for an entire form, consider setting `noValidate` on the form element instead. @default false */
+  disableValidation?: boolean;
 }
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
-    const { children, className, error, id: idProp, ...rest } = props;
+    const {
+      children,
+      className,
+      error,
+      id: idProp,
+      disableValidation = false,
+      ...rest
+    } = props;
+
+    const ownRef = useRef(null);
+
+    const { validity, validationMessage } = useFormControlValidity(
+      ownRef,
+      !disableValidation,
+    );
 
     const id = useFallbackId(idProp);
     const errorMsgId = id + 'err';
+
+    const errorMsg = error ?? validationMessage;
 
     return (
       <div className="grid gap-2">
@@ -42,12 +61,12 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             aria-describedby={cx({
               [errorMsgId]: !!error,
             })}
-            aria-invalid={!!error}
+            aria-invalid={!!error || validity === 'invalid'}
           />
           {children}
         </label>
-        {!!error && (
-          <FormErrorMessage id={errorMsgId}>{error}</FormErrorMessage>
+        {!!errorMsg && (
+          <FormErrorMessage id={errorMsgId}>{errorMsg}</FormErrorMessage>
         )}
       </div>
     );
