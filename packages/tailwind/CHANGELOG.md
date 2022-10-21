@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 0.7.3
+
+### Patch Changes
+
+- 3191a8a: OBOS theme for blockquotes in prose class
+
 ## 0.7.2
 
 ### Patch Changes
