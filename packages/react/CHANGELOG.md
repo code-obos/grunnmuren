@@ -1,5 +1,16 @@
 # @obosbbl/grunnmuren-react
 
+## 1.5.0
+
+### Minor Changes
+
+- 0878943: Better support for custom validation. Added `disableValidation` in `<TextField>`, `<TextArea>` and `<Checkbox>`, and support `noValidate` on the form element.
+
+### Patch Changes
+
+- Updated dependencies [3191a8a]
+  - @obosbbl/grunnmuren-tailwind@0.7.3
+
 ## 1.4.9
 
 ### Patch Changes
