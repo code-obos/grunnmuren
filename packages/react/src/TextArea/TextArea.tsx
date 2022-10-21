@@ -13,8 +13,10 @@ export interface TextAreaProps
   error?: string;
   /**  Label for the form control */
   label: string;
-  /** Automatically valdiate the form control using the HTML constraint validation API. @default true */
-  validate?: boolean;
+  /** @deprecated. use `disableValidation` instead */
+  validate?: never;
+  /** Disables the built in HTML5 validation. If using custom validation for an entire form, consider setting `noValidate` on the form element instead. @default false */
+  disableValidation?: boolean;
 }
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
@@ -24,8 +26,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       error,
       id: idProp,
       label,
-      required,
-      validate = true,
+      disableValidation = false,
       ...rest
     } = props;
 
@@ -33,7 +34,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     const { validity, validationMessage } = useFormControlValidity(
       ownRef,
-      validate,
+      !disableValidation,
     );
 
     const id = useFallbackId(idProp);
@@ -46,7 +47,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       <div className="grid gap-2">
         <FormLabel
           htmlFor={id}
-          isRequired={required}
+          isRequired={props.required}
           isInvalid={!!error || validity === 'invalid'}
         >
           {label}
@@ -61,7 +62,6 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           // @ts-expect-error fix this later
           ref={composeRefs(ownRef, ref)}
           id={id}
-          required={required}
           {...rest}
           // for accessibility reasons these cannot be overriden
           isInvalid={!!error || validity === 'invalid'}

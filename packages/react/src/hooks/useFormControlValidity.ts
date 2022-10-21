@@ -15,22 +15,19 @@ export function useFormControlValidity(
   const [validity, setValidity] = useState<Validity>('indeterminate');
   const [validationMessage, setValidationMessage] = useState<string>();
 
-  const onBlur = useCallback(
-    (event: FocusEvent) => {
-      // this triggers an invalid event, so if it's invalid it's handled by the `onInvalid` handler
-      const isValid = (event.target as HTMLInputElement).checkValidity();
+  const onBlur = useCallback((event: FocusEvent) => {
+    // this triggers an invalid event, so if it's invalid it's handled by the `onInvalid` handler
+    const isValid = (event.target as HTMLInputElement).checkValidity();
 
-      if (isValid && enabled) {
-        setValidity('valid');
-        setValidationMessage(undefined);
-      }
-    },
-    [enabled],
-  );
+    if (isValid) {
+      setValidity('valid');
+      setValidationMessage(undefined);
+    }
+  }, []);
 
   const onInput = useCallback(
     (event: Event) => {
-      if (enabled && validity !== 'indeterminate') {
+      if (validity !== 'indeterminate') {
         // this triggers an invalid event, so if it's invalid it's handled by the `onInvalid` handler
         const isValid = (event.target as HTMLInputElement).checkValidity();
 
@@ -40,33 +37,36 @@ export function useFormControlValidity(
         }
       }
     },
-    [enabled, validity],
+    [validity],
   );
 
-  const onInvalid = useCallback(
-    (event: Event) => {
-      if (enabled) {
-        event.preventDefault();
-        const message = (event.target as HTMLInputElement).validationMessage;
-        setValidationMessage(message);
-        setValidity('invalid');
-      }
-    },
-    [enabled],
-  );
+  const onInvalid = useCallback((event: Event) => {
+    event.preventDefault();
+    const message = (event.target as HTMLInputElement).validationMessage;
+    setValidationMessage(message);
+    setValidity('invalid');
+  }, []);
 
   useEffect(() => {
     const { current } = ref;
-    current?.addEventListener('blur', onBlur);
-    current?.addEventListener('input', onInput);
-    current?.addEventListener('invalid', onInvalid);
+
+    if (
+      enabled &&
+      // @ts-expect-error respect the <form noValidate> attribute if we are rendered inside a form
+      current?.form?.noValidate !== true
+    ) {
+      current?.addEventListener('blur', onBlur);
+      current?.addEventListener('input', onInput);
+      current?.addEventListener('invalid', onInvalid);
+    }
 
     return () => {
       current?.removeEventListener('blur', onBlur);
       current?.removeEventListener('input', onInput);
       current?.removeEventListener('invalid', onInvalid);
     };
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [enabled, onInput]);
 
   return { validity, validationMessage };
 }

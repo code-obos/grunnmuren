@@ -17,8 +17,10 @@ export interface TextFieldProps
   leftAddon?: React.ReactNode;
   /** React node on the left (ex. icon, text, component) */
   rightAddon?: React.ReactNode;
-  /** Automatically valdiate the form control using the HTML constraint validation API. @default true */
-  validate?: boolean;
+  /** @deprecated. use `disableValidation` instead */
+  validate?: never;
+  /** Disables the built in HTML5 validation. If using custom validation for an entire form, consider setting `noValidate` on the form element instead. @default false */
+  disableValidation?: boolean;
 }
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
@@ -28,9 +30,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       error,
       id: idProp,
       label,
-      required,
       type = 'text',
-      validate = true,
+      disableValidation = false,
       ...rest
     } = props;
 
@@ -38,7 +39,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
     const { validity, validationMessage } = useFormControlValidity(
       ownRef,
-      validate,
+      !disableValidation,
     );
 
     const id = useFallbackId(idProp);
@@ -51,7 +52,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       <div className="grid gap-2">
         <FormLabel
           htmlFor={id}
-          isRequired={required}
+          isRequired={props.required}
           isInvalid={!!error || validity === 'invalid'}
         >
           {label}
@@ -63,7 +64,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
         <Input
           id={id}
-          required={required}
           ref={composeRefs(ownRef, ref)}
           type={type}
           {...rest}
