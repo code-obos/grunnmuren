@@ -39,7 +39,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const id = useFallbackId(idProp);
     const errorMsgId = id + 'err';
 
-    const errorMsg = error ?? validationMessage;
+    const errorMsg = error || validationMessage;
 
     return (
       <div className="grid gap-2">
@@ -58,14 +58,12 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             ref={ref}
             type="checkbox"
             {...rest}
-            aria-describedby={cx({
-              [errorMsgId]: !!error,
-            })}
+            aria-describedby={errorMsg ? errorMsgId : undefined}
             aria-invalid={!!error || validity === 'invalid'}
           />
           {children}
         </label>
-        {!!errorMsg && (
+        {errorMsg && (
           <FormErrorMessage id={errorMsgId}>{errorMsg}</FormErrorMessage>
         )}
       </div>
