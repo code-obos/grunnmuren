@@ -41,7 +41,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     const helpTextId = id + 'help';
     const errorMsgId = id + 'err';
 
-    const errorMsg = error ?? validationMessage;
+    const errorMsg = error || validationMessage;
 
     return (
       <div className="grid gap-2">
@@ -65,10 +65,12 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           {...rest}
           // for accessibility reasons these cannot be overriden
           isInvalid={!!error || validity === 'invalid'}
-          aria-describedby={cx({
-            [errorMsgId]: !!error,
-            [helpTextId]: description,
-          })}
+          aria-describedby={
+            cx({
+              [errorMsgId]: errorMsg,
+              [helpTextId]: description,
+            }) || undefined
+          }
         />
 
         {errorMsg && (
