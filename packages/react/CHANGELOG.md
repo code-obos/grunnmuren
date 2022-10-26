@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.5.1
+
+### Patch Changes
+
+- ab7051e: fix accessibility issue for form components
+
 ## 1.5.0
 
 ### Minor Changes
