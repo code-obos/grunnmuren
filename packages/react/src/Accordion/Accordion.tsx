@@ -65,7 +65,7 @@ export const AccordionItem = (props: AccordionItemProps) => {
       <div
         className={cx(
           className,
-          'border-b-gray-concrete rounded-sm border-b-2 border-l-4 border-solid',
+          'rounded-sm border-b-2 border-l-4 border-solid',
           collapseContext.isExpanded ? 'border-l-green-dark' : 'border-l-green',
         )}
         {...rest}
