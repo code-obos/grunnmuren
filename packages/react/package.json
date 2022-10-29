@@ -48,7 +48,7 @@
     "@obosbbl/grunnmuren-icons": "workspace:^",
     "@seznam/compose-react-refs": "1.0.6",
     "clsx": "1.2.1",
-    "react-collapsed": "3.4.0",
+    "react-collapsed": "3.5.0",
     "react-use": "17.4.0"
   },
   "peerDependencies": {
