@@ -428,6 +428,9 @@ module.exports = (userOptions) => {
             DEFAULT: '#fff5d2',
           },
         },
+        borderColor: ({ theme }) => ({
+          DEFAULT: theme('colors.gray.light', 'currentColor'),
+        }),
         fontFamily: {
           sans: [fontFamily, 'sans-serif'],
         },
