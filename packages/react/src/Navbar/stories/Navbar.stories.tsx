@@ -40,7 +40,7 @@ export const Default = () => {
         logo={
           <a href="#" aria-label="Til startsiden for OBOS">
             <img
-              className="<md:w-[100px]"
+              className="max-md:w-[100px]"
               src="/obos_liggende_hus_hvit.svg"
               width="173"
               height="41"

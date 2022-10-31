@@ -67,7 +67,7 @@ export const Hero = (props: HeroProps) => {
           className={cx(
             className,
             // disable padding on small screens so the hero image is flush with the screen edges
-            '<md:px-0 container md:grid',
+            'max-md:px-0 container md:grid',
             {
               'md:grid-cols-[50%,50%]': contentPosition === 'vertical-split',
             },

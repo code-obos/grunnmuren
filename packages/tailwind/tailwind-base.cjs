@@ -375,7 +375,12 @@ module.exports = (userOptions) => {
           prose: '696px',
         },
         screens: {
-          // replicate the smaller than breakpoint from Windi. Even though we are mobile first, it is really nice with an escape hatch sometimes
+          'max-md': { max: '767.9px' },
+          /**
+           * @deprecated Tailwind 3.2 has built in support for max-width breakpoints, but it only works
+           * with a "simple screens" configuration... We add `max-md` manually here, allow everyone to migrate off
+           * `<md`, then we can remove `screens` enitrely from this config.
+           */
           '<md': { max: '767.9px' },
         },
         spacing: {

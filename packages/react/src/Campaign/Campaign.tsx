@@ -70,7 +70,7 @@ const CampaignImage = (props: CampaignImageProps) => {
 
   const className = cx(
     classNameProp,
-    '<md:rounded-b-3xl w-full',
+    'max-md:rounded-b-3xl w-full',
     bodyIsRightAligned ? 'md:rounded-r-3xl' : 'md:rounded-l-3xl md:order-1',
   );
 

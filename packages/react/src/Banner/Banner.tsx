@@ -23,7 +23,7 @@ export const Banner = (props: BannerProps) => {
 
   return (
     <article className={cx(className, bgColor, 'py-8 px-4 md:py-14')} {...rest}>
-      <div className="<md:flex-wrap container flex gap-4 md:flex-row md:gap-12">
+      <div className="max-md:flex-wrap container flex gap-4 md:gap-12">
         {image}
         <div className="w-prose">
           {heading && <h2 className="mb-4">{heading}</h2>}
