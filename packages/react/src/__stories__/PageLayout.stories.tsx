@@ -1,13 +1,13 @@
-import { Default as Navbar } from '../../Navbar/stories/Navbar.stories';
-import { WithImage as Hero } from '../../Hero/stories/Hero.stories';
-import { Default as Footer } from '../../Footer/stories/Footer.stories';
+import { Default as Navbar } from '../Navbar/stories/Navbar.stories';
+import { WithImage as Hero } from '../Hero/stories/Hero.stories';
+import { Default as Footer } from '../Footer/stories/Footer.stories';
 
 const metadata = {
   title: 'Pagelayout',
 };
 export default metadata;
 
-export const Default = () => {
+export const Pagelayout = () => {
   return (
     <div className="page-layout">
       <Navbar />
