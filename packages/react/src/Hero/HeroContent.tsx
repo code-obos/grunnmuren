@@ -21,7 +21,7 @@ export const HeroContent = (props: HeroContentProps) => {
     <div
       className={cx(
         className,
-        'max-md:mx-4 relative grid grid-flow-row grid-cols-[minmax(auto,_37rem)] content-center gap-6 rounded-3xl py-10 px-6 text-center md:p-12',
+        'relative grid grid-flow-row grid-cols-[minmax(auto,_37rem)] content-center gap-6 rounded-3xl py-10 px-6 text-center max-md:mx-4 md:p-12',
         {
           // On mobile we use negative margin on the content to pull the content up into the image
           'max-md:-mt-18': hasImage,

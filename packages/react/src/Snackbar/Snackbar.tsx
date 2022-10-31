@@ -35,7 +35,7 @@ export const Snackbar = (props: SnackbarProps) => {
             {heading}
           </h3>
 
-          <div className="snackbar-actions max-md:mt-3 flex justify-end gap-4 md:ml-4">
+          <div className="snackbar-actions flex justify-end gap-4 max-md:mt-3 md:ml-4">
             <SnackbarButton
               aria-expanded={isExpanded}
               onClick={() => setIsExpanded(!isExpanded)}
