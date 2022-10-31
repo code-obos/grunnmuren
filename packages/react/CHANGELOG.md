@@ -1,5 +1,21 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0
+
+### Minor Changes
+
+- 298bb54: change peer dependency requirement to Tailwind 3.2 or higher
+
+### Patch Changes
+
+- e47cb6d: deprecate custom `<md` variant. Use Tailwind 3.2 max width variants instead
+- 1de604e: refactor Accordion to use Tailwind ARIA attribute variants
+- eca94b7: set light gray (#e6e6e6) as the default border color
+- Updated dependencies [298bb54]
+- Updated dependencies [e47cb6d]
+- Updated dependencies [eca94b7]
+  - @obosbbl/grunnmuren-tailwind@0.8.0
+
 ## 1.5.1
 
 ### Patch Changes

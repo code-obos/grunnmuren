@@ -1,5 +1,16 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 0.8.0
+
+### Minor Changes
+
+- 298bb54: change peer dependency requirement to Tailwind 3.2 or higher
+
+### Patch Changes
+
+- e47cb6d: deprecate custom `<md` variant. Use Tailwind 3.2 max width variants instead
+- eca94b7: set light gray (#e6e6e6) as the default border color
+
 ## 0.7.3
 
 ### Patch Changes
