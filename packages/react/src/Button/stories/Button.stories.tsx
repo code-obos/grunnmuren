@@ -91,6 +91,14 @@ export const Default = (props: {
           {buttons}
         </ButtonsDisplayer>
       </div>
+
+      <div className="bg-white py-4">
+        <ButtonsDisplayer
+          buttonProps={{ color: 'dark-green', disabled, loading }}
+        >
+          {buttons}
+        </ButtonsDisplayer>
+      </div>
     </>
   );
 };
