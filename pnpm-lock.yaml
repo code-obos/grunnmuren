@@ -31,7 +31,7 @@ importers:
       '@svgr/core': 6.5.1
       '@svgr/plugin-jsx': 6.5.1
       '@svgr/plugin-svgo': 6.5.1
-      '@types/react': 18.0.24
+      '@types/react': 18.0.25
       '@vitejs/plugin-react': 1.3.2
       fs-extra: 10.1.0
       node-fetch: 3.2.10
@@ -44,7 +44,7 @@ importers:
       '@svgr/core': 6.5.1
       '@svgr/plugin-jsx': 6.5.1_@svgr+core@6.5.1
       '@svgr/plugin-svgo': 6.5.1_@svgr+core@6.5.1
-      '@types/react': 18.0.24
+      '@types/react': 18.0.25
       '@vitejs/plugin-react': 1.3.2
       fs-extra: 10.1.0
       node-fetch: 3.2.10
@@ -66,7 +66,7 @@ importers:
       '@storybook/builder-webpack5': 6.5.13
       '@storybook/manager-webpack5': 6.5.13
       '@storybook/react': 6.5.13
-      '@types/react': 18.0.24
+      '@types/react': 18.0.25
       '@types/react-dom': 18.0.8
       '@vitejs/plugin-react': 1.3.2
       clsx: 1.2.1
@@ -95,7 +95,7 @@ importers:
       '@storybook/builder-webpack5': 6.5.13_biqbaboplfbrettd7655fr4n2y
       '@storybook/manager-webpack5': 6.5.13_biqbaboplfbrettd7655fr4n2y
       '@storybook/react': 6.5.13_k366usdar6muzykyb3sbup5h4m
-      '@types/react': 18.0.24
+      '@types/react': 18.0.25
       '@types/react-dom': 18.0.8
       '@vitejs/plugin-react': 1.3.2
       postcss: 8.4.18
@@ -3616,11 +3616,11 @@ packages:
   /@types/react-dom/18.0.8:
     resolution: {integrity: sha512-C3GYO0HLaOkk9dDAz3Dl4sbe4AKUGTCfFIZsz3n/82dPNN8Du533HzKatDxeUYWu24wJgMP1xICqkWk1YOLOIw==}
     dependencies:
-      '@types/react': 18.0.24
+      '@types/react': 18.0.25
     dev: true
 
-  /@types/react/18.0.24:
-    resolution: {integrity: sha512-wRJWT6ouziGUy+9uX0aW4YOJxAY0bG6/AOk5AW5QSvZqI7dk6VBIbXvcVgIw/W5Jrl24f77df98GEKTJGOLx7Q==}
+  /@types/react/18.0.25:
+    resolution: {integrity: sha512-xD6c0KDT4m7n9uD4ZHi02lzskaiqcBxf4zi+tXZY98a04wvc0hi/TcCPC2FOESZi51Nd7tlUeOJY8RofL799/g==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.2
@@ -4943,7 +4943,7 @@ packages:
       mississippi: 3.0.0
       mkdirp: 0.5.6
       move-concurrently: 1.0.1
-      promise-inflight: 1.0.1
+      promise-inflight: 1.0.1_bluebird@3.7.2
       rimraf: 2.7.1
       ssri: 6.0.2
       unique-filename: 1.1.1
@@ -10188,6 +10188,17 @@ packages:
     peerDependenciesMeta:
       bluebird:
         optional: true
+    dev: true
+
+  /promise-inflight/1.0.1_bluebird@3.7.2:
+    resolution: {integrity: sha512-6zWPyEOFaQBJYcGMHBKTKJ3u6TBsnMFOIZSa6ce1e/ZrrsOlnHRHbabMjLiBYKp+n44X9eUI6VUPaukCXHuG4g==}
+    peerDependencies:
+      bluebird: '*'
+    peerDependenciesMeta:
+      bluebird:
+        optional: true
+    dependencies:
+      bluebird: 3.7.2
     dev: true
 
   /promise.allsettled/1.0.5:
