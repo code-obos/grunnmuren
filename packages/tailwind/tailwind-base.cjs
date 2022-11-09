@@ -333,6 +333,9 @@ module.exports = (userOptions) => {
         addUtilities({
           // imitates a bold font, but doesn't cause layout due to element width change like with font-weight
           // Note that this CSS isn't standardized, but it works in Fx, Chrome, Safari and Edge
+          /**
+           * @deprecated use font-bold instead
+           */
           '.fake-font-bold': {
             '-webkit-text-stroke': '1px',
           },
