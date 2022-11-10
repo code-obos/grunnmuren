@@ -3,4 +3,4 @@
 '@obosbbl/grunnmuren-tailwind': patch
 ---
 
-deprecate custom `fake-font-bold`. Use `font-bold`instead
+deprecated custom utility class `.fake-font-bold`. It was based on non standard CSS, and looked awful on non HD-screens
