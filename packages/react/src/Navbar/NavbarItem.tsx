@@ -18,7 +18,7 @@ export const NavbarItem = forwardRef<HTMLAnchorElement, NavbarItemProps>(
           className,
           'border-b border-[#0156E0] py-3 no-underline md:border-b-2 md:border-transparent md:py-2 md:hover:border-white',
           {
-            'fake-font-bold md:bg-blue-dark md:-mx-3 md:rounded-t-lg md:px-3':
+            'md:bg-blue-dark font-bold md:-mx-3 md:rounded-t-lg md:px-3':
               active,
           },
         )}
