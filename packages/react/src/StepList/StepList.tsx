@@ -18,7 +18,7 @@ export const StepListItem = (props: StepListItemProps) => {
     <li
       className={cx(
         className,
-        'group relative flex gap-4 pb-8 text-sm last:pb-0 md:gap-8 md:pb-12 md:text-base',
+        'group relative flex items-center gap-4 pb-8 text-sm last:pb-0 md:gap-8 md:pb-12 md:text-base',
       )}
       {...rest}
     >
