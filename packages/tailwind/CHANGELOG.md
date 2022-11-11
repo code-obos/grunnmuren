@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 0.8.1
+
+### Patch Changes
+
+- 26071ba: deprecated custom utility class `.fake-font-bold`. It was based on non standard CSS, and looked awful on non HD-screens
+
 ## 0.8.0
 
 ### Minor Changes

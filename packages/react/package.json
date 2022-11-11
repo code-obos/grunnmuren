@@ -1,6 +1,6 @@
 {
   "name": "@obosbbl/grunnmuren-react",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "OBOS Grunnmuren design system React components",
   "license": "MIT",
   "repository": {
@@ -52,7 +52,7 @@
     "react-use": "17.4.0"
   },
   "peerDependencies": {
-    "@obosbbl/grunnmuren-tailwind": "workspace:^0.8",
+    "@obosbbl/grunnmuren-tailwind": "workspace:^0.8.1",
     "react": "^18"
   },
   "peerDependenciesMeta": {
