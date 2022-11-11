@@ -1,5 +1,18 @@
 # @obosbbl/grunnmuren-react
 
+## 1.6.1
+
+### Patch Changes
+
+- 3373f91: LoadingSpinner icon is now squared so it looks better when spinning
+- 887797e: centered text for each step in StepList
+- 26071ba: deprecated custom utility class `.fake-font-bold`. It was based on non standard CSS, and looked awful on non HD-screens
+- Updated dependencies [3373f91]
+- Updated dependencies [3373f91]
+- Updated dependencies [26071ba]
+  - @obosbbl/grunnmuren-icons@0.5.1
+  - @obosbbl/grunnmuren-tailwind@0.8.1
+
 ## 1.6.0
 
 ### Minor Changes

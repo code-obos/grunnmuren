@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-icons
 
+## 0.5.1
+
+### Patch Changes
+
+- 3373f91: add Plus icon
+- 3373f91: LoadingSpinner icon is now squared so it looks better when spinning
+
 ## 0.5.0
 
 ### Minor Changes
