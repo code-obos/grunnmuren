@@ -16,7 +16,7 @@
   ],
   "dependencies": {
     "@tailwindcss/aspect-ratio": "0.4.2",
-    "@tailwindcss/typography": "0.5.7"
+    "@tailwindcss/typography": "0.5.8"
   },
   "devDependencies": {
     "tailwindcss": "3.2.1",
