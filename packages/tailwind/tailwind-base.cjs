@@ -296,7 +296,7 @@ module.exports = (userOptions) => {
             paddingRight: '1rem',
             marginLeft: 'auto',
             marginRight: 'auto',
-            maxWidth: '43.5rem',
+            maxWidth: '45.5rem',
           },
           // that thin blue line at the top
           '.topline::before': {
