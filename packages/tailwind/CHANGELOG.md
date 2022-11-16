@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 0.8.2
+
+### Patch Changes
+
+- c5ff179: fix: container-prose maxWidth was missing 2rem
+
 ## 0.8.1
 
 ### Patch Changes

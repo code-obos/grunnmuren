@@ -52,7 +52,7 @@
     "react-use": "17.4.0"
   },
   "peerDependencies": {
-    "@obosbbl/grunnmuren-tailwind": "workspace:^0.8.1",
+    "@obosbbl/grunnmuren-tailwind": "workspace:^0.8.2",
     "react": "^18"
   },
   "peerDependenciesMeta": {
