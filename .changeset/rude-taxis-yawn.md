@@ -2,4 +2,4 @@
 '@obosbbl/grunnmuren-tailwind': patch
 ---
 
-ordered list: change color to black
+prose ordered list: change color to black
