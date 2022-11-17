@@ -452,6 +452,7 @@ module.exports = (userOptions) => {
               '--tw-prose-lead': theme('colors.black'),
               '--tw-prose-quotes': theme('colors.blue.dark'),
               '--tw-prose-quote-borders': theme('colors.green.DEFAULT'),
+              '--tw-prose-counters': theme('colors.black'),
               // TODO: Increase bullet size. See design sketches
               '--tw-prose-bullets': theme('colors.green.DEFAULT'),
               color: theme('colors.black'),
