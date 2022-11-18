@@ -38,7 +38,7 @@ importers:
       ora: 6.1.2
       picocolors: 1.0.0
       prompts: 2.4.2
-      svgo: 3.0.0
+      svgo: 3.0.2
       vite: 2.9.15
     devDependencies:
       '@svgr/core': 6.5.1
@@ -51,7 +51,7 @@ importers:
       ora: 6.1.2
       picocolors: 1.0.0
       prompts: 2.4.2
-      svgo: 3.0.0
+      svgo: 3.0.2
       vite: 2.9.15
 
   packages/react:
@@ -4943,7 +4943,7 @@ packages:
       mississippi: 3.0.0
       mkdirp: 0.5.6
       move-concurrently: 1.0.1
-      promise-inflight: 1.0.1_bluebird@3.7.2
+      promise-inflight: 1.0.1
       rimraf: 2.7.1
       ssri: 6.0.2
       unique-filename: 1.1.1
@@ -10190,17 +10190,6 @@ packages:
         optional: true
     dev: true
 
-  /promise-inflight/1.0.1_bluebird@3.7.2:
-    resolution: {integrity: sha512-6zWPyEOFaQBJYcGMHBKTKJ3u6TBsnMFOIZSa6ce1e/ZrrsOlnHRHbabMjLiBYKp+n44X9eUI6VUPaukCXHuG4g==}
-    peerDependencies:
-      bluebird: '*'
-    peerDependenciesMeta:
-      bluebird:
-        optional: true
-    dependencies:
-      bluebird: 3.7.2
-    dev: true
-
   /promise.allsettled/1.0.5:
     resolution: {integrity: sha512-tVDqeZPoBC0SlzJHzWGZ2NKAguVq2oiYj7gbggbiTvH2itHohijTp7njOUA0aQ/nl+0lr/r6egmhoYu63UZ/pQ==}
     engines: {node: '>= 0.4'}
@@ -11643,8 +11632,8 @@ packages:
       stable: 0.1.8
     dev: true
 
-  /svgo/3.0.0:
-    resolution: {integrity: sha512-mSqPn6RDeNqJvCeqHERlfWJjd4crP/2PgFelil9WpTwC4D3okAUopPsH3lnEyl7ONXfDVyISOihDjO0uK8YVAA==}
+  /svgo/3.0.2:
+    resolution: {integrity: sha512-Z706C1U2pb1+JGP48fbazf3KxHrWOsLme6Rv7imFBn5EnuanDW1GPaA/P1/dvObE670JDePC3mnj0k0B7P0jjQ==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
