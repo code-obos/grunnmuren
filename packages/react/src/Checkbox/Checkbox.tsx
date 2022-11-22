@@ -43,9 +43,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     return (
       <div className="grid gap-2">
-        <label
-          className={cx(className, 'inline-flex cursor-pointer items-center')}
-        >
+        <label className={cx(className, 'inline-flex cursor-pointer')}>
           <input
             id={id}
             className={cx(
