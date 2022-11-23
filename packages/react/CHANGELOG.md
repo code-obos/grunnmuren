@@ -1,5 +1,13 @@
 # @obosbbl/grunnmuren-react
 
+## 1.6.2
+
+### Patch Changes
+
+- 634cc15: reduce vertical padding Card content on desktop
+- Updated dependencies [d38815c]
+  - @obosbbl/grunnmuren-tailwind@0.8.3
+
 ## 1.6.1
 
 ### Patch Changes

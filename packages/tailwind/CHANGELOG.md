@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 0.8.3
+
+### Patch Changes
+
+- d38815c: prose ordered list: change color to black
+
 ## 0.8.2
 
 ### Patch Changes
