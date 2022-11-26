@@ -72,7 +72,7 @@ importers:
       clsx: 1.2.1
       postcss: 8.4.19
       react: 18.2.0
-      react-collapsed: 3.5.0
+      react-collapsed: 3.6.0
       react-dom: 18.2.0
       react-use: 17.4.0
       require-from-string: 2.0.2
@@ -84,7 +84,7 @@ importers:
       '@obosbbl/grunnmuren-icons': link:../icons
       '@seznam/compose-react-refs': 1.0.6
       clsx: 1.2.1
-      react-collapsed: 3.5.0_biqbaboplfbrettd7655fr4n2y
+      react-collapsed: 3.6.0_biqbaboplfbrettd7655fr4n2y
       react-use: 17.4.0_biqbaboplfbrettd7655fr4n2y
     devDependencies:
       '@babel/core': 7.19.6
@@ -10382,11 +10382,11 @@ packages:
       webpack: 4.46.0
     dev: true
 
-  /react-collapsed/3.5.0_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-MtwlFoVfm1LdS1FFFNBQhMESSly0+ZaIouZHVbpVytM9gflLwUfPLbcqEuhzilT8upwzg45ect1zWC4Dbd5xpw==}
+  /react-collapsed/3.6.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-QqtogOGl5hM9L7j7rlMCYxm4jD8Ovr8voqyYS1g5ltADhUNvxbbgtJ5MwRiajJ0DmYFOZHShpnSPz4wvJaOiKA==}
     peerDependencies:
-      react: '>=16.8 || 18'
-      react-dom: '>=16.8 || 18'
+      react: ^16.8 || ^17 || 18
+      react-dom: ^16.8 || ^17 || 18
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
