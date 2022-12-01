@@ -19,11 +19,12 @@ export const Default = (props: any) => {
 
   return (
     <Pagination
+      aria-label="Sidepaginering"
       page={page}
       count={props.pageCount}
-      createHref={(page) => `#${page}`}
       onChange={setPage}
-      createAriaLabel={(page) => `Side ${page}`}
+      getItemHref={(page) => `#${page}`}
+      getItemAriaLabel={(page) => `Side ${page}`}
       nextPageAriaLabel="Neste side"
       prevPageAriaLabel="Forrige side"
     />

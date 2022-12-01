@@ -1,4 +1,5 @@
 import { createContext, useContext, useMemo, forwardRef } from 'react';
+import type { RequireAtLeastOne } from 'type-fest';
 import { ChevronLeft, ChevronRight } from '@obosbbl/grunnmuren-icons';
 import { cx } from '@/utils';
 
@@ -10,7 +11,7 @@ const PaginationContext = createContext<{
   pageCount: number;
 }>({ currentPage: 0, pageCount: 0 });
 
-interface PaginationProps
+interface BasePaginationProps
   extends Omit<React.ComponentPropsWithoutRef<'nav'>, 'onChange'> {
   /** The current page number.
    * @note Starts at 1
@@ -21,10 +22,10 @@ interface PaginationProps
   count: number;
 
   /**  Given a page number, should return a valid href string. */
-  createHref: (page: number) => string;
+  getItemHref: (page: number) => string;
 
   /**  Given a page number, should return a valid href string. */
-  createAriaLabel: (page: number) => string;
+  getItemAriaLabel: (page: number) => string;
   /** Aria label for the next page button link */
   nextPageAriaLabel: string;
   /** Aria label for the previous page button link */
@@ -34,14 +35,20 @@ interface PaginationProps
   onChange?: (page: number) => void;
 }
 
+// For accessibility reasons, aria-label or aria-labelledby is required.
+type PaginationProps = RequireAtLeastOne<
+  BasePaginationProps,
+  'aria-label' | 'aria-labelledby'
+>;
+
 export const Pagination = (props: PaginationProps) => {
   const {
     className,
     page: currentPage,
     count: pageCount,
     onChange,
-    createHref,
-    createAriaLabel,
+    getItemHref,
+    getItemAriaLabel,
     nextPageAriaLabel,
     prevPageAriaLabel,
     ...rest
@@ -72,15 +79,15 @@ export const Pagination = (props: PaginationProps) => {
       >
         <PrevPage
           aria-label={prevPageAriaLabel}
-          href={createHref(currentPage - 1)}
+          href={getItemHref(currentPage - 1)}
           onClick={handleClick(currentPage - 1)}
         />
         {/* Always render the first page */}
         <Page
           page={1}
-          href={createHref(1)}
+          href={getItemHref(1)}
           onClick={handleClick(1)}
-          aria-label={createAriaLabel(1)}
+          aria-label={getItemAriaLabel(1)}
           selected={currentPage === 1}
         />
         {pageCount > 2 + SIBLING_COUNT * 2 &&
@@ -89,9 +96,9 @@ export const Pagination = (props: PaginationProps) => {
         <Pages>
           {(page) => (
             <Page
-              href={createHref(page)}
+              href={getItemHref(page)}
               onClick={handleClick(page)}
-              aria-label={createAriaLabel(page)}
+              aria-label={getItemAriaLabel(page)}
               page={page}
               key={page}
               selected={page === currentPage}
@@ -100,7 +107,7 @@ export const Pagination = (props: PaginationProps) => {
         </Pages>
         <NextPage
           aria-label={nextPageAriaLabel}
-          href={createHref(currentPage + 1)}
+          href={getItemHref(currentPage + 1)}
           onClick={handleClick(currentPage + 1)}
         />
       </nav>
