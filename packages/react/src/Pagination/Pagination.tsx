@@ -83,7 +83,7 @@ export const Pagination = (props: PaginationProps) => {
           onClick={handleClick(currentPage - 1)}
         />
         {/* Always render the first page */}
-        <Page
+        <PageItem
           page={1}
           href={getItemHref(1)}
           onClick={handleClick(1)}
@@ -95,7 +95,7 @@ export const Pagination = (props: PaginationProps) => {
         {/* @ts-expect-error gaaha ts, come on*/}
         <Pages>
           {(page) => (
-            <Page
+            <PageItem
               href={getItemHref(page)}
               onClick={handleClick(page)}
               aria-label={getItemAriaLabel(page)}
@@ -210,7 +210,7 @@ interface PageProps extends PageLinkProps {
   selected?: boolean;
 }
 
-const Page = forwardRef<HTMLAnchorElement, PageProps>((props, ref) => {
+const PageItem = forwardRef<HTMLAnchorElement, PageProps>((props, ref) => {
   const { page, selected, ...rest } = props;
 
   return (
@@ -219,8 +219,3 @@ const Page = forwardRef<HTMLAnchorElement, PageProps>((props, ref) => {
     </PageLink>
   );
 });
-
-Pagination.NextPage = NextPage;
-Pagination.PrevPage = PrevPage;
-Pagination.Ellipsis = PaginationEllipsis;
-Pagination.Page = Page;

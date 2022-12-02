@@ -14,7 +14,7 @@ const metadata = {
 };
 export default metadata;
 
-export const Default = (props: any) => {
+export const Default = (props: { pageCount: number }) => {
   const [page, setPage] = useState(1);
 
   return (
