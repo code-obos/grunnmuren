@@ -43,7 +43,7 @@ const StepListBullet = (props: StepListBulletProps) => {
     <span
       // By default we hide this from screen readers to prevent noise, as the steps are implemented using an ordered list
       aria-hidden
-      className="text-green  grid h-10 w-10 flex-none place-content-center justify-items-center rounded-full border-2 bg-white text-sm font-bold  md:h-20 md:w-20 md:text-xl"
+      className="text-green grid h-10 w-10 flex-none place-content-center justify-items-center rounded-full border-2 bg-white text-sm font-bold md:h-20 md:w-20 md:text-xl"
       {...props}
     />
   );
