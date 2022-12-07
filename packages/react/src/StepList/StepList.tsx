@@ -1,3 +1,5 @@
+import { cx } from '@/utils';
+
 interface StepListProps extends React.ComponentPropsWithoutRef<'ol'> {}
 
 const StepList = (props: StepListProps) => {
@@ -19,7 +21,10 @@ export const StepListItem = (props: StepListItemProps) => {
 
   return (
     <li
-      className="relative mb-6 text-sm last:mb-0 last:bg-white md:text-base"
+      className={cx(
+        className,
+        'relative mb-6 text-sm last:mb-0 last:bg-white md:text-base',
+      )}
       {...rest}
     >
       <div className="align-start flex gap-4">
