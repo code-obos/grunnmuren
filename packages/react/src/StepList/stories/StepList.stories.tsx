@@ -11,8 +11,14 @@ export const Numbered = () => {
     <StepList>
       {numbers.map((n) => (
         <StepList.Item key={n} bullet={n + '.'}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-          sollicitudin metus felis, sed tincidunt mi tristique eu.
+          <p>
+            Let us wax poetic about the beauty of the cheeseburger. The flavour
+            gracefully dances across your palate like a majestic figure skater
+            on ice.
+          </p>
+          The cheese melts on the burger and in your mouth, perfectly
+          complementing the medium-rare beef. Any burger lover worth their salt
+          knows the best patty is comprised of ground chuck and brisket.
         </StepList.Item>
       ))}
     </StepList>
@@ -25,8 +31,14 @@ export const Icons = () => {
     <StepList>
       {icons.map((Icon, i) => (
         <StepList.Item key={i} bullet={<Icon />}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-          sollicitudin metus felis, sed tincidunt mi tristique eu.
+          <p>
+            Let us wax poetic about the beauty of the cheeseburger. The flavour
+            gracefully dances across your palate like a majestic figure skater
+            on ice.
+          </p>
+          The cheese melts on the burger and in your mouth, perfectly
+          complementing the medium-rare beef. Any burger lover worth their salt
+          knows the best patty is comprised of ground chuck and brisket.
         </StepList.Item>
       ))}
     </StepList>

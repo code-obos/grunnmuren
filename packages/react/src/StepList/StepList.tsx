@@ -1,9 +1,12 @@
-import { cx } from '@/utils';
-
 interface StepListProps extends React.ComponentPropsWithoutRef<'ol'> {}
 
 const StepList = (props: StepListProps) => {
-  return <ol {...props} />;
+  return (
+    <ol
+      className="z-1 before:bg-gray-light relative my-9 before:absolute before:bottom-5 before:left-5 before:top-5 before:block before:w-[2px] before:content-[''] before:md:left-10"
+      {...props}
+    />
+  );
 };
 
 interface StepListItemProps extends React.ComponentPropsWithoutRef<'li'> {
@@ -16,14 +19,13 @@ export const StepListItem = (props: StepListItemProps) => {
 
   return (
     <li
-      className={cx(
-        className,
-        'group relative flex items-center gap-4 pb-8 text-sm last:pb-0 md:gap-8 md:pb-12 md:text-base',
-      )}
+      className="relative mb-6 text-sm last:mb-0 last:bg-white md:text-base"
       {...rest}
     >
-      <StepListBullet>{bullet}</StepListBullet>
-      {children}
+      <div className="align-start flex gap-4">
+        <StepListBullet>{bullet}</StepListBullet>
+        <div>{children}</div>
+      </div>
     </li>
   );
 };
@@ -36,7 +38,7 @@ const StepListBullet = (props: StepListBulletProps) => {
     <span
       // By default we hide this from screen readers to prevent noise, as the steps are implemented using an ordered list
       aria-hidden
-      className="text-green after:bg-gray-light grid h-10 w-10 flex-none place-content-center justify-items-center rounded-full border-2 text-sm font-bold after:absolute after:left-5 after:top-10 after:bottom-0 after:w-0.5 group-last:after:hidden md:h-20 md:w-20 md:text-xl md:after:left-10 md:after:top-20"
+      className="text-green  grid h-10 w-10 flex-none place-content-center justify-items-center rounded-full border-2 bg-white text-sm font-bold  md:h-20 md:w-20 md:text-xl"
       {...props}
     />
   );
