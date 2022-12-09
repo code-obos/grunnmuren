@@ -1,14 +1,24 @@
 import { Documents, Parking, File, House } from '@obosbbl/grunnmuren-icons';
-import { StepList } from '../..';
+import { StepList, StepListProps } from '../..';
 
-const metadata = { title: 'StepList', parameters: { layout: 'padded' } };
+const metadata = {
+  title: 'StepList',
+  parameters: { layout: 'padded' },
+  argTypes: {
+    align: {
+      defaultValue: 'center',
+      options: ['center', 'top'],
+      control: { type: 'radio' },
+    },
+  },
+};
 export default metadata;
 
-export const Numbered = () => {
+export const Numbered = (props: StepListProps) => {
   const numbers = Array.from({ length: 4 }, (v, k) => k + 1);
 
   return (
-    <StepList>
+    <StepList {...props}>
       {numbers.map((n) => (
         <StepList.Item key={n} bullet={n + '.'}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
@@ -19,10 +29,10 @@ export const Numbered = () => {
   );
 };
 
-export const Icons = () => {
+export const Icons = (props: StepListProps) => {
   const icons = [Documents, Parking, File, House];
   return (
-    <StepList>
+    <StepList {...props}>
       {icons.map((Icon, i) => (
         <StepList.Item key={i} bullet={<Icon />}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
