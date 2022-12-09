@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-react
 
+## 1.7.0
+
+### Minor Changes
+
+- 58a8f70: StepList: support both top and center alignment of the bullets
+- ccd20f6: new Pagination component
+
 ## 1.6.2
 
 ### Patch Changes
