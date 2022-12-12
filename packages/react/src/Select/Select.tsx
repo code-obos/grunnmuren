@@ -16,12 +16,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       <div className={cx('relative', className)}>
         <select
           {...rest}
-          className="focus:border-blue-dark relative w-full appearance-none rounded-lg border border-b-[3px] border-solid border-black bg-white px-4 py-3.5 focus:-top-0.5 focus:-left-0.5 focus:border-[3px] focus:shadow focus:outline-none"
+          className="focus:border-blue-dark relative w-full cursor-pointer appearance-none rounded-lg border border-b-[3px] border-solid border-black bg-white px-4 py-3.5 focus:-top-0.5 focus:-left-0.5 focus:border-[3px] focus:shadow focus:outline-none"
           ref={ref}
         >
           {children}
         </select>
-        <ChevronDown className="absolute top-4 right-4" />
+        <ChevronDown className="pointer-events-none absolute top-4 right-4" />
       </div>
     );
   },
