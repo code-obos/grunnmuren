@@ -31,7 +31,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     <div
       className={cx(
         className,
-        'relative flex items-center rounded-md border-[1px] border-b-[3px] focus-within:-ml-[2px] focus-within:-mt-[2px] focus-within:border-[3px] focus-within:shadow',
+        'relative flex items-center rounded-lg border border-b-[3px] focus-within:-ml-[2px] focus-within:-mt-[2px] focus-within:border-[3px] focus-within:shadow',
         {
           'focus-within:border-blue-dark border-black': !isInvalid,
           'border-red focus-within:border-red': isInvalid,
@@ -48,7 +48,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         aria-invalid={isInvalid}
         // @ts-expect-error figure out how to get ref working with an `as` prop
         ref={ref}
-        className="focus:none placeholder-gray w-full rounded-md border-none px-4 py-3.5 focus:outline-none"
+        className="focus:none placeholder-gray w-full rounded-lg border-none px-4 py-3.5 focus:outline-none"
         size={size}
         type={type}
         {...rest}
