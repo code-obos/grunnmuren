@@ -66,7 +66,7 @@ const StepListBullet = ({ align, ...props }: StepListBulletProps) => {
       // By default we hide this from screen readers to prevent noise, as the steps are implemented using an ordered list
       aria-hidden
       className={cx(
-        'text-green after:bg-gray-light before:bg-gray-light grid h-10 w-10 flex-none place-content-center justify-items-center rounded-full border-2 text-sm font-bold after:absolute after:bottom-0 after:w-0.5 after:translate-x-1/2 group-last:after:hidden md:h-20 md:w-20 md:text-xl  ',
+        'text-green after:bg-gray-light before:bg-gray-light grid h-10 w-10 flex-none place-content-center justify-items-center rounded-full border-2 text-sm font-bold after:absolute after:bottom-0 after:w-0.5 after:translate-x-1/2 group-last:after:hidden md:h-20 md:w-20 md:text-xl',
         {
           'before:absolute before:top-0 before:bottom-1/2 before:w-0.5 before:-translate-y-5 before:translate-x-1/2 after:top-1/2 after:translate-y-5 group-first:before:hidden before:md:-translate-y-10 after:md:translate-y-10':
             align === 'center',
