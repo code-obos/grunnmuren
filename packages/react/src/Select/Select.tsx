@@ -16,7 +16,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       <div className={cx('relative', className)}>
         <select
           {...rest}
-          className="focus:border-blue border-gray-dark w-full appearance-none rounded-lg border-2 border-solid bg-white px-4 py-3 focus:outline-none"
+          className="focus:border-blue-dark relative w-full appearance-none rounded-lg border border-b-[3px] border-solid border-black bg-white px-4 py-3.5 focus:-top-0.5 focus:-left-0.5 focus:border-[3px] focus:shadow focus:outline-none"
           ref={ref}
         >
           {children}
