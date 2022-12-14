@@ -26,9 +26,7 @@ export const SelectPlain = forwardRef<HTMLSelectElement, SelectPlainProps>(
     const isSmall = size === 'small';
 
     return (
-      <div
-        className={cx(className, 'relative', isSmall ? 'text-sm' : undefined)}
-      >
+      <div className={cx(className, 'relative', isSmall && 'text-sm')}>
         <select
           aria-invalid={isInvalid}
           {...rest}

@@ -32,7 +32,6 @@ const options = [
 ];
 
 export const Default = (props: SelectProps) => {
-  console.log(props);
   return (
     <Select {...props} label="Velg område">
       <option value="">Velg område</option>
