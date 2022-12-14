@@ -1,27 +1,91 @@
-import { forwardRef } from 'react';
-import { cx } from '@/utils';
-import { ChevronDown } from '@obosbbl/grunnmuren-icons';
+import { forwardRef, useRef } from 'react';
+import { cx, composeRefs } from '@/utils';
+import { useFallbackId } from '@/hooks';
+import { FormLabel, FormHelperText, FormErrorMessage } from '..';
+import { useFormControlValidity } from '../hooks';
+import { SelectPlain } from './SelectPlain';
 
-export interface SelectProps extends React.ComponentPropsWithoutRef<'select'> {
+export interface SelectProps
+  extends Omit<React.ComponentPropsWithoutRef<'select'>, 'size'> {
+  /**
+   * Collection of <option />-elements
+   */
   children: React.ReactNode;
-  id?: string;
-  className?: string;
+
+  /** Help text for the form control */
+  description?: React.ReactNode;
+
+  /** Disables the built in HTML5 validation. If using custom validation for an entire form, consider setting `noValidate` on the form element instead. @default false */
+  disableValidation?: boolean;
+
+  /** Error message for the form control */
+  error?: string;
+
+  /**  Label for the form control */
+  label: string;
+
+  /**
+   * Changes font-size, padding and gaps
+   * @default medium
+   */
+  size?: 'medium' | 'small';
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   (props, ref) => {
-    const { children, className, ...rest } = props;
+    const {
+      description,
+      error,
+      id: idProp,
+      label,
+      disableValidation = false,
+      ...rest
+    } = props;
+
+    const ownRef = useRef(null);
+
+    const { validity, validationMessage } = useFormControlValidity(
+      ownRef,
+      !disableValidation,
+    );
+
+    const id = useFallbackId(idProp);
+    const helpTextId = id + 'help';
+    const errorMsgId = id + 'err';
+
+    const errorMsg = error || validationMessage;
 
     return (
-      <div className={cx('relative', className)}>
-        <select
-          {...rest}
-          className="focus:border-blue border-gray-dark w-full appearance-none rounded-lg border-2 border-solid bg-white px-4 py-3 focus:outline-none"
-          ref={ref}
+      <div className="grid gap-2">
+        <FormLabel
+          htmlFor={id}
+          isRequired={props.required}
+          isInvalid={!!error || validity === 'invalid'}
         >
-          {children}
-        </select>
-        <ChevronDown className="absolute top-4 right-4" />
+          {label}
+        </FormLabel>
+
+        {description && (
+          <FormHelperText id={helpTextId}>{description}</FormHelperText>
+        )}
+
+        <SelectPlain
+          id={id}
+          ref={composeRefs(ownRef, ref)}
+          {...rest}
+          // for accessibility reasons these cannot be overriden
+          isInvalid={!!error || validity === 'invalid'}
+          aria-describedby={
+            cx({
+              [errorMsgId]: errorMsg,
+              [helpTextId]: description,
+            }) || undefined
+          }
+        />
+
+        {errorMsg && (
+          <FormErrorMessage id={errorMsgId}>{errorMsg}</FormErrorMessage>
+        )}
       </div>
     );
   },
