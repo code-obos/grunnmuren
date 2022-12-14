@@ -116,10 +116,13 @@ const radio = plugin(function ({ addComponents, theme }) {
       borderRadius: '50%',
       border: `2px solid ${theme('colors.gray.dark')}`,
       cursor: 'pointer',
-      marginRight: '0.75rem',
       // use grid to handle the checked:before styles
       display: 'inline-grid',
       placeContent: 'center',
+      // Prevent flex container from altering the size of the radio button
+      flex: '0 0 auto',
+      // magic number that tries to keep the input horizontally centered in relation to the first line of the label text
+      transform: 'translateY(0.095em)',
       '&:checked': {
         borderColor: theme('colors.green.DEFAULT'),
       },

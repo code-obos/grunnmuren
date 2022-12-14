@@ -13,7 +13,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
     useContext(RadioContext);
 
   return (
-    <label className={cx(className, 'cursor-pointer')}>
+    <label className={cx(className, 'flex cursor-pointer gap-2.5')}>
       <input
         className="radio"
         defaultChecked={!isControlled ? rest.value === defaultValue : undefined}

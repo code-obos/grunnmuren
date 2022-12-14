@@ -43,13 +43,11 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     return (
       <div className="grid gap-2">
-        <label
-          className={cx(className, 'inline-flex cursor-pointer items-center')}
-        >
+        <label className={cx(className, 'flex cursor-pointer gap-2.5')}>
           <input
             id={id}
             className={cx(
-              'checkbox checked:bg-green checked:border-green mr-3 grid h-[1.25em] w-[1.25em] flex-none cursor-pointer appearance-none place-content-center rounded border-2 border-solid bg-white text-white focus:outline-none focus:ring-2',
+              'checkbox checked:bg-green checked:border-green grid h-[1.25em] w-[1.25em] flex-none translate-y-[0.1em] cursor-pointer appearance-none place-content-center rounded border-2 border-solid bg-white text-white focus:outline-none focus:ring-2',
               {
                 'border-gray-dark focus:ring-black': !error,
                 'border-red focus:ring-red': !!error,
