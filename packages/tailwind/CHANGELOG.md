@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 0.8.4
+
+### Patch Changes
+
+- e0a71da: Radio: improve alignment of input when label spans multiple lines
+
 ## 0.8.3
 
 ### Patch Changes

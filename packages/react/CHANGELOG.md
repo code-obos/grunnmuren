@@ -1,5 +1,24 @@
 # @obosbbl/grunnmuren-react
 
+## 1.8.0
+
+### Minor Changes
+
+- f44b6ea: Several changes to `<Select>` to make it actually usable:
+
+  - fix padding and focus styles
+  - add support `size` prop
+  - add support for `label`, `description` and `error` props
+
+### Patch Changes
+
+- 97db7a1: TextField: minor adjustments to match Figma
+- 97db7a1: minor adjustments to input error message to match Figma design
+- e0a71da: Checkbox: improve alignment of input when label spans multiple lines
+- e0a71da: Radio: improve alignment of input when label spans multiple lines
+- Updated dependencies [e0a71da]
+  - @obosbbl/grunnmuren-tailwind@0.8.4
+
 ## 1.7.0
 
 ### Minor Changes
