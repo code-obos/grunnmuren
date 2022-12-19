@@ -78,7 +78,7 @@ importers:
       require-from-string: 2.0.2
       rimraf: 3.0.2
       tailwindcss: 3.2.4
-      type-fest: 3.3.0
+      type-fest: 3.4.0
       vite: 2.9.15
       webpack: 5.75.0
     dependencies:
@@ -95,7 +95,7 @@ importers:
       '@storybook/addon-postcss': 2.0.0_webpack@5.75.0
       '@storybook/builder-webpack5': 6.5.14_biqbaboplfbrettd7655fr4n2y
       '@storybook/manager-webpack5': 6.5.14_biqbaboplfbrettd7655fr4n2y
-      '@storybook/react': 6.5.14_og5qmng5ydqfpo255a35blu2wq
+      '@storybook/react': 6.5.14_yuj5orni6snratdd3qdgtgcjbe
       '@types/react': 18.0.26
       '@types/react-dom': 18.0.9
       '@vitejs/plugin-react': 1.3.2
@@ -105,7 +105,7 @@ importers:
       require-from-string: 2.0.2
       rimraf: 3.0.2
       tailwindcss: 3.2.4_postcss@8.4.20
-      type-fest: 3.3.0
+      type-fest: 3.4.0
       vite: 2.9.15
       webpack: 5.75.0
 
@@ -2203,7 +2203,7 @@ packages:
       rimraf: 3.0.2
     dev: true
 
-  /@pmmmwh/react-refresh-webpack-plugin/0.5.6_z7kvve7o35ocine6cyt5jvcfxm:
+  /@pmmmwh/react-refresh-webpack-plugin/0.5.6_ac2skfegfbdzl4vu4isa62mihy:
     resolution: {integrity: sha512-IIWxofIYt/AbMwoeBgj+O2aAXLrlCQVg+A4a2zfpXFNHgP8o8rvi3v+oe5t787Lj+KXlKOh8BAiUp9bhuELXhg==}
     engines: {node: '>= 10.13'}
     peerDependencies:
@@ -2239,7 +2239,7 @@ packages:
       react-refresh: 0.11.0
       schema-utils: 3.1.1
       source-map: 0.7.3
-      type-fest: 3.3.0
+      type-fest: 3.4.0
       webpack: 5.75.0
     dev: true
 
@@ -3135,7 +3135,7 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/react/6.5.14_og5qmng5ydqfpo255a35blu2wq:
+  /@storybook/react/6.5.14_yuj5orni6snratdd3qdgtgcjbe:
     resolution: {integrity: sha512-SL0P5czN3g/IZAYw8ur9I/O8MPZI7Lyd46Pw+B1f7+Ou8eLmhqa8Uc8+3fU6v7ohtUDwsBiTsg3TAfTVEPog4A==}
     engines: {node: '>=10.13.0'}
     hasBin: true
@@ -3166,7 +3166,7 @@ packages:
       '@babel/core': 7.20.5
       '@babel/preset-flow': 7.16.7_@babel+core@7.20.5
       '@babel/preset-react': 7.16.7_@babel+core@7.20.5
-      '@pmmmwh/react-refresh-webpack-plugin': 0.5.6_z7kvve7o35ocine6cyt5jvcfxm
+      '@pmmmwh/react-refresh-webpack-plugin': 0.5.6_ac2skfegfbdzl4vu4isa62mihy
       '@storybook/addons': 6.5.14_biqbaboplfbrettd7655fr4n2y
       '@storybook/builder-webpack5': 6.5.14_biqbaboplfbrettd7655fr4n2y
       '@storybook/client-logger': 6.5.14
@@ -4985,7 +4985,7 @@ packages:
       mississippi: 3.0.0
       mkdirp: 0.5.6
       move-concurrently: 1.0.1
-      promise-inflight: 1.0.1_bluebird@3.7.2
+      promise-inflight: 1.0.1
       rimraf: 2.7.1
       ssri: 6.0.2
       unique-filename: 1.1.1
@@ -10247,17 +10247,6 @@ packages:
         optional: true
     dev: true
 
-  /promise-inflight/1.0.1_bluebird@3.7.2:
-    resolution: {integrity: sha512-6zWPyEOFaQBJYcGMHBKTKJ3u6TBsnMFOIZSa6ce1e/ZrrsOlnHRHbabMjLiBYKp+n44X9eUI6VUPaukCXHuG4g==}
-    peerDependencies:
-      bluebird: '*'
-    peerDependenciesMeta:
-      bluebird:
-        optional: true
-    dependencies:
-      bluebird: 3.7.2
-    dev: true
-
   /promise.allsettled/1.0.5:
     resolution: {integrity: sha512-tVDqeZPoBC0SlzJHzWGZ2NKAguVq2oiYj7gbggbiTvH2itHohijTp7njOUA0aQ/nl+0lr/r6egmhoYu63UZ/pQ==}
     engines: {node: '>= 0.4'}
@@ -12113,8 +12102,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /type-fest/3.3.0:
-    resolution: {integrity: sha512-gezeeOIZyQLGW5uuCeEnXF1aXmtt2afKspXz3YqoOcZ3l/YMJq1pujvgT+cz/Nw1O/7q/kSav5fihJHsC/AOUg==}
+  /type-fest/3.4.0:
+    resolution: {integrity: sha512-PEPg6RHlB9cFwoTMNENNrQFL0cXX04voWr2UPwQBJ3pVs7Mt8Y1oLWdUeMdGEwZE8HFFlujq8gS9enmyiQ8pLg==}
     engines: {node: '>=14.16'}
     dev: true
 
