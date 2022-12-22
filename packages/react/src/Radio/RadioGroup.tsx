@@ -1,8 +1,7 @@
-import { useMemo, useCallback, forwardRef, useRef } from 'react';
+import { useMemo, useCallback, forwardRef } from 'react';
 import { cx } from '@/utils';
 import { useFallbackId } from '@/hooks';
 import { FormHelperText, FormLabel, FormErrorMessage } from '../';
-import { useFormControlValidity } from '../hooks';
 import { RadioContext } from './RadioContext';
 
 export interface RadioGroupProps
@@ -43,7 +42,6 @@ export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
       className,
       defaultValue,
       description,
-      disableValidation = false,
       error,
       id: idProp,
       children,
@@ -71,15 +69,9 @@ export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
         onChange,
         required,
         value,
+        error: Boolean(error),
       }),
-      [defaultValue, isControlled, name, onChange, required, value],
-    );
-
-    const ownRef = useRef(null);
-
-    const { validity, validationMessage } = useFormControlValidity(
-      ownRef,
-      !disableValidation,
+      [defaultValue, isControlled, name, onChange, required, value, error],
     );
 
     const groupId = useFallbackId(idProp);
@@ -87,7 +79,7 @@ export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
     const helpTextId = `${groupId}:help`;
     const errorMsgId = groupId + 'err';
 
-    const errorMsg = error || validationMessage;
+    const errorMsg = error;
 
     return (
       <RadioContext.Provider value={group}>
@@ -98,7 +90,7 @@ export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
               [helpTextId]: description,
             }) || undefined
           }
-          aria-invalid={!!error || validity === 'invalid'}
+          aria-invalid={!!error}
           aria-labelledby={label ? labelId : undefined}
           className={cx(className, 'flex flex-col gap-4')}
           role="radiogroup"
@@ -106,11 +98,7 @@ export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
           {...rest}
         >
           {label && (
-            <FormLabel
-              id={labelId}
-              isRequired={required}
-              isInvalid={!!error || validity === 'invalid'}
-            >
+            <FormLabel id={labelId} isRequired={required} isInvalid={!!error}>
               {label}
             </FormLabel>
           )}

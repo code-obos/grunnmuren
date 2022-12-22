@@ -8,6 +8,7 @@ export const RadioContext = createContext<{
   onChange?(event: React.ChangeEvent<HTMLInputElement>): void;
   required?: boolean;
   value?: string;
+  error?: boolean;
 }>({
   defaultValue: undefined,
   isControlled: false,
@@ -15,4 +16,5 @@ export const RadioContext = createContext<{
   onChange: noop,
   required: false,
   value: undefined,
+  error: false,
 });
