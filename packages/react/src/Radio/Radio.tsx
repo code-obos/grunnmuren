@@ -17,8 +17,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
       <input
         className={cx(
           'radio focus:border-blue-dark',
-          error && 'focus:border-red',
-          error && 'border-red',
+          error && 'focus:border-red border-red',
         )}
         defaultChecked={!isControlled ? rest.value === defaultValue : undefined}
         checked={isControlled ? rest.value === value : undefined}
