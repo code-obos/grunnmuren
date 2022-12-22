@@ -5,7 +5,7 @@ import { RadioContext } from './RadioContext';
 export interface RadioProps extends React.ComponentPropsWithoutRef<'input'> {
   children: React.ReactNode;
 
-  /** Render select as invalid. Sets `aria-invalid` to true */
+  /** Render radio as invalid. Sets `aria-invalid` to true */
   isInvalid?: boolean;
 }
 
