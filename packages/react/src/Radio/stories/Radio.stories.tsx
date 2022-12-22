@@ -67,9 +67,15 @@ export const WithErrorText = () => {
       onChange={setValue}
       error={!value ? 'Feltet er påkrevd' : ''}
     >
-      <Radio value="1">Radio 1</Radio>
-      <Radio value="2">Radio 2</Radio>
-      <Radio value="3">Radio 3</Radio>
+      <Radio value="1" isInvalid={!value ? true : false}>
+        Radio 1
+      </Radio>
+      <Radio value="2" isInvalid={!value ? true : false}>
+        Radio 2
+      </Radio>
+      <Radio value="3" isInvalid={!value ? true : false}>
+        Radio 3
+      </Radio>
     </RadioGroup>
   );
 };

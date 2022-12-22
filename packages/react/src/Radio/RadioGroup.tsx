@@ -1,4 +1,4 @@
-import { useMemo, useId, useCallback, forwardRef, useRef } from 'react';
+import { useMemo, useCallback, forwardRef, useRef } from 'react';
 import { cx } from '@/utils';
 import { useFallbackId } from '@/hooks';
 import { FormHelperText, FormLabel, FormErrorMessage } from '../';
@@ -82,11 +82,10 @@ export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
       !disableValidation,
     );
 
-    const id = useFallbackId(idProp);
-    const groupId = useId();
+    const groupId = useFallbackId(idProp);
     const labelId = `${groupId}:label`;
     const helpTextId = `${groupId}:help`;
-    const errorMsgId = id + 'err';
+    const errorMsgId = groupId + 'err';
 
     const errorMsg = error || validationMessage;
 
@@ -99,6 +98,7 @@ export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
               [helpTextId]: description,
             }) || undefined
           }
+          aria-invalid={!!error || validity === 'invalid'}
           aria-labelledby={label ? labelId : undefined}
           className={cx(className, 'flex flex-col gap-4')}
           role="radiogroup"
