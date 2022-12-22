@@ -12,9 +12,6 @@ export interface RadioGroupProps
   /** Help text for the radio group. */
   description?: React.ReactNode;
 
-  /** Disables the built in HTML5 validation. If using custom validation for an entire form, consider setting `noValidate` on the form element instead. @default false */
-  disableValidation?: boolean;
-
   /** Error message for the form control */
   error?: string;
 
