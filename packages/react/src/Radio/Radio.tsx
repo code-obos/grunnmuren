@@ -18,7 +18,10 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
   return (
     <label className={cx(className, 'flex cursor-pointer gap-2.5')}>
       <input
-        className={cx('radio', isInvalid && 'border-red')}
+        className={cx(
+          'radio focus:border-blue-dark',
+          isInvalid && 'border-red',
+        )}
         defaultChecked={!isControlled ? rest.value === defaultValue : undefined}
         checked={isControlled ? rest.value === value : undefined}
         name={name}
