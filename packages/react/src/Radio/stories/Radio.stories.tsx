@@ -55,3 +55,21 @@ export const WithLongLabelThatBreaksLines = () => {
     </Radio>
   );
 };
+
+export const WithErrorText = () => {
+  const [value, setValue] = useState('');
+
+  return (
+    <RadioGroup
+      name="form-name"
+      description="Click on one of the options below to remove error-message"
+      value={value}
+      onChange={setValue}
+      error={!value ? 'Feltet er påkrevd' : ''}
+    >
+      <Radio value="1">Radio 1</Radio>
+      <Radio value="2">Radio 2</Radio>
+      <Radio value="3">Radio 3</Radio>
+    </RadioGroup>
+  );
+};

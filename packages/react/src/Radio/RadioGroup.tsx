@@ -1,22 +1,32 @@
-import { useMemo, useId, useCallback, forwardRef } from 'react';
+import { useMemo, useCallback, forwardRef } from 'react';
 import { cx } from '@/utils';
+import { useFallbackId } from '@/hooks';
+import { FormHelperText, FormLabel, FormErrorMessage } from '../';
 import { RadioContext } from './RadioContext';
-import { FormHelperText, FormLabel } from '../';
 
 export interface RadioGroupProps
   extends Omit<React.ComponentPropsWithoutRef<'div'>, 'onChange'> {
   /** The value of the radio button to be initially selected. For uncontrolled usage */
   defaultValue?: string;
+
   /** Help text for the radio group. */
   description?: React.ReactNode;
+
+  /** Error message for the form control */
+  error?: string;
+
   /** The `name` attribute for the radio buttons. */
   name: string;
+
   /** The label for the radio group. */
   label?: string;
+
   /** Event handler called when the value changes. */
   onChange?(value: string): void;
+
   /** Whether a value selection is required. */
   required?: boolean;
+
   /** The value of the selected radio button. For controlled usage */
   value?: string;
 }
@@ -29,6 +39,8 @@ export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
       className,
       defaultValue,
       description,
+      error,
+      id: idProp,
       children,
       label,
       name,
@@ -54,18 +66,28 @@ export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
         onChange,
         required,
         value,
+        error: Boolean(error),
       }),
-      [defaultValue, isControlled, name, onChange, required, value],
+      [defaultValue, isControlled, name, onChange, required, value, error],
     );
 
-    const groupId = useId();
+    const groupId = useFallbackId(idProp);
     const labelId = `${groupId}:label`;
-    const helpId = `${groupId}:help`;
+    const helpTextId = `${groupId}:help`;
+    const errorMsgId = groupId + 'err';
+
+    const errorMsg = error;
 
     return (
       <RadioContext.Provider value={group}>
         <div
-          aria-describedby={description ? helpId : undefined}
+          aria-describedby={
+            cx({
+              [errorMsgId]: errorMsg,
+              [helpTextId]: description,
+            }) || undefined
+          }
+          aria-invalid={!!error}
           aria-labelledby={label ? labelId : undefined}
           className={cx(className, 'flex flex-col gap-4')}
           role="radiogroup"
@@ -73,12 +95,20 @@ export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
           {...rest}
         >
           {label && (
-            <FormLabel id={labelId} isRequired={required}>
+            <FormLabel id={labelId} isRequired={required} isInvalid={!!error}>
               {label}
             </FormLabel>
           )}
+
+          {description && (
+            <FormHelperText id={helpTextId}>{description}</FormHelperText>
+          )}
+
           {children}
-          <FormHelperText id={helpId}>{description}</FormHelperText>
+
+          {errorMsg && (
+            <FormErrorMessage id={errorMsgId}>{errorMsg}</FormErrorMessage>
+          )}
         </div>
       </RadioContext.Provider>
     );

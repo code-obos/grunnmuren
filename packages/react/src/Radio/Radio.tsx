@@ -9,13 +9,13 @@ export interface RadioProps extends React.ComponentPropsWithoutRef<'input'> {
 export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
   const { children, className, ...rest } = props;
 
-  const { defaultValue, isControlled, name, onChange, required, value } =
+  const { defaultValue, isControlled, name, onChange, required, value, error } =
     useContext(RadioContext);
 
   return (
     <label className={cx(className, 'flex cursor-pointer gap-2.5')}>
       <input
-        className="radio"
+        className={cx('radio', error && 'border-red')}
         defaultChecked={!isControlled ? rest.value === defaultValue : undefined}
         checked={isControlled ? rest.value === value : undefined}
         name={name}
