@@ -1,5 +1,14 @@
 # @obosbbl/grunnmuren-react
 
+## 1.9.0
+
+### Minor Changes
+
+- 18ffbba: Minor changes to `<RadioGroup>`:
+
+  - moved `description` from under radio-buttons to over radio-buttons
+  - add support for `error` props
+
 ## 1.8.0
 
 ### Minor Changes
