@@ -58,7 +58,7 @@ const CampaignInner = <T extends React.ElementType = 'div'>(
   );
 };
 
-const Campaign = forwardRef(CampaignInner);
+const CampaignBase = forwardRef(CampaignInner);
 
 interface CampaignBodyProps extends React.ComponentPropsWithoutRef<'div'> {}
 
@@ -107,6 +107,9 @@ const CampaignImage = forwardRef<HTMLImageElement, CampaignImageProps>(
   },
 );
 
-Campaign.Body = CampaignBody;
-Campaign.Image = CampaignImage;
+const Campaign = Object.assign({}, CampaignBase, {
+  Body: CampaignBody,
+  Image: CampaignImage,
+});
+
 export { Campaign };
