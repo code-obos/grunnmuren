@@ -9,7 +9,7 @@ const Composition = {
   IconText: 'Icon Text',
 } as const;
 
-type CompositionValue = typeof Composition[keyof typeof Composition];
+type CompositionValue = (typeof Composition)[keyof typeof Composition];
 
 export default {
   title: 'Button',
