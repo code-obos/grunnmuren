@@ -4,6 +4,8 @@ import {
   createContext,
   isValidElement,
   useContext,
+  forwardRef,
+  ForwardedRef,
 } from 'react';
 import { cx } from '@/utils';
 
@@ -25,9 +27,10 @@ interface CampaignProps<T extends React.ElementType> {
   rightAlignBody?: boolean;
 }
 
-const Campaign = <T extends React.ElementType = 'div'>(
+const CampaignInner = <T extends React.ElementType = 'div'>(
   props: CampaignProps<T> &
     Omit<React.ComponentPropsWithoutRef<T>, keyof CampaignProps<T>>,
+  ref: ForwardedRef<HTMLDivElement>,
 ) => {
   const {
     as: Component = 'div',
@@ -45,6 +48,7 @@ const Campaign = <T extends React.ElementType = 'div'>(
         'grid gap-8 md:grid-flow-col md:grid-cols-[50%,50%] md:gap-0',
       )}
       {...rest}
+      ref={ref}
     >
       <CampaignContext.Provider value={rightAlignBody}>
         {Image}
@@ -54,42 +58,58 @@ const Campaign = <T extends React.ElementType = 'div'>(
   );
 };
 
+const CampaignBase = forwardRef(CampaignInner);
+
 interface CampaignBodyProps extends React.ComponentPropsWithoutRef<'div'> {}
 
-const CampaignBody = (props: CampaignBodyProps) => {
-  const { className, ...rest } = props;
-  return <div className={cx(className, 'md:mx-18 self-center')} {...rest} />;
-};
+const CampaignBody = forwardRef<HTMLDivElement, CampaignBodyProps>(
+  (props, ref) => {
+    const { className, ...rest } = props;
+    return (
+      <div
+        className={cx(className, 'md:mx-18 self-center')}
+        ref={ref}
+        {...rest}
+      />
+    );
+  },
+);
 
 interface CampaignImageProps extends React.ComponentPropsWithoutRef<'img'> {}
 
-const CampaignImage = (props: CampaignImageProps) => {
-  const { className: classNameProp, children, ...rest } = props;
+const CampaignImage = forwardRef<HTMLImageElement, CampaignImageProps>(
+  (props, ref) => {
+    const { className: classNameProp, children, ...rest } = props;
 
-  const bodyIsRightAligned = useContext(CampaignContext);
+    const bodyIsRightAligned = useContext(CampaignContext);
 
-  const className = cx(
-    classNameProp,
-    'max-md:rounded-b-3xl w-full',
-    bodyIsRightAligned ? 'md:rounded-r-3xl' : 'md:rounded-l-3xl md:order-1',
-  );
+    const className = cx(
+      classNameProp,
+      'max-md:rounded-b-3xl w-full',
+      bodyIsRightAligned ? 'md:rounded-r-3xl' : 'md:rounded-l-3xl md:order-1',
+    );
 
-  // If the component has children, clone it and apply our classes.
-  // Allows us to use custom image components (as long as they accept a className) such as next/image.
-  if (isValidElement(children)) {
-    const child = Children.only(children);
+    // If the component has children, clone it and apply our classes.
+    // Allows us to use custom image components (as long as they accept a className) such as next/image.
+    if (isValidElement(children)) {
+      const child = Children.only(children);
 
-    return cloneElement(child, {
-      // @ts-expect-error assume className prop is allowed
-      className,
-      ...rest,
-    });
-  }
+      return cloneElement(child, {
+        // @ts-expect-error assume className prop is allowed
+        className,
+        ref,
+        ...rest,
+      });
+    }
 
-  // Otherwise we fallback to rendering an img element ourselves.
-  return <img className={className} {...rest} />;
-};
+    // Otherwise we fallback to rendering an img element ourselves.
+    return <img className={className} ref={ref} {...rest} />;
+  },
+);
 
-Campaign.Body = CampaignBody;
-Campaign.Image = CampaignImage;
+const Campaign = Object.assign({}, CampaignBase, {
+  Body: CampaignBody,
+  Image: CampaignImage,
+});
+
 export { Campaign };

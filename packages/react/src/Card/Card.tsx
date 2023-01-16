@@ -1,4 +1,5 @@
 import { cx } from '@/utils';
+import { forwardRef } from 'react';
 
 export interface CardProps<T extends React.ElementType> {
   /** @default div */
@@ -7,9 +8,10 @@ export interface CardProps<T extends React.ElementType> {
   bgColor?: 'white' | 'gray';
 }
 
-export const Card = <T extends React.ElementType = 'div'>(
+const CardInner = <T extends React.ElementType = 'div'>(
   props: CardProps<T> &
     Omit<React.ComponentPropsWithoutRef<T>, keyof CardProps<T>>,
+  ref: React.ForwardedRef<HTMLDivElement>,
 ) => {
   const {
     as: Component = 'div',
@@ -25,6 +27,9 @@ export const Card = <T extends React.ElementType = 'div'>(
         'bg-gray-light': bgColor === 'gray',
       })}
       {...rest}
+      ref={ref}
     />
   );
 };
+
+export const Card = forwardRef(CardInner);
