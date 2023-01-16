@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.10.0
+
+### Minor Changes
+
+- 4ffe193: Campaign/Card: add possibility to send refs to components
+
 ## 1.9.0
 
 ### Minor Changes
