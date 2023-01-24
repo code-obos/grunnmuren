@@ -56,7 +56,9 @@ export const HeroContent = forwardRef<HTMLDivElement, HeroContentProps>(
       >
         <h1>{heading}</h1>
 
-        {description && <p className="text-lg md:text-xl">{description}</p>}
+        {description && (
+          <p className="text-lg font-semibold md:text-xl">{description}</p>
+        )}
         {children}
       </div>
     );

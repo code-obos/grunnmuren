@@ -2,12 +2,14 @@ import { forwardRef, useContext } from 'react';
 import { cx } from '@/utils';
 import { HeroContext } from './Hero';
 
-interface HeroImageProps extends React.ComponentPropsWithoutRef<'picture'> {
+interface HeroImageProps {
   /* Rendered on small screens in a 6/7 aspect ratio. Recommended size 600 px wide and 700 pixels high. */
   src: string;
   /* Rendered on larger screens in a 4/8 aspect ratio (square for vertical-split). Recommneded width 1280 */
   mdSrc: string;
   alt?: string;
+
+  className: string;
 }
 
 export const HeroImage = forwardRef<HTMLPictureElement, HeroImageProps>(
@@ -16,7 +18,7 @@ export const HeroImage = forwardRef<HTMLPictureElement, HeroImageProps>(
 
     return (
       <picture
-        className={cx('aspect-w-6 aspect-h-7 block', {
+        className={cx(props.className, 'aspect-w-6 aspect-h-7 block', {
           'sm:aspect-w-8 sm:aspect-h-4': contentPosition !== 'vertical-split',
           // calculate a square aspect ratio
           'sm:aspect-w-8 sm:aspect-h-8': contentPosition === 'vertical-split',
