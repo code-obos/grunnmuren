@@ -76,7 +76,7 @@ importers:
       react-dom: 18.2.0
       react-use: 17.4.0
       require-from-string: 2.0.2
-      rimraf: 4.0.7
+      rimraf: 4.1.2
       tailwindcss: 3.2.4
       type-fest: 3.5.2
       vite: 2.9.15
@@ -103,7 +103,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       require-from-string: 2.0.2
-      rimraf: 4.0.7
+      rimraf: 4.1.2
       tailwindcss: 3.2.4_postcss@8.4.21
       type-fest: 3.5.2
       vite: 2.9.15
@@ -10938,8 +10938,8 @@ packages:
       glob: 7.2.0
     dev: true
 
-  /rimraf/4.0.7:
-    resolution: {integrity: sha512-CUEDDrZvc0swDgVdXGiv3FcYYQMpJxjvSGt85Amj6yU+MCVWurrLCeLiJDdJPHCzNJnwuebBEdcO//eP11Xa7w==}
+  /rimraf/4.1.2:
+    resolution: {integrity: sha512-BlIbgFryTbw3Dz6hyoWFhKk+unCcHMSkZGrTFVAx2WmttdBSonsdtRlwiuTbDqTKr+UlXIUqJVS4QT5tUzGENQ==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
