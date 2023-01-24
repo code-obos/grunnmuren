@@ -9,7 +9,7 @@ interface HeroImageProps {
   mdSrc: string;
   alt?: string;
 
-  className: string;
+  className?: string;
 }
 
 export const HeroImage = forwardRef<HTMLPictureElement, HeroImageProps>(
