@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-react
 
+## 1.11.0
+
+### Minor Changes
+
+- cbcc712: Hero: add ref support to Hero components
+  HeroContent: semibold description
+
 ## 1.10.0
 
 ### Minor Changes
