@@ -1,4 +1,4 @@
-import { createContext, useMemo } from 'react';
+import { createContext, forwardRef, useMemo } from 'react';
 import { cx } from '@/utils';
 import { ButtonColorContext } from '../';
 import { usesGridAreaPlacement } from './utils';
@@ -21,7 +21,7 @@ export type HeroContentPosition =
   | 'center'
   | 'vertical-split';
 
-export interface HeroProps {
+export interface HeroProps extends React.ComponentPropsWithoutRef<'div'> {
   /** @default white */
   bgColor?: HeroColor;
   className?: string;
@@ -34,7 +34,7 @@ export interface HeroProps {
   image?: React.ReactNode;
 }
 
-export const Hero = (props: HeroProps) => {
+export const Hero = forwardRef<HTMLDivElement, HeroProps>((props, ref) => {
   const {
     bgColor = 'white',
     children,
@@ -78,6 +78,7 @@ export const Hero = (props: HeroProps) => {
               : undefined
           }
           {...rest}
+          ref={ref}
         >
           {image}
           {children}
@@ -85,4 +86,4 @@ export const Hero = (props: HeroProps) => {
       </HeroContext.Provider>
     </ButtonColorContext.Provider>
   );
-};
+});

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { forwardRef, useContext } from 'react';
 import { cx } from '@/utils';
 import { HeroContext } from './Hero';
 
@@ -8,33 +8,38 @@ interface HeroImageProps {
   /* Rendered on larger screens in a 4/8 aspect ratio (square for vertical-split). Recommneded width 1280 */
   mdSrc: string;
   alt?: string;
+
+  className?: string;
 }
 
-export const HeroImage = (props: HeroImageProps) => {
-  const { contentPosition } = useContext(HeroContext);
+export const HeroImage = forwardRef<HTMLPictureElement, HeroImageProps>(
+  (props, ref) => {
+    const { contentPosition } = useContext(HeroContext);
 
-  return (
-    <picture
-      className={cx('aspect-w-6 aspect-h-7 block', {
-        'sm:aspect-w-8 sm:aspect-h-4': contentPosition !== 'vertical-split',
-        // calculate a square aspect ratio
-        'sm:aspect-w-8 sm:aspect-h-8': contentPosition === 'vertical-split',
-      })}
-      style={
-        contentPosition !== 'vertical-split' &&
-        contentPosition !== 'below-center' &&
-        contentPosition !== 'below-left'
-          ? { gridArea: 'hero' }
-          : undefined
-      }
-    >
-      <source media="(min-width: 768px)" srcSet={props.mdSrc} />
-      <img
-        className="object-cover"
-        decoding="async"
-        src={props.src}
-        alt={props.alt}
-      />
-    </picture>
-  );
-};
+    return (
+      <picture
+        className={cx(props.className, 'aspect-w-6 aspect-h-7 block', {
+          'sm:aspect-w-8 sm:aspect-h-4': contentPosition !== 'vertical-split',
+          // calculate a square aspect ratio
+          'sm:aspect-w-8 sm:aspect-h-8': contentPosition === 'vertical-split',
+        })}
+        style={
+          contentPosition !== 'vertical-split' &&
+          contentPosition !== 'below-center' &&
+          contentPosition !== 'below-left'
+            ? { gridArea: 'hero' }
+            : undefined
+        }
+        ref={ref}
+      >
+        <source media="(min-width: 768px)" srcSet={props.mdSrc} />
+        <img
+          className="object-cover"
+          decoding="async"
+          src={props.src}
+          alt={props.alt}
+        />
+      </picture>
+    );
+  },
+);
