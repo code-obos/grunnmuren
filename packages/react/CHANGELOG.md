@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.11.1
+
+### Patch Changes
+
+- 90445cf: Snackbar: update design
+
 ## 1.11.0
 
 ### Minor Changes
