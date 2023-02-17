@@ -78,7 +78,7 @@ importers:
       require-from-string: 2.0.2
       rimraf: 4.1.2
       tailwindcss: 3.2.4
-      type-fest: 3.5.6
+      type-fest: 3.6.0
       vite: 2.9.15
       webpack: 5.75.0
     dependencies:
@@ -95,7 +95,7 @@ importers:
       '@storybook/addon-postcss': 2.0.0_webpack@5.75.0
       '@storybook/builder-webpack5': 6.5.16_biqbaboplfbrettd7655fr4n2y
       '@storybook/manager-webpack5': 6.5.16_biqbaboplfbrettd7655fr4n2y
-      '@storybook/react': 6.5.16_apcv4d42zncvnemxk53zj6z7rq
+      '@storybook/react': 6.5.16_ggh6f43qo6rxdq3umuw5gojubi
       '@types/react': 18.0.27
       '@types/react-dom': 18.0.10
       '@vitejs/plugin-react': 1.3.2
@@ -105,7 +105,7 @@ importers:
       require-from-string: 2.0.2
       rimraf: 4.1.2
       tailwindcss: 3.2.4_postcss@8.4.21
-      type-fest: 3.5.6
+      type-fest: 3.6.0
       vite: 2.9.15
       webpack: 5.75.0
 
@@ -2206,7 +2206,7 @@ packages:
       rimraf: 3.0.2
     dev: true
 
-  /@pmmmwh/react-refresh-webpack-plugin/0.5.6_zf7ludxymxevtzi3kjyevhdjdi:
+  /@pmmmwh/react-refresh-webpack-plugin/0.5.6_qlmtukss3ox2xtq2xziklhlcgi:
     resolution: {integrity: sha512-IIWxofIYt/AbMwoeBgj+O2aAXLrlCQVg+A4a2zfpXFNHgP8o8rvi3v+oe5t787Lj+KXlKOh8BAiUp9bhuELXhg==}
     engines: {node: '>= 10.13'}
     peerDependencies:
@@ -2242,7 +2242,7 @@ packages:
       react-refresh: 0.11.0
       schema-utils: 3.1.1
       source-map: 0.7.3
-      type-fest: 3.5.6
+      type-fest: 3.6.0
       webpack: 5.75.0
     dev: true
 
@@ -3138,7 +3138,7 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/react/6.5.16_apcv4d42zncvnemxk53zj6z7rq:
+  /@storybook/react/6.5.16_ggh6f43qo6rxdq3umuw5gojubi:
     resolution: {integrity: sha512-cBtNlOzf/MySpNLBK22lJ8wFU22HnfTB2xJyBk7W7Zi71Lm7Uxkhv1Pz8HdiQndJ0SlsAAQOWjQYsSZsGkZIaA==}
     engines: {node: '>=10.13.0'}
     hasBin: true
@@ -3169,7 +3169,7 @@ packages:
       '@babel/core': 7.20.12
       '@babel/preset-flow': 7.16.7_@babel+core@7.20.12
       '@babel/preset-react': 7.16.7_@babel+core@7.20.12
-      '@pmmmwh/react-refresh-webpack-plugin': 0.5.6_zf7ludxymxevtzi3kjyevhdjdi
+      '@pmmmwh/react-refresh-webpack-plugin': 0.5.6_qlmtukss3ox2xtq2xziklhlcgi
       '@storybook/addons': 6.5.16_biqbaboplfbrettd7655fr4n2y
       '@storybook/builder-webpack5': 6.5.16_biqbaboplfbrettd7655fr4n2y
       '@storybook/client-logger': 6.5.16
@@ -12177,8 +12177,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /type-fest/3.5.6:
-    resolution: {integrity: sha512-6bd2bflx8ed7c99tc6zSTIzHr1/QG29bQoK4Qh8MYGnlPbODUzGxklLShjwc/xWQQFHgIci+y5Arv7Rbb0LjXw==}
+  /type-fest/3.6.0:
+    resolution: {integrity: sha512-RqTRtKTzvPpNdDUp1dVkKQRunlPITk4mXeqFlAZoJsS+fLRn8AdPK0TcQDumGayhU7fjlBfiBjsq3pe3rIfXZQ==}
     engines: {node: '>=14.16'}
     dev: true
 
