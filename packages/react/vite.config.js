@@ -20,6 +20,7 @@ export default defineConfig({
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       external: [
+        '@obosbbl/grunnmuren-icons',
         '@seznam/compose-react-refs',
         'clsx',
         'react',
