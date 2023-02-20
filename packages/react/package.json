@@ -9,7 +9,7 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/grunnmuren.es.js"
+      "import": "./dist/grunnmuren.mjs"
     }
   },
   "files": [
