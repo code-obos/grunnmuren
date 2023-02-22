@@ -14,10 +14,10 @@ You need to setup and configure [`@obosbbl/grunnmuren-tailwind`](../tailwind/) a
 
 Install packages in the root folder
 
-````
+```
 cd ../..
 pnpm install
-````
+```
 
 Build the icons
 
@@ -27,7 +27,7 @@ pnpm run build
 ```
 
 Finally, start up development server from this folder
+
 ```
 pnpm dev
 ```
-
