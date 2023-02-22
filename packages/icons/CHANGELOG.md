@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-icons
 
+## 0.6.0
+
+### Minor Changes
+
+- d927d2f: update Vite to v4 (used for building and bundling Grunnmuren)
+
 ## 0.5.1
 
 ### Patch Changes

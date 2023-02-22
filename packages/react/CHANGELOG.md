@@ -1,5 +1,18 @@
 # @obosbbl/grunnmuren-react
 
+## 1.12.0
+
+### Minor Changes
+
+- e815527: add `'use client';` directive for better RSC (Next 13 app directory) interop.
+- d927d2f: update Vite to v4 (used for building and bundling Grunnmuren)
+
+### Patch Changes
+
+- a2750e9: fix: Grunnmuren icons were erroneously inlined in the build. Now they are properly externalized. Reduces the bundle size.
+- Updated dependencies [d927d2f]
+  - @obosbbl/grunnmuren-icons@0.6.0
+
 ## 1.11.1
 
 ### Patch Changes
