@@ -45,10 +45,10 @@ const CampaignInner = <T extends React.ElementType = 'div'>(
     <Component
       className={cx(
         className,
-        'grid gap-8 sm:grid-flow-col sm:gap-0 sm:p-0 lg:grid-cols-[50%,50%] lg:p-4 ',
+        'container grid gap-8 sm:grid-flow-col sm:gap-0 sm:p-0 lg:grid-cols-[50%,50%] lg:p-4',
         rightAlignBody
-          ? 'pr-4 sm:grid-cols-[40%,auto]'
-          : 'pl-4 sm:grid-cols-[auto,40%]',
+          ? 'pl-0 sm:grid-cols-[40%,auto]'
+          : 'pr-0 sm:grid-cols-[auto,40%]',
       )}
       {...rest}
       ref={ref}
@@ -94,7 +94,7 @@ const CampaignImage = forwardRef<HTMLImageElement, CampaignImageProps>(
 
     const className = cx(
       classNameProp,
-      'sm:h-[420px] object-cover lg:h-unset',
+      'sm:h-[420px] object-cover lg:h-auto',
       bodyIsRightAligned ? 'rounded-r-3xl' : 'rounded-l-3xl sm:order-1',
     );
 
