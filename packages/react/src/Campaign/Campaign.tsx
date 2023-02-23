@@ -45,15 +45,18 @@ const CampaignInner = <T extends React.ElementType = 'div'>(
     <Component
       className={cx(
         className,
-        'grid gap-8 md:grid-flow-col md:grid-cols-[50%,50%] md:gap-0',
+        'grid gap-8 sm:grid-flow-col sm:gap-0 sm:p-0 lg:grid-cols-[50%,50%] lg:p-4 ',
+        rightAlignBody
+          ? 'pr-4 sm:grid-cols-[40%,auto]'
+          : 'pl-4 sm:grid-cols-[auto,40%]',
       )}
       {...rest}
       ref={ref}
     >
       <CampaignContext.Provider value={rightAlignBody}>
         {Image}
+        {Body}
       </CampaignContext.Provider>
-      {Body}
     </Component>
   );
 };
@@ -65,9 +68,15 @@ interface CampaignBodyProps extends React.ComponentPropsWithoutRef<'div'> {}
 const CampaignBody = forwardRef<HTMLDivElement, CampaignBodyProps>(
   (props, ref) => {
     const { className, ...rest } = props;
+    const bodyIsRightAligned = useContext(CampaignContext);
+
     return (
       <div
-        className={cx(className, 'md:mx-18 self-center')}
+        className={cx(
+          className,
+          'lg:mx-18 self-center sm:mx-8',
+          bodyIsRightAligned ? 'ml-4' : 'mr-4',
+        )}
         ref={ref}
         {...rest}
       />
@@ -85,8 +94,8 @@ const CampaignImage = forwardRef<HTMLImageElement, CampaignImageProps>(
 
     const className = cx(
       classNameProp,
-      'max-md:rounded-b-3xl w-full',
-      bodyIsRightAligned ? 'md:rounded-r-3xl' : 'md:rounded-l-3xl md:order-1',
+      'sm:h-[420px] object-cover lg:h-unset',
+      bodyIsRightAligned ? 'rounded-r-3xl' : 'rounded-l-3xl sm:order-1',
     );
 
     // If the component has children, clone it and apply our classes.

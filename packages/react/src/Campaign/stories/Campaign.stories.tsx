@@ -13,7 +13,7 @@ const images = [
 
 export const Default = () => {
   return (
-    <div className="container flex flex-col gap-16">
+    <div className="container flex flex-col gap-16 px-0">
       {images.map((imageSrc, index) => (
         <Campaign
           rightAlignBody={index % 2 === 0}
@@ -32,6 +32,22 @@ export const Default = () => {
           image={<Campaign.Image src={imageSrc} alt="" />}
         />
       ))}
+      <Campaign
+        rightAlignBody={false}
+        key={'quote'}
+        body={
+          <Campaign.Body>
+            <h2 className="mb-6">
+              Regnestykket til Elise – sånn ser det ut med OBOS Deleie
+            </h2>
+            <p className="mb-8">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+              sit amet porta metus, quis dictum quam.
+            </p>
+          </Campaign.Body>
+        }
+        image={<Campaign.Image src={images[0]} alt="" />}
+      />
     </div>
   );
 };
