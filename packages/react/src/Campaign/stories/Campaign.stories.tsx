@@ -13,7 +13,7 @@ const images = [
 
 export const Default = () => {
   return (
-    <div className="container flex flex-col gap-16 px-0">
+    <div className="flex flex-col gap-16">
       {images.map((imageSrc, index) => (
         <Campaign
           rightAlignBody={index % 2 === 0}
