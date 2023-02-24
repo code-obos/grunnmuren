@@ -10,10 +10,10 @@ export default {
 export function Icons() {
   return (
     <div className="grid grid-cols-[repeat(auto-fill,_100px)] content-center justify-center gap-6">
-      {Object.values(icons).map((Icon) => (
-        <div key={Icon.name}>
+      {Object.entries(icons).map(([iconName, Icon]) => (
+        <div key={iconName}>
           <Icon className="mx-auto mb-2" />
-          <span className="block text-center text-sm">{Icon.name}</span>
+          <span className="block text-center text-sm">{iconName}</span>
         </div>
       ))}
     </div>
