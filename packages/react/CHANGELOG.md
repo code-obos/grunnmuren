@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.12.1
+
+### Patch Changes
+
+- bacaf34: Fix react-use exports
+
 ## 1.12.0
 
 ### Minor Changes
