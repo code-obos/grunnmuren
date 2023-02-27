@@ -1,4 +1,4 @@
-export { useMedia } from 'react-use';
+export { default as useMedia } from 'react-use/lib/useMedia';
 
 export * from './usePrefersReducedMotion';
 export * from './useBlockBackgroundColor';
