@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.12.2
+
+### Patch Changes
+
+- 30835a8: fix issue with using package in webpack due to dependency not being proper esm
+
 ## 1.12.1
 
 ### Patch Changes
