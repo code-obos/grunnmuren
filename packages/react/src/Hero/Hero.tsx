@@ -67,7 +67,7 @@ export const Hero = forwardRef<HTMLDivElement, HeroProps>((props, ref) => {
           className={cx(
             className,
             // disable padding on small screens so the hero image is flush with the screen edges
-            'container max-md:px-0 md:grid',
+            'container px-0 md:grid lg:px-4',
             {
               'md:grid-cols-[50%,50%]': contentPosition === 'vertical-split',
             },
