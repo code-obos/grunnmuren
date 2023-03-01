@@ -31,3 +31,15 @@ Finally, start up development server from this folder
 ```
 pnpm dev
 ```
+
+### Changeset
+
+All updates should be marked with a changeset.
+
+In the root folder, run
+
+```
+pnpm changeset
+```
+
+an followed the steps.
