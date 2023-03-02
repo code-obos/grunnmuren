@@ -1,5 +1,6 @@
 import { forwardRef, useRef } from 'react';
-import { cx, composeRefs } from '@/utils';
+import useMergedRef from '@react-hook/merged-ref';
+import { cx } from '@/utils';
 import { useFallbackId } from '@/hooks';
 import { Input, FormLabel, FormHelperText, FormErrorMessage } from '..';
 import { useFormControlValidity } from '../hooks';
@@ -32,6 +33,8 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     const ownRef = useRef(null);
 
+    const multiRef = useMergedRef(ownRef, ref);
+
     const { validity, validationMessage } = useFormControlValidity(
       ownRef,
       !disableValidation,
@@ -60,7 +63,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         <Input
           as="textarea"
           // @ts-expect-error fix this later
-          ref={composeRefs(ownRef, ref)}
+          ref={multiRef}
           id={id}
           {...rest}
           // for accessibility reasons these cannot be overriden
