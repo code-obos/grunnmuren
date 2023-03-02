@@ -51,7 +51,7 @@ export default defineConfig({
       // make sure to externalize deps that shouldn't be bundled
       external: [
         '@obosbbl/grunnmuren-icons',
-        '@seznam/compose-react-refs',
+        '@react-hook/merged-ref',
         'clsx',
         'react',
         'react-dom',

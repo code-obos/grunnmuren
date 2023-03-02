@@ -1,5 +1,6 @@
 import { forwardRef, useRef } from 'react';
-import { cx, composeRefs } from '@/utils';
+import useMergedRef from '@react-hook/merged-ref';
+import { cx } from '@/utils';
 import { useFallbackId } from '@/hooks';
 import { FormLabel, FormHelperText, FormErrorMessage } from '..';
 import { useFormControlValidity } from '../hooks';
@@ -43,6 +44,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     } = props;
 
     const ownRef = useRef(null);
+    const multiRef = useMergedRef(ownRef, ref);
 
     const { validity, validationMessage } = useFormControlValidity(
       ownRef,
@@ -71,7 +73,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
         <SelectPlain
           id={id}
-          ref={composeRefs(ownRef, ref)}
+          ref={multiRef}
           {...rest}
           // for accessibility reasons these cannot be overriden
           isInvalid={!!error || validity === 'invalid'}
