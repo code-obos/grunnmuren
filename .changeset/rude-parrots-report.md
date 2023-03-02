@@ -1,5 +1,5 @@
 ---
-'@obosbbl/grunnmuren-react': minor
+'@obosbbl/grunnmuren-react': patch
 ---
 
 - Place content of banner in center.
