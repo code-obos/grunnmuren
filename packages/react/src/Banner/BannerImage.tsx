@@ -11,7 +11,7 @@ export const BannerImage = (props: BannerImageProps) => {
     <img
       loading="lazy"
       decoding="async"
-      className="mx-auto w-20 flex-none self-start md:m-0 md:w-32"
+      className="w-20 flex-none self-center md:w-32 md:self-start"
       {...props}
     />
   );
