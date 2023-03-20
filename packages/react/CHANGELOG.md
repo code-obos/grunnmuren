@@ -1,5 +1,14 @@
 # @obosbbl/grunnmuren-react
 
+## 1.12.3
+
+### Patch Changes
+
+- 3eaf9bc: Use full width on hero on iPad.
+- c8c1456: - Place content of banner in center.
+  - Make icon and heading smaller.
+  - Place icon in center on mobile.
+
 ## 1.12.2
 
 ### Patch Changes
