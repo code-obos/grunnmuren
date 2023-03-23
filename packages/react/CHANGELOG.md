@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.12.4
+
+### Patch Changes
+
+- 13f0663: Fix banner text getting cut off on smaller screens.
+
 ## 1.12.3
 
 ### Patch Changes
