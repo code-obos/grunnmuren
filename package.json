@@ -6,6 +6,7 @@
     "url": "https://github.com/code-obos/grunnmuren"
   },
   "scripts": {
+    "dev": "pnpm --filter './packages/react' dev",
     "build": "pnpm --filter './packages/*' build",
     "ci:publish": "pnpm build && changeset publish",
     "ci:version": "changeset version",
