@@ -464,23 +464,39 @@ module.exports = (userOptions) => {
                 fontWeight: 400,
               },
               h1: {
-                fontWeight: 'bold',
+                fontWeight: theme('fontWeight.bold'),
+                fontSize: theme('fontSize.3xl'),
+                '@media (min-width: theme("screens.md"))': {
+                  fontSize: theme('fontSize.5xl'),
+                },
               },
               h2: {
-                fontWeight: 'bold',
+                fontWeight: theme('fontWeight.bold'),
+                fontSize: theme('fontSize.2xl'),
+                '@media (min-width: theme("screens.md"))': {
+                  fontSize: theme('fontSize.4xl'),
+                },
               },
               h3: {
-                fontWeight: 'bold',
+                fontWeight: theme('fontWeight.bold'),
+                fontSize: theme('fontSize.xl'),
+                '@media (min-width: theme("screens.md"))': {
+                  fontSize: theme('fontSize.2xl'),
+                },
               },
               h4: {
-                fontWeight: 'bold',
+                fontWeight: theme('fontWeight.bold'),
+                fontSize: theme('fontSize.lg'),
+                '@media (min-width: theme("screens.md"))': {
+                  fontSize: theme('fontSize.xl'),
+                },
               },
               li: {
                 marginTop: '1.5em',
                 marginBottom: '1.5em',
               },
               blockquote: {
-                fontWeight: '700',
+                fontWeight: theme('fontWeight.bold'),
                 fontStyle: 'normal',
               },
               'blockquote p:first-of-type::before': {
@@ -490,7 +506,7 @@ module.exports = (userOptions) => {
                 content: '"»"',
               },
               '[class~="lead"]': {
-                fontWeight: 500,
+                fontWeight: theme('fontWeight.medium'),
               },
             },
           },
