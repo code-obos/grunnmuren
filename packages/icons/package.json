@@ -33,7 +33,7 @@
     "@types/react": "18.0.28",
     "@vitejs/plugin-react": "3.1.0",
     "fs-extra": "11.1.0",
-    "node-fetch": "3.3.0",
+    "node-fetch": "3.3.1",
     "ora": "6.1.2",
     "picocolors": "1.0.0",
     "prompts": "2.4.2",
