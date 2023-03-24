@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 0.8.5
+
+### Patch Changes
+
+- c86d0d7: typography(prose): headings follow the styleguide
+
 ## 0.8.4
 
 ### Patch Changes
