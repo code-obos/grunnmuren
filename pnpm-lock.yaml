@@ -90,8 +90,8 @@ importers:
         specifier: 1.2.1
         version: 1.2.1
       react-collapsed:
-        specifier: 3.5.0
-        version: 3.5.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: 3.8.0
+        version: 3.8.0(react-dom@18.2.0)(react@18.2.0)
       react-use:
         specifier: 17.4.0
         version: 17.4.0(react-dom@18.2.0)(react@18.2.0)
@@ -10591,11 +10591,11 @@ packages:
       webpack: 4.46.0
     dev: true
 
-  /react-collapsed@3.5.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-MtwlFoVfm1LdS1FFFNBQhMESSly0+ZaIouZHVbpVytM9gflLwUfPLbcqEuhzilT8upwzg45ect1zWC4Dbd5xpw==}
+  /react-collapsed@3.8.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-ixCBxnEMqu+m2SHardAUN7DF9f4FQ2uF09DFMa4txyIs+W3UBhX6Y03a1dNF/N6JOLw968JhcmvqXEo/qVR7tw==}
     peerDependencies:
-      react: '>=16.8 || 18'
-      react-dom: '>=16.8 || 18'
+      react: ^18 || 18
+      react-dom: ^18 || 18
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
