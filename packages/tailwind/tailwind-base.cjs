@@ -406,7 +406,9 @@ module.exports = (userOptions) => {
             light: '#E6E6E6',
           },
           blue: {
-            // light blue
+            // Pale sky
+            pale: '#EBF5F9',
+            // Haze sky
             lightest: '#DEEFF5',
             // OBOS Sky
             light: '#BEDFEC',
@@ -416,7 +418,9 @@ module.exports = (userOptions) => {
             dark: '#002169',
           },
           green: {
-            // light green
+            // Pale mint
+            pale: '#F0F9F6',
+            // Haze mint
             lightest: '#E6F5F0',
             // OBOS Mint
             light: '#CDECE2',
