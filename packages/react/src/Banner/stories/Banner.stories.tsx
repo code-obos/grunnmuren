@@ -31,6 +31,20 @@ export const Default = () => {
           Dersom du lurer på noe er det bare å ta kontakt med oss.
         </Banner>
       ))}
+
+      <Banner
+        bgColor={bgcColors[0]}
+        heading="Kontakt oss"
+        image={<BannerImage {...img} bannerFull />}
+        bannerFull
+      >
+        Dersom du lurer på noe er det bare å ta kontakt med oss. Dersom du lurer
+        på noe er det bare å ta kontakt med oss. Dersom du lurer på noe er det
+        bare å ta kontakt med oss. Dersom du lurer på noe er det bare å ta
+        kontakt med oss. Dersom du lurer på noe er det bare å ta kontakt med
+        oss. Dersom du lurer på noe er det bare å ta kontakt med oss. Dersom du
+        lurer på noe er det bare å ta kontakt med oss.
+      </Banner>
     </div>
   );
 };
