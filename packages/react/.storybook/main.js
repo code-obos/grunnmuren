@@ -1,4 +1,5 @@
 const path = require('path');
+const { mergeConfig } = require('vite');
 
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
@@ -6,29 +7,34 @@ module.exports = {
     '@storybook/addon-docs',
     '@storybook/addon-controls',
     {
-      name: '@storybook/addon-postcss',
+      name: '@storybook/addon-styling',
       options: {
-        postcssLoaderOptions: {
-          // Allows us to use PostCSS 8+
+        postCss: {
           implementation: require('postcss'),
         },
       },
     },
   ],
-  framework: '@storybook/react',
+  framework: {
+    name: '@storybook/react-vite',
+    options: {},
+  },
   core: {
-    builder: 'webpack5',
+    builder: '@storybook/builder-vite',
     disableTelemetry: true,
   },
-  features: {
-    storyStoreV7: true,
-  },
   staticDirs: ['../public'],
-  webpackFinal: async (config) => {
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      '@': path.resolve(__dirname, '../src/'),
-    };
-    return config;
+  async viteFinal(config) {
+    // Merge custom configuration into the default config
+    return mergeConfig(config, {
+      resolve: {
+        alias: {
+          '@': path.resolve(__dirname, '../src/'),
+        },
+      },
+    });
+  },
+  docs: {
+    autodocs: true,
   },
 };
