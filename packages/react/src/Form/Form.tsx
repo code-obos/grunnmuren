@@ -12,7 +12,7 @@ export const Form = (props: FormProps) => {
     <form
       className={cx(
         className,
-        'border-blue-dark block overflow-hidden rounded-t-3xl rounded-b-lg border-2',
+        'border-blue-dark block overflow-hidden rounded-b-lg rounded-t-3xl border-2',
       )}
       {...rest}
     >

@@ -8,7 +8,7 @@ export default {
 export const Default = () => {
   return (
     <>
-      <div className="my-8 mx-4 flex gap-4">
+      <div className="mx-4 my-8 flex gap-4">
         <div className="flex flex-col gap-4">
           <Chip color="blue-light" variant="outline" icon={<InfoCircle />}>
             Frist for forkjøp 00. måned

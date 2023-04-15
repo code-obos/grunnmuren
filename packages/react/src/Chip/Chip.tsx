@@ -47,7 +47,7 @@ export const Chip = (props: ChipProps) => {
     >
       {icon && <div className={cx('px-3 py-2', iconColor)}>{icon}</div>}
       <div
-        className={cx('flex-1 py-2 px-4', {
+        className={cx('flex-1 px-4 py-2', {
           'bg-white': variant === 'outline',
         })}
       >

@@ -22,7 +22,7 @@ export const Banner = (props: BannerProps) => {
   const bgColor = useBlockBackgroundColor(bgColorProp);
 
   return (
-    <article className={cx(className, bgColor, 'py-8 px-4 md:py-14')} {...rest}>
+    <article className={cx(className, bgColor, 'px-4 py-8 md:py-14')} {...rest}>
       <div className="container flex flex-col justify-center gap-4 md:flex-row md:gap-12">
         {image}
         <div className="max-w-prose">
