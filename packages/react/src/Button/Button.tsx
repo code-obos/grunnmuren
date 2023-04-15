@@ -111,7 +111,7 @@ const Loader = (props: { children: React.ReactNode }) => {
       {deeplyWrapStrings(props.children)}
       <span
         // Notice the important modifier to visible here: we want it to escape the visibility hidden applied to the buttons children
-        className="!visible absolute top-1 bottom-1 left-1 right-1 grid place-items-center overflow-hidden bg-inherit"
+        className="!visible absolute bottom-1 left-1 right-1 top-1 grid place-items-center overflow-hidden bg-inherit"
         aria-hidden
       >
         <LoadingSpinner className="animate-spin" />

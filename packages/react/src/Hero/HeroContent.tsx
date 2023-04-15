@@ -22,7 +22,7 @@ export const HeroContent = forwardRef<HTMLDivElement, HeroContentProps>(
       <div
         className={cx(
           className,
-          'relative grid grid-flow-row grid-cols-[minmax(auto,_37rem)] content-center gap-6 rounded-3xl py-10 px-6 text-center max-md:mx-4 md:p-12',
+          'relative grid grid-flow-row grid-cols-[minmax(auto,_37rem)] content-center gap-6 rounded-3xl px-6 py-10 text-center max-md:mx-4 md:p-12',
           {
             // On mobile we use negative margin on the content to pull the content up into the image
             'max-md:-mt-18': hasImage,
@@ -32,17 +32,17 @@ export const HeroContent = forwardRef<HTMLDivElement, HeroContentProps>(
             'bg-white': bgColor === 'white',
             // vertical split
             // vertically center the content, remove the border radius on the edge, add some negative margin to pull the image beneath the hero content, left align the content
-            'md:z-10 md:-order-1 md:mt-0 md:-mr-5 md:justify-center md:rounded-l-none md:text-left':
+            'md:z-10 md:-order-1 md:-mr-5 md:mt-0 md:justify-center md:rounded-l-none md:text-left':
               contentPosition === 'vertical-split',
             // below center/content header
             'justify-center md:mx-auto md:w-4/5':
               contentPosition === 'below-center',
             'md:-mt-18': hasImage && contentPosition === 'below-center',
             // Below left style
-            'md:ml-[8%] md:-mt-32 md:max-w-[58%] md:text-left':
+            'md:-mt-32 md:ml-[8%] md:max-w-[58%] md:text-left':
               contentPosition === 'below-left',
             // styles for when the contain is fully contained within the image
-            'md:my-9 md:mx-32 md:w-2/5': usesGridArea,
+            'md:mx-32 md:my-9 md:w-2/5': usesGridArea,
             'self-end justify-self-start': contentPosition === 'bottom-left',
             'self-start justify-self-start': contentPosition === 'top-left',
             'self-start justify-self-end': contentPosition === 'top-right',

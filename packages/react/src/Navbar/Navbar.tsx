@@ -25,7 +25,7 @@ export const Navbar = (props: NavbarProps) => {
         <div
           className={cx(
             className,
-            'bg-blue relative pt-6 pb-12 text-white before:absolute before:bottom-0 before:left-0 before:right-0 before:h-6 before:rounded-t-3xl before:bg-white md:pt-8 md:pb-14',
+            'bg-blue relative pb-12 pt-6 text-white before:absolute before:bottom-0 before:left-0 before:right-0 before:h-6 before:rounded-t-3xl before:bg-white md:pb-14 md:pt-8',
           )}
           {...rest}
         >

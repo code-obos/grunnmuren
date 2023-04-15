@@ -31,7 +31,7 @@ export const SelectPlain = forwardRef<HTMLSelectElement, SelectPlainProps>(
           aria-invalid={isInvalid}
           {...rest}
           className={cx(
-            'w-full cursor-pointer appearance-none border border-b-[3px] bg-white focus:-mt-0.5 focus:-ml-0.5 focus:border-[3px] focus:shadow focus:outline-none',
+            'w-full cursor-pointer appearance-none border border-b-[3px] bg-white focus:-ml-0.5 focus:-mt-0.5 focus:border-[3px] focus:shadow focus:outline-none',
             isSmall ? 'rounded px-3.5 py-2' : 'rounded-lg px-4 py-3.5',
             isInvalid
               ? 'border-red focus:border-red'
@@ -43,7 +43,7 @@ export const SelectPlain = forwardRef<HTMLSelectElement, SelectPlainProps>(
         </select>
         <ChevronDown
           className={cx(
-            'pointer-events-none absolute top-0 bottom-0 my-auto',
+            'pointer-events-none absolute bottom-0 top-0 my-auto',
             isSmall ? 'right-3.5' : 'right-4',
           )}
         />

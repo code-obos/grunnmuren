@@ -14,7 +14,7 @@ export const CardLinkOverlay = forwardRef<
     <a
       className={cx(
         className,
-        'no-underline before:absolute before:top-0 before:left-0 before:block before:h-full before:w-full hover:underline',
+        'no-underline before:absolute before:left-0 before:top-0 before:block before:h-full before:w-full hover:underline',
       )}
       ref={ref}
       {...rest}
