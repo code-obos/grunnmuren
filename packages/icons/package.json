@@ -30,7 +30,7 @@
     "@svgr/core": "6.5.1",
     "@svgr/plugin-jsx": "6.5.1",
     "@svgr/plugin-svgo": "6.5.1",
-    "@types/react": "18.0.35",
+    "@types/react": "18.0.38",
     "@vitejs/plugin-react": "3.1.0",
     "fs-extra": "11.1.1",
     "node-fetch": "3.3.1",
