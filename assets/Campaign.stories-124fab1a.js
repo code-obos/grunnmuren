@@ -1,0 +1,29 @@
+'use client';
+import{j as e}from"./jsx-runtime-3f8eccd4.js";import{C as i}from"./TextField-b8f8b114.js";import"./Alert-6e526d2b.js";import"./ButtonColorContext-25920443.js";import"./index-7b93734d.js";import"./index-8aa52469.js";import"./clsx.m-388a5213.js";import"./icons-80e5b504.js";import"./index-2c1fe7d2.js";const B={title:"Campaign",parameters:{layout:"padded"}},d=["https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/w_780/f_auto,q_auto/v1611759995/Block%20Watne/Fluks/Mennesker/Bygge-hus-Fluks-arkitekt-ra%CC%8Adgiver","https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/w_780/f_auto,q_auto/v1614347690/Block%20Watne/Fluks/Interi%C3%B8r/interi%C3%B8r-standard-ferdighus","https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/w_780/f_auto,q_auto/v1612349703/Block%20Watne/Fluks/Illustrasjoner/Bygge-hus-inspirasjon"],t=()=>e("div",{className:"container flex flex-col gap-16",children:d.map((s,a)=>e(i,{rightAlignBody:a%2===0,body:e(i.Body,{children:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel leo et metus aliquet egestas quis vel lorem. Pellentesque in fermentum orci, eget pharetra ex. In maximus dolor id dolor vulputate, a placerat nulla sollicitudin. Sed viverra nisl ac nisi sodales, eu porttitor felis vulputate. Nulla volutpat rutrum dictum. Mauris augue odio, dignissim ac nibh porttitor, accumsan facilisis dui. Mauris ultrices elit in orci scelerisque feugiat."}),image:e(i.Image,{src:s,alt:""})},a))}),r=()=>{const s=e(i.Image,{children:e("img",{src:d[0],alt:""})}),a=e(i.Body,{children:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel leo et metus aliquet egestas quis vel lorem. Pellentesque in fermentum orci, eget pharetra ex. In maximus dolor id dolor vulputate, a placerat nulla sollicitudin. Sed viverra nisl ac nisi sodales, eu porttitor felis vulputate. Nulla volutpat rutrum dictum. Mauris augue odio, dignissim ac nibh porttitor, accumsan facilisis dui. Mauris ultrices elit in orci scelerisque feugiat."});return e(i,{className:"container",body:a,image:s})};var o,l,u;t.parameters={...t.parameters,docs:{...(o=t.parameters)==null?void 0:o.docs,source:{originalSource:`() => {
+  return <div className="container flex flex-col gap-16">
+      {images.map((imageSrc, index) => <Campaign rightAlignBody={index % 2 === 0} key={index} body={<Campaign.Body>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel
+              leo et metus aliquet egestas quis vel lorem. Pellentesque in
+              fermentum orci, eget pharetra ex. In maximus dolor id dolor
+              vulputate, a placerat nulla sollicitudin. Sed viverra nisl ac nisi
+              sodales, eu porttitor felis vulputate. Nulla volutpat rutrum
+              dictum. Mauris augue odio, dignissim ac nibh porttitor, accumsan
+              facilisis dui. Mauris ultrices elit in orci scelerisque feugiat.
+            </Campaign.Body>} image={<Campaign.Image src={imageSrc} alt="" />} />)}
+    </div>;
+}`,...(u=(l=t.parameters)==null?void 0:l.docs)==null?void 0:u.source}}};var n,m,c;r.parameters={...r.parameters,docs:{...(n=r.parameters)==null?void 0:n.docs,source:{originalSource:`() => {
+  const image = <Campaign.Image>
+      <img src={images[0]} alt="" />
+    </Campaign.Image>;
+  const body = <Campaign.Body>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel leo et
+      metus aliquet egestas quis vel lorem. Pellentesque in fermentum orci, eget
+      pharetra ex. In maximus dolor id dolor vulputate, a placerat nulla
+      sollicitudin. Sed viverra nisl ac nisi sodales, eu porttitor felis
+      vulputate. Nulla volutpat rutrum dictum. Mauris augue odio, dignissim ac
+      nibh porttitor, accumsan facilisis dui. Mauris ultrices elit in orci
+      scelerisque feugiat.
+    </Campaign.Body>;
+  return <Campaign className="container" body={body} image={image} />;
+}`,...(c=(m=r.parameters)==null?void 0:m.docs)==null?void 0:c.source}}};const b=["Default","WithCustomImageComponent"];export{t as Default,r as WithCustomImageComponent,b as __namedExportsOrder,B as default};
+//# sourceMappingURL=Campaign.stories-124fab1a.js.map
