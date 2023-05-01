@@ -12,7 +12,7 @@ export const FormSuccess = (props: FormSuccessProps) => {
     <div
       className={cx(
         className,
-        'bg-gray-concrete flex flex-col gap-8 p-8 text-center',
+        'bg-gray-lightest flex flex-col gap-8 p-8 text-center',
       )}
       {...rest}
     >

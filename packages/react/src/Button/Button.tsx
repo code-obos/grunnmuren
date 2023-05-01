@@ -29,8 +29,8 @@ export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
 const buttonVariations = {
   'standard-primary': 'bg-green border-green text-white',
   'standard-secondary': 'bg-white border-green text-black',
-  'light-green-primary': 'bg-green-light border-green-light text-black',
-  'light-green-secondary': 'bg-transparent border-green-light text-green-light',
+  'light-green-primary': 'bg-mint border-mint text-black',
+  'light-green-secondary': 'bg-transparent border-mint text-mint',
   'white-primary': 'bg-white border-white text-black',
   'white-secondary': 'bg-transparent border-white text-white',
 } as const;

@@ -5,12 +5,12 @@ export function useBlockBackgroundColor(
 ): string | undefined {
   switch (blockBgColor) {
     case 'gray':
-      return 'bg-gray-concrete';
+      return 'bg-gray-lightest';
     case 'green':
-      return 'bg-green-lightest';
+      return 'bg-mint-light';
     case 'yellow':
       return 'bg-yellow';
     case 'blue':
-      return 'bg-blue-lightest';
+      return 'bg-sky-light';
   }
 }
