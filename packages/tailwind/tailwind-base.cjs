@@ -417,9 +417,9 @@ module.exports = (userOptions) => {
             lightest: '#F0F9F6',
           },
           blue: {
-            // DEPRECRECATED light blue
+            // DEPRECATED light blue
             lightest: '#DEEFF5',
-            // DEPRECRECATED OBOS Sky
+            // DEPRECATED OBOS Sky
             light: '#BEDFEC',
             // OBOS Blue/Primary brand
             DEFAULT: '#0047BA',
@@ -427,9 +427,9 @@ module.exports = (userOptions) => {
             dark: '#002169',
           },
           green: {
-            // DEPRECRECATED light green
+            // DEPRECATED light green
             lightest: '#E6F5F0',
-            // DEPRECRECATED OBOS Mint
+            // DEPRECATED OBOS Mint
             light: '#CDECE2',
             // OBOS Green/Primary brand
             DEFAULT: '#008761',
