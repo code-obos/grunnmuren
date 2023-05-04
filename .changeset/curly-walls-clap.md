@@ -15,6 +15,8 @@ Add new colors mint and sky. Old colors are deprecated
 
 `<Button>` has a new Color-prop `mint` which is the same as `light-green`.
 
-`<Chip>` has a new Color-props `mint` and `sky` which are the same as `green-light` and `blue-light` respectively.
+`<Chip>` has new Color-props `mint` and `sky` which are the same as `green-light` and `blue-light` respectively.
+
+`<CardList> | <Banner>` have new Color-props `mint` and `sky` which are the same as `green` and `blue` respectively
 
 The old props and colors are deprecated and will be removed in the next major version. 

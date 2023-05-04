@@ -11,7 +11,7 @@ const img = {
   width: 520,
 };
 
-const bgcColors = ['gray', 'green', 'yellow', 'blue'] as const;
+const bgcColors = ['gray', 'green', 'yellow', 'blue', 'mint', 'sky'] as const;
 
 export const Default = () => {
   return (
