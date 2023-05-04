@@ -8,11 +8,6 @@ module.exports = {
     '@storybook/addon-controls',
     {
       name: '@storybook/addon-styling',
-      options: {
-        postCss: {
-          implementation: require('postcss'),
-        },
-      },
     },
   ],
   framework: {
