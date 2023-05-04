@@ -404,6 +404,7 @@ module.exports = (userOptions) => {
             light: '#E6E6E6',
             // Lightest gray
             lightest: '#f1f1f1',
+            // DEPRECATED concrete
             concrete: '#f1f1f1',
           },
           sky: {
@@ -421,6 +422,7 @@ module.exports = (userOptions) => {
             lightest: '#DEEFF5',
             // DEPRECATED OBOS Sky
             light: '#BEDFEC',
+
             // OBOS Blue/Primary brand
             DEFAULT: '#0047BA',
             // OBOS Ocean
@@ -431,6 +433,7 @@ module.exports = (userOptions) => {
             lightest: '#E6F5F0',
             // DEPRECATED OBOS Mint
             light: '#CDECE2',
+
             // OBOS Green/Primary brand
             DEFAULT: '#008761',
             // OBOS Forest

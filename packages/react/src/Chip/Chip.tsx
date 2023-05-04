@@ -1,6 +1,12 @@
 import { cx } from '@/utils';
 
-export type ChipColor = 'sky' | 'mint' | 'red-light' | 'orange-light';
+export type ChipColor =
+  | 'sky'
+  | 'mint'
+  | 'red-light'
+  | 'orange-light'
+  | 'green-light'
+  | 'blue-light';
 
 export interface ChipProps {
   icon?: React.ReactNode;
@@ -18,6 +24,8 @@ const chipVariations = {
   'red-light': 'bg-red-light border-red-light',
   mint: 'bg-mint border-mint',
   'orange-light': 'bg-orange-light border-orange-light',
+  'green-light': 'bg-green-light border-green-light',
+  'blue-light': 'bg-blue-light border-blue-light',
 } as const;
 
 const iconColors = {
@@ -25,6 +33,8 @@ const iconColors = {
   'red-light': 'text-red',
   mint: 'text-green',
   'orange-light': 'text-black',
+  'green-light': 'text-green',
+  'blue-light': 'text-blue-dark',
 };
 
 export const Chip = (props: ChipProps) => {
