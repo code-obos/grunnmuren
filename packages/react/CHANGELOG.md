@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.13.1
+
+### Patch Changes
+
+- 6e04d58: upgrade react-collapsed dependency
+
 ## 1.13.0
 
 ### Minor Changes
