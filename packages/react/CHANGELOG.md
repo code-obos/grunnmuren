@@ -1,18 +1,10 @@
 # @obosbbl/grunnmuren-react
 
-## 2.0.0
+## 1.13.0
 
 ### Minor Changes
 
 - 47c41f1: Add new colors mint and sky. Old colors are deprecated
-
-  `blue-light` -> `sky`
-  `blue-lightest` -> `sky-light`
-
-  `green-light` -> `mint`
-  `green-lightest` -> `mint-light`
-
-  `gray-concrete` -> -> `gray-lightest`
 
   `<Button>` has a new Color-prop `mint` which is the same as `light-green`.
 
