@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  plugins: [react({ fastRefresh: false })],
+  plugins: [react()],
   // prevent copying the public folder meant for Storybook into the dist folder
   publicDir: false,
   build: {
