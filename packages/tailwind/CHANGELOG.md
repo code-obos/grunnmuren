@@ -1,5 +1,19 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 0.9.0
+
+### Minor Changes
+
+- 47c41f1: Add new colors mint and sky. Old colors are deprecated
+
+  `blue-light` -> `sky`
+  `blue-lightest` -> `sky-light`
+
+  `green-light` -> `mint`
+  `green-lightest` -> `mint-light`
+
+  `gray-concrete` -> -> `gray-lightest`
+
 ## 0.8.5
 
 ### Patch Changes

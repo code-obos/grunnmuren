@@ -1,5 +1,24 @@
 # @obosbbl/grunnmuren-react
 
+## 1.13.0
+
+### Minor Changes
+
+- 47c41f1: Add new color-props mint and sky. Old color-props are deprecated
+
+  `<Button>` has a new Color-prop `mint` which is the same as `light-green`.
+
+  `<Chip>` has new Color-props `mint` and `sky` which are the same as `green-light` and `blue-light` respectively.
+
+  `<CardList> | <Banner>` have new Color-props `mint` and `sky` which are the same as `green` and `blue` respectively
+
+  The old props and colors are deprecated and will be removed in the next major version.
+
+### Patch Changes
+
+- Updated dependencies [47c41f1]
+  - @obosbbl/grunnmuren-tailwind@0.9.0
+
 ## 1.12.4
 
 ### Patch Changes
