@@ -1,0 +1,3 @@
+'use client';
+import{_ as o}from"./iframe-5c4ead3f.js";import"../sb-preview/runtime.mjs";(r=>typeof require<"u"?require:typeof Proxy<"u"?new Proxy(r,{get:(e,t)=>(typeof require<"u"?require:e)[t]}):r)(function(r){if(typeof require<"u")return require.apply(this,arguments);throw new Error('Dynamic require of "'+r+'" is not supported')});var n={docs:{renderer:async()=>{let{DocsRenderer:r}=await o(()=>import("./DocsRenderer-7FRJXR4N-fef55d02.js").then(e=>e.D),["./DocsRenderer-7FRJXR4N-fef55d02.js","./iframe-5c4ead3f.js","./index-8aa52469.js","./_getPrototype-b6ea67b3.js","./index-2c1fe7d2.js"],import.meta.url);return new r}}};export{n as parameters};
+//# sourceMappingURL=preview-78817fce.js.map
