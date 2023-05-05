@@ -10,12 +10,12 @@ import { LoadingSpinner } from '@obosbbl/grunnmuren-icons';
 import { cx } from '@/utils';
 import { ButtonColorContext } from '.';
 
-export type ButtonColor = 'standard' | 'white' | 'light-green';
+export type ButtonColor = 'standard' | 'white' | 'light-green' | 'mint';
 
 export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   children: React.ReactNode;
   className?: string;
-  color?: 'standard' | 'white' | 'light-green';
+  color?: 'standard' | 'white' | 'light-green' | 'mint';
   disabled?: boolean;
   href?: string;
   /** Renders the button in a loading state */
@@ -29,10 +29,12 @@ export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
 const buttonVariations = {
   'standard-primary': 'bg-green border-green text-white',
   'standard-secondary': 'bg-white border-green text-black',
-  'light-green-primary': 'bg-green-light border-green-light text-black',
-  'light-green-secondary': 'bg-transparent border-green-light text-green-light',
+  'mint-primary': 'bg-mint border-mint text-black',
+  'mint-secondary': 'bg-transparent border-mint text-mint',
   'white-primary': 'bg-white border-white text-black',
   'white-secondary': 'bg-transparent border-white text-white',
+  'light-green-primary': 'bg-green-light border-green-light text-black',
+  'light-green-secondary': 'bg-transparent border-green-light text-green-light',
 } as const;
 
 export const Button = forwardRef<

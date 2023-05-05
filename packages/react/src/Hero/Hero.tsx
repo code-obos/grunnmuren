@@ -60,7 +60,7 @@ export const Hero = forwardRef<HTMLDivElement, HeroProps>((props, ref) => {
 
   return (
     <ButtonColorContext.Provider
-      value={bgColor === 'white' ? 'standard' : 'light-green'}
+      value={bgColor === 'white' ? 'standard' : 'mint'}
     >
       <HeroContext.Provider value={context}>
         <div

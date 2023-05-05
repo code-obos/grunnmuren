@@ -10,10 +10,10 @@ export const Default = () => {
     <>
       <div className="mx-4 my-8 flex gap-4">
         <div className="flex flex-col gap-4">
-          <Chip color="blue-light" variant="outline" icon={<InfoCircle />}>
+          <Chip color="sky" variant="outline" icon={<InfoCircle />}>
             Frist for forkjøp 00. måned
           </Chip>
-          <Chip color="green-light" variant="outline" icon={<Star />}>
+          <Chip color="mint" variant="outline" icon={<Star />}>
             Medlemstilbud
           </Chip>
           <Chip color="red-light" variant="outline" icon={<Warning />}>
@@ -31,8 +31,8 @@ export const Default = () => {
           </Chip>
         </div>
         <div className="flex flex-col gap-4">
-          <Chip color="blue-light">Frist for forkjøp 00. måned</Chip>
-          <Chip color="green-light">Medlemstilbud</Chip>
+          <Chip color="sky">Frist for forkjøp 00. måned</Chip>
+          <Chip color="mint">Medlemstilbud</Chip>
           <Chip color="red-light">Alert</Chip>
           <Chip color="orange-light">Informasjon</Chip>
           <Chip className="border-red bg-red text-white">

@@ -161,7 +161,7 @@ const PageLink = forwardRef<HTMLAnchorElement, PageLinkProps>((props, ref) => {
     <a
       className={cx(
         className,
-        'aria-[current]:border-green hover:bg-gray-concrete flex h-9 w-9 items-center justify-center rounded-lg border-2 border-transparent no-underline sm:h-10 sm:w-10',
+        'aria-[current]:border-green hover:bg-gray-lightest flex h-9 w-9 items-center justify-center rounded-lg border-2 border-transparent no-underline sm:h-10 sm:w-10',
       )}
       ref={ref}
       {...rest}

@@ -1,16 +1,24 @@
-export type BlockBackgroundColor = 'yellow' | 'gray' | 'blue' | 'green';
+export type BlockBackgroundColor =
+  | 'yellow'
+  | 'gray'
+  | 'blue'
+  | 'green'
+  | 'mint'
+  | 'sky';
 
 export function useBlockBackgroundColor(
   blockBgColor: BlockBackgroundColor | undefined,
 ): string | undefined {
   switch (blockBgColor) {
     case 'gray':
-      return 'bg-gray-concrete';
+      return 'bg-gray-lightest';
     case 'green':
-      return 'bg-green-lightest';
+    case 'mint':
+      return 'bg-mint-light';
     case 'yellow':
       return 'bg-yellow';
     case 'blue':
-      return 'bg-blue-lightest';
+    case 'sky':
+      return 'bg-sky-light';
   }
 }

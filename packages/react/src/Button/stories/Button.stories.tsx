@@ -79,9 +79,7 @@ export const Default = (props: {
       </ButtonsDisplayer>
 
       <div className="bg-green-dark py-4">
-        <ButtonsDisplayer
-          buttonProps={{ color: 'light-green', disabled, loading }}
-        >
+        <ButtonsDisplayer buttonProps={{ color: 'mint', disabled, loading }}>
           {buttons}
         </ButtonsDisplayer>
       </div>

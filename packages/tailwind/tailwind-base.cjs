@@ -278,7 +278,7 @@ module.exports = (userOptions) => {
           a: {
             '@apply underline': {},
           },
-          '::selection': { '@apply bg-green-light text-black': {} },
+          '::selection': { '@apply bg-mint text-black': {} },
           // Remove the disclosure triangle in Safari if apply the `list-none` utility to the summary element
           'summary.list-none::-webkit-details-marker': {
             display: 'none',
@@ -396,30 +396,44 @@ module.exports = (userOptions) => {
           black: '#333',
           white: '#fff',
           gray: {
-            // TODO: Figure out how to work this into the color scale
-            concrete: '#f1f1f1',
-            // Gray
+            // Dark Gray
             dark: '#595959',
-            // Medium gray
+            // gray
             DEFAULT: '#818181',
             // Light gray
             light: '#E6E6E6',
+            // Lightest gray
+            lightest: '#f1f1f1',
+            // DEPRECATED concrete
+            concrete: '#f1f1f1',
+          },
+          sky: {
+            DEFAULT: '#BEDFEC',
+            light: '#DEEFF5',
+            lightest: '#EBF5F9',
+          },
+          mint: {
+            DEFAULT: '#CDECE2',
+            light: '#E6F5F0',
+            lightest: '#F0F9F6',
           },
           blue: {
-            // light blue
+            // DEPRECATED light blue
             lightest: '#DEEFF5',
-            // OBOS Sky
+            // DEPRECATED OBOS Sky
             light: '#BEDFEC',
+
             // OBOS Blue/Primary brand
             DEFAULT: '#0047BA',
             // OBOS Ocean
             dark: '#002169',
           },
           green: {
-            // light green
+            // DEPRECATED light green
             lightest: '#E6F5F0',
-            // OBOS Mint
+            // DEPRECATED OBOS Mint
             light: '#CDECE2',
+
             // OBOS Green/Primary brand
             DEFAULT: '#008761',
             // OBOS Forest
