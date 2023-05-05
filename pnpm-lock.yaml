@@ -90,8 +90,8 @@ importers:
         specifier: 1.2.1
         version: 1.2.1
       react-collapsed:
-        specifier: 3.5.0
-        version: 3.5.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: 4.0.2
+        version: 4.0.2(react-dom@18.2.0)(react@18.2.0)
       react-use:
         specifier: 17.4.0
         version: 17.4.0(react-dom@18.2.0)(react@18.2.0)
@@ -7811,11 +7811,11 @@ packages:
       unpipe: 1.0.0
     dev: true
 
-  /react-collapsed@3.5.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-MtwlFoVfm1LdS1FFFNBQhMESSly0+ZaIouZHVbpVytM9gflLwUfPLbcqEuhzilT8upwzg45ect1zWC4Dbd5xpw==}
+  /react-collapsed@4.0.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-mzGhppOLzW3PGtU+RlSYPANpShYd5wt6LdFWnDgHy/asyIfQT8BHDognr5sYFPouXiHPwGWUtQ6ZfI5jd7bU6Q==}
     peerDependencies:
-      react: '>=16.8 || 18'
-      react-dom: '>=16.8 || 18'
+      react: ^16.9.0 || ^17 || ^18 || 18
+      react-dom: ^16.9.0 || ^17 || ^18 || 18
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)

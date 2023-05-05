@@ -1,9 +1,8 @@
 import React, { createContext, useContext } from 'react';
 import { ChevronDown } from '@obosbbl/grunnmuren-icons';
-import useCollapse from 'react-collapsed';
+import { useCollapse } from 'react-collapsed';
 
 import { cx, noop } from '@/utils';
-import { usePrefersReducedMotion } from '@/hooks';
 
 /**
  * See https://www.w3.org/WAI/ARIA/apg/patterns/accordion/ for how to make an accordion/disclousre accessible
@@ -48,15 +47,12 @@ export interface AccordionItemProps
 }
 
 export const AccordionItem = (props: AccordionItemProps) => {
-  const prefersReducedMotion = usePrefersReducedMotion();
-
   const { className, defaultOpen, onChange = noop, open, ...rest } = props;
 
   const collapseContext = useCollapse({
     defaultExpanded: defaultOpen,
     isExpanded: open,
     duration: DURATION_MS,
-    hasDisabledAnimation: prefersReducedMotion,
     easing: 'cubic-bezier(0.25, 0.1, 0.25, 1)',
   });
 
@@ -123,11 +119,7 @@ export const AccordionContent = (props: AccordionContentProps) => {
 
   // Must use two divs here for the animation to work properly. See https://github.com/roginfarrer/react-collapsed#faq
   return (
-    <div
-      {...collapseProps}
-      role="region"
-      aria-labelledby={getToggleId(collapseProps.id)}
-    >
+    <div {...collapseProps} aria-labelledby={getToggleId(collapseProps.id)}>
       <div className={cx(className, 'p-5 pb-10')} {...rest} />
     </div>
   );
