@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
-- 47c41f1: Add new colors mint and sky. Old colors are deprecated
+- 47c41f1: Add new color-props mint and sky. Old color-props are deprecated
 
   `<Button>` has a new Color-prop `mint` which is the same as `light-green`.
 
