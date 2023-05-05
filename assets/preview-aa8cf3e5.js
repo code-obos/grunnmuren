@@ -1,3 +1,0 @@
-'use client';
-import{_ as o}from"./iframe-addff928.js";import"../sb-preview/runtime.mjs";(r=>typeof require<"u"?require:typeof Proxy<"u"?new Proxy(r,{get:(e,t)=>(typeof require<"u"?require:e)[t]}):r)(function(r){if(typeof require<"u")return require.apply(this,arguments);throw new Error('Dynamic require of "'+r+'" is not supported')});var n={docs:{renderer:async()=>{let{DocsRenderer:r}=await o(()=>import("./DocsRenderer-7FRJXR4N-6facf24e.js").then(e=>e.D),["./DocsRenderer-7FRJXR4N-6facf24e.js","./iframe-addff928.js","./index-8aa52469.js","./_getPrototype-b6ea67b3.js","./index-2c1fe7d2.js"],import.meta.url);return new r}}};export{n as parameters};
-//# sourceMappingURL=preview-aa8cf3e5.js.map
