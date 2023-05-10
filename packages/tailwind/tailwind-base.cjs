@@ -467,6 +467,7 @@ module.exports = (userOptions) => {
             css: {
               '--tw-prose-headings': 'inherit',
               '--tw-prose-lead': 'inherit',
+              '--tw-prose-links': 'inherit',
               '--tw-prose-quotes': theme('colors.blue.dark'),
               '--tw-prose-quote-borders': theme('colors.green.DEFAULT'),
               '--tw-prose-counters': theme('colors.black'),
