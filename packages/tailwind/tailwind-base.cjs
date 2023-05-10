@@ -465,7 +465,7 @@ module.exports = (userOptions) => {
         typography: (theme) => ({
           DEFAULT: {
             css: {
-              '--tw-prose-headings': theme('colors.black'),
+              '--tw-prose-headings': 'inherit',
               '--tw-prose-lead': theme('colors.black'),
               '--tw-prose-quotes': theme('colors.blue.dark'),
               '--tw-prose-quote-borders': theme('colors.green.DEFAULT'),
