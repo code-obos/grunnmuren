@@ -50,6 +50,7 @@ export const Prose = () => {
       <blockquote>
         <p>Quote. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
       </blockquote>
+      <a href="#">this is a link</a>
     </div>
   );
 };
