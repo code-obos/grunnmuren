@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 0.9.1
+
+### Patch Changes
+
+- b3fd304: prose: use 'inherit' instead of hardcoded color on headings, links and lead
+
 ## 0.9.0
 
 ### Minor Changes
