@@ -1,0 +1,1 @@
+{"version":3,"file":"preview-04fb0d90.js","sources":["../../.storybook/preview.js"],"sourcesContent":["import './storybook.css';\n\nexport const parameters = {\n  layout: 'fullscreen',\n};\n"],"names":["parameters"],"mappings":";AAEY,MAACA,EAAa,CACxB,OAAQ,YACV"}
