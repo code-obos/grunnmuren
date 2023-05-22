@@ -75,7 +75,7 @@ export const FormStepHeaderContent = (props: FormStepHeaderContentProps) => {
   return (
     <h2
       className={classNames(
-        'w-fitn grid grid-cols-[auto_1fr] grid-rows-[1fr_auto] items-center text-left text-xl font-bold md:text-2xl',
+        'grid grid-cols-[auto_1fr] grid-rows-[1fr_auto] items-center text-left text-xl font-bold md:text-2xl',
         {
           'text-white': !collapsed,
         },
