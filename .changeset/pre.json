@@ -6,5 +6,7 @@
     "@obosbbl/grunnmuren-react": "1.13.1",
     "@obosbbl/grunnmuren-tailwind": "0.9.1"
   },
-  "changesets": []
+  "changesets": [
+    "twenty-starfishes-marry"
+  ]
 }
