@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.14.0-beta.0
+
+### Minor Changes
+
+- a7a55cb: Add support for FormStep aka MultiStep
+
 ## 1.13.1
 
 ### Patch Changes
