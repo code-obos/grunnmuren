@@ -18,11 +18,10 @@ export const FormStepHeader = (props: FormStepHeaderProps) => {
   return (
     <button
       type="button"
-      aria-label={collapsed ? `Åpne steg ${step}` : `Steg ${step} er åpent`}
+      aria-disabled={collapsed}
       onClick={onClick}
-      disabled={collapsed && formStatus !== 'completed'}
       className={classNames(className, 'w-full py-4 pl-4 md:py-8 ', {
-        'bg-blue-dark cursor-default': !collapsed,
+        'bg-blue-dark': !collapsed,
         'border-black bg-white': collapsed && formStatus !== 'completed',
 
         'border-green bg-green text-white':
