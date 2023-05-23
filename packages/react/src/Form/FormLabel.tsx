@@ -16,7 +16,6 @@ export const FormLabel = (props: LabelProps) => {
     >
       {isRequired && (
         <span
-          aria-hidden
           className={cx(
             'mr-1 select-none',
             isInvalid ? 'text-red' : 'text-blue',
