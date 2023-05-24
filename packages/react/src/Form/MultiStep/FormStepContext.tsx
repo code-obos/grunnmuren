@@ -22,6 +22,15 @@ const FormStepContext = createContext<
   () => {},
 ]);
 
+export function useFormContext() {
+  const [state] = useContext(FormStepContext);
+
+  return {
+    activeStep: state.activeStep,
+    formData: state.formData,
+  };
+}
+
 export function useFormStepContext<FormStepData extends FieldValues>(
   formStep: number,
 ) {
@@ -31,16 +40,27 @@ export function useFormStepContext<FormStepData extends FieldValues>(
     dispatch({ type: 'PREV_STEP' });
   }, [dispatch]);
 
-  const submitAndNextFormStep = useCallback(
+  const setFormData = useCallback(
     (formValues: FormStepData) => {
       dispatch({
         type: 'SET_FORM_STEP_DATA',
         formId: `form${formStep}`,
         formValues,
       });
-      dispatch({ type: 'NEXT_STEP' });
     },
     [dispatch, formStep],
+  );
+
+  const nextFormStep = useCallback(() => {
+    dispatch({ type: 'NEXT_STEP' });
+  }, [dispatch]);
+
+  const submitAndNextFormStep = useCallback(
+    (formValues: FormStepData) => {
+      setFormData(formValues);
+      nextFormStep();
+    },
+    [nextFormStep, setFormData],
   );
 
   return {
@@ -48,7 +68,9 @@ export function useFormStepContext<FormStepData extends FieldValues>(
     activeStep: state.activeStep,
     setActiveStep: (step: number) => dispatch({ type: 'SET_STEP', step }),
     previousFormStep,
+    nextFormStep,
     submitAndNextFormStep,
+    setFormData,
     formData: state.formData,
   };
 }
