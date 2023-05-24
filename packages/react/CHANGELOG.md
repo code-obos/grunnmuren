@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.14.0-beta.1
+
+### Minor Changes
+
+- 872c6ff: Fix import of useUpdateEffect
+
 ## 1.14.0-beta.0
 
 ### Minor Changes
