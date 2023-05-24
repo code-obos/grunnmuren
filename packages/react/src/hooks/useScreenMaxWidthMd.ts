@@ -1,4 +1,4 @@
-import { useMedia } from '@/hooks';
+import { useMediaQuery } from '@react-hookz/web';
 
 export const useScreenMaxWidthMd = (defaultState: boolean) =>
-  useMedia('(max-width: 767.9px)', defaultState);
+  useMediaQuery('(max-width: 767.9px)', { initializeWithValue: defaultState });

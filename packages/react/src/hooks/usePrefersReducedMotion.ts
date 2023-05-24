@@ -1,6 +1,6 @@
-import { useMedia } from '@/hooks';
+import { useMediaQuery } from '@react-hookz/web';
 
 const QUERY = '(prefers-reduced-motion: reduce)';
 
 export const usePrefersReducedMotion = (defaultState = false) =>
-  useMedia(QUERY, defaultState);
+  useMediaQuery(QUERY, { initializeWithValue: defaultState });
