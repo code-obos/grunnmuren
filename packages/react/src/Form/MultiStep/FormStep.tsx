@@ -50,14 +50,9 @@ export const FormStep = (props: FormStepProps) => {
 
   return (
     <form
-      className={classNames(
-        'border-blue-dark relative block overflow-hidden rounded-lg border-2',
-        className,
-        {
-          'rounded-t-2xl md:rounded-t-3xl': step === 1,
-          'border-none': formStatus === 'completed' && !isActive,
-        },
-      )}
+      className={classNames('block', className, {
+        'border-none': formStatus === 'completed' && !isActive,
+      })}
       onSubmit={onSubmit}
       ref={formRef}
       {...rest}
@@ -70,7 +65,11 @@ export const FormStep = (props: FormStepProps) => {
       >
         {heading}
       </FormStepHeader>
-      {isActive && <div className="p-6 md:p-10">{children}</div>}
+      {isActive && (
+        <div className="border-blue-dark relative rounded-b-lg border-2 p-6 md:p-10">
+          {children}
+        </div>
+      )}
     </form>
   );
 };

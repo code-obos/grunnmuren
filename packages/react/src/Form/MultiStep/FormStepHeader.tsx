@@ -20,13 +20,19 @@ export const FormStepHeader = (props: FormStepHeaderProps) => {
       type="button"
       aria-disabled={collapsed}
       onClick={onClick}
-      className={classNames(className, 'w-full py-4 pl-4 md:py-8 ', {
-        'bg-blue-dark': !collapsed,
-        'border-black bg-white': collapsed && formStatus !== 'completed',
+      className={classNames(
+        className,
+        'border-blue-dark w-full rounded-t-lg border-2 py-4 pl-4 md:py-8 ',
+        {
+          'bg-blue-dark': !collapsed,
+          'border-black bg-white': collapsed && formStatus !== 'completed',
 
-        'border-green bg-green text-white':
-          collapsed && formStatus === 'completed',
-      })}
+          'border-green bg-green text-white':
+            collapsed && formStatus === 'completed',
+          'rounded-t-2xl md:rounded-t-3xl': step === 1,
+          'rounded-lg': collapsed,
+        },
+      )}
     >
       <FormStepHeaderContent
         collapsed={collapsed}
