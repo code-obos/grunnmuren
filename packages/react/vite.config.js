@@ -52,12 +52,12 @@ export default defineConfig({
       external: [
         '@obosbbl/grunnmuren-icons',
         '@react-hook/merged-ref',
+        '@react-hookz/web',
         'clsx',
         'react',
         'react-dom',
         'react/jsx-runtime',
         'react-collapsed',
-        'react-use',
       ],
     },
   },
