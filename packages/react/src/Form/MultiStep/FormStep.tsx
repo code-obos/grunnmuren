@@ -4,7 +4,7 @@ import classNames from 'clsx';
 
 import { FormStepHeader } from './FormStepHeader';
 import { useFormStepContext } from './FormStepContext';
-import useUpdateEffect from 'react-use/lib/useUpdateEffect';
+import { useUpdateEffect } from '@react-hookz/web';
 
 interface FormStepProps extends FormProps {
   step: number;
