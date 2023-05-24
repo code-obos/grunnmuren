@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-react
 
+## 1.14.0-beta.2
+
+### Minor Changes
+
+- 1a44b0c: use @react-hookz instead of react-use since react-use is not maintained
+- 7fdea57: add `relative` to FormStep.tsx for better popover support
+
 ## 1.14.0-beta.1
 
 ### Minor Changes
