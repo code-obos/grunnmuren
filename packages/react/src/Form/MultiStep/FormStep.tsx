@@ -28,6 +28,7 @@ export const FormStep = (props: FormStepProps) => {
     step,
     formStatus = 'blank',
     onSubmit,
+    className,
     ...rest
   } = props;
   const { isActive, setActiveStep, activeStep } = useFormStepContext(step);
@@ -50,9 +51,12 @@ export const FormStep = (props: FormStepProps) => {
   return (
     <form
       className={classNames(
-        'border-blue-dark block overflow-hidden rounded-lg border-2',
-        { 'rounded-t-2xl md:rounded-t-3xl': step === 1 },
-        { 'border-none': formStatus === 'completed' && !isActive },
+        'border-blue-dark relative block overflow-hidden rounded-lg border-2',
+        className,
+        {
+          'rounded-t-2xl md:rounded-t-3xl': step === 1,
+          'border-none': formStatus === 'completed' && !isActive,
+        },
       )}
       onSubmit={onSubmit}
       ref={formRef}
