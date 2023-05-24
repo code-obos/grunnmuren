@@ -97,7 +97,7 @@ importers:
         specifier: workspace:*
         version: link:../tailwind
       '@react-hookz/web':
-        specifier: ^23.0.0
+        specifier: 23.0.0
         version: 23.0.0(react-dom@18.2.0)(react@18.2.0)
       '@storybook/addon-controls':
         specifier: 7.0.12
