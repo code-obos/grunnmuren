@@ -1,5 +1,13 @@
 # @obosbbl/grunnmuren-react
 
+## 1.14.0-beta.3
+
+### Minor Changes
+
+- fae30fa: Move @react-hookz/web to dependencies
+- fae30fa: Fix overflow-hidden for popover content
+- 2af7f9c: FormStep: export setFormData, nextFormStep from formStepContext and add new useFormContext to get formData and activeStep without using a step
+
 ## 1.14.0-beta.2
 
 ### Minor Changes
