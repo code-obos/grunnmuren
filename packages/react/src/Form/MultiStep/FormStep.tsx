@@ -11,6 +11,7 @@ interface FormStepProps extends FormProps {
   heading: string;
   formStatus: FormStatus;
   onSubmit: FormEventHandler<HTMLFormElement>;
+  onHeaderClick?: () => void;
 }
 
 export interface FormStepData<T> {
@@ -29,6 +30,7 @@ export const FormStep = (props: FormStepProps) => {
     formStatus = 'blank',
     onSubmit,
     className,
+    onHeaderClick,
     ...rest
   } = props;
   const { isActive, setActiveStep, activeStep } = useFormStepContext(step);
@@ -37,9 +39,10 @@ export const FormStep = (props: FormStepProps) => {
 
   const handleHeaderClick = useCallback(() => {
     if (step < activeStep) {
+      onHeaderClick?.();
       setActiveStep(step);
     }
-  }, [activeStep, step, setActiveStep]);
+  }, [activeStep, step, setActiveStep, onHeaderClick]);
 
   // When switching steps, scroll the newly active one into view
   useUpdateEffect(() => {
