@@ -11,7 +11,7 @@ interface FormStepProps extends FormProps {
   heading: string;
   formStatus: FormStatus;
   onSubmit: FormEventHandler<HTMLFormElement>;
-  onHeaderClick?: () => void;
+  onHeaderClick?: (step: number) => void;
 }
 
 export interface FormStepData<T> {
@@ -39,7 +39,7 @@ export const FormStep = (props: FormStepProps) => {
 
   const handleHeaderClick = useCallback(() => {
     if (step < activeStep) {
-      onHeaderClick?.();
+      onHeaderClick?.(step);
       setActiveStep(step);
     }
   }, [activeStep, step, setActiveStep, onHeaderClick]);
