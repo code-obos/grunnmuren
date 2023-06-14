@@ -92,7 +92,6 @@ export const Pagination = (props: PaginationProps) => {
         />
         {pageCount > 2 + SIBLING_COUNT * 2 &&
           currentPage > SIBLING_COUNT + 2 && <PaginationEllipsis />}
-        {/* @ts-expect-error gaaha ts, come on*/}
         <Pages>
           {(page) => (
             <PageItem

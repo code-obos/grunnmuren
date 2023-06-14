@@ -63,11 +63,9 @@ export const Default = (props: {
 
   const buttons = [
     <Button key="button">
-      {/* @ts-expect-error care */}
       <ButtonContent>Button</ButtonContent>
     </Button>,
     <Button key="link" href="#">
-      {/* @ts-expect-error care */}
       <ButtonContent>Link</ButtonContent>
     </Button>,
   ];
