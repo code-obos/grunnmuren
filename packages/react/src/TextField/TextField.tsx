@@ -1,5 +1,5 @@
 import { forwardRef, useRef } from 'react';
-import useMergedRef from '@react-hook/merged-ref';
+import { mergeRefs } from 'react-merge-refs';
 import { cx } from '@/utils';
 import { useFallbackId } from '@/hooks';
 import { Input, FormLabel, FormHelperText, FormErrorMessage } from '..';
@@ -34,7 +34,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       type = 'text',
       disableValidation = false,
       ...rest
-    } = props;
+    } = props;+
 
     const ownRef = useRef(null);
 
@@ -49,7 +49,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
     const errorMsg = error || validationMessage;
 
-    const multiRef = useMergedRef(ownRef, ref);
+    const multiRef = mergeRefs([ownRef, ref]);
 
     return (
       <div className="grid gap-2">
