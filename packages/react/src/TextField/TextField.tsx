@@ -34,7 +34,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       type = 'text',
       disableValidation = false,
       ...rest
-    } = props;+
+    } = props;
 
     const ownRef = useRef(null);
 
