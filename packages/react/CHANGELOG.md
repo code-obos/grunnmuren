@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.14.0-beta.4
+
+### Minor Changes
+
+- 4e25934: remove @react-hook/merged-ref, use react-merge-refs instead
+
 ## 1.14.0-beta.3
 
 ### Minor Changes
