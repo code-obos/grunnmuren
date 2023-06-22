@@ -51,7 +51,7 @@ export default defineConfig({
       // make sure to externalize deps that shouldn't be bundled
       external: [
         '@obosbbl/grunnmuren-icons',
-        '@react-hook/merged-ref',
+        'react-merge-refs',
         '@react-hookz/web',
         'clsx',
         'react',
