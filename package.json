@@ -14,7 +14,7 @@
     "lint:js": "eslint . --ext \"js,cjs,mjs,tsx,ts\" --max-warnings 0 --ignore-path .gitignore"
   },
   "devDependencies": {
-    "@changesets/cli": "2.26.1",
+    "@changesets/cli": "2.26.2",
     "@typescript-eslint/eslint-plugin": "5.60.0",
     "@typescript-eslint/parser": "5.60.0",
     "eslint": "8.43.0",
