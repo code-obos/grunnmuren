@@ -5,11 +5,7 @@
 ### Minor Changes
 
 - 891a1d8: use @react-hookz instead of react-use since react-use is not maintained
-- 891a1d8: add `relative` to FormStep.tsx for better popover support
-- 891a1d8: Move @react-hookz/web to dependencies
 - 891a1d8: remove @react-hook/merged-ref, use react-merge-refs instead
-- 891a1d8: Fix import of useUpdateEffect
-- 891a1d8: Fix overflow-hidden for popover content
 - 891a1d8: FormStep: export setFormData, nextFormStep from formStepContext and add new useFormContext to get formData and activeStep without using a step
 - 891a1d8: add onHeaderClick on FormStep. Supplement function with own functions (i.e. track clicks to GA)
 - 891a1d8: Add support for FormStep aka MultiStep
