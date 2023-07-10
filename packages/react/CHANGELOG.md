@@ -1,5 +1,44 @@
 # @obosbbl/grunnmuren-react
 
+## 1.14.0-beta.5
+
+### Minor Changes
+
+- f42e051: add onHeaderClick on FormStep. Supplement function with own functions (i.e. track clicks to GA)
+
+## 1.14.0-beta.4
+
+### Minor Changes
+
+- 4e25934: remove @react-hook/merged-ref, use react-merge-refs instead
+
+## 1.14.0-beta.3
+
+### Minor Changes
+
+- fae30fa: Move @react-hookz/web to dependencies
+- fae30fa: Fix overflow-hidden for popover content
+- 2af7f9c: FormStep: export setFormData, nextFormStep from formStepContext and add new useFormContext to get formData and activeStep without using a step
+
+## 1.14.0-beta.2
+
+### Minor Changes
+
+- 1a44b0c: use @react-hookz instead of react-use since react-use is not maintained
+- 7fdea57: add `relative` to FormStep.tsx for better popover support
+
+## 1.14.0-beta.1
+
+### Minor Changes
+
+- 872c6ff: Fix import of useUpdateEffect
+
+## 1.14.0-beta.0
+
+### Minor Changes
+
+- a7a55cb: Add support for FormStep aka MultiStep
+
 ## 1.13.1
 
 ### Patch Changes

@@ -1,5 +1,5 @@
 import { forwardRef, useRef } from 'react';
-import useMergedRef from '@react-hook/merged-ref';
+import { mergeRefs } from 'react-merge-refs';
 import { cx } from '@/utils';
 import { useFallbackId } from '@/hooks';
 import { FormLabel, FormHelperText, FormErrorMessage } from '..';
@@ -44,7 +44,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     } = props;
 
     const ownRef = useRef(null);
-    const multiRef = useMergedRef(ownRef, ref);
+    const multiRef = mergeRefs([ownRef, ref]);
 
     const { validity, validationMessage } = useFormControlValidity(
       ownRef,
