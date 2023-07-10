@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.14.1
+
+### Patch Changes
+
+- 716d298: FormStepContext: expose setActiveStep from useFormContext
+
 ## 1.14.0
 
 ### Minor Changes
