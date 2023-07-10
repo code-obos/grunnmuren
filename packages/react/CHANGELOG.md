@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.14.0-beta.5
+
+### Minor Changes
+
+- f42e051: add onHeaderClick on FormStep. Supplement function with own functions (i.e. track clicks to GA)
+
 ## 1.14.0-beta.4
 
 ### Minor Changes
