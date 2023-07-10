@@ -1,0 +1,11 @@
+{
+  "mode": "pre",
+  "tag": "beta",
+  "initialVersions": {
+    "@obosbbl/grunnmuren-icons": "0.6.0",
+    "@obosbbl/grunnmuren-react": "1.13.1",
+    "@obosbbl/grunnmuren-tailwind": "0.9.1"
+  },
+  "changesets": [
+  ]
+}
