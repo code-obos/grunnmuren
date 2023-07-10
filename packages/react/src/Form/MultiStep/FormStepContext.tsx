@@ -23,11 +23,12 @@ const FormStepContext = createContext<
 ]);
 
 export function useFormContext() {
-  const [state] = useContext(FormStepContext);
+  const [state, dispatch] = useContext(FormStepContext);
 
   return {
     activeStep: state.activeStep,
     formData: state.formData,
+    setActiveStep: (step: number) => dispatch({ type: 'SET_STEP', step }),
   };
 }
 
