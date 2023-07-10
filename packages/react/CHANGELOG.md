@@ -1,5 +1,15 @@
 # @obosbbl/grunnmuren-react
 
+## 1.14.0
+
+### Minor Changes
+
+- 891a1d8: use @react-hookz instead of react-use since react-use is not maintained
+- 891a1d8: remove @react-hook/merged-ref, use react-merge-refs instead
+- 891a1d8: FormStep: export setFormData, nextFormStep from formStepContext and add new useFormContext to get formData and activeStep without using a step
+- 891a1d8: add onHeaderClick on FormStep. Supplement function with own functions (i.e. track clicks to GA)
+- 891a1d8: Add support for FormStep aka MultiStep
+
 ## 1.14.0-beta.5
 
 ### Minor Changes
