@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.14.2-beta.1
+
+### Patch Changes
+
+- 8a2c044: revert FormStepContext: Make setFormData and submitAndNextFormStep async
+
 ## 1.14.2-beta.0
 
 ### Patch Changes
