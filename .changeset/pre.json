@@ -7,5 +7,6 @@
     "@obosbbl/grunnmuren-tailwind": "0.9.1"
   },
   "changesets": [
+    "curly-pumas-wait"
   ]
 }
