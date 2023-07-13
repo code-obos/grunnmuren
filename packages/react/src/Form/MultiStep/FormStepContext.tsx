@@ -42,7 +42,7 @@ export function useFormStepContext<FormStepData extends FieldValues>(
   }, [dispatch]);
 
   const setFormData = useCallback(
-    async (formValues: FormStepData) => {
+    (formValues: FormStepData) => {
       dispatch({
         type: 'SET_FORM_STEP_DATA',
         formId: `form${formStep}`,
@@ -58,7 +58,7 @@ export function useFormStepContext<FormStepData extends FieldValues>(
 
   const submitAndNextFormStep = useCallback(
     async (formValues: FormStepData) => {
-      await setFormData(formValues);
+      setFormData(formValues);
       nextFormStep();
     },
     [nextFormStep, setFormData],
