@@ -13,7 +13,7 @@ export interface TextFieldProps
   /** Error message for the form control */
   error?: string;
   /**  Label for the form control */
-  label: string;
+  label: React.ReactNode;
   /** React node on the left (ex. icon, text, component) */
   leftAddon?: React.ReactNode;
   /** React node on the left (ex. icon, text, component) */
