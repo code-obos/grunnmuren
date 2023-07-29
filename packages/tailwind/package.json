@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "tailwindcss": "3.3.3",
-    "postcss": "8.4.26"
+    "postcss": "8.4.27"
   },
   "peerDependencies": {
     "tailwindcss": "^3.2"
