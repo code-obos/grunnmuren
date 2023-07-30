@@ -1,0 +1,3 @@
+'use client';
+import{S as e,c as m,s}from"./DocsRenderer-EYKKDMVH-a7165dc6.js";import"./iframe-cf705198.js";import"../sb-preview/runtime.js";import"./index-8aa52469.js";import"./_getPrototype-1e940c61.js";export{e as SyntaxHighlighter,m as createCopyToClipboardFunction,s as default};
+//# sourceMappingURL=syntaxhighlighter-QTQ2UBB4-6f5cf0a3.js.map
