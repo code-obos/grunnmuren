@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.14.2
+
+### Patch Changes
+
+- d56c5e9: update dependency react-collapsed for better Safari <= 13 compatibility
+
 ## 1.14.1
 
 ### Patch Changes
