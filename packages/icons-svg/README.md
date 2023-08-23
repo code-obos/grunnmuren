@@ -12,7 +12,7 @@ npm install @obosbbl/grunnmuren-icons-svg
 
 ```jsx
 // SVG
-import House from '@obosbbl/grunnmuren-icons-svg/svg/House.svg';
+import House from '@obosbbl/grunnmuren-icons-svg/House.svg';
 ```
 
 ## Updating the icons
