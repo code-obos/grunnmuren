@@ -6,34 +6,23 @@
     "url": "https://github.com/code-obos/grunnmuren"
   },
   "scripts": {
-    "dev": "pnpm --filter './packages/react' dev",
     "build": "pnpm --filter './packages/*' build",
     "ci:publish": "pnpm build && changeset publish",
     "ci:version": "changeset version",
+    "lint": "pnpm lint:js && pnpm lint:format",
     "lint:format": "prettier --list-different .",
     "lint:js": "eslint . --ext \"js,cjs,mjs,tsx,ts\" --max-warnings 0 --ignore-path .gitignore"
   },
-  "devDependencies": {
+  "dependencies": {
     "@changesets/cli": "2.26.2",
-    "@typescript-eslint/eslint-plugin": "6.3.0",
-    "@typescript-eslint/parser": "6.3.0",
+    "@typescript-eslint/eslint-plugin": "6.4.1",
+    "@typescript-eslint/parser": "6.4.1",
     "eslint": "8.47.0",
     "eslint-config-prettier": "9.0.0",
-    "eslint-plugin-react": "7.33.1",
+    "eslint-plugin-react": "7.33.2",
     "eslint-plugin-react-hooks": "4.6.0",
-    "prettier": "3.0.1",
-    "prettier-plugin-tailwindcss": "0.5.2",
+    "prettier": "3.0.2",
+    "prettier-plugin-tailwindcss": "0.5.3",
     "typescript": "5.1.6"
-  },
-  "pnpm": {
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "typescript"
-      ],
-      "allowedVersions": {
-        "react": "18",
-        "react-dom": "18"
-      }
-    }
   }
 }
