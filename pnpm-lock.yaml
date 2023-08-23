@@ -51,7 +51,7 @@ importers:
         specifier: 4.6.0
         version: 4.6.0(eslint@8.47.0)
       eslint-plugin-storybook:
-        specifier: ^0.6.13
+        specifier: 0.6.13
         version: 0.6.13(eslint@8.47.0)(typescript@5.1.6)
       prettier:
         specifier: 3.0.2
