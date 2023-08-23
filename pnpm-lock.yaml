@@ -30,7 +30,7 @@ importers:
         specifier: 7.3.2
         version: 7.3.2(react-dom@18.2.0)(react@18.2.0)(typescript@5.1.6)(vite@4.4.9)
       '@types/react':
-        specifier: ^18.2.21
+        specifier: 18.2.21
         version: 18.2.21
       '@typescript-eslint/eslint-plugin':
         specifier: 6.4.1
@@ -60,13 +60,13 @@ importers:
         specifier: 0.5.3
         version: 0.5.3(prettier@3.0.2)
       react:
-        specifier: ^18.2.0
+        specifier: 18.2.0
         version: 18.2.0
       react-dom:
-        specifier: ^18.2.0
+        specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       storybook:
-        specifier: ^7.3.2
+        specifier: 7.3.2
         version: 7.3.2
       typescript:
         specifier: 5.1.6
@@ -4464,7 +4464,7 @@ packages:
     dev: false
 
   /bytes@3.0.0:
-    resolution: {integrity: sha512-pMhOfFDPiv9t5jjIXkHosWmkSyQbvsgEVNkz0ERHbuLh2T/7j4Mqqpz523Fe8MVY89KC6Sh/QfS2sM+SjgFDcw==}
+    resolution: {integrity: sha1-0ygVQE1olpn4Wk6k+odV3ROpYEg=}
     engines: {node: '>= 0.8'}
     dev: false
 
