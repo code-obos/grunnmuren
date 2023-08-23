@@ -8,8 +8,8 @@ export default function RootLayout({
 }) {
   return (
     <html className={OBOSFont.variable} lang="nb-NO">
-      <body className="bg-sky">
-        <main>{children}</main>
+      <body>
+        <main className="bg-blue-dark">{children}</main>
       </body>
     </html>
   );
