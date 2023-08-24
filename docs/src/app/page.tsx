@@ -22,7 +22,7 @@ const topCards: CardProps[] = [
     title: 'Confluence',
     content:
       'På Confluence finner du dokumentasjon og retningslinjer for bruk.',
-    href: '',
+    href: 'https://obos-bbl.atlassian.net/l/cp/vyU0EjZ5',
     bgColor: 'blue',
   },
   {
@@ -44,7 +44,7 @@ const bottomCards: CardProps[] = [
   {
     title: 'Komponenter',
     content: 'Komponentene og tilhørende eksempelkode ligger på Storybook.',
-    href: '',
+    href: 'https://code-obos.github.io/grunnmuren',
     bgColor: 'white',
   },
   {
