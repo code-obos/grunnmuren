@@ -127,6 +127,18 @@ importers:
         specifier: 3.3.3
         version: 3.3.3
 
+  packages/components/alert:
+    dependencies:
+      '@obosbbl/grunnmuren-icons-react':
+        specifier: workspace:*
+        version: link:../../icons-react
+      class-variance-authority:
+        specifier: ^0.7.0
+        version: 0.7.0
+      react:
+        specifier: ^18
+        version: 18.2.0
+
   packages/components/chip:
     dependencies:
       class-variance-authority:
@@ -178,6 +190,9 @@ importers:
 
   packages/react:
     dependencies:
+      '@obosbbl/grunnmuren-react-alert':
+        specifier: workspace:*
+        version: link:../components/alert
       '@obosbbl/grunnmuren-react-chip':
         specifier: workspace:*
         version: link:../components/chip
