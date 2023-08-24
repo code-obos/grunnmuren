@@ -9,13 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@obosbbl/grunnmuren-tailwind": "workspace:*",
     "@obosbbl/grunnmuren-icons-react": "workspace:*",
+    "@obosbbl/grunnmuren-tailwind": "workspace:*",
     "autoprefixer": "10.4.15",
     "next": "13.4.19",
     "postcss": "8.4.28",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tailwindcss": "3.3.3"
+  },
+  "devDependencies": {
+    "clsx": "2.0.0"
   }
 }
