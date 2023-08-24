@@ -28,13 +28,21 @@ importers:
         version: 1.3.6(@types/react@18.2.21)(less@4.2.0)(postcss@8.4.28)(react-dom@18.2.0)(react@18.2.0)(webpack@5.88.2)
       '@storybook/builder-vite':
         specifier: 7.3.2
+<<<<<<< HEAD
         version: 7.3.2(typescript@5.1.6)(vite@4.4.9)
+=======
+        version: 7.3.2(typescript@5.1.6)(vite@4.4.2)
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
       '@storybook/react':
         specifier: 7.3.2
         version: 7.3.2(react-dom@18.2.0)(react@18.2.0)(typescript@5.1.6)
       '@storybook/react-vite':
         specifier: 7.3.2
+<<<<<<< HEAD
         version: 7.3.2(react-dom@18.2.0)(react@18.2.0)(typescript@5.1.6)(vite@4.4.9)
+=======
+        version: 7.3.2(react-dom@18.2.0)(react@18.2.0)(typescript@5.1.6)(vite@4.4.2)
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
       '@types/react':
         specifier: 18.2.21
         version: 18.2.21
@@ -95,6 +103,12 @@ importers:
       '@obosbbl/grunnmuren-tailwind':
         specifier: workspace:*
         version: link:../packages/tailwind
+<<<<<<< HEAD
+=======
+      framer-motion:
+        specifier: 10.16.1
+        version: 10.16.1(react-dom@18.2.0)(react@18.2.0)
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
       next:
         specifier: 13.4.19
         version: 13.4.19(@babel/core@7.22.10)(react-dom@18.2.0)(react@18.2.0)
@@ -119,10 +133,13 @@ importers:
         version: 3.3.3
 
   packages/icons-react:
+<<<<<<< HEAD
     dependencies:
       react:
         specifier: ^18
         version: 18.2.0
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     devDependencies:
       '@obosbbl/grunnmuren-icons-svg':
         specifier: workspace:*
@@ -136,9 +153,21 @@ importers:
       '@svgr/plugin-svgo':
         specifier: 8.0.1
         version: 8.0.1(@svgr/core@8.0.0)
+<<<<<<< HEAD
       fs-extra:
         specifier: 11.1.1
         version: 11.1.1
+=======
+      '@vitejs/plugin-react':
+        specifier: 4.0.2
+        version: 4.0.2(vite@4.4.2)
+      fs-extra:
+        specifier: 11.1.1
+        version: 11.1.1
+      vite:
+        specifier: 4.4.2
+        version: 4.4.2(less@4.2.0)
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
 
   packages/icons-svg:
     devDependencies:
@@ -158,6 +187,7 @@ importers:
         specifier: 3.0.2
         version: 3.0.2
 
+<<<<<<< HEAD
   packages/react/chip:
     dependencies:
       class-variance-authority:
@@ -167,6 +197,8 @@ importers:
         specifier: ^18
         version: 18.2.0
 
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
   packages/tailwind:
     dependencies:
       '@tailwindcss/aspect-ratio':
@@ -369,7 +401,10 @@ packages:
   /@babel/helper-plugin-utils@7.22.5:
     resolution: {integrity: sha512-uLls06UVKgFG9QD4OeFYLEGteMIAa5kpTPcFL28yuCIIzsf6ZyKZMllKVOCZFhiZ5ptnwX4mtKdWCBE/uT4amg==}
     engines: {node: '>=6.9.0'}
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
 
   /@babel/helper-remap-async-to-generator@7.22.9(@babel/core@7.22.10):
     resolution: {integrity: sha512-8WWC4oR4Px+tr+Fp0X3RHDVfINGpF3ad1HIbrc8A77epiR6eMMc6jsgozkzT2uDiOOdoS9cLIQ+XD2XvI2WSmQ==}
@@ -1160,7 +1195,10 @@ packages:
     dependencies:
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
 
   /@babel/plugin-transform-react-jsx-source@7.22.5(@babel/core@7.22.10):
     resolution: {integrity: sha512-yIiRO6yobeEIaI0RTbIr8iAK9FcBHLtZq0S89ZPjDLQXBA4xvghaKqI0etp/tF3htTM0sazJKKLz9oEiGRtu7w==}
@@ -1170,7 +1208,10 @@ packages:
     dependencies:
       '@babel/core': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
 
   /@babel/plugin-transform-regenerator@7.22.10(@babel/core@7.22.10):
     resolution: {integrity: sha512-F28b1mDt8KcT5bUyJc/U9nwzw6cV+UmTeRlXYIl2TNqMMJif0Jeey9/RQ3C4NOd2zp0/TRsDns9ttj2L523rsw==}
@@ -1690,6 +1731,23 @@ packages:
     engines: {node: '>=10.0.0'}
     dev: false
 
+<<<<<<< HEAD
+=======
+  /@emotion/is-prop-valid@0.8.8:
+    resolution: {integrity: sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==}
+    requiresBuild: true
+    dependencies:
+      '@emotion/memoize': 0.7.4
+    dev: false
+    optional: true
+
+  /@emotion/memoize@0.7.4:
+    resolution: {integrity: sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==}
+    requiresBuild: true
+    dev: false
+    optional: true
+
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
   /@emotion/use-insertion-effect-with-fallbacks@1.0.1(react@18.2.0):
     resolution: {integrity: sha512-jT/qyKZ9rzLErtrjGgdkMBn2OP8wl0G3sQlBb3YPryvKHsjvINUhVaPFfP+fpBcOkmrVOVEEHQFJ7nbj2TH2gw==}
     peerDependencies:
@@ -1704,7 +1762,10 @@ packages:
     cpu: [arm64]
     os: [android]
     requiresBuild: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /@esbuild/android-arm@0.18.20:
@@ -1713,7 +1774,10 @@ packages:
     cpu: [arm]
     os: [android]
     requiresBuild: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /@esbuild/android-x64@0.18.20:
@@ -1722,7 +1786,10 @@ packages:
     cpu: [x64]
     os: [android]
     requiresBuild: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /@esbuild/darwin-arm64@0.18.20:
@@ -1731,7 +1798,10 @@ packages:
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /@esbuild/darwin-x64@0.18.20:
@@ -1740,7 +1810,10 @@ packages:
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /@esbuild/freebsd-arm64@0.18.20:
@@ -1749,7 +1822,10 @@ packages:
     cpu: [arm64]
     os: [freebsd]
     requiresBuild: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /@esbuild/freebsd-x64@0.18.20:
@@ -1758,7 +1834,10 @@ packages:
     cpu: [x64]
     os: [freebsd]
     requiresBuild: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /@esbuild/linux-arm64@0.18.20:
@@ -1767,7 +1846,10 @@ packages:
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /@esbuild/linux-arm@0.18.20:
@@ -1776,7 +1858,10 @@ packages:
     cpu: [arm]
     os: [linux]
     requiresBuild: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /@esbuild/linux-ia32@0.18.20:
@@ -1785,7 +1870,10 @@ packages:
     cpu: [ia32]
     os: [linux]
     requiresBuild: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /@esbuild/linux-loong64@0.18.20:
@@ -1794,7 +1882,10 @@ packages:
     cpu: [loong64]
     os: [linux]
     requiresBuild: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /@esbuild/linux-mips64el@0.18.20:
@@ -1803,7 +1894,10 @@ packages:
     cpu: [mips64el]
     os: [linux]
     requiresBuild: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /@esbuild/linux-ppc64@0.18.20:
@@ -1812,7 +1906,10 @@ packages:
     cpu: [ppc64]
     os: [linux]
     requiresBuild: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /@esbuild/linux-riscv64@0.18.20:
@@ -1821,7 +1918,10 @@ packages:
     cpu: [riscv64]
     os: [linux]
     requiresBuild: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /@esbuild/linux-s390x@0.18.20:
@@ -1830,7 +1930,10 @@ packages:
     cpu: [s390x]
     os: [linux]
     requiresBuild: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /@esbuild/linux-x64@0.18.20:
@@ -1839,7 +1942,10 @@ packages:
     cpu: [x64]
     os: [linux]
     requiresBuild: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /@esbuild/netbsd-x64@0.18.20:
@@ -1848,7 +1954,10 @@ packages:
     cpu: [x64]
     os: [netbsd]
     requiresBuild: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /@esbuild/openbsd-x64@0.18.20:
@@ -1857,7 +1966,10 @@ packages:
     cpu: [x64]
     os: [openbsd]
     requiresBuild: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /@esbuild/sunos-x64@0.18.20:
@@ -1866,7 +1978,10 @@ packages:
     cpu: [x64]
     os: [sunos]
     requiresBuild: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /@esbuild/win32-arm64@0.18.20:
@@ -1875,7 +1990,10 @@ packages:
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /@esbuild/win32-ia32@0.18.20:
@@ -1884,7 +2002,10 @@ packages:
     cpu: [ia32]
     os: [win32]
     requiresBuild: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /@esbuild/win32-x64@0.18.20:
@@ -1893,7 +2014,10 @@ packages:
     cpu: [x64]
     os: [win32]
     requiresBuild: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /@eslint-community/eslint-utils@4.4.0(eslint@8.47.0):
@@ -2050,12 +2174,20 @@ packages:
       '@jest/schemas': 29.6.3
       '@types/istanbul-lib-coverage': 2.0.4
       '@types/istanbul-reports': 3.0.1
+<<<<<<< HEAD
       '@types/node': 20.5.4
+=======
+      '@types/node': 20.5.3
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
       '@types/yargs': 17.0.24
       chalk: 4.1.2
     dev: false
 
+<<<<<<< HEAD
   /@joshwooding/vite-plugin-react-docgen-typescript@0.2.1(typescript@5.1.6)(vite@4.4.9):
+=======
+  /@joshwooding/vite-plugin-react-docgen-typescript@0.2.1(typescript@5.1.6)(vite@4.4.2):
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     resolution: {integrity: sha512-ou4ZJSXMMWHqGS4g8uNRbC5TiTWxAgQZiVucoUrOCWuPrTbkpJbmVyIi9jU72SBry7gQtuMEDp4YR8EEXAg7VQ==}
     peerDependencies:
       typescript: '>= 4.3.x'
@@ -2069,7 +2201,11 @@ packages:
       magic-string: 0.27.0
       react-docgen-typescript: 2.2.2(typescript@5.1.6)
       typescript: 5.1.6
+<<<<<<< HEAD
       vite: 4.4.9(less@4.2.0)
+=======
+      vite: 4.4.2(less@4.2.0)
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     dev: false
 
   /@jridgewell/gen-mapping@0.3.3:
@@ -3030,7 +3166,11 @@ packages:
       - supports-color
     dev: false
 
+<<<<<<< HEAD
   /@storybook/builder-vite@7.3.2(typescript@5.1.6)(vite@4.4.9):
+=======
+  /@storybook/builder-vite@7.3.2(typescript@5.1.6)(vite@4.4.2):
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     resolution: {integrity: sha512-9xB3Z6QfDBX6Daj+LFldhavA8O7JU2E1dL6IHfaTLIamFH884Sl5Svq3GS3oh4/EbB/GifpVKEiwlvJaINCj+A==}
     peerDependencies:
       '@preact/preset-vite': '*'
@@ -3065,7 +3205,11 @@ packages:
       remark-slug: 6.1.0
       rollup: 3.28.1
       typescript: 5.1.6
+<<<<<<< HEAD
       vite: 4.4.9(less@4.2.0)
+=======
+      vite: 4.4.2(less@4.2.0)
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -3197,7 +3341,11 @@ packages:
       '@storybook/node-logger': 7.3.2
       '@storybook/types': 7.3.2
       '@types/find-cache-dir': 3.2.1
+<<<<<<< HEAD
       '@types/node': 16.18.44
+=======
+      '@types/node': 16.18.43
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
       '@types/node-fetch': 2.6.4
       '@types/pretty-hrtime': 1.0.1
       chalk: 4.1.2
@@ -3210,7 +3358,11 @@ packages:
       glob: 10.3.3
       handlebars: 4.7.8
       lazy-universal-dotenv: 4.0.0
+<<<<<<< HEAD
       node-fetch: 2.7.0
+=======
+      node-fetch: 2.6.13
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
       picomatch: 2.3.1
       pkg-dir: 5.0.0
       pretty-hrtime: 1.0.3
@@ -3244,7 +3396,11 @@ packages:
       '@storybook/telemetry': 7.3.2
       '@storybook/types': 7.3.2
       '@types/detect-port': 1.3.3
+<<<<<<< HEAD
       '@types/node': 16.18.44
+=======
+      '@types/node': 16.18.43
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
       '@types/pretty-hrtime': 1.0.1
       '@types/semver': 7.5.0
       better-opn: 3.0.2
@@ -3421,7 +3577,11 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
+<<<<<<< HEAD
   /@storybook/react-vite@7.3.2(react-dom@18.2.0)(react@18.2.0)(typescript@5.1.6)(vite@4.4.9):
+=======
+  /@storybook/react-vite@7.3.2(react-dom@18.2.0)(react@18.2.0)(typescript@5.1.6)(vite@4.4.2):
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     resolution: {integrity: sha512-lfDrcESQkrqVh1PkFgiJMrfhGYNckQ3rB2ZCvvzruHYWe/9B40EbMxGZauLg7B7M5j2Rzj+sa7Jfr3dasm+GJA==}
     engines: {node: '>=16'}
     peerDependencies:
@@ -3429,17 +3589,29 @@ packages:
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
       vite: ^3.0.0 || ^4.0.0
     dependencies:
+<<<<<<< HEAD
       '@joshwooding/vite-plugin-react-docgen-typescript': 0.2.1(typescript@5.1.6)(vite@4.4.9)
       '@rollup/pluginutils': 5.0.3
       '@storybook/builder-vite': 7.3.2(typescript@5.1.6)(vite@4.4.9)
       '@storybook/react': 7.3.2(react-dom@18.2.0)(react@18.2.0)(typescript@5.1.6)
       '@vitejs/plugin-react': 3.1.0(vite@4.4.9)
+=======
+      '@joshwooding/vite-plugin-react-docgen-typescript': 0.2.1(typescript@5.1.6)(vite@4.4.2)
+      '@rollup/pluginutils': 5.0.3
+      '@storybook/builder-vite': 7.3.2(typescript@5.1.6)(vite@4.4.2)
+      '@storybook/react': 7.3.2(react-dom@18.2.0)(react@18.2.0)(typescript@5.1.6)
+      '@vitejs/plugin-react': 3.1.0(vite@4.4.2)
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
       ast-types: 0.14.2
       magic-string: 0.30.3
       react: 18.2.0
       react-docgen: 6.0.0-alpha.3
       react-dom: 18.2.0(react@18.2.0)
+<<<<<<< HEAD
       vite: 4.4.9(less@4.2.0)
+=======
+      vite: 4.4.2(less@4.2.0)
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     transitivePeerDependencies:
       - '@preact/preset-vite'
       - encoding
@@ -3469,7 +3641,11 @@ packages:
       '@storybook/types': 7.3.2
       '@types/escodegen': 0.0.6
       '@types/estree': 0.0.51
+<<<<<<< HEAD
       '@types/node': 16.18.44
+=======
+      '@types/node': 16.18.43
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
       acorn: 7.4.1
       acorn-jsx: 5.3.2(acorn@7.4.1)
       acorn-walk: 7.2.0
@@ -3742,19 +3918,31 @@ packages:
     resolution: {integrity: sha512-ALYone6pm6QmwZoAgeyNksccT9Q4AWZQ6PvfwR37GT6r6FWUPguq6sUmNGSMV2Wr761oQoBxwGGa6DR5o1DC9g==}
     dependencies:
       '@types/connect': 3.4.35
+<<<<<<< HEAD
       '@types/node': 20.5.4
+=======
+      '@types/node': 20.5.3
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     dev: false
 
   /@types/connect@3.4.35:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
     dependencies:
+<<<<<<< HEAD
       '@types/node': 20.5.4
+=======
+      '@types/node': 20.5.3
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     dev: false
 
   /@types/cross-spawn@6.0.2:
     resolution: {integrity: sha512-KuwNhp3eza+Rhu8IFI5HUXRP0LIhqH5cAjubUvGXXthh4YYBuP2ntwEX+Cz8GJoZUHlKo247wPWOfA9LYEq4cw==}
     dependencies:
+<<<<<<< HEAD
       '@types/node': 20.5.4
+=======
+      '@types/node': 20.5.3
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     dev: false
 
   /@types/detect-port@1.3.3:
@@ -3802,7 +3990,11 @@ packages:
   /@types/express-serve-static-core@4.17.36:
     resolution: {integrity: sha512-zbivROJ0ZqLAtMzgzIUC4oNqDG9iF0lSsAqpOD9kbs5xcIM3dTiyuHvBc7R8MtWBp3AAWGaovJa+wzWPjLYW7Q==}
     dependencies:
+<<<<<<< HEAD
       '@types/node': 20.5.4
+=======
+      '@types/node': 20.5.3
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
       '@types/qs': 6.9.7
       '@types/range-parser': 1.2.4
       '@types/send': 0.17.1
@@ -3825,13 +4017,21 @@ packages:
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
     dependencies:
       '@types/minimatch': 5.1.2
+<<<<<<< HEAD
       '@types/node': 20.5.4
+=======
+      '@types/node': 20.5.3
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     dev: false
 
   /@types/graceful-fs@4.1.6:
     resolution: {integrity: sha512-Sig0SNORX9fdW+bQuTEovKj3uHcUL6LQKbCrrqb1X7J6/ReAbhCXRAhc+SMejhLELFj2QcyuxmUooZ4bt5ReSw==}
     dependencies:
+<<<<<<< HEAD
       '@types/node': 20.5.4
+=======
+      '@types/node': 20.5.3
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     dev: false
 
   /@types/http-errors@2.0.1:
@@ -3899,7 +4099,11 @@ packages:
   /@types/node-fetch@2.6.4:
     resolution: {integrity: sha512-1ZX9fcN4Rvkvgv4E6PAY5WXUFWFcRWxZa3EW83UjycOB9ljJCedb2CupIP4RZMEwF/M3eTcCihbBRgwtGbg5Rg==}
     dependencies:
+<<<<<<< HEAD
       '@types/node': 16.18.44
+=======
+      '@types/node': 20.5.3
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
       form-data: 3.0.1
     dev: false
 
@@ -3907,12 +4111,21 @@ packages:
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
     dev: false
 
+<<<<<<< HEAD
   /@types/node@16.18.44:
     resolution: {integrity: sha512-PZXtT+wqSMHnLPVExTh+tMt1VK+GvjRLsGZMbcQ4Mb/cG63xJig/TUmgrDa9aborl2i22UnpIzHYNu7s97NbBQ==}
     dev: false
 
   /@types/node@20.5.4:
     resolution: {integrity: sha512-Y9vbIAoM31djQZrPYjpTLo0XlaSwOIsrlfE3LpulZeRblttsLQRFRlBAppW0LOxyT3ALj2M5vU1ucQQayQH3jA==}
+=======
+  /@types/node@16.18.43:
+    resolution: {integrity: sha512-YFpgPKPRcwYbeNOimfu70B+TVJe6tr88WiW/TzEldkwGxQXrmabpU+lDjrFlNqdqIi3ON0o69EQBW62VH4MIxw==}
+    dev: false
+
+  /@types/node@20.5.3:
+    resolution: {integrity: sha512-ITI7rbWczR8a/S6qjAW7DMqxqFMjjTo61qZVWJ1ubPvbIQsL5D/TvwjYEalM8Kthpe3hTzOGrF2TGbAu2uyqeA==}
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     dev: false
 
   /@types/normalize-package-data@2.4.1:
@@ -3955,7 +4168,11 @@ packages:
     resolution: {integrity: sha512-Cwo8LE/0rnvX7kIIa3QHCkcuF21c05Ayb0ZfxPiv0W8VRiZiNW/WuRupHKpqqGVGf7SUA44QSOUKaEd9lIrd/Q==}
     dependencies:
       '@types/mime': 1.3.2
+<<<<<<< HEAD
       '@types/node': 20.5.4
+=======
+      '@types/node': 20.5.3
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     dev: false
 
   /@types/serve-static@1.15.2:
@@ -3963,7 +4180,11 @@ packages:
     dependencies:
       '@types/http-errors': 2.0.1
       '@types/mime': 3.0.1
+<<<<<<< HEAD
       '@types/node': 20.5.4
+=======
+      '@types/node': 20.5.3
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     dev: false
 
   /@types/unist@2.0.7:
@@ -4173,7 +4394,11 @@ packages:
       eslint-visitor-keys: 3.4.3
     dev: false
 
+<<<<<<< HEAD
   /@vitejs/plugin-react@3.1.0(vite@4.4.9):
+=======
+  /@vitejs/plugin-react@3.1.0(vite@4.4.2):
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     resolution: {integrity: sha512-AfgcRL8ZBhAlc3BFdigClmTUMISmmzHn7sB2h9U1odvc5U/MjWXsAaz18b/WoppUTDBzxOJwo2VdClfUcItu9g==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -4184,11 +4409,33 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.22.5(@babel/core@7.22.10)
       magic-string: 0.27.0
       react-refresh: 0.14.0
+<<<<<<< HEAD
       vite: 4.4.9(less@4.2.0)
+=======
+      vite: 4.4.2(less@4.2.0)
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     transitivePeerDependencies:
       - supports-color
     dev: false
 
+<<<<<<< HEAD
+=======
+  /@vitejs/plugin-react@4.0.2(vite@4.4.2):
+    resolution: {integrity: sha512-zbnVp3Esfg33zDaoLrjxG+p/dPiOtpvJA+1oOEQwSxMMTRL9zi1eghIcd2WtLjkcKnPsa3S15LzS/OzDn2BOCA==}
+    engines: {node: ^14.18.0 || >=16.0.0}
+    peerDependencies:
+      vite: ^4.2.0
+    dependencies:
+      '@babel/core': 7.22.10
+      '@babel/plugin-transform-react-jsx-self': 7.22.5(@babel/core@7.22.10)
+      '@babel/plugin-transform-react-jsx-source': 7.22.5(@babel/core@7.22.10)
+      react-refresh: 0.14.0
+      vite: 4.4.2(less@4.2.0)
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
   /@webassemblyjs/ast@1.11.6:
     resolution: {integrity: sha512-IN1xI7PwOvLPgjcf180gC1bqn3q/QaOCwYUahIOhbYUu8KA/3tw2RT/T0Gidi1l7Hhj5D/INhJxiICObqpMu4Q==}
     dependencies:
@@ -5009,12 +5256,15 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
+<<<<<<< HEAD
   /class-variance-authority@0.7.0:
     resolution: {integrity: sha512-jFI8IQw4hczaL4ALINxqLEXQbWcNjoSkloa4IaufXCJr6QawJyw7tuRysRsrE8w2p/4gGaxKIt/hX3qz/IbD1A==}
     dependencies:
       clsx: 2.0.0
     dev: false
 
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
   /clean-stack@2.2.0:
     resolution: {integrity: sha512-4diC9HaTE+KRAMWhDhrGOECgWZxoevMc5TlkObMqNSsVU62PYzXZ/SMTjzyGAFF1YusgxGcSWTEXBhp0CPwQ1A==}
     engines: {node: '>=6'}
@@ -5093,6 +5343,10 @@ packages:
   /clsx@2.0.0:
     resolution: {integrity: sha512-rQ1+kcj+ttHG0MKVGBUXwayCCF1oh39BF5COIpRzuCEv8Mwjv0XucrI2ExNTOn9IlLifGClWQcU9BrZORvtw6Q==}
     engines: {node: '>=6'}
+<<<<<<< HEAD
+=======
+    dev: true
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
 
   /color-convert@1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
@@ -5213,7 +5467,10 @@ packages:
     resolution: {integrity: sha512-1j20GZTsvKNkc4BY3NpMOM8tt///wY3FpIzozTOFO2ffuZcV61nojHXVKIy3WM+7ADCy5FVhdZYHYDdgTU0yJw==}
     dependencies:
       is-what: 3.14.1
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
 
   /core-js-compat@3.32.1:
     resolution: {integrity: sha512-GSvKDv4wE0bPnQtjklV101juQ85g6H3rm5PDP20mqlS5j0kXF3pP97YvAu5hl+uFHqMictp3b2VxOHljWMAtuA==}
@@ -5365,8 +5622,12 @@ packages:
       supports-color:
         optional: true
     dependencies:
+<<<<<<< HEAD
       ms: 2.1.2
     dev: false
+=======
+      ms: 2.1.3
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
 
   /debug@4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
@@ -5651,7 +5912,10 @@ packages:
     requiresBuild: true
     dependencies:
       prr: 1.0.1
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /error-ex@1.3.2:
@@ -5802,7 +6066,10 @@ packages:
       '@esbuild/win32-arm64': 0.18.20
       '@esbuild/win32-ia32': 0.18.20
       '@esbuild/win32-x64': 0.18.20
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
 
   /escalade@3.1.1:
     resolution: {integrity: sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==}
@@ -6403,8 +6670,13 @@ packages:
     resolution: {integrity: sha512-5nqDSxl8nn5BSNxyR3n4I6eDmbolI6WT+QqR547RwxQapgjQBmtktdP+HTBb/a/zLsbzERTONyUB5pefh5TtjQ==}
     dev: false
 
+<<<<<<< HEAD
   /flow-parser@0.215.1:
     resolution: {integrity: sha512-qq3rdRToqwesrddyXf+Ml8Tuf7TdoJS+EMbJgC6fHAVoBCXjb4mHelNd3J+jD8ts0bSHX81FG3LN7Qn/dcl6pA==}
+=======
+  /flow-parser@0.215.0:
+    resolution: {integrity: sha512-8bjwzy8vi+fNDy8YoTBNtQUSZa53i7UWJJTunJojOtjab9cMNhOCwohionuMgDQUU0y21QTTtPOX6OQEOQT72A==}
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     engines: {node: '>=0.4.0'}
     dev: false
 
@@ -6447,6 +6719,27 @@ packages:
   /fraction.js@4.2.1:
     resolution: {integrity: sha512-/KxoyCnPM0GwYI4NN0Iag38Tqt+od3/mLuguepLgCAKPn0ZhC544nssAW0tG2/00zXEYl9W+7hwAIpLHo6Oc7Q==}
 
+<<<<<<< HEAD
+=======
+  /framer-motion@10.16.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-K6TXr5mZtitC/dxQCBdg7xzdN0d5IAIrlaqCPKtIQVdzVPGC0qBuJKXggHX1vjnP5gPOFwB1KbCCTWcnFc3kWg==}
+    peerDependencies:
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      tslib: 2.6.2
+    optionalDependencies:
+      '@emotion/is-prop-valid': 0.8.8
+    dev: false
+
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
   /fresh@0.5.2:
     resolution: {integrity: sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q==}
     engines: {node: '>= 0.6'}
@@ -6847,7 +7140,10 @@ packages:
     requiresBuild: true
     dependencies:
       safer-buffer: 2.1.2
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /icss-utils@5.1.0(postcss@8.4.28):
@@ -6872,7 +7168,10 @@ packages:
     engines: {node: '>=0.10.0'}
     hasBin: true
     requiresBuild: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /import-fresh@3.3.0:
@@ -7188,7 +7487,10 @@ packages:
 
   /is-what@3.14.1:
     resolution: {integrity: sha512-sNxgpk9793nzSs7bA6JQJGeIuRBQhAaNGG77kzYQgMkrID+lS6SlK07K5LaptscDlSaIgH+GPFzf+d75FVxozA==}
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
 
   /is-windows@1.0.2:
     resolution: {integrity: sha512-eXK1UInq2bPmjyX6e3VHIzMLobc4J94i4AWn+Hpq3OU5KkrRC96OAcR3PRJ/pGu6m8TRnBHP9dkXQVsT/COVIA==}
@@ -7290,7 +7592,11 @@ packages:
     dependencies:
       '@jest/types': 29.6.3
       '@types/graceful-fs': 4.1.6
+<<<<<<< HEAD
       '@types/node': 20.5.4
+=======
+      '@types/node': 20.5.3
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
       anymatch: 3.1.3
       fb-watchman: 2.0.2
       graceful-fs: 4.2.11
@@ -7313,7 +7619,11 @@ packages:
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
       '@jest/types': 29.6.3
+<<<<<<< HEAD
       '@types/node': 20.5.4
+=======
+      '@types/node': 20.5.3
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
       chalk: 4.1.2
       ci-info: 3.8.0
       graceful-fs: 4.2.11
@@ -7324,7 +7634,11 @@ packages:
     resolution: {integrity: sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==}
     engines: {node: '>= 10.13.0'}
     dependencies:
+<<<<<<< HEAD
       '@types/node': 20.5.4
+=======
+      '@types/node': 20.5.3
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
       merge-stream: 2.0.0
       supports-color: 8.1.1
     dev: false
@@ -7333,7 +7647,11 @@ packages:
     resolution: {integrity: sha512-wacANXecZ/GbQakpf2CClrqrlwsYYDSXFd4fIGdL+dXpM2GWoJ+6bhQ7vR3TKi3+gkSfBkjy1/khH/WrYS4Q6g==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
+<<<<<<< HEAD
       '@types/node': 20.5.4
+=======
+      '@types/node': 20.5.3
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
       jest-util: 29.6.3
       merge-stream: 2.0.0
       supports-color: 8.1.1
@@ -7378,7 +7696,11 @@ packages:
       '@babel/register': 7.22.5(@babel/core@7.22.10)
       babel-core: 7.0.0-bridge.0(@babel/core@7.22.10)
       chalk: 4.1.2
+<<<<<<< HEAD
       flow-parser: 0.215.1
+=======
+      flow-parser: 0.215.0
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
       graceful-fs: 4.2.11
       micromatch: 4.0.5
       neo-async: 2.6.2
@@ -7508,7 +7830,10 @@ packages:
       source-map: 0.6.1
     transitivePeerDependencies:
       - supports-color
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
 
   /leven@3.1.0:
     resolution: {integrity: sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==}
@@ -7673,7 +7998,10 @@ packages:
     dependencies:
       pify: 4.0.1
       semver: 5.7.2
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
 
   /make-dir@3.1.0:
     resolution: {integrity: sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==}
@@ -7804,7 +8132,10 @@ packages:
     resolution: {integrity: sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==}
     engines: {node: '>=4'}
     hasBin: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
 
   /mime@2.6.0:
     resolution: {integrity: sha512-USPkMeET31rOMiarsBNIHZKLGgvKc/LrjofAnBlOttf5ajRvqiRA8QsenbcooctK6d6Ts6aqZXBA+XbkKthiQg==}
@@ -7918,7 +8249,10 @@ packages:
 
   /ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
 
   /mz@2.7.0:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==}
@@ -7947,7 +8281,10 @@ packages:
       sax: 1.2.4
     transitivePeerDependencies:
       - supports-color
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /negotiator@0.6.3:
@@ -8017,8 +8354,13 @@ packages:
     resolution: {integrity: sha512-F5kfEj95kX8tkDhUCYdV8dg3/8Olx/94zB8+ZNthFs6Bz31UpUi8Xh40TN3thLwXgrwXry1pEg9lJ++tLWTcqA==}
     dev: false
 
+<<<<<<< HEAD
   /node-fetch@2.7.0:
     resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
+=======
+  /node-fetch@2.6.13:
+    resolution: {integrity: sha512-StxNAxh15zr77QvvkmveSQ8uCQ4+v5FkvNTj0OESmiHu+VRi/gXArXtkWMElOsOUNLtUEvI4yS+rdtOHZTwlQA==}
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     engines: {node: 4.x || >=6.0.0}
     peerDependencies:
       encoding: ^0.1.0
@@ -8308,7 +8650,10 @@ packages:
   /parse-node-version@1.0.1:
     resolution: {integrity: sha512-3YHlOa/JgH6Mnpr05jP9eDG254US9ek25LyIxZlDItp2iJtwyaXQb57lBYLdT3MowkUFYEV2XXNAYIPlESvJlA==}
     engines: {node: '>= 0.10'}
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
 
   /parseurl@1.3.3:
     resolution: {integrity: sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==}
@@ -8383,7 +8728,10 @@ packages:
   /pify@4.0.1:
     resolution: {integrity: sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==}
     engines: {node: '>=6'}
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
 
   /pirates@4.0.6:
     resolution: {integrity: sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==}
@@ -8683,7 +9031,10 @@ packages:
   /prr@1.0.1:
     resolution: {integrity: sha512-yPw4Sng1gWghHQWj0B3ZggWUm4qVbPwPFcRG8KyxiU7J2OHFSoEHKS+EZ3fv5l1t9CyCiop6l/ZYeWbrgoQejw==}
     requiresBuild: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /pseudomap@1.0.2:
@@ -8855,7 +9206,10 @@ packages:
   /react-refresh@0.14.0:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==}
     engines: {node: '>=0.10.0'}
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
 
   /react-remove-scroll-bar@2.3.4(@types/react@18.2.21)(react@18.2.0):
     resolution: {integrity: sha512-63C4YQBUt0m6ALadE9XV56hV8BgJWDmmTPY758iIJjfQKt2nYwoUrPk0LXRXcB/yIj82T1/Ixfdpdk68LwIB0A==}
@@ -9167,21 +9521,33 @@ packages:
     resolution: {integrity: sha512-mwqeW5XsA2qAejG46gYdENaxXjx9onRNCfn7L0duuP4hCuTIi/QO7PDK07KJfp1d+izWPrzEJDcSqBa0OZQriA==}
     hasBin: true
     dependencies:
+<<<<<<< HEAD
       glob: 7.1.6
+=======
+      glob: 7.2.3
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     dev: false
 
   /rimraf@2.7.1:
     resolution: {integrity: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==}
     hasBin: true
     dependencies:
+<<<<<<< HEAD
       glob: 7.1.6
+=======
+      glob: 7.2.3
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     dev: false
 
   /rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
     hasBin: true
     dependencies:
+<<<<<<< HEAD
       glob: 7.1.6
+=======
+      glob: 7.2.3
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     dev: false
 
   /rollup@3.28.1:
@@ -9190,7 +9556,10 @@ packages:
     hasBin: true
     optionalDependencies:
       fsevents: 2.3.3
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
 
   /run-parallel@1.2.0:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
@@ -9228,7 +9597,10 @@ packages:
 
   /safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
 
   /sass-loader@13.3.2(webpack@5.88.2):
     resolution: {integrity: sha512-CQbKl57kdEv+KDLquhC+gE3pXt74LEAzm+tzywcA0/aHZuub8wTErbjAoNI57rPUWRYRNC5WUnNl8eGJNbDdwg==}
@@ -9256,7 +9628,10 @@ packages:
   /sax@1.2.4:
     resolution: {integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==}
     requiresBuild: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     optional: true
 
   /scheduler@0.23.0:
@@ -9277,7 +9652,10 @@ packages:
   /semver@5.7.2:
     resolution: {integrity: sha512-cBznnQ9KjJqU67B52RMC65CMarK2600WFnbkcaiwWq3xy/5haFJlshgnpjovMVJ+Hff49d8GEn0b87C5pDQ10g==}
     hasBin: true
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
 
   /semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
@@ -9445,7 +9823,10 @@ packages:
   /source-map@0.6.1:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
     engines: {node: '>=0.10.0'}
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
 
   /space-separated-tokens@1.1.5:
     resolution: {integrity: sha512-q/JSVd1Lptzhf5bkYm4ob4iWPjx0KiRe3sRFBNrVqbJkFaBm5vbbowy1mymoPNLRa52+oadOhJ+K49wsSeSjTA==}
@@ -9865,7 +10246,11 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       '@istanbuljs/schema': 0.1.3
+<<<<<<< HEAD
       glob: 7.1.6
+=======
+      glob: 7.2.3
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
       minimatch: 3.1.2
     dev: false
 
@@ -10275,8 +10660,13 @@ packages:
     engines: {node: '>= 0.8'}
     dev: false
 
+<<<<<<< HEAD
   /vite@4.4.9(less@4.2.0):
     resolution: {integrity: sha512-2mbUn2LlUmNASWwSCNSJ/EG2HuSRTnVNaydp6vMCm5VIqJsjMfbIWtbH2kDuwUVW5mMUKKZvGPX/rqeqVvv1XA==}
+=======
+  /vite@4.4.2(less@4.2.0):
+    resolution: {integrity: sha512-zUcsJN+UvdSyHhYa277UHhiJ3iq4hUBwHavOpsNUGsTgjBeoBlK8eDt+iT09pBq0h9/knhG/SPrZiM7cGmg7NA==}
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -10309,7 +10699,10 @@ packages:
       rollup: 3.28.1
     optionalDependencies:
       fsevents: 2.3.3
+<<<<<<< HEAD
     dev: false
+=======
+>>>>>>> 6f22e96e (Add pnpm lock and fix comments)
 
   /walker@1.0.8:
     resolution: {integrity: sha512-ts/8E8l5b7kY0vlWLewOkDXMmPdLcVV4GmOQLyxuSswIJsweeFZtAsMF7k1Nszz+TYBQrlYRmzOnr398y1JemQ==}

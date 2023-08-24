@@ -10,7 +10,7 @@ const OBOS_LOGO = {
 
 export default function Home() {
   return (
-    <div className="container min-h-screen px-5 py-14 text-white">
+    <div className="container min-h-screen px-4 py-14 text-white">
       <Image className="h-10 w-40" aria-hidden {...OBOS_LOGO} alt="" />
       <Link
         href="/"

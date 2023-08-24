@@ -12,7 +12,8 @@
     "ci:version": "changeset version",
     "lint": "pnpm lint:js && pnpm lint:format",
     "lint:format": "prettier --list-different .",
-    "lint:js": "eslint . --ext \"js,cjs,mjs,tsx,ts\" --max-warnings 0 --ignore-path .gitignore"
+    "lint:js": "eslint . --ext \"js,cjs,mjs,tsx,ts\" --max-warnings 0 --ignore-path .gitignore",
+    "dev:docs": "pnpm --filter './docs' dev"
   },
   "dependencies": {
     "@changesets/cli": "2.26.2",
