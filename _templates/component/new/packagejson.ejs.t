@@ -1,5 +1,5 @@
 ---
-to: packages/react/<%=name%>/package.json
+to: packages/components/<%=name%>/package.json
 ---
 {
   "name": "@obosbbl/grunnmuren-react-<%=name%>",

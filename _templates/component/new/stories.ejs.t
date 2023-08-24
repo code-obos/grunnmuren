@@ -1,5 +1,5 @@
 ---
-to: packages/react/<%=name%>/src/<%=Name%>.stories.tsx
+to: packages/components/<%=name%>/src/<%=Name%>.stories.tsx
 ---
 
 import { <%=Name%> } from './<%=Name%>';

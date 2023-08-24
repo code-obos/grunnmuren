@@ -1,5 +1,5 @@
 ---
-to: packages/react/<%=name%>/src/<%=Name%>.tsx
+to: packages/components/<%=name%>/src/<%=Name%>.tsx
 ---
 import { cva, type VariantProps } from 'class-variance-authority';
 
