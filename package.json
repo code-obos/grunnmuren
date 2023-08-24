@@ -33,15 +33,13 @@
     "eslint-plugin-react": "7.33.2",
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-storybook": "0.6.13",
-    "hygen": "^6.2.11",
+    "hygen": "6.2.11",
     "postcss": "8.4.28",
     "prettier": "3.0.2",
     "prettier-plugin-tailwindcss": "0.5.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "storybook": "7.3.2"
-  },
-  "devDependencies": {
+    "storybook": "7.3.2",
     "typescript": "5.1.6",
     "unbuild": "2.0.0"
   }
