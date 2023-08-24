@@ -13,7 +13,8 @@
     "lint": "pnpm lint:js && pnpm lint:format",
     "lint:format": "prettier --list-different .",
     "lint:js": "eslint . --ext \"js,cjs,mjs,tsx,ts\" --max-warnings 0 --ignore-path .gitignore",
-    "dev:docs": "pnpm --filter './docs' dev"
+    "dev:docs": "pnpm --filter './docs' dev",
+    "generate:component": "hygen component new"
   },
   "dependencies": {
     "@changesets/cli": "2.26.2",
@@ -35,6 +36,7 @@
     "eslint-plugin-react": "7.33.2",
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-storybook": "0.6.13",
+    "hygen": "6.2.11",
     "postcss": "8.4.28",
     "prettier": "3.0.2",
     "prettier-plugin-tailwindcss": "0.5.3",
