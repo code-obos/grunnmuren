@@ -87,6 +87,18 @@ importers:
         specifier: 2.0.0
         version: 2.0.0(typescript@5.1.6)
 
+  packages/components/alert:
+    dependencies:
+      '@obosbbl/grunnmuren-icons-react':
+        specifier: workspace:*
+        version: link:../../icons-react
+      class-variance-authority:
+        specifier: ^0.7.0
+        version: 0.7.0
+      react:
+        specifier: ^18
+        version: 18.2.0
+
   packages/components/chip:
     dependencies:
       class-variance-authority:
@@ -144,15 +156,6 @@ importers:
       react:
         specifier: ^18
         version: 18.2.0
-
-  packages/react/alert:
-    dependencies:
-      '@obosbbl/grunnmuren-icons-react':
-        specifier: workspace:*
-        version: link:../../icons-react
-      class-variance-authority:
-        specifier: 0.7.0
-        version: 0.7.0
 
   packages/tailwind:
     dependencies:
