@@ -1,5 +1,5 @@
 ---
-to: packages/react/<%=Name%>/package.json
+to: packages/react/<%=name%>/package.json
 ---
 
 {

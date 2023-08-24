@@ -1,5 +1,5 @@
 ---
-to: packages/react/<%=Name%>/src/<%=Name%>.tsx
+to: packages/react/<%=name%>/src/<%=Name%>.tsx
 ---
 
 const <%= Name %> = () => {
