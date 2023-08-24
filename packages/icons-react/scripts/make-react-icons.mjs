@@ -12,7 +12,7 @@ const SVG_PATH = path.join(
 
 // The path where we write the SVGs as React components.
 // The file is temporary, for pre bundling.
-const REACT_FILE = path.join(__dirname, '../icons.tsx');
+const REACT_FILE = path.join(__dirname, '../src/index.tsx');
 
 const files = listSvgs(SVG_PATH);
 
