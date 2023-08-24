@@ -2,34 +2,36 @@
   "name": "@obosbbl/grunnmuren-icons-react",
   "version": "1.0.0",
   "description": "Grunnmuren's icon set",
-  "main": "index.js",
+  "main": "dist/index.mjs",
+  "module": "dist/index.mjs",
   "type": "module",
   "repository": {
     "url": "https://github.com/code-obos/grunnmuren",
     "directory": "packages/icons-react"
   },
   "exports": {
-    ".": "./dist/icons.js"
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.mjs"
   },
   "files": [
     "dist"
   ],
   "sideEffects": false,
-  "types": "./dist/icons.d.ts",
+  "types": "./dist/index.d.ts",
   "license": "MIT",
   "scripts": {
-    "build": "pnpm run build:make-react && pnpm run build:vite && pnpm run build:types",
+    "build": "pnpm run build:make-react && pnpm run build:unbuild",
     "build:make-react": "node ./scripts/make-react-icons.mjs",
-    "build:types": "tsc --emitDeclarationOnly --declaration",
-    "build:vite": "vite build"
+    "build:unbuild": "unbuild"
+  },
+  "peerDependencies": {
+    "react": "^18"
   },
   "devDependencies": {
     "@obosbbl/grunnmuren-icons-svg": "workspace:*",
     "@svgr/core": "8.0.0",
     "@svgr/plugin-jsx": "8.0.1",
     "@svgr/plugin-svgo": "8.0.1",
-    "@vitejs/plugin-react": "4.0.2",
-    "fs-extra": "11.1.1",
-    "vite": "4.4.2"
+    "fs-extra": "11.1.1"
   }
 }
