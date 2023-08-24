@@ -27,5 +27,12 @@
   },
   "peerDependencies": {
     "react": "^18"
+  },
+  "unbuild": {
+    "rollup": {
+      "esbuild": {
+        "jsx": "automatic"
+      }
+    }
   }
 }
