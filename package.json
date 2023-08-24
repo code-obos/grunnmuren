@@ -6,7 +6,7 @@
     "url": "https://github.com/code-obos/grunnmuren"
   },
   "scripts": {
-    "build": "pnpm --filter './packages/*' build",
+    "build": "pnpm --filter './packages/**' build",
     "dev": "storybook dev -p 6006 --ci",
     "ci:publish": "pnpm build && changeset publish",
     "ci:version": "changeset version",
@@ -38,10 +38,11 @@
     "prettier-plugin-tailwindcss": "0.5.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "storybook": "7.3.2",
-    "typescript": "5.1.6"
+    "storybook": "7.3.2"
   },
   "devDependencies": {
-    "hygen": "^6.2.11"
+    "hygen": "^6.2.11",
+    "typescript": "5.1.6",
+    "unbuild": "2.0.0"
   }
 }
