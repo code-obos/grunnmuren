@@ -16,3 +16,5 @@ storybook-static/
 
 # Secrets
 .FIGMA_TOKEN
+.vercel
+packages/icons-react/icons.tsx
