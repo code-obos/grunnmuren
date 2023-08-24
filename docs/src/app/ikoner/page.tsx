@@ -24,7 +24,10 @@ export default function Home() {
       </div>
       <div className="my-14 flex flex-wrap justify-between gap-20">
         {Object.entries(icons).map(([iconName, Icon]) => (
-          <div key={iconName} className="w-24">
+          <div
+            key={iconName}
+            className="flex w-32 flex-col items-center p-4 hover:rounded-lg hover:bg-blue"
+          >
             <Icon className="mx-auto mb-2" />
             <span className="block text-center text-sm">{iconName}</span>
           </div>

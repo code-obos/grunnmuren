@@ -11,6 +11,7 @@
   "dependencies": {
     "@obosbbl/grunnmuren-icons-react": "workspace:*",
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
+    "framer-motion": "10.16.1",
     "next": "13.4.19",
     "react": "18.2.0",
     "react-dom": "18.2.0"

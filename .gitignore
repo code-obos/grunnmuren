@@ -16,3 +16,4 @@ storybook-static/
 
 # Secrets
 .FIGMA_TOKEN
+.vercel
