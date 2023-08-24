@@ -1,5 +1,5 @@
 {
-  "name": "@react-spectrum/badge",
+  "name": "@obosbbl/grunnmuren-react-chip",
   "version": "2.0.0",
   "description": "Grunnmuren UI components in React",
   "license": "MIT",
@@ -16,10 +16,6 @@
     "dist"
   ],
   "sideEffects": false,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/adobe/react-spectrum"
-  },
   "dependencies": {
     "class-variance-authority": "^0.7.0"
   }
