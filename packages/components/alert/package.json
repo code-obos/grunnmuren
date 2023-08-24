@@ -1,5 +1,5 @@
 {
-  "name": "@obosbbl/grunnmuren-react",
+  "name": "@obosbbl/grunnmuren-react-alert",
   "version": "1.0.0",
   "description": "Grunnmuren components in React",
   "license": "MIT",
@@ -22,8 +22,8 @@
     "url": "https://github.com/code-obos/grunnmuren"
   },
   "dependencies": {
-    "@obosbbl/grunnmuren-react-alert": "workspace:*",
-    "@obosbbl/grunnmuren-react-chip": "workspace:*"
+    "@obosbbl/grunnmuren-icons-react": "workspace:*",
+    "class-variance-authority": "^0.7.0"
   },
   "peerDependencies": {
     "react": "^18"
