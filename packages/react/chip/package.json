@@ -10,13 +10,19 @@
     "import": "./dist/import.mjs",
     "require": "./dist/main.js"
   },
+  "scripts": {
+    "build": "unbuild"
+  },
   "types": "dist/types.d.ts",
-  "source": "src/index.ts",
   "files": [
     "dist"
   ],
+  "source": "./src/index.ts",
   "sideEffects": false,
   "dependencies": {
     "class-variance-authority": "^0.7.0"
+  },
+  "peerDependencies": {
+    "react": "^18"
   }
 }

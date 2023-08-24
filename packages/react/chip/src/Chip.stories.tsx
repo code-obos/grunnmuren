@@ -1,4 +1,4 @@
-import { Chip, chipVariants } from './Chip';
+import { ChipBase as Chip } from './Chip';
 
 export default {
   title: 'Chip',
@@ -7,7 +7,12 @@ export default {
   },
 };
 
-const colors = ['red-light', 'orange-light', 'green-light', 'blue-light'];
+const colors = [
+  'red-light',
+  'orange-light',
+  'green-light',
+  'blue-light',
+] as const;
 
 export const Default = () => {
   return (
@@ -15,14 +20,14 @@ export const Default = () => {
       <div className="flex flex-col gap-2">
         {colors.map((color) => (
           <Chip key={color} color={color}>
-            Chip: {color}
+            {color}
           </Chip>
         ))}
       </div>
       <div className="flex flex-col gap-2">
         {colors.map((color) => (
           <Chip key={color} color={color} variant="outline">
-            Chip: {color}
+            {color}
           </Chip>
         ))}
       </div>
