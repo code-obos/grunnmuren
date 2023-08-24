@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
-    "@obosbbl/grunnmuren-icons-svg": "workspace:*",
+    "@obosbbl/grunnmuren-icons-react": "workspace:*",
     "autoprefixer": "10.4.15",
     "next": "13.4.19",
     "postcss": "8.4.28",

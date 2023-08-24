@@ -8,9 +8,9 @@ importers:
 
   docs:
     dependencies:
-      '@obosbbl/grunnmuren-icons-svg':
+      '@obosbbl/grunnmuren-icons-react':
         specifier: workspace:*
-        version: link:../packages/icons-svg
+        version: link:../packages/icons-react
       '@obosbbl/grunnmuren-tailwind':
         specifier: workspace:*
         version: link:../packages/tailwind
