@@ -13,10 +13,12 @@
     "lint": "pnpm lint:js && pnpm lint:format",
     "lint:format": "prettier --list-different .",
     "lint:js": "eslint . --ext \"js,cjs,mjs,tsx,ts\" --max-warnings 0 --ignore-path .gitignore",
+    "dev:docs": "pnpm --filter './docs' dev",
     "generate:component": "hygen component new"
   },
   "dependencies": {
     "@changesets/cli": "2.26.2",
+    "@next/eslint-plugin-next": "13.4.19",
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
     "@storybook/addon-controls": "7.3.2",
     "@storybook/addon-docs": "7.3.2",
@@ -29,6 +31,7 @@
     "@typescript-eslint/parser": "6.4.1",
     "autoprefixer": "10.4.15",
     "eslint": "8.47.0",
+    "eslint-config-next": "13.4.19",
     "eslint-config-prettier": "9.0.0",
     "eslint-plugin-react": "7.33.2",
     "eslint-plugin-react-hooks": "4.6.0",
