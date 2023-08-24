@@ -4,9 +4,11 @@ import path from 'path';
 import fs from 'fs-extra';
 import { __dirname, listSvgs } from './utils.mjs';
 
-
 // Path where SVGs are located
-const SVG_PATH = path.join(__dirname, '../node_modules/@obosbbl/grunnmuren-icons-svg/src');
+const SVG_PATH = path.join(
+  __dirname,
+  '../node_modules/@obosbbl/grunnmuren-icons-svg/src',
+);
 
 // The path where we write the SVGs as React components.
 // The file is temporary, for pre bundling.
