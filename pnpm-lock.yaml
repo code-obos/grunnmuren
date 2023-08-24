@@ -87,6 +87,15 @@ importers:
         specifier: 2.0.0
         version: 2.0.0(typescript@5.1.6)
 
+  packages/components/chip:
+    dependencies:
+      class-variance-authority:
+        specifier: ^0.7.0
+        version: 0.7.0
+      react:
+        specifier: ^18
+        version: 18.2.0
+
   packages/icons-react:
     dependencies:
       react:
@@ -127,11 +136,11 @@ importers:
         specifier: 3.0.2
         version: 3.0.2
 
-  packages/react/chip:
+  packages/react:
     dependencies:
-      class-variance-authority:
-        specifier: ^0.7.0
-        version: 0.7.0
+      '@obosbbl/grunnmuren-react-chip':
+        specifier: workspace:*
+        version: link:../components/chip
       react:
         specifier: ^18
         version: 18.2.0
