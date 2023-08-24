@@ -8,10 +8,12 @@ on:
     branches:
       - main
       - next
+      - v2
   pull_request:
     branches:
       - main
       - next
+      - v2
 
 jobs:
   build:
