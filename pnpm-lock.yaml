@@ -130,6 +130,15 @@ importers:
         specifier: 3.0.2
         version: 3.0.2
 
+  packages/react/button:
+    dependencies:
+      class-variance-authority:
+        specifier: ^0.7.0
+        version: 0.7.0
+      react:
+        specifier: ^18
+        version: 18.2.0
+
   packages/react/chip:
     dependencies:
       class-variance-authority:

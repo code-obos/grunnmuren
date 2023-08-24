@@ -1,8 +1,5 @@
----
-to: packages/react/<%=name%>/package.json
----
 {
-  "name": "@obosbbl/grunnmuren-react-<%=name%>",
+  "name": "@obosbbl/grunnmuren-react-button",
   "version": "1.0.0",
   "description": "Grunnmuren components in React",
   "license": "MIT",

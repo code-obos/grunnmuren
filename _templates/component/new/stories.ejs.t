@@ -2,7 +2,7 @@
 to: packages/react/<%=name%>/src/<%=Name%>.stories.tsx
 ---
 
-import <%=Name%> from './<%=Name%>';
+import { <%=Name%> } from './<%=Name%>';
 
 export default {
   title: '<%=Name%>',
