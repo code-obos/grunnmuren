@@ -9,7 +9,7 @@
     "directory": "packages/icons-svg"
   },
   "exports": {
-    "./*": "./src/*"
+    ".": "./src"
   },
   "files": [
     "src"
