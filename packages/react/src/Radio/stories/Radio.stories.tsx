@@ -11,7 +11,7 @@ export default metadata;
 
 export const Uncontrolled = () => {
   return (
-    <RadioGroup name="form-name" defaultValue="2">
+    <RadioGroup name="form-name-1" defaultValue="2">
       <Radio value="1">Radio 1</Radio>
       <Radio value="2">Radio 2</Radio>
       <Radio value="3">Radio 3</Radio>
@@ -23,7 +23,7 @@ export const Controlled = () => {
   const [value, setValue] = useState('2');
 
   return (
-    <RadioGroup name="form-name" value={value} onChange={setValue}>
+    <RadioGroup name="form-name-2" value={value} onChange={setValue}>
       <Radio value="1">Radio 1</Radio>
       <Radio value="2">Radio 2</Radio>
       <Radio value="3">Radio 3</Radio>
@@ -34,7 +34,7 @@ export const Controlled = () => {
 export const WithLabelAndHelpText = () => {
   return (
     <RadioGroup
-      name="form-name"
+      name="form-name-3"
       label="Radio label"
       required
       description="Radio help text"
@@ -61,7 +61,7 @@ export const WithErrorText = () => {
 
   return (
     <RadioGroup
-      name="form-name"
+      name="form-name-4"
       description="Click on one of the options below to remove error-message"
       value={value}
       onChange={setValue}
