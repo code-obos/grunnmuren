@@ -11,6 +11,15 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   release:
+    permissions:
+      # write permission is required to create a github release
+      contents: write
+      # write permission is required for autolabeler
+      # otherwise, read permission is required at least
+      pull-requests: write
+      # Write permission is required so that it can push to github registry
+      packages: write
+
     name: Release
     runs-on: ubuntu-latest
 
