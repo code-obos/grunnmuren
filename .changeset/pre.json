@@ -4,8 +4,14 @@
   "initialVersions": {
     "@obosbbl/grunnmuren-icons-react": "1.0.0",
     "@obosbbl/grunnmuren-icons-svg": "1.0.0",
-    "@obosbbl/grunnmuren-tailwind": "1.0.0"
+    "@obosbbl/grunnmuren-tailwind": "1.0.0",
+    "docs": "0.1.0",
+    "@obosbbl/grunnmuren-react-alert": "1.0.0",
+    "@obosbbl/grunnmuren-react-chip": "1.0.0",
+    "@obosbbl/grunnmuren-react": "1.0.0"
   },
   "changesets": [
+    "spotty-ladybugs-tease",
+    "thick-yaks-rest"
   ]
 }

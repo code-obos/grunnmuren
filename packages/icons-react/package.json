@@ -1,6 +1,6 @@
 {
   "name": "@obosbbl/grunnmuren-icons-react",
-  "version": "1.0.0",
+  "version": "2.0.0-canary.0",
   "description": "Grunnmuren's icon set",
   "main": "dist/index.mjs",
   "module": "dist/index.mjs",
