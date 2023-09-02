@@ -27,7 +27,7 @@
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
     "@storybook/addon-controls": "7.3.2",
     "@storybook/addon-docs": "7.3.2",
-    "@storybook/addon-styling": "1.3.6",
+    "@storybook/addon-styling": "1.3.7",
     "@storybook/builder-vite": "7.3.2",
     "@storybook/react": "7.3.2",
     "@storybook/react-vite": "7.3.2",
