@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.14.3
+
+### Patch Changes
+
+- f50be58f: Allow ReactNode as label for TextField
+
 ## 1.14.2
 
 ### Patch Changes
