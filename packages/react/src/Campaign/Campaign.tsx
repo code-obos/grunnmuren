@@ -58,7 +58,7 @@ const CampaignInner = <T extends React.ElementType = 'div'>(
   );
 };
 
-export const CampaignBase = forwardRef(CampaignInner);
+const CampaignBase = forwardRef(CampaignInner);
 
 export interface CampaignBodyProps
   extends React.ComponentPropsWithoutRef<'div'> {}
