@@ -12,7 +12,7 @@ import { cx } from '@/utils';
 // The context controls the alignment of the body vs the image
 const CampaignContext = createContext(true);
 
-interface CampaignProps<T extends React.ElementType> {
+export interface CampaignProps<T extends React.ElementType> {
   /** @default div */
   as?: T;
   body: React.ReactElement;
@@ -58,11 +58,12 @@ const CampaignInner = <T extends React.ElementType = 'div'>(
   );
 };
 
-const CampaignBase = forwardRef(CampaignInner);
+export const CampaignBase = forwardRef(CampaignInner);
 
-interface CampaignBodyProps extends React.ComponentPropsWithoutRef<'div'> {}
+export interface CampaignBodyProps
+  extends React.ComponentPropsWithoutRef<'div'> {}
 
-const CampaignBody = forwardRef<HTMLDivElement, CampaignBodyProps>(
+export const CampaignBody = forwardRef<HTMLDivElement, CampaignBodyProps>(
   (props, ref) => {
     const { className, ...rest } = props;
     return (
@@ -75,9 +76,10 @@ const CampaignBody = forwardRef<HTMLDivElement, CampaignBodyProps>(
   },
 );
 
-interface CampaignImageProps extends React.ComponentPropsWithoutRef<'img'> {}
+export interface CampaignImageProps
+  extends React.ComponentPropsWithoutRef<'img'> {}
 
-const CampaignImage = forwardRef<HTMLImageElement, CampaignImageProps>(
+export const CampaignImage = forwardRef<HTMLImageElement, CampaignImageProps>(
   (props, ref) => {
     const { className: classNameProp, children, ...rest } = props;
 
