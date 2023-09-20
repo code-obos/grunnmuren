@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.14.5
+
+### Patch Changes
+
+- 3c2ef489: Fikset URL som velges i Hero Image for ulike bredder
+
 ## 1.14.4
 
 ### Patch Changes
