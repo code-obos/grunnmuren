@@ -32,7 +32,7 @@ export const HeroImage = forwardRef<HTMLPictureElement, HeroImageProps>(
         }
         ref={ref}
       >
-        <source media="(min-width: 768px)" srcSet={props.mdSrc} />
+        <source media="(min-width: 640px)" srcSet={props.mdSrc} />
         <img
           className="object-cover"
           decoding="async"
