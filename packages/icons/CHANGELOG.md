@@ -1,5 +1,13 @@
 # @obosbbl/grunnmuren-icons
 
+## 0.7.0
+
+### Minor Changes
+
+- 573513b7: Update Plus icon.
+
+  Added new icons: Airplane, BuildingBalcony, CalendarStar, Campfire, Carport, CircusTent, Cookie, CookingPot, Couch, ElectricPlug, Fireplace, HardHat, HouseCheckmark, HouseTerraced, Link, LinkExternal, Meeting, Minus, MinusCircle, PiggyBank, PlusCircle, RecyclingSymbol, Run, Shovel, SoundOff, SoundOn, Sun, TableTennis, Trash
+
 ## 0.6.0
 
 ### Minor Changes
