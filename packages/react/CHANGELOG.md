@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-react
 
+## 1.14.6
+
+### Patch Changes
+
+- Updated dependencies [573513b7]
+  - @obosbbl/grunnmuren-icons@0.7.0
+
 ## 1.14.5
 
 ### Patch Changes
