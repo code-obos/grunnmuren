@@ -50,7 +50,7 @@
     "@react-hookz/web": "23.1.0",
     "clsx": "2.0.0",
     "react-collapsed": "4.0.4",
-    "react-merge-refs": "2.0.2"
+    "react-merge-refs": "2.1.1"
   },
   "peerDependencies": {
     "@obosbbl/grunnmuren-tailwind": "workspace:^0.9.1",
