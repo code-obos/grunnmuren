@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.14.7
+
+### Patch Changes
+
+- ac9450c3: add support for moduleResolution `Bundler` in TS
+
 ## 1.14.6
 
 ### Patch Changes
