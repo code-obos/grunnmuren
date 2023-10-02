@@ -1,6 +1,6 @@
 {
   "name": "@obosbbl/grunnmuren-react",
-  "version": "1.14.6",
+  "version": "1.14.7",
   "description": "OBOS Grunnmuren design system React components",
   "license": "MIT",
   "type": "module",
