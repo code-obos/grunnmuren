@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.14.8
+
+### Patch Changes
+
+- f4045c89: StepList: check if the StepListItem is a valid React element before cloning it. Fixes issue with conditional rendering.
+
 ## 1.14.7
 
 ### Patch Changes
