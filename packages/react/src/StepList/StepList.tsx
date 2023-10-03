@@ -1,4 +1,4 @@
-import { Children, cloneElement } from 'react';
+import { Children, cloneElement, isValidElement } from 'react';
 import { cx } from '@/utils';
 
 type Alignment = 'center' | 'top';
@@ -21,10 +21,13 @@ const StepList = (props: StepListProps) => {
   return (
     <ol className={cx(className, 'flex flex-col gap-8 md:gap-12')} {...rest}>
       {Children.map(children, (child) => {
-        if (!child) return null;
-        return cloneElement(child as React.ReactElement<StepListItemProps>, {
-          align,
-        });
+        // Need isValidElement check to prevent cloning of conditional renders such as
+        // {someCondition && <StepList.Item ... />}
+        if (isValidElement(child)) {
+          return cloneElement(child as React.ReactElement<StepListItemProps>, {
+            align,
+          });
+        }
       })}
     </ol>
   );
