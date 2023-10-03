@@ -21,6 +21,7 @@ const StepList = (props: StepListProps) => {
   return (
     <ol className={cx(className, 'flex flex-col gap-8 md:gap-12')} {...rest}>
       {Children.map(children, (child) => {
+        if (!child) return null;
         return cloneElement(child as React.ReactElement<StepListItemProps>, {
           align,
         });
