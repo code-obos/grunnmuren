@@ -2,4 +2,4 @@
 '@obosbbl/grunnmuren-react': patch
 ---
 
-Support falsy child of StepList. Makes it possible to add StepListItem conditionally
+StepList: check if the StepListItem is a valid React element before cloning it. Fixes issue with conditional rendering.
