@@ -3,14 +3,13 @@
   "version": "1.14.8",
   "description": "OBOS Grunnmuren design system React components",
   "license": "MIT",
-  "type": "module",
   "repository": {
     "url": "https://github.com/code-obos/grunnmuren",
     "directory": "packages/react"
   },
   "exports": {
     "types": "./dist/index.d.ts",
-    "default": "./dist/grunnmuren.mjs"
+    "import": "./dist/grunnmuren.mjs"
   },
   "files": [
     "dist"
