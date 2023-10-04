@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.14.9
+
+### Patch Changes
+
+- f7ece5ba: fix broken package because of wrong file extension
+
 ## 1.14.8
 
 ### Patch Changes
