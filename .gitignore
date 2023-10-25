@@ -6,7 +6,6 @@ storybook-static/
 
 # editors
 .idea/
-.vscode/
 
 *.log
 *.swp
@@ -16,3 +15,5 @@ storybook-static/
 
 # Secrets
 .FIGMA_TOKEN
+.vercel
+packages/icons-react/icons.tsx
