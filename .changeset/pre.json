@@ -1,0 +1,11 @@
+{
+  "mode": "pre",
+  "tag": "canary",
+  "initialVersions": {
+    "@obosbbl/grunnmuren-icons-react": "1.0.0",
+    "@obosbbl/grunnmuren-icons-svg": "1.0.0",
+    "@obosbbl/grunnmuren-tailwind": "1.0.0"
+  },
+  "changesets": [
+  ]
+}
