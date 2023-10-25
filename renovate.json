@@ -1,16 +1,4 @@
 {
-  "extends": [
-    "config:base"
-  ],
-  "schedule": ["on saturday"],
-  "packageRules": [
-    {
-      "matchPackagePatterns": ["^@svgr/"],
-      "groupName": "svgr packages"
-    },
-    {
-      "matchPackagePatterns": ["^@vitejs/", "vite"],
-      "groupName": "vite packages"
-    }
-  ]
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["github>code-obos/dkt-renovate-presets"]
 }
