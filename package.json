@@ -6,34 +6,41 @@
     "url": "https://github.com/code-obos/grunnmuren"
   },
   "scripts": {
-    "dev": "pnpm --filter './packages/react' dev",
-    "build": "pnpm --filter './packages/*' build",
+    "build": "pnpm --filter './packages/**' build",
+    "dev": "storybook dev -p 6006 --ci",
     "ci:publish": "pnpm build && changeset publish",
     "ci:version": "changeset version",
+    "lint": "pnpm lint:js && pnpm lint:format",
     "lint:format": "prettier --list-different .",
     "lint:js": "eslint . --ext \"js,cjs,mjs,tsx,ts\" --max-warnings 0 --ignore-path .gitignore"
   },
-  "devDependencies": {
+  "dependencies": {
     "@changesets/cli": "2.26.2",
-    "@typescript-eslint/eslint-plugin": "6.7.3",
-    "@typescript-eslint/parser": "6.7.3",
-    "eslint": "8.50.0",
+    "@obosbbl/grunnmuren-tailwind": "workspace:*",
+    "@storybook/addon-controls": "7.5.1",
+    "@storybook/addon-docs": "7.5.1",
+    "@storybook/addon-styling": "1.3.7",
+    "@storybook/builder-vite": "7.5.1",
+    "@storybook/react": "7.5.1",
+    "@storybook/react-vite": "7.5.1",
+    "@types/react": "18.2.31",
+    "@typescript-eslint/eslint-plugin": "6.9.0",
+    "@typescript-eslint/parser": "6.9.0",
+    "autoprefixer": "10.4.16",
+    "eslint": "8.52.0",
+    "eslint-config-next": "13.5.6",
     "eslint-config-prettier": "9.0.0",
     "eslint-plugin-react": "7.33.2",
     "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-storybook": "0.6.15",
+    "postcss": "8.4.31",
     "prettier": "3.0.3",
-    "prettier-plugin-tailwindcss": "0.5.4",
-    "typescript": "5.2.2"
-  },
-  "pnpm": {
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "typescript"
-      ],
-      "allowedVersions": {
-        "react": "18",
-        "react-dom": "18"
-      }
-    }
+    "prettier-plugin-tailwindcss": "0.5.6",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "storybook": "7.5.1",
+    "tailwindcss": "3.3.4",
+    "typescript": "5.2.2",
+    "unbuild": "2.0.0"
   }
 }
