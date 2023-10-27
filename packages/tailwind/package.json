@@ -2,11 +2,11 @@
   "name": "@obosbbl/grunnmuren-tailwind",
   "version": "2.0.0",
   "description": "Grunnmuren Tailwind preset",
-  "license": "MIT",
-  "type": "commonjs",
   "repository": {
     "url": "https://github.com/code-obos/grunnmuren"
   },
+  "license": "MIT",
+  "type": "commonjs",
   "exports": {
     ".": "./tailwind-base.cjs"
   },

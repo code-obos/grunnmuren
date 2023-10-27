@@ -2,7 +2,11 @@
   "name": "@obosbbl/grunnmuren-react",
   "version": "2.0.0",
   "description": "Grunnmuren components in React",
+  "repository": {
+    "url": "https://github.com/code-obos/grunnmuren"
+  },
   "license": "MIT",
+  "sideEffects": false,
   "type": "module",
   "exports": {
     "./button": {
@@ -10,15 +14,11 @@
       "default": "./dist/Button/Button.mjs"
     }
   },
-  "scripts": {
-    "build": "unbuild"
-  },
-  "sideEffects": false,
   "files": [
     "dist"
   ],
-  "repository": {
-    "url": "https://github.com/code-obos/grunnmuren"
+  "scripts": {
+    "build": "unbuild"
   },
   "dependencies": {
     "cva": "1.0.0-beta.1"
