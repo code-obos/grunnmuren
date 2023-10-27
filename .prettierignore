@@ -2,5 +2,4 @@ pnpm-lock.yaml
 renovate.json
 .changeset/
 dist/
-packages/icons/icons.tsx
-packages/icons-react/icons.tsx
+packages/icons-react/src/index.tsx

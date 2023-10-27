@@ -1,0 +1,43 @@
+{
+  "name": "@obosbbl/grunnmuren-icons-react",
+  "version": "1.0.0",
+  "description": "Grunnmuren's icon set as React components",
+  "repository": {
+    "url": "https://github.com/code-obos/grunnmuren"
+  },
+  "license": "MIT",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "default": "./dist/index.mjs"
+  },
+  "main": "dist/index.mjs",
+  "module": "dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "pnpm run build:make-react && pnpm run build:unbuild",
+    "build:make-react": "node ./scripts/make-react-icons.mjs",
+    "build:unbuild": "unbuild"
+  },
+  "devDependencies": {
+    "@obosbbl/grunnmuren-icons-svg": "workspace:*",
+    "@svgr/core": "8.1.0",
+    "@svgr/plugin-jsx": "8.1.0",
+    "@svgr/plugin-svgo": "8.1.0",
+    "fs-extra": "11.1.1"
+  },
+  "peerDependencies": {
+    "react": "^18"
+  },
+  "unbuild": {
+    "rollup": {
+      "esbuild": {
+        "jsx": "automatic"
+      }
+    }
+  }
+}
