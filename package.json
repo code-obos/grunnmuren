@@ -7,6 +7,7 @@
   },
   "scripts": {
     "build": "pnpm --filter './packages/**' build",
+    "build:storybook": "storybook build",
     "dev": "storybook dev -p 6006 --ci",
     "ci:publish": "pnpm build && changeset publish",
     "ci:version": "changeset version",
