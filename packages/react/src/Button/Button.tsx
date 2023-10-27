@@ -1,11 +1,15 @@
+import { useRef, useState } from 'react';
 import { cva, type VariantProps } from 'cva';
+import { LoadingSpinner } from '@obosbbl/grunnmuren-icons-react';
+
+import { useClientLayoutEffect } from '../utils/useClientLayoutEffect';
 
 /**
  * Figma: https://www.figma.com/file/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=30%3A2574&mode=dev
  */
 
 const buttonVariants = cva({
-  base: 'cursor-pointer rounded-lg px-4 py-2 font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+  base: 'min-h-[44px] cursor-pointer rounded-lg px-4 py-2 font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
   variants: {
     /**
      * The variant of the button
@@ -79,17 +83,52 @@ const buttonVariants = cva({
 type ButtonProps = VariantProps<typeof buttonVariants> & {
   className?: string;
   children: React.ReactNode;
+  /**
+   * Display the button in a loading state
+   * @default false
+   */
+  loading?: boolean;
+  style?: React.CSSProperties;
 };
 // TODO: Link/anchor support https://twitter.com/maranomynet_en/status/1713867936367001890/photo/1
 
 function Button(props: ButtonProps) {
-  const { className, variant, color, ...rest } = props;
+  const { children, className, color, loading, variant, style, ...restProps } =
+    props;
+
+  // TODO: Merge refs when we use RAC
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const [widthOverride, setWidthOverride] = useState<number>();
+
+  useClientLayoutEffect(() => {
+    if (loading) {
+      const requestID = window.requestAnimationFrame(() => {
+        setWidthOverride(buttonRef?.current?.getBoundingClientRect()?.width);
+      });
+      return () => {
+        setWidthOverride(undefined);
+        cancelAnimationFrame(requestID);
+      };
+    }
+  }, [loading, children]);
 
   return (
     <button
+      aria-busy={loading ? true : undefined}
       className={buttonVariants({ className, color, variant })}
-      {...rest}
-    />
+      ref={buttonRef}
+      style={{
+        ...style,
+        width: widthOverride,
+      }}
+      {...restProps}
+    >
+      {widthOverride ? (
+        <LoadingSpinner className="mx-auto animate-spin" />
+      ) : (
+        children
+      )}
+    </button>
   );
 }
 
