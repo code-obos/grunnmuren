@@ -1,16 +1,16 @@
 {
   "name": "grunnmuren",
-  "description": "Monorepo for Grunnmuren, OBOS' design system",
   "private": true,
+  "description": "Monorepo for Grunnmuren, OBOS' design system",
   "repository": {
     "url": "https://github.com/code-obos/grunnmuren"
   },
   "scripts": {
     "build": "pnpm --filter './packages/**' build",
     "build:storybook": "storybook build",
-    "dev": "storybook dev -p 6006 --ci",
     "ci:publish": "pnpm build && changeset publish",
     "ci:version": "changeset version",
+    "dev": "storybook dev -p 6006 --ci",
     "lint": "pnpm lint:js && pnpm lint:format",
     "lint:format": "prettier --list-different .",
     "lint:js": "eslint . --ext \"js,cjs,mjs,tsx,ts\" --max-warnings 0 --ignore-path .gitignore"
@@ -36,6 +36,7 @@
     "eslint-plugin-storybook": "0.6.15",
     "postcss": "8.4.31",
     "prettier": "3.0.3",
+    "prettier-plugin-packagejson": "2.4.6",
     "prettier-plugin-tailwindcss": "0.5.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
