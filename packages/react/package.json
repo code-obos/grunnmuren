@@ -12,6 +12,14 @@
     "./button": {
       "types": "./dist/Button/Button.d.ts",
       "default": "./dist/Button/Button.mjs"
+    },
+    "./label": {
+      "types": "./dist/label/index.d.ts",
+      "default": "./dist/label/index.mjs"
+    },
+    "./textfield": {
+      "types": "./dist/textfield/index.d.ts",
+      "default": "./dist/textfield/index.mjs"
     }
   },
   "files": [
@@ -22,14 +30,17 @@
   },
   "dependencies": {
     "@obosbbl/grunnmuren-icons-react": "^1.0.0",
-    "cva": "1.0.0-beta.1"
+    "cva": "1.0.0-beta.1",
+    "react-aria-components": "1.0.0-beta.2"
   },
   "peerDependencies": {
     "react": "^18"
   },
   "unbuild": {
     "entries": [
-      "./src/Button/Button.tsx"
+      "./src/Button/Button.tsx",
+      "./src/label/index.ts",
+      "./src/textfield/index.ts"
     ],
     "declaration": true,
     "rollup": {
