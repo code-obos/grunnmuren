@@ -32,7 +32,6 @@ export const WithPlaceholder: Story = {
 export const AsInvalid: Story = {
   args: {
     ...Example.args,
-    isRequired: true,
     errorMessage: 'Feltet er påkrevd',
   },
 };

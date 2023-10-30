@@ -17,6 +17,10 @@
       "types": "./dist/label/index.d.ts",
       "default": "./dist/label/index.mjs"
     },
+    "./radiogroup": {
+      "types": "./dist/radiogroup/index.d.ts",
+      "default": "./dist/radiogroup/index.mjs"
+    },
     "./textfield": {
       "types": "./dist/textfield/index.d.ts",
       "default": "./dist/textfield/index.mjs"
@@ -40,6 +44,7 @@
     "entries": [
       "./src/Button/Button.tsx",
       "./src/label/index.ts",
+      "./src/radiogroup/index.ts",
       "./src/textfield/index.ts"
     ],
     "declaration": true,
