@@ -9,16 +9,16 @@ import { useClientLayoutEffect } from '../utils/useClientLayoutEffect';
  */
 
 const buttonVariants = cva({
-  base: 'min-h-[44px] cursor-pointer rounded-lg px-4 py-2 font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+  base: 'inline-flex min-h-[44px] cursor-pointer items-center justify-center whitespace-nowrap rounded-lg px-4 py-2 font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
   variants: {
     /**
      * The variant of the button
      * @default primary
      */
     variant: {
-      primary: 'border-none hover:underline',
-      secondary: 'border-2 hover:underline',
-      tertiary: 'underline',
+      primary: 'border-none',
+      secondary: 'border-2',
+      tertiary: 'underline hover:no-underline',
     },
     /**
      * Adjusts the color of the button for usage on different backgrounds.
@@ -40,7 +40,8 @@ const buttonVariants = cva({
     {
       color: 'default',
       variant: 'secondary',
-      className: 'border-green bg-white text-black hover:border-green-dark',
+      className:
+        'border-green bg-white text-black hover:bg-green hover:text-white active:bg-green',
     },
     {
       color: 'mint',
@@ -51,7 +52,7 @@ const buttonVariants = cva({
     {
       color: 'mint',
       variant: 'secondary',
-      className: 'border-mint text-mint',
+      className: 'border-mint text-mint hover:bg-mint hover:text-black',
     },
     {
       color: 'mint',
@@ -66,7 +67,7 @@ const buttonVariants = cva({
     {
       color: 'white',
       variant: 'secondary',
-      className: 'border-white text-white',
+      className: 'border-white text-white hover:bg-white hover:text-black',
     },
     {
       color: 'white',
@@ -121,6 +122,7 @@ function Button(props: ButtonProps) {
         ...style,
         width: widthOverride,
       }}
+      type="button"
       {...restProps}
     >
       {widthOverride ? (
