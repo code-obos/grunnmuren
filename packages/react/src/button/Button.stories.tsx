@@ -22,7 +22,8 @@ const meta: Meta<typeof Button> = {
     return (
       <div className={cx(bgColor, 'flex gap-4 p-6')}>
         <Button {...props}>Button</Button>
-        <Button {...props} href="#">
+        {/* @ts-expect-error ts doesn't like the prop spread here, because props is typed as "ButtonLinkProps", which doesn't sit well when passing an href which only works with LinkProps */}
+        <Button href="#" {...props}>
           Link
         </Button>
       </div>

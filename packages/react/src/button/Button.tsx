@@ -81,7 +81,15 @@ const buttonVariants = cva({
   },
 });
 
-type _ButtonProps = VariantProps<typeof buttonVariants> & {
+type ButtonOrLinkProps =
+  | (React.ComponentPropsWithoutRef<'button'> & {
+      href?: never;
+    })
+  | (React.ComponentPropsWithoutRef<'a'> & {
+      href: string;
+    });
+
+type ButtonProps = VariantProps<typeof buttonVariants> & {
   className?: string;
   children: React.ReactNode;
   /**
@@ -90,40 +98,11 @@ type _ButtonProps = VariantProps<typeof buttonVariants> & {
    */
   loading?: boolean;
   style?: React.CSSProperties;
-};
+} & ButtonOrLinkProps;
 
-type ButtonProps = Omit<
-  React.ComponentPropsWithoutRef<'button'> & {
-    href?: never;
-  },
-  'color'
-> &
-  _ButtonProps;
-
-type AnchorProps = Omit<
-  React.ComponentPropsWithoutRef<'a'> & {
-    href: string;
-  },
-  'color'
-> &
-  _ButtonProps;
-
-const isAnchor = (props: ButtonProps | AnchorProps): props is AnchorProps => {
-  return 'href' in props;
-};
-
-function Button(props: AnchorProps): JSX.Element;
-function Button(props: ButtonProps): JSX.Element;
-function Button(props: ButtonProps | AnchorProps) {
+function Button(props: ButtonProps) {
   const { children, className, color, loading, variant, style, ...restProps } =
     props;
-
-  const Component = isAnchor(props) ? 'a' : 'button';
-
-  if (Component === 'button') {
-    // Set the button as type=button by default. Otherwise it will trigger unintented submits in forms
-    restProps.type ??= 'button';
-  }
 
   // TODO: Merge refs when we use RAC
   const buttonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
@@ -141,7 +120,15 @@ function Button(props: ButtonProps | AnchorProps) {
     }
   }, [loading, children]);
 
+  let Component: 'a' | 'button' = 'a';
+  if (props.href == null) {
+    // If we don't have a href, it's a button, and we add a fallback type button to prevent the button from accidentally submitting when in a form
+    Component = 'button';
+    restProps.type ??= 'button';
+  }
+
   return (
+    // @ts-expect-error TS doesn't agree here taht restProps is safe to spread, because restProps for anchors aren't type compatible with restProps for buttons, but that should be okay here
     <Component
       aria-busy={loading ? true : undefined}
       className={buttonVariants({ className, color, variant })}
