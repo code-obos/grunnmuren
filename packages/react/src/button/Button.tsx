@@ -22,23 +22,23 @@ const buttonVariants = cva({
     },
     /**
      * Adjusts the color of the button for usage on different backgrounds.
-     * @default default
+     * @default green
      */
     color: {
-      default: 'focus-visible:ring-black',
+      green: 'focus-visible:ring-black',
       mint: 'focus-visible:ring-mint focus-visible:ring-offset-green-dark',
       white: 'focus-visible:ring-white focus-visible:ring-offset-blue',
     },
   },
   compoundVariants: [
     {
-      color: 'default',
+      color: 'green',
       variant: 'primary',
       // Darken bg by 20% on hover. The color is manually crafted
       className: 'bg-green text-white hover:bg-green-dark active:bg-[#007352]',
     },
     {
-      color: 'default',
+      color: 'green',
       variant: 'secondary',
       className:
         'border-green bg-white text-black hover:bg-green hover:text-white active:bg-green',
@@ -77,21 +77,9 @@ const buttonVariants = cva({
   ],
   defaultVariants: {
     variant: 'primary',
-    color: 'default',
+    color: 'green',
   },
 });
-
-type ButtonProps = React.ComponentPropsWithoutRef<'button'> & {
-  href?: never;
-} & _ButtonProps;
-
-type AnchorProps = React.ComponentPropsWithoutRef<'a'> & {
-  href: string;
-} & _ButtonProps;
-
-const isAnchor = (props: ButtonProps | AnchorProps): props is AnchorProps => {
-  return 'href' in props;
-};
 
 type _ButtonProps = VariantProps<typeof buttonVariants> & {
   className?: string;
@@ -104,14 +92,41 @@ type _ButtonProps = VariantProps<typeof buttonVariants> & {
   style?: React.CSSProperties;
 };
 
+type ButtonProps = Omit<
+  React.ComponentPropsWithoutRef<'button'> & {
+    href?: never;
+  },
+  'color'
+> &
+  _ButtonProps;
+
+type AnchorProps = Omit<
+  React.ComponentPropsWithoutRef<'a'> & {
+    href: string;
+  },
+  'color'
+> &
+  _ButtonProps;
+
+const isAnchor = (props: ButtonProps | AnchorProps): props is AnchorProps => {
+  return 'href' in props;
+};
+
 function Button(props: AnchorProps): JSX.Element;
 function Button(props: ButtonProps): JSX.Element;
 function Button(props: ButtonProps | AnchorProps) {
   const { children, className, color, loading, variant, style, ...restProps } =
     props;
 
+  const Component = isAnchor(props) ? 'a' : 'button';
+
+  if (Component === 'button') {
+    // Set the button as type=button by default. Otherwise it will trigger unintented submits in forms
+    restProps.type ??= 'button';
+  }
+
   // TODO: Merge refs when we use RAC
-  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
   const [widthOverride, setWidthOverride] = useState<number>();
 
   useClientLayoutEffect(() => {
@@ -126,20 +141,15 @@ function Button(props: ButtonProps | AnchorProps) {
     }
   }, [loading, children]);
 
-  if (props.href != null) {
-    return <a {...restProps} />;
-  }
-
   return (
-    <button
+    <Component
       aria-busy={loading ? true : undefined}
       className={buttonVariants({ className, color, variant })}
-      ref={buttonRef}
+      ref={buttonRef as never}
       style={{
         ...style,
         width: widthOverride,
       }}
-      type="button"
       {...restProps}
     >
       {widthOverride ? (
@@ -147,8 +157,8 @@ function Button(props: ButtonProps | AnchorProps) {
       ) : (
         children
       )}
-    </button>
+    </Component>
   );
 }
 
-export { Button, buttonVariants, type ButtonProps };
+export { Button, type ButtonProps };
