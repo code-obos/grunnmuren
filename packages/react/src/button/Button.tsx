@@ -81,7 +81,19 @@ const buttonVariants = cva({
   },
 });
 
-type ButtonProps = VariantProps<typeof buttonVariants> & {
+type ButtonProps = React.ComponentPropsWithoutRef<'button'> & {
+  href?: never;
+} & _ButtonProps;
+
+type AnchorProps = React.ComponentPropsWithoutRef<'a'> & {
+  href: string;
+} & _ButtonProps;
+
+const isAnchor = (props: ButtonProps | AnchorProps): props is AnchorProps => {
+  return 'href' in props;
+};
+
+type _ButtonProps = VariantProps<typeof buttonVariants> & {
   className?: string;
   children: React.ReactNode;
   /**
@@ -91,9 +103,10 @@ type ButtonProps = VariantProps<typeof buttonVariants> & {
   loading?: boolean;
   style?: React.CSSProperties;
 };
-// TODO: Link/anchor support https://twitter.com/maranomynet_en/status/1713867936367001890/photo/1
 
-function Button(props: ButtonProps) {
+function Button(props: AnchorProps): JSX.Element;
+function Button(props: ButtonProps): JSX.Element;
+function Button(props: ButtonProps | AnchorProps) {
   const { children, className, color, loading, variant, style, ...restProps } =
     props;
 
@@ -112,6 +125,10 @@ function Button(props: ButtonProps) {
       };
     }
   }, [loading, children]);
+
+  if (props.href != null) {
+    return <a {...restProps} />;
+  }
 
   return (
     <button
