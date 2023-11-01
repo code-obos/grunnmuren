@@ -16,8 +16,9 @@ const buttonVariants = cva({
      * @default primary
      */
     variant: {
-      primary: 'border-none',
-      secondary: 'border-2',
+      primary: '',
+      // by using an inset box-shadow to emulate a border instead of an actual border, the button size will be equal regardless of the variant
+      secondary: 'shadow-[inset_0_0_0_2px]',
       tertiary: 'underline hover:no-underline',
     },
     /**
@@ -41,7 +42,7 @@ const buttonVariants = cva({
       color: 'green',
       variant: 'secondary',
       className:
-        'border-green bg-white text-black hover:bg-green hover:text-white active:bg-green',
+        'bg-white text-black shadow-green hover:bg-green hover:text-white active:bg-green',
     },
     {
       color: 'mint',
@@ -52,7 +53,7 @@ const buttonVariants = cva({
     {
       color: 'mint',
       variant: 'secondary',
-      className: 'border-mint text-mint hover:bg-mint hover:text-black',
+      className: 'text-mint shadow-mint hover:bg-mint hover:text-black',
     },
     {
       color: 'mint',
@@ -67,7 +68,7 @@ const buttonVariants = cva({
     {
       color: 'white',
       variant: 'secondary',
-      className: 'border-white text-white hover:bg-white hover:text-black',
+      className: 'text-white shadow-white hover:bg-white hover:text-black',
     },
     {
       color: 'white',
