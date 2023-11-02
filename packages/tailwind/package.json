@@ -13,7 +13,9 @@
   "files": [
     "tailwind-base.cjs"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.10"
+  },
   "devDependencies": {
     "tailwindcss": "3.3.4"
   },
