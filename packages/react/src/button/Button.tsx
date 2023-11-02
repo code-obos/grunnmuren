@@ -9,7 +9,11 @@ import { useClientLayoutEffect } from '../utils/useClientLayoutEffect';
  */
 
 const buttonVariants = cva({
-  base: 'inline-flex min-h-[44px] cursor-pointer items-center justify-center whitespace-nowrap rounded-lg px-4 py-2 font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+  base: [
+    'inline-flex min-h-[44px] cursor-pointer items-center justify-center whitespace-nowrap rounded-lg px-4 py-2 font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+    // Spaccing when using the button with icons
+    '[&>svg]:first-of-type:mr-2.5 [&>svg]:last-of-type:ml-2.5',
+  ],
   variants: {
     /**
      * The variant of the button
@@ -141,7 +145,8 @@ function Button(props: ButtonProps) {
       {...restProps}
     >
       {widthOverride ? (
-        <LoadingSpinner className="mx-auto animate-spin" />
+        // remove margin for icon alignment
+        <LoadingSpinner className="!m-0 mx-auto animate-spin" />
       ) : (
         children
       )}
