@@ -9,38 +9,44 @@ import { useClientLayoutEffect } from '../utils/useClientLayoutEffect';
  */
 
 const buttonVariants = cva({
-  base: 'min-h-[44px] cursor-pointer rounded-lg px-4 py-2 font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+  base: [
+    'inline-flex min-h-[44px] cursor-pointer items-center justify-center whitespace-nowrap rounded-lg px-4 py-2 font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+    // Spaccing when using the button with icons
+    '[&>svg]:first-of-type:mr-2.5 [&>svg]:last-of-type:ml-2.5',
+  ],
   variants: {
     /**
      * The variant of the button
      * @default primary
      */
     variant: {
-      primary: 'border-none hover:underline',
-      secondary: 'border-2 hover:underline',
-      tertiary: 'underline',
+      primary: '',
+      // by using an inset box-shadow to emulate a border instead of an actual border, the button size will be equal regardless of the variant
+      secondary: 'shadow-[inset_0_0_0_2px]',
+      tertiary: 'underline hover:no-underline',
     },
     /**
      * Adjusts the color of the button for usage on different backgrounds.
-     * @default default
+     * @default green
      */
     color: {
-      default: 'focus-visible:ring-black',
+      green: 'focus-visible:ring-black',
       mint: 'focus-visible:ring-mint focus-visible:ring-offset-green-dark',
       white: 'focus-visible:ring-white focus-visible:ring-offset-blue',
     },
   },
   compoundVariants: [
     {
-      color: 'default',
+      color: 'green',
       variant: 'primary',
       // Darken bg by 20% on hover. The color is manually crafted
       className: 'bg-green text-white hover:bg-green-dark active:bg-[#007352]',
     },
     {
-      color: 'default',
+      color: 'green',
       variant: 'secondary',
-      className: 'border-green bg-white text-black hover:border-green-dark',
+      className:
+        'bg-white text-black shadow-green hover:bg-green hover:text-white active:bg-green',
     },
     {
       color: 'mint',
@@ -51,7 +57,7 @@ const buttonVariants = cva({
     {
       color: 'mint',
       variant: 'secondary',
-      className: 'border-mint text-mint',
+      className: 'text-mint shadow-mint hover:bg-mint hover:text-black',
     },
     {
       color: 'mint',
@@ -66,7 +72,7 @@ const buttonVariants = cva({
     {
       color: 'white',
       variant: 'secondary',
-      className: 'border-white text-white',
+      className: 'text-white shadow-white hover:bg-white hover:text-black',
     },
     {
       color: 'white',
@@ -76,9 +82,17 @@ const buttonVariants = cva({
   ],
   defaultVariants: {
     variant: 'primary',
-    color: 'default',
+    color: 'green',
   },
 });
+
+type ButtonOrLinkProps =
+  | (React.ComponentPropsWithoutRef<'button'> & {
+      href?: never;
+    })
+  | (React.ComponentPropsWithoutRef<'a'> & {
+      href: string;
+    });
 
 type ButtonProps = VariantProps<typeof buttonVariants> & {
   className?: string;
@@ -89,15 +103,14 @@ type ButtonProps = VariantProps<typeof buttonVariants> & {
    */
   loading?: boolean;
   style?: React.CSSProperties;
-};
-// TODO: Link/anchor support https://twitter.com/maranomynet_en/status/1713867936367001890/photo/1
+} & ButtonOrLinkProps;
 
 function Button(props: ButtonProps) {
   const { children, className, color, loading, variant, style, ...restProps } =
     props;
 
   // TODO: Merge refs when we use RAC
-  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
   const [widthOverride, setWidthOverride] = useState<number>();
 
   useClientLayoutEffect(() => {
@@ -112,11 +125,19 @@ function Button(props: ButtonProps) {
     }
   }, [loading, children]);
 
+  let Component: 'a' | 'button' = 'a';
+  if (props.href == null) {
+    // If we don't have a href, it's a button, and we add a fallback type button to prevent the button from accidentally submitting when in a form
+    Component = 'button';
+    restProps.type ??= 'button';
+  }
+
   return (
-    <button
+    // @ts-expect-error TS doesn't agree here taht restProps is safe to spread, because restProps for anchors aren't type compatible with restProps for buttons, but that should be okay here
+    <Component
       aria-busy={loading ? true : undefined}
       className={buttonVariants({ className, color, variant })}
-      ref={buttonRef}
+      ref={buttonRef as never}
       style={{
         ...style,
         width: widthOverride,
@@ -124,12 +145,13 @@ function Button(props: ButtonProps) {
       {...restProps}
     >
       {widthOverride ? (
-        <LoadingSpinner className="mx-auto animate-spin" />
+        // remove margin for icon alignment
+        <LoadingSpinner className="!m-0 mx-auto animate-spin" />
       ) : (
         children
       )}
-    </button>
+    </Component>
   );
 }
 
-export { Button, buttonVariants, type ButtonProps };
+export { Button, type ButtonProps };
