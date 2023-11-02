@@ -10,8 +10,8 @@
   "type": "module",
   "exports": {
     "./button": {
-      "types": "./dist/Button/Button.d.ts",
-      "default": "./dist/Button/Button.mjs"
+      "types": "./dist/button/Button.d.ts",
+      "default": "./dist/button/Button.mjs"
     },
     "./label": {
       "types": "./dist/label/index.d.ts",
@@ -42,7 +42,7 @@
   },
   "unbuild": {
     "entries": [
-      "./src/Button/Button.tsx",
+      "./src/button/Button.tsx",
       "./src/label/index.ts",
       "./src/radiogroup/index.ts",
       "./src/textfield/index.ts"
