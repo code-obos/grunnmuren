@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.14.10
+
+### Patch Changes
+
+- 186dc9c0: FormErrorMessage: improve contrast
+
 ## 1.14.9
 
 ### Patch Changes
