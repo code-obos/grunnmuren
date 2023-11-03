@@ -12,12 +12,12 @@ export const FormErrorMessage = (props: FormErrorMessageProps) => {
     <div
       className={cx(
         className,
-        'bg-red-light text-red flex items-center gap-2 rounded px-2 py-1 text-sm',
+        'bg-red-light flex items-center gap-2 rounded px-2 py-1 text-sm text-[#C03850]',
       )}
       aria-live="polite"
       {...rest}
     >
-      <Warning className="text-red flex-shrink-0" />
+      <Warning className="flex-shrink-0 text-[#C03850]" />
       {children}
     </div>
   );
