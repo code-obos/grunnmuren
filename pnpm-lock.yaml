@@ -94,8 +94,8 @@ importers:
         specifier: 2.0.0
         version: 2.0.0
       react-collapsed:
-        specifier: 4.0.4
-        version: 4.0.4(react-dom@18.2.0)(react@18.2.0)
+        specifier: 4.1.1
+        version: 4.1.1(react-dom@18.2.0)(react@18.2.0)
       react-merge-refs:
         specifier: 2.0.2
         version: 2.0.2
@@ -8977,8 +8977,8 @@ packages:
       unpipe: 1.0.0
     dev: true
 
-  /react-collapsed@4.0.4(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-8avvmnQxDYTgGZYVP9+3Z7doomxVEBoCkukpTmUHEIrAYvELZ5jNNfYCt/hCpHB6GmQbzZoDmnDupjsnQVgcCQ==}
+  /react-collapsed@4.1.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-glxF9sgNEbySi08YMMCNfe7vVqd82HPY0njLf2FMXvATMCyvSbfr6lpT1PN5t3yD3eaoFU9RCSetlhScY9rWDg==}
     peerDependencies:
       react: ^16.9.0 || ^17 || ^18 || 18
       react-dom: ^16.9.0 || ^17 || ^18 || 18
