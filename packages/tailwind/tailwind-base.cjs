@@ -184,7 +184,74 @@ module.exports = (options) => {
       fontFamily: {
         sans: [fontFamily, 'sans-serif'],
       },
+      extend: {
+        typography: (theme) => ({
+          DEFAULT: {
+            css: {
+              '--tw-prose-headings': 'inherit',
+              '--tw-prose-lead': 'inherit',
+              '--tw-prose-links': 'inherit',
+              '--tw-prose-quotes': theme('colors.blue.dark'),
+              '--tw-prose-quote-borders': theme('colors.green.DEFAULT'),
+              '--tw-prose-counters': theme('colors.black'),
+              // TODO: Increase bullet size. See design sketches
+              '--tw-prose-bullets': theme('colors.green.DEFAULT'),
+              color: theme('colors.black'),
+              maxWidth: theme('maxWidth.prose'),
+              a: {
+                fontWeight: 400,
+              },
+              h1: {
+                fontWeight: theme('fontWeight.bold'),
+                fontSize: theme('fontSize.3xl'),
+                '@media (min-width: theme("screens.md"))': {
+                  fontSize: theme('fontSize.5xl'),
+                },
+              },
+              h2: {
+                fontWeight: theme('fontWeight.bold'),
+                fontSize: theme('fontSize.2xl'),
+                '@media (min-width: theme("screens.md"))': {
+                  fontSize: theme('fontSize.4xl'),
+                },
+              },
+              h3: {
+                fontWeight: theme('fontWeight.bold'),
+                fontSize: theme('fontSize.xl'),
+                '@media (min-width: theme("screens.md"))': {
+                  fontSize: theme('fontSize.2xl'),
+                },
+              },
+              h4: {
+                fontWeight: theme('fontWeight.bold'),
+                fontSize: theme('fontSize.lg'),
+                '@media (min-width: theme("screens.md"))': {
+                  fontSize: theme('fontSize.xl'),
+                },
+              },
+              li: {
+                marginTop: '1.5em',
+                marginBottom: '1.5em',
+              },
+              blockquote: {
+                fontWeight: theme('fontWeight.bold'),
+                fontStyle: 'normal',
+              },
+              'blockquote p:first-of-type::before': {
+                content: '"«"',
+              },
+              'blockquote p:last-of-type::after': {
+                content: '"»"',
+              },
+              '[class~="lead"]': {
+                fontWeight: theme('fontWeight.medium'),
+              },
+            },
+          },
+        }),
+      }
     },
+
   };
 };
 
