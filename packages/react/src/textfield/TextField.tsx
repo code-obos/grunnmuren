@@ -60,9 +60,7 @@ function TextField(props: TextFieldProps) {
       isInvalid={isInvalid}
       isRequired={isRequired}
     >
-      <Label isInvalid={isInvalid} isRequired={isRequired}>
-        {label}
-      </Label>
+      <Label>{label}</Label>
       {description && <Description>{description}</Description>}
       <Input />
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}

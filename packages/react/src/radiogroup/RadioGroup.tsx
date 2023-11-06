@@ -48,10 +48,10 @@ function RadioGroup(props: RadioGroupProps) {
     <RACRadioGroup
       {...restProps}
       className={cx(className, 'flex flex-col gap-2')}
+      isInvalid={isInvalid}
+      isRequired={isRequired}
     >
-      <Label isInvalid={isInvalid} isRequired={isRequired}>
-        {label}
-      </Label>
+      <Label>{label}</Label>
       {description && <Description>{description}</Description>}
       {children}
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
