@@ -5,24 +5,27 @@ import {
 } from 'react-aria-components';
 import { Check as CheckIcon } from '@obosbbl/grunnmuren-icons-react';
 
-const defaultClasses = cx(['flex cursor-pointer items-center gap-2']);
+const defaultClasses = cx(['flex cursor-pointer items-center gap-2 leading-7']);
 
 function Checkmark({
   isSelected,
   isFocusVisible,
   isHovered,
+  isInvalid,
 }: {
   isSelected: boolean;
   isFocusVisible: boolean;
   isHovered: boolean;
+  isInvalid: boolean;
 }) {
   return (
     <div
       className={cx(
-        'grid h-5 w-5 place-content-center rounded-sm border border-black p-0.5 text-white transition-all duration-200',
+        'grid h-6 w-6 place-content-center rounded-sm border-2 border-black p-0.5 text-white',
         isSelected ? 'bg-green' : '[&>svg]:hidden',
-        isFocusVisible && 'ring-2 ring-black ring-offset-2',
-        isHovered && 'border-green bg-green-lightest',
+        isFocusVisible && 'ring-2 ring-black ring-offset-[10px]',
+        isHovered && ' bg-green shadow-[inset_0_0_0_4px_rgb(255,255,255)]',
+        isInvalid && 'border-red',
       )}
     >
       <CheckIcon className="h-full w-full" />
@@ -46,12 +49,13 @@ function Checkbox(props: CheckboxProps) {
       className={cx(className, defaultClasses)}
       autoFocus
     >
-      {({ isSelected, isFocusVisible, isHovered }) => (
+      {({ isSelected, isFocusVisible, isHovered, isInvalid }) => (
         <>
           <Checkmark
             isSelected={isSelected}
             isFocusVisible={isFocusVisible}
             isHovered={isHovered}
+            isInvalid={isInvalid}
           />
           {children}
         </>

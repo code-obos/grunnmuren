@@ -14,6 +14,7 @@ type Story = StoryObj<typeof Checkbox>;
 export const Example: Story = {
   args: {
     children: 'Jeg godtar medlemsvilkårene',
-    isRequired: true,
+    isRequired: false,
+    isInvalid: false,
   },
 };
