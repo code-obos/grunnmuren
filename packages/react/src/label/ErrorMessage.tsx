@@ -1,6 +1,5 @@
 import { cx } from 'cva';
 import { Text } from 'react-aria-components';
-import { Warning } from '@obosbbl/grunnmuren-icons-react';
 
 type ErrorMessageProps = {
   className?: string;
@@ -14,11 +13,10 @@ function ErrorMessage(props: ErrorMessageProps) {
       {...restProps}
       className={cx(
         className,
-        'flex items-center gap-2 rounded bg-red-light px-2 py-1 text-sm text-red',
+        'w-fit rounded-sm bg-red-light px-2 py-1 text-sm leading-6 text-red',
       )}
       slot="errorMessage"
     >
-      <Warning className="flex-shrink-0 text-red" />
       {children}
     </Text>
   );

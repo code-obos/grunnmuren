@@ -12,7 +12,7 @@ function Description(props: DescriptionProps) {
   return (
     <Text
       {...restProps}
-      className={cx(className, 'text-sm text-gray-dark')}
+      className={cx(className, 'text-sm font-light leading-6')}
       slot="description"
     />
   );
