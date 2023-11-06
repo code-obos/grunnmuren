@@ -94,9 +94,9 @@ module.exports = () => {
           dark: '#00524C',
         },
         red: {
-          DEFAULT: '#cd465e',
+          DEFAULT: '#C0385D',
           // error red
-          light: '#faedef',
+          light: '#FAEDEF',
         },
         orange: {
           DEFAULT: '#e8a74a',
