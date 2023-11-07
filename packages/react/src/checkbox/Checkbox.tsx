@@ -5,30 +5,29 @@ import {
 } from 'react-aria-components';
 import { Check as CheckIcon } from '@obosbbl/grunnmuren-icons-react';
 
-const defaultClasses = cx(['flex cursor-pointer items-center gap-2 leading-7']);
+const defaultClasses = cx([
+  'group flex cursor-pointer items-center gap-4 leading-7',
+]);
 
-function Checkmark({
-  isSelected,
-  isFocusVisible,
-  isHovered,
-  isInvalid,
-}: {
-  isSelected: boolean;
-  isFocusVisible: boolean;
-  isHovered: boolean;
-  isInvalid: boolean;
-}) {
+// Pulling this out into it's own component. Will probably export it in the future
+// so it can be used in other views, outside of an input of type checkbox, like in table rows.
+function CheckmarkBox() {
   return (
     <div
-      className={cx(
-        'grid h-6 w-6 place-content-center rounded-sm border-2 border-black p-0.5 text-white',
-        isSelected ? 'bg-green' : '[&>svg]:hidden',
-        isFocusVisible && 'ring-2 ring-black ring-offset-[10px]',
-        isHovered && ' bg-green shadow-[inset_0_0_0_4px_rgb(255,255,255)]',
-        isInvalid && 'border-red',
-      )}
+      className={cx([
+        'relative z-0 grid h-6 w-6 place-content-center rounded-sm border-2 border-black p-1 text-white',
+        // selected
+        'group-data-[selected]:border-green group-data-[selected]:bg-green',
+        // focus
+        'group-data-[focus-visible]:ring-2 group-data-[focus-visible]:ring-black group-data-[focus-visible]:ring-offset-[9px]',
+        // hovered
+        'before:z-0 before:h-3 before:w-3 before:rounded-sm group-data-[selected=true]:before:hidden group-data-[hovered]:before:bg-green',
+        // invalid - The border is 1 px thicker when invalid. We don't actually want to change the border width, as that causes the element's size to change
+        // so we use an inner shadow of 1 px instead to pad the actual border
+        'group-data-[invalid]:border-red group-data-[invalid]:group-data-[selected]:shadow-none group-data-[invalid]:shadow-[inset_0_0_0_1px] group-data-[invalid]:shadow-red group-data-[hovered]:group-data-[invalid]:before:bg-red',
+      ])}
     >
-      <CheckIcon className="h-full w-full" />
+      <CheckIcon className="h-full w-full opacity-0 group-data-[selected]:opacity-100" />
     </div>
   );
 }
@@ -49,17 +48,8 @@ function Checkbox(props: CheckboxProps) {
       className={cx(className, defaultClasses)}
       autoFocus
     >
-      {({ isSelected, isFocusVisible, isHovered, isInvalid }) => (
-        <>
-          <Checkmark
-            isSelected={isSelected}
-            isFocusVisible={isFocusVisible}
-            isHovered={isHovered}
-            isInvalid={isInvalid}
-          />
-          {children}
-        </>
-      )}
+      <CheckmarkBox />
+      {children}
     </RACCheckbox>
   );
 }
