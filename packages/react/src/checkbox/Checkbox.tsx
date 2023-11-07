@@ -6,7 +6,7 @@ import {
 import { Check as CheckIcon } from '@obosbbl/grunnmuren-icons-react';
 
 const defaultClasses = cx([
-  'group flex cursor-pointer items-center gap-4 leading-7',
+  'group relative flex cursor-pointer items-center gap-4 leading-7',
 ]);
 
 // Pulling this out into it's own component. Will probably export it in the future
@@ -15,7 +15,7 @@ function CheckmarkBox() {
   return (
     <div
       className={cx([
-        'relative z-0 grid h-6 w-6 place-content-center rounded-sm border-2 border-black p-1 text-white',
+        'relative z-0 grid h-6 w-6 flex-none place-content-center rounded-sm border-2 border-black p-1 text-white',
         // selected
         'group-data-[selected]:border-green group-data-[selected]:bg-green',
         // focus
@@ -43,11 +43,9 @@ type CheckboxProps = {
 function Checkbox(props: CheckboxProps) {
   const { children, className, ...restProps } = props;
   return (
-    <RACCheckbox
-      {...restProps}
-      className={cx(className, defaultClasses)}
-      autoFocus
-    >
+    <RACCheckbox {...restProps} className={cx(className, defaultClasses)}>
+      {/* increases the clickable area of the checkbox for accessibility */}
+      <div className="absolute -left-2.5 top-1/2 z-10 h-11 w-11 -translate-y-1/2" />
       <CheckmarkBox />
       {children}
     </RACCheckbox>
