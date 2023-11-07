@@ -6,7 +6,7 @@ import {
 import { Check as CheckIcon } from '@obosbbl/grunnmuren-icons-react';
 
 const defaultClasses = cx([
-  'group relative flex cursor-pointer items-center gap-4 leading-7',
+  'group relative flex w-fit cursor-pointer items-center gap-4 py-2 leading-7',
 ]);
 
 // Pulling this out into it's own component. Will probably export it in the future
@@ -15,7 +15,7 @@ function CheckmarkBox() {
   return (
     <div
       className={cx([
-        'relative z-0 grid h-6 w-6 flex-none place-content-center rounded-sm border-2 border-black p-1 text-white',
+        'relative grid h-6 w-6 flex-none place-content-center rounded-sm border-2 border-black p-1 text-white',
         // selected
         'group-data-[selected]:border-green group-data-[selected]:bg-green',
         // focus

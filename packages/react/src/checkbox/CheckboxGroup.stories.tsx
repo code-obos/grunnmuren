@@ -4,7 +4,7 @@ import { CheckboxGroup } from './CheckboxGroup';
 import { Checkbox } from './Checkbox';
 
 const meta: Meta<typeof CheckboxGroup> = {
-  title: 'CheckboxGroup',
+  title: 'Checkbox/CheckboxGroup',
   component: CheckboxGroup,
   render: (args) => (
     <CheckboxGroup {...args}>
