@@ -13,6 +13,10 @@
       "types": "./dist/button/Button.d.ts",
       "default": "./dist/button/Button.mjs"
     },
+    "./checkbox": {
+      "types": "./dist/checkbox/index.d.ts",
+      "default": "./dist/checkbox/index.mjs"
+    },
     "./label": {
       "types": "./dist/label/index.d.ts",
       "default": "./dist/label/index.mjs"
@@ -43,6 +47,7 @@
   "unbuild": {
     "entries": [
       "./src/button/Button.tsx",
+      "./src/checkbox/index.ts",
       "./src/label/index.ts",
       "./src/radiogroup/index.ts",
       "./src/textfield/index.ts"
