@@ -6,7 +6,7 @@ import {
 import { Check as CheckIcon } from '@obosbbl/grunnmuren-icons-react';
 
 const defaultClasses = cx([
-  'group relative flex w-fit cursor-pointer items-center gap-4 py-2 leading-7',
+  'group relative inline-flex max-w-fit cursor-pointer items-center gap-4 py-2 leading-7',
 ]);
 
 // Pulling this out into it's own component. Will probably export it in the future
