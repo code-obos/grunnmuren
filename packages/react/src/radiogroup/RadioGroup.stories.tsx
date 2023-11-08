@@ -21,7 +21,8 @@ type Story = StoryObj<typeof RadioGroup>;
 
 export const Example: Story = {
   args: {
-    description: '',
+    description:
+      'Kontakt oss for mer utfyllende informasjon om de forskjellige alternativene',
     label: 'Velg hvordan du vil kjøpe boligen',
     isRequired: true,
     isInvalid: false,
