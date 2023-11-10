@@ -19,7 +19,7 @@ export const Snackbar = (props: SnackbarProps) => {
 
   return (
     <div className="container max-w-[59rem]">
-      <div className="bg-orange-light px-8 py-4 max-md:p-4">
+      <div className="bg-orange-light p-4 md:px-8">
         <div className="snackbar grid items-center">
           <InfoCircle className="text-orange snackbar-icon mr-4 self-start md:mr-8 md:text-2xl" />
 
