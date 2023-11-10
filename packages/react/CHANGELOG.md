@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 1.14.11
+
+### Patch Changes
+
+- bf8a694e: refactor: remove use of custom Tailwind breakpoint modifier in React components
+
 ## 1.14.10
 
 ### Patch Changes
