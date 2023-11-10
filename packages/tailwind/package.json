@@ -14,12 +14,13 @@
     "tailwind-base.cjs"
   ],
   "dependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/typography": "^0.5.10"
   },
   "devDependencies": {
-    "tailwindcss": "3.3.4"
+    "tailwindcss": "3.3.5"
   },
   "peerDependencies": {
-    "tailwindcss": "^3.4"
+    "tailwindcss": "^3.3.5"
   }
 }

@@ -23,15 +23,14 @@ const obosFonts = [
   },
 ];
 
-const defaultOpts = {
-  v1Compatiblity: false,
-};
+/**
+ * @param {boolean} options.legacyV1Compatibility
+ */
+module.exports = (options = {}) => {
+  const v1CompatibilityPlugins = [];
 
-module.exports = (options) => {
-  console.log('options', options);
-  const compatiblityPlugins = [];
-  if (options.v1Compatiblity) {
-    compatiblityPlugins.push(button, checkbox, radio, snackbar);
+  if (options.legacyV1Compatibility) {
+    v1CompatibilityPlugins.push(button, checkbox, radio, snackbar);
   }
 
   const fontFamily = 'OBOSFont';
@@ -40,7 +39,9 @@ module.exports = (options) => {
 
   return {
     plugins: [
-      ...compatiblityPlugins,
+      ...v1CompatibilityPlugins,
+      // TODO: Remove the aspect ratio plugin when Safari 14 usage is low enough
+      require('@tailwindcss/aspect-ratio'),
       require('@tailwindcss/typography'),
       plugin(function ({ addBase, addComponents }) {
         addBase({
@@ -85,7 +86,7 @@ module.exports = (options) => {
         const h3 = '@apply font-bold text-xl md:text-2xl';
         const h4 = '@apply font-bold text-lg md:text-xl';
 
-        if (options.v1Compatiblity) {
+        if (options.legacyV1Compatibility) {
           addBase({
             h1: {
               [h1]: {},
@@ -185,6 +186,21 @@ module.exports = (options) => {
         sans: [fontFamily, 'sans-serif'],
       },
       extend: {
+        maxWidth: {
+          // Override Tailwinds default prose width of 60 chars to 48. Roughly 590 pixels
+          prose: '696px',
+        },
+        width: {
+          prose: '696px',
+        },
+        spacing: {
+          18: '4.5rem',
+        },
+        borderColor: options.legacyV1Compatibility
+          ? ({ theme }) => ({
+              DEFAULT: theme('colors.gray.light', 'currentColor'),
+            })
+          : undefined,
         typography: (theme) => ({
           DEFAULT: {
             css: {
@@ -194,7 +210,6 @@ module.exports = (options) => {
               '--tw-prose-quotes': theme('colors.blue.dark'),
               '--tw-prose-quote-borders': theme('colors.green.DEFAULT'),
               '--tw-prose-counters': theme('colors.black'),
-              // TODO: Increase bullet size. See design sketches
               '--tw-prose-bullets': theme('colors.green.DEFAULT'),
               color: theme('colors.black'),
               maxWidth: theme('maxWidth.prose'),
@@ -249,13 +264,12 @@ module.exports = (options) => {
             },
           },
         }),
-      }
+      },
     },
-
   };
 };
 
-// V1 compatiblity
+// These custom components are only used for v1 compat
 const button = plugin(function ({ addComponents, theme }) {
   const hoverLoadingBgColor = 'rgba(0, 0, 0, 0.1)';
 
