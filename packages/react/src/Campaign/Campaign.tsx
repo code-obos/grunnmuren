@@ -87,8 +87,10 @@ export const CampaignImage = forwardRef<HTMLImageElement, CampaignImageProps>(
 
     const className = cx(
       classNameProp,
-      'max-md:rounded-b-3xl w-full',
-      bodyIsRightAligned ? 'md:rounded-r-3xl' : 'md:rounded-l-3xl md:order-1',
+      'rounded-b-3xl w-full',
+      bodyIsRightAligned
+        ? 'md:rounded-r-3xl md:rounded-l-none'
+        : 'md:rounded-l-3xl md:rounded-r-none md:order-1',
     );
 
     // If the component has children, clone it and apply our classes.
