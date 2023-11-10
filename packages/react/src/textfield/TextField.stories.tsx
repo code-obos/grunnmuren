@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { TextField as RACTextField } from 'react-aria-components';
+import { Mail } from '@obosbbl/grunnmuren-icons-react';
 
 import { TextField } from './TextField';
 import { Input } from './Input';
@@ -16,25 +17,53 @@ export default meta;
 
 type Story = StoryObj<typeof TextField>;
 
-export const Example: Story = {
+const Template = (args) => {
+  return <TextField {...args} />;
+};
+
+const LeftAddonTemplate = (args) => {
+  return (
+    <TextField
+      {...args}
+      leftAddon={<Mail className="pointer-events-none flex-none" />}
+    />
+  );
+};
+
+export const Required: Story = {
+  render: Template,
   args: {
-    description: 'For eksempel Drammensveien 1',
-    label: 'Addresse',
+    label: 'Epost',
     isRequired: true,
-    isInvalid: false,
   },
 };
 
-export const WithPlaceholder: Story = {
-  args: { ...Example.args, placeholder: 'Drammensveien 1' },
-};
+// export const WithPlaceholder: Story = {
+//   args: { ...Example.args, placeholder: 'Drammensveien 1' },
+// };
 
-export const AsInvalid: Story = {
-  args: {
-    ...Example.args,
-    errorMessage: 'Feltet er påkrevd',
-  },
-};
+// export const AsInvalid: Story = {
+//   args: {
+//     ...Example.args,
+//     errorMessage: 'Feltet er påkrevd',
+//   },
+// };
+
+// export const LeftAddon: Story = {
+//   render: LeftAddonTemplate,
+//   args: {
+//     ...Example.args,
+//     withAddonDivider: false,
+//   },
+// };
+
+// export const WithAddonDivider: Story = {
+//   render: LeftAddonTemplate,
+//   args: {
+//     ...Example.args,
+//     withAddonDivider: true,
+//   },
+// };
 
 export const Custom = ({ isInvalid }: { isInvalid?: boolean }) => {
   return (
