@@ -191,7 +191,7 @@ module.exports = (options = {}) => {
       },
       extend: {
         maxWidth: {
-          // Override Tailwinds default prose width of 60 chars to 48. Roughly 590 pixels
+          // Override Tailwinds default prose width of 60 chars.
           prose: '696px',
         },
         width: {

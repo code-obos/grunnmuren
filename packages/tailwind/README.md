@@ -48,6 +48,19 @@ Add the Tailwind directives to your CSS
 @tailwind utilities;
 ```
 
+Configure PostCSS to use Tailwind
+
+```js
+// postcss.config.js
+
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+};
+```
+
 ## Migrating from v1?
 
 To ease the transition from v1 to v2 of Grunnmuren, it is possible to configure the preset to be (partially) compatible with v1. This allows you to use v2 of the Tailwind preset with v1 of the React components, and upgrade your application over time instead of a full migration.
