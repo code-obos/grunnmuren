@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { TextField as RACTextField } from 'react-aria-components';
 import { Mail } from '@obosbbl/grunnmuren-icons-react';
 
-import { TextField } from './TextField';
+import { TextField, TextFieldProps } from './TextField';
 import { Input } from './Input';
 import { Label } from '../label/Label';
 import { Description } from '../label/Description';
@@ -30,11 +30,71 @@ const LeftAddonTemplate = (args) => {
   );
 };
 
+const RightAddonTemplate = (args) => {
+  return (
+    <TextField
+      {...args}
+      rightAddon={<Mail className="pointer-events-none flex-none" />}
+    />
+  );
+};
+
+const defaultProps = {
+  label: 'Epost',
+  withAddonDivider: false,
+};
+
+export const Default: Story = {
+  render: Template,
+  args: { ...defaultProps },
+};
+
 export const Required: Story = {
   render: Template,
   args: {
-    label: 'Epost',
+    ...defaultProps,
     isRequired: true,
+  },
+};
+
+export const WithDescription: Story = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    description: 'Vi kommer ikke til å uønsket epost',
+  },
+};
+
+export const WithPlaceholder: Story = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    placeholder: 'Fyll ut eposten din',
+  },
+};
+
+export const LeftAddon: Story = {
+  render: LeftAddonTemplate,
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const RightAddon: Story = {
+  render: RightAddonTemplate,
+  args: {
+    ...defaultProps,
+    withAddonDivider: false,
+  },
+};
+
+export const WithoutLabel: Story = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    label: undefined,
+    placeholder: 'Fyll ut eposten din',
+    'aria-label': 'Epost',
   },
 };
 
