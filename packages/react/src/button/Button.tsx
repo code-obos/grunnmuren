@@ -20,9 +20,9 @@ const buttonVariants = cva({
      * @default primary
      */
     variant: {
-      primary: '',
+      primary: 'no-underline',
       // by using an inset box-shadow to emulate a border instead of an actual border, the button size will be equal regardless of the variant
-      secondary: 'shadow-[inset_0_0_0_2px]',
+      secondary: 'no-underline shadow-[inset_0_0_0_2px]',
       tertiary: 'underline hover:no-underline',
     },
     /**
