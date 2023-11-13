@@ -30,7 +30,13 @@ module.exports = (options = {}) => {
   const v1CompatibilityPlugins = [];
 
   if (options.legacyV1Compatibility) {
-    v1CompatibilityPlugins.push(button, checkbox, radio, snackbar);
+    v1CompatibilityPlugins.push(
+      button,
+      checkbox,
+      radio,
+      snackbar,
+      require('@tailwindcss/aspect-ratio'),
+    );
   }
 
   const fontFamily = 'OBOSFont';
@@ -40,8 +46,6 @@ module.exports = (options = {}) => {
   return {
     plugins: [
       ...v1CompatibilityPlugins,
-      // TODO: Remove the aspect ratio plugin when Safari 14 usage is low enough
-      require('@tailwindcss/aspect-ratio'),
       require('@tailwindcss/typography'),
       plugin(function ({ addBase, addComponents }) {
         addBase({
