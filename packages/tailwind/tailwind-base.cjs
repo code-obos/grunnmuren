@@ -138,6 +138,9 @@ module.exports = (options = {}) => {
     ],
     theme: {
       colors: {
+        inherit: 'inherit',
+        current: 'currentColor',
+        transparent: 'transparent',
         black: '#333',
         white: '#fff',
         gray: {
