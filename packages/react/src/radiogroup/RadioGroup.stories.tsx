@@ -51,15 +51,10 @@ const ControlledTemplate = (args: RadioGroupProps) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <RadioGroup
-        label="Select city"
-        value={selectedItem}
-        {...args}
-        onChange={setSelectedItem}
-      >
+      <RadioGroup value={selectedItem} {...args} onChange={setSelectedItem}>
         {items}
       </RadioGroup>
-      <p className="text-default-500">Valgt: {selectedItem}</p>
+      <p>Valgt: {selectedItem}</p>
     </div>
   );
 };
@@ -69,6 +64,8 @@ const defaultProps = {
   isRequired: false,
   isInvalid: false,
   defaultValue: undefined,
+  name: undefined,
+  value: undefined,
 };
 
 export const Default: Story = {
@@ -121,6 +118,15 @@ export const WithErrorMessage: Story = {
     ...defaultProps,
     isInvalid: true,
     errorMessage: 'Det valgte alternativet er ikke gyldig',
+  },
+};
+
+export const HTMLForms: Story = {
+  render: Template,
+
+  args: {
+    ...defaultProps,
+    name: 'kjopsform',
   },
 };
 
