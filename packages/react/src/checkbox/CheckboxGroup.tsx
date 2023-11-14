@@ -51,7 +51,7 @@ function CheckboxGroup(props: CheckboxGroupProps) {
       isInvalid={isInvalid}
       isRequired={isRequired}
     >
-      <Label>{label}</Label>
+      {label && <Label>{label}</Label>}
       {description && <Description>{description}</Description>}
       {children}
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
