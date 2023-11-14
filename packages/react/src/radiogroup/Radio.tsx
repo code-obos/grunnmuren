@@ -10,8 +10,8 @@ const defaultClasses = cx([
   'before:h-6 before:w-6 before:flex-none before:rounded-full before:border-2 before:border-black',
   // selected
   'data-[selected]:before:bg-green data-[selected]:before:shadow-[inset_0_0_0_4px_rgb(255,255,255)]',
-  // hover: TODO: add hover states when they're added in figma.
-  // 'data-[hovered]:before:border-green data-[hovered]:before:bg-green-lightest data-[selected]:data-[hovered]:before:bg-green',
+  // hover states
+  'data-[hovered]:before:border-green',
   // focus
   'data-[focus-visible]:before:ring data-[focus-visible]:before:ring-black data-[focus-visible]:before:ring-offset-[9px]',
   // invalid - The border is 1 px thicker when invalid. We don't actually want to change the border width, as that causes the element's size to change
