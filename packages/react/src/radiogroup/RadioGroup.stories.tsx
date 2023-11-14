@@ -51,7 +51,7 @@ const ControlledTemplate = (args: RadioGroupProps) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <RadioGroup value={selectedItem} {...args} onChange={setSelectedItem}>
+      <RadioGroup {...args} value={selectedItem} onChange={setSelectedItem}>
         {items}
       </RadioGroup>
       <p>Valgt: {selectedItem}</p>
