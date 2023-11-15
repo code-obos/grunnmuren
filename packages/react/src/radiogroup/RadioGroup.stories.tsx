@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Button } from '../button/Button';
@@ -45,13 +45,16 @@ const Template = (args: RadioGroupProps) => {
 const ControlledTemplate = (args: RadioGroupProps) => {
   const [selectedItem, setSelectedItem] = useState<string>('ordinary');
 
-  useEffect(() => {
-    console.log('isSelected:', selectedItem);
-  }, [selectedItem]);
-
   return (
     <div className="flex flex-col gap-2">
-      <RadioGroup {...args} value={selectedItem} onChange={setSelectedItem}>
+      <RadioGroup
+        {...args}
+        value={selectedItem}
+        onChange={(value) => {
+          setSelectedItem(value);
+          args.onChange?.(value);
+        }}
+      >
         {items}
       </RadioGroup>
       <p>Valgt: {selectedItem}</p>
