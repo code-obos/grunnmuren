@@ -6,7 +6,6 @@ import pc from 'picocolors';
 import fs from 'fs-extra';
 import { __dirname, listSvgs } from './utils.mjs';
 
-const SRC_DIR = path.join(__dirname, '../raw');
 const DIST_DIR = path.join(__dirname, '../src');
 
 const ICON_SIZE = '1.25em';
@@ -34,7 +33,7 @@ const config = {
   ],
 };
 
-const files = listSvgs(SRC_DIR);
+const files = listSvgs();
 
 files.forEach(async (filePath) => {
   const rawData = await fs.readFile(filePath, 'utf-8');
