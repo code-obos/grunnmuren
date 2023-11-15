@@ -6,10 +6,12 @@ import prompts from 'prompts';
 import { __dirname } from './utils.mjs';
 
 // The Figma project where we can find our icons
-const FIGMA_PROJECT_ID = 'XRHRRytz9DqrDkWpE4IKVB';
+// https://www.figma.com/file/9OvSg0ZXI5E1eQYi7AWiWn/
+const FIGMA_PROJECT_ID = '9OvSg0ZXI5E1eQYi7AWiWn';
 
 // The id the of the node where we can find the icons
-const NODE_ID = '2192:33204';
+// https://www.figma.com/file/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?type=design&node-id=30-2099
+const NODE_ID = '30:2099';
 
 // Where we store the Figma token
 const FIGMA_TOKEN_PATH = path.join(__dirname, '../', '.FIGMA_TOKEN');
