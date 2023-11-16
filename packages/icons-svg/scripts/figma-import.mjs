@@ -163,7 +163,9 @@ async function downloadSvgIcon({ iconName, url }) {
  */
 function processComponents(components) {
   return components.map((i) => ({
-    id: i.children[0].id,
+    // Previously we exported the icon without any built in padding by getting the child of the icon node as such
+    // id: i.children[0].id,
+    id: i.id,
     name: i.name,
   }));
 }
