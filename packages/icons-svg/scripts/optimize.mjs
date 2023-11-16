@@ -8,7 +8,7 @@ import { __dirname, listSvgs } from './utils.mjs';
 
 const DIST_DIR = path.join(__dirname, '../src');
 
-const ICON_SIZE = '1.25em';
+const ICON_SIZE = '1.5em';
 
 const config = {
   plugins: [
