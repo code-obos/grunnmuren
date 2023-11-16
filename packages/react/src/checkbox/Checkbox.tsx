@@ -15,16 +15,16 @@ function CheckmarkBox() {
   return (
     <div
       className={cx([
-        'relative grid h-6 w-6 flex-none place-content-center rounded-sm border-2 border-black p-1 text-white',
+        'relative grid h-6 w-6 flex-none place-content-center rounded-sm border-2 border-black text-white',
         // selected
-        'group-data-[selected]:border-green group-data-[selected]:bg-green',
+        'group-data-[selected]:!border-green group-data-[selected]:!bg-green',
         // focus
         'group-data-[focus-visible]:ring-2 group-data-[focus-visible]:ring-black group-data-[focus-visible]:ring-offset-[9px]',
         // hovered
-        'before:z-0 before:h-3 before:w-3 before:rounded-sm group-data-[selected=true]:before:hidden group-data-[hovered]:before:bg-green',
+        'group-data-[hovered]:border-green group-data-[hovered]:group-data-[invalid]:border-red group-data-[hovered]:bg-green-lightest group-data-[hovered]:group-data-[invalid]:bg-red-light',
         // invalid - The border is 1 px thicker when invalid. We don't actually want to change the border width, as that causes the element's size to change
         // so we use an inner shadow of 1 px instead to pad the actual border
-        'group-data-[invalid]:border-red group-data-[invalid]:group-data-[selected]:shadow-none group-data-[invalid]:shadow-[inset_0_0_0_1px] group-data-[invalid]:shadow-red group-data-[hovered]:group-data-[invalid]:before:bg-red',
+        'group-data-[invalid]:border-red group-data-[invalid]:group-data-[selected]:shadow-none group-data-[invalid]:shadow-[inset_0_0_0_1px] group-data-[invalid]:shadow-red',
       ])}
     >
       <CheckIcon className="h-full w-full opacity-0 group-data-[selected]:opacity-100" />
