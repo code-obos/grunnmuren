@@ -5,7 +5,6 @@ import {
   type TextFieldProps as RACTextFieldProps,
 } from 'react-aria-components';
 
-// import { Input } from './Input';
 import { Label } from '../label/Label';
 import { Description } from '../label/Description';
 import { ErrorMessage } from '../label/ErrorMessage';
@@ -34,23 +33,31 @@ type TextFieldProps = {
   'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style'
 >;
 
-const slots = {
+const classes = {
   base: cx('group flex flex-col gap-2.5'),
   inputWrapper: cva({
     base: [
-      'relative inline-flex flex-row items-center gap-3 rounded-md border border-black px-3 py-2 text-sm font-light leading-6',
+      'relative inline-flex flex-row items-center rounded-md border border-black py-2.5 text-sm font-normal leading-6',
+      // prevent icons in addons from being flexed and affected by the text size of the input
+      '[&>svg]:flex-none [&>svg]:text-base',
       // focus
       'focus-within:ring-2 focus-within:ring-blue-dark',
       // invalid
-      'group-data-[invalid]:border-red',
+      'group-data-[invalid]:border-red group-data-[invalid]:outline group-data-[invalid]:outline-1 group-data-[invalid]:outline-red',
     ],
     variants: {
-      withAddonDivider: {
-        true: 'divide-x',
+      leftAddon: {
+        true: 'pl-3',
+      },
+      rightAddon: {
+        true: 'pr-3',
       },
     },
   }),
-  input: cx('w-full pl-2.5 font-normal placeholder-[#727070] !outline-none'),
+  input: cx(
+    'relative w-full px-3 font-normal leading-6 placeholder-[#727070] !outline-none',
+  ),
+  divider: cx('block h-6 w-px flex-none bg-black'),
 };
 
 function TextField(props: TextFieldProps) {
@@ -72,20 +79,31 @@ function TextField(props: TextFieldProps) {
   return (
     <RACTextField
       {...restProps}
-      className={cx(className, slots.base)}
+      className={cx(className, classes.base)}
       isInvalid={isInvalid}
       isRequired={isRequired}
     >
-      <Label>{label}</Label>
+      {label && <Label>{label}</Label>}
       {description && <Description>{description}</Description>}
-      <div className={slots.inputWrapper({ withAddonDivider })}>
+      <div
+        className={classes.inputWrapper({
+          leftAddon: !!leftAddon,
+          rightAddon: !!rightAddon,
+        })}
+      >
         {leftAddon}
-        <Input className={slots.input} />
+        {withAddonDivider && leftAddon && <Divider className="ml-3" />}
+        <Input className={classes.input} />
+        {withAddonDivider && rightAddon && <Divider className="mr-3" />}
         {rightAddon}
       </div>
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </RACTextField>
   );
+}
+
+function Divider({ className }: { className: string }) {
+  return <span className={cx(className, classes.divider)} />;
 }
 
 export { TextField, type TextFieldProps };
