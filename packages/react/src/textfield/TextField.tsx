@@ -24,6 +24,11 @@ type TextFieldProps = {
   rightAddon?: React.ReactNode;
   /** Placeholder text. Only visible when the input value is empty. */
   placeholder?: string;
+  /**
+   * Text alignment of the input
+   * @default left
+   */
+  textAlign?: 'left' | 'right';
   /** Additional style properties for the element. */
   style?: React.CSSProperties;
   /** Add a divider between the left/right addons and the input */
@@ -54,9 +59,15 @@ const classes = {
       },
     },
   }),
-  input: cx(
-    'relative w-full px-3 font-normal leading-6 placeholder-[#727070] !outline-none',
-  ),
+  input: cva({
+    base: 'relative w-full px-3 font-normal leading-6 placeholder-[#727070] !outline-none',
+    variants: {
+      textAlign: {
+        right: 'text-right',
+        left: '',
+      },
+    },
+  }),
   divider: cx('block h-6 w-px flex-none bg-black'),
 };
 
@@ -69,6 +80,7 @@ function TextField(props: TextFieldProps) {
     leftAddon,
     isRequired,
     isInvalid: _isInvalid,
+    textAlign,
     rightAddon,
     withAddonDivider,
     ...restProps
@@ -93,7 +105,7 @@ function TextField(props: TextFieldProps) {
       >
         {leftAddon}
         {withAddonDivider && leftAddon && <Divider className="ml-3" />}
-        <Input className={classes.input} />
+        <Input className={classes.input({ textAlign })} />
         {withAddonDivider && rightAddon && <Divider className="mr-3" />}
         {rightAddon}
       </div>

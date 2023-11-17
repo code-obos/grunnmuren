@@ -73,6 +73,7 @@ const defaultProps = {
   name: undefined,
   defaultValue: undefined,
   value: undefined,
+  textAlign: undefined,
 };
 
 export const Default: Story = {
@@ -141,6 +142,16 @@ export const IsInvalid: Story = {
   args: {
     ...defaultProps,
     isInvalid: true,
+  },
+};
+
+export const TextAlignRight: Story = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    textAlign: 'right',
+    withAddonDivider: true,
+    rightAddon: 'kr',
   },
 };
 
