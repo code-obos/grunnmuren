@@ -48,7 +48,7 @@
     "@obosbbl/grunnmuren-icons": "workspace:^",
     "@react-hookz/web": "23.1.0",
     "clsx": "2.0.0",
-    "react-collapsed": "4.0.4",
+    "react-collapsed": "4.1.2",
     "react-merge-refs": "2.0.2"
   },
   "peerDependencies": {
