@@ -1,11 +1,9 @@
+import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { TextField as RACTextField } from 'react-aria-components';
+import { Mail } from '@obosbbl/grunnmuren-icons-react';
 
-import { TextField } from './TextField';
-import { Input } from './Input';
-import { Label } from '../label/Label';
-import { Description } from '../label/Description';
-import { ErrorMessage } from '../label/ErrorMessage';
+import { Button } from '../button/Button';
+import { TextField, TextFieldProps } from './TextField';
 
 const meta: Meta<typeof TextField> = {
   title: 'TextField',
@@ -16,44 +14,168 @@ export default meta;
 
 type Story = StoryObj<typeof TextField>;
 
-export const Example: Story = {
+const Template = (args: TextFieldProps) => {
+  return args.isRequired ? (
+    <form
+      className="flex flex-col items-start gap-4"
+      onSubmit={(e) => {
+        e.preventDefault();
+        alert('Lagret!');
+      }}
+    >
+      <TextField {...args} />
+      <Button type="submit">Send inn</Button>
+    </form>
+  ) : (
+    <TextField {...args} />
+  );
+};
+
+const ControlledTemplate = (args: TextFieldProps) => {
+  const [value, setValue] = useState('');
+
+  return <Template {...args} value={value} onChange={setValue} />;
+};
+
+const LeftAddonTemplate = (args: TextFieldProps) => {
+  return (
+    <TextField {...args} leftAddon={<Mail className="pointer-events-none" />} />
+  );
+};
+
+const RightAddonTemplate = (args: TextFieldProps) => {
+  return (
+    <TextField
+      {...args}
+      rightAddon={<Mail className="pointer-events-none" />}
+    />
+  );
+};
+
+const InputTypesTemplate = (args: TextFieldProps) => {
+  return (
+    <div className="grid grid-cols-3 gap-3">
+      <TextField {...args} label="Text" type="text" />
+      <TextField {...args} label="Email" type="email" />
+      <TextField {...args} label="Search" type="search" />
+      <TextField {...args} label="Password" type="password" />
+      <TextField {...args} label="Tel" type="tel" />
+      <TextField {...args} label="Date" type="date" />
+    </div>
+  );
+};
+
+const defaultProps = {
+  label: 'Epost',
+  withAddonDivider: false,
+  isRequired: false,
+  isInvalid: false,
+  name: undefined,
+  defaultValue: undefined,
+  value: undefined,
+  textAlign: undefined,
+};
+
+export const Default: Story = {
+  render: Template,
+  args: { ...defaultProps },
+};
+
+export const Required: Story = {
+  render: Template,
   args: {
-    description: 'For eksempel Drammensveien 1',
-    label: 'Addresse',
+    ...defaultProps,
     isRequired: true,
-    isInvalid: false,
+  },
+};
+
+export const WithDescription: Story = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    description: 'Må fylles ut dersom du ønsker å motta nyhetsbrevet',
   },
 };
 
 export const WithPlaceholder: Story = {
-  args: { ...Example.args, placeholder: 'Drammensveien 1' },
+  render: Template,
+  args: {
+    ...defaultProps,
+    placeholder: 'Fyll ut eposten din',
+  },
 };
 
-export const AsInvalid: Story = {
+export const LeftAddon: Story = {
+  render: LeftAddonTemplate,
   args: {
-    ...Example.args,
+    ...defaultProps,
+  },
+};
+
+export const RightAddon: Story = {
+  render: RightAddonTemplate,
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const WithAddonDivider: Story = {
+  render: LeftAddonTemplate,
+  args: {
+    ...defaultProps,
+    withAddonDivider: true,
+  },
+};
+
+export const WithoutLabel: Story = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    label: undefined,
+    placeholder: 'Fyll ut eposten din',
+    'aria-label': 'Epost',
+  },
+};
+
+export const IsInvalid: Story = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    isInvalid: true,
+  },
+};
+
+export const TextAlignRight: Story = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    textAlign: 'right',
+    withAddonDivider: true,
+    rightAddon: 'kr',
+  },
+};
+
+export const WithErrorMessage: Story = {
+  render: Template,
+  args: {
+    ...defaultProps,
     errorMessage: 'Feltet er påkrevd',
   },
 };
 
-export const Custom = ({ isInvalid }: { isInvalid?: boolean }) => {
-  return (
-    <div>
-      <p className="mb-4 italic">
-        Custom implementation of TextField with a totally different layout,
-        while reusing the primitives
-      </p>
-      <RACTextField className="flex flex-col gap-2" isInvalid={isInvalid}>
-        <div className="flex items-baseline gap-4">
-          <Label className={isInvalid ? 'text-red' : undefined}>
-            Fullt navn
-          </Label>
+export const InputTypes = {
+  render: InputTypesTemplate,
 
-          <Input />
-        </div>
-        <Description>For eksempel Kari Nordmann</Description>
-        <ErrorMessage>Fyll ut dette feltet for å fortsette</ErrorMessage>
-      </RACTextField>
-    </div>
-  );
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const Controlled = {
+  render: ControlledTemplate,
+
+  args: {
+    ...defaultProps,
+    variant: 'bordered',
+  },
 };
