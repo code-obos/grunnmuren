@@ -5,6 +5,8 @@ import {
 } from 'react-aria-components';
 import { Check as CheckIcon } from '@obosbbl/grunnmuren-icons-react';
 
+import { Description } from '../label';
+
 const defaultClasses = cx([
   'group relative inline-flex max-w-fit cursor-pointer items-center gap-4 py-2 leading-7',
 ]);
@@ -34,20 +36,30 @@ function CheckmarkBox() {
 
 type CheckboxProps = {
   children: React.ReactNode;
+  /** Additional CSS className for the element. */
   className?: string;
+  /** Help text for the form control. */
+  description?: React.ReactNode;
+  /** Additional style properties for the element. */
+  style?: React.CSSProperties;
 } & Omit<
   RACCheckboxProps,
   'isDisabled' | 'style' | 'children' | 'isIndeterminate' | 'isReadOnly'
 >;
 
 function Checkbox(props: CheckboxProps) {
-  const { children, className, ...restProps } = props;
+  const { children, className, description, ...restProps } = props;
   return (
     <RACCheckbox {...restProps} className={cx(className, defaultClasses)}>
       {/* increases the clickable area of the checkbox for accessibility */}
       <div className="absolute -left-2.5 top-1/2 z-10 h-11 w-11 -translate-y-1/2" />
       <CheckmarkBox />
-      {children}
+      <div>
+        {children}
+        {description && (
+          <Description className="mt-2.5">{description}</Description>
+        )}
+      </div>
     </RACCheckbox>
   );
 }
