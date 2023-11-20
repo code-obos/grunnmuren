@@ -17,15 +17,37 @@ export default meta;
 
 type Story = StoryObj<typeof RadioGroup>;
 
-const items = (
-  <>
-    <Radio value="ordinary">Ordinær pris</Radio>
-    <Radio value="bostart">OBOS Bostart</Radio>
-    <Radio value="deleie">OBOS Deleie</Radio>
-  </>
-);
+const RadioItems = ({ description }: { description?: boolean }) => {
+  return (
+    <>
+      <Radio value="ordinary">Ordinær pris</Radio>
+      <Radio
+        value="bostart"
+        description={
+          description
+            ? 'OBOS Bostart gjør at du kan kjøpe en helt ny bolig til en lavere pris enn ordinær markedspris.'
+            : undefined
+        }
+      >
+        OBOS Bostart
+      </Radio>
+      <Radio
+        value="deleie"
+        description={
+          description
+            ? 'Med OBOS Deleie kan du kjøpe halve boligen, eller mer, og bo i hele.'
+            : undefined
+        }
+      >
+        OBOS Deleie
+      </Radio>
+    </>
+  );
+};
 
 const Template = (args: RadioGroupProps) => {
+  const items = <RadioItems description={Boolean(args.description)} />;
+
   return args.isRequired ? (
     <form
       className="flex flex-col items-start gap-4"
@@ -44,6 +66,8 @@ const Template = (args: RadioGroupProps) => {
 
 const ControlledTemplate = (args: RadioGroupProps) => {
   const [selectedItem, setSelectedItem] = useState<string>('ordinary');
+
+  const items = <RadioItems description={Boolean(args.description)} />;
 
   return (
     <div className="flex flex-col gap-2">
