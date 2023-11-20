@@ -46,9 +46,9 @@ const classes = {
       // prevent icons in addons from being flexed and affected by the text size of the input
       '[&>svg]:flex-none [&>svg]:text-base',
       // focus
-      'focus-within:ring-2 focus-within:ring-blue-dark',
+      'focus-within:ring-2 focus-within:ring-black',
       // invalid
-      'group-data-[invalid]:border-red group-data-[invalid]:outline group-data-[invalid]:outline-1 group-data-[invalid]:outline-red',
+      'group-data-[invalid]:border-red group-data-[invalid]:outline group-data-[invalid]:outline-2 group-data-[invalid]:outline-red',
     ],
     variants: {
       leftAddon: {
