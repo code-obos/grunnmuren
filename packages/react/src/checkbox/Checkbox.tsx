@@ -1,5 +1,7 @@
+import { useId } from 'react';
 import { cx } from 'cva';
 import {
+  CheckboxContext,
   Checkbox as RACCheckbox,
   CheckboxProps as RACCheckboxProps,
 } from 'react-aria-components';
@@ -18,8 +20,11 @@ function CheckmarkBox() {
     <div
       className={cx([
         'relative grid flex-none place-content-center rounded-sm border-2 border-black text-white',
-        //
-        'before:mt-[calc((1em_*_1.75_-_24px)_/_2)] before:h-[24px] before:w-[24px]',
+        // to vertically align the radio we need to calculate the label's height, which is equal to it's font size multiplied by the line height.
+        // For the ::before psuedo element the line height of the label is always 1em.
+        // When we know the height of the label we use the height of the radio to push it down to align with the label's first line
+        // TODO: 1.75 here is the unit less lineheight, altough we use 1.75rem as the line height, so there is a mismatch here. Revisit this when we've worked on typography in v2. Should this be a CSS custom property instead?
+        'mt-[calc((1em_*_1.75_-_24px)_/_2)] h-[24px] w-[24px]',
         // selected
         'group-data-[selected]:!border-green group-data-[selected]:!bg-green',
         // focus
@@ -42,6 +47,8 @@ type CheckboxProps = {
   className?: string;
   /** Help text for the form control. */
   description?: React.ReactNode;
+  /** Error message for the form control. Automatically sets `isInvalid` to true */
+  errorMessage?: React.ReactNode;
   /** Additional style properties for the element. */
   style?: React.CSSProperties;
 } & Omit<
@@ -51,18 +58,28 @@ type CheckboxProps = {
 
 function Checkbox(props: CheckboxProps) {
   const { children, className, description, ...restProps } = props;
+
+  const descriptionId = useId();
+
   return (
-    <RACCheckbox {...restProps} className={cx(className, defaultClasses)}>
-      {/* increases the clickable area of the checkbox for accessibility */}
-      <div className="absolute -left-2.5 top-0 z-10 h-11 w-11" />
-      <CheckmarkBox />
-      <div>
-        {children}
+    <div>
+      <CheckboxContext.Provider
+        value={{ 'aria-describedby': description ? descriptionId : undefined }}
+      >
+        <RACCheckbox {...restProps} className={cx(className, defaultClasses)}>
+          {/* increases the clickable area of the checkbox for accessibility */}
+          <div className="absolute -left-2.5 top-0 z-10 h-11 w-11" />
+          <CheckmarkBox />
+          {children}
+        </RACCheckbox>
+
         {description && (
-          <Description className="mt-2.5 block">{description}</Description>
+          <Description className="mt-2.5 block" id={descriptionId}>
+            {description}
+          </Description>
         )}
-      </div>
-    </RACCheckbox>
+      </CheckboxContext.Provider>
+    </div>
   );
 }
 

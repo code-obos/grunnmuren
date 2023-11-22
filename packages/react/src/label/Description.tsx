@@ -4,6 +4,7 @@ import { Text } from 'react-aria-components';
 type DescriptionProps = {
   className?: string;
   children: React.ReactNode;
+  id?: string;
 };
 
 function Description(props: DescriptionProps) {
