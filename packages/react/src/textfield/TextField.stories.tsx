@@ -34,7 +34,12 @@ const Template = (args: TextFieldProps) => {
 const ControlledTemplate = (args: TextFieldProps) => {
   const [value, setValue] = useState('');
 
-  return <Template {...args} value={value} onChange={setValue} />;
+  return (
+    <div className="flex flex-col gap-2">
+      <Template {...args} value={value} onChange={setValue} />
+      <p>{value}</p>
+    </div>
+  );
 };
 
 const LeftAddonTemplate = (args: TextFieldProps) => {
@@ -176,6 +181,5 @@ export const Controlled = {
 
   args: {
     ...defaultProps,
-    variant: 'bordered',
   },
 };
