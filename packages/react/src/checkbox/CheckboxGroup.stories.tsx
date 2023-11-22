@@ -17,15 +17,31 @@ export default meta;
 
 type Story = StoryObj<typeof CheckboxGroup>;
 
-const items = (
-  <>
-    <Checkbox value="bolig">Bolig</Checkbox>
-    <Checkbox value="bank">Bank</Checkbox>
-    <Checkbox value="fordeler">Medlemsfordeler</Checkbox>
-  </>
-);
+const CheckboxItems = ({ description }: { description?: boolean }) => {
+  return (
+    <>
+      <Checkbox value="bolig">Bolig</Checkbox>
+      <Checkbox
+        value="bank"
+        description={
+          description ? 'Markedets beste rentebetingelser' : undefined
+        }
+      >
+        Bank
+      </Checkbox>
+      <Checkbox
+        value="fordeler"
+        description={description ? 'Mer enn 100 fordeler' : undefined}
+      >
+        Medlemsfordeler
+      </Checkbox>
+    </>
+  );
+};
 
 const Template = (args: CheckboxGroupProps) => {
+  const items = <CheckboxItems description={Boolean(args.description)} />;
+
   return args.isRequired ? (
     <form
       className="flex flex-col items-start gap-4"
@@ -44,6 +60,8 @@ const Template = (args: CheckboxGroupProps) => {
 
 const ControlledTemplate = (args: CheckboxGroupProps) => {
   const [selectedItems, setSelectedItems] = useState(['bank']);
+
+  const items = <CheckboxItems description={Boolean(args.description)} />;
 
   return (
     <div className="flex flex-col gap-2">

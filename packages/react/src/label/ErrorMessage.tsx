@@ -1,10 +1,7 @@
 import { cx } from 'cva';
-import { Text } from 'react-aria-components';
+import { Text, type TextProps } from 'react-aria-components';
 
-type ErrorMessageProps = {
-  className?: string;
-  children: React.ReactNode;
-};
+type ErrorMessageProps = TextProps;
 
 function ErrorMessage(props: ErrorMessageProps) {
   const { children, className, ...restProps } = props;

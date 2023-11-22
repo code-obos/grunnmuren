@@ -85,6 +85,14 @@ export const IsInvalid: Story = {
   },
 };
 
+export const WithErrorMessage: Story = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    errorMessage: 'Huk av for å fortsette',
+  },
+};
+
 export const Controlled: Story = {
   render: ControlledTemplate,
   args: {

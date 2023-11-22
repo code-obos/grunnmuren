@@ -7,10 +7,11 @@ import {
 } from 'react-aria-components';
 import { Check as CheckIcon } from '@obosbbl/grunnmuren-icons-react';
 
-import { Description } from '../label';
+import { ErrorMessage } from '../label/ErrorMessage';
+import { Description } from '../label/Description';
 
 const defaultClasses = cx([
-  'group relative inline-flex max-w-fit cursor-pointer items-start gap-4 py-2 leading-7',
+  'group relative left-0 inline-flex max-w-fit cursor-pointer items-start gap-4 py-2 leading-7',
 ]);
 
 // Pulling this out into it's own component. Will probably export it in the future
@@ -19,7 +20,7 @@ function CheckmarkBox() {
   return (
     <div
       className={cx([
-        'relative grid flex-none place-content-center rounded-sm border-2 border-black text-white',
+        'relative left-0 grid flex-none place-content-center rounded-sm border-2 border-black text-white',
         // to vertically align the radio we need to calculate the label's height, which is equal to it's font size multiplied by the line height.
         // For the ::before psuedo element the line height of the label is always 1em.
         // When we know the height of the label we use the height of the radio to push it down to align with the label's first line
@@ -57,16 +58,35 @@ type CheckboxProps = {
 >;
 
 function Checkbox(props: CheckboxProps) {
-  const { children, className, description, ...restProps } = props;
+  const {
+    children,
+    className,
+    description,
+    errorMessage,
+    isInvalid: _isInvalid,
+    ...restProps
+  } = props;
 
-  const descriptionId = useId();
+  const id = useId();
+
+  const descriptionId = 'desc' + id;
+  const errorMessageId = 'error' + id;
+
+  const isInvalid = _isInvalid || errorMessage != null;
 
   return (
     <div>
       <CheckboxContext.Provider
-        value={{ 'aria-describedby': description ? descriptionId : undefined }}
+        value={{
+          'aria-describedby': description ? descriptionId : undefined,
+          'aria-errormessage': errorMessage ? errorMessageId : undefined,
+        }}
       >
-        <RACCheckbox {...restProps} className={cx(className, defaultClasses)}>
+        <RACCheckbox
+          {...restProps}
+          className={cx(className, defaultClasses)}
+          isInvalid={isInvalid}
+        >
           {/* increases the clickable area of the checkbox for accessibility */}
           <div className="absolute -left-2.5 top-0 z-10 h-11 w-11" />
           <CheckmarkBox />
@@ -74,9 +94,14 @@ function Checkbox(props: CheckboxProps) {
         </RACCheckbox>
 
         {description && (
-          <Description className="mt-2.5 block" id={descriptionId}>
+          <Description className="block" id={descriptionId}>
             {description}
           </Description>
+        )}
+        {errorMessage && (
+          <ErrorMessage className="mt-2 block" id={errorMessageId}>
+            {errorMessage}
+          </ErrorMessage>
         )}
       </CheckboxContext.Provider>
     </div>
