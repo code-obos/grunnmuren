@@ -46,7 +46,7 @@ function Radio(props: RadioProps) {
       <div>
         {children}
         {description && (
-          <Description className="mt-2.5 block">{description}</Description>
+          <Description className="mt-2 block">{description}</Description>
         )}
       </div>
     </RACRadio>

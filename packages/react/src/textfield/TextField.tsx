@@ -39,7 +39,7 @@ type TextFieldProps = {
 >;
 
 const classes = {
-  base: cx('group flex flex-col gap-2.5'),
+  base: cx('group flex flex-col gap-2'),
   inputWrapper: cva({
     base: [
       'relative inline-flex flex-row items-center rounded-md border border-black py-2.5 text-sm font-normal leading-6',
