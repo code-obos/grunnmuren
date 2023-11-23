@@ -33,7 +33,7 @@ type TextAreaProps = {
 >;
 
 const classes = {
-  base: cx('group flex flex-col gap-2.5'),
+  base: cx('group flex flex-col gap-2'),
   textarea: cx([
     'rounded-md border border-black px-3 py-2.5 text-sm font-normal leading-6 placeholder-[#727070]',
     // focus
