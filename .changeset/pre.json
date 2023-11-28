@@ -4,8 +4,12 @@
   "initialVersions": {
     "@obosbbl/grunnmuren-icons-react": "1.0.0",
     "@obosbbl/grunnmuren-icons-svg": "1.0.0",
-    "@obosbbl/grunnmuren-tailwind": "1.0.0"
+    "@obosbbl/grunnmuren-tailwind": "1.0.0",
+    "@obosbbl/grunnmuren-react": "1.0.0"
   },
   "changesets": [
+    "eleven-owls-report",
+    "gold-shrimps-peel",
+    "grumpy-rabbits-fry"
   ]
 }
