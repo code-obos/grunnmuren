@@ -6,14 +6,10 @@ name: Node.js CI
 on:
   push:
     branches:
-      - main
-      - next
-      - v2
+      - v1
   pull_request:
     branches:
-      - main
-      - next
-      - v2
+      - v1
 
 jobs:
   build:
@@ -58,7 +54,7 @@ jobs:
 
       - name: Deploy Storybook 🚀
         uses: JamesIves/github-pages-deploy-action@v4.4.3
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/v1'
         with:
           branch: docs # The branch the action should deploy to.
           folder: packages/react/storybook-static # The folder the action should deploy.
