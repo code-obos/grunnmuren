@@ -1,10 +1,7 @@
 import { cx } from 'cva';
-import { Text } from 'react-aria-components';
+import { Text, type TextProps } from 'react-aria-components';
 
-type DescriptionProps = {
-  className?: string;
-  children: React.ReactNode;
-};
+type DescriptionProps = TextProps;
 
 function Description(props: DescriptionProps) {
   const { className, ...restProps } = props;
