@@ -6,7 +6,7 @@ import { CheckboxGroup, type CheckboxGroupProps } from './CheckboxGroup';
 import { Checkbox } from './Checkbox';
 
 const meta: Meta<typeof CheckboxGroup> = {
-  title: 'Checkbox/CheckboxGroup',
+  title: 'CheckboxGroup',
   component: CheckboxGroup,
   argTypes: {
     onChange: { action: 'changed' },
