@@ -7,13 +7,9 @@ on:
   push:
     branches:
       - main
-      - next
-      - v2
   pull_request:
     branches:
       - main
-      - next
-      - v2
 
 jobs:
   build:
@@ -52,13 +48,6 @@ jobs:
       - name: Build packages
         run: pnpm run build
 
-      # Even though we only deploy from main, it makes sense to do this on PRs to ensure the change didn't break the Storybook
+      # It makes sense to do this on PRs to ensure the change didn't break the Storybook
       - name: Build storybook
-        run: pnpm --filter "@obosbbl/grunnmuren-react" build:storybook
-
-      - name: Deploy Storybook 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.4.3
-        if: github.ref == 'refs/heads/main'
-        with:
-          branch: docs # The branch the action should deploy to.
-          folder: packages/react/storybook-static # The folder the action should deploy.
+        run: pnpm build:storybook
