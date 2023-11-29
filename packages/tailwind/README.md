@@ -12,10 +12,6 @@ npm install -D @obosbbl/grunnmuren-tailwind@canary tailwindcss postcss autoprefi
 
 # pnpm
 pnpm add -D @obosbbl/grunnmuren-tailwind@canary tailwindcss postcss autoprefixer
-
-# yarn
-yarn add -D @obosbbl/grunnmuren-tailwind@canary tailwindcss postcss autoprefixer
-
 ```
 
 ## Usage
@@ -33,7 +29,7 @@ module.exports = {
     './src/app/**/*.{js,ts,jsx,tsx,}',
 
     // If you're using Grunnmuren's React components
-    './node_modules/@obosbbl/grunnmuren-react/dist/**/*.js',
+    './node_modules/@obosbbl/grunnmuren-react/dist/**/*.mjs',
   ],
 };
 ```

@@ -14,9 +14,6 @@ npm install @obosbbl/grunnmuren-icons-svg@canary
 
 # pnpm
 pnpm add @obosbbl/grunnmuren-icons-svg@canary
-
-# yarn
-yarn add @obosbbl/grunnmuren-icons-svg@canary
 ```
 
 ## Usage
