@@ -1,5 +1,7 @@
 # @obosbbl/grunnmuren-icons-react
 
+[![npm canary version](https://img.shields.io/npm/v/@obosbbl%2Fgrunnmuren-icons-react/canary.svg)](https://www.npmjs.com/package/@obosbbl/grunnmuren-icons-react)
+
 Grunnmuren's icon set as React components.
 
 To reduce the package installation size, this

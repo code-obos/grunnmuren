@@ -1,5 +1,7 @@
 # @obosbbl/grunnmuren-icons-svg
 
+[![npm canary version](https://img.shields.io/npm/v/@obosbbl%2Fgrunnmuren-icons-svg/canary.svg)](https://www.npmjs.com/package/@obosbbl/grunnmuren-icons-svg)
+
 Grunnmuren's icon set as raw SVG files.
 
 If you are using React, you may want to use [`@obosbbl/grunnmuren-icons-react`](../@obosbbl/grunnmuren-icons-react) instead.
@@ -7,9 +9,14 @@ If you are using React, you may want to use [`@obosbbl/grunnmuren-icons-react`](
 ## Install
 
 ```sh
-npm install @obosbbl/grunnmuren-icons-svg
+# npm
+npm install @obosbbl/grunnmuren-icons-svg@canary
 
-pnpm add @obosbbl/grunnmuren-icons-react
+# pnpm
+pnpm add @obosbbl/grunnmuren-icons-svg@canary
+
+# yarn
+yarn add @obosbbl/grunnmuren-icons-svg@canary
 ```
 
 ## Usage
