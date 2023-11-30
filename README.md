@@ -1,5 +1,6 @@
 # Grunnmuren - OBOS' design system
 
+[![Slack](https://img.shields.io/badge/Slack-%23grunnmuren--design--system-default?logo=slack)](https://obos.slack.com/archives/C03FR05FJ9F)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/62c234c7-3bb2-4592-a22f-ecb44d84f463/deploy-status)](https://app.netlify.com/sites/obos-grunnmuren/deploys)
 
 This is the monorepo for **Grunnmuren**, OBOS' design system.
