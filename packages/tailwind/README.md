@@ -1,6 +1,6 @@
 # @obosbbl/grunnmuren-tailwind
 
-[![npm version](https://badge.fury.io/js/@obosbbl%2Fgrunnmuren-tailwind.svg)](https://www.npmjs.com/package/@obosbbl/grunnmuren-tailwind)
+[![npm canary version](https://img.shields.io/npm/v/@obosbbl%2Fgrunnmuren-tailwind/canary.svg)](https://www.npmjs.com/package/@obosbbl/grunnmuren-tailwind)
 
 Grunnmuren Tailwind preset. See the [Tailwind documentation](https://tailwindcss.com/docs/presets) for more information about how presets work.
 
@@ -8,14 +8,10 @@ Grunnmuren Tailwind preset. See the [Tailwind documentation](https://tailwindcss
 
 ```sh
 # npm
-npm install -D @obosbbl/grunnmuren-tailwind tailwindcss postcss autoprefixer
+npm install -D @obosbbl/grunnmuren-tailwind@canary tailwindcss postcss autoprefixer
 
 # pnpm
-pnpm add -D @obosbbl/grunnmuren-tailwind tailwindcss postcss autoprefixer
-
-# yarn
-yarn add -D @obosbbl/grunnmuren-tailwind tailwindcss postcss autoprefixer
-
+pnpm add -D @obosbbl/grunnmuren-tailwind@canary tailwindcss postcss autoprefixer
 ```
 
 ## Usage
@@ -33,7 +29,7 @@ module.exports = {
     './src/app/**/*.{js,ts,jsx,tsx,}',
 
     // If you're using Grunnmuren's React components
-    './node_modules/@obosbbl/grunnmuren-react/dist/**/*.js',
+    './node_modules/@obosbbl/grunnmuren-react/dist/**/*.mjs',
   ],
 };
 ```

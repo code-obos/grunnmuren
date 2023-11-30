@@ -1,17 +1,19 @@
 # @obosbbl/grunnmuren-icons-react
 
-Grunnmuren's icon set as React components.
+[![npm canary version](https://img.shields.io/npm/v/@obosbbl%2Fgrunnmuren-icons-react/canary.svg)](https://www.npmjs.com/package/@obosbbl/grunnmuren-icons-react)
 
-To reduce the package installation size, this
+Grunnmuren's icon set as React components.
 
 If you want the raw SVG files for the icons, see [`@obosbbl/grunnmuren-icons-svg`](../@obosbbl/grunnmuren-icons-svg) instead.
 
 ## Install
 
 ```sh
-npm install @obosbbl/grunnmuren-icons-react
+# npm
+npm install @obosbbl/grunnmuren-icons-react@canary
 
-pnpm add @obosbbl/grunnmuren-icons-react
+# pnpm
+pnpm add @obosbbl/grunnmuren-icons-react@canary
 ```
 
 ## Usage
@@ -34,6 +36,6 @@ Since icons mostly are used as a visual decoration, they will also render with `
 <House />
 // <svg role="img" aria-hidden="true">...</svg>
 
-<House aria-label="Hus" />
+<House aria-label="Ikon som illustrerer et hus" />
 // <svg role="img" aria-label="Hus">...</svg>
 ```
