@@ -10,9 +10,7 @@ import { useClientLayoutEffect } from '../utils/useClientLayoutEffect';
 
 const buttonVariants = cva({
   base: [
-    'inline-flex min-h-[44px] cursor-pointer items-center justify-center whitespace-nowrap rounded-lg px-4 py-2 font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
-    // Spaccing when using the button with icons
-    '[&>svg]:first-of-type:mr-2.5 [&>svg]:last-of-type:ml-2.5',
+    'inline-flex min-h-[44px] cursor-pointer items-center justify-center whitespace-nowrap rounded-lg font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
   ],
   variants: {
     /**
@@ -33,6 +31,16 @@ const buttonVariants = cva({
       green: 'focus-visible:ring-black',
       mint: 'focus-visible:ring-mint focus-visible:ring-offset-green-dark',
       white: 'focus-visible:ring-white focus-visible:ring-offset-blue',
+    },
+    /**
+     * When the button is without text, but with a single icon.
+     * @default false
+     */
+    isIconOnly: {
+      true: 'p-2 [&>svg]:h-7 [&>svg]:w-7',
+      false:
+        // The of-type classes takes care to add spacing when the button is used with icons
+        'px-4 py-2 [&>svg]:first-of-type:mr-2.5 [&>svg]:last-of-type:ml-2.5',
     },
   },
   compoundVariants: [
@@ -83,6 +91,7 @@ const buttonVariants = cva({
   defaultVariants: {
     variant: 'primary',
     color: 'green',
+    isIconOnly: false,
   },
 });
 
@@ -106,8 +115,16 @@ type ButtonProps = VariantProps<typeof buttonVariants> & {
 } & ButtonOrLinkProps;
 
 function Button(props: ButtonProps) {
-  const { children, className, color, loading, variant, style, ...restProps } =
-    props;
+  const {
+    children,
+    className,
+    color,
+    isIconOnly,
+    loading,
+    variant,
+    style,
+    ...restProps
+  } = props;
 
   // TODO: Merge refs when we use RAC
   const buttonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
@@ -136,7 +153,7 @@ function Button(props: ButtonProps) {
     // @ts-expect-error TS doesn't agree here taht restProps is safe to spread, because restProps for anchors aren't type compatible with restProps for buttons, but that should be okay here
     <Component
       aria-busy={loading ? true : undefined}
-      className={buttonVariants({ className, color, variant })}
+      className={buttonVariants({ className, color, isIconOnly, variant })}
       ref={buttonRef as never}
       style={{
         ...style,
