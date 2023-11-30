@@ -1,6 +1,6 @@
 import { cx } from 'cva';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Edit } from '@obosbbl/grunnmuren-icons-react';
+import { Edit, Search } from '@obosbbl/grunnmuren-icons-react';
 
 import { Button } from './Button';
 
@@ -58,7 +58,7 @@ export const Tertiary: Story = {
   },
 };
 
-export const WithIcon = () => {
+export const WithIconAndText = () => {
   return (
     <div className="flex gap-8 p-8">
       <Button>
@@ -66,6 +66,16 @@ export const WithIcon = () => {
       </Button>
       <Button>
         Rediger <Edit />
+      </Button>
+    </div>
+  );
+};
+
+export const IconOnly = () => {
+  return (
+    <div className="p-8">
+      <Button isIconOnly aria-label="Søk">
+        <Search />
       </Button>
     </div>
   );
