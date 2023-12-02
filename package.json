@@ -17,7 +17,7 @@
     "lint:js": "eslint . --ext \"js,cjs,mjs,tsx,ts\" --max-warnings 0 --ignore-path .gitignore"
   },
   "dependencies": {
-    "@changesets/cli": "2.26.2",
+    "@changesets/cli": "2.27.1",
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
     "@storybook/addon-actions": "7.6.1",
     "@storybook/addon-controls": "7.6.1",
