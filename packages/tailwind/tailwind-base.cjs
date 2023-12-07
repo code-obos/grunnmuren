@@ -85,10 +85,11 @@ module.exports = (options = {}) => {
       }),
 
       plugin(function ({ addBase, addComponents }) {
-        const h1 = '@apply font-bold text-3xl md:text-5xl';
-        const h2 = '@apply font-bold text-2xl md:text-4xl';
-        const h3 = '@apply font-bold text-xl md:text-2xl';
-        const h4 = '@apply font-bold text-lg md:text-xl';
+        // This is tailwind syntax for setting both the font-size and the line-height
+        const h1 = '@apply font-bold text-[28px]/[38px] md:text-[40px]/[56px]';
+        const h2 = '@apply font-bold text-[24px]/[30px] md:text-[32px]/[42px]';
+        const h3 = '@apply font-bold text-[20px]/[30px] md:text-[24px]/[34px]';
+        const h4 = '@apply font-bold text-[18px]/[24px] md:text-[20px]/[28px]';
 
         if (options.legacyV1Compatibility) {
           addBase({
