@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.0.0-canary.1
+
+### Patch Changes
+
+- 7190630: minor adjustment of heading sizes
+
 ## 2.0.0-canary.0
 
 ### Major Changes

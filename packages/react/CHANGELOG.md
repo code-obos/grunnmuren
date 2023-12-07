@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.1
+
+### Minor Changes
+
+- 425dac9: Button: add support for `isIconOnly` to render a button with a single icon
+
 ## 2.0.0-canary.0
 
 ### Major Changes
