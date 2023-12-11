@@ -38,11 +38,11 @@ const Template = (args: SelectProps) => {
 };
 
 const ControlledTemplate = (args: SelectProps) => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState('dog');
 
   return (
     <div className="flex flex-col gap-2">
-      <Template {...args} value={value} onChange={setValue} />
+      <Template {...args} selectedKey={value} onSelectionChange={setValue} />
       <pre className="font-sans">{value}</pre>
     </div>
   );
@@ -53,9 +53,8 @@ const defaultProps = {
   isRequired: false,
   isInvalid: false,
   name: undefined,
-  defaultValue: undefined,
-  value: undefined,
-  rows: undefined,
+  defaultSelectedKey: undefined,
+  selectedKey: undefined,
 };
 
 export const Default: Story = {
@@ -84,14 +83,6 @@ export const WithPlaceholder: Story = {
   args: {
     ...defaultProps,
     placeholder: 'Lorem ipsum',
-  },
-};
-
-export const With5Rows: Story = {
-  render: Template,
-  args: {
-    ...defaultProps,
-    rows: 3,
   },
 };
 

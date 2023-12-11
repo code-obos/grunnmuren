@@ -14,7 +14,8 @@ import { Label } from '../label/Label';
 import { Description } from '../label/Description';
 import { ErrorMessage } from '../label/ErrorMessage';
 
-type SelectProps = {
+type SelectProps<T extends object> = {
+  children: React.ReactNode;
   /** Additional CSS className for the element. */
   className?: string;
   /** Help text for the form control. */
@@ -28,11 +29,11 @@ type SelectProps = {
   /** Additional style properties for the element. */
   style?: React.CSSProperties;
 } & Omit<
-  RACSelectProps,
+  RACSelectProps<T>,
   'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style'
 >;
 
-function Select(props: SelectProps) {
+function Select<T extends object>(props: SelectProps<T>) {
   const {
     className,
     children,
@@ -57,12 +58,12 @@ function Select(props: SelectProps) {
         )}
       >
         <SelectValue className="flex-1 truncate text-left data-[placeholder]:text-[#727070]" />
-        <ChevronDown className=" text-base transition-transform duration-150 group-data-[open]:rotate-180 motion-reduce:transition-none" />
+        <ChevronDown className="text-base transition-transform duration-150 group-data-[open]:rotate-180 motion-reduce:transition-none" />
       </Button>
 
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 
-      <Popover className="white w-[--trigger-width] overflow-auto rounded-md border border-black bg-white shadow">
+      <Popover className="data-[entering]:animate-in data-[entering]:fade-in data-[exiting]:animate-out data-[exiting]:fade-out w-[--trigger-width] overflow-auto rounded-md border border-black bg-white shadow">
         <ListBox
           className={cx(
             'text-sm outline-none',
