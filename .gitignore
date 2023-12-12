@@ -3,6 +3,8 @@ node_modules
 dist/
 .next/
 storybook-static/
+next-env.d.ts
+
 
 # editors
 .idea/

@@ -1,0 +1,19 @@
+{
+    "name": "form-demo",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+      },
+    "dependencies": {
+        "next": "14.0.4",
+        "@obosbbl/grunnmuren-react": "workspace:*"
+    },
+    "devDependencies": {
+        "@obosbbl/grunnmuren-tailwind": "workspace:*",
+        "tailwindcss": "3.3.6"
+    }
+}
