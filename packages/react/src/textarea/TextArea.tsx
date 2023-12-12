@@ -49,7 +49,6 @@ function TextArea(props: TextAreaProps) {
     description,
     errorMessage,
     label,
-    isRequired,
     isInvalid: _isInvalid,
     rows,
     ...restProps
@@ -62,7 +61,6 @@ function TextArea(props: TextAreaProps) {
       {...restProps}
       className={cx(className, classes.base)}
       isInvalid={isInvalid}
-      isRequired={isRequired}
     >
       {label && <Label>{label}</Label>}
       {description && <Description>{description}</Description>}
