@@ -59,6 +59,9 @@ function Select<T extends object>(props: SelectProps<T>) {
         className={cx(
           'flex items-center gap-2',
           'rounded-md border border-black px-3 py-2.5 text-sm font-normal leading-6',
+          // focus
+          'focus-visible:ring-2 ring-black focus:outline-none',
+          // invalid
           'group-data-[invalid]:border-red',
         )}
       >
@@ -73,9 +76,11 @@ function Select<T extends object>(props: SelectProps<T>) {
           className={cx(
             'text-sm outline-none',
             // the items
-            '[&>[role=option]]:cursor-default [&>[role=option]]:px-6 [&>[role=option]]:py-2 [&>[role=option]]:outline-none',
-            // focus here is really item hover
-            'focus:[&>[role=option]]:bg-sky-lightest',
+            '[&_[role=option]]:cursor-default [&_[role=option]]:px-6 [&_[role=option]]:py-2 [&_[role=option]]:outline-none [&_[role=option]]:leading-6',
+            // "focus" here is really item hover/active
+            'focus:[&_[role=option]]:bg-sky-lightest',
+            // headers for grouped sections
+            '[&_header]:px-6 [&_header]:py-2 [&_header]:font-medium [&_header]:leading-6',
           )}
         >
           {children}

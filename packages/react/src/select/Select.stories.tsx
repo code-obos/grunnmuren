@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { Header, Section } from 'react-aria-components';
 
 import { Button } from '../button/Button';
 import { Select, SelectItem, SelectProps } from './Select';
@@ -13,7 +14,7 @@ export default meta;
 
 type Story = StoryObj<typeof Select>;
 
-const Template = (args: SelectProps) => {
+const Template = (args: SelectProps ) => {
   const select = (
     <Select {...args}>
       <SelectItem id="agder">Agder</SelectItem>
@@ -53,6 +54,31 @@ const ControlledTemplate = (args: SelectProps) => {
   );
 };
 
+const GroupedTemplate = (args: SelectProps) => {
+
+  return (
+    <Select {...args}>
+      <Section>
+        <Header>Sørlandet</Header>
+        <SelectItem>Agder</SelectItem>
+      </Section>
+      <Section>
+        <Header>Vestlandet</Header>
+        <SelectItem>Rogaland</SelectItem>
+        <SelectItem>Møre og Romdsdal</SelectItem>
+      </Section>
+      <Section>
+        <Header>Østlandet</Header>
+        <SelectItem>Oslo</SelectItem>
+        <SelectItem>
+          Vestfold og Telemark
+        </SelectItem>
+        <SelectItem>Viken</SelectItem>
+      </Section>
+    </Select>
+  );
+};
+
 const defaultProps = {
   label: 'Velg område',
   isRequired: false,
@@ -81,6 +107,13 @@ export const WithDescription: Story = {
   args: {
     ...defaultProps,
     description: 'OBOS bygger nye boliger over store deler av landet.',
+  },
+};
+
+export const WithGroupedSectionHeadings: Story = {
+  render: GroupedTemplate,
+  args: {
+    ...defaultProps,
   },
 };
 
