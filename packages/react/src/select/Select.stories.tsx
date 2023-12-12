@@ -16,9 +16,14 @@ type Story = StoryObj<typeof Select>;
 const Template = (args: SelectProps) => {
   const select = (
     <Select {...args}>
-      <SelectItem id="panda">Panda</SelectItem>
-      <SelectItem id="cat">Cat</SelectItem>
-      <SelectItem id="dog">Dog</SelectItem>
+      <SelectItem id="agder">Agder</SelectItem>
+      <SelectItem id="innlandet">Innlandet</SelectItem>
+      <SelectItem id="more-og-romsdal">Møre og Romsdal</SelectItem>
+      <SelectItem id="oslo">Oslo</SelectItem>
+      <SelectItem id="rogaland">Rogaland</SelectItem>
+      <SelectItem id="trondelag">Trøndelag</SelectItem>
+      <SelectItem id="vestfold-og-telemark">Vestfold og Telemark</SelectItem>
+      <SelectItem id="viken">Viken</SelectItem>
     </Select>
   );
   return args.isRequired ? (
@@ -38,7 +43,7 @@ const Template = (args: SelectProps) => {
 };
 
 const ControlledTemplate = (args: SelectProps) => {
-  const [value, setValue] = useState('dog');
+  const [value, setValue] = useState('oslo');
 
   return (
     <div className="flex flex-col gap-2">
@@ -49,12 +54,13 @@ const ControlledTemplate = (args: SelectProps) => {
 };
 
 const defaultProps = {
-  label: 'Beskrivelse',
+  label: 'Velg område',
   isRequired: false,
   isInvalid: false,
   name: undefined,
   defaultSelectedKey: undefined,
   selectedKey: undefined,
+  placeholder: 'Velg område',
 };
 
 export const Default: Story = {
@@ -74,15 +80,7 @@ export const WithDescription: Story = {
   render: Template,
   args: {
     ...defaultProps,
-    description: 'Maks 250 tegn',
-  },
-};
-
-export const WithPlaceholder: Story = {
-  render: Template,
-  args: {
-    ...defaultProps,
-    placeholder: 'Lorem ipsum',
+    description: 'OBOS bygger nye boliger over store deler av landet.',
   },
 };
 
@@ -91,8 +89,8 @@ export const WithoutLabel: Story = {
   args: {
     ...defaultProps,
     label: undefined,
-    placeholder: 'Beskrivelse',
-    'aria-label': 'Beskrivelse',
+    placeholder: 'Velg område',
+    'aria-label': 'Velg område',
   },
 };
 

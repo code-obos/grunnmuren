@@ -40,13 +40,17 @@ function Select<T extends object>(props: SelectProps<T>) {
     description,
     errorMessage,
     label,
+    isInvalid: _isInvalid,
     ...restProps
   } = props;
+
+  const isInvalid = _isInvalid || errorMessage != null;
 
   return (
     <RACSelect
       {...restProps}
       className={cx(className, 'group flex flex-col gap-2')}
+      isInvalid={isInvalid}
     >
       {label && <Label>{label}</Label>}
       {description && <Description>{description}</Description>}
@@ -55,6 +59,7 @@ function Select<T extends object>(props: SelectProps<T>) {
         className={cx(
           'flex items-center gap-2',
           'rounded-md border border-black px-3 py-2.5 text-sm font-normal leading-6',
+          'group-data-[invalid]:border-red',
         )}
       >
         <SelectValue className="flex-1 truncate text-left data-[placeholder]:text-[#727070]" />
@@ -63,14 +68,14 @@ function Select<T extends object>(props: SelectProps<T>) {
 
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 
-      <Popover className="data-[entering]:animate-in data-[entering]:fade-in data-[exiting]:animate-out data-[exiting]:fade-out w-[--trigger-width] overflow-auto rounded-md border border-black bg-white shadow">
+      <Popover className="data-[entering]:animate-in data-[entering]:fade-in data-[exiting]:animate-out data-[exiting]:fade-out min-w-[--trigger-width] overflow-auto rounded-md border border-black bg-white shadow">
         <ListBox
           className={cx(
             'text-sm outline-none',
             // the items
             '[&>[role=option]]:cursor-default [&>[role=option]]:px-6 [&>[role=option]]:py-2 [&>[role=option]]:outline-none',
             // focus here is really item hover
-            'focus:[&>[role=option]]:bg-green-light',
+            'focus:[&>[role=option]]:bg-sky-lightest',
           )}
         >
           {children}
