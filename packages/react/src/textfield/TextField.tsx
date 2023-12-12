@@ -78,7 +78,6 @@ function TextField(props: TextFieldProps) {
     errorMessage,
     label,
     leftAddon,
-    isRequired,
     isInvalid: _isInvalid,
     textAlign,
     rightAddon,
@@ -93,7 +92,6 @@ function TextField(props: TextFieldProps) {
       {...restProps}
       className={cx(className, classes.base)}
       isInvalid={isInvalid}
-      isRequired={isRequired}
     >
       {label && <Label>{label}</Label>}
       {description && <Description>{description}</Description>}
