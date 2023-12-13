@@ -47,6 +47,7 @@ module.exports = (options = {}) => {
     plugins: [
       ...v1CompatibilityPlugins,
       require('@tailwindcss/typography'),
+      require('tailwindcss-animate'),
       plugin(function ({ addBase, addComponents }) {
         addBase({
           html: {
