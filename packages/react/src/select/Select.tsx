@@ -7,8 +7,9 @@ import {
   type SelectProps as RACSelectProps,
   SelectValue,
   ListBoxItem,
+  ListBoxItemProps,
 } from 'react-aria-components';
-import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
+import { ChevronDown, Check } from '@obosbbl/grunnmuren-icons-react';
 
 import { Label } from '../label/Label';
 import { Description } from '../label/Description';
@@ -60,7 +61,7 @@ function Select<T extends object>(props: SelectProps<T>) {
           'flex items-center gap-2',
           'rounded-md border border-black px-3 py-2.5 text-sm font-normal leading-6',
           // focus
-          'focus-visible:ring-2 ring-black focus:outline-none',
+          'ring-black focus:outline-none focus-visible:ring-2',
           // invalid
           'group-data-[invalid]:border-red',
         )}
@@ -71,14 +72,10 @@ function Select<T extends object>(props: SelectProps<T>) {
 
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 
-      <Popover className="data-[entering]:animate-in data-[entering]:fade-in data-[exiting]:animate-out data-[exiting]:fade-out min-w-[--trigger-width] overflow-auto rounded-md border border-black bg-white shadow">
+      <Popover className="min-w-[--trigger-width] overflow-auto rounded-md border border-black bg-white shadow data-[entering]:animate-in data-[exiting]:animate-out data-[entering]:fade-in data-[exiting]:fade-out">
         <ListBox
           className={cx(
             'text-sm outline-none',
-            // the items
-            '[&_[role=option]]:cursor-default [&_[role=option]]:px-6 [&_[role=option]]:py-2 [&_[role=option]]:outline-none [&_[role=option]]:leading-6',
-            // "focus" here is really item hover/active
-            'focus:[&_[role=option]]:bg-sky-lightest',
             // headers for grouped sections
             '[&_header]:px-6 [&_header]:py-2 [&_header]:font-medium [&_header]:leading-6',
           )}
@@ -90,4 +87,17 @@ function Select<T extends object>(props: SelectProps<T>) {
   );
 }
 
-export { Select, ListBoxItem as SelectItem, type SelectProps };
+const SelectItem = (props: ListBoxItemProps) => {
+  return (
+    <ListBoxItem className="flex cursor-default px-6 py-2 leading-6 outline-none focus:bg-sky-lightest">
+      {({ isSelected }) => (
+        <>
+          {isSelected && <Check className="-ml-6 text-base" />}
+          {props.children}
+        </>
+      )}
+    </ListBoxItem>
+  );
+};
+
+export { Select, SelectItem, type SelectProps };
