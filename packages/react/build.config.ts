@@ -31,7 +31,7 @@ export default defineBuildConfig({
       if (Array.isArray(options.plugins)) {
         options.plugins = options.plugins.filter((plugin) => {
           return (
-            plugin && 'name' in plugin && plugin.name !== 'preserve-directes'
+            plugin && 'name' in plugin && plugin.name !== 'preserve-directives'
           );
         });
       }
