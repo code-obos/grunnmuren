@@ -73,7 +73,7 @@ type TextFieldProps = {
 // };
 
 const classes = {
-  base: cx('group flex flex-col gap-2'),
+  field: cx('group flex flex-col gap-2'),
   input: cx(
     'rounded-md px-3 py-2.5 text-sm font-normal leading-6 placeholder-[#727070] outline-none ring-1 ring-black',
     'focus:ring-2',
@@ -113,7 +113,7 @@ function TextField(props: TextFieldProps) {
   return (
     <RACTextField
       {...restProps}
-      className={cx(className, classes.base)}
+      className={cx(className, classes.field)}
       isInvalid={isInvalid}
     >
       {label && <Label>{label}</Label>}

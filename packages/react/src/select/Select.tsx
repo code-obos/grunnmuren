@@ -62,7 +62,7 @@ function Select<T extends object>(props: SelectProps<T>) {
   return (
     <RACSelect
       {...restProps}
-      className={cx(className, 'group flex flex-col gap-2')}
+      className={cx(className, inputClasses.field)}
       isInvalid={isInvalid}
     >
       {label && <Label>{label}</Label>}

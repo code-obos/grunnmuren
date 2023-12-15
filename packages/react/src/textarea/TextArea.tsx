@@ -49,7 +49,7 @@ function TextArea(props: TextAreaProps) {
   return (
     <RACTextField
       {...restProps}
-      className={cx(className, classes.base)}
+      className={cx(className, classes.field)}
       isInvalid={isInvalid}
     >
       {label && <Label>{label}</Label>}

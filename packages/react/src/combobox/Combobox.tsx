@@ -12,7 +12,8 @@ import {
 } from 'react-aria-components';
 import { ChevronDown, Check } from '@obosbbl/grunnmuren-icons-react';
 
-import { classes } from '../select/Select';
+import { classes as inputClasses } from '../textfield/TextField';
+import { classes as selectClasses } from '../select/Select';
 import { Label } from '../label/Label';
 import { Description } from '../label/Description';
 import { ErrorMessage } from '../label/ErrorMessage';
@@ -52,25 +53,17 @@ function Combobox<T extends object>(props: ComboboxProps<T>) {
   return (
     <RACCombobox
       {...restProps}
-      className={cx(className, 'group flex flex-col gap-2')}
+      className={cx(className, inputClasses.field)}
       isInvalid={isInvalid}
     >
       {label && <Label>{label}</Label>}
       {description && <Description>{description}</Description>}
 
-      <Group
-        className={cx(
-          'flex cursor-default items-center gap-2',
-          'rounded-md border border-black px-3 py-2.5 text-sm font-normal leading-6',
-          // focus
-          'ring-black focus:outline-none focus-visible:ring-2',
-          // invalid
-          'group-data-[invalid]:border-red',
-        )}
-      >
-        <Input className="flex-1 truncate text-left data-[placeholder]:text-[#727070]" />
+      <Group className="inline-flex items-center">
+        <Input className={inputClasses.input} />
+        {/* <Input className="flex-1 truncate text-left data-[placeholder]:text-[#727070]" /> */}
         <Button>
-          <ChevronDown className={classes.chevron} />
+          <ChevronDown className={selectClasses.chevron} />
         </Button>
       </Group>
 
@@ -78,12 +71,12 @@ function Combobox<T extends object>(props: ComboboxProps<T>) {
 
       <Popover
         className={cx(
-          classes.popover,
+          selectClasses.popover,
           'min-w-[calc(var(--trigger-width)+1.5rem)]',
         )}
         offset={20}
       >
-        <ListBox className={classes.listbox}>{children}</ListBox>
+        <ListBox className={selectClasses.listbox}>{children}</ListBox>
       </Popover>
     </RACCombobox>
   );
