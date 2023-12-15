@@ -79,7 +79,7 @@ function Select<T extends object>(props: SelectProps<T>) {
           inputClasses.input,
           // TODO: focus or focus-visible?
           // How to reuse placeholder text?
-          'flex cursor-default items-center gap-2',
+          'inline-flex cursor-default items-center gap-2',
         )}
       >
         <SelectValue className="flex-1 truncate text-left data-[placeholder]:text-[#727070]" />

@@ -59,9 +59,8 @@ function Combobox<T extends object>(props: ComboboxProps<T>) {
       {label && <Label>{label}</Label>}
       {description && <Description>{description}</Description>}
 
-      <Group className="inline-flex items-center">
+      <Group className={cx('inline-flex items-center gap-2')}>
         <Input className={inputClasses.input} />
-        {/* <Input className="flex-1 truncate text-left data-[placeholder]:text-[#727070]" /> */}
         <Button>
           <ChevronDown className={selectClasses.chevron} />
         </Button>
@@ -69,13 +68,7 @@ function Combobox<T extends object>(props: ComboboxProps<T>) {
 
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 
-      <Popover
-        className={cx(
-          selectClasses.popover,
-          'min-w-[calc(var(--trigger-width)+1.5rem)]',
-        )}
-        offset={20}
-      >
+      <Popover className={selectClasses.popover}>
         <ListBox className={selectClasses.listbox}>{children}</ListBox>
       </Popover>
     </RACCombobox>
