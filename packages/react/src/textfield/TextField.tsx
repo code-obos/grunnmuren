@@ -74,9 +74,9 @@ type TextFieldProps = {
 const classes = {
   base: cx('group flex flex-col gap-2'),
   input: cx(
-    'rounded-md px-3 py-2.5 text-sm font-normal leading-6 outline-none ring-1 ring-black',
-    'focus-within:ring-2',
-    'group-data-[invalid]:ring-red ',
+    'rounded-md px-3 py-2.5 text-sm font-normal leading-6 placeholder-[#727070] outline-none ring-1 ring-black',
+    'focus:ring-2',
+    'group-data-[invalid]:ring-2 group-data-[invalid]:ring-red group-data-[invalid]:focus:ring',
   ),
 };
 
@@ -126,4 +126,4 @@ function Divider({ className }: { className: string }) {
   return <span className={cx(className, classes.divider)} />;
 }
 
-export { TextField, type TextFieldProps };
+export { TextField, type TextFieldProps, classes };
