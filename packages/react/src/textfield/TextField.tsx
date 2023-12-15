@@ -3,6 +3,7 @@ import {
   Input,
   TextField as RACTextField,
   type TextFieldProps as RACTextFieldProps,
+  Group,
 } from 'react-aria-components';
 
 import { Label } from '../label/Label';
@@ -78,6 +79,19 @@ const classes = {
     'focus:ring-2',
     'group-data-[invalid]:ring-2 group-data-[invalid]:ring-red group-data-[invalid]:focus:ring',
   ),
+  divider: cx('block h-6 w-px flex-none bg-black'),
+};
+
+const variants = {
+  input: cva({
+    base: classes.input,
+    variants: {
+      textAlign: {
+        right: 'text-right',
+        left: '',
+      },
+    },
+  }),
 };
 
 function TextField(props: TextFieldProps) {
@@ -86,11 +100,11 @@ function TextField(props: TextFieldProps) {
     description,
     errorMessage,
     label,
-    // leftAddon,
+    leftAddon,
     isInvalid: _isInvalid,
     textAlign,
-    // rightAddon,
-    // withAddonDivider,
+    rightAddon,
+    withAddonDivider,
     ...restProps
   } = props;
 
@@ -104,6 +118,19 @@ function TextField(props: TextFieldProps) {
     >
       {label && <Label>{label}</Label>}
       {description && <Description>{description}</Description>}
+
+      {leftAddon || rightAddon ? (
+        <Group className="inline-flex items-center">
+          {leftAddon}
+          {withAddonDivider && leftAddon && <Divider className="ml-3" />}
+          <Input className={variants.input({ textAlign })} />
+          {withAddonDivider && rightAddon && <Divider className="mr-3" />}
+          {rightAddon}
+        </Group>
+      ) : (
+        <Input className={variants.input({ textAlign })} />
+      )}
+
       {/* <div
         className={classes.inputWrapper({
           leftAddon: !!leftAddon,
@@ -113,7 +140,7 @@ function TextField(props: TextFieldProps) {
       {/* {leftAddon}
         {withAddonDivider && leftAddon && <Divider className="ml-3" />} */}
       {/* <Input className={classes.input({ textAlign })} /> */}
-      <Input className={classes.input} />
+      {/* <Input className={classes.input} /> */}
       {/* {withAddonDivider && rightAddon && <Divider className="mr-3" />}
         {rightAddon}
       </div> */}

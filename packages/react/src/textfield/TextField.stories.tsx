@@ -45,6 +45,9 @@ const ControlledTemplate = (args: TextFieldProps) => {
 const LeftAddonTemplate = (args: TextFieldProps) => {
   return (
     <TextField {...args} leftAddon={<Mail className="pointer-events-none" />} />
+    // <TextField {...args}>
+    //   <Mail className="pointer-events-none" />
+    // </TextField>
   );
 };
 

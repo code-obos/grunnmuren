@@ -33,17 +33,6 @@ type TextAreaProps = {
   'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style'
 >;
 
-// const classes = {
-//   base: cx('group flex flex-col gap-2'),
-//   textarea: cx([
-//     'rounded-md border border-black px-3 py-2.5 text-sm font-normal leading-6 placeholder-[#727070]',
-//     // focus
-//     'focus:outline-none focus:ring-2 focus:ring-black',
-//     // invalid
-//     'data-[invalid]:border-red',
-//   ]),
-// };
-
 function TextArea(props: TextAreaProps) {
   const {
     className,

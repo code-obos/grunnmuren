@@ -70,7 +70,7 @@ function Combobox<T extends object>(props: ComboboxProps<T>) {
       >
         <Input className="flex-1 truncate text-left data-[placeholder]:text-[#727070]" />
         <Button>
-          <ChevronDown className="text-base transition-transform duration-150 group-data-[open]:rotate-180 motion-reduce:transition-none" />
+          <ChevronDown className={classes.chevron} />
         </Button>
       </Group>
 
