@@ -38,37 +38,46 @@ type TextFieldProps = {
   'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style'
 >;
 
+// const classes = {
+//   base: cx('group flex flex-col gap-2'),
+//   inputWrapper: cva({
+//     base: [
+//       'relative inline-flex flex-row items-center rounded-md border border-black py-2.5 text-sm font-normal leading-6',
+//       // prevent icons in addons from being flexed and affected by the text size of the input
+//       '[&>svg]:flex-none [&>svg]:text-base',
+//       // focus
+//       'focus-within:ring-2 focus-within:ring-blue-dark',
+//       // invalid
+//       'group-data-[invalid]:border-red group-data-[invalid]:outline group-data-[invalid]:outline-1 group-data-[invalid]:outline-red',
+//     ],
+//     variants: {
+//       leftAddon: {
+//         true: 'pl-3',
+//       },
+//       rightAddon: {
+//         true: 'pr-3',
+//       },
+//     },
+//   }),
+//   input: cva({
+//     base: 'relative w-full px-3 font-normal leading-6 placeholder-[#727070] !outline-none',
+//     variants: {
+//       textAlign: {
+//         right: 'text-right',
+//         left: '',
+//       },
+//     },
+//   }),
+//   divider: cx('block h-6 w-px flex-none bg-black'),
+// };
+
 const classes = {
   base: cx('group flex flex-col gap-2'),
-  inputWrapper: cva({
-    base: [
-      'relative inline-flex flex-row items-center rounded-md border border-black py-2.5 text-sm font-normal leading-6',
-      // prevent icons in addons from being flexed and affected by the text size of the input
-      '[&>svg]:flex-none [&>svg]:text-base',
-      // focus
-      'focus-within:ring-2 focus-within:ring-blue-dark',
-      // invalid
-      'group-data-[invalid]:border-red group-data-[invalid]:outline group-data-[invalid]:outline-1 group-data-[invalid]:outline-red',
-    ],
-    variants: {
-      leftAddon: {
-        true: 'pl-3',
-      },
-      rightAddon: {
-        true: 'pr-3',
-      },
-    },
-  }),
-  input: cva({
-    base: 'relative w-full px-3 font-normal leading-6 placeholder-[#727070] !outline-none',
-    variants: {
-      textAlign: {
-        right: 'text-right',
-        left: '',
-      },
-    },
-  }),
-  divider: cx('block h-6 w-px flex-none bg-black'),
+  input: cx(
+    'rounded-md px-3 py-2.5 text-sm font-normal leading-6 outline-none ring-1 ring-black',
+    'focus-within:ring-2',
+    'group-data-[invalid]:ring-red ',
+  ),
 };
 
 function TextField(props: TextFieldProps) {
@@ -77,11 +86,11 @@ function TextField(props: TextFieldProps) {
     description,
     errorMessage,
     label,
-    leftAddon,
+    // leftAddon,
     isInvalid: _isInvalid,
     textAlign,
-    rightAddon,
-    withAddonDivider,
+    // rightAddon,
+    // withAddonDivider,
     ...restProps
   } = props;
 
@@ -95,18 +104,19 @@ function TextField(props: TextFieldProps) {
     >
       {label && <Label>{label}</Label>}
       {description && <Description>{description}</Description>}
-      <div
+      {/* <div
         className={classes.inputWrapper({
           leftAddon: !!leftAddon,
           rightAddon: !!rightAddon,
         })}
-      >
-        {leftAddon}
-        {withAddonDivider && leftAddon && <Divider className="ml-3" />}
-        <Input className={classes.input({ textAlign })} />
-        {withAddonDivider && rightAddon && <Divider className="mr-3" />}
+      > */}
+      {/* {leftAddon}
+        {withAddonDivider && leftAddon && <Divider className="ml-3" />} */}
+      {/* <Input className={classes.input({ textAlign })} /> */}
+      <Input className={classes.input} />
+      {/* {withAddonDivider && rightAddon && <Divider className="mr-3" />}
         {rightAddon}
-      </div>
+      </div> */}
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </RACTextField>
   );
