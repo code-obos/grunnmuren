@@ -12,6 +12,7 @@ import {
 } from 'react-aria-components';
 import { ChevronDown, Check } from '@obosbbl/grunnmuren-icons-react';
 
+import { styles } from '../select/Select';
 import { Label } from '../label/Label';
 import { Description } from '../label/Description';
 import { ErrorMessage } from '../label/ErrorMessage';
@@ -75,8 +76,15 @@ function Combobox<T extends object>(props: ComboboxProps<T>) {
 
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 
-      <Popover className="min-w-[--trigger-width] overflow-auto rounded-md border border-black bg-white shadow data-[entering]:animate-in data-[exiting]:animate-out data-[entering]:fade-in data-[exiting]:fade-out">
-        <ListBox className="text-sm outline-none">{children}</ListBox>
+      <Popover
+        className={cx(
+          styles.popover,
+          'min-w-[calc(var(--trigger-width)+1.5rem)]',
+        )}
+        offset={20}
+        // crossOffset={-12}
+      >
+        <ListBox className={styles.listbox}>{children}</ListBox>
       </Popover>
     </RACCombobox>
   );

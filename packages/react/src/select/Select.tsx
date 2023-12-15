@@ -15,6 +15,14 @@ import { Label } from '../label/Label';
 import { Description } from '../label/Description';
 import { ErrorMessage } from '../label/ErrorMessage';
 
+const styles = {
+  popover: cx(
+    'min-w-[--trigger-width] overflow-auto rounded-md border border-black bg-white shadow data-[entering]:animate-in data-[exiting]:animate-out data-[entering]:fade-in data-[exiting]:fade-out',
+    // 'overflow-auto rounded-md border border-black bg-white shadow data-[entering]:animate-in data-[exiting]:animate-out data-[entering]:fade-in data-[exiting]:fade-out',
+  ),
+  listbox: cx('text-sm outline-none'),
+};
+
 type SelectProps<T extends object> = {
   children: React.ReactNode;
   /** Additional CSS className for the element. */
@@ -72,8 +80,8 @@ function Select<T extends object>(props: SelectProps<T>) {
 
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 
-      <Popover className="min-w-[--trigger-width] overflow-auto rounded-md border border-black bg-white shadow data-[entering]:animate-in data-[exiting]:animate-out data-[entering]:fade-in data-[exiting]:fade-out">
-        <ListBox className="text-sm outline-none">{children}</ListBox>
+      <Popover className={styles.popover}>
+        <ListBox className={styles.listbox}>{children}</ListBox>
       </Popover>
     </RACSelect>
   );
@@ -103,4 +111,5 @@ export {
   SelectItem,
   type SelectProps,
   type ListBoxItemProps as SelectItemProps,
+  styles,
 };
