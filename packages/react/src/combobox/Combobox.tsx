@@ -12,7 +12,7 @@ import {
 } from 'react-aria-components';
 import { ChevronDown, Check } from '@obosbbl/grunnmuren-icons-react';
 
-import { styles } from '../select/Select';
+import { classes } from '../select/Select';
 import { Label } from '../label/Label';
 import { Description } from '../label/Description';
 import { ErrorMessage } from '../label/ErrorMessage';
@@ -78,13 +78,12 @@ function Combobox<T extends object>(props: ComboboxProps<T>) {
 
       <Popover
         className={cx(
-          styles.popover,
+          classes.popover,
           'min-w-[calc(var(--trigger-width)+1.5rem)]',
         )}
         offset={20}
-        // crossOffset={-12}
       >
-        <ListBox className={styles.listbox}>{children}</ListBox>
+        <ListBox className={classes.listbox}>{children}</ListBox>
       </Popover>
     </RACCombobox>
   );

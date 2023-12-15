@@ -15,7 +15,7 @@ import { Label } from '../label/Label';
 import { Description } from '../label/Description';
 import { ErrorMessage } from '../label/ErrorMessage';
 
-const styles = {
+const classes = {
   popover: cx(
     'min-w-[--trigger-width] overflow-auto rounded-md border border-black bg-white shadow data-[entering]:animate-in data-[exiting]:animate-out data-[entering]:fade-in data-[exiting]:fade-out',
     // 'overflow-auto rounded-md border border-black bg-white shadow data-[entering]:animate-in data-[exiting]:animate-out data-[entering]:fade-in data-[exiting]:fade-out',
@@ -111,5 +111,5 @@ export {
   SelectItem,
   type SelectProps,
   type ListBoxItemProps as SelectItemProps,
-  styles,
+  classes,
 };
