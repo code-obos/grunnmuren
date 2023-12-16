@@ -133,8 +133,8 @@ importers:
         specifier: 2.4.2
         version: 2.4.2
       svgo:
-        specifier: 3.0.5
-        version: 3.0.5
+        specifier: 3.1.0
+        version: 3.1.0
 
   packages/react:
     dependencies:
@@ -11377,8 +11377,8 @@ packages:
       picocolors: 1.0.0
     dev: true
 
-  /svgo@3.0.5:
-    resolution: {integrity: sha512-HQKHEo73pMNOlDlBcLgZRcHW2+1wo7bFYayAXkGN0l/2+h68KjlfZyMRhdhaGvoHV2eApOovl12zoFz42sT6rQ==}
+  /svgo@3.1.0:
+    resolution: {integrity: sha512-R5SnNA89w1dYgNv570591F66v34b3eQShpIBcQtZtM5trJwm1VvxbIoMpRYY3ybTAutcKTLEmTsdnaknOHbiQA==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
