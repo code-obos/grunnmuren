@@ -54,7 +54,7 @@ function TextArea(props: TextAreaProps) {
     >
       {label && <Label>{label}</Label>}
       {description && <Description>{description}</Description>}
-      <RACTextArea className={classes.input} rows={rows} />
+      <RACTextArea className={classes.input()} rows={rows} />
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </RACTextField>
   );

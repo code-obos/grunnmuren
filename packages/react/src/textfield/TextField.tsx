@@ -74,18 +74,29 @@ type TextFieldProps = {
 
 const classes = {
   field: cx('group flex flex-col gap-2'),
-  input: cx(
-    'rounded-md px-3 py-2.5 text-sm font-normal leading-6 placeholder-[#727070] outline-none ring-1 ring-black',
-    'focus:ring-2',
-    'group-data-[invalid]:ring-2 group-data-[invalid]:ring-red group-data-[invalid]:focus:ring',
-  ),
-  inputGroup: cx(),
+  input: cva({
+    base: [
+      'rounded-md px-3 py-2.5 text-sm font-normal leading-6 placeholder-[#727070] outline-none ring-1 ring-black',
+      // 'focus:ring-2',
+      'group-data-[invalid]:ring-2 group-data-[invalid]:ring-red group-data-[invalid]:focus:ring',
+    ],
+    variants: {
+      focusVisible: {
+        true: 'data-[focus-visible]:ring-2',
+        false: 'focus:ring-2',
+      },
+    },
+    defaultVariants: {
+      focusVisible: false,
+    },
+  }),
+  inputGroup: cx('inline-flex items-center'),
   divider: cx('block h-6 w-px flex-none bg-black'),
 };
 
 const variants = {
   input: cva({
-    base: classes.input,
+    base: classes.input(),
     variants: {
       textAlign: {
         right: 'text-right',
@@ -121,7 +132,7 @@ function TextField(props: TextFieldProps) {
       {description && <Description>{description}</Description>}
 
       {leftAddon || rightAddon ? (
-        <Group className="inline-flex items-center">
+        <Group className={classes.inputGroup}>
           {leftAddon}
           {withAddonDivider && leftAddon && <Divider className="ml-3" />}
           <Input className={variants.input({ textAlign })} />

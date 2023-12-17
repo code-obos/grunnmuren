@@ -76,7 +76,7 @@ function Select<T extends object>(props: SelectProps<T>) {
           // 'ring-black focus:outline-none focus-visible:ring-2',
           // // invalid
           // 'group-data-[invalid]:border-red',
-          inputClasses.input,
+          inputClasses.input({ focusVisible: true }),
           // TODO: focus or focus-visible?
           // How to reuse placeholder text?
           'inline-flex cursor-default items-center gap-2',
