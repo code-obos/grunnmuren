@@ -101,7 +101,7 @@ const SelectItem = (props: ListBoxItemProps) => {
       {...props}
       className={cx(
         props.className,
-        'flex cursor-default px-6 py-2 leading-6 outline-none focus:bg-sky-lightest',
+        'flex cursor-default px-6 py-2 leading-6 outline-none data-[focused]:bg-sky-lightest',
       )}
     >
       {({ isSelected }) => (
