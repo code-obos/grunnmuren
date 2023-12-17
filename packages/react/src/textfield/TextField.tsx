@@ -79,6 +79,7 @@ const classes = {
     'focus:ring-2',
     'group-data-[invalid]:ring-2 group-data-[invalid]:ring-red group-data-[invalid]:focus:ring',
   ),
+  inputGroup: cx(),
   divider: cx('block h-6 w-px flex-none bg-black'),
 };
 
