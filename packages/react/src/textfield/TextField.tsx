@@ -137,7 +137,7 @@ function TextField(props: TextFieldProps) {
         <Group className={classes.inputGroup}>
           {leftAddon}
           {withAddonDivider && leftAddon && <Divider className="ml-3" />}
-          <Input className={variants.input({ textAlign })} />
+          <Input className={cx(variants.input({ textAlign }), 'flex-1')} />
           {withAddonDivider && rightAddon && <Divider className="mr-3" />}
           {rightAddon}
         </Group>
