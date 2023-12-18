@@ -59,8 +59,8 @@ function Combobox<T extends object>(props: ComboboxProps<T>) {
       {label && <Label>{label}</Label>}
       {description && <Description>{description}</Description>}
 
-      <Group className={cx('inline-flex items-center gap-2')}>
-        <Input className={cx(inputClasses.input(), 'flex-1')} />
+      <Group className={inputClasses.inputGroup}>
+        <Input className={inputClasses.input({ isGrouped: true })} />
         <Button>
           <ChevronDown className={selectClasses.chevron} />
         </Button>

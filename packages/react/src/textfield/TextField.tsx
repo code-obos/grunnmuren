@@ -1,4 +1,4 @@
-import { cx, cva } from 'cva';
+import { cx, cva, compose } from 'cva';
 import {
   Input,
   TextField as RACTextField,
@@ -87,18 +87,25 @@ const classes = {
           'data-[focus-visible]:ring-2 group-data-[invalid]:data-[focus-visible]:ring',
         focus: 'focus:ring-2 group-data-[invalid]:focus:ring',
       },
+      isGrouped: {
+        false: '',
+        true: 'flex-1 !ring-0',
+      },
     },
     defaultVariants: {
       focusModifier: 'focus',
+      isGrouped: false,
     },
   }),
-  inputGroup: cx('inline-flex items-center'),
+  inputGroup: cx(
+    'inline-flex items-center overflow-hidden rounded-md ring-1 ring-black focus-within:ring-2 group-data-[invalid]:ring-2 group-data-[invalid]:ring-red group-data-[invalid]:focus-within:ring',
+  ),
   divider: cx('block h-6 w-px flex-none bg-black'),
 };
 
 const variants = {
   input: cva({
-    base: classes.input(),
+    base: '',
     variants: {
       textAlign: {
         right: 'text-right',
@@ -107,6 +114,8 @@ const variants = {
     },
   }),
 };
+
+const test = compose(classes.input, variants.input);
 
 function TextField(props: TextFieldProps) {
   const {
@@ -137,12 +146,12 @@ function TextField(props: TextFieldProps) {
         <Group className={classes.inputGroup}>
           {leftAddon}
           {withAddonDivider && leftAddon && <Divider className="ml-3" />}
-          <Input className={cx(variants.input({ textAlign }), 'flex-1')} />
+          <Input className={test({ textAlign, isGrouped: true })} />
           {withAddonDivider && rightAddon && <Divider className="mr-3" />}
           {rightAddon}
         </Group>
       ) : (
-        <Input className={variants.input({ textAlign })} />
+        <Input className={test({ textAlign })} />
       )}
 
       {/* <div
