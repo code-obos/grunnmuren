@@ -77,17 +77,19 @@ const classes = {
   input: cva({
     base: [
       'rounded-md px-3 py-2.5 text-sm font-normal leading-6 placeholder-[#727070] outline-none ring-1 ring-black',
-      // 'focus:ring-2',
-      'group-data-[invalid]:ring-2 group-data-[invalid]:ring-red group-data-[invalid]:focus:ring',
+      // invalid styles
+      'group-data-[invalid]:ring-2 group-data-[invalid]:ring-red',
     ],
     variants: {
-      focusVisible: {
-        true: 'data-[focus-visible]:ring-2',
-        false: 'focus:ring-2',
+      // Focus rings
+      focusModifier: {
+        visible:
+          'data-[focus-visible]:ring-2 group-data-[invalid]:data-[focus-visible]:ring',
+        focus: 'focus:ring-2 group-data-[invalid]:focus:ring',
       },
     },
     defaultVariants: {
-      focusVisible: false,
+      focusModifier: 'focus',
     },
   }),
   inputGroup: cx('inline-flex items-center'),

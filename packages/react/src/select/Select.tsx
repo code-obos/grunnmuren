@@ -19,7 +19,6 @@ import { ErrorMessage } from '../label/ErrorMessage';
 const classes = {
   popover: cx(
     'min-w-[--trigger-width] overflow-auto rounded-md border border-black bg-white shadow data-[entering]:animate-in data-[exiting]:animate-out data-[entering]:fade-in data-[exiting]:fade-out',
-    // 'overflow-auto rounded-md border border-black bg-white shadow data-[entering]:animate-in data-[exiting]:animate-out data-[entering]:fade-in data-[exiting]:fade-out',
   ),
   listbox: cx('text-sm outline-none'),
   chevron: cx(
@@ -70,14 +69,7 @@ function Select<T extends object>(props: SelectProps<T>) {
 
       <Button
         className={cx(
-          // 'flex cursor-default items-center gap-2',
-          // 'rounded-md border border-black px-3 py-2.5 text-sm font-normal leading-6',
-          // // focus
-          // 'ring-black focus:outline-none focus-visible:ring-2',
-          // // invalid
-          // 'group-data-[invalid]:border-red',
-          inputClasses.input({ focusVisible: true }),
-          // TODO: focus or focus-visible?
+          inputClasses.input({ focusModifier: 'visible' }),
           // How to reuse placeholder text?
           'inline-flex cursor-default items-center gap-2',
         )}
