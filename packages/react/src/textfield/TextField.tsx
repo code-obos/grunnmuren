@@ -39,39 +39,6 @@ type TextFieldProps = {
   'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style'
 >;
 
-// const classes = {
-//   base: cx('group flex flex-col gap-2'),
-//   inputWrapper: cva({
-//     base: [
-//       'relative inline-flex flex-row items-center rounded-md border border-black py-2.5 text-sm font-normal leading-6',
-//       // prevent icons in addons from being flexed and affected by the text size of the input
-//       '[&>svg]:flex-none [&>svg]:text-base',
-//       // focus
-//       'focus-within:ring-2 focus-within:ring-blue-dark',
-//       // invalid
-//       'group-data-[invalid]:border-red group-data-[invalid]:outline group-data-[invalid]:outline-1 group-data-[invalid]:outline-red',
-//     ],
-//     variants: {
-//       leftAddon: {
-//         true: 'pl-3',
-//       },
-//       rightAddon: {
-//         true: 'pr-3',
-//       },
-//     },
-//   }),
-//   input: cva({
-//     base: 'relative w-full px-3 font-normal leading-6 placeholder-[#727070] !outline-none',
-//     variants: {
-//       textAlign: {
-//         right: 'text-right',
-//         left: '',
-//       },
-//     },
-//   }),
-//   divider: cx('block h-6 w-px flex-none bg-black'),
-// };
-
 const classes = {
   field: cx('group flex flex-col gap-2'),
   input: cva({
@@ -81,15 +48,16 @@ const classes = {
       'group-data-[invalid]:ring-2 group-data-[invalid]:ring-red',
     ],
     variants: {
-      // Focus rings
+      // Focus rings. Can either be :focus or :focus-visible based on the needs of the particular component.
       focusModifier: {
+        focus: 'focus:ring-2 group-data-[invalid]:focus:ring',
         visible:
           'data-[focus-visible]:ring-2 group-data-[invalid]:data-[focus-visible]:ring',
-        focus: 'focus:ring-2 group-data-[invalid]:focus:ring',
       },
       isGrouped: {
         false: '',
-        true: 'flex-1 !ring-0',
+        //
+        true: 'flex-1 !ring-0 first:pl-0 last:pr-0',
       },
     },
     defaultVariants: {
@@ -98,7 +66,7 @@ const classes = {
     },
   }),
   inputGroup: cx(
-    'inline-flex items-center overflow-hidden rounded-md ring-1 ring-black focus-within:ring-2 group-data-[invalid]:ring-2 group-data-[invalid]:ring-red group-data-[invalid]:focus-within:ring',
+    'inline-flex items-center overflow-hidden rounded-md px-3 ring-1 ring-black focus-within:ring-2 group-data-[invalid]:ring-2 group-data-[invalid]:ring-red group-data-[invalid]:focus-within:ring',
   ),
   divider: cx('block h-6 w-px flex-none bg-black'),
 };
@@ -154,19 +122,6 @@ function TextField(props: TextFieldProps) {
         <Input className={test({ textAlign })} />
       )}
 
-      {/* <div
-        className={classes.inputWrapper({
-          leftAddon: !!leftAddon,
-          rightAddon: !!rightAddon,
-        })}
-      > */}
-      {/* {leftAddon}
-        {withAddonDivider && leftAddon && <Divider className="ml-3" />} */}
-      {/* <Input className={classes.input({ textAlign })} /> */}
-      {/* <Input className={classes.input} /> */}
-      {/* {withAddonDivider && rightAddon && <Divider className="mr-3" />}
-        {rightAddon}
-      </div> */}
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </RACTextField>
   );

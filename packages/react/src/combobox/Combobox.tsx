@@ -68,7 +68,17 @@ function Combobox<T extends object>(props: ComboboxProps<T>) {
 
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 
-      <Popover className={selectClasses.popover}>
+      <Popover
+        // FIXME: The trigger width doesn't include the padding of the group, so for now we have to apply this workaround.
+        // Also... the combobox border gets a pixel wider when focused, so we account for that as well when calculating the width
+        // and the offset.
+        // The input gutter should probably be moved to a theme variable instead of using the hardcoded value as here.
+        className={cx(
+          selectClasses.popover,
+          'min-w-[calc(var(--trigger-width)+26px)]',
+        )}
+        crossOffset={-13}
+      >
         <ListBox className={selectClasses.listbox}>{children}</ListBox>
       </Popover>
     </RACCombobox>

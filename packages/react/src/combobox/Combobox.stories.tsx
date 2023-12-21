@@ -13,19 +13,39 @@ export default meta;
 
 type Story = StoryObj<typeof Combobox>;
 
+const items = [
+  { name: 'Ager', area: 'Norde Aker' },
+  { name: 'Bogerud Torg', area: 'Østensjø' },
+  { name: 'Bølgelengden', area: 'Nordstrand' },
+  { name: 'Ensjøveien 8', area: 'Gamle Oslo' },
+  { name: 'Fjorten', area: 'Nordre Aker' },
+  { name: 'Furuset Village', area: 'Alna' },
+  { name: 'Hoffsveien Hage', area: 'Ullern' },
+  { name: 'Lumanders hage', area: 'Gamle Oslo' },
+  { name: 'Løren botaniske', area: 'Grünerløkka' },
+  { name: 'Mortensrud Felt 16', area: 'Søndre Nordstrand' },
+  { name: 'Oen', area: 'Grorud' },
+  { name: 'Rosenholmveien', area: 'Søndre Nordstrand' },
+  { name: 'Røakollen', area: 'Vestre Aker' },
+  { name: 'Sandakerveien 121', area: 'Nordre Aker' },
+  { name: 'Stenbråtveien', area: 'Søndre Nordstrand' },
+  { name: 'Stilla', area: 'Nordre Aker' },
+  { name: 'Teglverksløkka', area: 'Bjerke' },
+  { name: 'Ulvenkroken', area: 'Bjerke' },
+  { name: 'Ulvenplassen', area: 'Bjerke' },
+  { name: 'Vitigrend', area: 'Vestre Aker' },
+  { name: 'Vollebekk', area: 'Bjerke' },
+  { name: 'Våronnveien 17', area: 'Østensjø' },
+];
+
 const Template = <T extends object>(args: ComboboxProps<T>) => {
   const select = (
     <Combobox {...args}>
-      <ComboboxItem id="agder">Agder</ComboboxItem>
-      <ComboboxItem id="innlandet">Innlandet</ComboboxItem>
-      <ComboboxItem id="more-og-romsdal">Møre og Romsdal</ComboboxItem>
-      <ComboboxItem id="oslo">Oslo</ComboboxItem>
-      <ComboboxItem id="rogaland">Rogaland</ComboboxItem>
-      <ComboboxItem id="trondelag">Trøndelag</ComboboxItem>
-      <ComboboxItem id="vestfold-og-telemark">
-        Vestfold og Telemark
-      </ComboboxItem>
-      <ComboboxItem id="viken">Viken</ComboboxItem>
+      {items.map((item) => (
+        <ComboboxItem key={item.name} textValue={item.name}>
+          {item.name}
+        </ComboboxItem>
+      ))}
     </Combobox>
   );
   return args.isRequired ? (
@@ -56,13 +76,13 @@ const ControlledTemplate = <T extends object>(args: ComboboxProps<T>) => {
 };
 
 const defaultProps = {
-  label: 'Velg område',
+  label: 'Velg boligprosjekt',
   isRequired: false,
   isInvalid: false,
   name: undefined,
   defaultSelectedKey: undefined,
   selectedKey: undefined,
-  placeholder: 'Velg område',
+  placeholder: 'Velg boligprosjekt',
 };
 
 export const Default: Story = {
@@ -91,8 +111,8 @@ export const WithoutLabel: Story = {
   args: {
     ...defaultProps,
     label: undefined,
-    placeholder: 'Velg område',
-    'aria-label': 'Velg område',
+    placeholder: 'Velg boligprosjekt',
+    'aria-label': 'Velg boligprosjekt',
   },
 };
 
