@@ -11,20 +11,10 @@ import {
 } from 'react-aria-components';
 import { ChevronDown, Check } from '@obosbbl/grunnmuren-icons-react';
 
-import { classes as inputClasses } from '../textfield/TextField';
+import { formField, input, dropdown } from '../classes';
 import { Label } from '../label/Label';
 import { Description } from '../label/Description';
 import { ErrorMessage } from '../label/ErrorMessage';
-
-const classes = {
-  popover: cx(
-    'min-w-[--trigger-width] overflow-auto rounded-md border border-black bg-white shadow data-[entering]:animate-in data-[exiting]:animate-out data-[entering]:fade-in data-[exiting]:fade-out',
-  ),
-  listbox: cx('text-sm outline-none'),
-  chevron: cx(
-    'text-base transition-transform duration-150 group-data-[open]:rotate-180 motion-reduce:transition-none',
-  ),
-};
 
 type SelectProps<T extends object> = {
   children: React.ReactNode;
@@ -61,7 +51,7 @@ function Select<T extends object>(props: SelectProps<T>) {
   return (
     <RACSelect
       {...restProps}
-      className={cx(className, inputClasses.field)}
+      className={cx(className, formField)}
       isInvalid={isInvalid}
     >
       {label && <Label>{label}</Label>}
@@ -69,25 +59,34 @@ function Select<T extends object>(props: SelectProps<T>) {
 
       <Button
         className={cx(
-          inputClasses.input({ focusModifier: 'visible' }),
+          input({ focusModifier: 'visible' }),
           // How to reuse placeholder text?
           'inline-flex cursor-default items-center gap-2',
         )}
       >
         <SelectValue className="flex-1 truncate text-left data-[placeholder]:text-[#727070]" />
-        <ChevronDown className={classes.chevron} />
+        <ChevronDown className={dropdown.chevronIcon} />
       </Button>
 
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 
-      <Popover className={classes.popover}>
-        <ListBox className={classes.listbox}>{children}</ListBox>
+      <Popover className={dropdown.popover}>
+        <ListBox className={dropdown.listbox}>{children}</ListBox>
       </Popover>
     </RACSelect>
   );
 }
 
 const SelectItem = (props: ListBoxItemProps) => {
+  let textValue = props.textValue;
+
+  // When the ListBoxItem child isn't a string we have to set textValue for keyboard completion to work.
+  // Since we use a render function (to handle the selected state) the child is never a string.
+  // This condition adds back that behaviour
+  if (textValue == null && typeof props.children === 'string') {
+    textValue = props.children;
+  }
+
   return (
     <ListBoxItem
       {...props}
@@ -95,6 +94,7 @@ const SelectItem = (props: ListBoxItemProps) => {
         props.className,
         'flex cursor-default px-6 py-2 leading-6 outline-none data-[focused]:bg-sky-lightest',
       )}
+      textValue={textValue}
     >
       {({ isSelected }) => (
         <>
@@ -111,5 +111,4 @@ export {
   SelectItem,
   type SelectProps,
   type ListBoxItemProps as SelectItemProps,
-  classes,
 };

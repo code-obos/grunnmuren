@@ -6,6 +6,7 @@ import {
   Group,
 } from 'react-aria-components';
 
+import { formField, input, inputGroup } from '../classes';
 import { Label } from '../label/Label';
 import { Description } from '../label/Description';
 import { ErrorMessage } from '../label/ErrorMessage';
@@ -39,40 +40,9 @@ type TextFieldProps = {
   'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style'
 >;
 
-const classes = {
-  field: cx('group flex flex-col gap-2'),
-  input: cva({
-    base: [
-      'rounded-md px-3 py-2.5 text-sm font-normal leading-6 placeholder-[#727070] outline-none ring-1 ring-black',
-      // invalid styles
-      'group-data-[invalid]:ring-2 group-data-[invalid]:ring-red',
-    ],
-    variants: {
-      // Focus rings. Can either be :focus or :focus-visible based on the needs of the particular component.
-      focusModifier: {
-        focus: 'focus:ring-2 group-data-[invalid]:focus:ring',
-        visible:
-          'data-[focus-visible]:ring-2 group-data-[invalid]:data-[focus-visible]:ring',
-      },
-      isGrouped: {
-        false: '',
-        //
-        true: 'flex-1 !ring-0 first:pl-0 last:pr-0',
-      },
-    },
-    defaultVariants: {
-      focusModifier: 'focus',
-      isGrouped: false,
-    },
-  }),
-  inputGroup: cx(
-    'inline-flex items-center overflow-hidden rounded-md px-3 ring-1 ring-black focus-within:ring-2 group-data-[invalid]:ring-2 group-data-[invalid]:ring-red group-data-[invalid]:focus-within:ring',
-  ),
-  divider: cx('block h-6 w-px flex-none bg-black'),
-};
-
-const variants = {
-  input: cva({
+const inputWithAlignment = compose(
+  input,
+  cva({
     base: '',
     variants: {
       textAlign: {
@@ -81,9 +51,7 @@ const variants = {
       },
     },
   }),
-};
-
-const test = compose(classes.input, variants.input);
+);
 
 function TextField(props: TextFieldProps) {
   const {
@@ -104,22 +72,24 @@ function TextField(props: TextFieldProps) {
   return (
     <RACTextField
       {...restProps}
-      className={cx(className, classes.field)}
+      className={cx(className, formField)}
       isInvalid={isInvalid}
     >
       {label && <Label>{label}</Label>}
       {description && <Description>{description}</Description>}
 
       {leftAddon || rightAddon ? (
-        <Group className={classes.inputGroup}>
+        <Group className={inputGroup}>
           {leftAddon}
           {withAddonDivider && leftAddon && <Divider className="ml-3" />}
-          <Input className={test({ textAlign, isGrouped: true })} />
+          <Input
+            className={inputWithAlignment({ textAlign, isGrouped: true })}
+          />
           {withAddonDivider && rightAddon && <Divider className="mr-3" />}
           {rightAddon}
         </Group>
       ) : (
-        <Input className={test({ textAlign })} />
+        <Input className={inputWithAlignment({ textAlign })} />
       )}
 
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
@@ -128,7 +98,9 @@ function TextField(props: TextFieldProps) {
 }
 
 function Divider({ className }: { className: string }) {
-  return <span className={cx(className, classes.divider)} />;
+  return (
+    <span className={cx(className, 'block h-6 w-px flex-none bg-black')} />
+  );
 }
 
-export { TextField, type TextFieldProps, classes };
+export { TextField, type TextFieldProps };

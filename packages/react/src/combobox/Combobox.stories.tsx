@@ -82,10 +82,11 @@ const ControlledTemplate = <T extends object>(args: ComboboxProps<T>) => {
 };
 
 const AsyncTemplate = <T extends object>(args: ComboboxProps<T>) => {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<Array<{ url: string; name: string }>>([]);
   const [filterText, setFilterText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  // TODO: Add debouncing
   useEffect(() => {
     async function fetchData() {
       if (filterText.length >= 2) {
@@ -100,12 +101,13 @@ const AsyncTemplate = <T extends object>(args: ComboboxProps<T>) => {
     }
     fetchData();
   }, [filterText]);
-  console.log(items);
 
   return (
     <Combobox
-      label="SW character lookup"
-      items={items}
+      // items={items}
+      // provide our own filtering as the result is already filtered. Should behave same as
+      // providing items={items}, but TS is complaining for some reason. Doing this for now.
+      defaultFilter={() => true}
       onInputChange={setFilterText}
       inputValue={filterText}
       isLoading={isLoading}
@@ -126,6 +128,7 @@ const defaultProps = {
   defaultSelectedKey: undefined,
   selectedKey: undefined,
   placeholder: 'Velg boligprosjekt',
+  isLoading: false,
 };
 
 export const Default: Story = {
@@ -188,5 +191,7 @@ export const Async = {
 
   args: {
     ...defaultProps,
+    label: 'SW characters lookup',
+    placeholder: 'Search for names',
   },
 };

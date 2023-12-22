@@ -5,7 +5,7 @@ import {
   type TextFieldProps as RACTextFieldProps,
 } from 'react-aria-components';
 
-import { classes } from '../textfield/TextField';
+import { formField, input } from '../classes';
 import { Label } from '../label/Label';
 import { Description } from '../label/Description';
 import { ErrorMessage } from '../label/ErrorMessage';
@@ -49,12 +49,12 @@ function TextArea(props: TextAreaProps) {
   return (
     <RACTextField
       {...restProps}
-      className={cx(className, classes.field)}
+      className={cx(className, formField)}
       isInvalid={isInvalid}
     >
       {label && <Label>{label}</Label>}
       {description && <Description>{description}</Description>}
-      <RACTextArea className={classes.input()} rows={rows} />
+      <RACTextArea className={input()} rows={rows} />
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </RACTextField>
   );
