@@ -1,10 +1,12 @@
-import { cx, cva } from 'cva';
+import { cx, cva, compose } from 'cva';
 import {
   Input,
   TextField as RACTextField,
   type TextFieldProps as RACTextFieldProps,
+  Group,
 } from 'react-aria-components';
 
+import { formField, input, inputGroup } from '../classes';
 import { Label } from '../label/Label';
 import { Description } from '../label/Description';
 import { ErrorMessage } from '../label/ErrorMessage';
@@ -38,29 +40,10 @@ type TextFieldProps = {
   'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style'
 >;
 
-const classes = {
-  base: cx('group flex flex-col gap-2'),
-  inputWrapper: cva({
-    base: [
-      'relative inline-flex flex-row items-center rounded-md border border-black py-2.5 text-sm font-normal leading-6',
-      // prevent icons in addons from being flexed and affected by the text size of the input
-      '[&>svg]:flex-none [&>svg]:text-base',
-      // focus
-      'focus-within:ring-2 focus-within:ring-blue-dark',
-      // invalid
-      'group-data-[invalid]:border-red group-data-[invalid]:outline group-data-[invalid]:outline-1 group-data-[invalid]:outline-red',
-    ],
-    variants: {
-      leftAddon: {
-        true: 'pl-3',
-      },
-      rightAddon: {
-        true: 'pr-3',
-      },
-    },
-  }),
-  input: cva({
-    base: 'relative w-full px-3 font-normal leading-6 placeholder-[#727070] !outline-none',
+const inputWithAlignment = compose(
+  input,
+  cva({
+    base: '',
     variants: {
       textAlign: {
         right: 'text-right',
@@ -68,8 +51,7 @@ const classes = {
       },
     },
   }),
-  divider: cx('block h-6 w-px flex-none bg-black'),
-};
+);
 
 function TextField(props: TextFieldProps) {
   const {
@@ -90,30 +72,35 @@ function TextField(props: TextFieldProps) {
   return (
     <RACTextField
       {...restProps}
-      className={cx(className, classes.base)}
+      className={cx(className, formField)}
       isInvalid={isInvalid}
     >
       {label && <Label>{label}</Label>}
       {description && <Description>{description}</Description>}
-      <div
-        className={classes.inputWrapper({
-          leftAddon: !!leftAddon,
-          rightAddon: !!rightAddon,
-        })}
-      >
-        {leftAddon}
-        {withAddonDivider && leftAddon && <Divider className="ml-3" />}
-        <Input className={classes.input({ textAlign })} />
-        {withAddonDivider && rightAddon && <Divider className="mr-3" />}
-        {rightAddon}
-      </div>
+
+      {leftAddon || rightAddon ? (
+        <Group className={inputGroup}>
+          {leftAddon}
+          {withAddonDivider && leftAddon && <Divider className="ml-3" />}
+          <Input
+            className={inputWithAlignment({ textAlign, isGrouped: true })}
+          />
+          {withAddonDivider && rightAddon && <Divider className="mr-3" />}
+          {rightAddon}
+        </Group>
+      ) : (
+        <Input className={inputWithAlignment({ textAlign })} />
+      )}
+
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </RACTextField>
   );
 }
 
 function Divider({ className }: { className: string }) {
-  return <span className={cx(className, classes.divider)} />;
+  return (
+    <span className={cx(className, 'block h-6 w-px flex-none bg-black')} />
+  );
 }
 
 export { TextField, type TextFieldProps };

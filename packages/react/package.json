@@ -17,6 +17,10 @@
       "types": "./dist/checkbox/index.d.ts",
       "default": "./dist/checkbox/index.mjs"
     },
+    "./combobox": {
+      "types": "./dist/combobox/index.d.ts",
+      "default": "./dist/combobox/index.mjs"
+    },
     "./label": {
       "types": "./dist/label/index.d.ts",
       "default": "./dist/label/index.mjs"
@@ -52,6 +56,7 @@
     "entries": [
       "./src/button/Button.tsx",
       "./src/checkbox/index.ts",
+      "./src/combobox/index.ts",
       "./src/label/index.ts",
       "./src/radiogroup/index.ts",
       "./src/textfield/index.ts",
