@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Button } from '../button/Button';
@@ -42,8 +42,14 @@ const Template = <T extends object>(args: ComboboxProps<T>) => {
   const select = (
     <Combobox {...args}>
       {items.map((item) => (
-        <ComboboxItem key={item.name} textValue={item.name}>
+        <ComboboxItem
+          key={item.name}
+          textValue={item.name}
+          id={item.name}
+          className="flex gap-2"
+        >
           {item.name}
+          <small className="text-gray">{item.area}</small>
         </ComboboxItem>
       ))}
     </Combobox>
@@ -65,13 +71,50 @@ const Template = <T extends object>(args: ComboboxProps<T>) => {
 };
 
 const ControlledTemplate = <T extends object>(args: ComboboxProps<T>) => {
-  const [value, setValue] = useState<string | number>('oslo');
+  const [value, setValue] = useState<string | number>(items[0].name);
 
   return (
     <div className="flex flex-col gap-2">
       <Template {...args} selectedKey={value} onSelectionChange={setValue} />
       <pre className="font-sans">{value}</pre>
     </div>
+  );
+};
+
+const AsyncTemplate = <T extends object>(args: ComboboxProps<T>) => {
+  const [items, setItems] = useState([]);
+  const [filterText, setFilterText] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    async function fetchData() {
+      if (filterText.length >= 2) {
+        setIsLoading(true);
+        const result = await fetch(
+          `https://swapi.dev/api/people?search=${filterText}`,
+        );
+        const data = await result.json();
+        setItems(data.results);
+        setIsLoading(false);
+      }
+    }
+    fetchData();
+  }, [filterText]);
+  console.log(items);
+
+  return (
+    <Combobox
+      label="SW character lookup"
+      items={items}
+      onInputChange={setFilterText}
+      inputValue={filterText}
+      isLoading={isLoading}
+      {...args}
+    >
+      {items.map((item) => (
+        <ComboboxItem key={item.url}>{item.name}</ComboboxItem>
+      ))}
+    </Combobox>
   );
 };
 
@@ -134,6 +177,14 @@ export const WithErrorMessage: Story = {
 
 export const Controlled = {
   render: ControlledTemplate,
+
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const Async = {
+  render: AsyncTemplate,
 
   args: {
     ...defaultProps,

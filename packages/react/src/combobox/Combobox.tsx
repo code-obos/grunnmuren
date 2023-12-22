@@ -10,7 +10,11 @@ import {
   ListBoxItem,
   ListBoxItemProps,
 } from 'react-aria-components';
-import { ChevronDown, Check } from '@obosbbl/grunnmuren-icons-react';
+import {
+  ChevronDown,
+  Check,
+  LoadingSpinner,
+} from '@obosbbl/grunnmuren-icons-react';
 
 import { classes as inputClasses } from '../textfield/TextField';
 import { classes as selectClasses } from '../select/Select';
@@ -26,6 +30,11 @@ type ComboboxProps<T extends object> = {
   description?: React.ReactNode;
   /** Error message for the form control. Automatically sets `isInvalid` to true */
   errorMessage?: React.ReactNode;
+  /**
+   * Display the dropdown button in a loading state
+   * @default false
+   */
+  isLoading?: boolean;
   /** Label for the form control. */
   label?: React.ReactNode;
   /** Placeholder text. Only visible when the input value is empty. */
@@ -43,6 +52,7 @@ function Combobox<T extends object>(props: ComboboxProps<T>) {
     children,
     description,
     errorMessage,
+    isLoading,
     label,
     isInvalid: _isInvalid,
     ...restProps
@@ -62,7 +72,11 @@ function Combobox<T extends object>(props: ComboboxProps<T>) {
       <Group className={inputClasses.inputGroup}>
         <Input className={inputClasses.input({ isGrouped: true })} />
         <Button>
-          <ChevronDown className={selectClasses.chevron} />
+          {isLoading ? (
+            <LoadingSpinner className="animate-spin" />
+          ) : (
+            <ChevronDown className={selectClasses.chevron} />
+          )}
         </Button>
       </Group>
 
