@@ -4,7 +4,9 @@ import {
   TextField as RACTextField,
   type TextFieldProps as RACTextFieldProps,
   Group,
+  FieldError,
 } from 'react-aria-components';
+import { forwardRef, type ForwardedRef } from 'react';
 
 import { formField, input, inputGroup } from '../classes';
 import { Label } from '../label/Label';
@@ -53,7 +55,7 @@ const inputWithAlignment = compose(
   }),
 );
 
-function TextField(props: TextFieldProps) {
+function TextField(props: TextFieldProps, ref: ForwardedRef<HTMLInputElement>) {
   const {
     className,
     description,
@@ -83,6 +85,8 @@ function TextField(props: TextFieldProps) {
           {leftAddon}
           {withAddonDivider && leftAddon && <Divider className="ml-3" />}
           <Input
+            // @ts-ignore
+            ref={ref}
             className={inputWithAlignment({ textAlign, isGrouped: true })}
           />
           {withAddonDivider && rightAddon && <Divider className="mr-3" />}
@@ -93,6 +97,7 @@ function TextField(props: TextFieldProps) {
       )}
 
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      <FieldError className="w-fit rounded-sm bg-red-light px-2 py-1 text-sm leading-6 text-red" />
     </RACTextField>
   );
 }
@@ -103,4 +108,5 @@ function Divider({ className }: { className: string }) {
   );
 }
 
-export { TextField, type TextFieldProps };
+const _TextField = forwardRef(TextField);
+export { _TextField as TextField, type TextFieldProps };

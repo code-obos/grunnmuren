@@ -1,12 +1,16 @@
+'use client';
+import { useFormState } from 'react-dom';
+import { Form } from 'react-aria-components';
 import { TextField } from '@obosbbl/grunnmuren-react/textfield';
-import { Button } from '@obosbbl/grunnmuren-react/button';
 
 import { submitForm } from './submitAction';
 import SubmitButton from './SubmitButton';
 
 export default function () {
+  const [{ errors }, formAction] = useFormState(submitForm, { errors: {} });
+
   return (
-    <form action={submitForm} className="space-y-4">
+    <Form action={formAction} validationErrors={errors} className="space-y-4">
       <TextField name="name" label="Navn" isRequired />
       <TextField
         name="email"
@@ -20,6 +24,6 @@ export default function () {
         }
       />
       <SubmitButton>Lagre</SubmitButton>
-    </form>
+    </Form>
   );
 }
