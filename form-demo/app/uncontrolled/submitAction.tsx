@@ -1,5 +1,10 @@
 'use server';
-import { schema } from '../schema';
+import { z } from 'zod';
+
+const schema = z.object({
+  name: z.string(),
+  email: z.string().email().endsWith('.no'),
+});
 
 export async function submitForm(prevState: unknown, formData: FormData) {
   const result = schema.safeParse(Object.fromEntries(formData));

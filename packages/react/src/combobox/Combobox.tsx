@@ -19,7 +19,7 @@ import {
 import { formField, inputGroup, input, dropdown } from '../classes';
 import { Label } from '../label/Label';
 import { Description } from '../label/Description';
-import { ErrorMessage } from '../label/ErrorMessage';
+import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
 
 type ComboboxProps<T extends object> = {
   children: React.ReactNode;
@@ -79,7 +79,7 @@ function Combobox<T extends object>(props: ComboboxProps<T>) {
         </Button>
       </Group>
 
-      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      <ErrorMessageOrFieldError errorMessage={errorMessage} />
 
       <Popover
         // FIXME: The trigger width doesn't include the padding of the group, so for now we have to apply this workaround.

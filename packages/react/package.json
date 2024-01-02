@@ -51,5 +51,22 @@
   },
   "peerDependencies": {
     "react": "^18"
+  },
+  "unbuild": {
+    "entries": [
+      "./src/button/Button.tsx",
+      "./src/checkbox/index.ts",
+      "./src/combobox/index.ts",
+      "./src/label/index.ts",
+      "./src/radiogroup/index.ts",
+      "./src/textfield/index.ts",
+      "./src/select/index.ts"
+    ],
+    "declaration": true,
+    "rollup": {
+      "esbuild": {
+        "jsx": "automatic"
+      }
+    }
   }
 }

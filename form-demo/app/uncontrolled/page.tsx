@@ -11,19 +11,23 @@ export default function () {
 
   return (
     <Form action={formAction} validationErrors={errors} className="space-y-4">
-      <TextField name="name" label="Navn" isRequired />
+      <p>
+        This is an uncontrolled form that uses zod to validate the form data on
+        the server side in a React server action.
+      </p>
+      <TextField name="name" label="Name" isRequired />
       <TextField
         name="email"
-        label="Epost"
-        isRequired
+        label="Email"
         type="email"
+        isRequired
         description={
           <>
-            Må være <em>.no</em> epost
+            Must be a <em>.no</em> email address
           </>
         }
       />
-      <SubmitButton>Lagre</SubmitButton>
+      <SubmitButton>Save</SubmitButton>
     </Form>
   );
 }

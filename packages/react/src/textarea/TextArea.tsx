@@ -8,7 +8,7 @@ import {
 import { formField, input } from '../classes';
 import { Label } from '../label/Label';
 import { Description } from '../label/Description';
-import { ErrorMessage } from '../label/ErrorMessage';
+import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
 
 type TextAreaProps = {
   /** Additional CSS className for the element. */
@@ -55,7 +55,7 @@ function TextArea(props: TextAreaProps) {
       {label && <Label>{label}</Label>}
       {description && <Description>{description}</Description>}
       <RACTextArea className={input()} rows={rows} />
-      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      <ErrorMessageOrFieldError errorMessage={errorMessage} />
     </RACTextField>
   );
 }

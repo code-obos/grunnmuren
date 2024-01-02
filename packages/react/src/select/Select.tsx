@@ -14,7 +14,7 @@ import { ChevronDown, Check } from '@obosbbl/grunnmuren-icons-react';
 import { formField, input, dropdown } from '../classes';
 import { Label } from '../label/Label';
 import { Description } from '../label/Description';
-import { ErrorMessage } from '../label/ErrorMessage';
+import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
 
 type SelectProps<T extends object> = {
   children: React.ReactNode;
@@ -68,7 +68,7 @@ function Select<T extends object>(props: SelectProps<T>) {
         <ChevronDown className={dropdown.chevronIcon} />
       </Button>
 
-      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      <ErrorMessageOrFieldError errorMessage={errorMessage} />
 
       <Popover className={dropdown.popover}>
         <ListBox className={dropdown.listbox}>{children}</ListBox>
