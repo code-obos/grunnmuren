@@ -1,5 +1,6 @@
 import { FieldError } from 'react-aria-components';
 import { ErrorMessage } from '../label/ErrorMessage';
+import { formFieldError } from '../classes';
 
 type Props = {
   errorMessage?: React.ReactNode;
@@ -13,6 +14,6 @@ export function ErrorMessageOrFieldError({ errorMessage }: Props) {
   return errorMessage ? (
     <ErrorMessage>{errorMessage}</ErrorMessage>
   ) : (
-    <FieldError className="w-fit rounded-sm bg-red-light px-2 py-1 text-sm leading-6 text-red" />
+    <FieldError className={formFieldError} />
   );
 }

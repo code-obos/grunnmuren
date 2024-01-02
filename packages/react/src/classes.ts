@@ -1,6 +1,9 @@
 import { cx, cva } from 'cva';
 
 const formField = cx('group flex flex-col gap-2');
+const formFieldError = cx(
+  'w-fit rounded-sm bg-red-light px-2 py-1 text-sm leading-6 text-red',
+);
 
 const input = cva({
   base: [
@@ -41,4 +44,4 @@ const dropdown = {
   ),
 };
 
-export { formField, input, inputGroup, dropdown };
+export { formField, formFieldError, input, inputGroup, dropdown };
