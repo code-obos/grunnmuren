@@ -1,7 +1,7 @@
 'use client';
 import { useFormState } from 'react-dom';
 import { Form } from 'react-aria-components';
-import { TextField } from '@obosbbl/grunnmuren-react/textfield';
+import { TextField } from '@obosbbl/grunnmuren-react';
 
 import { submitForm } from './submitAction';
 import SubmitButton from './SubmitButton';
