@@ -44,8 +44,7 @@
     "react-dom": "18.2.0",
     "storybook": "7.6.6",
     "tailwindcss": "3.4.0",
-    "typescript": "5.3.3",
-    "unbuild": "2.0.0"
+    "typescript": "5.3.3"
   },
   "engines": {
     "node": ">=20"
