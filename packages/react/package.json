@@ -9,40 +9,16 @@
   "sideEffects": false,
   "type": "module",
   "exports": {
-    "./button": {
-      "types": "./dist/button/Button.d.ts",
-      "default": "./dist/button/Button.mjs"
-    },
-    "./checkbox": {
-      "types": "./dist/checkbox/index.d.ts",
-      "default": "./dist/checkbox/index.mjs"
-    },
-    "./combobox": {
-      "types": "./dist/combobox/index.d.ts",
-      "default": "./dist/combobox/index.mjs"
-    },
-    "./label": {
-      "types": "./dist/label/index.d.ts",
-      "default": "./dist/label/index.mjs"
-    },
-    "./radiogroup": {
-      "types": "./dist/radiogroup/index.d.ts",
-      "default": "./dist/radiogroup/index.mjs"
-    },
-    "./textfield": {
-      "types": "./dist/textfield/index.d.ts",
-      "default": "./dist/textfield/index.mjs"
-    },
-    "./select": {
-      "types": "./dist/select/index.d.ts",
-      "default": "./dist/select/index.mjs"
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
     }
   },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "unbuild"
+    "build": "bunchee"
   },
   "dependencies": {
     "@obosbbl/grunnmuren-icons-react": "workspace:^2.0.0-canary.0",
@@ -51,22 +27,5 @@
   },
   "peerDependencies": {
     "react": "^18"
-  },
-  "unbuild": {
-    "entries": [
-      "./src/button/Button.tsx",
-      "./src/checkbox/index.ts",
-      "./src/combobox/index.ts",
-      "./src/label/index.ts",
-      "./src/radiogroup/index.ts",
-      "./src/textfield/index.ts",
-      "./src/select/index.ts"
-    ],
-    "declaration": true,
-    "rollup": {
-      "esbuild": {
-        "jsx": "automatic"
-      }
-    }
   }
 }

@@ -9,19 +9,16 @@
   "sideEffects": false,
   "type": "module",
   "exports": {
-    "types": "./dist/index.d.ts",
+    "types": "./dist/index.d.mts",
     "default": "./dist/index.mjs"
   },
-  "main": "dist/index.mjs",
-  "module": "dist/index.mjs",
-  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "pnpm run build:make-react && pnpm run build:unbuild",
-    "build:make-react": "node ./scripts/make-react-icons.mjs",
-    "build:unbuild": "unbuild"
+    "build": "pnpm run build:make-react && pnpm run build:bundle",
+    "build:bundle": "bunchee",
+    "build:make-react": "node ./scripts/make-react-icons.mjs"
   },
   "devDependencies": {
     "@obosbbl/grunnmuren-icons-svg": "workspace:*",
@@ -32,12 +29,5 @@
   },
   "peerDependencies": {
     "react": "^18"
-  },
-  "unbuild": {
-    "rollup": {
-      "esbuild": {
-        "jsx": "automatic"
-      }
-    }
   }
 }
