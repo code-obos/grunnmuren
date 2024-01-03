@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-icons-svg
 
+## 2.0.0-canary.1
+
+### Patch Changes
+
+- 389d117: update svgo
+
 ## 2.0.0-canary.0
 
 ### Major Changes

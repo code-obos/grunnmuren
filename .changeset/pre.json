@@ -5,13 +5,23 @@
     "@obosbbl/grunnmuren-icons-react": "1.0.0",
     "@obosbbl/grunnmuren-icons-svg": "1.0.0",
     "@obosbbl/grunnmuren-tailwind": "1.0.0",
-    "@obosbbl/grunnmuren-react": "1.0.0"
+    "@obosbbl/grunnmuren-react": "1.0.0",
+    "form-demo": "0.0.0"
   },
   "changesets": [
+    "afraid-rings-search",
     "eleven-owls-report",
+    "gentle-seas-boil",
     "gold-shrimps-peel",
     "grumpy-pans-design",
     "grumpy-rabbits-fry",
-    "small-fishes-accept"
+    "honest-coins-allow",
+    "moody-rice-tie",
+    "orange-stingrays-retire",
+    "pretty-geckos-rush",
+    "slimy-meals-sin",
+    "small-fishes-accept",
+    "tall-dancers-carry",
+    "weak-ties-perform"
   ]
 }

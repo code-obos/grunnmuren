@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-icons-react
 
+## 2.0.0-canary.1
+
+### Patch Changes
+
+- 834c1a9: use bunchee instead of unbuild to bundle the icons
+
 ## 2.0.0-canary.0
 
 ### Major Changes
