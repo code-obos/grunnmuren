@@ -9,7 +9,7 @@ import {
 import { formField, input, inputGroup } from '../classes';
 import { Label } from '../label/Label';
 import { Description } from '../label/Description';
-import { ErrorMessage } from '../label/ErrorMessage';
+import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
 
 type TextFieldProps = {
   /** Additional CSS className for the element. */
@@ -92,7 +92,7 @@ function TextField(props: TextFieldProps) {
         <Input className={inputWithAlignment({ textAlign })} />
       )}
 
-      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      <ErrorMessageOrFieldError errorMessage={errorMessage} />
     </RACTextField>
   );
 }

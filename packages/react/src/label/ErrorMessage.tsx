@@ -1,5 +1,6 @@
 import { cx } from 'cva';
 import { Text, type TextProps } from 'react-aria-components';
+import { formFieldError } from '../classes';
 
 type ErrorMessageProps = TextProps;
 
@@ -8,10 +9,7 @@ function ErrorMessage(props: ErrorMessageProps) {
   return (
     <Text
       {...restProps}
-      className={cx(
-        className,
-        'w-fit rounded-sm bg-red-light px-2 py-1 text-sm leading-6 text-red',
-      )}
+      className={cx(className, formFieldError)}
       slot="errorMessage"
     >
       {children}
