@@ -19,7 +19,7 @@ pnpm add @obosbbl/grunnmuren-react@canary
 Before you start using the components you need to configure the [Tailwind preset](../tailwind/). Remember to add this package to the content scan.
 
 ```js
-import { Button } from '@obosbbl/grunnmuren-react/button';
+import { Button } from '@obosbbl/grunnmuren-react';
 
 export default function () {
   return <Button>Click me</Button>;
