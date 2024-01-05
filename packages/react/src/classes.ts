@@ -8,6 +8,8 @@ const formFieldError = cx(
 const input = cva({
   base: [
     'rounded-md px-3 py-2.5 text-sm font-normal leading-6 placeholder-[#727070] outline-none ring-1 ring-black',
+    // Prevents excessive date input height in Webkit
+    '[&:-webkit-datetime-edit]:block [&:-webkit-datetime-edit]:p-0',
     // invalid styles
     'group-data-[invalid]:ring-2 group-data-[invalid]:ring-red',
   ],
