@@ -110,7 +110,7 @@ type ButtonProps = VariantProps<typeof buttonVariants> & {
    * Display the button in a loading state
    * @default false
    */
-  loading?: boolean;
+  isLoading?: boolean;
   style?: React.CSSProperties;
 } & ButtonOrLinkProps;
 
@@ -120,7 +120,7 @@ function Button(props: ButtonProps) {
     className,
     color,
     isIconOnly,
-    loading,
+    isLoading,
     variant,
     style,
     ...restProps
@@ -131,7 +131,7 @@ function Button(props: ButtonProps) {
   const [widthOverride, setWidthOverride] = useState<number>();
 
   useClientLayoutEffect(() => {
-    if (loading) {
+    if (isLoading) {
       const requestID = window.requestAnimationFrame(() => {
         setWidthOverride(buttonRef?.current?.getBoundingClientRect()?.width);
       });
@@ -140,7 +140,7 @@ function Button(props: ButtonProps) {
         cancelAnimationFrame(requestID);
       };
     }
-  }, [loading, children]);
+  }, [isLoading, children]);
 
   let Component: 'a' | 'button' = 'a';
   if (props.href == null) {
@@ -152,7 +152,7 @@ function Button(props: ButtonProps) {
   return (
     // @ts-expect-error TS doesn't agree here taht restProps is safe to spread, because restProps for anchors aren't type compatible with restProps for buttons, but that should be okay here
     <Component
-      aria-busy={loading ? true : undefined}
+      aria-busy={isLoading ? true : undefined}
       className={buttonVariants({ className, color, isIconOnly, variant })}
       ref={buttonRef as never}
       style={{
