@@ -54,7 +54,7 @@ const Form = (props: {
       validationErrors={errors}
     >
       {props.children}
-      <Button type="submit" loading={isLoading}>
+      <Button type="submit" isLoading={isLoading}>
         Send inn
       </Button>
     </RACForm>
