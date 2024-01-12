@@ -1,4 +1,4 @@
-export { Form } from 'react-aria-components';
+export { Form, I18nProvider } from 'react-aria-components';
 
 export * from './button';
 export * from './checkbox';
