@@ -48,8 +48,8 @@ importers:
         specifier: 10.4.16
         version: 10.4.16(postcss@8.4.32)
       bunchee:
-        specifier: 4.2.11
-        version: 4.2.11(typescript@5.3.3)
+        specifier: 4.3.4
+        version: 4.3.4(typescript@5.3.3)
       eslint:
         specifier: 8.56.0
         version: 8.56.0
@@ -6412,8 +6412,8 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
-  /bunchee@4.2.11(typescript@5.3.3):
-    resolution: {integrity: sha512-hd4M7s3F8rXgN+sRBblDuSpb+3mXvOL9oY4Tmj84kn9D9euVQbnlkiX0BCvK2dQckohdgs9JA1JquqZavRrD9A==}
+  /bunchee@4.3.4(typescript@5.3.3):
+    resolution: {integrity: sha512-AP1sBrBPLD6jJGl+uTFoCmfs5GX1seWJt9Q/1oU0v45tV5Gxf7ikwgi59EreFTQ+NkmW0WP9rBiVCeyDKyZcRw==}
     engines: {node: '>= 18.0.0'}
     hasBin: true
     peerDependencies:
