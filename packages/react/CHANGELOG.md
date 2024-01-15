@@ -1,5 +1,15 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.3
+
+### Minor Changes
+
+- 38c2d3d: add I18nProvider
+
+### Patch Changes
+
+- c2a8150: rename Button component's `loading` prop to `isLoading` to align better with other prop names
+
 ## 2.0.0-canary.2
 
 ### Minor Changes
