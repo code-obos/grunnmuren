@@ -1,3 +1,4 @@
+import { forwardRef, type Ref } from 'react';
 import { cx } from 'cva';
 import {
   Button,
@@ -35,7 +36,10 @@ type SelectProps<T extends object> = {
   'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style'
 >;
 
-function Select<T extends object>(props: SelectProps<T>) {
+function Select<T extends object>(
+  props: SelectProps<T>,
+  ref: Ref<HTMLButtonElement>,
+) {
   const {
     className,
     children,
@@ -63,6 +67,8 @@ function Select<T extends object>(props: SelectProps<T>) {
           // How to reuse placeholder text?
           'inline-flex cursor-default items-center gap-2',
         )}
+        // See https://github.com/adobe/react-spectrum/discussions/4792#discussioncomment-6492305
+        ref={ref}
       >
         <SelectValue className="flex-1 truncate text-left data-[placeholder]:text-[#727070]" />
         <ChevronDown className={dropdown.chevronIcon} />
@@ -106,8 +112,9 @@ const SelectItem = (props: ListBoxItemProps) => {
   );
 };
 
+const _Select = forwardRef(Select);
 export {
-  Select,
+  _Select as Select,
   SelectItem,
   type SelectProps,
   type ListBoxItemProps as SelectItemProps,

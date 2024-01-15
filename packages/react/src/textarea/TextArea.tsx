@@ -1,3 +1,4 @@
+import { forwardRef, type Ref } from 'react';
 import { cx } from 'cva';
 import {
   TextArea as RACTextArea,
@@ -33,7 +34,7 @@ type TextAreaProps = {
   'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style'
 >;
 
-function TextArea(props: TextAreaProps) {
+function TextArea(props: TextAreaProps, ref: Ref<HTMLTextAreaElement>) {
   const {
     className,
     description,
@@ -54,10 +55,11 @@ function TextArea(props: TextAreaProps) {
     >
       {label && <Label>{label}</Label>}
       {description && <Description>{description}</Description>}
-      <RACTextArea className={input()} rows={rows} />
+      <RACTextArea className={input()} rows={rows} ref={ref} />
       <ErrorMessageOrFieldError errorMessage={errorMessage} />
     </RACTextField>
   );
 }
 
-export { TextArea, type TextAreaProps };
+const _TextArea = forwardRef(TextArea);
+export { _TextArea as TextArea, type TextAreaProps };

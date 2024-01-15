@@ -1,3 +1,4 @@
+import { forwardRef, type Ref } from 'react';
 import { cx, cva, compose } from 'cva';
 import {
   Input,
@@ -53,7 +54,7 @@ const inputWithAlignment = compose(
   }),
 );
 
-function TextField(props: TextFieldProps) {
+function TextField(props: TextFieldProps, ref: Ref<HTMLInputElement>) {
   const {
     className,
     description,
@@ -84,6 +85,7 @@ function TextField(props: TextFieldProps) {
           {withAddonDivider && leftAddon && <Divider className="ml-3" />}
           <Input
             className={inputWithAlignment({ textAlign, isGrouped: true })}
+            ref={ref}
           />
           {withAddonDivider && rightAddon && <Divider className="mr-3" />}
           {rightAddon}
@@ -103,4 +105,5 @@ function Divider({ className }: { className: string }) {
   );
 }
 
-export { TextField, type TextFieldProps };
+const _TextField = forwardRef(TextField);
+export { _TextField as TextField, type TextFieldProps };
