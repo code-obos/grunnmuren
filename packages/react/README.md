@@ -50,6 +50,42 @@ export default function RootLayout({
 
 See the [RAC internationalization docs](https://react-spectrum.adobe.com/react-aria/internationalization.html) for more information.
 
+### Optimize bundle size by removing unused locales
+
+React Aria Components has built in support for over 30 languages, most of which will be unused in your application. To optimize your applications bundle size, it is recommended to use React Aria's build plugin to remove all the unused locales. Here is a quick example for Next.js:
+
+#### Install
+
+```sh
+# npm
+npm install @react-aria/optimize-locales-plugin --save-dev
+
+# pnpm
+pnpm add -D @react-aria/optimize-locales-plugin
+```
+
+#### Configuration
+
+```js
+// next.config.js
+const optimizeLocales = require('@react-aria/optimize-locales-plugin');
+
+module.exports = {
+  webpack(config) {
+    config.plugins.push(
+      optimizeLocales.webpack({
+        // If you have a multitenant app, include both Norwegian and Swedish
+        // If your app only serves one language, adjust accordingly
+        locales: ['nb-NO', 'sv-SE'],
+      }),
+    );
+    return config;
+  },
+};
+```
+
+The plugin works with several different bundlers. See [React Aria's bundle size optimization docs](https://react-spectrum.adobe.com/react-aria/internationalization.html#optimizing-bundle-size) for more information.
+
 ## Usage
 
 Before you start using the components you need to configure the [Tailwind preset](../tailwind/). Remember to add this package to the content scan.
