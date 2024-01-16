@@ -1,3 +1,4 @@
+import { forwardRef, type Ref } from 'react';
 import { cx } from 'cva';
 import {
   CheckboxGroup as RACCheckboxGroup,
@@ -30,7 +31,7 @@ type CheckboxGroupProps = {
   | 'orientation'
 >;
 
-function CheckboxGroup(props: CheckboxGroupProps) {
+function CheckboxGroup(props: CheckboxGroupProps, ref: Ref<HTMLDivElement>) {
   const {
     children,
     className,
@@ -50,6 +51,7 @@ function CheckboxGroup(props: CheckboxGroupProps) {
       className={cx(className, 'flex flex-col gap-2')}
       isInvalid={isInvalid}
       isRequired={isRequired}
+      ref={ref}
     >
       {label && <Label>{label}</Label>}
       {description && <Description>{description}</Description>}
@@ -59,4 +61,5 @@ function CheckboxGroup(props: CheckboxGroupProps) {
   );
 }
 
-export { CheckboxGroup, type CheckboxGroupProps };
+const _CheckboxGroup = forwardRef(CheckboxGroup);
+export { _CheckboxGroup as CheckboxGroup, type CheckboxGroupProps };

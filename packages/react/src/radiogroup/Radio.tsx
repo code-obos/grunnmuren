@@ -1,3 +1,4 @@
+import { forwardRef, type Ref } from 'react';
 import { cx } from 'cva';
 import {
   Radio as RACRadio,
@@ -36,10 +37,14 @@ type RadioProps = {
   style?: React.CSSProperties;
 } & Omit<RACRAdioProps, 'isDisabled' | 'children' | 'style'>;
 
-function Radio(props: RadioProps) {
+function Radio(props: RadioProps, ref: Ref<HTMLLabelElement>) {
   const { children, className, description, ...restProps } = props;
   return (
-    <RACRadio {...restProps} className={cx(className, defaultClasses)}>
+    <RACRadio
+      {...restProps}
+      className={cx(className, defaultClasses)}
+      ref={ref}
+    >
       {/* increases the clickable area of the radio button for accessibility */}
       <div className="absolute -left-2.5 top-0 z-10 h-11 w-11 " />
 
@@ -53,4 +58,5 @@ function Radio(props: RadioProps) {
   );
 }
 
-export { Radio, type RadioProps };
+const _Radio = forwardRef(Radio);
+export { _Radio as Radio, type RadioProps };
