@@ -1,3 +1,4 @@
+import { forwardRef, type Ref } from 'react';
 import { useId } from 'react';
 import { cx } from 'cva';
 import {
@@ -57,7 +58,7 @@ type CheckboxProps = {
   'isDisabled' | 'style' | 'children' | 'isIndeterminate' | 'isReadOnly'
 >;
 
-function Checkbox(props: CheckboxProps) {
+function Checkbox(props: CheckboxProps, ref: Ref<HTMLLabelElement>) {
   const {
     children,
     className,
@@ -86,6 +87,7 @@ function Checkbox(props: CheckboxProps) {
           {...restProps}
           className={cx(className, defaultClasses)}
           isInvalid={isInvalid}
+          ref={ref}
         >
           {/* increases the clickable area of the checkbox for accessibility */}
           <div className="absolute -left-2.5 top-0 z-10 h-11 w-11" />
@@ -108,4 +110,5 @@ function Checkbox(props: CheckboxProps) {
   );
 }
 
-export { Checkbox, type CheckboxProps };
+const _Checkbox = forwardRef(Checkbox);
+export { _Checkbox as Checkbox, type CheckboxProps };

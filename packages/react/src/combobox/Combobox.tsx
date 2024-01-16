@@ -1,3 +1,4 @@
+import { forwardRef, type Ref } from 'react';
 import { cx } from 'cva';
 import {
   ListBox,
@@ -45,7 +46,10 @@ type ComboboxProps<T extends object> = {
   'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style'
 >;
 
-function Combobox<T extends object>(props: ComboboxProps<T>) {
+function Combobox<T extends object>(
+  props: ComboboxProps<T>,
+  ref: Ref<HTMLInputElement>,
+) {
   const {
     className,
     children,
@@ -69,7 +73,7 @@ function Combobox<T extends object>(props: ComboboxProps<T>) {
       {description && <Description>{description}</Description>}
 
       <Group className={inputGroup}>
-        <Input className={input({ isGrouped: true })} />
+        <Input className={input({ isGrouped: true })} ref={ref} />
         <Button>
           {isLoading ? (
             <LoadingSpinner className="animate-spin" />
@@ -127,8 +131,9 @@ const ComboboxItem = (props: ListBoxItemProps) => {
   );
 };
 
+const _Combobox = forwardRef(Combobox);
 export {
-  Combobox,
+  _Combobox as Combobox,
   ComboboxItem,
   type ComboboxProps,
   type ListBoxItemProps as ComboboxItemProps,
