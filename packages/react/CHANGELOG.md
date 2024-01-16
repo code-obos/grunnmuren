@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.4
+
+### Patch Changes
+
+- 16e0788: add forwardRef support for better compat with react-hook-form
+
 ## 2.0.0-canary.3
 
 ### Minor Changes
