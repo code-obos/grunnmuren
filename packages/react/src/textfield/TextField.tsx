@@ -91,7 +91,7 @@ function TextField(props: TextFieldProps, ref: Ref<HTMLInputElement>) {
           {rightAddon}
         </Group>
       ) : (
-        <Input className={inputWithAlignment({ textAlign })} />
+        <Input className={inputWithAlignment({ textAlign })} ref={ref} />
       )}
 
       <ErrorMessageOrFieldError errorMessage={errorMessage} />

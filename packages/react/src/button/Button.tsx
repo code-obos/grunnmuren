@@ -1,6 +1,7 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, forwardRef, type Ref } from 'react';
 import { cva, type VariantProps } from 'cva';
 import { LoadingSpinner } from '@obosbbl/grunnmuren-icons-react';
+import { mergeRefs } from '@react-aria/utils';
 
 import { useClientLayoutEffect } from '../utils/useClientLayoutEffect';
 
@@ -114,7 +115,10 @@ type ButtonProps = VariantProps<typeof buttonVariants> & {
   style?: React.CSSProperties;
 } & ButtonOrLinkProps;
 
-function Button(props: ButtonProps) {
+function Button(
+  props: ButtonProps,
+  forwardedRef: Ref<HTMLButtonElement | HTMLAnchorElement>,
+) {
   const {
     children,
     className,
@@ -126,14 +130,15 @@ function Button(props: ButtonProps) {
     ...restProps
   } = props;
 
-  // TODO: Merge refs when we use RAC
-  const buttonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
   const [widthOverride, setWidthOverride] = useState<number>();
+
+  const ownRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
+  const ref = mergeRefs(ownRef, forwardedRef);
 
   useClientLayoutEffect(() => {
     if (isLoading) {
       const requestID = window.requestAnimationFrame(() => {
-        setWidthOverride(buttonRef?.current?.getBoundingClientRect()?.width);
+        setWidthOverride(ownRef.current?.getBoundingClientRect()?.width);
       });
       return () => {
         setWidthOverride(undefined);
@@ -154,7 +159,7 @@ function Button(props: ButtonProps) {
     <Component
       aria-busy={isLoading ? true : undefined}
       className={buttonVariants({ className, color, isIconOnly, variant })}
-      ref={buttonRef as never}
+      ref={ref as never}
       style={{
         ...style,
         width: widthOverride,
@@ -171,4 +176,5 @@ function Button(props: ButtonProps) {
   );
 }
 
-export { Button, type ButtonProps };
+const _Button = forwardRef(Button);
+export { _Button as Button, type ButtonProps };
