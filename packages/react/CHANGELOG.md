@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.5
+
+### Patch Changes
+
+- 39c848e: fix: add missing `use client` directive to Button component
+
 ## 2.0.0-canary.4
 
 ### Patch Changes
