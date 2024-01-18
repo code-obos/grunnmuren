@@ -1,4 +1,3 @@
-'use client';
 import { useLayoutEffect } from 'react';
 
 const canUseDOM = (): boolean => {
