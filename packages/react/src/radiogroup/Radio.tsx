@@ -46,7 +46,7 @@ function Radio(props: RadioProps, ref: Ref<HTMLLabelElement>) {
       ref={ref}
     >
       {/* increases the clickable area of the radio button for accessibility */}
-      <div className="absolute -left-2.5 top-0 z-10 h-11 w-11 " />
+      <span className="absolute -left-2.5 top-0 z-10 h-11 w-11 " />
 
       <div>
         {children}

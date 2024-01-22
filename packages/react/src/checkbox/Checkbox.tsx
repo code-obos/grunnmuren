@@ -19,7 +19,7 @@ const defaultClasses = cx([
 // so it can be used in other views, outside of an input of type checkbox, like in table rows.
 function CheckmarkBox() {
   return (
-    <div
+    <span
       className={cx([
         'relative left-0 grid flex-none place-content-center rounded-sm border-2 border-black text-white',
         // to vertically align the radio we need to calculate the label's height, which is equal to it's font size multiplied by the line height.
@@ -39,7 +39,7 @@ function CheckmarkBox() {
       ])}
     >
       <CheckIcon className="h-full w-full opacity-0 group-data-[selected]:opacity-100" />
-    </div>
+    </span>
   );
 }
 
@@ -90,7 +90,7 @@ function Checkbox(props: CheckboxProps, ref: Ref<HTMLLabelElement>) {
           ref={ref}
         >
           {/* increases the clickable area of the checkbox for accessibility */}
-          <div className="absolute -left-2.5 top-0 z-10 h-11 w-11" />
+          <span className="absolute -left-2.5 top-0 z-10 h-11 w-11" />
           <CheckmarkBox />
           {children}
         </RACCheckbox>
