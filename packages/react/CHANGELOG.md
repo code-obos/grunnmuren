@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.6
+
+### Patch Changes
+
+- 248007d: fix screen reader issue with Checkbox
+
 ## 2.0.0-canary.5
 
 ### Patch Changes
