@@ -29,7 +29,7 @@ module.exports = {
     './src/app/**/*.{js,ts,jsx,tsx,}',
 
     // If you're using Grunnmuren's React components
-    './node_modules/@obosbbl/grunnmuren-react/dist/**/*.mjs',
+    './node_modules/@obosbbl/grunnmuren-react/dist/**/*.{mjs,js}',
   ],
 };
 ```
