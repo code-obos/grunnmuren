@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.7
+
+### Patch Changes
+
+- 56b6cb6: fix invisible ring on input (safari v<17)
+
 ## 2.0.0-canary.6
 
 ### Patch Changes
