@@ -10,6 +10,8 @@ const input = cva({
     'rounded-md px-3 py-2.5 text-sm font-normal leading-6 placeholder-[#727070] outline-none ring-1 ring-black',
     // invalid styles
     'group-data-[invalid]:ring-2 group-data-[invalid]:ring-red',
+    // Fix invisible ring on safari: https://github.com/tailwindlabs/tailwindcss.com/issues/1135
+    'appearance-none',
   ],
   variants: {
     // Focus rings. Can either be :focus or :focus-visible based on the needs of the particular component.
