@@ -62,13 +62,6 @@ const RightAddonTemplate = (args: NumberFieldProps) => {
 
 const defaultProps = {
   label: 'Beløp',
-  withAddonDivider: false,
-  isRequired: false,
-  isInvalid: false,
-  name: undefined,
-  defaultValue: undefined,
-  value: undefined,
-  textAlign: undefined,
 };
 
 export const Default: Story = {
