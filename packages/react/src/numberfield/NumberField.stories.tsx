@@ -166,3 +166,21 @@ export const Controlled = {
     ...defaultProps,
   },
 };
+
+export const MinValue = {
+  render: Template,
+
+  args: {
+    ...defaultProps,
+    minValue: 0,
+  },
+};
+
+export const MaxValue = {
+  render: Template,
+
+  args: {
+    ...defaultProps,
+    maxValue: 1000,
+  },
+};
