@@ -10,6 +10,10 @@ import {
   type ComboBoxProps as RACComboboxProps,
   ListBoxItem,
   ListBoxItemProps,
+  SectionProps,
+  Section,
+  HeadingProps,
+  Header,
 } from 'react-aria-components';
 import {
   ChevronDown,
@@ -132,9 +136,42 @@ const ComboboxItem = (props: ListBoxItemProps) => {
 };
 
 const _Combobox = forwardRef(Combobox);
+
+type ComboboxSectionProps<T extends object> = {
+  /**
+   * Controls whether or not a divider line should be displayed between sections
+   * @default false
+   */
+  omitDividerLine?: boolean;
+} & SectionProps<T>;
+
+const ComboboxSection = <T extends object>({
+  className,
+  omitDividerLine,
+  ...restProps
+}: ComboboxSectionProps<T>) => (
+  <Section
+    {...restProps}
+    className={cx(
+      className,
+      'mx-6 [&>:not(:first-child)]:-mx-6',
+      !omitDividerLine && 'border-b-[0.25px] last:border-b-0',
+    )}
+  />
+);
+
+const ComboboxHeader = (props: HeadingProps) => (
+  <Header
+    {...props}
+    className={cx(props.className, 'py-2 font-medium leading-6')}
+  />
+);
+
 export {
   _Combobox as Combobox,
   ComboboxItem,
   type ComboboxProps,
   type ListBoxItemProps as ComboboxItemProps,
+  ComboboxSection,
+  ComboboxHeader,
 };
