@@ -99,7 +99,7 @@ function TextField(props: TextFieldProps, ref: Ref<HTMLInputElement>) {
   );
 }
 
-function Divider({ className }: { className: string }) {
+export function Divider({ className }: { className: string }) {
   return (
     <span className={cx(className, 'block h-6 w-px flex-none bg-black')} />
   );

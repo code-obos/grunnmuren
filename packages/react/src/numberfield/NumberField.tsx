@@ -11,6 +11,7 @@ import { formField, input, inputGroup } from '../classes';
 import { Label } from '../label/Label';
 import { Description } from '../label/Description';
 import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
+import { Divider } from '../textfield';
 
 type NumberFieldProps = {
   /** Additional CSS className for the element. */
@@ -101,12 +102,6 @@ function NumberField(props: NumberFieldProps, ref: Ref<HTMLInputElement>) {
 
       <ErrorMessageOrFieldError errorMessage={errorMessage} />
     </RACNumberField>
-  );
-}
-
-function Divider({ className }: { className: string }) {
-  return (
-    <span className={cx(className, 'block h-6 w-px flex-none bg-black')} />
   );
 }
 
