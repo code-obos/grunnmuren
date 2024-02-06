@@ -38,7 +38,12 @@ type NumberFieldProps = {
   withAddonDivider?: boolean;
 } & Omit<
   RACNumberFieldProps,
-  'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style'
+  | 'className'
+  | 'isReadOnly'
+  | 'isDisabled'
+  | 'children'
+  | 'style'
+  | 'hideStepper'
 >;
 
 const inputWithAlignment = compose(
