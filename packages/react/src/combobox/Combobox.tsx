@@ -154,7 +154,7 @@ const ComboboxSection = <T extends object>({
     {...restProps}
     className={cx(
       className,
-      'mx-6 pb-2 [&>:not(:first-child)]:-mx-6',
+      'mx-6 py-2 [&>:not(:first-child)]:-mx-6',
       !omitDividerLine && 'border-b-[0.25px] last:border-b-0',
     )}
   />
