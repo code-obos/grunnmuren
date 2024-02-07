@@ -1,1 +1,1 @@
-export { TextField, type TextFieldProps, Divider } from './TextField';
+export { TextField, type TextFieldProps } from './TextField';
