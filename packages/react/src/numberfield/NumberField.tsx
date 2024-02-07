@@ -1,3 +1,4 @@
+// This component is based on a copy of ../textfield/TextField, refactoring is TBD: https://github.com/code-obos/grunnmuren/pull/722#issuecomment-1931478786
 import { forwardRef, type Ref } from 'react';
 import { cx, cva, compose } from 'cva';
 import {
@@ -11,7 +12,6 @@ import { formField, input, inputGroup } from '../classes';
 import { Label } from '../label/Label';
 import { Description } from '../label/Description';
 import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
-import { Divider } from '../textfield';
 
 type NumberFieldProps = {
   /** Additional CSS className for the element. */
@@ -102,6 +102,12 @@ function NumberField(props: NumberFieldProps, ref: Ref<HTMLInputElement>) {
 
       <ErrorMessageOrFieldError errorMessage={errorMessage} />
     </RACNumberField>
+  );
+}
+
+export function Divider({ className }: { className: string }) {
+  return (
+    <span className={cx(className, 'block h-6 w-px flex-none bg-black')} />
   );
 }
 
