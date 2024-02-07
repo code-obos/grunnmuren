@@ -7,3 +7,4 @@ export * from './radiogroup';
 export * from './select';
 export * from './textarea';
 export * from './textfield';
+export * from './numberfield';
