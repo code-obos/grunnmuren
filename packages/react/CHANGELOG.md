@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.8
+
+### Minor Changes
+
+- 899a5e0: Added new component for numbers using the `<NumberField/>` from RAC. This component and it's stories are very similar to the `<TextField/>` component
+
 ## 2.0.0-canary.7
 
 ### Patch Changes
