@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.9
+
+### Patch Changes
+
+- 4bbfe32: Export NumberField component and Props type
+
 ## 2.0.0-canary.8
 
 ### Minor Changes
