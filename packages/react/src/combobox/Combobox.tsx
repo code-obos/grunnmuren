@@ -10,10 +10,6 @@ import {
   type ComboBoxProps as RACComboboxProps,
   ListBoxItem,
   ListBoxItemProps,
-  SectionProps,
-  Section,
-  HeadingProps,
-  Header,
 } from 'react-aria-components';
 import {
   ChevronDown,
@@ -25,6 +21,7 @@ import { formField, inputGroup, input, dropdown } from '../classes';
 import { Label } from '../label/Label';
 import { Description } from '../label/Description';
 import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
+import { Section, Header } from '../internals';
 
 type ComboboxProps<T extends object> = {
   children: React.ReactNode;
@@ -137,31 +134,11 @@ const ComboboxItem = (props: ListBoxItemProps) => {
 
 const _Combobox = forwardRef(Combobox);
 
-const ComboboxSection = <T extends object>({
-  className,
-  ...restProps
-}: SectionProps<T>) => (
-  <Section
-    {...restProps}
-    className={cx(className, 'py-2 [&>:not(:first-child)]:pl-10')}
-  />
-);
-
-const ComboboxHeader = (props: HeadingProps) => (
-  <Header
-    {...props}
-    className={cx(
-      props.className,
-      'mx-6 py-2 font-medium leading-6 text-blue-dark',
-    )}
-  />
-);
-
 export {
   _Combobox as Combobox,
   ComboboxItem,
   type ComboboxProps,
   type ListBoxItemProps as ComboboxItemProps,
-  ComboboxSection,
-  ComboboxHeader,
+  Section as ComboboxSection,
+  Header as ComboboxHeader,
 };
