@@ -127,33 +127,31 @@ const AsyncTemplate = <T extends object>(args: ComboboxProps<T>) => {
 };
 
 const GroupedTemplate = <T extends object>(args: ComboboxProps<T>) => (
-  <>
-    <Combobox {...args}>
-      {items
-        .reduce(
-          (prev, { area, name }) => {
-            const indexOfArea = prev.findIndex((p) => p.area === area);
-            if (indexOfArea === -1) {
-              return [...prev, { area, names: [name] }];
-            }
-            return [
-              ...prev.slice(0, indexOfArea),
-              { area, names: [...prev[indexOfArea].names, name] },
-              ...prev.slice(indexOfArea + 1),
-            ];
-          },
-          [] as Array<{ area: string; names: string[] }>,
-        )
-        .map(({ area, names }) => (
-          <ComboboxSection key={area}>
-            <ComboboxHeader>{area}</ComboboxHeader>
-            {names.map((name) => (
-              <ComboboxItem key={name}>{name}</ComboboxItem>
-            ))}
-          </ComboboxSection>
-        ))}
-    </Combobox>
-  </>
+  <Combobox {...args}>
+    {items
+      .reduce(
+        (prev, { area, name }) => {
+          const indexOfArea = prev.findIndex((p) => p.area === area);
+          if (indexOfArea === -1) {
+            return [...prev, { area, names: [name] }];
+          }
+          return [
+            ...prev.slice(0, indexOfArea),
+            { area, names: [...prev[indexOfArea].names, name] },
+            ...prev.slice(indexOfArea + 1),
+          ];
+        },
+        [] as Array<{ area: string; names: string[] }>,
+      )
+      .map(({ area, names }) => (
+        <ComboboxSection key={area}>
+          <ComboboxHeader>{area}</ComboboxHeader>
+          {names.map((name) => (
+            <ComboboxItem key={name}>{name}</ComboboxItem>
+          ))}
+        </ComboboxSection>
+      ))}
+  </Combobox>
 );
 
 const defaultProps = {
