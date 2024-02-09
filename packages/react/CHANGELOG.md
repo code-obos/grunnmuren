@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.10
+
+### Patch Changes
+
+- 1367c42: Fixed inconsistent spacing in buttons with icon and text.
+
 ## 2.0.0-canary.9
 
 ### Patch Changes
