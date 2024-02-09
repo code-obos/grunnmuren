@@ -34,4 +34,4 @@ const ListBoxItem = (props: ListBoxItemProps) => {
   );
 };
 
-export { ListBoxItem, ListBoxItemProps };
+export { ListBoxItem, type ListBoxItemProps };
