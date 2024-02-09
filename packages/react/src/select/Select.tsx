@@ -16,6 +16,7 @@ import { formField, input, dropdown } from '../classes';
 import { Label } from '../label/Label';
 import { Description } from '../label/Description';
 import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
+import { Section, Header } from '../internals';
 
 type SelectProps<T extends object> = {
   children: React.ReactNode;
@@ -118,4 +119,6 @@ export {
   SelectItem,
   type SelectProps,
   type ListBoxItemProps as SelectItemProps,
+  Section as SelectSection,
+  Header as SelectHeader,
 };
