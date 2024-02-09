@@ -60,14 +60,30 @@ export const Tertiary: Story = {
 
 export const WithIconAndText = () => {
   return (
-    <div className="flex gap-8 p-8">
-      <Button>
-        <Edit /> Rediger
-      </Button>
-      <Button>
-        Rediger <Edit />
-      </Button>
-    </div>
+    <>
+      <div className="flex gap-8 p-8">
+        <Button>
+          <Edit /> Rediger
+        </Button>
+        <Button>
+          <Edit /> Rediger mer
+        </Button>
+        <Button>
+          <Edit /> Rediger med enda mer tekst
+        </Button>
+      </div>
+      <div className="flex gap-8 p-8">
+        <Button>
+          Rediger <Edit />
+        </Button>
+        <Button>
+          Rediger mer <Edit />
+        </Button>
+        <Button>
+          Rediger med enda mer tekst <Edit />
+        </Button>
+      </div>
+    </>
   );
 };
 
