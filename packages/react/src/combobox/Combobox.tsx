@@ -121,7 +121,7 @@ const ComboboxItem = (props: ListBoxItemProps) => {
       {...props}
       className={cx(
         props.className,
-        'flex cursor-default px-6 py-2 leading-6 outline-none data-[focused]:bg-sky-lightest',
+        'flex cursor-pointer px-6 py-2 leading-6 outline-none data-[focused]:bg-sky-lightest',
       )}
       textValue={textValue}
     >
@@ -137,33 +137,23 @@ const ComboboxItem = (props: ListBoxItemProps) => {
 
 const _Combobox = forwardRef(Combobox);
 
-type ComboboxSectionProps<T extends object> = {
-  /**
-   * Controls whether or not a divider line should be displayed between sections
-   * @default false
-   */
-  omitDividerLine?: boolean;
-} & SectionProps<T>;
-
 const ComboboxSection = <T extends object>({
   className,
-  omitDividerLine,
   ...restProps
-}: ComboboxSectionProps<T>) => (
+}: SectionProps<T>) => (
   <Section
     {...restProps}
-    className={cx(
-      className,
-      'mx-6 py-2 [&>:not(:first-child)]:-mx-6',
-      !omitDividerLine && 'border-b-[0.25px] last:border-b-0',
-    )}
+    className={cx(className, 'py-2 [&>:not(:first-child)]:pl-10')}
   />
 );
 
 const ComboboxHeader = (props: HeadingProps) => (
   <Header
     {...props}
-    className={cx(props.className, 'py-2 font-medium leading-6')}
+    className={cx(
+      props.className,
+      'mx-6 py-2 font-medium leading-6 text-blue-dark',
+    )}
   />
 );
 
