@@ -40,9 +40,7 @@ const buttonVariants = cva({
      */
     isIconOnly: {
       true: 'p-2 [&>svg]:h-7 [&>svg]:w-7',
-      false:
-        // The of-type classes takes care to add spacing when the button is used with icons
-        'gap-2.5 px-4 py-2',
+      false: 'gap-2.5 px-4 py-2',
     },
   },
   compoundVariants: [
