@@ -32,17 +32,32 @@ const ShortTemplate = (args: AlertboxProps) => (
 
 const defaultProps = {};
 
-export const Default: Story = {
+export const DefaultAlert: Story = {
   render: Template,
   args: defaultProps,
 };
 
-export const Short: Story = {
+export const ShortAlert: Story = {
   render: ShortTemplate,
   args: defaultProps,
 };
 
-export const NonDismissable: Story = {
+export const NonDismissableAlert: Story = {
   render: Template,
   args: { ...defaultProps, isDismissable: false },
+};
+
+export const SuccessAlert: Story = {
+  render: Template,
+  args: { ...defaultProps, variant: 'success' },
+};
+
+export const WarningAlert: Story = {
+  render: Template,
+  args: { ...defaultProps, variant: 'warning' },
+};
+
+export const DangerAlert: Story = {
+  render: Template,
+  args: { ...defaultProps, variant: 'danger' },
 };
