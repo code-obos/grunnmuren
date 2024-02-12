@@ -1,7 +1,20 @@
 import { cva, type VariantProps } from 'cva';
 import { Button } from 'react-aria-components';
-import { Close, InfoCircle } from '@obosbbl/grunnmuren-icons-react';
+import {
+  Close,
+  InfoCircle,
+  CheckCircle,
+  Warning,
+  CloseCircle,
+} from '@obosbbl/grunnmuren-icons-react';
 import { useState } from 'react';
+
+const iconMap = {
+  info: InfoCircle,
+  success: CheckCircle,
+  warning: Warning,
+  danger: CloseCircle,
+};
 
 const variants = cva({
   base: [
@@ -15,6 +28,7 @@ const variants = cva({
     variant: {
       info: 'bg-sky-light',
       success: 'bg-mint-light',
+      warning: 'bg-yellow-light',
       danger: 'bg-red-light',
     },
   },
@@ -44,13 +58,15 @@ const Alertbox = ({
     if (onClose) onClose();
   };
 
+  const Icon = iconMap[variant];
+
   return (
     isDialogOpen && (
       <div
         className={variants({ className, variant })}
         role={isDismissable ? 'dialog' : undefined}
       >
-        <InfoCircle className="col-end-1" />
+        <Icon className="col-end-1" />
         {children}
         {isDismissable && (
           <Button
