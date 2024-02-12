@@ -10,6 +10,8 @@ import {
   ComboboxHeader,
 } from './Combobox';
 
+import { counties } from '../mocks';
+
 const meta: Meta<typeof Combobox> = {
   title: 'Combobox',
   component: Combobox,
@@ -19,45 +21,22 @@ export default meta;
 
 type Story = StoryObj<typeof Combobox>;
 
-const items = [
-  { name: 'Ager', area: 'Norde Aker' },
-  { name: 'Bogerud Torg', area: 'Østensjø' },
-  { name: 'Bølgelengden', area: 'Nordstrand' },
-  { name: 'Ensjøveien 8', area: 'Gamle Oslo' },
-  { name: 'Fjorten', area: 'Nordre Aker' },
-  { name: 'Furuset Village', area: 'Alna' },
-  { name: 'Hoffsveien Hage', area: 'Ullern' },
-  { name: 'Lumanders hage', area: 'Gamle Oslo' },
-  { name: 'Løren botaniske', area: 'Grünerløkka' },
-  { name: 'Mortensrud Felt 16', area: 'Søndre Nordstrand' },
-  { name: 'Oen', area: 'Grorud' },
-  { name: 'Rosenholmveien', area: 'Søndre Nordstrand' },
-  { name: 'Røakollen', area: 'Vestre Aker' },
-  { name: 'Sandakerveien 121', area: 'Nordre Aker' },
-  { name: 'Stenbråtveien', area: 'Søndre Nordstrand' },
-  { name: 'Stilla', area: 'Nordre Aker' },
-  { name: 'Teglverksløkka', area: 'Bjerke' },
-  { name: 'Ulvenkroken', area: 'Bjerke' },
-  { name: 'Ulvenplassen', area: 'Bjerke' },
-  { name: 'Vitigrend', area: 'Vestre Aker' },
-  { name: 'Vollebekk', area: 'Bjerke' },
-  { name: 'Våronnveien 17', area: 'Østensjø' },
-];
-
 const Template = <T extends object>(args: ComboboxProps<T>) => {
   const select = (
     <Combobox {...args}>
-      {items.map((item) => (
-        <ComboboxItem
-          key={item.name}
-          textValue={item.name}
-          id={item.name}
-          className="flex gap-2"
-        >
-          {item.name}
-          <small className="text-gray">{item.area}</small>
-        </ComboboxItem>
-      ))}
+      {counties.map((county) =>
+        county.municipalities.map((municipality) => (
+          <ComboboxItem
+            key={municipality.name}
+            textValue={municipality.name}
+            id={municipality.name}
+            className="flex gap-2"
+          >
+            {municipality.name}
+            <small className="text-gray">{county.name}</small>
+          </ComboboxItem>
+        )),
+      )}
     </Combobox>
   );
   return args.isRequired ? (
@@ -77,7 +56,7 @@ const Template = <T extends object>(args: ComboboxProps<T>) => {
 };
 
 const ControlledTemplate = <T extends object>(args: ComboboxProps<T>) => {
-  const [value, setValue] = useState<string | number>(items[0].name);
+  const [value, setValue] = useState<string | number>(counties[0].name);
 
   return (
     <div className="flex flex-col gap-2">
@@ -128,29 +107,16 @@ const AsyncTemplate = <T extends object>(args: ComboboxProps<T>) => {
 
 const GroupedTemplate = <T extends object>(args: ComboboxProps<T>) => (
   <Combobox {...args}>
-    {items
-      .reduce(
-        (prev, { area, name }) => {
-          const indexOfArea = prev.findIndex((p) => p.area === area);
-          if (indexOfArea === -1) {
-            return [...prev, { area, names: [name] }];
-          }
-          return [
-            ...prev.slice(0, indexOfArea),
-            { area, names: [...prev[indexOfArea].names, name] },
-            ...prev.slice(indexOfArea + 1),
-          ];
-        },
-        [] as Array<{ area: string; names: string[] }>,
-      )
-      .map(({ area, names }) => (
-        <ComboboxSection key={area}>
-          <ComboboxHeader>{area}</ComboboxHeader>
-          {names.map((name) => (
-            <ComboboxItem key={name}>{name}</ComboboxItem>
-          ))}
-        </ComboboxSection>
-      ))}
+    {counties.map((county) => (
+      <ComboboxSection key={county.name}>
+        <ComboboxHeader>{county.name}</ComboboxHeader>
+        {county.municipalities.map((municipality) => (
+          <ComboboxItem key={municipality.name}>
+            {municipality.name}
+          </ComboboxItem>
+        ))}
+      </ComboboxSection>
+    ))}
   </Combobox>
 );
 
