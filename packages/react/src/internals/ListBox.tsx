@@ -34,7 +34,7 @@ const ListBoxItem = (props: ListBoxItemProps) => {
       {...props}
       className={cx(
         props.className,
-        'flex cursor-pointer px-6 py-2 leading-6 outline-none data-[focused]:bg-sky-lightest',
+        'flex cursor-pointer px-6 py-3 leading-6 outline-none data-[focused]:bg-sky-lightest',
       )}
       textValue={textValue}
     >
@@ -59,7 +59,7 @@ const ListBoxSection = <T extends object>({
     {...restProps}
     // The :not(:first-child) selector adds extra spacing to all the options, but not the section (group) headings
     // This way we get the desired extra indent on all options within a group
-    className={cx(className, 'py-2 [&>:not(:first-child)]:pl-10')}
+    className={cx(className, 'pb-1 [&>:not(:first-child)]:pl-10')}
   />
 );
 
