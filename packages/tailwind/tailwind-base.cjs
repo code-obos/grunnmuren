@@ -189,6 +189,7 @@ module.exports = (options = {}) => {
         yellow: {
           // open house
           DEFAULT: '#fff5d2',
+          light: '#FFF2DE',
         },
       },
       fontFamily: {
