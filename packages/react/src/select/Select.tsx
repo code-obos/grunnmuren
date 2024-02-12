@@ -17,8 +17,8 @@ import {
   ListBox,
   ListBoxItem,
   ListBoxItemProps,
-  Section,
-  Header,
+  ListBoxSection,
+  ListBoxHeader,
 } from '../internals';
 
 type SelectProps<T extends object> = {
@@ -93,6 +93,6 @@ export {
   ListBoxItem as SelectItem,
   type SelectProps,
   type ListBoxItemProps as SelectItemProps,
-  Section as SelectSection,
-  Header as SelectHeader,
+  ListBoxSection as SelectSection,
+  ListBoxHeader as SelectHeader,
 };

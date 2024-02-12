@@ -18,8 +18,8 @@ import {
   ListBox,
   ListBoxItem,
   ListBoxItemProps,
-  Section,
-  Header,
+  ListBoxSection,
+  ListBoxHeader,
 } from '../internals';
 
 type ComboboxProps<T extends object> = {
@@ -109,6 +109,6 @@ export {
   ListBoxItem as ComboboxItem,
   type ComboboxProps,
   type ListBoxItemProps as ComboboxItemProps,
-  Section as ComboboxSection,
-  Header as ComboboxHeader,
+  ListBoxSection as ComboboxSection,
+  ListBoxHeader as ComboboxHeader,
 };
