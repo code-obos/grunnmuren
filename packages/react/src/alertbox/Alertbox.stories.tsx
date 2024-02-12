@@ -24,7 +24,7 @@ const Template = (args: AlertboxProps) => (
   </Alertbox>
 );
 
-const ShortTemplate = (args: AlertboxProps) => (
+const SmallTemplate = (args: AlertboxProps) => (
   <Alertbox {...args}>
     <AlertboxBody>Some short message</AlertboxBody>
   </Alertbox>
@@ -37,8 +37,8 @@ export const DefaultAlert: Story = {
   args: defaultProps,
 };
 
-export const ShortAlert: Story = {
-  render: ShortTemplate,
+export const SmallAlert: Story = {
+  render: SmallTemplate,
   args: defaultProps,
 };
 
