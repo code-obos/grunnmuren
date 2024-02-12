@@ -18,8 +18,12 @@ type Story = StoryObj<typeof Alertbox>;
 
 const Template = (args: AlertboxProps) => (
   <Alertbox {...args}>
-    <AlertboxHeading level={2}>This is the heading</AlertboxHeading>
-    <AlertboxBody>Some text</AlertboxBody>
+    <AlertboxHeading level={2}>Informativ tittel</AlertboxHeading>
+    <AlertboxBody>
+      Bruk dette tekstfeltet til å beskrive hva varslingen handler om. Du kan
+      bruke så mange linjer du har behov for, men prøv likevel å være kort og
+      konsis.
+    </AlertboxBody>
     <AlertboxFooter>Sist oppdatert: 20.01.2024</AlertboxFooter>
   </Alertbox>
 );
