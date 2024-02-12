@@ -71,7 +71,7 @@ const ListBoxHeader = (props: HeadingProps) => (
     {...props}
     className={cx(
       props.className,
-      'mx-6 py-2 font-medium leading-6 text-blue-dark',
+      'mx-6 cursor-default py-2 font-medium leading-6 text-blue-dark',
     )}
   />
 );
