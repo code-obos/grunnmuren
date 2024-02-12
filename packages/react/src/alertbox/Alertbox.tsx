@@ -18,7 +18,7 @@ const iconMap = {
 
 const variants = cva({
   base: [
-    ':nth-child(4):col-span-12 grid grid-cols-[auto_1fr_auto] gap-2 rounded-md border-2 px-3 py-2',
+    ':nth-child(4):col-span-12 grid grid-cols-[auto_1fr_auto] items-center gap-2 rounded-md border-2 px-3 py-2',
   ],
   variants: {
     /**
