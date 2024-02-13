@@ -2,17 +2,18 @@ import { cva, type VariantProps } from 'cva';
 import { Button } from 'react-aria-components';
 import {
   Close,
+  ChevronDown,
   InfoCircle,
   CheckCircle,
   Warning,
   CloseCircle,
 } from '@obosbbl/grunnmuren-icons-react';
 import { useState } from 'react';
+import { dropdown } from '../classes';
 
+// TODO: expand/collapse
 // TODO: add border colors
 // TODO: add new icons
-// TODO: expand/collapse
-// TODO: evaluate roles with screen reader tests
 
 const iconMap = {
   info: InfoCircle,
@@ -21,7 +22,7 @@ const iconMap = {
   danger: CloseCircle,
 };
 
-const variants = cva({
+const alertVariants = cva({
   base: [
     'grid grid-cols-[auto_1fr_auto] items-center gap-2 rounded-md border-2 px-3 py-2',
   ],
@@ -36,10 +37,17 @@ const variants = cva({
       warning: 'bg-yellow-light',
       danger: 'bg-red-light',
     },
+    isCollapsed: {
+      true: 'transition-height h-12 overflow-hidden duration-500 ease-in-out',
+    },
+    defaultVariants: {
+      variant: 'info',
+      isCollapsed: false,
+    },
   },
 });
 
-type Props = VariantProps<typeof variants> & {
+type Props = VariantProps<typeof alertVariants> & {
   children: React.ReactNode;
   /**
    * The ARIA role for the alertbox.
@@ -62,7 +70,7 @@ type Props = VariantProps<typeof variants> & {
    * Controls if the alert is rendered or not.
    * This is used to control the open/closed state of the component; make the component "controlled".
    */
-  isOpen?: boolean;
+  isVisible?: boolean;
   /**
    * Callback that should be triggered when a dismissable alert is closed.
    * This is used to control the open/closed state of the component; make the component "controlled".
@@ -76,15 +84,18 @@ const Alertbox = ({
   className,
   variant = 'info',
   isDismissable,
-  isOpen: isControlledOpen,
+  isVisible: isControlledVisible,
   onClose,
+  isExpandable,
 }: Props) => {
   const Icon = iconMap[variant];
 
-  const [isUncontrolledOpen, setIsUncontrolledOpen] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const [isUncontrolledVisible, setIsUncontrolledVisible] = useState(true);
 
   const close = () => {
-    setIsUncontrolledOpen(false);
+    setIsUncontrolledVisible(false);
     if (onClose) onClose();
   };
 
@@ -94,13 +105,32 @@ const Alertbox = ({
     );
   }
 
-  const isOpen =
-    isControlledOpen !== undefined ? isControlledOpen : isUncontrolledOpen;
+  const isVisible =
+    isControlledVisible !== undefined
+      ? isControlledVisible
+      : isUncontrolledVisible;
+
   return (
-    isOpen && (
-      <div className={variants({ className, variant })} role={role}>
-        <Icon className="col-end-1" />
+    isVisible && (
+      <div
+        className={alertVariants({
+          className,
+          variant,
+          isCollapsed: isExpandable && !isExpanded,
+        })}
+        role={role}
+      >
+        <Icon className="col-start-1 col-end-1" />
         {children}
+        {isExpandable && (
+          <Button
+            className="col-start-3 col-end-3 row-start-1"
+            onPress={() => setIsExpanded((prevState) => !prevState)}
+            aria-expanded={isExpanded}
+          >
+            <ChevronDown className={dropdown.chevronIcon} />
+          </Button>
+        )}
         {isDismissable && (
           <Button className="col-start-3 col-end-3 row-start-1" onPress={close}>
             <Close />

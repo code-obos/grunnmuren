@@ -37,17 +37,21 @@ const SmallTemplate = (args: AlertboxProps) => (
 );
 
 const ControlledTemplate = (args: AlertboxProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   return (
     <>
       <Button
-        onClick={() => setIsOpen((prevState) => !prevState)}
+        onClick={() => setIsVisible((prevState) => !prevState)}
         className="mb-4"
       >
-        {`${isOpen ? 'Skjul' : 'Vis'} alert`}
+        {`${isVisible ? 'Skjul' : 'Vis'} alert`}
       </Button>
-      <Template {...args} isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <Template
+        {...args}
+        isVisible={isVisible}
+        onClose={() => setIsVisible(false)}
+      />
     </>
   );
 };
@@ -92,4 +96,9 @@ export const DangerAlert: Story = {
 export const ControlledAlert: Story = {
   render: ControlledTemplate,
   args: { ...defaultProps, variant: 'danger', isDismissable: true },
+};
+
+export const ExpandableAlert: Story = {
+  render: Template,
+  args: { ...defaultProps, isExpandable: true },
 };
