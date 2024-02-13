@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.11
+
+### Minor Changes
+
+- 24261c1: Added sub-components to `<Select/>` and `<Combobox/>` to enable grouping of the listbox items.
+
 ## 2.0.0-canary.10
 
 ### Patch Changes
