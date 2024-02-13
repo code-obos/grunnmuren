@@ -6,6 +6,8 @@ import {
   AlertboxBody,
   AlertboxFooter,
 } from '.';
+import { useState } from 'react';
+import { Button } from '..';
 
 const meta: Meta<typeof Alertbox> = {
   title: 'Alertbox',
@@ -33,6 +35,22 @@ const SmallTemplate = (args: AlertboxProps) => (
     <AlertboxBody>Some short message</AlertboxBody>
   </Alertbox>
 );
+
+const ControlledTemplate = (args: AlertboxProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <Button
+        onClick={() => setIsOpen((prevState) => !prevState)}
+        className="mb-4"
+      >
+        {`${isOpen ? 'Skjul' : 'Vis'} alert`}
+      </Button>
+      <Template {...args} isOpen={isOpen} onClose={() => setIsOpen(false)} />
+    </>
+  );
+};
 
 const defaultProps = {};
 
@@ -69,4 +87,9 @@ export const WarningAlert: Story = {
 export const DangerAlert: Story = {
   render: Template,
   args: { ...defaultProps, variant: 'danger' },
+};
+
+export const ControlledAlert: Story = {
+  render: ControlledTemplate,
+  args: { ...defaultProps, variant: 'danger', isDismissable: true },
 };

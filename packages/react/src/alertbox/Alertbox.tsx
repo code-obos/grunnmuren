@@ -9,6 +9,11 @@ import {
 } from '@obosbbl/grunnmuren-icons-react';
 import { useState } from 'react';
 
+// TODO: add border colors
+// TODO: add new icons
+// TODO: expand/collapse
+// TODO: evaluate roles with screen reader tests
+
 const iconMap = {
   info: InfoCircle,
   success: CheckCircle,
@@ -36,32 +41,52 @@ const variants = cva({
 
 type Props = VariantProps<typeof variants> & {
   children: React.ReactNode;
-  isOpen?: boolean;
-  onClose?: () => void;
+  /**
+   * Controls if the alert kan be dismissed with a close button
+   * This also implicitly changes the role from "alert" to "dialog".
+   * @default true
+   */
   isDismissable?: boolean;
+  /**
+   * Controls if the alert is expandable or not
+   * @default false
+   */
   isExpandable?: boolean;
+  /** Additional CSS className for the element. */
   className?: string;
+  /**
+   * Controls if the alert is rendered or not.
+   * This is used to control the open/closed state of the component; make the component "controlled".
+   */
+  isOpen?: boolean;
+  /**
+   * Callback that should be triggered when a dismissable alert is closed.
+   * This is used to control the open/closed state of the component; make the component "controlled".
+   */
+  onClose?: () => void;
 };
 
 const Alertbox = ({
   children,
   className,
-  isOpen = true,
-  onClose,
   variant = 'info',
   isDismissable,
+  isOpen: isControlledOpen,
+  onClose,
 }: Props) => {
-  const [isDialogOpen, setIsDialogOpen] = useState(isOpen);
-  // TODO: handle controlled close / open properly
-  const closeDialog = () => {
-    setIsDialogOpen(false);
+  const Icon = iconMap[variant];
+
+  const [isUncontrolledOpen, setIsUncontrolledOpen] = useState(true);
+
+  const close = () => {
+    setIsUncontrolledOpen(false);
     if (onClose) onClose();
   };
 
-  const Icon = iconMap[variant];
-
+  const isOpen =
+    isControlledOpen !== undefined ? isControlledOpen : isUncontrolledOpen;
   return (
-    isDialogOpen && (
+    isOpen && (
       <div
         className={variants({ className, variant })}
         role={isDismissable ? 'dialog' : 'alert'}
@@ -71,7 +96,7 @@ const Alertbox = ({
         {isDismissable && (
           <Button
             className="col-start-12 col-end-12 row-start-1"
-            onPress={() => closeDialog()}
+            onPress={close}
           >
             <Close />
           </Button>
