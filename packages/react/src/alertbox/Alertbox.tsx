@@ -83,6 +83,12 @@ const Alertbox = ({
     if (onClose) onClose();
   };
 
+  if (onClose && !isDismissable) {
+    console.warn(
+      'Passing an `onClose` callback without setting the `isDismissable` prop to `true` will not have any effect.',
+    );
+  }
+
   const isOpen =
     isControlledOpen !== undefined ? isControlledOpen : isUncontrolledOpen;
   return (
