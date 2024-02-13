@@ -100,10 +100,7 @@ const Alertbox = ({
         <Icon className="col-end-1" />
         {children}
         {isDismissable && (
-          <Button
-            className="col-start-12 col-end-12 row-start-1"
-            onPress={close}
-          >
+          <Button className="col-start-3 col-end-3 row-start-1" onPress={close}>
             <Close />
           </Button>
         )}
@@ -121,20 +118,18 @@ type AlertboxHeadingProps = {
 const AlertboxHeading = ({ children, level }: AlertboxHeadingProps) => {
   const Heading = `h${level as number}` as keyof JSX.IntrinsicElements;
   return (
-    <Heading className="col-span-10 text-base font-medium leading-7">
-      {children}
-    </Heading>
+    <Heading className="text-base font-medium leading-7">{children}</Heading>
   );
 };
 
 const AlertboxBody = ({ children }: { children: React.ReactNode }) => (
-  <span className="text-sm leading-6 [&:nth-child(3)]:col-span-12">
+  <span className="text-sm leading-6 [&:nth-child(3)]:col-span-full">
     {children}
   </span>
 );
 
 const AlertboxFooter = ({ children }: { children: React.ReactNode }) => (
-  <footer className="col-span-12 text-xs leading-6">{children}</footer>
+  <footer className="col-span-full text-xs leading-6">{children}</footer>
 );
 
 export {
