@@ -2,14 +2,12 @@ import { cva, type VariantProps } from 'cva';
 import { Button, useLocale } from 'react-aria-components';
 import {
   Close,
-  ChevronDown,
   InfoCircle,
   CheckCircle,
   Warning,
   CloseCircle,
 } from '@obosbbl/grunnmuren-icons-react';
 import { useState } from 'react';
-import { dropdown } from '../classes';
 
 // TODO: expand/collapse
 // TODO: add border colors
@@ -37,12 +35,8 @@ const alertVariants = cva({
       warning: 'bg-yellow-light',
       danger: 'bg-red-light',
     },
-    isCollapsed: {
-      true: 'transition-height h-12 overflow-hidden duration-500 ease-in-out',
-    },
     defaultVariants: {
       variant: 'info',
-      isCollapsed: false,
     },
   },
 });
@@ -59,11 +53,6 @@ type Props = VariantProps<typeof alertVariants> & {
    * @default true
    */
   isDismissable?: boolean;
-  /**
-   * Controls if the alert is expandable or not
-   * @default false
-   */
-  isExpandable?: boolean;
   /** Additional CSS className for the element. */
   className?: string;
   /**
@@ -92,11 +81,8 @@ const Alertbox = ({
   isVisible: isControlledVisible,
   onClose,
   customAriaCloseLabel,
-  isExpandable,
 }: Props) => {
   const Icon = iconMap[variant];
-
-  const [isExpanded, setIsExpanded] = useState(false);
 
   const [isUncontrolledVisible, setIsUncontrolledVisible] = useState(true);
 
@@ -128,21 +114,11 @@ const Alertbox = ({
         className={alertVariants({
           className,
           variant,
-          isCollapsed: isExpandable && !isExpanded,
         })}
         role={role}
       >
         <Icon className="col-start-1 col-end-1" />
         {children}
-        {isExpandable && (
-          <Button
-            className="col-start-3 col-end-3 row-start-1"
-            onPress={() => setIsExpanded((prevState) => !prevState)}
-            aria-expanded={isExpanded}
-          >
-            <ChevronDown className={dropdown.chevronIcon} />
-          </Button>
-        )}
         {isDismissable && (
           <Button
             className="col-start-3 col-end-3 row-start-1"

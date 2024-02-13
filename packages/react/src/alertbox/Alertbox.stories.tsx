@@ -97,8 +97,3 @@ export const ControlledAlert: Story = {
   render: ControlledTemplate,
   args: { ...defaultProps, variant: 'danger', isDismissable: true },
 };
-
-export const ExpandableAlert: Story = {
-  render: Template,
-  args: { ...defaultProps, isExpandable: true },
-};
