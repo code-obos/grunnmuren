@@ -135,7 +135,9 @@ const Alertbox = ({
 
 type AlertboxHeadingProps = {
   children: React.ReactNode;
+  /** The level of the heading */
   level: 1 | 2 | 3 | 4 | 5 | 6;
+  /** Additional CSS className for the element. */
   className?: string;
 };
 
@@ -149,13 +151,25 @@ const AlertboxHeading = ({ children, level }: AlertboxHeadingProps) => {
   );
 };
 
-const AlertboxBody = ({ children }: { children: React.ReactNode }) => (
+type AlertboxBodyProps = {
+  children: React.ReactNode;
+  /** Additional CSS className for the element. */
+  className?: string;
+};
+
+const AlertboxBody = ({ children }: AlertboxBodyProps) => (
   <span className="text-sm leading-6 [&:nth-child(3)]:col-span-full">
     {children}
   </span>
 );
 
-const AlertboxFooter = ({ children }: { children: React.ReactNode }) => (
+type AlertboxFooterProps = {
+  children: React.ReactNode;
+  /** Additional CSS className for the element. */
+  className?: string;
+};
+
+const AlertboxFooter = ({ children }: AlertboxFooterProps) => (
   <footer className="col-span-full text-xs leading-6">{children}</footer>
 );
 
