@@ -65,11 +65,6 @@ type Props = VariantProps<typeof alertVariants> & {
    * This is used to control the open/closed state of the component; make the component "controlled".
    */
   onClose?: () => void;
-  /**
-   * Override the built in aria-label for the close button with a custom label.
-   * Make sure to handle translations yourself.
-   */
-  customAriaCloseLabel?: string;
 };
 
 const Alertbox = ({
@@ -80,7 +75,6 @@ const Alertbox = ({
   isDismissable,
   isVisible: isControlledVisible,
   onClose,
-  customAriaCloseLabel,
 }: Props) => {
   const Icon = iconMap[variant];
 
@@ -123,7 +117,7 @@ const Alertbox = ({
           <Button
             className="col-start-3 col-end-3 row-start-1"
             onPress={close}
-            aria-label={customAriaCloseLabel || closeLabel}
+            aria-label={closeLabel}
           >
             <Close />
           </Button>
