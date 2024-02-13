@@ -2,20 +2,24 @@ import { forwardRef, type Ref } from 'react';
 import { cx } from 'cva';
 import {
   Button,
-  ListBox,
   Popover,
   Select as RACSelect,
   type SelectProps as RACSelectProps,
   SelectValue,
-  ListBoxItem,
-  ListBoxItemProps,
 } from 'react-aria-components';
-import { ChevronDown, Check } from '@obosbbl/grunnmuren-icons-react';
+import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
 
 import { formField, input, dropdown } from '../classes';
 import { Label } from '../label/Label';
 import { Description } from '../label/Description';
 import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
+import {
+  ListBox,
+  ListBoxItem,
+  ListBoxItemProps,
+  ListBoxSection,
+  ListBoxHeader,
+} from '../internals';
 
 type SelectProps<T extends object> = {
   children: React.ReactNode;
@@ -77,45 +81,18 @@ function Select<T extends object>(
       <ErrorMessageOrFieldError errorMessage={errorMessage} />
 
       <Popover className={dropdown.popover}>
-        <ListBox className={dropdown.listbox}>{children}</ListBox>
+        <ListBox>{children}</ListBox>
       </Popover>
     </RACSelect>
   );
 }
 
-const SelectItem = (props: ListBoxItemProps) => {
-  let textValue = props.textValue;
-
-  // When the ListBoxItem child isn't a string we have to set textValue for keyboard completion to work.
-  // Since we use a render function (to handle the selected state) the child is never a string.
-  // This condition adds back that behaviour
-  if (textValue == null && typeof props.children === 'string') {
-    textValue = props.children;
-  }
-
-  return (
-    <ListBoxItem
-      {...props}
-      className={cx(
-        props.className,
-        'flex cursor-default px-6 py-2 leading-6 outline-none data-[focused]:bg-sky-lightest',
-      )}
-      textValue={textValue}
-    >
-      {({ isSelected }) => (
-        <>
-          {isSelected && <Check className="-ml-6 text-base" />}
-          {props.children}
-        </>
-      )}
-    </ListBoxItem>
-  );
-};
-
 const _Select = forwardRef(Select);
 export {
   _Select as Select,
-  SelectItem,
+  ListBoxItem as SelectItem,
   type SelectProps,
   type ListBoxItemProps as SelectItemProps,
+  ListBoxSection as SelectSection,
+  ListBoxHeader as SelectHeader,
 };

@@ -2,7 +2,15 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Button } from '../button/Button';
-import { Select, SelectItem, SelectProps } from './Select';
+import {
+  Select,
+  SelectHeader,
+  SelectItem,
+  SelectProps,
+  SelectSection,
+} from './Select';
+
+import { counties } from '../mocks';
 
 const meta: Meta<typeof Select> = {
   title: 'Select',
@@ -16,14 +24,9 @@ type Story = StoryObj<typeof Select>;
 const Template = <T extends object>(args: SelectProps<T>) => {
   const select = (
     <Select {...args}>
-      <SelectItem id="agder">Agder</SelectItem>
-      <SelectItem id="innlandet">Innlandet</SelectItem>
-      <SelectItem id="more-og-romsdal">Møre og Romsdal</SelectItem>
-      <SelectItem id="oslo">Oslo</SelectItem>
-      <SelectItem id="rogaland">Rogaland</SelectItem>
-      <SelectItem id="trondelag">Trøndelag</SelectItem>
-      <SelectItem id="vestfold-og-telemark">Vestfold og Telemark</SelectItem>
-      <SelectItem id="viken">Viken</SelectItem>
+      {counties.map(({ name }) => (
+        <SelectItem key={name}>{name}</SelectItem>
+      ))}
     </Select>
   );
   return args.isRequired ? (
@@ -52,6 +55,19 @@ const ControlledTemplate = <T extends object>(args: SelectProps<T>) => {
     </div>
   );
 };
+
+const GroupedTemplate = <T extends object>(args: SelectProps<T>) => (
+  <Select {...args}>
+    {counties.map(({ name: county, municipalities }) => (
+      <SelectSection key={county}>
+        <SelectHeader>{county}</SelectHeader>
+        {municipalities.map(({ name: municipality }) => (
+          <SelectItem key={municipality}>{municipality}</SelectItem>
+        ))}
+      </SelectSection>
+    ))}
+  </Select>
+);
 
 const defaultProps = {
   label: 'Velg område',
@@ -113,6 +129,13 @@ export const WithErrorMessage: Story = {
 export const Controlled = {
   render: ControlledTemplate,
 
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const Grouped = {
+  render: GroupedTemplate,
   args: {
     ...defaultProps,
   },
