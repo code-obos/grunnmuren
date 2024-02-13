@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from 'cva';
-import { Button } from 'react-aria-components';
+import { Button, useLocale } from 'react-aria-components';
 import {
   Close,
   ChevronDown,
@@ -76,6 +76,11 @@ type Props = VariantProps<typeof alertVariants> & {
    * This is used to control the open/closed state of the component; make the component "controlled".
    */
   onClose?: () => void;
+  /**
+   * Override the built in aria-label for the close button with a custom label.
+   * Make sure to handle translations yourself.
+   */
+  customAriaCloseLabel?: string;
 };
 
 const Alertbox = ({
@@ -86,6 +91,7 @@ const Alertbox = ({
   isDismissable,
   isVisible: isControlledVisible,
   onClose,
+  customAriaCloseLabel,
   isExpandable,
 }: Props) => {
   const Icon = iconMap[variant];
@@ -110,6 +116,12 @@ const Alertbox = ({
       ? isControlledVisible
       : isUncontrolledVisible;
 
+  // Set a default aria-label for the close button and handle translations based on the current locale
+  const { locale } = useLocale();
+  let closeLabel = 'Lukk';
+  if (locale === 'sv') closeLabel = 'Stäng';
+  else if (locale === 'en') closeLabel = 'Close';
+
   return (
     isVisible && (
       <div
@@ -132,7 +144,11 @@ const Alertbox = ({
           </Button>
         )}
         {isDismissable && (
-          <Button className="col-start-3 col-end-3 row-start-1" onPress={close}>
+          <Button
+            className="col-start-3 col-end-3 row-start-1"
+            onPress={close}
+            aria-label={customAriaCloseLabel || closeLabel}
+          >
             <Close />
           </Button>
         )}
