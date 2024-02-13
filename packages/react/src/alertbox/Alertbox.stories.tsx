@@ -52,7 +52,7 @@ const ControlledTemplate = (args: AlertboxProps) => {
   );
 };
 
-const defaultProps = {};
+const defaultProps = { role: 'alert' as const };
 
 export const DefaultAlert: Story = {
   render: Template,
@@ -66,12 +66,12 @@ export const SmallAlert: Story = {
 
 export const DismissableAlert: Story = {
   render: Template,
-  args: { ...defaultProps, isDismissable: true },
+  args: { ...defaultProps, isDismissable: true, role: 'dialog' },
 };
 
 export const SmallDismissableAlert: Story = {
   render: SmallTemplate,
-  args: { ...defaultProps, isDismissable: true },
+  args: { ...defaultProps, isDismissable: true, role: 'dialog' },
 };
 
 export const SuccessAlert: Story = {

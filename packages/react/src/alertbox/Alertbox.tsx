@@ -42,6 +42,10 @@ const variants = cva({
 type Props = VariantProps<typeof variants> & {
   children: React.ReactNode;
   /**
+   * The ARIA role for the alertbox.
+   */
+  role: 'alert' | 'status' | 'dialog' | 'presentation' | 'none';
+  /**
    * Controls if the alert kan be dismissed with a close button
    * This also implicitly changes the role from "alert" to "dialog".
    * @default true
@@ -68,6 +72,7 @@ type Props = VariantProps<typeof variants> & {
 
 const Alertbox = ({
   children,
+  role,
   className,
   variant = 'info',
   isDismissable,
@@ -93,10 +98,7 @@ const Alertbox = ({
     isControlledOpen !== undefined ? isControlledOpen : isUncontrolledOpen;
   return (
     isOpen && (
-      <div
-        className={variants({ className, variant })}
-        role={isDismissable ? 'dialog' : 'alert'}
-      >
+      <div className={variants({ className, variant })} role={role}>
         <Icon className="col-end-1" />
         {children}
         {isDismissable && (
