@@ -46,9 +46,14 @@ export const SmallAlert: Story = {
   args: defaultProps,
 };
 
-export const NonDismissableAlert: Story = {
+export const DismissableAlert: Story = {
   render: Template,
-  args: { ...defaultProps, isDismissable: false },
+  args: { ...defaultProps, isDismissable: true },
+};
+
+export const SmallDismissableAlert: Story = {
+  render: SmallTemplate,
+  args: { ...defaultProps, isDismissable: true },
 };
 
 export const SuccessAlert: Story = {

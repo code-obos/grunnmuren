@@ -49,7 +49,7 @@ const Alertbox = ({
   isOpen = true,
   onClose,
   variant = 'info',
-  isDismissable = true,
+  isDismissable,
 }: Props) => {
   const [isDialogOpen, setIsDialogOpen] = useState(isOpen);
   // TODO: handle controlled close / open properly
@@ -64,7 +64,7 @@ const Alertbox = ({
     isDialogOpen && (
       <div
         className={variants({ className, variant })}
-        role={isDismissable ? 'dialog' : undefined}
+        role={isDismissable ? 'dialog' : 'alert'}
       >
         <Icon className="col-end-1" />
         {children}
