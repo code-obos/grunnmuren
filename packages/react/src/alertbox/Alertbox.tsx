@@ -170,7 +170,7 @@ type AlertboxFooterProps = {
 };
 
 const AlertboxFooter = ({ children }: AlertboxFooterProps) => (
-  <footer className="col-span-full text-xs leading-6">{children}</footer>
+  <span className="col-span-full text-xs leading-6">{children}</span>
 );
 
 export {
