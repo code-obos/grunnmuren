@@ -148,7 +148,10 @@ type AlertboxHeadingProps = {
 };
 
 const AlertboxHeading = ({ children, level }: AlertboxHeadingProps) => {
-  const Heading = `h${level as number}` as keyof JSX.IntrinsicElements;
+  const Heading = `h${level as number}` as keyof Pick<
+    JSX.IntrinsicElements,
+    `h${typeof level}`
+  >;
   return (
     <Heading className="text-base font-medium leading-7">{children}</Heading>
   );
