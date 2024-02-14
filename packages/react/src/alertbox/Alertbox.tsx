@@ -1,6 +1,6 @@
 import { Children } from 'react';
 import { cva, type VariantProps } from 'cva';
-import { useLocale } from 'react-aria-components';
+import { useLocale, Button } from 'react-aria-components';
 import {
   Close,
   InfoCircle,
@@ -9,7 +9,6 @@ import {
   CloseCircle,
 } from '@obosbbl/grunnmuren-icons-react';
 import { useState } from 'react';
-import { Button } from '../button';
 
 // TODO: expand/collapse
 // TODO: add border colors
@@ -124,11 +123,9 @@ const Alertbox = ({
         {firstChild}
         {isDismissable && (
           <Button
-            className="col-start-3 col-end-3 row-start-1 -mb-2 -mr-2 -mt-2 focus-visible:ring-offset-0"
-            onClick={close}
+            className="col-start-3 col-end-3 row-start-1 -m-2 grid h-11 w-11 place-items-center outline-transparent transition-[outline] duration-200 focus:-outline-offset-8 focus:outline-black"
+            onPress={close}
             aria-label={closeLabel}
-            isIconOnly
-            variant="tertiary"
           >
             <Close />
           </Button>
