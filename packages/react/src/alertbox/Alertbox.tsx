@@ -118,7 +118,7 @@ const Alertbox = ({
         })}
         role={role}
       >
-        <Icon className="col-start-1 col-end-1" />
+        <Icon />
         {firstChild}
         {isDismissable && (
           <Button
