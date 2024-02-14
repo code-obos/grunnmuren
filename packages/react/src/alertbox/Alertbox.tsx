@@ -122,7 +122,7 @@ const Alertbox = ({
         {firstChild}
         {isDismissable && (
           <Button
-            className="col-start-3 col-end-3 row-start-1 -m-2 grid h-11 w-11 place-items-center outline-transparent transition-[outline] duration-200 focus:-outline-offset-8 focus:outline-black"
+            className="-m-2 grid h-11 w-11 place-items-center outline-transparent transition-[outline] duration-200 focus:-outline-offset-8 focus:outline-black"
             onPress={close}
             aria-label={closeLabel}
           >
