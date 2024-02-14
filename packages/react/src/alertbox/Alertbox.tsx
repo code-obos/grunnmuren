@@ -1,5 +1,6 @@
+import { Children } from 'react';
 import { cva, type VariantProps } from 'cva';
-import { Button, useLocale } from 'react-aria-components';
+import { useLocale } from 'react-aria-components';
 import {
   Close,
   InfoCircle,
@@ -8,6 +9,7 @@ import {
   CloseCircle,
 } from '@obosbbl/grunnmuren-icons-react';
 import { useState } from 'react';
+import { Button } from '../button';
 
 // TODO: expand/collapse
 // TODO: add border colors
@@ -102,6 +104,13 @@ const Alertbox = ({
   if (locale === 'sv') closeLabel = 'Stäng';
   else if (locale === 'en') closeLabel = 'Close';
 
+  if (!children) {
+    console.error('`No children was passed to the <AlertBox/>` component.');
+    return;
+  }
+
+  const [firstChild, ...restChildren] = Children.toArray(children);
+
   return (
     isVisible && (
       <div
@@ -112,16 +121,19 @@ const Alertbox = ({
         role={role}
       >
         <Icon className="col-start-1 col-end-1" />
-        {children}
+        {firstChild}
         {isDismissable && (
           <Button
-            className="col-start-3 col-end-3 row-start-1"
-            onPress={close}
+            className="col-start-3 col-end-3 row-start-1 -mb-2 -mr-2  -mt-2 focus-visible:ring-offset-0"
+            onClick={close}
             aria-label={closeLabel}
+            isIconOnly
+            variant="tertiary"
           >
             <Close />
           </Button>
         )}
+        {restChildren}
       </div>
     )
   );
@@ -152,7 +164,8 @@ type AlertboxBodyProps = {
 };
 
 const AlertboxBody = ({ children }: AlertboxBodyProps) => (
-  <span className="text-sm leading-6 [&:nth-child(3)]:col-span-full">
+  // Make the body text span the entire container when it is not passed as the first child (small alerts)
+  <span className="text-sm leading-6 [&:not(:nth-child(2))]:col-span-full">
     {children}
   </span>
 );
