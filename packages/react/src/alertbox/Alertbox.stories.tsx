@@ -26,7 +26,9 @@ const Template = (args: AlertboxProps) => (
       bruke så mange linjer du har behov for, men prøv likevel å være kort og
       konsis.
     </AlertboxBody>
-    <AlertboxFooter>Sist oppdatert: 20.01.2024</AlertboxFooter>
+    <AlertboxFooter>
+      Sist oppdatert: <time dateTime="2024-01-20">20.01.2024</time>
+    </AlertboxFooter>
   </Alertbox>
 );
 
