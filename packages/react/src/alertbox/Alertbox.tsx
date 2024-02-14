@@ -11,7 +11,6 @@ import {
 import { useState } from 'react';
 
 // TODO: expand/collapse
-// TODO: add border colors
 // TODO: add new icons
 
 const iconMap = {
