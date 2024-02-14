@@ -49,7 +49,7 @@ type Props = VariantProps<typeof alertVariants> & {
    */
   role: 'alert' | 'status' | 'dialog' | 'presentation' | 'none';
   /**
-   * Controls if the alert kan be dismissed with a close button
+   * Controls if the alert can be dismissed with a close button
    * This also implicitly changes the role from "alert" to "dialog".
    * @default true
    */
