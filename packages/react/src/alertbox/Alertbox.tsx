@@ -184,7 +184,12 @@ type AlertboxFooterProps = {
 };
 
 const AlertboxFooter = ({ children, className }: AlertboxFooterProps) => (
-  <div className={cx(className, 'col-span-full -mt-[6px] text-xs leading-6')}>
+  <div
+    className={cx(
+      className,
+      'col-span-full -mt-[6px] text-xs font-light leading-6',
+    )}
+  >
     {children}
   </div>
 );
