@@ -31,10 +31,10 @@ const alertVariants = cva({
      * @default info
      */
     variant: {
-      info: 'bg-sky-light',
-      success: 'bg-mint-light',
-      warning: 'bg-yellow-light',
-      danger: 'bg-red-light',
+      info: 'border-[#1A7FA7] bg-sky-light',
+      success: 'border-[#0F9B6E] bg-mint-light',
+      warning: 'border-[#C57C13] bg-[#FFF2DE]',
+      danger: 'border-[#C0385D] bg-red-light',
     },
   },
   defaultVariants: {
