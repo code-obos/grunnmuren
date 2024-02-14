@@ -166,11 +166,12 @@ type AlertboxBodyProps = {
 };
 
 const AlertboxBody = ({ children, className }: AlertboxBodyProps) => (
-  // Make the body text span the entire container when it is not passed as the first child (small alerts)
   <div
     className={cx(
       className,
-      'text-sm leading-6 [&:not(:nth-child(2))]:col-span-full',
+      'text-sm leading-6',
+      // Make the body text span the entire container when it is not passed as the first child (small alerts)
+      '[&:not(:nth-child(2))]:col-span-full',
     )}
   >
     {children}
