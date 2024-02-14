@@ -37,9 +37,9 @@ const alertVariants = cva({
       warning: 'bg-yellow-light',
       danger: 'bg-red-light',
     },
-    defaultVariants: {
-      variant: 'info',
-    },
+  },
+  defaultVariants: {
+    variant: 'info',
   },
 });
 
@@ -124,7 +124,7 @@ const Alertbox = ({
         {firstChild}
         {isDismissable && (
           <Button
-            className="col-start-3 col-end-3 row-start-1 -mb-2 -mr-2  -mt-2 focus-visible:ring-2 focus-visible:ring-offset-0"
+            className="col-start-3 col-end-3 row-start-1 -mb-2 -mr-2 -mt-2 focus-visible:ring-offset-0"
             onClick={close}
             aria-label={closeLabel}
             isIconOnly
