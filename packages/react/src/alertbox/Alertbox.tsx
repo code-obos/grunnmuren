@@ -162,9 +162,9 @@ type AlertboxBodyProps = {
 
 const AlertboxBody = ({ children }: AlertboxBodyProps) => (
   // Make the body text span the entire container when it is not passed as the first child (small alerts)
-  <p className="text-sm leading-6 [&:not(:nth-child(2))]:col-span-full">
+  <div className="text-sm leading-6 [&:not(:nth-child(2))]:col-span-full">
     {children}
-  </p>
+  </div>
 );
 
 type AlertboxFooterProps = {
@@ -174,7 +174,7 @@ type AlertboxFooterProps = {
 };
 
 const AlertboxFooter = ({ children }: AlertboxFooterProps) => (
-  <p className="col-span-full -mt-[6px] text-xs leading-6">{children}</p>
+  <div className="col-span-full -mt-[6px] text-xs leading-6">{children}</div>
 );
 
 export {
