@@ -1,5 +1,5 @@
 import { Children } from 'react';
-import { cva, type VariantProps } from 'cva';
+import { cva, type VariantProps, cx } from 'cva';
 import { useLocale, Button } from 'react-aria-components';
 import {
   Close,
@@ -143,13 +143,19 @@ type AlertboxHeadingProps = {
   className?: string;
 };
 
-const AlertboxHeading = ({ children, level }: AlertboxHeadingProps) => {
+const AlertboxHeading = ({
+  children,
+  level,
+  className,
+}: AlertboxHeadingProps) => {
   const Heading = `h${level as number}` as keyof Pick<
     JSX.IntrinsicElements,
     `h${typeof level}`
   >;
   return (
-    <Heading className="text-base font-medium leading-7">{children}</Heading>
+    <Heading className={cx(className, 'text-base font-medium leading-7')}>
+      {children}
+    </Heading>
   );
 };
 
@@ -159,9 +165,14 @@ type AlertboxBodyProps = {
   className?: string;
 };
 
-const AlertboxBody = ({ children }: AlertboxBodyProps) => (
+const AlertboxBody = ({ children, className }: AlertboxBodyProps) => (
   // Make the body text span the entire container when it is not passed as the first child (small alerts)
-  <div className="text-sm leading-6 [&:not(:nth-child(2))]:col-span-full">
+  <div
+    className={cx(
+      className,
+      'text-sm leading-6 [&:not(:nth-child(2))]:col-span-full',
+    )}
+  >
     {children}
   </div>
 );
