@@ -22,19 +22,25 @@ const Template = (args: AlertboxProps) => (
   <Alertbox {...args}>
     <AlertboxHeading level={2}>Informativ tittel</AlertboxHeading>
     <AlertboxBody>
-      Bruk dette tekstfeltet til å beskrive hva varslingen handler om. Du kan
-      bruke så mange linjer du har behov for, men prøv likevel å være kort og
-      konsis.
+      <p>
+        Bruk dette tekstfeltet til å beskrive hva varslingen handler om. Du kan
+        bruke så mange linjer du har behov for, men prøv likevel å være kort og
+        konsis.
+      </p>
     </AlertboxBody>
     <AlertboxFooter>
-      Sist oppdatert: <time dateTime="2024-01-20">20.01.2024</time>
+      <p>
+        Sist oppdatert: <time dateTime="2024-01-20">20.01.2024</time>
+      </p>
     </AlertboxFooter>
   </Alertbox>
 );
 
 const SmallTemplate = (args: AlertboxProps) => (
   <Alertbox {...args}>
-    <AlertboxBody>Some short message</AlertboxBody>
+    <AlertboxBody>
+      Bruk dette tekstfeltet til å skrive en kort varsling
+    </AlertboxBody>
   </Alertbox>
 );
 
