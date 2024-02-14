@@ -24,7 +24,7 @@ const iconMap = {
 
 const alertVariants = cva({
   base: [
-    'grid grid-cols-[auto_1fr_auto] items-center gap-2 rounded-md border-2 px-3 py-2',
+    'grid grid-cols-[auto_1fr_auto] items-center gap-x-2 gap-y-4 rounded-md border-2 px-3 py-2',
   ],
   variants: {
     /**
@@ -124,7 +124,7 @@ const Alertbox = ({
         {firstChild}
         {isDismissable && (
           <Button
-            className="col-start-3 col-end-3 row-start-1 -mb-2 -mr-2  -mt-2 focus-visible:ring-offset-0"
+            className="col-start-3 col-end-3 row-start-1 -mb-2 -mr-2  -mt-2 focus-visible:ring-2 focus-visible:ring-offset-0"
             onClick={close}
             aria-label={closeLabel}
             isIconOnly
@@ -177,7 +177,7 @@ type AlertboxFooterProps = {
 };
 
 const AlertboxFooter = ({ children }: AlertboxFooterProps) => (
-  <p className="col-span-full text-xs leading-6">{children}</p>
+  <p className="col-span-full -mt-[6px] text-xs leading-6">{children}</p>
 );
 
 export {
