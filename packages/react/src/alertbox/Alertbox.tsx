@@ -9,7 +9,7 @@ import {
   Warning,
   CloseCircle,
 } from '@obosbbl/grunnmuren-icons-react';
-import { useId, useState } from 'react';
+import { useState } from 'react';
 
 // TODO: add new icons
 const iconMap = {
@@ -32,25 +32,11 @@ const alertVariants = cva({
       warning: 'border-[#C57C13] bg-[#FFF2DE]',
       danger: 'border-[#C0385D] bg-red-light',
     },
-    isExpandable: {
-      true: 'grid-cols-[auto_1fr_auto]',
-    },
     isDismissable: {
       true: 'grid-cols-[auto_1fr_auto]',
+      false: 'grid-cols-[auto_1fr]',
     },
   },
-  compoundVariants: [
-    {
-      isDismissable: true,
-      isExpandable: true,
-      className: 'grid-cols-[auto_1fr_auto_auto]',
-    },
-    {
-      isDismissable: false,
-      isExpandable: false,
-      className: 'grid-cols-[auto_1fr]',
-    },
-  ],
   defaultVariants: {
     variant: 'info',
   },
@@ -94,7 +80,7 @@ const Alertbox = ({
   isDismissable = false, // Assign default value to make cva variants apply correctly
   isVisible: isControlledVisible,
   onClose,
-  isExpandable = false, // Assign default value to make cva variants apply correctly
+  isExpandable,
 }: Props) => {
   const Icon = iconMap[variant];
 
@@ -122,23 +108,13 @@ const Alertbox = ({
   if (locale === 'sv') closeLabel = 'Stäng';
   else if (locale === 'en') closeLabel = 'Close';
 
-  const [isExpanded, setIsExpanded] = useState(false);
-  const id = useId();
-
   if (!children) {
     console.error('`No children was passed to the <AlertBox/>` component.');
     return;
   }
 
   const [firstChild, ...restChildren] = Children.toArray(children);
-
-  const btnClasses = cx(
-    'grid h-11 w-11 place-items-center',
-    // Focus styles:
-    '-m-2 outline-transparent transition-[outline] duration-200 focus:-outline-offset-8 focus:outline-black',
-  );
-
-  const isCollapsed = isExpandable && !isExpanded;
+  const lastChild = restChildren.pop();
 
   return (
     isVisible && (
@@ -146,42 +122,44 @@ const Alertbox = ({
         className={alertVariants({
           className,
           variant,
-          isExpandable,
           isDismissable,
         })}
         role={role}
       >
         <Icon />
         {firstChild}
-        {isExpandable && (
-          <Button
-            className={btnClasses}
-            onPress={() => setIsExpanded((prevState) => !prevState)}
-            aria-expanded={isExpanded}
-            aria-controls={id}
-          >
-            <ChevronDown
-              className={cx(
-                'transition-transform duration-150 motion-reduce:transition-none',
-                isExpanded && 'rotate-180',
-              )}
-            />
-          </Button>
-        )}
         {isDismissable && (
           <Button
-            className={btnClasses}
+            className={cx(
+              'grid h-11 w-11 place-items-center',
+              // Focus styles:
+              '-m-2 outline-transparent transition-[outline] duration-200 focus:-outline-offset-8 focus:outline-black',
+            )}
             onPress={close}
             aria-label={closeLabel}
           >
             <Close />
           </Button>
         )}
-        {!isCollapsed && restChildren.length > 0 && (
-          <div className="col-span-full grid gap-y-4" id={id}>
+        {isExpandable ? (
+          <details className="col-span-full [&[open]_summary_svg]:rotate-180">
+            <summary
+              className={cx(
+                'relative -my-3 inline-flex cursor-pointer items-center gap-1 py-3 text-sm leading-6',
+                // Focus styles:
+                'outline-none after:absolute after:bottom-3 after:left-0 after:right-0 after:h-0 after:bg-transparent after:transition-all after:duration-200',
+                'focus:after:h-[2px] focus:after:bg-black',
+              )}
+            >
+              Vis mer
+              <ChevronDown className="transition-transform duration-150 motion-reduce:transition-none" />
+            </summary>
             {restChildren}
-          </div>
+          </details>
+        ) : (
+          restChildren
         )}
+        {lastChild}
       </div>
     )
   );
@@ -215,7 +193,16 @@ type AlertboxBodyProps = {
 };
 
 const AlertboxBody = ({ children, className }: AlertboxBodyProps) => (
-  <div className={cx(className, 'text-sm leading-6')}>{children}</div>
+  <div
+    className={cx(
+      className,
+      'text-sm leading-6',
+      // Make the body text span the entire container when it is passed as the first child (small alerts)
+      '[&:not(:nth-child(2))]:col-span-full',
+    )}
+  >
+    {children}
+  </div>
 );
 
 type AlertboxFooterProps = {
@@ -225,7 +212,7 @@ type AlertboxFooterProps = {
 };
 
 const AlertboxFooter = ({ children, className }: AlertboxFooterProps) => (
-  <div className={cx(className, '-mt-[6px] text-xs font-light leading-6')}>
+  <div className={cx(className, 'col-span-full text-xs font-light leading-6')}>
     {children}
   </div>
 );
