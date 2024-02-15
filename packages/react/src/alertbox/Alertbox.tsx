@@ -3,16 +3,15 @@ import { cva, type VariantProps, cx } from 'cva';
 import { useLocale, Button } from 'react-aria-components';
 import {
   Close,
+  ChevronDown,
   InfoCircle,
   CheckCircle,
   Warning,
   CloseCircle,
 } from '@obosbbl/grunnmuren-icons-react';
-import { useState } from 'react';
+import { useId, useState } from 'react';
 
-// TODO: expand/collapse
 // TODO: add new icons
-
 const iconMap = {
   info: InfoCircle,
   success: CheckCircle,
@@ -21,9 +20,7 @@ const iconMap = {
 };
 
 const alertVariants = cva({
-  base: [
-    'grid grid-cols-[auto_1fr_auto] items-center gap-x-2 gap-y-4 rounded-md border-2 px-3 py-2',
-  ],
+  base: ['grid items-center gap-x-2 gap-y-4 rounded-md border-2 px-3 py-2'],
   variants: {
     /**
      * The variant of the alert
@@ -35,7 +32,25 @@ const alertVariants = cva({
       warning: 'border-[#C57C13] bg-[#FFF2DE]',
       danger: 'border-[#C0385D] bg-red-light',
     },
+    isExpandable: {
+      true: 'grid-cols-[auto_1fr_auto]',
+    },
+    isDismissable: {
+      true: 'grid-cols-[auto_1fr_auto]',
+    },
   },
+  compoundVariants: [
+    {
+      isDismissable: true,
+      isExpandable: true,
+      className: 'grid-cols-[auto_1fr_auto_auto]',
+    },
+    {
+      isDismissable: false,
+      isExpandable: false,
+      className: 'grid-cols-[auto_1fr]',
+    },
+  ],
   defaultVariants: {
     variant: 'info',
   },
@@ -52,6 +67,11 @@ type Props = VariantProps<typeof alertVariants> & {
    * @default true
    */
   isDismissable?: boolean;
+  /**
+   * Controls if the alert is expandable or not
+   * @default false
+   */
+  isExpandable?: boolean;
   /** Additional CSS className for the element. */
   className?: string;
   /**
@@ -71,9 +91,10 @@ const Alertbox = ({
   role,
   className,
   variant = 'info',
-  isDismissable,
+  isDismissable = false, // Assign default value to make cva variants apply correctly
   isVisible: isControlledVisible,
   onClose,
+  isExpandable = false, // Assign default value to make cva variants apply correctly
 }: Props) => {
   const Icon = iconMap[variant];
 
@@ -101,6 +122,9 @@ const Alertbox = ({
   if (locale === 'sv') closeLabel = 'Stäng';
   else if (locale === 'en') closeLabel = 'Close';
 
+  const [isExpanded, setIsExpanded] = useState(false);
+  const id = useId();
+
   if (!children) {
     console.error('`No children was passed to the <AlertBox/>` component.');
     return;
@@ -108,27 +132,56 @@ const Alertbox = ({
 
   const [firstChild, ...restChildren] = Children.toArray(children);
 
+  const btnClasses = cx(
+    'grid h-11 w-11 place-items-center',
+    // Focus styles:
+    '-m-2 outline-transparent transition-[outline] duration-200 focus:-outline-offset-8 focus:outline-black',
+  );
+
+  const isCollapsed = isExpandable && !isExpanded;
+
   return (
     isVisible && (
       <div
         className={alertVariants({
           className,
           variant,
+          isExpandable,
+          isDismissable,
         })}
         role={role}
       >
         <Icon />
         {firstChild}
+        {isExpandable && (
+          <Button
+            className={btnClasses}
+            onPress={() => setIsExpanded((prevState) => !prevState)}
+            aria-expanded={isExpanded}
+            aria-controls={id}
+          >
+            <ChevronDown
+              className={cx(
+                'transition-transform duration-150 motion-reduce:transition-none',
+                isExpanded && 'rotate-180',
+              )}
+            />
+          </Button>
+        )}
         {isDismissable && (
           <Button
-            className="-m-2 grid h-11 w-11 place-items-center outline-transparent transition-[outline] duration-200 focus:-outline-offset-8 focus:outline-black"
+            className={btnClasses}
             onPress={close}
             aria-label={closeLabel}
           >
             <Close />
           </Button>
         )}
-        {restChildren}
+        {!isCollapsed && restChildren.length > 0 && (
+          <div className="col-span-full grid gap-y-4" id={id}>
+            {restChildren}
+          </div>
+        )}
       </div>
     )
   );
@@ -162,16 +215,7 @@ type AlertboxBodyProps = {
 };
 
 const AlertboxBody = ({ children, className }: AlertboxBodyProps) => (
-  <div
-    className={cx(
-      className,
-      'text-sm leading-6',
-      // Make the body text span the entire container when it is not passed as the first child (small alerts)
-      '[&:not(:nth-child(2))]:col-span-full',
-    )}
-  >
-    {children}
-  </div>
+  <div className={cx(className, 'text-sm leading-6')}>{children}</div>
 );
 
 type AlertboxFooterProps = {
@@ -181,12 +225,7 @@ type AlertboxFooterProps = {
 };
 
 const AlertboxFooter = ({ children, className }: AlertboxFooterProps) => (
-  <div
-    className={cx(
-      className,
-      'col-span-full -mt-[6px] text-xs font-light leading-6',
-    )}
-  >
+  <div className={cx(className, '-mt-[6px] text-xs font-light leading-6')}>
     {children}
   </div>
 );
