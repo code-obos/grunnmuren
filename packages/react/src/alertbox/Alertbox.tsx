@@ -72,6 +72,29 @@ type Props = VariantProps<typeof alertVariants> & {
   onClose?: () => void;
 };
 
+const translations = {
+  close: {
+    nb: 'Lukk',
+    nn: 'Lukk',
+    sv: 'Stäng',
+    en: 'Close',
+  },
+  showMore: {
+    nb: 'Les mer',
+    nn: 'Les meir',
+    sv: 'Läs mer',
+    en: 'Read more',
+  },
+  showLess: {
+    nb: 'Vis mindre',
+    nn: 'Vis mindre',
+    sv: 'Dölj',
+    en: 'Show less',
+  },
+};
+
+type SupportedLocales = 'nb' | 'nn' | 'sv' | 'en';
+
 const Alertbox = ({
   children,
   role,
@@ -102,11 +125,7 @@ const Alertbox = ({
       ? isControlledVisible
       : isUncontrolledVisible;
 
-  // Set a default aria-label for the close button and handle translations based on the current locale
   const { locale } = useLocale();
-  let closeLabel = 'Lukk';
-  if (locale === 'sv') closeLabel = 'Stäng';
-  else if (locale === 'en') closeLabel = 'Close';
 
   if (!children) {
     console.error('`No children was passed to the <AlertBox/>` component.');
@@ -136,13 +155,13 @@ const Alertbox = ({
               '-m-2 outline-transparent transition-[outline] duration-200 focus:-outline-offset-8 focus:outline-black',
             )}
             onPress={close}
-            aria-label={closeLabel}
+            aria-label={translations.close[locale as SupportedLocales]}
           >
             <Close />
           </Button>
         )}
         {isExpandable ? (
-          <details className="col-span-full [&[open]_summary_svg]:rotate-180">
+          <details className="col-span-full [&:not([open])_summary_[data-show='less']]:hidden [&[open]_summary_[data-show='more']]:hidden [&[open]_summary_svg]:rotate-180">
             <summary
               className={cx(
                 'relative -my-3 inline-flex cursor-pointer items-center gap-1 py-3 text-sm leading-6',
@@ -151,7 +170,12 @@ const Alertbox = ({
                 'focus:after:h-[2px] focus:after:bg-black',
               )}
             >
-              Vis mer
+              <span data-show="more">
+                {translations.showMore[locale as SupportedLocales]}
+              </span>
+              <span data-show="less">
+                {translations.showLess[locale as SupportedLocales]}
+              </span>
               <ChevronDown className="transition-transform duration-150 motion-reduce:transition-none" />
             </summary>
             {restChildren}
