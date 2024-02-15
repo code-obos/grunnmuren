@@ -161,7 +161,7 @@ const Alertbox = ({
           </Button>
         )}
         {isExpandable ? (
-          <details className="col-span-full [&:not([open])_summary_[data-show='less']]:hidden [&[open]_summary_[data-show='more']]:hidden [&[open]_summary_svg]:rotate-180">
+          <details className="col-span-full [&:not([open])_[data-show='less']]:hidden [&[open]_[data-show='more']]:hidden [&[open]_summary_svg]:rotate-180">
             <summary
               className={cx(
                 'relative -my-3 inline-flex cursor-pointer items-center gap-1 py-3 text-sm leading-6',
