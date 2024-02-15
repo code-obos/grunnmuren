@@ -147,10 +147,7 @@ const AlertboxHeading = ({
   level,
   className,
 }: AlertboxHeadingProps) => {
-  const Heading = `h${level as number}` as keyof Pick<
-    JSX.IntrinsicElements,
-    `h${typeof level}`
-  >;
+  const Heading = `h${level}` as const;
   return (
     <Heading className={cx(className, 'text-base font-medium leading-7')}>
       {children}
