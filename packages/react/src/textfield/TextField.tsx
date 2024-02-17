@@ -82,12 +82,12 @@ function TextField(props: TextFieldProps, ref: Ref<HTMLInputElement>) {
       {leftAddon || rightAddon ? (
         <Group className={inputGroup}>
           {leftAddon}
-          {withAddonDivider && leftAddon && <Divider className="ml-3" />}
+          {withAddonDivider && leftAddon && <Divider />}
           <Input
             className={inputWithAlignment({ textAlign, isGrouped: true })}
             ref={ref}
           />
-          {withAddonDivider && rightAddon && <Divider className="mr-3" />}
+          {withAddonDivider && rightAddon && <Divider />}
           {rightAddon}
         </Group>
       ) : (
@@ -99,10 +99,8 @@ function TextField(props: TextFieldProps, ref: Ref<HTMLInputElement>) {
   );
 }
 
-function Divider({ className }: { className: string }) {
-  return (
-    <span className={cx(className, 'block h-6 w-px flex-none bg-black')} />
-  );
+function Divider() {
+  return <span className="block h-6 w-px flex-none bg-black" />;
 }
 
 const _TextField = forwardRef(TextField);
