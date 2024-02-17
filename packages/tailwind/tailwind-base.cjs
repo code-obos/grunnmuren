@@ -1,4 +1,5 @@
 const plugin = require('tailwindcss/plugin');
+const fallback = require('./fallback');
 
 const obosFonts = [
   {
@@ -135,6 +136,10 @@ module.exports = (options = {}) => {
               fontDisplay: 'swap',
             },
           })),
+
+          addBase({
+            '@font-face': fallback,
+          }),
         );
       }),
     ],
@@ -192,7 +197,7 @@ module.exports = (options = {}) => {
         },
       },
       fontFamily: {
-        sans: [fontFamily, 'sans-serif'],
+        sans: [fontFamily, fallback['font-family'], 'sans-serif'],
       },
       extend: {
         maxWidth: {
