@@ -72,6 +72,7 @@ type Props = VariantProps<typeof alertVariants> & {
   /**
    * Controls if the alert is rendered or not.
    * This is used to control the open/closed state of the component; make the component "controlled".
+   * @default false
    */
   isDismissed?: boolean;
   /**
