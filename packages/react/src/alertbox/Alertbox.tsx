@@ -21,7 +21,7 @@ const iconMap = {
 
 const alertVariants = cva({
   base: [
-    'grid items-center gap-2 rounded-md border-2 px-3 py-2',
+    'grid grid-cols-[auto_1fr_auto] items-center gap-2 rounded-md border-2 px-3 py-2',
     // Heading styles:
     '[&_[data-slot="heading"]]:text-base [&_[data-slot="heading"]]:font-medium [&_[data-slot="heading"]]:leading-7',
     // Content styles:
@@ -40,14 +40,9 @@ const alertVariants = cva({
       warning: 'border-[#C57C13] bg-[#FFF2DE]',
       danger: 'border-[#C0385D] bg-red-light',
     },
-    isDismissable: {
-      true: 'grid-cols-[auto_1fr_auto]',
-      false: 'grid-cols-[auto_1fr]',
-    },
   },
   defaultVariants: {
     variant: 'info',
-    isDismissable: false,
   },
 });
 
@@ -155,7 +150,6 @@ const Alertbox = ({
       className={alertVariants({
         className,
         variant,
-        isDismissable,
       })}
       // The role prop is required to force consumers to consider and choose the appropriate alertbox role.
       // role="none" will not have any effect on a div, so it can be omitted.
