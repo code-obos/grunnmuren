@@ -9,7 +9,7 @@ import {
 } from 'react-aria-components';
 
 import { formField, input, inputGroup } from '../classes';
-import { InputAddonDivider } from '../internals/InputAddonDivider';
+import { InputAddonDivider } from '../internals';
 import { Label } from '../label/Label';
 import { Description } from '../label/Description';
 import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
