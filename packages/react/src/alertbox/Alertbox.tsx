@@ -123,7 +123,7 @@ const Alertbox = ({
         className,
         variant,
       })}
-      role={role}
+      role={role === 'none' ? undefined : role}
     >
       <Icon />
       {firstChild}
