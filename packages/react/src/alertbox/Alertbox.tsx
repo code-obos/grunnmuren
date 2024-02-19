@@ -58,27 +58,27 @@ type Props = VariantProps<typeof alertVariants> & {
    */
   role: 'alert' | 'status' | 'none';
   /**
-   * Controls if the alert can be dismissed with a close button.
-   * @default true
-   */
-  isDismissable?: boolean;
-  /**
    * Controls if the alert is expandable or not
    * @default false
    */
-  isExpandable?: boolean;
   /** Additional CSS className for the element. */
   className?: string;
+  isExpandable?: boolean;
+  /**
+   * Controls if the alert can be dismissed with a close button.
+   * @default false
+   */
+  isDismissable?: boolean;
   /**
    * Controls if the alert is rendered or not.
    * This is used to control the open/closed state of the component; make the component "controlled".
    */
-  isVisible?: boolean;
+  isDismissed?: boolean;
   /**
    * Callback that should be triggered when a dismissable alert is closed.
    * This is used to control the open/closed state of the component; make the component "controlled".
    */
-  onClose?: () => void;
+  onDismiss?: () => void;
 };
 
 const translations = {
@@ -110,8 +110,8 @@ const Alertbox = ({
   className,
   variant = 'info',
   isDismissable = false, // Assign default value to make cva variants apply correctly
-  isVisible: isControlledVisible,
-  onClose,
+  isDismissed: isControlledVisible,
+  onDismiss,
   isExpandable,
 }: Props) => {
   const Icon = iconMap[variant];
@@ -119,23 +119,23 @@ const Alertbox = ({
   const { locale } = useLocale();
 
   const [isUncontrolledVisible, setIsUncontrolledVisible] = useState(true);
-  const isVisible =
+  const isDismissed =
     isControlledVisible !== undefined
       ? isControlledVisible
       : isUncontrolledVisible;
 
-  if (!isVisible) return;
+  if (!isDismissed) return;
 
   const close = () => {
     setIsUncontrolledVisible(false);
-    if (onClose) onClose();
+    if (onDismiss) onDismiss();
   };
 
   const isInDevMode = process.env.NODE_ENV !== 'production';
 
-  if (isInDevMode && onClose && !isDismissable) {
+  if (isInDevMode && onDismiss && !isDismissable) {
     console.warn(
-      'Passing an `onClose` callback without setting the `isDismissable` prop to `true` will not have any effect.',
+      'Passing an `onDismiss` callback without setting the `isDismissable` prop to `true` will not have any effect.',
     );
   }
 
