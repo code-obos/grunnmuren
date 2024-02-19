@@ -1,5 +1,15 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.12
+
+### Minor Changes
+
+- dcb1e5c: Added new component `<Alertbox/>` for dismissable and non-dismissable alerts.
+
+### Patch Changes
+
+- 73d8c88: fix issue with missing spacing/gap when using TextField with addons
+
 ## 2.0.0-canary.11
 
 ### Minor Changes
