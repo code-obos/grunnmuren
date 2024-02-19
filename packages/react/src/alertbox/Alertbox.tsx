@@ -57,12 +57,12 @@ type Props = VariantProps<typeof alertVariants> & {
    * The ARIA role for the alertbox.
    */
   role: 'alert' | 'status' | 'none';
+  /** Additional CSS className for the element. */
+  className?: string;
   /**
    * Controls if the alert is expandable or not
    * @default false
    */
-  /** Additional CSS className for the element. */
-  className?: string;
   isExpandable?: boolean;
   /**
    * Controls if the alert can be dismissed with a close button.
