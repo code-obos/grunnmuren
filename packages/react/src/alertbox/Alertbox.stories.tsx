@@ -38,12 +38,12 @@ const SmallTemplate = (args: AlertboxProps) => (
 );
 
 const ControlledTemplate = (args: AlertboxProps) => {
-  const [isDismissed, setisDismissed] = useState(false);
+  const [isDismissed, setIsDismissed] = useState(false);
 
   return (
     <>
       <Button
-        onClick={() => setisDismissed((prevState) => !prevState)}
+        onClick={() => setIsDismissed((prevState) => !prevState)}
         className="mb-4"
       >
         {`${isDismissed ? 'Skjul' : 'Vis'} alert`}
@@ -51,7 +51,7 @@ const ControlledTemplate = (args: AlertboxProps) => {
       <Template
         {...args}
         isDismissed={isDismissed}
-        onDismiss={() => setisDismissed(false)}
+        onDismiss={() => setIsDismissed(false)}
       />
     </>
   );
