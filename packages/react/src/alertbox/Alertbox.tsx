@@ -174,7 +174,7 @@ const Alertbox = ({
         </Button>
       )}
       {isExpandable ? (
-        <details className="col-span-full [&:not([open])_[data-show='less']]:hidden [&[open]_[data-show='more']]:hidden [&[open]_summary_svg]:rotate-180">
+        <details className="col-span-full [&:not([open])_[data-slot='show-less']]:hidden [&[open]_[data-slot='show-more']]:hidden [&[open]_summary_svg]:rotate-180">
           <summary
             className={cx(
               'relative -my-3 inline-flex cursor-pointer items-center gap-1 py-3 text-sm leading-6',
@@ -183,10 +183,10 @@ const Alertbox = ({
               'focus:after:h-[1px] focus:after:bg-black',
             )}
           >
-            <span data-show="more">
+            <span data-slot="show-more">
               {translations.showMore[locale as SupportedLocales]}
             </span>
-            <span data-show="less">
+            <span data-slot="show-less">
               {translations.showLess[locale as SupportedLocales]}
             </span>
             <ChevronDown className="transition-transform duration-150 motion-reduce:transition-none" />
