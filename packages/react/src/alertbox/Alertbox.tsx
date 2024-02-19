@@ -77,7 +77,17 @@ type Props = VariantProps<typeof alertVariants> & {
   onDismiss?: () => void;
 };
 
-const translations = {
+type SupportedLocales = 'nb' | 'nn' | 'sv' | 'en';
+
+type Translation = {
+  [key in SupportedLocales]: string;
+};
+
+type Translations = {
+  [x: string]: Translation;
+};
+
+const translations: Translations = {
   close: {
     nb: 'Lukk',
     nn: 'Lukk',
@@ -97,8 +107,6 @@ const translations = {
     en: 'Show less',
   },
 };
-
-type SupportedLocales = 'nb' | 'nn' | 'sv' | 'en';
 
 const Alertbox = ({
   children,
