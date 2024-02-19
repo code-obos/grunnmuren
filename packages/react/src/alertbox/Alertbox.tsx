@@ -167,7 +167,7 @@ const Alertbox = ({
                 'relative -my-3 inline-flex cursor-pointer items-center gap-1 py-3 text-sm leading-6',
                 // Focus styles:
                 'outline-none after:absolute after:bottom-3 after:left-0 after:right-0 after:h-0 after:bg-transparent after:transition-all after:duration-200',
-                'focus:after:h-[2px] focus:after:bg-black',
+                'focus:after:h-[1px] focus:after:bg-black',
               )}
             >
               <span data-show="more">
