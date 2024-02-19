@@ -8,6 +8,7 @@ import {
 } from 'react-aria-components';
 
 import { formField, input, inputGroup } from '../classes';
+import { InputAddonDivider } from '../internals/InputAddonDivider';
 import { Label } from '../label/Label';
 import { Description } from '../label/Description';
 import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
@@ -82,12 +83,12 @@ function TextField(props: TextFieldProps, ref: Ref<HTMLInputElement>) {
       {leftAddon || rightAddon ? (
         <Group className={inputGroup}>
           {leftAddon}
-          {withAddonDivider && leftAddon && <Divider />}
+          {withAddonDivider && leftAddon && <InputAddonDivider />}
           <Input
             className={inputWithAlignment({ textAlign, isGrouped: true })}
             ref={ref}
           />
-          {withAddonDivider && rightAddon && <Divider />}
+          {withAddonDivider && rightAddon && <InputAddonDivider />}
           {rightAddon}
         </Group>
       ) : (
@@ -97,10 +98,6 @@ function TextField(props: TextFieldProps, ref: Ref<HTMLInputElement>) {
       <ErrorMessageOrFieldError errorMessage={errorMessage} />
     </RACTextField>
   );
-}
-
-function Divider() {
-  return <span className="block h-6 w-px flex-none bg-black" />;
 }
 
 const _TextField = forwardRef(TextField);
