@@ -78,12 +78,12 @@ export const SmallAlert: Story = {
 
 export const DismissableAlert: Story = {
   render: Template,
-  args: { ...defaultProps, isDismissable: true, role: 'dialog' },
+  args: { ...defaultProps, isDismissable: true },
 };
 
 export const SmallDismissableAlert: Story = {
   render: SmallTemplate,
-  args: { ...defaultProps, isDismissable: true, role: 'dialog' },
+  args: { ...defaultProps, isDismissable: true },
 };
 
 export const SuccessAlert: Story = {

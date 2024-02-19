@@ -46,7 +46,7 @@ type Props = VariantProps<typeof alertVariants> & {
   /**
    * The ARIA role for the alertbox.
    */
-  role: 'alert' | 'status' | 'dialog' | 'presentation' | 'none';
+  role: 'alert' | 'status' | 'none';
   /**
    * Controls if the alert can be dismissed with a close button.
    * @default true
