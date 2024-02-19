@@ -47,6 +47,7 @@ const alertVariants = cva({
   },
   defaultVariants: {
     variant: 'info',
+    isDismissable: false,
   },
 });
 
