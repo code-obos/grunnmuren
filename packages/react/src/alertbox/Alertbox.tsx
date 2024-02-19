@@ -21,7 +21,7 @@ const iconMap = {
 
 const alertVariants = cva({
   base: [
-    'grid items-center gap-x-2 gap-y-4 rounded-md border-2 px-3 py-2',
+    'grid items-center gap-2 rounded-md border-2 px-3 py-2',
     // Heading styles:
     '[&_[data-slot="heading"]]:text-base [&_[data-slot="heading"]]:font-medium [&_[data-slot="heading"]]:leading-7',
     // Content styles:
@@ -174,7 +174,7 @@ const Alertbox = ({
         </Button>
       )}
       {isExpandable ? (
-        <details className="col-span-full [&:not([open])_[data-slot='show-less']]:hidden [&[open]_[data-slot='show-more']]:hidden [&[open]_summary_svg]:rotate-180">
+        <details className="col-span-full [&:not([open])_[data-slot='show-less']]:hidden [&[open]_[data-slot='show-more']]:hidden [&[open]_summary_svg]:rotate-180 [&_[data-slot='content']]:mt-2">
           <summary
             className={cx(
               'relative -my-3 inline-flex cursor-pointer items-center gap-1 py-3 text-sm leading-6',
