@@ -123,6 +123,8 @@ const Alertbox = ({
         className,
         variant,
       })}
+      // The role prop is required to force consumers to consider and choose the appropriate alertbox role.
+      // role="none" will not have any effect on a div, so it can be omitted.
       role={role === 'none' ? undefined : role}
     >
       <Icon />
