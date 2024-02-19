@@ -84,7 +84,9 @@ const Alertbox = ({
     if (onClose) onClose();
   };
 
-  if (onClose && !isDismissable) {
+  const isInDevMode = process.env.NODE_ENV !== 'production';
+
+  if (isInDevMode && onClose && !isDismissable) {
     console.warn(
       'Passing an `onClose` callback without setting the `isDismissable` prop to `true` will not have any effect.',
     );
@@ -101,7 +103,7 @@ const Alertbox = ({
   if (locale === 'sv') closeLabel = 'Stäng';
   else if (locale === 'en') closeLabel = 'Close';
 
-  if (!children) {
+  if (isInDevMode && !children) {
     console.error('`No children was passed to the <AlertBox/>` component.');
     return;
   }
