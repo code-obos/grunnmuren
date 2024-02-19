@@ -111,7 +111,7 @@ const Alertbox = ({
   className,
   variant = 'info',
   isDismissable = false, // Assign default value to make cva variants apply correctly
-  isDismissed: isControlledVisible,
+  isDismissed,
   onDismiss,
   isExpandable,
 }: Props) => {
@@ -124,12 +124,10 @@ const Alertbox = ({
   const isCollapsed = isExpandable && !isExpanded;
 
   const [isUncontrolledVisible, setIsUncontrolledVisible] = useState(true);
-  const isDismissed =
-    isControlledVisible !== undefined
-      ? isControlledVisible
-      : isUncontrolledVisible;
+  const isVisible =
+    isDismissed !== undefined ? !isDismissed : isUncontrolledVisible;
 
-  if (!isDismissed) return;
+  if (!isVisible) return;
 
   const close = () => {
     setIsUncontrolledVisible(false);
