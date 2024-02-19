@@ -1,4 +1,4 @@
-import { Children } from 'react';
+import { Children, useId } from 'react';
 import { cva, type VariantProps, cx } from 'cva';
 import { useLocale, Button } from 'react-aria-components';
 import {
@@ -119,6 +119,10 @@ const Alertbox = ({
 
   const { locale } = useLocale();
 
+  const id = useId();
+  const [isExpanded, setIsExpanded] = useState(false);
+  const isCollapsed = isExpandable && !isExpanded;
+
   const [isUncontrolledVisible, setIsUncontrolledVisible] = useState(true);
   const isDismissed =
     isControlledVisible !== undefined
@@ -174,28 +178,33 @@ const Alertbox = ({
           <Close />
         </Button>
       )}
-      {isExpandable ? (
-        <details className="col-span-full [&:not([open])_[data-slot='show-less']]:hidden [&[open]_[data-slot='show-more']]:hidden [&[open]_summary_svg]:rotate-180 [&_[data-slot='content']]:mt-2">
-          <summary
+      {isExpandable && (
+        <Button
+          className={cx(
+            'relative col-span-full row-start-2 -my-3 inline-flex max-w-fit cursor-pointer items-center gap-1 py-3 text-sm leading-6',
+            // Focus styles:
+            'outline-none after:absolute after:bottom-3 after:left-0 after:right-0 after:h-0 after:bg-transparent after:transition-all after:duration-200',
+            'focus:after:h-[1px] focus:after:bg-black',
+          )}
+          onPress={() => setIsExpanded((prevState) => !prevState)}
+          aria-expanded={isExpanded}
+          aria-controls={id}
+        >
+          {isExpanded
+            ? translations.showLess[locale as SupportedLocales]
+            : translations.showMore[locale as SupportedLocales]}
+          <ChevronDown
             className={cx(
-              'relative -my-3 inline-flex cursor-pointer items-center gap-1 py-3 text-sm leading-6',
-              // Focus styles:
-              'outline-none after:absolute after:bottom-3 after:left-0 after:right-0 after:h-0 after:bg-transparent after:transition-all after:duration-200',
-              'focus:after:h-[1px] focus:after:bg-black',
+              'transition-transform duration-150 motion-reduce:transition-none',
+              isExpanded && 'rotate-180',
             )}
-          >
-            <span data-slot="show-more">
-              {translations.showMore[locale as SupportedLocales]}
-            </span>
-            <span data-slot="show-less">
-              {translations.showLess[locale as SupportedLocales]}
-            </span>
-            <ChevronDown className="transition-transform duration-150 motion-reduce:transition-none" />
-          </summary>
+          />
+        </Button>
+      )}
+      {!isCollapsed && restChildren.length > 0 && (
+        <div className="col-span-full grid gap-y-4" id={id}>
           {restChildren}
-        </details>
-      ) : (
-        restChildren
+        </div>
       )}
       {lastChild}
     </div>
