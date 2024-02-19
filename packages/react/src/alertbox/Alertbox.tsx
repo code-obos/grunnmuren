@@ -157,13 +157,13 @@ const AlertboxHeading = ({
   );
 };
 
-type AlertboxBodyProps = {
+type AlertboxContentProps = {
   children: React.ReactNode;
   /** Additional CSS className for the element. */
   className?: string;
 };
 
-const AlertboxBody = ({ children, className }: AlertboxBodyProps) => (
+const AlertboxContent = ({ children, className }: AlertboxContentProps) => (
   <div
     className={cx(
       className,
@@ -197,6 +197,6 @@ export {
   type Props as AlertboxProps,
   Alertbox,
   AlertboxHeading,
-  AlertboxBody,
+  AlertboxContent,
   AlertboxFooter,
 };

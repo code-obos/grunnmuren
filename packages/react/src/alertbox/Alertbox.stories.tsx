@@ -3,7 +3,7 @@ import {
   AlertboxProps,
   Alertbox,
   AlertboxHeading,
-  AlertboxBody,
+  AlertboxContent,
   AlertboxFooter,
 } from '.';
 import { useState } from 'react';
@@ -21,13 +21,13 @@ type Story = StoryObj<typeof Alertbox>;
 const Template = (args: AlertboxProps) => (
   <Alertbox {...args}>
     <AlertboxHeading level={2}>Informativ tittel</AlertboxHeading>
-    <AlertboxBody>
+    <AlertboxContent>
       <p>
         Bruk dette tekstfeltet til å beskrive hva varslingen handler om. Du kan
         bruke så mange linjer du har behov for, men prøv likevel å være kort og
         konsis.
       </p>
-    </AlertboxBody>
+    </AlertboxContent>
     <AlertboxFooter>
       <p>
         Sist oppdatert: <time dateTime="2024-01-20">20.01.2024</time>
@@ -38,9 +38,9 @@ const Template = (args: AlertboxProps) => (
 
 const SmallTemplate = (args: AlertboxProps) => (
   <Alertbox {...args}>
-    <AlertboxBody>
+    <AlertboxContent>
       Bruk dette tekstfeltet til å skrive en kort varsling
-    </AlertboxBody>
+    </AlertboxContent>
   </Alertbox>
 );
 
