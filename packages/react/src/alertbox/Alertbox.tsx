@@ -1,5 +1,5 @@
 import { Children } from 'react';
-import { cva, type VariantProps, cx } from 'cva';
+import { cva, type VariantProps } from 'cva';
 import { useLocale, Button } from 'react-aria-components';
 import {
   Close,
@@ -23,6 +23,12 @@ const iconMap = {
 const alertVariants = cva({
   base: [
     'grid grid-cols-[auto_1fr_auto] items-center gap-x-2 gap-y-4 rounded-md border-2 px-3 py-2',
+    // Heading styles:
+    '[&_[data-slot="heading"]]:text-base [&_[data-slot="heading"]]:font-medium [&_[data-slot="heading"]]:leading-7',
+    // Content styles:
+    '[&:has([data-slot="heading"])_[data-slot="content"]]:col-span-full [&_[data-slot="content"]]:text-sm [&_[data-slot="content"]]:leading-6',
+    // Footer styles:
+    '[&_[data-slot="footer"]]:col-span-full [&_[data-slot="footer"]]:-mt-[6px] [&_[data-slot="footer"]]:text-xs [&_[data-slot="footer"]]:font-light [&_[data-slot="footer"]]:leading-6',
   ],
   variants: {
     /**
@@ -136,67 +142,4 @@ const Alertbox = ({
   );
 };
 
-type AlertboxHeadingProps = {
-  children: React.ReactNode;
-  /** The level of the heading */
-  level: 1 | 2 | 3 | 4 | 5 | 6;
-  /** Additional CSS className for the element. */
-  className?: string;
-};
-
-const AlertboxHeading = ({
-  children,
-  level,
-  className,
-}: AlertboxHeadingProps) => {
-  const Heading = `h${level}` as const;
-  return (
-    <Heading className={cx(className, 'text-base font-medium leading-7')}>
-      {children}
-    </Heading>
-  );
-};
-
-type AlertboxContentProps = {
-  children: React.ReactNode;
-  /** Additional CSS className for the element. */
-  className?: string;
-};
-
-const AlertboxContent = ({ children, className }: AlertboxContentProps) => (
-  <div
-    className={cx(
-      className,
-      'text-sm leading-6',
-      // Make the body text span the entire container when it is passed as the first child (small alerts)
-      '[&:not(:nth-child(2))]:col-span-full',
-    )}
-  >
-    {children}
-  </div>
-);
-
-type AlertboxFooterProps = {
-  children: React.ReactNode;
-  /** Additional CSS className for the element. */
-  className?: string;
-};
-
-const AlertboxFooter = ({ children, className }: AlertboxFooterProps) => (
-  <div
-    className={cx(
-      className,
-      'col-span-full -mt-[6px] text-xs font-light leading-6',
-    )}
-  >
-    {children}
-  </div>
-);
-
-export {
-  type Props as AlertboxProps,
-  Alertbox,
-  AlertboxHeading,
-  AlertboxContent,
-  AlertboxFooter,
-};
+export { type Props as AlertboxProps, Alertbox };

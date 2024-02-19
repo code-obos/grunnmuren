@@ -1,13 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import {
-  AlertboxProps,
-  Alertbox,
-  AlertboxHeading,
-  AlertboxContent,
-  AlertboxFooter,
-} from '.';
+import { AlertboxProps, Alertbox } from '.';
 import { useState } from 'react';
 import { Button } from '..';
+import { Content, Heading, Footer } from '../content';
 
 const meta: Meta<typeof Alertbox> = {
   title: 'Alertbox',
@@ -20,27 +15,25 @@ type Story = StoryObj<typeof Alertbox>;
 
 const Template = (args: AlertboxProps) => (
   <Alertbox {...args}>
-    <AlertboxHeading level={2}>Informativ tittel</AlertboxHeading>
-    <AlertboxContent>
+    <Heading level={2}>Informativ tittel</Heading>
+    <Content>
       <p>
         Bruk dette tekstfeltet til å beskrive hva varslingen handler om. Du kan
         bruke så mange linjer du har behov for, men prøv likevel å være kort og
         konsis.
       </p>
-    </AlertboxContent>
-    <AlertboxFooter>
+    </Content>
+    <Footer>
       <p>
         Sist oppdatert: <time dateTime="2024-01-20">20.01.2024</time>
       </p>
-    </AlertboxFooter>
+    </Footer>
   </Alertbox>
 );
 
 const SmallTemplate = (args: AlertboxProps) => (
   <Alertbox {...args}>
-    <AlertboxContent>
-      Bruk dette tekstfeltet til å skrive en kort varsling
-    </AlertboxContent>
+    <Content>Bruk dette tekstfeltet til å skrive en kort varsling</Content>
   </Alertbox>
 );
 
