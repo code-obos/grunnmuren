@@ -83,7 +83,19 @@ const Alertbox = ({
 }: Props) => {
   const Icon = iconMap[variant];
 
+  // Set a default aria-label for the close button and handle translations based on the current locale
+  const { locale } = useLocale();
+  let closeLabel = 'Lukk';
+  if (locale === 'sv') closeLabel = 'Stäng';
+  else if (locale === 'en') closeLabel = 'Close';
+
   const [isUncontrolledVisible, setIsUncontrolledVisible] = useState(true);
+  const isVisible =
+    isControlledVisible !== undefined
+      ? isControlledVisible
+      : isUncontrolledVisible;
+
+  if (!isVisible) return;
 
   const close = () => {
     setIsUncontrolledVisible(false);
@@ -98,17 +110,6 @@ const Alertbox = ({
     );
   }
 
-  const isVisible =
-    isControlledVisible !== undefined
-      ? isControlledVisible
-      : isUncontrolledVisible;
-
-  // Set a default aria-label for the close button and handle translations based on the current locale
-  const { locale } = useLocale();
-  let closeLabel = 'Lukk';
-  if (locale === 'sv') closeLabel = 'Stäng';
-  else if (locale === 'en') closeLabel = 'Close';
-
   if (isInDevMode && !children) {
     console.error('`No children was passed to the <AlertBox/>` component.');
     return;
@@ -117,28 +118,26 @@ const Alertbox = ({
   const [firstChild, ...restChildren] = Children.toArray(children);
 
   return (
-    isVisible && (
-      <div
-        className={alertVariants({
-          className,
-          variant,
-        })}
-        role={role}
-      >
-        <Icon />
-        {firstChild}
-        {isDismissable && (
-          <Button
-            className="-m-2 grid h-11 w-11 place-items-center outline-transparent transition-[outline] duration-200 focus:-outline-offset-8 focus:outline-black"
-            onPress={close}
-            aria-label={closeLabel}
-          >
-            <Close />
-          </Button>
-        )}
-        {restChildren}
-      </div>
-    )
+    <div
+      className={alertVariants({
+        className,
+        variant,
+      })}
+      role={role}
+    >
+      <Icon />
+      {firstChild}
+      {isDismissable && (
+        <Button
+          className="-m-2 grid h-11 w-11 place-items-center outline-transparent transition-[outline] duration-200 focus:-outline-offset-8 focus:outline-black"
+          onPress={close}
+          aria-label={closeLabel}
+        >
+          <Close />
+        </Button>
+      )}
+      {restChildren}
+    </div>
   );
 };
 
