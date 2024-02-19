@@ -9,6 +9,7 @@ import {
 } from 'react-aria-components';
 
 import { formField, input, inputGroup } from '../classes';
+import { InputAddonDivider } from '../internals';
 import { Label } from '../label/Label';
 import { Description } from '../label/Description';
 import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
@@ -88,12 +89,12 @@ function NumberField(props: NumberFieldProps, ref: Ref<HTMLInputElement>) {
       {leftAddon || rightAddon ? (
         <Group className={inputGroup}>
           {leftAddon}
-          {withAddonDivider && leftAddon && <Divider className="ml-3" />}
+          {withAddonDivider && leftAddon && <InputAddonDivider />}
           <Input
             className={inputWithAlignment({ textAlign, isGrouped: true })}
             ref={ref}
           />
-          {withAddonDivider && rightAddon && <Divider className="mr-3" />}
+          {withAddonDivider && rightAddon && <InputAddonDivider />}
           {rightAddon}
         </Group>
       ) : (
@@ -102,12 +103,6 @@ function NumberField(props: NumberFieldProps, ref: Ref<HTMLInputElement>) {
 
       <ErrorMessageOrFieldError errorMessage={errorMessage} />
     </RACNumberField>
-  );
-}
-
-export function Divider({ className }: { className: string }) {
-  return (
-    <span className={cx(className, 'block h-6 w-px flex-none bg-black')} />
   );
 }
 
