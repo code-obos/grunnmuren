@@ -20,7 +20,15 @@ const iconMap = {
 };
 
 const alertVariants = cva({
-  base: ['grid items-center gap-x-2 gap-y-4 rounded-md border-2 px-3 py-2'],
+  base: [
+    'grid items-center gap-x-2 gap-y-4 rounded-md border-2 px-3 py-2',
+    // Heading styles:
+    '[&_[data-slot="heading"]]:text-base [&_[data-slot="heading"]]:font-medium [&_[data-slot="heading"]]:leading-7',
+    // Content styles:
+    '[&:has([data-slot="heading"])_[data-slot="content"]]:col-span-full [&_[data-slot="content"]]:text-sm [&_[data-slot="content"]]:leading-6',
+    // Footer styles:
+    '[&_[data-slot="footer"]]:col-span-full [&_[data-slot="footer"]]:text-xs [&_[data-slot="footer"]]:font-light [&_[data-slot="footer"]]:leading-6',
+  ],
   variants: {
     /**
      * The variant of the alert
@@ -47,7 +55,7 @@ type Props = VariantProps<typeof alertVariants> & {
   /**
    * The ARIA role for the alertbox.
    */
-  role: 'alert' | 'status' | 'dialog' | 'presentation' | 'none';
+  role: 'alert' | 'status' | 'none';
   /**
    * Controls if the alert can be dismissed with a close button.
    * @default true
@@ -107,27 +115,30 @@ const Alertbox = ({
 }: Props) => {
   const Icon = iconMap[variant];
 
+  const { locale } = useLocale();
+
   const [isUncontrolledVisible, setIsUncontrolledVisible] = useState(true);
+  const isVisible =
+    isControlledVisible !== undefined
+      ? isControlledVisible
+      : isUncontrolledVisible;
+
+  if (!isVisible) return;
 
   const close = () => {
     setIsUncontrolledVisible(false);
     if (onClose) onClose();
   };
 
-  if (onClose && !isDismissable) {
+  const isInDevMode = process.env.NODE_ENV !== 'production';
+
+  if (isInDevMode && onClose && !isDismissable) {
     console.warn(
       'Passing an `onClose` callback without setting the `isDismissable` prop to `true` will not have any effect.',
     );
   }
 
-  const isVisible =
-    isControlledVisible !== undefined
-      ? isControlledVisible
-      : isUncontrolledVisible;
-
-  const { locale } = useLocale();
-
-  if (!children) {
+  if (isInDevMode && !children) {
     console.error('`No children was passed to the <AlertBox/>` component.');
     return;
   }
@@ -136,115 +147,57 @@ const Alertbox = ({
   const lastChild = restChildren.pop();
 
   return (
-    isVisible && (
-      <div
-        className={alertVariants({
-          className,
-          variant,
-          isDismissable,
-        })}
-        role={role}
-      >
-        <Icon />
-        {firstChild}
-        {isDismissable && (
-          <Button
+    <div
+      className={alertVariants({
+        className,
+        variant,
+        isDismissable,
+      })}
+      // The role prop is required to force consumers to consider and choose the appropriate alertbox role.
+      // role="none" will not have any effect on a div, so it can be omitted.
+      role={role === 'none' ? undefined : role}
+    >
+      <Icon />
+      {firstChild}
+      {isDismissable && (
+        <Button
+          className={cx(
+            'grid h-11 w-11 place-items-center',
+            // Focus styles:
+            '-m-2 outline-transparent transition-[outline] duration-200 focus:-outline-offset-8 focus:outline-black',
+          )}
+          onPress={close}
+          aria-label={translations.close[locale as SupportedLocales]}
+        >
+          <Close />
+        </Button>
+      )}
+      {isExpandable ? (
+        <details className="col-span-full [&:not([open])_[data-show='less']]:hidden [&[open]_[data-show='more']]:hidden [&[open]_summary_svg]:rotate-180">
+          <summary
             className={cx(
-              'grid h-11 w-11 place-items-center',
+              'relative -my-3 inline-flex cursor-pointer items-center gap-1 py-3 text-sm leading-6',
               // Focus styles:
-              '-m-2 outline-transparent transition-[outline] duration-200 focus:-outline-offset-8 focus:outline-black',
+              'outline-none after:absolute after:bottom-3 after:left-0 after:right-0 after:h-0 after:bg-transparent after:transition-all after:duration-200',
+              'focus:after:h-[1px] focus:after:bg-black',
             )}
-            onPress={close}
-            aria-label={translations.close[locale as SupportedLocales]}
           >
-            <Close />
-          </Button>
-        )}
-        {isExpandable ? (
-          <details className="col-span-full [&:not([open])_[data-show='less']]:hidden [&[open]_[data-show='more']]:hidden [&[open]_summary_svg]:rotate-180">
-            <summary
-              className={cx(
-                'relative -my-3 inline-flex cursor-pointer items-center gap-1 py-3 text-sm leading-6',
-                // Focus styles:
-                'outline-none after:absolute after:bottom-3 after:left-0 after:right-0 after:h-0 after:bg-transparent after:transition-all after:duration-200',
-                'focus:after:h-[1px] focus:after:bg-black',
-              )}
-            >
-              <span data-show="more">
-                {translations.showMore[locale as SupportedLocales]}
-              </span>
-              <span data-show="less">
-                {translations.showLess[locale as SupportedLocales]}
-              </span>
-              <ChevronDown className="transition-transform duration-150 motion-reduce:transition-none" />
-            </summary>
-            {restChildren}
-          </details>
-        ) : (
-          restChildren
-        )}
-        {lastChild}
-      </div>
-    )
+            <span data-show="more">
+              {translations.showMore[locale as SupportedLocales]}
+            </span>
+            <span data-show="less">
+              {translations.showLess[locale as SupportedLocales]}
+            </span>
+            <ChevronDown className="transition-transform duration-150 motion-reduce:transition-none" />
+          </summary>
+          {restChildren}
+        </details>
+      ) : (
+        restChildren
+      )}
+      {lastChild}
+    </div>
   );
 };
 
-type AlertboxHeadingProps = {
-  children: React.ReactNode;
-  /** The level of the heading */
-  level: 1 | 2 | 3 | 4 | 5 | 6;
-  /** Additional CSS className for the element. */
-  className?: string;
-};
-
-const AlertboxHeading = ({
-  children,
-  level,
-  className,
-}: AlertboxHeadingProps) => {
-  const Heading = `h${level}` as const;
-  return (
-    <Heading className={cx(className, 'text-base font-medium leading-7')}>
-      {children}
-    </Heading>
-  );
-};
-
-type AlertboxBodyProps = {
-  children: React.ReactNode;
-  /** Additional CSS className for the element. */
-  className?: string;
-};
-
-const AlertboxBody = ({ children, className }: AlertboxBodyProps) => (
-  <div
-    className={cx(
-      className,
-      'text-sm leading-6',
-      // Make the body text span the entire container when it is passed as the first child (small alerts)
-      '[&:not(:nth-child(2))]:col-span-full',
-    )}
-  >
-    {children}
-  </div>
-);
-
-type AlertboxFooterProps = {
-  children: React.ReactNode;
-  /** Additional CSS className for the element. */
-  className?: string;
-};
-
-const AlertboxFooter = ({ children, className }: AlertboxFooterProps) => (
-  <div className={cx(className, 'col-span-full text-xs font-light leading-6')}>
-    {children}
-  </div>
-);
-
-export {
-  type Props as AlertboxProps,
-  Alertbox,
-  AlertboxHeading,
-  AlertboxBody,
-  AlertboxFooter,
-};
+export { type Props as AlertboxProps, Alertbox };

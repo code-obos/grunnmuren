@@ -1,13 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import {
-  AlertboxProps,
-  Alertbox,
-  AlertboxHeading,
-  AlertboxBody,
-  AlertboxFooter,
-} from '.';
+import { AlertboxProps, Alertbox } from '.';
 import { useState } from 'react';
 import { Button } from '..';
+import { Content, Heading, Footer } from '../content';
 
 const meta: Meta<typeof Alertbox> = {
   title: 'Alertbox',
@@ -20,27 +15,25 @@ type Story = StoryObj<typeof Alertbox>;
 
 const Template = (args: AlertboxProps) => (
   <Alertbox {...args}>
-    <AlertboxHeading level={2}>Informativ tittel</AlertboxHeading>
-    <AlertboxBody>
+    <Heading level={2}>Informativ tittel</Heading>
+    <Content>
       <p>
         Bruk dette tekstfeltet til å beskrive hva varslingen handler om. Du kan
         bruke så mange linjer du har behov for, men prøv likevel å være kort og
         konsis.
       </p>
-    </AlertboxBody>
-    <AlertboxFooter>
+    </Content>
+    <Footer>
       <p>
         Sist oppdatert: <time dateTime="2024-01-20">20.01.2024</time>
       </p>
-    </AlertboxFooter>
+    </Footer>
   </Alertbox>
 );
 
 const SmallTemplate = (args: AlertboxProps) => (
   <Alertbox {...args}>
-    <AlertboxBody>
-      Bruk dette tekstfeltet til å skrive en kort varsling
-    </AlertboxBody>
+    <Content>Bruk dette tekstfeltet til å skrive en kort varsling</Content>
   </Alertbox>
 );
 
@@ -64,7 +57,7 @@ const ControlledTemplate = (args: AlertboxProps) => {
   );
 };
 
-const defaultProps = { role: 'alert' as const };
+const defaultProps = { role: 'alert', variant: 'info' } as const;
 
 export const DefaultAlert: Story = {
   render: Template,
@@ -78,12 +71,12 @@ export const SmallAlert: Story = {
 
 export const DismissableAlert: Story = {
   render: Template,
-  args: { ...defaultProps, isDismissable: true, role: 'dialog' },
+  args: { ...defaultProps, isDismissable: true },
 };
 
 export const SmallDismissableAlert: Story = {
   render: SmallTemplate,
-  args: { ...defaultProps, isDismissable: true, role: 'dialog' },
+  args: { ...defaultProps, isDismissable: true },
 };
 
 export const SuccessAlert: Story = {
