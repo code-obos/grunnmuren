@@ -1,5 +1,5 @@
 ---
-"@obosbbl/grunnmuren-react": major
+"@obosbbl/grunnmuren-react": minor
 ---
 
 Renaming of props for dismissable alertboxes.
