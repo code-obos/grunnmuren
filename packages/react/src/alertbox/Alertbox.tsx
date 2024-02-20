@@ -108,6 +108,10 @@ const translations: Translations = {
   },
 };
 
+type SupportedLocale = ReturnType<typeof useLocale> & {
+  locale: SupportedLocales;
+};
+
 const Alertbox = ({
   children,
   role,
@@ -120,7 +124,7 @@ const Alertbox = ({
 }: Props) => {
   const Icon = iconMap[variant];
 
-  const { locale } = useLocale();
+  const { locale } = useLocale() as SupportedLocale;
 
   const id = useId();
   const [isExpanded, setIsExpanded] = useState(false);
@@ -173,7 +177,7 @@ const Alertbox = ({
             '-m-2 outline-transparent transition-[outline] duration-200 focus:-outline-offset-8 focus:outline-black',
           )}
           onPress={close}
-          aria-label={translations.close[locale as SupportedLocales]}
+          aria-label={translations.close[locale]}
         >
           <Close />
         </Button>
@@ -191,8 +195,8 @@ const Alertbox = ({
           aria-controls={id}
         >
           {isExpanded
-            ? translations.showLess[locale as SupportedLocales]
-            : translations.showMore[locale as SupportedLocales]}
+            ? translations.showLess[locale]
+            : translations.showMore[locale]}
           <ChevronDown
             className={cx(
               'transition-transform duration-150 motion-reduce:transition-none',
