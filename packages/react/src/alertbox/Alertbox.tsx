@@ -77,7 +77,7 @@ type Props = VariantProps<typeof alertVariants> & {
   onDismiss?: () => void;
 };
 
-type SupportedLocales = 'nb' | 'nn' | 'sv' | 'en';
+type SupportedLocales = 'nb' | 'sv' | 'en';
 
 type Translation = {
   [key in SupportedLocales]: string;
@@ -90,19 +90,16 @@ type Translations = {
 const translations: Translations = {
   close: {
     nb: 'Lukk',
-    nn: 'Lukk',
     sv: 'Stäng',
     en: 'Close',
   },
   showMore: {
     nb: 'Les mer',
-    nn: 'Les meir',
     sv: 'Läs mer',
     en: 'Read more',
   },
   showLess: {
     nb: 'Vis mindre',
-    nn: 'Vis mindre',
     sv: 'Dölj',
     en: 'Show less',
   },
