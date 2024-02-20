@@ -163,6 +163,9 @@ importers:
       '@react-aria/utils':
         specifier: ^3.23.0
         version: 3.23.0(react@18.2.0)
+      '@types/node':
+        specifier: ^20.11.19
+        version: 20.11.19
       cva:
         specifier: 1.0.0-beta.1
         version: 1.0.0-beta.1(typescript@5.3.3)
@@ -172,10 +175,6 @@ importers:
       react-aria-components:
         specifier: ^1.0.0
         version: 1.0.0(react-dom@18.2.0)(react@18.2.0)
-    devDependencies:
-      '@types/node':
-        specifier: ^20.11.19
-        version: 20.11.19
 
   packages/tailwind:
     dependencies:
@@ -5646,7 +5645,7 @@ packages:
     resolution: {integrity: sha512-7xMnVEcZFu0DikYjWOlRq7NTPETrm7teqUT2WkQjrTIkEgUyyGdWsj/Zg8bEJt5TNklzbPD1X3fqfsHw3SpapQ==}
     dependencies:
       undici-types: 5.26.5
-    dev: true
+    dev: false
 
   /@types/normalize-package-data@2.4.4:
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -11949,6 +11948,7 @@ packages:
 
   /undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+    dev: false
 
   /unicode-canonical-property-names-ecmascript@2.0.0:
     resolution: {integrity: sha512-yY5PpDlfVIU5+y/BSCxAJRBIS1Zc2dDG3Ujq+sR0U+JjUevW2JhocOF+soROYDSaAezOzOKuyyixhD6mBknSmQ==}
