@@ -169,9 +169,8 @@ const Alertbox = ({
       {isDismissable && (
         <button
           className={cx(
-            'grid h-11 w-11 place-items-center',
-            // Focus styles:
-            '-m-2 outline-transparent transition-[outline] duration-200 focus:-outline-offset-8 focus:outline-black',
+            '-m-2 grid h-11 w-11 place-items-center rounded-sm',
+            'focus:outline-none focus:-outline-offset-8 focus:outline-black',
           )}
           onClick={close}
           aria-label={translations.close[locale]}
