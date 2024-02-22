@@ -2,8 +2,6 @@
 "@obosbbl/grunnmuren-react": minor
 ---
 
-Expose `<Alertbox/>`.
-
-Renaming of props for dismissable alertboxes.
-
-New prop to make content expandable.
+* Export `<Alertbox />`, `<Heading />`, `<Content />` and `<Footer /> components.
+* Prop renaming for dismissable alertboxes.
+* Add `isExpandable` prop to AlertBox to make content expandable.
