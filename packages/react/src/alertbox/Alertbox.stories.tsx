@@ -57,7 +57,13 @@ const ControlledTemplate = (args: AlertboxProps) => {
   );
 };
 
-const defaultProps = { role: 'alert', variant: 'info' } as const;
+const defaultProps = {
+  role: 'alert',
+  variant: 'info',
+  isDismissable: false,
+  isExpandable: false,
+  isDismissed: false,
+} as const;
 
 export const DefaultAlert: Story = {
   render: Template,
