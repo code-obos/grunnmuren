@@ -1,6 +1,6 @@
 import { Children, useId } from 'react';
 import { cva, type VariantProps, cx } from 'cva';
-import { useLocale, Button } from 'react-aria-components';
+import { useLocale } from 'react-aria-components';
 import {
   Close,
   ChevronDown,
@@ -167,27 +167,27 @@ const Alertbox = ({
       <Icon />
       {firstChild}
       {isDismissable && (
-        <Button
+        <button
           className={cx(
             'grid h-11 w-11 place-items-center',
             // Focus styles:
             '-m-2 outline-transparent transition-[outline] duration-200 focus:-outline-offset-8 focus:outline-black',
           )}
-          onPress={close}
+          onClick={close}
           aria-label={translations.close[locale]}
         >
           <Close />
-        </Button>
+        </button>
       )}
       {isExpandable && (
-        <Button
+        <button
           className={cx(
             'relative col-span-full row-start-2 -my-3 inline-flex max-w-fit cursor-pointer items-center gap-1 py-3 text-sm leading-6',
             // Focus styles:
             'outline-none after:absolute after:bottom-3 after:left-0 after:right-0 after:h-0 after:bg-transparent after:transition-all after:duration-200',
             'focus:after:h-[1px] focus:after:bg-black',
           )}
-          onPress={() => setIsExpanded((prevState) => !prevState)}
+          onClick={() => setIsExpanded((prevState) => !prevState)}
           aria-expanded={isExpanded}
           aria-controls={id}
         >
@@ -200,7 +200,7 @@ const Alertbox = ({
               isExpanded && 'rotate-180',
             )}
           />
-        </Button>
+        </button>
       )}
       {!isCollapsed && restChildren.length > 0 && (
         <div className="col-span-full grid gap-y-4" id={id}>
