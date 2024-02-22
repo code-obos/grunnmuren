@@ -1,3 +1,4 @@
+import { GrunnmurenProvider } from '@obosbbl/grunnmuren-react';
 import './globals.css';
 
 export const metadata = {
@@ -9,11 +10,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const locale = 'nb';
+
   return (
-    <html lang="no">
-      <body>
-        <main className="container-prose">{children}</main>
-      </body>
-    </html>
+    <GrunnmurenProvider locale={locale}>
+      <html lang={locale}>
+        <body>
+          <main className="container-prose">{children}</main>
+        </body>
+      </html>
+    </GrunnmurenProvider>
   );
 }

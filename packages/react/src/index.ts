@@ -1,5 +1,6 @@
-export { Form, I18nProvider } from 'react-aria-components';
+export { Form } from 'react-aria-components';
 
+export * from './GrunnmurenProvider';
 export * from './button';
 export * from './checkbox';
 export * from './combobox';

@@ -14,19 +14,19 @@ npm install @obosbbl/grunnmuren-react@canary
 pnpm add @obosbbl/grunnmuren-react@canary
 ```
 
-## Localization configuration
+## Setup
 
 Grunnmuren uses [React Aria Components](https://react-spectrum.adobe.com/react-aria/) under the hood. RAC has built in translation strings for non visible content (for accessibility reasons). It also automatically detects the language based on the browser or system language.
 
-To ensure that the language of the page content matches the accessibility strings you should wrap your application in a `I18nProvider`. This will override RAC's automatic locale selection.
+To ensure that the language of the page content matches the accessibility strings you must wrap your application in a `GrunnmurenProvider` with a `locale` prop. This will override RAC's automatic locale selection.
 
 In [Next.js](https://nextjs.org/) you can do this in the root [root layout](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts#root-layout-required).
 
-Valid locales for Norwegian are `nb-NO` or `nb`, Swedish is `sv-SE` or `sv`.
+Valid locales are `nb`, `sv` or `en`. The provider defaults to `nb` if unspecified.
 
 ```js
 // app/layout.tsx
-import { I18nProvider } from '@obosbbl/grunnmuren-react';
+import { GrunnmurenProvider } from '@obosbbl/grunnmuren-react';
 
 
 export default function RootLayout({
@@ -35,15 +35,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
 
-  // Either 'nb' or 'sv'
+  // Either 'nb', 'sv' or 'en'
   const locale = 'nb';
 
   return (
-    <I18nProvider locale={locale}>
+    <GrunnmurenProvider locale={locale}>
       <html lang={locale}>
         <body>{children}</body>
       </html>
-    </I18nProvider>
+    </GrunnmurenProvider>
   )
 }
 ```
@@ -76,7 +76,7 @@ module.exports = {
       optimizeLocales.webpack({
         // If you have a multitenant app, include both Norwegian and Swedish
         // If your app only serves one language, adjust accordingly
-        locales: ['nb-NO', 'sv-SE'],
+        locales: ['nb', 'sv'],
       }),
     );
     return config;
