@@ -170,7 +170,7 @@ const Alertbox = ({
       {isDismissable && (
         <button
           className={cx(
-            '-m-2 grid h-11 w-11 place-items-center rounded-sm',
+            '-m-2 grid h-11 w-11 place-items-center rounded-xl',
             'focus:outline-none focus:-outline-offset-8 focus:outline-black',
           )}
           onClick={close}
