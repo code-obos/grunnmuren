@@ -1,8 +1,10 @@
-import { Children } from 'react';
-import { cva, type VariantProps } from 'cva';
-import { useLocale, Button } from 'react-aria-components';
+'use client';
+import { Children, useId } from 'react';
+import { cva, type VariantProps, cx } from 'cva';
+import { useLocale } from 'react-aria-components';
 import {
   Close,
+  ChevronDown,
   InfoCircle,
   CheckCircle,
   Warning,
@@ -10,9 +12,7 @@ import {
 } from '@obosbbl/grunnmuren-icons-react';
 import { useState } from 'react';
 
-// TODO: expand/collapse
 // TODO: add new icons
-
 const iconMap = {
   info: InfoCircle,
   success: CheckCircle,
@@ -22,13 +22,13 @@ const iconMap = {
 
 const alertVariants = cva({
   base: [
-    'grid grid-cols-[auto_1fr_auto] items-center gap-x-2 gap-y-4 rounded-md border-2 px-3 py-2',
+    'grid grid-cols-[auto_1fr_auto] items-center gap-2 rounded-md border-2 px-3 py-2',
     // Heading styles:
     '[&_[data-slot="heading"]]:text-base [&_[data-slot="heading"]]:font-medium [&_[data-slot="heading"]]:leading-7',
     // Content styles:
     '[&:has([data-slot="heading"])_[data-slot="content"]]:col-span-full [&_[data-slot="content"]]:text-sm [&_[data-slot="content"]]:leading-6',
     // Footer styles:
-    '[&_[data-slot="footer"]]:col-span-full [&_[data-slot="footer"]]:-mt-[6px] [&_[data-slot="footer"]]:text-xs [&_[data-slot="footer"]]:font-light [&_[data-slot="footer"]]:leading-6',
+    '[&_[data-slot="footer"]]:col-span-full [&_[data-slot="footer"]]:text-xs [&_[data-slot="footer"]]:font-light [&_[data-slot="footer"]]:leading-6',
   ],
   variants: {
     /**
@@ -53,23 +53,61 @@ type Props = VariantProps<typeof alertVariants> & {
    * The ARIA role for the alertbox.
    */
   role: 'alert' | 'status' | 'none';
-  /**
-   * Controls if the alert can be dismissed with a close button.
-   * @default true
-   */
-  isDismissable?: boolean;
   /** Additional CSS className for the element. */
   className?: string;
   /**
+   * Controls if the alert is expandable or not
+   * @default false
+   */
+  isExpandable?: boolean;
+  /**
+   * Controls if the alert can be dismissed with a close button.
+   * @default false
+   */
+  isDismissable?: boolean;
+  /**
    * Controls if the alert is rendered or not.
    * This is used to control the open/closed state of the component; make the component "controlled".
+   * @default false
    */
-  isVisible?: boolean;
+  isDismissed?: boolean;
   /**
    * Callback that should be triggered when a dismissable alert is closed.
    * This is used to control the open/closed state of the component; make the component "controlled".
    */
-  onClose?: () => void;
+  onDismiss?: () => void;
+};
+
+type SupportedLocales = 'nb' | 'sv' | 'en';
+
+type Translation = {
+  [key in SupportedLocales]: string;
+};
+
+type Translations = {
+  [x: string]: Translation;
+};
+
+const translations: Translations = {
+  close: {
+    nb: 'Lukk',
+    sv: 'Stäng',
+    en: 'Close',
+  },
+  showMore: {
+    nb: 'Les mer',
+    sv: 'Läs mer',
+    en: 'Read more',
+  },
+  showLess: {
+    nb: 'Vis mindre',
+    sv: 'Dölj',
+    en: 'Show less',
+  },
+};
+
+type SupportedLocale = ReturnType<typeof useLocale> & {
+  locale: SupportedLocales;
 };
 
 const Alertbox = ({
@@ -77,36 +115,35 @@ const Alertbox = ({
   role,
   className,
   variant = 'info',
-  isDismissable,
-  isVisible: isControlledVisible,
-  onClose,
+  isDismissable = false, // Assign default value to make cva variants apply correctly
+  isDismissed,
+  onDismiss,
+  isExpandable,
 }: Props) => {
   const Icon = iconMap[variant];
 
-  // Set a default aria-label for the close button and handle translations based on the current locale
-  const { locale } = useLocale();
-  let closeLabel = 'Lukk';
-  if (locale === 'sv') closeLabel = 'Stäng';
-  else if (locale === 'en') closeLabel = 'Close';
+  const { locale } = useLocale() as SupportedLocale;
+
+  const id = useId();
+  const [isExpanded, setIsExpanded] = useState(false);
+  const isCollapsed = isExpandable && !isExpanded;
 
   const [isUncontrolledVisible, setIsUncontrolledVisible] = useState(true);
   const isVisible =
-    isControlledVisible !== undefined
-      ? isControlledVisible
-      : isUncontrolledVisible;
+    isDismissed !== undefined ? !isDismissed : isUncontrolledVisible;
 
   if (!isVisible) return;
 
   const close = () => {
     setIsUncontrolledVisible(false);
-    if (onClose) onClose();
+    if (onDismiss) onDismiss();
   };
 
   const isInDevMode = process.env.NODE_ENV !== 'production';
 
-  if (isInDevMode && onClose && !isDismissable) {
+  if (isInDevMode && onDismiss && !isDismissable) {
     console.warn(
-      'Passing an `onClose` callback without setting the `isDismissable` prop to `true` will not have any effect.',
+      'Passing an `onDismiss` callback without setting the `isDismissable` prop to `true` will not have any effect.',
     );
   }
 
@@ -116,6 +153,7 @@ const Alertbox = ({
   }
 
   const [firstChild, ...restChildren] = Children.toArray(children);
+  const lastChild = restChildren.pop();
 
   return (
     <div
@@ -130,15 +168,46 @@ const Alertbox = ({
       <Icon />
       {firstChild}
       {isDismissable && (
-        <Button
-          className="-m-2 grid h-11 w-11 place-items-center outline-transparent transition-[outline] duration-200 focus:-outline-offset-8 focus:outline-black"
-          onPress={close}
-          aria-label={closeLabel}
+        <button
+          className={cx(
+            '-m-2 grid h-11 w-11 place-items-center rounded-xl',
+            'focus:outline-none focus:-outline-offset-8 focus:outline-black',
+          )}
+          onClick={close}
+          aria-label={translations.close[locale]}
         >
           <Close />
-        </Button>
+        </button>
       )}
-      {restChildren}
+      {isExpandable && (
+        <button
+          className={cx(
+            'relative col-span-full row-start-2 -my-3 inline-flex max-w-fit cursor-pointer items-center gap-1 py-3 text-sm leading-6',
+            // Focus styles:
+            'outline-none after:absolute after:bottom-3 after:left-0 after:right-0 after:h-0 after:bg-transparent after:transition-all after:duration-200',
+            'focus:after:h-[1px] focus:after:bg-black',
+          )}
+          onClick={() => setIsExpanded((prevState) => !prevState)}
+          aria-expanded={isExpanded}
+          aria-controls={id}
+        >
+          {isExpanded
+            ? translations.showLess[locale]
+            : translations.showMore[locale]}
+          <ChevronDown
+            className={cx(
+              'transition-transform duration-150 motion-reduce:transition-none',
+              isExpanded && 'rotate-180',
+            )}
+          />
+        </button>
+      )}
+      {!isCollapsed && restChildren.length > 0 && (
+        <div className="col-span-full grid gap-y-4" id={id}>
+          {restChildren}
+        </div>
+      )}
+      {lastChild}
     </div>
   );
 };

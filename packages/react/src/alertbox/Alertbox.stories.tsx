@@ -38,26 +38,32 @@ const SmallTemplate = (args: AlertboxProps) => (
 );
 
 const ControlledTemplate = (args: AlertboxProps) => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isDismissed, setIsDismissed] = useState(true);
 
   return (
     <>
       <Button
-        onClick={() => setIsVisible((prevState) => !prevState)}
+        onClick={() => setIsDismissed((prevState) => !prevState)}
         className="mb-4"
       >
-        {`${isVisible ? 'Skjul' : 'Vis'} alert`}
+        {`${isDismissed ? 'Vis' : 'Skjul'} alert`}
       </Button>
       <Template
         {...args}
-        isVisible={isVisible}
-        onClose={() => setIsVisible(false)}
+        isDismissed={isDismissed}
+        onDismiss={() => setIsDismissed(true)}
       />
     </>
   );
 };
 
-const defaultProps = { role: 'alert', variant: 'info' } as const;
+const defaultProps = {
+  role: 'alert',
+  variant: 'info',
+  isDismissable: false,
+  isExpandable: false,
+  isDismissed: false,
+} as const;
 
 export const DefaultAlert: Story = {
   render: Template,
@@ -97,4 +103,14 @@ export const DangerAlert: Story = {
 export const ControlledAlert: Story = {
   render: ControlledTemplate,
   args: { ...defaultProps, variant: 'danger', isDismissable: true },
+};
+
+export const ExpandableAlert: Story = {
+  render: Template,
+  args: { ...defaultProps, isExpandable: true },
+};
+
+export const ExpandableDismissableAlert: Story = {
+  render: Template,
+  args: { ...defaultProps, isExpandable: true, isDismissable: true },
 };
