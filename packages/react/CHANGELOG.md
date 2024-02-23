@@ -1,5 +1,13 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.13
+
+### Minor Changes
+
+- 1217ade: \* Export `<Alertbox />`, `<Heading />`, `<Content />` and `<Footer />` components.
+  - Prop renaming for dismissable alertboxes.
+  - Add `isExpandable` prop to AlertBox to make content expandable.
+
 ## 2.0.0-canary.12
 
 ### Minor Changes
