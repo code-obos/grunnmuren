@@ -4,6 +4,8 @@ import {
   Breadcrumbs as RACBreadcrumbs,
   Breadcrumb as RACBreadcrumb,
   Link as RACLink,
+  type BreadcrumbsProps as RACBreadcrumbsProps,
+  type BreadcrumbProps as RACBreadcrumbProps,
 } from 'react-aria-components';
 import { ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 
@@ -16,7 +18,7 @@ type BreadcrumbsProps = {
   /** Additional style properties for the element. */
   style?: React.CSSProperties;
   links: Array<{ href: string; label: string }>;
-};
+} & Omit<RACBreadcrumbsProps<RACBreadcrumbProps>, 'className' | 'style'>;
 
 function Breadcrumbs(props: BreadcrumbsProps) {
   const { className, links, ...restProps } = props;
