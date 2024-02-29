@@ -26,9 +26,9 @@ function Breadcrumbs(props: BreadcrumbsProps) {
   return (
     <RACBreadcrumbs {...restProps} className={cx(className, defaultClasses)}>
       {links.map((link, i) => (
-        <RACBreadcrumb key={i} className="flex">
+        <RACBreadcrumb key={i} className="flex items-center">
           <RACLink href={link.href}>{link.label}</RACLink>
-          <ChevronRight className="-mt-0.5 px-1 align-middle" />
+          <ChevronRight className="-mt-0.5 px-1" />
         </RACBreadcrumb>
       ))}
     </RACBreadcrumbs>
