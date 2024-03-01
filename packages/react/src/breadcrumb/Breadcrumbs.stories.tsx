@@ -10,9 +10,9 @@ const meta: Meta<typeof Breadcrumbs> = {
     return (
       <Breadcrumbs
         links={[
-          { href: '/', label: 'Min side' },
-          { href: '/', label: 'Instillinger' },
-          { href: '/', label: 'Kontaktinformasjon' },
+          { href: '/', text: 'Min side' },
+          { href: '/', text: 'Instillinger' },
+          { href: '/', text: 'Kontaktinformasjon' },
         ]}
       />
     );
@@ -26,9 +26,9 @@ type Story = StoryObj<typeof Breadcrumbs>;
 export const Default: Story = {
   args: {
     links: [
-      { href: '/', label: 'Min side' },
-      { href: '/', label: 'Instillinger' },
-      { href: '/', label: 'Kontaktinformasjon' },
+      { href: '/', text: 'Min side' },
+      { href: '/', text: 'Instillinger' },
+      { href: '/', text: 'Kontaktinformasjon' },
     ],
   },
 };

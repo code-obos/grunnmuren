@@ -17,7 +17,7 @@ type BreadcrumbsProps = {
 
   /** Additional style properties for the element. */
   style?: React.CSSProperties;
-  links: Array<{ href: string; label: string }>;
+  links: Array<{ href: string; text: string }>;
 } & Omit<RACBreadcrumbsProps<RACBreadcrumbProps>, 'className' | 'style'>;
 
 function Breadcrumbs(props: BreadcrumbsProps) {
@@ -28,10 +28,10 @@ function Breadcrumbs(props: BreadcrumbsProps) {
       {links.map((link, i) => (
         <RACBreadcrumb key={i} className="flex items-center">
           {i === links.length - 1 ? (
-            <p>{link.label}</p>
+            <p>{link.text}</p>
           ) : (
             <>
-              <RACLink href={link.href}>{link.label}</RACLink>
+              <RACLink href={link.href}>{link.text}</RACLink>
               <ChevronRight className="px-1" />
             </>
           )}
