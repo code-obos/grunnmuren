@@ -2,12 +2,11 @@ import { forwardRef } from 'react';
 import { cx } from 'cva';
 import {
   Breadcrumbs as RACBreadcrumbs,
-  Breadcrumb as RACBreadcrumb,
   Link as RACLink,
   type BreadcrumbsProps as RACBreadcrumbsProps,
-  type BreadcrumbProps as RACBreadcrumbProps,
 } from 'react-aria-components';
 import { ChevronRight } from '@obosbbl/grunnmuren-icons-react';
+import { Breadcrumb, BreadcrumbProps } from './Breadcrumb';
 
 const defaultClasses = 'flex flex-wrap';
 
@@ -18,7 +17,7 @@ type BreadcrumbsProps = {
   /** Additional style properties for the element. */
   style?: React.CSSProperties;
   links: Array<{ href: string; text: string }>;
-} & Omit<RACBreadcrumbsProps<RACBreadcrumbProps>, 'className' | 'style'>;
+} & Omit<RACBreadcrumbsProps<BreadcrumbProps>, 'className' | 'style'>;
 
 function Breadcrumbs(props: BreadcrumbsProps) {
   const { className, links, ...restProps } = props;
@@ -26,7 +25,7 @@ function Breadcrumbs(props: BreadcrumbsProps) {
   return (
     <RACBreadcrumbs {...restProps} className={cx(className, defaultClasses)}>
       {links.map((link, i) => (
-        <RACBreadcrumb key={i} className="flex items-center">
+        <Breadcrumb key={i} className="flex items-center">
           {i === links.length - 1 ? (
             <p>{link.text}</p>
           ) : (
@@ -35,7 +34,7 @@ function Breadcrumbs(props: BreadcrumbsProps) {
               <ChevronRight className="px-1" />
             </>
           )}
-        </RACBreadcrumb>
+        </Breadcrumb>
       ))}
     </RACBreadcrumbs>
   );
