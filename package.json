@@ -48,5 +48,8 @@
   },
   "engines": {
     "node": ">=20"
+  },
+  "devDependencies": {
+    "@react-aria/optimize-locales-plugin": "^1.0.2"
   }
 }
