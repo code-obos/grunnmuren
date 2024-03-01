@@ -35,7 +35,7 @@ function Breadcrumb(props: BreadcrumbProps) {
       ) : (
         children
       )}
-      <ChevronRight className="px-1 group-last:hidden" data-slot="separator" />
+      <ChevronRight className="px-1 group-last:hidden" />
     </RACBreadcrumb>
   );
 }
