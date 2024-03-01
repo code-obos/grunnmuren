@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, type Ref } from 'react';
 import { cx } from 'cva';
 import {
   Link,
@@ -20,13 +20,14 @@ type BreadcrumbProps = {
   /** Children  */
 } & Omit<RACBreadcrumbProps, 'className' | 'style'>;
 
-function Breadcrumb(props: BreadcrumbProps) {
+function Breadcrumb(props: BreadcrumbProps, ref: Ref<HTMLLIElement>) {
   const { className, children, href, ...restProps } = props;
 
   return (
     <RACBreadcrumb
       className={cx(defaultClasses, className, 'group')}
       {...restProps}
+      ref={ref}
     >
       {href ? (
         <Link href={href} className="group-last:no-underline">

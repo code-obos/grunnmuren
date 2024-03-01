@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, type Ref } from 'react';
 import { cx } from 'cva';
 import {
   Breadcrumbs as RACBreadcrumbs,
@@ -16,11 +16,15 @@ type BreadcrumbsProps = {
   style?: React.CSSProperties;
 } & Omit<RACBreadcrumbsProps<BreadcrumbProps>, 'className' | 'style'>;
 
-function Breadcrumbs(props: BreadcrumbsProps) {
+function Breadcrumbs(props: BreadcrumbsProps, ref: Ref<HTMLOListElement>) {
   const { className, children, ...restProps } = props;
 
   return (
-    <RACBreadcrumbs {...restProps} className={cx(className, defaultClasses)}>
+    <RACBreadcrumbs
+      {...restProps}
+      className={cx(className, defaultClasses)}
+      ref={ref}
+    >
       {children}
     </RACBreadcrumbs>
   );
