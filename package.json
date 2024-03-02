@@ -29,7 +29,7 @@
     "@types/react": "18.2.55",
     "@typescript-eslint/eslint-plugin": "6.21.0",
     "@typescript-eslint/parser": "6.21.0",
-    "autoprefixer": "10.4.17",
+    "autoprefixer": "10.4.18",
     "bunchee": "4.4.8",
     "eslint": "8.56.0",
     "eslint-config-prettier": "9.1.0",
