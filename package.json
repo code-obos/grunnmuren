@@ -5,6 +5,7 @@
   "repository": {
     "url": "https://github.com/code-obos/grunnmuren"
   },
+  "type": "module",
   "scripts": {
     "build": "pnpm --filter './packages/**' build",
     "build:netlify": "pnpm --filter @obosbbl/grunnmuren-icons-react build && pnpm build:storybook",
