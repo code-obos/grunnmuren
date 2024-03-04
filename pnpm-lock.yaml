@@ -14,6 +14,9 @@ importers:
       '@obosbbl/grunnmuren-tailwind':
         specifier: workspace:*
         version: link:packages/tailwind
+      '@react-aria/optimize-locales-plugin':
+        specifier: 1.0.2
+        version: 1.0.2
       '@storybook/addon-actions':
         specifier: 7.6.17
         version: 7.6.17
@@ -3336,6 +3339,12 @@ packages:
       '@swc/helpers': 0.5.3
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@react-aria/optimize-locales-plugin@1.0.2:
+    resolution: {integrity: sha512-qrExP0PL446RU9o3PAOH9/8+UYjat9I1R5Vcj2ddumhso9Cv/QdOZYhLvm4f+gf7IlN3dbO9zpwpanuEdBWSfg==}
+    dependencies:
+      unplugin: 1.6.0
     dev: false
 
   /@react-aria/overlays@3.20.0(react-dom@18.2.0)(react@18.2.0):

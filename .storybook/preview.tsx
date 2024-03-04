@@ -1,15 +1,15 @@
 import React from 'react';
 import { Preview } from '@storybook/react';
-import { I18nProvider } from '../packages/react/src/index';
+import { GrunnmurenProvider } from '../packages/react/src';
 
 import './storybook.css';
 
 const preview: Preview = {
   decorators: [
     (Story) => (
-      <I18nProvider locale="nb">
+      <GrunnmurenProvider locale="nb">
         <Story />
-      </I18nProvider>
+      </GrunnmurenProvider>
     ),
   ],
 };
