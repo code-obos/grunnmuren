@@ -15,9 +15,9 @@ type BreadcrumbProps = {
 
   /** Additional style properties for the element. */
   style?: React.CSSProperties;
-  href?: string;
 
-  /** Children  */
+  /** The URL to navigate to when clicking the breadcrumb. */
+  href?: string;
 } & Omit<RACBreadcrumbProps, 'className' | 'style'>;
 
 function Breadcrumb(props: BreadcrumbProps, ref: Ref<HTMLLIElement>) {
