@@ -17,6 +17,7 @@ pnpm add @obosbbl/grunnmuren-react@canary
 ## Setup
 
 ### Internationalization
+
 Grunnmuren uses [React Aria Components](https://react-spectrum.adobe.com/react-aria/) under the hood. RAC has built in translation strings for non visible content (for accessibility reasons). It also automatically detects the language based on the browser or system language.
 
 To ensure that the language of the page content matches the accessibility strings you must wrap your application in a `GrunnmurenProvider` with a `locale` prop. This will override RAC's automatic locale selection.
@@ -51,12 +52,12 @@ export default function RootLayout({
 
 See the [RAC internationalization docs](https://react-spectrum.adobe.com/react-aria/internationalization.html) for more information.
 
-
 ### Routing
+
 When using compontents that include links from RAC (For example `Breadcrumbs`), the links will always treat the hrefs as external.
 
-In order to avoid hard refreshing, you need to prop your router navigation-function 
-through `GrunnmurenProvider`. 
+In order to avoid hard refreshing, you need to prop your router navigation-function
+through `GrunnmurenProvider`.
 
 In [Next.js](https://nextjs.org/) this is also done in the root [root layout](https://react-spectrum.adobe.com/react-aria/routing.html).
 
