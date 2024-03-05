@@ -1,6 +1,5 @@
 'use client';
 import { I18nProvider, RouterProvider } from 'react-aria-components';
-import { UrlObject } from 'url';
 
 type GrunnmurenProviderProps = {
   children: React.ReactNode;
@@ -11,7 +10,7 @@ type GrunnmurenProviderProps = {
   locale?: 'nb' | 'sv' | 'en';
 
   /** The router to use for navigation */
-  navigate?: (url: UrlObject | string) => void;
+  navigate?: (path: string) => void;
 };
 
 function GrunnmurenProvider({
