@@ -11,3 +11,4 @@ export * from './textfield';
 export * from './numberfield';
 export * from './alertbox';
 export * from './content';
+export * from './breadcrumbs';
