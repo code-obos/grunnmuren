@@ -6,8 +6,6 @@ import {
 } from 'react-aria-components';
 import { BreadcrumbProps } from './Breadcrumb';
 
-const defaultClasses = 'flex flex-wrap';
-
 type BreadcrumbsProps = {
   /** Additional CSS className for the element. */
   className?: string;
@@ -22,7 +20,7 @@ function Breadcrumbs(props: BreadcrumbsProps, ref: Ref<HTMLOListElement>) {
   return (
     <RACBreadcrumbs
       {...restProps}
-      className={cx(className, defaultClasses)}
+      className={cx(className, 'flex flex-wrap')}
       ref={ref}
     >
       {children}

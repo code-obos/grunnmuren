@@ -7,8 +7,6 @@ import {
 } from 'react-aria-components';
 import { ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 
-const defaultClasses = 'flex items-center';
-
 type BreadcrumbProps = {
   /** Additional CSS className for the element. */
   className?: string;
@@ -25,7 +23,7 @@ function Breadcrumb(props: BreadcrumbProps, ref: Ref<HTMLLIElement>) {
 
   return (
     <RACBreadcrumb
-      className={cx(defaultClasses, className, 'group')}
+      className={cx(className, 'group flex items-center')}
       {...restProps}
       ref={ref}
     >
