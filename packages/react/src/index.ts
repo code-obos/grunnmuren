@@ -1,3 +1,4 @@
+'use client';
 export { Form } from 'react-aria-components';
 
 export * from './GrunnmurenProvider';
