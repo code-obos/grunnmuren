@@ -1,5 +1,5 @@
+import { GrunnmurenProvider } from '@obosbbl/grunnmuren-react';
 import './globals.css';
-import { Providers } from './providers';
 
 export const metadata = {
   title: 'Grunnmuren form examples',
@@ -13,12 +13,12 @@ export default function RootLayout({
   const locale = 'nb';
 
   return (
-    <Providers locale={locale}>
+    <GrunnmurenProvider locale={locale}>
       <html lang={locale}>
         <body>
           <main className="container-prose">{children}</main>
         </body>
       </html>
-    </Providers>
+    </GrunnmurenProvider>
   );
 }
