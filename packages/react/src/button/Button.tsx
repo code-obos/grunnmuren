@@ -1,4 +1,3 @@
-'use client';
 import { useRef, useState, forwardRef, type Ref } from 'react';
 import { cva, type VariantProps } from 'cva';
 import { LoadingSpinner } from '@obosbbl/grunnmuren-icons-react';

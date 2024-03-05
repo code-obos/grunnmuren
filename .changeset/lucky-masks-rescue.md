@@ -2,4 +2,5 @@
 "@obosbbl/grunnmuren-react": patch
 ---
 
-update react-aria-components dependency to 1.1.1
+* Update react-aria-components to 1.1.1
+* Add `use client;` directive to Grunnmuren for better RSC compatibility 

@@ -1,4 +1,3 @@
-'use client';
 import { Children, useId } from 'react';
 import { cva, type VariantProps, cx } from 'cva';
 import { useLocale } from 'react-aria-components';
