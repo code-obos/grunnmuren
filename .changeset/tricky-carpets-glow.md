@@ -2,4 +2,4 @@
 "@obosbbl/grunnmuren-react": minor
 ---
 
-Add RouterProvider in GrunnmurenProvider for internal links
+Add `navigate` prop to `<GrunnmurenProvider>` for integration with client side routers such as next/router.
