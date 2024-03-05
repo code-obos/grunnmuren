@@ -1,4 +1,3 @@
-'use client';
 import { I18nProvider, RouterProvider } from 'react-aria-components';
 
 type GrunnmurenProviderProps = {
