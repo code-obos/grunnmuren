@@ -22,14 +22,27 @@ Grunnmuren uses [React Aria Components](https://react-spectrum.adobe.com/react-a
 
 To ensure that the language of the page content matches the accessibility strings you must wrap your application in a `GrunnmurenProvider` with a `locale` prop. This will override RAC's automatic locale selection.
 
-In [Next.js](https://nextjs.org/) you can do this in the root [root layout](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts#root-layout-required).
+In [Next.js](https://nextjs.org/) you can do this in the root [root layout](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts#root-layout-required). In order to avoid making `RootLayout` a client component, you should import `GrunnmurenProvider` in a providers-file, that uses `"use client"`
 
 Valid locales are `nb`, `sv` or `en`. The provider defaults to `nb` if unspecified.
 
 ```js
-// app/layout.tsx
+// app/providers.tsx
+'use client'
 import { GrunnmurenProvider } from '@obosbbl/grunnmuren-react';
 
+export function Providers({children, locale}: { children: React.ReactNode, locale: 'nb' | 'sv' | 'en'}) {
+
+  return (
+    <GrunnmurenProvider locale={locale}>
+      {children}
+    </GrunnmurenProvider>
+  )
+}
+```
+
+```js
+// app/layout.tsx
 
 export default function RootLayout({
   children,
@@ -41,11 +54,11 @@ export default function RootLayout({
   const locale = 'nb';
 
   return (
-    <GrunnmurenProvider locale={locale}>
+    <Providers locale={locale}>
       <html lang={locale}>
         <body>{children}</body>
       </html>
-    </GrunnmurenProvider>
+    </Providers>
   )
 }
 ```
@@ -59,31 +72,46 @@ When using compontents that include links from RAC (For example `Breadcrumbs`), 
 In order to avoid hard refreshing, you need to prop your router navigation-function
 through `GrunnmurenProvider`. See the [RAC routing docs](https://react-spectrum.adobe.com/react-aria/routing.html)
 
-In [Next.js](https://nextjs.org/) this is also done in the root [root layout](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts#root-layout-required).
+In [Next.js](https://nextjs.org/) this is also done in the root [root layout](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts#root-layout-required). In order to avoid making `RootLayout` a client component, you should import `GrunnmurenProvider` in a providers-file, that uses `"use client"`
 
 ```js
-
-// app/layout.tsx
+// app/providers.tsx
+'use client'
 import { GrunnmurenProvider } from '@obosbbl/grunnmuren-react';
 import { useRouter } from 'next/navigation';
 
+export function Providers({children, locale}: { children: React.ReactNode, locale: string}) {
+  let router = useRouter();
+
+  return (
+    <GrunnmurenProvider locale={locale} navigate={router.push}>
+      {children}
+    </GrunnmurenProvider>
+  )
+}
+```
+
+The `RootLayout` file then looks exactly like it does in the previous step:
+
+```js
+// app/layout.tsx
+import {Providers} from "./providers";
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  let router = useRouter();
 
   // Either 'nb', 'sv' or 'en'
   const locale = 'nb';
 
   return (
-    <GrunnmurenProvider locale={locale} navigate={router.push}>
+    <Providers locale={locale}>
       <html lang={locale}>
         <body>{children}</body>
       </html>
-    </GrunnmurenProvider>
+    </Providers>
   )
 }
 ```
