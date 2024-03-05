@@ -20,7 +20,7 @@ function Breadcrumbs(props: BreadcrumbsProps, ref: Ref<HTMLOListElement>) {
   return (
     <RACBreadcrumbs
       {...restProps}
-      className={cx(className, 'flex flex-wrap')}
+      className={cx(className, 'flex flex-wrap text-sm leading-6')}
       ref={ref}
     >
       {children}
