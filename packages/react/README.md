@@ -57,11 +57,12 @@ See the [RAC internationalization docs](https://react-spectrum.adobe.com/react-a
 When using compontents that include links from RAC (For example `Breadcrumbs`), the links will always treat the hrefs as external.
 
 In order to avoid hard refreshing, you need to prop your router navigation-function
-through `GrunnmurenProvider`.
+through `GrunnmurenProvider`. See the [RAC routing docs](https://react-spectrum.adobe.com/react-aria/routing.html)
 
-In [Next.js](https://nextjs.org/) this is also done in the root [root layout](https://react-spectrum.adobe.com/react-aria/routing.html).
+In [Next.js](https://nextjs.org/) this is also done in the root [root layout](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts#root-layout-required).
 
 ```js
+
 // app/layout.tsx
 import { GrunnmurenProvider } from '@obosbbl/grunnmuren-react';
 import { useRouter } from 'next/navigation';
