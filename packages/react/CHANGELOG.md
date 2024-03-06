@@ -1,5 +1,18 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.14
+
+### Minor Changes
+
+- 60d6d9e: Rename `<I18nProvider />` to `<GrunnmurenProvider />`. Explicitly set supported languages to `nb,`, `sv` and `en`, with `nb` as the default.
+- 5175169: Add Breadcrumbs and Breadcrumb components
+- e0ab2b0: Add `navigate` prop to `<GrunnmurenProvider>` for integration with client side routers such as next/router.
+
+### Patch Changes
+
+- 969ec11: \* Update react-aria-components to 1.1.1
+  - Add `use client;` directive to Grunnmuren for better RSC compatibility
+
 ## 2.0.0-canary.13
 
 ### Minor Changes
