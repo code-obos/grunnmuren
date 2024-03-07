@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.15
+
+### Patch Changes
+
+- a22d890: add white background to inputgroup
+
 ## 2.0.0-canary.14
 
 ### Minor Changes
