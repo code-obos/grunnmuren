@@ -12,7 +12,7 @@ type AccordionItemProps = {
   heading: string;
 };
 
-const defaultStyles = 'bg-white flex flex-col gap-2 p-2';
+const defaultStyles = 'group bg-white flex flex-col gap-2 p-2';
 
 function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
   return (
@@ -23,11 +23,11 @@ function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
 }
 
 function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   return (
     <div
-      className="group border-b border-gray-light group-last:border-0"
+      className="border-b border-gray-light group-last:border-0"
       data-open={open}
       ref={ref}
     >
