@@ -34,12 +34,12 @@ const list = (
   </ul>
 );
 const boligspar = (
-  <Content>
+  <p>
     Ønsker du å overføre penger fra Boligspar Ung til en av dine andre kontoer,
     er det en enkel sak. <a href="#">Logg inn i nettbanken</a> og velg
     &quot;Uttak Boligspar&quot; Ung i menyen. Slik som BSU, kan du ta ut det du
-    har spart inneværende år. Om du vil ta ut mer vil kontoen avsluttes.{' '}
-  </Content>
+    har spart inneværende år. Om du vil ta ut mer vil kontoen avsluttes.
+  </p>
 );
 
 const meta: Meta<typeof Accordion> = {
@@ -65,7 +65,7 @@ const meta: Meta<typeof Accordion> = {
         </AccordionItem>
         <AccordionItem>
           <Heading level={2}>Overfør penger fra Boligspar Ung?</Heading>
-          {boligspar}
+          <Content>{boligspar}</Content>
         </AccordionItem>
       </Accordion>
     );
@@ -92,7 +92,7 @@ export const Default: Story = {
       </AccordionItem>
       <AccordionItem>
         <Heading level={2}>Overfør penger fra Boligspar Ung?</Heading>
-        {boligspar}
+        <Content>{boligspar}</Content>
       </AccordionItem>
     </Accordion>
   ),
@@ -115,7 +115,7 @@ export const WithBackground = () => {
         </AccordionItem>
         <AccordionItem>
           <Heading level={2}>Overfør penger fra Boligspar Ung?</Heading>
-          {boligspar}
+          <Content>{boligspar}</Content>
         </AccordionItem>
       </Accordion>
     </div>
