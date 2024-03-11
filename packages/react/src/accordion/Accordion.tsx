@@ -30,7 +30,8 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
     <div
       className={cx(
         'group border-b border-gray-light last:border-0',
-        '[&_[data-slot="content"]]:m-2 [&_[data-slot="content"]]:hidden [&_[data-slot="content"]]:border-l-[3px] [&_[data-slot="content"]]:border-mint [&_[data-slot="content"]]:px-3.5 [&_[data-slot="content"]]:py-1.5 [&_[data-slot="content"]]:group-data-[open]:block',
+        '[&_[data-slot="content"]]:m-2 [&_[data-slot="content"]]:hidden [&_[data-slot="content"]]:border-l-[3px] [&_[data-slot="content"]]:border-mint [&_[data-slot="content"]]:px-3.5 [&_[data-slot="content"]]:py-1.5',
+        '[&_[data-slot="content"]]:data-[open]:block',
       )}
       data-open={open || undefined}
       ref={ref}
