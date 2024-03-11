@@ -1,4 +1,4 @@
-import { useState, forwardRef, type Ref } from 'react';
+import React, { useState, forwardRef, type Ref } from 'react';
 import { cx } from 'cva';
 import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
 
@@ -9,14 +9,15 @@ type AccordionProps = {
 type AccordionItemProps = {
   children: React.ReactNode;
   className?: string;
-  heading: string;
+  heading: React.ReactNode;
 };
-
-const defaultStyles = 'group bg-white flex flex-col gap-2 p-2';
 
 function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
   return (
-    <div className={cx(defaultStyles, props.className)} ref={ref}>
+    <div
+      className={cx('flex flex-col gap-2 bg-white p-2', props.className)}
+      ref={ref}
+    >
       {props.children}
     </div>
   );
@@ -27,13 +28,15 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
 
   return (
     <div
-      className="border-b border-gray-light group-last:border-0"
-      data-open={open}
+      className={cx(
+        'group border-b border-gray-light last:border-0',
+        '[&_[data-slot="content"]]:m-2 [&_[data-slot="content"]]:hidden [&_[data-slot="content"]]:border-l-[3px] [&_[data-slot="content"]]:border-mint [&_[data-slot="content"]]:px-3.5 [&_[data-slot="content"]]:py-1.5 [&_[data-slot="content"]]:group-data-[open]:block',
+      )}
+      data-open={open || undefined}
       ref={ref}
     >
       <button
         onClick={() => setOpen(!open)}
-        data-open={open}
         className={cx(
           'flex w-full items-center justify-between gap-2 rounded-md p-2',
         )}
@@ -43,16 +46,11 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
         </p>
         <ChevronDown
           className={cx(
-            'text-base transition-transform duration-150 motion-reduce:transition-none',
-            open && 'group-data-[open]:rotate-180',
+            'text-base transition-transform duration-150 group-data-[open]:rotate-180 motion-reduce:transition-none',
           )}
         />
       </button>
-      {open && (
-        <div className="m-2 border-l-[3px] border-mint px-3.5 py-1.5">
-          {props.children}
-        </div>
-      )}
+      {props.children}
     </div>
   );
 }

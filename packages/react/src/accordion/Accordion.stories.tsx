@@ -1,5 +1,6 @@
 import { StoryObj, Meta } from '@storybook/react';
 import { Accordion, AccordionItem } from './Accordion';
+import { Content, Heading } from '..';
 
 const rammelån =
   'Den største forskjellen mellom et vanlig boliglån og et rammelån er fleksibiliteten. Med et rammelån kan du velge å betale mindre ned på lånet i trangere tider, hvis du for eksempel i en periode opplever å få andre uforutsette utgifter. Med et rammelån kan det friste å bruke mer penger enn det du egentlig har behov for. Derfor er det viktig at du har god økonomisk disiplin, og vi anbefaler alltid å sette opp et fast månedlig trekk som minimum dekker dekker rentene. Du kan når som helst betale ned på rammelånet ditt. Det gjør du enkelt i mobilbanken eller nettbanken ved å overføre beløpet du ønsker fra en konto og inn til rammelånet.';
@@ -33,12 +34,12 @@ const list = (
   </ul>
 );
 const boligspar = (
-  <p>
+  <Content>
     Ønsker du å overføre penger fra Boligspar Ung til en av dine andre kontoer,
     er det en enkel sak. <a href="#">Logg inn i nettbanken</a> og velg
     &quot;Uttak Boligspar&quot; Ung i menyen. Slik som BSU, kan du ta ut det du
     har spart inneværende år. Om du vil ta ut mer vil kontoen avsluttes.{' '}
-  </p>
+  </Content>
 );
 
 const meta: Meta<typeof Accordion> = {
@@ -51,17 +52,35 @@ const meta: Meta<typeof Accordion> = {
   render: () => {
     return (
       <Accordion>
-        <AccordionItem heading="Hvordan betaler jeg ned på rammelånet?">
-          {rammelån}
+        <AccordionItem
+          heading={
+            <Heading level={2}>Hvordan betaler jeg ned på rammelånet?</Heading>
+          }
+        >
+          <Content>{rammelån}</Content>
         </AccordionItem>
-        <AccordionItem heading="Bør jeg velge rammelån eller boliglån?">
-          <div>
+        <AccordionItem
+          heading={
+            <Heading level={2}>Bør jeg velge rammelån eller boliglån?</Heading>
+          }
+        >
+          <Content>
             {rammelån2}
             {list}
-          </div>
+          </Content>
         </AccordionItem>
-        <AccordionItem heading="Overfør penger fra Boligspar Ung?">
-          {boligspar}
+        <AccordionItem
+          heading={
+            <Heading level={2}>Overfør penger fra Boligspar Ung?</Heading>
+          }
+        >
+          <Content>
+            Ønsker du å overføre penger fra Boligspar Ung til en av dine andre
+            kontoer, er det en enkel sak. <a href="#">Logg inn i nettbanken</a>{' '}
+            og velg &quot;Uttak Boligspar&quot; Ung i menyen. Slik som BSU, kan
+            du ta ut det du har spart inneværende år. Om du vil ta ut mer vil
+            kontoen avsluttes.{' '}
+          </Content>
         </AccordionItem>
       </Accordion>
     );
