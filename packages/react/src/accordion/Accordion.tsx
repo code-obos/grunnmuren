@@ -15,7 +15,10 @@ type AccordionItemProps = {
 function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
   return (
     <div
-      className={cx('flex flex-col gap-2 bg-white p-2', props.className)}
+      className={cx(
+        'flex flex-col gap-2 rounded-lg bg-white p-2',
+        props.className,
+      )}
       ref={ref}
     >
       {props.children}
