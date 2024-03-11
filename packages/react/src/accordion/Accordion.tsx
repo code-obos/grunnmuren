@@ -41,7 +41,10 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
          * render the accordion item, we can use the level-prop to identify the heading component */
         if (child.props.level) {
           return (
-            <Heading level={child.props.level}>
+            <Heading
+              level={child.props.level}
+              className='className="flex-1 text-left font-semibold leading-7'
+            >
               <button
                 onClick={() => setOpen(!open)}
                 className={cx(
