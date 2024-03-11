@@ -1,15 +1,15 @@
-import React, { useState, forwardRef, type Ref } from 'react';
+import React, { useState, forwardRef, type Ref, Children } from 'react';
 import { cx } from 'cva';
 import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
+import { Heading } from '../content';
 
 type AccordionProps = {
-  children: React.ReactNode;
+  children: React.JSX.Element[];
   className?: string;
 };
 type AccordionItemProps = {
-  children: React.ReactNode;
+  children: React.JSX.Element[];
   className?: string;
-  heading: React.ReactNode;
 };
 
 function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
@@ -36,22 +36,31 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
       data-open={open || undefined}
       ref={ref}
     >
-      <button
-        onClick={() => setOpen(!open)}
-        className={cx(
-          'flex w-full items-center justify-between gap-2 rounded-md p-2',
-        )}
-      >
-        <p className="flex-1 text-left font-semibold leading-7">
-          {props.heading}
-        </p>
-        <ChevronDown
-          className={cx(
-            'text-base transition-transform duration-150 group-data-[open]:rotate-180 motion-reduce:transition-none',
-          )}
-        />
-      </button>
-      {props.children}
+      {Children.map(props.children, (child) => {
+        /** Since we are using <Heading> and <Content> from Grunnmuren to
+         * render the accordion item, we can use the level-prop to identify the heading component */
+        if (child.props.level) {
+          return (
+            <Heading level={child.props.level}>
+              <button
+                onClick={() => setOpen(!open)}
+                className={cx(
+                  'flex w-full items-center justify-between gap-2 rounded-md p-2',
+                )}
+              >
+                {child.props.children}
+                <ChevronDown
+                  className={cx(
+                    'text-base transition-transform duration-150 group-data-[open]:rotate-180 motion-reduce:transition-none',
+                  )}
+                />
+              </button>
+            </Heading>
+          );
+        } else {
+          return child;
+        }
+      })}
     </div>
   );
 }

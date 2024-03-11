@@ -52,35 +52,20 @@ const meta: Meta<typeof Accordion> = {
   render: () => {
     return (
       <Accordion>
-        <AccordionItem
-          heading={
-            <Heading level={2}>Hvordan betaler jeg ned på rammelånet?</Heading>
-          }
-        >
+        <AccordionItem>
+          <Heading level={2}>Hvordan betaler jeg ned på rammelånet?</Heading>
           <Content>{rammelån}</Content>
         </AccordionItem>
-        <AccordionItem
-          heading={
-            <Heading level={2}>Bør jeg velge rammelån eller boliglån?</Heading>
-          }
-        >
+        <AccordionItem>
+          <Heading level={2}>Bør jeg velge rammelån eller boliglån?</Heading>
           <Content>
             {rammelån2}
             {list}
           </Content>
         </AccordionItem>
-        <AccordionItem
-          heading={
-            <Heading level={2}>Overfør penger fra Boligspar Ung?</Heading>
-          }
-        >
-          <Content>
-            Ønsker du å overføre penger fra Boligspar Ung til en av dine andre
-            kontoer, er det en enkel sak. <a href="#">Logg inn i nettbanken</a>{' '}
-            og velg &quot;Uttak Boligspar&quot; Ung i menyen. Slik som BSU, kan
-            du ta ut det du har spart inneværende år. Om du vil ta ut mer vil
-            kontoen avsluttes.{' '}
-          </Content>
+        <AccordionItem>
+          <Heading level={2}>Overfør penger fra Boligspar Ung?</Heading>
+          {boligspar}
         </AccordionItem>
       </Accordion>
     );
@@ -92,40 +77,44 @@ export default meta;
 type Story = StoryObj<typeof Accordion>;
 
 export const Default: Story = {
-  args: {
-    children: (
-      <Accordion>
-        <AccordionItem heading="Hvordan betaler jeg ned på rammelånet?">
-          {rammelån}
-        </AccordionItem>
-        <AccordionItem heading="Bør jeg velge rammelån eller boliglån?">
-          <>
-            {rammelån2}
-            {list}
-          </>
-        </AccordionItem>
-        <AccordionItem heading="Overfør penger fra Boligspar Ung?">
-          {boligspar}
-        </AccordionItem>
-      </Accordion>
-    ),
-  },
+  render: () => (
+    <Accordion>
+      <AccordionItem>
+        <Heading level={2}>Hvordan betaler jeg ned på rammelånet?</Heading>
+        <Content>{rammelån}</Content>
+      </AccordionItem>
+      <AccordionItem>
+        <Heading level={2}>Bør jeg velge rammelån eller boliglån?</Heading>
+        <Content>
+          {rammelån2}
+          {list}
+        </Content>
+      </AccordionItem>
+      <AccordionItem>
+        <Heading level={2}>Overfør penger fra Boligspar Ung?</Heading>
+        {boligspar}
+      </AccordionItem>
+    </Accordion>
+  ),
 };
 
 export const WithBackground = () => {
   return (
     <div className="bg-mint p-6">
       <Accordion>
-        <AccordionItem heading="Hvordan betaler jeg ned på rammelånet?">
-          {rammelån}
+        <AccordionItem>
+          <Heading level={2}>Hvordan betaler jeg ned på rammelånet?</Heading>
+          <Content>{rammelån}</Content>
         </AccordionItem>
-        <AccordionItem heading="Bør jeg velge rammelån eller boliglån?">
-          <>
+        <AccordionItem>
+          <Heading level={2}>Bør jeg velge rammelån eller boliglån?</Heading>
+          <Content>
             {rammelån2}
             {list}
-          </>
+          </Content>
         </AccordionItem>
-        <AccordionItem heading="Overfør penger fra Boligspar Ung?">
+        <AccordionItem>
+          <Heading level={2}>Overfør penger fra Boligspar Ung?</Heading>
           {boligspar}
         </AccordionItem>
       </Accordion>
