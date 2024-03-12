@@ -15,10 +15,7 @@ type AccordionItemProps = {
 function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
   return (
     <div
-      className={cx(
-        'flex flex-col gap-2 rounded-lg bg-white p-2',
-        props.className,
-      )}
+      className={cx('flex flex-col rounded-lg bg-white p-2', props.className)}
       ref={ref}
     >
       {props.children}
@@ -32,8 +29,9 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
   return (
     <div
       className={cx(
-        'group border-b border-gray-light last:border-0',
-        '[&_[data-slot="content"]]:m-2 [&_[data-slot="content"]]:hidden [&_[data-slot="content"]]:border-l-[3px] [&_[data-slot="content"]]:border-mint [&_[data-slot="content"]]:px-3.5 [&_[data-slot="content"]]:py-1.5',
+        'group relative px-2',
+        'after:absolute after:left-[9px] after:right-[9px] after:h-px after:bg-gray-light',
+        '[&_[data-slot="content"]]:mb-[5px] [&_[data-slot="content"]]:hidden [&_[data-slot="content"]]:border-l-[3px] [&_[data-slot="content"]]:border-mint [&_[data-slot="content"]]:px-3.5 [&_[data-slot="content"]]:py-1.5',
         '[&_[data-slot="content"]]:data-[open]:block',
       )}
       data-open={open || undefined}
@@ -44,14 +42,11 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
          * render the accordion item, we can use the level-prop to identify the heading component */
         if (child.props.level) {
           return (
-            <Heading
-              level={child.props.level}
-              className='className="flex-1 text-left font-semibold leading-7'
-            >
+            <Heading level={child.props.level}>
               <button
                 onClick={() => setOpen(!open)}
                 className={cx(
-                  'flex w-full items-center justify-between gap-2 rounded-md p-2',
+                  'flex w-full flex-1 items-center justify-between rounded-md py-[18px] text-left font-semibold leading-7',
                 )}
               >
                 {child.props.children}
