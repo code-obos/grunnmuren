@@ -1,10 +1,10 @@
-import React, { useState, forwardRef, type Ref, Children } from 'react';
+import React, { useState, forwardRef, type Ref, Children, useId } from 'react';
 import { cx } from 'cva';
 import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
 import { Heading } from '../content';
 
 type AccordionProps = {
-  children: React.JSX.Element[];
+  children: React.JSX.Element[] | React.JSX.Element;
   className?: string;
 };
 type AccordionItemProps = {
@@ -25,13 +25,13 @@ function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
 
 function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
   const [open, setOpen] = useState(false);
+  const contentId = useId();
 
   return (
     <div
       className={cx(
         'group relative px-2',
-        'after:absolute after:left-[9px] after:right-[9px] after:h-px after:bg-gray-light',
-        '[&_[data-slot="content"]]:mb-[5px] [&_[data-slot="content"]]:hidden [&_[data-slot="content"]]:border-l-[3px] [&_[data-slot="content"]]:border-mint [&_[data-slot="content"]]:px-3.5 [&_[data-slot="content"]]:py-1.5',
+        '[&_[data-slot="content"]]:mb-[10px] [&_[data-slot="content"]]:hidden [&_[data-slot="content"]]:border-l-[3px] [&_[data-slot="content"]]:border-mint [&_[data-slot="content"]]:px-3.5 [&_[data-slot="content"]]:py-1.5',
         '[&_[data-slot="content"]]:data-[open]:block',
       )}
       data-open={open || undefined}
@@ -48,6 +48,8 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
                 className={cx(
                   'flex w-full flex-1 items-center justify-between rounded-md py-[18px] text-left font-semibold leading-7',
                 )}
+                aria-expanded={open}
+                aria-controls={contentId}
               >
                 {child.props.children}
                 <ChevronDown
@@ -59,7 +61,17 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
             </Heading>
           );
         } else {
-          return child;
+          return (
+            <div
+              aria-labelledby={contentId}
+              role="region"
+              className={cx(
+                'after:absolute after:left-[9px] after:right-[9px] after:h-px after:bg-gray-light after:group-last:h-0',
+              )}
+            >
+              {child}
+            </div>
+          );
         }
       })}
     </div>

@@ -121,3 +121,14 @@ export const WithBackground = () => {
     </div>
   );
 };
+
+export const Single: Story = {
+  render: () => (
+    <Accordion>
+      <AccordionItem>
+        <Heading level={2}>Hvordan betaler jeg ned på rammelånet?</Heading>
+        <Content>{rammelån}</Content>
+      </AccordionItem>
+    </Accordion>
+  ),
+};
