@@ -31,8 +31,8 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
     <div
       className={cx(
         'group relative px-2',
-        '[&_[data-slot="content"]]:mb-[10px] [&_[data-slot="content"]]:hidden [&_[data-slot="content"]]:border-l-[3px] [&_[data-slot="content"]]:border-mint [&_[data-slot="content"]]:px-3.5 [&_[data-slot="content"]]:py-1.5',
-        '[&_[data-slot="content"]]:data-[open]:block',
+        /** Pseudoelement for the gray bottom border */
+        'after:absolute after:left-[9px] after:right-[9px] after:h-px after:bg-gray-light after:last:h-0',
       )}
       data-open={open || undefined}
       ref={ref}
@@ -66,10 +66,14 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
               aria-labelledby={contentId}
               role="region"
               className={cx(
-                'after:absolute after:left-[9px] after:right-[9px] after:h-px after:bg-gray-light after:group-last:h-0',
+                '[&_[data-slot="content"]]:mb-[10px] [&_[data-slot="content"]]:border-l-[3px] [&_[data-slot="content"]]:border-mint [&_[data-slot="content"]]:px-3.5 [&_[data-slot="content"]]:py-1.5',
+                'grid transition-all duration-300',
+                open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
               )}
+              // @ts-expect-error type error until this is added to react: https://github.com/DefinitelyTyped/DefinitelyTyped/pull/60822
+              inert={open || undefined}
             >
-              {child}
+              <div className="overflow-hidden">{child}</div>
             </div>
           );
         }
