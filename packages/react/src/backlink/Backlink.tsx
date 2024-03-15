@@ -22,7 +22,7 @@ function Backlink(props: BacklinkProps, ref: Ref<HTMLAnchorElement>) {
 
   return (
     <RACLink
-      className={cx(className, 'flex max-w-fit items-center')}
+      className={cx(className, 'flex max-w-fit items-center py-2.5')}
       {...restProps}
       ref={ref}
       href={href}
