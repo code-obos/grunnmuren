@@ -5,11 +5,21 @@ import { Heading } from '../content';
 
 type AccordionProps = {
   children: React.JSX.Element[] | React.JSX.Element;
+
+  /** Additional CSS className for the element. */
   className?: string;
+
+  /** Additional style properties for the element. */
+  style?: React.CSSProperties;
 };
 type AccordionItemProps = {
   children: React.JSX.Element[];
+
+  /** Additional CSS className for the element. */
   className?: string;
+
+  /** Additional style properties for the element. */
+  style?: React.CSSProperties;
 };
 
 function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
