@@ -36,6 +36,7 @@ function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
 function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
   const [open, setOpen] = useState(false);
   const contentId = useId();
+  const buttonId = useId();
 
   return (
     <div
@@ -44,7 +45,6 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
         /** Pseudoelement for the gray bottom border */
         'after:absolute after:left-[9px] after:right-[9px] after:h-px after:bg-gray-light after:last:h-0',
       )}
-      data-open={open || undefined}
       ref={ref}
     >
       {Children.map(props.children, (child) => {
@@ -59,6 +59,7 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
                   'flex w-full flex-1 items-center justify-between rounded-md py-[18px] text-left font-semibold leading-7',
                 )}
                 aria-expanded={open}
+                id={buttonId}
                 aria-controls={contentId}
               >
                 {child.props.children}
@@ -73,7 +74,8 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
         } else {
           return (
             <div
-              aria-labelledby={contentId}
+              id={contentId}
+              aria-labelledby={buttonId}
               role="region"
               className={cx(
                 '[&_[data-slot="content"]]:mb-[10px] [&_[data-slot="content"]]:border-l-[3px] [&_[data-slot="content"]]:border-mint [&_[data-slot="content"]]:px-3.5 [&_[data-slot="content"]]:py-1.5',
