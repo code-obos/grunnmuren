@@ -25,7 +25,7 @@ type AccordionItemProps = {
 function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
   return (
     <div
-      className={cx('flex flex-col rounded-lg bg-white p-2', props.className)}
+      className={cx(props.className, 'flex flex-col rounded-lg bg-white p-2')}
       ref={ref}
     >
       {props.children}
@@ -41,6 +41,7 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
   return (
     <div
       className={cx(
+        props.className,
         'group relative px-2',
         /** Pseudoelement for the gray bottom border */
         'after:absolute after:left-[9px] after:right-[9px] after:h-px after:bg-gray-light after:last:h-0',
@@ -55,19 +56,13 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
             <Heading level={child.props.level}>
               <button
                 onClick={() => setOpen(!open)}
-                className={cx(
-                  'flex w-full flex-1 items-center justify-between rounded-md py-[18px] text-left font-semibold leading-7',
-                )}
+                className="flex w-full flex-1 items-center justify-between rounded-md py-[18px] text-left font-semibold leading-7"
                 aria-expanded={open}
                 id={buttonId}
                 aria-controls={contentId}
               >
                 {child.props.children}
-                <ChevronDown
-                  className={cx(
-                    'text-base transition-transform duration-150 group-data-[open]:rotate-180 motion-reduce:transition-none',
-                  )}
-                />
+                <ChevronDown className="text-base transition-transform duration-150 group-data-[open]:rotate-180 motion-reduce:transition-none" />
               </button>
             </Heading>
           );
@@ -79,11 +74,12 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
               role="region"
               className={cx(
                 '[&_[data-slot="content"]]:mb-[10px] [&_[data-slot="content"]]:border-l-[3px] [&_[data-slot="content"]]:border-mint [&_[data-slot="content"]]:px-3.5 [&_[data-slot="content"]]:py-1.5',
+                '',
                 'grid transition-all duration-300',
                 open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
               )}
               // @ts-expect-error type error until this is added to react: https://github.com/DefinitelyTyped/DefinitelyTyped/pull/60822
-              inert={open || undefined}
+              inert={open ? undefined : 'true'}
             >
               <div className="overflow-hidden">{child}</div>
             </div>
