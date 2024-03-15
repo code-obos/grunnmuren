@@ -1,7 +1,7 @@
 import { forwardRef, type Ref } from 'react';
 import { cx } from 'cva';
 import { Link as RACLink, type LinkProps } from 'react-aria-components';
-import { ArrowLeft } from '@obosbbl/grunnmuren-icons-react';
+import { ChevronLeft } from '@obosbbl/grunnmuren-icons-react';
 
 type BacklinkProps = {
   /** Additional CSS className for the element. */
@@ -28,7 +28,7 @@ function Backlink(props: BacklinkProps, ref: Ref<HTMLAnchorElement>) {
       href={href}
     >
       <>
-        <ArrowLeft className={cx('mr-2', iconStyle)} />
+        <ChevronLeft className={cx('mr-2', iconStyle)} />
         {children}
       </>
     </RACLink>
