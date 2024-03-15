@@ -22,6 +22,13 @@ type AccordionItemProps = {
   style?: React.CSSProperties;
 };
 
+type AccordionContentProps = {
+  children: React.JSX.Element;
+  contentId: string;
+  buttonId: string;
+  open: boolean;
+};
+
 function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
   return (
     <div
@@ -68,21 +75,13 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
           );
         } else {
           return (
-            <div
-              id={contentId}
-              aria-labelledby={buttonId}
-              role="region"
-              className={cx(
-                '[&_[data-slot="content"]]:mb-[10px] [&_[data-slot="content"]]:border-l-[3px] [&_[data-slot="content"]]:border-mint [&_[data-slot="content"]]:px-3.5 [&_[data-slot="content"]]:py-1.5',
-                'text-sm font-light leading-6',
-                'grid transition-all duration-300',
-                open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
-              )}
-              // @ts-expect-error type error until this is added to react: https://github.com/DefinitelyTyped/DefinitelyTyped/pull/60822
-              inert={open ? undefined : 'true'}
+            <AccordionContent
+              contentId={contentId}
+              buttonId={buttonId}
+              open={open}
             >
-              <div className="overflow-hidden">{child}</div>
-            </div>
+              {child}
+            </AccordionContent>
           );
         }
       })}
@@ -96,4 +95,25 @@ export {
   _Accordion as Accordion,
   _AccordionItem as AccordionItem,
   type AccordionProps,
+};
+
+const AccordionContent = (props: AccordionContentProps) => {
+  const { children, contentId, buttonId, open } = props;
+  return (
+    <div
+      id={contentId}
+      aria-labelledby={buttonId}
+      role="region"
+      className={cx(
+        '[&_[data-slot="content"]]:mb-[10px] [&_[data-slot="content"]]:border-l-[3px] [&_[data-slot="content"]]:border-mint [&_[data-slot="content"]]:px-3.5 [&_[data-slot="content"]]:py-1.5',
+        'text-sm font-light leading-6',
+        'grid transition-all duration-300',
+        open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
+      )}
+      // @ts-expect-error type error until this is added to react: https://github.com/DefinitelyTyped/DefinitelyTyped/pull/60822
+      inert={open ? undefined : 'true'}
+    >
+      <div className="overflow-hidden">{children}</div>
+    </div>
+  );
 };
