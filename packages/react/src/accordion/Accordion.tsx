@@ -74,7 +74,7 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
               role="region"
               className={cx(
                 '[&_[data-slot="content"]]:mb-[10px] [&_[data-slot="content"]]:border-l-[3px] [&_[data-slot="content"]]:border-mint [&_[data-slot="content"]]:px-3.5 [&_[data-slot="content"]]:py-1.5',
-                '',
+                'text-sm font-light leading-6',
                 'grid transition-all duration-300',
                 open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
               )}
