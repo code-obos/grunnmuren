@@ -112,11 +112,12 @@ const AccordionContent = (props: AccordionContentProps) => {
       className={cx(
         'text-sm font-light leading-6',
         '[&_[data-slot="content"]]:px-3.5 [&_[data-slot="content"]]:py-1.5',
-        'grid transition-all duration-300 [&_[data-slot="content"]]:overflow-hidden [&_[data-slot="content"]]:after:transition-all [&_[data-slot="content"]]:after:duration-300',
-        '[&_[data-slot="content"]]:relative [&_[data-slot="content"]]:after:absolute [&_[data-slot="content"]]:after:bottom-1.5 [&_[data-slot="content"]]:after:left-0 [&_[data-slot="content"]]:after:top-0 [&_[data-slot="content"]]:after:w-[3px]',
+        '[&_[data-slot="content"]]:border-l-3',
+        'grid transition-all duration-300 [&_[data-slot="content"]]:overflow-hidden [&_[data-slot="content"]]:transition-all [&_[data-slot="content"]]:duration-300',
+        '[&_[data-slot="content"]]:border-l-[3px]',
         open
-          ? 'mb-0 grid-rows-[1fr] [&_[data-slot="content"]]:after:bg-mint'
-          : '[&_[data-slot="content"]]:after:transparent -mb-3 grid-rows-[0fr]',
+          ? 'mb-[10px] grid-rows-[1fr] [&_[data-slot="content"]]:border-mint'
+          : '-mb-3 grid-rows-[0fr] [&_[data-slot="content"]]:border-transparent',
       )}
       // @ts-expect-error type error until this is added to react: https://github.com/DefinitelyTyped/DefinitelyTyped/pull/60822
       inert={open ? undefined : 'true'}
