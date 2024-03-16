@@ -69,7 +69,12 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
                 aria-controls={contentId}
               >
                 {child.props.children}
-                <ChevronDown className="text-base transition-transform duration-150 group-data-[open]:rotate-180 motion-reduce:transition-none" />
+                <ChevronDown
+                  className={cx(
+                    'text-base transition-transform duration-150 motion-reduce:transition-none',
+                    open && 'rotate-180',
+                  )}
+                />
               </button>
             </Heading>
           );
@@ -105,15 +110,18 @@ const AccordionContent = (props: AccordionContentProps) => {
       aria-labelledby={buttonId}
       role="region"
       className={cx(
-        '[&_[data-slot="content"]]:mb-[10px] [&_[data-slot="content"]]:border-l-[3px] [&_[data-slot="content"]]:border-mint [&_[data-slot="content"]]:px-3.5 [&_[data-slot="content"]]:py-1.5',
         'text-sm font-light leading-6',
-        'grid transition-all duration-300',
-        open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
+        '[&_[data-slot="content"]]:px-3.5 [&_[data-slot="content"]]:py-1.5',
+        'grid transition-all duration-300 [&_[data-slot="content"]]:overflow-hidden [&_[data-slot="content"]]:after:transition-all [&_[data-slot="content"]]:after:duration-300',
+        '[&_[data-slot="content"]]:relative [&_[data-slot="content"]]:after:absolute [&_[data-slot="content"]]:after:bottom-1.5 [&_[data-slot="content"]]:after:left-0 [&_[data-slot="content"]]:after:top-0 [&_[data-slot="content"]]:after:w-[3px]',
+        open
+          ? 'mb-0 grid-rows-[1fr] [&_[data-slot="content"]]:after:bg-mint'
+          : '[&_[data-slot="content"]]:after:transparent -mb-3 grid-rows-[0fr]',
       )}
       // @ts-expect-error type error until this is added to react: https://github.com/DefinitelyTyped/DefinitelyTyped/pull/60822
       inert={open ? undefined : 'true'}
     >
-      <div className="overflow-hidden">{children}</div>
+      {children}
     </div>
   );
 };
