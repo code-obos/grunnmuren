@@ -111,10 +111,8 @@ const AccordionContent = (props: AccordionContentProps) => {
       role="region"
       className={cx(
         'text-sm font-light leading-6',
-        '[&_[data-slot="content"]]:px-3.5 [&_[data-slot="content"]]:py-1.5',
-        '[&_[data-slot="content"]]:border-l-3',
+        '[&_[data-slot="content"]]:border-l-[3px] [&_[data-slot="content"]]:px-3.5 [&_[data-slot="content"]]:py-1.5',
         'grid transition-all duration-300 [&_[data-slot="content"]]:overflow-hidden [&_[data-slot="content"]]:transition-all [&_[data-slot="content"]]:duration-300',
-        '[&_[data-slot="content"]]:border-l-[3px]',
         open
           ? 'mb-[10px] grid-rows-[1fr] [&_[data-slot="content"]]:border-mint'
           : '-mb-3 grid-rows-[0fr] [&_[data-slot="content"]]:border-transparent',
