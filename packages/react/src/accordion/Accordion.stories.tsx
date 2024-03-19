@@ -45,10 +45,6 @@ const boligspar = (
 const meta: Meta<typeof Accordion> = {
   title: 'Accordion',
   component: Accordion,
-  parameters: {
-    // disable built in padding in story, because we provide our own
-    layout: 'fullscreen',
-  },
   render: () => {
     return (
       <Accordion>
