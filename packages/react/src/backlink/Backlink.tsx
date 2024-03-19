@@ -22,13 +22,18 @@ function Backlink(props: BacklinkProps, ref: Ref<HTMLAnchorElement>) {
 
   return (
     <RACLink
-      className={cx(className, 'flex max-w-fit items-center py-2.5')}
+      className={cx(className, 'group flex max-w-fit items-center py-2.5')}
       {...restProps}
       ref={ref}
       href={href}
     >
       <>
-        <ChevronLeft className={cx('mr-2', iconStyle)} />
+        <ChevronLeft
+          className={cx(
+            'mr-2 transition-transform duration-300 group-hover:-translate-x-1',
+            iconStyle,
+          )}
+        />
         {children}
       </>
     </RACLink>
