@@ -3,6 +3,7 @@ import { Provider } from 'react-aria-components';
 import { cx } from 'cva';
 import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
 
+import { useClientLayoutEffect } from '../utils/useClientLayoutEffect';
 import { HeadingContext, ContentContext } from '../content';
 
 type AccordionProps = {
@@ -23,6 +24,13 @@ type AccordionItemProps = {
 
   /** Additional style properties for the element. */
   style?: React.CSSProperties;
+
+  /** Whether the accordion is open (controlled) */
+  isOpen?: boolean;
+  /** Whether the accordion is open by default (uncontrolled) */
+  defaultOpen?: boolean;
+  /** Handler that is called when the accordion's open state changes */
+  onOpenChange?: (isOpen: boolean) => void;
 };
 
 function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
@@ -52,10 +60,49 @@ function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
 }
 
 function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
-  const { className, children, ...restProps } = props;
-  const [isOpen, setIsOpen] = useState(false);
+  const {
+    className,
+    children,
+    defaultOpen = false,
+    isOpen: controlledIsOpen,
+    onOpenChange,
+    ...restProps
+  } = props;
+
   const contentId = useId();
   const buttonId = useId();
+
+  const isControlled = controlledIsOpen != null;
+
+  // This component has internal state that controls whether it is open or not,
+  // regardless if we are controlled or uncontrolled.
+  // If we are controlled, we use a layout effect to sync the controlled state
+  // with the internal state.
+  //
+  const [isOpen, setIsOpen] = useState(
+    // If we are controlled, use that open state, otherwise use the uncontrolled
+    isControlled ? controlledIsOpen : defaultOpen,
+  );
+
+  useClientLayoutEffect(() => {
+    if (isControlled) {
+      setIsOpen(controlledIsOpen);
+    }
+  }, [controlledIsOpen, isControlled]);
+
+  const handleOpenChange = () => {
+    const newOpenState = !isOpen;
+
+    if (!isControlled) {
+      setIsOpen(newOpenState);
+    }
+
+    // Always call the change handler, even if we're uncontrolled.
+    // Easier to add stuff such as tracking etc.
+    if (onOpenChange) {
+      onOpenChange(newOpenState);
+    }
+  };
 
   return (
     <div
@@ -79,7 +126,7 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
                   // the z-index is necessary for the focus ring to be drawn above the left border of the content
                   className="relative z-10 flex min-h-[44px] w-full items-center justify-between gap-1.5 rounded-sm text-left focus:outline-none focus-visible:ring focus-visible:ring-black"
                   id={buttonId}
-                  onClick={() => setIsOpen((isOpen) => !isOpen)}
+                  onClick={handleOpenChange}
                 >
                   {children}
                   <ChevronDown
@@ -101,7 +148,7 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
               inert: isOpen ? undefined : 'true',
               'aria-labelledby': buttonId,
               _wrapper: (children) => (
-                <div className="grid grid-rows-[0fr] transition-all duration-300 group-data-[open='true']:grid-rows-[1fr] motion-reduce:transition-none">
+                <div className="grid grid-rows-[0fr] border-l-[3px] border-mint transition-all duration-300 group-data-[open='true']:grid-rows-[1fr] motion-reduce:transition-none">
                   {children}
                 </div>
               ),
@@ -121,4 +168,5 @@ export {
   _Accordion as Accordion,
   _AccordionItem as AccordionItem,
   type AccordionProps,
+  type AccordionItemProps,
 };
