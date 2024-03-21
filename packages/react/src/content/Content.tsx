@@ -5,10 +5,11 @@ type HeadingProps = HTMLProps<HTMLHeadingElement> & {
   children?: React.ReactNode;
   /** The level of the heading */
   level: 1 | 2 | 3 | 4 | 5 | 6;
-  _render?: (children: React.ReactNode) => React.ReactNode;
+  /** @private Used internally for slotted components */
+  _innerWrapper?: (children: React.ReactNode) => React.ReactNode;
 };
 
-export const HeadingContext = createContext<
+const HeadingContext = createContext<
   ContextValue<HeadingProps, HTMLHeadingElement>
 >({});
 
@@ -18,33 +19,40 @@ const Heading = (
 ) => {
   [props, ref] = useContextProps(props, ref, HeadingContext);
 
-  let { children, level, className, _render: render, ...restProps } = props;
+  const {
+    children,
+    level,
+    className,
+    _innerWrapper: innerWrapper,
+    ...restProps
+  } = props;
 
   const Element = `h${level}` as const;
 
   return (
     <Element {...restProps} className={className} data-slot="heading">
-      {render ? render(children) : children}
+      {innerWrapper ? innerWrapper(children) : children}
     </Element>
   );
 };
 
-type ContentProps = HTMLProps<HTMLDivElement> & {
-  children: React.ReactNode;
-  _wrapper?: (children: React.ReactNode) => React.ReactNode;
-};
-
-export const ContentContext = createContext<
+const ContentContext = createContext<
   ContextValue<ContentProps, HTMLDivElement>
 >({});
 
+type ContentProps = HTMLProps<HTMLDivElement> & {
+  children: React.ReactNode;
+  /** @private Used internally for slotted components */
+  _outerWrapper?: (children: React.ReactNode) => React.ReactNode;
+};
+
 const Content = (props: ContentProps, ref: ForwardedRef<HTMLDivElement>) => {
   [props, ref] = useContextProps(props, ref, ContentContext);
-  const { _wrapper: wrapper, ...restProps } = props;
+  const { _outerWrapper: outerWrapper, ...restProps } = props;
 
   const content = <div {...restProps} data-slot="content" />;
 
-  return wrapper ? wrapper(content) : content;
+  return outerWrapper ? outerWrapper(content) : content;
 };
 
 type FooterProps = HTMLProps<HTMLDivElement> & {
@@ -56,8 +64,10 @@ const Footer = (props: FooterProps) => <div {...props} data-slot="footer" />;
 export {
   type HeadingProps,
   Heading,
+  HeadingContext,
   type ContentProps,
   Content,
+  ContentContext,
   type FooterProps,
   Footer,
 };

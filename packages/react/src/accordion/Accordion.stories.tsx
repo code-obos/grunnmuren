@@ -81,7 +81,7 @@ function controlledReducer(state: boolean[], indexToFlip: number) {
   state[indexToFlip] = !state[indexToFlip];
   return [...state];
 }
-const ControlledTemplate = (args: TextFieldProps) => {
+const ControlledTemplate = () => {
   const [state, dispatch] = useReducer(controlledReducer, [
     false,
     false,
@@ -133,56 +133,3 @@ export const Default: Story = {
 export const Controlled = {
   render: ControlledTemplate,
 };
-
-export const OnColoredBackground: Story = {
-  render: () => {
-    return (
-      <div className="bg-mint px-5 py-[30px]">
-        <div className="rounded-lg bg-white">
-          <Template />
-        </div>
-      </div>
-    );
-  },
-  parameters: {
-    layout: 'fullscreen',
-  },
-  args: {
-    ...defaultProps,
-  },
-};
-
-// export const WithBackground = () => {
-//   return (
-//     <div className="bg-mint p-6">
-//       <Accordion>
-//         <AccordionItem>
-//           <Heading level={2}>Hvordan betaler jeg ned på rammelånet?</Heading>
-//           <Content>{rammelån}</Content>
-//         </AccordionItem>
-//         <AccordionItem>
-//           <Heading level={2}>Bør jeg velge rammelån eller boliglån?</Heading>
-//           <Content>
-//             {rammelån2}
-//             {list}
-//           </Content>
-//         </AccordionItem>
-//         <AccordionItem>
-//           <Heading level={2}>Overfør penger fra Boligspar Ung?</Heading>
-//           <Content>{boligspar}</Content>
-//         </AccordionItem>
-//       </Accordion>
-//     </div>
-//   );
-// };
-
-// export const Single: Story = {
-//   render: () => (
-//     <Accordion>
-//       <AccordionItem>
-//         <Heading level={2}>Hvordan betaler jeg ned på rammelånet?</Heading>
-//         <Content>{rammelån}</Content>
-//       </AccordionItem>
-//     </Accordion>
-//   ),
-// };

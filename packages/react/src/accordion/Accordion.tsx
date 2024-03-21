@@ -39,11 +39,7 @@ function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
   const childCount = Children.count(children);
 
   return (
-    <div
-      {...restProps}
-      className={cx(restProps.className, 'flex flex-col gap-2.5')}
-      ref={ref}
-    >
+    <div {...restProps} ref={ref}>
       {Children.map(children, (child, index) => {
         return (
           <>
@@ -104,7 +100,7 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
   return (
     <div
       {...restProps}
-      className={cx('group relative', className)}
+      className={cx('group relative py-3.5', className)}
       ref={ref}
       data-open={isOpen}
     >
@@ -116,7 +112,7 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
               className: 'font-semibold leading-7',
               // Supply a default level here to make this typecheck ok. Will be overwritten with the consumers set heading level anyways
               level: 3,
-              _render: (children) => (
+              _innerWrapper: (children) => (
                 <button
                   aria-controls={contentId}
                   aria-expanded={isOpen}
@@ -140,12 +136,13 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
             ContentContext,
             {
               className:
-                'text-sm font-light leading-6 px-3.5 py-1.5 overflow-hidden border-mint border-l-[3px] duration-300 group-data-[open="false"]:py-0',
+                'text-sm font-light leading-6 px-3.5 py-1.5 overflow-hidden border-mint border-l-[3px] duration-300 group-data-[open="false"]:py-0 motion-reduce:transition-none',
               role: 'region',
+              // @ts-expect-error TODO: remove this expect-error when we're on React 19 https://github.com/facebook/react/issues/17157#issuecomment-2003750544
               inert: isOpen ? undefined : 'true',
               'aria-labelledby': buttonId,
-              _wrapper: (children) => (
-                <div className="grid grid-rows-[0fr] border-l-[3px] border-mint transition-all duration-300 group-data-[open='true']:grid-rows-[1fr] motion-reduce:transition-none">
+              _outerWrapper: (children) => (
+                <div className="grid grid-rows-[0fr] transition-all duration-300 group-data-[open='true']:grid-rows-[1fr] motion-reduce:transition-none">
                   {children}
                 </div>
               ),
