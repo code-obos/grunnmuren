@@ -17,7 +17,7 @@ type AccordionProps = {
 };
 
 type AccordionItemProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 
   /** Additional CSS className for the element. */
   className?: string;
