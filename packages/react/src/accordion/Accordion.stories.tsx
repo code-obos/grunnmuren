@@ -1,4 +1,4 @@
-import { useState, useReducer } from 'react';
+import { useReducer } from 'react';
 import { StoryObj, Meta } from '@storybook/react';
 import { Accordion, AccordionItem, AccordionItemProps } from './Accordion';
 import { Content, Heading } from '..';
@@ -132,10 +132,24 @@ export const Default: Story = {
 
 export const Controlled = {
   render: ControlledTemplate,
+};
 
-  // args: {
-  //   ...defaultProps,
-  // },
+export const OnColoredBackground: Story = {
+  render: () => {
+    return (
+      <div className="bg-mint px-5 py-[30px]">
+        <div className="rounded-lg bg-white">
+          <Template />
+        </div>
+      </div>
+    );
+  },
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: {
+    ...defaultProps,
+  },
 };
 
 // export const WithBackground = () => {

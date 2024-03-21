@@ -41,10 +41,7 @@ function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
   return (
     <div
       {...restProps}
-      className={cx(
-        restProps.className,
-        'flex flex-col gap-2.5 rounded-lg bg-white',
-      )}
+      className={cx(restProps.className, 'flex flex-col gap-2.5')}
       ref={ref}
     >
       {Children.map(children, (child, index) => {
