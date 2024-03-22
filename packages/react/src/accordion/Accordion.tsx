@@ -100,7 +100,7 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
   return (
     <div
       {...restProps}
-      className={cx('group relative py-3.5', className)}
+      className={cx('group relative', className)}
       ref={ref}
       data-open={isOpen}
     >
@@ -117,7 +117,7 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
                   aria-controls={contentId}
                   aria-expanded={isOpen}
                   // the z-index is necessary for the focus ring to be drawn above the left border of the content
-                  className="relative z-10 flex min-h-[44px] w-full items-center justify-between gap-1.5 rounded-sm text-left focus:outline-none focus-visible:ring focus-visible:ring-black"
+                  className="relative z-10 flex min-h-[44px] w-full items-center justify-between gap-1.5 rounded-sm py-3.5 text-left focus:outline-none focus-visible:ring  focus-visible:ring-black"
                   id={buttonId}
                   onClick={handleOpenChange}
                 >
@@ -145,8 +145,8 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
               _outerWrapper: (children) => (
                 <div
                   className={cx(
-                    'grid transition-all duration-300 motion-reduce:transition-none',
-                    isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr] ',
+                    'grid transition-all duration-300 after:relative after:block after:h-0 after:transition-all after:duration-300 motion-reduce:transition-none',
+                    isOpen ? 'grid-rows-[1fr] after:h-3.5' : 'grid-rows-[0fr] ',
                   )}
                 >
                   {children}
