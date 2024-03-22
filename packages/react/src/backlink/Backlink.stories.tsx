@@ -20,3 +20,11 @@ export const WithCustomIcon = () => {
     </Backlink>
   );
 };
+
+export const NoUnderline = () => {
+  return (
+    <Backlink href="#" className="no-underline">
+      Tillbake
+    </Backlink>
+  );
+};

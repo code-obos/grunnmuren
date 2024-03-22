@@ -33,7 +33,7 @@ function Backlink(props: BacklinkProps, ref: Ref<HTMLAnchorElement>) {
       <>
         <ChevronLeft
           className={cx(
-            'mr-2 transition-transform duration-300 group-hover:-translate-x-1 flex-shrink-0',
+            'mr-2 flex-shrink-0 transition-transform duration-300 group-hover:-translate-x-1',
             iconStyle,
           )}
         />
