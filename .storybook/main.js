@@ -8,9 +8,6 @@ module.exports = {
     '@storybook/addon-docs',
     '@storybook/addon-controls',
     '@storybook/addon-actions',
-    {
-      name: '@storybook/addon-styling',
-    },
   ],
   framework: {
     name: '@storybook/react-vite',
