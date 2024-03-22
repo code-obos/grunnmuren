@@ -44,7 +44,9 @@ function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
         return (
           <>
             {child}
-            {index < childCount - 1 && <hr className="border-gray-light" />}
+            {index < childCount - 1 && (
+              <hr className="border-gray-light" aria-hidden />
+            )}
           </>
         );
       })}
