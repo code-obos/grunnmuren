@@ -143,7 +143,12 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
               inert: isOpen ? undefined : 'true',
               'aria-labelledby': buttonId,
               _outerWrapper: (children) => (
-                <div className="grid grid-rows-[0fr] transition-all duration-300 group-data-[open='true']:grid-rows-[1fr] motion-reduce:transition-none">
+                <div
+                  className={cx(
+                    'grid transition-all duration-300 motion-reduce:transition-none',
+                    isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr] ',
+                  )}
+                >
                   {children}
                 </div>
               ),
