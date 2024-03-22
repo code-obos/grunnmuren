@@ -40,16 +40,14 @@ function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
 
   return (
     <div {...restProps} ref={ref}>
-      {Children.map(children, (child, index) => {
-        return (
-          <>
-            {child}
-            {index < childCount - 1 && (
-              <hr className="border-gray-light" aria-hidden />
-            )}
-          </>
-        );
-      })}
+      {Children.map(children, (child, index) => (
+        <>
+          {child}
+          {index < childCount - 1 && (
+            <hr className="border-gray-light" aria-hidden />
+          )}
+        </>
+      ))}
     </div>
   );
 }
