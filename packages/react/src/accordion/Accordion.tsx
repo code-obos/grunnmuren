@@ -124,7 +124,7 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
                   {children}
                   <ChevronDown
                     className={cx(
-                      'transition-transform duration-150 motion-reduce:transition-none',
+                      'transition-transform duration-300 motion-reduce:transition-none',
                       isOpen && 'rotate-180',
                     )}
                   />
