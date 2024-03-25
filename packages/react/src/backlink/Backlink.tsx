@@ -24,7 +24,7 @@ function Backlink(props: BacklinkProps, ref: Ref<HTMLAnchorElement>) {
     <RACLink
       className={cx(
         className,
-        'group flex max-w-fit items-center gap-2 rounded-md p-2.5 focus:outline-none focus-visible:ring focus-visible:ring-black',
+        'group flex max-w-fit items-center gap-1 rounded-md p-2.5 focus:outline-none focus-visible:ring focus-visible:ring-black',
       )}
       {...restProps}
       ref={ref}
