@@ -15,6 +15,9 @@ type BacklinkProps = {
 
   /** Icon styling */
   iconStyle?: string;
+
+  /** The content of the link */
+  children?: React.ReactNode;
 } & Omit<LinkProps, 'className' | 'style'>;
 
 function Backlink(props: BacklinkProps, ref: Ref<HTMLAnchorElement>) {
@@ -30,15 +33,13 @@ function Backlink(props: BacklinkProps, ref: Ref<HTMLAnchorElement>) {
       ref={ref}
       href={href}
     >
-      <>
-        <ChevronLeft
-          className={cx(
-            'mr-2 flex-shrink-0 transition-transform duration-300 group-hover:-translate-x-1',
-            iconStyle,
-          )}
-        />
-        {children}
-      </>
+      <ChevronLeft
+        className={cx(
+          'mr-2 flex-shrink-0 transition-transform duration-300 group-hover:-translate-x-1',
+          iconStyle,
+        )}
+      />
+      {children}
     </RACLink>
   );
 }
