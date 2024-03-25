@@ -27,7 +27,7 @@ function Backlink(props: BacklinkProps, ref: Ref<HTMLAnchorElement>) {
     <RACLink
       className={cx(
         className,
-        'group flex max-w-fit items-center rounded-md py-2.5 pr-1 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-black',
+        'group flex max-w-fit items-center gap-2 rounded-md p-2.5 outline-none focus-visible:ring focus-visible:ring-black',
       )}
       {...restProps}
       ref={ref}
@@ -35,7 +35,7 @@ function Backlink(props: BacklinkProps, ref: Ref<HTMLAnchorElement>) {
     >
       <ChevronLeft
         className={cx(
-          'mr-2 flex-shrink-0 transition-transform duration-300 group-hover:-translate-x-1',
+          '-ml-[0.5em] flex-shrink-0 transition-transform duration-300 group-hover:-translate-x-1',
           iconStyle,
         )}
       />
