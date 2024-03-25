@@ -2,6 +2,7 @@
 export { Form } from 'react-aria-components';
 
 export * from './GrunnmurenProvider';
+export * from './accordion';
 export * from './button';
 export * from './checkbox';
 export * from './combobox';
