@@ -13,21 +13,18 @@ type BacklinkProps = {
   /** The URL to navigate to when clicking the backlink. */
   href?: string;
 
-  /** Icon styling */
-  iconStyle?: string;
-
   /** The content of the link */
   children?: React.ReactNode;
 } & Omit<LinkProps, 'className' | 'style'>;
 
 function Backlink(props: BacklinkProps, ref: Ref<HTMLAnchorElement>) {
-  const { className, children, href, iconStyle, ...restProps } = props;
+  const { className, children, href, ...restProps } = props;
 
   return (
     <RACLink
       className={cx(
         className,
-        'group flex max-w-fit items-center gap-2 rounded-md p-2.5 outline-none focus-visible:ring focus-visible:ring-black',
+        'group flex max-w-fit items-center gap-2 rounded-md p-2.5 focus:outline-none focus-visible:ring focus-visible:ring-black',
       )}
       {...restProps}
       ref={ref}
@@ -36,7 +33,6 @@ function Backlink(props: BacklinkProps, ref: Ref<HTMLAnchorElement>) {
       <ChevronLeft
         className={cx(
           '-ml-[0.5em] flex-shrink-0 transition-transform duration-300 group-hover:-translate-x-1',
-          iconStyle,
         )}
       />
       {children}

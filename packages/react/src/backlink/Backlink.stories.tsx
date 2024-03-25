@@ -15,7 +15,7 @@ export const Default = () => {
 
 export const WithCustomIcon = () => {
   return (
-    <Backlink href="#" iconStyle="text-green">
+    <Backlink href="#" className="text-green">
       Tillbake
     </Backlink>
   );
