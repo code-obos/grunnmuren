@@ -1,5 +1,24 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.16
+
+### Minor Changes
+
+- 8b84eb5: Add Accordion and AccordionItem components. Use as follows:
+
+  ```jsx
+  <Accordion>
+    <AccordionItem>
+      <Heading>Item 1</Heading>
+      <Content>Item 1</Content>
+    </AccordionItem>
+    <AccordionItem>
+      <Heading>Item 2</Heading>
+      <Content>Item 2</Content>
+    </AccordionItem>
+  </Accordion>
+  ```
+
 ## 2.0.0-canary.15
 
 ### Patch Changes
