@@ -10,7 +10,7 @@ type BacklinkProps = {
   /** Additional style properties for the element. */
   style?: React.CSSProperties;
 
-  /** The URL to navigate to when clicking the breadcrumb. */
+  /** The URL to navigate to when clicking the backlink. */
   href?: string;
 
   /** Icon styling */
