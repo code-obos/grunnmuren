@@ -1,6 +1,10 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
-import { Backlink } from '.';
+import { Backlink, BacklinkProps } from '.';
+
+const Template = (args: BacklinkProps) => {
+  return <Backlink {...args}>Tillbake</Backlink>;
+};
 
 const meta: Meta<typeof Backlink> = {
   title: 'Backlink',
@@ -9,22 +13,24 @@ const meta: Meta<typeof Backlink> = {
 
 export default meta;
 
-export const Default = () => {
-  return <Backlink href="#">Tillbake</Backlink>;
+type Story = StoryObj<typeof Backlink>;
+
+const defaultProps = {
+  href: '#',
+  withUnderline: false,
+} as const;
+
+export const Default: Story = {
+  render: Template,
+  args: defaultProps,
 };
 
-export const WithCustomColor = () => {
-  return (
-    <Backlink href="#" className="text-green">
-      Tillbake
-    </Backlink>
-  );
+export const CustomColor: Story = {
+  render: Template,
+  args: { ...defaultProps, className: 'text-green' },
 };
 
-export const NoUnderline = () => {
-  return (
-    <Backlink href="#" className="no-underline">
-      Tillbake
-    </Backlink>
-  );
+export const WithUnderline: Story = {
+  render: Template,
+  args: { ...defaultProps, withUnderline: true },
 };
