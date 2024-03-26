@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.17
+
+### Minor Changes
+
+- ef11713: Adds support for accordions that are wrapped by a container with a background color.
+
 ## 2.0.0-canary.16
 
 ### Minor Changes
