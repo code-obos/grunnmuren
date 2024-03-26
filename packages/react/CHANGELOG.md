@@ -5,6 +5,7 @@
 ### Minor Changes
 
 - cb3286b: New `<Backlink/>` component.
+
 Example:
 `<Backlink href="/my-path"/>`
 ## 2.0.0-canary.17
