@@ -29,8 +29,7 @@ function Backlink(props: BacklinkProps, ref: Ref<HTMLAnchorElement>) {
     <RACLink
       className={cx(
         className,
-        !withUnderline && '[&:not(:hover)]:no-underline',
-        'group flex max-w-fit items-center gap-3 rounded-md p-2.5 focus:outline-none focus-visible:ring focus-visible:ring-black',
+        'group flex max-w-fit items-center gap-3 rounded-md p-2.5 no-underline focus:outline-none focus-visible:ring focus-visible:ring-black',
       )}
       {...restProps}
       ref={ref}
@@ -41,7 +40,14 @@ function Backlink(props: BacklinkProps, ref: Ref<HTMLAnchorElement>) {
           '-ml-[0.5em] flex-shrink-0 transition-transform duration-300 group-hover:-translate-x-1',
         )}
       />
-      {children}
+      <span
+        className={cx(
+          'border-b-2 border-t-2 border-transparent leading-none transition-colors duration-300',
+          withUnderline ? 'border-b-black' : 'hover:border-b-black',
+        )}
+      >
+        {children}
+      </span>
     </RACLink>
   );
 }
