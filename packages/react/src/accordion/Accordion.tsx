@@ -48,7 +48,7 @@ function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
         <>
           {child}
           {index < childCount - 1 && (
-            // Margin is added to enable support for containers with background colors
+            // Margin is added to enable support for containers with a background color
             <hr className="mx-2 border-gray-light" aria-hidden />
           )}
         </>
