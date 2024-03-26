@@ -15,15 +15,21 @@ type BacklinkProps = {
 
   /** The content of the link */
   children?: React.ReactNode;
+
+  /** To underline the link
+   * @default false
+   */
+  withUnderline?: boolean;
 } & Omit<LinkProps, 'className' | 'style'>;
 
 function Backlink(props: BacklinkProps, ref: Ref<HTMLAnchorElement>) {
-  const { className, children, href, ...restProps } = props;
+  const { className, children, href, withUnderline, ...restProps } = props;
 
   return (
     <RACLink
       className={cx(
         className,
+        !withUnderline && '[&:not(:hover)]:no-underline',
         'group flex max-w-fit items-center gap-1 rounded-md p-2.5 focus:outline-none focus-visible:ring focus-visible:ring-black',
       )}
       {...restProps}
