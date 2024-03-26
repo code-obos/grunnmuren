@@ -13,7 +13,7 @@ export const Default = () => {
   return <Backlink href="#">Tillbake</Backlink>;
 };
 
-export const WithCustomIcon = () => {
+export const WithCustomColor = () => {
   return (
     <Backlink href="#" className="text-green">
       Tillbake
