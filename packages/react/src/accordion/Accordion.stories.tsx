@@ -107,6 +107,34 @@ const ControlledTemplate = () => {
   );
 };
 
+const ColoredTemplate = (args: AccordionItemProps) => {
+  return (
+    <div className="bg-mint p-10">
+      <Accordion className="bg-white">
+        <AccordionItem
+          onOpenChange={args.onOpenChange}
+          defaultOpen={args.defaultOpen}
+        >
+          <Heading level={2}>Bør jeg velge rammelån eller boliglån?</Heading>
+          <Content className="prose">
+            <p>
+              Hvis du har glemt passordet ditt kan du sende oss en melding i
+              mobilbanken eller nettbanken, så sender vi deg et nytt passord. Du
+              kan også ringe oss på telefon{' '}
+              <a href="tel:+4722865800">22 86 58 00</a>, så hjelper vi deg.
+            </p>
+            <p>
+              <strong>NB:</strong> Har du BankID fra en annen bank, må du
+              kontakte den banken du har fått BankID fra for å få tilbakestilt
+              passordet ditt.
+            </p>
+          </Content>
+        </AccordionItem>
+      </Accordion>
+    </div>
+  );
+};
+
 const meta: Meta<typeof AccordionItem> = {
   title: 'Accordion',
   component: AccordionItem,
@@ -132,4 +160,11 @@ export const Default: Story = {
 
 export const Controlled = {
   render: ControlledTemplate,
+};
+
+export const Colored: Story = {
+  render: ColoredTemplate,
+  args: {
+    ...defaultProps,
+  },
 };
