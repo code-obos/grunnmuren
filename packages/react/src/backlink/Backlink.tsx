@@ -42,7 +42,7 @@ function Backlink(props: BacklinkProps, ref: Ref<HTMLAnchorElement>) {
       />
       <span
         className={cx(
-          'border-b-2 border-t-2 border-transparent leading-none transition-colors duration-300',
+          'border-b-[1px] border-t-[1px] border-transparent leading-none transition-colors duration-300',
           withUnderline ? 'border-b-black' : 'hover:border-b-black',
         )}
       >
