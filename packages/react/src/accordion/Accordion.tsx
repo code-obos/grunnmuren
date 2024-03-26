@@ -44,7 +44,7 @@ function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
         <>
           {child}
           {index < childCount - 1 && (
-            // Margin is added to enable support background colors
+            // Margin is added to enable support containers with background colors
             <hr className="mx-2 border-gray-light" aria-hidden />
           )}
         </>
@@ -110,7 +110,7 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
           [
             HeadingContext,
             {
-              // Negative margin to strech the button to the entire with of the accordion (to support background colors)
+              // Negative margin to strech the button to the entire with of the accordion (to support containers with a background color)
               className: 'font-semibold leading-7 -mx-2',
               // Supply a default level here to make this typecheck ok. Will be overwritten with the consumers set heading level anyways
               level: 3,
