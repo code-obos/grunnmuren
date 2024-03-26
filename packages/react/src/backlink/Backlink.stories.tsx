@@ -25,11 +25,6 @@ export const Default: Story = {
   args: defaultProps,
 };
 
-export const CustomColor: Story = {
-  render: Template,
-  args: { ...defaultProps, className: 'text-green' },
-};
-
 export const WithUnderline: Story = {
   render: Template,
   args: { ...defaultProps, withUnderline: true },
