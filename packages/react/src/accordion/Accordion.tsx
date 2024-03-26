@@ -34,17 +34,22 @@ type AccordionItemProps = {
 };
 
 function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
-  const { children, ...restProps } = props;
+  const { children, className, ...restProps } = props;
 
   const childCount = Children.count(children);
 
   return (
-    <div {...restProps} ref={ref}>
+    <div
+      {...restProps}
+      ref={ref}
+      className={cx('rounded-lg bg-white', className)}
+    >
       {Children.map(children, (child, index) => (
         <>
           {child}
           {index < childCount - 1 && (
-            <hr className="border-gray-light" aria-hidden />
+            // Margin is added to enable support for containers with a background color
+            <hr className="mx-2 border-gray-light" aria-hidden />
           )}
         </>
       ))}
@@ -100,7 +105,7 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
   return (
     <div
       {...restProps}
-      className={cx('group relative', className)}
+      className={cx('group relative px-2', className)}
       ref={ref}
       data-open={isOpen}
     >
@@ -109,15 +114,16 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
           [
             HeadingContext,
             {
-              className: 'font-semibold leading-7',
+              // Negative margin to strech the button to the entire with of the accordion (to support containers with a background color)
+              className: 'font-semibold leading-7 -mx-2',
               // Supply a default level here to make this typecheck ok. Will be overwritten with the consumers set heading level anyways
               level: 3,
               _innerWrapper: (children) => (
                 <button
                   aria-controls={contentId}
                   aria-expanded={isOpen}
-                  // the z-index is necessary for the focus ring to be drawn above the left border of the content
-                  className="relative z-10 flex min-h-[44px] w-full items-center justify-between gap-1.5 rounded-sm py-3.5 text-left focus:outline-none focus-visible:ring  focus-visible:ring-black"
+                  // Use outline with offset as focus indicator, this does not cover the left mint border on the expanded content and works with or without a background color on the accordion container
+                  className="flex min-h-[44px] w-full items-center justify-between gap-1.5 rounded-lg px-2 py-3.5 text-left focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-[-6px] focus-visible:outline-black"
                   id={buttonId}
                   onClick={handleOpenChange}
                 >
