@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.19
+
+### Patch Changes
+
+- d3ed719: Fixes typo in docs and reduced underline height on `<Backlink/>`.
+- eaa8d74: Fixes hover style on backlink so that underline is applied even when something other than the text is hovered in the link.
+
 ## 2.0.0-canary.18
 
 ### Minor Changes
