@@ -39,7 +39,11 @@ function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
   const childCount = Children.count(children);
 
   return (
-    <div {...restProps} ref={ref} className={cx('rounded-lg', className)}>
+    <div
+      {...restProps}
+      ref={ref}
+      className={cx('rounded-lg bg-white', className)}
+    >
       {Children.map(children, (child, index) => (
         <>
           {child}

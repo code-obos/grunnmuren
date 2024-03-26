@@ -110,7 +110,7 @@ const ControlledTemplate = () => {
 const ColoredTemplate = (args: AccordionItemProps) => {
   return (
     <div className="bg-mint p-10">
-      <Accordion className="bg-white">
+      <Accordion>
         <AccordionItem
           onOpenChange={args.onOpenChange}
           defaultOpen={args.defaultOpen}
