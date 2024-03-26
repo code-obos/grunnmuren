@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Backlink, BacklinkProps } from '.';
 
 const Template = (args: BacklinkProps) => {
-  return <Backlink {...args}>Tillbake</Backlink>;
+  return <Backlink {...args}>Tilbake</Backlink>;
 };
 
 const meta: Meta<typeof Backlink> = {
