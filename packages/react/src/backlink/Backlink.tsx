@@ -16,7 +16,7 @@ type BacklinkProps = {
   /** The content of the link */
   children?: React.ReactNode;
 
-  /** To underline the link
+  /** To add a permanent underline on the link (not only on hover)
    * @default false
    */
   withUnderline?: boolean;
@@ -30,7 +30,7 @@ function Backlink(props: BacklinkProps, ref: Ref<HTMLAnchorElement>) {
       className={cx(
         className,
         !withUnderline && '[&:not(:hover)]:no-underline',
-        'group flex max-w-fit items-center gap-1 rounded-md p-2.5 focus:outline-none focus-visible:ring focus-visible:ring-black',
+        'group flex max-w-fit items-center gap-3 rounded-md p-2.5 focus:outline-none focus-visible:ring focus-visible:ring-black',
       )}
       {...restProps}
       ref={ref}
