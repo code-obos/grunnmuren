@@ -109,7 +109,51 @@ const ControlledTemplate = () => {
 
 const ColoredTemplate = (args: AccordionItemProps) => {
   return (
-    <div className="bg-mint p-10">
+    <div className="bg-green-dark p-10">
+      <Accordion>
+        <AccordionItem
+          onOpenChange={args.onOpenChange}
+          defaultOpen={args.defaultOpen}
+        >
+          <Heading level={2}>Bør jeg velge rammelån eller boliglån?</Heading>
+          <Content className="prose">
+            <p>
+              Hvis du har glemt passordet ditt kan du sende oss en melding i
+              mobilbanken eller nettbanken, så sender vi deg et nytt passord. Du
+              kan også ringe oss på telefon{' '}
+              <a href="tel:+4722865800">22 86 58 00</a>, så hjelper vi deg.
+            </p>
+            <p>
+              <strong>NB:</strong> Har du BankID fra en annen bank, må du
+              kontakte den banken du har fått BankID fra for å få tilbakestilt
+              passordet ditt.
+            </p>
+          </Content>
+        </AccordionItem>
+        <AccordionItem
+          onOpenChange={args.onOpenChange}
+          defaultOpen={args.defaultOpen}
+        >
+          <Heading level={2}>Overfør penger fra Boligspar Ung?</Heading>
+          <Content className="prose">
+            <p>
+              Ønsker du å overføre penger fra Boligspar Ung til en av dine andre
+              kontoer, er det en enkel sak.{' '}
+              <a href="#">Logg inn i nettbanken</a> og velg &quot;Uttak
+              Boligspar&quot; Ung i menyen. Slik som BSU, kan du ta ut det du
+              har spart inneværende år. Om du vil ta ut mer vil kontoen
+              avsluttes.
+            </p>
+          </Content>
+        </AccordionItem>
+      </Accordion>
+    </div>
+  );
+};
+
+const ColoredStandaloneTemplate = (args: AccordionItemProps) => {
+  return (
+    <div className="bg-green-dark p-10">
       <Accordion>
         <AccordionItem
           onOpenChange={args.onOpenChange}
@@ -164,6 +208,13 @@ export const Controlled = {
 
 export const Colored: Story = {
   render: ColoredTemplate,
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const ColoredStandalone: Story = {
+  render: ColoredStandaloneTemplate,
   args: {
     ...defaultProps,
   },
