@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.20
+
+### Patch Changes
+
+- b2ce9a7: Fixes focus-visible styling for Backlinks.
+- ce83bec: Fixes issue with custom underline on backlinks that wraps over multiple lines.
+
 ## 2.0.0-canary.19
 
 ### Patch Changes
