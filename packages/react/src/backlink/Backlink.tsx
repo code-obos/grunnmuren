@@ -1,25 +1,32 @@
-import { forwardRef, type Ref, HTMLProps } from 'react';
+import { forwardRef, type Ref } from 'react';
 import { cx } from 'cva';
+import { Link as RACLink, type LinkProps } from 'react-aria-components';
 import { ChevronLeft } from '@obosbbl/grunnmuren-icons-react';
 
 type BacklinkProps = {
   /** Additional CSS className for the element. */
   className?: string;
 
+  /** Additional style properties for the element. */
+  style?: React.CSSProperties;
+
   /** The URL to navigate to when clicking the backlink. */
   href?: string;
+
+  /** The content of the link */
+  children?: React.ReactNode;
 
   /** To add a permanent underline on the link (not only on hover)
    * @default false
    */
   withUnderline?: boolean;
-} & HTMLProps<HTMLAnchorElement>;
+} & Omit<LinkProps, 'className' | 'style'>;
 
 function Backlink(props: BacklinkProps, ref: Ref<HTMLAnchorElement>) {
   const { className, children, href, withUnderline, ...restProps } = props;
 
   return (
-    <a
+    <RACLink
       className={cx(
         className,
         'group flex max-w-fit items-center gap-3 rounded-md p-2.5 no-underline focus:outline-none focus-visible:ring focus-visible:ring-black',
@@ -44,7 +51,7 @@ function Backlink(props: BacklinkProps, ref: Ref<HTMLAnchorElement>) {
           {children}
         </span>
       </span>
-    </a>
+    </RACLink>
   );
 }
 
