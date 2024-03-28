@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.21
+
+### Patch Changes
+
+- 687cdec: Reverts back to using the Link component from RAC in Backlink.
+
 ## 2.0.0-canary.20
 
 ### Patch Changes
