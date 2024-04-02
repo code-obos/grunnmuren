@@ -7,9 +7,6 @@ type BacklinkProps = {
   /** Additional CSS className for the element. */
   className?: string;
 
-  /** Additional style properties for the element. */
-  style?: React.CSSProperties;
-
   /** The URL to navigate to when clicking the backlink. */
   href?: string;
 
@@ -20,7 +17,7 @@ type BacklinkProps = {
    * @default false
    */
   withUnderline?: boolean;
-} & Omit<LinkProps, 'className' | 'style'>;
+} & LinkProps;
 
 function Backlink(props: BacklinkProps, ref: Ref<HTMLAnchorElement>) {
   const { className, children, href, withUnderline, ...restProps } = props;
