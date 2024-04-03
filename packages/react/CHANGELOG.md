@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.23
+
+### Patch Changes
+
+- 2bfbfaf: Accordion: Fix icon size shrinking with long texts
+
 ## 2.0.0-canary.22
 
 ### Patch Changes
