@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.22
+
+### Patch Changes
+
+- 335b6b5: Fixes focus-visible on the Backlink component.
+
 ## 2.0.0-canary.21
 
 ### Patch Changes
