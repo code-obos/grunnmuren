@@ -7,9 +7,6 @@ type BacklinkProps = {
   /** Additional CSS className for the element. */
   className?: string;
 
-  /** Additional style properties for the element. */
-  style?: React.CSSProperties;
-
   /** The URL to navigate to when clicking the backlink. */
   href?: string;
 
@@ -20,7 +17,7 @@ type BacklinkProps = {
    * @default false
    */
   withUnderline?: boolean;
-} & Omit<LinkProps, 'className' | 'style'>;
+} & LinkProps;
 
 function Backlink(props: BacklinkProps, ref: Ref<HTMLAnchorElement>) {
   const { className, children, href, withUnderline, ...restProps } = props;
@@ -29,7 +26,7 @@ function Backlink(props: BacklinkProps, ref: Ref<HTMLAnchorElement>) {
     <RACLink
       className={cx(
         className,
-        'group flex max-w-fit items-center gap-3 rounded-md p-2.5 no-underline focus:outline-none focus-visible:ring focus-visible:ring-black',
+        'group flex max-w-fit items-center gap-3 rounded-md p-2.5 no-underline focus:outline-none data-[focus-visible]:ring data-[focus-visible]:ring-black',
       )}
       {...restProps}
       ref={ref}
