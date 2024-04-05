@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.24
+
+### Patch Changes
+
+- 0cd21d8: Accordion: explictly set heading font size to prevents global heading styles to affect it's size
+
 ## 2.0.0-canary.23
 
 ### Patch Changes
