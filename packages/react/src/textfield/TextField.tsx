@@ -37,12 +37,14 @@ type TextFieldProps = {
   style?: React.CSSProperties;
   /** Add a divider between the left/right addons and the input */
   withAddonDivider?: boolean;
+  /** Defines the number of characters and determines the width of the input element */
+  size?: number;
 } & Omit<
   RACTextFieldProps,
   'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style'
 >;
 
-const inputWithAlignment = compose(
+const inputVariants = compose(
   input,
   cva({
     base: '',
@@ -50,6 +52,10 @@ const inputWithAlignment = compose(
       textAlign: {
         right: 'text-right',
         left: '',
+      },
+      autoWidth: {
+        true: 'max-w-fit',
+        false: '',
       },
     },
   }),
@@ -66,6 +72,7 @@ function TextField(props: TextFieldProps, ref: Ref<HTMLInputElement>) {
     textAlign,
     rightAddon,
     withAddonDivider,
+    size,
     ...restProps
   } = props;
 
@@ -85,14 +92,27 @@ function TextField(props: TextFieldProps, ref: Ref<HTMLInputElement>) {
           {leftAddon}
           {withAddonDivider && leftAddon && <InputAddonDivider />}
           <Input
-            className={inputWithAlignment({ textAlign, isGrouped: true })}
+            className={inputVariants({
+              textAlign,
+              isGrouped: true,
+              autoWidth: !!size,
+            })}
             ref={ref}
+            size={
+              size && size + 1
+            } /** Add one extra character for a more precise width */
           />
           {withAddonDivider && rightAddon && <InputAddonDivider />}
           {rightAddon}
         </Group>
       ) : (
-        <Input className={inputWithAlignment({ textAlign })} ref={ref} />
+        <Input
+          className={inputVariants({ textAlign, autoWidth: !!size })}
+          ref={ref}
+          size={
+            size && size + 1
+          } /** Add one extra character for a more precise width */
+        />
       )}
 
       <ErrorMessageOrFieldError errorMessage={errorMessage} />
