@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Checkbox, CheckboxProps } from './Checkbox';
+import { Button } from '../button/Button';
 
 const meta: Meta<typeof Checkbox> = {
   title: 'Checkbox',
@@ -16,7 +17,20 @@ export default meta;
 type Story = StoryObj<typeof Checkbox>;
 
 const Template = (args: CheckboxProps) => {
-  return <Checkbox {...args} />;
+  return args.isRequired ? (
+    <form
+      className="flex flex-col items-start gap-4"
+      onSubmit={(e) => {
+        e.preventDefault();
+        alert('Lagret!');
+      }}
+    >
+      <Checkbox {...args} />
+      <Button type="submit">Send inn</Button>
+    </form>
+  ) : (
+    <Checkbox {...args} />
+  );
 };
 
 const ControlledTemplate = (args: CheckboxProps) => {
