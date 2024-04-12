@@ -193,5 +193,6 @@ export const CustomWidth: Story = {
       'Bruksenhetsnummeret, som tidligere ble kalt bolignummer, består av en bokstav og fire tall. F.eks. H0101',
     size: 5,
     maxLength: 5,
+    minLength: 5,
   },
 };
