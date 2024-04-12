@@ -1,5 +1,15 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.25
+
+### Minor Changes
+
+- dcb804a: Adds support for custom size on `TextField` and `NumberField`.
+
+### Patch Changes
+
+- 53ae6f0: RadioGroup/CheckboxGroup: add support for displaying error messages when used in a `<Form>` component with the `validationErrors` prop. This enables the use of server side validation for these components.
+
 ## 2.0.0-canary.24
 
 ### Patch Changes
