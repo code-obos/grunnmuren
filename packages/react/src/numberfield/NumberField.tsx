@@ -38,6 +38,12 @@ type NumberFieldProps = {
   style?: React.CSSProperties;
   /** Add a divider between the left/right addons and the input */
   withAddonDivider?: boolean;
+  /** Defines the number of characters and determines the width of the input element, a value of 0 will be ignored */
+  size?: number;
+  /** Defines the maximum numeric value */
+  maxValue?: number;
+  /** Defines the minimum numeric value */
+  minValue?: number;
 } & Omit<
   RACNumberFieldProps,
   | 'className'
@@ -48,7 +54,7 @@ type NumberFieldProps = {
   | 'hideStepper'
 >;
 
-const inputWithAlignment = compose(
+const inputVariants = compose(
   input,
   cva({
     base: '',
@@ -56,6 +62,10 @@ const inputWithAlignment = compose(
       textAlign: {
         right: 'text-right',
         left: '',
+      },
+      autoWidth: {
+        true: 'box-content max-w-fit',
+        false: '',
       },
     },
   }),
@@ -72,6 +82,7 @@ function NumberField(props: NumberFieldProps, ref: Ref<HTMLInputElement>) {
     textAlign,
     rightAddon,
     withAddonDivider,
+    size,
     ...restProps
   } = props;
 
@@ -91,14 +102,23 @@ function NumberField(props: NumberFieldProps, ref: Ref<HTMLInputElement>) {
           {leftAddon}
           {withAddonDivider && leftAddon && <InputAddonDivider />}
           <Input
-            className={inputWithAlignment({ textAlign, isGrouped: true })}
+            className={inputVariants({
+              textAlign,
+              isGrouped: true,
+              autoWidth: !!size,
+            })}
             ref={ref}
+            size={size}
           />
           {withAddonDivider && rightAddon && <InputAddonDivider />}
           {rightAddon}
         </Group>
       ) : (
-        <Input className={inputWithAlignment({ textAlign })} ref={ref} />
+        <Input
+          className={inputVariants({ textAlign, autoWidth: !!size })}
+          ref={ref}
+          size={size}
+        />
       )}
 
       <ErrorMessageOrFieldError errorMessage={errorMessage} />

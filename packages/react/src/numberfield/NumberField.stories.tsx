@@ -177,3 +177,15 @@ export const MaxValue = {
     maxValue: 1000,
   },
 };
+
+export const CustomWidth: Story = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    label: 'Husstandends samlede lån og gjeld utenom boliglån',
+    description:
+      'Samlet lån og gjeld inkluderer studielån, billån, forbrukslån og rammer på kredittkort.',
+    size: 10,
+    maxValue: 99999999,
+  },
+};

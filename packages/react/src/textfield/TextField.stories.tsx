@@ -183,3 +183,16 @@ export const Controlled = {
     ...defaultProps,
   },
 };
+
+export const CustomWidth: Story = {
+  render: Template,
+  args: {
+    ...defaultProps,
+    label: 'Bruksenhetsnummer',
+    description:
+      'Bruksenhetsnummeret, som tidligere ble kalt bolignummer, består av en bokstav og fire tall. F.eks. H0101',
+    size: 5,
+    maxLength: 5,
+    minLength: 5,
+  },
+};
