@@ -4,16 +4,15 @@ import { formFieldError } from '../classes';
 
 type Props = {
   errorMessage?: React.ReactNode;
-  className?: string;
 };
 
 /**
  * This component handles renders a custom error message (if provided), otherwise it falls back to the browser's native validation.
  * In other words, this handles controlled and uncontrolled form errors.
  */
-export function ErrorMessageOrFieldError({ errorMessage, className }: Props) {
+export function ErrorMessageOrFieldError({ errorMessage }: Props) {
   return errorMessage ? (
-    <ErrorMessage className={className}>{errorMessage}</ErrorMessage>
+    <ErrorMessage>{errorMessage}</ErrorMessage>
   ) : (
     <FieldError className={formFieldError} />
   );
