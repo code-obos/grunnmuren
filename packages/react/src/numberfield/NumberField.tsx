@@ -40,8 +40,10 @@ type NumberFieldProps = {
   withAddonDivider?: boolean;
   /** Defines the number of characters and determines the width of the input element, a value of 0 will be ignored */
   size?: number;
-  /** Defines the maximum string length for the input (including formatting characters) */
-  maxLength?: number;
+  /** Defines the maximum numeric value */
+  maxValue?: number;
+  /** Defines the minimum numeric value */
+  minValue?: number;
 } & Omit<
   RACNumberFieldProps,
   | 'className'
