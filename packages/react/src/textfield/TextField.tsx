@@ -95,7 +95,7 @@ function TextField(props: TextFieldProps, ref: Ref<HTMLInputElement>) {
             className={inputVariants({
               textAlign,
               isGrouped: true,
-              autoWidth: !!size,
+              autoWidth: typeof size === 'number',
             })}
             ref={ref}
             size={size}
@@ -105,7 +105,10 @@ function TextField(props: TextFieldProps, ref: Ref<HTMLInputElement>) {
         </Group>
       ) : (
         <Input
-          className={inputVariants({ textAlign, autoWidth: !!size })}
+          className={inputVariants({
+            textAlign,
+            autoWidth: typeof size === 'number',
+          })}
           ref={ref}
           size={size}
         />
