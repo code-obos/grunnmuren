@@ -185,7 +185,7 @@ export const CustomWidth: Story = {
     label: 'Husstandends samlede lån og gjeld utenom boliglån',
     description:
       'Samlet lån og gjeld inkluderer studielån, billån, forbrukslån og rammer på kredittkort.',
-    size: 16,
-    maxLength: 21,
+    size: 10,
+    maxValue: 99999999,
   },
 };
