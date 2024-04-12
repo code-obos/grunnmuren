@@ -35,7 +35,7 @@ type TextFieldProps = {
   textAlign?: 'left' | 'right';
   /** Additional style properties for the element. */
   style?: React.CSSProperties;
-  /** Add a divider between the left/right addons and the input */
+  /** Add a divider between the left/right addons and the input, a value of 0 will be ignored */
   withAddonDivider?: boolean;
   /** Defines the number of characters and determines the width of the input element */
   size?: number;
