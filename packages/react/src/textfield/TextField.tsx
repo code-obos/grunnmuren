@@ -54,7 +54,7 @@ const inputVariants = compose(
         left: '',
       },
       autoWidth: {
-        true: 'max-w-fit',
+        true: 'box-content max-w-fit',
         false: '',
       },
     },
@@ -98,9 +98,7 @@ function TextField(props: TextFieldProps, ref: Ref<HTMLInputElement>) {
               autoWidth: !!size,
             })}
             ref={ref}
-            size={
-              size && size + 1
-            } /** Add one extra character for a more precise width */
+            size={size}
           />
           {withAddonDivider && rightAddon && <InputAddonDivider />}
           {rightAddon}
@@ -109,9 +107,7 @@ function TextField(props: TextFieldProps, ref: Ref<HTMLInputElement>) {
         <Input
           className={inputVariants({ textAlign, autoWidth: !!size })}
           ref={ref}
-          size={
-            size && size + 1
-          } /** Add one extra character for a more precise width */
+          size={size}
         />
       )}
 

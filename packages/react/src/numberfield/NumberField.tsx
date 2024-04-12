@@ -62,7 +62,7 @@ const inputVariants = compose(
         left: '',
       },
       autoWidth: {
-        true: 'max-w-fit',
+        true: 'box-content max-w-fit',
         false: '',
       },
     },
@@ -107,9 +107,7 @@ function NumberField(props: NumberFieldProps, ref: Ref<HTMLInputElement>) {
               autoWidth: !!size,
             })}
             ref={ref}
-            size={
-              size && size + 1
-            } /** Add one extra character for a more precise width */
+            size={size}
             maxLength={maxLength}
           />
           {withAddonDivider && rightAddon && <InputAddonDivider />}
@@ -119,9 +117,7 @@ function NumberField(props: NumberFieldProps, ref: Ref<HTMLInputElement>) {
         <Input
           className={inputVariants({ textAlign, autoWidth: !!size })}
           ref={ref}
-          size={
-            size && size + 1
-          } /** Add one extra character for a more precise width */
+          size={size}
           maxLength={maxLength}
         />
       )}
