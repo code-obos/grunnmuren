@@ -7,7 +7,7 @@ import {
 
 import { Label } from '../label/Label';
 import { Description } from '../label/Description';
-import { ErrorMessage } from '../label/ErrorMessage';
+import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
 
 type CheckboxGroupProps = {
   children: React.ReactNode;
@@ -56,7 +56,7 @@ function CheckboxGroup(props: CheckboxGroupProps, ref: Ref<HTMLDivElement>) {
       {label && <Label>{label}</Label>}
       {description && <Description>{description}</Description>}
       {children}
-      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      <ErrorMessageOrFieldError errorMessage={errorMessage} />
     </RACCheckboxGroup>
   );
 }

@@ -7,7 +7,7 @@ import {
 
 import { Label } from '../label/Label';
 import { Description } from '../label/Description';
-import { ErrorMessage } from '../label/ErrorMessage';
+import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
 
 type RadioGroupProps = {
   children: React.ReactNode;
@@ -56,7 +56,7 @@ function RadioGroup(props: RadioGroupProps, ref: Ref<HTMLDivElement>) {
       {label && <Label>{label}</Label>}
       {description && <Description>{description}</Description>}
       {children}
-      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      <ErrorMessageOrFieldError errorMessage={errorMessage} />
     </RACRadioGroup>
   );
 }
