@@ -83,7 +83,6 @@ function NumberField(props: NumberFieldProps, ref: Ref<HTMLInputElement>) {
     rightAddon,
     withAddonDivider,
     size,
-    maxLength,
     ...restProps
   } = props;
 
@@ -110,7 +109,6 @@ function NumberField(props: NumberFieldProps, ref: Ref<HTMLInputElement>) {
             })}
             ref={ref}
             size={size}
-            maxLength={maxLength}
           />
           {withAddonDivider && rightAddon && <InputAddonDivider />}
           {rightAddon}
@@ -120,7 +118,6 @@ function NumberField(props: NumberFieldProps, ref: Ref<HTMLInputElement>) {
           className={inputVariants({ textAlign, autoWidth: !!size })}
           ref={ref}
           size={size}
-          maxLength={maxLength}
         />
       )}
 
