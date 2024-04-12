@@ -38,7 +38,7 @@ type NumberFieldProps = {
   style?: React.CSSProperties;
   /** Add a divider between the left/right addons and the input */
   withAddonDivider?: boolean;
-  /** Defines the number of characters and determines the width of the input element, a value of 0 will be ignored */
+  /** Defines the number of characters and determines the width of the input element */
   size?: number;
   /** Defines the maximum numeric value */
   maxValue?: number;
