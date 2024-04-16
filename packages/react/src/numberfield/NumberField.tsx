@@ -98,7 +98,7 @@ function NumberField(props: NumberFieldProps, ref: Ref<HTMLInputElement>) {
       {description && <Description>{description}</Description>}
 
       {leftAddon || rightAddon ? (
-        <Group className={inputGroup}>
+        <Group className={cx(inputGroup, { 'w-fit': !!size })}>
           {leftAddon}
           {withAddonDivider && leftAddon && <InputAddonDivider />}
           <Input
