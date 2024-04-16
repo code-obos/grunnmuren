@@ -32,7 +32,7 @@ const input = cva({
 });
 
 const inputGroup = cx([
-  'w-fit inline-flex items-center gap-3 overflow-hidden rounded-md bg-white px-3 text-sm ring-1 ring-black focus-within:ring-2',
+  'inline-flex w-fit items-center gap-3 overflow-hidden rounded-md bg-white px-3 text-sm ring-1 ring-black focus-within:ring-2',
   'group-data-[invalid]:ring-2 group-data-[invalid]:ring-red group-data-[invalid]:focus-within:ring',
   // Make sure icons are the correct size
   '[&_svg]:text-base',
