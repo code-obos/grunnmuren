@@ -96,8 +96,9 @@ function Checkbox(props: CheckboxProps, ref: Ref<HTMLLabelElement>) {
         </RACCheckbox>
 
         {description && (
-          <Description className="block" id={descriptionId}>
-            {description}
+          <Description className="block">
+            {/* Use this wrapper div to avoid infinite re-render loops in React until this bug in RAC is fixed: https://github.com/adobe/react-spectrum/issues/6229 */}
+            <div id={descriptionId}>{description}</div>
           </Description>
         )}
         {errorMessage && (
