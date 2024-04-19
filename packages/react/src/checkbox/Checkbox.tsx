@@ -9,7 +9,7 @@ import {
 import { Check as CheckIcon } from '@obosbbl/grunnmuren-icons-react';
 
 import { ErrorMessage } from '../label/ErrorMessage';
-import { Description } from '../label/Description';
+import { descriptionClasses } from '../label/Description';
 
 const defaultClasses = cx([
   'group relative left-0 inline-flex max-w-fit cursor-pointer items-start gap-4 py-2 leading-7',
@@ -96,10 +96,14 @@ function Checkbox(props: CheckboxProps, ref: Ref<HTMLLabelElement>) {
         </RACCheckbox>
 
         {description && (
-          <Description className="block">
-            {/* Use this wrapper div to avoid infinite re-render loops in React until this bug in RAC is fixed: https://github.com/adobe/react-spectrum/issues/6229 */}
-            <div id={descriptionId}>{description}</div>
-          </Description>
+          // {/* Use a div instead of the Description component to avoid infinite re-render loops in React until this bug in RAC is fixed: https://github.com/adobe/react-spectrum/issues/6229 */}
+          <div
+            id={descriptionId}
+            slot="description"
+            className={cx('block', descriptionClasses)}
+          >
+            {description}
+          </div>
         )}
         {errorMessage && (
           <ErrorMessage className="mt-2 block" id={errorMessageId}>
