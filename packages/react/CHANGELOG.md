@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.26
+
+### Patch Changes
+
+- d98c7a9: Fixes infinite re-renders in CheckboxGroup with Checkboxes that has the description prop set.
+- d86d439: Fix width of TextField and NumberField with left/rightAddon
+
 ## 2.0.0-canary.25
 
 ### Minor Changes
