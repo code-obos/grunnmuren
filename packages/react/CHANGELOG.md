@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.27
+
+### Patch Changes
+
+- da3a2a0: Removes redundant wrapper div on Checkbox description.
+
 ## 2.0.0-canary.26
 
 ### Patch Changes
