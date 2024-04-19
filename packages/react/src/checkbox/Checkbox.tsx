@@ -100,7 +100,7 @@ function Checkbox(props: CheckboxProps, ref: Ref<HTMLLabelElement>) {
           <div
             id={descriptionId}
             slot="description"
-            className={descriptionClasses}
+            className={cx('block', descriptionClasses)}
           >
             {description}
           </div>
