@@ -22,25 +22,25 @@ importers:
         version: 8.0.9
       '@storybook/addon-controls':
         specifier: 8.0.9
-        version: 8.0.9(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+        version: 8.0.9(@types/react@18.2.79)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@storybook/addon-docs':
         specifier: 8.0.9
         version: 8.0.9
       '@storybook/builder-vite':
         specifier: 8.0.9
-        version: 8.0.9(typescript@5.4.5)(vite@5.2.10)
+        version: 8.0.9(typescript@5.4.5)(vite@5.2.10(@types/node@20.12.7))
       '@storybook/react':
         specifier: 8.0.9
-        version: 8.0.9(react-dom@18.3.1)(react@18.3.1)(typescript@5.4.5)
+        version: 8.0.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.4.5)
       '@storybook/react-vite':
         specifier: 8.0.9
-        version: 8.0.9(react-dom@18.3.1)(react@18.3.1)(rollup@4.17.1)(typescript@5.4.5)(vite@5.2.10)
+        version: 8.0.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.17.2)(typescript@5.4.5)(vite@5.2.10(@types/node@20.12.7))
       '@types/react':
         specifier: 18.2.79
         version: 18.2.79
       '@typescript-eslint/eslint-plugin':
         specifier: 7.7.1
-        version: 7.7.1(@typescript-eslint/parser@7.7.1)(eslint@8.57.0)(typescript@5.4.5)
+        version: 7.7.1(@typescript-eslint/parser@7.7.1(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)
       '@typescript-eslint/parser':
         specifier: 7.7.1
         version: 7.7.1(eslint@8.57.0)(typescript@5.4.5)
@@ -48,8 +48,8 @@ importers:
         specifier: 10.4.19
         version: 10.4.19(postcss@8.4.38)
       bunchee:
-        specifier: 5.1.3
-        version: 5.1.3(typescript@5.4.5)
+        specifier: 5.1.5
+        version: 5.1.5(typescript@5.4.5)
       eslint:
         specifier: 8.57.0
         version: 8.57.0
@@ -85,7 +85,7 @@ importers:
         version: 18.3.1(react@18.3.1)
       storybook:
         specifier: 8.0.9
-        version: 8.0.9(react-dom@18.3.1)(react@18.3.1)
+        version: 8.0.9(@babel/preset-env@7.23.7(@babel/core@7.24.3))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tailwindcss:
         specifier: 3.4.3
         version: 3.4.3
@@ -100,7 +100,7 @@ importers:
         version: link:../packages/react
       next:
         specifier: 14.2.3
-        version: 14.2.3(@babel/core@7.24.3)(react-dom@18.3.1)(react@18.3.1)
+        version: 14.2.3(@babel/core@7.24.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       zod:
         specifier: 3.23.4
         version: 3.23.4
@@ -126,10 +126,10 @@ importers:
         version: 8.1.0(typescript@5.4.5)
       '@svgr/plugin-jsx':
         specifier: 8.1.0
-        version: 8.1.0(@svgr/core@8.1.0)
+        version: 8.1.0(@svgr/core@8.1.0(typescript@5.4.5))
       '@svgr/plugin-svgo':
         specifier: 8.1.0
-        version: 8.1.0(@svgr/core@8.1.0)(typescript@5.4.5)
+        version: 8.1.0(@svgr/core@8.1.0(typescript@5.4.5))(typescript@5.4.5)
       fs-extra:
         specifier: 11.2.0
         version: 11.2.0
@@ -174,7 +174,7 @@ importers:
         version: 18.2.0
       react-aria-components:
         specifier: ^1.1.1
-        version: 1.1.1(react-dom@18.3.1)(react@18.2.0)
+        version: 1.1.1(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
 
   packages/tailwind:
     dependencies:
@@ -1811,8 +1811,18 @@ packages:
     cpu: [arm]
     os: [android]
 
+  '@rollup/rollup-android-arm-eabi@4.17.2':
+    resolution: {integrity: sha512-NM0jFxY8bB8QLkoKxIQeObCaDlJKewVlIEkuyYKm5An1tdVZ966w2+MPQ2l8LBZLjR+SgyV+nRkTIunzOYBMLQ==}
+    cpu: [arm]
+    os: [android]
+
   '@rollup/rollup-android-arm64@4.17.1':
     resolution: {integrity: sha512-piwZDjuW2WiHr05djVdUkrG5JbjnGbtx8BXQchYCMfib/nhjzWoiScelZ+s5IJI7lecrwSxHCzW026MWBL+oJQ==}
+    cpu: [arm64]
+    os: [android]
+
+  '@rollup/rollup-android-arm64@4.17.2':
+    resolution: {integrity: sha512-yeX/Usk7daNIVwkq2uGoq2BYJKZY1JfyLTaHO/jaiSwi/lsf8fTFoQW/n6IdAsx5tx+iotu2zCJwz8MxI6D/Bw==}
     cpu: [arm64]
     os: [android]
 
@@ -1821,8 +1831,18 @@ packages:
     cpu: [arm64]
     os: [darwin]
 
+  '@rollup/rollup-darwin-arm64@4.17.2':
+    resolution: {integrity: sha512-kcMLpE6uCwls023+kknm71ug7MZOrtXo+y5p/tsg6jltpDtgQY1Eq5sGfHcQfb+lfuKwhBmEURDga9N0ol4YPw==}
+    cpu: [arm64]
+    os: [darwin]
+
   '@rollup/rollup-darwin-x64@4.17.1':
     resolution: {integrity: sha512-S7TYNQpWXB9APkxu/SLmYHezWwCoZRA9QLgrDeml+SR2A1LLPD2DBUdUlvmCF7FUpRMKvbeeWky+iizQj65Etw==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@rollup/rollup-darwin-x64@4.17.2':
+    resolution: {integrity: sha512-AtKwD0VEx0zWkL0ZjixEkp5tbNLzX+FCqGG1SvOu993HnSz4qDI6S4kGzubrEJAljpVkhRSlg5bzpV//E6ysTQ==}
     cpu: [x64]
     os: [darwin]
 
@@ -1831,8 +1851,18 @@ packages:
     cpu: [arm]
     os: [linux]
 
+  '@rollup/rollup-linux-arm-gnueabihf@4.17.2':
+    resolution: {integrity: sha512-3reX2fUHqN7sffBNqmEyMQVj/CKhIHZd4y631duy0hZqI8Qoqf6lTtmAKvJFYa6bhU95B1D0WgzHkmTg33In0A==}
+    cpu: [arm]
+    os: [linux]
+
   '@rollup/rollup-linux-arm-musleabihf@4.17.1':
     resolution: {integrity: sha512-9BfzwyPNV0IizQoR+5HTNBGkh1KXE8BqU0DBkqMngmyFW7BfuIZyMjQ0s6igJEiPSBvT3ZcnIFohZ19OqjhDPg==}
+    cpu: [arm]
+    os: [linux]
+
+  '@rollup/rollup-linux-arm-musleabihf@4.17.2':
+    resolution: {integrity: sha512-uSqpsp91mheRgw96xtyAGP9FW5ChctTFEoXP0r5FAzj/3ZRv3Uxjtc7taRQSaQM/q85KEKjKsZuiZM3GyUivRg==}
     cpu: [arm]
     os: [linux]
 
@@ -1841,8 +1871,18 @@ packages:
     cpu: [arm64]
     os: [linux]
 
+  '@rollup/rollup-linux-arm64-gnu@4.17.2':
+    resolution: {integrity: sha512-EMMPHkiCRtE8Wdk3Qhtciq6BndLtstqZIroHiiGzB3C5LDJmIZcSzVtLRbwuXuUft1Cnv+9fxuDtDxz3k3EW2A==}
+    cpu: [arm64]
+    os: [linux]
+
   '@rollup/rollup-linux-arm64-musl@4.17.1':
     resolution: {integrity: sha512-ekggix/Bc/d/60H1Mi4YeYb/7dbal1kEDZ6sIFVAE8pUSx7PiWeEh+NWbL7bGu0X68BBIkgF3ibRJe1oFTksQQ==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@rollup/rollup-linux-arm64-musl@4.17.2':
+    resolution: {integrity: sha512-NMPylUUZ1i0z/xJUIx6VUhISZDRT+uTWpBcjdv0/zkp7b/bQDF+NfnfdzuTiB1G6HTodgoFa93hp0O1xl+/UbA==}
     cpu: [arm64]
     os: [linux]
 
@@ -1851,8 +1891,18 @@ packages:
     cpu: [ppc64]
     os: [linux]
 
+  '@rollup/rollup-linux-powerpc64le-gnu@4.17.2':
+    resolution: {integrity: sha512-T19My13y8uYXPw/L/k0JYaX1fJKFT/PWdXiHr8mTbXWxjVF1t+8Xl31DgBBvEKclw+1b00Chg0hxE2O7bTG7GQ==}
+    cpu: [ppc64]
+    os: [linux]
+
   '@rollup/rollup-linux-riscv64-gnu@4.17.1':
     resolution: {integrity: sha512-gEYmYYHaehdvX46mwXrU49vD6Euf1Bxhq9pPb82cbUU9UT2NV+RSckQ5tKWOnNXZixKsy8/cPGtiUWqzPuAcXQ==}
+    cpu: [riscv64]
+    os: [linux]
+
+  '@rollup/rollup-linux-riscv64-gnu@4.17.2':
+    resolution: {integrity: sha512-BOaNfthf3X3fOWAB+IJ9kxTgPmMqPPH5f5k2DcCsRrBIbWnaJCgX2ll77dV1TdSy9SaXTR5iDXRL8n7AnoP5cg==}
     cpu: [riscv64]
     os: [linux]
 
@@ -1861,8 +1911,18 @@ packages:
     cpu: [s390x]
     os: [linux]
 
+  '@rollup/rollup-linux-s390x-gnu@4.17.2':
+    resolution: {integrity: sha512-W0UP/x7bnn3xN2eYMql2T/+wpASLE5SjObXILTMPUBDB/Fg/FxC+gX4nvCfPBCbNhz51C+HcqQp2qQ4u25ok6g==}
+    cpu: [s390x]
+    os: [linux]
+
   '@rollup/rollup-linux-x64-gnu@4.17.1':
     resolution: {integrity: sha512-AsdnINQoDWfKpBzCPqQWxSPdAWzSgnYbrJYtn6W0H2E9It5bZss99PiLA8CgmDRfvKygt20UpZ3xkhFlIfX9zQ==}
+    cpu: [x64]
+    os: [linux]
+
+  '@rollup/rollup-linux-x64-gnu@4.17.2':
+    resolution: {integrity: sha512-Hy7pLwByUOuyaFC6mAr7m+oMC+V7qyifzs/nW2OJfC8H4hbCzOX07Ov0VFk/zP3kBsELWNFi7rJtgbKYsav9QQ==}
     cpu: [x64]
     os: [linux]
 
@@ -1871,8 +1931,18 @@ packages:
     cpu: [x64]
     os: [linux]
 
+  '@rollup/rollup-linux-x64-musl@4.17.2':
+    resolution: {integrity: sha512-h1+yTWeYbRdAyJ/jMiVw0l6fOOm/0D1vNLui9iPuqgRGnXA0u21gAqOyB5iHjlM9MMfNOm9RHCQ7zLIzT0x11Q==}
+    cpu: [x64]
+    os: [linux]
+
   '@rollup/rollup-win32-arm64-msvc@4.17.1':
     resolution: {integrity: sha512-J0d3NVNf7wBL9t4blCNat+d0PYqAx8wOoY+/9Q5cujnafbX7BmtYk3XvzkqLmFECaWvXGLuHmKj/wrILUinmQg==}
+    cpu: [arm64]
+    os: [win32]
+
+  '@rollup/rollup-win32-arm64-msvc@4.17.2':
+    resolution: {integrity: sha512-tmdtXMfKAjy5+IQsVtDiCfqbynAQE/TQRpWdVataHmhMb9DCoJxp9vLcCBjEQWMiUYxO1QprH/HbY9ragCEFLA==}
     cpu: [arm64]
     os: [win32]
 
@@ -1881,8 +1951,18 @@ packages:
     cpu: [ia32]
     os: [win32]
 
+  '@rollup/rollup-win32-ia32-msvc@4.17.2':
+    resolution: {integrity: sha512-7II/QCSTAHuE5vdZaQEwJq2ZACkBpQDOmQsE6D6XUbnBHW8IAhm4eTufL6msLJorzrHDFv3CF8oCA/hSIRuZeQ==}
+    cpu: [ia32]
+    os: [win32]
+
   '@rollup/rollup-win32-x64-msvc@4.17.1':
     resolution: {integrity: sha512-0QbCkfk6cnnVKWqqlC0cUrrUMDMfu5ffvYMTUHf+qMN2uAb3MKP31LPcwiMXBNsvoFGs/kYdFOsuLmvppCopXA==}
+    cpu: [x64]
+    os: [win32]
+
+  '@rollup/rollup-win32-x64-msvc@4.17.2':
+    resolution: {integrity: sha512-TGGO7v7qOq4CYmSBVEYpI1Y5xDuCEnbVC5Vth8mOsW0gDSzxNrVERPc790IGHsrT2dQSimgMr9Ub3Y1Jci5/8w==}
     cpu: [x64]
     os: [win32]
 
@@ -2682,8 +2762,8 @@ packages:
     resolution: {integrity: sha512-zhaCDicdLuWN5UbN5IMnFqNMhNfo919sH85y2/ea+5Yg9TsTkeZxpL+JLbp6cgYFS4sRLp3YV4S6yDuqVWHYOw==}
     engines: {node: '>=6'}
 
-  bunchee@5.1.3:
-    resolution: {integrity: sha512-jTG7K1pm8QpN3NyzY3su2FXCpOVixkNK8w0LmB6eKEFRZ4VSwznkoxnLFTcNuuTKFJ3AAXVfI1cV8/dFz8nTEA==}
+  bunchee@5.1.5:
+    resolution: {integrity: sha512-zrUIjZcyJjiXdUk1U1Sa1ItmopK3ZmzFUGQ5M4FGDPRI0ksDB4OCRyqp5ci2vFdLFy1y8MbrxIoOD6/j8TYfYQ==}
     engines: {node: '>= 18.0.0'}
     hasBin: true
     peerDependencies:
@@ -4877,6 +4957,11 @@ packages:
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
     hasBin: true
 
+  rollup@4.17.2:
+    resolution: {integrity: sha512-/9ClTJPByC0U4zNLowV1tMBe8yMEAxewtR3cUNX5BoEpGH3dQEWpJLr6CLp0fPdYRF/fzVOgvDb1zXuakwF5kQ==}
+    engines: {node: '>=18.0.0', npm: '>=8.0.0'}
+    hasBin: true
+
   run-parallel@1.2.0:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
 
@@ -6757,14 +6842,15 @@ snapshots:
       wrap-ansi: 8.1.0
       wrap-ansi-cjs: wrap-ansi@7.0.0
 
-  '@joshwooding/vite-plugin-react-docgen-typescript@0.3.0(typescript@5.4.5)(vite@5.2.10)':
+  '@joshwooding/vite-plugin-react-docgen-typescript@0.3.0(typescript@5.4.5)(vite@5.2.10(@types/node@20.12.7))':
     dependencies:
       glob: 7.2.3
       glob-promise: 4.2.2(glob@7.2.3)
       magic-string: 0.27.0
       react-docgen-typescript: 2.2.2(typescript@5.4.5)
+      vite: 5.2.10(@types/node@20.12.7)
+    optionalDependencies:
       typescript: 5.4.5
-      vite: 5.2.10
 
   '@jridgewell/gen-mapping@0.3.5':
     dependencies:
@@ -6860,15 +6946,17 @@ snapshots:
   '@radix-ui/react-compose-refs@1.0.1(@types/react@18.2.79)(react@18.3.1)':
     dependencies:
       '@babel/runtime': 7.23.7
-      '@types/react': 18.2.79
       react: 18.3.1
+    optionalDependencies:
+      '@types/react': 18.2.79
 
   '@radix-ui/react-slot@1.0.2(@types/react@18.2.79)(react@18.3.1)':
     dependencies:
       '@babel/runtime': 7.23.7
       '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.79)(react@18.3.1)
-      '@types/react': 18.2.79
       react: 18.3.1
+    optionalDependencies:
+      '@types/react': 18.2.79
 
   '@react-aria/breadcrumbs@3.5.11(react@18.2.0)':
     dependencies:
@@ -6891,7 +6979,7 @@ snapshots:
       '@swc/helpers': 0.5.11
       react: 18.2.0
 
-  '@react-aria/calendar@3.5.6(react-dom@18.3.1)(react@18.2.0)':
+  '@react-aria/calendar@3.5.6(react-dom@18.3.1(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@internationalized/date': 3.5.2
       '@react-aria/i18n': 3.10.2(react@18.2.0)
@@ -6921,14 +7009,14 @@ snapshots:
       '@swc/helpers': 0.5.11
       react: 18.2.0
 
-  '@react-aria/combobox@3.8.4(react-dom@18.3.1)(react@18.2.0)':
+  '@react-aria/combobox@3.8.4(react-dom@18.3.1(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@react-aria/i18n': 3.10.2(react@18.2.0)
-      '@react-aria/listbox': 3.11.5(react-dom@18.3.1)(react@18.2.0)
+      '@react-aria/listbox': 3.11.5(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
       '@react-aria/live-announcer': 3.3.2
-      '@react-aria/menu': 3.13.1(react-dom@18.3.1)(react@18.2.0)
-      '@react-aria/overlays': 3.21.1(react-dom@18.3.1)(react@18.2.0)
-      '@react-aria/selection': 3.17.5(react-dom@18.3.1)(react@18.2.0)
+      '@react-aria/menu': 3.13.1(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
+      '@react-aria/overlays': 3.21.1(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
+      '@react-aria/selection': 3.17.5(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
       '@react-aria/textfield': 3.14.3(react@18.2.0)
       '@react-aria/utils': 3.23.2(react@18.2.0)
       '@react-stately/collections': 3.10.5(react@18.2.0)
@@ -6941,7 +7029,7 @@ snapshots:
       react: 18.2.0
       react-dom: 18.3.1(react@18.2.0)
 
-  '@react-aria/datepicker@3.9.3(react-dom@18.3.1)(react@18.2.0)':
+  '@react-aria/datepicker@3.9.3(react-dom@18.3.1(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@internationalized/date': 3.5.2
       '@internationalized/number': 3.5.1
@@ -6951,7 +7039,7 @@ snapshots:
       '@react-aria/i18n': 3.10.2(react@18.2.0)
       '@react-aria/interactions': 3.21.1(react@18.2.0)
       '@react-aria/label': 3.7.6(react@18.2.0)
-      '@react-aria/spinbutton': 3.6.3(react-dom@18.3.1)(react@18.2.0)
+      '@react-aria/spinbutton': 3.6.3(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
       '@react-aria/utils': 3.23.2(react@18.2.0)
       '@react-stately/datepicker': 3.9.2(react@18.2.0)
       '@react-stately/form': 3.0.1(react@18.2.0)
@@ -6964,10 +7052,10 @@ snapshots:
       react: 18.2.0
       react-dom: 18.3.1(react@18.2.0)
 
-  '@react-aria/dialog@3.5.12(react-dom@18.3.1)(react@18.2.0)':
+  '@react-aria/dialog@3.5.12(react-dom@18.3.1(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@react-aria/focus': 3.16.2(react@18.2.0)
-      '@react-aria/overlays': 3.21.1(react-dom@18.3.1)(react@18.2.0)
+      '@react-aria/overlays': 3.21.1(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
       '@react-aria/utils': 3.23.2(react@18.2.0)
       '@react-types/dialog': 3.5.8(react@18.2.0)
       '@react-types/shared': 3.22.1(react@18.2.0)
@@ -6975,13 +7063,13 @@ snapshots:
       react: 18.2.0
       react-dom: 18.3.1(react@18.2.0)
 
-  '@react-aria/dnd@3.5.3(react-dom@18.3.1)(react@18.2.0)':
+  '@react-aria/dnd@3.5.3(react-dom@18.3.1(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@internationalized/string': 3.2.1
       '@react-aria/i18n': 3.10.2(react@18.2.0)
       '@react-aria/interactions': 3.21.1(react@18.2.0)
       '@react-aria/live-announcer': 3.3.2
-      '@react-aria/overlays': 3.21.1(react-dom@18.3.1)(react@18.2.0)
+      '@react-aria/overlays': 3.21.1(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
       '@react-aria/utils': 3.23.2(react@18.2.0)
       '@react-stately/dnd': 3.2.8(react@18.2.0)
       '@react-types/button': 3.9.2(react@18.2.0)
@@ -7008,13 +7096,13 @@ snapshots:
       '@swc/helpers': 0.5.11
       react: 18.2.0
 
-  '@react-aria/grid@3.8.8(react-dom@18.3.1)(react@18.2.0)':
+  '@react-aria/grid@3.8.8(react-dom@18.3.1(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@react-aria/focus': 3.16.2(react@18.2.0)
       '@react-aria/i18n': 3.10.2(react@18.2.0)
       '@react-aria/interactions': 3.21.1(react@18.2.0)
       '@react-aria/live-announcer': 3.3.2
-      '@react-aria/selection': 3.17.5(react-dom@18.3.1)(react@18.2.0)
+      '@react-aria/selection': 3.17.5(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
       '@react-aria/utils': 3.23.2(react@18.2.0)
       '@react-stately/collections': 3.10.5(react@18.2.0)
       '@react-stately/grid': 3.8.5(react@18.2.0)
@@ -7027,13 +7115,13 @@ snapshots:
       react: 18.2.0
       react-dom: 18.3.1(react@18.2.0)
 
-  '@react-aria/gridlist@3.7.5(react-dom@18.3.1)(react@18.2.0)':
+  '@react-aria/gridlist@3.7.5(react-dom@18.3.1(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@react-aria/focus': 3.16.2(react@18.2.0)
-      '@react-aria/grid': 3.8.8(react-dom@18.3.1)(react@18.2.0)
+      '@react-aria/grid': 3.8.8(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
       '@react-aria/i18n': 3.10.2(react@18.2.0)
       '@react-aria/interactions': 3.21.1(react@18.2.0)
-      '@react-aria/selection': 3.17.5(react-dom@18.3.1)(react@18.2.0)
+      '@react-aria/selection': 3.17.5(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
       '@react-aria/utils': 3.23.2(react@18.2.0)
       '@react-stately/list': 3.10.3(react@18.2.0)
       '@react-types/shared': 3.22.1(react@18.2.0)
@@ -7078,11 +7166,11 @@ snapshots:
       '@swc/helpers': 0.5.11
       react: 18.2.0
 
-  '@react-aria/listbox@3.11.5(react-dom@18.3.1)(react@18.2.0)':
+  '@react-aria/listbox@3.11.5(react-dom@18.3.1(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@react-aria/interactions': 3.21.1(react@18.2.0)
       '@react-aria/label': 3.7.6(react@18.2.0)
-      '@react-aria/selection': 3.17.5(react-dom@18.3.1)(react@18.2.0)
+      '@react-aria/selection': 3.17.5(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
       '@react-aria/utils': 3.23.2(react@18.2.0)
       '@react-stately/collections': 3.10.5(react@18.2.0)
       '@react-stately/list': 3.10.3(react@18.2.0)
@@ -7096,13 +7184,13 @@ snapshots:
     dependencies:
       '@swc/helpers': 0.5.11
 
-  '@react-aria/menu@3.13.1(react-dom@18.3.1)(react@18.2.0)':
+  '@react-aria/menu@3.13.1(react-dom@18.3.1(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@react-aria/focus': 3.16.2(react@18.2.0)
       '@react-aria/i18n': 3.10.2(react@18.2.0)
       '@react-aria/interactions': 3.21.1(react@18.2.0)
-      '@react-aria/overlays': 3.21.1(react-dom@18.3.1)(react@18.2.0)
-      '@react-aria/selection': 3.17.5(react-dom@18.3.1)(react@18.2.0)
+      '@react-aria/overlays': 3.21.1(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
+      '@react-aria/selection': 3.17.5(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
       '@react-aria/utils': 3.23.2(react@18.2.0)
       '@react-stately/collections': 3.10.5(react@18.2.0)
       '@react-stately/menu': 3.6.1(react@18.2.0)
@@ -7122,11 +7210,11 @@ snapshots:
       '@swc/helpers': 0.5.11
       react: 18.2.0
 
-  '@react-aria/numberfield@3.11.1(react-dom@18.3.1)(react@18.2.0)':
+  '@react-aria/numberfield@3.11.1(react-dom@18.3.1(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@react-aria/i18n': 3.10.2(react@18.2.0)
       '@react-aria/interactions': 3.21.1(react@18.2.0)
-      '@react-aria/spinbutton': 3.6.3(react-dom@18.3.1)(react@18.2.0)
+      '@react-aria/spinbutton': 3.6.3(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
       '@react-aria/textfield': 3.14.3(react@18.2.0)
       '@react-aria/utils': 3.23.2(react@18.2.0)
       '@react-stately/form': 3.0.1(react@18.2.0)
@@ -7142,7 +7230,7 @@ snapshots:
     dependencies:
       unplugin: 1.6.0
 
-  '@react-aria/overlays@3.21.1(react-dom@18.3.1)(react@18.2.0)':
+  '@react-aria/overlays@3.21.1(react-dom@18.3.1(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@react-aria/focus': 3.16.2(react@18.2.0)
       '@react-aria/i18n': 3.10.2(react@18.2.0)
@@ -7194,15 +7282,15 @@ snapshots:
       '@swc/helpers': 0.5.11
       react: 18.2.0
 
-  '@react-aria/select@3.14.3(react-dom@18.3.1)(react@18.2.0)':
+  '@react-aria/select@3.14.3(react-dom@18.3.1(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@react-aria/form': 3.0.3(react@18.2.0)
       '@react-aria/i18n': 3.10.2(react@18.2.0)
       '@react-aria/interactions': 3.21.1(react@18.2.0)
       '@react-aria/label': 3.7.6(react@18.2.0)
-      '@react-aria/listbox': 3.11.5(react-dom@18.3.1)(react@18.2.0)
-      '@react-aria/menu': 3.13.1(react-dom@18.3.1)(react@18.2.0)
-      '@react-aria/selection': 3.17.5(react-dom@18.3.1)(react@18.2.0)
+      '@react-aria/listbox': 3.11.5(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
+      '@react-aria/menu': 3.13.1(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
+      '@react-aria/selection': 3.17.5(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
       '@react-aria/utils': 3.23.2(react@18.2.0)
       '@react-aria/visually-hidden': 3.8.10(react@18.2.0)
       '@react-stately/select': 3.6.2(react@18.2.0)
@@ -7213,7 +7301,7 @@ snapshots:
       react: 18.2.0
       react-dom: 18.3.1(react@18.2.0)
 
-  '@react-aria/selection@3.17.5(react-dom@18.3.1)(react@18.2.0)':
+  '@react-aria/selection@3.17.5(react-dom@18.3.1(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@react-aria/focus': 3.16.2(react@18.2.0)
       '@react-aria/i18n': 3.10.2(react@18.2.0)
@@ -7245,7 +7333,7 @@ snapshots:
       '@swc/helpers': 0.5.11
       react: 18.2.0
 
-  '@react-aria/spinbutton@3.6.3(react-dom@18.3.1)(react@18.2.0)':
+  '@react-aria/spinbutton@3.6.3(react-dom@18.3.1(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@react-aria/i18n': 3.10.2(react@18.2.0)
       '@react-aria/live-announcer': 3.3.2
@@ -7269,10 +7357,10 @@ snapshots:
       '@swc/helpers': 0.5.11
       react: 18.2.0
 
-  '@react-aria/table@3.13.5(react-dom@18.3.1)(react@18.2.0)':
+  '@react-aria/table@3.13.5(react-dom@18.3.1(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@react-aria/focus': 3.16.2(react@18.2.0)
-      '@react-aria/grid': 3.8.8(react-dom@18.3.1)(react@18.2.0)
+      '@react-aria/grid': 3.8.8(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
       '@react-aria/i18n': 3.10.2(react@18.2.0)
       '@react-aria/interactions': 3.21.1(react@18.2.0)
       '@react-aria/live-announcer': 3.3.2
@@ -7290,11 +7378,11 @@ snapshots:
       react: 18.2.0
       react-dom: 18.3.1(react@18.2.0)
 
-  '@react-aria/tabs@3.8.5(react-dom@18.3.1)(react@18.2.0)':
+  '@react-aria/tabs@3.8.5(react-dom@18.3.1(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@react-aria/focus': 3.16.2(react@18.2.0)
       '@react-aria/i18n': 3.10.2(react@18.2.0)
-      '@react-aria/selection': 3.17.5(react-dom@18.3.1)(react@18.2.0)
+      '@react-aria/selection': 3.17.5(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
       '@react-aria/utils': 3.23.2(react@18.2.0)
       '@react-stately/tabs': 3.6.4(react@18.2.0)
       '@react-types/shared': 3.22.1(react@18.2.0)
@@ -7303,13 +7391,13 @@ snapshots:
       react: 18.2.0
       react-dom: 18.3.1(react@18.2.0)
 
-  '@react-aria/tag@3.3.3(react-dom@18.3.1)(react@18.2.0)':
+  '@react-aria/tag@3.3.3(react-dom@18.3.1(react@18.2.0))(react@18.2.0)':
     dependencies:
-      '@react-aria/gridlist': 3.7.5(react-dom@18.3.1)(react@18.2.0)
+      '@react-aria/gridlist': 3.7.5(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
       '@react-aria/i18n': 3.10.2(react@18.2.0)
       '@react-aria/interactions': 3.21.1(react@18.2.0)
       '@react-aria/label': 3.7.6(react@18.2.0)
-      '@react-aria/selection': 3.17.5(react-dom@18.3.1)(react@18.2.0)
+      '@react-aria/selection': 3.17.5(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
       '@react-aria/utils': 3.23.2(react@18.2.0)
       '@react-stately/list': 3.10.3(react@18.2.0)
       '@react-types/button': 3.9.2(react@18.2.0)
@@ -7729,95 +7817,149 @@ snapshots:
       '@react-types/shared': 3.22.1(react@18.2.0)
       react: 18.2.0
 
-  '@rollup/plugin-commonjs@25.0.7(rollup@4.17.1)':
+  '@rollup/plugin-commonjs@25.0.7(rollup@4.17.2)':
     dependencies:
-      '@rollup/pluginutils': 5.1.0(rollup@4.17.1)
+      '@rollup/pluginutils': 5.1.0(rollup@4.17.2)
       commondir: 1.0.1
       estree-walker: 2.0.2
       glob: 8.1.0
       is-reference: 1.2.1
       magic-string: 0.30.10
-      rollup: 4.17.1
+    optionalDependencies:
+      rollup: 4.17.2
 
-  '@rollup/plugin-json@6.1.0(rollup@4.17.1)':
+  '@rollup/plugin-json@6.1.0(rollup@4.17.2)':
     dependencies:
-      '@rollup/pluginutils': 5.1.0(rollup@4.17.1)
-      rollup: 4.17.1
+      '@rollup/pluginutils': 5.1.0(rollup@4.17.2)
+    optionalDependencies:
+      rollup: 4.17.2
 
-  '@rollup/plugin-node-resolve@15.2.3(rollup@4.17.1)':
+  '@rollup/plugin-node-resolve@15.2.3(rollup@4.17.2)':
     dependencies:
-      '@rollup/pluginutils': 5.1.0(rollup@4.17.1)
+      '@rollup/pluginutils': 5.1.0(rollup@4.17.2)
       '@types/resolve': 1.20.2
       deepmerge: 4.3.1
       is-builtin-module: 3.2.1
       is-module: 1.0.0
       resolve: 1.22.8
-      rollup: 4.17.1
+    optionalDependencies:
+      rollup: 4.17.2
 
-  '@rollup/plugin-replace@5.0.5(rollup@4.17.1)':
+  '@rollup/plugin-replace@5.0.5(rollup@4.17.2)':
     dependencies:
-      '@rollup/pluginutils': 5.1.0(rollup@4.17.1)
+      '@rollup/pluginutils': 5.1.0(rollup@4.17.2)
       magic-string: 0.30.10
-      rollup: 4.17.1
+    optionalDependencies:
+      rollup: 4.17.2
 
-  '@rollup/plugin-wasm@6.2.2(rollup@4.17.1)':
+  '@rollup/plugin-wasm@6.2.2(rollup@4.17.2)':
     dependencies:
-      '@rollup/pluginutils': 5.1.0(rollup@4.17.1)
-      rollup: 4.17.1
+      '@rollup/pluginutils': 5.1.0(rollup@4.17.2)
+    optionalDependencies:
+      rollup: 4.17.2
 
-  '@rollup/pluginutils@5.1.0(rollup@4.17.1)':
+  '@rollup/pluginutils@5.1.0(rollup@4.17.2)':
     dependencies:
       '@types/estree': 1.0.5
       estree-walker: 2.0.2
       picomatch: 2.3.1
-      rollup: 4.17.1
+    optionalDependencies:
+      rollup: 4.17.2
 
   '@rollup/rollup-android-arm-eabi@4.17.1':
+    optional: true
+
+  '@rollup/rollup-android-arm-eabi@4.17.2':
     optional: true
 
   '@rollup/rollup-android-arm64@4.17.1':
     optional: true
 
+  '@rollup/rollup-android-arm64@4.17.2':
+    optional: true
+
   '@rollup/rollup-darwin-arm64@4.17.1':
+    optional: true
+
+  '@rollup/rollup-darwin-arm64@4.17.2':
     optional: true
 
   '@rollup/rollup-darwin-x64@4.17.1':
     optional: true
 
+  '@rollup/rollup-darwin-x64@4.17.2':
+    optional: true
+
   '@rollup/rollup-linux-arm-gnueabihf@4.17.1':
+    optional: true
+
+  '@rollup/rollup-linux-arm-gnueabihf@4.17.2':
     optional: true
 
   '@rollup/rollup-linux-arm-musleabihf@4.17.1':
     optional: true
 
+  '@rollup/rollup-linux-arm-musleabihf@4.17.2':
+    optional: true
+
   '@rollup/rollup-linux-arm64-gnu@4.17.1':
+    optional: true
+
+  '@rollup/rollup-linux-arm64-gnu@4.17.2':
     optional: true
 
   '@rollup/rollup-linux-arm64-musl@4.17.1':
     optional: true
 
+  '@rollup/rollup-linux-arm64-musl@4.17.2':
+    optional: true
+
   '@rollup/rollup-linux-powerpc64le-gnu@4.17.1':
+    optional: true
+
+  '@rollup/rollup-linux-powerpc64le-gnu@4.17.2':
     optional: true
 
   '@rollup/rollup-linux-riscv64-gnu@4.17.1':
     optional: true
 
+  '@rollup/rollup-linux-riscv64-gnu@4.17.2':
+    optional: true
+
   '@rollup/rollup-linux-s390x-gnu@4.17.1':
+    optional: true
+
+  '@rollup/rollup-linux-s390x-gnu@4.17.2':
     optional: true
 
   '@rollup/rollup-linux-x64-gnu@4.17.1':
     optional: true
 
+  '@rollup/rollup-linux-x64-gnu@4.17.2':
+    optional: true
+
   '@rollup/rollup-linux-x64-musl@4.17.1':
+    optional: true
+
+  '@rollup/rollup-linux-x64-musl@4.17.2':
     optional: true
 
   '@rollup/rollup-win32-arm64-msvc@4.17.1':
     optional: true
 
+  '@rollup/rollup-win32-arm64-msvc@4.17.2':
+    optional: true
+
   '@rollup/rollup-win32-ia32-msvc@4.17.1':
     optional: true
 
+  '@rollup/rollup-win32-ia32-msvc@4.17.2':
+    optional: true
+
   '@rollup/rollup-win32-x64-msvc@4.17.1':
+    optional: true
+
+  '@rollup/rollup-win32-x64-msvc@4.17.2':
     optional: true
 
   '@storybook/addon-actions@8.0.9':
@@ -7829,9 +7971,9 @@ snapshots:
       polished: 4.2.2
       uuid: 9.0.1
 
-  '@storybook/addon-controls@8.0.9(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)':
+  '@storybook/addon-controls@8.0.9(@types/react@18.2.79)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@storybook/blocks': 8.0.9(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@storybook/blocks': 8.0.9(@types/react@18.2.79)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       lodash: 4.17.21
       ts-dedent: 2.2.0
     transitivePeerDependencies:
@@ -7845,16 +7987,16 @@ snapshots:
     dependencies:
       '@babel/core': 7.24.3
       '@mdx-js/react': 3.0.1(@types/react@18.2.79)(react@18.3.1)
-      '@storybook/blocks': 8.0.9(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@storybook/blocks': 8.0.9(@types/react@18.2.79)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@storybook/client-logger': 8.0.9
-      '@storybook/components': 8.0.9(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@storybook/components': 8.0.9(@types/react@18.2.79)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@storybook/csf-plugin': 8.0.9
       '@storybook/csf-tools': 8.0.9
       '@storybook/global': 5.0.0
       '@storybook/node-logger': 8.0.9
       '@storybook/preview-api': 8.0.9
-      '@storybook/react-dom-shim': 8.0.9(react-dom@18.3.1)(react@18.3.1)
-      '@storybook/theming': 8.0.9(react-dom@18.3.1)(react@18.3.1)
+      '@storybook/react-dom-shim': 8.0.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@storybook/theming': 8.0.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@storybook/types': 8.0.9
       '@types/react': 18.2.79
       fs-extra: 11.2.0
@@ -7867,19 +8009,19 @@ snapshots:
       - encoding
       - supports-color
 
-  '@storybook/blocks@8.0.9(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)':
+  '@storybook/blocks@8.0.9(@types/react@18.2.79)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@storybook/channels': 8.0.9
       '@storybook/client-logger': 8.0.9
-      '@storybook/components': 8.0.9(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@storybook/components': 8.0.9(@types/react@18.2.79)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@storybook/core-events': 8.0.9
       '@storybook/csf': 0.1.5
       '@storybook/docs-tools': 8.0.9
       '@storybook/global': 5.0.0
-      '@storybook/icons': 1.2.9(react-dom@18.3.1)(react@18.3.1)
-      '@storybook/manager-api': 8.0.9(react-dom@18.3.1)(react@18.3.1)
+      '@storybook/icons': 1.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@storybook/manager-api': 8.0.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@storybook/preview-api': 8.0.9
-      '@storybook/theming': 8.0.9(react-dom@18.3.1)(react@18.3.1)
+      '@storybook/theming': 8.0.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@storybook/types': 8.0.9
       '@types/lodash': 4.14.202
       color-convert: 2.0.1
@@ -7888,13 +8030,14 @@ snapshots:
       markdown-to-jsx: 7.3.2(react@18.3.1)
       memoizerific: 1.11.3
       polished: 4.2.2
-      react: 18.3.1
-      react-colorful: 5.6.1(react-dom@18.3.1)(react@18.3.1)
-      react-dom: 18.3.1(react@18.3.1)
+      react-colorful: 5.6.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       telejson: 7.2.0
       tocbot: 4.25.0
       ts-dedent: 2.2.0
       util-deprecate: 1.0.2
+    optionalDependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
     transitivePeerDependencies:
       - '@types/react'
       - encoding
@@ -7920,7 +8063,7 @@ snapshots:
       - encoding
       - supports-color
 
-  '@storybook/builder-vite@8.0.9(typescript@5.4.5)(vite@5.2.10)':
+  '@storybook/builder-vite@8.0.9(typescript@5.4.5)(vite@5.2.10(@types/node@20.12.7))':
     dependencies:
       '@storybook/channels': 8.0.9
       '@storybook/client-logger': 8.0.9
@@ -7939,8 +8082,9 @@ snapshots:
       fs-extra: 11.2.0
       magic-string: 0.30.10
       ts-dedent: 2.2.0
+      vite: 5.2.10(@types/node@20.12.7)
+    optionalDependencies:
       typescript: 5.4.5
-      vite: 5.2.10
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -7953,7 +8097,7 @@ snapshots:
       telejson: 7.2.0
       tiny-invariant: 1.3.3
 
-  '@storybook/cli@8.0.9(react-dom@18.3.1)(react@18.3.1)':
+  '@storybook/cli@8.0.9(@babel/preset-env@7.23.7(@babel/core@7.24.3))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@babel/core': 7.24.3
       '@babel/types': 7.24.0
@@ -7961,7 +8105,7 @@ snapshots:
       '@storybook/codemod': 8.0.9
       '@storybook/core-common': 8.0.9
       '@storybook/core-events': 8.0.9
-      '@storybook/core-server': 8.0.9(react-dom@18.3.1)(react@18.3.1)
+      '@storybook/core-server': 8.0.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@storybook/csf-tools': 8.0.9
       '@storybook/node-logger': 8.0.9
       '@storybook/telemetry': 8.0.9
@@ -7980,7 +8124,7 @@ snapshots:
       get-npm-tarball-url: 2.1.0
       giget: 1.2.1
       globby: 11.1.0
-      jscodeshift: 0.15.1(@babel/preset-env@7.23.7)
+      jscodeshift: 0.15.1(@babel/preset-env@7.23.7(@babel/core@7.24.3))
       leven: 3.1.0
       ora: 5.4.1
       prettier: 3.2.5
@@ -8016,7 +8160,7 @@ snapshots:
       '@types/cross-spawn': 6.0.6
       cross-spawn: 7.0.3
       globby: 11.1.0
-      jscodeshift: 0.15.1(@babel/preset-env@7.23.7)
+      jscodeshift: 0.15.1(@babel/preset-env@7.23.7(@babel/core@7.24.3))
       lodash: 4.17.21
       prettier: 3.2.5
       recast: 0.23.6
@@ -8024,14 +8168,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@storybook/components@8.0.9(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)':
+  '@storybook/components@8.0.9(@types/react@18.2.79)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@radix-ui/react-slot': 1.0.2(@types/react@18.2.79)(react@18.3.1)
       '@storybook/client-logger': 8.0.9
       '@storybook/csf': 0.1.5
       '@storybook/global': 5.0.0
-      '@storybook/icons': 1.2.9(react-dom@18.3.1)(react@18.3.1)
-      '@storybook/theming': 8.0.9(react-dom@18.3.1)(react@18.3.1)
+      '@storybook/icons': 1.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@storybook/theming': 8.0.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@storybook/types': 8.0.9
       memoizerific: 1.11.3
       react: 18.3.1
@@ -8078,7 +8222,7 @@ snapshots:
     dependencies:
       ts-dedent: 2.2.0
 
-  '@storybook/core-server@8.0.9(react-dom@18.3.1)(react@18.3.1)':
+  '@storybook/core-server@8.0.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@aw-web-design/x-default-browser': 1.4.126
       '@babel/core': 7.24.3
@@ -8092,7 +8236,7 @@ snapshots:
       '@storybook/docs-mdx': 3.0.0
       '@storybook/global': 5.0.0
       '@storybook/manager': 8.0.9
-      '@storybook/manager-api': 8.0.9(react-dom@18.3.1)(react@18.3.1)
+      '@storybook/manager-api': 8.0.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@storybook/node-logger': 8.0.9
       '@storybook/preview-api': 8.0.9
       '@storybook/telemetry': 8.0.9
@@ -8178,21 +8322,21 @@ snapshots:
 
   '@storybook/global@5.0.0': {}
 
-  '@storybook/icons@1.2.9(react-dom@18.3.1)(react@18.3.1)':
+  '@storybook/icons@1.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@storybook/manager-api@8.0.9(react-dom@18.3.1)(react@18.3.1)':
+  '@storybook/manager-api@8.0.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@storybook/channels': 8.0.9
       '@storybook/client-logger': 8.0.9
       '@storybook/core-events': 8.0.9
       '@storybook/csf': 0.1.5
       '@storybook/global': 5.0.0
-      '@storybook/icons': 1.2.9(react-dom@18.3.1)(react@18.3.1)
+      '@storybook/icons': 1.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@storybook/router': 8.0.9
-      '@storybook/theming': 8.0.9(react-dom@18.3.1)(react@18.3.1)
+      '@storybook/theming': 8.0.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@storybook/types': 8.0.9
       dequal: 2.0.3
       lodash: 4.17.21
@@ -8227,18 +8371,18 @@ snapshots:
 
   '@storybook/preview@8.0.9': {}
 
-  '@storybook/react-dom-shim@8.0.9(react-dom@18.3.1)(react@18.3.1)':
+  '@storybook/react-dom-shim@8.0.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@storybook/react-vite@8.0.9(react-dom@18.3.1)(react@18.3.1)(rollup@4.17.1)(typescript@5.4.5)(vite@5.2.10)':
+  '@storybook/react-vite@8.0.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.17.2)(typescript@5.4.5)(vite@5.2.10(@types/node@20.12.7))':
     dependencies:
-      '@joshwooding/vite-plugin-react-docgen-typescript': 0.3.0(typescript@5.4.5)(vite@5.2.10)
-      '@rollup/pluginutils': 5.1.0(rollup@4.17.1)
-      '@storybook/builder-vite': 8.0.9(typescript@5.4.5)(vite@5.2.10)
+      '@joshwooding/vite-plugin-react-docgen-typescript': 0.3.0(typescript@5.4.5)(vite@5.2.10(@types/node@20.12.7))
+      '@rollup/pluginutils': 5.1.0(rollup@4.17.2)
+      '@storybook/builder-vite': 8.0.9(typescript@5.4.5)(vite@5.2.10(@types/node@20.12.7))
       '@storybook/node-logger': 8.0.9
-      '@storybook/react': 8.0.9(react-dom@18.3.1)(react@18.3.1)(typescript@5.4.5)
+      '@storybook/react': 8.0.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.4.5)
       find-up: 5.0.0
       magic-string: 0.30.10
       react: 18.3.1
@@ -8246,7 +8390,7 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       resolve: 1.22.8
       tsconfig-paths: 4.2.0
-      vite: 5.2.10
+      vite: 5.2.10(@types/node@20.12.7)
     transitivePeerDependencies:
       - '@preact/preset-vite'
       - encoding
@@ -8255,13 +8399,13 @@ snapshots:
       - typescript
       - vite-plugin-glimmerx
 
-  '@storybook/react@8.0.9(react-dom@18.3.1)(react@18.3.1)(typescript@5.4.5)':
+  '@storybook/react@8.0.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.4.5)':
     dependencies:
       '@storybook/client-logger': 8.0.9
       '@storybook/docs-tools': 8.0.9
       '@storybook/global': 5.0.0
       '@storybook/preview-api': 8.0.9
-      '@storybook/react-dom-shim': 8.0.9(react-dom@18.3.1)(react@18.3.1)
+      '@storybook/react-dom-shim': 8.0.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@storybook/types': 8.0.9
       '@types/escodegen': 0.0.6
       '@types/estree': 0.0.51
@@ -8275,12 +8419,13 @@ snapshots:
       prop-types: 15.8.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      react-element-to-jsx-string: 15.0.0(react-dom@18.3.1)(react@18.3.1)
+      react-element-to-jsx-string: 15.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       semver: 7.5.4
       ts-dedent: 2.2.0
       type-fest: 2.19.0
-      typescript: 5.4.5
       util-deprecate: 1.0.2
+    optionalDependencies:
+      typescript: 5.4.5
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -8305,12 +8450,13 @@ snapshots:
       - encoding
       - supports-color
 
-  '@storybook/theming@8.0.9(react-dom@18.3.1)(react@18.3.1)':
+  '@storybook/theming@8.0.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@emotion/use-insertion-effect-with-fallbacks': 1.0.1(react@18.3.1)
       '@storybook/client-logger': 8.0.9
       '@storybook/global': 5.0.0
       memoizerific: 1.11.3
+    optionalDependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
@@ -8380,7 +8526,7 @@ snapshots:
       '@babel/types': 7.23.6
       entities: 4.5.0
 
-  '@svgr/plugin-jsx@8.1.0(@svgr/core@8.1.0)':
+  '@svgr/plugin-jsx@8.1.0(@svgr/core@8.1.0(typescript@5.4.5))':
     dependencies:
       '@babel/core': 7.23.7
       '@svgr/babel-preset': 8.1.0(@babel/core@7.23.7)
@@ -8390,7 +8536,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@svgr/plugin-svgo@8.1.0(@svgr/core@8.1.0)(typescript@5.4.5)':
+  '@svgr/plugin-svgo@8.1.0(@svgr/core@8.1.0(typescript@5.4.5))(typescript@5.4.5)':
     dependencies:
       '@svgr/core': 8.1.0(typescript@5.4.5)
       cosmiconfig: 8.3.6(typescript@5.4.5)
@@ -8429,7 +8575,6 @@ snapshots:
   '@swc/core@1.5.2(@swc/helpers@0.5.11)':
     dependencies:
       '@swc/counter': 0.1.3
-      '@swc/helpers': 0.5.11
       '@swc/types': 0.1.5
     optionalDependencies:
       '@swc/core-darwin-arm64': 1.5.2
@@ -8441,6 +8586,7 @@ snapshots:
       '@swc/core-win32-arm64-msvc': 1.5.2
       '@swc/core-win32-ia32-msvc': 1.5.2
       '@swc/core-win32-x64-msvc': 1.5.2
+      '@swc/helpers': 0.5.11
 
   '@swc/counter@0.1.3': {}
 
@@ -8621,7 +8767,7 @@ snapshots:
 
   '@types/uuid@9.0.7': {}
 
-  '@typescript-eslint/eslint-plugin@7.7.1(@typescript-eslint/parser@7.7.1)(eslint@8.57.0)(typescript@5.4.5)':
+  '@typescript-eslint/eslint-plugin@7.7.1(@typescript-eslint/parser@7.7.1(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)':
     dependencies:
       '@eslint-community/regexpp': 4.10.0
       '@typescript-eslint/parser': 7.7.1(eslint@8.57.0)(typescript@5.4.5)
@@ -8636,6 +8782,7 @@ snapshots:
       natural-compare: 1.4.0
       semver: 7.6.0
       ts-api-utils: 1.3.0(typescript@5.4.5)
+    optionalDependencies:
       typescript: 5.4.5
     transitivePeerDependencies:
       - supports-color
@@ -8648,6 +8795,7 @@ snapshots:
       '@typescript-eslint/visitor-keys': 7.7.1
       debug: 4.3.4
       eslint: 8.57.0
+    optionalDependencies:
       typescript: 5.4.5
     transitivePeerDependencies:
       - supports-color
@@ -8669,6 +8817,7 @@ snapshots:
       debug: 4.3.4
       eslint: 8.57.0
       ts-api-utils: 1.3.0(typescript@5.4.5)
+    optionalDependencies:
       typescript: 5.4.5
     transitivePeerDependencies:
       - supports-color
@@ -8686,6 +8835,7 @@ snapshots:
       is-glob: 4.0.3
       semver: 7.5.4
       tsutils: 3.21.0(typescript@5.4.5)
+    optionalDependencies:
       typescript: 5.4.5
     transitivePeerDependencies:
       - supports-color
@@ -8700,6 +8850,7 @@ snapshots:
       minimatch: 9.0.4
       semver: 7.6.0
       ts-api-utils: 1.3.0(typescript@5.4.5)
+    optionalDependencies:
       typescript: 5.4.5
     transitivePeerDependencies:
       - supports-color
@@ -9037,25 +9188,26 @@ snapshots:
 
   builtin-modules@3.3.0: {}
 
-  bunchee@5.1.3(typescript@5.4.5):
+  bunchee@5.1.5(typescript@5.4.5):
     dependencies:
-      '@rollup/plugin-commonjs': 25.0.7(rollup@4.17.1)
-      '@rollup/plugin-json': 6.1.0(rollup@4.17.1)
-      '@rollup/plugin-node-resolve': 15.2.3(rollup@4.17.1)
-      '@rollup/plugin-replace': 5.0.5(rollup@4.17.1)
-      '@rollup/plugin-wasm': 6.2.2(rollup@4.17.1)
-      '@rollup/pluginutils': 5.1.0(rollup@4.17.1)
+      '@rollup/plugin-commonjs': 25.0.7(rollup@4.17.2)
+      '@rollup/plugin-json': 6.1.0(rollup@4.17.2)
+      '@rollup/plugin-node-resolve': 15.2.3(rollup@4.17.2)
+      '@rollup/plugin-replace': 5.0.5(rollup@4.17.2)
+      '@rollup/plugin-wasm': 6.2.2(rollup@4.17.2)
+      '@rollup/pluginutils': 5.1.0(rollup@4.17.2)
       '@swc/core': 1.5.2(@swc/helpers@0.5.11)
       '@swc/helpers': 0.5.11
       arg: 5.0.2
       clean-css: 5.3.3
       magic-string: 0.30.10
       pretty-bytes: 5.6.0
-      rollup: 4.17.1
-      rollup-plugin-dts: 6.1.0(rollup@4.17.1)(typescript@5.4.5)
-      rollup-plugin-swc3: 0.11.1(@swc/core@1.5.2)(rollup@4.17.1)
-      rollup-preserve-directives: 1.1.1(rollup@4.17.1)
+      rollup: 4.17.2
+      rollup-plugin-dts: 6.1.0(rollup@4.17.2)(typescript@5.4.5)
+      rollup-plugin-swc3: 0.11.1(@swc/core@1.5.2(@swc/helpers@0.5.11))(rollup@4.17.2)
+      rollup-preserve-directives: 1.1.1(rollup@4.17.2)
       tslib: 2.6.2
+    optionalDependencies:
       typescript: 5.4.5
 
   busboy@1.6.0:
@@ -9239,6 +9391,7 @@ snapshots:
       js-yaml: 4.1.0
       parse-json: 5.2.0
       path-type: 4.0.0
+    optionalDependencies:
       typescript: 5.4.5
 
   cross-spawn@5.1.0:
@@ -9299,6 +9452,7 @@ snapshots:
   cva@1.0.0-beta.1(typescript@5.4.5):
     dependencies:
       clsx: 2.0.0
+    optionalDependencies:
       typescript: 5.4.5
 
   debug@2.6.9:
@@ -10383,7 +10537,7 @@ snapshots:
     dependencies:
       argparse: 2.0.1
 
-  jscodeshift@0.15.1(@babel/preset-env@7.23.7):
+  jscodeshift@0.15.1(@babel/preset-env@7.23.7(@babel/core@7.24.3)):
     dependencies:
       '@babel/core': 7.24.3
       '@babel/parser': 7.24.1
@@ -10392,7 +10546,6 @@ snapshots:
       '@babel/plugin-transform-nullish-coalescing-operator': 7.23.4(@babel/core@7.24.3)
       '@babel/plugin-transform-optional-chaining': 7.23.4(@babel/core@7.24.3)
       '@babel/plugin-transform-private-methods': 7.23.3(@babel/core@7.24.3)
-      '@babel/preset-env': 7.23.7(@babel/core@7.24.3)
       '@babel/preset-flow': 7.23.3(@babel/core@7.24.3)
       '@babel/preset-typescript': 7.23.3(@babel/core@7.24.3)
       '@babel/register': 7.23.7(@babel/core@7.24.3)
@@ -10406,6 +10559,8 @@ snapshots:
       recast: 0.23.6
       temp: 0.8.4
       write-file-atomic: 2.4.3
+    optionalDependencies:
+      '@babel/preset-env': 7.23.7(@babel/core@7.24.3)
     transitivePeerDependencies:
       - supports-color
 
@@ -10675,7 +10830,7 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  next@14.2.3(@babel/core@7.24.3)(react-dom@18.3.1)(react@18.3.1):
+  next@14.2.3(@babel/core@7.24.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@next/env': 14.2.3
       '@swc/helpers': 0.5.5
@@ -10972,8 +11127,9 @@ snapshots:
   postcss-load-config@4.0.2(postcss@8.4.38):
     dependencies:
       lilconfig: 3.0.0
-      postcss: 8.4.38
       yaml: 2.3.4
+    optionalDependencies:
+      postcss: 8.4.38
 
   postcss-nested@6.0.1(postcss@8.4.38):
     dependencies:
@@ -11015,9 +11171,10 @@ snapshots:
 
   prettier-plugin-packagejson@2.5.0(prettier@3.2.5):
     dependencies:
-      prettier: 3.2.5
       sort-package-json: 2.10.0
       synckit: 0.9.0
+    optionalDependencies:
+      prettier: 3.2.5
 
   prettier-plugin-tailwindcss@0.5.14(prettier@3.2.5):
     dependencies:
@@ -11094,13 +11251,13 @@ snapshots:
       iconv-lite: 0.4.24
       unpipe: 1.0.0
 
-  react-aria-components@1.1.1(react-dom@18.3.1)(react@18.2.0):
+  react-aria-components@1.1.1(react-dom@18.3.1(react@18.2.0))(react@18.2.0):
     dependencies:
       '@internationalized/date': 3.5.2
       '@internationalized/string': 3.2.1
       '@react-aria/focus': 3.16.2(react@18.2.0)
       '@react-aria/interactions': 3.21.1(react@18.2.0)
-      '@react-aria/menu': 3.13.1(react-dom@18.3.1)(react@18.2.0)
+      '@react-aria/menu': 3.13.1(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
       '@react-aria/toolbar': 3.0.0-beta.3(react@18.2.0)
       '@react-aria/utils': 3.23.2(react@18.2.0)
       '@react-stately/menu': 3.6.1(react@18.2.0)
@@ -11113,45 +11270,45 @@ snapshots:
       '@swc/helpers': 0.5.3
       client-only: 0.0.1
       react: 18.2.0
-      react-aria: 3.32.1(react-dom@18.3.1)(react@18.2.0)
+      react-aria: 3.32.1(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
       react-dom: 18.3.1(react@18.2.0)
       react-stately: 3.30.1(react@18.2.0)
       use-sync-external-store: 1.2.0(react@18.2.0)
 
-  react-aria@3.32.1(react-dom@18.3.1)(react@18.2.0):
+  react-aria@3.32.1(react-dom@18.3.1(react@18.2.0))(react@18.2.0):
     dependencies:
       '@internationalized/string': 3.2.1
       '@react-aria/breadcrumbs': 3.5.11(react@18.2.0)
       '@react-aria/button': 3.9.3(react@18.2.0)
-      '@react-aria/calendar': 3.5.6(react-dom@18.3.1)(react@18.2.0)
+      '@react-aria/calendar': 3.5.6(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
       '@react-aria/checkbox': 3.14.1(react@18.2.0)
-      '@react-aria/combobox': 3.8.4(react-dom@18.3.1)(react@18.2.0)
-      '@react-aria/datepicker': 3.9.3(react-dom@18.3.1)(react@18.2.0)
-      '@react-aria/dialog': 3.5.12(react-dom@18.3.1)(react@18.2.0)
-      '@react-aria/dnd': 3.5.3(react-dom@18.3.1)(react@18.2.0)
+      '@react-aria/combobox': 3.8.4(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
+      '@react-aria/datepicker': 3.9.3(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
+      '@react-aria/dialog': 3.5.12(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
+      '@react-aria/dnd': 3.5.3(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
       '@react-aria/focus': 3.16.2(react@18.2.0)
-      '@react-aria/gridlist': 3.7.5(react-dom@18.3.1)(react@18.2.0)
+      '@react-aria/gridlist': 3.7.5(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
       '@react-aria/i18n': 3.10.2(react@18.2.0)
       '@react-aria/interactions': 3.21.1(react@18.2.0)
       '@react-aria/label': 3.7.6(react@18.2.0)
       '@react-aria/link': 3.6.5(react@18.2.0)
-      '@react-aria/listbox': 3.11.5(react-dom@18.3.1)(react@18.2.0)
-      '@react-aria/menu': 3.13.1(react-dom@18.3.1)(react@18.2.0)
+      '@react-aria/listbox': 3.11.5(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
+      '@react-aria/menu': 3.13.1(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
       '@react-aria/meter': 3.4.11(react@18.2.0)
-      '@react-aria/numberfield': 3.11.1(react-dom@18.3.1)(react@18.2.0)
-      '@react-aria/overlays': 3.21.1(react-dom@18.3.1)(react@18.2.0)
+      '@react-aria/numberfield': 3.11.1(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
+      '@react-aria/overlays': 3.21.1(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
       '@react-aria/progress': 3.4.11(react@18.2.0)
       '@react-aria/radio': 3.10.2(react@18.2.0)
       '@react-aria/searchfield': 3.7.3(react@18.2.0)
-      '@react-aria/select': 3.14.3(react-dom@18.3.1)(react@18.2.0)
-      '@react-aria/selection': 3.17.5(react-dom@18.3.1)(react@18.2.0)
+      '@react-aria/select': 3.14.3(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
+      '@react-aria/selection': 3.17.5(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
       '@react-aria/separator': 3.3.11(react@18.2.0)
       '@react-aria/slider': 3.7.6(react@18.2.0)
       '@react-aria/ssr': 3.9.2(react@18.2.0)
       '@react-aria/switch': 3.6.2(react@18.2.0)
-      '@react-aria/table': 3.13.5(react-dom@18.3.1)(react@18.2.0)
-      '@react-aria/tabs': 3.8.5(react-dom@18.3.1)(react@18.2.0)
-      '@react-aria/tag': 3.3.3(react-dom@18.3.1)(react@18.2.0)
+      '@react-aria/table': 3.13.5(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
+      '@react-aria/tabs': 3.8.5(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
+      '@react-aria/tag': 3.3.3(react-dom@18.3.1(react@18.2.0))(react@18.2.0)
       '@react-aria/textfield': 3.14.3(react@18.2.0)
       '@react-aria/tooltip': 3.7.2(react@18.2.0)
       '@react-aria/utils': 3.23.2(react@18.2.0)
@@ -11160,7 +11317,7 @@ snapshots:
       react: 18.2.0
       react-dom: 18.3.1(react@18.2.0)
 
-  react-colorful@5.6.1(react-dom@18.3.1)(react@18.3.1):
+  react-colorful@5.6.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -11196,7 +11353,7 @@ snapshots:
       react: 18.3.1
       scheduler: 0.23.2
 
-  react-element-to-jsx-string@15.0.0(react-dom@18.3.1)(react@18.3.1):
+  react-element-to-jsx-string@15.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@base2/pretty-print-object': 1.0.1
       is-plain-object: 5.0.0
@@ -11402,27 +11559,27 @@ snapshots:
     dependencies:
       glob: 7.2.3
 
-  rollup-plugin-dts@6.1.0(rollup@4.17.1)(typescript@5.4.5):
+  rollup-plugin-dts@6.1.0(rollup@4.17.2)(typescript@5.4.5):
     dependencies:
       magic-string: 0.30.10
-      rollup: 4.17.1
+      rollup: 4.17.2
       typescript: 5.4.5
     optionalDependencies:
       '@babel/code-frame': 7.24.2
 
-  rollup-plugin-swc3@0.11.1(@swc/core@1.5.2)(rollup@4.17.1):
+  rollup-plugin-swc3@0.11.1(@swc/core@1.5.2(@swc/helpers@0.5.11))(rollup@4.17.2):
     dependencies:
       '@fastify/deepmerge': 1.3.0
-      '@rollup/pluginutils': 5.1.0(rollup@4.17.1)
+      '@rollup/pluginutils': 5.1.0(rollup@4.17.2)
       '@swc/core': 1.5.2(@swc/helpers@0.5.11)
       get-tsconfig: 4.7.3
-      rollup: 4.17.1
-      rollup-preserve-directives: 1.1.1(rollup@4.17.1)
+      rollup: 4.17.2
+      rollup-preserve-directives: 1.1.1(rollup@4.17.2)
 
-  rollup-preserve-directives@1.1.1(rollup@4.17.1):
+  rollup-preserve-directives@1.1.1(rollup@4.17.2):
     dependencies:
       magic-string: 0.30.10
-      rollup: 4.17.1
+      rollup: 4.17.2
 
   rollup@4.17.1:
     dependencies:
@@ -11444,6 +11601,28 @@ snapshots:
       '@rollup/rollup-win32-arm64-msvc': 4.17.1
       '@rollup/rollup-win32-ia32-msvc': 4.17.1
       '@rollup/rollup-win32-x64-msvc': 4.17.1
+      fsevents: 2.3.3
+
+  rollup@4.17.2:
+    dependencies:
+      '@types/estree': 1.0.5
+    optionalDependencies:
+      '@rollup/rollup-android-arm-eabi': 4.17.2
+      '@rollup/rollup-android-arm64': 4.17.2
+      '@rollup/rollup-darwin-arm64': 4.17.2
+      '@rollup/rollup-darwin-x64': 4.17.2
+      '@rollup/rollup-linux-arm-gnueabihf': 4.17.2
+      '@rollup/rollup-linux-arm-musleabihf': 4.17.2
+      '@rollup/rollup-linux-arm64-gnu': 4.17.2
+      '@rollup/rollup-linux-arm64-musl': 4.17.2
+      '@rollup/rollup-linux-powerpc64le-gnu': 4.17.2
+      '@rollup/rollup-linux-riscv64-gnu': 4.17.2
+      '@rollup/rollup-linux-s390x-gnu': 4.17.2
+      '@rollup/rollup-linux-x64-gnu': 4.17.2
+      '@rollup/rollup-linux-x64-musl': 4.17.2
+      '@rollup/rollup-win32-arm64-msvc': 4.17.2
+      '@rollup/rollup-win32-ia32-msvc': 4.17.2
+      '@rollup/rollup-win32-x64-msvc': 4.17.2
       fsevents: 2.3.3
 
   run-parallel@1.2.0:
@@ -11628,9 +11807,9 @@ snapshots:
 
   store2@2.14.2: {}
 
-  storybook@8.0.9(react-dom@18.3.1)(react@18.3.1):
+  storybook@8.0.9(@babel/preset-env@7.23.7(@babel/core@7.24.3))(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
-      '@storybook/cli': 8.0.9(react-dom@18.3.1)(react@18.3.1)
+      '@storybook/cli': 8.0.9(@babel/preset-env@7.23.7(@babel/core@7.24.3))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     transitivePeerDependencies:
       - '@babel/preset-env'
       - bufferutil
@@ -11730,9 +11909,10 @@ snapshots:
 
   styled-jsx@5.1.1(@babel/core@7.24.3)(react@18.3.1):
     dependencies:
-      '@babel/core': 7.24.3
       client-only: 0.0.1
       react: 18.3.1
+    optionalDependencies:
+      '@babel/core': 7.24.3
 
   sucrase@3.35.0:
     dependencies:
@@ -12073,12 +12253,13 @@ snapshots:
 
   vary@1.1.2: {}
 
-  vite@5.2.10:
+  vite@5.2.10(@types/node@20.12.7):
     dependencies:
       esbuild: 0.20.2
       postcss: 8.4.38
       rollup: 4.17.1
     optionalDependencies:
+      '@types/node': 20.12.7
       fsevents: 2.3.3
 
   watchpack@2.4.0:
