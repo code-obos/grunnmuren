@@ -7,7 +7,7 @@ const formFieldError = cx(
 
 const input = cva({
   base: [
-    'rounded-md py-2.5 text-sm font-normal leading-6 placeholder-[#727070] outline-none ring-1 ring-black',
+    'rounded-md py-2.5 text-base font-normal leading-6 placeholder-[#727070] outline-none ring-1 ring-black',
     // invalid styles
     'group-data-[invalid]:ring-2 group-data-[invalid]:ring-red',
     // Fix invisible ring on safari: https://github.com/tailwindlabs/tailwindcss.com/issues/1135
@@ -32,10 +32,8 @@ const input = cva({
 });
 
 const inputGroup = cx([
-  'inline-flex items-center gap-3 overflow-hidden rounded-md bg-white px-3 text-sm ring-1 ring-black focus-within:ring-2',
+  'inline-flex items-center gap-3 overflow-hidden rounded-md bg-white px-3 text-base ring-1 ring-black focus-within:ring-2',
   'group-data-[invalid]:ring-2 group-data-[invalid]:ring-red group-data-[invalid]:focus-within:ring',
-  // Make sure icons are the correct size
-  '[&_svg]:text-base',
 ]);
 
 const dropdown = {
