@@ -81,7 +81,7 @@ function Select<T extends object>(
       <ErrorMessageOrFieldError errorMessage={errorMessage} />
 
       <Popover className={dropdown.popover}>
-        <ListBox>{children}</ListBox>
+        <ListBox className={dropdown.listbox}>{children}</ListBox>
       </Popover>
     </RACSelect>
   );

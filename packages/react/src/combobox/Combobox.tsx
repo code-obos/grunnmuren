@@ -96,7 +96,7 @@ function Combobox<T extends object>(
         )}
         crossOffset={-13}
       >
-        <ListBox>{children}</ListBox>
+        <ListBox className={dropdown.listbox}>{children}</ListBox>
       </Popover>
     </RACCombobox>
   );
