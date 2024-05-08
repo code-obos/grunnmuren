@@ -1,5 +1,17 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.28
+
+### Patch Changes
+
+- b168eb1: upgrade react-aria-components to 1.2.0
+- 41642ab: Fixes scrolling and autoscrolling bug in `<Combobox/>` and `<Select/>`.
+- 02592b2: TextField, Select, TextArea, Combobox:
+  Increase font size from 14px to 16px to prevent zooming on iOS
+  when input field is focused.
+
+  TextField: Fix issue with `type="date"` where the size of the input was off.
+
 ## 2.0.0-canary.27
 
 ### Patch Changes
