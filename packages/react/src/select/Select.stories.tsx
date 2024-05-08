@@ -24,9 +24,11 @@ type Story = StoryObj<typeof Select>;
 const Template = <T extends object>(args: SelectProps<T>) => {
   const select = (
     <Select {...args}>
-      {counties.map(({ name }) => (
-        <SelectItem key={name}>{name}</SelectItem>
-      ))}
+      {counties.map((county) =>
+        county.municipalities.map((municipality) => (
+          <SelectItem key={municipality.name}>{municipality.name}</SelectItem>
+        )),
+      )}
     </Select>
   );
   return args.isRequired ? (

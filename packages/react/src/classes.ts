@@ -38,9 +38,11 @@ const inputGroup = cx([
 
 const dropdown = {
   popover: cx(
-    'min-w-[--trigger-width] overflow-auto rounded-md border border-black bg-white shadow data-[entering]:animate-in data-[exiting]:animate-out data-[entering]:fade-in data-[exiting]:fade-out',
+    'min-w-[--trigger-width] rounded-md bg-white shadow data-[entering]:animate-in data-[exiting]:animate-out data-[entering]:fade-in data-[exiting]:fade-out',
   ),
-  listbox: cx('text-sm outline-none'),
+  listbox: cx(
+    'max-h-[25rem] overflow-y-scroll rounded-md border border-black text-sm outline-none',
+  ),
   chevronIcon: cx(
     'text-base transition-transform duration-150 group-data-[open]:rotate-180 motion-reduce:transition-none',
   ),
