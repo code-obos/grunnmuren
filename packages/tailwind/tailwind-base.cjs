@@ -87,10 +87,17 @@ module.exports = (options = {}) => {
 
       plugin(function ({ addBase, addComponents }) {
         // This is tailwind syntax for setting both the font-size and the line-height
-        const h1 = '@apply font-bold text-[28px]/[38px] md:text-[40px]/[56px]';
-        const h2 = '@apply font-bold text-[24px]/[30px] md:text-[32px]/[42px]';
-        const h3 = '@apply font-bold text-[20px]/[30px] md:text-[24px]/[34px]';
-        const h4 = '@apply font-bold text-[18px]/[24px] md:text-[20px]/[28px]';
+        const h1 =
+          '@apply font-bold text-[2.8125rem]/[4.1875rem] md:text-[3.9375rem]/[7.625rem]';
+        const h2 =
+          '@apply font-bold text-[1.8125rem]/[2.75rem] md:text-[2.25rem]/[4rem]';
+        const h3 =
+          '@apply font-bold text-[1.4375rem]/[2.25rem] md:text-[1.625rem]/[2.8125rem]';
+        const h4 =
+          '@apply font-medium text-[1.1875rem]/[1.875rem] md:text-[1.3125rem]/[2.1875rem]';
+        const h5 =
+          '@apply font-medium text-[1.125rem]/[1.75rem] md:text-[1.1875rem]/[2rem]';
+        const h6 = '@apply font-bold text-[1rem]/[1.625rem]';
 
         if (options.legacyV1Compatibility) {
           addBase({
@@ -105,6 +112,12 @@ module.exports = (options = {}) => {
             },
             h4: {
               [h4]: {},
+            },
+            h5: {
+              [h5]: {},
+            },
+            h6: {
+              [h6]: {},
             },
           });
         }
@@ -121,6 +134,12 @@ module.exports = (options = {}) => {
           },
           '.h4': {
             [h4]: {},
+          },
+          '.h5': {
+            [h5]: {},
+          },
+          '.h6': {
+            [h6]: {},
           },
         });
       }),
