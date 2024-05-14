@@ -88,7 +88,7 @@ module.exports = (options = {}) => {
       plugin(function ({ addBase, addComponents }) {
         // This is tailwind syntax for setting both the font-size and the line-height
         const h1 =
-          '@apply font-bold text-[2.8125rem]/[4.1875rem] md:text-[3.9375rem]/[5.9375]';
+          '@apply font-bold text-[2.8125rem]/[4.1875rem] md:text-[3.9375rem]/[5.9375rem]';
         const h2 =
           '@apply font-bold text-[1.8125rem]/[2.75rem] md:text-[2.25rem]/[3.5rem]';
         const h3 =
