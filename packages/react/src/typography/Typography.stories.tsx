@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Body, H1, H2, H3, H4, H5, H6, HeadingProps, Preamble } from '.';
+import { Body, H1, H2, H3, H4, H5, H6, Preamble } from '.';
 
-const Template = (args: HeadingProps) => {
+const Template = () => {
   return (
     <>
-      <H1 {...args}>Grunnmuren</H1>
+      <H1>Grunnmuren</H1>
       <Preamble>Grunnmuren er designsystemet til OBOS.</Preamble>
-      <H2 {...args}>Typografi</H2>
+      <H2>Typografi</H2>
       <Body>
         Typografi defineres av både tailwind-klasser og react-komponenter.
       </Body>
@@ -15,15 +15,15 @@ const Template = (args: HeadingProps) => {
   );
 };
 
-const HeadingsTemplate = (args: HeadingProps) => {
+const HeadingsTemplate = () => {
   return (
     <>
-      <H1 {...args}>Overskrift nivå 1</H1>
-      <H2 {...args}>Overskrift nivå 2</H2>
-      <H3 {...args}>Overskrift nivå 3</H3>
-      <H4 {...args}>Overskrift nivå 4</H4>
-      <H5 {...args}>Overskrift nivå 5</H5>
-      <H6 {...args}>Overskrift nivå 6</H6>
+      <H1>Overskrift nivå 1</H1>
+      <H2>Overskrift nivå 2</H2>
+      <H3>Overskrift nivå 3</H3>
+      <H4>Overskrift nivå 4</H4>
+      <H5>Overskrift nivå 5</H5>
+      <H6>Overskrift nivå 6</H6>
     </>
   );
 };
