@@ -100,6 +100,8 @@ module.exports = (options = {}) => {
         const h6 = '@apply font-bold text-[1rem]/[1.625rem]';
 
         const body = '@apply font-normal text-[1rem]/[1.625rem]';
+        const preamble =
+          '@apply font-normal text-[1.8125rem]/[2.75rem] md:text-[2.25rem]/[3.5rem]';
 
         if (options.legacyV1Compatibility) {
           addBase({
@@ -123,6 +125,9 @@ module.exports = (options = {}) => {
             },
             body: {
               [body]: {},
+            },
+            preamble: {
+              [preamble]: {},
             },
           });
         }
@@ -148,6 +153,9 @@ module.exports = (options = {}) => {
           },
           '.body': {
             [body]: {},
+          },
+          '.preamble': {
+            [preamble]: {},
           },
         });
       }),

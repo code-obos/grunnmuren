@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Body, H1, H2, H3, H4, H5, H6, HeadingProps } from '.';
+import { Body, H1, H2, H3, H4, H5, H6, HeadingProps, Preamble } from '.';
 
 const Template = (args: HeadingProps) => {
   return (
     <>
       <H1 {...args}>Grunnmuren</H1>
-      <Body>Grunnmuren er designsystemet til OBOS.</Body>
+      <Preamble>Grunnmuren er designsystemet til OBOS.</Preamble>
       <H2 {...args}>Typografi</H2>
       <Body>
         Typografi defineres av både tailwind-klasser og react-komponenter.
@@ -27,6 +27,13 @@ const HeadingsTemplate = (args: HeadingProps) => {
     </>
   );
 };
+
+const PreambleTemplate = () => (
+  <Preamble>
+    Dokumentavgift er en avgift som du må betale til staten når du kjøper en
+    fast eiendom.
+  </Preamble>
+);
 
 const BodyTemplate = () => {
   return (
@@ -61,6 +68,11 @@ export const Default: StoryObj = {
 
 export const Headings: StoryObj = {
   render: HeadingsTemplate,
+  args: defaultProps,
+};
+
+export const Preambles: StoryObj = {
+  render: PreambleTemplate,
   args: defaultProps,
 };
 
