@@ -88,15 +88,15 @@ module.exports = (options = {}) => {
       plugin(function ({ addBase, addComponents }) {
         // This is tailwind syntax for setting both the font-size and the line-height
         const h1 =
-          '@apply font-bold text-[2.8125rem]/[4.1875rem] md:text-[3.9375rem]/[7.625rem]';
+          '@apply font-bold text-[2.8125rem]/[4.1875rem] md:text-[3.9375rem]/[5.9375]';
         const h2 =
-          '@apply font-bold text-[1.8125rem]/[2.75rem] md:text-[2.25rem]/[4rem]';
+          '@apply font-bold text-[1.8125rem]/[2.75rem] md:text-[2.25rem]/[3.5rem]';
         const h3 =
-          '@apply font-bold text-[1.4375rem]/[2.25rem] md:text-[1.625rem]/[2.8125rem]';
+          '@apply font-bold text-[1.4375rem]/[2.25rem] md:text-[1.625rem]/[2.5625rem]';
         const h4 =
-          '@apply font-medium text-[1.1875rem]/[1.875rem] md:text-[1.3125rem]/[2.1875rem]';
+          '@apply font-medium text-[1.1875rem]/[1.875rem] md:text-[1.3125rem]/[2.125rem]';
         const h5 =
-          '@apply font-medium text-[1.125rem]/[1.75rem] md:text-[1.1875rem]/[2rem]';
+          '@apply font-medium text-[1.125rem]/[1.75rem] md:text-[1.1875rem]/[1.9375rem]';
         const h6 = '@apply font-bold text-[1rem]/[1.625rem]';
 
         if (options.legacyV1Compatibility) {
