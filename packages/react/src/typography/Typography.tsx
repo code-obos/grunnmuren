@@ -4,39 +4,27 @@ import { cx } from 'cva';
 type HeadingProps = HTMLProps<HTMLHeadingElement>;
 
 const H1 = ({ className, ...props }: HeadingProps) => (
-  <h1 {...props} className={cx('h1', className)}>
-    {props.children}
-  </h1>
+  <h1 {...props} className={cx('h1', className)} />
 );
 
 const H2 = ({ className, ...props }: HeadingProps) => (
-  <h2 {...props} className={cx('h2', className)}>
-    {props.children}
-  </h2>
+  <h2 {...props} className={cx('h2', className)} />
 );
 
 const H3 = ({ className, ...props }: HeadingProps) => (
-  <h3 {...props} className={cx('h3', className)}>
-    {props.children}
-  </h3>
+  <h3 {...props} className={cx('h3', className)} />
 );
 
 const H4 = ({ className, ...props }: HeadingProps) => (
-  <h4 {...props} className={cx('h4', className)}>
-    {props.children}
-  </h4>
+  <h4 {...props} className={cx('h4', className)} />
 );
 
 const H5 = ({ className, ...props }: HeadingProps) => (
-  <h5 {...props} className={cx('h5', className)}>
-    {props.children}
-  </h5>
+  <h5 {...props} className={cx('h5', className)} />
 );
 
 const H6 = ({ className, ...props }: HeadingProps) => (
-  <h6 {...props} className={cx('h6', className)}>
-    {props.children}
-  </h6>
+  <h6 {...props} className={cx('h6', className)} />
 );
 
 export { H1, H2, H3, H4, H5, H6, type HeadingProps };
