@@ -15,18 +15,15 @@ const HeadingsTemplate = (args: HeadingProps) => {
   );
 };
 
-const meta: Meta<typeof H1> = {
+const meta: Meta = {
   title: 'Typography',
-  component: H1,
 };
 
 export default meta;
 
-type Story = StoryObj<typeof H1>;
-
 const defaultProps = {} as const;
 
-export const Headings: Story = {
+export const Headings: StoryObj = {
   render: HeadingsTemplate,
   args: defaultProps,
 };
