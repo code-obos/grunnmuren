@@ -99,6 +99,8 @@ module.exports = (options = {}) => {
           '@apply font-medium text-[1.125rem]/[1.75rem] md:text-[1.1875rem]/[1.9375rem]';
         const h6 = '@apply font-bold text-[1rem]/[1.625rem]';
 
+        const body = '@apply font-normal text-[1rem]/[1.625rem]';
+
         if (options.legacyV1Compatibility) {
           addBase({
             h1: {
@@ -118,6 +120,9 @@ module.exports = (options = {}) => {
             },
             h6: {
               [h6]: {},
+            },
+            body: {
+              [body]: {},
             },
           });
         }
@@ -140,6 +145,9 @@ module.exports = (options = {}) => {
           },
           '.h6': {
             [h6]: {},
+          },
+          '.body': {
+            [body]: {},
           },
         });
       }),

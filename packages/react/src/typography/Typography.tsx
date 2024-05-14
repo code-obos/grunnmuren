@@ -27,4 +27,8 @@ const H6 = ({ className, ...props }: HeadingProps) => (
   <h6 {...props} className={cx('h6', className)} />
 );
 
-export { H1, H2, H3, H4, H5, H6, type HeadingProps };
+const Body = ({ className, ...props }: HTMLProps<HTMLParagraphElement>) => (
+  <p {...props} className={cx('body', className)} />
+);
+
+export { H1, H2, H3, H4, H5, H6, Body, type HeadingProps };
