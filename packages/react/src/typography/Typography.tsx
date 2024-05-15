@@ -35,4 +35,14 @@ const Body = ({ className, ...props }: HTMLProps<HTMLParagraphElement>) => (
   <p {...props} className={cx('body', className)} />
 );
 
-export { H1, H2, H3, H4, H5, H6, Lead, Body, type HeadingProps };
+const Blockquote = ({
+  className,
+  children,
+  ...props
+}: HTMLProps<HTMLQuoteElement>) => (
+  <blockquote {...props} className={cx('blockquote', className)}>
+    <p>{children}</p>
+  </blockquote>
+);
+
+export { H1, H2, H3, H4, H5, H6, Lead, Body, Blockquote, type HeadingProps };

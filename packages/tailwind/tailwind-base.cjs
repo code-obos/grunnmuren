@@ -102,6 +102,8 @@ module.exports = (options = {}) => {
         const body = '@apply font-normal text-[1rem]/[1.625rem]';
         const lead =
           '@apply font-normal text-[1.8125rem]/[2.75rem] md:text-[2.25rem]/[3.5rem]';
+        const blockquote =
+          '@apply italic font-normal text-[1rem]/[1.625rem] md:text-[1rem]/[1.6875rem]';
 
         if (options.legacyV1Compatibility) {
           addBase({
@@ -128,6 +130,9 @@ module.exports = (options = {}) => {
             },
             lead: {
               [lead]: {},
+            },
+            blockquote: {
+              [blockquote]: {},
             },
           });
         }
@@ -156,6 +161,9 @@ module.exports = (options = {}) => {
           },
           '.lead': {
             [lead]: {},
+          },
+          '.blockquote': {
+            [blockquote]: {},
           },
         });
       }),

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Body, H1, H2, H3, H4, H5, H6, Lead } from '.';
+import { Body, H1, H2, H3, H4, H5, H6, Lead, Blockquote } from '.';
 
 const Template = () => {
   return (
@@ -11,6 +11,11 @@ const Template = () => {
       <Body>
         Typografi defineres av både tailwind-klasser og react-komponenter.
       </Body>
+      <Blockquote className='before:text-[4.6875rem]/[1] before:font-bold before:content-["\""]'>
+        Det er et tøft boligmarked, og med de prisene det er på bolig i Oslo,
+        virket det nesten umulig å komme inn på markedet. Jeg var på noen
+        visninger, men det ble enten for lite eller for gammelt og slitt
+      </Blockquote>
     </>
   );
 };
