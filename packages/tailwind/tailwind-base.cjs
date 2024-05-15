@@ -23,8 +23,12 @@ const obosFonts = [
   },
 ];
 
+/**
+ * Styles for typography that are reused in both component classes and prose (through the tailwind typography plugin)
+ */
 const typography = {
   h1Text: {
+    fontWeight: 'bold',
     small: {
       fontSize: '2.8125rem',
       lineHeight: '4.1875rem',
@@ -35,6 +39,7 @@ const typography = {
     },
   },
   h2Text: {
+    fontWeight: 'bold',
     small: {
       fontSize: '1.8125rem',
       lineHeight: '2.75rem',
@@ -45,6 +50,7 @@ const typography = {
     },
   },
   h3Text: {
+    fontWeight: 'bold',
     small: {
       fontSize: '1.4375rem',
       lineHeight: '2.25rem',
@@ -55,6 +61,7 @@ const typography = {
     },
   },
   h4Text: {
+    fontWeight: 'medium',
     small: {
       fontSize: '1.1875rem',
       lineHeight: '1.1875rem',
@@ -65,6 +72,7 @@ const typography = {
     },
   },
   h5Text: {
+    fontWeight: 'medium',
     small: {
       fontSize: '1.125rem',
       lineHeight: '1.75rem',
@@ -75,14 +83,16 @@ const typography = {
     },
   },
   h6Text: {
-    fontSize: '1rem',
+    fontWeight: 'bold',
+    fontSize: '1rem', // 1rem is the base font size, which is obviously the default size. But it is set explicitly here to make it easier to configure in the future, if this size changes.
     lineHeight: '1.625rem',
   },
   bodyText: {
-    fontSize: '1rem',
+    fontSize: '1rem', // 1rem is the base font size, which is obviously the default size. But it is set explicitly here to make it easier to configure in the future, if this size changes.
     lineHeight: '1.625rem',
   },
   leadText: {
+    fontWeight: 'medium',
     small: {
       fontSize: '1.4375rem',
       lineHeight: '2.25rem',
@@ -94,12 +104,19 @@ const typography = {
   },
   blockquoteText: {
     small: {
-      fontSize: '1rem',
+      fontSize: '1rem', // 1rem is the base font size, which is obviously the default size. But it is set explicitly here to make it easier to configure in the future, if this size changes.
       lineHeight: '1.625rem',
     },
     large: {
-      fontSize: '1rem',
+      fontSize: '1rem', // 1rem is the base font size, which is obviously the default size. But it is set explicitly here to make it easier to configure in the future, if this size changes.
       lineHeight: '1.6875rem',
+    },
+    before: {
+      // TODO: Use correct font for quote mark (font: OBOS Display)
+      content: '"\\""',
+      fontSize: '4.6875rem',
+      lineHeight: '1.6875rem',
+      fontWeight: 'bold',
     },
   },
   descriptionText: {
@@ -191,17 +208,22 @@ module.exports = (options = {}) => {
         } = typography;
 
         // This is tailwind syntax for setting both the font-size and the line-height
-        const h1 = `@apply font-bold text-[${h1Text.small.fontSize}]/[${h1Text.small.lineHeight}] md:text-[${h1Text.large.fontSize}]/[${h1Text.large.lineHeight}]`;
-        const h2 = `@apply font-bold text-[${h2Text.small.fontSize}]/[${h2Text.small.lineHeight}] md:text-[${h2Text.large.fontSize}]/[${h2Text.large.lineHeight}]`;
-        const h3 = `@apply font-bold text-[${h3Text.small.fontSize}]/[${h3Text.small.lineHeight}] md:text-[${h3Text.large.fontSize}]/[${h3Text.large.lineHeight}]`;
-        const h4 = `@apply font-medium text-[${h4Text.small.fontSize}]/[${h4Text.small.lineHeight}] md:text-[${h4Text.large.fontSize}]/[${h4Text.large.lineHeight}]`;
-        const h5 = `@apply font-medium text-[${h5Text.small.fontSize}]/[${h5Text.small.lineHeight}] md:text-[${h5Text.large.fontSize}]/[${h5Text.large.lineHeight}]`;
-        const h6 = `@apply font-bold text-[${h6Text.fontSize}]/[${h6Text.lineHeight}]`;
+        const h1 = `@apply font-${h1Text.fontWeight} text-[${h1Text.small.fontSize}]/[${h1Text.small.lineHeight}] md:text-[${h1Text.large.fontSize}]/[${h1Text.large.lineHeight}]`;
+        const h2 = `@apply font-${h2Text.fontWeight} text-[${h2Text.small.fontSize}]/[${h2Text.small.lineHeight}] md:text-[${h2Text.large.fontSize}]/[${h2Text.large.lineHeight}]`;
+        const h3 = `@apply font-${h3Text.fontWeight} text-[${h3Text.small.fontSize}]/[${h3Text.small.lineHeight}] md:text-[${h3Text.large.fontSize}]/[${h3Text.large.lineHeight}]`;
+        const h4 = `@apply font-${h4Text.fontWeight} text-[${h4Text.small.fontSize}]/[${h4Text.small.lineHeight}] md:text-[${h4Text.large.fontSize}]/[${h4Text.large.lineHeight}]`;
+        const h5 = `@apply font-${h5Text.fontWeight} text-[${h5Text.small.fontSize}]/[${h5Text.small.lineHeight}] md:text-[${h5Text.large.fontSize}]/[${h5Text.large.lineHeight}]`;
+        const h6 = `@apply font-${h6Text.fontWeight} text-[${h6Text.fontSize}]/[${h6Text.lineHeight}]`;
 
-        const body = `@apply font-normal text-[${bodyText.fontSize}]/[${bodyText.lineHeight}]`;
+        const body = `@apply text-[${bodyText.fontSize}]/[${bodyText.lineHeight}]`;
         const lead = `@apply font-medium text-[${leadText.small.fontSize}]/[${leadText.small.lineHeight}] md:text-[${leadText.large.fontSize}]/[${leadText.large.lineHeight}]`;
-        const blockquote = `@apply italic font-normal grid grid-cols-[32px_1fr] gap-x-[22px] pt-4 text-[${blockquoteText.large.fontSize}]/[${blockquoteText.large.lineHeight}] md:text-[${blockquoteText.small.fontSize}]/[${blockquoteText.small.lineHeight}] before:text-[4.6875rem]/[1.6875rem] before:font-bold before:content-["\\""]`;
-        const description = `@apply font-normal text-[${descriptionText.large.fontSize}]/[${descriptionText.large.lineHeight}] md:text-[${descriptionText.small.fontSize}]/[${descriptionText.small.lineHeight}]`;
+
+        // TODO: Use correct font for quote mark (font: OBOS Display)
+        const blockquote = `@apply italic grid grid-cols-[32px_1fr] gap-x-[22px] pt-4
+         text-[${blockquoteText.large.fontSize}]/[${blockquoteText.large.lineHeight}] md:text-[${blockquoteText.small.fontSize}]/[${blockquoteText.small.lineHeight}]
+         before:text-[${blockquoteText.before.fontSize}]/[${blockquoteText.before.lineHeight}] before:font-${blockquoteText.before.fontWeight} before:content-[${blockquoteText.before.content}]`;
+
+        const description = `@apply text-[${descriptionText.large.fontSize}]/[${descriptionText.large.lineHeight}] md:text-[${descriptionText.small.fontSize}]/[${descriptionText.small.lineHeight}]`;
 
         if (options.legacyV1Compatibility) {
           addBase({
@@ -345,6 +367,7 @@ module.exports = (options = {}) => {
               '--tw-prose-headings': 'inherit',
               '--tw-prose-lead': 'inherit',
               '--tw-prose-links': 'inherit',
+              '--tw-prose-quotes': 'inherit',
               '--tw-prose-counters': theme('colors.black'),
               '--tw-prose-bullets': theme('colors.green.DEFAULT'),
               color: theme('colors.black'),
@@ -402,13 +425,24 @@ module.exports = (options = {}) => {
                 },
               },
               blockquote: {
-                // TODO Style with quote mark
-                fontWeight: theme('fontWeight.bold'),
+                // Reset defaults:
+                marginBottom: 'unset',
+                padding: 'unset',
+                border: 'unset',
+                fontWeight: theme('fontWeight.normal'),
                 fontStyle: 'italic',
+                display: 'grid',
+                gridTemplateColumns: '32px 1fr',
+                columnGap: '22px',
+                paddingTop: '1rem',
                 ...typography.blockquoteText.small,
                 '@media (min-width: theme("screens.md"))': {
                   ...typography.blockquoteText.large,
                 },
+              },
+              'blockquote::before': {
+                // TODO: Use correct font for quote mark (font: OBOS Display)
+                ...typography.blockquoteText.before,
               },
               '[class~="lead"]': {
                 fontWeight: theme('fontWeight.medium'),
