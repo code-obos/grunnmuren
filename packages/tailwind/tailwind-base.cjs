@@ -103,7 +103,7 @@ module.exports = (options = {}) => {
         const lead =
           '@apply font-normal text-[1.8125rem]/[2.75rem] md:text-[2.25rem]/[3.5rem]';
         const blockquote =
-          '@apply italic font-normal text-[1rem]/[1.625rem] md:text-[1rem]/[1.6875rem]';
+          '@apply italic font-normal grid pl-8 text-[1rem]/[1.625rem] md:text-[1rem]/[1.6875rem] before:text-[4.6875rem]/[1] before:-ml-8 before:-mb-12 before:font-bold before:content-["\\""]';
 
         if (options.legacyV1Compatibility) {
           addBase({
