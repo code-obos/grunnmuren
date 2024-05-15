@@ -9,7 +9,8 @@ export const Default = () => {
       <p className="body">
         Typografi defineres av både tailwind-klasser og react-komponenter.
       </p>
-      <blockquote className="grid-cols-[32px_1fr] grid-rows-2 gap-x-[22px]">
+      {/* TODO: */}
+      <blockquote className="blockquote">
         Det er et tøft boligmarked, og med de prisene det er på bolig i Oslo,
         virket det nesten umulig å komme inn på markedet. Jeg var på noen
         visninger, men det ble enten for lite eller for gammelt og slitt
