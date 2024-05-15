@@ -1,21 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Body, H1, H2, H3, H4, H5, H6, Lead, Blockquote } from '.';
-
 const Template = () => {
   return (
     <>
-      <H1>Grunnmuren</H1>
-      <Lead>Grunnmuren er designsystemet til OBOS.</Lead>
-      <H2>Typografi</H2>
-      <Body>
+      <h1 className="h1">Grunnmuren</h1>
+      <p className="lead">Grunnmuren er designsystemet til OBOS.</p>
+      <h2 className="h2">Typografi</h2>
+      <p className="body">
         Typografi defineres av både tailwind-klasser og react-komponenter.
-      </Body>
-      <Blockquote className='before:text-[4.6875rem]/[1] before:font-bold before:content-["\""]'>
+      </p>
+      <blockquote className="grid-cols-[32px_1fr] grid-rows-2 gap-x-[22px]">
         Det er et tøft boligmarked, og med de prisene det er på bolig i Oslo,
         virket det nesten umulig å komme inn på markedet. Jeg var på noen
         visninger, men det ble enten for lite eller for gammelt og slitt
-      </Blockquote>
+      </blockquote>
     </>
   );
 };
@@ -23,37 +21,37 @@ const Template = () => {
 const HeadingsTemplate = () => {
   return (
     <>
-      <H1>Overskrift nivå 1</H1>
-      <H2>Overskrift nivå 2</H2>
-      <H3>Overskrift nivå 3</H3>
-      <H4>Overskrift nivå 4</H4>
-      <H5>Overskrift nivå 5</H5>
-      <H6>Overskrift nivå 6</H6>
+      <h1 className="h1">Overskrift nivå 1</h1>
+      <h2 className="h2">Overskrift nivå 2</h2>
+      <h3 className="h3">Overskrift nivå 3</h3>
+      <h4 className="h4">Overskrift nivå 4</h4>
+      <h5 className="h5">Overskrift nivå 5</h5>
+      <h6 className="h6">Overskrift nivå 6</h6>
     </>
   );
 };
 
 const LeadTemplate = () => (
-  <Lead>
+  <p className="lead">
     Dokumentavgift er en avgift som du må betale til staten når du kjøper en
     fast eiendom.
-  </Lead>
+  </p>
 );
 
 const BodyTemplate = () => {
   return (
     <>
-      <Body>
+      <p className="body">
         Mange opplever at prisvekst og rentehevinger har fått store konsekvenser
         for økonomien. Førstegangskjøpere og de som tjener mindre, sliter med å
         komme seg inn på boligmarkedet.
-      </Body>
-      <Body>
+      </p>
+      <p className="body">
         – Det er et tøft boligmarked, og med de prisene det er på bolig i Oslo,
         virket det nesten umulig å komme inn på markedet. Jeg var på noen
         visninger, men det ble enten for lite eller for gammelt og slitt,
         forteller boligkjøper Brita (30).
-      </Body>
+      </p>
     </>
   );
 };
