@@ -6,10 +6,7 @@ export const Default = () => {
       <h1 className="h1">Grunnmuren</h1>
       <p className="lead">Grunnmuren er designsystemet til OBOS.</p>
       <h2 className="h2">Typografi</h2>
-      <p className="body">
-        Typografi defineres av både tailwind-klasser og react-komponenter.
-      </p>
-      {/* TODO: */}
+      <p className="body">Typografi defineres av tailwind-klasser.</p>
       <blockquote className="blockquote">
         Det er et tøft boligmarked, og med de prisene det er på bolig i Oslo,
         virket det nesten umulig å komme inn på markedet. Jeg var på noen
@@ -56,6 +53,14 @@ export const Body = () => {
     </>
   );
 };
+
+export const Blockquote = () => (
+  <blockquote className="blockquote">
+    Det er et tøft boligmarked, og med de prisene det er på bolig i Oslo, virket
+    det nesten umulig å komme inn på markedet. Jeg var på noen visninger, men
+    det ble enten for lite eller for gammelt og slitt
+  </blockquote>
+);
 
 const meta: Meta = {
   title: 'Typography',
