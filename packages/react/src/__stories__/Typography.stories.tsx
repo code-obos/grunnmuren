@@ -2,7 +2,7 @@ import type { Meta } from '@storybook/react';
 
 export const Default = () => {
   return (
-    <>
+    <div className="grid gap-8">
       <h1 className="h1">Grunnmuren</h1>
       <p className="lead">Grunnmuren er designsystemet til OBOS.</p>
       <h2 className="h2">Typografi</h2>
@@ -12,7 +12,11 @@ export const Default = () => {
         virket det nesten umulig å komme inn på markedet. Jeg var på noen
         visninger, men det ble enten for lite eller for gammelt og slitt
       </blockquote>
-    </>
+      <figcaption className="description">
+        Lav møblering gjør at rommet oppleves større. Zen Milano-sengen er fra
+        Bohus, mens Soft Serve-lampen er fra Moniker.
+      </figcaption>
+    </div>
   );
 };
 
@@ -60,6 +64,13 @@ export const Blockquote = () => (
     det nesten umulig å komme inn på markedet. Jeg var på noen visninger, men
     det ble enten for lite eller for gammelt og slitt
   </blockquote>
+);
+
+export const Description = () => (
+  <figcaption className="description">
+    Lav møblering gjør at rommet oppleves større. Zen Milano-sengen er fra
+    Bohus, mens Soft Serve-lampen er fra Moniker.
+  </figcaption>
 );
 
 const meta: Meta = {

@@ -104,6 +104,8 @@ module.exports = (options = {}) => {
           '@apply font-normal text-[1.8125rem]/[2.75rem] md:text-[2.25rem]/[3.5rem]';
         const blockquote =
           '@apply italic font-normal grid grid-cols-[32px_1fr] gap-x-[22px] pt-4 text-[1rem]/[1.625rem] md:text-[1rem]/[1.6875rem] before:text-[4.6875rem]/[1.6875rem] before:font-bold before:content-["\\""]';
+        const description =
+          '@apply font-normal text-[0.875rem]/[1.4375rem] md:text-[0.875rem]/[1.375rem]';
 
         if (options.legacyV1Compatibility) {
           addBase({
@@ -149,6 +151,9 @@ module.exports = (options = {}) => {
           },
           '.blockquote': {
             [blockquote]: {},
+          },
+          '.description': {
+            [description]: {},
           },
         });
       }),
