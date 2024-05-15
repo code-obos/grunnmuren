@@ -27,12 +27,12 @@ const H6 = ({ className, ...props }: HeadingProps) => (
   <h6 {...props} className={cx('h6', className)} />
 );
 
-const Preamble = ({ className, ...props }: HTMLProps<HTMLParagraphElement>) => (
-  <p {...props} className={cx('preamble', className)} />
+const Lead = ({ className, ...props }: HTMLProps<HTMLParagraphElement>) => (
+  <p {...props} className={cx('lead', className)} />
 );
 
 const Body = ({ className, ...props }: HTMLProps<HTMLParagraphElement>) => (
   <p {...props} className={cx('body', className)} />
 );
 
-export { H1, H2, H3, H4, H5, H6, Preamble, Body, type HeadingProps };
+export { H1, H2, H3, H4, H5, H6, Lead, Body, type HeadingProps };

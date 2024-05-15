@@ -100,7 +100,7 @@ module.exports = (options = {}) => {
         const h6 = '@apply font-bold text-[1rem]/[1.625rem]';
 
         const body = '@apply font-normal text-[1rem]/[1.625rem]';
-        const preamble =
+        const lead =
           '@apply font-normal text-[1.8125rem]/[2.75rem] md:text-[2.25rem]/[3.5rem]';
 
         if (options.legacyV1Compatibility) {
@@ -126,8 +126,8 @@ module.exports = (options = {}) => {
             body: {
               [body]: {},
             },
-            preamble: {
-              [preamble]: {},
+            lead: {
+              [lead]: {},
             },
           });
         }
@@ -154,8 +154,8 @@ module.exports = (options = {}) => {
           '.body': {
             [body]: {},
           },
-          '.preamble': {
-            [preamble]: {},
+          '.lead': {
+            [lead]: {},
           },
         });
       }),
