@@ -101,7 +101,7 @@ module.exports = (options = {}) => {
 
         const body = '@apply font-normal text-[1rem]/[1.625rem]';
         const lead =
-          '@apply font-normal text-[1.8125rem]/[2.75rem] md:text-[2.25rem]/[3.5rem]';
+          '@apply font-normal text-[1.4375rem]/[2.25rem] md:text-[1.625rem]/[2.5625rem]';
         const blockquote =
           '@apply italic font-normal grid grid-cols-[32px_1fr] gap-x-[22px] pt-4 text-[1rem]/[1.625rem] md:text-[1rem]/[1.6875rem] before:text-[4.6875rem]/[1.6875rem] before:font-bold before:content-["\\""]';
         const description =
