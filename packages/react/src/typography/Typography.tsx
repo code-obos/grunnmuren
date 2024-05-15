@@ -41,7 +41,7 @@ const Blockquote = ({
   ...props
 }: HTMLProps<HTMLQuoteElement>) => (
   <blockquote {...props} className={cx('blockquote', className)}>
-    <p>{children}</p>
+    {children}
   </blockquote>
 );
 
