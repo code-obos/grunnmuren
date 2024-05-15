@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
-const Template = () => {
+export const Default = () => {
   return (
     <>
       <h1 className="h1">Grunnmuren</h1>
@@ -18,7 +18,7 @@ const Template = () => {
   );
 };
 
-const HeadingsTemplate = () => {
+export const Headings = () => {
   return (
     <>
       <h1 className="h1">Overskrift nivå 1</h1>
@@ -31,14 +31,14 @@ const HeadingsTemplate = () => {
   );
 };
 
-const LeadTemplate = () => (
+export const Lead = () => (
   <p className="lead">
     Dokumentavgift er en avgift som du må betale til staten når du kjøper en
     fast eiendom.
   </p>
 );
 
-const BodyTemplate = () => {
+export const Body = () => {
   return (
     <>
       <p className="body">
@@ -61,25 +61,3 @@ const meta: Meta = {
 };
 
 export default meta;
-
-const defaultProps = {} as const;
-
-export const Default: StoryObj = {
-  render: Template,
-  args: defaultProps,
-};
-
-export const Headings: StoryObj = {
-  render: HeadingsTemplate,
-  args: defaultProps,
-};
-
-export const Leads: StoryObj = {
-  render: LeadTemplate,
-  args: defaultProps,
-};
-
-export const Bodies: StoryObj = {
-  render: BodyTemplate,
-  args: defaultProps,
-};
