@@ -23,6 +23,97 @@ const obosFonts = [
   },
 ];
 
+const typography = {
+  h1Text: {
+    small: {
+      fontSize: '2.8125rem',
+      lineHeight: '4.1875rem',
+    },
+    large: {
+      fontSize: '3.9375rem',
+      lineHeight: '5.9375rem',
+    },
+  },
+  h2Text: {
+    small: {
+      fontSize: '1.8125rem',
+      lineHeight: '2.75rem',
+    },
+    large: {
+      fontSize: '2.25rem',
+      lineHeight: '3.5rem',
+    },
+  },
+  h3Text: {
+    small: {
+      fontSize: '1.4375rem',
+      lineHeight: '2.25rem',
+    },
+    large: {
+      fontSize: '1.625rem',
+      lineHeight: '2.5625rem',
+    },
+  },
+  h4Text: {
+    small: {
+      fontSize: '1.1875rem',
+      lineHeight: '1.1875rem',
+    },
+    large: {
+      fontSize: '1.3125rem',
+      lineHeight: '2.125rem',
+    },
+  },
+  h5Text: {
+    small: {
+      fontSize: '1.125rem',
+      lineHeight: '1.75rem',
+    },
+    large: {
+      fontSize: '1.1875rem',
+      lineHeight: '1.9375rem',
+    },
+  },
+  h6Text: {
+    fontSize: '1rem',
+    lineHeight: '1.625rem',
+  },
+  bodyText: {
+    fontSize: '1rem',
+    lineHeight: '1.625rem',
+  },
+  leadText: {
+    small: {
+      fontSize: '1.4375rem',
+      lineHeight: '2.25rem',
+    },
+    large: {
+      fontSize: '1.625rem',
+      lineHeight: '2.5625rem',
+    },
+  },
+  blockquoteText: {
+    small: {
+      fontSize: '1rem',
+      lineHeight: '1.625rem',
+    },
+    large: {
+      fontSize: '1rem',
+      lineHeight: '1.6875rem',
+    },
+  },
+  descriptionText: {
+    small: {
+      fontSize: '0.875rem',
+      lineHeight: '1.4375rem',
+    },
+    large: {
+      fontSize: '0.875rem',
+      lineHeight: '1.375rem',
+    },
+  },
+};
+
 /**
  * @param {boolean} options.legacyV1Compatibility
  */
@@ -86,26 +177,31 @@ module.exports = (options = {}) => {
       }),
 
       plugin(function ({ addBase, addComponents }) {
-        // This is tailwind syntax for setting both the font-size and the line-height
-        const h1 =
-          '@apply font-bold text-[2.8125rem]/[4.1875rem] md:text-[3.9375rem]/[5.9375rem]';
-        const h2 =
-          '@apply font-bold text-[1.8125rem]/[2.75rem] md:text-[2.25rem]/[3.5rem]';
-        const h3 =
-          '@apply font-bold text-[1.4375rem]/[2.25rem] md:text-[1.625rem]/[2.5625rem]';
-        const h4 =
-          '@apply font-medium text-[1.1875rem]/[1.875rem] md:text-[1.3125rem]/[2.125rem]';
-        const h5 =
-          '@apply font-medium text-[1.125rem]/[1.75rem] md:text-[1.1875rem]/[1.9375rem]';
-        const h6 = '@apply font-bold text-[1rem]/[1.625rem]';
+        const {
+          h1Text,
+          h2Text,
+          h3Text,
+          h4Text,
+          h5Text,
+          h6Text,
+          bodyText,
+          leadText,
+          blockquoteText,
+          descriptionText,
+        } = typography;
 
-        const body = '@apply font-normal text-[1rem]/[1.625rem]';
-        const lead =
-          '@apply font-normal text-[1.4375rem]/[2.25rem] md:text-[1.625rem]/[2.5625rem]';
-        const blockquote =
-          '@apply italic font-normal grid grid-cols-[32px_1fr] gap-x-[22px] pt-4 text-[1rem]/[1.625rem] md:text-[1rem]/[1.6875rem] before:text-[4.6875rem]/[1.6875rem] before:font-bold before:content-["\\""]';
-        const description =
-          '@apply font-normal text-[0.875rem]/[1.4375rem] md:text-[0.875rem]/[1.375rem]';
+        // This is tailwind syntax for setting both the font-size and the line-height
+        const h1 = `@apply font-bold text-[${h1Text.small.fontSize}]/[${h1Text.small.lineHeight}] md:text-[${h1Text.large.fontSize}]/[${h1Text.large.lineHeight}]`;
+        const h2 = `@apply font-bold text-[${h2Text.small.fontSize}]/[${h2Text.small.lineHeight}] md:text-[${h2Text.large.fontSize}]/[${h2Text.large.lineHeight}]`;
+        const h3 = `@apply font-bold text-[${h3Text.small.fontSize}]/[${h3Text.small.lineHeight}] md:text-[${h3Text.large.fontSize}]/[${h3Text.large.lineHeight}]`;
+        const h4 = `@apply font-medium text-[${h4Text.small.fontSize}]/[${h4Text.small.lineHeight}] md:text-[${h4Text.large.fontSize}]/[${h4Text.large.lineHeight}]`;
+        const h5 = `@apply font-medium text-[${h5Text.small.fontSize}]/[${h5Text.small.lineHeight}] md:text-[${h5Text.large.fontSize}]/[${h5Text.large.lineHeight}]`;
+        const h6 = `@apply font-bold text-[${h6Text.fontSize}]/[${h6Text.lineHeight}]`;
+
+        const body = `@apply font-normal text-[${bodyText.fontSize}]/[${bodyText.lineHeight}]`;
+        const lead = `@apply font-medium text-[${leadText.small.fontSize}]/[${leadText.small.lineHeight}] md:text-[${leadText.large.fontSize}]/[${leadText.large.lineHeight}]`;
+        const blockquote = `@apply italic font-normal grid grid-cols-[32px_1fr] gap-x-[22px] pt-4 text-[${blockquoteText.large.fontSize}]/[${blockquoteText.large.lineHeight}] md:text-[${blockquoteText.small.fontSize}]/[${blockquoteText.small.lineHeight}] before:text-[4.6875rem]/[1.6875rem] before:font-bold before:content-["\\""]`;
+        const description = `@apply font-normal text-[${descriptionText.large.fontSize}]/[${descriptionText.large.lineHeight}] md:text-[${descriptionText.small.fontSize}]/[${descriptionText.small.lineHeight}]`;
 
         if (options.legacyV1Compatibility) {
           addBase({
@@ -249,8 +345,6 @@ module.exports = (options = {}) => {
               '--tw-prose-headings': 'inherit',
               '--tw-prose-lead': 'inherit',
               '--tw-prose-links': 'inherit',
-              '--tw-prose-quotes': theme('colors.blue.dark'),
-              '--tw-prose-quote-borders': theme('colors.green.DEFAULT'),
               '--tw-prose-counters': theme('colors.black'),
               '--tw-prose-bullets': theme('colors.green.DEFAULT'),
               color: theme('colors.black'),
@@ -260,48 +354,74 @@ module.exports = (options = {}) => {
               },
               h1: {
                 fontWeight: theme('fontWeight.bold'),
-                fontSize: theme('fontSize.3xl'),
+                ...typography.h1Text.small,
                 '@media (min-width: theme("screens.md"))': {
-                  fontSize: theme('fontSize.5xl'),
+                  ...typography.h1Text.large,
                 },
               },
               h2: {
                 fontWeight: theme('fontWeight.bold'),
-                fontSize: theme('fontSize.2xl'),
+                ...typography.h2Text.small,
                 '@media (min-width: theme("screens.md"))': {
-                  fontSize: theme('fontSize.4xl'),
+                  ...typography.h2Text.large,
                 },
               },
               h3: {
                 fontWeight: theme('fontWeight.bold'),
-                fontSize: theme('fontSize.xl'),
+                ...typography.h3Text.small,
                 '@media (min-width: theme("screens.md"))': {
-                  fontSize: theme('fontSize.2xl'),
+                  ...typography.h3Text.large,
                 },
               },
               h4: {
                 fontWeight: theme('fontWeight.bold'),
-                fontSize: theme('fontSize.lg'),
+                ...typography.h4Text.small,
                 '@media (min-width: theme("screens.md"))': {
-                  fontSize: theme('fontSize.xl'),
+                  ...typography.h4Text.large,
                 },
+              },
+              h5: {
+                fontWeight: theme('fontWeight.bold'),
+                ...typography.h5Text.small,
+                '@media (min-width: theme("screens.md"))': {
+                  ...typography.h5Text.large,
+                },
+              },
+              h6: {
+                fontWeight: theme('fontWeight.bold'),
+                ...typography.h6Text,
               },
               li: {
                 marginTop: '1.5em',
                 marginBottom: '1.5em',
               },
+              p: {
+                ...typography.bodyText.small,
+                '@media (min-width: theme("screens.md"))': {
+                  ...typography.bodyText.large,
+                },
+              },
               blockquote: {
+                // TODO Style with quote mark
                 fontWeight: theme('fontWeight.bold'),
-                fontStyle: 'normal',
-              },
-              'blockquote p:first-of-type::before': {
-                content: '"«"',
-              },
-              'blockquote p:last-of-type::after': {
-                content: '"»"',
+                fontStyle: 'italic',
+                ...typography.blockquoteText.small,
+                '@media (min-width: theme("screens.md"))': {
+                  ...typography.blockquoteText.large,
+                },
               },
               '[class~="lead"]': {
                 fontWeight: theme('fontWeight.medium'),
+                ...typography.leadText.small,
+                '@media (min-width: theme("screens.md"))': {
+                  ...typography.leadText.large,
+                },
+              },
+              '[class~="description"]': {
+                ...typography.descriptionText.small,
+                '@media (min-width: theme("screens.md"))': {
+                  ...typography.descriptionText.large,
+                },
               },
             },
           },
