@@ -1,5 +1,5 @@
 const plugin = require('tailwindcss/plugin');
-const fallback = require('./fallback');
+const fontFallback = require('./fonts/font-fallback');
 
 const obosFonts = [
   {
@@ -25,6 +25,8 @@ const obosFonts = [
 ];
 
 /**
+ * @param {boolean} options.includeFontDeclarations
+ * @param {boolean} options.includeFontFallback
  * @param {boolean} options.legacyV1Compatibility
  */
 module.exports = (options = {}) => {
@@ -126,21 +128,23 @@ module.exports = (options = {}) => {
         });
       }),
       plugin(function ({ addBase }) {
-        addBase(
-          fonts.map((font) => ({
-            '@font-face': {
-              fontFamily,
-              fontWeight: font.fontWeight,
-              fontStyle: font.fontStyle,
-              src: `url('${font.url}') format('woff2')`,
-              fontDisplay: 'swap',
-            },
-          })),
+        if (options.includeFontDeclarations) {
+          addBase(
+            fonts.map((font) => ({
+              '@font-face': {
+                fontFamily,
+                fontWeight: font.fontWeight,
+                fontStyle: font.fontStyle,
+                src: `url('${font.url}') format('woff2')`,
+                fontDisplay: 'swap',
+              },
+            })),
 
-          addBase({
-            '@font-face': fallback,
-          }),
-        );
+            addBase({
+              '@font-face': fontFallback,
+            }),
+          );
+        }
       }),
     ],
     theme: {
@@ -197,7 +201,11 @@ module.exports = (options = {}) => {
         },
       },
       fontFamily: {
-        sans: [fontFamily, fallback['font-family'], 'sans-serif'],
+        sans: [
+          fontFamily,
+          options.includeFontFallback && fontFallback['font-family'],
+          'sans-serif',
+        ].filter(),
       },
       extend: {
         maxWidth: {

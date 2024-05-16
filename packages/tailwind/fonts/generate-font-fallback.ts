@@ -4,13 +4,12 @@ import { readMetrics, generateFontFace } from 'fontaine';
 const fontGlob = new Glob('*.woff2');
 
 for await (const fontFile of fontGlob.scan({
-  cwd: './fonts',
   absolute: true,
 })) {
   const fontMetrics = await readMetrics('file://' + fontFile);
 
   if (fontMetrics == null) {
-    throw new Error('Unable to read metrics for ', fontFile);
+    throw new Error('Unable to read metrics for ' + fontFile);
   }
   console.log(fontFile, fontMetrics);
 
@@ -36,6 +35,7 @@ for await (const fontFile of fontGlob.scan({
   const rules = lines.slice(1, -2);
 
   const obj = {};
+
   for (const rule of rules) {
     let [property, value] = rule.split(':').map((v) => v.trim());
     value = value.slice(0, -1);
@@ -45,5 +45,8 @@ for await (const fontFile of fontGlob.scan({
 
   console.log(obj);
 
-  await Bun.write('./fallback.js', `module.exports = ${JSON.stringify(obj)}`);
+  await Bun.write(
+    './font-fallback.js',
+    `module.exports = ${JSON.stringify(obj)}`,
+  );
 }
