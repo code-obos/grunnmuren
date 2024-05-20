@@ -25,11 +25,13 @@ const obosFonts = [
 ];
 
 /**
- * @param {boolean} options.includeFontDeclarations
  * @param {boolean} options.includeFontFallback
  * @param {boolean} options.legacyV1Compatibility
  */
 module.exports = (options = {}) => {
+  options.includeFontFallback ??= true;
+  options.legacyV1Compatibility ??= false;
+
   const v1CompatibilityPlugins = [];
 
   if (options.legacyV1Compatibility) {
@@ -43,7 +45,6 @@ module.exports = (options = {}) => {
   }
 
   const fontFamily = 'OBOSFont';
-  const fonts = obosFonts;
   const containerSize = '92rem';
 
   return {
@@ -128,22 +129,22 @@ module.exports = (options = {}) => {
         });
       }),
       plugin(function ({ addBase }) {
-        if (options.includeFontDeclarations) {
-          addBase(
-            fonts.map((font) => ({
-              '@font-face': {
-                fontFamily,
-                fontWeight: font.fontWeight,
-                fontStyle: font.fontStyle,
-                src: `url('${font.url}') format('woff2')`,
-                fontDisplay: 'swap',
-              },
-            })),
+        addBase(
+          obosFonts.map((font) => ({
+            '@font-face': {
+              fontFamily,
+              fontWeight: font.fontWeight,
+              fontStyle: font.fontStyle,
+              src: `url('${font.url}') format('woff2')`,
+              fontDisplay: 'swap',
+            },
+          })),
+        );
 
-            addBase({
-              '@font-face': fontFallback,
-            }),
-          );
+        if (options.includeFontFallback) {
+          addBase({
+            '@font-face': fontFallback,
+          });
         }
       }),
     ],
@@ -203,9 +204,10 @@ module.exports = (options = {}) => {
       fontFamily: {
         sans: [
           fontFamily,
+          // get the name of the fallback font
           options.includeFontFallback && fontFallback['font-family'],
           'sans-serif',
-        ].filter(),
+        ].filter((f) => f),
       },
       extend: {
         maxWidth: {
