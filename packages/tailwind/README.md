@@ -65,6 +65,8 @@ If you use [Content-Security-Policy](https://developer.mozilla.org/en-US/docs/We
 
 The preset includes a (local) fallback font to prevent [CLS](https://web.dev/articles/cls) while the fonts are loading. This is similar to the [font optimization in Next](https://nextjs.org/docs/app/building-your-application/optimizing/fonts). This is enabled by default, but can be disabled with the `includeFontFallback` option.
 
+The fallback font metrics is generated with a script that can be run with `pnpm font-fallback` (requires [Bun](https://bun.sh/)). If the fonts are changed, the script must be rerun and the resulting file commited.
+
 ## Migrating from v1?
 
 To ease the transition from v1 to v2 of Grunnmuren, it is possible to configure the preset to be (partially) compatible with v1. This allows you to use v2 of the Tailwind preset with v1 of the React components, and upgrade your application over time instead of a full migration.
