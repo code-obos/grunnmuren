@@ -50,7 +50,9 @@ for await (const fontFile of fontGlob.scan({
   const obj: Record<string, string> = {};
 
   for (const rule of rules) {
-    const [cssProperty, cssValue] = rule.split(':').map((v) => v.trim().replace(';', ''));
+    const [cssProperty, cssValue] = rule
+      .split(':')
+      .map((v) => v.trim().replace(';', ''));
     obj[cssProperty] = cssValue;
   }
 
