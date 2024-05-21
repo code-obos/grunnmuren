@@ -1,6 +1,5 @@
 ---
 "@obosbbl/grunnmuren-tailwind": major
-"@obosbbl/grunnmuren-react": major
 ---
 
 New design on `<h1>`-`<h4>` for both utility classes and prose.
