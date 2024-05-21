@@ -11,8 +11,12 @@
     ".": "./tailwind-base.cjs"
   },
   "files": [
-    "tailwind-base.cjs"
+    "tailwind-base.cjs",
+    "fonts/font-fallback.js"
   ],
+  "scripts": {
+    "font-fallback": "bun --cwd=./fonts ./generate-font-fallback.ts"
+  },
   "dependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/typography": "^0.5.10",

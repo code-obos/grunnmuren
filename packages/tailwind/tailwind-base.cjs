@@ -1,4 +1,5 @@
 const plugin = require('tailwindcss/plugin');
+const fontFallback = require('./fonts/font-fallback');
 
 const obosFonts = [
   {
@@ -24,9 +25,13 @@ const obosFonts = [
 ];
 
 /**
+ * @param {boolean} options.includeFontFallback
  * @param {boolean} options.legacyV1Compatibility
  */
 module.exports = (options = {}) => {
+  options.includeFontFallback ??= true;
+  options.legacyV1Compatibility ??= false;
+
   const v1CompatibilityPlugins = [];
 
   if (options.legacyV1Compatibility) {
@@ -40,7 +45,6 @@ module.exports = (options = {}) => {
   }
 
   const fontFamily = 'OBOSFont';
-  const fonts = obosFonts;
   const containerSize = '92rem';
 
   return {
@@ -126,7 +130,7 @@ module.exports = (options = {}) => {
       }),
       plugin(function ({ addBase }) {
         addBase(
-          fonts.map((font) => ({
+          obosFonts.map((font) => ({
             '@font-face': {
               fontFamily,
               fontWeight: font.fontWeight,
@@ -136,6 +140,12 @@ module.exports = (options = {}) => {
             },
           })),
         );
+
+        if (options.includeFontFallback) {
+          addBase({
+            '@font-face': fontFallback,
+          });
+        }
       }),
     ],
     theme: {
@@ -192,7 +202,12 @@ module.exports = (options = {}) => {
         },
       },
       fontFamily: {
-        sans: [fontFamily, 'sans-serif'],
+        sans: [
+          fontFamily,
+          // get the name of the fallback font
+          options.includeFontFallback && fontFallback['font-family'],
+          'sans-serif',
+        ].filter((f) => f),
       },
       extend: {
         maxWidth: {

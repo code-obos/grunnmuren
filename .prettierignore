@@ -3,3 +3,4 @@ renovate.json
 .changeset/
 dist/
 packages/icons-react/src/index.tsx
+packages/tailwind/fonts/font-fallback.js
