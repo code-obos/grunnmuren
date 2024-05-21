@@ -50,10 +50,7 @@ for await (const fontFile of fontGlob.scan({
   const obj: Record<string, string> = {};
 
   for (const rule of rules) {
-    // eslint-disable-next-line prefer-const
-    let [cssProperty, cssValue] = rule.split(':').map((v) => v.trim());
-    cssValue = cssValue.slice(0, -1);
-
+    const [cssProperty, cssValue] = rule.split(':').map((v) => v.trim().replace(';', ''));
     obj[cssProperty] = cssValue;
   }
 
