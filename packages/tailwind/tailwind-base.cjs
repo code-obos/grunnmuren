@@ -113,10 +113,9 @@ const typography = {
     },
     before: {
       // TODO: Use correct font for quote mark (font: OBOS Display)
-      content: '"\\""',
+      content: '"“"',
       fontSize: '4.6875rem',
       lineHeight: '1.6875rem',
-      fontWeight: 'bold',
     },
   },
   descriptionText: {
@@ -221,7 +220,7 @@ module.exports = (options = {}) => {
         // TODO: Use correct font for quote mark (font: OBOS Display)
         const blockquote = `@apply italic grid grid-cols-[32px_1fr] gap-x-[22px] pt-4
          text-[${blockquoteText.large.fontSize}]/[${blockquoteText.large.lineHeight}] md:text-[${blockquoteText.small.fontSize}]/[${blockquoteText.small.lineHeight}]
-         before:text-[${blockquoteText.before.fontSize}]/[${blockquoteText.before.lineHeight}] before:font-${blockquoteText.before.fontWeight} before:content-[${blockquoteText.before.content}]`;
+         before:text-[${blockquoteText.before.fontSize}]/[${blockquoteText.before.lineHeight}] before:content-[${blockquoteText.before.content}]`;
 
         const description = `@apply text-[${descriptionText.large.fontSize}]/[${descriptionText.large.lineHeight}] md:text-[${descriptionText.small.fontSize}]/[${descriptionText.small.lineHeight}]`;
 
