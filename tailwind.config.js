@@ -1,6 +1,4 @@
 module.exports = {
-  presets: [
-    require('@obosbbl/grunnmuren-tailwind')({ includeFontFallback: false }),
-  ],
+  presets: [require('@obosbbl/grunnmuren-tailwind')],
   content: ['./packages/**/*.{ts,tsx}'],
 };
