@@ -41,7 +41,7 @@ for await (const fontFile of fontGlob.scan({
     descent-override: 26%;
     line-gap-override: 0%;
   }
-    Remove the first and last line from thes string, stripping away the font
+    Remove the first and last line from the string, stripping away the font
     face declaration, and leaving us only with the actual css rules for the font
    */
   const lines = fontFaceDeclaration.split('\n');
