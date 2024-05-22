@@ -21,7 +21,7 @@ export const Default = () => {
       </blockquote>
       <h3 className="h3">Bildetekster</h3>
       <p className="body">
-        Klassen <code>description</code> brukes for bildetekster:
+        Klassen <code>description</code> kan f.eks. brukes for bildetekster:
       </p>
       <figure>
         <img
