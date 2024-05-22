@@ -218,7 +218,7 @@ module.exports = (options = {}) => {
         const lead = `@apply font-medium text-[${leadText.small.fontSize}]/[${leadText.small.lineHeight}] md:text-[${leadText.large.fontSize}]/[${leadText.large.lineHeight}]`;
 
         // TODO: Use correct font for quote mark (font: OBOS Display)
-        const blockquote = `@apply italic grid grid-cols-[2rem_1fr] gap-x-[22px] pt-4
+        const blockquote = `@apply italic grid grid-cols-[2rem_1fr] gap-x-[7px] pt-4
          text-[${blockquoteText.large.fontSize}]/[${blockquoteText.large.lineHeight}] md:text-[${blockquoteText.small.fontSize}]/[${blockquoteText.small.lineHeight}]
          before:text-[${blockquoteText.before.fontSize}]/[${blockquoteText.before.lineHeight}] before:content-[${blockquoteText.before.content}]`;
 
@@ -432,7 +432,7 @@ module.exports = (options = {}) => {
                 fontStyle: 'italic',
                 display: 'grid',
                 gridTemplateColumns: '2rem 1fr',
-                columnGap: '22px',
+                columnGap: '7px',
                 paddingTop: '1rem',
                 ...typography.blockquoteText.small,
                 '@media (min-width: theme("screens.md"))': {
