@@ -103,6 +103,9 @@ const typography = {
     },
   },
   blockquoteText: {
+    display: 'grid',
+    gridTemplateColumns: '2rem 1fr',
+    columnGap: '7px',
     small: {
       fontSize: '1rem', // 1rem is the base font size, which is obviously the default size. But it is set explicitly here to make it easier to configure in the future, if this size changes.
       lineHeight: '1.625rem',
@@ -218,7 +221,7 @@ module.exports = (options = {}) => {
         const lead = `@apply font-medium text-[${leadText.small.fontSize}]/[${leadText.small.lineHeight}] md:text-[${leadText.large.fontSize}]/[${leadText.large.lineHeight}]`;
 
         // TODO: Use correct font for quote mark (font: OBOS Display)
-        const blockquote = `@apply italic grid grid-cols-[2rem_1fr] gap-x-[7px] pt-4
+        const blockquote = `@apply italic grid grid-cols-[${blockquoteText.gridTemplateColumns.split(' ').join('_')}] gap-x-[${blockquoteText.columnGap}] pt-4
          text-[${blockquoteText.large.fontSize}]/[${blockquoteText.large.lineHeight}] md:text-[${blockquoteText.small.fontSize}]/[${blockquoteText.small.lineHeight}]
          before:text-[${blockquoteText.before.fontSize}]/[${blockquoteText.before.lineHeight}] before:content-[${blockquoteText.before.content}]`;
 
@@ -430,9 +433,10 @@ module.exports = (options = {}) => {
                 border: 'unset',
                 fontWeight: theme('fontWeight.normal'),
                 fontStyle: 'italic',
-                display: 'grid',
-                gridTemplateColumns: '2rem 1fr',
-                columnGap: '7px',
+                display: typography.blockquoteText.display,
+                gridTemplateColumns:
+                  typography.blockquoteText.gridTemplateColumns,
+                columnGap: typography.blockquoteText.columnGap,
                 paddingTop: '1rem',
                 ...typography.blockquoteText.small,
                 '@media (min-width: theme("screens.md"))': {
