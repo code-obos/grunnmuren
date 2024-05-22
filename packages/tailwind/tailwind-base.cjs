@@ -31,11 +31,11 @@ const typography = {
     fontWeight: 'bold',
     small: {
       fontSize: '2.8125rem',
-      lineHeight: '4.1875rem',
+      lineHeight: '3.625rem',
     },
     large: {
       fontSize: '3.9375rem',
-      lineHeight: '5.9375rem',
+      lineHeight: '5.125rem',
     },
   },
   h2Text: {
