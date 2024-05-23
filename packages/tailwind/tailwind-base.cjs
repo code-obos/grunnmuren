@@ -105,7 +105,7 @@ const typography = {
   blockquoteText: {
     display: 'grid',
     gridTemplateColumns: '2rem 1fr',
-    columnGap: '7px',
+    columnGap: '0.4375rem',
     small: {
       fontSize: '1rem', // 1rem is the base font size, which is obviously the default size. But it is set explicitly here to make it easier to configure in the future, if this size changes.
       lineHeight: '1.625rem',
