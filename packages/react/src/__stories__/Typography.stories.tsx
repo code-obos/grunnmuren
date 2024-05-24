@@ -40,11 +40,11 @@ export const Default = () => {
 export const Headings = () => {
   return (
     <>
-      <h1 className="heading-xl">Overskrift nivå 1</h1>
-      <h2 className="heading-l">Overskrift nivå 2</h2>
-      <h3 className="heading-m">Overskrift nivå 3</h3>
-      <h4 className="heading-s">Overskrift nivå 4</h4>
-      <h5 className="heading-xs">Overskrift nivå 5</h5>
+      <h1 className="heading-xl">Overskrift nivå 1 (XL)</h1>
+      <h2 className="heading-l">Overskrift nivå 2 (L)</h2>
+      <h3 className="heading-m">Overskrift nivå 3 (M)</h3>
+      <h4 className="heading-s">Overskrift nivå 4 (S)</h4>
+      <h5 className="heading-xs">Overskrift nivå 5 (XS)</h5>
     </>
   );
 };
