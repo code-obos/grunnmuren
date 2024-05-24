@@ -1,28 +1,37 @@
 const plugin = require('tailwindcss/plugin');
 const fontFallback = require('./fonts/font-fallback');
 
-const obosFonts = [
-  {
-    fontWeight: 400,
-    fontStyle: 'normal',
-    url: 'https://www.obos.no/fonts/OBOSText-Regular.woff2',
-  },
-  {
-    fontWeight: 400,
-    fontStyle: 'italic',
-    url: 'https://www.obos.no/fonts/OBOSText-Italic.woff2',
-  },
-  {
-    fontWeight: 500,
-    fontStyle: 'normal',
-    url: 'https://www.obos.no/fonts/OBOSText-Medium.woff2',
-  },
-  {
-    fontWeight: 700,
-    fontStyle: 'normal',
-    url: 'https://www.obos.no/fonts/OBOSText-Bold.woff2',
-  },
-];
+const fontDeclarations = {
+  OBOSText: [
+    {
+      fontWeight: 400,
+      fontStyle: 'normal',
+      url: 'https://www.obos.no/fonts/OBOSText-Regular.woff2',
+    },
+    {
+      fontWeight: 400,
+      fontStyle: 'italic',
+      url: 'https://www.obos.no/fonts/OBOSText-Italic.woff2',
+    },
+    {
+      fontWeight: 500,
+      fontStyle: 'normal',
+      url: 'https://www.obos.no/fonts/OBOSText-Medium.woff2',
+    },
+    {
+      fontWeight: 700,
+      fontStyle: 'normal',
+      url: 'https://www.obos.no/fonts/OBOSText-Bold.woff2',
+    },
+  ],
+  OBOSDisplay: [
+    {
+      fontWeight: 700,
+      fontStyle: 'normal',
+      url: 'https://www.obos.no/fonts/OBOSText-Bold.woff2',
+    },
+  ],
+};
 
 /**
  * Styles for typography that are reused in both component classes and prose (through the tailwind typography plugin)
@@ -150,7 +159,7 @@ module.exports = (options = {}) => {
     );
   }
 
-  const fontFamily = 'OBOSFont';
+  const fontFamily = 'OBOSText';
   const containerSize = '92rem';
 
   return {
@@ -290,7 +299,7 @@ module.exports = (options = {}) => {
       }),
       plugin(function ({ addBase }) {
         addBase(
-          obosFonts.map((font) => ({
+          fontDeclarations['OBOSText'].map((font) => ({
             '@font-face': {
               fontFamily,
               fontWeight: font.fontWeight,
