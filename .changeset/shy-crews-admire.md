@@ -2,8 +2,11 @@
 "@obosbbl/grunnmuren-tailwind": major
 ---
 
+Updated typography design.
+
+* BREAKING: Deprecate `.h1`, `.h2`, `.h3` and `.h4` classes
+* Add heading classes with "t-shirt sizes": `.heading-xl`, `.heading-l`, `.heading-m`, `.heading-s` and `.heading-xs`
+* Add classes: `.paragraph`, `.lead`, `.blockquote` and `.description` 
 New design on `<h1>`-`<h4>` for both utility classes and prose.
-
-New component classes: `h5`, `h6`, `body`, `lead`, `blockquote` and `description` have been added.
-
-Styles for `<h5>`, `<h6>` and `.description` is also added to prose CSS.
+* Update lineheight and fontsize for all typograhpy
+* Update `.prose` class with new typography.
