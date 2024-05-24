@@ -45,6 +45,7 @@ export const Headings = () => {
       <h2 className="heading-l">Overskrift nivå 2</h2>
       <h3 className="heading-m">Overskrift nivå 3</h3>
       <h4 className="heading-s">Overskrift nivå 4</h4>
+      <h5 className="heading-xs">Overskrift nivå 5</h5>
     </>
   );
 };

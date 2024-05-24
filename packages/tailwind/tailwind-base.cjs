@@ -72,6 +72,17 @@ const typography = {
       lineHeight: '2.125rem',
     },
   },
+  headingXsText: {
+    fontWeight: 'medium',
+    small: {
+      fontSize: '1.125rem',
+      lineHeight: '1.75rem',
+    },
+    large: {
+      fontSize: '1.1875rem',
+      lineHeight: '1.9375rem',
+    },
+  },
   paragraphText: {
     fontSize: '1rem', // 1rem is the base font size, which is obviously the default size. But it is set explicitly here to make it easier to configure in the future, if this size changes.
     lineHeight: '1.625rem',
@@ -189,6 +200,7 @@ module.exports = (options = {}) => {
           headingLText,
           headingMText,
           headingSText,
+          headingXsText,
           paragraphText,
           leadText,
           blockquoteText,
@@ -200,6 +212,7 @@ module.exports = (options = {}) => {
         const headingL = `@apply font-${headingLText.fontWeight} text-[${headingLText.small.fontSize}]/[${headingLText.small.lineHeight}] md:text-[${headingLText.large.fontSize}]/[${headingLText.large.lineHeight}]`;
         const headingM = `@apply font-${headingMText.fontWeight} text-[${headingMText.small.fontSize}]/[${headingMText.small.lineHeight}] md:text-[${headingMText.large.fontSize}]/[${headingMText.large.lineHeight}]`;
         const headingS = `@apply font-${headingSText.fontWeight} text-[${headingSText.small.fontSize}]/[${headingSText.small.lineHeight}] md:text-[${headingSText.large.fontSize}]/[${headingSText.large.lineHeight}]`;
+        const headingXs = `@apply font-${headingXsText.fontWeight} text-[${headingXsText.small.fontSize}]/[${headingXsText.small.lineHeight}] md:text-[${headingXsText.large.fontSize}]/[${headingXsText.large.lineHeight}]`;
 
         const paragraph = `@apply text-[${paragraphText.fontSize}]/[${paragraphText.lineHeight}]`;
         const lead = `@apply font-medium text-[${leadText.small.fontSize}]/[${leadText.small.lineHeight}] md:text-[${leadText.large.fontSize}]/[${leadText.large.lineHeight}]`;
@@ -240,6 +253,9 @@ module.exports = (options = {}) => {
           },
           '.heading-s': {
             [headingS]: {},
+          },
+          '.heading-xs': {
+            [headingXs]: {},
           },
           '.paragraph': {
             [paragraph]: {},
@@ -392,6 +408,13 @@ module.exports = (options = {}) => {
                 ...typography.headingSText.small,
                 '@media (min-width: theme("screens.md"))': {
                   ...typography.headingSText.large,
+                },
+              },
+              h5: {
+                fontWeight: theme('fontWeight.bold'),
+                ...typography.headingXsText.small,
+                '@media (min-width: theme("screens.md"))': {
+                  ...typography.headingXsText.large,
                 },
               },
               li: {
