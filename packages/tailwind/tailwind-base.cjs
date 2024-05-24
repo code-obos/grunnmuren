@@ -226,22 +226,38 @@ module.exports = (options = {}) => {
 
         if (options.legacyV1Compatibility) {
           addBase({
-            'heading-xl': {
+            h1: {
               [headingXl]: {},
             },
-            'heading-l': {
+            h2: {
               [headingL]: {},
             },
-            'heading-m': {
+            h3: {
               [headingM]: {},
             },
-            'heading-s': {
+            h4: {
               [headingS]: {},
             },
           });
         }
 
         addComponents({
+          /** @deprecated Will be replaced by heading-xl */
+          '.h1': {
+            [headingXl]: {},
+          },
+          /** @deprecated Will be replaced by heading-l */
+          '.h2': {
+            [headingL]: {},
+          },
+          /** @deprecated Will be replaced by heading-m */
+          '.h3': {
+            [headingM]: {},
+          },
+          /** @deprecated Will be replaced by heading-s */
+          '.h4': {
+            [headingS]: {},
+          },
           '.heading-xl': {
             [headingXl]: {},
           },
