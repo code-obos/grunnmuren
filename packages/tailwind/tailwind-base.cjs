@@ -1,5 +1,5 @@
 const plugin = require('tailwindcss/plugin');
-const fontFallback = require('./fonts/font-fallback');
+const fontFallbacks = require('./fonts/font-fallback');
 
 const fontDeclarations = {
   OBOSText: [
@@ -210,8 +210,8 @@ module.exports = (options = {}) => {
         } = typography;
 
         // This is tailwind syntax for setting both the font-size and the line-height
-        const headingXl = `@apply font-${headingXlText.fontWeight} text-[${headingXlText.small.fontSize}]/[${headingXlText.small.lineHeight}] md:text-[${headingXlText.large.fontSize}]/[${headingXlText.large.lineHeight}]`;
-        const headingL = `@apply font-${headingLText.fontWeight} text-[${headingLText.small.fontSize}]/[${headingLText.small.lineHeight}] md:text-[${headingLText.large.fontSize}]/[${headingLText.large.lineHeight}]`;
+        const headingXl = `@apply font-display font-${headingXlText.fontWeight} text-[${headingXlText.small.fontSize}]/[${headingXlText.small.lineHeight}] md:text-[${headingXlText.large.fontSize}]/[${headingXlText.large.lineHeight}]`;
+        const headingL = `@apply font-display font-${headingLText.fontWeight} text-[${headingLText.small.fontSize}]/[${headingLText.small.lineHeight}] md:text-[${headingLText.large.fontSize}]/[${headingLText.large.lineHeight}]`;
         const headingM = `@apply font-${headingMText.fontWeight} text-[${headingMText.small.fontSize}]/[${headingMText.small.lineHeight}] md:text-[${headingMText.large.fontSize}]/[${headingMText.large.lineHeight}]`;
         const headingS = `@apply font-${headingSText.fontWeight} text-[${headingSText.small.fontSize}]/[${headingSText.small.lineHeight}] md:text-[${headingSText.large.fontSize}]/[${headingSText.large.lineHeight}]`;
         const headingXs = `@apply font-${headingXsText.fontWeight} text-[${headingXsText.small.fontSize}]/[${headingXsText.small.lineHeight}] md:text-[${headingXsText.large.fontSize}]/[${headingXsText.large.lineHeight}]`;
@@ -219,10 +219,9 @@ module.exports = (options = {}) => {
         const paragraph = `@apply text-[${paragraphText.fontSize}]/[${paragraphText.lineHeight}]`;
         const lead = `@apply font-medium text-[${leadText.small.fontSize}]/[${leadText.small.lineHeight}] md:text-[${leadText.large.fontSize}]/[${leadText.large.lineHeight}]`;
 
-        // TODO: Use correct font for quote mark (font: OBOS Display)
         const blockquote = `@apply font-${blockquoteText.fontWeight} italic grid grid-cols-[${blockquoteText.gridTemplateColumns.split(' ').join('_')}] gap-x-[${blockquoteText.columnGap}] pt-4
          text-[${blockquoteText.large.fontSize}]/[${blockquoteText.large.lineHeight}] md:text-[${blockquoteText.small.fontSize}]/[${blockquoteText.small.lineHeight}]
-         before:text-[${blockquoteText.before.fontSize}]/[${blockquoteText.before.lineHeight}] before:content-[${blockquoteText.before.content}]`;
+         before:text-[${blockquoteText.before.fontSize}]/[${blockquoteText.before.lineHeight}] before:content-[${blockquoteText.before.content}] before:font-display`;
 
         const description = `@apply text-[${descriptionText.large.fontSize}]/[${descriptionText.large.lineHeight}] md:text-[${descriptionText.small.fontSize}]/[${descriptionText.small.lineHeight}]`;
 
@@ -306,9 +305,11 @@ module.exports = (options = {}) => {
         );
 
         if (options.includeFontFallback) {
-          addBase({
-            '@font-face': fontFallback,
-          });
+          addBase(
+            Object.values(fontFallbacks).map((fontFallback) => ({
+              '@font-face': fontFallback,
+            })),
+          );
         }
       }),
     ],
@@ -368,11 +369,15 @@ module.exports = (options = {}) => {
       fontFamily: {
         sans: [
           'OBOSText',
-          // get the name of the fallback font
-          options.includeFontFallback && fontFallback['font-family'],
+          options.includeFontFallback && fontFallbacks.OBOSText['font-family'],
           'sans-serif',
         ].filter((f) => f),
-        display: ['OBOSDisplay', 'sans-serif'],
+        display: [
+          'OBOSDisplay',
+          options.includeFontFallback &&
+            fontFallbacks.OBOSDisplay['font-family'],
+          'sans-serif',
+        ],
       },
       extend: {
         maxWidth: {
