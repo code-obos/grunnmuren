@@ -3,14 +3,14 @@ import type { Meta } from '@storybook/react';
 export const Default = () => {
   return (
     <div className="grid gap-8">
-      <h1 className="h1">Grunnmuren</h1>
+      <h1 className="heading-xl">Grunnmuren</h1>
       <p className="lead">Grunnmuren er designsystemet til OBOS.</p>
-      <h2 className="h2">Typografi i Grunnmuren</h2>
+      <h2 className="heading-l">Typografi i Grunnmuren</h2>
       <p className="body">
         Typografien i Grunnmuren defineres av tailwind-klasser. Denne teksten
         har for eksempel klassen <code>body</code>.
       </p>
-      <h3 className="h3">Sitater</h3>
+      <h3 className="heading-m">Sitater</h3>
       <p className="body">
         Lengre sitater kan framheves med klassen <code>blockquote</code>:
       </p>
@@ -19,7 +19,7 @@ export const Default = () => {
         virket det nesten umulig å komme inn på markedet. Jeg var på noen
         visninger, men det ble enten for lite eller for gammelt og slitt
       </blockquote>
-      <h3 className="h3">Bildetekster</h3>
+      <h3 className="heading-m">Bildetekster</h3>
       <p className="body">
         Klassen <code>description</code> kan f.eks. brukes for bildetekster:
       </p>
@@ -41,12 +41,10 @@ export const Default = () => {
 export const Headings = () => {
   return (
     <>
-      <h1 className="h1">Overskrift nivå 1</h1>
-      <h2 className="h2">Overskrift nivå 2</h2>
-      <h3 className="h3">Overskrift nivå 3</h3>
-      <h4 className="h4">Overskrift nivå 4</h4>
-      <h5 className="h5">Overskrift nivå 5</h5>
-      <h6 className="h6">Overskrift nivå 6</h6>
+      <h1 className="heading-xl">Overskrift nivå 1</h1>
+      <h2 className="heading-l">Overskrift nivå 2</h2>
+      <h3 className="heading-m">Overskrift nivå 3</h3>
+      <h4 className="heading-s">Overskrift nivå 4</h4>
     </>
   );
 };

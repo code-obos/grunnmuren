@@ -28,7 +28,7 @@ const obosFonts = [
  * Styles for typography that are reused in both component classes and prose (through the tailwind typography plugin)
  */
 const typography = {
-  h1Text: {
+  headingXlText: {
     fontWeight: 'bold',
     small: {
       fontSize: '2.8125rem',
@@ -39,7 +39,7 @@ const typography = {
       lineHeight: '5.125rem',
     },
   },
-  h2Text: {
+  headingLText: {
     fontWeight: 'bold',
     small: {
       fontSize: '1.8125rem',
@@ -50,7 +50,7 @@ const typography = {
       lineHeight: '3.5rem',
     },
   },
-  h3Text: {
+  headingMText: {
     fontWeight: 'bold',
     small: {
       fontSize: '1.4375rem',
@@ -61,7 +61,7 @@ const typography = {
       lineHeight: '2.5625rem',
     },
   },
-  h4Text: {
+  headingSText: {
     fontWeight: 'medium',
     small: {
       fontSize: '1.1875rem',
@@ -71,22 +71,6 @@ const typography = {
       fontSize: '1.3125rem',
       lineHeight: '2.125rem',
     },
-  },
-  h5Text: {
-    fontWeight: 'medium',
-    small: {
-      fontSize: '1.125rem',
-      lineHeight: '1.75rem',
-    },
-    large: {
-      fontSize: '1.1875rem',
-      lineHeight: '1.9375rem',
-    },
-  },
-  h6Text: {
-    fontWeight: 'bold',
-    fontSize: '1rem', // 1rem is the base font size, which is obviously the default size. But it is set explicitly here to make it easier to configure in the future, if this size changes.
-    lineHeight: '1.625rem',
   },
   bodyText: {
     fontSize: '1rem', // 1rem is the base font size, which is obviously the default size. But it is set explicitly here to make it easier to configure in the future, if this size changes.
@@ -201,12 +185,10 @@ module.exports = (options = {}) => {
 
       plugin(function ({ addBase, addComponents }) {
         const {
-          h1Text,
-          h2Text,
-          h3Text,
-          h4Text,
-          h5Text,
-          h6Text,
+          headingXlText,
+          headingLText,
+          headingMText,
+          headingSText,
           bodyText,
           leadText,
           blockquoteText,
@@ -214,12 +196,10 @@ module.exports = (options = {}) => {
         } = typography;
 
         // This is tailwind syntax for setting both the font-size and the line-height
-        const h1 = `@apply font-${h1Text.fontWeight} text-[${h1Text.small.fontSize}]/[${h1Text.small.lineHeight}] md:text-[${h1Text.large.fontSize}]/[${h1Text.large.lineHeight}]`;
-        const h2 = `@apply font-${h2Text.fontWeight} text-[${h2Text.small.fontSize}]/[${h2Text.small.lineHeight}] md:text-[${h2Text.large.fontSize}]/[${h2Text.large.lineHeight}]`;
-        const h3 = `@apply font-${h3Text.fontWeight} text-[${h3Text.small.fontSize}]/[${h3Text.small.lineHeight}] md:text-[${h3Text.large.fontSize}]/[${h3Text.large.lineHeight}]`;
-        const h4 = `@apply font-${h4Text.fontWeight} text-[${h4Text.small.fontSize}]/[${h4Text.small.lineHeight}] md:text-[${h4Text.large.fontSize}]/[${h4Text.large.lineHeight}]`;
-        const h5 = `@apply font-${h5Text.fontWeight} text-[${h5Text.small.fontSize}]/[${h5Text.small.lineHeight}] md:text-[${h5Text.large.fontSize}]/[${h5Text.large.lineHeight}]`;
-        const h6 = `@apply font-${h6Text.fontWeight} text-[${h6Text.fontSize}]/[${h6Text.lineHeight}]`;
+        const headingXl = `@apply font-${headingXlText.fontWeight} text-[${headingXlText.small.fontSize}]/[${headingXlText.small.lineHeight}] md:text-[${headingXlText.large.fontSize}]/[${headingXlText.large.lineHeight}]`;
+        const headingL = `@apply font-${headingLText.fontWeight} text-[${headingLText.small.fontSize}]/[${headingLText.small.lineHeight}] md:text-[${headingLText.large.fontSize}]/[${headingLText.large.lineHeight}]`;
+        const headingM = `@apply font-${headingMText.fontWeight} text-[${headingMText.small.fontSize}]/[${headingMText.small.lineHeight}] md:text-[${headingMText.large.fontSize}]/[${headingMText.large.lineHeight}]`;
+        const headingS = `@apply font-${headingSText.fontWeight} text-[${headingSText.small.fontSize}]/[${headingSText.small.lineHeight}] md:text-[${headingSText.large.fontSize}]/[${headingSText.large.lineHeight}]`;
 
         const body = `@apply text-[${bodyText.fontSize}]/[${bodyText.lineHeight}]`;
         const lead = `@apply font-medium text-[${leadText.small.fontSize}]/[${leadText.small.lineHeight}] md:text-[${leadText.large.fontSize}]/[${leadText.large.lineHeight}]`;
@@ -233,39 +213,33 @@ module.exports = (options = {}) => {
 
         if (options.legacyV1Compatibility) {
           addBase({
-            h1: {
-              [h1]: {},
+            'heading-xl': {
+              [headingXl]: {},
             },
-            h2: {
-              [h2]: {},
+            'heading-l': {
+              [headingL]: {},
             },
-            h3: {
-              [h3]: {},
+            'heading-m': {
+              [headingM]: {},
             },
-            h4: {
-              [h4]: {},
+            'heading-s': {
+              [headingS]: {},
             },
           });
         }
 
         addComponents({
-          '.h1': {
-            [h1]: {},
+          '.heading-xl': {
+            [headingXl]: {},
           },
-          '.h2': {
-            [h2]: {},
+          '.heading-l': {
+            [headingL]: {},
           },
-          '.h3': {
-            [h3]: {},
+          '.heading-m': {
+            [headingM]: {},
           },
-          '.h4': {
-            [h4]: {},
-          },
-          '.h5': {
-            [h5]: {},
-          },
-          '.h6': {
-            [h6]: {},
+          '.heading-s': {
+            [headingS]: {},
           },
           '.body': {
             [body]: {},
@@ -392,44 +366,33 @@ module.exports = (options = {}) => {
               a: {
                 fontWeight: 400,
               },
-              h1: {
+              headingXl: {
                 fontWeight: theme('fontWeight.bold'),
-                ...typography.h1Text.small,
+                ...typography.headingXlText.small,
                 '@media (min-width: theme("screens.md"))': {
-                  ...typography.h1Text.large,
+                  ...typography.headingXlText.large,
                 },
               },
-              h2: {
+              headingL: {
                 fontWeight: theme('fontWeight.bold'),
-                ...typography.h2Text.small,
+                ...typography.headingLText.small,
                 '@media (min-width: theme("screens.md"))': {
-                  ...typography.h2Text.large,
+                  ...typography.headingLText.large,
                 },
               },
-              h3: {
+              headingM: {
                 fontWeight: theme('fontWeight.bold'),
-                ...typography.h3Text.small,
+                ...typography.headingMText.small,
                 '@media (min-width: theme("screens.md"))': {
-                  ...typography.h3Text.large,
+                  ...typography.headingMText.large,
                 },
               },
-              h4: {
+              headingS: {
                 fontWeight: theme('fontWeight.bold'),
-                ...typography.h4Text.small,
+                ...typography.headingSText.small,
                 '@media (min-width: theme("screens.md"))': {
-                  ...typography.h4Text.large,
+                  ...typography.headingSText.large,
                 },
-              },
-              h5: {
-                fontWeight: theme('fontWeight.bold'),
-                ...typography.h5Text.small,
-                '@media (min-width: theme("screens.md"))': {
-                  ...typography.h5Text.large,
-                },
-              },
-              h6: {
-                fontWeight: theme('fontWeight.bold'),
-                ...typography.h6Text,
               },
               li: {
                 marginTop: '1.5em',
