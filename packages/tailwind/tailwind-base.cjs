@@ -25,6 +25,111 @@ const obosFonts = [
 ];
 
 /**
+ * Styles for typography that are reused in both component classes and prose (through the tailwind typography plugin)
+ */
+const typography = {
+  headingXlText: {
+    fontWeight: 'bold',
+    small: {
+      fontSize: '2.8125rem',
+      lineHeight: '3.625rem',
+    },
+    large: {
+      fontSize: '3.9375rem',
+      lineHeight: '5.125rem',
+    },
+  },
+  headingLText: {
+    fontWeight: 'bold',
+    small: {
+      fontSize: '1.8125rem',
+      lineHeight: '2.75rem',
+    },
+    large: {
+      fontSize: '2.25rem',
+      lineHeight: '3.5rem',
+    },
+  },
+  headingMText: {
+    fontWeight: 'bold',
+    small: {
+      fontSize: '1.4375rem',
+      lineHeight: '2.25rem',
+    },
+    large: {
+      fontSize: '1.625rem',
+      lineHeight: '2.5625rem',
+    },
+  },
+  headingSText: {
+    fontWeight: 'medium',
+    small: {
+      fontSize: '1.1875rem',
+      lineHeight: '1.1875rem',
+    },
+    large: {
+      fontSize: '1.3125rem',
+      lineHeight: '2.125rem',
+    },
+  },
+  headingXsText: {
+    fontWeight: 'medium',
+    small: {
+      fontSize: '1.125rem',
+      lineHeight: '1.75rem',
+    },
+    large: {
+      fontSize: '1.1875rem',
+      lineHeight: '1.9375rem',
+    },
+  },
+  paragraphText: {
+    fontSize: '1rem', // 1rem is the base font size, which is obviously the default size. But it is set explicitly here to make it easier to configure in the future, if this size changes.
+    lineHeight: '1.625rem',
+  },
+  leadText: {
+    fontWeight: 'medium',
+    small: {
+      fontSize: '1.4375rem',
+      lineHeight: '2.25rem',
+    },
+    large: {
+      fontSize: '1.625rem',
+      lineHeight: '2.5625rem',
+    },
+  },
+  blockquoteText: {
+    display: 'grid',
+    gridTemplateColumns: '2rem 1fr',
+    columnGap: '0.4375rem',
+    small: {
+      fontSize: '1rem', // 1rem is the base font size, which is obviously the default size. But it is set explicitly here to make it easier to configure in the future, if this size changes.
+      lineHeight: '1.625rem',
+    },
+    large: {
+      fontSize: '1rem', // 1rem is the base font size, which is obviously the default size. But it is set explicitly here to make it easier to configure in the future, if this size changes.
+      lineHeight: '1.6875rem',
+    },
+    before: {
+      // TODO: Use correct font for quote mark (font: OBOS Display)
+      content: '"“"',
+      fontSize: '4.6875rem',
+      lineHeight: '1.6875rem',
+    },
+  },
+  descriptionText: {
+    small: {
+      fontSize: '0.875rem',
+      lineHeight: '1.4375rem',
+    },
+    large: {
+      fontSize: '0.875rem',
+      lineHeight: '1.375rem',
+    },
+  },
+};
+
+/**
  * @param {boolean} options.includeFontFallback
  * @param {boolean} options.legacyV1Compatibility
  */
@@ -90,41 +195,95 @@ module.exports = (options = {}) => {
       }),
 
       plugin(function ({ addBase, addComponents }) {
+        const {
+          headingXlText,
+          headingLText,
+          headingMText,
+          headingSText,
+          headingXsText,
+          paragraphText,
+          leadText,
+          blockquoteText,
+          descriptionText,
+        } = typography;
+
         // This is tailwind syntax for setting both the font-size and the line-height
-        const h1 = '@apply font-bold text-[28px]/[38px] md:text-[40px]/[56px]';
-        const h2 = '@apply font-bold text-[24px]/[30px] md:text-[32px]/[42px]';
-        const h3 = '@apply font-bold text-[20px]/[30px] md:text-[24px]/[34px]';
-        const h4 = '@apply font-bold text-[18px]/[24px] md:text-[20px]/[28px]';
+        const headingXl = `@apply font-${headingXlText.fontWeight} text-[${headingXlText.small.fontSize}]/[${headingXlText.small.lineHeight}] md:text-[${headingXlText.large.fontSize}]/[${headingXlText.large.lineHeight}]`;
+        const headingL = `@apply font-${headingLText.fontWeight} text-[${headingLText.small.fontSize}]/[${headingLText.small.lineHeight}] md:text-[${headingLText.large.fontSize}]/[${headingLText.large.lineHeight}]`;
+        const headingM = `@apply font-${headingMText.fontWeight} text-[${headingMText.small.fontSize}]/[${headingMText.small.lineHeight}] md:text-[${headingMText.large.fontSize}]/[${headingMText.large.lineHeight}]`;
+        const headingS = `@apply font-${headingSText.fontWeight} text-[${headingSText.small.fontSize}]/[${headingSText.small.lineHeight}] md:text-[${headingSText.large.fontSize}]/[${headingSText.large.lineHeight}]`;
+        const headingXs = `@apply font-${headingXsText.fontWeight} text-[${headingXsText.small.fontSize}]/[${headingXsText.small.lineHeight}] md:text-[${headingXsText.large.fontSize}]/[${headingXsText.large.lineHeight}]`;
+
+        const paragraph = `@apply text-[${paragraphText.fontSize}]/[${paragraphText.lineHeight}]`;
+        const lead = `@apply font-medium text-[${leadText.small.fontSize}]/[${leadText.small.lineHeight}] md:text-[${leadText.large.fontSize}]/[${leadText.large.lineHeight}]`;
+
+        // TODO: Use correct font for quote mark (font: OBOS Display)
+        const blockquote = `@apply italic grid grid-cols-[${blockquoteText.gridTemplateColumns.split(' ').join('_')}] gap-x-[${blockquoteText.columnGap}] pt-4
+         text-[${blockquoteText.large.fontSize}]/[${blockquoteText.large.lineHeight}] md:text-[${blockquoteText.small.fontSize}]/[${blockquoteText.small.lineHeight}]
+         before:text-[${blockquoteText.before.fontSize}]/[${blockquoteText.before.lineHeight}] before:content-[${blockquoteText.before.content}]`;
+
+        const description = `@apply text-[${descriptionText.large.fontSize}]/[${descriptionText.large.lineHeight}] md:text-[${descriptionText.small.fontSize}]/[${descriptionText.small.lineHeight}]`;
 
         if (options.legacyV1Compatibility) {
           addBase({
             h1: {
-              [h1]: {},
+              [headingXl]: {},
             },
             h2: {
-              [h2]: {},
+              [headingL]: {},
             },
             h3: {
-              [h3]: {},
+              [headingM]: {},
             },
             h4: {
-              [h4]: {},
+              [headingS]: {},
             },
           });
         }
 
         addComponents({
+          /** @deprecated Will be replaced by heading-xl */
           '.h1': {
-            [h1]: {},
+            [headingXl]: {},
           },
+          /** @deprecated Will be replaced by heading-l */
           '.h2': {
-            [h2]: {},
+            [headingL]: {},
           },
+          /** @deprecated Will be replaced by heading-m */
           '.h3': {
-            [h3]: {},
+            [headingM]: {},
           },
+          /** @deprecated Will be replaced by heading-s */
           '.h4': {
-            [h4]: {},
+            [headingS]: {},
+          },
+          '.heading-xl': {
+            [headingXl]: {},
+          },
+          '.heading-l': {
+            [headingL]: {},
+          },
+          '.heading-m': {
+            [headingM]: {},
+          },
+          '.heading-s': {
+            [headingS]: {},
+          },
+          '.heading-xs': {
+            [headingXs]: {},
+          },
+          '.paragraph': {
+            [paragraph]: {},
+          },
+          '.lead': {
+            [lead]: {},
+          },
+          '.blockquote': {
+            [blockquote]: {},
+          },
+          '.description': {
+            [description]: {},
           },
         });
       }),
@@ -231,8 +390,7 @@ module.exports = (options = {}) => {
               '--tw-prose-headings': 'inherit',
               '--tw-prose-lead': 'inherit',
               '--tw-prose-links': 'inherit',
-              '--tw-prose-quotes': theme('colors.blue.dark'),
-              '--tw-prose-quote-borders': theme('colors.green.DEFAULT'),
+              '--tw-prose-quotes': 'inherit',
               '--tw-prose-counters': theme('colors.black'),
               '--tw-prose-bullets': theme('colors.green.DEFAULT'),
               color: theme('colors.black'),
@@ -242,48 +400,82 @@ module.exports = (options = {}) => {
               },
               h1: {
                 fontWeight: theme('fontWeight.bold'),
-                fontSize: theme('fontSize.3xl'),
+                ...typography.headingXlText.small,
                 '@media (min-width: theme("screens.md"))': {
-                  fontSize: theme('fontSize.5xl'),
+                  ...typography.headingXlText.large,
                 },
               },
               h2: {
                 fontWeight: theme('fontWeight.bold'),
-                fontSize: theme('fontSize.2xl'),
+                ...typography.headingLText.small,
                 '@media (min-width: theme("screens.md"))': {
-                  fontSize: theme('fontSize.4xl'),
+                  ...typography.headingLText.large,
                 },
               },
               h3: {
                 fontWeight: theme('fontWeight.bold'),
-                fontSize: theme('fontSize.xl'),
+                ...typography.headingMText.small,
                 '@media (min-width: theme("screens.md"))': {
-                  fontSize: theme('fontSize.2xl'),
+                  ...typography.headingMText.large,
                 },
               },
               h4: {
                 fontWeight: theme('fontWeight.bold'),
-                fontSize: theme('fontSize.lg'),
+                ...typography.headingSText.small,
                 '@media (min-width: theme("screens.md"))': {
-                  fontSize: theme('fontSize.xl'),
+                  ...typography.headingSText.large,
+                },
+              },
+              h5: {
+                fontWeight: theme('fontWeight.bold'),
+                ...typography.headingXsText.small,
+                '@media (min-width: theme("screens.md"))': {
+                  ...typography.headingXsText.large,
                 },
               },
               li: {
                 marginTop: '1.5em',
                 marginBottom: '1.5em',
               },
+              p: {
+                ...typography.paragraphText.small,
+                '@media (min-width: theme("screens.md"))': {
+                  ...typography.paragraphText.large,
+                },
+              },
               blockquote: {
-                fontWeight: theme('fontWeight.bold'),
-                fontStyle: 'normal',
+                // Reset defaults:
+                marginBottom: 'unset',
+                padding: 'unset',
+                border: 'unset',
+                fontWeight: theme('fontWeight.normal'),
+                fontStyle: 'italic',
+                display: typography.blockquoteText.display,
+                gridTemplateColumns:
+                  typography.blockquoteText.gridTemplateColumns,
+                columnGap: typography.blockquoteText.columnGap,
+                paddingTop: '1rem',
+                ...typography.blockquoteText.small,
+                '@media (min-width: theme("screens.md"))': {
+                  ...typography.blockquoteText.large,
+                },
               },
-              'blockquote p:first-of-type::before': {
-                content: '"«"',
-              },
-              'blockquote p:last-of-type::after': {
-                content: '"»"',
+              'blockquote::before': {
+                // TODO: Use correct font for quote mark (font: OBOS Display)
+                ...typography.blockquoteText.before,
               },
               '[class~="lead"]': {
                 fontWeight: theme('fontWeight.medium'),
+                ...typography.leadText.small,
+                '@media (min-width: theme("screens.md"))': {
+                  ...typography.leadText.large,
+                },
+              },
+              '[class~="description"]': {
+                ...typography.descriptionText.small,
+                '@media (min-width: theme("screens.md"))': {
+                  ...typography.descriptionText.large,
+                },
               },
             },
           },

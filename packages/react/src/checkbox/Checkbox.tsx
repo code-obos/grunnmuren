@@ -9,7 +9,6 @@ import {
 import { Check as CheckIcon } from '@obosbbl/grunnmuren-icons-react';
 
 import { ErrorMessage } from '../label/ErrorMessage';
-import { descriptionClasses } from '../label/Description';
 
 const defaultClasses = cx([
   'group relative left-0 inline-flex max-w-fit cursor-pointer items-start gap-4 py-2 leading-7',
@@ -100,7 +99,7 @@ function Checkbox(props: CheckboxProps, ref: Ref<HTMLLabelElement>) {
           <div
             id={descriptionId}
             slot="description"
-            className={cx('block', descriptionClasses)}
+            className="description block"
           >
             {description}
           </div>
