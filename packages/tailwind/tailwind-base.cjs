@@ -159,7 +159,6 @@ module.exports = (options = {}) => {
     );
   }
 
-  const fontFamily = 'OBOSText';
   const containerSize = '92rem';
 
   return {
@@ -299,15 +298,18 @@ module.exports = (options = {}) => {
       }),
       plugin(function ({ addBase }) {
         addBase(
-          fontDeclarations['OBOSText'].map((font) => ({
-            '@font-face': {
-              fontFamily,
-              fontWeight: font.fontWeight,
-              fontStyle: font.fontStyle,
-              src: `url('${font.url}') format('woff2')`,
-              fontDisplay: 'swap',
-            },
-          })),
+          Object.entries(fontDeclarations).flatMap(
+            ([fontFamily, fontFamilyDeclarations]) =>
+              fontFamilyDeclarations.map((font) => ({
+                '@font-face': {
+                  fontFamily,
+                  fontWeight: font.fontWeight,
+                  fontStyle: font.fontStyle,
+                  src: `url('${font.url}') format('woff2')`,
+                  fontDisplay: 'swap',
+                },
+              })),
+          ),
         );
 
         if (options.includeFontFallback) {
@@ -372,11 +374,12 @@ module.exports = (options = {}) => {
       },
       fontFamily: {
         sans: [
-          fontFamily,
+          'OBOSText',
           // get the name of the fallback font
           options.includeFontFallback && fontFallback['font-family'],
           'sans-serif',
         ].filter((f) => f),
+        display: ['OBOSDisplay', 'sans-serif'],
       },
       extend: {
         maxWidth: {
