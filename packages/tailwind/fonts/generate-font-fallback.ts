@@ -2,7 +2,7 @@ import { Glob } from 'bun';
 import { readMetrics, generateFontFace } from 'fontaine';
 
 /**
- * This script parses all the OBOSText fonts and generates
+ * This script parses all the OBOS fonts and generates
  * a local font fallback to reduce CLS. It is in similar vein
  * to next/font, but uses fontaine instead.
  *

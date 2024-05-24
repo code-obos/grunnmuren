@@ -18,17 +18,10 @@ const fontDeclarations = {
       fontStyle: 'normal',
       url: 'https://www.obos.no/fonts/OBOSText-Medium.woff2',
     },
-    {
-      fontWeight: 700,
-      fontStyle: 'normal',
-      url: 'https://www.obos.no/fonts/OBOSText-Bold.woff2',
-    },
   ],
   OBOSDisplay: [
     {
-      fontWeight: 700,
-      fontStyle: 'normal',
-      url: 'https://www.obos.no/fonts/OBOSText-Bold.woff2',
+      url: 'https://www.obos.no/fonts/OBOSDisplay-SemiBold.woff2',
     },
   ],
 };
