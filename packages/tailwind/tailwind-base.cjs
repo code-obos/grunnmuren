@@ -72,7 +72,7 @@ const typography = {
       lineHeight: '2.125rem',
     },
   },
-  bodyText: {
+  paragraphText: {
     fontSize: '1rem', // 1rem is the base font size, which is obviously the default size. But it is set explicitly here to make it easier to configure in the future, if this size changes.
     lineHeight: '1.625rem',
   },
@@ -189,7 +189,7 @@ module.exports = (options = {}) => {
           headingLText,
           headingMText,
           headingSText,
-          bodyText,
+          paragraphText,
           leadText,
           blockquoteText,
           descriptionText,
@@ -201,7 +201,7 @@ module.exports = (options = {}) => {
         const headingM = `@apply font-${headingMText.fontWeight} text-[${headingMText.small.fontSize}]/[${headingMText.small.lineHeight}] md:text-[${headingMText.large.fontSize}]/[${headingMText.large.lineHeight}]`;
         const headingS = `@apply font-${headingSText.fontWeight} text-[${headingSText.small.fontSize}]/[${headingSText.small.lineHeight}] md:text-[${headingSText.large.fontSize}]/[${headingSText.large.lineHeight}]`;
 
-        const body = `@apply text-[${bodyText.fontSize}]/[${bodyText.lineHeight}]`;
+        const paragraph = `@apply text-[${paragraphText.fontSize}]/[${paragraphText.lineHeight}]`;
         const lead = `@apply font-medium text-[${leadText.small.fontSize}]/[${leadText.small.lineHeight}] md:text-[${leadText.large.fontSize}]/[${leadText.large.lineHeight}]`;
 
         // TODO: Use correct font for quote mark (font: OBOS Display)
@@ -241,8 +241,8 @@ module.exports = (options = {}) => {
           '.heading-s': {
             [headingS]: {},
           },
-          '.body': {
-            [body]: {},
+          '.paragraph': {
+            [paragraph]: {},
           },
           '.lead': {
             [lead]: {},
@@ -366,28 +366,28 @@ module.exports = (options = {}) => {
               a: {
                 fontWeight: 400,
               },
-              headingXl: {
+              h1: {
                 fontWeight: theme('fontWeight.bold'),
                 ...typography.headingXlText.small,
                 '@media (min-width: theme("screens.md"))': {
                   ...typography.headingXlText.large,
                 },
               },
-              headingL: {
+              h2: {
                 fontWeight: theme('fontWeight.bold'),
                 ...typography.headingLText.small,
                 '@media (min-width: theme("screens.md"))': {
                   ...typography.headingLText.large,
                 },
               },
-              headingM: {
+              h3: {
                 fontWeight: theme('fontWeight.bold'),
                 ...typography.headingMText.small,
                 '@media (min-width: theme("screens.md"))': {
                   ...typography.headingMText.large,
                 },
               },
-              headingS: {
+              h4: {
                 fontWeight: theme('fontWeight.bold'),
                 ...typography.headingSText.small,
                 '@media (min-width: theme("screens.md"))': {
@@ -399,9 +399,9 @@ module.exports = (options = {}) => {
                 marginBottom: '1.5em',
               },
               p: {
-                ...typography.bodyText.small,
+                ...typography.paragraphText.small,
                 '@media (min-width: theme("screens.md"))': {
-                  ...typography.bodyText.large,
+                  ...typography.paragraphText.large,
                 },
               },
               blockquote: {

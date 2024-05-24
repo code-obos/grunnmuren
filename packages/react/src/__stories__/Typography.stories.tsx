@@ -6,12 +6,12 @@ export const Default = () => {
       <h1 className="heading-xl">Grunnmuren</h1>
       <p className="lead">Grunnmuren er designsystemet til OBOS.</p>
       <h2 className="heading-l">Typografi i Grunnmuren</h2>
-      <p className="body">
+      <p className="paragraph">
         Typografien i Grunnmuren defineres av tailwind-klasser. Denne teksten
-        har for eksempel klassen <code>body</code>.
+        har for eksempel klassen <code>paragraph</code>.
       </p>
       <h3 className="heading-m">Sitater</h3>
-      <p className="body">
+      <p className="paragraph">
         Lengre sitater kan framheves med klassen <code>blockquote</code>:
       </p>
       <blockquote className="blockquote">
@@ -20,7 +20,7 @@ export const Default = () => {
         visninger, men det ble enten for lite eller for gammelt og slitt
       </blockquote>
       <h3 className="heading-m">Bildetekster</h3>
-      <p className="body">
+      <p className="paragraph">
         Klassen <code>description</code> kan f.eks. brukes for bildetekster:
       </p>
       <figure>
@@ -59,12 +59,12 @@ export const Lead = () => (
 export const Body = () => {
   return (
     <>
-      <p className="body">
+      <p className="paragraph">
         Mange opplever at prisvekst og rentehevinger har fått store konsekvenser
         for økonomien. Førstegangskjøpere og de som tjener mindre, sliter med å
         komme seg inn på boligmarkedet.
       </p>
-      <p className="body">
+      <p className="paragraph">
         – Det er et tøft boligmarked, og med de prisene det er på bolig i Oslo,
         virket det nesten umulig å komme inn på markedet. Jeg var på noen
         visninger, men det ble enten for lite eller for gammelt og slitt,
