@@ -15,9 +15,8 @@ export const Default = () => {
         Lengre sitater kan framheves med klassen <code>blockquote</code>:
       </p>
       <blockquote className="blockquote">
-        Det er et tøft boligmarked, og med de prisene det er på bolig i Oslo,
-        virket det nesten umulig å komme inn på markedet. Jeg var på noen
-        visninger, men det ble enten for lite eller for gammelt og slitt
+        Typografi er grunnmuren i all visuell kommunikasjon; den bærer
+        budskapets vekt og gir strukturen vi bygger vår forståelse på.
       </blockquote>
       <h3 className="heading-m">Bildetekster</h3>
       <p className="paragraph">
