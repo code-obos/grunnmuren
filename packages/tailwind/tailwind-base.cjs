@@ -162,7 +162,7 @@ module.exports = (options = {}) => {
       plugin(function ({ addBase, addComponents }) {
         addBase({
           html: {
-            '@apply text-black antialiased font-normal': {},
+            '@apply text-black antialiased font-normal font-text': {},
           },
           b: {
             fontWeight: 500,
@@ -367,7 +367,7 @@ module.exports = (options = {}) => {
         },
       },
       fontFamily: {
-        sans: [
+        text: [
           'OBOSText',
           options.includeFontFallback && fontFallbacks.OBOSText['font-family'],
           'sans-serif',

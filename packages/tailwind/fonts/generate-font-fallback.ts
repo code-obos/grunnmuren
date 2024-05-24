@@ -10,8 +10,8 @@ import { readMetrics, generateFontFace } from 'fontaine';
  * The output of the file is loaded as a font declaration in the Tailwind preset.
  *
  * The fonts are grouped by their family and parsed. Even though we parse several font files,
- * and the metrics are somewhat different between fonts int eh same family, they should all
- * result in an equal font declaration.
+ * and the metrics are somewhat different between fonts in the same family, they should all
+ * result in an equal font declaration. The console logging is useful debugging to make sure that is true.
  *
  */
 
@@ -24,7 +24,7 @@ const fontFilesByFamily = Object.groupBy(
   (file) => file.split('-')[0],
 );
 
-const fontFallbacks = {};
+const fontFallbacks: Record<string, unknown> = {};
 
 for (const [fontFamilyName, fontFiles] of Object.entries(fontFilesByFamily)) {
   for await (const fontFile of fontFiles ?? []) {
