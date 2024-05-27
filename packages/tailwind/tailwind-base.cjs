@@ -29,7 +29,7 @@ const obosFonts = [
  */
 const typography = {
   headingXlText: {
-    fontWeight: 'bold',
+    fontWeight: 'semibold',
     small: {
       fontSize: '2.8125rem',
       lineHeight: '3.625rem',
@@ -40,7 +40,7 @@ const typography = {
     },
   },
   headingLText: {
-    fontWeight: 'bold',
+    fontWeight: 'semibold',
     small: {
       fontSize: '1.8125rem',
       lineHeight: '2.75rem',
@@ -51,7 +51,7 @@ const typography = {
     },
   },
   headingMText: {
-    fontWeight: 'bold',
+    fontWeight: 'medium',
     small: {
       fontSize: '1.4375rem',
       lineHeight: '2.25rem',
@@ -99,16 +99,17 @@ const typography = {
     },
   },
   blockquoteText: {
+    fontWeight: 'medium',
     display: 'grid',
     gridTemplateColumns: '2rem 1fr',
     columnGap: '0.4375rem',
     small: {
-      fontSize: '1rem', // 1rem is the base font size, which is obviously the default size. But it is set explicitly here to make it easier to configure in the future, if this size changes.
-      lineHeight: '1.625rem',
+      fontSize: '1.4375rem',
+      lineHeight: '2.25rem',
     },
     large: {
-      fontSize: '1rem', // 1rem is the base font size, which is obviously the default size. But it is set explicitly here to make it easier to configure in the future, if this size changes.
-      lineHeight: '1.6875rem',
+      fontSize: '1.625rem',
+      lineHeight: '2.5625rem',
     },
     before: {
       // TODO: Use correct font for quote mark (font: OBOS Display)
@@ -218,7 +219,7 @@ module.exports = (options = {}) => {
         const lead = `@apply font-medium text-[${leadText.small.fontSize}]/[${leadText.small.lineHeight}] md:text-[${leadText.large.fontSize}]/[${leadText.large.lineHeight}]`;
 
         // TODO: Use correct font for quote mark (font: OBOS Display)
-        const blockquote = `@apply italic grid grid-cols-[${blockquoteText.gridTemplateColumns.split(' ').join('_')}] gap-x-[${blockquoteText.columnGap}] pt-4
+        const blockquote = `@apply font-${blockquoteText.fontWeight} italic grid grid-cols-[${blockquoteText.gridTemplateColumns.split(' ').join('_')}] gap-x-[${blockquoteText.columnGap}] pt-4
          text-[${blockquoteText.large.fontSize}]/[${blockquoteText.large.lineHeight}] md:text-[${blockquoteText.small.fontSize}]/[${blockquoteText.small.lineHeight}]
          before:text-[${blockquoteText.before.fontSize}]/[${blockquoteText.before.lineHeight}] before:content-[${blockquoteText.before.content}]`;
 
@@ -399,28 +400,28 @@ module.exports = (options = {}) => {
                 fontWeight: 400,
               },
               h1: {
-                fontWeight: theme('fontWeight.bold'),
+                fontWeight: theme('fontWeight.semibold'),
                 ...typography.headingXlText.small,
                 '@media (min-width: theme("screens.md"))': {
                   ...typography.headingXlText.large,
                 },
               },
               h2: {
-                fontWeight: theme('fontWeight.bold'),
+                fontWeight: theme('fontWeight.semibold'),
                 ...typography.headingLText.small,
                 '@media (min-width: theme("screens.md"))': {
                   ...typography.headingLText.large,
                 },
               },
               h3: {
-                fontWeight: theme('fontWeight.bold'),
+                fontWeight: theme('fontWeight.medium'),
                 ...typography.headingMText.small,
                 '@media (min-width: theme("screens.md"))': {
                   ...typography.headingMText.large,
                 },
               },
               h4: {
-                fontWeight: theme('fontWeight.bold'),
+                fontWeight: theme('fontWeight.medium'),
                 ...typography.headingSText.small,
                 '@media (min-width: theme("screens.md"))': {
                   ...typography.headingSText.large,
@@ -448,7 +449,7 @@ module.exports = (options = {}) => {
                 marginBottom: 'unset',
                 padding: 'unset',
                 border: 'unset',
-                fontWeight: theme('fontWeight.normal'),
+                fontWeight: theme('fontWeight.medium'),
                 fontStyle: 'italic',
                 display: typography.blockquoteText.display,
                 gridTemplateColumns:
