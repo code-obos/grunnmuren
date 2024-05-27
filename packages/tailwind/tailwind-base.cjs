@@ -103,7 +103,7 @@ const typography = {
   blockquoteText: {
     fontWeight: 'medium',
     display: 'grid',
-    gridTemplateColumns: '2rem 1fr',
+    gridTemplateColumns: '3rem 1fr',
     columnGap: '0.4375rem',
     small: {
       fontSize: '1.4375rem',
@@ -474,7 +474,7 @@ module.exports = (options = {}) => {
                 },
               },
               'blockquote::before': {
-                // TODO: Use correct font for quote mark (font: OBOS Display)
+                fontFamily: 'OBOSDisplay',
                 ...typography.blockquoteText.before,
               },
               '[class~="lead"]': {
