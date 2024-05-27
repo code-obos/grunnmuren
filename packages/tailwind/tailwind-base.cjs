@@ -161,7 +161,7 @@ module.exports = (options = {}) => {
       ...v1CompatibilityPlugins,
       require('@tailwindcss/typography'),
       require('tailwindcss-animate'),
-      plugin(function ({ addBase, addComponents }) {
+      plugin(function ({ addBase, addComponents, theme }) {
         addBase({
           html: {
             '@apply text-black antialiased font-normal font-text': {},
@@ -179,6 +179,15 @@ module.exports = (options = {}) => {
         });
 
         addComponents({
+          '.page-layout': {
+            display: 'flex',
+            flexDirection: 'column',
+            minHeight: '100vh',
+          },
+          '.page-layout-main': {
+            backgroundColor: theme('colors.white'),
+            flexGrow: '1',
+          },
           '.container': {
             width: '100%',
             paddingLeft: '1rem',
