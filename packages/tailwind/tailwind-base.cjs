@@ -114,10 +114,11 @@ const typography = {
       lineHeight: '2.5625rem',
     },
     before: {
-      // TODO: Use correct font for quote mark (font: OBOS Display)
       content: '"“"',
+      fontFamily: 'OBOSDisplay',
       fontSize: '4.6875rem',
       lineHeight: '1.6875rem',
+      fontWeight: '400',
     },
   },
   descriptionText: {
@@ -221,7 +222,7 @@ module.exports = (options = {}) => {
 
         const blockquote = `@apply font-${blockquoteText.fontWeight} italic grid grid-cols-[${blockquoteText.gridTemplateColumns.split(' ').join('_')}] gap-x-[${blockquoteText.columnGap}] pt-4
          text-[${blockquoteText.large.fontSize}]/[${blockquoteText.large.lineHeight}] md:text-[${blockquoteText.small.fontSize}]/[${blockquoteText.small.lineHeight}]
-         before:text-[${blockquoteText.before.fontSize}]/[${blockquoteText.before.lineHeight}] before:content-[${blockquoteText.before.content}] before:font-display`;
+         before:text-[${blockquoteText.before.fontSize}]/[${blockquoteText.before.lineHeight}] before:content-[${blockquoteText.before.content}] before:font-display before:font-normal`;
 
         const description = `@apply text-[${descriptionText.large.fontSize}]/[${descriptionText.large.lineHeight}] md:text-[${descriptionText.small.fontSize}]/[${descriptionText.small.lineHeight}]`;
 
@@ -474,7 +475,6 @@ module.exports = (options = {}) => {
                 },
               },
               'blockquote::before': {
-                fontFamily: 'OBOSDisplay',
                 ...typography.blockquoteText.before,
               },
               '[class~="lead"]': {
