@@ -1,28 +1,30 @@
 const plugin = require('tailwindcss/plugin');
-const fontFallback = require('./fonts/font-fallback');
+const fontFallbacks = require('./fonts/font-fallback');
 
-const obosFonts = [
-  {
-    fontWeight: 400,
-    fontStyle: 'normal',
-    url: 'https://www.obos.no/fonts/OBOSText-Regular.woff2',
-  },
-  {
-    fontWeight: 400,
-    fontStyle: 'italic',
-    url: 'https://www.obos.no/fonts/OBOSText-Italic.woff2',
-  },
-  {
-    fontWeight: 500,
-    fontStyle: 'normal',
-    url: 'https://www.obos.no/fonts/OBOSText-Medium.woff2',
-  },
-  {
-    fontWeight: 700,
-    fontStyle: 'normal',
-    url: 'https://www.obos.no/fonts/OBOSText-Bold.woff2',
-  },
-];
+const fontDeclarations = {
+  OBOSText: [
+    {
+      fontWeight: 400,
+      fontStyle: 'normal',
+      url: 'https://www.obos.no/fonts/OBOSText-Regular.woff2',
+    },
+    {
+      fontWeight: 400,
+      fontStyle: 'italic',
+      url: 'https://www.obos.no/fonts/OBOSText-Italic.woff2',
+    },
+    {
+      fontWeight: 500,
+      fontStyle: 'normal',
+      url: 'https://www.obos.no/fonts/OBOSText-Medium.woff2',
+    },
+  ],
+  OBOSDisplay: [
+    {
+      url: 'https://www.obos.no/fonts/OBOSDisplay-SemiBold.woff2',
+    },
+  ],
+};
 
 /**
  * Styles for typography that are reused in both component classes and prose (through the tailwind typography plugin)
@@ -101,7 +103,7 @@ const typography = {
   blockquoteText: {
     fontWeight: 'medium',
     display: 'grid',
-    gridTemplateColumns: '2rem 1fr',
+    gridTemplateColumns: '3rem 1fr',
     columnGap: '0.4375rem',
     small: {
       fontSize: '1.4375rem',
@@ -112,10 +114,12 @@ const typography = {
       lineHeight: '2.5625rem',
     },
     before: {
-      // TODO: Use correct font for quote mark (font: OBOS Display)
       content: '"“"',
+      fontFamily: 'OBOSDisplay',
       fontSize: '4.6875rem',
       lineHeight: '1.6875rem',
+      fontWeight: '400',
+      fontStyle: 'normal',
     },
   },
   descriptionText: {
@@ -150,7 +154,6 @@ module.exports = (options = {}) => {
     );
   }
 
-  const fontFamily = 'OBOSFont';
   const containerSize = '92rem';
 
   return {
@@ -161,7 +164,7 @@ module.exports = (options = {}) => {
       plugin(function ({ addBase, addComponents }) {
         addBase({
           html: {
-            '@apply text-black antialiased font-normal': {},
+            '@apply text-black antialiased font-normal font-text': {},
           },
           b: {
             fontWeight: 500,
@@ -209,8 +212,8 @@ module.exports = (options = {}) => {
         } = typography;
 
         // This is tailwind syntax for setting both the font-size and the line-height
-        const headingXl = `@apply font-${headingXlText.fontWeight} text-[${headingXlText.small.fontSize}]/[${headingXlText.small.lineHeight}] md:text-[${headingXlText.large.fontSize}]/[${headingXlText.large.lineHeight}]`;
-        const headingL = `@apply font-${headingLText.fontWeight} text-[${headingLText.small.fontSize}]/[${headingLText.small.lineHeight}] md:text-[${headingLText.large.fontSize}]/[${headingLText.large.lineHeight}]`;
+        const headingXl = `@apply font-display font-${headingXlText.fontWeight} text-[${headingXlText.small.fontSize}]/[${headingXlText.small.lineHeight}] md:text-[${headingXlText.large.fontSize}]/[${headingXlText.large.lineHeight}]`;
+        const headingL = `@apply font-display font-${headingLText.fontWeight} text-[${headingLText.small.fontSize}]/[${headingLText.small.lineHeight}] md:text-[${headingLText.large.fontSize}]/[${headingLText.large.lineHeight}]`;
         const headingM = `@apply font-${headingMText.fontWeight} text-[${headingMText.small.fontSize}]/[${headingMText.small.lineHeight}] md:text-[${headingMText.large.fontSize}]/[${headingMText.large.lineHeight}]`;
         const headingS = `@apply font-${headingSText.fontWeight} text-[${headingSText.small.fontSize}]/[${headingSText.small.lineHeight}] md:text-[${headingSText.large.fontSize}]/[${headingSText.large.lineHeight}]`;
         const headingXs = `@apply font-${headingXsText.fontWeight} text-[${headingXsText.small.fontSize}]/[${headingXsText.small.lineHeight}] md:text-[${headingXsText.large.fontSize}]/[${headingXsText.large.lineHeight}]`;
@@ -218,10 +221,9 @@ module.exports = (options = {}) => {
         const paragraph = `@apply text-[${paragraphText.fontSize}]/[${paragraphText.lineHeight}]`;
         const lead = `@apply font-medium text-[${leadText.small.fontSize}]/[${leadText.small.lineHeight}] md:text-[${leadText.large.fontSize}]/[${leadText.large.lineHeight}]`;
 
-        // TODO: Use correct font for quote mark (font: OBOS Display)
         const blockquote = `@apply font-${blockquoteText.fontWeight} italic grid grid-cols-[${blockquoteText.gridTemplateColumns.split(' ').join('_')}] gap-x-[${blockquoteText.columnGap}] pt-4
          text-[${blockquoteText.large.fontSize}]/[${blockquoteText.large.lineHeight}] md:text-[${blockquoteText.small.fontSize}]/[${blockquoteText.small.lineHeight}]
-         before:text-[${blockquoteText.before.fontSize}]/[${blockquoteText.before.lineHeight}] before:content-[${blockquoteText.before.content}]`;
+         before:text-[${blockquoteText.before.fontSize}]/[${blockquoteText.before.lineHeight}] before:content-[${blockquoteText.before.content}] before:font-display before:not-italic`;
 
         const description = `@apply text-[${descriptionText.large.fontSize}]/[${descriptionText.large.lineHeight}] md:text-[${descriptionText.small.fontSize}]/[${descriptionText.small.lineHeight}]`;
 
@@ -290,21 +292,26 @@ module.exports = (options = {}) => {
       }),
       plugin(function ({ addBase }) {
         addBase(
-          obosFonts.map((font) => ({
-            '@font-face': {
-              fontFamily,
-              fontWeight: font.fontWeight,
-              fontStyle: font.fontStyle,
-              src: `url('${font.url}') format('woff2')`,
-              fontDisplay: 'swap',
-            },
-          })),
+          Object.entries(fontDeclarations).flatMap(
+            ([fontFamily, fontFamilyDeclarations]) =>
+              fontFamilyDeclarations.map((font) => ({
+                '@font-face': {
+                  fontFamily,
+                  fontWeight: font.fontWeight,
+                  fontStyle: font.fontStyle,
+                  src: `url('${font.url}') format('woff2')`,
+                  fontDisplay: 'swap',
+                },
+              })),
+          ),
         );
 
         if (options.includeFontFallback) {
-          addBase({
-            '@font-face': fontFallback,
-          });
+          addBase(
+            Object.values(fontFallbacks).map((fontFallback) => ({
+              '@font-face': fontFallback,
+            })),
+          );
         }
       }),
     ],
@@ -362,12 +369,17 @@ module.exports = (options = {}) => {
         },
       },
       fontFamily: {
-        sans: [
-          fontFamily,
-          // get the name of the fallback font
-          options.includeFontFallback && fontFallback['font-family'],
+        text: [
+          'OBOSText',
+          options.includeFontFallback && fontFallbacks.OBOSText['font-family'],
           'sans-serif',
         ].filter((f) => f),
+        display: [
+          'OBOSDisplay',
+          options.includeFontFallback &&
+            fontFallbacks.OBOSDisplay['font-family'],
+          'sans-serif',
+        ],
       },
       extend: {
         maxWidth: {
@@ -400,6 +412,7 @@ module.exports = (options = {}) => {
                 fontWeight: 400,
               },
               h1: {
+                fontFamily: 'OBOSDisplay',
                 fontWeight: theme('fontWeight.semibold'),
                 ...typography.headingXlText.small,
                 '@media (min-width: theme("screens.md"))': {
@@ -407,6 +420,7 @@ module.exports = (options = {}) => {
                 },
               },
               h2: {
+                fontFamily: 'OBOSDisplay',
                 fontWeight: theme('fontWeight.semibold'),
                 ...typography.headingLText.small,
                 '@media (min-width: theme("screens.md"))': {
@@ -462,7 +476,6 @@ module.exports = (options = {}) => {
                 },
               },
               'blockquote::before': {
-                // TODO: Use correct font for quote mark (font: OBOS Display)
                 ...typography.blockquoteText.before,
               },
               '[class~="lead"]': {
