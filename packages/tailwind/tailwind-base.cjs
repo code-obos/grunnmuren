@@ -410,6 +410,7 @@ module.exports = (options = {}) => {
                 fontWeight: 400,
               },
               h1: {
+                fontFamily: 'OBOSDisplay',
                 fontWeight: theme('fontWeight.semibold'),
                 ...typography.headingXlText.small,
                 '@media (min-width: theme("screens.md"))': {
@@ -417,6 +418,7 @@ module.exports = (options = {}) => {
                 },
               },
               h2: {
+                fontFamily: 'OBOSDisplay',
                 fontWeight: theme('fontWeight.semibold'),
                 ...typography.headingLText.small,
                 '@media (min-width: theme("screens.md"))': {
