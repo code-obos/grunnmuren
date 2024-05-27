@@ -21,7 +21,7 @@ const input = cva({
         'data-[focus-visible]:ring-2 group-data-[invalid]:data-[focus-visible]:ring',
     },
     isGrouped: {
-      false: 'px-3',
+      false: 'bg-white px-3',
       true: 'flex-1 !ring-0',
     },
   },
