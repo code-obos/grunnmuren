@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.29
+
+### Patch Changes
+
+- 1d29985: fix: make TextArea/Select usable against non white backgrounds
+- 7cef865: fix: error messages were missing when using native validation
+
 ## 2.0.0-canary.28
 
 ### Patch Changes
