@@ -223,9 +223,9 @@ module.exports = (options = {}) => {
         // This is tailwind syntax for setting both the font-size and the line-height
         const headingXl = `@apply font-display font-${headingXlText.fontWeight} text-[${headingXlText.small.fontSize}]/[${headingXlText.small.lineHeight}] md:text-[${headingXlText.large.fontSize}]/[${headingXlText.large.lineHeight}]`;
         const headingL = `@apply font-display font-${headingLText.fontWeight} text-[${headingLText.small.fontSize}]/[${headingLText.small.lineHeight}] md:text-[${headingLText.large.fontSize}]/[${headingLText.large.lineHeight}]`;
-        const headingM = `@apply font-${headingMText.fontWeight} text-[${headingMText.small.fontSize}]/[${headingMText.small.lineHeight}] md:text-[${headingMText.large.fontSize}]/[${headingMText.large.lineHeight}]`;
-        const headingS = `@apply font-${headingSText.fontWeight} text-[${headingSText.small.fontSize}]/[${headingSText.small.lineHeight}] md:text-[${headingSText.large.fontSize}]/[${headingSText.large.lineHeight}]`;
-        const headingXs = `@apply font-${headingXsText.fontWeight} text-[${headingXsText.small.fontSize}]/[${headingXsText.small.lineHeight}] md:text-[${headingXsText.large.fontSize}]/[${headingXsText.large.lineHeight}]`;
+        const headingM = `@apply font-text font-${headingMText.fontWeight} text-[${headingMText.small.fontSize}]/[${headingMText.small.lineHeight}] md:text-[${headingMText.large.fontSize}]/[${headingMText.large.lineHeight}]`;
+        const headingS = `@apply font-text font-${headingSText.fontWeight} text-[${headingSText.small.fontSize}]/[${headingSText.small.lineHeight}] md:text-[${headingSText.large.fontSize}]/[${headingSText.large.lineHeight}]`;
+        const headingXs = `@apply font-text font-${headingXsText.fontWeight} text-[${headingXsText.small.fontSize}]/[${headingXsText.small.lineHeight}] md:text-[${headingXsText.large.fontSize}]/[${headingXsText.large.lineHeight}]`;
 
         const paragraph = `@apply text-[${paragraphText.fontSize}]/[${paragraphText.lineHeight}]`;
         const lead = `@apply font-medium text-[${leadText.small.fontSize}]/[${leadText.small.lineHeight}] md:text-[${leadText.large.fontSize}]/[${leadText.large.lineHeight}]`;
@@ -437,6 +437,7 @@ module.exports = (options = {}) => {
                 },
               },
               h3: {
+                fontFamily: 'OBOSText',
                 fontWeight: theme('fontWeight.medium'),
                 ...typography.headingMText.small,
                 '@media (min-width: theme("screens.md"))': {
@@ -444,6 +445,7 @@ module.exports = (options = {}) => {
                 },
               },
               h4: {
+                fontFamily: 'OBOSText',
                 fontWeight: theme('fontWeight.medium'),
                 ...typography.headingSText.small,
                 '@media (min-width: theme("screens.md"))': {
@@ -451,6 +453,7 @@ module.exports = (options = {}) => {
                 },
               },
               h5: {
+                fontFamily: 'OBOSText',
                 fontWeight: theme('fontWeight.bold'),
                 ...typography.headingXsText.small,
                 '@media (min-width: theme("screens.md"))': {
