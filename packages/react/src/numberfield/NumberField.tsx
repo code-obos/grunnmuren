@@ -86,7 +86,9 @@ function NumberField(props: NumberFieldProps, ref: Ref<HTMLInputElement>) {
     ...restProps
   } = props;
 
-  const isInvalid = _isInvalid || errorMessage != null;
+  // the order of the conditions matter here, because providing a value for isInvalid makes the validation state "controlled",
+  // which will override any built in validation
+  const isInvalid = errorMessage != null || _isInvalid;
 
   return (
     <RACNumberField

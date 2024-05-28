@@ -89,7 +89,7 @@ const ControlledTemplate = (args: RadioGroupProps) => {
 const defaultProps = {
   label: 'Velg hvordan du vil kjøpe boligen',
   isRequired: false,
-  isInvalid: false,
+  isInvalid: undefined,
   defaultValue: undefined,
   name: undefined,
   value: undefined,

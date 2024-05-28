@@ -54,7 +54,7 @@ const ControlledTemplate = (args: CheckboxProps) => {
 const defaultProps: CheckboxProps = {
   children: 'Jeg godtar medlemsvilkårene.',
   isRequired: false,
-  isInvalid: false,
+  isInvalid: undefined,
   defaultSelected: undefined,
   value: undefined,
   isSelected: undefined,

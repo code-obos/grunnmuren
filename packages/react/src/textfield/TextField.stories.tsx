@@ -74,7 +74,7 @@ const defaultProps = {
   label: 'Epost',
   withAddonDivider: false,
   isRequired: false,
-  isInvalid: false,
+  isInvalid: undefined,
   name: undefined,
   defaultValue: undefined,
   value: undefined,

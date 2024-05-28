@@ -74,7 +74,7 @@ const GroupedTemplate = <T extends object>(args: SelectProps<T>) => (
 const defaultProps = {
   label: 'Velg område',
   isRequired: false,
-  isInvalid: false,
+  isInvalid: undefined,
   name: undefined,
   defaultSelectedKey: undefined,
   selectedKey: undefined,
