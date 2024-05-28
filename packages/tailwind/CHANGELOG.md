@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.0.0-canary.4
+
+### Patch Changes
+
+- 8fe9e00: fix: use correct font-family for headings in v1 compatibility mode
+
 ## 2.0.0-canary.3
 
 ### Major Changes
