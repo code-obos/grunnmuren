@@ -123,7 +123,7 @@ const GroupedTemplate = <T extends object>(args: ComboboxProps<T>) => (
 const defaultProps = {
   label: 'Velg boligprosjekt',
   isRequired: false,
-  isInvalid: false,
+  isInvalid: undefined,
   name: undefined,
   defaultSelectedKey: undefined,
   selectedKey: undefined,

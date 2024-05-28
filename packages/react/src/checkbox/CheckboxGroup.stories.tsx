@@ -83,7 +83,7 @@ const ControlledTemplate = (args: CheckboxGroupProps) => {
 const defaultProps = {
   label: 'Jeg er interessert i',
   isRequired: false,
-  isInvalid: false,
+  isInvalid: undefined,
   defaultValue: undefined,
   name: undefined,
   value: undefined,

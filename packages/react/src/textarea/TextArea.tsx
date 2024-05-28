@@ -45,7 +45,7 @@ function TextArea(props: TextAreaProps, ref: Ref<HTMLTextAreaElement>) {
     ...restProps
   } = props;
 
-  const isInvalid = _isInvalid || errorMessage != null;
+  const isInvalid = errorMessage != null || _isInvalid;
 
   return (
     <RACTextField
