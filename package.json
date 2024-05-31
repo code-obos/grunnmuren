@@ -17,7 +17,7 @@
     "lint:js": "eslint . --ext \"js,cjs,mjs,tsx,ts\" --max-warnings 0 --ignore-path .gitignore"
   },
   "dependencies": {
-    "@changesets/cli": "2.27.3",
+    "@changesets/cli": "2.27.5",
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
     "@react-aria/optimize-locales-plugin": "1.1.1",
     "@storybook/addon-actions": "8.1.3",
