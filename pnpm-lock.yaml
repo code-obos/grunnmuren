@@ -28,13 +28,13 @@ importers:
         version: 8.1.3(prettier@3.2.5)
       '@storybook/builder-vite':
         specifier: 8.1.3
-        version: 8.1.3(prettier@3.2.5)(typescript@5.4.5)(vite@5.2.10(@types/node@20.12.12))
+        version: 8.1.3(prettier@3.2.5)(typescript@5.4.5)(vite@5.2.10(@types/node@20.13.0))
       '@storybook/react':
         specifier: 8.1.3
         version: 8.1.3(prettier@3.2.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.4.5)
       '@storybook/react-vite':
         specifier: 8.1.3
-        version: 8.1.3(prettier@3.2.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.17.2)(typescript@5.4.5)(vite@5.2.10(@types/node@20.12.12))
+        version: 8.1.3(prettier@3.2.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.17.2)(typescript@5.4.5)(vite@5.2.10(@types/node@20.13.0))
       '@types/bun':
         specifier: 1.1.3
         version: 1.1.3
@@ -171,7 +171,7 @@ importers:
         version: 3.24.1(react@18.3.1)
       '@types/node':
         specifier: ^20.11.19
-        version: 20.12.12
+        version: 20.13.0
       cva:
         specifier: 1.0.0-beta.1
         version: 1.0.0-beta.1(typescript@5.4.5)
@@ -2687,8 +2687,11 @@ packages:
   '@types/node@18.19.33':
     resolution: {integrity: sha512-NR9+KrpSajr2qBVp/Yt5TU/rp+b5Mayi3+OlMlcg2cVCfRmcG5PWZ7S4+MG9PZ5gWBoc9Pd0BKSRViuBCRPu0A==}
 
-  '@types/node@20.12.12':
-    resolution: {integrity: sha512-eWLDGF/FOSPtAvEqeRAQ4C8LSA7M1I7i0ky1I8U7kD1J5ITyW3AsRhQrKVoWf5pFKZ2kILsEGJhsI9r93PYnOw==}
+  '@types/node@20.12.14':
+    resolution: {integrity: sha512-scnD59RpYD91xngrQQLGkE+6UrHUPzeKZWhhjBSa3HSkwjbQc38+q3RoIVEwxQGRw3M+j5hpNAM+lgV3cVormg==}
+
+  '@types/node@20.13.0':
+    resolution: {integrity: sha512-FM6AOb3khNkNIXPnHFDYaHerSv8uN22C91z098AnGccVu+Pcdhi+pNUFDi0iLmPIsVE0JBD0KVS7mzUYt4nRzQ==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -7468,13 +7471,13 @@ snapshots:
       wrap-ansi: 8.1.0
       wrap-ansi-cjs: wrap-ansi@7.0.0
 
-  '@joshwooding/vite-plugin-react-docgen-typescript@0.3.1(typescript@5.4.5)(vite@5.2.10(@types/node@20.12.12))':
+  '@joshwooding/vite-plugin-react-docgen-typescript@0.3.1(typescript@5.4.5)(vite@5.2.10(@types/node@20.13.0))':
     dependencies:
       glob: 7.2.3
       glob-promise: 4.2.2(glob@7.2.3)
       magic-string: 0.27.0
       react-docgen-typescript: 2.2.2(typescript@5.4.5)
-      vite: 5.2.10(@types/node@20.12.12)
+      vite: 5.2.10(@types/node@20.13.0)
     optionalDependencies:
       typescript: 5.4.5
 
@@ -8882,7 +8885,7 @@ snapshots:
       - prettier
       - supports-color
 
-  '@storybook/builder-vite@8.1.3(prettier@3.2.5)(typescript@5.4.5)(vite@5.2.10(@types/node@20.12.12))':
+  '@storybook/builder-vite@8.1.3(prettier@3.2.5)(typescript@5.4.5)(vite@5.2.10(@types/node@20.13.0))':
     dependencies:
       '@storybook/channels': 8.1.3
       '@storybook/client-logger': 8.1.3
@@ -8901,7 +8904,7 @@ snapshots:
       fs-extra: 11.2.0
       magic-string: 0.30.10
       ts-dedent: 2.2.0
-      vite: 5.2.10(@types/node@20.12.12)
+      vite: 5.2.10(@types/node@20.13.0)
     optionalDependencies:
       typescript: 5.4.5
     transitivePeerDependencies:
@@ -9207,11 +9210,11 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@storybook/react-vite@8.1.3(prettier@3.2.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.17.2)(typescript@5.4.5)(vite@5.2.10(@types/node@20.12.12))':
+  '@storybook/react-vite@8.1.3(prettier@3.2.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.17.2)(typescript@5.4.5)(vite@5.2.10(@types/node@20.13.0))':
     dependencies:
-      '@joshwooding/vite-plugin-react-docgen-typescript': 0.3.1(typescript@5.4.5)(vite@5.2.10(@types/node@20.12.12))
+      '@joshwooding/vite-plugin-react-docgen-typescript': 0.3.1(typescript@5.4.5)(vite@5.2.10(@types/node@20.13.0))
       '@rollup/pluginutils': 5.1.0(rollup@4.17.2)
-      '@storybook/builder-vite': 8.1.3(prettier@3.2.5)(typescript@5.4.5)(vite@5.2.10(@types/node@20.12.12))
+      '@storybook/builder-vite': 8.1.3(prettier@3.2.5)(typescript@5.4.5)(vite@5.2.10(@types/node@20.13.0))
       '@storybook/node-logger': 8.1.3
       '@storybook/react': 8.1.3(prettier@3.2.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.4.5)
       '@storybook/types': 8.1.3
@@ -9222,7 +9225,7 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       resolve: 1.22.8
       tsconfig-paths: 4.2.0
-      vite: 5.2.10(@types/node@20.12.12)
+      vite: 5.2.10(@types/node@20.13.0)
     transitivePeerDependencies:
       - '@preact/preset-vite'
       - encoding
@@ -9483,7 +9486,7 @@ snapshots:
   '@types/body-parser@1.19.5':
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 20.12.12
+      '@types/node': 20.13.0
 
   '@types/bun@1.1.3':
     dependencies:
@@ -9491,11 +9494,11 @@ snapshots:
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 20.12.12
+      '@types/node': 20.13.0
 
   '@types/cross-spawn@6.0.6':
     dependencies:
-      '@types/node': 20.12.12
+      '@types/node': 20.13.0
 
   '@types/detect-port@1.3.5': {}
 
@@ -9517,7 +9520,7 @@ snapshots:
 
   '@types/express-serve-static-core@4.17.41':
     dependencies:
-      '@types/node': 20.12.12
+      '@types/node': 20.13.0
       '@types/qs': 6.9.11
       '@types/range-parser': 1.2.7
       '@types/send': 0.17.4
@@ -9534,7 +9537,7 @@ snapshots:
   '@types/glob@7.2.0':
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 20.12.12
+      '@types/node': 20.13.0
 
   '@types/hast@3.0.4':
     dependencies:
@@ -9566,7 +9569,11 @@ snapshots:
     dependencies:
       undici-types: 5.26.5
 
-  '@types/node@20.12.12':
+  '@types/node@20.12.14':
+    dependencies:
+      undici-types: 5.26.5
+
+  '@types/node@20.13.0':
     dependencies:
       undici-types: 5.26.5
 
@@ -9594,13 +9601,13 @@ snapshots:
   '@types/send@0.17.4':
     dependencies:
       '@types/mime': 1.3.5
-      '@types/node': 20.12.12
+      '@types/node': 20.13.0
 
   '@types/serve-static@1.15.5':
     dependencies:
       '@types/http-errors': 2.0.4
       '@types/mime': 3.0.4
-      '@types/node': 20.12.12
+      '@types/node': 20.13.0
 
   '@types/unist@3.0.2': {}
 
@@ -9608,7 +9615,7 @@ snapshots:
 
   '@types/ws@8.5.10':
     dependencies:
-      '@types/node': 20.12.12
+      '@types/node': 20.12.14
 
   '@typescript-eslint/eslint-plugin@7.10.0(@typescript-eslint/parser@7.10.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)':
     dependencies:
@@ -10038,7 +10045,7 @@ snapshots:
 
   bun-types@1.1.9:
     dependencies:
-      '@types/node': 20.12.12
+      '@types/node': 20.12.14
       '@types/ws': 8.5.10
 
   bunchee@5.1.5(typescript@5.4.5):
@@ -13270,13 +13277,13 @@ snapshots:
 
   vary@1.1.2: {}
 
-  vite@5.2.10(@types/node@20.12.12):
+  vite@5.2.10(@types/node@20.13.0):
     dependencies:
       esbuild: 0.20.2
       postcss: 8.4.38
       rollup: 4.18.0
     optionalDependencies:
-      '@types/node': 20.12.12
+      '@types/node': 20.13.0
       fsevents: 2.3.3
 
   watchpack@2.4.0:
