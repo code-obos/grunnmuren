@@ -15,8 +15,8 @@ importers:
         specifier: workspace:*
         version: link:packages/tailwind
       '@react-aria/optimize-locales-plugin':
-        specifier: 1.1.0
-        version: 1.1.0
+        specifier: 1.1.1
+        version: 1.1.1
       '@storybook/addon-actions':
         specifier: 8.1.3
         version: 8.1.3
@@ -1656,8 +1656,8 @@ packages:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
 
-  '@react-aria/optimize-locales-plugin@1.1.0':
-    resolution: {integrity: sha512-H6DsU8hQPARq7Cqo1V48guTArWYRwvT6PAah8HgNYaraepWClxL14k+Ty7HECPRi2AakbMiE4VegWBi0oyxovg==}
+  '@react-aria/optimize-locales-plugin@1.1.1':
+    resolution: {integrity: sha512-/fw/hvQJq5MMD+hhdyxPZ5i3hxgxQ8caIgn8TRg9GXBZuTUa7wqRgcifEgd0aR/GRFOR2kcAkDa/Sq0jVaZRYQ==}
 
   '@react-aria/overlays@3.22.1':
     resolution: {integrity: sha512-GHiFMWO4EQ6+j6b5QCnNoOYiyx1Gk8ZiwLzzglCI4q1NY5AG2EAmfU4Z1+Gtrf2S5Y0zHbumC7rs9GnPoGLUYg==}
@@ -5909,9 +5909,6 @@ packages:
     resolution: {integrity: sha512-d6Mhq8RJeGA8UfKCu54Um4lFA0eSaRa3XxdAJg8tIdxbu1ubW0hBCZUL7yI2uGyYCRndvbK8FLHzqy2XKfeMsg==}
     engines: {node: '>=14.0.0'}
 
-  unplugin@1.6.0:
-    resolution: {integrity: sha512-BfJEpWBu3aE/AyHx8VaNE/WgouoQxgH9baAiH82JjX8cqVyi3uJQstqwD5J+SZxIK326SZIhsSZlALXVBCknTQ==}
-
   untildify@4.0.0:
     resolution: {integrity: sha512-KK8xQ1mkzZeg9inewmFVDNkg3l5LUhoq9kN6iWYB/CC9YMG8HA+c1Q8HwDe6dEX7kErrEVNVBO3fWsVq5iDgtw==}
     engines: {node: '>=8'}
@@ -8002,9 +7999,9 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@react-aria/optimize-locales-plugin@1.1.0':
+  '@react-aria/optimize-locales-plugin@1.1.1':
     dependencies:
-      unplugin: 1.6.0
+      unplugin: 1.10.1
 
   '@react-aria/overlays@3.22.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
@@ -13208,13 +13205,6 @@ snapshots:
     dependencies:
       acorn: 8.11.3
       chokidar: 3.6.0
-      webpack-sources: 3.2.3
-      webpack-virtual-modules: 0.6.1
-
-  unplugin@1.6.0:
-    dependencies:
-      acorn: 8.11.3
-      chokidar: 3.5.3
       webpack-sources: 3.2.3
       webpack-virtual-modules: 0.6.1
 
