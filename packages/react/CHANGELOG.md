@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.30
+
+### Patch Changes
+
+- bfec6ef: Fixes popover overflow in `Combobox` and `Select`
+
 ## 2.0.0-canary.29
 
 ### Patch Changes
