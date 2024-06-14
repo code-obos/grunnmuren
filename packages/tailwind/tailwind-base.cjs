@@ -414,7 +414,7 @@ module.exports = (options = {}) => {
               '--tw-prose-links': 'inherit',
               '--tw-prose-quotes': 'inherit',
               '--tw-prose-counters': theme('colors.black'),
-              '--tw-prose-bullets': theme('colors.green.DEFAULT'),
+              '--tw-prose-bullets': theme('colors.black'),
               color: theme('colors.black'),
               maxWidth: theme('maxWidth.prose'),
               a: {
@@ -461,8 +461,10 @@ module.exports = (options = {}) => {
                 },
               },
               li: {
-                marginTop: '1.5em',
-                marginBottom: '1.5em',
+                ...typography.paragraphText.small,
+                '@media (min-width: theme("screens.md"))': {
+                  ...typography.paragraphText.large,
+                },
               },
               p: {
                 ...typography.paragraphText.small,
