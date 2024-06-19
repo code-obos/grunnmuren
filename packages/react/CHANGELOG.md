@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.31
+
+### Patch Changes
+
+- 94ec4f6: Breadcrumbs: remove browser's default outline for the links, use focus-visible for focus ring
+- b8efb04: Backlink: use cursor-pointer
+
 ## 2.0.0-canary.30
 
 ### Patch Changes
