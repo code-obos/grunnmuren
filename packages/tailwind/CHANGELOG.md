@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.0.0-canary.5
+
+### Patch Changes
+
+- 6b2f461: Fixes styling on lists in prose.
+
 ## 2.0.0-canary.4
 
 ### Patch Changes
