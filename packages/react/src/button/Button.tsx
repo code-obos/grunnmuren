@@ -1,5 +1,10 @@
 import { useRef, useState, forwardRef, type Ref } from 'react';
 import { cva, type VariantProps } from 'cva';
+import {
+  Button as RACButton,
+  Link as RACLink,
+  type ButtonProps as RACButtonProps,
+} from 'react-aria-components';
 import { LoadingSpinner } from '@obosbbl/grunnmuren-icons-react';
 import { mergeRefs } from '@react-aria/utils';
 
@@ -11,7 +16,7 @@ import { useClientLayoutEffect } from '../utils/useClientLayoutEffect';
 
 const buttonVariants = cva({
   base: [
-    'inline-flex min-h-[44px] cursor-pointer items-center justify-center whitespace-nowrap rounded-lg font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+    'inline-flex min-h-[44px] cursor-pointer items-center justify-center whitespace-nowrap rounded-lg font-medium transition-all duration-200 focus:outline-none data-[focus-visible]:ring-2 data-[focus-visible]:ring-offset-2',
   ],
   variants: {
     /**
@@ -94,37 +99,39 @@ const buttonVariants = cva({
   },
 });
 
-type ButtonOrLinkProps =
-  | (React.ComponentPropsWithoutRef<'button'> & {
-      href?: never;
-    })
-  | (React.ComponentPropsWithoutRef<'a'> & {
-      href: string;
-    });
-
-type ButtonProps = VariantProps<typeof buttonVariants> & {
-  className?: string;
-  children: React.ReactNode;
+type ButtonOrLinkProps = VariantProps<typeof buttonVariants> & {
+  children?: React.ReactNode;
+  href?: string;
   /**
    * Display the button in a loading state
    * @default false
    */
   isLoading?: boolean;
-  style?: React.CSSProperties;
-} & ButtonOrLinkProps;
+};
+
+type ButtonProps = (
+  | RACButtonProps
+  | React.ComponentPropsWithoutRef<typeof RACLink>
+) &
+  ButtonOrLinkProps;
+
+function isLinkProps(
+  props: ButtonProps,
+): props is ButtonOrLinkProps & React.ComponentPropsWithoutRef<typeof RACLink> {
+  return 'href' in props;
+}
 
 function Button(
   props: ButtonProps,
   forwardedRef: Ref<HTMLButtonElement | HTMLAnchorElement>,
 ) {
   const {
-    children,
-    className,
+    children: _children,
     color,
     isIconOnly,
     isLoading,
     variant,
-    style,
+    style: _style,
     ...restProps
   } = props;
 
@@ -143,34 +150,42 @@ function Button(
         cancelAnimationFrame(requestID);
       };
     }
-  }, [isLoading, children]);
+  }, [isLoading, _children]);
 
-  let Component: 'a' | 'button' = 'a';
-  if (props.href == null) {
-    // If we don't have a href, it's a button, and we add a fallback type button to prevent the button from accidentally submitting when in a form
-    Component = 'button';
-    restProps.type ??= 'button';
-  }
+  const className = buttonVariants({
+    className: props.className,
+    color,
+    isIconOnly,
+    variant,
+  });
 
-  return (
-    // @ts-expect-error TS doesn't agree here taht restProps is safe to spread, because restProps for anchors aren't type compatible with restProps for buttons, but that should be okay here
-    <Component
-      aria-busy={isLoading ? true : undefined}
-      className={buttonVariants({ className, color, isIconOnly, variant })}
-      ref={ref as never}
-      style={{
-        ...style,
-        width: widthOverride,
-      }}
+  const children = widthOverride ? (
+    // remove margin for icon alignment
+    <LoadingSpinner className="!m-0 mx-auto animate-spin" />
+  ) : (
+    _children
+  );
+
+  const style = { ..._style, widthOverride };
+
+  return isLinkProps(restProps) ? (
+    <RACLink
       {...restProps}
+      className={className}
+      style={style}
+      ref={ref as React.ForwardedRef<HTMLAnchorElement>}
     >
-      {widthOverride ? (
-        // remove margin for icon alignment
-        <LoadingSpinner className="!m-0 mx-auto animate-spin" />
-      ) : (
-        children
-      )}
-    </Component>
+      {children}
+    </RACLink>
+  ) : (
+    <RACButton
+      {...restProps}
+      className={className}
+      style={style}
+      ref={ref as React.ForwardedRef<HTMLButtonElement>}
+    >
+      {children}
+    </RACButton>
   );
 }
 
