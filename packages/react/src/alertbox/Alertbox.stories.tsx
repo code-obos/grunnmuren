@@ -43,7 +43,7 @@ const ControlledTemplate = (args: AlertboxProps) => {
   return (
     <>
       <Button
-        onClick={() => setIsDismissed((prevState) => !prevState)}
+        onPress={() => setIsDismissed((prevState) => !prevState)}
         className="mb-4"
       >
         {`${isDismissed ? 'Vis' : 'Skjul'} alert`}
