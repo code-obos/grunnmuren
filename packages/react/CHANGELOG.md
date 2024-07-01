@@ -1,5 +1,14 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.32
+
+### Minor Changes
+
+- ee10040: Button: change implementation to use Button/Link from react-aria-components.
+
+  - `onClick` prop is now called `onPress`.
+  - Button, when used with a href, now works as expected with the `navigate` prop in `<GrunnmurenProvider>`.
+
 ## 2.0.0-canary.31
 
 ### Patch Changes
