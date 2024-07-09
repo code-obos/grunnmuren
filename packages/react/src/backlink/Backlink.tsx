@@ -1,7 +1,7 @@
-import { forwardRef, type Ref } from 'react';
-import { cx } from 'cva';
-import { Link as RACLink, type LinkProps } from 'react-aria-components';
 import { ChevronLeft } from '@obosbbl/grunnmuren-icons-react';
+import { cx } from 'cva';
+import { type Ref, forwardRef } from 'react';
+import { type LinkProps, Link as RACLink } from 'react-aria-components';
 
 type BacklinkProps = {
   /** Additional CSS className for the element. */

@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
 import { Mail } from '@obosbbl/grunnmuren-icons-react';
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 
 import { Button } from '../button/Button';
-import { TextField, TextFieldProps } from './TextField';
+import { TextField, type TextFieldProps } from './TextField';
 
 const meta: Meta<typeof TextField> = {
   title: 'TextField',

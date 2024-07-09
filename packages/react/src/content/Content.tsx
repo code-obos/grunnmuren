@@ -1,5 +1,5 @@
-import { HTMLProps, createContext, type ForwardedRef } from 'react';
-import { useContextProps, type ContextValue } from 'react-aria-components';
+import { type ForwardedRef, type HTMLProps, createContext } from 'react';
+import { type ContextValue, useContextProps } from 'react-aria-components';
 
 type HeadingProps = HTMLProps<HTMLHeadingElement> & {
   children?: React.ReactNode;

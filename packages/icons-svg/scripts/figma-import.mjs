@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-import ora from 'ora';
+import path from 'node:path';
 import fs from 'fs-extra';
-import path from 'path';
+import ora from 'ora';
 import prompts from 'prompts';
 import { __dirname } from './utils.mjs';
 
@@ -54,7 +54,7 @@ const FIGMA_TOKEN_PATH = path.join(__dirname, '../', '.FIGMA_TOKEN');
   let components;
   try {
     components = await fetchComponents(figmaToken);
-    spinner.succeed(`Loaded Figma components`);
+    spinner.succeed('Loaded Figma components');
   } catch (e) {
     spinner.fail('Unable to load Figma components: ' + e.message);
     return;

@@ -1,5 +1,5 @@
 import { Glob } from 'bun';
-import { readMetrics, generateFontFace } from 'fontaine';
+import { generateFontFace, readMetrics } from 'fontaine';
 
 /**
  * This script parses all the OBOS fonts and generates

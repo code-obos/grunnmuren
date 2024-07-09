@@ -1,11 +1,11 @@
-import { forwardRef, type Ref } from 'react';
+import { ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
+import { type Ref, forwardRef } from 'react';
 import {
   Link,
   Breadcrumb as RACBreadcrumb,
   type BreadcrumbProps as RACBreadcrumbProps,
 } from 'react-aria-components';
-import { ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 
 type BreadcrumbProps = {
   /** Additional CSS className for the element. */

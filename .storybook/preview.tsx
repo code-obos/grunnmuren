@@ -1,5 +1,4 @@
-import React from 'react';
-import { Preview } from '@storybook/react';
+import type { Preview } from '@storybook/react';
 import { GrunnmurenProvider } from '../packages/react/src';
 
 import './storybook.css';

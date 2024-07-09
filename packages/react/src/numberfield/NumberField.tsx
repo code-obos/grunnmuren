@@ -1,18 +1,18 @@
+import { compose, cva, cx } from 'cva';
 // This component is based on a copy of ../textfield/TextField, refactoring is TBD: https://github.com/code-obos/grunnmuren/pull/722#issuecomment-1931478786
-import { forwardRef, type Ref } from 'react';
-import { cx, cva, compose } from 'cva';
+import { type Ref, forwardRef } from 'react';
 import {
+  Group,
   Input,
   NumberField as RACNumberField,
   type NumberFieldProps as RACNumberFieldProps,
-  Group,
 } from 'react-aria-components';
 
 import { formField, input, inputGroup } from '../classes';
 import { InputAddonDivider } from '../internals';
-import { Label } from '../label/Label';
 import { Description } from '../label/Description';
 import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
+import { Label } from '../label/Label';
 
 type NumberFieldProps = {
   /** Additional CSS className for the element. */

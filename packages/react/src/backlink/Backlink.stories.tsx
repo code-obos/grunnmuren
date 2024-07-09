@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Backlink, BacklinkProps } from '.';
+import { Backlink, type BacklinkProps } from '.';
 
 const Template = (args: BacklinkProps) => {
   return <Backlink {...args}>Tilbake</Backlink>;

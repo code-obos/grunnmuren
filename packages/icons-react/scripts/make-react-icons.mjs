@@ -1,6 +1,6 @@
 #!/usr/bin/env node
+import path from 'node:path';
 import { transform } from '@svgr/core';
-import path from 'path';
 import fs from 'fs-extra';
 import { __dirname, listSvgs } from './utils.mjs';
 

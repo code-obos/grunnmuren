@@ -1,5 +1,5 @@
 import { cx } from 'cva';
-import { Label as RACLabel, type LabelProps } from 'react-aria-components';
+import { type LabelProps, Label as RACLabel } from 'react-aria-components';
 
 function Label(props: LabelProps) {
   const { children, className, ...restProps } = props;

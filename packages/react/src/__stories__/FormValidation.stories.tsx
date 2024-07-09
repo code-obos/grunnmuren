@@ -1,8 +1,8 @@
-import { FormEvent, useState } from 'react';
-import { Form as RACForm } from 'react-aria-components';
 import type { Meta } from '@storybook/react';
-import { TextField } from '../textfield';
+import { type FormEvent, useState } from 'react';
+import { Form as RACForm } from 'react-aria-components';
 import { Button } from '../button/Button';
+import { TextField } from '../textfield';
 
 const meta: Meta = {
   title: 'Form validation',
@@ -36,7 +36,7 @@ const Form = (props: {
 
     setIsLoading(false);
 
-    if (!(data['email'] as string).endsWith('.no')) {
+    if (!(data.email as string).endsWith('.no')) {
       setErrors({ email: emailErrorMessage });
     } else {
       setErrors({});

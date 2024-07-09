@@ -1,10 +1,11 @@
-import React, { Children, useState, forwardRef, type Ref, useId } from 'react';
-import { Provider } from 'react-aria-components';
-import { cx } from 'cva';
 import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
+import { cx } from 'cva';
+import type React from 'react';
+import { Children, type Ref, forwardRef, useId, useState } from 'react';
+import { Provider } from 'react-aria-components';
 
+import { ContentContext, HeadingContext } from '../content';
 import { useClientLayoutEffect } from '../utils/useClientLayoutEffect';
-import { HeadingContext, ContentContext } from '../content';
 
 type AccordionProps = {
   children: React.ReactNode;
@@ -126,6 +127,7 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
                   className="flex min-h-[44px] w-full items-center justify-between gap-1.5 rounded-lg px-2 py-3.5 text-left focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-[-6px] focus-visible:outline-black"
                   id={buttonId}
                   onClick={handleOpenChange}
+                  type="button"
                 >
                   {children}
                   <ChevronDown
