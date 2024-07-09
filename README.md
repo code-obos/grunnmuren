@@ -39,7 +39,7 @@ pnpm install
 
 #### Linting
 
-The following command runs both prettier and eslint.
+The following command runs both prettier and biome.
 
 ```bash
 pnpm lint
