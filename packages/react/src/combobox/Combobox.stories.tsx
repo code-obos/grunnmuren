@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { useEffect, useState } from 'react';
 
 import { Button } from '../button/Button';
 import {
   Combobox,
-  ComboboxItem,
-  ComboboxProps,
-  ComboboxSection,
   ComboboxHeader,
+  ComboboxItem,
+  type ComboboxProps,
+  ComboboxSection,
 } from './Combobox';
 
 import { counties } from '../mocks';

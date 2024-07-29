@@ -1,12 +1,12 @@
-import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 
 import { Button } from '../button/Button';
 import {
   Select,
   SelectHeader,
   SelectItem,
-  SelectProps,
+  type SelectProps,
   SelectSection,
 } from './Select';
 

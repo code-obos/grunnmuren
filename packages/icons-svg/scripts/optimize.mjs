@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-import { optimize } from 'svgo';
-import path from 'path';
-import pc from 'picocolors';
+import path from 'node:path';
 import fs from 'fs-extra';
+import pc from 'picocolors';
+import { optimize } from 'svgo';
 import { __dirname, listSvgs } from './utils.mjs';
 
 const DIST_DIR = path.join(__dirname, '../src');
@@ -62,7 +62,7 @@ files.forEach(async (filePath) => {
  * Copied from https://github.com/svg/svgo/blob/fdf9236d12b861cee926d7ba3f00284ff7884eab/lib/svgo/coa.js#L512
  */
 function printProfitInfo(inBytes, outBytes) {
-  var profitPercents = 100 - (outBytes * 100) / inBytes;
+  const profitPercents = 100 - (outBytes * 100) / inBytes;
 
   console.log(
     Math.round((inBytes / 1024) * 1000) / 1000 +

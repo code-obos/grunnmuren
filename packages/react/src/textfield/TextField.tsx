@@ -1,17 +1,17 @@
-import { forwardRef, type Ref } from 'react';
-import { cx, cva, compose } from 'cva';
+import { compose, cva, cx } from 'cva';
+import { type Ref, forwardRef } from 'react';
 import {
+  Group,
   Input,
   TextField as RACTextField,
   type TextFieldProps as RACTextFieldProps,
-  Group,
 } from 'react-aria-components';
 
 import { formField, input, inputGroup } from '../classes';
 import { InputAddonDivider } from '../internals';
-import { Label } from '../label/Label';
 import { Description } from '../label/Description';
 import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
+import { Label } from '../label/Label';
 
 type TextFieldProps = {
   /** Additional CSS className for the element. */

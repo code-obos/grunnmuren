@@ -1,0 +1,61 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.7.1/schema.json",
+  "files": {
+    "ignore": ["dist/", ".next/", "public/", "storybook-static/"],
+    "ignoreUnknown": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "a11y": {
+        "useValidAnchor": "warn",
+        "noSvgWithoutTitle": "warn"
+      },
+      "correctness": {
+        "noUnusedImports": "error"
+      },
+      "complexity": {
+        "noForEach": "warn"
+      },
+      "style": {
+        "noParameterAssign": "warn",
+        "noCommaOperator": "warn",
+        "useTemplate": "warn"
+      },
+      "security": {
+        "noDangerouslySetInnerHtml": "warn"
+      },
+      "suspicious": {
+        "noExplicitAny": "warn",
+        "noConfusingVoidType": "warn",
+        "noRedeclare": "warn",
+        "noAssignInExpressions": "warn",
+        "noArrayIndexKey": "warn",
+        "noImplicitAnyLet": "warn"
+      },
+      "performance": {
+        "noAccumulatingSpread": "warn"
+      }
+    }
+  },
+  "formatter": {
+    "enabled": false,
+    "indentStyle": "space"
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single"
+    }
+  },
+  "overrides": [
+    {
+      "include": [".vscode/**"],
+      "json": {
+        "parser": {
+          "allowComments": true
+        }
+      }
+    }
+  ]
+}

@@ -1,15 +1,15 @@
-import { Children, useId } from 'react';
-import { cva, type VariantProps, cx } from 'cva';
-import { useLocale } from 'react-aria-components';
 import {
-  Close,
-  ChevronDown,
-  InfoCircle,
   CheckCircle,
-  Warning,
+  ChevronDown,
+  Close,
   CloseCircle,
+  InfoCircle,
+  Warning,
 } from '@obosbbl/grunnmuren-icons-react';
+import { type VariantProps, cva, cx } from 'cva';
+import { Children, useId } from 'react';
 import { useState } from 'react';
+import { useLocale } from 'react-aria-components';
 
 // TODO: add new icons
 const iconMap = {
@@ -173,6 +173,7 @@ const Alertbox = ({
             'focus:outline-none focus:-outline-offset-8 focus:outline-black',
           )}
           onClick={close}
+          type="button"
           aria-label={translations.close[locale]}
         >
           <Close />
@@ -180,6 +181,7 @@ const Alertbox = ({
       )}
       {isExpandable && (
         <button
+          type="button"
           className={cx(
             'relative col-span-full row-start-2 -my-3 inline-flex max-w-fit cursor-pointer items-center gap-1 py-3 text-sm leading-6',
             // Focus styles:

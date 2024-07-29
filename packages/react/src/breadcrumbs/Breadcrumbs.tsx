@@ -1,10 +1,10 @@
-import { forwardRef, type Ref } from 'react';
 import { cx } from 'cva';
+import { type Ref, forwardRef } from 'react';
 import {
   Breadcrumbs as RACBreadcrumbs,
   type BreadcrumbsProps as RACBreadcrumbsProps,
 } from 'react-aria-components';
-import { BreadcrumbProps } from './Breadcrumb';
+import type { BreadcrumbProps } from './Breadcrumb';
 
 type BreadcrumbsProps = {
   /** Additional CSS className for the element. */

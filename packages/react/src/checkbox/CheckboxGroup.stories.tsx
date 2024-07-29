@@ -1,9 +1,9 @@
-import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 
 import { Button } from '../button/Button';
-import { CheckboxGroup, type CheckboxGroupProps } from './CheckboxGroup';
 import { Checkbox } from './Checkbox';
+import { CheckboxGroup, type CheckboxGroupProps } from './CheckboxGroup';
 
 const meta: Meta<typeof CheckboxGroup> = {
   title: 'CheckboxGroup',

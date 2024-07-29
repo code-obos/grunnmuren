@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   presets: [require('@obosbbl/grunnmuren-tailwind')],
   content: [
     './app/**/*.{tsx,ts}',

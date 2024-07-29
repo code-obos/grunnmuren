@@ -1,7 +1,7 @@
+import type { Meta, StoryObj } from '@storybook/react';
 import { useReducer } from 'react';
-import { StoryObj, Meta } from '@storybook/react';
-import { Accordion, AccordionItem, AccordionItemProps } from './Accordion';
 import { Content, Heading } from '..';
+import { Accordion, AccordionItem, type AccordionItemProps } from './Accordion';
 
 const Template = (args: AccordionItemProps) => {
   return (

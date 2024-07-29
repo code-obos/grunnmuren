@@ -1,12 +1,12 @@
-import { forwardRef, type Ref } from 'react';
-import { useId } from 'react';
+import { Check as CheckIcon } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
+import { type Ref, forwardRef } from 'react';
+import { useId } from 'react';
 import {
   CheckboxContext,
   Checkbox as RACCheckbox,
-  CheckboxProps as RACCheckboxProps,
+  type CheckboxProps as RACCheckboxProps,
 } from 'react-aria-components';
-import { Check as CheckIcon } from '@obosbbl/grunnmuren-icons-react';
 
 import { ErrorMessage } from '../label/ErrorMessage';
 

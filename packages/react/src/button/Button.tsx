@@ -1,12 +1,12 @@
-import { useRef, useState, forwardRef, type Ref } from 'react';
-import { cva, type VariantProps } from 'cva';
-import {
-  Button as RACButton,
-  Link as RACLink,
-  type ButtonProps as RACButtonProps,
-} from 'react-aria-components';
 import { LoadingSpinner } from '@obosbbl/grunnmuren-icons-react';
 import { mergeRefs } from '@react-aria/utils';
+import { type VariantProps, cva } from 'cva';
+import { type Ref, forwardRef, useRef, useState } from 'react';
+import {
+  Button as RACButton,
+  type ButtonProps as RACButtonProps,
+  Link as RACLink,
+} from 'react-aria-components';
 
 import { useClientLayoutEffect } from '../utils/useClientLayoutEffect';
 

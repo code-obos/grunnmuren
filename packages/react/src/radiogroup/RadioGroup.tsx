@@ -1,13 +1,13 @@
-import { forwardRef, type Ref } from 'react';
 import { cx } from 'cva';
+import { type Ref, forwardRef } from 'react';
 import {
   RadioGroup as RACRadioGroup,
   type RadioGroupProps as RACRadioGroupProps,
 } from 'react-aria-components';
 
-import { Label } from '../label/Label';
 import { Description } from '../label/Description';
 import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
+import { Label } from '../label/Label';
 
 type RadioGroupProps = {
   children: React.ReactNode;

@@ -1,9 +1,9 @@
 'use client';
-import { useFormState } from 'react-dom';
 import { Form, TextField } from '@obosbbl/grunnmuren-react';
+import { useFormState } from 'react-dom';
 
-import { submitForm } from './submitAction';
 import SubmitButton from './SubmitButton';
+import { submitForm } from './submitAction';
 
 export default function () {
   const [{ errors }, formAction] = useFormState(submitForm, { errors: {} });

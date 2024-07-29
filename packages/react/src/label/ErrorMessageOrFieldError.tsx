@@ -1,6 +1,6 @@
 import { FieldError } from 'react-aria-components';
-import { ErrorMessage } from '../label/ErrorMessage';
 import { formFieldError } from '../classes';
+import { ErrorMessage } from '../label/ErrorMessage';
 
 type Props = {
   errorMessage?: React.ReactNode;

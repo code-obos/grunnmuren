@@ -39,8 +39,8 @@ jobs:
       - name: Prettier formatting check
         run: pnpm lint:format
 
-      - name: eslint
-        run: pnpm lint:js
+      - name: biome ci
+        run: pnpm lint:ci
 
       - name: Build packages
         run: pnpm run build

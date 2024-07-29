@@ -1,26 +1,26 @@
-import { forwardRef, type Ref } from 'react';
+import { ChevronDown, LoadingSpinner } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
+import { type Ref, forwardRef } from 'react';
 import {
+  Button,
   Group,
+  Input,
   Popover,
   ComboBox as RACCombobox,
-  Button,
-  Input,
   type ComboBoxProps as RACComboboxProps,
 } from 'react-aria-components';
-import { ChevronDown, LoadingSpinner } from '@obosbbl/grunnmuren-icons-react';
 
-import { formField, inputGroup, input, dropdown } from '../classes';
-import { Label } from '../label/Label';
-import { Description } from '../label/Description';
-import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
+import { dropdown, formField, input, inputGroup } from '../classes';
 import {
   ListBox,
-  ListBoxItem,
-  ListBoxItemProps,
-  ListBoxSection,
   ListBoxHeader,
+  ListBoxItem,
+  type ListBoxItemProps,
+  ListBoxSection,
 } from '../internals';
+import { Description } from '../label/Description';
+import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
+import { Label } from '../label/Label';
 
 type ComboboxProps<T extends object> = {
   children: React.ReactNode;

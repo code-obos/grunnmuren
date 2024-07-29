@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
 import { PiggyBank } from '@obosbbl/grunnmuren-icons-react';
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 
 import { Button } from '../button/Button';
-import { NumberField, NumberFieldProps } from './NumberField';
+import { NumberField, type NumberFieldProps } from './NumberField';
 
 const meta: Meta<typeof NumberField> = {
   title: 'NumberField',

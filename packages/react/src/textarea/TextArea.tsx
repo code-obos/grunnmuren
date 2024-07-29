@@ -1,5 +1,5 @@
-import { forwardRef, type Ref } from 'react';
 import { cx } from 'cva';
+import { type Ref, forwardRef } from 'react';
 import {
   TextArea as RACTextArea,
   TextField as RACTextField,
@@ -7,9 +7,9 @@ import {
 } from 'react-aria-components';
 
 import { formField, input } from '../classes';
-import { Label } from '../label/Label';
 import { Description } from '../label/Description';
 import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
+import { Label } from '../label/Label';
 
 type TextAreaProps = {
   /** Additional CSS className for the element. */
