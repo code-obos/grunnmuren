@@ -221,20 +221,20 @@ module.exports = (options = {}) => {
         } = typography;
 
         // This is tailwind syntax for setting both the font-size and the line-height
-        const headingXl = `@apply font-display font-${headingXlText.fontWeight} text-[${headingXlText.small.fontSize}]/[${headingXlText.small.lineHeight}] md:text-[${headingXlText.large.fontSize}]/[${headingXlText.large.lineHeight}]`;
-        const headingL = `@apply font-display font-${headingLText.fontWeight} text-[${headingLText.small.fontSize}]/[${headingLText.small.lineHeight}] md:text-[${headingLText.large.fontSize}]/[${headingLText.large.lineHeight}]`;
-        const headingM = `@apply font-text font-${headingMText.fontWeight} text-[${headingMText.small.fontSize}]/[${headingMText.small.lineHeight}] md:text-[${headingMText.large.fontSize}]/[${headingMText.large.lineHeight}]`;
-        const headingS = `@apply font-text font-${headingSText.fontWeight} text-[${headingSText.small.fontSize}]/[${headingSText.small.lineHeight}] md:text-[${headingSText.large.fontSize}]/[${headingSText.large.lineHeight}]`;
-        const headingXs = `@apply font-text font-${headingXsText.fontWeight} text-[${headingXsText.small.fontSize}]/[${headingXsText.small.lineHeight}] md:text-[${headingXsText.large.fontSize}]/[${headingXsText.large.lineHeight}]`;
+        const headingXl = `@apply font-display font-${headingXlText.fontWeight} text-[${headingXlText.small.fontSize}]/[${headingXlText.small.lineHeight}] lg:text-[${headingXlText.large.fontSize}]/[${headingXlText.large.lineHeight}]`;
+        const headingL = `@apply font-display font-${headingLText.fontWeight} text-[${headingLText.small.fontSize}]/[${headingLText.small.lineHeight}] lg:text-[${headingLText.large.fontSize}]/[${headingLText.large.lineHeight}]`;
+        const headingM = `@apply font-text font-${headingMText.fontWeight} text-[${headingMText.small.fontSize}]/[${headingMText.small.lineHeight}] lg:text-[${headingMText.large.fontSize}]/[${headingMText.large.lineHeight}]`;
+        const headingS = `@apply font-text font-${headingSText.fontWeight} text-[${headingSText.small.fontSize}]/[${headingSText.small.lineHeight}] lg:text-[${headingSText.large.fontSize}]/[${headingSText.large.lineHeight}]`;
+        const headingXs = `@apply font-text font-${headingXsText.fontWeight} text-[${headingXsText.small.fontSize}]/[${headingXsText.small.lineHeight}] lg:text-[${headingXsText.large.fontSize}]/[${headingXsText.large.lineHeight}]`;
 
         const paragraph = `@apply text-[${paragraphText.fontSize}]/[${paragraphText.lineHeight}]`;
-        const lead = `@apply font-medium text-[${leadText.small.fontSize}]/[${leadText.small.lineHeight}] md:text-[${leadText.large.fontSize}]/[${leadText.large.lineHeight}]`;
+        const lead = `@apply font-medium text-[${leadText.small.fontSize}]/[${leadText.small.lineHeight}] lg:text-[${leadText.large.fontSize}]/[${leadText.large.lineHeight}]`;
 
         const blockquote = `@apply font-${blockquoteText.fontWeight} italic grid grid-cols-[${blockquoteText.gridTemplateColumns.split(' ').join('_')}] gap-x-[${blockquoteText.columnGap}] pt-4
-         text-[${blockquoteText.large.fontSize}]/[${blockquoteText.large.lineHeight}] md:text-[${blockquoteText.small.fontSize}]/[${blockquoteText.small.lineHeight}]
+         text-[${blockquoteText.large.fontSize}]/[${blockquoteText.large.lineHeight}] lg:text-[${blockquoteText.small.fontSize}]/[${blockquoteText.small.lineHeight}]
          before:text-[${blockquoteText.before.fontSize}]/[${blockquoteText.before.lineHeight}] before:content-[${blockquoteText.before.content}] before:font-display before:not-italic`;
 
-        const description = `@apply text-[${descriptionText.large.fontSize}]/[${descriptionText.large.lineHeight}] md:text-[${descriptionText.small.fontSize}]/[${descriptionText.small.lineHeight}]`;
+        const description = `@apply text-[${descriptionText.large.fontSize}]/[${descriptionText.large.lineHeight}] lg:text-[${descriptionText.small.fontSize}]/[${descriptionText.small.lineHeight}]`;
 
         if (options.legacyV1Compatibility) {
           addBase({
@@ -424,7 +424,7 @@ module.exports = (options = {}) => {
                 fontFamily: 'OBOSDisplay',
                 fontWeight: theme('fontWeight.semibold'),
                 ...typography.headingXlText.small,
-                '@media (min-width: theme("screens.md"))': {
+                '@media (min-width: theme("screens.lg"))': {
                   ...typography.headingXlText.large,
                 },
               },
@@ -432,7 +432,7 @@ module.exports = (options = {}) => {
                 fontFamily: 'OBOSDisplay',
                 fontWeight: theme('fontWeight.semibold'),
                 ...typography.headingLText.small,
-                '@media (min-width: theme("screens.md"))': {
+                '@media (min-width: theme("screens.lg"))': {
                   ...typography.headingLText.large,
                 },
               },
@@ -440,7 +440,7 @@ module.exports = (options = {}) => {
                 fontFamily: 'OBOSText',
                 fontWeight: theme('fontWeight.medium'),
                 ...typography.headingMText.small,
-                '@media (min-width: theme("screens.md"))': {
+                '@media (min-width: theme("screens.lg"))': {
                   ...typography.headingMText.large,
                 },
               },
@@ -448,7 +448,7 @@ module.exports = (options = {}) => {
                 fontFamily: 'OBOSText',
                 fontWeight: theme('fontWeight.medium'),
                 ...typography.headingSText.small,
-                '@media (min-width: theme("screens.md"))': {
+                '@media (min-width: theme("screens.lg"))': {
                   ...typography.headingSText.large,
                 },
               },
@@ -456,19 +456,19 @@ module.exports = (options = {}) => {
                 fontFamily: 'OBOSText',
                 fontWeight: theme('fontWeight.bold'),
                 ...typography.headingXsText.small,
-                '@media (min-width: theme("screens.md"))': {
+                '@media (min-width: theme("screens.lg"))': {
                   ...typography.headingXsText.large,
                 },
               },
               li: {
                 ...typography.paragraphText.small,
-                '@media (min-width: theme("screens.md"))': {
+                '@media (min-width: theme("screens.lg"))': {
                   ...typography.paragraphText.large,
                 },
               },
               p: {
                 ...typography.paragraphText.small,
-                '@media (min-width: theme("screens.md"))': {
+                '@media (min-width: theme("screens.lg"))': {
                   ...typography.paragraphText.large,
                 },
               },
