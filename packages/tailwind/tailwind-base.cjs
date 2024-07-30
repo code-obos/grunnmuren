@@ -485,7 +485,7 @@ module.exports = (options = {}) => {
                 columnGap: typography.blockquoteText.columnGap,
                 paddingTop: '1rem',
                 ...typography.blockquoteText.small,
-                '@media (min-width: theme("screens.md"))': {
+                '@media (min-width: theme("screens.lg"))': {
                   ...typography.blockquoteText.large,
                 },
               },
@@ -495,13 +495,13 @@ module.exports = (options = {}) => {
               '[class~="lead"]': {
                 fontWeight: theme('fontWeight.medium'),
                 ...typography.leadText.small,
-                '@media (min-width: theme("screens.md"))': {
+                '@media (min-width: theme("screens.lg"))': {
                   ...typography.leadText.large,
                 },
               },
               '[class~="description"]': {
                 ...typography.descriptionText.small,
-                '@media (min-width: theme("screens.md"))': {
+                '@media (min-width: theme("screens.lg"))': {
                   ...typography.descriptionText.large,
                 },
               },
