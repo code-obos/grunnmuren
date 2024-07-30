@@ -2,4 +2,4 @@
 '@obosbbl/grunnmuren-tailwind': patch
 ---
 
-Fixes breakpoints on typography
+Increases breakpoint from `md` to `lg` for mobile font styles on typography
