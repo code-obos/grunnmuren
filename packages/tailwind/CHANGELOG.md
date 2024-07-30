@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.0.0-canary.6
+
+### Patch Changes
+
+- 066c74f: Increases breakpoint from `md` to `lg` for mobile font styles on typography
+
 ## 2.0.0-canary.5
 
 ### Patch Changes
