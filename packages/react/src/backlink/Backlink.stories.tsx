@@ -3,7 +3,21 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Backlink, BacklinkProps } from '.';
 
 const Template = (args: BacklinkProps) => {
-  return <Backlink {...args}>Tilbake</Backlink>;
+  const { href, ...rest } = args;
+  return (
+    <div className="flex gap-20">
+      <div>
+        Link
+        <Backlink href={href} {...rest}>
+          Tilbake
+        </Backlink>
+      </div>
+      <div>
+        Button
+        <Backlink {...rest}>Tilbake</Backlink>
+      </div>
+    </div>
+  );
 };
 
 const meta: Meta<typeof Backlink> = {
