@@ -11,7 +11,7 @@ import { Check as CheckIcon } from '@obosbbl/grunnmuren-icons-react';
 import { ErrorMessage } from '../label/ErrorMessage';
 
 const defaultClasses = cx([
-  'group relative left-0 inline-flex max-w-fit cursor-pointer items-start gap-4 py-2 leading-7',
+  'group relative left-0 -mx-2.5 inline-flex max-w-fit cursor-pointer items-start gap-4 p-2.5 leading-7',
 ]);
 
 // Pulling this out into it's own component. Will probably export it in the future
@@ -88,8 +88,6 @@ function Checkbox(props: CheckboxProps, ref: Ref<HTMLLabelElement>) {
           isInvalid={isInvalid}
           ref={ref}
         >
-          {/* increases the clickable area of the checkbox for accessibility */}
-          <span className="absolute -left-2.5 top-0 z-10 h-11 w-11" />
           <CheckmarkBox />
           {children}
         </RACCheckbox>

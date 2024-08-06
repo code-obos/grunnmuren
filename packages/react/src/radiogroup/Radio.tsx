@@ -8,7 +8,7 @@ import {
 import { Description } from '../label';
 
 const defaultClasses = cx([
-  'relative inline-flex max-w-fit cursor-pointer items-start gap-4 py-2 leading-7',
+  'relative -ml-2.5 inline-flex max-w-fit cursor-pointer items-start gap-4 py-2.5 pl-2.5 leading-7',
   // the radio button itself
   'before:flex-none before:rounded-full before:border-2 before:border-black',
   // to vertically align the radio we need to calculate the label's height, which is equal to it's font size multiplied by the line height.
@@ -45,9 +45,6 @@ function Radio(props: RadioProps, ref: Ref<HTMLLabelElement>) {
       className={cx(className, defaultClasses)}
       ref={ref}
     >
-      {/* increases the clickable area of the radio button for accessibility */}
-      <span className="absolute -left-2.5 top-0 z-10 h-11 w-11 " />
-
       <div>
         {children}
         {description && (
