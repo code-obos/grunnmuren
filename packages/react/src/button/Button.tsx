@@ -118,7 +118,7 @@ type ButtonProps = (
 function isLinkProps(
   props: ButtonProps,
 ): props is ButtonOrLinkProps & React.ComponentPropsWithoutRef<typeof RACLink> {
-  return 'href' in props;
+  return 'href' in props && props.href !== undefined;
 }
 
 function Button(
