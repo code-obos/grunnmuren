@@ -24,7 +24,7 @@ type BacklinkProps = (
 function isLinkProps(
   props: BacklinkProps,
 ): props is ButtonOrLinkProps & React.ComponentPropsWithoutRef<typeof Link> {
-  return 'href' in props;
+  return !!props.href;
 }
 
 function Backlink(
