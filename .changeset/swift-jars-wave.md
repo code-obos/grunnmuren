@@ -2,4 +2,4 @@
 '@obosbbl/grunnmuren-react': patch
 ---
 
-Button: render Button if href is undefined
+Button/Backlink: render Button if href is undefined
