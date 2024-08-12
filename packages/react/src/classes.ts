@@ -1,6 +1,6 @@
 import { cx, cva } from 'cva';
 
-const formField = cx('group flex flex-col gap-2');
+const formField = cx('group flex flex-col gap-2 [&>input]:min-h-11');
 const formFieldError = cx(
   'w-fit rounded-sm bg-red-light px-2 py-1 text-sm leading-6 text-red',
 );
