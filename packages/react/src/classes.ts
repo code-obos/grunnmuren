@@ -38,10 +38,10 @@ const inputGroup = cx([
 
 const dropdown = {
   popover: cx(
-    // Use outline + clip-path hack instead of border to prevent scrollbars from overflowing border-radius
-    'min-w-[--trigger-width] overflow-y-auto rounded-md bg-white shadow outline outline-1 outline-offset-[-1px] outline-black [clip-path:content-box] data-[entering]:animate-in data-[exiting]:animate-out data-[entering]:fade-in data-[exiting]:fade-out',
+    'min-w-[--trigger-width] overflow-y-auto rounded-md border border-black bg-white shadow data-[entering]:animate-in data-[exiting]:animate-out data-[entering]:fade-in data-[exiting]:fade-out',
   ),
-  listbox: cx('max-h-[25rem] text-sm outline-none'),
+  // overflow-x-hidden is needed to prevent visible vertical scrollbars from overflowing the border radius of the popover
+  listbox: cx('max-h-[25rem] overflow-x-hidden text-sm outline-none'),
   chevronIcon: cx(
     'text-base transition-transform duration-150 group-data-[open]:rotate-180 motion-reduce:transition-none',
   ),
