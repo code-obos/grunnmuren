@@ -1,13 +1,13 @@
 import { cx, cva } from 'cva';
 
-const formField = cx('group flex flex-col gap-2 [&>input]:min-h-11');
+const formField = cx('group flex flex-col gap-2');
 const formFieldError = cx(
   'w-fit rounded-sm bg-red-light px-2 py-1 text-sm leading-6 text-red',
 );
 
 const input = cva({
   base: [
-    'rounded-md py-2.5 text-base font-normal leading-6 placeholder-[#727070] outline-none ring-1 ring-black',
+    'min-h-11 rounded-md py-2.5 text-base font-normal leading-6 placeholder-[#727070] outline-none ring-1 ring-black',
     // invalid styles
     'group-data-[invalid]:ring-2 group-data-[invalid]:ring-red',
     // Fix invisible ring on safari: https://github.com/tailwindlabs/tailwindcss.com/issues/1135
