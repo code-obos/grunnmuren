@@ -5,6 +5,7 @@ import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
 
 import { useClientLayoutEffect } from '../utils/useClientLayoutEffect';
 import { HeadingContext, ContentContext } from '../content';
+import { Description } from '../label/Description';
 
 type AccordionProps = {
   children: React.ReactNode;
@@ -31,6 +32,8 @@ type AccordionItemProps = {
   defaultOpen?: boolean;
   /** Handler that is called when the accordion's open state changes */
   onOpenChange?: (isOpen: boolean) => void;
+  /** Help text for the accordion item */
+  description?: React.ReactNode;
 };
 
 function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
@@ -64,11 +67,13 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
     defaultOpen = false,
     isOpen: controlledIsOpen,
     onOpenChange,
+    description,
     ...restProps
   } = props;
 
   const contentId = useId();
   const buttonId = useId();
+  const descriptionId = useId();
 
   const isControlled = controlledIsOpen != null;
 
@@ -126,6 +131,10 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
                   className="flex min-h-[44px] w-full items-center justify-between gap-1.5 rounded-lg px-2 py-3.5 text-left focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-[-6px] focus-visible:outline-black"
                   id={buttonId}
                   onClick={handleOpenChange}
+                  aria-describedby={
+                    // Only set aria-describedby if there is a description
+                    description ? descriptionId : undefined
+                  }
                 >
                   {children}
                   <ChevronDown
@@ -149,14 +158,21 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
               inert: isOpen ? undefined : 'true',
               'aria-labelledby': buttonId,
               _outerWrapper: (children) => (
-                <div
-                  className={cx(
-                    'grid transition-all duration-300 after:relative after:block after:h-0 after:transition-all after:duration-300 motion-reduce:transition-none',
-                    isOpen ? 'grid-rows-[1fr] after:h-3.5' : 'grid-rows-[0fr] ',
+                <>
+                  {description && (
+                    <Description id={descriptionId}>{description}</Description>
                   )}
-                >
-                  {children}
-                </div>
+                  <div
+                    className={cx(
+                      'grid transition-all duration-300 after:relative after:block after:h-0 after:transition-all after:duration-300 motion-reduce:transition-none',
+                      isOpen
+                        ? 'grid-rows-[1fr] after:h-3.5'
+                        : 'grid-rows-[0fr] ',
+                    )}
+                  >
+                    {children}
+                  </div>
+                </>
               ),
             },
           ],
