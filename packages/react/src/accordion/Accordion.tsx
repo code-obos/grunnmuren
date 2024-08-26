@@ -34,6 +34,8 @@ type AccordionItemProps = {
   onOpenChange?: (isOpen: boolean) => void;
   /** Help text for the accordion item */
   description?: React.ReactNode;
+  /** Wheter the accordion should */
+  noContentBorder?: boolean;
 };
 
 function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
@@ -68,6 +70,7 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
     isOpen: controlledIsOpen,
     onOpenChange,
     description,
+    noContentBorder,
     ...restProps
   } = props;
 
@@ -147,9 +150,11 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
           [
             ContentContext,
             {
-              className:
-                // Uses pseudo element for vertical padding, since that doesn't affect the height when the accordion is closed
-                'text-sm font-light leading-6 px-3.5 relative overflow-hidden border-mint border-l-[3px] before:relative before:block before:h-1.5 after:relative after:block after:h-1.5',
+              // Uses pseudo element for vertical padding, since that doesn't affect the height when the accordion is closed
+              className: cx(
+                'relative overflow-hidden px-3.5 text-sm font-light leading-6  before:relative before:block before:h-1.5 after:relative after:block after:h-1.5',
+                !noContentBorder && 'border-l-[3px] border-mint',
+              ),
               role: 'region',
               // @ts-expect-error TODO: remove this expect-error when we're on React 19 https://github.com/facebook/react/issues/17157#issuecomment-2003750544
               inert: isOpen ? undefined : 'true',
@@ -158,7 +163,7 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
                 <div
                   className={cx(
                     'grid transition-all duration-300 after:relative after:block after:h-0 after:transition-all after:duration-300 motion-reduce:transition-none',
-                    isOpen ? 'grid-rows-[1fr] after:h-3.5' : 'grid-rows-[0fr] ',
+                    isOpen ? 'grid-rows-[1fr] after:h-3.5' : 'grid-rows-[0fr]',
                   )}
                 >
                   {children}
