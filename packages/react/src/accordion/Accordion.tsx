@@ -131,10 +131,7 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
                   className="flex min-h-[44px] w-full items-center justify-between gap-1.5 rounded-lg px-2 py-3.5 text-left focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-[-6px] focus-visible:outline-black"
                   id={buttonId}
                   onClick={handleOpenChange}
-                  aria-describedby={
-                    // Only set aria-describedby if there is a description
-                    description ? descriptionId : undefined
-                  }
+                  aria-describedby={description ? descriptionId : undefined}
                 >
                   {children}
                   <ChevronDown
