@@ -155,27 +155,34 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
               inert: isOpen ? undefined : 'true',
               'aria-labelledby': buttonId,
               _outerWrapper: (children) => (
-                <>
-                  {description && (
-                    <Description id={descriptionId}>{description}</Description>
+                <div
+                  className={cx(
+                    'grid transition-all duration-300 after:relative after:block after:h-0 after:transition-all after:duration-300 motion-reduce:transition-none',
+                    isOpen ? 'grid-rows-[1fr] after:h-3.5' : 'grid-rows-[0fr] ',
                   )}
-                  <div
-                    className={cx(
-                      'grid transition-all duration-300 after:relative after:block after:h-0 after:transition-all after:duration-300 motion-reduce:transition-none',
-                      isOpen
-                        ? 'grid-rows-[1fr] after:h-3.5'
-                        : 'grid-rows-[0fr] ',
-                    )}
-                  >
-                    {children}
-                  </div>
-                </>
+                >
+                  {children}
+                </div>
               ),
             },
           ],
         ]}
       >
         {children}
+        {description && (
+          <div
+            className={cx(
+              'grid transition-all duration-300 after:relative after:block after:h-0 after:transition-all after:duration-300 motion-reduce:transition-none',
+              isOpen ? 'grid-rows-[0fr]' : 'grid-rows-[1fr] after:h-3.5',
+            )}
+            // @ts-expect-error TODO: remove this expect-error when we're on React 19 https://github.com/facebook/react/issues/17157#issuecomment-2003750544
+            inert={isOpen ? 'true' : undefined}
+          >
+            <Description id={descriptionId} className="overflow-hidden">
+              {description}
+            </Description>
+          </div>
+        )}
       </Provider>
     </div>
   );
