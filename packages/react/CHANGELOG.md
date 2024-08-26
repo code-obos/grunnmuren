@@ -1,5 +1,16 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.33
+
+### Patch Changes
+
+- 08cc710: Fixes input height issue in `<TextField/>` component on Safari mobile.
+- 3d9a230: Increases click area on `Radio` and `Checkbox` so that it is minimum 44x44 px when used without children.
+- 3d9a230: Fixes an issue with the click area on `Radio` and `Checkbox` where the area just to the left of the radio/checkbox gave a hover effect that indicated that the pointer was in the click area, but no click event fired.
+- 845a3bb: Button/Backlink: render Button if href is undefined
+- 34ae950: Fixes an issue with scrollbars overflowing the border radius on popovers, and incorrect painting of the popover border in some browsers. This affects both the `<Select/>` component and the `<ComboBox/>` component.
+- 94b2a45: fix: render Backlink as <button> when no href is provided, as it is more semantically correct
+
 ## 2.0.0-canary.32
 
 ### Minor Changes
