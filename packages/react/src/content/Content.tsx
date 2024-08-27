@@ -1,5 +1,13 @@
-import { HTMLProps, createContext, type ForwardedRef } from 'react';
+import {
+  HTMLProps,
+  createContext,
+  useEffect,
+  useId,
+  type ForwardedRef,
+} from 'react';
 import { useContextProps, type ContextValue } from 'react-aria-components';
+import { cx } from 'cva';
+import { Text, type TextProps } from 'react-aria-components';
 
 type HeadingProps = HTMLProps<HTMLHeadingElement> & {
   children?: React.ReactNode;
@@ -61,6 +69,48 @@ type FooterProps = HTMLProps<HTMLDivElement> & {
 
 const Footer = (props: FooterProps) => <div {...props} data-slot="footer" />;
 
+export const DescriptionContext = createContext<
+  ContextValue<DescriptionProps, HTMLElement>
+>({});
+
+type DescriptionProps = TextProps & {
+  /** @private Used internally to ?? */
+  _onMount?: (id: string) => void;
+  /** @private Used internally for slotted components */
+  _outerWrapper?: (children: React.ReactNode) => React.ReactNode;
+};
+
+const Description = (
+  props: DescriptionProps,
+  ref: ForwardedRef<HTMLElement>,
+) => {
+  [props, ref] = useContextProps(props, ref, DescriptionContext);
+  const {
+    className,
+    _outerWrapper: outerWrapper,
+    _onMount: onMount,
+    ...restProps
+  } = props;
+
+  const autoId = useId();
+  const id = restProps.id ?? autoId;
+
+  useEffect(() => {
+    onMount?.(id);
+  }, [id]);
+
+  const content = (
+    <Text
+      {...restProps}
+      id={id}
+      className={cx(className, 'description')}
+      slot="description"
+    />
+  );
+
+  return outerWrapper ? outerWrapper(content) : content;
+};
+
 export {
   type HeadingProps,
   Heading,
@@ -70,4 +120,6 @@ export {
   ContentContext,
   type FooterProps,
   Footer,
+  Description,
+  type DescriptionProps,
 };
