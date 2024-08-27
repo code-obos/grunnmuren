@@ -198,7 +198,9 @@ const DescriptionTemplate = (args: AccordionItemProps) => {
             onChange={(value) => setSelectedAreas(value)}
           >
             {options.map((option) => (
-              <Checkbox value={option}>{option}</Checkbox>
+              <Checkbox key={option} value={option}>
+                {option}
+              </Checkbox>
             ))}
           </CheckboxGroup>
         </Content>
