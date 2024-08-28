@@ -157,6 +157,7 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
           [
             ContentContext,
             {
+              id: contentId,
               // Uses pseudo element for vertical padding, since that doesn't affect the height when the accordion is closed
               className: cx(
                 'relative overflow-hidden px-3.5 text-sm font-light leading-6  before:relative before:block before:h-1.5 after:relative after:block after:h-1.5',
