@@ -33,6 +33,8 @@ type AccordionItemProps = {
   onOpenChange?: (isOpen: boolean) => void;
   /** Disable mint border on the left side of the accordion content */
   noContentBorder?: boolean;
+  /** Override the WAI-ARIA accordion pattern to handle the accordion panel content manually */
+  noPanelContentAria?: boolean;
 };
 
 function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
@@ -73,6 +75,7 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
     isOpen: controlledIsOpen,
     onOpenChange,
     noContentBorder,
+    noPanelContentAria,
     ...restProps
   } = props;
 
@@ -134,7 +137,7 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
                   aria-expanded={isOpen}
                   // Use outline with offset as focus indicator, this does not cover the left mint border on the expanded content and works with or without a background color on the accordion container
                   className="flex min-h-[44px] w-full items-center justify-between gap-1.5 rounded-lg px-2 py-3.5 text-left focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-[-6px] focus-visible:outline-black"
-                  id={buttonId}
+                  id={noPanelContentAria ? undefined : buttonId}
                   onClick={handleOpenChange}
                   aria-describedby={
                     !isOpen ? descriptionIds.join(' ') : undefined
@@ -159,10 +162,10 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
                 'relative overflow-hidden px-3.5 text-sm font-light leading-6  before:relative before:block before:h-1.5 after:relative after:block after:h-1.5',
                 !noContentBorder && 'border-l-[3px] border-mint',
               ),
-              role: 'region',
+              role: noPanelContentAria ? undefined : 'region',
               // @ts-expect-error TODO: remove this expect-error when we're on React 19 https://github.com/facebook/react/issues/17157#issuecomment-2003750544
               inert: isOpen ? undefined : 'true',
-              'aria-labelledby': buttonId,
+              'aria-labelledby': noPanelContentAria ? undefined : buttonId,
               _outerWrapper: (children) => (
                 <div
                   className={cx(

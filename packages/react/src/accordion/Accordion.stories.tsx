@@ -190,12 +190,13 @@ const DescriptionTemplate = (args: AccordionItemProps) => {
         onOpenChange={args.onOpenChange}
         defaultOpen={args.defaultOpen}
         noContentBorder
+        noPanelContentAria
       >
         <Heading level={4} id={headingId}>
           Velg område
         </Heading>
         <Description>{selectedAreas.join(', ')}</Description>
-        <Content role="none" aria-labelledby={undefined}>
+        <Content>
           <CheckboxGroup
             value={selectedAreas}
             onChange={(value) => setSelectedAreas(value)}
