@@ -97,7 +97,7 @@ const Description = (
 
   useEffect(() => {
     onMount?.(id);
-  }, [id]);
+  }, []);
 
   const content = (
     <Text
