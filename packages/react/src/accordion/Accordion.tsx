@@ -137,7 +137,7 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
                   id={buttonId}
                   onClick={handleOpenChange}
                   aria-describedby={
-                    isOpen ? descriptionIds.join(' ') : undefined
+                    !isOpen ? descriptionIds.join(' ') : undefined
                   }
                 >
                   {children}
