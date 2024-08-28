@@ -97,7 +97,8 @@ const Description = (
 
   useEffect(() => {
     onMount?.(id);
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Should only run on mount
 
   const content = (
     <Text
