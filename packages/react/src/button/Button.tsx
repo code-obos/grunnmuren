@@ -166,7 +166,7 @@ function Button(
     _children
   );
 
-  const style = { ..._style, widthOverride };
+  const style = { ..._style, width: widthOverride };
 
   return isLinkProps(restProps) ? (
     <RACLink
