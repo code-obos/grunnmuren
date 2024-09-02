@@ -1,7 +1,7 @@
-import { useReducer } from 'react';
+import { useId, useReducer, useState } from 'react';
 import { StoryObj, Meta } from '@storybook/react';
 import { Accordion, AccordionItem, AccordionItemProps } from './Accordion';
-import { Content, Heading } from '..';
+import { Checkbox, CheckboxGroup, Content, Heading, Description } from '..';
 
 const Template = (args: AccordionItemProps) => {
   return (
@@ -179,6 +179,41 @@ const ColoredStandaloneTemplate = (args: AccordionItemProps) => {
   );
 };
 
+const DescriptionTemplate = (args: AccordionItemProps) => {
+  const options = ['Oslo', 'Bergen', 'Trondheim'];
+  const [selectedAreas, setSelectedAreas] = useState(['Oslo']);
+  const headingId = useId();
+
+  return (
+    <Accordion>
+      <AccordionItem
+        onOpenChange={args.onOpenChange}
+        defaultOpen={args.defaultOpen}
+        noContentBorder
+        noPanelContentAria
+      >
+        <Heading level={4} id={headingId}>
+          Velg område
+        </Heading>
+        <Description>{selectedAreas.join(', ')}</Description>
+        <Content>
+          <CheckboxGroup
+            value={selectedAreas}
+            onChange={(value) => setSelectedAreas(value)}
+            aria-labelledby={headingId}
+          >
+            {options.map((option) => (
+              <Checkbox key={option} value={option}>
+                {option}
+              </Checkbox>
+            ))}
+          </CheckboxGroup>
+        </Content>
+      </AccordionItem>
+    </Accordion>
+  );
+};
+
 const meta: Meta<typeof AccordionItem> = {
   title: 'Accordion',
   component: AccordionItem,
@@ -215,6 +250,13 @@ export const Colored: Story = {
 
 export const ColoredStandalone: Story = {
   render: ColoredStandaloneTemplate,
+  args: {
+    ...defaultProps,
+  },
+};
+
+export const WithDescription: Story = {
+  render: DescriptionTemplate,
   args: {
     ...defaultProps,
   },

@@ -4,7 +4,7 @@ import { cx } from 'cva';
 import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
 
 import { useClientLayoutEffect } from '../utils/useClientLayoutEffect';
-import { HeadingContext, ContentContext } from '../content';
+import { HeadingContext, ContentContext, DescriptionContext } from '../content';
 
 type AccordionProps = {
   children: React.ReactNode;
@@ -31,6 +31,10 @@ type AccordionItemProps = {
   defaultOpen?: boolean;
   /** Handler that is called when the accordion's open state changes */
   onOpenChange?: (isOpen: boolean) => void;
+  /** Disable mint border on the left side of the accordion content */
+  noContentBorder?: boolean;
+  /** Override the WAI-ARIA accordion pattern to handle the accordion panel content manually */
+  noPanelContentAria?: boolean;
 };
 
 function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
@@ -57,6 +61,12 @@ function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
   );
 }
 
+const collapsableClasses = cx(
+  'grid transition-all duration-300 after:relative after:block after:transition-all after:duration-300 motion-reduce:transition-none',
+);
+const collapsedClasses = cx('grid-rows-[0fr] after:h-0');
+const expandedClasses = cx('grid-rows-[1fr] after:h-3.5');
+
 function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
   const {
     className,
@@ -64,11 +74,14 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
     defaultOpen = false,
     isOpen: controlledIsOpen,
     onOpenChange,
+    noContentBorder,
+    noPanelContentAria,
     ...restProps
   } = props;
 
   const contentId = useId();
   const buttonId = useId();
+  const [descriptionIds, setDescriptionIds] = useState<string[]>([]);
 
   const isControlled = controlledIsOpen != null;
 
@@ -124,8 +137,11 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
                   aria-expanded={isOpen}
                   // Use outline with offset as focus indicator, this does not cover the left mint border on the expanded content and works with or without a background color on the accordion container
                   className="flex min-h-[44px] w-full items-center justify-between gap-1.5 rounded-lg px-2 py-3.5 text-left focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-[-6px] focus-visible:outline-black"
-                  id={buttonId}
+                  id={noPanelContentAria ? undefined : buttonId}
                   onClick={handleOpenChange}
+                  aria-describedby={
+                    !isOpen ? descriptionIds.join(' ') : undefined
+                  }
                 >
                   {children}
                   <ChevronDown
@@ -141,23 +157,49 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
           [
             ContentContext,
             {
-              className:
-                // Uses pseudo element for vertical padding, since that doesn't affect the height when the accordion is closed
-                'text-sm font-light leading-6 px-3.5 relative overflow-hidden border-mint border-l-[3px] before:relative before:block before:h-1.5 after:relative after:block after:h-1.5',
-              role: 'region',
+              id: contentId,
+              // Uses pseudo element for vertical padding, since that doesn't affect the height when the accordion is closed
+              className: cx(
+                'relative overflow-hidden px-3.5 text-sm font-light leading-6  before:relative before:block before:h-1.5 after:relative after:block after:h-1.5',
+                !noContentBorder && 'border-l-[3px] border-mint',
+              ),
+              role: noPanelContentAria ? undefined : 'region',
               // @ts-expect-error TODO: remove this expect-error when we're on React 19 https://github.com/facebook/react/issues/17157#issuecomment-2003750544
               inert: isOpen ? undefined : 'true',
-              'aria-labelledby': buttonId,
+              'aria-labelledby': noPanelContentAria ? undefined : buttonId,
               _outerWrapper: (children) => (
                 <div
                   className={cx(
-                    'grid transition-all duration-300 after:relative after:block after:h-0 after:transition-all after:duration-300 motion-reduce:transition-none',
-                    isOpen ? 'grid-rows-[1fr] after:h-3.5' : 'grid-rows-[0fr] ',
+                    collapsableClasses,
+                    isOpen ? expandedClasses : collapsedClasses,
                   )}
                 >
                   {children}
                 </div>
               ),
+            },
+          ],
+          [
+            DescriptionContext,
+            {
+              className: 'overflow-hidden',
+              _onMount: (id) => {
+                setDescriptionIds((prev) => [...prev, id]);
+              },
+              _outerWrapper: (children) => {
+                return (
+                  <div
+                    className={cx(
+                      collapsableClasses,
+                      isOpen ? collapsedClasses : expandedClasses,
+                    )}
+                    // @ts-expect-error TODO: remove this expect-error when we're on React 19 https://github.com/facebook/react/issues/17157#issuecomment-2003750544
+                    inert={isOpen ? 'true' : undefined}
+                  >
+                    {children}
+                  </div>
+                );
+              },
             },
           ],
         ]}
