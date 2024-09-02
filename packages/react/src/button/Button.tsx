@@ -6,9 +6,8 @@ import {
   type ButtonProps as RACButtonProps,
 } from 'react-aria-components';
 import { LoadingSpinner } from '@obosbbl/grunnmuren-icons-react';
-import { mergeRefs } from '@react-aria/utils';
+import { mergeRefs, useLayoutEffect } from '@react-aria/utils';
 
-import { useClientLayoutEffect } from '../utils/useClientLayoutEffect';
 
 /**
  * Figma: https://www.figma.com/file/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=30%3A2574&mode=dev
@@ -140,7 +139,7 @@ function Button(
   const ownRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
   const ref = mergeRefs(ownRef, forwardedRef);
 
-  useClientLayoutEffect(() => {
+  useLayoutEffect(() => {
     if (isLoading) {
       const requestID = window.requestAnimationFrame(() => {
         setWidthOverride(ownRef.current?.getBoundingClientRect()?.width);
