@@ -8,7 +8,6 @@ import {
 import { LoadingSpinner } from '@obosbbl/grunnmuren-icons-react';
 import { mergeRefs, useLayoutEffect } from '@react-aria/utils';
 
-
 /**
  * Figma: https://www.figma.com/file/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=30%3A2574&mode=dev
  */
