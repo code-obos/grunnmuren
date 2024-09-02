@@ -2,8 +2,8 @@ import React, { Children, useState, forwardRef, type Ref, useId } from 'react';
 import { Provider } from 'react-aria-components';
 import { cx } from 'cva';
 import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
+import { useLayoutEffect } from '@react-aria/utils';
 
-import { useClientLayoutEffect } from '../utils/useClientLayoutEffect';
 import { HeadingContext, ContentContext } from '../content';
 
 type AccordionProps = {
@@ -82,7 +82,7 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
     isControlled ? controlledIsOpen : defaultOpen,
   );
 
-  useClientLayoutEffect(() => {
+  useLayoutEffect(() => {
     if (isControlled) {
       setIsOpen(controlledIsOpen);
     }
