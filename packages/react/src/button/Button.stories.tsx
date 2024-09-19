@@ -105,6 +105,14 @@ export const ButtonSandbox = () => {
         <Button variant="tertiary">Tertiary</Button>
       </div>
 
+      <div className="bg-mint-lightest p-8">
+        <div className="flex gap-8">
+          <Button>Primary</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="tertiary">Tertiary</Button>
+        </div>
+      </div>
+
       <div className="bg-green-dark">
         <div className="flex gap-8 p-8">
           <Button color="mint">Primary</Button>

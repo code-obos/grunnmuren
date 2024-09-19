@@ -55,8 +55,7 @@ const buttonVariants = cva({
     {
       color: 'green',
       variant: 'secondary',
-      className:
-        'bg-white text-black shadow-green hover:bg-green hover:text-white active:bg-green',
+      className: 'shadow-green hover:bg-green hover:text-white active:bg-green',
     },
     {
       color: 'mint',
