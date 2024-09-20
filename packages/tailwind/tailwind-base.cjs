@@ -399,9 +399,11 @@ module.exports = (options = {}) => {
         },
         width: {
           prose: '696px',
+          container: 'var(--gm-container-container)',
         },
         spacing: {
           18: '4.5rem',
+          container: 'var(--gm-container-gutter)',
         },
         borderColor: options.legacyV1Compatibility
           ? ({ theme }) => ({
