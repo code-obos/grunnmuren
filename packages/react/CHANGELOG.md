@@ -1,5 +1,61 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.34
+
+### Minor Changes
+
+- f276e97: add `useHref` to GrunnmurenProvider to simplify usage with routers such as Next when using a basepath.
+
+  Example with a Next app and the [basePath](https://nextjs.org/docs/app/api-reference/next-config-js/basePath) setting set to `/medlem`.
+
+  **Before**
+
+  ```tsx
+  import Link from 'next/link';
+  import { Button } from '@obosbbl/grunnmuren-react';
+
+  // Notice how you have to handle the basepath yourself with Grunnmuren's component, but not with Next's.
+
+  <Link href="/bli-medlem">Bli medlem</Link>
+  <Button href="/medlem/bli-medlem">Bli medlem</Button>
+  ```
+
+  **After**
+
+  ```js
+  // app/providers.tsx
+  'use client'
+  import { GrunnmurenProvider } from '@obosbbl/grunnmuren-react';
+  import { useRouter } from 'next/navigation';
+
+  export function Providers({children, locale}: { children: React.ReactNode, locale: string}) {
+    const router = useRouter();
+    const useHref = (href: string) => '/medlem' + href;
+
+    return (
+      <GrunnmurenProvider locale={locale} navigate={router.push} useHref={useHref}>
+        {children}
+      </GrunnmurenProvider>
+    )
+  }
+  ```
+
+  ```tsx
+  import Link from 'next/link';
+  import { Button } from '@obosbbl/grunnmuren-react';
+
+  // The hrefs are the same, as basepath is handled by the useHref hook in the provider.
+
+  <Link href="/bli-medlem">Bli medlem</Link>
+  <Button href="/bli-medlem">Bli medlem</Button>
+  ```
+
+### Patch Changes
+
+- de38e17: Removes white background color on `<Button variant="secondary"/>` to make it transparent and work well in a conatiner with any light color (not just white)
+- ee2da0c: fix: Button should keep it's width when in isLoading state
+- ee2da0c: refactor: use useLayoutEffect from react-aria instead of rolling our own. Reduces bundle size by a few bytes
+
 ## 2.0.0-canary.33
 
 ### Patch Changes
