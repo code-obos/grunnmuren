@@ -1,5 +1,7 @@
 import { I18nProvider, RouterProvider } from 'react-aria-components';
 
+type RouterProviderProps = React.ComponentProps<typeof RouterProvider>;
+
 type GrunnmurenProviderProps = {
   children: React.ReactNode;
   /**
@@ -8,19 +10,24 @@ type GrunnmurenProviderProps = {
    */
   locale?: 'nb' | 'sv' | 'en';
 
-  /** The router to use for navigation */
-  navigate?: (path: string) => void;
+  /** The router to use for client side navigation */
+  navigate?: RouterProviderProps['navigate'];
+  /** Converts a router-specific href to a native HTML href, e.g. prepending a base path */
+  useHref?: RouterProviderProps['useHref'];
 };
 
 function GrunnmurenProvider({
   children,
   locale = 'nb',
   navigate,
+  useHref,
 }: GrunnmurenProviderProps) {
   return (
     <I18nProvider locale={locale}>
       {navigate ? (
-        <RouterProvider navigate={navigate}>{children}</RouterProvider>
+        <RouterProvider navigate={navigate} useHref={useHref}>
+          {children}
+        </RouterProvider>
       ) : (
         children
       )}
