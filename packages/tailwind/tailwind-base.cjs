@@ -177,6 +177,40 @@ module.exports = (options = {}) => {
           ':root': {
             '--gm-container-width': '92rem',
             '--gm-container-gutter': '1rem',
+
+            '--gm-color-black': '#333',
+            '--gm-color-white': '#fff',
+
+            '--gm-color-gray': '#818181',
+            '--gm-color-gray-dark': '#595959',
+            '--gm-color-gray-light': '#E6E6E6',
+            '--gm-color-gray-lightest': '#f1f1f1',
+
+            '--gm-color-sky': '#BEDFEC',
+            '--gm-color-sky-light': '#DEEFF5',
+            '--gm-color-sky-lightest': '#EBF5F9',
+
+            '--gm-color-mint': '#CDECE2',
+            '--gm-color-mint-light': '#E6F5F0',
+            '--gm-color-mint-lightest': '#F0F9F6',
+
+            '--gm-color-blue': '#0047BA',
+            '--gm-color-blue-light': '#BEDFEC',
+            '--gm-color-blue-lightest': '#DEEFF5',
+            '--gm-color-blue-dark': '#002169',
+
+            '--gm-color-green': '#008761',
+            '--gm-color-green-dark': '#00524C',
+            '--gm-color-green-light': '#CDECE2',
+            '--gm-color-green-lightest': '#E6F5F0',
+
+            '--gm-color-red': '#C0385D',
+            '--gm-color-red-light': '#FAEDEF',
+
+            '--gm-color-orange': '#e8a74a',
+            '--gm-color-orange-light': '#f8e5c9',
+
+            '--gm-color-yellow': '#fff5d2',
           },
         });
 
@@ -331,52 +365,52 @@ module.exports = (options = {}) => {
         inherit: 'inherit',
         current: 'currentColor',
         transparent: 'transparent',
-        black: '#333',
-        white: '#fff',
+        black: 'var(--gm-color-black)',
+        white: 'var(--gm-color-white)',
         gray: {
-          DEFAULT: '#818181',
-          dark: '#595959',
-          light: '#E6E6E6',
-          lightest: '#f1f1f1',
+          DEFAULT: 'var(--gm-color-gray)',
+          dark: 'var(--gm-color-gray-dark)',
+          light: 'var(--gm-color-gray-light)',
+          lightest: 'var(--gm-color-gray-lightest)',
         },
         sky: {
-          DEFAULT: '#BEDFEC',
-          light: '#DEEFF5',
-          lightest: '#EBF5F9',
+          DEFAULT: 'var(--gm-color-sky)',
+          light: 'var(--gm-color-sky-light)',
+          lightest: 'var(--gm-color-sky-lightest)',
         },
         mint: {
-          DEFAULT: '#CDECE2',
-          light: '#E6F5F0',
-          lightest: '#F0F9F6',
+          DEFAULT: 'var(--gm-color-mint)',
+          light: 'var(--gm-color-mint-light)',
+          lightest: 'var(--gm-color-mint-lightest)',
         },
         blue: {
           // OBOS Blue/Primary brand
-          DEFAULT: '#0047BA',
-          light: '#BEDFEC',
-          lightest: '#DEEFF5',
+          DEFAULT: 'var(--gm-color-blue)',
           // OBOS Ocean
-          dark: '#002169',
+          dark: 'var(--gm-color-blue-dark)',
+          light: 'var(--gm-color-blue-light)',
+          lightest: 'var(--gm-color-blue-lightest)',
         },
         green: {
           // OBOS Green/Primary brand
-          DEFAULT: '#008761',
-          lightest: '#E6F5F0',
-          light: '#CDECE2',
+          DEFAULT: 'var(--gm-color-green)',
           // OBOS Forest
-          dark: '#00524C',
+          dark: 'var(--gm-color-green-dark)',
+          light: 'var(--gm-color-green-light)',
+          lightest: 'var(--gm-color-green-lightest)',
         },
         red: {
-          DEFAULT: '#C0385D',
+          DEFAULT: 'var(--gm-color-red)',
           // error red
-          light: '#FAEDEF',
+          light: 'var(--gm-color-red-light)',
         },
         orange: {
-          DEFAULT: '#e8a74a',
-          light: '#f8e5c9',
+          DEFAULT: 'var(--gm-color-orange)',
+          light: 'var(--gm-color-orange-light)',
         },
         yellow: {
           // open house
-          DEFAULT: '#fff5d2',
+          DEFAULT: 'var(--gm-color-yellow)',
         },
       },
       fontFamily: {
@@ -399,11 +433,9 @@ module.exports = (options = {}) => {
         },
         width: {
           prose: '696px',
-          container: 'var(--gm-container-container)',
         },
         spacing: {
           18: '4.5rem',
-          container: 'var(--gm-container-gutter)',
         },
         borderColor: options.legacyV1Compatibility
           ? ({ theme }) => ({
