@@ -81,7 +81,7 @@ import { GrunnmurenProvider } from '@obosbbl/grunnmuren-react';
 import { useRouter } from 'next/navigation';
 
 export function Providers({children, locale}: { children: React.ReactNode, locale: string}) {
-  let router = useRouter();
+  const router = useRouter();
 
   return (
     <GrunnmurenProvider locale={locale} navigate={router.push}>
@@ -114,6 +114,52 @@ export default function RootLayout({
     </Providers>
   )
 }
+```
+
+#### Basepath
+
+If you're using a router such as Next's, then you can use the `useHref` prop to convert router-specific hrefs into native HTML hrefs. This is very useful for instance when using Next's [basepath](https://nextjs.org/docs/app/api-reference/next-config-js/basePath) setting, as you can use this to prepend the basepath to all links, similar to Next's `<Link>`.
+
+**Before**
+
+```tsx
+import Link from 'next/link';
+import { Button } from '@obosbbl/grunnmuren-react';
+
+// Notice how you have to handle the basepath yourself with Grunnmuren's component, but not with Next's.
+
+<Link href="/bli-medlem">Bli medlem</Link>
+<Button href="/medlem/bli-medlem">Bli medlem</Button>
+```
+
+**After**
+
+```js
+// app/providers.tsx
+'use client'
+import { GrunnmurenProvider } from '@obosbbl/grunnmuren-react';
+import { useRouter } from 'next/navigation';
+
+export function Providers({children, locale}: { children: React.ReactNode, locale: string}) {
+  const router = useRouter();
+  const useHref = (href: string) => '/medlem' + href;
+
+  return (
+    <GrunnmurenProvider locale={locale} navigate={router.push} useHref={useHref}>
+      {children}
+    </GrunnmurenProvider>
+  )
+}
+```
+
+```tsx
+import Link from 'next/link';
+import { Button } from '@obosbbl/grunnmuren-react';
+
+// The hrefs are the same, as basepath is handled by the useHref hook in the provider.
+
+<Link href="/bli-medlem">Bli medlem</Link>
+<Button href="/bli-medlem">Bli medlem</Button>
 ```
 
 ### Optimize bundle size by removing unused locales
