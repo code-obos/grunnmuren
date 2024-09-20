@@ -154,8 +154,6 @@ module.exports = (options = {}) => {
     );
   }
 
-  const containerSize = '92rem';
-
   return {
     plugins: [
       ...v1CompatibilityPlugins,
@@ -176,6 +174,10 @@ module.exports = (options = {}) => {
             'text-decoration': 'underline',
           },
           '::selection': { '@apply bg-mint text-black': {} },
+          ':root': {
+            '--gm-container-width': '92rem',
+            '--gm-container-gutter': '1rem',
+          },
         });
 
         addComponents({
@@ -190,16 +192,16 @@ module.exports = (options = {}) => {
           },
           '.container': {
             width: '100%',
-            paddingLeft: '1rem',
-            paddingRight: '1rem',
+            paddingLeft: 'var(--gm-container-gutter)',
+            paddingRight: 'var(--gm-container-gutter)',
             marginLeft: 'auto',
             marginRight: 'auto',
-            maxWidth: containerSize,
+            maxWidth: 'var(--gm-container-width)',
           },
           '.container-prose': {
             width: '100%',
-            paddingLeft: '1rem',
-            paddingRight: '1rem',
+            paddingLeft: 'var(--gm-container-gutter)',
+            paddingRight: 'var(--gm-container-gutter)',
             marginLeft: 'auto',
             marginRight: 'auto',
             maxWidth: '45.5rem',
