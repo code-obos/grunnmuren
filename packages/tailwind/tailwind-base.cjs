@@ -154,8 +154,6 @@ module.exports = (options = {}) => {
     );
   }
 
-  const containerSize = '92rem';
-
   return {
     plugins: [
       ...v1CompatibilityPlugins,
@@ -176,6 +174,44 @@ module.exports = (options = {}) => {
             'text-decoration': 'underline',
           },
           '::selection': { '@apply bg-mint text-black': {} },
+          ':root': {
+            '--gm-container-width': '92rem',
+            '--gm-container-gutter-width': '1rem',
+
+            '--gm-color-black': '#333',
+            '--gm-color-white': '#fff',
+
+            '--gm-color-gray': '#818181',
+            '--gm-color-gray-dark': '#595959',
+            '--gm-color-gray-light': '#e6e6e6',
+            '--gm-color-gray-lightest': '#f1f1f1',
+
+            '--gm-color-sky': '#bedfec',
+            '--gm-color-sky-light': '#deeff5',
+            '--gm-color-sky-lightest': '#ebf5f9',
+
+            '--gm-color-mint': '#cdece2',
+            '--gm-color-mint-light': '#e6f5f0',
+            '--gm-color-mint-lightest': '#f0f9f6',
+
+            '--gm-color-blue': '#0047ba',
+            '--gm-color-blue-light': '#bedfec',
+            '--gm-color-blue-lightest': '#deeff5',
+            '--gm-color-blue-dark': '#002169',
+
+            '--gm-color-green': '#008761',
+            '--gm-color-green-dark': '#00524c',
+            '--gm-color-green-light': '#cdece2',
+            '--gm-color-green-lightest': '#e6f5f0',
+
+            '--gm-color-red': '#c0385d',
+            '--gm-color-red-light': '#faedef',
+
+            '--gm-color-orange': '#e8a74a',
+            '--gm-color-orange-light': '#f8e5c9',
+
+            '--gm-color-yellow': '#fff5d2',
+          },
         });
 
         addComponents({
@@ -190,16 +226,16 @@ module.exports = (options = {}) => {
           },
           '.container': {
             width: '100%',
-            paddingLeft: '1rem',
-            paddingRight: '1rem',
+            paddingLeft: 'var(--gm-container-gutter-width)',
+            paddingRight: 'var(--gm-container-gutter-width)',
             marginLeft: 'auto',
             marginRight: 'auto',
-            maxWidth: containerSize,
+            maxWidth: 'var(--gm-container-width)',
           },
           '.container-prose': {
             width: '100%',
-            paddingLeft: '1rem',
-            paddingRight: '1rem',
+            paddingLeft: 'var(--gm-container-gutter-width)',
+            paddingRight: 'var(--gm-container-gutter-width)',
             marginLeft: 'auto',
             marginRight: 'auto',
             maxWidth: '45.5rem',
@@ -329,52 +365,52 @@ module.exports = (options = {}) => {
         inherit: 'inherit',
         current: 'currentColor',
         transparent: 'transparent',
-        black: '#333',
-        white: '#fff',
+        black: 'var(--gm-color-black)',
+        white: 'var(--gm-color-white)',
         gray: {
-          DEFAULT: '#818181',
-          dark: '#595959',
-          light: '#E6E6E6',
-          lightest: '#f1f1f1',
+          DEFAULT: 'var(--gm-color-gray)',
+          dark: 'var(--gm-color-gray-dark)',
+          light: 'var(--gm-color-gray-light)',
+          lightest: 'var(--gm-color-gray-lightest)',
         },
         sky: {
-          DEFAULT: '#BEDFEC',
-          light: '#DEEFF5',
-          lightest: '#EBF5F9',
+          DEFAULT: 'var(--gm-color-sky)',
+          light: 'var(--gm-color-sky-light)',
+          lightest: 'var(--gm-color-sky-lightest)',
         },
         mint: {
-          DEFAULT: '#CDECE2',
-          light: '#E6F5F0',
-          lightest: '#F0F9F6',
+          DEFAULT: 'var(--gm-color-mint)',
+          light: 'var(--gm-color-mint-light)',
+          lightest: 'var(--gm-color-mint-lightest)',
         },
         blue: {
           // OBOS Blue/Primary brand
-          DEFAULT: '#0047BA',
-          light: '#BEDFEC',
-          lightest: '#DEEFF5',
+          DEFAULT: 'var(--gm-color-blue)',
           // OBOS Ocean
-          dark: '#002169',
+          dark: 'var(--gm-color-blue-dark)',
+          light: 'var(--gm-color-blue-light)',
+          lightest: 'var(--gm-color-blue-lightest)',
         },
         green: {
           // OBOS Green/Primary brand
-          DEFAULT: '#008761',
-          lightest: '#E6F5F0',
-          light: '#CDECE2',
+          DEFAULT: 'var(--gm-color-green)',
           // OBOS Forest
-          dark: '#00524C',
+          dark: 'var(--gm-color-green-dark)',
+          light: 'var(--gm-color-green-light)',
+          lightest: 'var(--gm-color-green-lightest)',
         },
         red: {
-          DEFAULT: '#C0385D',
+          DEFAULT: 'var(--gm-color-red)',
           // error red
-          light: '#FAEDEF',
+          light: 'var(--gm-color-red-light)',
         },
         orange: {
-          DEFAULT: '#e8a74a',
-          light: '#f8e5c9',
+          DEFAULT: 'var(--gm-color-orange)',
+          light: 'var(--gm-color-orange-light)',
         },
         yellow: {
           // open house
-          DEFAULT: '#fff5d2',
+          DEFAULT: 'var(--gm-color-yellow)',
         },
       },
       fontFamily: {
