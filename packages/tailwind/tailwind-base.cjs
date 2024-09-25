@@ -176,7 +176,7 @@ module.exports = (options = {}) => {
           '::selection': { '@apply bg-mint text-black': {} },
           ':root': {
             '--gm-container-width': '92rem',
-            '--gm-container-gutter': '1rem',
+            '--gm-container-gutter-width': '1rem',
 
             '--gm-color-black': '#333',
             '--gm-color-white': '#fff',
@@ -226,16 +226,16 @@ module.exports = (options = {}) => {
           },
           '.container': {
             width: '100%',
-            paddingLeft: 'var(--gm-container-gutter)',
-            paddingRight: 'var(--gm-container-gutter)',
+            paddingLeft: 'var(--gm-container-gutter-width)',
+            paddingRight: 'var(--gm-container-gutter-width)',
             marginLeft: 'auto',
             marginRight: 'auto',
             maxWidth: 'var(--gm-container-width)',
           },
           '.container-prose': {
             width: '100%',
-            paddingLeft: 'var(--gm-container-gutter)',
-            paddingRight: 'var(--gm-container-gutter)',
+            paddingLeft: 'var(--gm-container-gutter-width)',
+            paddingRight: 'var(--gm-container-gutter-width)',
             marginLeft: 'auto',
             marginRight: 'auto',
             maxWidth: '45.5rem',
