@@ -62,7 +62,6 @@ const defaultProps = {
   variant: 'info',
   isDismissable: false,
   isExpandable: false,
-  isDismissed: false,
 } as const;
 
 export const DefaultAlert: Story = {
