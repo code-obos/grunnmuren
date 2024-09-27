@@ -333,6 +333,15 @@ module.exports = (options = {}) => {
           '.description': {
             [description]: {},
           },
+          '.focus-outline': {
+            '@apply focus-visible:outline focus-visible:outline-2': {},
+          },
+          '.focus-outline-black': {
+            '@apply focus-outline focus-visible:outline-black': {},
+          },
+          '.focus-outline-white': {
+            '@apply focus-outline focus-visible:outline-white': {},
+          },
         });
       }),
       plugin(function ({ addBase }) {
