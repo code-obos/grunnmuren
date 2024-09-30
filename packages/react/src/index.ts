@@ -3,6 +3,7 @@ export { Form } from 'react-aria-components';
 
 export * from './GrunnmurenProvider';
 export * from './accordion';
+export * from './badge';
 export * from './button';
 export * from './checkbox';
 export * from './combobox';
