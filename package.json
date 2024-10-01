@@ -19,7 +19,7 @@
   "dependencies": {
     "@changesets/cli": "2.27.8",
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
-    "@react-aria/optimize-locales-plugin": "1.1.1",
+    "@react-aria/optimize-locales-plugin": "1.1.2",
     "@storybook/addon-actions": "8.3.4",
     "@storybook/addon-controls": "8.3.4",
     "@storybook/addon-docs": "8.3.4",
