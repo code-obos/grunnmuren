@@ -64,7 +64,7 @@ const inputVariants = compose(
         left: '',
       },
       autoWidth: {
-        true: 'box-content max-w-fit',
+        true: 'max-w-fit',
         false: '',
       },
     },

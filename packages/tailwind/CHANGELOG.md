@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.0.0-canary.7
+
+### Minor Changes
+
+- b5c86a5: Exposes custom properties for container width and gutter, along with all custom colors.
+
 ## 2.0.0-canary.6
 
 ### Patch Changes
