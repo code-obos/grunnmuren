@@ -10,6 +10,7 @@ import { ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 type BreadcrumbProps = {
   /** Additional CSS className for the element. */
   className?: string;
+  children?: React.ReactNode;
 
   /** Additional style properties for the element. */
   style?: React.CSSProperties;
