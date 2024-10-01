@@ -61,11 +61,14 @@ type FooterProps = HTMLProps<HTMLDivElement> & {
 
 const Footer = (props: FooterProps) => <div {...props} data-slot="footer" />;
 
+const Description = (props: FooterProps) => <div {...props} data-slot="description" />;
+
 export {
   type HeadingProps,
   Heading,
   HeadingContext,
   type ContentProps,
+  Description,
   Content,
   ContentContext,
   type FooterProps,

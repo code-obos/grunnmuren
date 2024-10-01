@@ -1,7 +1,7 @@
 import { useReducer } from 'react';
 import { StoryObj, Meta } from '@storybook/react';
 import { Accordion, AccordionItem, AccordionItemProps } from './Accordion';
-import { Content, Heading } from '..';
+import { Content, Description, Heading } from '..';
 
 const Template = (args: AccordionItemProps) => {
   return (
@@ -11,7 +11,8 @@ const Template = (args: AccordionItemProps) => {
         defaultOpen={args.defaultOpen}
       >
         <Heading level={2}>Hvordan betaler jeg ned på rammelånet?</Heading>
-        <Content className="prose">
+        <Description>Valgte filter</Description>
+        <Content className="prose" role="presentation">
           Den største forskjellen mellom et vanlig boliglån og et rammelån er
           fleksibiliteten. Med et rammelån kan du velge å betale mindre ned på
           lånet i trangere tider, hvis du for eksempel i en periode opplever å
