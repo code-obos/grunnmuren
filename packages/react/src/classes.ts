@@ -7,7 +7,11 @@ const formFieldError = cx(
 
 const input = cva({
   base: [
-    'min-h-11 rounded-md py-2.5 text-base font-normal leading-6 placeholder-[#727070] outline-none ring-1 ring-black',
+    // Use box-content to enable auto width based on number of characters (size)
+    // Setting min-height to prevent the input from collapsing in Safari
+    // Combining these with a padding-y as base classes makes it easier to standardize the height (44px) of all inputs
+    'box-content min-h-6 py-2.5',
+    'rounded-md text-base font-normal leading-6 placeholder-[#727070] outline-none ring-1 ring-black',
     // invalid styles
     'group-data-[invalid]:ring-2 group-data-[invalid]:ring-red',
     // Fix invisible ring on safari: https://github.com/tailwindlabs/tailwindcss.com/issues/1135
