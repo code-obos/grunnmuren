@@ -1,5 +1,15 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.35
+
+### Minor Changes
+
+- 860f58a: add `<Badge />` component
+
+### Patch Changes
+
+- 2f1951f: Fixes input height on inputs that sets the size prop.
+
 ## 2.0.0-canary.34
 
 ### Minor Changes
