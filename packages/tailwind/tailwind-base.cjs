@@ -345,6 +345,9 @@ module.exports = (options = {}) => {
           '.focus-outline-black': {
             '@apply focus-outline focus-visible:outline-black': {},
           },
+          '.focus-outline-mint': {
+            '@apply focus-outline focus-visible:outline-mint': {},
+          },
           '.focus-outline-white': {
             '@apply focus-outline focus-visible:outline-white': {},
           },
