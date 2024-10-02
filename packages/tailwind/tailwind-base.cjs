@@ -333,6 +333,12 @@ module.exports = (options = {}) => {
           '.description': {
             [description]: {},
           },
+          '.outline-offset-focus': {
+            '@apply outline outline-2 outline-offset-2': {},
+          },
+          '.outline-offset-focus-black': {
+            '@apply outline-offset-focus outline-black': {},
+          },
           '.focus-outline': {
             '@apply focus-visible:outline focus-visible:outline-2': {},
           },
