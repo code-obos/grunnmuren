@@ -1,4 +1,5 @@
 import { I18nProvider, RouterProvider } from 'react-aria-components';
+import type { Locale } from './use-locale';
 
 type RouterProviderProps = React.ComponentProps<typeof RouterProvider>;
 
@@ -8,7 +9,7 @@ type GrunnmurenProviderProps = {
    *  The locale to apply to the children.
    *  @default nb
    */
-  locale?: 'nb' | 'sv' | 'en';
+  locale?: Locale;
 
   /** The router to use for client side navigation */
   navigate?: RouterProviderProps['navigate'];

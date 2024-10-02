@@ -2,6 +2,7 @@
 export { Form } from 'react-aria-components';
 
 export * from './GrunnmurenProvider';
+export * from './use-locale';
 export * from './accordion';
 export * from './badge';
 export * from './button';
