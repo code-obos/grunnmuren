@@ -14,7 +14,7 @@ import { mergeRefs, useLayoutEffect } from '@react-aria/utils';
 
 const buttonVariants = cva({
   base: [
-    'inline-flex min-h-[44px] cursor-pointer items-center justify-center whitespace-nowrap rounded-lg font-medium transition-all duration-200 focus:outline-none data-[focus-visible]:ring-2 data-[focus-visible]:ring-offset-2',
+    'focus-outline-offset inline-flex min-h-[44px] cursor-pointer items-center justify-center whitespace-nowrap rounded-lg font-medium transition-colors duration-200',
   ],
   variants: {
     /**
@@ -32,9 +32,9 @@ const buttonVariants = cva({
      * @default green
      */
     color: {
-      green: 'focus-visible:ring-black',
-      mint: 'focus-visible:ring-mint focus-visible:ring-offset-green-dark',
-      white: 'focus-visible:ring-white focus-visible:ring-offset-blue',
+      green: 'focus-outline-black',
+      mint: 'focus-outline-mint',
+      white: 'focus-outline-white',
     },
     /**
      * When the button is without text, but with a single icon.
