@@ -336,6 +336,12 @@ module.exports = (options = {}) => {
           '.focus-outline': {
             '@apply focus-visible:outline focus-visible:outline-2': {},
           },
+          '.focus-outline-offset': {
+            '@apply focus-visible:outline-offset-2': {},
+          },
+          '.focus-outline-inset': {
+            '@apply focus-visible:-outline-offset-4': {},
+          },
           '.focus-outline-black': {
             '@apply focus-outline focus-visible:outline-black': {},
           },

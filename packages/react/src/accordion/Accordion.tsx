@@ -123,7 +123,7 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
                   aria-controls={contentId}
                   aria-expanded={isOpen}
                   // Use outline with offset as focus indicator, this does not cover the left mint border on the expanded content and works with or without a background color on the accordion container
-                  className="focus-outline-black flex min-h-[44px] w-full items-center justify-between gap-1.5 rounded-lg px-2 py-3.5 text-left focus-visible:outline-offset-[-4px]"
+                  className="focus-outline-black focus-outline-inset flex min-h-[44px] w-full items-center justify-between gap-1.5 rounded-lg px-2 py-3.5 text-left"
                   id={buttonId}
                   onClick={handleOpenChange}
                 >
