@@ -1,6 +1,6 @@
 import { Children, useId } from 'react';
 import { cva, type VariantProps, cx } from 'cva';
-import { useLocale } from 'react-aria-components';
+
 import {
   Close,
   ChevronDown,
@@ -10,6 +10,7 @@ import {
   CloseCircle,
 } from '@obosbbl/grunnmuren-icons-react';
 import { useState } from 'react';
+import { useLocale, type Locale } from '../use-locale';
 
 // TODO: add new icons
 const iconMap = {
@@ -77,10 +78,8 @@ type Props = VariantProps<typeof alertVariants> & {
   onDismiss?: () => void;
 };
 
-type SupportedLocales = 'nb' | 'sv' | 'en';
-
 type Translation = {
-  [key in SupportedLocales]: string;
+  [key in Locale]: string;
 };
 
 type Translations = {
@@ -105,10 +104,6 @@ const translations: Translations = {
   },
 };
 
-type SupportedLocale = ReturnType<typeof useLocale> & {
-  locale: SupportedLocales;
-};
-
 const Alertbox = ({
   children,
   role,
@@ -121,7 +116,7 @@ const Alertbox = ({
 }: Props) => {
   const Icon = iconMap[variant];
 
-  const { locale } = useLocale() as SupportedLocale;
+  const locale = useLocale();
 
   const id = useId();
   const [isExpanded, setIsExpanded] = useState(false);
