@@ -36,7 +36,7 @@ const input = cva({
 });
 
 const inputGroup = cx([
-  'focus-within:ring-focus inline-flex items-center gap-3 overflow-hidden rounded-md bg-white px-3 text-base ring-1 ring-black',
+  'inline-flex items-center gap-3 overflow-hidden rounded-md bg-white px-3 text-base ring-1 ring-black focus-within:ring-focus',
   'group-data-[invalid]:ring-focus group-data-[invalid]:ring-red group-data-[invalid]:focus-within:ring',
 ]);
 
