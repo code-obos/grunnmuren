@@ -39,7 +39,7 @@ function Backlink(
     <Component
       className={cx(
         className,
-        'focus-outline-black group flex max-w-fit cursor-pointer items-center gap-3 rounded-md p-2.5 no-underline',
+        'group focus-outline-black flex max-w-fit cursor-pointer items-center gap-3 rounded-md p-2.5 no-underline',
       )}
       {...restProps}
       // @ts-expect-error ignore the type of the ref here

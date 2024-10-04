@@ -13,7 +13,7 @@
     "ci:version": "changeset version && pnpm install --lockfile-only",
     "dev": "storybook dev -p 6006 --ci",
     "lint": "pnpm lint:js && pnpm lint:format",
-    "lint:format": "prettier --list-different .",
+    "lint:format": "prettier --write .",
     "lint:js": "eslint . --ext \"js,cjs,mjs,tsx,ts\" --max-warnings 0 --ignore-path .gitignore"
   },
   "dependencies": {

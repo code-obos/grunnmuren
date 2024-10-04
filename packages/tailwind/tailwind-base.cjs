@@ -375,6 +375,18 @@ module.exports = (options = {}) => {
           '.focus-outline-white': {
             '@apply focus-visible:outline-focus-white': {},
           },
+          '.ring-focus': {
+            '@apply ring-2': {},
+          },
+          '.ring-focus-black': {
+            '@apply ring-focus ring-black': {},
+          },
+          '.ring-focus-offset': {
+            '@apply ring-focus ring-offset-2': {},
+          },
+          '.ring-focus-offset-black': {
+            '@apply ring-focus-offset ring-black': {},
+          },
         });
       }),
       plugin(function ({ addBase }) {
