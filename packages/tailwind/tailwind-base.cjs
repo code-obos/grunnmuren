@@ -333,14 +333,32 @@ module.exports = (options = {}) => {
           '.description': {
             [description]: {},
           },
+          '.outline-focus': {
+            '@apply outline outline-2': {},
+          },
           '.outline-offset-focus': {
-            '@apply outline outline-2 outline-offset-2': {},
+            '@apply outline-focus outline-offset-2': {},
+          },
+          '.outline-focus-black': {
+            '@apply outline-focus outline-black': {},
+          },
+          '.outline-focus-red': {
+            '@apply outline-focus outline-red': {},
+          },
+          '.outline-focus-mint': {
+            '@apply outline-focus outline-mint': {},
+          },
+          '.outline-focus-white': {
+            '@apply outline-focus outline-white': {},
           },
           '.outline-offset-focus-black': {
             '@apply outline-offset-focus outline-black': {},
           },
+          '.outline-offset-focus-red': {
+            '@apply outline-offset-focus outline-red': {},
+          },
           '.focus-outline': {
-            '@apply focus-visible:outline focus-visible:outline-2': {},
+            '@apply focus-visible:outline-focus': {},
           },
           '.focus-outline-offset': {
             '@apply focus-visible:outline-offset-2': {},
@@ -349,13 +367,13 @@ module.exports = (options = {}) => {
             '@apply focus-visible:-outline-offset-4': {},
           },
           '.focus-outline-black': {
-            '@apply focus-outline focus-visible:outline-black': {},
+            '@apply focus-visible:outline-focus-black': {},
           },
           '.focus-outline-mint': {
-            '@apply focus-outline focus-visible:outline-mint': {},
+            '@apply focus-visible:outline-focus-mint': {},
           },
           '.focus-outline-white': {
-            '@apply focus-outline focus-visible:outline-white': {},
+            '@apply focus-visible:outline-focus-white': {},
           },
         });
       }),
