@@ -13,16 +13,16 @@ const input = cva({
     'box-content min-h-6 py-2.5',
     'rounded-md text-base font-normal leading-6 placeholder-[#727070] outline-none ring-1 ring-black',
     // invalid styles
-    'group-data-[invalid]:ring-2 group-data-[invalid]:ring-red',
+    'group-data-[invalid]:ring-focus group-data-[invalid]:ring-red',
     // Fix invisible ring on safari: https://github.com/tailwindlabs/tailwindcss.com/issues/1135
     'appearance-none',
   ],
   variants: {
     // Focus rings. Can either be :focus or :focus-visible based on the needs of the particular component.
     focusModifier: {
-      focus: 'focus:ring-2 group-data-[invalid]:focus:ring',
+      focus: 'focus:ring-focus group-data-[invalid]:focus:ring',
       visible:
-        'data-[focus-visible]:ring-2 group-data-[invalid]:data-[focus-visible]:ring',
+        'data-[focus-visible]:ring-focus group-data-[invalid]:data-[focus-visible]:ring',
     },
     isGrouped: {
       false: 'bg-white px-3',
@@ -36,8 +36,8 @@ const input = cva({
 });
 
 const inputGroup = cx([
-  'inline-flex items-center gap-3 overflow-hidden rounded-md bg-white px-3 text-base ring-1 ring-black focus-within:ring-2',
-  'group-data-[invalid]:ring-2 group-data-[invalid]:ring-red group-data-[invalid]:focus-within:ring',
+  'focus-within:ring-focus inline-flex items-center gap-3 overflow-hidden rounded-md bg-white px-3 text-base ring-1 ring-black',
+  'group-data-[invalid]:ring-focus group-data-[invalid]:ring-red group-data-[invalid]:focus-within:ring',
 ]);
 
 const dropdown = {
