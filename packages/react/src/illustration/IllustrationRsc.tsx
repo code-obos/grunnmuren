@@ -9,13 +9,13 @@ import {
 const cache = {};
 
 export async function IllustrationTest({ name }) {
-  const url =
+  const metaUrl =
     'https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/fl_getinfo/Grunnmuren/Illustrasjoner/Flytteesker-ensfarget.png';
 
-  let ratio = cache[url];
+  let ratio = cache[metaUrl];
 
   if (!ratio) {
-    const illustrationMeta = await fetch();
+    const illustrationMeta = await fetch(metaUrl);
 
     const json = await illustrationMeta.json();
 
@@ -24,7 +24,7 @@ export async function IllustrationTest({ name }) {
     const { width, height } = json.output;
 
     ratio = width / height;
-    cache[url] = ratio;
+    cache[metaUrl] = ratio;
   }
 
   console.log({ width, height, ratio });
