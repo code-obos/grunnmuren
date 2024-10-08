@@ -7,6 +7,8 @@ const formFieldError = cx(
 
 const input = cva({
   base: [
+    // All inputs should always have a white background (this also ensures that type="search" on Safri doesn't get a gray background)
+    'bg-white',
     // Use box-content to enable auto width based on number of characters (size)
     // Setting min-height to prevent the input from collapsing in Safari
     // Combining these with a padding-y as base classes makes it easier to standardize the height (44px) of all inputs
@@ -25,7 +27,7 @@ const input = cva({
         'data-[focus-visible]:ring-2 group-data-[invalid]:data-[focus-visible]:ring',
     },
     isGrouped: {
-      false: 'bg-white px-3',
+      false: 'px-3',
       true: 'flex-1 !ring-0',
     },
   },
