@@ -1,5 +1,15 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.36
+
+### Minor Changes
+
+- 7932247: add `useLocale()` hook that returns the locale set in GrunnmurenProvider
+
+### Patch Changes
+
+- 4a30610: Fixes background color on inputs with type="search" in Safari
+
 ## 2.0.0-canary.35
 
 ### Minor Changes
