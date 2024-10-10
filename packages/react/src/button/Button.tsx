@@ -14,7 +14,7 @@ import { mergeRefs, useLayoutEffect } from '@react-aria/utils';
 
 const buttonVariants = cva({
   base: [
-    'focus-visible:outline-focus-offset inline-flex min-h-[44px] cursor-pointer items-center justify-center whitespace-nowrap rounded-lg font-medium transition-colors duration-200',
+    'inline-flex min-h-[44px] cursor-pointer items-center justify-center whitespace-nowrap rounded-lg font-medium transition-colors duration-200 focus-visible:outline-focus-offset',
   ],
   variants: {
     /**
