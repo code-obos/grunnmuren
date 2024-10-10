@@ -105,7 +105,7 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
   return (
     <div
       {...restProps}
-      className={cx('group relative px-2', className)}
+      className={cx('relative px-2', className)}
       ref={ref}
       data-open={isOpen}
     >
