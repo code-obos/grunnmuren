@@ -334,58 +334,19 @@ module.exports = (options = {}) => {
             [description]: {},
           },
           '.outline-focus': {
-            '@apply outline outline-2': {},
+            '@apply outline outline-2 outline-black': {},
           },
-          '.outline-offset-focus': {
+          '.outline-focus-offset': {
             '@apply outline-focus outline-offset-2': {},
           },
-          '.outline-focus-black': {
-            '@apply outline-focus outline-black': {},
-          },
-          '.outline-focus-red': {
-            '@apply outline-focus outline-red': {},
-          },
-          '.outline-focus-mint': {
-            '@apply outline-focus outline-mint': {},
-          },
-          '.outline-focus-white': {
-            '@apply outline-focus outline-white': {},
-          },
-          '.outline-offset-focus-black': {
-            '@apply outline-offset-focus outline-black': {},
-          },
-          '.outline-offset-focus-red': {
-            '@apply outline-offset-focus outline-red': {},
-          },
-          '.focus-outline': {
-            '@apply focus-visible:outline-focus': {},
-          },
-          '.focus-outline-offset': {
-            '@apply focus-visible:outline-offset-2': {},
-          },
-          '.focus-outline-inset': {
-            '@apply focus-visible:-outline-offset-4': {},
-          },
-          '.focus-outline-black': {
-            '@apply focus-visible:outline-focus-black': {},
-          },
-          '.focus-outline-mint': {
-            '@apply focus-visible:outline-focus-mint': {},
-          },
-          '.focus-outline-white': {
-            '@apply focus-visible:outline-focus-white': {},
+          '.outline-focus-inset': {
+            '@apply outline-focus -outline-offset-4': {},
           },
           '.ring-focus': {
-            '@apply ring-2': {},
-          },
-          '.ring-focus-black': {
-            '@apply ring-focus ring-black': {},
+            '@apply ring-2 ring-black': {},
           },
           '.ring-focus-offset': {
             '@apply ring-focus ring-offset-2': {},
-          },
-          '.ring-focus-offset-black': {
-            '@apply ring-focus-offset ring-black': {},
           },
         });
       }),

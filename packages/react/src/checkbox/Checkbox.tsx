@@ -29,7 +29,7 @@ function CheckmarkBox() {
         // selected
         'group-data-[selected]:!border-green group-data-[selected]:!bg-green',
         // focus
-        'group-data-[focus-visible]:outline-offset-focus-black',
+        'group-data-[focus-visible]:outline-focus-offset',
         // hovered
         'group-data-[hovered]:border-green group-data-[hovered]:group-data-[invalid]:border-red group-data-[hovered]:bg-green-lightest group-data-[hovered]:group-data-[invalid]:bg-red-light',
         // invalid - The border is 1 px thicker when invalid. We don't actually want to change the border width, as that causes the element's size to change
