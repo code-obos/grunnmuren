@@ -165,7 +165,7 @@ const Alertbox = ({
         <button
           className={cx(
             '-m-2 grid h-11 w-11 place-items-center rounded-xl',
-            'focus-visible:outline-none focus-visible:-outline-offset-8 focus-visible:outline-black',
+            'focus-visible:outline-focus focus-visible:-outline-offset-8',
           )}
           onClick={close}
           aria-label={translations.close[locale]}
@@ -178,7 +178,7 @@ const Alertbox = ({
           className={cx(
             'relative col-span-full row-start-2 -my-3 inline-flex max-w-fit cursor-pointer items-center gap-1 py-3 text-sm leading-6',
             // Focus styles:
-            'outline-none after:absolute after:bottom-3 after:left-0 after:right-0 after:h-0 after:bg-transparent after:transition-all after:duration-200',
+            'outline-none after:absolute after:bottom-3 after:left-0 after:right-0 after:h-0',
             'focus-visible:after:h-[2px] focus-visible:after:bg-black',
           )}
           onClick={() => setIsExpanded((prevState) => !prevState)}

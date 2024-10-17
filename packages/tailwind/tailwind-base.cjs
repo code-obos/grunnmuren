@@ -333,6 +333,26 @@ module.exports = (options = {}) => {
           '.description': {
             [description]: {},
           },
+          /** Standard black focus outline */
+          '.outline-focus': {
+            '@apply outline outline-2 outline-black': {},
+          },
+          /** Standard black focus outline with offset */
+          '.outline-focus-offset': {
+            '@apply outline-focus outline-offset-2': {},
+          },
+          /** Standard black focus outline with negative offset (inset) */
+          '.outline-focus-inset': {
+            '@apply outline-focus -outline-offset-4': {},
+          },
+          /** Standard black focus ring */
+          '.ring-focus': {
+            '@apply ring-2 ring-black': {},
+          },
+          /** Standard black focus ring with offset */
+          '.ring-focus-offset': {
+            '@apply ring-focus ring-offset-2': {},
+          },
         });
       }),
       plugin(function ({ addBase }) {

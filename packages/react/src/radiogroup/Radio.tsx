@@ -21,7 +21,7 @@ const defaultClasses = cx([
   // hover
   'data-[hovered]:before:border-green data-[hovered]:before:bg-green-lightest data-[hovered]:data-[invalid]:before:bg-red-light',
   // focus
-  'data-[focus-visible]:before:ring data-[focus-visible]:before:ring-black data-[focus-visible]:before:ring-offset-[9px]',
+  'data-[focus-visible]:before:ring-focus-offset',
   // invalid - The border is 1 px thicker when invalid. We don't actually want to change the border width, as that causes the element's size to change
   // so we use an inner outline to artifically pad the border
   'data-[invalid]:before:outline-solid data-[invalid]:before:border-red data-[invalid]:data-[selected]:before:!bg-red data-[invalid]:before:outline data-[invalid]:before:outline-[3px] data-[invalid]:before:outline-offset-[-3px] data-[invalid]:before:outline-red',

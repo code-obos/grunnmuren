@@ -32,7 +32,7 @@ function Breadcrumb(props: BreadcrumbProps, ref: Ref<HTMLLIElement>) {
         <Link
           href={href}
           // use outline instead of ring for focus marker that can be offset without creating a white background between the focus marker and the element content
-          className="rounded-sm focus:outline-none group-last:no-underline data-[focus-visible]:outline data-[focus-visible]:outline-offset-2 data-[focus-visible]:outline-black"
+          className="rounded-sm data-[focus-visible]:focus-visible:outline-focus focus:outline-none group-last:no-underline"
         >
           {children}
         </Link>
