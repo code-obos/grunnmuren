@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.0.0-canary.8
+
+### Patch Changes
+
+- f096065: Standardizes focus styles.
+
 ## 2.0.0-canary.7
 
 ### Minor Changes
