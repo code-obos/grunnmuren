@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.37
+
+### Patch Changes
+
+- 9efdc87: Removes group class from `Accordion` to prevent issues with content that has the `group`-class`.
+- f096065: Standardizes focus styles.
+
 ## 2.0.0-canary.36
 
 ### Minor Changes
