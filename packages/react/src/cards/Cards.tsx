@@ -64,7 +64,9 @@ const cardVariants = cva({
     'group/card relative grid gap-y-4',
     'border',
     // Fixes width on inlined Button components
-    '[&_[data-slot="button"]]:w-fit',
+    // This is needed to make sure the button only takes up the space it's content needs
+    // While still preventing it from overflowing the card
+    '[&_[data-slot="button"]]:w-fit [&_[data-slot="button"]]:max-w-full [&_[data-slot="button"]]:!whitespace-normal',
   ],
   variants: {
     border: {
