@@ -78,7 +78,7 @@ const cardVariants = cva({
         // Make entire card clickable if it contains one single CTA but no other clickable elements, and has no href prop for the entire card
         '[&:not(:has(a:not([data-slot="button"]),button:not([data-slot="button"]),input))_[data-slot="button"]:first-of-type:last-of-type]:after:absolute',
         // Make the pseudo-element cover the entire card
-        '[&:not(:has(a:not([data-slot="button"]),button:not([data-slot="button"]),input))_[data-slot="button"]:first-of-type:last-of-type]:after:bottom-0 [&:not(:has(a:not([data-slot="button"]),button:not([data-slot="button"]),input))_[data-slot="button"]:first-of-type:last-of-type]:after:left-0 [&:not(:has(a:not([data-slot="button"]),button:not([data-slot="button"]),input))_[data-slot="button"]:first-of-type:last-of-type]:after:right-0 [&:not(:has(a:not([data-slot="button"]),button:not([data-slot="button"]),input))_[data-slot="button"]:first-of-type:last-of-type]:after:top-0',
+        '[&:not(:has(a:not([data-slot="button"]),button:not([data-slot="button"]),input))_[data-slot="button"]:first-of-type:last-of-type]:after:inset-0',
         // Fixes rounding of the pseudo-element corners so they align perfectly with the card
         '[&:not(:has(a:not([data-slot="button"]),button:not([data-slot="button"]),input))_[data-slot="button"]:first-of-type:last-of-type]:after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
         // Focus styles on CTA (only when there is one single CTA as the only interactive element)
@@ -151,7 +151,7 @@ const Card = ({ className, border, href, children }: CardProps) => {
                       // It is also used to apply focus styles.
                       // Note that the border-radius is set 1px less then the card radius
                       // This is due to the fact that the card as a 1px border and needs to be adjusted to align perfectly
-                      'no-underline after:absolute after:bottom-0 after:left-0 after:right-0 after:top-0 after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
+                      'no-underline after:absolute after:inset-0 after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
                       // focus styles
                       'focus-visible:after:outline-focus focus-visible:outline-none focus-visible:after:outline-offset-2',
                       // 'focus-visible:outline-none focus-visible:before:absolute focus-visible:before:-inset-2 focus-visible:before:rounded-3xl focus-visible:before:border-2 focus-visible:before:border-black',
