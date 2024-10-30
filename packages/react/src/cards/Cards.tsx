@@ -23,7 +23,7 @@ const overlayVariants = cva({
   // Needs a negative offset to align with the card border
   // z-indes is set to make sure it is always placed on top of the image,
   //even the overlay is put before the image in the DOM.
-  base: 'absolute -top-[1px] z-[1] px-3 py-2',
+  base: 'w-fit px-3 py-2',
   variants: {
     color: {
       'blue-dark': ['bg-blue-dark', 'text-white'],
@@ -32,16 +32,14 @@ const overlayVariants = cva({
     },
     align: {
       left: [
-        '-left-[1px]',
         // Make sure the overlay corner radius aligns perfectly with the card
+        // TODO: Solve this with container queries when tailwind supports max-width container queries (should only have rounded bottom corner when width < 100% of container)
         'rounded-br-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
-        'rounded-tl-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
       ],
       right: [
-        '-right-[1px]',
         // Make sure the overlay corner radius aligns perfectly with the card
+        // TODO: Solve this with container queries when tailwind supports max-width container queries (should only have rounded bottom corner when width < 100% of container)
         'rounded-bl-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
-        'rounded-tr-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
       ],
     },
   },
@@ -53,14 +51,23 @@ const Overlay = ({
   align = 'left',
   ...props
 }: OverlayProps) => (
-  <span
-    className={overlayVariants({
-      color,
-      align,
+  <div
+    className={cx(
       className,
-    })}
-    {...props}
-  />
+      'absolute left-[-1px] right-[-1px] top-[-1px] z-[1] overflow-hidden rounded-t-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
+      // Make sure click events "pass through" the overlay to the card
+      'pointer-events-none',
+    )}
+  >
+    <div
+      className={overlayVariants({
+        color,
+        align,
+        className,
+      })}
+      {...props}
+    />
+  </div>
 );
 
 type CardProps = {
