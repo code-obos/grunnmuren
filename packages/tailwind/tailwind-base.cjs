@@ -145,18 +145,13 @@ module.exports = (options = {}) => {
   const v1CompatibilityPlugins = [];
 
   if (options.legacyV1Compatibility) {
-    v1CompatibilityPlugins.push(
-      button,
-      checkbox,
-      radio,
-      snackbar,
-      require('@tailwindcss/aspect-ratio'),
-    );
+    v1CompatibilityPlugins.push(button, checkbox, radio, snackbar);
   }
 
   return {
     plugins: [
       ...v1CompatibilityPlugins,
+      require('@tailwindcss/aspect-ratio'),
       require('@tailwindcss/typography'),
       require('tailwindcss-animate'),
       plugin(function ({ addBase, addComponents, theme }) {
