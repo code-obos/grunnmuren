@@ -63,6 +63,7 @@ const cardVariants = cva({
     'rounded-2xl p-3',
     'group/card relative grid gap-y-4',
     'border',
+    // Fixes width on inlined Button components
     '[&_[data-slot="button"]]:w-fit',
   ],
   variants: {
