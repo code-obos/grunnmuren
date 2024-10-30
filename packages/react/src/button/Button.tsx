@@ -172,6 +172,7 @@ function Button(
       className={className}
       style={style}
       ref={ref as React.ForwardedRef<HTMLAnchorElement>}
+      data-slot="button"
     >
       {children}
     </RACLink>
@@ -181,6 +182,7 @@ function Button(
       className={className}
       style={style}
       ref={ref as React.ForwardedRef<HTMLButtonElement>}
+      data-slot="button"
     >
       {children}
     </RACButton>
