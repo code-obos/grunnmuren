@@ -75,11 +75,11 @@ const cardVariants = cva({
     },
     href: {
       false: [
-        // Make entire card clickable if it contains a CTA, but has no href for the entire card
+        // Make entire card clickable if it contains a CTA and no other clickable elements, and has no href for the entire card
         '[&_[data-slot="button"]:first-of-type:last-of-type]:after:absolute [&_[data-slot="button"]:first-of-type:last-of-type]:after:inset-0 [&_[data-slot="button"]:first-of-type:last-of-type]:after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
-        // Focus styles on CTA (only when there is one single CTA)
+        // Focus styles on CTA (only when there is one single CTA as the only interactive element)
         '[&_[data-slot="button"]:first-of-type:last-of-type:focus-visible]:after:outline-focus [&_[data-slot="button"]:first-of-type:last-of-type:focus-visible]:outline-none [&_[data-slot="button"]:first-of-type:last-of-type:focus-visible]:after:outline-offset-2',
-        // Hover effect on CTA (only when there is one single CTA)
+        // Hover effect on CTA (only when there is one single CTA as the only interactive element)
         '[&:hover:has([data-slot="button"]:first-of-type:last-of-type)_[data-slot="media"]_*]:motion-safe:scale-110',
       ],
       true: [
