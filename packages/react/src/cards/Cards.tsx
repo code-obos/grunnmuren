@@ -12,7 +12,7 @@ const CardsContextProvider = ({ children }: { children: React.ReactNode }) => (
   <CardsContext.Provider value={true}>{children}</CardsContext.Provider>
 );
 
-type CardOverlayProps = {
+type OverlayProps = {
   color?: 'blue-dark' | 'blue' | 'mint';
   align?: 'left' | 'right';
   className?: string;
@@ -20,7 +20,10 @@ type CardOverlayProps = {
 };
 
 const overlayVariants = cva({
-  base: 'absolute top-0 px-3 py-2',
+  // Needs a negative offset to align with the card border
+  // z-indes is set to make sure it is always placed on top of the image,
+  //even the overlay is put before the image in the DOM.
+  base: 'absolute -top-[1px] z-[1] px-3 py-2',
   variants: {
     color: {
       'blue-dark': ['bg-blue-dark', 'text-white'],
@@ -28,18 +31,28 @@ const overlayVariants = cva({
       mint: ['bg-mint', 'text-black'],
     },
     align: {
-      left: ['left-0', 'rounded-br-2xl', 'rounded-tl-2xl'],
-      right: ['right-0', 'rounded-bl-2xl', 'rounded-tr-2xl'],
+      left: [
+        '-left-[1px]',
+        // Make sure the overlay corner radius aligns perfectly with the card
+        'rounded-br-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
+        'rounded-tl-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
+      ],
+      right: [
+        '-right-[1px]',
+        // Make sure the overlay corner radius aligns perfectly with the card
+        'rounded-bl-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
+        'rounded-tr-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
+      ],
     },
   },
 });
 
-const CardOverlay = ({
+const Overlay = ({
   className,
   color = 'blue-dark',
   align = 'left',
   ...props
-}: CardOverlayProps) => (
+}: OverlayProps) => (
   <span
     className={overlayVariants({
       color,
@@ -132,9 +145,7 @@ const Card = ({ className, border, href, children }: CardProps) => {
                   // Enables the hover effect
                   '*:group-hover/card:motion-safe:scale-110',
               ),
-              // TODO: Fix this type error
-              children: null,
-              // TODO: We should never display alt text in Cards, as they are purely decorative (is aria-hidden on wrapper enough?)
+              // We should never announce the content of media in Cards, as they are purely decorative
               'aria-hidden': true,
             },
           ],
@@ -190,11 +201,4 @@ const Cards = ({ className, children }: CardsProps) => {
   );
 };
 
-export {
-  CardOverlay,
-  CardOverlayProps,
-  Card,
-  type CardProps,
-  type CardsProps,
-  Cards,
-};
+export { Overlay, OverlayProps, Card, type CardProps, type CardsProps, Cards };
