@@ -75,20 +75,26 @@ const cardVariants = cva({
     },
     href: {
       false: [
-        // Make entire card clickable if it contains a CTA and no other clickable elements, and has no href for the entire card
-        '[&_[data-slot="button"]:first-of-type:last-of-type]:after:absolute [&_[data-slot="button"]:first-of-type:last-of-type]:after:inset-0 [&_[data-slot="button"]:first-of-type:last-of-type]:after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
+        // Make entire card clickable if it contains one single CTA but no other clickable elements, and has no href prop for the entire card
+        '[&:not(:has(a:not([data-slot="button"]),button:not([data-slot="button"]),input))_[data-slot="button"]:first-of-type:last-of-type]:after:absolute',
+        // Make the pseudo-element cover the entire card
+        '[&:not(:has(a:not([data-slot="button"]),button:not([data-slot="button"]),input))_[data-slot="button"]:first-of-type:last-of-type]:after:bottom-0 [&:not(:has(a:not([data-slot="button"]),button:not([data-slot="button"]),input))_[data-slot="button"]:first-of-type:last-of-type]:after:left-0 [&:not(:has(a:not([data-slot="button"]),button:not([data-slot="button"]),input))_[data-slot="button"]:first-of-type:last-of-type]:after:right-0 [&:not(:has(a:not([data-slot="button"]),button:not([data-slot="button"]),input))_[data-slot="button"]:first-of-type:last-of-type]:after:top-0',
+        // Fixes rounding of the pseudo-element corners so they align perfectly with the card
+        '[&:not(:has(a:not([data-slot="button"]),button:not([data-slot="button"]),input))_[data-slot="button"]:first-of-type:last-of-type]:after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
         // Focus styles on CTA (only when there is one single CTA as the only interactive element)
-        '[&_[data-slot="button"]:first-of-type:last-of-type:focus-visible]:after:outline-focus [&_[data-slot="button"]:first-of-type:last-of-type:focus-visible]:outline-none [&_[data-slot="button"]:first-of-type:last-of-type:focus-visible]:after:outline-offset-2',
+        '[&:not(:has(a:not([data-slot="button"]),button:not([data-slot="button"]),input))_[data-slot="button"]:first-of-type:last-of-type:focus-visible]:after:outline-focus [&:not(:has(a:not([data-slot="button"]),button:not([data-slot="button"]),input))_[data-slot="button"]:first-of-type:last-of-type:focus-visible]:outline-none [&:not(:has(a:not([data-slot="button"]),button:not([data-slot="button"]),input))_[data-slot="button"]:first-of-type:last-of-type:focus-visible]:after:outline-offset-2',
         // Hover effect on CTA (only when there is one single CTA as the only interactive element)
         '[&:hover:has([data-slot="button"]:first-of-type:last-of-type)_[data-slot="media"]_*]:motion-safe:scale-110',
       ],
       true: [
-        // Make CTA clickable by itself, while the rest of the card has another href
-        '[&_[data-slot="button"]]:relative',
+        // Make interactive elements clickable by themselves, while the rest of the card is clickable as a whole
+        // The card is then made clickable by a pseudo-element on the heading that covers the entire card
+        // And since the heading (card-heading-link) comes before all other content, they will be clickable by just setting their position to relative
+        '[&_a:not([data-slot="card-heading-link"])]:relative [&_button]:relative [&_input]:relative',
         // Don't trigger image zoom hover effect on the entire card when hovering CTA's
-        '[&:has([data-slot="button"]:hover)_[data-slot="media"]_*]:scale-100',
+        '[&:has(a:not([data-slot="card-heading-link"]):hover)_[data-slot="media"]_*]:scale-100',
         // Don't trigger underline hover effect on title when hovering CTA's
-        '[&:has([data-slot="button"]:hover)_[data-slot="card-heading-link"]]:border-b-transparent',
+        '[&:has(a:not([data-slot="card-heading-link"]):hover)_[data-slot="card-heading-link"]]:border-b-transparent',
       ],
     },
   },
@@ -145,7 +151,7 @@ const Card = ({ className, border, href, children }: CardProps) => {
                       // It is also used to apply focus styles.
                       // Note that the border-radius is set 1px less then the card radius
                       // This is due to the fact that the card as a 1px border and needs to be adjusted to align perfectly
-                      'no-underline after:absolute after:inset-0 after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
+                      'no-underline after:absolute after:bottom-0 after:left-0 after:right-0 after:top-0 after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
                       // focus styles
                       'focus-visible:after:outline-focus focus-visible:outline-none focus-visible:after:outline-offset-2',
                       // 'focus-visible:outline-none focus-visible:before:absolute focus-visible:before:-inset-2 focus-visible:before:rounded-3xl focus-visible:before:border-2 focus-visible:before:border-black',
