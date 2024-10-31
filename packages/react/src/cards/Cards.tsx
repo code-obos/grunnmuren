@@ -75,6 +75,10 @@ type CardProps = {
   children: React.ReactNode;
   href?: LinkProps['href'];
   border?: 'black' | 'dark-blue' | 'dark-green';
+  /** @default 'column' */
+  directon?: 'row' | 'column';
+  /** @default false */
+  reverse?: boolean;
 };
 
 const cardVariants = cva({
@@ -119,18 +123,55 @@ const cardVariants = cva({
         '[&:has(a:not([data-slot="card-heading-link"]):hover)_[data-slot="card-heading-link"]]:border-b-transparent',
       ],
     },
+    directon: {
+      // Cards with vertical layout should have a 50% width on the media, "auto" otherwise
+      row: [
+        'gap-x-4',
+        // Force grid items to snap the available spaces
+        'grid-flow-dense', // Move down to icons section
+
+        // **** Icons ****
+        // If an icon is the first child:
+        // - make the icon span the first column, which has a width that matches the size of the icon (auto)
+        // - make all other children span the second column, which takes up the remaining space (1fr)
+        '[&:has(svg:first-child)>:not(svg)]:col-start-2 [&:has(svg:first-child)]:grid-cols-[auto,1fr]',
+        // If an icon is the last child:
+        // - make the icon span the second column, which has a width that matches the size of the icon (auto)
+        // - make all other children span the first column, which takes up the remaining space (1fr)
+        '[&:has(svg:last-child)>:not(svg)]:col-start-1 [&:has(svg:last-child)]:grid-cols-[1fr,auto]',
+        // Center align icons in the middle of each grid cell
+        '[&>svg]:self-center',
+
+        // **** Media ****
+        '[&:has([data-slot="media"])]:grid-cols-[1fr,1fr]',
+      ],
+      column: '',
+    },
+    reverse: {
+      true: '',
+      false: '',
+    },
   },
 });
 
-const Card = ({ className, border, href, children }: CardProps) => {
+const Card = ({
+  className,
+  border,
+  href,
+  directon = 'column',
+  reverse = false,
+  children,
+}: CardProps) => {
   const hasListContext = useCardsContext();
   const Element = hasListContext ? 'li' : 'div';
   return (
     <Element
       className={cardVariants({
         border,
-        className,
         href: !!href,
+        directon,
+        reverse,
+        className,
       })}
     >
       <Provider
@@ -142,7 +183,10 @@ const Card = ({ className, border, href, children }: CardProps) => {
               className: cx(
                 // Make sure image is placed to top and the sides over Card the border
                 'mx-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))] mt-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
-                'overflow-hidden rounded-t-2xl',
+                'overflow-hidden rounded-tl-2xl',
+                directon === 'column' && 'rounded-t-2xl',
+                directon === 'row' && 'rounded-l-2xl',
+                directon === 'row' && reverse && 'rounded-r-2xl',
                 !border && 'rounded-b-2xl',
                 // Child (image/video) styles
                 '*:object-cover',
