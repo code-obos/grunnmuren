@@ -21,7 +21,7 @@ type OverlayProps = {
 
 const overlayVariants = cva({
   // Needs a negative offset to align with the card border
-  // z-indes is set to make sure it is always placed on top of the image,
+  // z-index is set to make sure it is always placed on top of the image,
   //even the overlay is put before the image in the DOM.
   base: 'w-fit px-3 py-2',
   variants: {
