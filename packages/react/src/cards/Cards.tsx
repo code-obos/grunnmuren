@@ -51,6 +51,7 @@ const Overlay = ({
   align = 'left',
   ...props
 }: OverlayProps) => (
+  // Wrapper to prevent the overlay from overflowing the card border radius if it's wider than the card and wrapps to a new line
   <div
     className={cx(
       className,
