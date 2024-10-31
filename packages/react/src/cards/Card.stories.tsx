@@ -2,7 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Card, Overlay } from './Cards';
 import { Heading, Media } from '../content';
 import { Button } from '../button';
-import { ArrowRight, LinkExternal } from '@obosbbl/grunnmuren-icons-react';
+import {
+  ArrowRight,
+  LinkExternal,
+  PiggyBank,
+} from '@obosbbl/grunnmuren-icons-react';
 
 const meta: Meta<typeof Card> = {
   title: 'Card',
@@ -237,5 +241,21 @@ export const InfoCardWithInlineContent = () => (
       Les mer
       <ArrowRight className="transition-transform group-hover:motion-safe:translate-x-1" />
     </Button>
+  </Card>
+);
+
+export const LinkCardWithIconLeft = () => (
+  <Card href="/#" border="black" directon="row">
+    <PiggyBank />
+    <Heading level={3}>Kort uten bilde</Heading>
+    <p>Dette er en beskrivelse</p>
+  </Card>
+);
+
+export const LinkCardWithIconRight = () => (
+  <Card href="/#" border="black" directon="row">
+    <Heading level={3}>Kort uten bilde</Heading>
+    <p>Dette er en beskrivelse</p>
+    <PiggyBank />
   </Card>
 );
