@@ -53,23 +53,20 @@ export const LinkCardWithoutImageAndCTA = () => (
 );
 
 export const LinkCardWithImportantOverlay = () => (
-  <Card border="black">
+  <Card border="black" href="#card">
     <Overlay color="blue-dark">Viktig - må komme først</Overlay>
     <Media>
       <img src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg" />
     </Media>
     <Heading level={3}>Overskrift</Heading>
     <p>
-      Her er informasjonen i ekstra viktig, og derfor plassert før allt annt
+      Her er informasjonen i overlay ekstra viktig, og derfor plassert før allt
+      annt
     </p>
-    <Button variant="tertiary" href="#cta" className="group">
-      Les mer
-      <ArrowRight className="transition-transform group-hover:motion-safe:translate-x-1" />
-    </Button>
   </Card>
 );
 
-export const LinkCardWithOverlay = () => (
+export const LinkCardWithOverlayAndCTA = () => (
   <Card border="black">
     <Media>
       <img src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg" />
@@ -180,9 +177,16 @@ export const InfoCard = () => (
   <Card className="bg-sky-lightest">
     <Heading level={3}>Informasjonskort</Heading>
     <p>
-      Dette kortet skal ikke være klikkbart, men kan ha klikkbare elementer inne
-      i seg
+      Dette kortet skal ikke være klikkbart, siden det kun har informasjon i
+      seg.
     </p>
+  </Card>
+);
+
+export const InfoCardWithCta = () => (
+  <Card className="bg-sky-lightest">
+    <Heading level={3}>Informasjonskort</Heading>
+    <p>Dette kortet skal være klikkbart, siden det er én CTA</p>
     <Button variant="tertiary" href="#" className="group">
       Les mer
       <ArrowRight className="transition-transform group-hover:motion-safe:translate-x-1" />
