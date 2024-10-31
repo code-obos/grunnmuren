@@ -77,8 +77,6 @@ type CardProps = {
   border?: 'black' | 'dark-blue' | 'dark-green';
   /** @default 'column' */
   directon?: 'row' | 'column';
-  /** @default false */
-  reverse?: boolean;
 };
 
 const cardVariants = cva({
@@ -147,10 +145,6 @@ const cardVariants = cva({
       ],
       column: '',
     },
-    reverse: {
-      true: '',
-      false: '',
-    },
   },
 });
 
@@ -159,7 +153,6 @@ const Card = ({
   border,
   href,
   directon = 'column',
-  reverse = false,
   children,
 }: CardProps) => {
   const hasListContext = useCardsContext();
@@ -170,7 +163,6 @@ const Card = ({
         border,
         href: !!href,
         directon,
-        reverse,
         className,
       })}
     >
@@ -186,7 +178,6 @@ const Card = ({
                 'overflow-hidden rounded-tl-2xl',
                 directon === 'column' && 'rounded-t-2xl',
                 directon === 'row' && 'rounded-l-2xl',
-                directon === 'row' && reverse && 'rounded-r-2xl',
                 !border && 'rounded-b-2xl',
                 // Child (image/video) styles
                 '*:object-cover',
