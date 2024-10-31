@@ -33,12 +33,10 @@ const overlayVariants = cva({
     align: {
       left: [
         // Make sure the overlay corner radius aligns perfectly with the card
-        // TODO: Solve this with container queries when tailwind supports max-width container queries (should only have rounded bottom corner when width < 100% of container)
         'rounded-br-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
       ],
       right: [
         // Make sure the overlay corner radius aligns perfectly with the card
-        // TODO: Solve this with container queries when tailwind supports max-width container queries (should only have rounded bottom corner when width < 100% of container)
         'rounded-bl-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
       ],
     },
@@ -51,11 +49,12 @@ const Overlay = ({
   align = 'left',
   ...props
 }: OverlayProps) => (
-  // Wrapper to prevent the overlay from overflowing the card border radius if it's wider than the card and wrapps to a new line
+  // Wrapper to prevent the overlay from overflowing (overflow-hidden) the card border radius if it's wider than the card and wrapps to a new line
   <div
     className={cx(
       className,
-      'absolute left-[-1px] right-[-1px] top-[-1px] z-[1] overflow-hidden rounded-t-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
+      // Position over the Card border by using negative position
+      'absolute left-[calc(theme(borderWidth.DEFAULT)*-1)] right-[calc(theme(borderWidth.DEFAULT)*-1)] top-[calc(theme(borderWidth.DEFAULT)*-1)] z-[1] overflow-hidden rounded-t-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
       // Make sure click events "pass through" the overlay to the card
       'pointer-events-none',
     )}
@@ -142,7 +141,7 @@ const Card = ({ className, border, href, children }: CardProps) => {
               aspectRatio: '3:2',
               className: cx(
                 // Make sure image is placed to top and the sides over Card the border
-                'mx-[calc(theme(space.3)*-1-1px)] mt-[calc(theme(space.3)*-1-1px)]',
+                'mx-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))] mt-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
                 'overflow-hidden rounded-t-2xl',
                 !border && 'rounded-b-2xl',
                 // Child (image/video) styles
