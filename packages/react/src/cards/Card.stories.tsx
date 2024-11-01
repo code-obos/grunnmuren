@@ -321,7 +321,12 @@ export const LinkCardWithIconRight = () => (
 );
 
 export const ImageCardLeft = () => (
-  <Card href="/#" border="black" direction="row" className="w-[40rem]">
+  <Card
+    href="/#"
+    border="black"
+    direction="row"
+    className="w-[40rem] max-w-full"
+  >
     <Media>
       <img
         alt=""
@@ -337,7 +342,12 @@ export const ImageCardLeft = () => (
 );
 
 export const ImageCardRight = () => (
-  <Card href="/#" border="black" direction="row" className="w-[40rem]">
+  <Card
+    href="/#"
+    border="black"
+    direction="row"
+    className="w-[40rem]  max-w-full"
+  >
     <Heading level={3}>Kort uten bilde</Heading>
     <p>Dette er en beskrivelse</p>
     <Badge size="small" color="mint">
@@ -353,7 +363,12 @@ export const ImageCardRight = () => (
 );
 
 export const ImageCardLeftWithOverlayLeft = () => (
-  <Card href="/#" border="black" direction="row" className="w-[40rem]">
+  <Card
+    href="/#"
+    border="black"
+    direction="row"
+    className="w-[40rem]  max-w-full"
+  >
     <Media>
       <Overlay color="blue-dark">Viktig</Overlay>
       <img
@@ -370,7 +385,7 @@ export const ImageCardLeftWithOverlayLeft = () => (
 );
 
 export const ImageCardLeftWithOverlayRight = () => (
-  <Card href="/#" border="black" direction="row" className="w-96">
+  <Card href="/#" border="black" direction="row" className="w-96 max-w-full">
     <Media>
       <Overlay color="blue-dark" align="right">
         Viktig
@@ -386,7 +401,7 @@ export const ImageCardLeftWithOverlayRight = () => (
 );
 
 export const ImageCardRightWithOverlayLeft = () => (
-  <Card href="/#" border="black" direction="row" className="w-96">
+  <Card href="/#" border="black" direction="row" className="w-96 max-w-full">
     <Heading level={3}>Kort uten bilde</Heading>
     <p>Dette er en beskrivelse</p>
     <Media>
@@ -400,7 +415,7 @@ export const ImageCardRightWithOverlayLeft = () => (
 );
 
 export const ImageCardRightWithOverlayRight = () => (
-  <Card href="/#" border="black" direction="row" className="w-96">
+  <Card href="/#" border="black" direction="row" className="w-96 max-w-full">
     <Heading level={3}>Kort uten bilde</Heading>
     <p>Dette er en beskrivelse</p>
     <Media>
