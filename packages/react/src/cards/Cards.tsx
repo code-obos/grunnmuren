@@ -1,6 +1,6 @@
 import { Link, Provider, type LinkProps } from 'react-aria-components';
 import { cva, cx } from 'cva';
-import { createContext, useContext } from 'react';
+import { createContext, useContext, Children } from 'react';
 import { HeadingContext, MediaContext } from '../content';
 
 // Internal context used for semantics on the Card children
@@ -125,8 +125,8 @@ const cardVariants = cva({
       // Cards with vertical layout should have a 50% width on the media, "auto" otherwise
       row: [
         'gap-x-4',
-        // Force grid items to snap the available spaces
-        'grid-flow-dense', // Move down to icons section
+        // Force grid items to snap the available spaces (this is important for the icon placement, and doesn't affect the layout when there is no icon)
+        'grid-flow-dense',
 
         // **** Icons ****
         // If an icon is the first child:
@@ -142,6 +142,16 @@ const cardVariants = cva({
 
         // **** Media ****
         '[&:has([data-slot="media"])]:grid-cols-[1fr,1fr]',
+        // If media is the first child:
+        '[&:has([data-slot="media"]:first-child)>:not([data-slot="media"])]:col-start-2',
+        '[&:has([data-slot="media"]:last-child)>:not([data-slot="media"])]:col-start-1',
+        // To make sure all the other children only spans their natural height we add a pseudo-element that can take up the remaining space in the grid
+        '[&:has([data-slot="media"])]:after:relative',
+
+        // If there is no media in the card, make sure the content spans the entire height of the card
+        // This override is neccessary due to the inline style passed to the card to make the media grid layout work
+        // As we can't conditionally apply inline styles based on the card children, we need to override the height with a grid-template-rows value instead
+        '[&:not(:has([data-slot="media"]))]:!grid-rows-[auto]',
       ],
       column: '',
     },
@@ -157,6 +167,7 @@ const Card = ({
 }: CardProps) => {
   const hasListContext = useCardsContext();
   const Element = hasListContext ? 'li' : 'div';
+  const numberOfChildren = Children.count(children);
   return (
     <Element
       className={cardVariants({
@@ -165,6 +176,16 @@ const Card = ({
         directon,
         className,
       })}
+      style={
+        directon === 'row'
+          ? {
+              // To make sure the media spans the entire card height while the other children only spans their natural height
+              // We set the grid-template-rows to auto for all children except the last one, which spans the remaining space
+              // The last row will be applied to the pseudo-element that takes up the remaining space of the column containing every other child than the media
+              gridTemplateRows: `repeat(${numberOfChildren - 1}, auto) 1fr`,
+            }
+          : undefined
+      }
     >
       <Provider
         values={[
@@ -174,11 +195,23 @@ const Card = ({
               aspectRatio: '3:2',
               className: cx(
                 // Make sure image is placed to top and the sides over Card the border
-                'mx-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))] mt-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
-                'overflow-hidden rounded-tl-2xl',
-                directon === 'column' && 'rounded-t-2xl',
-                directon === 'row' && 'rounded-l-2xl',
+                'overflow-hidden',
                 !border && 'rounded-b-2xl',
+                // column
+                directon === 'column' &&
+                  'mx-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))] mt-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
+                directon === 'column' && 'rounded-t-2xl',
+
+                // row
+                directon === 'row' && 'first:rounded-l-2xl last:rounded-r-2xl',
+                directon === 'row' && !border && 'rounded-t-2xl',
+                directon === 'row' &&
+                  'my-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
+                directon === 'row' &&
+                  'first:ml-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
+                directon === 'row' &&
+                  'last:mr-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
+
                 // Child (image/video) styles
                 '*:object-cover',
                 // Prepare animation for hover effects
@@ -187,8 +220,17 @@ const Card = ({
                   // Enables the hover effect
                   '*:group-hover/card:motion-safe:scale-110',
               ),
-              // We should never announce the content of media in Cards, as they are purely decorative
+              // Never announce the content of media in Cards, as they are purely decorative
               'aria-hidden': true,
+              style:
+                directon === 'row'
+                  ? {
+                      // Work around since row-span-full doesn't work in a grid with auto rows (unknown number of items)
+                      // and tailwind doesn't support classnames built from variables/template literals
+                      // This makes the media span the entire card height
+                      gridRow: `span ${numberOfChildren} / span ${numberOfChildren}`,
+                    }
+                  : undefined,
             },
           ],
           [
@@ -211,7 +253,8 @@ const Card = ({
                       'focus-visible:after:outline-focus focus-visible:outline-none focus-visible:after:outline-offset-2',
                       // 'focus-visible:outline-none focus-visible:before:absolute focus-visible:before:-inset-2 focus-visible:before:rounded-3xl focus-visible:before:border-2 focus-visible:before:border-black',
                       // hover styles
-                      'border-b-2 border-b-transparent transition-colors group-hover/card:border-b-current',
+                      // TODO: fix line height hon hover
+                      'border-b-2 border-b-transparent transition-colors group-hover/card:*:border-b-current',
                     )}
                     data-slot="card-heading-link"
                   >

@@ -259,3 +259,23 @@ export const LinkCardWithIconRight = () => (
     <PiggyBank />
   </Card>
 );
+
+export const ImageCardLeft = () => (
+  <Card href="/#" border="black" directon="row">
+    <Media>
+      <img src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg" />
+    </Media>
+    <Heading level={3}>Kort uten bilde</Heading>
+    <p>Dette er en beskrivelse</p>
+  </Card>
+);
+
+export const ImageCardRight = () => (
+  <Card href="/#" border="black" directon="row">
+    <Heading level={3}>Kort uten bilde</Heading>
+    <p>Dette er en beskrivelse</p>
+    <Media>
+      <img src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg" />
+    </Media>
+  </Card>
+);
