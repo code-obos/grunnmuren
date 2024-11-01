@@ -310,8 +310,8 @@ const Card = ({
                 direction === 'row' &&
                   'last:mr-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
 
-                // Child (image/video) styles
-                '*:object-cover',
+                // Child image styles
+                '[&_img]:object-cover',
                 // Prepare animation for hover effects. This can also be enabled by classes of the parent component, so it is always prepared here.
                 '*:transition-transform *:duration-300 *:ease-in-out',
                 href &&
