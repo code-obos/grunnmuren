@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Card, Overlay } from './Cards';
+import { Card, ClickArea, Overlay } from './Cards';
 import { Heading, Media } from '../content';
 import { Button } from '../button';
 import {
@@ -48,11 +48,13 @@ export const LinkCardWithoutImage = () => (
 export const LinkCardWithoutImageAndCTA = () => (
   <Card border="black">
     <Heading level={3}>Kort uten bilde</Heading>
-    <p>Dette er en beskrivelse</p>
-    <Button variant="tertiary" href="#cta" className="group">
-      Les mer
-      <ArrowRight className="transition-transform group-hover:motion-safe:translate-x-1" />
-    </Button>
+    <p>Hele dette kortet er klikkbart</p>
+    <ClickArea>
+      <Button variant="tertiary" href="#cta" className="group">
+        Les mer
+        <ArrowRight className="transition-transform group-hover:motion-safe:translate-x-1" />
+      </Button>
+    </ClickArea>
   </Card>
 );
 
@@ -78,12 +80,15 @@ export const LinkCardWithOverlayAndCTA = () => (
     <Heading level={3}>Overskrift</Heading>
     <Overlay color="mint">Info</Overlay>
     <p>
-      Her er overlay plassert rett under overskriften, siden den ikke er kritisk
+      Her er overlay plassert rett under overskriften, siden den ikke er
+      kritisk. Hele kortet er klikkbart.
     </p>
-    <Button variant="tertiary" href="#cta" className="group">
-      Les mer
-      <ArrowRight className="transition-transform group-hover:motion-safe:translate-x-1" />
-    </Button>
+    <ClickArea>
+      <Button variant="tertiary" href="#cta" className="group">
+        Les mer
+        <ArrowRight className="transition-transform group-hover:motion-safe:translate-x-1" />
+      </Button>
+    </ClickArea>
   </Card>
 );
 
@@ -101,11 +106,13 @@ export const BorderedCardWithCtaInside = () => (
       <img src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg" />
     </Media>
     <Heading level={3}>Card 1</Heading>
-    <p>Dette er en beskrivelse</p>
-    <Button variant="tertiary" href="#cta" className="group">
-      Les mer
-      <ArrowRight className="transition-transform group-hover:motion-safe:translate-x-1" />
-    </Button>
+    <p>Hele kortet er klikkbart</p>
+    <ClickArea>
+      <Button variant="tertiary" href="#cta" className="group">
+        Les mer
+        <ArrowRight className="transition-transform group-hover:motion-safe:translate-x-1" />
+      </Button>
+    </ClickArea>
   </Card>
 );
 
@@ -115,7 +122,7 @@ export const LinkCardWithPrimaryCTA = () => (
       <img src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg" />
     </Media>
     <Heading level={3}>Card 1</Heading>
-    <p>Dette er en beskrivelse</p>
+    <p>Kun de individuelle knappene i dette kortet er klikkbare</p>
     <Button variant="primary" href="#cta" className="group">
       Meld forkjøp
       <ArrowRight className="transition-transform group-hover:motion-safe:translate-x-1" />
@@ -133,7 +140,10 @@ export const LinkCardWithTertiaryCTA = () => (
       <img src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg" />
     </Media>
     <Heading level={3}>Card 1</Heading>
-    <p>Dette er en beskrivelse</p>
+    <p>
+      Hele kortet er klikkbart mot linken `#card`. Og CTA-en under er klikkbar
+      isolert for seg, den linker til `#cta`.
+    </p>
     <Button variant="tertiary" href="#cta" className="group">
       Åpne finnannonsen
       <LinkExternal />
@@ -147,7 +157,9 @@ export const CardWithCtaMultipleCTAInside = () => (
       <img src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg" />
     </Media>
     <Heading level={3}>Card 1</Heading>
-    <p>Dette er en beskrivelse</p>
+    <p>
+      Dette kortet er ikke klikkbart i seg selv. Men har to klikkbare CTA-er.
+    </p>
     <Button variant="secondary" href="#secondary" className="group/secondary">
       Bli medlem
       <ArrowRight className="transition-transform group-hover/secondary:motion-safe:translate-x-1" />
@@ -165,7 +177,10 @@ export const LinkCardWithCtaMultipleCTAInside = () => (
       <img src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg" />
     </Media>
     <Heading level={3}>Card 1</Heading>
-    <p>Dette er en beskrivelse</p>
+    <p>
+      Dette kortet er klikkbart i seg selv. Men har også to individuelt
+      klikkbare CTA-er.
+    </p>
     <Button variant="secondary" href="#secondary" className="group/secondary">
       Bli medlem
       <ArrowRight className="transition-transform group-hover/secondary:motion-safe:translate-x-1" />
@@ -190,11 +205,13 @@ export const InfoCard = () => (
 export const InfoCardWithCta = () => (
   <Card className="bg-sky-lightest">
     <Heading level={3}>Informasjonskort</Heading>
-    <p>Dette kortet skal være klikkbart, siden det er én CTA</p>
-    <Button variant="tertiary" href="#" className="group">
-      Les mer
-      <ArrowRight className="transition-transform group-hover:motion-safe:translate-x-1" />
-    </Button>
+    <p>Hele dette kortet skal er klikkbart</p>
+    <ClickArea>
+      <Button variant="tertiary" href="#" className="group">
+        Les mer
+        <ArrowRight className="transition-transform group-hover:motion-safe:translate-x-1" />
+      </Button>
+    </ClickArea>
   </Card>
 );
 
@@ -219,14 +236,13 @@ export const InfoCardWithMultipleCTA = () => (
 export const InfoCardDark = () => (
   <Card className="bg-blue-dark text-white">
     <Heading level={3}>Informasjonskort</Heading>
-    <p>
-      Dette kortet skal ikke være klikkbart, men kan ha klikkbare elementer inne
-      i seg
-    </p>
-    <Button variant="tertiary" href="#" className="group" color="white">
-      Les mer
-      <ArrowRight className="transition-transform group-hover:motion-safe:translate-x-1" />
-    </Button>
+    <p>Hele dette kortet er klikkbart</p>
+    <ClickArea>
+      <Button variant="tertiary" href="#" className="group" color="white">
+        Les mer
+        <ArrowRight className="transition-transform group-hover:motion-safe:translate-x-1" />
+      </Button>
+    </ClickArea>
   </Card>
 );
 
@@ -245,7 +261,7 @@ export const InfoCardWithInlineContent = () => (
 );
 
 export const LinkCardWithIconLeft = () => (
-  <Card href="/#" border="black" directon="row">
+  <Card href="/#" border="black" directon="row" className="w-60">
     <PiggyBank />
     <Heading level={3}>Kort uten bilde</Heading>
     <p>Dette er en beskrivelse</p>
@@ -253,7 +269,7 @@ export const LinkCardWithIconLeft = () => (
 );
 
 export const LinkCardWithIconRight = () => (
-  <Card href="/#" border="black" directon="row">
+  <Card href="/#" border="black" directon="row" className="w-60">
     <Heading level={3}>Kort uten bilde</Heading>
     <p>Dette er en beskrivelse</p>
     <PiggyBank />
@@ -261,7 +277,7 @@ export const LinkCardWithIconRight = () => (
 );
 
 export const ImageCardLeft = () => (
-  <Card href="/#" border="black" directon="row">
+  <Card href="/#" border="black" directon="row" className="w-96">
     <Media>
       <img src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg" />
     </Media>
@@ -271,7 +287,7 @@ export const ImageCardLeft = () => (
 );
 
 export const ImageCardRight = () => (
-  <Card href="/#" border="black" directon="row">
+  <Card href="/#" border="black" directon="row" className="w-96">
     <Heading level={3}>Kort uten bilde</Heading>
     <p>Dette er en beskrivelse</p>
     <Media>

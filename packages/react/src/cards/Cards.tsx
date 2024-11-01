@@ -1,4 +1,9 @@
-import { Link, Provider, type LinkProps } from 'react-aria-components';
+import {
+  ContextValue,
+  Link,
+  Provider,
+  type LinkProps,
+} from 'react-aria-components';
 import { cva, cx } from 'cva';
 import { createContext, useContext, Children } from 'react';
 import { HeadingContext, MediaContext } from '../content';
@@ -21,7 +26,6 @@ type OverlayProps = {
 
 const overlayVariants = cva({
   // Needs a negative offset to align with the card border
-  // z-index is set to make sure it is always placed on top of the image,
   // even when the overlay is put before the image in the DOM.
   base: 'w-fit px-3 py-2',
   variants: {
@@ -54,6 +58,7 @@ const Overlay = ({
     className={cx(
       className,
       // Position over the Card border by using negative position
+      // z-index is set to make sure it is always placed on top of the image
       'absolute left-[calc(theme(borderWidth.DEFAULT)*-1)] right-[calc(theme(borderWidth.DEFAULT)*-1)] top-[calc(theme(borderWidth.DEFAULT)*-1)] z-[1] overflow-hidden rounded-t-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
       // Make sure click events "pass through" the overlay to the card
       'pointer-events-none',
@@ -82,6 +87,39 @@ type CardProps = {
   directon?: 'row' | 'column';
 };
 
+type ClickAreaProps = {
+  children: JSX.Element;
+  /**
+   * Determines if the click area is active or not.
+   * @default true
+   */
+  active?: boolean;
+};
+
+const ClickAreaContext = createContext<
+  ContextValue<Partial<ClickAreaProps>, HTMLDivElement>
+>({});
+
+const ClickArea = ({ children, active = true }: ClickAreaProps) =>
+  active ? (
+    <div
+      data-slot="click-area"
+      className={cx(
+        // Make sure the click area is always placed on top of overlay and media
+        'z-[1]',
+        '[&>:first-child]:after:absolute [&>:first-child]:after:inset-0 [&>:first-child]:after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
+        // Remove focus outline from the child
+        '[&>:first-child:focus-visible]:outline-none',
+        // Focus styles for the click area
+        '[&>:first-child:focus-visible]:after:outline-focus [&>:first-child:focus-visible]:after:outline-offset-2',
+      )}
+    >
+      {children}
+    </div>
+  ) : (
+    children
+  );
+
 const cardVariants = cva({
   base: [
     // We can't use overflow-hidden on the card to force content to follow the border radius as it will hide the focus outline
@@ -102,25 +140,22 @@ const cardVariants = cva({
     },
     href: {
       false: [
-        // Make entire card clickable if it contains one single CTA but no other clickable elements, and has no href prop for the entire card
-        '[&:not(:has(a:not([data-slot="button"]),button:not([data-slot="button"]),input))_[data-slot="button"]:first-of-type:last-of-type]:after:absolute',
-        // Make the pseudo-element cover the entire card
-        '[&:not(:has(a:not([data-slot="button"]),button:not([data-slot="button"]),input))_[data-slot="button"]:first-of-type:last-of-type]:after:inset-0',
-        // Fixes rounding of the pseudo-element corners so they align perfectly with the card
-        '[&:not(:has(a:not([data-slot="button"]),button:not([data-slot="button"]),input))_[data-slot="button"]:first-of-type:last-of-type]:after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
-        // Focus styles on CTA (only when there is one single CTA as the only interactive element)
-        '[&:not(:has(a:not([data-slot="button"]),button:not([data-slot="button"]),input))_[data-slot="button"]:first-of-type:last-of-type:focus-visible]:after:outline-focus [&:not(:has(a:not([data-slot="button"]),button:not([data-slot="button"]),input))_[data-slot="button"]:first-of-type:last-of-type:focus-visible]:outline-none [&:not(:has(a:not([data-slot="button"]),button:not([data-slot="button"]),input))_[data-slot="button"]:first-of-type:last-of-type:focus-visible]:after:outline-offset-2',
-        // Hover effect on CTA (only when there is one single CTA as the only interactive element)
-        '[&:hover:has([data-slot="button"]:first-of-type:last-of-type)_[data-slot="media"]_*]:motion-safe:scale-110',
+        // Hover effect on the Card image if the card has a ClickArea
+        '[&:hover:has([data-slot="click-area"])_[data-slot="media"]_*]:motion-safe:scale-110',
+        // Hover effect on the Card heading if the card has a ClickArea
+        '[&:hover:has([data-slot="click-area"])_[data-slot="heading"]]:border-b-current',
       ],
       true: [
         // Make interactive elements clickable by themselves, while the rest of the card is clickable as a whole
         // The card is then made clickable by a pseudo-element on the heading that covers the entire card
         // And since the heading (card-heading-link) comes before all other content, they will be clickable by just setting their position to relative
         '[&_a:not([data-slot="card-heading-link"])]:relative [&_button]:relative [&_input]:relative',
-        // Don't trigger image zoom hover effect on the entire card when hovering CTA's
+        // Make sure other interactive elements are placed on top of the pseudo-element that makes the entire card clickable by setting a higher z-index
+        '[&_a:not([data-slot="card-heading-link"])]:z-[2] [&_button]:z-[2] [&_input]:z-[2]',
+
+        // Don't trigger image zoom hover effect on the entire card when hovering other clickable elements
         '[&:has(a:not([data-slot="card-heading-link"]):hover)_[data-slot="media"]_*]:scale-100',
-        // Don't trigger underline hover effect on title when hovering CTA's
+        // Don't trigger underline hover effect on title when hovering other clickable elements
         '[&:has(a:not([data-slot="card-heading-link"]):hover)_[data-slot="card-heading-link"]]:border-b-transparent',
       ],
     },
@@ -144,6 +179,7 @@ const cardVariants = cva({
         '[&>svg]:self-center',
 
         // **** Media ****
+        // Media should span 50% of the card width, the rest should span the remaining 50% space
         '[&:has([data-slot="media"])]:grid-cols-[1fr,1fr]',
         // If media is the first child:
         '[&:has([data-slot="media"]:first-child)>:not([data-slot="media"])]:col-start-2',
@@ -193,6 +229,14 @@ const Card = ({
       <Provider
         values={[
           [
+            ClickAreaContext,
+            {
+              // The click area is only active for other elements when the Card does not have a href itself.
+              // Without this the Card heading link click area (which takes up the entire card) would never be clickable, as this ClickArea would be placed on top of it
+              active: !href,
+            },
+          ],
+          [
             MediaContext,
             {
               aspectRatio: '3:2',
@@ -239,24 +283,31 @@ const Card = ({
           [
             HeadingContext,
             {
-              className: 'heading-s inline text-pretty',
+              className: cx(
+                'heading-s inline text-pretty',
+                // Set up hover effect for the heading that can be triggered by the ClickArea
+                !href &&
+                  'w-fit border-b-2 border-b-transparent transition-colors',
+              ),
               _innerWrapper: (children) =>
                 href ? (
                   <Link
                     href={href}
                     // Uses a pseudo-element with absolute position to make the entire card focusable and clickable
-                    // Makes border-radius of the focus ring match the image border-radius
                     className={cx(
                       // Pseudo-element needed to enable click on entire card
                       // It is also used to apply focus styles.
                       // Note that the border-radius is set 1px less then the card radius
                       // This is due to the fact that the card as a 1px border and needs to be adjusted to align perfectly
-                      'no-underline after:absolute after:inset-0 after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
+                      // z-index is set to make sure it is always placed on top of the image and overlay
+                      'no-underline after:absolute after:inset-0 after:z-[1] after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
                       // focus styles
                       'focus-visible:after:outline-focus focus-visible:outline-none focus-visible:after:outline-offset-2',
                       // hover styles
-                      // TODO: fix line height hon hover
-                      'border-b-2 border-b-transparent transition-colors group-hover/card:*:border-b-current',
+                      'border-b-2 border-b-transparent transition-colors group-hover/card:border-b-current',
+                      // Ensure this wrapper link has the exact same line-height as the heading
+                      // This is necessary to make sure the hover effect underline matches the heading line-height
+                      'heading-s',
                     )}
                     data-slot="card-heading-link"
                   >
@@ -288,4 +339,13 @@ const Cards = ({ className, children }: CardsProps) => {
   );
 };
 
-export { Overlay, OverlayProps, Card, type CardProps, type CardsProps, Cards };
+export {
+  Overlay,
+  OverlayProps,
+  type ClickAreaProps,
+  ClickArea,
+  Card,
+  type CardProps,
+  type CardsProps,
+  Cards,
+};
