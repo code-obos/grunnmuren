@@ -17,17 +17,12 @@ const CardsContextProvider = ({ children }: { children: React.ReactNode }) => (
   <CardsContext.Provider value={true}>{children}</CardsContext.Provider>
 );
 
-type OverlayProps = Pick<CardProps, 'direction'> & {
+type OverlayProps = {
   color?: 'blue-dark' | 'blue' | 'mint';
   align?: 'left' | 'right';
   className?: string;
   children: React.ReactNode;
 };
-
-// Internal context used for positioning the overlay
-const OverlayContext = createContext<
-  ContextValue<Partial<OverlayProps>, HTMLDivElement>
->({});
 
 const overlayVariants = cva({
   base: 'inline-flex w-fit px-3 py-2',
@@ -38,69 +33,48 @@ const overlayVariants = cva({
       mint: ['bg-mint', 'text-black'],
     },
     align: {
-      left: '',
-      right: '',
-    },
-    direction: {
-      column: '',
-      row: '',
-    },
-  },
-  compoundVariants: [
-    {
-      align: 'left',
-      direction: 'column',
-      className:
-        // Make sure the overlay corner radius aligns perfectly with the card
-        'rounded-br-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
-    },
-    {
-      align: 'right',
-      direction: 'column',
-      className:
-        // Make sure the overlay corner radius aligns perfectly with the card
+      // Make sure the overlay corner radius aligns perfectly with the card
+      left: 'rounded-br-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
+      // Make sure the overlay corner radius aligns perfectly with the card
+      right:
         'rounded-bl-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
     },
-  ],
+  },
 });
 
 const Overlay = ({
   className,
   color = 'blue-dark',
   align = 'left',
-  direction = 'column',
   children,
-}: OverlayProps) => {
-  return (
-    // Wrapper to prevent the overlay from overflowing (overflow-hidden) the card border radius if it's wider than the card and wrapps to a new line
-    <div
-      data-slot="overlay"
-      className={cx(
-        className,
-        'bottom-[calc(theme(borderWidth.DEFAULT)*-1)] left-[calc(theme(borderWidth.DEFAULT)*-1)] right-[calc(theme(borderWidth.DEFAULT)*-1)] top-[calc(theme(borderWidth.DEFAULT)*-1)]',
-        // z-index is set to make sure it is always placed on top of the image (this element inherintly have position absolute when put inside a Media component, which is the intended use)
-        'z-[1]',
-        // Overflow hidden is set to make sure the overlay always follows the border radius of the Media, no matter where it is placed
-        ' overflow-hidden',
+}: OverlayProps) => (
+  // Wrapper to prevent the overlay from overflowing the card border radius if it's wider than the card and wrapps to a new line
+  <div
+    data-slot="overlay"
+    className={cx(
+      className,
+      'bottom-[calc(theme(borderWidth.DEFAULT)*-1)] left-[calc(theme(borderWidth.DEFAULT)*-1)] right-[calc(theme(borderWidth.DEFAULT)*-1)] top-[calc(theme(borderWidth.DEFAULT)*-1)]',
+      // z-index is set to make sure it is always placed on top of the image (this element inherintly have position absolute when put inside a Media component, which is the intended use)
+      'z-[1]',
+      // Overflow hidden is set to make sure the overlay always follows the border radius of the Media, no matter where it is placed
+      ' overflow-hidden',
 
-        align === 'right' && 'text-right',
-        // Make sure click events "pass through" the overlay to the card
-        'pointer-events-none',
-      )}
+      align === 'right' && 'text-right',
+      // Make sure click events "pass through" the overlay to the card
+      'pointer-events-none',
+    )}
+  >
+    <span
+      className={overlayVariants({
+        color,
+        align,
+        className,
+      })}
     >
-      <span
-        className={overlayVariants({
-          color,
-          align,
-          className,
-          direction,
-        })}
-      >
-        {children}
-      </span>
-    </div>
-  );
-};
+      {children}
+    </span>
+  </div>
+);
 
 type CardProps = {
   className?: string;
@@ -256,7 +230,6 @@ const Card = ({
     >
       <Provider
         values={[
-          [OverlayContext, { direction }],
           [
             ClickAreaContext,
             {
