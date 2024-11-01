@@ -142,8 +142,7 @@ const cardVariants = cva({
     href: {
       false: [
         // Hover effect on the Card image if the card has a ClickArea
-        // TODO: fix hover effect that affects overlay
-        '[&:hover:has([data-slot="click-area"])_[data-slot="media"]_img]:motion-safe:scale-110',
+        '[&:hover:has([data-slot="click-area"])_[data-slot="media"]>:not([data-slot="overlay"])]:motion-safe:scale-110',
         // Hover effect on the Card heading if the card has a ClickArea
         '[&:hover:has([data-slot="click-area"])_[data-slot="heading"]]:border-b-current',
       ],
