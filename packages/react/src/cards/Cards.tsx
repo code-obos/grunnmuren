@@ -291,13 +291,16 @@ const Card = ({
                 // Make sure image is placed to top and the sides over Card the border
                 'overflow-hidden',
                 !border && 'rounded-b-2xl',
-                // column
+                // *** Column direction ***
+                // Positions the media to the top of the card and make sure it spans the entire width of the card
                 direction === 'column' &&
                   'mx-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))] mt-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
+                // Rounded top corners for the media to match the card
                 direction === 'column' && 'rounded-t-2xl',
+                // Makes sure the media is always displayed first in the card in a column layout
                 direction === 'column' && '-order-1',
 
-                // row
+                // *** Row direction ***
                 direction === 'row' && 'first:rounded-l-2xl last:rounded-r-2xl',
                 direction === 'row' && !border && 'rounded-t-2xl',
                 direction === 'row' &&
