@@ -7,6 +7,7 @@ import {
 import { cva, cx } from 'cva';
 import { createContext, useContext, Children } from 'react';
 import { HeadingContext, MediaContext } from '../content';
+import { useMatchMedia } from '../hooks';
 
 // Internal context used for semantics on the Card children
 const CardsContext = createContext(false);
@@ -76,6 +77,17 @@ const Overlay = ({
   </div>
 );
 
+type Direction = 'row' | 'column';
+
+type ResponsiveDirection = {
+  default?: Direction;
+  sm?: Direction;
+  md?: Direction;
+  lg?: Direction;
+  xl?: Direction;
+  '2xl'?: Direction;
+};
+
 type CardProps = {
   className?: string;
   children: React.ReactNode;
@@ -85,7 +97,7 @@ type CardProps = {
    * Determines the direction of the card layout (column: vertical, row: horizontal).
    * @default column
    */
-  direction?: 'row' | 'column';
+  direction?: Direction | ResponsiveDirection;
 };
 
 type ClickAreaProps = {
@@ -198,15 +210,49 @@ const cardVariants = cva({
   },
 });
 
+const defaultDirection = 'column';
+
 const Card = ({
   className,
   border,
   href,
-  direction = 'column',
+  direction: _direction = defaultDirection,
   children,
 }: CardProps) => {
   const hasListContext = useCardsContext();
   const Element = hasListContext ? 'li' : 'div';
+
+  // Tailwind breakpoints
+  const breakPointMap = {
+    sm: '(min-width: 640px)',
+    md: '(min-width: 768px)',
+    lg: '(min-width: 1024px)',
+    xl: '(min-width: 1280px)',
+    '2xl': '(min-width: 1536px)',
+  };
+  // Breakpoints in order of priority (largest to smallest), since we are using min-width we start with the largest breakpoint
+  const orderedBreakPoints = ['2xl', 'xl', 'lg', 'md', 'sm'] as const;
+
+  let direction =
+    typeof _direction === 'string'
+      ? _direction
+      : _direction.default ?? defaultDirection;
+
+  const matches = {
+    sm: useMatchMedia(breakPointMap['sm']),
+    md: useMatchMedia(breakPointMap['md']),
+    lg: useMatchMedia(breakPointMap['lg']),
+    xl: useMatchMedia(breakPointMap['xl']),
+    '2xl': useMatchMedia(breakPointMap['2xl']),
+  };
+  if (typeof _direction !== 'string') {
+    orderedBreakPoints.forEach((breakPoint) => {
+      if (matches[breakPoint]) {
+        direction = _direction[breakPoint] ?? direction;
+      }
+    });
+  }
+
   const numberOfChildren = Children.count(children);
   return (
     <Element
@@ -249,6 +295,7 @@ const Card = ({
                 direction === 'column' &&
                   'mx-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))] mt-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
                 direction === 'column' && 'rounded-t-2xl',
+                direction === 'column' && '-order-1',
 
                 // row
                 direction === 'row' && 'first:rounded-l-2xl last:rounded-r-2xl',

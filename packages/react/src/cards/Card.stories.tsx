@@ -411,3 +411,19 @@ export const ImageCardRightWithOverlayRight = () => (
     </Media>
   </Card>
 );
+
+export const CardWithResponsiveDirection = () => (
+  <Card href="/#" border="black" direction={{ lg: 'row' }}>
+    <Heading level={3}>Responsiv layout</Heading>
+    <p>Dette kortet endrer layout etter breakpoints</p>
+    <Media>
+      <Overlay color="blue-dark" align="right">
+        Viktig
+      </Overlay>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+      />
+    </Media>
+  </Card>
+);
