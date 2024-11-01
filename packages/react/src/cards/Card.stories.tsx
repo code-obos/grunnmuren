@@ -65,11 +65,11 @@ export const LinkCardWithoutImageAndCTA = () => (
 export const LinkCardWithImportantOverlayLeft = () => (
   <Card border="black" href="#card">
     <Media>
-      <Overlay color="blue-dark">Viktig - må komme først</Overlay>
       <img
         alt=""
         src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
       />
+      <Overlay color="blue-dark">Viktig</Overlay>
     </Media>
     <Heading level={3}>Overskrift</Heading>
     <p>
@@ -83,7 +83,7 @@ export const LinkCardWithImportantOverlayRight = () => (
   <Card border="black" href="#card">
     <Media>
       <Overlay color="blue-dark" align="right">
-        Viktig - må komme først
+        Viktig
       </Overlay>
       <img
         alt=""
