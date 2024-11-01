@@ -75,7 +75,10 @@ type CardProps = {
   children: React.ReactNode;
   href?: LinkProps['href'];
   border?: 'black' | 'dark-blue' | 'dark-green';
-  /** @default 'column' */
+  /**
+   * Determines the direction of the card layout (column: vertical, row: horizontal).
+   * @default column
+   */
   directon?: 'row' | 'column';
 };
 
