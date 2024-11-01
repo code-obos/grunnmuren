@@ -17,17 +17,20 @@ const CardsContextProvider = ({ children }: { children: React.ReactNode }) => (
   <CardsContext.Provider value={true}>{children}</CardsContext.Provider>
 );
 
-type OverlayProps = {
+type OverlayProps = Pick<CardProps, 'direction'> & {
   color?: 'blue-dark' | 'blue' | 'mint';
   align?: 'left' | 'right';
   className?: string;
   children: React.ReactNode;
 };
 
+// Internal context used for positioning the overlay
+const OverlayContext = createContext<
+  ContextValue<Partial<OverlayProps>, HTMLDivElement>
+>({});
+
 const overlayVariants = cva({
-  // Needs a negative offset to align with the card border
-  // even when the overlay is put before the image in the DOM.
-  base: 'w-fit px-3 py-2',
+  base: 'inline-flex w-fit px-3 py-2',
   variants: {
     color: {
       'blue-dark': ['bg-blue-dark', 'text-white'],
@@ -35,45 +38,69 @@ const overlayVariants = cva({
       mint: ['bg-mint', 'text-black'],
     },
     align: {
-      left: [
-        // Make sure the overlay corner radius aligns perfectly with the card
-        'rounded-br-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
-      ],
-      right: [
-        // Make sure the overlay corner radius aligns perfectly with the card
-        'rounded-bl-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
-      ],
+      left: '',
+      right: '',
+    },
+    direction: {
+      column: '',
+      row: '',
     },
   },
+  compoundVariants: [
+    {
+      align: 'left',
+      direction: 'column',
+      className:
+        // Make sure the overlay corner radius aligns perfectly with the card
+        'rounded-br-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
+    },
+    {
+      align: 'right',
+      direction: 'column',
+      className:
+        // Make sure the overlay corner radius aligns perfectly with the card
+        'rounded-bl-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
+    },
+  ],
 });
 
 const Overlay = ({
   className,
   color = 'blue-dark',
   align = 'left',
-  ...props
-}: OverlayProps) => (
-  // Wrapper to prevent the overlay from overflowing (overflow-hidden) the card border radius if it's wider than the card and wrapps to a new line
-  <div
-    className={cx(
-      className,
-      // Position over the Card border by using negative position
-      // z-index is set to make sure it is always placed on top of the image
-      'absolute left-[calc(theme(borderWidth.DEFAULT)*-1)] right-[calc(theme(borderWidth.DEFAULT)*-1)] top-[calc(theme(borderWidth.DEFAULT)*-1)] z-[1] overflow-hidden rounded-t-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
-      // Make sure click events "pass through" the overlay to the card
-      'pointer-events-none',
-    )}
-  >
+  direction = 'column',
+  children,
+}: OverlayProps) => {
+  return (
+    // Wrapper to prevent the overlay from overflowing (overflow-hidden) the card border radius if it's wider than the card and wrapps to a new line
     <div
-      className={overlayVariants({
-        color,
-        align,
+      data-slot="overlay"
+      className={cx(
         className,
-      })}
-      {...props}
-    />
-  </div>
-);
+        'bottom-[calc(theme(borderWidth.DEFAULT)*-1)] left-[calc(theme(borderWidth.DEFAULT)*-1)] right-[calc(theme(borderWidth.DEFAULT)*-1)] top-[calc(theme(borderWidth.DEFAULT)*-1)]',
+        // z-index is set to make sure it is always placed on top of the image (this element inherintly have position absolute when put inside a Media component, which is the intended use)
+        'z-[1]',
+        // Overflow hidden is set to make sure the overlay always follows the border radius of the Media, no matter where it is placed
+        ' overflow-hidden',
+
+        align === 'right' && 'text-right',
+        // Make sure click events "pass through" the overlay to the card
+        'pointer-events-none',
+      )}
+    >
+      <span
+        className={overlayVariants({
+          color,
+          align,
+          className,
+          direction,
+        })}
+      >
+        {children}
+      </span>
+    </div>
+  );
+};
 
 type CardProps = {
   className?: string;
@@ -84,7 +111,7 @@ type CardProps = {
    * Determines the direction of the card layout (column: vertical, row: horizontal).
    * @default column
    */
-  directon?: 'row' | 'column';
+  direction?: 'row' | 'column';
 };
 
 type ClickAreaProps = {
@@ -141,7 +168,8 @@ const cardVariants = cva({
     href: {
       false: [
         // Hover effect on the Card image if the card has a ClickArea
-        '[&:hover:has([data-slot="click-area"])_[data-slot="media"]_*]:motion-safe:scale-110',
+        // TODO: fix hover effect that affects overlay
+        '[&:hover:has([data-slot="click-area"])_[data-slot="media"]_img]:motion-safe:scale-110',
         // Hover effect on the Card heading if the card has a ClickArea
         '[&:hover:has([data-slot="click-area"])_[data-slot="heading"]]:border-b-current',
       ],
@@ -154,12 +182,12 @@ const cardVariants = cva({
         '[&_a:not([data-slot="card-heading-link"])]:z-[2] [&_button]:z-[2] [&_input]:z-[2]',
 
         // Don't trigger image zoom hover effect on the entire card when hovering other clickable elements
-        '[&:has(a:not([data-slot="card-heading-link"]):hover)_[data-slot="media"]_*]:scale-100',
+        '[&:has(a:not([data-slot="card-heading-link"]):hover)_[data-slot="media"]_*:not([data-slot="overlay"])]:scale-100',
         // Don't trigger underline hover effect on title when hovering other clickable elements
         '[&:has(a:not([data-slot="card-heading-link"]):hover)_[data-slot="card-heading-link"]]:border-b-transparent',
       ],
     },
-    directon: {
+    direction: {
       // Cards with vertical layout should have a 50% width on the media, "auto" otherwise
       row: [
         'gap-x-4',
@@ -201,7 +229,7 @@ const Card = ({
   className,
   border,
   href,
-  directon = 'column',
+  direction = 'column',
   children,
 }: CardProps) => {
   const hasListContext = useCardsContext();
@@ -212,11 +240,11 @@ const Card = ({
       className={cardVariants({
         border,
         href: !!href,
-        directon,
+        direction,
         className,
       })}
       style={
-        directon === 'row'
+        direction === 'row'
           ? {
               // To make sure the media spans the entire card height while the other children only spans their natural height
               // We set the grid-template-rows to auto for all children except the last one, which spans the remaining space
@@ -228,6 +256,7 @@ const Card = ({
     >
       <Provider
         values={[
+          [OverlayContext, { direction }],
           [
             ClickAreaContext,
             {
@@ -245,18 +274,18 @@ const Card = ({
                 'overflow-hidden',
                 !border && 'rounded-b-2xl',
                 // column
-                directon === 'column' &&
+                direction === 'column' &&
                   'mx-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))] mt-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
-                directon === 'column' && 'rounded-t-2xl',
+                direction === 'column' && 'rounded-t-2xl',
 
                 // row
-                directon === 'row' && 'first:rounded-l-2xl last:rounded-r-2xl',
-                directon === 'row' && !border && 'rounded-t-2xl',
-                directon === 'row' &&
+                direction === 'row' && 'first:rounded-l-2xl last:rounded-r-2xl',
+                direction === 'row' && !border && 'rounded-t-2xl',
+                direction === 'row' &&
                   'my-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
-                directon === 'row' &&
+                direction === 'row' &&
                   'first:ml-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
-                directon === 'row' &&
+                direction === 'row' &&
                   'last:mr-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
 
                 // Child (image/video) styles
@@ -265,12 +294,10 @@ const Card = ({
                 '*:transition-transform *:duration-300 *:ease-in-out',
                 href &&
                   // Enables the hover effect
-                  '*:group-hover/card:motion-safe:scale-110',
+                  '[&>:not([data-slot="overlay"])]:group-hover/card:motion-safe:scale-110',
               ),
-              // Never announce the content of media in Cards, as they are purely decorative
-              'aria-hidden': true,
               style:
-                directon === 'row'
+                direction === 'row'
                   ? {
                       // Work around since row-span-full doesn't work in a grid with auto rows (unknown number of items)
                       // and tailwind doesn't support classnames built from variables/template literals

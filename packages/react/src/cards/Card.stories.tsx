@@ -15,7 +15,10 @@ const meta: Meta<typeof Card> = {
   render: (props) => (
     <Card {...props}>
       <Media>
-        <img src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg" />
+        <img
+          alt=""
+          src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+        />
       </Media>
       <Heading level={3}>Card 1</Heading>
       <p>Dette er en beskrivelse</p>
@@ -59,11 +62,33 @@ export const LinkCardWithoutImageAndCTA = () => (
   </Card>
 );
 
-export const LinkCardWithImportantOverlay = () => (
+export const LinkCardWithImportantOverlayLeft = () => (
   <Card border="black" href="#card">
-    <Overlay color="blue-dark">Viktig - må komme først</Overlay>
     <Media>
-      <img src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg" />
+      <Overlay color="blue-dark">Viktig - må komme først</Overlay>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+      />
+    </Media>
+    <Heading level={3}>Overskrift</Heading>
+    <p>
+      Her er informasjonen i overlay ekstra viktig, og derfor plassert før allt
+      annt
+    </p>
+  </Card>
+);
+
+export const LinkCardWithImportantOverlayRight = () => (
+  <Card border="black" href="#card">
+    <Media>
+      <Overlay color="blue-dark" align="right">
+        Viktig - må komme først
+      </Overlay>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+      />
     </Media>
     <Heading level={3}>Overskrift</Heading>
     <p>
@@ -76,10 +101,13 @@ export const LinkCardWithImportantOverlay = () => (
 export const LinkCardWithOverlayAndCTA = () => (
   <Card border="black">
     <Media>
-      <img src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg" />
+      <Overlay color="mint">Info</Overlay>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+      />
     </Media>
     <Heading level={3}>Overskrift</Heading>
-    <Overlay color="mint">Info</Overlay>
     <p>
       Her er overlay plassert rett under overskriften, siden den ikke er
       kritisk. Hele kortet er klikkbart.
@@ -104,7 +132,10 @@ export const BorderedCard: Story = {
 export const BorderedCardWithCtaInside = () => (
   <Card border="dark-blue">
     <Media>
-      <img src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg" />
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+      />
     </Media>
     <Heading level={3}>Card 1</Heading>
     <p>Hele kortet er klikkbart</p>
@@ -120,7 +151,10 @@ export const BorderedCardWithCtaInside = () => (
 export const LinkCardWithPrimaryCTA = () => (
   <Card border="dark-blue" href="#card">
     <Media>
-      <img src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg" />
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+      />
     </Media>
     <Heading level={3}>Card 1</Heading>
     <p>Kun de individuelle knappene i dette kortet er klikkbare</p>
@@ -138,7 +172,10 @@ export const LinkCardWithPrimaryCTA = () => (
 export const LinkCardWithTertiaryCTA = () => (
   <Card border="dark-blue" href="#card">
     <Media>
-      <img src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg" />
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+      />
     </Media>
     <Heading level={3}>Card 1</Heading>
     <p>
@@ -155,7 +192,10 @@ export const LinkCardWithTertiaryCTA = () => (
 export const CardWithCtaMultipleCTAInside = () => (
   <Card border="dark-blue">
     <Media>
-      <img src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg" />
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+      />
     </Media>
     <Heading level={3}>Card 1</Heading>
     <p>
@@ -175,7 +215,10 @@ export const CardWithCtaMultipleCTAInside = () => (
 export const LinkCardWithCtaMultipleCTAInside = () => (
   <Card border="dark-blue" href="#card">
     <Media>
-      <img src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg" />
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+      />
     </Media>
     <Heading level={3}>Card 1</Heading>
     <p>
@@ -262,7 +305,7 @@ export const InfoCardWithInlineContent = () => (
 );
 
 export const LinkCardWithIconLeft = () => (
-  <Card href="/#" border="black" directon="row" className="w-60">
+  <Card href="/#" border="black" direction="row" className="w-60">
     <PiggyBank />
     <Heading level={3}>Kort uten bilde</Heading>
     <p>Dette er en beskrivelse</p>
@@ -270,7 +313,7 @@ export const LinkCardWithIconLeft = () => (
 );
 
 export const LinkCardWithIconRight = () => (
-  <Card href="/#" border="black" directon="row" className="w-60">
+  <Card href="/#" border="black" direction="row" className="w-60">
     <Heading level={3}>Kort uten bilde</Heading>
     <p>Dette er en beskrivelse</p>
     <PiggyBank />
@@ -278,9 +321,12 @@ export const LinkCardWithIconRight = () => (
 );
 
 export const ImageCardLeft = () => (
-  <Card href="/#" border="black" directon="row" className="w-96">
+  <Card href="/#" border="black" direction="row" className="w-96">
     <Media>
-      <img src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg" />
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+      />
     </Media>
     <Heading level={3}>Kort uten bilde</Heading>
     <p>Dette er en beskrivelse</p>
@@ -291,14 +337,77 @@ export const ImageCardLeft = () => (
 );
 
 export const ImageCardRight = () => (
-  <Card href="/#" border="black" directon="row" className="w-96">
+  <Card href="/#" border="black" direction="row" className="w-96">
     <Heading level={3}>Kort uten bilde</Heading>
     <p>Dette er en beskrivelse</p>
     <Badge size="small" color="mint">
       Visning
     </Badge>
     <Media>
-      <img src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg" />
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+      />
+    </Media>
+  </Card>
+);
+
+export const ImageCardLeftWithOverlayLeft = () => (
+  <Card href="/#" border="black" direction="row" className="w-96">
+    <Media>
+      <Overlay color="blue-dark">Viktig</Overlay>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+      />
+    </Media>
+    <Heading level={3}>Kort uten bilde</Heading>
+    <p>Dette er en beskrivelse</p>
+  </Card>
+);
+
+export const ImageCardLeftWithOverlayRight = () => (
+  <Card href="/#" border="black" direction="row" className="w-96">
+    <Media>
+      <Overlay color="blue-dark" align="right">
+        Viktig
+      </Overlay>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+      />
+    </Media>
+    <Heading level={3}>Kort uten bilde</Heading>
+    <p>Dette er en beskrivelse</p>
+  </Card>
+);
+
+export const ImageCardRightWithOverlayLeft = () => (
+  <Card href="/#" border="black" direction="row" className="w-96">
+    <Heading level={3}>Kort uten bilde</Heading>
+    <p>Dette er en beskrivelse</p>
+    <Media>
+      <Overlay color="blue-dark">Viktig</Overlay>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+      />
+    </Media>
+  </Card>
+);
+
+export const ImageCardRightWithOverlayRight = () => (
+  <Card href="/#" border="black" direction="row" className="w-96">
+    <Heading level={3}>Kort uten bilde</Heading>
+    <p>Dette er en beskrivelse</p>
+    <Media>
+      <Overlay color="blue-dark" align="right">
+        Viktig
+      </Overlay>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+      />
     </Media>
   </Card>
 );
