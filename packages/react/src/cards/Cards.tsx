@@ -214,7 +214,7 @@ const Card = ({
 
                 // Child (image/video) styles
                 '*:object-cover',
-                // Prepare animation for hover effects
+                // Prepare animation for hover effects. This can also be enabled by classes of the parent component, so it is always prepared here.
                 '*:transition-transform *:duration-300 *:ease-in-out',
                 href &&
                   // Enables the hover effect
@@ -251,7 +251,6 @@ const Card = ({
                       'no-underline after:absolute after:inset-0 after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
                       // focus styles
                       'focus-visible:after:outline-focus focus-visible:outline-none focus-visible:after:outline-offset-2',
-                      // 'focus-visible:outline-none focus-visible:before:absolute focus-visible:before:-inset-2 focus-visible:before:rounded-3xl focus-visible:before:border-2 focus-visible:before:border-black',
                       // hover styles
                       // TODO: fix line height hon hover
                       'border-b-2 border-b-transparent transition-colors group-hover/card:*:border-b-current',
