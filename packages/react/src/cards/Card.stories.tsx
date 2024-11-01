@@ -7,6 +7,7 @@ import {
   LinkExternal,
   PiggyBank,
 } from '@obosbbl/grunnmuren-icons-react';
+import { Badge } from '../badge';
 
 const meta: Meta<typeof Card> = {
   title: 'Card',
@@ -283,6 +284,9 @@ export const ImageCardLeft = () => (
     </Media>
     <Heading level={3}>Kort uten bilde</Heading>
     <p>Dette er en beskrivelse</p>
+    <Badge size="small" color="mint">
+      Visning
+    </Badge>
   </Card>
 );
 
@@ -290,6 +294,9 @@ export const ImageCardRight = () => (
   <Card href="/#" border="black" directon="row" className="w-96">
     <Heading level={3}>Kort uten bilde</Heading>
     <p>Dette er en beskrivelse</p>
+    <Badge size="small" color="mint">
+      Visning
+    </Badge>
     <Media>
       <img src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg" />
     </Media>
