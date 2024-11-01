@@ -321,7 +321,7 @@ export const LinkCardWithIconRight = () => (
 );
 
 export const ImageCardLeft = () => (
-  <Card href="/#" border="black" direction="row" className="w-96">
+  <Card href="/#" border="black" direction="row" className="w-[40rem]">
     <Media>
       <img
         alt=""
@@ -337,7 +337,7 @@ export const ImageCardLeft = () => (
 );
 
 export const ImageCardRight = () => (
-  <Card href="/#" border="black" direction="row" className="w-96">
+  <Card href="/#" border="black" direction="row" className="w-[40rem]">
     <Heading level={3}>Kort uten bilde</Heading>
     <p>Dette er en beskrivelse</p>
     <Badge size="small" color="mint">
@@ -353,7 +353,7 @@ export const ImageCardRight = () => (
 );
 
 export const ImageCardLeftWithOverlayLeft = () => (
-  <Card href="/#" border="black" direction="row" className="w-96">
+  <Card href="/#" border="black" direction="row" className="w-[40rem]">
     <Media>
       <Overlay color="blue-dark">Viktig</Overlay>
       <img
@@ -363,6 +363,9 @@ export const ImageCardLeftWithOverlayLeft = () => (
     </Media>
     <Heading level={3}>Kort uten bilde</Heading>
     <p>Dette er en beskrivelse</p>
+    <Badge size="small" color="mint">
+      Visning
+    </Badge>
   </Card>
 );
 
