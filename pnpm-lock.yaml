@@ -51,8 +51,8 @@ importers:
         specifier: 10.4.20
         version: 10.4.20(postcss@8.4.47)
       bunchee:
-        specifier: 5.6.0
-        version: 5.6.0(typescript@5.6.3)
+        specifier: 5.6.1
+        version: 5.6.1(typescript@5.6.3)
       eslint:
         specifier: 8.57.0
         version: 8.57.0
@@ -2147,8 +2147,8 @@ packages:
   bun-types@1.1.29:
     resolution: {integrity: sha512-En3/TzSPMPyl5UlUB1MHzHpcrZDakTm7mS203eLoX1fBoEa3PW+aSS8GAqVJ7Is/m34Z5ogL+ECniLY0uDaCPw==}
 
-  bunchee@5.6.0:
-    resolution: {integrity: sha512-nUMXSnNUbLO4X3fyO+1RmQInO2vwzDK59Q1TREoVRjHXRKoJkfwTMqrQx4AHbarzlzuHNsviwB9iH6riGu8c9w==}
+  bunchee@5.6.1:
+    resolution: {integrity: sha512-vWd2eZFJmZYHVY+Snvsy9X7E4qIO6v7ur9qYjjYWW67P9uVQ1hhoARn7uGIM1gkYtfohZR+LnY7e3Xzo/PMxvQ==}
     engines: {node: '>= 18.0.0'}
     hasBin: true
     peerDependencies:
@@ -6930,7 +6930,7 @@ snapshots:
       '@types/node': 20.12.14
       '@types/ws': 8.5.12
 
-  bunchee@5.6.0(typescript@5.6.3):
+  bunchee@5.6.1(typescript@5.6.3):
     dependencies:
       '@rollup/plugin-commonjs': 28.0.1(rollup@4.24.0)
       '@rollup/plugin-json': 6.1.0(rollup@4.24.0)
