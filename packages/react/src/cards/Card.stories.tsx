@@ -311,7 +311,7 @@ export const InfoCardWithInlineContent = () => (
 );
 
 export const HeadingOnly = () => (
-  <Card href="/#" border="black" direction="row" className="w-32">
+  <Card href="/#" border="black" direction="row" className="w-52">
     <Heading level={3}>Tregt internet</Heading>
     <ArrowRight />
   </Card>
