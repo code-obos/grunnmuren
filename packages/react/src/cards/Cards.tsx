@@ -327,9 +327,11 @@ const Card = ({
             {
               className: cx(
                 'heading-s inline text-pretty',
+                // Border (bottom/top) is set to transparent to make sure the bottom underline is not visible when the card is hovered
+                // Border top is set to ensure an even space the heading and it's content
                 // Set up hover effect for the heading that can be triggered by the ClickArea
                 !href &&
-                  'w-fit border-b-2 border-b-transparent transition-colors',
+                  'w-fit border-y-2 border-y-transparent transition-colors',
               ),
               _innerWrapper: (children) =>
                 href ? (
@@ -346,10 +348,9 @@ const Card = ({
                       // focus styles
                       'focus-visible:after:outline-focus focus-visible:outline-none focus-visible:after:outline-offset-2',
                       // hover styles
-                      'border-b-2 border-b-transparent transition-colors group-hover/card:border-b-current',
-                      // Ensure this wrapper link has the exact same line-height as the heading
-                      // This is necessary to make sure the hover effect underline matches the heading line-height
-                      'heading-s',
+                      'border-y-2 border-y-transparent transition-colors group-hover/card:border-b-current',
+                      // This is necessary to make sure the hover effect underline work when the heading is multiline
+                      'leading-6',
                     )}
                     data-slot="card-heading-link"
                   >
