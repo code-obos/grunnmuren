@@ -71,14 +71,14 @@ type BrandTileProps = {
 };
 
 const BrandTile = ({ className, children }: BrandTileProps) => (
-  <div
+  <span
     className={cx(
       className,
-      'm-2 grid h-10 w-10 place-items-center rounded-lg bg-white p-1.5',
+      'm-2 inline-grid h-18 w-18 place-items-center rounded-lg bg-white p-1.5',
     )}
   >
     {children}
-  </div>
+  </span>
 );
 
 type MediaOverlayProps = {
