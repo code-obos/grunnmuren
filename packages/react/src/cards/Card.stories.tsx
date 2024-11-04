@@ -561,6 +561,9 @@ export const CardWithBrandTile = () => (
         <BrandTile>
           <BrandLogo />
         </BrandTile>
+        <BrandTile>
+          <BrandLogo />
+        </BrandTile>
         <Label color="mint" align="right">
           Info
         </Label>
