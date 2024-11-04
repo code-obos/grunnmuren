@@ -98,6 +98,12 @@ type CardProps = {
    * @default column
    */
   direction?: Direction | ResponsiveDirection;
+  /**
+   * The element type to render the card as.
+   * @default li if rendered inside a Cards component
+   * @default section otherwise
+   */
+  as?: 'section' | 'li' | 'aside' | 'div';
 };
 
 type ClickAreaProps = {
@@ -216,9 +222,10 @@ const Card = ({
   href,
   direction: _direction = defaultDirection,
   children,
+  as,
 }: CardProps) => {
   const hasListContext = useCardsContext();
-  const Element = hasListContext ? 'li' : 'div';
+  const Element = hasListContext ? 'li' : as ?? 'section';
 
   let direction =
     typeof _direction === 'string'
