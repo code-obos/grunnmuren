@@ -7,7 +7,7 @@ import {
 import { cva, cx } from 'cva';
 import { createContext, useContext, Children } from 'react';
 import { HeadingContext, MediaContext } from '../content';
-import { useMatchBreakPoints, useMatchMedia } from '../hooks';
+import { useMatchBreakPoints } from '../hooks';
 
 // Internal context used for semantics on the Card children
 const CardsContext = createContext(false);
