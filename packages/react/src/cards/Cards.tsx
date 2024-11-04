@@ -197,8 +197,6 @@ const cardVariants = cva({
         // If media is the first child:
         '[&:has([data-slot="media"]:first-child)>:not([data-slot="media"])]:col-start-2',
         '[&:has([data-slot="media"]:last-child)>:not([data-slot="media"])]:col-start-1',
-        // To make sure all the other children only spans their natural height we add a pseudo-element that can take up the remaining space in the grid
-        '[&:has([data-slot="media"])]:after:relative',
 
         // If there is no media in the card, make sure the content spans the entire height of the card
         // This override is neccessary due to the inline style passed to the card to make the media grid layout work
@@ -267,7 +265,8 @@ const Card = ({
           ? {
               // To make sure the media spans the entire card height while the other children only spans their natural height
               // We set the grid-template-rows to auto for all children except the last one, which spans the remaining space
-              // The last row will be applied to the pseudo-element that takes up the remaining space of the column containing every other child than the media
+              // This extra row fills up the remaining space in the columns so that the media can span the entire height of the card (since we set a fixed number of rows)
+              // And the other children can span their natural height (a last extra last row that spans the remaining space)
               gridTemplateRows: `repeat(${numberOfChildren - 1}, auto) 1fr`,
             }
           : undefined
