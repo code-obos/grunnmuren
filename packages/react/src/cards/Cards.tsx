@@ -7,7 +7,7 @@ import {
 import { cva, cx } from 'cva';
 import { createContext, useContext, Children } from 'react';
 import { HeadingContext, MediaContext } from '../content';
-import { useMatchMedia } from '../hooks';
+import { useMatchBreakPoints, useMatchMedia } from '../hooks';
 
 // Internal context used for semantics on the Card children
 const CardsContext = createContext(false);
@@ -220,31 +220,16 @@ const Card = ({
   const hasListContext = useCardsContext();
   const Element = hasListContext ? 'li' : 'div';
 
-  // Tailwind breakpoints
-  const breakPointMap = {
-    sm: '(min-width: 640px)',
-    md: '(min-width: 768px)',
-    lg: '(min-width: 1024px)',
-    xl: '(min-width: 1280px)',
-    '2xl': '(min-width: 1536px)',
-  };
-  // Breakpoints in order of priority (largest to smallest), since we are using min-width we start with the largest breakpoint
-  const orderedBreakPoints = ['2xl', 'xl', 'lg', 'md', 'sm'] as const;
-
   let direction =
     typeof _direction === 'string'
       ? _direction
       : _direction.default ?? defaultDirection;
 
-  const matches = {
-    sm: useMatchMedia(breakPointMap['sm']),
-    md: useMatchMedia(breakPointMap['md']),
-    lg: useMatchMedia(breakPointMap['lg']),
-    xl: useMatchMedia(breakPointMap['xl']),
-    '2xl': useMatchMedia(breakPointMap['2xl']),
-  };
+  const matches = useMatchBreakPoints();
   if (typeof _direction !== 'string') {
-    orderedBreakPoints.forEach((breakPoint) => {
+    // Breakpoints in order of priority (largest to smallest), since we are using min-width we start with the largest breakpoint
+    (['2xl', 'xl', 'lg', 'md', 'sm'] as const).forEach((breakPoint) => {
+      // Apply direction from the first matching breakpoint and upwards (mimicing min-width media queries)
       if (matches[breakPoint]) {
         direction = _direction[breakPoint] ?? direction;
       }
