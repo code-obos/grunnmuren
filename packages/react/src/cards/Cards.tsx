@@ -18,15 +18,15 @@ const CardsContextProvider = ({ children }: { children: React.ReactNode }) => (
   <CardsContext.Provider value={true}>{children}</CardsContext.Provider>
 );
 
-type OverlayProps = {
+type LabelProps = {
   color?: 'blue-dark' | 'blue' | 'mint';
   align?: 'left' | 'right';
   className?: string;
   children: React.ReactNode;
 };
 
-const overlayVariants = cva({
-  base: 'inline-flex w-fit px-3 py-2',
+const labelVariants = cva({
+  base: 'absolute top-0 px-3 py-2',
   variants: {
     color: {
       'blue-dark': ['bg-blue-dark', 'text-white'],
@@ -34,46 +34,74 @@ const overlayVariants = cva({
       mint: ['bg-mint', 'text-black'],
     },
     align: {
-      // Make sure the overlay corner radius aligns perfectly with the card
-      left: 'rounded-br-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
-      // Make sure the overlay corner radius aligns perfectly with the card
-      right:
+      left: [
+        // Make sure the overlay corner radius aligns perfectly with the card
+        'rounded-br-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
+        'left-0',
+      ],
+      right: [
+        // Make sure the overlay corner radius aligns perfectly with the card
         'rounded-bl-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
+        'right-0',
+      ],
     },
   },
 });
 
-const Overlay = ({
+const Label = ({
   className,
   color = 'blue-dark',
   align = 'left',
   children,
-}: OverlayProps) => (
-  // Wrapper to prevent the overlay from overflowing the card border radius if it's wider than the card and wrapps to a new line
+}: LabelProps) => (
+  <span
+    className={labelVariants({
+      color,
+      align,
+      className,
+    })}
+  >
+    {children}
+  </span>
+);
+
+type BrandTileProps = {
+  children: React.ReactNode;
+  className?: string;
+};
+
+const BrandTile = ({ className, children }: BrandTileProps) => (
   <div
-    data-slot="overlay"
     className={cx(
       className,
-      'bottom-[calc(theme(borderWidth.DEFAULT)*-1)] left-[calc(theme(borderWidth.DEFAULT)*-1)] right-[calc(theme(borderWidth.DEFAULT)*-1)] top-[calc(theme(borderWidth.DEFAULT)*-1)]',
+      'm-2 grid h-10 w-10 place-items-center rounded-lg bg-white p-1.5',
+    )}
+  >
+    {children}
+  </div>
+);
+
+type MediaOverlayProps = {
+  className?: string;
+  children: React.ReactNode;
+};
+
+const MediaOverlay = ({ className, children }: MediaOverlayProps) => (
+  // Wrapper to prevent the overlay from overflowing the card border radius if it's wider than the card and wrapps to a new line
+  <div
+    data-slot="media-overlay"
+    className={cx(
+      className,
       // z-index is set to make sure it is always placed on top of the image (this element inherintly have position absolute when put inside a Media component, which is the intended use)
       'z-[1]',
       // Overflow hidden is set to make sure the overlay always follows the border radius of the Media, no matter where it is placed
-      ' overflow-hidden',
-
-      align === 'right' && 'text-right',
+      // Border radius is set to inherit to make sure the overlay follows the border radius of the Media which varies depending on the card layout
+      'overflow-hidden rounded-[inherit]',
       // Make sure click events "pass through" the overlay to the card
       'pointer-events-none',
     )}
   >
-    <span
-      className={overlayVariants({
-        color,
-        align,
-        className,
-      })}
-    >
-      {children}
-    </span>
+    {children}
   </div>
 );
 
@@ -161,7 +189,7 @@ const cardVariants = cva({
     href: {
       false: [
         // Hover effect on the Card image if the card has a ClickArea
-        '[&:hover:has([data-slot="click-area"])_[data-slot="media"]>:not([data-slot="overlay"])]:motion-safe:scale-110',
+        '[&:hover:has([data-slot="click-area"])_[data-slot="media"]>:not([data-slot="media-overlay"])]:motion-safe:scale-110',
         // Hover effect on the Card heading if the card has a ClickArea
         '[&:hover:has([data-slot="click-area"])_[data-slot="heading"]]:border-b-current',
       ],
@@ -174,7 +202,7 @@ const cardVariants = cva({
         '[&_a:not([data-slot="card-heading-link"])]:z-[2] [&_button]:z-[2] [&_input]:z-[2]',
 
         // Don't trigger image zoom hover effect on the entire card when hovering other clickable elements
-        '[&:has(a:not([data-slot="card-heading-link"]):hover)_[data-slot="media"]_*:not([data-slot="overlay"])]:scale-100',
+        '[&:has(a:not([data-slot="card-heading-link"]):hover)_[data-slot="media"]_*:not([data-slot="media-overlay"])]:scale-100',
         // Don't trigger underline hover effect on title when hovering other clickable elements
         '[&:has(a:not([data-slot="card-heading-link"]):hover)_[data-slot="card-heading-link"]]:border-b-transparent',
       ],
@@ -310,7 +338,7 @@ const Card = ({
                 '*:transition-transform *:duration-300 *:ease-in-out',
                 href &&
                   // Enables the hover effect
-                  '[&>:not([data-slot="overlay"])]:group-hover/card:motion-safe:scale-110',
+                  '[&>:not([data-slot="media-overlay"])]:group-hover/card:motion-safe:scale-110',
               ),
               style:
                 direction === 'row'
@@ -385,8 +413,12 @@ const Cards = ({ className, children }: CardsProps) => {
 };
 
 export {
-  Overlay,
-  OverlayProps,
+  MediaOverlay,
+  MediaOverlayProps,
+  Label,
+  type LabelProps,
+  BrandTile,
+  type BrandTileProps,
   type ClickAreaProps,
   ClickArea,
   Card,
