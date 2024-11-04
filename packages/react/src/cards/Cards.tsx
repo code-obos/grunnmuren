@@ -131,6 +131,7 @@ const ClickArea = ({ children, active = true }: ClickAreaProps) =>
         '[&>:first-child:focus-visible]:outline-none',
         // Focus styles for the click area
         '[&>:first-child:focus-visible]:after:outline-focus [&>:first-child:focus-visible]:after:outline-offset-2',
+        'hover:cursor-pointer',
       )}
     >
       {children}
