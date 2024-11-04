@@ -189,20 +189,22 @@ const cardVariants = cva({
         // If an icon is the first child:
         // - make the icon span the first column, which has a width that matches the size of the icon (auto)
         // - make all other children span the second column, which takes up the remaining space (1fr)
-        '[&:has(svg:first-child)>:not(svg)]:col-start-2 [&:has(svg:first-child)]:grid-cols-[auto,1fr]',
+        '[&:has(>svg:first-child)>:not(svg)]:col-start-2 [&:has(>svg:first-child)]:grid-cols-[auto,1fr]',
         // If an icon is the last child:
         // - make the icon span the second column, which has a width that matches the size of the icon (auto)
         // - make all other children span the first column, which takes up the remaining space (1fr)
-        '[&:has(svg:last-child)>:not(svg)]:col-start-1 [&:has(svg:last-child)]:grid-cols-[1fr,auto]',
+        '[&:has(>svg:last-child)>:not(svg)]:col-start-1 [&:has(>svg:last-child)]:grid-cols-[1fr,auto]',
         // Center align icons in the middle of each grid cell
         '[&>svg]:self-center',
 
         // **** Media ****
         // Media should span 50% of the card width, the rest should span the remaining 50% space
-        '[&:has([data-slot="media"])]:grid-cols-[1fr,1fr]',
+        // '[&:has([data-slot="media"]:first-child)]:grid-cols-[1fr,auto]',
+        // '[&:has([data-slot="media"]:last-child)]:grid-cols-[auto,1fr]',
+        '[&:has(>[data-slot="media"])]:grid-cols-[1fr,1fr]',
         // If media is the first child:
-        '[&:has([data-slot="media"]:first-child)>:not([data-slot="media"])]:col-start-2',
-        '[&:has([data-slot="media"]:last-child)>:not([data-slot="media"])]:col-start-1',
+        '[&:has(>[data-slot="media"]:first-child)>:not([data-slot="media"])]:col-start-2',
+        '[&:has(>[data-slot="media"]:last-child)>:not([data-slot="media"])]:col-start-1',
 
         // If there is no media in the card, make sure the content spans the entire height of the card
         // This override is neccessary due to the inline style passed to the card to make the media grid layout work
