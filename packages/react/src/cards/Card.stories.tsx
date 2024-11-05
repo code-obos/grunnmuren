@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Card, ClickArea, Label, BrandTile } from './Cards';
+import { Card, ClickArea, OverlayBadge, BrandTile } from './Cards';
 import { Heading, Media, MediaOverlay } from '../content';
 import { Button } from '../button';
 import {
@@ -71,10 +71,10 @@ export const LinkCardWithImportantOverlayLeft = () => (
         src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
       />
       <MediaOverlay>
-        <Label color="blue-dark">
+        <OverlayBadge color="blue-dark">
           <InfoCircle />
           Meldefrist
-        </Label>
+        </OverlayBadge>
       </MediaOverlay>
     </Media>
     <Heading level={3}>Overskrift</Heading>
@@ -89,9 +89,9 @@ export const LinkCardWithImportantOverlayRight = () => (
   <Card border="black" href="#card">
     <Media>
       <MediaOverlay>
-        <Label color="blue-dark" align="right">
+        <OverlayBadge color="blue-dark" align="right">
           Viktig
-        </Label>
+        </OverlayBadge>
       </MediaOverlay>
       <img
         alt=""
@@ -110,7 +110,7 @@ export const LinkCardWithOverlayAndCTA = () => (
   <Card border="black">
     <Media>
       <MediaOverlay>
-        <Label color="mint">Viktig</Label>
+        <OverlayBadge color="mint">Viktig</OverlayBadge>
       </MediaOverlay>
       <img
         alt=""
@@ -388,10 +388,10 @@ export const ImageCardLeftWithOverlayLeft = () => (
   >
     <Media>
       <MediaOverlay>
-        <Label color="blue-dark">
+        <OverlayBadge color="blue-dark">
           <InfoCircle />
           Meldefrist
-        </Label>
+        </OverlayBadge>
       </MediaOverlay>
       <img
         alt=""
@@ -410,9 +410,9 @@ export const ImageCardLeftWithOverlayRight = () => (
   <Card href="/#" border="black" direction="row" className="w-96 max-w-full">
     <Media>
       <MediaOverlay>
-        <Label color="blue-dark" align="right">
+        <OverlayBadge color="blue-dark" align="right">
           Viktig
-        </Label>
+        </OverlayBadge>
       </MediaOverlay>
       <img
         alt=""
@@ -430,10 +430,10 @@ export const ImageCardRightWithOverlayLeft = () => (
     <p>Dette er en beskrivelse</p>
     <Media>
       <MediaOverlay>
-        <Label color="blue-dark">
+        <OverlayBadge color="blue-dark">
           <InfoCircle />
           Meldefrist
-        </Label>
+        </OverlayBadge>
       </MediaOverlay>
       <img
         alt=""
@@ -449,9 +449,9 @@ export const ImageCardRightWithOverlayRight = () => (
     <p>Dette er en beskrivelse</p>
     <Media>
       <MediaOverlay>
-        <Label color="blue-dark" align="right">
+        <OverlayBadge color="blue-dark" align="right">
           Viktig
-        </Label>
+        </OverlayBadge>
       </MediaOverlay>
       <img
         alt=""
@@ -467,9 +467,9 @@ export const CardWithResponsiveDirection = () => (
     <p>Dette kortet endrer layout etter breakpoints</p>
     <Media>
       <MediaOverlay>
-        <Label color="blue-dark" align="right">
+        <OverlayBadge color="blue-dark" align="right">
           Viktig
-        </Label>
+        </OverlayBadge>
       </MediaOverlay>
       <img
         alt=""
@@ -574,9 +574,9 @@ export const CardWithBrandTile = () => (
         <BrandTile>
           <BrandLogo />
         </BrandTile>
-        <Label color="mint" align="right">
+        <OverlayBadge color="mint" align="right">
           Info
-        </Label>
+        </OverlayBadge>
       </MediaOverlay>
       <img
         alt=""

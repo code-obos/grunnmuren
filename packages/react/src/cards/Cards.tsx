@@ -8,6 +8,7 @@ import { cva, cx } from 'cva';
 import { createContext, useContext, Children, useId } from 'react';
 import { HeadingContext, MediaContext, MediaOverlayContext } from '../content';
 import { useMatchBreakPoints } from '../hooks';
+import { Badge } from '../badge';
 
 // Internal context used for semantics on the Card children
 const CardsContext = createContext(false);
@@ -18,21 +19,16 @@ const CardsContextProvider = ({ children }: { children: React.ReactNode }) => (
   <CardsContext.Provider value={true}>{children}</CardsContext.Provider>
 );
 
-type LabelProps = {
-  color?: 'blue-dark' | 'blue' | 'mint';
+type OverlayBadgeProps = {
+  color?: 'blue-dark' | 'mint';
   align?: 'left' | 'right';
   className?: string;
   children: React.ReactNode;
 };
 
-const labelVariants = cva({
-  base: 'description absolute top-0 inline-flex gap-1 px-3 py-2',
+const overlayBadgeVariants = cva({
+  base: 'absolute top-0 rounded-none',
   variants: {
-    color: {
-      'blue-dark': ['bg-blue-dark', 'text-white'],
-      blue: ['bg-blue', 'text-white'],
-      mint: ['bg-mint', 'text-black'],
-    },
     align: {
       left: [
         // Make sure the overlay corner radius aligns perfectly with the card
@@ -48,21 +44,22 @@ const labelVariants = cva({
   },
 });
 
-const Label = ({
+const OverlayBadge = ({
   className,
   color = 'blue-dark',
   align = 'left',
   children,
-}: LabelProps) => (
-  <span
-    className={labelVariants({
-      color,
+}: OverlayBadgeProps) => (
+  <Badge
+    size="large"
+    color={color}
+    className={overlayBadgeVariants({
       align,
       className,
     })}
   >
     {children}
-  </span>
+  </Badge>
 );
 
 type BrandTileProps = {
@@ -408,8 +405,8 @@ const Cards = ({ className, children }: CardsProps) => {
 };
 
 export {
-  Label,
-  type LabelProps,
+  OverlayBadge,
+  type OverlayBadgeProps,
   BrandTile,
   type BrandTileProps,
   type ClickAreaProps,
