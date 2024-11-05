@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Card, ClickArea, OverlayBadge, BrandTile } from './Cards';
+import { Card, ClickArea, OverlayBadge } from './Cards';
 import { Heading, Media, MediaOverlay } from '../content';
 import { Button } from '../button';
 import {
@@ -587,6 +587,14 @@ export const CardWithBrandTile = () => (
     <p>Dette er en beskrivelse</p>
   </Card>
 );
+
+function BrandTile({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="m-2 inline-grid h-18 w-18 place-items-center rounded-lg bg-white p-1.5">
+      {children}
+    </span>
+  );
+}
 
 function BrandLogo() {
   return (

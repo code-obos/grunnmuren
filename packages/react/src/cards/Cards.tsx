@@ -62,22 +62,6 @@ const OverlayBadge = ({
   </Badge>
 );
 
-type BrandTileProps = {
-  children: React.ReactNode;
-  className?: string;
-};
-
-const BrandTile = ({ className, children }: BrandTileProps) => (
-  <span
-    className={cx(
-      className,
-      'm-2 inline-grid h-18 w-18 place-items-center rounded-lg bg-white p-1.5',
-    )}
-  >
-    {children}
-  </span>
-);
-
 type Direction = 'row' | 'column';
 
 type ResponsiveDirection = {
@@ -407,8 +391,6 @@ const Cards = ({ className, children }: CardsProps) => {
 export {
   OverlayBadge,
   type OverlayBadgeProps,
-  BrandTile,
-  type BrandTileProps,
   type ClickAreaProps,
   ClickArea,
   Card,
