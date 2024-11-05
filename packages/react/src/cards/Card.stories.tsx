@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Card, ClickArea, MediaOverlay, Label, BrandTile } from './Cards';
-import { Heading, Media } from '../content';
+import { Card, ClickArea, Label, BrandTile } from './Cards';
+import { Heading, Media, MediaOverlay } from '../content';
 import { Button } from '../button';
 import {
   ArrowRight,

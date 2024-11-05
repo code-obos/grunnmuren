@@ -6,7 +6,7 @@ import {
 } from 'react-aria-components';
 import { cva, cx } from 'cva';
 import { createContext, useContext, Children, useId } from 'react';
-import { HeadingContext, MediaContext } from '../content';
+import { HeadingContext, MediaContext, MediaOverlayContext } from '../content';
 import { useMatchBreakPoints } from '../hooks';
 
 // Internal context used for semantics on the Card children
@@ -79,30 +79,6 @@ const BrandTile = ({ className, children }: BrandTileProps) => (
   >
     {children}
   </span>
-);
-
-type MediaOverlayProps = {
-  className?: string;
-  children: React.ReactNode;
-};
-
-const MediaOverlay = ({ className, children }: MediaOverlayProps) => (
-  // Wrapper to prevent the overlay from overflowing the card border radius if it's wider than the card and wrapps to a new line
-  <div
-    data-slot="media-overlay"
-    className={cx(
-      className,
-      // z-index is set to make sure it is always placed on top of the image (this element inherintly have position absolute when put inside a Media component, which is the intended use)
-      'z-[1]',
-      // Overflow hidden is set to make sure the overlay always follows the border radius of the Media, no matter where it is placed
-      // Border radius is set to inherit to make sure the overlay follows the border radius of the Media which varies depending on the card layout
-      'overflow-hidden rounded-[inherit]',
-      // Make sure click events "pass through" the overlay to the card
-      'pointer-events-none',
-    )}
-  >
-    {children}
-  </div>
 );
 
 type Direction = 'row' | 'column';
@@ -356,6 +332,20 @@ const Card = ({
             },
           ],
           [
+            MediaOverlayContext,
+            {
+              className: cx(
+                // z-index is set to make sure it is always placed on top of the image (this element inherintly have position absolute when put inside a Media component, which is the intended use)
+                'z-[1]',
+                // Overflow hidden is set to make sure the overlay always follows the border radius of the Media, no matter where it is placed
+                // Border radius is set to inherit to make sure the overlay follows the border radius of the Media which varies depending on the card layout
+                'overflow-hidden rounded-[inherit]',
+                // Make sure click events "pass through" the overlay to the card
+                'pointer-events-none',
+              ),
+            },
+          ],
+          [
             HeadingContext,
             {
               id: headingId,
@@ -418,8 +408,6 @@ const Cards = ({ className, children }: CardsProps) => {
 };
 
 export {
-  MediaOverlay,
-  MediaOverlayProps,
   Label,
   type LabelProps,
   BrandTile,

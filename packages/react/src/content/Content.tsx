@@ -56,6 +56,25 @@ const Content = (props: ContentProps, ref: ForwardedRef<HTMLDivElement>) => {
   return outerWrapper ? outerWrapper(content) : content;
 };
 
+const MediaOverlayContext = createContext<
+  ContextValue<Partial<MediaOverlayProps>, HTMLDivElement>
+>({});
+
+type MediaOverlayProps = {
+  className?: string;
+  children: React.ReactNode;
+};
+
+// Wrapper for content that should overlay `Media`
+// Such as play button, video duration, or badges/labels
+const MediaOverlay = (
+  props: MediaOverlayProps,
+  ref: ForwardedRef<HTMLDivElement>,
+) => {
+  [props, ref] = useContextProps(props, ref, MediaOverlayContext);
+  return <div data-slot="media-overlay" {...props} />;
+};
+
 const MediaContext = createContext<
   ContextValue<Partial<MediaProps>, HTMLDivElement>
 >({});
@@ -101,6 +120,9 @@ export {
   type ContentProps,
   Content,
   ContentContext,
+  MediaOverlayContext,
+  MediaOverlay,
+  type MediaOverlayProps,
   Media,
   MediaContext,
   type MediaProps,
