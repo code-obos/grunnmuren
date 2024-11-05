@@ -261,7 +261,7 @@ export const InfoCard = () => (
 export const InfoCardWithCta = () => (
   <Card className="bg-sky-lightest">
     <Heading level={3}>Informasjonskort</Heading>
-    <p>Hele dette kortet skal er klikkbart</p>
+    <p>Hele dette kortet er klikkbart</p>
     <ClickArea>
       <Button variant="tertiary" href="#" className="group">
         Les mer
