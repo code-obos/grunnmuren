@@ -5,7 +5,7 @@ import {
   type LinkProps,
 } from 'react-aria-components';
 import { cva, cx } from 'cva';
-import { createContext, useContext, Children } from 'react';
+import { createContext, useContext, Children, useId } from 'react';
 import { HeadingContext, MediaContext } from '../content';
 import { useMatchBreakPoints } from '../hooks';
 
@@ -255,6 +255,7 @@ const Card = ({
   children,
   as,
 }: CardProps) => {
+  const headingId = useId();
   const hasListContext = useCardsContext();
   const Element = hasListContext ? 'li' : as ?? 'section';
 
@@ -279,6 +280,7 @@ const Card = ({
   const numberOfChildren = Children.count(children);
   return (
     <Element
+      aria-labelledby={headingId}
       className={cardVariants({
         border,
         href: !!href,
@@ -356,6 +358,7 @@ const Card = ({
           [
             HeadingContext,
             {
+              id: headingId,
               className: cx(
                 'inline',
                 // Styles for the heading when not wrapped in a link
