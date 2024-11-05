@@ -26,7 +26,7 @@ type LabelProps = {
 };
 
 const labelVariants = cva({
-  base: 'absolute top-0 px-3 py-2',
+  base: 'description absolute top-0 inline-flex gap-1 px-3 py-2',
   variants: {
     color: {
       'blue-dark': ['bg-blue-dark', 'text-white'],
