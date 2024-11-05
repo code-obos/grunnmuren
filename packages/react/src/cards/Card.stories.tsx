@@ -572,6 +572,39 @@ export const CardWithCoveringIllustration = () => (
   </Card>
 );
 
+export const CardWithIllustrationAndOverlayBadge = () => (
+  <Card href="#card" border="dark-blue" className="w-72">
+    <Media>
+      <MediaOverlay>
+        <OverlayBadge>
+          <InfoCircle />
+          Meldefrist 14. oktober
+        </OverlayBadge>
+      </MediaOverlay>
+      <div className="grid place-items-center pt-10">
+        <Illustration />
+      </div>
+    </Media>
+    <small className="description">Forhåndsvarsling - Saksnr. F0347565</small>
+    <div className="grid">
+      <Heading level={3}>Rødbergvn 88C</Heading>
+      <small className="description">Bjerke - Oslo</small>
+    </div>
+    <p className="font-semibold">100 m² | Prisantydning 9 600 000 kr</p>
+    <p className="flex gap-x-1">
+      <House /> Rekkehus/småhus
+    </p>
+    <p className="flex gap-x-1">
+      <Bed /> 3 soverom
+    </p>
+    <p className="flex gap-x-1">
+      <PiggyBank /> Totalpris 9 989 838
+    </p>
+    <Badge size="small" color="mint">
+      Visning 13. oktober
+    </Badge>
+  </Card>
+);
 export const CardWithCoveringResponsiveIllustration = () => (
   <Card href="#card" border="dark-blue" direction={{ sm: 'row' }}>
     <Media>
