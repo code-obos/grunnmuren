@@ -4,6 +4,8 @@ import { Heading, Media, MediaOverlay } from '../content';
 import { Button } from '../button';
 import {
   ArrowRight,
+  Bed,
+  House,
   InfoCircle,
   LinkExternal,
   PiggyBank,
@@ -549,8 +551,24 @@ export const CardWithCoveringIllustration = () => (
     <Media>
       <Illustration />
     </Media>
-    <Heading level={3}>Kort med illustrasjon</Heading>
-    <p>Dette er en beskrivelse</p>
+    <small className="description">Forhåndsvarsling - Saksnr. F0347565</small>
+    <div className="grid">
+      <Heading level={3}>Rødbergvn 88C</Heading>
+      <small className="description">Bjerke - Oslo</small>
+    </div>
+    <p className="font-semibold">100 m² | Prisantydning 9 600 000 kr</p>
+    <p className="flex gap-x-1">
+      <House /> Rekkehus/småhus
+    </p>
+    <p className="flex gap-x-1">
+      <Bed /> 3 soverom
+    </p>
+    <p className="flex gap-x-1">
+      <PiggyBank /> Totalpris 9 989 838
+    </p>
+    <Badge size="small" color="mint">
+      Visning 13. oktober
+    </Badge>
   </Card>
 );
 
