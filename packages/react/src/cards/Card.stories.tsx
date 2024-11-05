@@ -194,7 +194,7 @@ export const LinkCardWithTertiaryCTA = () => (
       Hele kortet er klikkbart mot linken `#card`. Og CTA-en under er klikkbar
       isolert for seg, den linker til `#cta`.
     </p>
-    <Button variant="tertiary" href="#cta" className="group">
+    <Button variant="tertiary" href="#cta">
       Åpne finnannonsen
       <LinkExternal />
     </Button>
@@ -603,6 +603,11 @@ export const CardWithIllustrationAndOverlayBadge = () => (
     <Badge size="small" color="mint">
       Visning 13. oktober
     </Badge>
+    <hr className="border-t border-t-gray-light" />
+    <Button variant="tertiary" href="#cta" className="justify-self-center">
+      Åpne finnannonsen
+      <LinkExternal />
+    </Button>
   </Card>
 );
 export const CardWithCoveringResponsiveIllustration = () => (
