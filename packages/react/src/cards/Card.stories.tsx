@@ -4,6 +4,7 @@ import { Heading, Media, MediaOverlay } from '../content';
 import { Button } from '../button';
 import {
   ArrowRight,
+  InfoCircle,
   LinkExternal,
   PiggyBank,
 } from '@obosbbl/grunnmuren-icons-react';
@@ -70,7 +71,10 @@ export const LinkCardWithImportantOverlayLeft = () => (
         src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
       />
       <MediaOverlay>
-        <Label color="blue-dark">Viktig</Label>
+        <Label color="blue-dark">
+          <InfoCircle />
+          Meldefrist
+        </Label>
       </MediaOverlay>
     </Media>
     <Heading level={3}>Overskrift</Heading>
@@ -384,7 +388,10 @@ export const ImageCardLeftWithOverlayLeft = () => (
   >
     <Media>
       <MediaOverlay>
-        <Label color="blue-dark">Viktig</Label>
+        <Label color="blue-dark">
+          <InfoCircle />
+          Meldefrist
+        </Label>
       </MediaOverlay>
       <img
         alt=""
@@ -423,7 +430,10 @@ export const ImageCardRightWithOverlayLeft = () => (
     <p>Dette er en beskrivelse</p>
     <Media>
       <MediaOverlay>
-        <Label color="blue-dark">Viktig</Label>
+        <Label color="blue-dark">
+          <InfoCircle />
+          Meldefrist
+        </Label>
       </MediaOverlay>
       <img
         alt=""
