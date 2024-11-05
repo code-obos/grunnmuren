@@ -263,6 +263,8 @@ const Card = ({
       ? _direction
       : _direction.default ?? defaultDirection;
 
+  // Get the current breakpoints that match to determine the direction of the card
+  // This has to be done with JS since we can't use media queries on inline styles
   const matches = useMatchBreakPoints();
   if (typeof _direction !== 'string') {
     // Breakpoints in order of priority (largest to smallest), since we are using min-width we start with the largest breakpoint
