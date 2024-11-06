@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react';
-import { Card, CardBody } from './Card';
-import { Heading } from '../content';
+import { Card } from './Card';
+import { Heading, Content } from '../content';
 import { cx } from 'cva';
 
 const meta: Meta<typeof Card> = {
@@ -8,13 +8,13 @@ const meta: Meta<typeof Card> = {
   component: Card,
   render: () => (
     <Card>
-      <CardBody>
+      <Content>
         <Heading level={3}>Min bolig</Heading>
         <p>
           Her finner du alt om din nye bolig og hva som venter deg fremover. Du
           finner dine dokumenter, salgsoppgave og mye mer.
         </p>
-      </CardBody>
+      </Content>
     </Card>
   ),
 };
@@ -32,10 +32,10 @@ export const WithBorder = () => {
     <Cards>
       {colors.map((color) => (
         <Card border={color} key={color}>
-          <CardBody>
+          <Content>
             <Heading level={3}>Border {color}</Heading>
             <p>Dette kortet har {color} som border</p>
-          </CardBody>
+          </Content>
         </Card>
       ))}
     </Cards>
@@ -56,10 +56,10 @@ export const WithBackground = () => {
           className={cx(bgColor, bgColor.includes('dark') && 'text-white')}
           key={bgColor}
         >
-          <CardBody>
+          <Content>
             <Heading level={3}>Bakgrunn {bgColor}</Heading>
             <p>Dette kortet har {bgColor} som bakgrunnsfarge</p>
-          </CardBody>
+          </Content>
         </Card>
       ))}
     </Cards>

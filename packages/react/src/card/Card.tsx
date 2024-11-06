@@ -1,6 +1,6 @@
-import { cva, cx, VariantProps } from 'cva';
+import { cva, VariantProps } from 'cva';
 import { Provider } from 'react-aria-components';
-import { HeadingContext } from '../content';
+import { ContentContext, HeadingContext } from '../content';
 
 type CardProps = VariantProps<typeof cardVariants> & {
   children?: React.ReactNode;
@@ -39,6 +39,12 @@ const Card = ({
               className: 'heading-s text-pretty',
             },
           ],
+          [
+            ContentContext,
+            {
+              className: 'grid gap-y-4',
+            },
+          ],
         ]}
       >
         {children}
@@ -47,15 +53,4 @@ const Card = ({
   );
 };
 
-type CardBodyProps = {
-  children?: React.ReactNode;
-  className?: string;
-};
-
-const CardBody = ({ children, className, ...restProps }: CardBodyProps) => (
-  <div className={cx(className, 'grid gap-y-4')} {...restProps}>
-    {children}
-  </div>
-);
-
-export { Card, type CardProps, type CardBodyProps, CardBody };
+export { Card, type CardProps };

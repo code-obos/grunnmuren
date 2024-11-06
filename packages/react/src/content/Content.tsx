@@ -37,7 +37,7 @@ const Heading = (
 };
 
 const ContentContext = createContext<
-  ContextValue<ContentProps, HTMLDivElement>
+  ContextValue<Partial<ContentProps>, HTMLDivElement>
 >({});
 
 type ContentProps = HTMLProps<HTMLDivElement> & {
