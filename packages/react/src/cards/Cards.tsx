@@ -151,9 +151,8 @@ const cardVariants = cva({
       true: [
         // Make interactive elements clickable by themselves, while the rest of the card is clickable as a whole
         // The card is then made clickable by a pseudo-element on the heading that covers the entire card
-        // And since the heading (card-heading-link) comes before all other content, they will be clickable by just setting their position to relative
         '[&_a:not([data-slot="card-heading-link"])]:relative [&_button]:relative [&_input]:relative',
-        // Make sure other interactive elements are placed on top of the pseudo-element that makes the entire card clickable by setting a higher z-index
+        // Place other interactive on top of the pseudo-element that makes the entire card clickable by setting a higher z-index than the pseudo-element
         '[&_a:not([data-slot="card-heading-link"])]:z-[2] [&_button]:z-[2] [&_input]:z-[2]',
 
         // Don't trigger image zoom hover effect on the entire card when hovering other clickable elements
