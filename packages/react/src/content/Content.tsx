@@ -10,7 +10,7 @@ type HeadingProps = HTMLProps<HTMLHeadingElement> & {
 };
 
 const HeadingContext = createContext<
-  ContextValue<HeadingProps, HTMLHeadingElement>
+  ContextValue<Partial<HeadingProps>, HTMLHeadingElement>
 >({});
 
 const Heading = (
