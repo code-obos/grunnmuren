@@ -182,8 +182,6 @@ const cardVariants = cva({
 
         // **** Media ****
         // Media should span 50% of the card width, the rest should span the remaining 50% space
-        // '[&:has([data-slot="media"]:first-child)]:grid-cols-[1fr,auto]',
-        // '[&:has([data-slot="media"]:last-child)]:grid-cols-[auto,1fr]',
         '[&:has(>[data-slot="media"])]:grid-cols-[1fr,1fr]',
         // If media is the first child:
         '[&:has(>[data-slot="media"]:first-child)>:not([data-slot="media"])]:col-start-2',
