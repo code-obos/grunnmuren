@@ -283,8 +283,14 @@ export const InfoCardWithMultipleLinks = () => (
   <Card className="bg-blue-dark text-white">
     <Heading level={3}>Kort med flere klikkbare elementer</Heading>
     <p>
-      Dette kortet skal ikke være klikkbart, men kan ha klikkbare elementer inne
-      i seg <a href="#forkjop">forkjøp</a>.
+      Dette kortet skal ikke være klikkbart, men kan ha{' '}
+      <a
+        href="#link"
+        className="focus-visible:outline-focus focus-visible:outline-white"
+      >
+        klikkbare elementer
+      </a>{' '}
+      inne i seg.
     </p>
     <Button variant="tertiary" href="#" className="group" color="white">
       Les mer
@@ -612,7 +618,7 @@ export const CardWithCoveringResponsiveIllustration = () => (
   </Card>
 );
 
-export const CardWithBrandTile = () => (
+export const CardWithMultiOverlayContent = () => (
   <Card href="#card" border="dark-blue" direction={{ sm: 'row' }}>
     <Media>
       <MediaOverlay>
