@@ -363,7 +363,7 @@ export const ImageCardLeftWithOverlayLeft = () => (
     href="/#"
     border="black"
     direction="row"
-    className="w-[40rem]  max-w-full"
+    className="w-[40rem] max-w-full"
   >
     <Media>
       <MediaOverlay>
@@ -386,7 +386,12 @@ export const ImageCardLeftWithOverlayLeft = () => (
 );
 
 export const ImageCardLeftWithOverlayRight = () => (
-  <Card href="/#" border="black" direction="row" className="w-96 max-w-full">
+  <Card
+    href="/#"
+    border="black"
+    direction="row"
+    className="w-[40rem] max-w-full"
+  >
     <Media>
       <MediaOverlay>
         <OverlayBadge color="blue-dark" align="right">
@@ -404,7 +409,12 @@ export const ImageCardLeftWithOverlayRight = () => (
 );
 
 export const ImageCardRightWithOverlayLeft = () => (
-  <Card href="/#" border="black" direction="row" className="w-96 max-w-full">
+  <Card
+    href="/#"
+    border="black"
+    direction="row"
+    className="w-[40rem] max-w-full"
+  >
     <Heading level={3}>Kort med bilde</Heading>
     <p>Dette er en beskrivelse</p>
     <Media>
@@ -423,7 +433,12 @@ export const ImageCardRightWithOverlayLeft = () => (
 );
 
 export const ImageCardRightWithOverlayRight = () => (
-  <Card href="/#" border="black" direction="row" className="w-96 max-w-full">
+  <Card
+    href="/#"
+    border="black"
+    direction="row"
+    className="w-[40rem] max-w-full"
+  >
     <Heading level={3}>Kort med bilde</Heading>
     <p>Dette er en beskrivelse</p>
     <Media>
