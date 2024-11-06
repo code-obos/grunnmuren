@@ -10,7 +10,10 @@ const meta: Meta<typeof Cards> = {
     <Cards {...props}>
       <Card href="card-1">
         <Media>
-          <img src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg" />
+          <img
+            alt=""
+            src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+          />
         </Media>
         <Heading level={3}>Kort 1</Heading>
         <Content>
@@ -19,7 +22,10 @@ const meta: Meta<typeof Cards> = {
       </Card>
       <Card href="card-2">
         <Media>
-          <img src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg" />
+          <img
+            alt=""
+            src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+          />
         </Media>
         <Heading level={3}>Kort 2</Heading>
         <Content>
@@ -28,7 +34,10 @@ const meta: Meta<typeof Cards> = {
       </Card>
       <Card href="card-3">
         <Media>
-          <img src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg" />
+          <img
+            alt=""
+            src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+          />
         </Media>
         <Heading level={3}>Kort 3</Heading>
         <Content>
@@ -37,7 +46,10 @@ const meta: Meta<typeof Cards> = {
       </Card>
       <Card href="card-4">
         <Media>
-          <img src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg" />
+          <img
+            alt=""
+            src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+          />
         </Media>
         <Heading level={3}>Kort 4</Heading>
         <Content>
