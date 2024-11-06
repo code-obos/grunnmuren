@@ -52,7 +52,7 @@ export const LinkCardWithoutImage = () => (
   </Card>
 );
 
-export const LinkCardWithoutImageAndCTA = () => (
+export const CTACardWithoutImage = () => (
   <Card border="black">
     <Heading level={3}>Kort uten bilde</Heading>
     <p>Hele dette kortet er klikkbart</p>
@@ -81,8 +81,8 @@ export const LinkCardWithImportantOverlayLeft = () => (
     </Media>
     <Heading level={3}>Overskrift</Heading>
     <p>
-      Her er informasjonen i overlay ekstra viktig, og derfor plassert før allt
-      annt
+      Her er informasjonen i overlay ekstra viktig, og derfor uthevet med
+      mørkeblå farge.
     </p>
   </Card>
 );
@@ -102,8 +102,8 @@ export const LinkCardWithImportantOverlayRight = () => (
     </Media>
     <Heading level={3}>Overskrift</Heading>
     <p>
-      Her er informasjonen i overlay ekstra viktig, og derfor plassert før allt
-      annt
+      Her er informasjonen i overlay ekstra viktig, og derfor uthevet med
+      mørkeblå farge.
     </p>
   </Card>
 );
@@ -120,10 +120,8 @@ export const LinkCardWithOverlayAndCTA = () => (
       />
     </Media>
     <Heading level={3}>Overskrift</Heading>
-    <p>
-      Her er overlay plassert rett under overskriften, siden den ikke er
-      kritisk. Hele kortet er klikkbart.
-    </p>
+    <p>Her er informasjonen i overlay sekundær.</p>
+    <p>Hele dette kortet er klikkbart, men kun CTA-en er kodet som en lenke.</p>
     <ClickArea>
       <Button variant="tertiary" href="#cta" className="group">
         Les mer
@@ -160,7 +158,7 @@ export const BorderedCardWithCtaInside = () => (
   </Card>
 );
 
-export const LinkCardWithPrimaryCTA = () => (
+export const LinkCardWithMultiCTA = () => (
   <Card border="dark-blue" href="#card">
     <Media>
       <img
@@ -169,10 +167,13 @@ export const LinkCardWithPrimaryCTA = () => (
       />
     </Media>
     <Heading level={3}>Card 1</Heading>
-    <p>Kun de individuelle knappene i dette kortet er klikkbare</p>
-    <Button variant="primary" href="#cta" className="group">
+    <p>
+      Hele dette kortet er klikkbart opp mot en egen link. Mens de individuelle
+      CTA-ene er klikkbare opp mot sine respektive linker.
+    </p>
+    <Button variant="primary" href="#cta" className="group/primary">
       Meld forkjøp
-      <ArrowRight className="transition-transform group-hover:motion-safe:translate-x-1" />
+      <ArrowRight className="transition-transform group-hover/primary:motion-safe:translate-x-1" />
     </Button>
     <Button variant="secondary" href="#secondary" className="group/secondary">
       Bli medlem
@@ -201,7 +202,7 @@ export const LinkCardWithTertiaryCTA = () => (
   </Card>
 );
 
-export const CardWithCtaMultipleCTAInside = () => (
+export const CardWithCtaMultipleCTA = () => (
   <Card border="dark-blue">
     <Media>
       <img
@@ -211,31 +212,8 @@ export const CardWithCtaMultipleCTAInside = () => (
     </Media>
     <Heading level={3}>Card 1</Heading>
     <p>
-      Dette kortet er ikke klikkbart i seg selv. Men har to klikkbare CTA-er.
-    </p>
-    <Button variant="secondary" href="#secondary" className="group/secondary">
-      Bli medlem
-      <ArrowRight className="transition-transform group-hover/secondary:motion-safe:translate-x-1" />
-    </Button>
-    <Button variant="tertiary" href="#tertiary" className="group/tertiary">
-      Min side
-      <ArrowRight className="transition-transform group-hover/tertiary:motion-safe:translate-x-1" />
-    </Button>
-  </Card>
-);
-
-export const LinkCardWithCtaMultipleCTAInside = () => (
-  <Card border="dark-blue" href="#card">
-    <Media>
-      <img
-        alt=""
-        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
-      />
-    </Media>
-    <Heading level={3}>Card 1</Heading>
-    <p>
-      Dette kortet er klikkbart i seg selv. Men har også to individuelt
-      klikkbare CTA-er.
+      Dette kortet er ikke klikkbart i seg selv. Men har to klikkbare CTA-er i
+      seg.
     </p>
     <Button variant="secondary" href="#secondary" className="group/secondary">
       Bli medlem
@@ -261,7 +239,7 @@ export const InfoCard = () => (
 export const InfoCardWithCta = () => (
   <Card className="bg-sky-lightest">
     <Heading level={3}>Informasjonskort</Heading>
-    <p>Hele dette kortet er klikkbart</p>
+    <p>Hele dette kortet er klikkbart opp mot linken &quot;Les mer&quot;</p>
     <ClickArea>
       <Button variant="tertiary" href="#" className="group">
         Les mer
@@ -275,8 +253,7 @@ export const InfoCardWithMultipleCTA = () => (
   <Card className="bg-sky-lightest">
     <Heading level={3}>Informasjonskort</Heading>
     <p>
-      Dette kortet skal ikke være klikkbart, men kan ha klikkbare elementer inne
-      i seg
+      Dette kortet skal ikke være klikkbart, men har klikkbare CTA-er inne i seg
     </p>
     <Button variant="secondary" href="#secondary" className="group/secondary">
       Bli medlem
@@ -292,7 +269,7 @@ export const InfoCardWithMultipleCTA = () => (
 export const InfoCardDark = () => (
   <Card className="bg-blue-dark text-white">
     <Heading level={3}>Informasjonskort</Heading>
-    <p>Hele dette kortet er klikkbart</p>
+    <p>Hele dette kortet er klikkbart opp mot linken &quot;Les mer&quot;</p>
     <ClickArea>
       <Button variant="tertiary" href="#" className="group" color="white">
         Les mer
@@ -302,7 +279,7 @@ export const InfoCardDark = () => (
   </Card>
 );
 
-export const InfoCardWithInlineContent = () => (
+export const InfoCardWithMultipleLinks = () => (
   <Card className="bg-blue-dark text-white">
     <Heading level={3}>Kort med flere klikkbare elementer</Heading>
     <p>
@@ -326,14 +303,14 @@ export const HeadingOnly = () => (
 export const LinkCardWithIconLeft = () => (
   <Card href="/#" border="black" direction="row" className="w-60">
     <PiggyBank />
-    <Heading level={3}>Kort uten bilde</Heading>
+    <Heading level={3}>Kort med ikon</Heading>
     <p>Dette er en beskrivelse</p>
   </Card>
 );
 
 export const LinkCardWithIconRight = () => (
   <Card href="/#" border="black" direction="row" className="w-60">
-    <Heading level={3}>Kort uten bilde</Heading>
+    <Heading level={3}>Kort med ikon</Heading>
     <p>Dette er en beskrivelse</p>
     <PiggyBank />
   </Card>
@@ -352,7 +329,7 @@ export const ImageCardLeft = () => (
         src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
       />
     </Media>
-    <Heading level={3}>Kort uten bilde</Heading>
+    <Heading level={3}>Kort med bilde</Heading>
     <p>Dette er en beskrivelse</p>
     <Badge size="small" color="mint">
       Visning
@@ -367,7 +344,7 @@ export const ImageCardRight = () => (
     direction="row"
     className="w-[40rem]  max-w-full"
   >
-    <Heading level={3}>Kort uten bilde</Heading>
+    <Heading level={3}>Kort med bilde</Heading>
     <p>Dette er en beskrivelse</p>
     <Badge size="small" color="mint">
       Visning
@@ -400,7 +377,7 @@ export const ImageCardLeftWithOverlayLeft = () => (
         src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
       />
     </Media>
-    <Heading level={3}>Kort uten bilde</Heading>
+    <Heading level={3}>Kort med bilde</Heading>
     <p>Dette er en beskrivelse</p>
     <Badge size="small" color="mint">
       Visning
@@ -421,14 +398,14 @@ export const ImageCardLeftWithOverlayRight = () => (
         src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
       />
     </Media>
-    <Heading level={3}>Kort uten bilde</Heading>
+    <Heading level={3}>Kort med bilde</Heading>
     <p>Dette er en beskrivelse.</p>
   </Card>
 );
 
 export const ImageCardRightWithOverlayLeft = () => (
   <Card href="/#" border="black" direction="row" className="w-96 max-w-full">
-    <Heading level={3}>Kort uten bilde</Heading>
+    <Heading level={3}>Kort med bilde</Heading>
     <p>Dette er en beskrivelse</p>
     <Media>
       <MediaOverlay>
@@ -447,7 +424,7 @@ export const ImageCardRightWithOverlayLeft = () => (
 
 export const ImageCardRightWithOverlayRight = () => (
   <Card href="/#" border="black" direction="row" className="w-96 max-w-full">
-    <Heading level={3}>Kort uten bilde</Heading>
+    <Heading level={3}>Kort med bilde</Heading>
     <p>Dette er en beskrivelse</p>
     <Media>
       <MediaOverlay>
@@ -525,7 +502,7 @@ const Illustration = () => (
 export const CardWithInlineTopIllustration = () => (
   <Card href="#card" border="dark-blue" className="w-72">
     <Illustration />
-    <Heading level={3}>Utemuljø og grøntanlegg</Heading>
+    <Heading level={3}>Utemiljø og grøntanlegg</Heading>
     <p>
       Et godt utemiljø er viktig for trivselen. Vi har en egen utenhusavdeling
       med flinke folk som kan hjelpe med realisering av nye prosjekter.
@@ -538,7 +515,7 @@ export const CardWithLeftIllustration = () => (
     <Media>
       <Illustration />
     </Media>
-    <Heading level={3}>Utemuljø og grøntanlegg</Heading>
+    <Heading level={3}>Utemiljø og grøntanlegg</Heading>
     <p>
       Et godt utemiljø er viktig for trivselen. Vi har en egen utenhusavdeling
       med flinke folk som kan hjelpe med realisering av nye prosjekter.
