@@ -147,8 +147,6 @@ const cardVariants = cva({
       false: [
         // Hover effect on the Card image if the card has a ClickArea
         '[&:hover:has([data-slot="click-area"])_[data-slot="media"]>:not([data-slot="media-overlay"])]:motion-safe:scale-110',
-        // Hover effect on the Card heading if the card has a ClickArea
-        '[&:hover:has([data-slot="click-area"])_[data-slot="heading"]]:border-b-current',
       ],
       true: [
         // Make interactive elements clickable by themselves, while the rest of the card is clickable as a whole
