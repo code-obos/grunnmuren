@@ -42,7 +42,7 @@ const Card = ({
           [
             ContentContext,
             {
-              className: 'grid gap-y-4',
+              className: 'grid gap-y-4 auto-rows-max',
             },
           ],
         ]}
