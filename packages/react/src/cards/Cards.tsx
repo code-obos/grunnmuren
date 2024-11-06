@@ -157,8 +157,6 @@ const cardVariants = cva({
 
         // Don't trigger image zoom hover effect on the entire card when hovering other clickable elements
         '[&:has(a:not([data-slot="card-heading-link"]):hover)_[data-slot="media"]_*:not([data-slot="media-overlay"])]:scale-100',
-        // Don't trigger underline hover effect on title when hovering other clickable elements
-        '[&:has(a:not([data-slot="card-heading-link"]):hover)_[data-slot="card-heading-link"]]:border-b-transparent',
       ],
     },
     direction: {
@@ -349,7 +347,7 @@ const Card = ({
                       // hover styles
                       // Border (bottom/top) is set to transparent to make sure the bottom underline is not visible when the card is hovered
                       // Border top is set to ensure an even space the heading and it's content
-                      'border-y-2 border-y-transparent transition-colors group-hover/card:border-b-current',
+                      'border-y-2 border-y-transparent transition-colors hover:border-b-current',
                       // Match the heading styles (especially important when the content spans mulitple lines)
                       'heading-s text-pretty',
                     )}
