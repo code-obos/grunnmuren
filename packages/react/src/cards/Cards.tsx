@@ -183,9 +183,10 @@ const cardVariants = cva({
         // **** Media ****
         // Media should span 50% of the card width, the rest should span the remaining 50% space
         '[&:has(>[data-slot="media"])]:grid-cols-[1fr,1fr]',
-        // If media is the first child:
-        '[&:has(>[data-slot="media"]:first-child)>:not([data-slot="media"])]:col-start-2',
+        // If media is the first child it should span the first column
         '[&:has(>[data-slot="media"]:last-child)>:not([data-slot="media"])]:col-start-1',
+        // All other children should span the second column
+        '[&:has(>[data-slot="media"]:first-child)>:not([data-slot="media"])]:col-start-2',
 
         // If there is no media in the card, make sure the content spans the entire height of the card
         // This override is neccessary due to the inline style passed to the card to make the media grid layout work
@@ -243,9 +244,10 @@ const Card = ({
         direction === 'row'
           ? {
               // To make sure the media spans the entire card height while the other children only spans their natural height
-              // We set the grid-template-rows to auto for all children except the last one, which spans the remaining space
+              // we set the grid-template-rows to auto for all children except the last one, which spans the remaining space.
               // This extra row fills up the remaining space in the columns so that the media can span the entire height of the card (since we set a fixed number of rows)
-              // And the other children can span their natural height (a last extra last row that spans the remaining space)
+              // And the other children can span their natural height (a last extra last row that spans the remaining space).
+              // By doint this we avoid extra wrapper elements to make the media span the entire height of the card.
               gridTemplateRows: `repeat(${numberOfChildren - 1}, auto) 1fr`,
             }
           : undefined
@@ -266,14 +268,16 @@ const Card = ({
             {
               aspectRatio: '3:2',
               className: cx(
-                // Make sure image is placed to top and the sides over Card the border
+                // Make content follow the border radius
                 'overflow-hidden',
+                // Bottom corners of the Media are rounded when the card has no border
                 !border && 'rounded-b-2xl',
+
                 // *** Column direction ***
-                // Positions the media to the top of the card and make sure it spans the entire width of the card
+                // Positions the media to the top of the card and makes sure it spans the entire width of the card
                 direction === 'column' &&
                   'mx-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))] mt-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
-                // Rounded top corners for the media to match the card
+                // Rounded top corners for the media to match the column layout
                 direction === 'column' && 'rounded-t-2xl',
                 // Makes sure the media is always displayed first in the card in a column layout
                 direction === 'column' && '-order-1',
@@ -290,7 +294,7 @@ const Card = ({
 
                 // Child image styles
                 '[&_img]:object-cover',
-                // Prepare animation for hover effects. This can also be enabled by classes of the parent component, so it is always prepared here.
+                // Prepare animation for hover effects. The hover effect can also be enabled by classes on the parent component, so it is always prepared here.
                 '*:transition-transform *:duration-300 *:ease-in-out',
                 href &&
                   // Enables the hover effect
@@ -327,10 +331,8 @@ const Card = ({
               id: headingId,
               className: cx(
                 'inline',
-                // Styles for the heading when not wrapped in a link
-                // Set up hover effect for the heading that can be triggered by the ClickArea
-                !href &&
-                  'heading-s w-fit text-pretty border-y-2 border-y-transparent transition-colors',
+                // Styles for the heading when content not wrapped in a link
+                !href && 'heading-s w-fit text-pretty',
               ),
               _innerWrapper: (children) =>
                 href ? (
@@ -338,8 +340,6 @@ const Card = ({
                     href={href}
                     // Uses a pseudo-element with absolute position to make the entire card focusable and clickable
                     className={cx(
-                      // Pseudo-element needed to enable click on entire card
-                      // It is also used to apply focus styles.
                       // Note that the border-radius is set 1px less then the card radius
                       // This is due to the fact that the card as a 1px border and needs to be adjusted to align perfectly
                       // z-index is set to make sure it is always placed on top of the image and overlay
@@ -350,7 +350,7 @@ const Card = ({
                       // Border (bottom/top) is set to transparent to make sure the bottom underline is not visible when the card is hovered
                       // Border top is set to ensure an even space the heading and it's content
                       'border-y-2 border-y-transparent transition-colors group-hover/card:border-b-current',
-                      // Match the heading styles
+                      // Match the heading styles (especially important when the content spans mulitple lines)
                       'heading-s text-pretty',
                     )}
                     data-slot="card-heading-link"
