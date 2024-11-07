@@ -1,7 +1,8 @@
 import type { Meta } from '@storybook/react';
 import { Card } from './Card';
-import { Heading, Content } from '../content';
+import { Heading, Content, Media } from '../content';
 import { cx } from 'cva';
+import { PiggyBank } from '@obosbbl/grunnmuren-icons-react';
 
 const meta: Meta<typeof Card> = {
   title: 'Card',
@@ -65,3 +66,59 @@ export const WithBackground = () => {
     </Cards>
   );
 };
+
+export const WithImage = () => (
+  <Card>
+    <Media>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+      />
+    </Media>
+    <Content>
+      <Heading level={3}>Kort med bilde</Heading>
+      <p>
+        Dette kortet har et bilde og er uten border. Derfor er alle hjørner på
+        bildet avrundet.
+      </p>
+    </Content>
+  </Card>
+);
+
+export const WithImageAndBorder = () => (
+  <Card border="blue-dark">
+    <Media>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+      />
+    </Media>
+    <Content>
+      <Heading level={3}>Kort med bilde og border</Heading>
+      <p>
+        Dette kortet har et bilde og border. Derfor er kun hjørnene i toppen
+        avrundet.
+      </p>
+    </Content>
+  </Card>
+);
+
+export const WithIconTop = () => (
+  <Card border="black">
+    <PiggyBank />
+    <Content>
+      <Heading level={3}>Kort med ikon i topp</Heading>
+      <p>Dette kortet har svart border og et ikon</p>
+    </Content>
+  </Card>
+);
+
+export const WithIconBottom = () => (
+  <Card border="black">
+    <Content>
+      <Heading level={3}>Kort med ikon i bunn</Heading>
+      <p>Dette kortet har svart border og et ikon</p>
+    </Content>
+    <PiggyBank />
+  </Card>
+);
