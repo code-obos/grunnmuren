@@ -4,7 +4,6 @@ import { Link, LinkProps } from 'react-aria-components';
 type CardProps = VariantProps<typeof cardVariants> & {
   children?: React.ReactNode;
   className?: string;
-  /** Makes the entire card clickable by wrapping the content of the <Heading> in a <Link> */
 };
 
 const cardVariants = cva({
