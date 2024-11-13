@@ -55,6 +55,20 @@ const Content = (props: ContentProps, ref: ForwardedRef<HTMLDivElement>) => {
   return outerWrapper ? outerWrapper(content) : content;
 };
 
+const MediaContext = createContext<
+  ContextValue<Partial<MediaProps>, HTMLDivElement>
+>({});
+
+type MediaProps = HTMLProps<HTMLDivElement> & {
+  children: React.ReactNode;
+};
+
+const Media = (props: MediaProps, ref: ForwardedRef<HTMLDivElement>) => {
+  [props] = useContextProps(props, ref, MediaContext);
+
+  return <div {...props} data-slot="media" />;
+};
+
 type FooterProps = HTMLProps<HTMLDivElement> & {
   children: React.ReactNode;
 };
@@ -68,6 +82,9 @@ export {
   type ContentProps,
   Content,
   ContentContext,
+  MediaContext,
+  type MediaProps,
+  Media,
   type FooterProps,
   Footer,
 };
