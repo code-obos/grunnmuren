@@ -5,6 +5,7 @@ import { HeadingContext } from '../content';
 type CardProps = VariantProps<typeof cardVariants> & {
   children?: React.ReactNode;
   className?: string;
+  /** Makes the entire card clickable by wrapping the content of the <Heading> in a <Link> */
   href?: LinkProps['href'];
 };
 
