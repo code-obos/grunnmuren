@@ -27,19 +27,6 @@ const cardVariants = cva({
     '[&_[data-slot="media"]>*]:aspect-[3/2] [&_[data-slot="media"]>*]:w-full [&_[data-slot="media"]_img]:object-cover',
     // Prepare zoom animation for hover effects. The hover effect can also be enabled by classes on the parent component, so it is always prepared here.
     '[&_[data-slot="media"]>*]:transition-transform [&_[data-slot="media"]>*]:duration-300 [&_[data-slot="media"]>*]:ease-in-out',
-
-    // **** Footer ****
-    // Content of the footer is intended to be outside the clickable area of the card
-    // This serves as an area where the consumer can place other interactive elements that should not trigger the card click
-    '[&_[data-slot="footer"]]:relative', // Setting it to relative will place it on top of the clickable pseudo-element
-    // Position footer at the edges of the card, but give it the same padding as the rest of the card
-    '[&_[data-slot="footer"]]:py-3',
-    '[&_[data-slot="footer"]]:mx-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
-    '[&_[data-slot="footer"]]:mb-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
-    // Creates a divider line between the footer and the rest of the card that follows the card padding (the CSS would become even more complex if the border was placed on the card itself)
-    '[&_[data-slot="footer"]]:before:absolute',
-    '[&_[data-slot="footer"]]:before:left-3 [&_[data-slot="footer"]]:before:right-3 [&_[data-slot="footer"]]:before:top-0',
-    '[&_[data-slot="footer"]]:before:border-t [&_[data-slot="footer"]]:before:border-t-current',
   ],
   variants: {
     border: {
@@ -58,7 +45,7 @@ const cardVariants = cva({
         // Enables the zoom hover effect on media (note that we can't use group-hover/card here, because there might be other clickable elements in the card aside from the heading)
         '[&:has([data-slot="card-heading-link"]:hover)_[data-slot="media"]>*]:scale-110',
 
-        // **** Fail-safe for interactive elements not placed in a <Footer> ****
+        // **** Fail-safe for interactive elements ****
         // Make interactive elements clickable by themselves, while the rest of the card is clickable as a whole
         // The card is then made clickable by a pseudo-element on the heading that covers the entire card
         '[&_a:not([data-slot="card-heading-link"])]:relative [&_button]:relative [&_input]:relative',

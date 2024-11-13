@@ -1,16 +1,14 @@
 import type { Meta } from '@storybook/react';
 import { Card } from './Card';
-import { Heading, Content, Media, Footer } from '../content';
+import { Heading, Content, Media } from '../content';
 import { cx } from 'cva';
 import {
   ArrowRight,
   Bed,
   House,
-  LinkExternal,
   PiggyBank,
 } from '@obosbbl/grunnmuren-icons-react';
 import { Badge } from '../badge';
-import { Button } from '../button';
 
 const meta: Meta<typeof Card> = {
   title: 'Card',
@@ -282,12 +280,6 @@ export const ClickableWithOtherClickableElements = () => (
       <Badge size="small" color="mint">
         Visning 13. oktober
       </Badge>
-      <Footer className="grid place-items-center">
-        <Button variant="tertiary" href="#cta">
-          Åpne finnannonsen
-          <LinkExternal />
-        </Button>
-      </Footer>
     </Content>
   </Card>
 );
@@ -325,12 +317,6 @@ export const ClickableWithOtherClickableElementsAndBackgroundColor = () => (
       <Badge size="small" color="white" className="text-black">
         Visning 13. oktober
       </Badge>
-      <Footer className="grid place-items-center">
-        <Button variant="tertiary" color="white" href="#cta">
-          Åpne finnannonsen
-          <LinkExternal />
-        </Button>
-      </Footer>
     </Content>
   </Card>
 );
