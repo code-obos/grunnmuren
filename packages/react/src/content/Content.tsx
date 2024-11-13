@@ -1,4 +1,3 @@
-import { cva, VariantProps } from 'cva';
 import { HTMLProps, createContext, type ForwardedRef } from 'react';
 import { useContextProps, type ContextValue } from 'react-aria-components';
 
@@ -60,34 +59,14 @@ const MediaContext = createContext<
   ContextValue<Partial<MediaProps>, HTMLDivElement>
 >({});
 
-type MediaProps = HTMLProps<HTMLDivElement> &
-  VariantProps<typeof mediaVariants> & {
-    children: React.ReactNode;
-  };
-
-const mediaVariants = cva({
-  variants: {
-    aspectRatio: {
-      // Sets the aspect ratio on any child
-      // width: 100% is necessary to make aspect ratio work in FF
-      '2:3': '*:aspect-[2/3] *:w-full [&_img]:object-cover',
-      '3:4': '*:aspect-[3/4] *:w-full [&_img]:object-cover',
-      '3:2': '*:aspect-[3/2] *:w-full [&_img]:object-cover',
-      '4:3': '*:aspect-[4/3] *:w-full [&_img]:object-cover',
-      '16:9': '*:aspect-video *:w-full [&_img]:object-cover',
-    },
-  },
-});
+type MediaProps = HTMLProps<HTMLDivElement> & {
+  children: React.ReactNode;
+};
 
 const Media = (props: MediaProps, ref: ForwardedRef<HTMLDivElement>) => {
-  [props, ref] = useContextProps(props, ref, MediaContext);
-  const { className: _className, aspectRatio, ...restProps } = props;
-  const className = mediaVariants({
-    className: _className,
-    aspectRatio,
-  });
+  [props] = useContextProps(props, ref, MediaContext);
 
-  return <div className={className} {...restProps} data-slot="media" />;
+  return <div {...props} data-slot="media" />;
 };
 
 type FooterProps = HTMLProps<HTMLDivElement> & {
