@@ -29,8 +29,8 @@ const cardVariants = cva({
     '[&_[data-slot="media"]>*]:transition-transform [&_[data-slot="media"]>*]:duration-300 [&_[data-slot="media"]>*]:ease-in-out',
 
     // **** Footer ****
-    // Footer content of the footer is intended to be outside the clickable area of the card
-    // Fot this reason the CSS of the footer becomes a little bit more complex
+    // Content of the footer is intended to be outside the clickable area of the card
+    // This serves as an area where the consumer can place other interactive elements that should not trigger the card click
     '[&_[data-slot="footer"]]:relative', // Setting it to relative will place it on top of the clickable pseudo-element
     // Position footer at the edges of the card, but give it the same padding as the rest of the card
     '[&_[data-slot="footer"]]:py-3',
@@ -58,6 +58,7 @@ const cardVariants = cva({
         // Enables the zoom hover effect on media (note that we can't use group-hover/card here, because there might be other clickable elements in the card aside from the heading)
         '[&:has([data-slot="card-heading-link"]:hover)_[data-slot="media"]>*]:scale-110',
 
+        // **** Fail-safe for interactive elements not placed in a <Footer> ****
         // Make interactive elements clickable by themselves, while the rest of the card is clickable as a whole
         // The card is then made clickable by a pseudo-element on the heading that covers the entire card
         '[&_a:not([data-slot="card-heading-link"])]:relative [&_button]:relative [&_input]:relative',
@@ -99,17 +100,16 @@ const Card = ({
                     // Uses a pseudo-element with absolute position to make the entire card focusable and clickable
                     className={cx(
                       'cursor-pointer',
-                      // Note that the border-radius is set 1px less then the card radius
-                      // This is due to the fact that the card as a 1px border and needs to be adjusted to align perfectly
+                      // **** Hover: custom underline ****
+                      // The border radius needs to be adjusted to align perfectly with the card border
                       'no-underline after:absolute after:inset-[calc(theme(borderWidth.DEFAULT)*-1)] after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
-                      // focus styles
-                      'focus-visible:after:outline-focus focus-visible:outline-none focus-visible:after:outline-offset-2',
-                      // hover styles
                       // Border (bottom/top) is set to transparent to make sure the bottom underline is not visible when the card is hovered
                       // Border top is set to even out the border bottom used for the underline
                       'border-y-2 border-y-transparent transition-colors hover:border-b-current',
                       // Match the heading styles (especially important when the content spans mulitple lines)
                       'heading-s text-pretty',
+                      // **** Focus ****
+                      'focus-visible:after:outline-focus focus-visible:outline-none focus-visible:after:outline-offset-2',
                     )}
                     data-slot="card-heading-link"
                   >
