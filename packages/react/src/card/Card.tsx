@@ -48,7 +48,7 @@ const cardVariants = cva({
     '[&_[data-slot="heading"]_[data-slot="card-link"]]:border-y-2',
     '[&_[data-slot="heading"]_[data-slot="card-link"]]:border-y-transparent',
     '[&_[data-slot="heading"]_[data-slot="card-link"]]:transition-colors',
-    '[&_[data-slot="heading"]_[data-slot="card-link"]]:hover:border-b-current',
+    '[&_[data-slot="heading"]_[data-slot="card-link"]:hover]:border-b-current',
     // **** Focus ****
     '[&_[data-slot="heading"]_[data-slot="card-link"]:focus-visible]:after:outline-focus',
     '[&_[data-slot="heading"]_[data-slot="card-link"]:focus-visible]:outline-none',
