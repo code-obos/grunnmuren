@@ -243,6 +243,16 @@ export const ClickableWithImage = () => (
   </Card>
 );
 
+export const ClickableWithBackground = () => (
+  <Card href="#card" className="bg-blue-dark text-white">
+    <Content>
+      <Heading level={3}>Klikkbart med bakgrunnsfarge</Heading>
+      <p>Dette kortet er klikkbart og har en bakgrunnsfarge</p>
+    </Content>
+    <ArrowRight className="transition-transform group-hover/card:motion-safe:translate-x-1" />
+  </Card>
+);
+
 export const ClickableWithOtherClickableElements = () => (
   <Card href="#card" border="blue-dark" className="w-72">
     <Media>
@@ -274,6 +284,49 @@ export const ClickableWithOtherClickableElements = () => (
       </Badge>
       <Footer className="grid place-items-center">
         <Button variant="tertiary" href="#cta">
+          Åpne finnannonsen
+          <LinkExternal />
+        </Button>
+      </Footer>
+    </Content>
+  </Card>
+);
+
+export const ClickableWithOtherClickableElementsAndBackgroundColor = () => (
+  <Card
+    href="#card"
+    border="blue-dark"
+    className="w-72 bg-blue-dark text-white"
+  >
+    <Media>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+      />
+    </Media>
+    <Content>
+      <div className="grid">
+        <Heading level={3}>Rødbergvn 88C</Heading>
+        <small className="description">Bjerke - Oslo</small>
+      </div>
+      <small className="description -order-1">
+        Forhåndsvarsling - Saksnr. F0347565
+      </small>
+      <p className="font-semibold">100 m² | Prisantydning 9 600 000 kr</p>
+      <p className="flex gap-x-1">
+        <House /> Rekkehus/småhus
+      </p>
+      <p className="flex gap-x-1">
+        <Bed /> 3 soverom
+      </p>
+      <p className="flex gap-x-1">
+        <PiggyBank /> Totalpris 9 989 838
+      </p>
+      <Badge size="small" color="white" className="text-black">
+        Visning 13. oktober
+      </Badge>
+      <Footer className="grid place-items-center">
+        <Button variant="tertiary" color="white" href="#cta">
           Åpne finnannonsen
           <LinkExternal />
         </Button>
