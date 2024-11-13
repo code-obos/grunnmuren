@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react';
-import { Card } from './Card';
+import { Card, CardLink } from './Card';
 import { Heading, Content, Media } from '../content';
 import { cx } from 'cva';
 import {
@@ -214,9 +214,11 @@ export const CardWithCoveringIllustration = () => (
 );
 
 export const ClickableWithIcon = () => (
-  <Card href="#card" border="black">
+  <Card border="black">
     <Content>
-      <Heading level={3}>Klikkbart</Heading>
+      <Heading level={3}>
+        <CardLink href="#card">Klikkbar</CardLink>
+      </Heading>
       <p>Dette kortet er klikkbart og har svart border med et ikon</p>
     </Content>
     <ArrowRight className="transition-transform group-hover/card:motion-safe:translate-x-1" />
@@ -224,7 +226,7 @@ export const ClickableWithIcon = () => (
 );
 
 export const ClickableWithImage = () => (
-  <Card href="#card">
+  <Card>
     <Media>
       <img
         alt=""
@@ -232,7 +234,9 @@ export const ClickableWithImage = () => (
       />
     </Media>
     <Content>
-      <Heading level={3}>Kort med bilde</Heading>
+      <Heading level={3}>
+        <CardLink href="#card">Klikkbar med bilde</CardLink>
+      </Heading>
       <p>
         Dette kortet har et bilde og er uten border. Derfor er alle hjørner på
         bildet avrundet.
@@ -242,9 +246,11 @@ export const ClickableWithImage = () => (
 );
 
 export const ClickableWithBackground = () => (
-  <Card href="#card" className="bg-blue-dark text-white">
+  <Card className="bg-blue-dark text-white">
     <Content>
-      <Heading level={3}>Klikkbart med bakgrunnsfarge</Heading>
+      <Heading level={3}>
+        <CardLink href="#card">Klikkbar med bakgrunnsfarge</CardLink>
+      </Heading>
       <p>Dette kortet er klikkbart og har en bakgrunnsfarge</p>
     </Content>
     <ArrowRight className="transition-transform group-hover/card:motion-safe:translate-x-1" />
@@ -252,7 +258,7 @@ export const ClickableWithBackground = () => (
 );
 
 export const ClickableWithOtherClickableElements = () => (
-  <Card href="#card" border="blue-dark" className="w-72">
+  <Card border="blue-dark" className="w-72">
     <Media>
       <img
         alt=""
@@ -261,7 +267,9 @@ export const ClickableWithOtherClickableElements = () => (
     </Media>
     <Content>
       <div className="grid">
-        <Heading level={3}>Rødbergvn 88C</Heading>
+        <Heading level={3}>
+          <CardLink href="#card">Rødbergvn 88C</CardLink>
+        </Heading>
         <small className="description">Bjerke - Oslo</small>
       </div>
       <small className="description -order-1">
@@ -285,11 +293,7 @@ export const ClickableWithOtherClickableElements = () => (
 );
 
 export const ClickableWithOtherClickableElementsAndBackgroundColor = () => (
-  <Card
-    href="#card"
-    border="blue-dark"
-    className="w-72 bg-blue-dark text-white"
-  >
+  <Card border="blue-dark" className="w-72 bg-blue-dark text-mint">
     <Media>
       <img
         alt=""
@@ -298,7 +302,9 @@ export const ClickableWithOtherClickableElementsAndBackgroundColor = () => (
     </Media>
     <Content>
       <div className="grid">
-        <Heading level={3}>Rødbergvn 88C</Heading>
+        <Heading level={3}>
+          <CardLink href="#card">Rødbergvn 88C</CardLink>
+        </Heading>
         <small className="description">Bjerke - Oslo</small>
       </div>
       <small className="description -order-1">
@@ -314,7 +320,7 @@ export const ClickableWithOtherClickableElementsAndBackgroundColor = () => (
       <p className="flex gap-x-1">
         <PiggyBank /> Totalpris 9 989 838
       </p>
-      <Badge size="small" color="white" className="text-black">
+      <Badge size="small" color="mint" className="text-black">
         Visning 13. oktober
       </Badge>
     </Content>
