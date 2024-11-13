@@ -1,9 +1,16 @@
 import type { Meta } from '@storybook/react';
 import { Card } from './Card';
-import { Heading, Content, Media } from '../content';
+import { Heading, Content, Media, Footer } from '../content';
 import { cx } from 'cva';
-import { Bed, House, PiggyBank } from '@obosbbl/grunnmuren-icons-react';
+import {
+  ArrowRight,
+  Bed,
+  House,
+  LinkExternal,
+  PiggyBank,
+} from '@obosbbl/grunnmuren-icons-react';
 import { Badge } from '../badge';
+import { Button } from '../button';
 
 const meta: Meta<typeof Card> = {
   title: 'Card',
@@ -204,6 +211,73 @@ export const CardWithCoveringIllustration = () => (
       <Badge size="small" color="mint">
         Visning 13. oktober
       </Badge>
+    </Content>
+  </Card>
+);
+
+export const ClickableWithIcon = () => (
+  <Card href="#card" border="black">
+    <Content>
+      <Heading level={3}>Klikkbart</Heading>
+      <p>Dette kortet er klikkbart og har svart border med et ikon</p>
+    </Content>
+    <ArrowRight className="transition-transform group-hover/card:motion-safe:translate-x-1" />
+  </Card>
+);
+
+export const ClickableWithImage = () => (
+  <Card href="#card">
+    <Media>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+      />
+    </Media>
+    <Content>
+      <Heading level={3}>Kort med bilde</Heading>
+      <p>
+        Dette kortet har et bilde og er uten border. Derfor er alle hjørner på
+        bildet avrundet.
+      </p>
+    </Content>
+  </Card>
+);
+
+export const ClickableWithOtherClickableElements = () => (
+  <Card href="#card" border="blue-dark" className="w-72">
+    <Media>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+      />
+    </Media>
+    <Content>
+      <div className="grid">
+        <Heading level={3}>Rødbergvn 88C</Heading>
+        <small className="description">Bjerke - Oslo</small>
+      </div>
+      <small className="description -order-1">
+        Forhåndsvarsling - Saksnr. F0347565
+      </small>
+      <p className="font-semibold">100 m² | Prisantydning 9 600 000 kr</p>
+      <p className="flex gap-x-1">
+        <House /> Rekkehus/småhus
+      </p>
+      <p className="flex gap-x-1">
+        <Bed /> 3 soverom
+      </p>
+      <p className="flex gap-x-1">
+        <PiggyBank /> Totalpris 9 989 838
+      </p>
+      <Badge size="small" color="mint">
+        Visning 13. oktober
+      </Badge>
+      <Footer className="grid place-items-center">
+        <Button variant="tertiary" href="#cta">
+          Åpne finnannonsen
+          <LinkExternal />
+        </Button>
+      </Footer>
     </Content>
   </Card>
 );
