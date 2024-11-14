@@ -59,8 +59,9 @@ const cardVariants = cva({
     // Make interactive elements clickable by themselves, while the rest of the card is clickable as a whole
     // The card is then made clickable by a pseudo-element on the heading that covers the entire card
     '[&_a:not([data-slot="card-link"])]:relative [&_button]:relative [&_input]:relative',
-    // Place other interactive on top of the pseudo-element that makes the entire card clickable by setting a higher z-index than the pseudo-element
-    '[&_a:not([data-slot="card-link"])]:z-[2] [&_button]:z-[2] [&_input]:z-[2]',
+    // Place other interactive on top of the pseudo-element that makes the entire card clickable
+    // by setting a higher z-index than the pseudo-element (which implicitly z-index 0)
+    '[&_a:not([data-slot="card-link"])]:z-[1] [&_button]:z-[1] [&_input]:z-[1]',
   ],
   variants: {
     border: {
