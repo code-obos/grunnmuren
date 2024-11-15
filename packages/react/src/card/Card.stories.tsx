@@ -273,10 +273,10 @@ export const ClickableWithImageAndCTA = () => (
         Dette kortet er klikkbart og har en bakgrunnsfarge og en CTA-lenke som
         gjør at hele kortet blir klikkbart mot den lenken
       </p>
-      <CardLink>
+      <CardLink className="group/cta">
         <Button href="#cta" variant="tertiary">
-          Klikkbar med bakgrunnsfarge
-          <ArrowRight className="transition-transform group-hover/card:motion-safe:translate-x-1" />
+          Klikkbar med bilde
+          <ArrowRight className="transition-transform group-hover/cta:motion-safe:translate-x-1" />
         </Button>
       </CardLink>
     </Content>
@@ -291,10 +291,10 @@ export const ClickableWithBackgroundAndCTA = () => (
         Dette kortet er klikkbart og har en bakgrunnsfarge og en CTA-lenke som
         gjør at hele kortet blir klikkbart mot den lenken
       </p>
-      <CardLink className="mt-1">
+      <CardLink className="group/cta mt-1">
         <Button href="#cta" variant="tertiary">
           Klikkbar med bakgrunnsfarge
-          <ArrowRight className="transition-transform group-hover/card:motion-safe:translate-x-1" />
+          <ArrowRight className="transition-transform group-hover/cta:motion-safe:translate-x-1" />
         </Button>
       </CardLink>
     </Content>
