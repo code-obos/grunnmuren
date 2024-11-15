@@ -15,9 +15,9 @@ const cardVariants = cva({
 
     // **** Heading ****
     '[&_[data-slot="heading"]]:inline',
-    '[&:not(:has([data-slot="card-link"]))_[data-slot="heading"]]:heading-s',
-    '[&:not(:has([data-slot="card-link"]))_[data-slot="heading"]]:w-fit',
-    '[&:not(:has([data-slot="card-link"]))_[data-slot="heading"]]:text-pretty',
+    '[&_[data-slot="heading"]]:heading-s',
+    '[&_[data-slot="heading"]]:w-fit',
+    '[&_[data-slot="heading"]]:text-pretty',
 
     // **** Content ****
     '[&_[data-slot="content"]]:grid [&_[data-slot="content"]]:auto-rows-max [&_[data-slot="content"]]:gap-y-4',
@@ -39,11 +39,12 @@ const cardVariants = cva({
     // **** Hover: custom underline ****
     // Border (bottom/top) is set to transparent to make sure the bottom underline is not visible when the card is hovered
     // Border top is set to even out the border bottom used for the underline
+    '[&_[data-slot="heading"]_[data-slot="card-link"]]:no-underline',
     '[&_[data-slot="heading"]_[data-slot="card-link"]]:border-y-2',
     '[&_[data-slot="heading"]_[data-slot="card-link"]]:border-y-transparent',
     '[&_[data-slot="heading"]_[data-slot="card-link"]]:transition-colors',
     '[&_[data-slot="heading"]_[data-slot="card-link"]:hover]:border-b-current',
-    // Mimic heading styles for the card link if placed in the heading slot
+    // Mimic heading styles for the card link if placed in the heading slot. This is necessary to make the custom underline align with the link text
     '[&_[data-slot="heading"]_[data-slot="card-link"]]:heading-s [&_[data-slot="heading"]_[data-slot="card-link"]]:text-pretty',
 
     // **** Fail-safe for interactive elements ****
