@@ -20,14 +20,14 @@
     "@changesets/cli": "2.27.9",
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
     "@react-aria/optimize-locales-plugin": "1.1.2",
-    "@storybook/addon-actions": "8.3.5",
-    "@storybook/addon-controls": "8.3.5",
-    "@storybook/addon-docs": "8.3.5",
-    "@storybook/builder-vite": "8.3.5",
-    "@storybook/react": "8.3.5",
-    "@storybook/react-vite": "8.3.5",
-    "@types/bun": "1.1.10",
-    "@types/react": "18.3.11",
+    "@storybook/addon-actions": "8.4.2",
+    "@storybook/addon-controls": "8.4.2",
+    "@storybook/addon-docs": "8.4.2",
+    "@storybook/builder-vite": "8.4.2",
+    "@storybook/react": "8.4.2",
+    "@storybook/react-vite": "8.4.2",
+    "@types/bun": "1.1.13",
+    "@types/react": "18.3.12",
     "@typescript-eslint/eslint-plugin": "7.10.0",
     "@typescript-eslint/parser": "7.10.0",
     "autoprefixer": "10.4.20",
@@ -44,12 +44,12 @@
     "prettier-plugin-tailwindcss": "0.5.14",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "storybook": "8.3.5",
+    "storybook": "8.4.2",
     "tailwindcss": "3.4.14",
     "typescript": "5.6.3"
   },
   "packageManager": "pnpm@9.12.3",
   "engines": {
-    "node": ">=20"
+    "node": ">=22.11"
   }
 }
