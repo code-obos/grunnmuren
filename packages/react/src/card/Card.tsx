@@ -1,4 +1,4 @@
-import { cva, cx, VariantProps } from 'cva';
+import { cva, VariantProps } from 'cva';
 import { Link, LinkProps } from 'react-aria-components';
 
 type CardProps = VariantProps<typeof cardVariants> & {
@@ -37,21 +37,12 @@ const cardVariants = cva({
     '[&:has([data-slot="card-link"]:hover)_[data-slot="media"]>*]:scale-110',
     // **** Card link in Heading ****
     // **** Hover: custom underline ****
-    // The border radius needs to be adjusted to align perfectly with the card border
-    '[&_[data-slot="heading"]_[data-slot="card-link"]]:no-underline',
-    '[&_[data-slot="heading"]_[data-slot="card-link"]]:after:absolute',
-    '[&_[data-slot="heading"]_[data-slot="card-link"]]:after:inset-[calc(theme(borderWidth.DEFAULT)*-1)]',
-    '[&_[data-slot="heading"]_[data-slot="card-link"]]:after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
     // Border (bottom/top) is set to transparent to make sure the bottom underline is not visible when the card is hovered
     // Border top is set to even out the border bottom used for the underline
     '[&_[data-slot="heading"]_[data-slot="card-link"]]:border-y-2',
     '[&_[data-slot="heading"]_[data-slot="card-link"]]:border-y-transparent',
     '[&_[data-slot="heading"]_[data-slot="card-link"]]:transition-colors',
     '[&_[data-slot="heading"]_[data-slot="card-link"]:hover]:border-b-current',
-    // **** Focus ****
-    '[&_[data-slot="heading"]_[data-slot="card-link"]:focus-visible]:after:outline-focus',
-    '[&_[data-slot="heading"]_[data-slot="card-link"]:focus-visible]:outline-none',
-    '[&_[data-slot="heading"]_[data-slot="card-link"]:focus-visible]:after:outline-offset-2',
     // Mimic heading styles for the card link if placed in the heading slot
     '[&_[data-slot="heading"]_[data-slot="card-link"]]:heading-s [&_[data-slot="heading"]_[data-slot="card-link"]]:text-pretty',
 
@@ -94,14 +85,85 @@ const Card = ({
   );
 };
 
-type CardLinkProps = LinkProps;
+type RACLinkProps = Pick<LinkProps, 'href' | 'routerOptions' | 'children'>;
 
-const CardLink = ({ className, ...restProps }: CardLinkProps) => (
-  <Link
-    data-slot="card-link"
-    {...restProps}
-    className={cx(className, 'cursor-pointer')}
-  />
-);
+type CardLinkWrapperProps = {
+  [Key in keyof RACLinkProps]: LinkProps[Key];
+} & {
+  // Override children type of LinkProps as it also allows a callback which is not allowed in HTMLProps
+  children: React.ReactNode;
+};
+
+type CardLinkProps = {
+  className?: string;
+} & (RACLinkProps | CardLinkWrapperProps);
+
+const cardLinkVariants = cva({
+  base: [
+    'cursor-pointer',
+    // **** Clickarea ****
+    'after:absolute',
+    'after:inset-[calc(theme(borderWidth.DEFAULT)*-1)]',
+    'after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
+  ],
+  variants: {
+    withHref: {
+      true: [
+        // **** Focus ****
+        'focus-visible:outline-none',
+        'focus-visible:after:outline-focus',
+        'focus-visible:after:outline-offset-2',
+        // **** Hover ****
+        // Links are underlined by default, and the underline is removed on hover.
+        // So we make sure that also happens when the user hovers the clickable area.
+        'hover:no-underline',
+      ],
+      false: [
+        // **** Focus ****
+        '[&_a:focus-visible]:outline-none',
+        '[&:has(a:focus-visible)]:after:outline-focus',
+        '[&:has(a:focus-visible)]:after:outline-offset-2',
+        // **** Hover ****
+        // Links are underlined by default, and the underline is removed on hover.
+        // So we make sure that also happens when the user hovers the card.
+        // The group-hover ensures that the hover effect also applies when this component is used as a wrapper around a link.
+        '[&_a]:group-hover/card:no-underline',
+      ],
+    },
+  },
+});
+
+/**
+ * A component that creates a clickable area on a card.
+ * It can be used either as a wrapper around a link or as a standalone link.
+ */
+const CardLink = ({
+  className: _className,
+  href,
+  ...restProps
+}: CardLinkProps) => {
+  const className = cardLinkVariants({
+    className: _className,
+    withHref: !!href,
+  });
+
+  return href ? (
+    <Link
+      data-slot="card-link"
+      {...restProps}
+      href={href}
+      className={className}
+    />
+  ) : (
+    // We can't utilize that the `Link` component from react-aria-components renders as a span if it doesn't have an href,
+    // because it still renders with role="link" and tabindex="0" which makes it focusable.
+    // So we need to render a div instead.
+    <div
+      data-slot="card-link"
+      className={className}
+      {...(restProps as CardLinkWrapperProps)}
+    />
+  );
+};
 
 export { Card, type CardProps, type CardLinkProps, CardLink };

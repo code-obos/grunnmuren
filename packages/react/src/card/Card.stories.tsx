@@ -1,14 +1,16 @@
 import type { Meta } from '@storybook/react';
 import { Card, CardLink } from './Card';
-import { Heading, Content, Media } from '../content';
+import { Heading, Content, Media, Footer } from '../content';
 import { cx } from 'cva';
 import {
   ArrowRight,
   Bed,
+  Documents,
   House,
   PiggyBank,
 } from '@obosbbl/grunnmuren-icons-react';
 import { Badge } from '../badge';
+import { Button } from '../button';
 
 const meta: Meta<typeof Card> = {
   title: 'Card',
@@ -257,6 +259,48 @@ export const ClickableWithBackground = () => (
   </Card>
 );
 
+export const ClickableWithImageAndCTA = () => (
+  <Card>
+    <Media>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+      />
+    </Media>
+    <Content>
+      <Heading level={3}>Klikkbar med bakgrunnsfarge og CTA</Heading>
+      <p>
+        Dette kortet er klikkbart og har en bakgrunnsfarge og en CTA-lenke som
+        gjør at hele kortet blir klikkbart mot den lenken
+      </p>
+      <CardLink>
+        <Button href="#cta" variant="tertiary">
+          Klikkbar med bakgrunnsfarge
+          <ArrowRight className="transition-transform group-hover/card:motion-safe:translate-x-1" />
+        </Button>
+      </CardLink>
+    </Content>
+  </Card>
+);
+
+export const ClickableWithBackgroundAndCTA = () => (
+  <Card className="bg-blue-dark text-white">
+    <Content>
+      <Heading level={3}>Klikkbar med bakgrunnsfarge og CTA</Heading>
+      <p>
+        Dette kortet er klikkbart og har en bakgrunnsfarge og en CTA-lenke som
+        gjør at hele kortet blir klikkbart mot den lenken
+      </p>
+      <CardLink className="mt-1">
+        <Button href="#cta" variant="tertiary">
+          Klikkbar med bakgrunnsfarge
+          <ArrowRight className="transition-transform group-hover/card:motion-safe:translate-x-1" />
+        </Button>
+      </CardLink>
+    </Content>
+  </Card>
+);
+
 export const ClickableWithOtherClickableElements = () => (
   <Card border="blue-dark" className="w-72">
     <Media>
@@ -288,6 +332,13 @@ export const ClickableWithOtherClickableElements = () => (
       <Badge size="small" color="mint">
         Visning 13. oktober
       </Badge>
+      <Footer className="relative grid gap-y-2">
+        <hr className="border-t border-t-current" />
+        <Button href="#other-link" variant="tertiary">
+          Se prospekt
+          <Documents />
+        </Button>
+      </Footer>
     </Content>
   </Card>
 );
@@ -323,6 +374,17 @@ export const ClickableWithOtherClickableElementsAndBackgroundColor = () => (
       <Badge size="small" color="mint" className="text-black">
         Visning 13. oktober
       </Badge>
+      <Footer className="relative grid gap-y-2">
+        <hr className="border-t border-t-current" />
+        <Button
+          href="#other-link"
+          variant="tertiary"
+          className="focus-visible:outline-current"
+        >
+          Se prospekt
+          <Documents />
+        </Button>
+      </Footer>
     </Content>
   </Card>
 );
