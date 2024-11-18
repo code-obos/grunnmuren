@@ -1,10 +1,10 @@
 'use client';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { useDateFormatter, type DateFormatterOptions } from 'react-aria';
 
 type DateFormatterProps = {
   value: Date | string;
-  options: DateFormatterOptions;
+  options?: DateFormatterOptions;
   /** Callback to customize the rendering of the date */
   render?: (formattedDate: string) => ReactNode;
 };
@@ -29,7 +29,7 @@ const DateFormatter = ({
 
   const formatted = formatter.format(date);
 
-  return render ? render(formatted) : formatted;
+  return <>{render ? render(formatted) : formatted}</>;
 };
 
 export { DateFormatter, type DateFormatterProps };
