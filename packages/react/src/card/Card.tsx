@@ -32,9 +32,11 @@ const cardVariants = cva({
     // Prepare zoom animation for hover effects. The hover effect can also be enabled by classes on the parent component, so it is always prepared here.
     '[&_[data-slot="media"]>*]:duration-300 [&_[data-slot="media"]>*]:ease-in-out [&_[data-slot="media"]>*]:motion-safe:transition-transform',
 
-    // **** Card link in Heading ****
+    // **** Card link ****
     // **** Hover ****
     // Enables the zoom hover effect on media (note that we can't use group-hover/card here, because there might be other clickable elements in the card aside from the heading)
+    '[&:has([data-slot="card-link"]_a:hover)_[data-slot="media"]>*]:scale-110',
+    // **** Card link in Heading ****
     '[&:has([data-slot="heading"]_[data-slot="card-link"]:hover)_[data-slot="media"]>*]:scale-110',
     // Border (bottom/top) is set to transparent to make sure the bottom underline is not visible when the card is hovered
     // Border top is set to even out the border bottom used for the underline
@@ -48,8 +50,8 @@ const cardVariants = cva({
 
     // **** Fail-safe for interactive elements ****
     // Make interactive elements clickable by themselves, while the rest of the card is clickable as a whole
-    // The card is then made clickable by a pseudo-element on the heading that covers the entire card
-    '[&_a:not([data-slot="card-link"])]:relative [&_button]:relative [&_input]:relative',
+    // The card is made clickable by a pseudo-element on the heading that covers the entire card
+    '[&:not(:has([data-slot="card-link"]_a))_a:not([data-slot="card-link"])]:relative [&_button]:relative [&_input]:relative',
     // Place other interactive on top of the pseudo-element that makes the entire card clickable
     // by setting a higher z-index than the pseudo-element (which implicitly z-index 0)
     '[&_a:not([data-slot="card-link"])]:z-[1] [&_button]:z-[1] [&_input]:z-[1]',
@@ -123,6 +125,15 @@ const cardLinkVariants = cva({
         '[&_a]:after:absolute',
         '[&_a]:after:inset-[calc(theme(borderWidth.DEFAULT)*-1)]',
         '[&_a]:after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
+        // **** Focus ****
+        '[&_a:focus-visible]:outline-none',
+        '[&_a:focus-visible]:after:outline-focus',
+        '[&_a:focus-visible]:after:outline-offset-2',
+        // **** Hover ****
+        // Links are underlined by default, and the underline is removed on hover.
+        // So we make sure that also happens when the user hovers the card.
+        // The group-hover ensures that the hover effect also applies when this component is used as a wrapper around a link.
+        '[&_a]:group-hover/card:no-underline',
       ],
     },
   },
