@@ -1,6 +1,10 @@
 import type { Meta } from '@storybook/react';
 import { DateFormatter } from './DateFormatter';
 
+const meta: Meta = {
+  title: 'DateFormatter',
+};
+
 export const Default = () => <DateFormatter value={new Date()} />;
 
 export const LongDate = () => (
@@ -117,9 +121,5 @@ export const ShortDay = () => (
     }}
   />
 );
-
-const meta: Meta = {
-  title: 'DateFormatter',
-};
 
 export default meta;
