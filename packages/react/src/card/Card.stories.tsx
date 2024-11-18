@@ -259,7 +259,7 @@ export const ClickableWithBackground = () => (
   </Card>
 );
 
-export const WithImageAndCTA = () => (
+export const ClickableWithImageAndCTA = () => (
   <Card>
     <Media>
       <img
@@ -269,13 +269,10 @@ export const WithImageAndCTA = () => (
     </Media>
     <Content>
       <Heading level={3}>Med bilde og CTA</Heading>
-      <p>
-        Dette kortet er ikke klikkbart i seg selv, men har en klikkbar
-        CTA-lenke.
-      </p>
+      <p>Dette kortet har bilde og er klikkbart mot en CTA-lenke</p>
       <CardLink className="group/cta">
         <Button href="#cta" variant="tertiary">
-          Klikk her
+          Les mer
           <ArrowRight className="transition-transform group-hover/cta:motion-safe:translate-x-1" />
         </Button>
       </CardLink>
@@ -283,17 +280,14 @@ export const WithImageAndCTA = () => (
   </Card>
 );
 
-export const WithBackgroundAndCTA = () => (
+export const ClickableWithBackgroundAndCTA = () => (
   <Card className="bg-blue-dark text-white">
     <Content>
       <Heading level={3}>Bakgrunnsfarge og CTA</Heading>
-      <p>
-        Dette kortet er ikke klikkbart i seg selv, men har en klikkbar
-        CTA-lenke.
-      </p>
+      <p>Dette kortet har bakgrunnsfarge og er klikkbart mot en CTA-lenke.</p>
       <CardLink className="group/cta mt-1">
         <Button href="#cta" variant="tertiary">
-          Klikk her
+          Les mer
           <ArrowRight className="transition-transform group-hover/cta:motion-safe:translate-x-1" />
         </Button>
       </CardLink>
