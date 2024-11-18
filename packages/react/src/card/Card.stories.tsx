@@ -191,7 +191,7 @@ export const CardWithCoveringIllustration = () => (
       <Illustration />
     </Media>
     <Content>
-      <div className="grid">
+      <div className="grid gap-1">
         <Heading level={3}>Rødbergvn 88C</Heading>
         <small className="description">Bjerke - Oslo</small>
       </div>
@@ -259,7 +259,7 @@ export const ClickableWithBackground = () => (
   </Card>
 );
 
-export const ClickableWithImageAndCTA = () => (
+export const WithImageAndCTA = () => (
   <Card>
     <Media>
       <img
@@ -268,10 +268,10 @@ export const ClickableWithImageAndCTA = () => (
       />
     </Media>
     <Content>
-      <Heading level={3}>Klikkbar med bakgrunnsfarge og CTA</Heading>
+      <Heading level={3}>Med bilde og CTA</Heading>
       <p>
-        Dette kortet er klikkbart og har en bakgrunnsfarge og en CTA-lenke som
-        gjør at hele kortet blir klikkbart mot den lenken
+        Dette kortet er ikke klikkbart i seg selv, men har en klikkbar
+        CTA-lenke.
       </p>
       <CardLink className="group/cta">
         <Button href="#cta" variant="tertiary">
@@ -283,13 +283,13 @@ export const ClickableWithImageAndCTA = () => (
   </Card>
 );
 
-export const ClickableWithBackgroundAndCTA = () => (
+export const WithBackgroundAndCTA = () => (
   <Card className="bg-blue-dark text-white">
     <Content>
-      <Heading level={3}>Klikkbar med bakgrunnsfarge og CTA</Heading>
+      <Heading level={3}>Bakgrunnsfarge og CTA</Heading>
       <p>
-        Dette kortet er klikkbart og har en bakgrunnsfarge og en CTA-lenke som
-        gjør at hele kortet blir klikkbart mot den lenken
+        Dette kortet er ikke klikkbart i seg selv, men har en klikkbar
+        CTA-lenke.
       </p>
       <CardLink className="group/cta mt-1">
         <Button href="#cta" variant="tertiary">
@@ -310,7 +310,7 @@ export const ClickableWithOtherClickableElements = () => (
       />
     </Media>
     <Content>
-      <div className="grid">
+      <div className="grid gap-1">
         <Heading level={3}>
           <CardLink href="#card">Rødbergvn 88C</CardLink>
         </Heading>
@@ -352,7 +352,7 @@ export const ClickableWithOtherClickableElementsAndBackgroundColor = () => (
       />
     </Media>
     <Content>
-      <div className="grid">
+      <div className="grid gap-1">
         <Heading level={3}>
           <CardLink href="#card">Rødbergvn 88C</CardLink>
         </Heading>

@@ -100,16 +100,14 @@ type CardLinkProps = {
 } & (RACLinkProps | CardLinkWrapperProps);
 
 const cardLinkVariants = cva({
-  base: [
-    'cursor-pointer',
-    // **** Clickarea ****
-    'after:absolute',
-    'after:inset-[calc(theme(borderWidth.DEFAULT)*-1)]',
-    'after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
-  ],
   variants: {
     withHref: {
       true: [
+        // **** Clickarea ****
+        'cursor-pointer',
+        'after:absolute',
+        'after:inset-[calc(theme(borderWidth.DEFAULT)*-1)]',
+        'after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
         // **** Focus ****
         'focus-visible:outline-none',
         'focus-visible:after:outline-focus',
@@ -120,10 +118,12 @@ const cardLinkVariants = cva({
         'hover:no-underline',
       ],
       false: [
+        // **** Clickarea ****
+        '[&_a]:after:cursor-pointer',
+        '[&_a]:after:absolute',
+        '[&_a]:after:inset-[calc(theme(borderWidth.DEFAULT)*-1)]',
+        '[&_a]:after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
         // **** Focus ****
-        '[&_a:focus-visible]:outline-none',
-        '[&:has(a:focus-visible)]:after:outline-focus',
-        '[&:has(a:focus-visible)]:after:outline-offset-2',
         // **** Hover ****
         // Links are underlined by default, and the underline is removed on hover.
         // So we make sure that also happens when the user hovers the card.
