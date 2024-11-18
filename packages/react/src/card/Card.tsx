@@ -99,6 +99,7 @@ type CardLinkProps = {
 } & (RACLinkProps | CardLinkWrapperProps);
 
 const cardLinkVariants = cva({
+  base: 'w-fit max-w-full',
   variants: {
     withHref: {
       true: [
@@ -122,12 +123,6 @@ const cardLinkVariants = cva({
         '[&_a]:after:absolute',
         '[&_a]:after:inset-[calc(theme(borderWidth.DEFAULT)*-1)]',
         '[&_a]:after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
-        // **** Focus ****
-        // **** Hover ****
-        // Links are underlined by default, and the underline is removed on hover.
-        // So we make sure that also happens when the user hovers the card.
-        // The group-hover ensures that the hover effect also applies when this component is used as a wrapper around a link.
-        '[&_a]:group-hover/card:no-underline',
       ],
     },
   },
