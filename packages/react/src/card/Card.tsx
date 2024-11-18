@@ -32,11 +32,10 @@ const cardVariants = cva({
     // Prepare zoom animation for hover effects. The hover effect can also be enabled by classes on the parent component, so it is always prepared here.
     '[&_[data-slot="media"]>*]:duration-300 [&_[data-slot="media"]>*]:ease-in-out [&_[data-slot="media"]>*]:motion-safe:transition-transform',
 
-    // **** Card link ****
-    // Enables the zoom hover effect on media (note that we can't use group-hover/card here, because there might be other clickable elements in the card aside from the heading)
-    '[&:has([data-slot="card-link"]:hover)_[data-slot="media"]>*]:scale-110',
     // **** Card link in Heading ****
-    // **** Hover: custom underline ****
+    // **** Hover ****
+    // Enables the zoom hover effect on media (note that we can't use group-hover/card here, because there might be other clickable elements in the card aside from the heading)
+    '[&:has([data-slot="heading"]_[data-slot="card-link"]:hover)_[data-slot="media"]>*]:scale-110',
     // Border (bottom/top) is set to transparent to make sure the bottom underline is not visible when the card is hovered
     // Border top is set to even out the border bottom used for the underline
     '[&_[data-slot="heading"]_[data-slot="card-link"]]:no-underline',
