@@ -116,7 +116,7 @@ export const WithIconTop = () => (
     <PiggyBank />
     <Content>
       <Heading level={3}>Kort med ikon i topp</Heading>
-      <p>Dette kortet har svart border og et ikon</p>
+      <p>Dette kortet har svart border og et ikon i toppen</p>
     </Content>
   </Card>
 );
@@ -125,7 +125,7 @@ export const WithIconBottom = () => (
   <Card border="black">
     <Content>
       <Heading level={3}>Kort med ikon i bunn</Heading>
-      <p>Dette kortet har svart border og et ikon</p>
+      <p>Dette kortet har svart border og et ikon i bunn</p>
     </Content>
     <PiggyBank />
   </Card>
@@ -219,7 +219,7 @@ export const ClickableWithIcon = () => (
   <Card border="black">
     <Content>
       <Heading level={3}>
-        <CardLink href="#card">Klikkbar</CardLink>
+        <CardLink href="#card">Klikkbar med ikon</CardLink>
       </Heading>
       <p>Dette kortet er klikkbart og har svart border med et ikon</p>
     </Content>
@@ -240,8 +240,8 @@ export const ClickableWithImage = () => (
         <CardLink href="#card">Klikkbar med bilde</CardLink>
       </Heading>
       <p>
-        Dette kortet har et bilde og er uten border. Derfor er alle hjørner på
-        bildet avrundet.
+        Dette kortet er klikkbart. Det har et bilde og er uten border. Derfor er
+        alle hjørner på bildet avrundet.
       </p>
     </Content>
   </Card>
@@ -275,7 +275,7 @@ export const WithImageAndCTA = () => (
       </p>
       <CardLink className="group/cta">
         <Button href="#cta" variant="tertiary">
-          Klikkbar med bilde
+          Klikk her
           <ArrowRight className="transition-transform group-hover/cta:motion-safe:translate-x-1" />
         </Button>
       </CardLink>
@@ -293,7 +293,7 @@ export const WithBackgroundAndCTA = () => (
       </p>
       <CardLink className="group/cta mt-1">
         <Button href="#cta" variant="tertiary">
-          Klikkbar med bakgrunnsfarge
+          Klikk her
           <ArrowRight className="transition-transform group-hover/cta:motion-safe:translate-x-1" />
         </Button>
       </CardLink>
