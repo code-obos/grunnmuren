@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.38
+
+### Minor Changes
+
+- 00e0eea: New component `<DateFormatter>`, that can be used to format dates.
+- f32aa43: New `<Card>` component that can serve as either a clickable link or a decorative container. Supporting text content along with images, illustrations and icons.
+
 ## 2.0.0-canary.37
 
 ### Patch Changes
