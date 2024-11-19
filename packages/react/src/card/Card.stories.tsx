@@ -1,9 +1,16 @@
 import type { Meta } from '@storybook/react';
-import { Card } from './Card';
-import { Heading, Content, Media } from '../content';
+import { Card, CardLink } from './Card';
+import { Heading, Content, Media, Footer } from '../content';
 import { cx } from 'cva';
-import { Bed, House, PiggyBank } from '@obosbbl/grunnmuren-icons-react';
+import {
+  ArrowRight,
+  Bed,
+  Documents,
+  House,
+  PiggyBank,
+} from '@obosbbl/grunnmuren-icons-react';
 import { Badge } from '../badge';
+import { Button } from '../button';
 
 const meta: Meta<typeof Card> = {
   title: 'Card',
@@ -26,23 +33,6 @@ export default meta;
 const Cards = ({ children }: { children: React.ReactNode }) => (
   <div className="grid gap-4">{children}</div>
 );
-
-export const WithBorder = () => {
-  const colors = ['black', 'blue-dark', 'green-dark'] as const;
-
-  return (
-    <Cards>
-      {colors.map((color) => (
-        <Card border={color} key={color}>
-          <Content>
-            <Heading level={3}>Border {color}</Heading>
-            <p>Dette kortet har {color} som border</p>
-          </Content>
-        </Card>
-      ))}
-    </Cards>
-  );
-};
 
 export const WithBackground = () => {
   const bgColors = [
@@ -86,8 +76,8 @@ export const WithImage = () => (
   </Card>
 );
 
-export const WithImageAndBorder = () => (
-  <Card border="blue-dark">
+export const OutlinedWithImageAnd = () => (
+  <Card variant="outlined">
     <Media>
       <img
         alt=""
@@ -105,20 +95,20 @@ export const WithImageAndBorder = () => (
 );
 
 export const WithIconTop = () => (
-  <Card border="black">
+  <Card variant="outlined">
     <PiggyBank />
     <Content>
       <Heading level={3}>Kort med ikon i topp</Heading>
-      <p>Dette kortet har svart border og et ikon</p>
+      <p>Dette kortet har svart border og et ikon i toppen</p>
     </Content>
   </Card>
 );
 
 export const WithIconBottom = () => (
-  <Card border="black">
+  <Card variant="outlined">
     <Content>
       <Heading level={3}>Kort med ikon i bunn</Heading>
-      <p>Dette kortet har svart border og et ikon</p>
+      <p>Dette kortet har svart border og et ikon i bunn</p>
     </Content>
     <PiggyBank />
   </Card>
@@ -166,7 +156,7 @@ const Illustration = () => (
 );
 
 export const CardWithInlineTopIllustration = () => (
-  <Card border="blue-dark" className="w-72">
+  <Card variant="outlined" className="w-72">
     <Illustration />
     <Content>
       <Heading level={3}>Utemiljø og grøntanlegg</Heading>
@@ -179,12 +169,12 @@ export const CardWithInlineTopIllustration = () => (
 );
 
 export const CardWithCoveringIllustration = () => (
-  <Card border="blue-dark" className="w-72">
+  <Card variant="outlined" className="w-72">
     <Media>
       <Illustration />
     </Media>
     <Content>
-      <div className="grid">
+      <div className="grid gap-1">
         <Heading level={3}>Rødbergvn 88C</Heading>
         <small className="description">Bjerke - Oslo</small>
       </div>
@@ -204,6 +194,174 @@ export const CardWithCoveringIllustration = () => (
       <Badge size="small" color="mint">
         Visning 13. oktober
       </Badge>
+    </Content>
+  </Card>
+);
+
+export const ClickableWithIcon = () => (
+  <Card variant="outlined">
+    <Content>
+      <Heading level={3}>
+        <CardLink href="#card">Klikkbar med ikon</CardLink>
+      </Heading>
+      <p>Dette kortet er klikkbart og har svart border med et ikon</p>
+    </Content>
+    <ArrowRight className="transition-transform group-hover/card:motion-safe:translate-x-1" />
+  </Card>
+);
+
+export const ClickableWithImage = () => (
+  <Card>
+    <Media>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+      />
+    </Media>
+    <Content>
+      <Heading level={3}>
+        <CardLink href="#card">Klikkbar med bilde</CardLink>
+      </Heading>
+      <p>
+        Dette kortet er klikkbart. Det har et bilde og er uten border. Derfor er
+        alle hjørner på bildet avrundet.
+      </p>
+    </Content>
+  </Card>
+);
+
+export const ClickableWithBackground = () => (
+  <Card className="bg-blue-dark text-white">
+    <Content>
+      <Heading level={3}>
+        <CardLink href="#card">Klikkbar med bakgrunnsfarge</CardLink>
+      </Heading>
+      <p>Dette kortet er klikkbart og har en bakgrunnsfarge</p>
+    </Content>
+    <ArrowRight className="transition-transform group-hover/card:motion-safe:translate-x-1" />
+  </Card>
+);
+
+export const ClickableWithImageAndCTA = () => (
+  <Card>
+    <Media>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+      />
+    </Media>
+    <Content>
+      <Heading level={3}>Med bilde og CTA</Heading>
+      <p>Dette kortet har bilde og er klikkbart mot en CTA-lenke</p>
+      <CardLink className="group/cta">
+        <Button href="#cta" variant="tertiary">
+          Les mer
+          <ArrowRight className="transition-transform group-hover/cta:motion-safe:translate-x-1" />
+        </Button>
+      </CardLink>
+    </Content>
+  </Card>
+);
+
+export const ClickableWithBackgroundAndCTA = () => (
+  <Card className="bg-blue-dark text-white">
+    <Content>
+      <Heading level={3}>Bakgrunnsfarge og CTA</Heading>
+      <p>Dette kortet har bakgrunnsfarge og er klikkbart mot en CTA-lenke.</p>
+      <CardLink className="group/cta mt-1">
+        <Button href="#cta" variant="tertiary">
+          Les mer
+          <ArrowRight className="transition-transform group-hover/cta:motion-safe:translate-x-1" />
+        </Button>
+      </CardLink>
+    </Content>
+  </Card>
+);
+
+export const ClickableWithOtherClickableElements = () => (
+  <Card variant="outlined" className="w-72">
+    <Media>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+      />
+    </Media>
+    <Content>
+      <div className="grid gap-1">
+        <Heading level={3}>
+          <CardLink href="#card">Rødbergvn 88C</CardLink>
+        </Heading>
+        <small className="description">Bjerke - Oslo</small>
+      </div>
+      <small className="description -order-1">
+        Forhåndsvarsling - Saksnr. F0347565
+      </small>
+      <p className="font-semibold">100 m² | Prisantydning 9 600 000 kr</p>
+      <p className="flex gap-x-1">
+        <House /> Rekkehus/småhus
+      </p>
+      <p className="flex gap-x-1">
+        <Bed /> 3 soverom
+      </p>
+      <p className="flex gap-x-1">
+        <PiggyBank /> Totalpris 9 989 838
+      </p>
+      <Badge size="small" color="mint">
+        Visning 13. oktober
+      </Badge>
+      <Footer className="relative grid gap-y-2">
+        <hr className="border-t border-t-current" />
+        <Button href="#other-link" variant="tertiary">
+          Se prospekt
+          <Documents />
+        </Button>
+      </Footer>
+    </Content>
+  </Card>
+);
+
+export const ClickableWithOtherClickableElementsAndBackgroundColor = () => (
+  <Card variant="outlined" className="w-72 bg-blue-dark text-mint">
+    <Media>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+      />
+    </Media>
+    <Content>
+      <div className="grid gap-1">
+        <Heading level={3}>
+          <CardLink href="#card">Rødbergvn 88C</CardLink>
+        </Heading>
+        <small className="description">Bjerke - Oslo</small>
+      </div>
+      <small className="description -order-1">
+        Forhåndsvarsling - Saksnr. F0347565
+      </small>
+      <p className="font-semibold">100 m² | Prisantydning 9 600 000 kr</p>
+      <p className="flex gap-x-1">
+        <House /> Rekkehus/småhus
+      </p>
+      <p className="flex gap-x-1">
+        <Bed /> 3 soverom
+      </p>
+      <p className="flex gap-x-1">
+        <PiggyBank /> Totalpris 9 989 838
+      </p>
+      <Badge size="small" color="mint" className="text-black">
+        Visning 13. oktober
+      </Badge>
+      <Footer className="relative grid gap-y-2">
+        <hr className="border-t border-t-current" />
+        <Button
+          href="#other-link"
+          variant="tertiary"
+          className="focus-visible:outline-current"
+        >
+          Se prospekt
+          <Documents />
+        </Button>
+      </Footer>
     </Content>
   </Card>
 );
