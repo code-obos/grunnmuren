@@ -98,10 +98,11 @@ export const CapitalizedMonth = () => (
     options={{
       month: 'long',
     }}
-    render={(formattedDate: string) =>
+  >
+    {(formattedDate: string) =>
       formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)
     }
-  />
+  </DateFormatter>
 );
 
 export const Day = () => (

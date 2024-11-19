@@ -6,7 +6,7 @@ type DateFormatterProps = {
   value: Date | string;
   options?: DateFormatterOptions;
   /** Callback to customize the rendering of the date */
-  render?: (formattedDate: string) => ReactNode;
+  children?: (formattedDate: string) => ReactNode;
 };
 
 /**
@@ -17,7 +17,7 @@ type DateFormatterProps = {
 const DateFormatter = ({
   options: _options,
   value,
-  render,
+  children: render,
 }: DateFormatterProps) => {
   const options = {
     timeZone: 'Europe/Berlin',
