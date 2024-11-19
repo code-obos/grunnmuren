@@ -57,15 +57,17 @@ const cardVariants = cva({
     '[&_a:not([data-slot="card-link"])]:z-[1] [&_button]:z-[1] [&_input]:z-[1]',
   ],
   variants: {
-    border: {
-      black: 'border-black',
-      'blue-dark': 'border-blue-dark',
-      'green-dark': 'border-green-dark',
-      undefined: [
+    /**
+     * The variant of the card
+     * @default subtle
+     */
+    variant: {
+      subtle: [
         'border-transparent',
         // Media styles:
         '[&_[data-slot="media"]]:rounded-b-2xl',
       ],
+      outlined: 'border border-black',
     },
   },
 });
@@ -73,12 +75,12 @@ const cardVariants = cva({
 const Card = ({
   children,
   className: _className,
-  border,
+  variant = 'subtle',
   ...restProps
 }: CardProps) => {
   const className = cardVariants({
     className: _className,
-    border,
+    variant,
   });
   return (
     <div className={className} {...restProps}>

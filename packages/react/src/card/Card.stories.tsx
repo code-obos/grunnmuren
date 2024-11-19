@@ -34,23 +34,6 @@ const Cards = ({ children }: { children: React.ReactNode }) => (
   <div className="grid gap-4">{children}</div>
 );
 
-export const WithBorder = () => {
-  const colors = ['black', 'blue-dark', 'green-dark'] as const;
-
-  return (
-    <Cards>
-      {colors.map((color) => (
-        <Card border={color} key={color}>
-          <Content>
-            <Heading level={3}>Border {color}</Heading>
-            <p>Dette kortet har {color} som border</p>
-          </Content>
-        </Card>
-      ))}
-    </Cards>
-  );
-};
-
 export const WithBackground = () => {
   const bgColors = [
     'bg-mint-lightest',
@@ -94,7 +77,7 @@ export const WithImage = () => (
 );
 
 export const WithImageAndBorder = () => (
-  <Card border="blue-dark">
+  <Card variant="outlined">
     <Media>
       <img
         alt=""
@@ -112,7 +95,7 @@ export const WithImageAndBorder = () => (
 );
 
 export const WithIconTop = () => (
-  <Card border="black">
+  <Card variant="outlined">
     <PiggyBank />
     <Content>
       <Heading level={3}>Kort med ikon i topp</Heading>
@@ -122,7 +105,7 @@ export const WithIconTop = () => (
 );
 
 export const WithIconBottom = () => (
-  <Card border="black">
+  <Card variant="outlined">
     <Content>
       <Heading level={3}>Kort med ikon i bunn</Heading>
       <p>Dette kortet har svart border og et ikon i bunn</p>
@@ -173,7 +156,7 @@ const Illustration = () => (
 );
 
 export const CardWithInlineTopIllustration = () => (
-  <Card border="blue-dark" className="w-72">
+  <Card variant="outlined" className="w-72">
     <Illustration />
     <Content>
       <Heading level={3}>Utemiljø og grøntanlegg</Heading>
@@ -186,7 +169,7 @@ export const CardWithInlineTopIllustration = () => (
 );
 
 export const CardWithCoveringIllustration = () => (
-  <Card border="blue-dark" className="w-72">
+  <Card variant="outlined" className="w-72">
     <Media>
       <Illustration />
     </Media>
@@ -216,7 +199,7 @@ export const CardWithCoveringIllustration = () => (
 );
 
 export const ClickableWithIcon = () => (
-  <Card border="black">
+  <Card variant="outlined">
     <Content>
       <Heading level={3}>
         <CardLink href="#card">Klikkbar med ikon</CardLink>
@@ -296,7 +279,7 @@ export const ClickableWithBackgroundAndCTA = () => (
 );
 
 export const ClickableWithOtherClickableElements = () => (
-  <Card border="blue-dark" className="w-72">
+  <Card variant="outlined" className="w-72">
     <Media>
       <img
         alt=""
@@ -338,7 +321,7 @@ export const ClickableWithOtherClickableElements = () => (
 );
 
 export const ClickableWithOtherClickableElementsAndBackgroundColor = () => (
-  <Card border="blue-dark" className="w-72 bg-blue-dark text-mint">
+  <Card variant="outlined" className="w-72 bg-blue-dark text-mint">
     <Media>
       <img
         alt=""
