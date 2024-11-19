@@ -76,7 +76,7 @@ export const WithImage = () => (
   </Card>
 );
 
-export const WithImageAndBorder = () => (
+export const OutlinedWithImageAnd = () => (
   <Card variant="outlined">
     <Media>
       <img
