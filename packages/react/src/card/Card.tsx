@@ -70,12 +70,15 @@ const cardVariants = cva({
       outlined: 'border border-black',
     },
   },
+  defaultVariants: {
+    variant: 'subtle',
+  },
 });
 
 const Card = ({
   children,
   className: _className,
-  variant = 'subtle',
+  variant,
   ...restProps
 }: CardProps) => {
   const className = cardVariants({
