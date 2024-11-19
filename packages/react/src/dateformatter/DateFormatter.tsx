@@ -29,7 +29,7 @@ const DateFormatter = ({
 
   const formatted = formatter.format(date);
 
-  return <>{render ? render(formatted) : formatted}</>;
+  return render ? render(formatted) : formatted;
 };
 
 export { DateFormatter, type DateFormatterProps };
