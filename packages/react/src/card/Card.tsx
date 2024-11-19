@@ -89,9 +89,7 @@ const Card = ({
 
 type RACLinkProps = Pick<LinkProps, 'href' | 'routerOptions' | 'children'>;
 
-type CardLinkWrapperProps = {
-  [Key in keyof RACLinkProps]: LinkProps[Key];
-} & {
+type CardLinkWrapperProps = RACLinkProps & {
   // Override children type of LinkProps as it also allows a callback which is not allowed in HTMLProps
   children: React.ReactNode;
 };
