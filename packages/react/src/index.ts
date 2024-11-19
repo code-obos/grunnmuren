@@ -17,4 +17,5 @@ export * from './alertbox';
 export * from './content';
 export * from './breadcrumbs';
 export * from './backlink';
+export * from './card';
 export * from './dateformatter';

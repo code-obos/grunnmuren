@@ -10,7 +10,7 @@ type HeadingProps = HTMLProps<HTMLHeadingElement> & {
 };
 
 const HeadingContext = createContext<
-  ContextValue<HeadingProps, HTMLHeadingElement>
+  ContextValue<Partial<HeadingProps>, HTMLHeadingElement>
 >({});
 
 const Heading = (
@@ -37,7 +37,7 @@ const Heading = (
 };
 
 const ContentContext = createContext<
-  ContextValue<ContentProps, HTMLDivElement>
+  ContextValue<Partial<ContentProps>, HTMLDivElement>
 >({});
 
 type ContentProps = HTMLProps<HTMLDivElement> & {
@@ -55,6 +55,12 @@ const Content = (props: ContentProps, ref: ForwardedRef<HTMLDivElement>) => {
   return outerWrapper ? outerWrapper(content) : content;
 };
 
+type MediaProps = HTMLProps<HTMLDivElement> & {
+  children: React.ReactNode;
+};
+
+const Media = (props: MediaProps) => <div {...props} data-slot="media" />;
+
 type FooterProps = HTMLProps<HTMLDivElement> & {
   children: React.ReactNode;
 };
@@ -68,6 +74,8 @@ export {
   type ContentProps,
   Content,
   ContentContext,
+  type MediaProps,
+  Media,
   type FooterProps,
   Footer,
 };
