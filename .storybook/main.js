@@ -8,6 +8,7 @@ module.exports = {
     '@storybook/addon-docs',
     '@storybook/addon-controls',
     '@storybook/addon-actions',
+    '@storybook/addon-interactions',
   ],
   framework: {
     name: '@storybook/react-vite',
