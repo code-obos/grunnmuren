@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.39
+
+### Patch Changes
+
+- 4b40468: Fixes expand/collapse bug in `<Alertbox>` that occured when not passing a `<Footer>`.
+
 ## 2.0.0-canary.38
 
 ### Minor Changes
