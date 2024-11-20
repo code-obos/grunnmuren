@@ -147,7 +147,6 @@ const Alertbox = ({
   }
 
   const [firstChild, ...restChildren] = Children.toArray(children);
-  const lastChild = restChildren.pop();
 
   return (
     <div
@@ -196,12 +195,17 @@ const Alertbox = ({
           />
         </button>
       )}
-      {!isCollapsed && restChildren.length > 0 && (
-        <div className="col-span-full grid gap-y-4" id={id}>
+      {restChildren?.length > 0 && (
+        <div
+          className={cx(
+            'col-span-full grid gap-y-4',
+            isCollapsed && '[&>*:not([data-slot="footer"])]:hidden',
+          )}
+          id={id}
+        >
           {restChildren}
         </div>
       )}
-      {lastChild}
     </div>
   );
 };
