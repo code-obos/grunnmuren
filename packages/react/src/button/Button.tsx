@@ -7,6 +7,7 @@ import {
   type ButtonProps as RACButtonProps,
 } from 'react-aria-components';
 import { LoadingSpinner } from '@obosbbl/grunnmuren-icons-react';
+import { useLocale, type Locale } from '../use-locale';
 
 /**
  * Figma: https://www.figma.com/file/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=30%3A2574&mode=dev
@@ -123,6 +124,22 @@ function isLinkProps(
   return !!props.href;
 }
 
+type Translation = {
+  [key in Locale]: string;
+};
+
+type Translations = {
+  [x: string]: Translation;
+};
+
+const translations: Translations = {
+  pending: {
+    nb: 'venter',
+    sv: 'väntar',
+    en: 'pending',
+  },
+};
+
 function Button(
   props: ButtonProps,
   ref: Ref<HTMLButtonElement | HTMLAnchorElement>,
@@ -147,9 +164,11 @@ function Button(
     isPending,
   });
 
+  const locale = useLocale();
+
   const { progressBarProps } = useProgressBar({
     isIndeterminate: true,
-    'aria-label': 'Venter',
+    'aria-label': translations.pending[locale],
   });
 
   const children = isPending ? (
