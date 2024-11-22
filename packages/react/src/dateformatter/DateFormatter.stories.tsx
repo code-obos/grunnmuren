@@ -1,41 +1,69 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
+import { expect, within } from '@storybook/test';
 import { DateFormatter } from './DateFormatter';
 
-const meta: Meta = {
+const meta: Meta<typeof DateFormatter> = {
   title: 'DateFormatter',
+  component: DateFormatter,
+  render: (props) => <DateFormatter {...props} />,
 };
 
-export const Default = () => <DateFormatter value={new Date()} />;
+type Story = StoryObj<typeof meta>;
 
-export const LongDate = () => (
-  <DateFormatter
-    value={new Date()}
-    options={{
+export const Default: Story = {
+  args: {
+    value: new Date('1929-08-19'),
+    options: {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText('19.08.1929')).toBeInTheDocument();
+  },
+};
+
+export const LongDate: Story = {
+  args: {
+    value: new Date('1929-08-19'),
+    options: {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
-    }}
-  />
-);
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText('19. august 1929')).toBeInTheDocument();
+  },
+};
 
-export const FullDateTime = () => (
-  <DateFormatter
-    value={new Date()}
-    options={{
+export const FullDateTime: Story = {
+  args: {
+    value: new Date('1929-08-19'),
+    options: {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
       hour: 'numeric',
       minute: 'numeric',
       second: 'numeric',
-    }}
-  />
-);
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(
+      canvas.getByText('19. august 1929 kl. 01:00:00'),
+    ).toBeInTheDocument();
+  },
+};
 
-export const WithCustomTimeZone = () => (
-  <DateFormatter
-    value={new Date()}
-    options={{
+export const WithCustomTimeZone: Story = {
+  args: {
+    value: new Date('1929-08-19'),
+    options: {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -43,84 +71,112 @@ export const WithCustomTimeZone = () => (
       minute: 'numeric',
       second: 'numeric',
       timeZone: 'EST',
-    }}
-  />
-);
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(
+      canvas.getByText('18. august 1929 kl. 19:00:00'),
+    ).toBeInTheDocument();
+  },
+};
 
-export const Year = () => (
-  <DateFormatter
-    value={new Date()}
-    options={{
+export const Year: Story = {
+  args: {
+    value: new Date('1929-08-19'),
+    options: {
       year: 'numeric',
-    }}
-  />
-);
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText('1929')).toBeInTheDocument();
+  },
+};
 
-export const ShortYear = () => (
-  <DateFormatter
-    value={new Date()}
-    options={{
+export const ShortYear: Story = {
+  args: {
+    value: new Date('1929-08-19'),
+    options: {
       year: '2-digit',
-    }}
-  />
-);
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText('29')).toBeInTheDocument();
+  },
+};
 
-export const Month = () => (
-  <DateFormatter
-    value={new Date()}
-    options={{
+export const Month: Story = {
+  args: {
+    value: new Date('1929-08-19'),
+    options: {
       month: 'numeric',
-    }}
-  />
-);
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText('8.')).toBeInTheDocument();
+  },
+};
 
-export const LongMonth = () => (
-  <DateFormatter
-    value={new Date()}
-    options={{
+export const LongMonth: Story = {
+  args: {
+    value: new Date('1929-08-19'),
+    options: {
       month: 'long',
-    }}
-  />
-);
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText('august')).toBeInTheDocument();
+  },
+};
 
-export const ShortMonth = () => (
-  <DateFormatter
-    value={new Date()}
-    options={{
+export const ShortMonth: Story = {
+  args: {
+    value: new Date('1929-08-19'),
+    options: {
       month: 'short',
-    }}
-  />
-);
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText('aug')).toBeInTheDocument();
+  },
+};
 
-export const CapitalizedMonth = () => (
-  <DateFormatter
-    value={new Date()}
-    options={{
+export const CapitalizedMonth: Story = {
+  args: {
+    value: new Date('1929-08-19'),
+    options: {
       month: 'long',
-    }}
-  >
-    {(formattedDate: string) =>
-      formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)
-    }
-  </DateFormatter>
-);
+    },
+  },
+  render: (props) => (
+    <DateFormatter {...props}>
+      {(formattedDate: string) =>
+        formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)
+      }
+    </DateFormatter>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText('August')).toBeInTheDocument();
+  },
+};
 
-export const Day = () => (
-  <DateFormatter
-    value={new Date()}
-    options={{
+export const Day: Story = {
+  args: {
+    value: new Date('2001-01-01'),
+    options: {
       day: 'numeric',
-    }}
-  />
-);
-
-export const ShortDay = () => (
-  <DateFormatter
-    value={new Date()}
-    options={{
-      day: '2-digit',
-    }}
-  />
-);
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText('1.')).toBeInTheDocument();
+  },
+};
 
 export default meta;
