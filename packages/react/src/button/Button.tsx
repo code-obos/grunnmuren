@@ -53,44 +53,54 @@ const buttonVariants = cva({
       color: 'green',
       variant: 'primary',
       // Darken bg by 20% on hover. The color is manually crafted
-      className: 'bg-green text-white hover:bg-green-dark active:bg-[#007352]',
+      className:
+        'bg-green text-white hover:bg-green-dark active:bg-[#007352] [&_[role="progressbar"]]:text-white',
     },
     {
       color: 'green',
       variant: 'secondary',
       className:
-        'text-black shadow-green hover:bg-green hover:text-white active:bg-green',
+        'text-black shadow-green hover:bg-green hover:text-white active:bg-green [&:hover_[role="progressbar"]]:text-white [&_[role="progressbar"]]:text-black',
+    },
+    {
+      color: 'green',
+      variant: 'tertiary',
+      className: '[&_[role="progressbar"]]:text-black',
     },
     {
       color: 'mint',
       variant: 'primary',
       // Darken bg by 20% on hover. The color is manually crafted
-      className: 'active:[#9ddac6] bg-mint text-black hover:bg-[#8dd4bd]',
+      className:
+        'active:[#9ddac6] bg-mint text-black hover:bg-[#8dd4bd] [&_[role="progressbar"]]:text-black',
     },
     {
       color: 'mint',
       variant: 'secondary',
-      className: 'text-mint shadow-mint hover:bg-mint hover:text-black',
+      className:
+        'text-mint shadow-mint hover:bg-mint hover:text-black [&:hover_[role="progressbar"]]:text-black [&_[role="progressbar"]]:text-mint',
     },
     {
       color: 'mint',
       variant: 'tertiary',
-      className: 'text-mint',
+      className: 'text-mint [&_[role="progressbar"]]:text-mint',
     },
     {
       color: 'white',
       variant: 'primary',
-      className: 'bg-white text-black hover:bg-sky active:bg-sky-light',
+      className:
+        'bg-white text-black hover:bg-sky active:bg-sky-light [&_[role="progressbar"]]:text-black',
     },
     {
       color: 'white',
       variant: 'secondary',
-      className: 'text-white shadow-white hover:bg-white hover:text-black',
+      className:
+        'text-white shadow-white hover:bg-white hover:text-black [&:hover_[role="progressbar"]]:text-black [&_[role="progressbar"]]:text-white',
     },
     {
       color: 'white',
       variant: 'tertiary',
-      className: 'text-white',
+      className: 'text-white [&_[role="progressbar"]]:text-white',
     },
   ],
   defaultVariants: {
@@ -110,6 +120,8 @@ type ButtonOrLinkProps = VariantProps<typeof buttonVariants> & {
    * @default false
    */
   isLoading?: boolean;
+  /** Additional style properties for the element. */
+  style?: React.CSSProperties;
 };
 
 type ButtonProps = (
@@ -175,7 +187,7 @@ function Button(
     <>
       {_children}
       <LoadingSpinner
-        className="absolute m-auto animate-spin text-[white]"
+        className="absolute m-auto animate-spin"
         {...progressBarProps}
       />
     </>
