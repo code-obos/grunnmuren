@@ -48,3 +48,9 @@ jobs:
       # It makes sense to do this on PRs to ensure the change didn't break the Storybook
       - name: Build storybook
         run: pnpm build:storybook
+
+      - name: Serve Storybook and run tests
+        run: |
+          pnpm concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
+            "pnpm http-server storybook-static --port 6006 --silent" \
+            "pnpm wait-on tcp:127.0.0.1:6006 && pnpm test-storybook"
