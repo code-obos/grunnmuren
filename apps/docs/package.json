@@ -16,5 +16,11 @@
     "react-dom": "18.3.1",
     "vinxi": "0.4.3"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@obosbbl/grunnmuren-tailwind": "workspace:*",
+    "autoprefixer": "10.4.20",
+    "postcss": "8.4.49",
+    "tailwindcss": "3.4.15",
+    "vite-tsconfig-paths": "5.1.3"
+  }
 }
