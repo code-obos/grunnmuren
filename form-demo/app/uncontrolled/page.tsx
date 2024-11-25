@@ -1,12 +1,20 @@
 'use client';
-import { useFormState } from 'react-dom';
-import { Form, TextField } from '@obosbbl/grunnmuren-react';
+import { useActionState } from 'react';
+import {
+  Card,
+  Heading,
+  Content,
+  Form,
+  TextField,
+  Button,
+} from '@obosbbl/grunnmuren-react';
 
 import { submitForm } from './submitAction';
-import SubmitButton from './SubmitButton';
 
 export default function () {
-  const [{ errors }, formAction] = useFormState(submitForm, { errors: {} });
+  const [{ errors }, formAction, isPending] = useActionState(submitForm, {
+    errors: {},
+  });
 
   return (
     <Form action={formAction} validationErrors={errors} className="space-y-4">
@@ -26,7 +34,13 @@ export default function () {
           </>
         }
       />
-      <SubmitButton>Save</SubmitButton>
+      <Card>
+        <Content>
+          <Heading level={3}>TEst</Heading>
+          TEst
+        </Content>
+      </Card>
+      <Button isLoading={isPending}>Save</Button>
     </Form>
   );
 }
