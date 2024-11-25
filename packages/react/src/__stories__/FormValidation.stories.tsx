@@ -17,7 +17,7 @@ const Form = (props: {
   serverValidate?: boolean;
 }) => {
   const [errors, setErrors] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [isPending, setIsPending] = useState(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,12 +29,12 @@ const Form = (props: {
       return;
     }
 
-    setIsLoading(true);
+    setIsPending(true);
 
     // Fake a delay here, so it looks like we're submitting the data to a server
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    setIsLoading(false);
+    setIsPending(false);
 
     if (!(data['email'] as string).endsWith('.no')) {
       setErrors({ email: emailErrorMessage });
@@ -54,7 +54,7 @@ const Form = (props: {
       validationErrors={errors}
     >
       {props.children}
-      <Button type="submit" isLoading={isLoading}>
+      <Button type="submit" isPending={isPending}>
         Send inn
       </Button>
     </RACForm>

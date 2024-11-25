@@ -1,12 +1,13 @@
-import { useRef, useState, forwardRef, type Ref } from 'react';
+import { forwardRef, type Ref } from 'react';
 import { cva, type VariantProps } from 'cva';
+import { useProgressBar } from 'react-aria';
 import {
   Button as RACButton,
   Link as RACLink,
   type ButtonProps as RACButtonProps,
 } from 'react-aria-components';
 import { LoadingSpinner } from '@obosbbl/grunnmuren-icons-react';
-import { mergeRefs, useLayoutEffect } from '@react-aria/utils';
+import { useLocale, type Locale } from '../use-locale';
 
 /**
  * Figma: https://www.figma.com/file/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=30%3A2574&mode=dev
@@ -14,7 +15,7 @@ import { mergeRefs, useLayoutEffect } from '@react-aria/utils';
 
 const buttonVariants = cva({
   base: [
-    'inline-flex min-h-[44px] cursor-pointer items-center justify-center whitespace-nowrap rounded-lg font-medium transition-colors duration-200 focus-visible:outline-focus-offset',
+    'relative inline-flex min-h-[44px] cursor-pointer items-center justify-center whitespace-nowrap rounded-lg font-medium transition-colors duration-200 focus-visible:outline-focus-offset',
   ],
   variants: {
     /**
@@ -44,56 +45,69 @@ const buttonVariants = cva({
       true: 'p-2 [&>svg]:h-7 [&>svg]:w-7',
       false: 'gap-2.5 px-4 py-2',
     },
+    // Make the content of the button transparent to hide it's content, but keep the button width
+    isPending: { true: '!text-transparent', false: null },
   },
   compoundVariants: [
     {
       color: 'green',
       variant: 'primary',
       // Darken bg by 20% on hover. The color is manually crafted
-      className: 'bg-green text-white hover:bg-green-dark active:bg-[#007352]',
+      className:
+        'bg-green text-white hover:bg-green-dark active:bg-[#007352] [&_[role="progressbar"]]:text-white',
     },
     {
       color: 'green',
       variant: 'secondary',
       className:
-        'text-black shadow-green hover:bg-green hover:text-white active:bg-green',
+        'text-black shadow-green hover:bg-green hover:text-white active:bg-green [&:hover_[role="progressbar"]]:text-white [&_[role="progressbar"]]:text-black',
+    },
+    {
+      color: 'green',
+      variant: 'tertiary',
+      className: '[&_[role="progressbar"]]:text-black',
     },
     {
       color: 'mint',
       variant: 'primary',
       // Darken bg by 20% on hover. The color is manually crafted
-      className: 'active:[#9ddac6] bg-mint text-black hover:bg-[#8dd4bd]',
+      className:
+        'active:[#9ddac6] bg-mint text-black hover:bg-[#8dd4bd] [&_[role="progressbar"]]:text-black',
     },
     {
       color: 'mint',
       variant: 'secondary',
-      className: 'text-mint shadow-mint hover:bg-mint hover:text-black',
+      className:
+        'text-mint shadow-mint hover:bg-mint hover:text-black [&:hover_[role="progressbar"]]:text-black [&_[role="progressbar"]]:text-mint',
     },
     {
       color: 'mint',
       variant: 'tertiary',
-      className: 'text-mint',
+      className: 'text-mint [&_[role="progressbar"]]:text-mint',
     },
     {
       color: 'white',
       variant: 'primary',
-      className: 'bg-white text-black hover:bg-sky active:bg-sky-light',
+      className:
+        'bg-white text-black hover:bg-sky active:bg-sky-light [&_[role="progressbar"]]:text-black',
     },
     {
       color: 'white',
       variant: 'secondary',
-      className: 'text-white shadow-white hover:bg-white hover:text-black',
+      className:
+        'text-white shadow-white hover:bg-white hover:text-black [&:hover_[role="progressbar"]]:text-black [&_[role="progressbar"]]:text-white',
     },
     {
       color: 'white',
       variant: 'tertiary',
-      className: 'text-white',
+      className: 'text-white [&_[role="progressbar"]]:text-white',
     },
   ],
   defaultVariants: {
     variant: 'primary',
     color: 'green',
     isIconOnly: false,
+    isPending: false,
   },
 });
 
@@ -102,9 +116,12 @@ type ButtonOrLinkProps = VariantProps<typeof buttonVariants> & {
   href?: string;
   /**
    * Display the button in a loading state
+   * @deprecated Use isPending instead.
    * @default false
    */
   isLoading?: boolean;
+  /** Additional style properties for the element. */
+  style?: React.CSSProperties;
 };
 
 type ButtonProps = (
@@ -119,9 +136,25 @@ function isLinkProps(
   return !!props.href;
 }
 
+type Translation = {
+  [key in Locale]: string;
+};
+
+type Translations = {
+  [x: string]: Translation;
+};
+
+const translations: Translations = {
+  pending: {
+    nb: 'venter',
+    sv: 'väntar',
+    en: 'pending',
+  },
+};
+
 function Button(
   props: ButtonProps,
-  forwardedRef: Ref<HTMLButtonElement | HTMLAnchorElement>,
+  ref: Ref<HTMLButtonElement | HTMLAnchorElement>,
 ) {
   const {
     children: _children,
@@ -129,48 +162,43 @@ function Button(
     isIconOnly,
     isLoading,
     variant,
-    style: _style,
+    isPending: _isPending,
     ...restProps
   } = props;
 
-  const [widthOverride, setWidthOverride] = useState<number>();
-
-  const ownRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
-  const ref = mergeRefs(ownRef, forwardedRef);
-
-  useLayoutEffect(() => {
-    if (isLoading) {
-      const requestID = window.requestAnimationFrame(() => {
-        setWidthOverride(ownRef.current?.getBoundingClientRect()?.width);
-      });
-      return () => {
-        setWidthOverride(undefined);
-        cancelAnimationFrame(requestID);
-      };
-    }
-  }, [isLoading, _children]);
+  const isPending = _isPending || isLoading;
 
   const className = buttonVariants({
     className: props.className,
     color,
     isIconOnly,
     variant,
+    isPending,
   });
 
-  const children = widthOverride ? (
-    // remove margin for icon alignment
-    <LoadingSpinner className="!m-0 mx-auto animate-spin" />
+  const locale = useLocale();
+
+  const { progressBarProps } = useProgressBar({
+    isIndeterminate: true,
+    'aria-label': translations.pending[locale],
+  });
+
+  const children = isPending ? (
+    <>
+      {_children}
+      <LoadingSpinner
+        className="absolute m-auto motion-safe:animate-spin"
+        {...progressBarProps}
+      />
+    </>
   ) : (
     _children
   );
-
-  const style = { ..._style, width: widthOverride };
 
   return isLinkProps(restProps) ? (
     <RACLink
       {...restProps}
       className={className}
-      style={style}
       ref={ref as React.ForwardedRef<HTMLAnchorElement>}
     >
       {children}
@@ -179,7 +207,7 @@ function Button(
     <RACButton
       {...restProps}
       className={className}
-      style={style}
+      isPending={isPending}
       ref={ref as React.ForwardedRef<HTMLButtonElement>}
     >
       {children}
