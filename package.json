@@ -15,6 +15,7 @@
     "lint": "pnpm lint:js && pnpm lint:format",
     "lint:format": "prettier --list-different .",
     "lint:js": "eslint . --ext \"js,cjs,mjs,tsx,ts\" --max-warnings 0 --ignore-path .gitignore",
+    "serve-storybook": "http-server storybook-static -p 6006 --silent",
     "test": "test-storybook"
   },
   "dependencies": {
@@ -52,6 +53,9 @@
     "storybook": "8.4.4",
     "tailwindcss": "3.4.15",
     "typescript": "5.6.3"
+  },
+  "devDependencies": {
+    "http-server": "14.1.1"
   },
   "packageManager": "pnpm@9.13.2",
   "engines": {
