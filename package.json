@@ -43,6 +43,7 @@
     "eslint-plugin-react-hooks": "4.6.2",
     "eslint-plugin-storybook": "0.8.0",
     "fontaine": "0.5.0",
+    "http-server": "14.1.1",
     "playwright": "1.49.0",
     "postcss": "8.4.49",
     "prettier": "3.2.5",
@@ -53,9 +54,6 @@
     "storybook": "8.4.5",
     "tailwindcss": "3.4.15",
     "typescript": "5.6.3"
-  },
-  "devDependencies": {
-    "http-server": "14.1.1"
   },
   "packageManager": "pnpm@9.14.2",
   "engines": {
