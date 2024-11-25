@@ -187,7 +187,7 @@ function Button(
     <>
       {_children}
       <LoadingSpinner
-        className="absolute m-auto animate-spin"
+        className="absolute m-auto motion-safe:animate-spin"
         {...progressBarProps}
       />
     </>
