@@ -9,4 +9,4 @@ packages/tailwind/fonts/font-fallback.js
 routeTree.gen.ts
 # Build output from TanStack start
 .vinxi
-.vercel
+.output
