@@ -56,4 +56,4 @@ jobs:
         run: |
           pnpm dlx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
             "pnpm serve-storybook" \
-            "pnpm dlx wait-on tcp:127.0.0.1:6006 && yarn test-storybook"
+            "pnpm dlx wait-on tcp:127.0.0.1:6006 && pnpm test"
