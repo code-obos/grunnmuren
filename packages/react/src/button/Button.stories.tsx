@@ -39,7 +39,7 @@ export const Primary: Story = {
   args: {
     color: 'green',
     variant: 'primary',
-    isLoading: false,
+    isPending: false,
   },
 };
 
