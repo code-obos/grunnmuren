@@ -10,6 +10,8 @@
     "start": "vinxi start"
   },
   "dependencies": {
+    "@obosbbl/grunnmuren-icons-react": "workspace:*",
+    "@obosbbl/grunnmuren-react": "workspace:*",
     "@tanstack/react-router": "1.82.8",
     "@tanstack/start": "1.82.9",
     "react": "18.3.1",

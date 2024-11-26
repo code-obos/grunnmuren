@@ -11,9 +11,16 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as IkonerImport } from './routes/ikoner'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const IkonerRoute = IkonerImport.update({
+  id: '/ikoner',
+  path: '/ikoner',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
@@ -32,6 +39,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/ikoner': {
+      id: '/ikoner'
+      path: '/ikoner'
+      fullPath: '/ikoner'
+      preLoaderRoute: typeof IkonerImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -39,32 +53,37 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ikoner': typeof IkonerRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ikoner': typeof IkonerRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/ikoner': typeof IkonerRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/ikoner'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/ikoner'
+  id: '__root__' | '/' | '/ikoner'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  IkonerRoute: typeof IkonerRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  IkonerRoute: IkonerRoute,
 }
 
 export const routeTree = rootRoute
@@ -77,11 +96,15 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/",
+        "/ikoner"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/ikoner": {
+      "filePath": "ikoner.tsx"
     }
   }
 }
