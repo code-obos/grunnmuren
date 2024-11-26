@@ -16,6 +16,7 @@ const cardVariants = cva({
     // **** Heading ****
     '[&_[data-slot="heading"]]:inline',
     '[&_[data-slot="heading"]]:heading-s',
+    '[&_[data-slot="heading"]]:leading-6', // A bit more line height than the default is necessary to make the underline align with the text if the heading has a card link
     '[&_[data-slot="heading"]]:w-fit',
     '[&_[data-slot="heading"]]:text-pretty',
 
@@ -46,7 +47,7 @@ const cardVariants = cva({
     '[&_[data-slot="heading"]_[data-slot="card-link"]]:transition-colors',
     '[&_[data-slot="heading"]_[data-slot="card-link"]:hover]:border-b-current',
     // Mimic heading styles for the card link if placed in the heading slot. This is necessary to make the custom underline align with the link text
-    '[&_[data-slot="heading"]_[data-slot="card-link"]]:heading-s [&_[data-slot="heading"]_[data-slot="card-link"]]:text-pretty',
+    '[&_[data-slot="heading"]_[data-slot="card-link"]]:heading-s [&_[data-slot="heading"]_[data-slot="card-link"]]:text-pretty [&_[data-slot="heading"]_[data-slot="card-link"]]:leading-6',
 
     // **** Fail-safe for interactive elements ****
     // Make interactive elements clickable by themselves, while the rest of the card is clickable as a whole
