@@ -1,11 +1,11 @@
 import appCss from '@/app.css?url';
+import { GrunnmurenProvider } from '@obosbbl/grunnmuren-react';
 import {
   Outlet,
   ScrollRestoration,
   createRootRoute,
 } from '@tanstack/react-router';
 import { Meta, Scripts } from '@tanstack/start';
-import { GrunnmurenProvider } from '@obosbbl/grunnmuren-react';
 import type { ReactNode } from 'react';
 
 export const Route = createRootRoute({
