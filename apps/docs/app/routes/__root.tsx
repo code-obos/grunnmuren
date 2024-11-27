@@ -1,3 +1,4 @@
+import appCss from '@/app.css?url';
 import {
   Outlet,
   ScrollRestoration,
@@ -5,7 +6,6 @@ import {
 } from '@tanstack/react-router';
 import { Meta, Scripts } from '@tanstack/start';
 import type { ReactNode } from 'react';
-import appCss from '@/app.css?url';
 
 export const Route = createRootRoute({
   head: () => ({

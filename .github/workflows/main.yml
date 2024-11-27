@@ -36,6 +36,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: biome
+        run: pnpm lint:biome
+
       - name: Prettier formatting check
         run: pnpm lint:format
 
