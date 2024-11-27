@@ -6,6 +6,7 @@ import {
 import { Meta, Scripts } from '@tanstack/start';
 import type { ReactNode } from 'react';
 import appCss from '@/app.css?url';
+import { MainNav } from '@/ui/MainNav';
 
 export const Route = createRootRoute({
   head: () => ({
@@ -40,8 +41,9 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
       <head>
         <Meta />
       </head>
-      <body>
-        {children}
+      <body className="flex gap-x-6">
+        <MainNav />
+        <main className="grow">{children}</main>
         <ScrollRestoration />
         <Scripts />
       </body>

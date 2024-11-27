@@ -5,5 +5,9 @@ export const Route = createFileRoute('/')({
 });
 
 function Home() {
-  return <h1>Hello, Grunnmuren docs!</h1>;
+  return (
+    <>
+      <h1>Hello, Grunnmuren docs!</h1>
+    </>
+  );
 }

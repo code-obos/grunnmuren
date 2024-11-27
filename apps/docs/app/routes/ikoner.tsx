@@ -8,11 +8,14 @@ export const Route = createFileRoute('/ikoner')({
 
 function IconsGrid() {
   return (
-    <div className="grid grid-cols-[repeat(auto-fill,_150px)] content-center justify-center gap-6">
-      {Object.entries(icons).map(([iconName, Icon]) => (
-        <IconCard key={iconName} iconName={iconName} Icon={Icon} />
-      ))}
-    </div>
+    <>
+      <h1 className="heading-l mb-12 mt-9">Ikoner</h1>
+      <div className="grid grid-cols-[repeat(auto-fill,_150px)] content-center gap-6">
+        {Object.entries(icons).map(([iconName, Icon]) => (
+          <IconCard key={iconName} iconName={iconName} Icon={Icon} />
+        ))}
+      </div>
+    </>
   );
 }
 
