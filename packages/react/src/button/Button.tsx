@@ -15,7 +15,7 @@ import { useLocale, type Locale } from '../use-locale';
 
 const buttonVariants = cva({
   base: [
-    'relative inline-flex min-h-[44px] cursor-pointer items-center justify-center whitespace-nowrap rounded-lg font-medium transition-colors duration-200 focus-visible:outline-focus-offset',
+    'inline-flex min-h-[44px] cursor-pointer items-center justify-center whitespace-nowrap rounded-lg font-medium transition-colors duration-200 focus-visible:outline-focus-offset [&:not([data-focus-visible])]:outline-none',
   ],
   variants: {
     /**
@@ -33,9 +33,10 @@ const buttonVariants = cva({
      * @default green
      */
     color: {
-      green: 'focus-visible:outline-focus',
-      mint: 'focus-visible:outline-focus focus-visible:outline-mint',
-      white: 'focus-visible:outline-focus focus-visible:outline-white',
+      green: 'data-[focus-visible]:outline-focus',
+      mint: 'data-[focus-visible]:outline-focus data-[focus-visible]:outline-mint',
+      white:
+        'data-[focus-visible]:outline-focus data-[focus-visible]:outline-white',
     },
     /**
      * When the button is without text, but with a single icon.
@@ -46,7 +47,7 @@ const buttonVariants = cva({
       false: 'gap-2.5 px-4 py-2',
     },
     // Make the content of the button transparent to hide it's content, but keep the button width
-    isPending: { true: '!text-transparent', false: null },
+    isPending: { true: 'relative !text-transparent', false: null },
   },
   compoundVariants: [
     {
