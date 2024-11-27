@@ -31,10 +31,15 @@ type ComboboxProps<T extends object> = {
   /** Error message for the form control. Automatically sets `isInvalid` to true */
   errorMessage?: React.ReactNode;
   /**
-   * Display the dropdown button trigger in a loading state
-   * @default false
+   * Display the dropdown button trigger in a pending state
+   * @deprecated Use isPending instead.
    */
   isLoading?: boolean;
+  /**
+   * Display the dropdown button trigger in a pending state
+   * @default false
+   */
+  isPending?: boolean;
   /** Label for the form control. */
   label?: React.ReactNode;
   /** Placeholder text. Only visible when the input value is empty. */
@@ -56,10 +61,13 @@ function Combobox<T extends object>(
     description,
     errorMessage,
     isLoading,
+    isPending: _isPending,
     label,
     isInvalid: _isInvalid,
     ...restProps
   } = props;
+
+  const isPending = _isPending || isLoading;
 
   // the order of the conditions matter here, because providing a value for isInvalid makes the validation state "controlled",
   // which will override any built in validation
@@ -77,7 +85,7 @@ function Combobox<T extends object>(
       <Group className={inputGroup}>
         <Input className={input({ isGrouped: true })} ref={ref} />
         <Button>
-          {isLoading ? (
+          {isPending ? (
             <LoadingSpinner className="animate-spin" />
           ) : (
             <ChevronDown className={dropdown.chevronIcon} />

@@ -69,19 +69,19 @@ const ControlledTemplate = <T extends object>(args: ComboboxProps<T>) => {
 const AsyncTemplate = <T extends object>(args: ComboboxProps<T>) => {
   const [items, setItems] = useState<Array<{ url: string; name: string }>>([]);
   const [filterText, setFilterText] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isPending, setIsPending] = useState(false);
 
   // TODO: Add debouncing
   useEffect(() => {
     async function fetchData() {
       if (filterText.length >= 2) {
-        setIsLoading(true);
+        setIsPending(true);
         const result = await fetch(
           `https://swapi.dev/api/people?search=${filterText}`,
         );
         const data = await result.json();
         setItems(data.results);
-        setIsLoading(false);
+        setIsPending(false);
       }
     }
     fetchData();
@@ -95,7 +95,7 @@ const AsyncTemplate = <T extends object>(args: ComboboxProps<T>) => {
       defaultFilter={() => true}
       onInputChange={setFilterText}
       inputValue={filterText}
-      isLoading={isLoading}
+      isPending={isPending}
       {...args}
     >
       {items.map((item) => (
@@ -128,7 +128,7 @@ const defaultProps = {
   defaultSelectedKey: undefined,
   selectedKey: undefined,
   placeholder: 'Velg boligprosjekt',
-  isLoading: false,
+  isPending: false,
 };
 
 export const Default: Story = {
