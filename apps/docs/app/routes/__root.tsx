@@ -6,7 +6,7 @@ import {
 import { Meta, Scripts } from '@tanstack/start';
 import type { ReactNode } from 'react';
 import appCss from '@/app.css?url';
-import { MainNav } from '@/ui/MainNav';
+import { MainNav } from '@/ui/main-nav';
 
 export const Route = createRootRoute({
   head: () => ({
