@@ -1,3 +1,5 @@
+import appCss from '@/app.css?url';
+import { GrunnmurenProvider } from '@obosbbl/grunnmuren-react';
 import {
   Outlet,
   ScrollRestoration,
@@ -5,7 +7,6 @@ import {
 } from '@tanstack/react-router';
 import { Meta, Scripts } from '@tanstack/start';
 import type { ReactNode } from 'react';
-import appCss from '@/app.css?url';
 import { MainNav } from '@/ui/main-nav';
 
 export const Route = createRootRoute({
@@ -30,7 +31,9 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <RootDocument>
-      <Outlet />
+      <GrunnmurenProvider locale="nb">
+        <Outlet />
+      </GrunnmurenProvider>
     </RootDocument>
   );
 }
