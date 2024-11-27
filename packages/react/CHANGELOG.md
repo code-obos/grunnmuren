@@ -1,5 +1,24 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.40
+
+### Minor Changes
+
+- 3cb2008: Button: deprecate isLoading in favor of isPending
+
+  - change prop name to align with React Aria and the useActionState hook in React.
+  - improved accessibility for pending state by [utilizing React aria](https://react-spectrum.adobe.com/react-aria/Button.html#pending)
+  - button events are now disabled when the button is in a pending state.
+  - refactor to CSS instead of useLayoutEffect when button is in a pending state.
+
+### Patch Changes
+
+- bcd1ad3: Fixes line-height on `<CardLink>` so that underline on hover aligns better with the text.
+- 87da523: Fixes focus styles on all components using either `<Link>` or `<Button>` from react-aria-components internally.
+- 8bdd3e3: Combobox: deprecate isLoading in favor of isPending
+
+  - change prop name to align with React Aria and the useActionState hook in React.
+
 ## 2.0.0-canary.39
 
 ### Patch Changes
