@@ -159,7 +159,7 @@ module.exports = (options = {}) => {
       ...v1CompatibilityPlugins,
       require('@tailwindcss/typography'),
       require('tailwindcss-animate'),
-      plugin(function ({ addBase, addComponents, theme }) {
+      plugin(({ addBase, addComponents, theme }) => {
         addBase({
           html: {
             '@apply text-black antialiased font-normal font-text': {},
@@ -243,7 +243,7 @@ module.exports = (options = {}) => {
         });
       }),
 
-      plugin(function ({ addBase, addComponents }) {
+      plugin(({ addBase, addComponents }) => {
         const {
           headingXlText,
           headingLText,
@@ -355,7 +355,7 @@ module.exports = (options = {}) => {
           },
         });
       }),
-      plugin(function ({ addBase }) {
+      plugin(({ addBase }) => {
         addBase(
           Object.entries(fontDeclarations).flatMap(
             ([fontFamily, fontFamilyDeclarations]) =>
@@ -570,7 +570,7 @@ module.exports = (options = {}) => {
 };
 
 // These custom components are only used for v1 compat
-const button = plugin(function ({ addComponents, theme }) {
+const button = plugin(({ addComponents, theme }) => {
   const hoverLoadingBgColor = 'rgba(0, 0, 0, 0.1)';
 
   addComponents({
@@ -627,7 +627,7 @@ const button = plugin(function ({ addComponents, theme }) {
   });
 });
 
-const radio = plugin(function ({ addComponents, theme }) {
+const radio = plugin(({ addComponents, theme }) => {
   addComponents({
     '.radio': {
       // hide the native radio input
@@ -672,7 +672,7 @@ const radio = plugin(function ({ addComponents, theme }) {
   });
 });
 
-const checkbox = plugin(function ({ addComponents, theme }) {
+const checkbox = plugin(({ addComponents, theme }) => {
   addComponents({
     '.checkbox': {
       '&::before': {
@@ -693,7 +693,7 @@ const checkbox = plugin(function ({ addComponents, theme }) {
   });
 });
 
-const snackbar = plugin(function ({ addComponents, theme }) {
+const snackbar = plugin(({ addComponents, theme }) => {
   addComponents({
     '.snackbar': {
       'grid-template-columns': 'min-content auto',

@@ -1,5 +1,5 @@
 import { Glob } from 'bun';
-import { readMetrics, generateFontFace } from 'fontaine';
+import { generateFontFace, readMetrics } from 'fontaine';
 
 /**
  * This script parses all the OBOS fonts and generates
@@ -31,7 +31,7 @@ for (const [fontFamilyName, fontFiles] of Object.entries(fontFilesByFamily)) {
     const fontMetrics = await readMetrics(Bun.pathToFileURL(fontFile));
 
     if (fontMetrics == null) {
-      throw new Error('Unable to read metrics for ' + fontFile);
+      throw new Error(`Unable to read metrics for ${fontFile}`);
     }
     console.log(fontFile, fontMetrics);
 
