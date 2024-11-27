@@ -1,8 +1,21 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
   "files": {
-    "ignore": ["dist/", ".next/", ".output/", ".vinxi/", "routetree.gen.ts"],
-    "include": ["apps/", "form-demo"]
+    "ignore": [
+      "dist/",
+      ".next/",
+      ".output/",
+      ".vinxi/",
+      "routetree.gen.ts",
+      "packages/icons-react/src"
+    ],
+    "include": [
+      "apps/",
+      "form-demo",
+      "packages/icons-react",
+      "packages/icons-svg",
+      "packages/tailwind"
+    ]
   },
   "linter": {
     "enabled": true,

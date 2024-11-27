@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-import ora from 'ora';
+import path from 'node:path';
 import fs from 'fs-extra';
-import path from 'path';
+import ora from 'ora';
 import prompts from 'prompts';
 import { __dirname } from './utils.mjs';
 
@@ -18,13 +18,13 @@ const FIGMA_TOKEN_PATH = path.join(__dirname, '../', '.FIGMA_TOKEN');
 
 (async function main() {
   const spinner = ora(
-    'Reading Figma access token from ' + FIGMA_TOKEN_PATH,
+    `Reading Figma access token from ${FIGMA_TOKEN_PATH}`,
   ).start();
 
   let figmaToken = await readTokenFromDisk();
 
   if (figmaToken) {
-    spinner.succeed('Using Figma access token from ' + FIGMA_TOKEN_PATH);
+    spinner.succeed(`Using Figma access token from ${FIGMA_TOKEN_PATH}`);
   } else {
     spinner.warn('No Figma access token found');
 
@@ -45,7 +45,7 @@ const FIGMA_TOKEN_PATH = path.join(__dirname, '../', '.FIGMA_TOKEN');
 
     if (saveToken) {
       await writeTokenToDisk(figmaToken);
-      spinner.succeed('Saved token to ' + FIGMA_TOKEN_PATH);
+      spinner.succeed(`Saved token to ${FIGMA_TOKEN_PATH}`);
     }
   }
 
@@ -54,9 +54,9 @@ const FIGMA_TOKEN_PATH = path.join(__dirname, '../', '.FIGMA_TOKEN');
   let components;
   try {
     components = await fetchComponents(figmaToken);
-    spinner.succeed(`Loaded Figma components`);
+    spinner.succeed('Loaded Figma components');
   } catch (e) {
-    spinner.fail('Unable to load Figma components: ' + e.message);
+    spinner.fail(`Unable to load Figma components: ${e.message}`);
     return;
   }
 
@@ -66,7 +66,7 @@ const FIGMA_TOKEN_PATH = path.join(__dirname, '../', '.FIGMA_TOKEN');
     icons = processComponents(components);
     spinner.succeed(`Parsed ${icons.length} components into icons`);
   } catch (e) {
-    spinner.fail('Unable to parse icons from Figma components: ' + e.message);
+    spinner.fail(`Unable to parse icons from Figma components: ${e.message}`);
     return;
   }
 
@@ -76,7 +76,7 @@ const FIGMA_TOKEN_PATH = path.join(__dirname, '../', '.FIGMA_TOKEN');
     urls = await fetchImageUrls(icons, figmaToken);
     spinner.succeed();
   } catch (e) {
-    spinner.fail('Unable to get icon URLs: ' + e.message);
+    spinner.fail(`Unable to get icon URLs: ${e.message}`);
     return;
   }
 

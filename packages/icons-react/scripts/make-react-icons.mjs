@@ -1,6 +1,6 @@
 #!/usr/bin/env node
+import path from 'node:path';
 import { transform } from '@svgr/core';
-import path from 'path';
 import fs from 'fs-extra';
 import { __dirname, listSvgs } from './utils.mjs';
 
@@ -20,9 +20,10 @@ const files = listSvgs(SVG_PATH);
 fs.outputFileSync(REACT_FILE, '');
 fs.appendFile(REACT_FILE, 'import type { SVGProps } from "react";\n');
 
+// biome-ignore lint/complexity/noForEach: leaving this as is in biome migration. Fix when updating this script
 files.forEach(async (file) => {
   const jsx = await toReact(file);
-  fs.appendFile(REACT_FILE, jsx + '\n');
+  fs.appendFile(REACT_FILE, `${jsx}\n`);
 });
 
 // Inline SVGs doesn't need the namespace

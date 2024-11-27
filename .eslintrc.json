@@ -5,7 +5,13 @@
     "es2021": true,
     "node": true
   },
-  "ignorePatterns": ["form-demo/", "apps"],
+  "ignorePatterns": [
+    "form-demo/",
+    "apps",
+    "packages/icons-react",
+    "packages/icons-svg",
+    "packages/tailwind"
+  ],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
