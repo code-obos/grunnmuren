@@ -1,5 +1,5 @@
 import * as icons from '@obosbbl/grunnmuren-icons-react';
-import { Card, Content } from '@obosbbl/grunnmuren-react';
+import { Card } from '@obosbbl/grunnmuren-react';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/ikoner')({
@@ -19,10 +19,8 @@ function IconsGrid() {
 function IconCard({ iconName, Icon }) {
   return (
     <Card className="bg-gray-lightest" key={iconName}>
-      <Content>
-        <Icon className="mx-auto" />
-        <span className="block text-center text-sm">{iconName}</span>
-      </Content>
+      <Icon className="mx-auto" />
+      <span className="block text-center text-sm">{iconName}</span>
     </Card>
   );
 }
