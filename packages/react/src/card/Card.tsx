@@ -53,6 +53,8 @@ const cardVariants = cva({
     // Make interactive elements clickable by themselves, while the rest of the card is clickable as a whole
     // The card is made clickable by a pseudo-element on the heading that covers the entire card
     '[&:not(:has([data-slot="card-link"]_a))_a:not([data-slot="card-link"])]:relative [&_button]:relative [&_input]:relative',
+    // Our Button component has position: relative by default, so we need to override that if it is used in a CardLink (to make the entire card clickable)
+    '[&_[data-slot="card-link"]_a]:static',
     // Place other interactive on top of the pseudo-element that makes the entire card clickable
     // by setting a higher z-index than the pseudo-element (which implicitly z-index 0)
     '[&_a:not([data-slot="card-link"])]:z-[1] [&_button]:z-[1] [&_input]:z-[1]',
@@ -116,8 +118,8 @@ const cardLinkVariants = cva({
         'after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
         // **** Focus ****
         'focus-visible:outline-none',
-        'focus-visible:after:outline-focus',
-        'focus-visible:after:outline-offset-2',
+        'data-[focus-visible]:after:outline-focus',
+        'data-[focus-visible]:after:outline-offset-2',
         // **** Hover ****
         // Links are underlined by default, and the underline is removed on hover.
         // So we make sure that also happens when the user hovers the clickable area.
@@ -130,9 +132,9 @@ const cardLinkVariants = cva({
         '[&_a]:after:inset-[calc(theme(borderWidth.DEFAULT)*-1)]',
         '[&_a]:after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
         // **** Focus ****
-        '[&_a:focus-visible]:outline-none',
-        '[&_a:focus-visible]:after:outline-focus',
-        '[&_a:focus-visible]:after:outline-offset-2',
+        '[&_a[data-focus-visible]]:outline-none',
+        '[&_a[data-focus-visible]]:after:outline-focus',
+        '[&_a[data-focus-visible]]:after:outline-offset-2',
         // **** Hover ****
         // Links are underlined by default, and the underline is removed on hover.
         // So we make sure that also happens when the user hovers the card.
