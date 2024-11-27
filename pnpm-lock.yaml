@@ -119,6 +119,12 @@ importers:
 
   apps/docs:
     dependencies:
+      '@obosbbl/grunnmuren-icons-react':
+        specifier: workspace:*
+        version: link:../../packages/icons-react
+      '@obosbbl/grunnmuren-react':
+        specifier: workspace:*
+        version: link:../../packages/react
       '@tanstack/react-router':
         specifier: 1.82.8
         version: 1.82.8(@tanstack/router-generator@1.82.10)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
