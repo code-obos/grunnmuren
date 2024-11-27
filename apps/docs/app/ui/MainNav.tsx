@@ -5,7 +5,7 @@ import { Button, Disclosure, DisclosurePanel } from 'react-aria-components';
 
 export const MainNav = () => (
   <nav
-    className="h-fit w-72 max-w-full bg-sky-lightest px-5 py-9"
+    className="-order-1 h-fit w-72 max-w-full bg-sky-lightest px-5 py-9"
     aria-label="Navigasjonsmeny for grunnmuren"
   >
     <ul>

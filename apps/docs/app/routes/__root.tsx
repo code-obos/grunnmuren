@@ -42,8 +42,8 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
         <Meta />
       </head>
       <body className="lg:flex lg:gap-x-6">
-        <MainNav />
         <main className="grow">{children}</main>
+        <MainNav />
         <ScrollRestoration />
         <Scripts />
       </body>
