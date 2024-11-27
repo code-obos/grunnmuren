@@ -5,6 +5,7 @@ import {
   createRootRoute,
 } from '@tanstack/react-router';
 import { Meta, Scripts } from '@tanstack/start';
+import { GrunnmurenProvider } from '@obosbbl/grunnmuren-react';
 import type { ReactNode } from 'react';
 
 export const Route = createRootRoute({
@@ -29,7 +30,9 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <RootDocument>
-      <Outlet />
+      <GrunnmurenProvider locale="nb">
+        <Outlet />
+      </GrunnmurenProvider>
     </RootDocument>
   );
 }
