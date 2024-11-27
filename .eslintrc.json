@@ -5,6 +5,7 @@
     "es2021": true,
     "node": true
   },
+  "ignorePatterns": ["form-demo/", "apps"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",

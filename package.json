@@ -12,13 +12,15 @@
     "ci:publish": "pnpm build && changeset publish",
     "ci:version": "changeset version && pnpm install --lockfile-only",
     "dev": "storybook dev -p 6006 --ci",
-    "lint": "pnpm lint:js && pnpm lint:format",
+    "lint": "pnpm lint:biome && pnpm lint:js && pnpm lint:format",
+    "lint:biome": "pnpm biome check .",
     "lint:format": "prettier --list-different .",
     "lint:js": "eslint . --ext \"js,cjs,mjs,tsx,ts\" --max-warnings 0 --ignore-path .gitignore",
     "serve-storybook": "http-server storybook-static -p 6006 --silent",
     "test": "test-storybook"
   },
   "dependencies": {
+    "@biomejs/biome": "1.9.4",
     "@changesets/cli": "2.27.10",
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
     "@react-aria/optimize-locales-plugin": "1.1.3",
