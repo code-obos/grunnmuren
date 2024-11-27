@@ -1,4 +1,5 @@
 import appCss from '@/app.css?url';
+import { MainNav } from '@/ui/main-nav';
 import { GrunnmurenProvider } from '@obosbbl/grunnmuren-react';
 import {
   Outlet,
@@ -43,8 +44,9 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
       <head>
         <Meta />
       </head>
-      <body>
-        {children}
+      <body className="grid gap-6 lg:flex">
+        <main className="grow">{children}</main>
+        <MainNav />
         <ScrollRestoration />
         <Scripts />
       </body>
