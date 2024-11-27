@@ -12,7 +12,7 @@ const SubNavItem = ({ to, title }: SubNavItemProps) => (
   <li>
     <Link
       to={to}
-      className="inline-flex items-center gap-2 rounded-md px-3 py-2 focus-visible:outline-focus focus-visible:outline-focus-inset data-[status=active]:font-bold data-[status=active]:no-underline"
+      className="description inline-flex items-center gap-2 rounded-md px-3 py-2 focus-visible:outline-focus focus-visible:outline-focus-inset data-[status=active]:font-bold data-[status=active]:no-underline"
     >
       {title}
     </Link>
@@ -30,7 +30,7 @@ const MainNavItem = ({ title, subNavItems }: MainNavItemProps) => (
       <Heading level={2}>
         <Button
           slot="trigger"
-          className="group flex w-full cursor-pointer place-items-center justify-between rounded-md p-3 focus-visible:outline-focus-inset data-[focus-visible]:outline-focus [&:not([data-focus-visible])]:outline-none"
+          className="group flex w-full cursor-pointer place-items-center justify-between rounded-md p-3 font-semibold focus-visible:outline-focus-inset data-[focus-visible]:outline-focus [&:not([data-focus-visible])]:outline-none"
         >
           {title}
           <ChevronDown className="flex-none transition-transform duration-300 group-aria-expanded:rotate-180 motion-reduce:transition-none" />
