@@ -1,4 +1,5 @@
 import appCss from '@/app.css?url';
+import { GrunnmurenProvider } from '@obosbbl/grunnmuren-react';
 import {
   Outlet,
   ScrollRestoration,
@@ -29,7 +30,9 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <RootDocument>
-      <Outlet />
+      <GrunnmurenProvider locale="nb">
+        <Outlet />
+      </GrunnmurenProvider>
     </RootDocument>
   );
 }
