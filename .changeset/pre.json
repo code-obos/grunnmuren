@@ -6,7 +6,8 @@
     "@obosbbl/grunnmuren-icons-svg": "1.0.0",
     "@obosbbl/grunnmuren-tailwind": "1.0.0",
     "@obosbbl/grunnmuren-react": "1.0.0",
-    "form-demo": "0.0.0"
+    "form-demo": "0.0.0",
+    "@obosbbl/grunnmuren-docs": "0.0.1"
   },
   "changesets": [
     "afraid-rings-search",
@@ -14,6 +15,7 @@
     "bright-singers-roll",
     "calm-hounds-draw",
     "clever-frogs-breathe",
+    "clever-geckos-press",
     "curly-radios-jam",
     "cyan-kangaroos-poke",
     "cyan-rings-dance",
@@ -60,12 +62,15 @@
     "orange-stingrays-retire",
     "pink-olives-look",
     "polite-keys-remain",
+    "popular-jobs-drum",
     "pretty-geckos-rush",
     "quiet-bees-battle",
     "quiet-insects-tickle",
     "rude-eyes-occur",
+    "selfish-kids-greet",
     "serious-doors-build",
     "shaggy-adults-vanish",
+    "shaggy-rings-explain",
     "sharp-suns-swim",
     "shy-crews-admire",
     "silly-ghosts-dress",
