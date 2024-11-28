@@ -1,5 +1,6 @@
 export default function Figma() {
   return (
+    // biome-ignore lint/a11y/noSvgWithoutTitle: the icon is hidden from screen readers
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={24}
@@ -11,7 +12,6 @@ export default function Figma() {
       strokeLinecap="round"
       strokeLinejoin="round"
       role="img"
-      alt=""
       aria-hidden
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />

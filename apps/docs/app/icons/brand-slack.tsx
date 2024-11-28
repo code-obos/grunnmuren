@@ -1,5 +1,6 @@
 export default function Slack() {
   return (
+    // biome-ignore lint/a11y/noSvgWithoutTitle: the icon is hidden from screen readers
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={24}
@@ -10,6 +11,8 @@ export default function Slack() {
       strokeWidth={1.5}
       strokeLinecap="round"
       strokeLinejoin="round"
+      role="img"
+      aria-hidden
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M12 12v-6a2 2 0 0 1 4 0v6m0 -2a2 2 0 1 1 2 2h-6" />
