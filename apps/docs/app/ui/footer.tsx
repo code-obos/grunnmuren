@@ -43,7 +43,9 @@ export function Footer() {
                 className="flex gap-2"
                 href="https://obos.slack.com/archives/C03FR05FJ9F"
               >
-                <Slack /> #grunnmuren-design-system
+                <Slack />
+                <span className="sr-only">Slack:</span>{' '}
+                #grunnmuren-design-system
               </a>
             </li>
           </ul>
