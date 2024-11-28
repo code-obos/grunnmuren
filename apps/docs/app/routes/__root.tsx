@@ -1,4 +1,5 @@
 import appCss from '@/app.css?url';
+import { Footer } from '@/ui/footer';
 import { MainNav } from '@/ui/main-nav';
 import { GrunnmurenProvider } from '@obosbbl/grunnmuren-react';
 import {
@@ -44,9 +45,14 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
       <head>
         <Meta />
       </head>
-      <body className="grid gap-6 lg:flex">
-        <main className="grow">{children}</main>
-        <MainNav />
+      <body>
+        <div className="grid lg:flex">
+          <div className="grow px-6">
+            <main className="grow">{children}</main>
+            <Footer />
+          </div>
+          <MainNav />
+        </div>
         <ScrollRestoration />
         <Scripts />
       </body>
