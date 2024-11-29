@@ -52,6 +52,15 @@ const mainNavItems = [
     title: 'Komponenter',
     subNavItems: [
       {
+        to: '/komponenter/button',
+        title: 'Button',
+      },
+    ],
+  },
+  {
+    title: 'Profil',
+    subNavItems: [
+      {
         to: '/ikoner',
         title: 'Ikoner',
       },

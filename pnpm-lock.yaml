@@ -125,6 +125,9 @@ importers:
       '@obosbbl/grunnmuren-icons-react':
         specifier: workspace:*
         version: link:../../packages/icons-react
+      '@obosbbl/grunnmuren-icons-svg':
+        specifier: workspace:*
+        version: link:../../packages/icons-svg
       '@obosbbl/grunnmuren-react':
         specifier: workspace:*
         version: link:../../packages/react

@@ -1,3 +1,4 @@
+import { Card, CardLink, Heading } from '@obosbbl/grunnmuren-react';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/')({
@@ -7,7 +8,21 @@ export const Route = createFileRoute('/')({
 function Home() {
   return (
     <>
-      <h1>Hello, Grunnmuren docs!</h1>
+      <h1 className="heading-l mb-12">Grunnmuren</h1>
+      <div className="grid grid-cols-2 gap-4">
+        <Card variant="outlined">
+          <Heading level={2}>
+            <CardLink href="/">Komponenter</CardLink>
+          </Heading>
+          Se alle byggeklossene våre
+        </Card>
+        <Card variant="outlined">
+          <Heading level={2}>
+            <CardLink href="/ikoner">Ikoner</CardLink>
+          </Heading>
+          Utforsk ikonsettet vårt
+        </Card>
+      </div>
     </>
   );
 }
