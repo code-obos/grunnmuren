@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as IkonerImport } from './routes/ikoner'
 import { Route as IndexImport } from './routes/index'
+import { Route as KomponenterButtonImport } from './routes/komponenter/button'
 
 // Create/Update Routes
 
@@ -25,6 +26,12 @@ const IkonerRoute = IkonerImport.update({
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const KomponenterButtonRoute = KomponenterButtonImport.update({
+  id: '/komponenter/button',
+  path: '/komponenter/button',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -46,6 +53,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IkonerImport
       parentRoute: typeof rootRoute
     }
+    '/komponenter/button': {
+      id: '/komponenter/button'
+      path: '/komponenter/button'
+      fullPath: '/komponenter/button'
+      preLoaderRoute: typeof KomponenterButtonImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -54,36 +68,41 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ikoner': typeof IkonerRoute
+  '/komponenter/button': typeof KomponenterButtonRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ikoner': typeof IkonerRoute
+  '/komponenter/button': typeof KomponenterButtonRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/ikoner': typeof IkonerRoute
+  '/komponenter/button': typeof KomponenterButtonRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/ikoner'
+  fullPaths: '/' | '/ikoner' | '/komponenter/button'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/ikoner'
-  id: '__root__' | '/' | '/ikoner'
+  to: '/' | '/ikoner' | '/komponenter/button'
+  id: '__root__' | '/' | '/ikoner' | '/komponenter/button'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   IkonerRoute: typeof IkonerRoute
+  KomponenterButtonRoute: typeof KomponenterButtonRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   IkonerRoute: IkonerRoute,
+  KomponenterButtonRoute: KomponenterButtonRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,7 +116,8 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/ikoner"
+        "/ikoner",
+        "/komponenter/button"
       ]
     },
     "/": {
@@ -105,6 +125,9 @@ export const routeTree = rootRoute
     },
     "/ikoner": {
       "filePath": "ikoner.tsx"
+    },
+    "/komponenter/button": {
+      "filePath": "komponenter/button.tsx"
     }
   }
 }
