@@ -1,5 +1,5 @@
-import { createFileRoute } from '@tanstack/react-router';
 import { Card, CardLink, Heading } from '@obosbbl/grunnmuren-react';
+import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/')({
   component: Home,

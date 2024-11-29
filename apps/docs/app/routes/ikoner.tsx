@@ -1,9 +1,9 @@
-import * as icons from '@obosbbl/grunnmuren-icons-react';
-import { Button, Card } from '@obosbbl/grunnmuren-react';
-import { createFileRoute } from '@tanstack/react-router';
-import { ArrowDown, Box } from '@obosbbl/grunnmuren-icons-react';
 import Figma from '@/icons/brand-figma';
 import Github from '@/icons/brand-github';
+import * as icons from '@obosbbl/grunnmuren-icons-react';
+import { ArrowDown, Box } from '@obosbbl/grunnmuren-icons-react';
+import { Button, Card } from '@obosbbl/grunnmuren-react';
+import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/ikoner')({
   component: Page,
