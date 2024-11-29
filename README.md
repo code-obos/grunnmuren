@@ -23,6 +23,10 @@ and check out these packages:
 - [@obosbbl/grunnmuren-icons-react](./packages/icons-react/) - SVG icons as React components.
 - [@obosbbl/grunnmuren-icons-svg](./packages/icons-svg/) - SVG icons.
 
+and the documentation source:
+
+- [Docs](./apps/docs)
+
 ## Contributing
 
 ### Local setup

@@ -46,9 +46,9 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
         <Meta />
       </head>
       <body>
-        <div className="grid lg:flex">
-          <div className="grow px-6">
-            <main className="grow">{children}</main>
+        <div className="grid min-h-screen lg:flex">
+          <div className="flex grow flex-col px-6">
+            <main className="flex-1">{children}</main>
             <Footer />
           </div>
           <MainNav />

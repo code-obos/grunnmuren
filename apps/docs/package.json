@@ -6,7 +6,8 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "pnpm build:assets && vinxi build",
+    "build": "pnpm build:assets && pnpm build:app",
+    "build:app": "vinxi build",
     "build:assets": "mkdir -p public/resources/icons && cp -r node_modules/@obosbbl/grunnmuren-icons-svg/src/ public/resources/icons",
     "dev": "vinxi dev",
     "start": "vinxi start"
