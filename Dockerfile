@@ -1,29 +1,36 @@
-FROM node:22-alpine AS base
+FROM dktprodacr.azurecr.io/dktp/node22:latest AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
-FROM base AS deps
+FROM base AS prod-deps
+COPY . /app
 WORKDIR /app
-COPY . .
-RUN echo "node-linker=hoisted" >> .npmrc
-RUN \
-  --mount=type=secret,id=npmrc,target=/root/.npmrc\
-  pnpm install
 
-FROM deps as builder
+RUN \
+  --mount=type=secret,id=npmrc,target=/home/node/.npmrc\
+  --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
+
+FROM base AS builder
+COPY . /app
 WORKDIR /app
+
+RUN \
+  --mount=type=secret,id=npmrc,target=/home/node/.npmrc\
+  --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 
 RUN pnpm build
-RUN pnpm --filter docs build
+RUN pnpm --filter @obosbbl/grunnmuren-docs build
 
-FROM dktprodacr.azurecr.io/dktp/bun1 AS app
-ENV NODE_ENV="production"
-WORKDIR /app
-COPY --from=builder /app/apps/docs/.output ./apps/docs/.output/
+FROM base
 WORKDIR /app/apps/docs
+ENV NODE_ENV="production"
+
+COPY --from=builder /app/apps/docs/.output .output
+COPY --from=builder /app/apps/docs/.vinxi .vinxi
+COPY --from=prod-deps /app/apps/docs/node_modules node_modules
+
 ENV PORT=3000
-# set hostname to localhost
-ENV HOSTNAME="0.0.0.0"
 EXPOSE 3000
-# CMD [ "bun", "run", ".output/server/index.mjs" ]
+USER node
+CMD [ "node", ".output/server/index.mjs" ]

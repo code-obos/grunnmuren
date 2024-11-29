@@ -4,8 +4,8 @@ import tsConfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
   server: {
-    preset: 'bun',
-    compatibilityDate: '2024-11-25',
+    preset: 'node-server',
+    compatibilityDate: '2024-11-29',
   },
   vite: {
     plugins: [
