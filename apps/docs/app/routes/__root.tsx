@@ -48,7 +48,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
       <body>
         <div className="grid min-h-screen lg:flex">
           <div className="flex grow flex-col px-6">
-            <main className="flex-1">{children}</main>
+            <main className="grow">{children}</main>
             <Footer />
           </div>
           <MainNav />
