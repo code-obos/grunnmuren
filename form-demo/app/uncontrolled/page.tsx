@@ -1,12 +1,11 @@
 'use client';
 import { useActionState } from 'react';
 import {
-  Card,
-  Heading,
   Content,
   Form,
   TextField,
   Button,
+  Alertbox,
 } from '@obosbbl/grunnmuren-react';
 
 import { submitForm } from './submitAction';
@@ -34,12 +33,16 @@ export default function () {
           </>
         }
       />
-      <Card>
-        <Content>
-          <Heading level={3}>TEst</Heading>
-          TEst
+      <Alertbox role="alert" variant="info" className="mt-4">
+        <Content className="flex flex-col gap-2">
+          <h3 className="text-base">Medlemsnummer</h3>
+          <p>
+            Giver får nytt medlemsnummer og begynner å spare ansiennitet på
+            nytt. Det nye medlemskapet blir aktivt etter at medlemskontingenten
+            er betalt.
+          </p>
         </Content>
-      </Card>
+      </Alertbox>
       <Button isLoading={isPending}>Save</Button>
     </Form>
   );

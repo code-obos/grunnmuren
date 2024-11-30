@@ -53,5 +53,11 @@
   "packageManager": "pnpm@9.13.2",
   "engines": {
     "node": ">=22.11"
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/react": "npm:types-react@rc",
+      "@types/react-dom": "npm:types-react-dom@rc"
+    }
   }
 }
