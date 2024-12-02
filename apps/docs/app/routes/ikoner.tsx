@@ -7,6 +7,12 @@ import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/ikoner')({
   component: Page,
+  head: () => ({
+    meta: [
+      { title: 'Ikoner - Grunnmuren' },
+      { name: 'description', content: 'Grunnmuren sitt ikonsett' },
+    ],
+  }),
 });
 
 function Page() {
