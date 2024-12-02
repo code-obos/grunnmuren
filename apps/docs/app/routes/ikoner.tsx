@@ -85,6 +85,7 @@ function IconCard({ iconName, Icon }) {
       <Button
         variant="tertiary"
         href={downloadSvgLink}
+        // @ts-expect-error fix in Grunnmuren so we're allowed to pass download when href is set
         download
         className="ml-auto w-[44px]"
       >
