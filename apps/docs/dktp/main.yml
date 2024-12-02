@@ -5,6 +5,10 @@ properties:
       external: true
       allowInsecure: false
       targetPort: 3000
+    secrets:
+      - name: splunk-token
+        keyVaultUrl: https://dkt-nettsted-prod-kv.vault.azure.net/secrets/Splunk-Token
+        identity: SystemAssigned
   template:
     scale:
       minReplicas: 1
@@ -34,6 +38,11 @@ properties:
 
       - image: dktprodacr.azurecr.io/dktp/log-forwarder:latest
         name: default
+        env:
+          - name: SPLUNK_TOKEN
+            secretRef: splunk-token
+          - name: ENVIRONMENT
+            value: prod
         resources:
           cpu: 0.25
           memory: 0.5Gi
