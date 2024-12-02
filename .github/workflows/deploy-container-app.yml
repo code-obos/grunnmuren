@@ -1,0 +1,169 @@
+name: 🚀 Deploy Container App
+run-name: 🚀 Deploy Container App to ${{ inputs.environment}}
+
+# Loosely based on https://github.com/Azure/container-apps-deploy-action/blob/main/action.yml
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: Name of the GitHub environment to target
+        required: true
+        type: string
+      app_environment:
+        description: Name of the application environment to target. Used for picking the correct `.env` file.
+        required: true
+        type: string
+      dktp-config-directory:
+        description: Path to the directory containing DKTP config
+        required: true
+        type: string
+      image-tag:
+        description: Tag of the image to deploy
+        required: true
+        type: string
+
+env:
+  DKTP_CONFIG_FILE: ${{ inputs.dktp-config-directory }}/main.yml
+  DKTP_ENV_FILE: ${{ inputs.dktp-config-directory }}/${{ inputs.app_environment }}.env
+  CONFIG_FILE_OUTPUT: out.yaml
+  IMAGE_TAG: ${{ inputs.image-tag }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare config
+        uses: falti/dotenv-action@eb9c0c4f17a3872394f256bd27d5740bee1cf61a # v1.1.1
+        with:
+          path: ${{ env.DKTP_ENV_FILE }}
+          export-variables: true
+          keys-case: bypass
+
+      - name: Validate yaml
+        uses: mikefarah/yq@c35ec752e38ea0c096d3c44e13cfc0797ac394d8 # v4.43.1
+        with:
+          # https://mikefarah.gitbook.io/yq/usage/tips-and-tricks#validating-yaml-files
+          cmd: yq --exit-status 'tag == "!!map" or tag== "!!seq"' ${{ env.DKTP_CONFIG_FILE }} > /dev/null
+      - name: Create config
+        uses: mikefarah/yq@c35ec752e38ea0c096d3c44e13cfc0797ac394d8 # v4.43.1
+        with:
+          # https://mikefarah.gitbook.io/yq/operators/env-variable-operators#tip
+          cmd: yq '(.. | select(tag == "!!str")) |= envsubst' ${{ env.DKTP_CONFIG_FILE }} > ${{ env.CONFIG_FILE_OUTPUT }}
+      - name: Validate updated yaml
+        uses: mikefarah/yq@c35ec752e38ea0c096d3c44e13cfc0797ac394d8 # v4.43.1
+        with:
+          # https://mikefarah.gitbook.io/yq/usage/tips-and-tricks#validating-yaml-files
+          cmd: yq --exit-status 'tag == "!!map" or tag== "!!seq"' ${{ env.CONFIG_FILE_OUTPUT }} > /dev/null
+
+      - name: Log in to Azure
+        uses: azure/login@8c334a195cbb38e46038007b304988d888bf676a # v2
+        with:
+          client-id: ${{ vars.ACA_CLIENT_ID }}
+          tenant-id: ${{ vars.TENANT_ID }}
+          subscription-id: ${{ vars.SUBSCRIPTION_ID }}
+
+      - name: Validate needed variables
+        run: |
+          if [ -z "$resource_group_name" ]
+          then
+            missing=true
+            echo "\`resource_group_name\` must be set in env file" >> $GITHUB_STEP_SUMMARY
+          fi
+          if [ -z "$container_app_name" ]
+          then
+            missing=true
+            echo "\`container_app_name\` must be set in env file" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [ $missing ]
+          then
+            exit 1
+          fi
+
+      - name: Check if the Container App already exists in the resource group
+        shell: bash
+        run: |
+          az containerapp show \
+            -g $resource_group_name \
+            -n $container_app_name \
+            --output none && CONTAINER_APP_EXISTS=true || CONTAINER_APP_EXISTS=false
+          if [[ $CONTAINER_APP_EXISTS = 'false' ]]; then
+            echo "Container app does not exist" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+
+      - name: Update Container app
+        shell: bash
+        run: |
+          revision_name=$(
+            az containerapp update \
+              -g $resource_group_name \
+              -n $container_app_name \
+              --yaml ${{ env.CONFIG_FILE_OUTPUT }} |
+              jq -r '.properties.latestRevisionName'
+          )
+          echo "Container app updated. New revision name: '$revision_name'. Checking provisioning state..."
+
+          # https://learn.microsoft.com/en-us/rest/api/containerapps/container-apps-revisions/get-revision?view=rest-containerapps-2023-05-01&tabs=HTTP
+          # We're interested in provisioningState, provisioningError and runningState
+          # First we wait for provisioningState to move on from 'Provisioning', then we check runningState.
+          # According to the API docs we should check for 'Processing', but in reality the revision can also be in the 'Activating' state.
+          state=
+          error=
+          running_state=
+          start_seconds=$SECONDS
+          timeout_seconds=300 # Five minutes
+          while
+            data=$(
+              az containerapp revision show \
+                -g $resource_group_name \
+                -n $container_app_name \
+                --revision $revision_name
+            )
+            state=$(echo $data | jq -r '.properties.provisioningState')
+            error=$(echo $data | jq -r '.properties.provisioningError')
+            running_state=$(echo $data | jq -r '.properties.runningState')
+            elapsed_seconds=$((SECONDS - start_seconds))
+
+            if [[ $elapsed_seconds -gt $timeout_seconds ]]; then
+              timeout=1
+              break
+            elif [[ $state == "Provisioning" ]]; then
+              echo "Still provisioning. Retrying in 500ms..."
+              sleep 0.5
+            elif [[ $running_state == "Processing" || $running_state == "Activating" || $running_state == "Unknown" ]]; then
+              echo "Running state is '$running_state'. Retrying in 500ms..."
+              sleep 0.5
+            else
+              break
+            fi
+          do true; done
+
+          if [[ $state != 'Provisioned' ]] || [[ $running_state != 'Running' && $running_state != 'RunningAtMaxScale' ]]; then
+            echo "> [!CAUTION]" >> $GITHUB_STEP_SUMMARY
+            if [[ $timeout ]]; then
+              echo "> Timed out after $elapsed_seconds seconds." >> $GITHUB_STEP_SUMMARY
+            fi
+            echo "> Provisioning state: \`$state\`." >> $GITHUB_STEP_SUMMARY
+            echo "> Running state: \`$running_state\`." >> $GITHUB_STEP_SUMMARY
+            echo "> Error message:" >> $GITHUB_STEP_SUMMARY
+            echo "> \`\`\`" >> $GITHUB_STEP_SUMMARY
+            echo "> $error" >> $GITHUB_STEP_SUMMARY
+            echo "> \`\`\`" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+
+          echo "Provisioning succeeded! Revision name: \`$revision_name\`" >> $GITHUB_STEP_SUMMARY
+
+      - name: 🔒 Azure Logout
+        if: always()
+        run: az logout
+        shell: bash

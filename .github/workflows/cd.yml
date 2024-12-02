@@ -33,7 +33,7 @@ jobs:
 
   deploy_prod:
     name: Deploy to PROD
-    uses: code-obos/dkt-actions/.github/workflows/deploy-container-app.yml@36a9f77d4efc1dbff8ded44d4f5b464c4b2acf1d # v1.1.1
+    uses: ./.github/workflows/deploy-container-app.yml
     needs: docker
     with:
       environment: prod-grunnmuren

@@ -25,7 +25,7 @@ jobs:
         uses: docker/setup-buildx-action@c47758b77c9736f4b2ef4073d4d51994fabfe349 # v3.7.1
 
       - name: Login to Azure Container Registry
-        uses: code-obos/dkt-actions/dktp/acr-login@36a9f77d4efc1dbff8ded44d4f5b464c4b2acf1d # v1.1.1
+        uses: ./apps/docs/dktp/acr-login
         with:
           acr-client-id: ${{ vars.ACR_CLIENT_ID }}
           tenant-id: ${{ vars.TENANT_ID }}
@@ -51,4 +51,4 @@ jobs:
         run: rm .npmrc
 
       - name: Azure logout
-        uses: code-obos/dkt-actions/dktp/acr-logout@36a9f77d4efc1dbff8ded44d4f5b464c4b2acf1d # v1.1.1
+        uses: ./apps/docs/dktp/acr-logout
