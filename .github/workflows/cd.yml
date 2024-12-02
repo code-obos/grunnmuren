@@ -1,0 +1,39 @@
+name: App CD
+
+on:
+  workflow_dispatch:
+  push:
+    #    branches:
+    #      - main
+    paths:
+      - Dockerfile
+      - apps/**
+      - packages/**
+      - .github/workflows/build-push-image.yml
+      - .github/workflows/cd.yml
+      - pnpm-lock.yaml
+      - package.json
+      - postcss.config.cjs
+      - tsconfig.json
+
+permissions:
+  contents: read
+  id-token: write
+  packages: read
+
+jobs:
+  docker:
+    name: Build and push image
+    uses: ./.github/workflows/build-push-image.yml
+    secrets:
+      npm-github-packages-token: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy_prod:
+    name: Deploy to PROD
+    uses: code-obos/dkt-actions/.github/workflows/deploy-container-app.yml@36a9f77d4efc1dbff8ded44d4f5b464c4b2acf1d # v1.1.1
+    needs: docker
+    with:
+      environment: prod-grunnmuren
+      app_environment: prod
+      dktp-config-directory: ./apps/docs/dktp
+      image-tag: ${{ github.sha }}

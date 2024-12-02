@@ -1,0 +1,54 @@
+name: Build and push image
+
+env:
+  container-registry: dktprodacr.azurecr.io
+
+on:
+  workflow_call:
+    secrets:
+      npm-github-packages-token:
+        required: true
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    environment: acr
+    permissions:
+      contents: read
+      id-token: write
+      packages: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@c47758b77c9736f4b2ef4073d4d51994fabfe349 # v3.7.1
+
+      - name: Login to Azure Container Registry
+        uses: code-obos/dkt-actions/dktp/acr-login@36a9f77d4efc1dbff8ded44d4f5b464c4b2acf1d # v1.1.1
+        with:
+          acr-client-id: ${{ vars.ACR_CLIENT_ID }}
+          tenant-id: ${{ vars.TENANT_ID }}
+          subscription-id: ${{ vars.SUBSCRIPTION_ID }}
+
+      - name: Setup npm credentials
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.npm-github-packages-token }}" >> .npmrc
+
+      - name: Build and push
+        uses: docker/build-push-action@4f58ea79222b3b9dc2c8bbdd6debcef730109a75 # v6.9.0
+        with:
+          push: false
+          tags: ${{ env.container-registry }}/grunnmuren/docs:${{ github.sha }}
+          secret-files: |
+            npmrc=.npmrc
+          build-args: |
+            app_name=grunnmuren
+
+          file: Dockerfile
+
+      - name: Clean up npm credentials
+        run: rm .npmrc
+
+      - name: Azure logout
+        uses: code-obos/dkt-actions/dktp/acr-logout@36a9f77d4efc1dbff8ded44d4f5b464c4b2acf1d # v1.1.1
