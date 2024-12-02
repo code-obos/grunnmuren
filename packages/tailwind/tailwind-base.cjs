@@ -1,3 +1,4 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
 const plugin = require('tailwindcss/plugin');
 const fontFallbacks = require('./fonts/font-fallback');
 
@@ -445,6 +446,8 @@ module.exports = (options = {}) => {
             fontFallbacks.OBOSDisplay['font-family'],
           'sans-serif',
         ],
+        // OBOS doesn't have monospaced font, so we keep Tailwind's default here
+        mono: defaultTheme.fontFamily.mono,
       },
       extend: {
         maxWidth: {
