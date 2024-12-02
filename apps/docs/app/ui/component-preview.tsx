@@ -32,7 +32,7 @@ export const ComponentPreview = ({
           <LiveEditor
             tabMode="focus"
             // Use the same black color as the background on the editor
-            className="font-mono row-span-2"
+            className="row-span-2 font-[monospace]"
             onChange={(newCode) => setCodeString(newCode)}
           />
           <div className="relative text-mint">
