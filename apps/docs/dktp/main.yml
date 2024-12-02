@@ -1,0 +1,45 @@
+properties:
+  configuration:
+    activeRevisionsMode: Single
+    ingress:
+      external: true
+      allowInsecure: false
+      targetPort: 3000
+  template:
+    scale:
+      minReplicas: 1
+      maxReplicas: 3
+    containers:
+      - image: dktprodacr.azurecr.io/grunnmuren/docs:${IMAGE_TAG}
+        name: default
+        resources:
+          cpu: 0.25
+          memory: 0.5Gi
+        probes:
+          - type: liveness
+            httpGet:
+              path: '/api/health'
+              port: 3000
+            initialDelaySeconds: 7
+            periodSeconds: 3
+          - type: readiness
+            httpGet:
+              path: '/api/health'
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 3
+        volumeMounts:
+          - mountPath: /var/log/console-logs
+            name: log-volume
+
+      - image: dktprodacr.azurecr.io/dktp/log-forwarder:latest
+        name: default
+        resources:
+          cpu: 0.25
+          memory: 0.5Gi
+        volumeMounts:
+          - mountPath: /var/log/console-logs
+            name: log-volume
+    volumes:
+      - name: log-volume
+        emptyDir: {}
