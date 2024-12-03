@@ -34,7 +34,7 @@ properties:
             periodSeconds: 3
         volumeMounts:
           - mountPath: /var/log/console-logs
-            name: log-volume
+            name: logvolume
 
       - image: dktprodacr.azurecr.io/dktp/log-forwarder:latest
         name: logs
@@ -48,7 +48,7 @@ properties:
           memory: 0.5Gi
         volumeMounts:
           - mountPath: /var/log/console-logs
-            name: log-volume
+            name: logvolume
     volumes:
-      - name: log-volume
+      - name: logvolume
         emptyDir: {}
