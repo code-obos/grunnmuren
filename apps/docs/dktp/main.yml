@@ -15,7 +15,7 @@ properties:
       maxReplicas: 3
     containers:
       - image: dktprodacr.azurecr.io/grunnmuren/docs:${IMAGE_TAG}
-        name: default
+        name: docs
         resources:
           cpu: 0.25
           memory: 0.5Gi
@@ -37,7 +37,7 @@ properties:
             name: log-volume
 
       - image: dktprodacr.azurecr.io/dktp/log-forwarder:latest
-        name: default
+        name: logs
         env:
           - name: SPLUNK_TOKEN
             secretRef: splunk-token
