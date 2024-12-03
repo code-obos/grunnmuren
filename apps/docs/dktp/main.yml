@@ -1,7 +1,4 @@
 properties:
-  volumes:
-    - name: logvolume
-      emptyDir: {}
   configuration:
     activeRevisionsMode: Single
     ingress:
@@ -52,3 +49,6 @@ properties:
         volumeMounts:
           - mountPath: /var/log/console-logs
             name: logvolume
+  volumes:
+    - name: logvolume
+      emptyDir: {}
