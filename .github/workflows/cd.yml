@@ -25,8 +25,8 @@ jobs:
   docker:
     name: Build and push image
     uses: ./.github/workflows/build-push-image.yml
-    secrets:
-      npm-github-packages-token: ${{ secrets.GITHUB_TOKEN }}
+    # secrets:
+    #  npm-github-packages-token: ${{ secrets.GITHUB_TOKEN }}
 
   deploy_prod:
     name: Deploy to PROD
