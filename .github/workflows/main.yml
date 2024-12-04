@@ -7,9 +7,17 @@ on:
   push:
     branches:
       - main
+    paths:
+      - '!apps/**'
+      - '.github/workflows/build-push-image.yml'
+      - '.github/workflows/cd.yml'
   pull_request:
     branches:
       - main
+    paths:
+      - '!apps/**'
+      - '.github/workflows/build-push-image.yml'
+      - '.github/workflows/cd.yml'
 
 jobs:
   build:

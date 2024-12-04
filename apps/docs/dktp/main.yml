@@ -1,0 +1,54 @@
+properties:
+  configuration:
+    activeRevisionsMode: Single
+    ingress:
+      external: true
+      allowInsecure: false
+      targetPort: 3000
+    secrets:
+      - name: splunk-token
+        keyVaultUrl: https://dkt-nettsted-prod-kv.vault.azure.net/secrets/Splunk-Token
+        identity: System
+  template:
+    scale:
+      minReplicas: 1
+      maxReplicas: 3
+    containers:
+      - image: dktprodacr.azurecr.io/grunnmuren/docs:${IMAGE_TAG}
+        name: docs
+        resources:
+          cpu: 0.25
+          memory: 0.5Gi
+        probes:
+          - type: liveness
+            httpGet:
+              path: '/api/health'
+              port: 3000
+            initialDelaySeconds: 7
+            periodSeconds: 3
+          - type: readiness
+            httpGet:
+              path: '/api/health'
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 3
+        volumeMounts:
+          - mountPath: /var/log/console-logs
+            volumeName: logs
+
+      - image: dktprodacr.azurecr.io/dktp/log-forwarder:latest
+        name: logs
+        env:
+          - name: SPLUNK_TOKEN
+            secretRef: splunk-token
+          - name: ENVIRONMENT
+            value: prod
+        resources:
+          cpu: 0.25
+          memory: 0.5Gi
+        volumeMounts:
+          - mountPath: /var/log/console-logs
+            volumeName: logs
+    volumes:
+      - name: logs
+        storageType: EmptyDir
