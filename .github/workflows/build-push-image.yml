@@ -2,12 +2,10 @@ name: Build and push image
 
 env:
   container-registry: dktprodacr.azurecr.io
+  branch-name: ${{ github.head_ref || github.ref_name }}
 
 on:
   workflow_call:
-    #secrets:
-    #npm-github-packages-token:
-    #required: true
 
 jobs:
   build-and-push:
@@ -31,24 +29,17 @@ jobs:
           tenant-id: ${{ vars.TENANT_ID }}
           subscription-id: ${{ vars.SUBSCRIPTION_ID }}
 
-      #- name: Setup npm credentials
-      #  run: |
-      #    echo "//npm.pkg.github.com/:_authToken=${{ secrets.npm-github-packages-token }}" >> .npmrc
-
       - name: Build and push
         uses: docker/build-push-action@4f58ea79222b3b9dc2c8bbdd6debcef730109a75 # v6.9.0
         with:
-          push: true
+          push: ${{env.branch-name == 'main'}}
+
           tags: ${{ env.container-registry }}/grunnmuren/docs:${{ github.sha }}
-          #    secret-files: |
-          #      npmrc=.npmrc
+
           build-args: |
             app_name=grunnmuren
 
           file: Dockerfile
-
-      # - name: Clean up npm credentials
-      #   run: rm .npmrc
 
       - name: Azure logout
         uses: ./apps/docs/dktp/acr-logout

@@ -3,8 +3,6 @@ name: App CD
 on:
   workflow_dispatch:
   push:
-    #    branches:
-    #      - main
     paths:
       - Dockerfile
       - apps/**
@@ -25,10 +23,9 @@ jobs:
   docker:
     name: Build and push image
     uses: ./.github/workflows/build-push-image.yml
-    # secrets:
-    #  npm-github-packages-token: ${{ secrets.GITHUB_TOKEN }}
 
   deploy_prod:
+    if: contains(github.head_ref, 'main') || contains(github.ref_name, 'main')
     name: Deploy to PROD
     uses: ./.github/workflows/deploy-container-app.yml
     needs: docker
