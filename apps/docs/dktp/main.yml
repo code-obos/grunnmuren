@@ -8,7 +8,7 @@ properties:
     secrets:
       - name: splunk-token
         keyVaultUrl: https://dkt-nettsted-prod-kv.vault.azure.net/secrets/Splunk-Token
-        identity: SystemAssigned
+        identity: System
   template:
     scale:
       minReplicas: 1
@@ -34,7 +34,7 @@ properties:
             periodSeconds: 3
         volumeMounts:
           - mountPath: /var/log/console-logs
-            name: logvolume
+            volumeName: logs
 
       - image: dktprodacr.azurecr.io/dktp/log-forwarder:latest
         name: logs
@@ -48,7 +48,7 @@ properties:
           memory: 0.5Gi
         volumeMounts:
           - mountPath: /var/log/console-logs
-            name: logvolume
-  volumes:
-    - name: logvolume
-      emptyDir: {}
+            volumeName: logs
+    volumes:
+      - name: logs
+        storageType: EmptyDir
