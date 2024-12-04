@@ -25,7 +25,7 @@ jobs:
     uses: ./.github/workflows/build-push-image.yml
 
   deploy_prod:
-    if: contains(github.head_ref, 'cicd-gm') || contains(github.ref_name, 'cicd-gm')
+    if: contains(github.head_ref, 'main') || contains(github.ref_name, 'main')
     name: Deploy to PROD
     uses: ./.github/workflows/deploy-container-app.yml
     needs: docker
