@@ -4,4 +4,3 @@
 *.md
 **/dist
 .npmrc
-**/.next
