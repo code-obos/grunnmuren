@@ -1,5 +1,13 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.0.0-canary.9
+
+### Patch Changes
+
+- f457060: include Tailwind's default `font-mono` utility for setting the font family.
+
+  OBOS doesn't have a monospaced font, so we use Tailwind's default here.
+
 ## 2.0.0-canary.8
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-icons-react
 
+## 2.0.0-canary.2
+
+### Minor Changes
+
+- 9737bf0: feat: addded new icons ThumbsUp, ThumbsDown, Candle, University, Figma, Github & Slack
+
 ## 2.0.0-canary.1
 
 ### Patch Changes
