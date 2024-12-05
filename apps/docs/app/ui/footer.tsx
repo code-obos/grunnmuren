@@ -1,7 +1,5 @@
 import logoUrl from '@/assets/obos_liggende_hus_svart_rgb.png?url';
-import Figma from '@/icons/brand-figma';
-import Github from '@/icons/brand-github';
-import Slack from '@/icons/brand-slack';
+import { Figma, Github, Slack } from '@obosbbl/grunnmuren-icons-react';
 import { Link } from '@tanstack/react-router';
 
 export function Footer() {
