@@ -21,5 +21,9 @@ export default defineConfig({
         projects: ['./tsconfig.json'],
       }),
     ],
+    esbuild: {
+      // We need to disable minification of identifiers to preserve React component names in auto generated code snippets (see `reactElementToJSXString` in file:///./app/ui/component-preview.tsx).
+      minifyIdentifiers: false,
+    },
   },
 });
