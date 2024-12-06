@@ -8,7 +8,7 @@ import {
   type CheckboxProps as RACCheckboxProps,
 } from 'react-aria-components';
 
-import { ErrorMessage } from '../label/ErrorMessage';
+import { ErrorMessage } from '../label/error-message';
 
 const defaultClasses = cx([
   'group relative left-0 -mx-2.5 inline-flex max-w-fit cursor-pointer items-start gap-4 p-2.5 leading-7',

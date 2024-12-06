@@ -10,7 +10,7 @@ import { cx } from 'cva';
 import { Badge } from '../badge';
 import { Button } from '../button';
 import { Content, Footer, Heading, Media } from '../content';
-import { Card, CardLink } from './Card';
+import { Card, CardLink } from './card';
 
 const meta: Meta<typeof Card> = {
   title: 'Card',

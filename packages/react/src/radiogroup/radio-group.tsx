@@ -5,9 +5,9 @@ import {
   type RadioGroupProps as RACRadioGroupProps,
 } from 'react-aria-components';
 
-import { Description } from '../label/Description';
-import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
-import { Label } from '../label/Label';
+import { Description } from '../label/description';
+import { ErrorMessageOrFieldError } from '../label/error-messsage-or-field-error';
+import { Label } from '../label/label';
 
 type RadioGroupProps = {
   children: React.ReactNode;

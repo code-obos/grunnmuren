@@ -9,9 +9,9 @@ import {
 
 import { formField, input, inputGroup } from '../classes';
 import { InputAddonDivider } from '../internals';
-import { Description } from '../label/Description';
-import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
-import { Label } from '../label/Label';
+import { Description } from '../label/description';
+import { ErrorMessageOrFieldError } from '../label/error-messsage-or-field-error';
+import { Label } from '../label/label';
 
 type TextFieldProps = {
   /** Additional CSS className for the element. */

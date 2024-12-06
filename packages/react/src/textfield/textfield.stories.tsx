@@ -2,8 +2,8 @@ import { Mail } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { Button } from '../button/Button';
-import { TextField, type TextFieldProps } from './TextField';
+import { Button } from '../button/button';
+import { TextField, type TextFieldProps } from './textfield';
 
 const meta: Meta<typeof TextField> = {
   title: 'TextField',

@@ -1,1 +1,1 @@
-export * from './DateFormatter';
+export * from './date-formatter';

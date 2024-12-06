@@ -2,7 +2,7 @@ import { Edit, Search } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { cx } from 'cva';
 
-import { Button } from './Button';
+import { Button } from './button';
 
 const meta: Meta<typeof Button> = {
   title: 'Button',

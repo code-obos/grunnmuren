@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { Button } from '../button/Button';
-import { Radio } from './Radio';
-import { RadioGroup, type RadioGroupProps } from './RadioGroup';
+import { Button } from '../button/button';
+import { Radio } from './radio';
+import { RadioGroup, type RadioGroupProps } from './radio-group';
 
 const meta: Meta<typeof RadioGroup> = {
   title: 'RadioGroup',

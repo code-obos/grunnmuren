@@ -18,9 +18,9 @@ import {
   type ListBoxItemProps,
   ListBoxSection,
 } from '../internals';
-import { Description } from '../label/Description';
-import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
-import { Label } from '../label/Label';
+import { Description } from '../label/description';
+import { ErrorMessageOrFieldError } from '../label/error-messsage-or-field-error';
+import { Label } from '../label/label';
 
 type ComboboxProps<T extends object> = {
   children: React.ReactNode;

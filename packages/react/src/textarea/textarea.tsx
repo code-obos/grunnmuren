@@ -7,9 +7,9 @@ import {
 } from 'react-aria-components';
 
 import { formField, input } from '../classes';
-import { Description } from '../label/Description';
-import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
-import { Label } from '../label/Label';
+import { Description } from '../label/description';
+import { ErrorMessageOrFieldError } from '../label/error-messsage-or-field-error';
+import { Label } from '../label/label';
 
 type TextAreaProps = {
   /** Additional CSS className for the element. */

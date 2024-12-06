@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { Button } from '../button/Button';
+import { Button } from '../button/button';
 import {
   Select,
   SelectHeader,
   SelectItem,
   type SelectProps,
   SelectSection,
-} from './Select';
+} from './select';
 
 import { counties } from '../mocks';
 

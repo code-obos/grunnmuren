@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { expect, within } from '@storybook/test';
-import { DateFormatter } from './DateFormatter';
+import { DateFormatter } from './date-formatter';
 
 const meta: Meta<typeof DateFormatter> = {
   title: 'DateFormatter',

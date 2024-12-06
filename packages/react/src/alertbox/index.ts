@@ -1,1 +1,1 @@
-export * from './Alertbox';
+export * from './alertbox';

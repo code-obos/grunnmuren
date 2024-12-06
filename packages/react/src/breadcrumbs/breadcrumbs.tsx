@@ -4,7 +4,7 @@ import {
   Breadcrumbs as RACBreadcrumbs,
   type BreadcrumbsProps as RACBreadcrumbsProps,
 } from 'react-aria-components';
-import type { BreadcrumbProps } from './Breadcrumb';
+import type { BreadcrumbProps } from './breadcrumb';
 
 type BreadcrumbsProps = {
   /** Additional CSS className for the element. */
