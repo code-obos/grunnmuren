@@ -8,13 +8,6 @@
       ".vinxi/",
       "routetree.gen.ts",
       "packages/icons-react/src"
-    ],
-    "include": [
-      "apps/",
-      "form-demo",
-      "packages/icons-react",
-      "packages/icons-svg",
-      "packages/tailwind"
     ]
   },
   "linter": {
