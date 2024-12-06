@@ -12,7 +12,7 @@ interface PropsTableProps {
 }
 
 export const PropsTable = ({ props }: PropsTableProps) => (
-  <table>
+  <table className="w-full">
     <caption className="heading-m mb-2 text-left">Props</caption>
     <thead>
       <tr className="bg-sky-lightest text-left align-baseline *:px-3 *:py-2">
@@ -34,7 +34,7 @@ export const PropsTable = ({ props }: PropsTableProps) => (
             </code>
           </td>
           <td>{prop.description}</td>
-          <td>{prop.defaultValue?.value}</td>
+          <td>{prop.defaultValue?.value ?? '-'}</td>
         </tr>
       ))}
     </tbody>
