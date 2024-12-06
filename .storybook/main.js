@@ -1,5 +1,5 @@
-import optimizeLocales from '@react-aria/optimize-locales-plugin';
 import path from 'node:path';
+import optimizeLocales from '@react-aria/optimize-locales-plugin';
 import { mergeConfig } from 'vite';
 
 module.exports = {
