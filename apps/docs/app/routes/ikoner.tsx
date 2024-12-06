@@ -1,5 +1,5 @@
 import * as icons from '@obosbbl/grunnmuren-icons-react';
-import { ArrowDown, Box, Figma, Github } from '@obosbbl/grunnmuren-icons-react';
+import { Box, Download, Figma, Github } from '@obosbbl/grunnmuren-icons-react';
 import { Button, Card } from '@obosbbl/grunnmuren-react';
 import { createFileRoute } from '@tanstack/react-router';
 
@@ -93,7 +93,7 @@ function IconCard({ iconName, Icon }) {
         download
         className="ml-auto w-[44px]"
       >
-        <ArrowDown className="flex-none" />
+        <Download className="flex-none" />
       </Button>
     </Card>
   );
