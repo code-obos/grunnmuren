@@ -1,7 +1,7 @@
 import { ChevronLeft } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
-import { forwardRef, type Ref } from 'react';
-import { Button, Link, type ButtonProps } from 'react-aria-components';
+import { type Ref, forwardRef } from 'react';
+import { Button, type ButtonProps, Link } from 'react-aria-components';
 
 type ButtonOrLinkProps = {
   children?: React.ReactNode;

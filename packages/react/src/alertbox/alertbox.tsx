@@ -1,4 +1,4 @@
-import { cva, cx, type VariantProps } from 'cva';
+import { type VariantProps, cva, cx } from 'cva';
 import { Children, useId } from 'react';
 
 import {
@@ -10,7 +10,7 @@ import {
   Warning,
 } from '@obosbbl/grunnmuren-icons-react';
 import { useState } from 'react';
-import { useLocale, type Locale } from '../use-locale';
+import { type Locale, useLocale } from '../use-locale';
 
 // TODO: add new icons
 const iconMap = {
@@ -168,6 +168,7 @@ const Alertbox = ({
           )}
           onClick={close}
           aria-label={translations.close[locale]}
+          type="button"
         >
           <Close />
         </button>
@@ -183,6 +184,7 @@ const Alertbox = ({
           onClick={() => setIsExpanded((prevState) => !prevState)}
           aria-expanded={isExpanded}
           aria-controls={id}
+          type="button"
         >
           {isExpanded
             ? translations.showLess[locale]

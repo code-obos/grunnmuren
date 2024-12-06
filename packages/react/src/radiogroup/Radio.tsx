@@ -1,8 +1,8 @@
-import { forwardRef, type Ref } from 'react';
 import { cx } from 'cva';
+import { type Ref, forwardRef } from 'react';
 import {
+  type RadioProps as RACRAdioProps,
   Radio as RACRadio,
-  RadioProps as RACRAdioProps,
 } from 'react-aria-components';
 
 import { Description } from '../label';

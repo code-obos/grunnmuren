@@ -1,16 +1,16 @@
-import {
-  ListBox as RACListBox,
-  ListBoxProps,
-  ListBoxItem as RACListBoxItem,
-  type ListBoxItemProps,
-  Header,
-  HeadingProps,
-  Section,
-  SectionProps,
-} from 'react-aria-components';
-import { cx } from 'cva';
-import { dropdown } from '../classes';
 import { Check } from '@obosbbl/grunnmuren-icons-react';
+import { cx } from 'cva';
+import {
+  Header,
+  type HeadingProps,
+  type ListBoxItemProps,
+  type ListBoxProps,
+  ListBox as RACListBox,
+  ListBoxItem as RACListBoxItem,
+  Section,
+  type SectionProps,
+} from 'react-aria-components';
+import { dropdown } from '../classes';
 
 const ListBox = <T extends object>({
   className,
@@ -78,8 +78,8 @@ const ListBoxHeader = (props: HeadingProps) => (
 
 export {
   ListBox,
-  ListBoxItem,
-  ListBoxItemProps,
-  ListBoxSection,
   ListBoxHeader,
+  ListBoxItem,
+  type ListBoxItemProps,
+  ListBoxSection,
 };
