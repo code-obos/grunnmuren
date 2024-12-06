@@ -16,7 +16,7 @@ import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
 import {
   ListBox,
   ListBoxItem,
-  ListBoxItemProps,
+  type ListBoxItemProps,
   ListBoxSection,
   ListBoxHeader,
 } from '../internals';
