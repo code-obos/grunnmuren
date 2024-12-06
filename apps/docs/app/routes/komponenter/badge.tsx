@@ -1,6 +1,6 @@
+import { PropsTable } from '@/ui/props-table';
 import { createFileRoute } from '@tanstack/react-router';
 import { BadgeDoc } from '../../../docgen';
-import { PropsTable } from '@/ui/props-table';
 
 export const Route = createFileRoute('/komponenter/badge')({
   component: Page,
