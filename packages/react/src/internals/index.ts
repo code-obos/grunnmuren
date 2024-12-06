@@ -1,2 +1,2 @@
-export * from './ListBox';
-export * from './InputAddonDivider';
+export * from './listbox';
+export * from './input-addon-divider';

@@ -3,4 +3,4 @@ export {
   SelectItem,
   type SelectProps,
   type SelectItemProps,
-} from './Select';
+} from './select';

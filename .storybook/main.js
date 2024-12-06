@@ -1,6 +1,6 @@
-import { mergeConfig } from 'vite';
-import path from 'path';
+import path from 'node:path';
 import optimizeLocales from '@react-aria/optimize-locales-plugin';
+import { mergeConfig } from 'vite';
 
 module.exports = {
   stories: ['../packages/react/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
