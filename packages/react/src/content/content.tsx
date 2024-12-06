@@ -17,6 +17,7 @@ const Heading = (
   props: HeadingProps,
   ref: ForwardedRef<HTMLHeadingElement>,
 ) => {
+  // biome-ignore lint/style/noParameterAssign: fix when removing refs for React 19
   [props, ref] = useContextProps(props, ref, HeadingContext);
 
   const {
@@ -47,6 +48,7 @@ type ContentProps = HTMLProps<HTMLDivElement> & {
 };
 
 const Content = (props: ContentProps, ref: ForwardedRef<HTMLDivElement>) => {
+  // biome-ignore lint/style/noParameterAssign: fix when removing refs for React 19
   [props, ref] = useContextProps(props, ref, ContentContext);
   const { _outerWrapper: outerWrapper, ...restProps } = props;
 
