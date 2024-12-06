@@ -1,13 +1,13 @@
+import { cva, cx, type VariantProps } from 'cva';
 import { Children, useId } from 'react';
-import { cva, type VariantProps, cx } from 'cva';
 
 import {
-  Close,
-  ChevronDown,
-  InfoCircle,
   CheckCircle,
-  Warning,
+  ChevronDown,
+  Close,
   CloseCircle,
+  InfoCircle,
+  Warning,
 } from '@obosbbl/grunnmuren-icons-react';
 import { useState } from 'react';
 import { useLocale, type Locale } from '../use-locale';
@@ -210,4 +210,4 @@ const Alertbox = ({
   );
 };
 
-export { type Props as AlertboxProps, Alertbox };
+export { Alertbox, type Props as AlertboxProps };

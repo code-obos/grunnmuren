@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { AlertboxProps, Alertbox } from '.';
 import { useState } from 'react';
+import { Alertbox, type AlertboxProps } from '.';
 import { Button } from '..';
-import { Content, Heading, Footer } from '../content';
+import { Content, Footer, Heading } from '../content';
 
 const meta: Meta<typeof Alertbox> = {
   title: 'Alertbox',

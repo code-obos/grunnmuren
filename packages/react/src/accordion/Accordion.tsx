@@ -1,10 +1,10 @@
-import React, { Children, useState, forwardRef, type Ref, useId } from 'react';
-import { Provider } from 'react-aria-components';
-import { cx } from 'cva';
 import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
 import { useLayoutEffect } from '@react-aria/utils';
+import { cx } from 'cva';
+import React, { Children, forwardRef, type Ref, useId, useState } from 'react';
+import { Provider } from 'react-aria-components';
 
-import { HeadingContext, ContentContext } from '../content';
+import { ContentContext, HeadingContext } from '../content';
 
 type AccordionProps = {
   children: React.ReactNode;
@@ -173,6 +173,6 @@ const _AccordionItem = forwardRef(AccordionItem);
 export {
   _Accordion as Accordion,
   _AccordionItem as AccordionItem,
-  type AccordionProps,
   type AccordionItemProps,
+  type AccordionProps,
 };
