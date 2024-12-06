@@ -1,5 +1,5 @@
-import { withDefaultConfig } from 'react-docgen-typescript';
 import fs from 'fs';
+import { withDefaultConfig } from 'react-docgen-typescript';
 
 const options = {
   savePropValueAsString: true,
