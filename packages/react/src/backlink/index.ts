@@ -1,1 +1,1 @@
-export { Backlink, type BacklinkProps } from './Backlink';
+export { Backlink, type BacklinkProps } from './backlink';

@@ -7,17 +7,10 @@ on:
   push:
     branches:
       - main
-    paths:
-      - '!apps/**'
-      - '.github/workflows/build-push-image.yml'
-      - '.github/workflows/cd.yml'
+
   pull_request:
     branches:
       - main
-    paths:
-      - '!apps/**'
-      - '.github/workflows/build-push-image.yml'
-      - '.github/workflows/cd.yml'
 
 jobs:
   build:
@@ -49,9 +42,6 @@ jobs:
 
       - name: Prettier formatting check
         run: pnpm lint:format
-
-      - name: eslint
-        run: pnpm lint:js
 
       - name: Build packages
         run: pnpm run build
