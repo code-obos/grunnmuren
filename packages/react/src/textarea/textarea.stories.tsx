@@ -1,8 +1,8 @@
-import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 
 import { Button } from '../button/Button';
-import { TextArea, TextAreaProps } from './TextArea';
+import { TextArea, type TextAreaProps } from './TextArea';
 
 const meta: Meta<typeof TextArea> = {
   title: 'TextArea',

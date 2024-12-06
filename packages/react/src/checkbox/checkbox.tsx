@@ -69,8 +69,8 @@ function Checkbox(props: CheckboxProps, ref: Ref<HTMLLabelElement>) {
 
   const id = useId();
 
-  const descriptionId = 'desc' + id;
-  const errorMessageId = 'error' + id;
+  const descriptionId = `desc${id}`;
+  const errorMessageId = `error${id}`;
 
   const isInvalid = errorMessage != null || _isInvalid;
 

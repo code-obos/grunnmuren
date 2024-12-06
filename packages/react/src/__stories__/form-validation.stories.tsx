@@ -36,7 +36,7 @@ const Form = (props: {
 
     setIsPending(false);
 
-    if (!(data['email'] as string).endsWith('.no')) {
+    if (!(data.email as string).endsWith('.no')) {
       setErrors({ email: emailErrorMessage });
     } else {
       setErrors({});
@@ -132,12 +132,12 @@ export const ControlledValidation = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
-  let nameError;
+  let nameError: string;
   if (!name) {
     nameError = 'Fyll ut navn';
   }
 
-  let emailError;
+  let emailError: string;
   if (!email.endsWith('.no')) {
     emailError = emailErrorMessage;
   }

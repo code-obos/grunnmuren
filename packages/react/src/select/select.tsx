@@ -1,5 +1,6 @@
-import { forwardRef, type Ref } from 'react';
+import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
+import { type Ref, forwardRef } from 'react';
 import {
   Button,
   Popover,
@@ -7,19 +8,18 @@ import {
   type SelectProps as RACSelectProps,
   SelectValue,
 } from 'react-aria-components';
-import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
 
-import { formField, input, dropdown } from '../classes';
-import { Label } from '../label/Label';
-import { Description } from '../label/Description';
-import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
+import { dropdown, formField, input } from '../classes';
 import {
   ListBox,
+  ListBoxHeader,
   ListBoxItem,
   type ListBoxItemProps,
   ListBoxSection,
-  ListBoxHeader,
 } from '../internals';
+import { Description } from '../label/Description';
+import { ErrorMessageOrFieldError } from '../label/ErrorMessageOrFieldError';
+import { Label } from '../label/Label';
 
 type SelectProps<T extends object> = {
   children: React.ReactNode;
