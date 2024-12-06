@@ -3,4 +3,4 @@ export {
   ComboboxItem,
   type ComboboxProps,
   type ComboboxItemProps,
-} from './Combobox';
+} from './combobox';
