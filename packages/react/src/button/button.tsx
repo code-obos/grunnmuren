@@ -1,13 +1,13 @@
-import { forwardRef, type Ref } from 'react';
-import { cva, type VariantProps } from 'cva';
+import { LoadingSpinner } from '@obosbbl/grunnmuren-icons-react';
+import { type VariantProps, cva } from 'cva';
+import { type Ref, forwardRef } from 'react';
 import { useProgressBar } from 'react-aria';
 import {
   Button as RACButton,
-  Link as RACLink,
   type ButtonProps as RACButtonProps,
+  Link as RACLink,
 } from 'react-aria-components';
-import { LoadingSpinner } from '@obosbbl/grunnmuren-icons-react';
-import { useLocale, type Locale } from '../use-locale';
+import { type Locale, useLocale } from '../use-locale';
 
 /**
  * Figma: https://www.figma.com/file/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=30%3A2574&mode=dev

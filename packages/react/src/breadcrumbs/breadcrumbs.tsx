@@ -1,4 +1,4 @@
-import { forwardRef, type Ref } from 'react';
+import { type Ref, forwardRef } from 'react';
 import { cx } from 'cva';
 import {
   Breadcrumbs as RACBreadcrumbs,

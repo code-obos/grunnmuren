@@ -4,7 +4,7 @@ import { cx } from 'cva';
 import {
   CheckboxContext,
   Checkbox as RACCheckbox,
-  CheckboxProps as RACCheckboxProps,
+  type CheckboxProps as RACCheckboxProps,
 } from 'react-aria-components';
 import { Check as CheckIcon } from '@obosbbl/grunnmuren-icons-react';
 

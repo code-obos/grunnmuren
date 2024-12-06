@@ -1,5 +1,5 @@
-import { cva, VariantProps } from 'cva';
-import { Link, LinkProps } from 'react-aria-components';
+import { type VariantProps, cva } from 'cva';
+import { Link, type LinkProps } from 'react-aria-components';
 
 type CardProps = VariantProps<typeof cardVariants> & {
   children?: React.ReactNode;
@@ -178,4 +178,4 @@ const CardLink = ({
   );
 };
 
-export { Card, type CardProps, type CardLinkProps, CardLink };
+export { Card, CardLink, type CardLinkProps, type CardProps };

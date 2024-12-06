@@ -1,7 +1,3 @@
-import type { Meta } from '@storybook/react';
-import { Card, CardLink } from './Card';
-import { Heading, Content, Media, Footer } from '../content';
-import { cx } from 'cva';
 import {
   ArrowRight,
   Bed,
@@ -9,8 +5,12 @@ import {
   House,
   PiggyBank,
 } from '@obosbbl/grunnmuren-icons-react';
+import type { Meta } from '@storybook/react';
+import { cx } from 'cva';
 import { Badge } from '../badge';
 import { Button } from '../button';
+import { Content, Footer, Heading, Media } from '../content';
+import { Card, CardLink } from './Card';
 
 const meta: Meta<typeof Card> = {
   title: 'Card',
