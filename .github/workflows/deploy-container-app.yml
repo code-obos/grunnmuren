@@ -48,17 +48,17 @@ jobs:
           keys-case: bypass
 
       - name: Validate yaml
-        uses: mikefarah/yq@c35ec752e38ea0c096d3c44e13cfc0797ac394d8 # v4.43.1
+        uses: mikefarah/yq@4839dbbf80445070a31c7a9c1055da527db2d5ee # v4.44.6
         with:
           # https://mikefarah.gitbook.io/yq/usage/tips-and-tricks#validating-yaml-files
           cmd: yq --exit-status 'tag == "!!map" or tag== "!!seq"' ${{ env.DKTP_CONFIG_FILE }} > /dev/null
       - name: Create config
-        uses: mikefarah/yq@c35ec752e38ea0c096d3c44e13cfc0797ac394d8 # v4.43.1
+        uses: mikefarah/yq@4839dbbf80445070a31c7a9c1055da527db2d5ee # v4.44.6
         with:
           # https://mikefarah.gitbook.io/yq/operators/env-variable-operators#tip
           cmd: yq '(.. | select(tag == "!!str")) |= envsubst' ${{ env.DKTP_CONFIG_FILE }} > ${{ env.CONFIG_FILE_OUTPUT }}
       - name: Validate updated yaml
-        uses: mikefarah/yq@c35ec752e38ea0c096d3c44e13cfc0797ac394d8 # v4.43.1
+        uses: mikefarah/yq@4839dbbf80445070a31c7a9c1055da527db2d5ee # v4.44.6
         with:
           # https://mikefarah.gitbook.io/yq/usage/tips-and-tricks#validating-yaml-files
           cmd: yq --exit-status 'tag == "!!map" or tag== "!!seq"' ${{ env.CONFIG_FILE_OUTPUT }} > /dev/null
