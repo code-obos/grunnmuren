@@ -38,7 +38,7 @@ jobs:
       id-token: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Prepare config
         uses: falti/dotenv-action@eb9c0c4f17a3872394f256bd27d5740bee1cf61a # v1.1.1
