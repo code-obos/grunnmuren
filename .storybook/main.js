@@ -14,6 +14,9 @@ module.exports = {
     name: '@storybook/react-vite',
     options: {},
   },
+  features: {
+    experimentalRSC: true,
+  },
   core: {
     builder: '@storybook/builder-vite',
     disableTelemetry: true,
