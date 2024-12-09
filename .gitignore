@@ -19,6 +19,3 @@ next-env.d.ts
 .FIGMA_TOKEN
 .vercel
 packages/icons-react/icons.tsx
-
-# docgen output file
-"apps/docs/docgen.ts"
