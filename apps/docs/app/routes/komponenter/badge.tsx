@@ -33,7 +33,10 @@ const examples = [
   ...colors.map((color) => ({
     title: color.charAt(0).toUpperCase() + color.slice(1),
     code: (
-      <div className={cx('space-x-4 p-2', color === 'white' && 'bg-gray')}>
+      <div
+        className={cx('space-x-4 p-2', color === 'white' && 'bg-gray')}
+        key={color}
+      >
         <Badge color={color} size="small">
           small
         </Badge>
@@ -49,7 +52,10 @@ const examples = [
   ...colors.map((color) => ({
     title: `${color.charAt(0).toUpperCase() + color.slice(1)} med ikon`,
     code: (
-      <div className={cx('space-x-4 p-2', color === 'white' && 'bg-gray')}>
+      <div
+        className={cx('space-x-4 p-2', color === 'white' && 'bg-gray')}
+        key={color}
+      >
         <Badge color={color} size="small">
           <PaintRoller />
           small
