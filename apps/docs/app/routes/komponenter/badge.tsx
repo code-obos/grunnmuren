@@ -1,10 +1,10 @@
-import { PropsTable } from '@/ui/props-table';
-import { createFileRoute } from '@tanstack/react-router';
-import { BadgeDoc } from '../../../docgen';
 import { ComponentPreview } from '@/ui/component-preview';
-import { Badge } from '@obosbbl/grunnmuren-react';
+import { PropsTable } from '@/ui/props-table';
 import { PaintRoller } from '@obosbbl/grunnmuren-icons-react';
+import { Badge } from '@obosbbl/grunnmuren-react';
+import { createFileRoute } from '@tanstack/react-router';
 import { cx } from 'cva';
+import { BadgeDoc } from '../../../docgen';
 
 export const Route = createFileRoute('/komponenter/badge')({
   component: Page,
