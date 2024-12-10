@@ -25,7 +25,9 @@ const examples = [
     code: (
       <>
         {colors.map((color) => (
-          <Badge color={color}>{color}</Badge>
+          <Badge color={color} key={color}>
+            {color}
+          </Badge>
         ))}
       </>
     ),
