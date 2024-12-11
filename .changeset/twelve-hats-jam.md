@@ -2,4 +2,4 @@
 '@obosbbl/grunnmuren-react': patch
 ---
 
-Ensures auto hyphens on headings in the `Card` component
+Add [hyphens: auto](https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens) to Card headings to ensure they don't overflow the card container.
