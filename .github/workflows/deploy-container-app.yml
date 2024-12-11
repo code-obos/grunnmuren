@@ -41,7 +41,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Prepare config
-        uses: falti/dotenv-action@eb9c0c4f17a3872394f256bd27d5740bee1cf61a # v1.1.1
+        uses: falti/dotenv-action@a33be0b8cf6a6e6f1b82cc9f3782061ab1022be5 # v1.1.4
         with:
           path: ${{ env.DKTP_ENV_FILE }}
           export-variables: true
