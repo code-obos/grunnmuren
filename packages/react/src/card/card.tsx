@@ -20,7 +20,7 @@ const cardVariants = cva({
     '[&_[data-slot="heading"]]:w-fit',
     '[&_[data-slot="heading"]]:text-pretty',
     '[&_[data-slot="heading"]]:hyphens-auto',
-    '[&_[data-slot="heading"]]:[word-break:break-word]',
+    '[&_[data-slot="heading"]]:[word-break:break-word]', // necessary to make hyphens work in grid containers in Safari
 
     // **** Content ****
     '[&_[data-slot="content"]]:grid [&_[data-slot="content"]]:auto-rows-max [&_[data-slot="content"]]:gap-y-4',
@@ -53,7 +53,7 @@ const cardVariants = cva({
     '[&_[data-slot="heading"]_[data-slot="card-link"]]:leading-6',
     '[&_[data-slot="heading"]_[data-slot="card-link"]]:text-pretty',
     '[&_[data-slot="heading"]_[data-slot="card-link"]]:hyphens-auto',
-    '[&_[data-slot="heading"]_[data-slot="card-link"]]:[word-break:break-word]',
+    '[&_[data-slot="heading"]_[data-slot="card-link"]]:[word-break:break-word]', // necessary to make hyphens work in grid containers in Safari
 
     // **** Fail-safe for interactive elements ****
     // Make interactive elements clickable by themselves, while the rest of the card is clickable as a whole
