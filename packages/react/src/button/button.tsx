@@ -6,6 +6,7 @@ import {
   Button as RACButton,
   type ButtonProps as RACButtonProps,
   Link as RACLink,
+  type LinkProps as RACLinkProps,
 } from 'react-aria-components';
 import { type Locale, useLocale } from '../use-locale';
 
@@ -125,15 +126,11 @@ type ButtonOrLinkProps = VariantProps<typeof buttonVariants> & {
   style?: React.CSSProperties;
 };
 
-type ButtonProps = (
-  | RACButtonProps
-  | React.ComponentPropsWithoutRef<typeof RACLink>
-) &
-  ButtonOrLinkProps;
+type ButtonProps = (RACButtonProps | RACLinkProps) & ButtonOrLinkProps;
 
 function isLinkProps(
   props: ButtonProps,
-): props is ButtonOrLinkProps & React.ComponentPropsWithoutRef<typeof RACLink> {
+): props is ButtonOrLinkProps & RACLinkProps {
   return !!props.href;
 }
 

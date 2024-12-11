@@ -1,7 +1,9 @@
 import { ComponentPreview } from '@/ui/component-preview';
+import { PropsTable } from '@/ui/props-table';
 import { Edit, Search } from '@obosbbl/grunnmuren-icons-react';
 import { Button } from '@obosbbl/grunnmuren-react';
 import { createFileRoute } from '@tanstack/react-router';
+import { ButtonDoc } from 'docgen';
 
 export const Route = createFileRoute('/komponenter/button')({
   component: Page,
@@ -142,9 +144,9 @@ const examples = [
 function Page() {
   return (
     <>
-      <h1 className="heading-l mb-12 mt-9">Button</h1>
+      <h1 className="heading-l mb-12 mt-9">{ButtonDoc.displayName}</h1>
       <div className="prose">
-        <p>Info om knapper her...</p>
+        <p>{ButtonDoc.description}</p>
       </div>
 
       {examples.map(({ title, code }) => (
@@ -155,6 +157,7 @@ function Page() {
           code={code}
         />
       ))}
+      <PropsTable props={ButtonDoc.props} />
     </>
   );
 }
