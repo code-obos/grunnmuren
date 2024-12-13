@@ -1,15 +1,26 @@
 'use client';
-import { Form, TextField } from '@obosbbl/grunnmuren-react';
-import { useFormState } from 'react-dom';
+import { Button, Form, TextField } from '@obosbbl/grunnmuren-react';
+import { type FormEvent, startTransition, useActionState } from 'react';
 
 import { submitForm } from './submit-action';
-import SubmitButton from './submit-button';
 
 export default function () {
-  const [{ errors }, formAction] = useFormState(submitForm, { errors: {} });
+  const [{ errors }, formAction, isPending] = useActionState(submitForm, {
+    errors: {},
+  });
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    startTransition(() => {
+      formAction(new FormData(event.currentTarget));
+    });
+  };
 
   return (
-    <Form action={formAction} validationErrors={errors} className="space-y-4">
+    <Form
+      onSubmit={handleSubmit}
+      validationErrors={errors}
+      className="space-y-4"
+    >
       <p>
         This is an uncontrolled form that uses zod to validate the form data on
         the server side in a React server action.
@@ -26,7 +37,10 @@ export default function () {
           </>
         }
       />
-      <SubmitButton>Save</SubmitButton>
+
+      <Button isPending={isPending} type="submit">
+        Save
+      </Button>
     </Form>
   );
 }

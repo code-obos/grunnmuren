@@ -6,7 +6,15 @@ const schema = z.object({
   email: z.string().email().endsWith('.no'),
 });
 
-export async function submitForm(prevState: unknown, formData: FormData) {
+type SubmitFormResult = {
+  errors: Record<string, string[]>;
+};
+
+export async function submitForm(
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  prevState: any,
+  formData: FormData,
+): Promise<SubmitFormResult> {
   const result = schema.safeParse(Object.fromEntries(formData));
 
   // Simulate a delay
@@ -14,6 +22,7 @@ export async function submitForm(prevState: unknown, formData: FormData) {
 
   if (!result.success) {
     return {
+      ...prevState,
       errors: result.error.flatten().fieldErrors,
     };
   }
