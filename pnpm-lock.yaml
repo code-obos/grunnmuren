@@ -69,8 +69,8 @@ importers:
         specifier: 14.1.1
         version: 14.1.1
       playwright:
-        specifier: 1.49.0
-        version: 1.49.0
+        specifier: 1.49.1
+        version: 1.49.1
       postcss:
         specifier: 8.4.49
         version: 8.4.49
@@ -5054,8 +5054,13 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  playwright@1.49.0:
-    resolution: {integrity: sha512-eKpmys0UFDnfNb3vfsf8Vx2LEOtflgRebl0Im2eQQnYMA4Aqd+Zw8bEOB+7ZKvN76901mRnqdsiOGKxzVTbi7A==}
+  playwright-core@1.49.1:
+    resolution: {integrity: sha512-BzmpVcs4kE2CH15rWfzpjzVGhWERJfmnXmniSyKeRZUs9Ws65m+RGIi7mjJK/euCegfn3i7jvqWeWyHe9y3Vgg==}
+    engines: {node: '>=18'}
+    hasBin: true
+
+  playwright@1.49.1:
+    resolution: {integrity: sha512-VYL8zLoNTBxVOrJBbDuRgDWa3i+mfQgDTrL8Ah9QXZ7ax4Dsj0MSq5bYgytRnDVVe+njoKnfsYkH3HzqVj5UZA==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -9077,7 +9082,7 @@ snapshots:
       jest-serializer-html: 7.1.0
       jest-watch-typeahead: 2.2.2(jest@29.7.0(@types/node@22.9.0))
       nyc: 15.1.0
-      playwright: 1.49.0
+      playwright: 1.49.1
       storybook: 8.4.7(prettier@3.2.5)
     transitivePeerDependencies:
       - '@swc/helpers'
@@ -12368,9 +12373,11 @@ snapshots:
 
   playwright-core@1.49.0: {}
 
-  playwright@1.49.0:
+  playwright-core@1.49.1: {}
+
+  playwright@1.49.1:
     dependencies:
-      playwright-core: 1.49.0
+      playwright-core: 1.49.1
     optionalDependencies:
       fsevents: 2.3.2
 
