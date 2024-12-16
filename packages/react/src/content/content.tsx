@@ -1,4 +1,4 @@
-import { type ForwardedRef, type HTMLProps, createContext } from 'react';
+import { type HTMLProps, type Ref, createContext } from 'react';
 import { type ContextValue, useContextProps } from 'react-aria-components';
 
 type HeadingProps = HTMLProps<HTMLHeadingElement> & {
@@ -13,10 +13,7 @@ const HeadingContext = createContext<
   ContextValue<Partial<HeadingProps>, HTMLHeadingElement>
 >({});
 
-const Heading = (
-  props: HeadingProps,
-  ref: ForwardedRef<HTMLHeadingElement>,
-) => {
+const Heading = (props: HeadingProps, ref: Ref<HTMLHeadingElement>) => {
   // biome-ignore lint/style/noParameterAssign: fix when removing refs for React 19
   [props, ref] = useContextProps(props, ref, HeadingContext);
 
@@ -47,7 +44,7 @@ type ContentProps = HTMLProps<HTMLDivElement> & {
   _outerWrapper?: (children: React.ReactNode) => React.ReactNode;
 };
 
-const Content = (props: ContentProps, ref: ForwardedRef<HTMLDivElement>) => {
+const Content = (props: ContentProps, ref: Ref<HTMLDivElement>) => {
   // biome-ignore lint/style/noParameterAssign: fix when removing refs for React 19
   [props, ref] = useContextProps(props, ref, ContentContext);
   const { _outerWrapper: outerWrapper, ...restProps } = props;
