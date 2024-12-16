@@ -1,4 +1,4 @@
-import { type HTMLProps, type Ref, createContext } from 'react';
+import { type HTMLProps, type Ref, createContext, forwardRef } from 'react';
 import { type ContextValue, useContextProps } from 'react-aria-components';
 
 type HeadingProps = HTMLProps<HTMLHeadingElement> & {
@@ -66,12 +66,15 @@ type FooterProps = HTMLProps<HTMLDivElement> & {
 
 const Footer = (props: FooterProps) => <div {...props} data-slot="footer" />;
 
+const _Heading = forwardRef(Heading);
+const _Content = forwardRef(Content);
+
 export {
   type HeadingProps,
-  Heading,
+  _Heading as Heading,
   HeadingContext,
   type ContentProps,
-  Content,
+  _Content as Content,
   ContentContext,
   type MediaProps,
   Media,
