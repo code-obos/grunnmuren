@@ -66,7 +66,6 @@ type FooterProps = HTMLProps<HTMLDivElement> & {
 
 const Footer = (props: FooterProps) => <div {...props} data-slot="footer" />;
 
-
 const _Heading = forwardRef(Heading);
 const _Content = forwardRef(Content);
 
