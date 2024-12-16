@@ -13,10 +13,7 @@ const HeadingContext = createContext<
   ContextValue<Partial<HeadingProps>, HTMLHeadingElement>
 >({});
 
-const Heading = (
-  props: HeadingProps,
-  ref: Ref<HTMLHeadingElement>,
-) => {
+const Heading = (props: HeadingProps, ref: Ref<HTMLHeadingElement>) => {
   // biome-ignore lint/style/noParameterAssign: fix when removing refs for React 19
   [props, ref] = useContextProps(props, ref, HeadingContext);
 
