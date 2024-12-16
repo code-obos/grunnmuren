@@ -11,8 +11,7 @@ type SubmitFormResult = {
 };
 
 export async function submitForm(
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  prevState: any,
+  prevState: SubmitFormResult,
   formData: FormData,
 ): Promise<SubmitFormResult> {
   const result = schema.safeParse(Object.fromEntries(formData));
@@ -22,7 +21,6 @@ export async function submitForm(
 
   if (!result.success) {
     return {
-      ...prevState,
       errors: result.error.flatten().fieldErrors,
     };
   }

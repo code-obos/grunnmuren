@@ -8,6 +8,10 @@ export default function () {
   const [{ errors }, formAction, isPending] = useActionState(submitForm, {
     errors: {},
   });
+
+  // cannot use action directly on the form submit, because it resets the form
+  // which means our validation messages aren't displayed...
+  // another workaround for this is here https://www.robinwieruch.de/react-server-action-reset-form/
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     startTransition(() => {
