@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.43
+
+### Patch Changes
+
+- 04a4e83: add forwardRef to Content and Heading. Fixes issue with these components in Next 15 and React 19.
+
 ## 2.0.0-canary.42
 
 ### Patch Changes
