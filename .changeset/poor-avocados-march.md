@@ -3,4 +3,4 @@
 '@obosbbl/grunnmuren-react': minor
 ---
 
-Upgrade peerDeps with React 19
+add React 19 as allowed peerDep
