@@ -1,5 +1,17 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.41
+
+### Minor Changes
+
+- 9653882: add React 19 as allowed peerDep
+
+### Patch Changes
+
+- 9d5a044: fix type issue with refs for Heading and Content components
+- Updated dependencies [9653882]
+  - @obosbbl/grunnmuren-icons-react@2.0.0-canary.3
+
 ## 2.0.0-canary.40
 
 ### Minor Changes

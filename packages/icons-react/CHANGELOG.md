@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-icons-react
 
+## 2.0.0-canary.3
+
+### Minor Changes
+
+- 9653882: add React 19 as allowed peerDep
+
 ## 2.0.0-canary.2
 
 ### Minor Changes
