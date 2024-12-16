@@ -6,7 +6,14 @@ const schema = z.object({
   email: z.string().email().endsWith('.no'),
 });
 
-export async function submitForm(prevState: unknown, formData: FormData) {
+type SubmitFormResult = {
+  errors: Record<string, string[]>;
+};
+
+export async function submitForm(
+  prevState: SubmitFormResult,
+  formData: FormData,
+): Promise<SubmitFormResult> {
   const result = schema.safeParse(Object.fromEntries(formData));
 
   // Simulate a delay
