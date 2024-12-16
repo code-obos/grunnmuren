@@ -21,9 +21,9 @@
     "@tanstack/start": "1.90.0",
     "cva": "1.0.0-beta.1",
     "prism-react-renderer": "2.4.0",
-    "react": "18.3.1",
+    "react": "19.0.0",
     "react-aria-components": "1.5.0",
-    "react-dom": "18.3.1",
+    "react-dom": "19.0.0",
     "react-element-to-jsx-string": "15.0.0",
     "react-live": "4.1.8",
     "vinxi": "0.5.1"
