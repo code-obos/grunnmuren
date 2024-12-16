@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.42
+
+### Patch Changes
+
+- 86315e1: Add [hyphens: auto](https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens) to Card headings to ensure they don't overflow the card container.
+
 ## 2.0.0-canary.41
 
 ### Minor Changes
