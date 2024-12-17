@@ -53,10 +53,5 @@
   "packageManager": "pnpm@9.14.2",
   "engines": {
     "node": ">=22.11 <23"
-  },
-  "pnpm": {
-    "overrides": {
-      "babel-dead-code-elimination": "^1.0.8"
-    }
   }
 }
