@@ -20,8 +20,6 @@ jobs:
       # write permission is required for autolabeler
       # otherwise, read permission is required at least
       pull-requests: write
-      # To consume internal packages
-      packages: read
     runs-on: ubuntu-latest
 
     strategy:
