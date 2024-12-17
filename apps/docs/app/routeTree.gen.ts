@@ -11,12 +11,19 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as SanityImport } from './routes/sanity'
 import { Route as IkonerImport } from './routes/ikoner'
 import { Route as IndexImport } from './routes/index'
 import { Route as KomponenterButtonImport } from './routes/komponenter/button'
 import { Route as KomponenterBadgeImport } from './routes/komponenter/badge'
 
 // Create/Update Routes
+
+const SanityRoute = SanityImport.update({
+  id: '/sanity',
+  path: '/sanity',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IkonerRoute = IkonerImport.update({
   id: '/ikoner',
@@ -60,6 +67,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IkonerImport
       parentRoute: typeof rootRoute
     }
+    '/sanity': {
+      id: '/sanity'
+      path: '/sanity'
+      fullPath: '/sanity'
+      preLoaderRoute: typeof SanityImport
+      parentRoute: typeof rootRoute
+    }
     '/komponenter/badge': {
       id: '/komponenter/badge'
       path: '/komponenter/badge'
@@ -82,6 +96,7 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ikoner': typeof IkonerRoute
+  '/sanity': typeof SanityRoute
   '/komponenter/badge': typeof KomponenterBadgeRoute
   '/komponenter/button': typeof KomponenterButtonRoute
 }
@@ -89,6 +104,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ikoner': typeof IkonerRoute
+  '/sanity': typeof SanityRoute
   '/komponenter/badge': typeof KomponenterBadgeRoute
   '/komponenter/button': typeof KomponenterButtonRoute
 }
@@ -97,19 +113,26 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/ikoner': typeof IkonerRoute
+  '/sanity': typeof SanityRoute
   '/komponenter/badge': typeof KomponenterBadgeRoute
   '/komponenter/button': typeof KomponenterButtonRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/ikoner' | '/komponenter/badge' | '/komponenter/button'
+  fullPaths:
+    | '/'
+    | '/ikoner'
+    | '/sanity'
+    | '/komponenter/badge'
+    | '/komponenter/button'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/ikoner' | '/komponenter/badge' | '/komponenter/button'
+  to: '/' | '/ikoner' | '/sanity' | '/komponenter/badge' | '/komponenter/button'
   id:
     | '__root__'
     | '/'
     | '/ikoner'
+    | '/sanity'
     | '/komponenter/badge'
     | '/komponenter/button'
   fileRoutesById: FileRoutesById
@@ -118,6 +141,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   IkonerRoute: typeof IkonerRoute
+  SanityRoute: typeof SanityRoute
   KomponenterBadgeRoute: typeof KomponenterBadgeRoute
   KomponenterButtonRoute: typeof KomponenterButtonRoute
 }
@@ -125,6 +149,7 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   IkonerRoute: IkonerRoute,
+  SanityRoute: SanityRoute,
   KomponenterBadgeRoute: KomponenterBadgeRoute,
   KomponenterButtonRoute: KomponenterButtonRoute,
 }
@@ -141,6 +166,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/ikoner",
+        "/sanity",
         "/komponenter/badge",
         "/komponenter/button"
       ]
@@ -150,6 +176,9 @@ export const routeTree = rootRoute
     },
     "/ikoner": {
       "filePath": "ikoner.tsx"
+    },
+    "/sanity": {
+      "filePath": "sanity.tsx"
     },
     "/komponenter/badge": {
       "filePath": "komponenter/badge.tsx"
