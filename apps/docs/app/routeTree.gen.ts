@@ -12,10 +12,11 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as SanityImport } from './routes/sanity'
-import { Route as IkonerImport } from './routes/ikoner'
-import { Route as IndexImport } from './routes/index'
-import { Route as KomponenterButtonImport } from './routes/komponenter/button'
-import { Route as KomponenterBadgeImport } from './routes/komponenter/badge'
+import { Route as DocsImport } from './routes/_docs'
+import { Route as DocsIndexImport } from './routes/_docs/index'
+import { Route as DocsIkonerImport } from './routes/_docs/ikoner'
+import { Route as DocsKomponenterButtonImport } from './routes/_docs/komponenter/button'
+import { Route as DocsKomponenterBadgeImport } from './routes/_docs/komponenter/badge'
 
 // Create/Update Routes
 
@@ -25,46 +26,44 @@ const SanityRoute = SanityImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const IkonerRoute = IkonerImport.update({
-  id: '/ikoner',
-  path: '/ikoner',
+const DocsRoute = DocsImport.update({
+  id: '/_docs',
   getParentRoute: () => rootRoute,
 } as any)
 
-const IndexRoute = IndexImport.update({
+const DocsIndexRoute = DocsIndexImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => DocsRoute,
 } as any)
 
-const KomponenterButtonRoute = KomponenterButtonImport.update({
+const DocsIkonerRoute = DocsIkonerImport.update({
+  id: '/ikoner',
+  path: '/ikoner',
+  getParentRoute: () => DocsRoute,
+} as any)
+
+const DocsKomponenterButtonRoute = DocsKomponenterButtonImport.update({
   id: '/komponenter/button',
   path: '/komponenter/button',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => DocsRoute,
 } as any)
 
-const KomponenterBadgeRoute = KomponenterBadgeImport.update({
+const DocsKomponenterBadgeRoute = DocsKomponenterBadgeImport.update({
   id: '/komponenter/badge',
   path: '/komponenter/badge',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => DocsRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/ikoner': {
-      id: '/ikoner'
-      path: '/ikoner'
-      fullPath: '/ikoner'
-      preLoaderRoute: typeof IkonerImport
+    '/_docs': {
+      id: '/_docs'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof DocsImport
       parentRoute: typeof rootRoute
     }
     '/sanity': {
@@ -74,84 +73,112 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SanityImport
       parentRoute: typeof rootRoute
     }
-    '/komponenter/badge': {
-      id: '/komponenter/badge'
+    '/_docs/ikoner': {
+      id: '/_docs/ikoner'
+      path: '/ikoner'
+      fullPath: '/ikoner'
+      preLoaderRoute: typeof DocsIkonerImport
+      parentRoute: typeof DocsImport
+    }
+    '/_docs/': {
+      id: '/_docs/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof DocsIndexImport
+      parentRoute: typeof DocsImport
+    }
+    '/_docs/komponenter/badge': {
+      id: '/_docs/komponenter/badge'
       path: '/komponenter/badge'
       fullPath: '/komponenter/badge'
-      preLoaderRoute: typeof KomponenterBadgeImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof DocsKomponenterBadgeImport
+      parentRoute: typeof DocsImport
     }
-    '/komponenter/button': {
-      id: '/komponenter/button'
+    '/_docs/komponenter/button': {
+      id: '/_docs/komponenter/button'
       path: '/komponenter/button'
       fullPath: '/komponenter/button'
-      preLoaderRoute: typeof KomponenterButtonImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof DocsKomponenterButtonImport
+      parentRoute: typeof DocsImport
     }
   }
 }
 
 // Create and export the route tree
 
+interface DocsRouteChildren {
+  DocsIkonerRoute: typeof DocsIkonerRoute
+  DocsIndexRoute: typeof DocsIndexRoute
+  DocsKomponenterBadgeRoute: typeof DocsKomponenterBadgeRoute
+  DocsKomponenterButtonRoute: typeof DocsKomponenterButtonRoute
+}
+
+const DocsRouteChildren: DocsRouteChildren = {
+  DocsIkonerRoute: DocsIkonerRoute,
+  DocsIndexRoute: DocsIndexRoute,
+  DocsKomponenterBadgeRoute: DocsKomponenterBadgeRoute,
+  DocsKomponenterButtonRoute: DocsKomponenterButtonRoute,
+}
+
+const DocsRouteWithChildren = DocsRoute._addFileChildren(DocsRouteChildren)
+
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/ikoner': typeof IkonerRoute
+  '': typeof DocsRouteWithChildren
   '/sanity': typeof SanityRoute
-  '/komponenter/badge': typeof KomponenterBadgeRoute
-  '/komponenter/button': typeof KomponenterButtonRoute
+  '/ikoner': typeof DocsIkonerRoute
+  '/': typeof DocsIndexRoute
+  '/komponenter/badge': typeof DocsKomponenterBadgeRoute
+  '/komponenter/button': typeof DocsKomponenterButtonRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/ikoner': typeof IkonerRoute
   '/sanity': typeof SanityRoute
-  '/komponenter/badge': typeof KomponenterBadgeRoute
-  '/komponenter/button': typeof KomponenterButtonRoute
+  '/ikoner': typeof DocsIkonerRoute
+  '/': typeof DocsIndexRoute
+  '/komponenter/badge': typeof DocsKomponenterBadgeRoute
+  '/komponenter/button': typeof DocsKomponenterButtonRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/ikoner': typeof IkonerRoute
+  '/_docs': typeof DocsRouteWithChildren
   '/sanity': typeof SanityRoute
-  '/komponenter/badge': typeof KomponenterBadgeRoute
-  '/komponenter/button': typeof KomponenterButtonRoute
+  '/_docs/ikoner': typeof DocsIkonerRoute
+  '/_docs/': typeof DocsIndexRoute
+  '/_docs/komponenter/badge': typeof DocsKomponenterBadgeRoute
+  '/_docs/komponenter/button': typeof DocsKomponenterButtonRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
-    | '/ikoner'
+    | ''
     | '/sanity'
+    | '/ikoner'
+    | '/'
     | '/komponenter/badge'
     | '/komponenter/button'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/ikoner' | '/sanity' | '/komponenter/badge' | '/komponenter/button'
+  to: '/sanity' | '/ikoner' | '/' | '/komponenter/badge' | '/komponenter/button'
   id:
     | '__root__'
-    | '/'
-    | '/ikoner'
+    | '/_docs'
     | '/sanity'
-    | '/komponenter/badge'
-    | '/komponenter/button'
+    | '/_docs/ikoner'
+    | '/_docs/'
+    | '/_docs/komponenter/badge'
+    | '/_docs/komponenter/button'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  IkonerRoute: typeof IkonerRoute
+  DocsRoute: typeof DocsRouteWithChildren
   SanityRoute: typeof SanityRoute
-  KomponenterBadgeRoute: typeof KomponenterBadgeRoute
-  KomponenterButtonRoute: typeof KomponenterButtonRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  IkonerRoute: IkonerRoute,
+  DocsRoute: DocsRouteWithChildren,
   SanityRoute: SanityRoute,
-  KomponenterBadgeRoute: KomponenterBadgeRoute,
-  KomponenterButtonRoute: KomponenterButtonRoute,
 }
 
 export const routeTree = rootRoute
@@ -164,27 +191,37 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
-        "/ikoner",
-        "/sanity",
-        "/komponenter/badge",
-        "/komponenter/button"
+        "/_docs",
+        "/sanity"
       ]
     },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/ikoner": {
-      "filePath": "ikoner.tsx"
+    "/_docs": {
+      "filePath": "_docs.tsx",
+      "children": [
+        "/_docs/ikoner",
+        "/_docs/",
+        "/_docs/komponenter/badge",
+        "/_docs/komponenter/button"
+      ]
     },
     "/sanity": {
       "filePath": "sanity.tsx"
     },
-    "/komponenter/badge": {
-      "filePath": "komponenter/badge.tsx"
+    "/_docs/ikoner": {
+      "filePath": "_docs/ikoner.tsx",
+      "parent": "/_docs"
     },
-    "/komponenter/button": {
-      "filePath": "komponenter/button.tsx"
+    "/_docs/": {
+      "filePath": "_docs/index.tsx",
+      "parent": "/_docs"
+    },
+    "/_docs/komponenter/badge": {
+      "filePath": "_docs/komponenter/badge.tsx",
+      "parent": "/_docs"
+    },
+    "/_docs/komponenter/button": {
+      "filePath": "_docs/komponenter/button.tsx",
+      "parent": "/_docs"
     }
   }
 }

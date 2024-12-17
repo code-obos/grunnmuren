@@ -1,14 +1,14 @@
-import { ComponentPreview } from '@/ui/component-preview';
-import { PropsTable } from '@/ui/props-table';
-import { PaintRoller } from '@obosbbl/grunnmuren-icons-react';
-import { Badge } from '@obosbbl/grunnmuren-react';
-import { createFileRoute } from '@tanstack/react-router';
-import { cx } from 'cva';
-import { BadgeDoc } from '../../../docgen';
+import { ComponentPreview } from '@/ui/component-preview'
+import { PropsTable } from '@/ui/props-table'
+import { PaintRoller } from '@obosbbl/grunnmuren-icons-react'
+import { Badge } from '@obosbbl/grunnmuren-react'
+import { createFileRoute } from '@tanstack/react-router'
+import { cx } from 'cva'
+import { BadgeDoc } from '../../../docgen'
 
-export const Route = createFileRoute('/komponenter/badge')({
+export const Route = createFileRoute('/_docs/komponenter/badge')({
   component: Page,
-});
+})
 
 const colors = [
   'mint',
@@ -17,7 +17,7 @@ const colors = [
   'green-dark',
   'gray-dark',
   'white',
-] as const;
+] as const
 
 const examples = [
   {
@@ -73,7 +73,7 @@ const examples = [
       </div>
     ),
   })),
-];
+]
 
 function Page() {
   return (
@@ -94,5 +94,5 @@ function Page() {
 
       <PropsTable props={BadgeDoc.props} />
     </>
-  );
+  )
 }

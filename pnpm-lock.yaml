@@ -104,6 +104,9 @@ importers:
 
   apps/docs:
     dependencies:
+      '@code-obos/sanity-auth':
+        specifier: 1.4.0
+        version: 1.4.0(sanity@3.67.1(@emotion/is-prop-valid@1.2.2)(@types/node@22.9.0)(@types/react@18.3.17)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.13(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.36.0))(styled-components@6.1.13(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
       '@obosbbl/grunnmuren-icons-react':
         specifier: workspace:*
         version: link:../../packages/icons-react
@@ -1124,6 +1127,13 @@ packages:
   '@cloudflare/kv-asset-handler@0.3.4':
     resolution: {integrity: sha512-YLPHc8yASwjNkmcDMQMY35yiWjoKAKnhUbPRszBRS0YgH+IXtsMp61j+yTcnCE3oO2DgP0U3iejLC8FTtKDC8Q==}
     engines: {node: '>=16.13'}
+
+  '@code-obos/sanity-auth@1.4.0':
+    resolution: {integrity: sha512-hOFf0ZexckPhuf5DID98Uiclgwr/lthoxLtMHAMrrhkyN7uqVomZxnrzcd30lGhfDGeg5/tEx75W9eivNRTUHA==, tarball: https://npm.pkg.github.com/download/@code-obos/sanity-auth/1.4.0/e034322684793444ff7cb90dbe4ab3abc761504f}
+    engines: {node: '>=20'}
+    peerDependencies:
+      sanity: ^3.37.1
+      styled-components: ^6.1
 
   '@deno/shim-deno-test@0.5.0':
     resolution: {integrity: sha512-4nMhecpGlPi0cSzT67L+Tm+GOJqvuk8gqHBziqcUQOarnuIax1z96/gJHCSIz2Z0zhxE6Rzwb3IZXPtFh51j+w==}
@@ -9733,6 +9743,11 @@ snapshots:
   '@cloudflare/kv-asset-handler@0.3.4':
     dependencies:
       mime: 3.0.0
+
+  '@code-obos/sanity-auth@1.4.0(sanity@3.67.1(@emotion/is-prop-valid@1.2.2)(@types/node@22.9.0)(@types/react@18.3.17)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.13(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.36.0))(styled-components@6.1.13(react-dom@19.0.0(react@19.0.0))(react@19.0.0))':
+    dependencies:
+      sanity: 3.67.1(@emotion/is-prop-valid@1.2.2)(@types/node@22.9.0)(@types/react@18.3.17)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.13(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.36.0)
+      styled-components: 6.1.13(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
 
   '@deno/shim-deno-test@0.5.0': {}
 
