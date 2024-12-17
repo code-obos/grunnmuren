@@ -1,11 +1,11 @@
+import cssLink from '@/sanity.css?url'
 import { obosAuthStore } from '@code-obos/sanity-auth'
 import { createFileRoute } from '@tanstack/react-router'
 import { Studio, defineConfig } from 'sanity'
-import appCss from './sanity.css?url';
 
 // See https://www.sanity.io/docs/embedding-sanity-studio
 
-const dataset = 'grunnmuren';
+const dataset = 'grunnmuren'
 
 const config = defineConfig({
   projectId: 'tq6w17ny',
@@ -17,7 +17,7 @@ const config = defineConfig({
 
 export const Route = createFileRoute('/sanity')({
   head: () => ({
-    links: [{ rel: 'stylesheet', href: appCss }],
+    links: [{ rel: 'stylesheet', href: cssLink }],
   }),
   component: () => <Studio config={config} />,
 })

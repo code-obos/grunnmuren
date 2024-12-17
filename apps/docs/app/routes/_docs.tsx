@@ -11,6 +11,7 @@ import {
   useRouter,
 } from '@tanstack/react-router';
 
+// This is the shared layout for all the Grunnmuren docs pages that are "public", ie not the Sanity studio
 export const Route = createFileRoute('/_docs')({
   component: RootLayout,
   head: () => ({
