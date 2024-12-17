@@ -10,12 +10,12 @@ const dataset = 'grunnmuren';
 const config = defineConfig({
   projectId: 'tq6w17ny',
   dataset,
-  basePath: '/sanity',
+  basePath: '/studio',
   title: 'Grunnmuren - Sanity Studio',
   auth: obosAuthStore({ dataset }),
 });
 
-export const Route = createFileRoute('/sanity')({
+export const Route = createFileRoute('/studio')({
   head: () => ({
     links: [{ rel: 'stylesheet', href: cssLink }],
   }),
