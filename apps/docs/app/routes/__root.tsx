@@ -1,7 +1,4 @@
-import {
-  Outlet,
-  createRootRoute,
-} from '@tanstack/react-router';
+import { Outlet, createRootRoute } from '@tanstack/react-router';
 import { Meta, Scripts } from '@tanstack/start';
 
 export const Route = createRootRoute({
@@ -20,7 +17,6 @@ export const Route = createRootRoute({
 });
 
 function RootDocument() {
-
   return (
     <html lang="no">
       <head>

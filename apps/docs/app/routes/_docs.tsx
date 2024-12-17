@@ -20,34 +20,34 @@ export const Route = createFileRoute('/_docs')({
       {
         title: "Grunnmuren - OBOS' Design System",
       },
-    ]
-  })
-})
+    ],
+  }),
+});
 
 function RootLayout() {
   const router = useRouter();
 
   return (
     <>
-        <GrunnmurenProvider
-          locale="nb"
-          // This integrates RAC/Grunnmuren with TanStack router
-          // Giving us typesafe routes
-          // See https://react-spectrum.adobe.com/react-aria/routing.html#tanstack-router
-          navigate={(to, options) => router.navigate({ to, ...options })}
-          useHref={(to) => router.buildLocation({ to }).href}
-        >
-          <div className="grid min-h-screen lg:flex">
-            <div className="flex grow flex-col px-6">
-              <main className="grow">
-                <Outlet />
-              </main>
-              <Footer />
-            </div>
-            <MainNav />
+      <GrunnmurenProvider
+        locale="nb"
+        // This integrates RAC/Grunnmuren with TanStack router
+        // Giving us typesafe routes
+        // See https://react-spectrum.adobe.com/react-aria/routing.html#tanstack-router
+        navigate={(to, options) => router.navigate({ to, ...options })}
+        useHref={(to) => router.buildLocation({ to }).href}
+      >
+        <div className="grid min-h-screen lg:flex">
+          <div className="flex grow flex-col px-6">
+            <main className="grow">
+              <Outlet />
+            </main>
+            <Footer />
           </div>
-        </GrunnmurenProvider>
-        <ScrollRestoration />
+          <MainNav />
+        </div>
+      </GrunnmurenProvider>
+      <ScrollRestoration />
     </>
   );
 }

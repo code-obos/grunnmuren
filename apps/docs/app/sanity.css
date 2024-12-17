@@ -1,8 +1,8 @@
-  body {
-    height: 100vh;
-    max-height: 100dvh;
-    overscroll-behavior: none;
-    -webkit-font-smoothing: antialiased;
-    overflow: auto;
-    margin: 0;
-  }
+body {
+  height: 100vh;
+  max-height: 100dvh;
+  overscroll-behavior: none;
+  -webkit-font-smoothing: antialiased;
+  overflow: auto;
+  margin: 0;
+}
