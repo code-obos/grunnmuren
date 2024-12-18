@@ -10,7 +10,7 @@ export const Route = createFileRoute('/_docs/komponenter/button')({
 });
 
 const examples = [
-  { title: 'Knapp', code: `<Button>Knapp</Button>` },
+  { title: 'Knapp', code: '<Button>Knapp</Button>' },
   {
     title: 'Lenke-knapp',
     code: `<Button href="#link">Lenke-knapp</Button>`,
