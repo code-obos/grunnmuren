@@ -8,7 +8,8 @@ import { LiveEditor, LivePreview, LiveProvider } from 'react-live';
 
 type ComponentPreviewProps = {
   title: string;
-  code: React.ReactNode;
+  /** @alpha - Passing a React.ReactNode is currently not compatible with React 19, pass a string to make it work with React 19 until react-element-to-jsx-string supports React 19  */
+  code: React.ReactNode | string;
   /** All custom components that are rendered must be present in the scope */
   scope: Partial<typeof GrunnmurenIconsScope & typeof GrunnmurenScope>;
 };
@@ -19,7 +20,9 @@ export const ComponentPreview = ({
   scope,
 }: ComponentPreviewProps) => {
   // Keep of the code string in state to be able to copy it
-  const [codeString, setCodeString] = useState(reactElementToJSXString(code));
+  const [codeString, setCodeString] = useState(
+    typeof code === 'string' ? code : reactElementToJSXString(code),
+  );
 
   const [hasCopied, setHasCopied] = useState(false);
   return (

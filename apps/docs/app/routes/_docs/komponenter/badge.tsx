@@ -22,56 +22,44 @@ const colors = [
 const examples = [
   {
     title: 'Badge',
-    code: (
-      <>
-        {colors.map((color) => (
-          <Badge color={color} key={color}>
-            {color}
-          </Badge>
-        ))}
-      </>
-    ),
+    code: `
+<>
+${colors.map((color) => `    <Badge color="${color}">${color}</Badge>`).join('\n')}
+</>
+    `,
   },
   ...colors.map((color) => ({
     title: color.charAt(0).toUpperCase() + color.slice(1),
-    code: (
-      <div
-        className={cx('space-x-4 p-2', color === 'white' && 'bg-gray')}
-        key={color}
-      >
-        <Badge color={color} size="small">
-          small
-        </Badge>
-        <Badge color={color} size="medium">
-          medium
-        </Badge>
-        <Badge color={color} size="large">
-          large
-        </Badge>
-      </div>
-    ),
+    code: `
+<div className="${cx('space-x-4 p-2', color === 'white' && 'bg-gray')}">
+  <Badge color="${color}" size="small">
+    small
+  </Badge>
+  <Badge color="${color}" size="medium">
+    medium
+  </Badge>
+  <Badge color="${color}" size="large">
+    large
+  </Badge>
+</div>`,
   })),
   ...colors.map((color) => ({
     title: `${color.charAt(0).toUpperCase() + color.slice(1)} med ikon`,
-    code: (
-      <div
-        className={cx('space-x-4 p-2', color === 'white' && 'bg-gray')}
-        key={color}
-      >
-        <Badge color={color} size="small">
-          <PaintRoller />
-          small
-        </Badge>
-        <Badge color={color} size="medium">
-          <PaintRoller />
-          medium
-        </Badge>
-        <Badge color={color} size="large">
-          <PaintRoller />
-          large
-        </Badge>
-      </div>
-    ),
+    code: `
+<div className="${cx('space-x-4 p-2', color === 'white' && 'bg-gray')}">
+  <Badge color="${color}" size="small">
+    <PaintRoller />
+    small
+  </Badge>
+  <Badge color="${color}" size="medium">
+    <PaintRoller />
+    medium
+  </Badge>
+  <Badge color="${color}" size="large">
+    <PaintRoller />
+    large
+  </Badge>
+</div>`,
   })),
 ];
 
