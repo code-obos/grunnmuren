@@ -8,16 +8,16 @@ COPY . /app
 WORKDIR /app
 
 RUN \
-  --mount=type=secret,id=npmrc,target=/home/node/.npmrc\
-  --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
+    --mount=type=secret,id=npmrc,target=/root/.npmrc\
+    --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
 
 FROM base AS builder
 COPY . /app
 WORKDIR /app
 
 RUN \
-  --mount=type=secret,id=npmrc,target=/home/node/.npmrc\
-  --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+    --mount=type=secret,id=npmrc,target=/root/.npmrc\
+    --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 
 RUN pnpm build
 RUN pnpm --filter @obosbbl/grunnmuren-docs build
