@@ -5,7 +5,7 @@ import { Button } from '@obosbbl/grunnmuren-react';
 import { createFileRoute } from '@tanstack/react-router';
 import { ButtonDoc } from 'docgen';
 
-export const Route = createFileRoute('/komponenter/button')({
+export const Route = createFileRoute('/_docs/komponenter/button')({
   component: Page,
 });
 

@@ -23,6 +23,7 @@ jobs:
   docker:
     name: Build and push image
     uses: ./.github/workflows/build-push-image.yml
+    secrets: inherit
 
   deploy_prod:
     if: contains(github.head_ref, 'main') || contains(github.ref_name, 'main')
