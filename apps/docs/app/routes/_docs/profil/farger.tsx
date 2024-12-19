@@ -30,7 +30,7 @@ function RouteComponent() {
 
   return (
     <>
-      <h1 className="heading-l mb-12 mt-9">Ikoner</h1>
+      <h1 className="heading-l mb-12 mt-9">Farger</h1>
       <div className="prose mb-12">
         <p>Grunnmuren har {Object.keys(colors).length} forskjellige farger.</p>
       </div>
