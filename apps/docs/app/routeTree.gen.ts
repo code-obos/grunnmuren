@@ -14,7 +14,8 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as StudioImport } from './routes/studio'
 import { Route as DocsImport } from './routes/_docs'
 import { Route as DocsIndexImport } from './routes/_docs/index'
-import { Route as DocsIkonerImport } from './routes/_docs/ikoner'
+import { Route as DocsProfilIkonerImport } from './routes/_docs/profil/ikoner'
+import { Route as DocsProfilFargerImport } from './routes/_docs/profil/farger'
 import { Route as DocsKomponenterButtonImport } from './routes/_docs/komponenter/button'
 import { Route as DocsKomponenterBadgeImport } from './routes/_docs/komponenter/badge'
 
@@ -37,9 +38,15 @@ const DocsIndexRoute = DocsIndexImport.update({
   getParentRoute: () => DocsRoute,
 } as any)
 
-const DocsIkonerRoute = DocsIkonerImport.update({
-  id: '/ikoner',
-  path: '/ikoner',
+const DocsProfilIkonerRoute = DocsProfilIkonerImport.update({
+  id: '/profil/ikoner',
+  path: '/profil/ikoner',
+  getParentRoute: () => DocsRoute,
+} as any)
+
+const DocsProfilFargerRoute = DocsProfilFargerImport.update({
+  id: '/profil/farger',
+  path: '/profil/farger',
   getParentRoute: () => DocsRoute,
 } as any)
 
@@ -73,13 +80,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudioImport
       parentRoute: typeof rootRoute
     }
-    '/_docs/ikoner': {
-      id: '/_docs/ikoner'
-      path: '/ikoner'
-      fullPath: '/ikoner'
-      preLoaderRoute: typeof DocsIkonerImport
-      parentRoute: typeof DocsImport
-    }
     '/_docs/': {
       id: '/_docs/'
       path: '/'
@@ -101,23 +101,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsKomponenterButtonImport
       parentRoute: typeof DocsImport
     }
+    '/_docs/profil/farger': {
+      id: '/_docs/profil/farger'
+      path: '/profil/farger'
+      fullPath: '/profil/farger'
+      preLoaderRoute: typeof DocsProfilFargerImport
+      parentRoute: typeof DocsImport
+    }
+    '/_docs/profil/ikoner': {
+      id: '/_docs/profil/ikoner'
+      path: '/profil/ikoner'
+      fullPath: '/profil/ikoner'
+      preLoaderRoute: typeof DocsProfilIkonerImport
+      parentRoute: typeof DocsImport
+    }
   }
 }
 
 // Create and export the route tree
 
 interface DocsRouteChildren {
-  DocsIkonerRoute: typeof DocsIkonerRoute
   DocsIndexRoute: typeof DocsIndexRoute
   DocsKomponenterBadgeRoute: typeof DocsKomponenterBadgeRoute
   DocsKomponenterButtonRoute: typeof DocsKomponenterButtonRoute
+  DocsProfilFargerRoute: typeof DocsProfilFargerRoute
+  DocsProfilIkonerRoute: typeof DocsProfilIkonerRoute
 }
 
 const DocsRouteChildren: DocsRouteChildren = {
-  DocsIkonerRoute: DocsIkonerRoute,
   DocsIndexRoute: DocsIndexRoute,
   DocsKomponenterBadgeRoute: DocsKomponenterBadgeRoute,
   DocsKomponenterButtonRoute: DocsKomponenterButtonRoute,
+  DocsProfilFargerRoute: DocsProfilFargerRoute,
+  DocsProfilIkonerRoute: DocsProfilIkonerRoute,
 }
 
 const DocsRouteWithChildren = DocsRoute._addFileChildren(DocsRouteChildren)
@@ -125,28 +141,31 @@ const DocsRouteWithChildren = DocsRoute._addFileChildren(DocsRouteChildren)
 export interface FileRoutesByFullPath {
   '': typeof DocsRouteWithChildren
   '/studio': typeof StudioRoute
-  '/ikoner': typeof DocsIkonerRoute
   '/': typeof DocsIndexRoute
   '/komponenter/badge': typeof DocsKomponenterBadgeRoute
   '/komponenter/button': typeof DocsKomponenterButtonRoute
+  '/profil/farger': typeof DocsProfilFargerRoute
+  '/profil/ikoner': typeof DocsProfilIkonerRoute
 }
 
 export interface FileRoutesByTo {
   '/studio': typeof StudioRoute
-  '/ikoner': typeof DocsIkonerRoute
   '/': typeof DocsIndexRoute
   '/komponenter/badge': typeof DocsKomponenterBadgeRoute
   '/komponenter/button': typeof DocsKomponenterButtonRoute
+  '/profil/farger': typeof DocsProfilFargerRoute
+  '/profil/ikoner': typeof DocsProfilIkonerRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_docs': typeof DocsRouteWithChildren
   '/studio': typeof StudioRoute
-  '/_docs/ikoner': typeof DocsIkonerRoute
   '/_docs/': typeof DocsIndexRoute
   '/_docs/komponenter/badge': typeof DocsKomponenterBadgeRoute
   '/_docs/komponenter/button': typeof DocsKomponenterButtonRoute
+  '/_docs/profil/farger': typeof DocsProfilFargerRoute
+  '/_docs/profil/ikoner': typeof DocsProfilIkonerRoute
 }
 
 export interface FileRouteTypes {
@@ -154,20 +173,28 @@ export interface FileRouteTypes {
   fullPaths:
     | ''
     | '/studio'
-    | '/ikoner'
     | '/'
     | '/komponenter/badge'
     | '/komponenter/button'
+    | '/profil/farger'
+    | '/profil/ikoner'
   fileRoutesByTo: FileRoutesByTo
-  to: '/studio' | '/ikoner' | '/' | '/komponenter/badge' | '/komponenter/button'
+  to:
+    | '/studio'
+    | '/'
+    | '/komponenter/badge'
+    | '/komponenter/button'
+    | '/profil/farger'
+    | '/profil/ikoner'
   id:
     | '__root__'
     | '/_docs'
     | '/studio'
-    | '/_docs/ikoner'
     | '/_docs/'
     | '/_docs/komponenter/badge'
     | '/_docs/komponenter/button'
+    | '/_docs/profil/farger'
+    | '/_docs/profil/ikoner'
   fileRoutesById: FileRoutesById
 }
 
@@ -198,18 +225,15 @@ export const routeTree = rootRoute
     "/_docs": {
       "filePath": "_docs.tsx",
       "children": [
-        "/_docs/ikoner",
         "/_docs/",
         "/_docs/komponenter/badge",
-        "/_docs/komponenter/button"
+        "/_docs/komponenter/button",
+        "/_docs/profil/farger",
+        "/_docs/profil/ikoner"
       ]
     },
     "/studio": {
       "filePath": "studio.tsx"
-    },
-    "/_docs/ikoner": {
-      "filePath": "_docs/ikoner.tsx",
-      "parent": "/_docs"
     },
     "/_docs/": {
       "filePath": "_docs/index.tsx",
@@ -221,6 +245,14 @@ export const routeTree = rootRoute
     },
     "/_docs/komponenter/button": {
       "filePath": "_docs/komponenter/button.tsx",
+      "parent": "/_docs"
+    },
+    "/_docs/profil/farger": {
+      "filePath": "_docs/profil/farger.tsx",
+      "parent": "/_docs"
+    },
+    "/_docs/profil/ikoner": {
+      "filePath": "_docs/profil/ikoner.tsx",
       "parent": "/_docs"
     }
   }
