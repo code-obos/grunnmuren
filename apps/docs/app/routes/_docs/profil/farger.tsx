@@ -47,6 +47,9 @@ const Color = ({ name, value }) => (
   <div
     style={{
       backgroundColor: value,
+      // Makes sure the text has enough contrast by calculating the color based on the background color
+      // This will yield a color that is either black or white
+      // Refer to: https://til.jakelazaroff.com/css/swap-between-black-and-white-text-based-on-background-color/
       color: `lch(from ${value} calc((54 - l) * infinity) 0 0)`,
       border: value === '#fff' ? '1px solid var(--gm-color-blue-dark)' : '',
     }}
