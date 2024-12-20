@@ -47,7 +47,7 @@ const Color = ({ name, value }) => (
   <div
     style={{
       backgroundColor: value,
-      color: `lch(from ${value} calc((50 - l) * infinity) 0 0)`,
+      color: `lch(from ${value} calc((54 - l) * infinity) 0 0)`,
       border: value === '#fff' ? '1px solid var(--gm-color-blue-dark)' : '',
     }}
     className="grid h-32 w-32 items-end"
