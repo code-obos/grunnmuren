@@ -21,7 +21,7 @@ runs:
   using: 'composite'
   steps:
     - name: Log in to Azure
-      uses: azure/login@a65d910e8af852a8061c627c456678983e180302 # v2
+      uses: azure/login@a65d910e8af852a8061c627c456678983e180302 # v2.2.0
       with:
         client-id: ${{ inputs.acr-client-id }}
         tenant-id: ${{ inputs.tenant-id }}
