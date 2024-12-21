@@ -179,39 +179,39 @@ module.exports = (options = {}) => {
             '--gm-container-width': '92rem',
             '--gm-container-gutter-width': '1rem',
 
-            '--gm-color-black': '#333',
-            '--gm-color-white': '#fff',
+            '--gm-color-black': '51 51 51',
+            '--gm-color-white': '255 255 255',
 
-            '--gm-color-gray': '#818181',
-            '--gm-color-gray-dark': '#595959',
-            '--gm-color-gray-light': '#e6e6e6',
-            '--gm-color-gray-lightest': '#f1f1f1',
+            '--gm-color-gray': '129 129 129',
+            '--gm-color-gray-dark': '89 89 89',
+            '--gm-color-gray-light': '230 230 230',
+            '--gm-color-gray-lightest': '241 241 241',
 
-            '--gm-color-sky': '#bedfec',
-            '--gm-color-sky-light': '#deeff5',
-            '--gm-color-sky-lightest': '#ebf5f9',
+            '--gm-color-sky': '190 223 236',
+            '--gm-color-sky-light': '222 239 245',
+            '--gm-color-sky-lightest': '235 245 249',
 
-            '--gm-color-mint': '#cdece2',
-            '--gm-color-mint-light': '#e6f5f0',
-            '--gm-color-mint-lightest': '#f0f9f6',
+            '--gm-color-mint': '205 236 226',
+            '--gm-color-mint-light': '230 245 240',
+            '--gm-color-mint-lightest': '240 249 246',
 
-            '--gm-color-blue': '#0047ba',
-            '--gm-color-blue-light': '#bedfec',
-            '--gm-color-blue-lightest': '#deeff5',
-            '--gm-color-blue-dark': '#002169',
+            '--gm-color-blue': '0 71 186',
+            '--gm-color-blue-light': '190 223 236',
+            '--gm-color-blue-lightest': '222 239 245',
+            '--gm-color-blue-dark': '0 33 105',
 
-            '--gm-color-green': '#008761',
-            '--gm-color-green-dark': '#00524c',
-            '--gm-color-green-light': '#cdece2',
-            '--gm-color-green-lightest': '#e6f5f0',
+            '--gm-color-green': '0 135 97',
+            '--gm-color-green-dark': '0 82 76',
+            '--gm-color-green-light': '205 236 226',
+            '--gm-color-green-lightest': '230 245 240',
 
-            '--gm-color-red': '#c0385d',
-            '--gm-color-red-light': '#faedef',
+            '--gm-color-red': '192 56 93',
+            '--gm-color-red-light': '250 237 239',
 
-            '--gm-color-orange': '#e8a74a',
-            '--gm-color-orange-light': '#f8e5c9',
+            '--gm-color-orange': '232 167 74',
+            '--gm-color-orange-light': '248 229 201',
 
-            '--gm-color-yellow': '#fff5d2',
+            '--gm-color-yellow': '255 245 210',
           },
         });
 
@@ -386,52 +386,52 @@ module.exports = (options = {}) => {
         inherit: 'inherit',
         current: 'currentColor',
         transparent: 'transparent',
-        black: 'var(--gm-color-black)',
-        white: 'var(--gm-color-white)',
+        black: 'rgb(var(--gm-color-black))',
+        white: 'rgb(var(--gm-color-white))',
         gray: {
-          DEFAULT: 'var(--gm-color-gray)',
-          dark: 'var(--gm-color-gray-dark)',
-          light: 'var(--gm-color-gray-light)',
-          lightest: 'var(--gm-color-gray-lightest)',
+          DEFAULT: 'rgb(var(--gm-color-gray))',
+          dark: 'rgb(var(--gm-color-gray-dark))',
+          light: 'rgb(var(--gm-color-gray-light))',
+          lightest: 'rgb(var(--gm-color-gray-lightest))',
         },
         sky: {
-          DEFAULT: 'var(--gm-color-sky)',
-          light: 'var(--gm-color-sky-light)',
-          lightest: 'var(--gm-color-sky-lightest)',
+          DEFAULT: 'rgb(var(--gm-color-sky))',
+          light: 'rgb(var(--gm-color-sky-light))',
+          lightest: 'rgb(var(--gm-color-sky-lightest))',
         },
         mint: {
-          DEFAULT: 'var(--gm-color-mint)',
-          light: 'var(--gm-color-mint-light)',
-          lightest: 'var(--gm-color-mint-lightest)',
+          DEFAULT: 'rgb(var(--gm-color-mint))',
+          light: 'rgb(var(--gm-color-mint-light))',
+          lightest: 'rgb(var(--gm-color-mint-lightest))',
         },
         blue: {
           // OBOS Blue/Primary brand
-          DEFAULT: 'var(--gm-color-blue)',
+          DEFAULT: 'rgb(var(--gm-color-blue))',
           // OBOS Ocean
-          dark: 'var(--gm-color-blue-dark)',
-          light: 'var(--gm-color-blue-light)',
-          lightest: 'var(--gm-color-blue-lightest)',
+          dark: 'rgb(var(--gm-color-blue-dark))',
+          light: 'rgb(var(--gm-color-blue-light))',
+          lightest: 'rgb(var(--gm-color-blue-lightest))',
         },
         green: {
           // OBOS Green/Primary brand
-          DEFAULT: 'var(--gm-color-green)',
+          DEFAULT: 'rgb(var(--gm-color-green))',
           // OBOS Forest
-          dark: 'var(--gm-color-green-dark)',
-          light: 'var(--gm-color-green-light)',
-          lightest: 'var(--gm-color-green-lightest)',
+          dark: 'rgb(var(--gm-color-green-dark))',
+          light: 'rgb(var(--gm-color-green-light))',
+          lightest: 'rgb(var(--gm-color-green-lightest))',
         },
         red: {
-          DEFAULT: 'var(--gm-color-red)',
+          DEFAULT: 'rgb(var(--gm-color-red))',
           // error red
-          light: 'var(--gm-color-red-light)',
+          light: 'rgb(var(--gm-color-red-light))',
         },
         orange: {
-          DEFAULT: 'var(--gm-color-orange)',
-          light: 'var(--gm-color-orange-light)',
+          DEFAULT: 'rgb(var(--gm-color-orange))',
+          light: 'rgb(var(--gm-color-orange-light))',
         },
         yellow: {
           // open house
-          DEFAULT: 'var(--gm-color-yellow)',
+          DEFAULT: 'rgb(var(--gm-color-yellow))',
         },
       },
       fontFamily: {
