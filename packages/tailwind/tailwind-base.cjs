@@ -179,39 +179,39 @@ module.exports = (options = {}) => {
             '--gm-container-width': '92rem',
             '--gm-container-gutter-width': '1rem',
 
-            '--gm-color-black': '51 51 51',
-            '--gm-color-white': '255 255 255',
+            '--gm-color-black': hexToRgb('#333'),
+            '--gm-color-white': hexToRgb('#fff'),
 
-            '--gm-color-gray': '129 129 129',
-            '--gm-color-gray-dark': '89 89 89',
-            '--gm-color-gray-light': '230 230 230',
-            '--gm-color-gray-lightest': '241 241 241',
+            '--gm-color-gray': hexToRgb('#818181'),
+            '--gm-color-gray-dark': hexToRgb('#595959'),
+            '--gm-color-gray-light': hexToRgb('#e6e6e6'),
+            '--gm-color-gray-lightest': hexToRgb('#f1f1f1'),
 
-            '--gm-color-sky': '190 223 236',
-            '--gm-color-sky-light': '222 239 245',
-            '--gm-color-sky-lightest': '235 245 249',
+            '--gm-color-sky': hexToRgb('#bedfec'),
+            '--gm-color-sky-light': hexToRgb('#deeff5'),
+            '--gm-color-sky-lightest': hexToRgb('#ebf5f9'),
 
-            '--gm-color-mint': '205 236 226',
-            '--gm-color-mint-light': '230 245 240',
-            '--gm-color-mint-lightest': '240 249 246',
+            '--gm-color-mint': hexToRgb('#cdece2'),
+            '--gm-color-mint-light': hexToRgb('#e6f5f0'),
+            '--gm-color-mint-lightest': hexToRgb('#f0f9f6'),
 
-            '--gm-color-blue': '0 71 186',
-            '--gm-color-blue-light': '190 223 236',
-            '--gm-color-blue-lightest': '222 239 245',
-            '--gm-color-blue-dark': '0 33 105',
+            '--gm-color-blue': hexToRgb('#0047ba'),
+            '--gm-color-blue-light': hexToRgb('#bedfec'),
+            '--gm-color-blue-lightest': hexToRgb('#deeff5'),
+            '--gm-color-blue-dark': hexToRgb('#002169'),
 
-            '--gm-color-green': '0 135 97',
-            '--gm-color-green-dark': '0 82 76',
-            '--gm-color-green-light': '205 236 226',
-            '--gm-color-green-lightest': '230 245 240',
+            '--gm-color-green': hexToRgb('#008761'),
+            '--gm-color-green-dark': hexToRgb('#00524c'),
+            '--gm-color-green-light': hexToRgb('#cdece2'),
+            '--gm-color-green-lightest': hexToRgb('#e6f5f0'),
 
-            '--gm-color-red': '192 56 93',
-            '--gm-color-red-light': '250 237 239',
+            '--gm-color-red': hexToRgb('#c0385d'),
+            '--gm-color-red-light': hexToRgb('#faedef'),
 
-            '--gm-color-orange': '232 167 74',
-            '--gm-color-orange-light': '248 229 201',
+            '--gm-color-orange': hexToRgb('#e8a74a'),
+            '--gm-color-orange-light': hexToRgb('#f8e5c9'),
 
-            '--gm-color-yellow': '255 245 210',
+            '--gm-color-yellow': hexToRgb('#fff5d2'),
           },
         });
 
@@ -571,6 +571,32 @@ module.exports = (options = {}) => {
     },
   };
 };
+
+/**
+ * A function that takes in a hex color as a string and returns a string with the color's rgb values.
+ * @param {string} hex
+ * @returns {string} The rgb values of the color.
+ */
+function hexToRgb(hex) {
+  // Remove the hash (#) at the start if it's there
+  hex = hex.replace(/^#/, '');
+
+  // If the hex value is shorthand (3 characters), expand it to 6 characters
+  if (hex.length === 3) {
+    hex = hex
+      .split('')
+      .map((char) => char + char)
+      .join('');
+  }
+
+  // Parse the r, g, and b values from the hex string
+  const r = parseInt(hex.substring(0, 2), 16);
+  const g = parseInt(hex.substring(2, 4), 16);
+  const b = parseInt(hex.substring(4, 6), 16);
+
+  // Return the RGB values as a whitespace-separated string
+  return `${r} ${g} ${b}`;
+}
 
 // These custom components are only used for v1 compat
 const button = plugin(({ addComponents, theme }) => {
