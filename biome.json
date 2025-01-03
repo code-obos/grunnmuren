@@ -36,6 +36,16 @@
           "allowComments": true
         }
       }
+    },
+    {
+      "include": ["$.tsx"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useFilenamingConvention": "off"
+          }
+        }
+      }
     }
   ]
 }
