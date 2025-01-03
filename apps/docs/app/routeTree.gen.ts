@@ -11,20 +11,14 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as StudioImport } from './routes/studio'
 import { Route as DocsImport } from './routes/_docs'
 import { Route as DocsIndexImport } from './routes/_docs/index'
+import { Route as StudioSplatImport } from './routes/studio/$'
 import { Route as DocsIkonerImport } from './routes/_docs/ikoner'
 import { Route as DocsKomponenterButtonImport } from './routes/_docs/komponenter/button'
 import { Route as DocsKomponenterBadgeImport } from './routes/_docs/komponenter/badge'
 
 // Create/Update Routes
-
-const StudioRoute = StudioImport.update({
-  id: '/studio',
-  path: '/studio',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const DocsRoute = DocsImport.update({
   id: '/_docs',
@@ -35,6 +29,12 @@ const DocsIndexRoute = DocsIndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => DocsRoute,
+} as any)
+
+const StudioSplatRoute = StudioSplatImport.update({
+  id: '/studio/$',
+  path: '/studio/$',
+  getParentRoute: () => rootRoute,
 } as any)
 
 const DocsIkonerRoute = DocsIkonerImport.update({
@@ -66,19 +66,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsImport
       parentRoute: typeof rootRoute
     }
-    '/studio': {
-      id: '/studio'
-      path: '/studio'
-      fullPath: '/studio'
-      preLoaderRoute: typeof StudioImport
-      parentRoute: typeof rootRoute
-    }
     '/_docs/ikoner': {
       id: '/_docs/ikoner'
       path: '/ikoner'
       fullPath: '/ikoner'
       preLoaderRoute: typeof DocsIkonerImport
       parentRoute: typeof DocsImport
+    }
+    '/studio/$': {
+      id: '/studio/$'
+      path: '/studio/$'
+      fullPath: '/studio/$'
+      preLoaderRoute: typeof StudioSplatImport
+      parentRoute: typeof rootRoute
     }
     '/_docs/': {
       id: '/_docs/'
@@ -124,16 +124,16 @@ const DocsRouteWithChildren = DocsRoute._addFileChildren(DocsRouteChildren)
 
 export interface FileRoutesByFullPath {
   '': typeof DocsRouteWithChildren
-  '/studio': typeof StudioRoute
   '/ikoner': typeof DocsIkonerRoute
+  '/studio/$': typeof StudioSplatRoute
   '/': typeof DocsIndexRoute
   '/komponenter/badge': typeof DocsKomponenterBadgeRoute
   '/komponenter/button': typeof DocsKomponenterButtonRoute
 }
 
 export interface FileRoutesByTo {
-  '/studio': typeof StudioRoute
   '/ikoner': typeof DocsIkonerRoute
+  '/studio/$': typeof StudioSplatRoute
   '/': typeof DocsIndexRoute
   '/komponenter/badge': typeof DocsKomponenterBadgeRoute
   '/komponenter/button': typeof DocsKomponenterButtonRoute
@@ -142,8 +142,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_docs': typeof DocsRouteWithChildren
-  '/studio': typeof StudioRoute
   '/_docs/ikoner': typeof DocsIkonerRoute
+  '/studio/$': typeof StudioSplatRoute
   '/_docs/': typeof DocsIndexRoute
   '/_docs/komponenter/badge': typeof DocsKomponenterBadgeRoute
   '/_docs/komponenter/button': typeof DocsKomponenterButtonRoute
@@ -153,18 +153,23 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | ''
-    | '/studio'
     | '/ikoner'
+    | '/studio/$'
     | '/'
     | '/komponenter/badge'
     | '/komponenter/button'
   fileRoutesByTo: FileRoutesByTo
-  to: '/studio' | '/ikoner' | '/' | '/komponenter/badge' | '/komponenter/button'
+  to:
+    | '/ikoner'
+    | '/studio/$'
+    | '/'
+    | '/komponenter/badge'
+    | '/komponenter/button'
   id:
     | '__root__'
     | '/_docs'
-    | '/studio'
     | '/_docs/ikoner'
+    | '/studio/$'
     | '/_docs/'
     | '/_docs/komponenter/badge'
     | '/_docs/komponenter/button'
@@ -173,12 +178,12 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   DocsRoute: typeof DocsRouteWithChildren
-  StudioRoute: typeof StudioRoute
+  StudioSplatRoute: typeof StudioSplatRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   DocsRoute: DocsRouteWithChildren,
-  StudioRoute: StudioRoute,
+  StudioSplatRoute: StudioSplatRoute,
 }
 
 export const routeTree = rootRoute
@@ -192,7 +197,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/_docs",
-        "/studio"
+        "/studio/$"
       ]
     },
     "/_docs": {
@@ -204,12 +209,12 @@ export const routeTree = rootRoute
         "/_docs/komponenter/button"
       ]
     },
-    "/studio": {
-      "filePath": "studio.tsx"
-    },
     "/_docs/ikoner": {
       "filePath": "_docs/ikoner.tsx",
       "parent": "/_docs"
+    },
+    "/studio/$": {
+      "filePath": "studio/$.tsx"
     },
     "/_docs/": {
       "filePath": "_docs/index.tsx",
