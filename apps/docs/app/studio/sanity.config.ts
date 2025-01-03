@@ -1,4 +1,5 @@
 import { obosAuthStore } from '@code-obos/sanity-auth';
+import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { schemaTypes } from './schema-types';
@@ -11,7 +12,7 @@ export default defineConfig({
   basePath: '/studio',
   title: 'Grunnmuren - Sanity Studio',
   auth: obosAuthStore({ dataset }),
-  plugins: [structureTool()],
+  plugins: [structureTool(), visionTool()],
   schema: {
     types: schemaTypes,
   },
