@@ -1,5 +1,5 @@
-import appCss from '@/app.css?url';
-import {sanityFetch} from '@/lib/sanity'
+import { sanityFetch } from '@/lib/sanity';
+import appCss from '@/styles/app.css?url';
 import { Footer } from '@/ui/footer';
 import { MainNav } from '@/ui/main-nav';
 import { GrunnmurenProvider } from '@obosbbl/grunnmuren-react';
@@ -11,9 +11,12 @@ import {
   createFileRoute,
   useRouter,
 } from '@tanstack/react-router';
-import {defineQuery} from 'groq'
+import { defineQuery } from 'groq';
 
-const COMPONENTS_QUERY = defineQuery(`*[_type == "component"]{_id,name,slug} | order(name asc)`)
+const COMPONENTS_QUERY = defineQuery(
+  // make sure the slug is always a string so we don't have add fallback value in code just to make TypeScript happy
+  `*[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, '')} | order(name asc)`,
+);
 
 // This is the shared layout for all the Grunnmuren docs pages that are "public", ie not the Sanity studio
 export const Route = createFileRoute('/_docs')({
@@ -31,9 +34,6 @@ export const Route = createFileRoute('/_docs')({
 
 function RootLayout() {
   const router = useRouter();
-
-  const data = Route.useLoaderData();
-  console.log(data)
 
   return (
     <>

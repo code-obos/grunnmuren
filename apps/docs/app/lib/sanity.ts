@@ -1,25 +1,23 @@
-import {type QueryParams, createClient } from '@sanity/client'
+import { type QueryParams, createClient } from '@sanity/client';
 
 export const client = createClient({
   projectId: 'tq6w17ny',
   dataset: 'grunnmuren',
   apiVersion: '2024-09-18',
   useCdn: true,
-})
+});
 
 export async function sanityFetch<const QueryString extends string>({
   query,
   params = {},
-  lastLiveEventId,
 }: {
-  query: QueryString
-  params?: QueryParams
-  lastLiveEventId?: string | undefined
+  query: QueryString;
+  params?: QueryParams;
 }) {
-  const {result, syncTags} = await client.fetch(query, params, {
+  // Not sure what's happening here, but I need to set filterReponse to false to get the data as an array?
+  const { result } = await client.fetch(query, params, {
     filterResponse: false,
-    lastLiveEventId,
-  })
+  });
 
-  return {data: result, tags: syncTags}
+  return { data: result };
 }
