@@ -125,6 +125,36 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
+export type CodeBlock = {
+  _type: 'code-block';
+  code?: Code;
+  caption?: string;
+};
+
+export type Content = Array<
+  | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: 'span';
+        _key: string;
+      }>;
+      style?: 'normal' | 'h2' | 'h3' | 'h4' | 'h5' | 'blockquote';
+      listItem?: 'bullet' | 'number';
+      markDefs?: Array<{
+        href?: string;
+        _type: 'link';
+        _key: string;
+      }>;
+      level?: number;
+      _type: 'block';
+      _key: string;
+    }
+  | ({
+      _key: string;
+    } & CodeBlock)
+>;
+
 export type Component = {
   _id: string;
   _type: 'component';
@@ -133,12 +163,21 @@ export type Component = {
   _rev: string;
   name?: string;
   slug?: Slug;
+  content?: Content;
 };
 
 export type Slug = {
   _type: 'slug';
   current?: string;
   source?: string;
+};
+
+export type Code = {
+  _type: 'code';
+  language?: string;
+  filename?: string;
+  code?: string;
+  highlightedLines?: Array<number>;
 };
 
 export type AllSanitySchemaTypes =
@@ -152,8 +191,11 @@ export type AllSanitySchemaTypes =
   | SanityImageMetadata
   | Geopoint
   | SanityAssetSourceData
+  | CodeBlock
+  | Content
   | Component
-  | Slug;
+  | Slug
+  | Code;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./app/routes/_docs.tsx
 // Variable: COMPONENTS_NAVIGATION_QUERY
@@ -164,10 +206,11 @@ export type COMPONENTS_NAVIGATION_QUERYResult = Array<{
   slug: string | '';
 }>;
 
-// Source: ./app/routes/_docs/komponenter.$slug.tsx
+// Source: ./app/routes/_docs/komponenter/$slug.tsx
 // Variable: COMPONENT_QUERY
-// Query: *[_type == "component" && slug.current == $slug][0]{ "name": coalesce(name, '') }
+// Query: *[_type == "component" && slug.current == $slug][0]{ content, "name": coalesce(name, '') }
 export type COMPONENT_QUERYResult = {
+  content: Content | null;
   name: string | '';
 } | null;
 
@@ -187,6 +230,6 @@ declare module '@sanity/client' {
     "*[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, '')} | order(name asc)":
       | COMPONENTS_NAVIGATION_QUERYResult
       | COMPONENTS_INDEX_QUERYResult;
-    '*[_type == "component" && slug.current == $slug][0]{ "name": coalesce(name, \'\') }': COMPONENT_QUERYResult;
+    '*[_type == "component" && slug.current == $slug][0]{ content, "name": coalesce(name, \'\') }': COMPONENT_QUERYResult;
   }
 }
