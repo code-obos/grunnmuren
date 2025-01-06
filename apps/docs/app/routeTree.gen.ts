@@ -15,8 +15,10 @@ import { Route as DocsImport } from './routes/_docs'
 import { Route as DocsIndexImport } from './routes/_docs/index'
 import { Route as StudioSplatImport } from './routes/studio/$'
 import { Route as DocsIkonerImport } from './routes/_docs/ikoner'
+import { Route as DocsKomponenterIndexImport } from './routes/_docs/komponenter/index'
 import { Route as DocsKomponenterButtonImport } from './routes/_docs/komponenter/button'
 import { Route as DocsKomponenterBadgeImport } from './routes/_docs/komponenter/badge'
+import { Route as DocsKomponenterSlugImport } from './routes/_docs/komponenter.$slug'
 
 // Create/Update Routes
 
@@ -43,6 +45,12 @@ const DocsIkonerRoute = DocsIkonerImport.update({
   getParentRoute: () => DocsRoute,
 } as any)
 
+const DocsKomponenterIndexRoute = DocsKomponenterIndexImport.update({
+  id: '/komponenter/',
+  path: '/komponenter/',
+  getParentRoute: () => DocsRoute,
+} as any)
+
 const DocsKomponenterButtonRoute = DocsKomponenterButtonImport.update({
   id: '/komponenter/button',
   path: '/komponenter/button',
@@ -52,6 +60,12 @@ const DocsKomponenterButtonRoute = DocsKomponenterButtonImport.update({
 const DocsKomponenterBadgeRoute = DocsKomponenterBadgeImport.update({
   id: '/komponenter/badge',
   path: '/komponenter/badge',
+  getParentRoute: () => DocsRoute,
+} as any)
+
+const DocsKomponenterSlugRoute = DocsKomponenterSlugImport.update({
+  id: '/komponenter/$slug',
+  path: '/komponenter/$slug',
   getParentRoute: () => DocsRoute,
 } as any)
 
@@ -87,6 +101,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsIndexImport
       parentRoute: typeof DocsImport
     }
+    '/_docs/komponenter/$slug': {
+      id: '/_docs/komponenter/$slug'
+      path: '/komponenter/$slug'
+      fullPath: '/komponenter/$slug'
+      preLoaderRoute: typeof DocsKomponenterSlugImport
+      parentRoute: typeof DocsImport
+    }
     '/_docs/komponenter/badge': {
       id: '/_docs/komponenter/badge'
       path: '/komponenter/badge'
@@ -101,6 +122,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsKomponenterButtonImport
       parentRoute: typeof DocsImport
     }
+    '/_docs/komponenter/': {
+      id: '/_docs/komponenter/'
+      path: '/komponenter'
+      fullPath: '/komponenter'
+      preLoaderRoute: typeof DocsKomponenterIndexImport
+      parentRoute: typeof DocsImport
+    }
   }
 }
 
@@ -109,15 +137,19 @@ declare module '@tanstack/react-router' {
 interface DocsRouteChildren {
   DocsIkonerRoute: typeof DocsIkonerRoute
   DocsIndexRoute: typeof DocsIndexRoute
+  DocsKomponenterSlugRoute: typeof DocsKomponenterSlugRoute
   DocsKomponenterBadgeRoute: typeof DocsKomponenterBadgeRoute
   DocsKomponenterButtonRoute: typeof DocsKomponenterButtonRoute
+  DocsKomponenterIndexRoute: typeof DocsKomponenterIndexRoute
 }
 
 const DocsRouteChildren: DocsRouteChildren = {
   DocsIkonerRoute: DocsIkonerRoute,
   DocsIndexRoute: DocsIndexRoute,
+  DocsKomponenterSlugRoute: DocsKomponenterSlugRoute,
   DocsKomponenterBadgeRoute: DocsKomponenterBadgeRoute,
   DocsKomponenterButtonRoute: DocsKomponenterButtonRoute,
+  DocsKomponenterIndexRoute: DocsKomponenterIndexRoute,
 }
 
 const DocsRouteWithChildren = DocsRoute._addFileChildren(DocsRouteChildren)
@@ -127,16 +159,20 @@ export interface FileRoutesByFullPath {
   '/ikoner': typeof DocsIkonerRoute
   '/studio/$': typeof StudioSplatRoute
   '/': typeof DocsIndexRoute
+  '/komponenter/$slug': typeof DocsKomponenterSlugRoute
   '/komponenter/badge': typeof DocsKomponenterBadgeRoute
   '/komponenter/button': typeof DocsKomponenterButtonRoute
+  '/komponenter': typeof DocsKomponenterIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/ikoner': typeof DocsIkonerRoute
   '/studio/$': typeof StudioSplatRoute
   '/': typeof DocsIndexRoute
+  '/komponenter/$slug': typeof DocsKomponenterSlugRoute
   '/komponenter/badge': typeof DocsKomponenterBadgeRoute
   '/komponenter/button': typeof DocsKomponenterButtonRoute
+  '/komponenter': typeof DocsKomponenterIndexRoute
 }
 
 export interface FileRoutesById {
@@ -145,8 +181,10 @@ export interface FileRoutesById {
   '/_docs/ikoner': typeof DocsIkonerRoute
   '/studio/$': typeof StudioSplatRoute
   '/_docs/': typeof DocsIndexRoute
+  '/_docs/komponenter/$slug': typeof DocsKomponenterSlugRoute
   '/_docs/komponenter/badge': typeof DocsKomponenterBadgeRoute
   '/_docs/komponenter/button': typeof DocsKomponenterButtonRoute
+  '/_docs/komponenter/': typeof DocsKomponenterIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -156,23 +194,29 @@ export interface FileRouteTypes {
     | '/ikoner'
     | '/studio/$'
     | '/'
+    | '/komponenter/$slug'
     | '/komponenter/badge'
     | '/komponenter/button'
+    | '/komponenter'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/ikoner'
     | '/studio/$'
     | '/'
+    | '/komponenter/$slug'
     | '/komponenter/badge'
     | '/komponenter/button'
+    | '/komponenter'
   id:
     | '__root__'
     | '/_docs'
     | '/_docs/ikoner'
     | '/studio/$'
     | '/_docs/'
+    | '/_docs/komponenter/$slug'
     | '/_docs/komponenter/badge'
     | '/_docs/komponenter/button'
+    | '/_docs/komponenter/'
   fileRoutesById: FileRoutesById
 }
 
@@ -205,8 +249,10 @@ export const routeTree = rootRoute
       "children": [
         "/_docs/ikoner",
         "/_docs/",
+        "/_docs/komponenter/$slug",
         "/_docs/komponenter/badge",
-        "/_docs/komponenter/button"
+        "/_docs/komponenter/button",
+        "/_docs/komponenter/"
       ]
     },
     "/_docs/ikoner": {
@@ -220,12 +266,20 @@ export const routeTree = rootRoute
       "filePath": "_docs/index.tsx",
       "parent": "/_docs"
     },
+    "/_docs/komponenter/$slug": {
+      "filePath": "_docs/komponenter.$slug.tsx",
+      "parent": "/_docs"
+    },
     "/_docs/komponenter/badge": {
       "filePath": "_docs/komponenter/badge.tsx",
       "parent": "/_docs"
     },
     "/_docs/komponenter/button": {
       "filePath": "_docs/komponenter/button.tsx",
+      "parent": "/_docs"
+    },
+    "/_docs/komponenter/": {
+      "filePath": "_docs/komponenter/index.tsx",
       "parent": "/_docs"
     }
   }

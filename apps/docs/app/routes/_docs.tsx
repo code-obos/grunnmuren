@@ -13,7 +13,7 @@ import {
 } from '@tanstack/react-router';
 import { defineQuery } from 'groq';
 
-const COMPONENTS_QUERY = defineQuery(
+const COMPONENTS_NAVIGATION_QUERY = defineQuery(
   // make sure the slug is always a string so we don't have add fallback value in code just to make TypeScript happy
   `*[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, '')} | order(name asc)`,
 );
@@ -29,7 +29,7 @@ export const Route = createFileRoute('/_docs')({
       },
     ],
   }),
-  loader: () => sanityFetch({ query: COMPONENTS_QUERY }),
+  loader: () => sanityFetch({ query: COMPONENTS_NAVIGATION_QUERY }),
 });
 
 function RootLayout() {

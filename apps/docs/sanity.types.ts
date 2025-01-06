@@ -156,9 +156,25 @@ export type AllSanitySchemaTypes =
   | Slug;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./app/routes/_docs.tsx
-// Variable: COMPONENTS_QUERY
+// Variable: COMPONENTS_NAVIGATION_QUERY
 // Query: *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, '')} | order(name asc)
-export type COMPONENTS_QUERYResult = Array<{
+export type COMPONENTS_NAVIGATION_QUERYResult = Array<{
+  _id: string;
+  name: string | null;
+  slug: string | '';
+}>;
+
+// Source: ./app/routes/_docs/komponenter.$slug.tsx
+// Variable: COMPONENT_QUERY
+// Query: *[_type == "component" && slug == $slug][0]{ name }
+export type COMPONENT_QUERYResult = {
+  name: string | null;
+} | null;
+
+// Source: ./app/routes/_docs/komponenter/index.tsx
+// Variable: COMPONENTS_INDEX_QUERY
+// Query: *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, '')} | order(name asc)
+export type COMPONENTS_INDEX_QUERYResult = Array<{
   _id: string;
   name: string | null;
   slug: string | '';
@@ -168,6 +184,9 @@ export type COMPONENTS_QUERYResult = Array<{
 import '@sanity/client';
 declare module '@sanity/client' {
   interface SanityQueries {
-    "*[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, '')} | order(name asc)": COMPONENTS_QUERYResult;
+    "*[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, '')} | order(name asc)":
+      | COMPONENTS_NAVIGATION_QUERYResult
+      | COMPONENTS_INDEX_QUERYResult;
+    '*[_type == "component" && slug == $slug][0]{ name }': COMPONENT_QUERYResult;
   }
 }
