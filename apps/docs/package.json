@@ -11,16 +11,21 @@
     "build:assets": "mkdir -p public/resources/icons && cp -r node_modules/@obosbbl/grunnmuren-icons-svg/src/ public/resources/icons",
     "build:docgen": "node build-docs.js && prettier --write docgen.ts --ignore-path",
     "dev": "vinxi dev",
-    "start": "vinxi start"
+    "start": "vinxi start",
+    "typegen:extract": "sanity schema extract",
+    "typegen:generate": "sanity typegen generate"
   },
   "dependencies": {
     "@code-obos/sanity-auth": "1.4.0",
     "@obosbbl/grunnmuren-icons-react": "workspace:*",
     "@obosbbl/grunnmuren-icons-svg": "workspace:*",
     "@obosbbl/grunnmuren-react": "workspace:*",
+    "@sanity/client": "6.24.1",
+    "@sanity/vision": "3.68.3",
     "@tanstack/react-router": "1.95.1",
     "@tanstack/start": "1.95.1",
     "cva": "1.0.0-beta.2",
+    "groq": "3.68.3",
     "prism-react-renderer": "2.4.1",
     "react": "19.0.0",
     "react-aria-components": "1.5.0",
