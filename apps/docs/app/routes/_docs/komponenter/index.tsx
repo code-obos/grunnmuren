@@ -29,8 +29,10 @@ function Page() {
         {components.map((component) => (
           <Card key={component._id} variant="outlined">
             <Heading level={2}>
-              {/* @ts-expect-error figure out how to make this typesafe */}
-              <CardLink href={`/komponenter/${component.slug}`}>{component.name}</CardLink>
+              {/* @ts-expect-error figure out how to make this typesafe. Seems like routerOptions doesn't accept params */}
+              <CardLink href={`/komponenter/${component.slug}`}>
+                {component.name}
+              </CardLink>
             </Heading>
           </Card>
         ))}

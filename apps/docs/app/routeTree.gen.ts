@@ -16,9 +16,7 @@ import { Route as DocsIndexImport } from './routes/_docs/index'
 import { Route as StudioSplatImport } from './routes/studio/$'
 import { Route as DocsIkonerImport } from './routes/_docs/ikoner'
 import { Route as DocsKomponenterIndexImport } from './routes/_docs/komponenter/index'
-import { Route as DocsKomponenterBuuttonImport } from './routes/_docs/komponenter/buutton'
-import { Route as DocsKomponenterBaadgeImport } from './routes/_docs/komponenter/baadge'
-import { Route as DocsKomponenterSlugImport } from './routes/_docs/komponenter.$slug'
+import { Route as DocsKomponenterSlugImport } from './routes/_docs/komponenter/$slug'
 
 // Create/Update Routes
 
@@ -48,18 +46,6 @@ const DocsIkonerRoute = DocsIkonerImport.update({
 const DocsKomponenterIndexRoute = DocsKomponenterIndexImport.update({
   id: '/komponenter/',
   path: '/komponenter/',
-  getParentRoute: () => DocsRoute,
-} as any)
-
-const DocsKomponenterBuuttonRoute = DocsKomponenterBuuttonImport.update({
-  id: '/komponenter/buutton',
-  path: '/komponenter/buutton',
-  getParentRoute: () => DocsRoute,
-} as any)
-
-const DocsKomponenterBaadgeRoute = DocsKomponenterBaadgeImport.update({
-  id: '/komponenter/baadge',
-  path: '/komponenter/baadge',
   getParentRoute: () => DocsRoute,
 } as any)
 
@@ -108,20 +94,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsKomponenterSlugImport
       parentRoute: typeof DocsImport
     }
-    '/_docs/komponenter/baadge': {
-      id: '/_docs/komponenter/baadge'
-      path: '/komponenter/baadge'
-      fullPath: '/komponenter/baadge'
-      preLoaderRoute: typeof DocsKomponenterBaadgeImport
-      parentRoute: typeof DocsImport
-    }
-    '/_docs/komponenter/buutton': {
-      id: '/_docs/komponenter/buutton'
-      path: '/komponenter/buutton'
-      fullPath: '/komponenter/buutton'
-      preLoaderRoute: typeof DocsKomponenterBuuttonImport
-      parentRoute: typeof DocsImport
-    }
     '/_docs/komponenter/': {
       id: '/_docs/komponenter/'
       path: '/komponenter'
@@ -138,8 +110,6 @@ interface DocsRouteChildren {
   DocsIkonerRoute: typeof DocsIkonerRoute
   DocsIndexRoute: typeof DocsIndexRoute
   DocsKomponenterSlugRoute: typeof DocsKomponenterSlugRoute
-  DocsKomponenterBaadgeRoute: typeof DocsKomponenterBaadgeRoute
-  DocsKomponenterBuuttonRoute: typeof DocsKomponenterBuuttonRoute
   DocsKomponenterIndexRoute: typeof DocsKomponenterIndexRoute
 }
 
@@ -147,8 +117,6 @@ const DocsRouteChildren: DocsRouteChildren = {
   DocsIkonerRoute: DocsIkonerRoute,
   DocsIndexRoute: DocsIndexRoute,
   DocsKomponenterSlugRoute: DocsKomponenterSlugRoute,
-  DocsKomponenterBaadgeRoute: DocsKomponenterBaadgeRoute,
-  DocsKomponenterBuuttonRoute: DocsKomponenterBuuttonRoute,
   DocsKomponenterIndexRoute: DocsKomponenterIndexRoute,
 }
 
@@ -160,8 +128,6 @@ export interface FileRoutesByFullPath {
   '/studio/$': typeof StudioSplatRoute
   '/': typeof DocsIndexRoute
   '/komponenter/$slug': typeof DocsKomponenterSlugRoute
-  '/komponenter/baadge': typeof DocsKomponenterBaadgeRoute
-  '/komponenter/buutton': typeof DocsKomponenterBuuttonRoute
   '/komponenter': typeof DocsKomponenterIndexRoute
 }
 
@@ -170,8 +136,6 @@ export interface FileRoutesByTo {
   '/studio/$': typeof StudioSplatRoute
   '/': typeof DocsIndexRoute
   '/komponenter/$slug': typeof DocsKomponenterSlugRoute
-  '/komponenter/baadge': typeof DocsKomponenterBaadgeRoute
-  '/komponenter/buutton': typeof DocsKomponenterBuuttonRoute
   '/komponenter': typeof DocsKomponenterIndexRoute
 }
 
@@ -182,8 +146,6 @@ export interface FileRoutesById {
   '/studio/$': typeof StudioSplatRoute
   '/_docs/': typeof DocsIndexRoute
   '/_docs/komponenter/$slug': typeof DocsKomponenterSlugRoute
-  '/_docs/komponenter/baadge': typeof DocsKomponenterBaadgeRoute
-  '/_docs/komponenter/buutton': typeof DocsKomponenterBuuttonRoute
   '/_docs/komponenter/': typeof DocsKomponenterIndexRoute
 }
 
@@ -195,18 +157,9 @@ export interface FileRouteTypes {
     | '/studio/$'
     | '/'
     | '/komponenter/$slug'
-    | '/komponenter/baadge'
-    | '/komponenter/buutton'
     | '/komponenter'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/ikoner'
-    | '/studio/$'
-    | '/'
-    | '/komponenter/$slug'
-    | '/komponenter/baadge'
-    | '/komponenter/buutton'
-    | '/komponenter'
+  to: '/ikoner' | '/studio/$' | '/' | '/komponenter/$slug' | '/komponenter'
   id:
     | '__root__'
     | '/_docs'
@@ -214,8 +167,6 @@ export interface FileRouteTypes {
     | '/studio/$'
     | '/_docs/'
     | '/_docs/komponenter/$slug'
-    | '/_docs/komponenter/baadge'
-    | '/_docs/komponenter/buutton'
     | '/_docs/komponenter/'
   fileRoutesById: FileRoutesById
 }
@@ -250,8 +201,6 @@ export const routeTree = rootRoute
         "/_docs/ikoner",
         "/_docs/",
         "/_docs/komponenter/$slug",
-        "/_docs/komponenter/baadge",
-        "/_docs/komponenter/buutton",
         "/_docs/komponenter/"
       ]
     },
@@ -267,15 +216,7 @@ export const routeTree = rootRoute
       "parent": "/_docs"
     },
     "/_docs/komponenter/$slug": {
-      "filePath": "_docs/komponenter.$slug.tsx",
-      "parent": "/_docs"
-    },
-    "/_docs/komponenter/baadge": {
-      "filePath": "_docs/komponenter/baadge.tsx",
-      "parent": "/_docs"
-    },
-    "/_docs/komponenter/buutton": {
-      "filePath": "_docs/komponenter/buutton.tsx",
+      "filePath": "_docs/komponenter/$slug.tsx",
       "parent": "/_docs"
     },
     "/_docs/komponenter/": {

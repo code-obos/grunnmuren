@@ -1,14 +1,6 @@
-import { ComponentPreview } from '@/ui/component-preview'
-import { PropsTable } from '@/ui/props-table'
-import { PaintRoller } from '@obosbbl/grunnmuren-icons-react'
-import { Badge } from '@obosbbl/grunnmuren-react'
-import { createFileRoute } from '@tanstack/react-router'
-import { cx } from 'cva'
-import { BadgeDoc } from 'docgen'
-
-export const Route = createFileRoute('/_docs/komponenter/baadge')({
-  component: Page,
-})
+import { PaintRoller } from '@obosbbl/grunnmuren-icons-react';
+import { Badge } from '@obosbbl/grunnmuren-react';
+import { cx } from 'cva';
 
 const colors = [
   'mint',
@@ -17,9 +9,9 @@ const colors = [
   'green-dark',
   'gray-dark',
   'white',
-] as const
+] as const;
 
-const examples = [
+export const examples = [
   {
     title: 'Badge',
     code: `
@@ -61,26 +53,6 @@ ${colors.map((color) => `    <Badge color="${color}">${color}</Badge>`).join('\n
   </Badge>
 </div>`,
   })),
-]
+];
 
-function Page() {
-  return (
-    <>
-      <h1 className="heading-l mb-12 mt-9">{BadgeDoc.displayName}</h1>
-      <div className="prose">
-        <p>{BadgeDoc.description}</p>
-      </div>
-
-      {examples.map(({ title, code }) => (
-        <ComponentPreview
-          scope={{ Badge, PaintRoller }}
-          key={title}
-          title={title}
-          code={code}
-        />
-      ))}
-
-      <PropsTable props={BadgeDoc.props} />
-    </>
-  )
-}
+export const scope = { Badge, PaintRoller };
