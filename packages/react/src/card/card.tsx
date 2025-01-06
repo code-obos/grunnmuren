@@ -1,5 +1,5 @@
 import { type VariantProps, cva } from 'cva';
-import { Link, type LinkProps } from 'react-aria-components';
+import { Link, type LinkProps as RACLinkProps } from 'react-aria-components';
 
 type CardProps = VariantProps<typeof cardVariants> & {
   children?: React.ReactNode;
@@ -101,16 +101,16 @@ const Card = ({
   );
 };
 
-type RACLinkProps = Pick<LinkProps, 'href' | 'routerOptions' | 'children'>;
-
-type CardLinkWrapperProps = RACLinkProps & {
-  // Override children type of LinkProps as it also allows a callback which is not allowed in HTMLProps
-  children: React.ReactNode;
+type CardLinkWrapperProps = {
+  children?: React.ReactNode;
+  className?: string;
+} & {
+  [K in keyof Omit<RACLinkProps, 'className' | 'children'>]?: never;
 };
 
-type CardLinkProps = {
-  className?: string;
-} & (RACLinkProps | CardLinkWrapperProps);
+type CardLinkProps =
+  | (Omit<RACLinkProps, 'href'> & { href: string })
+  | CardLinkWrapperProps;
 
 const cardLinkVariants = cva({
   base: 'w-fit max-w-full',
@@ -168,7 +168,7 @@ const CardLink = ({
   return href ? (
     <Link
       data-slot="card-link"
-      {...restProps}
+      {...(restProps as RACLinkProps)}
       href={href}
       className={className}
     />
@@ -177,9 +177,9 @@ const CardLink = ({
     // because it still renders with role="link" and tabindex="0" which makes it focusable.
     // So we need to render a div instead.
     <div
+      {...(restProps as CardLinkWrapperProps)}
       data-slot="card-link"
       className={className}
-      {...(restProps as CardLinkWrapperProps)}
     />
   );
 };
