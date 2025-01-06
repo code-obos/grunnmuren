@@ -12,7 +12,6 @@ const docs = withDefaultConfig().parse(
 
 const outputPath = './docgen.ts';
 console.log(`Writing props to "${outputPath}"...\n`);
-console.log(docs);
 
 let withoutError = true;
 
@@ -22,7 +21,7 @@ try {
     Object.values(docs)
       .map((prop) => {
         const prettifiedName = prop.displayName.replace('_', '');
-        return `export const ${prettifiedName}Doc = ${JSON.stringify({ ...prop, displayName: prettifiedName }, null, 2)}`;
+        return `export const ${prettifiedName} = ${JSON.stringify({ ...prop, displayName: prettifiedName }, null, 2)}`;
       })
       .join('\n'),
   );

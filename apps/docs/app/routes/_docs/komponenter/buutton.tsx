@@ -1,13 +1,13 @@
-import { ComponentPreview } from '@/ui/component-preview';
-import { PropsTable } from '@/ui/props-table';
-import { Edit, Search } from '@obosbbl/grunnmuren-icons-react';
-import { Button } from '@obosbbl/grunnmuren-react';
-import { createFileRoute } from '@tanstack/react-router';
-import { ButtonDoc } from 'docgen';
+import { ComponentPreview } from '@/ui/component-preview'
+import { PropsTable } from '@/ui/props-table'
+import { Edit, Search } from '@obosbbl/grunnmuren-icons-react'
+import { Button } from '@obosbbl/grunnmuren-react'
+import { createFileRoute } from '@tanstack/react-router'
+import { ButtonDoc } from 'docgen'
 
-export const Route = createFileRoute('/_docs/komponenter/button')({
+export const Route = createFileRoute('/_docs/komponenter/buutton')({
   component: Page,
-});
+})
 
 const examples = [
   { title: 'Knapp', code: '<Button>Knapp</Button>' },
@@ -139,7 +139,7 @@ const examples = [
 </div>
       `,
   },
-];
+]
 
 function Page() {
   return (
@@ -159,5 +159,5 @@ function Page() {
       ))}
       <PropsTable props={ButtonDoc.props} />
     </>
-  );
+  )
 }

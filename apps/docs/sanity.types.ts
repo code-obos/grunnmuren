@@ -166,7 +166,7 @@ export type COMPONENTS_NAVIGATION_QUERYResult = Array<{
 
 // Source: ./app/routes/_docs/komponenter.$slug.tsx
 // Variable: COMPONENT_QUERY
-// Query: *[_type == "component" && slug == $slug][0]{ name }
+// Query: *[_type == "component" && slug.current == $slug][0]{ name }
 export type COMPONENT_QUERYResult = {
   name: string | null;
 } | null;
@@ -187,6 +187,6 @@ declare module '@sanity/client' {
     "*[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, '')} | order(name asc)":
       | COMPONENTS_NAVIGATION_QUERYResult
       | COMPONENTS_INDEX_QUERYResult;
-    '*[_type == "component" && slug == $slug][0]{ name }': COMPONENT_QUERYResult;
+    '*[_type == "component" && slug.current == $slug][0]{ name }': COMPONENT_QUERYResult;
   }
 }

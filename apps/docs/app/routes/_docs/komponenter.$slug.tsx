@@ -1,10 +1,11 @@
 import { sanityFetch } from '@/lib/sanity';
+import { PropsTable } from '@/ui/props-table';
 import { createFileRoute, notFound } from '@tanstack/react-router';
+import * as props from 'docgen';
 import { defineQuery } from 'groq';
 
 const COMPONENT_QUERY = defineQuery(
-  // make sure the slug is always a string so we don't have add fallback value in code just to make TypeScript happy
-  `*[_type == "component" && slug == $slug][0]{ name }`,
+  `*[_type == "component" && slug.current == $slug][0]{ name }`,
 );
 
 export const Route = createFileRoute('/_docs/komponenter/$slug')({
@@ -15,24 +16,28 @@ export const Route = createFileRoute('/_docs/komponenter/$slug')({
       params: { slug: params.slug },
     });
 
-    if (!res.data) {
+    if (res.data == null) {
       throw notFound();
     }
-    return res;
+
+    const componentName = res.data.name;
+    const componentProps = props[componentName as string].props;
+
+    return { data: res.data, componentProps }
   },
 });
 
 function Page() {
-  const { data } = Route.useLoaderData();
+  const { data, componentProps } = Route.useLoaderData();
 
   return (
     <>
-      <h1 className="heading-l mb-12 mt-9">{data?.name}</h1>
+      <h1 className="heading-l mb-12 mt-9">{data.name}</h1>
       {/* <div className="prose">
         <p>{data}</p>
       </div> */}
 
-      {/* <PropsTable props={BadgeDoc.props} /> */}
+      <PropsTable props={componentProps} />
     </>
   );
 }

@@ -16,8 +16,8 @@ import { Route as DocsIndexImport } from './routes/_docs/index'
 import { Route as StudioSplatImport } from './routes/studio/$'
 import { Route as DocsIkonerImport } from './routes/_docs/ikoner'
 import { Route as DocsKomponenterIndexImport } from './routes/_docs/komponenter/index'
-import { Route as DocsKomponenterButtonImport } from './routes/_docs/komponenter/button'
-import { Route as DocsKomponenterBadgeImport } from './routes/_docs/komponenter/badge'
+import { Route as DocsKomponenterBuuttonImport } from './routes/_docs/komponenter/buutton'
+import { Route as DocsKomponenterBaadgeImport } from './routes/_docs/komponenter/baadge'
 import { Route as DocsKomponenterSlugImport } from './routes/_docs/komponenter.$slug'
 
 // Create/Update Routes
@@ -51,15 +51,15 @@ const DocsKomponenterIndexRoute = DocsKomponenterIndexImport.update({
   getParentRoute: () => DocsRoute,
 } as any)
 
-const DocsKomponenterButtonRoute = DocsKomponenterButtonImport.update({
-  id: '/komponenter/button',
-  path: '/komponenter/button',
+const DocsKomponenterBuuttonRoute = DocsKomponenterBuuttonImport.update({
+  id: '/komponenter/buutton',
+  path: '/komponenter/buutton',
   getParentRoute: () => DocsRoute,
 } as any)
 
-const DocsKomponenterBadgeRoute = DocsKomponenterBadgeImport.update({
-  id: '/komponenter/badge',
-  path: '/komponenter/badge',
+const DocsKomponenterBaadgeRoute = DocsKomponenterBaadgeImport.update({
+  id: '/komponenter/baadge',
+  path: '/komponenter/baadge',
   getParentRoute: () => DocsRoute,
 } as any)
 
@@ -108,18 +108,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsKomponenterSlugImport
       parentRoute: typeof DocsImport
     }
-    '/_docs/komponenter/badge': {
-      id: '/_docs/komponenter/badge'
-      path: '/komponenter/badge'
-      fullPath: '/komponenter/badge'
-      preLoaderRoute: typeof DocsKomponenterBadgeImport
+    '/_docs/komponenter/baadge': {
+      id: '/_docs/komponenter/baadge'
+      path: '/komponenter/baadge'
+      fullPath: '/komponenter/baadge'
+      preLoaderRoute: typeof DocsKomponenterBaadgeImport
       parentRoute: typeof DocsImport
     }
-    '/_docs/komponenter/button': {
-      id: '/_docs/komponenter/button'
-      path: '/komponenter/button'
-      fullPath: '/komponenter/button'
-      preLoaderRoute: typeof DocsKomponenterButtonImport
+    '/_docs/komponenter/buutton': {
+      id: '/_docs/komponenter/buutton'
+      path: '/komponenter/buutton'
+      fullPath: '/komponenter/buutton'
+      preLoaderRoute: typeof DocsKomponenterBuuttonImport
       parentRoute: typeof DocsImport
     }
     '/_docs/komponenter/': {
@@ -138,8 +138,8 @@ interface DocsRouteChildren {
   DocsIkonerRoute: typeof DocsIkonerRoute
   DocsIndexRoute: typeof DocsIndexRoute
   DocsKomponenterSlugRoute: typeof DocsKomponenterSlugRoute
-  DocsKomponenterBadgeRoute: typeof DocsKomponenterBadgeRoute
-  DocsKomponenterButtonRoute: typeof DocsKomponenterButtonRoute
+  DocsKomponenterBaadgeRoute: typeof DocsKomponenterBaadgeRoute
+  DocsKomponenterBuuttonRoute: typeof DocsKomponenterBuuttonRoute
   DocsKomponenterIndexRoute: typeof DocsKomponenterIndexRoute
 }
 
@@ -147,8 +147,8 @@ const DocsRouteChildren: DocsRouteChildren = {
   DocsIkonerRoute: DocsIkonerRoute,
   DocsIndexRoute: DocsIndexRoute,
   DocsKomponenterSlugRoute: DocsKomponenterSlugRoute,
-  DocsKomponenterBadgeRoute: DocsKomponenterBadgeRoute,
-  DocsKomponenterButtonRoute: DocsKomponenterButtonRoute,
+  DocsKomponenterBaadgeRoute: DocsKomponenterBaadgeRoute,
+  DocsKomponenterBuuttonRoute: DocsKomponenterBuuttonRoute,
   DocsKomponenterIndexRoute: DocsKomponenterIndexRoute,
 }
 
@@ -160,8 +160,8 @@ export interface FileRoutesByFullPath {
   '/studio/$': typeof StudioSplatRoute
   '/': typeof DocsIndexRoute
   '/komponenter/$slug': typeof DocsKomponenterSlugRoute
-  '/komponenter/badge': typeof DocsKomponenterBadgeRoute
-  '/komponenter/button': typeof DocsKomponenterButtonRoute
+  '/komponenter/baadge': typeof DocsKomponenterBaadgeRoute
+  '/komponenter/buutton': typeof DocsKomponenterBuuttonRoute
   '/komponenter': typeof DocsKomponenterIndexRoute
 }
 
@@ -170,8 +170,8 @@ export interface FileRoutesByTo {
   '/studio/$': typeof StudioSplatRoute
   '/': typeof DocsIndexRoute
   '/komponenter/$slug': typeof DocsKomponenterSlugRoute
-  '/komponenter/badge': typeof DocsKomponenterBadgeRoute
-  '/komponenter/button': typeof DocsKomponenterButtonRoute
+  '/komponenter/baadge': typeof DocsKomponenterBaadgeRoute
+  '/komponenter/buutton': typeof DocsKomponenterBuuttonRoute
   '/komponenter': typeof DocsKomponenterIndexRoute
 }
 
@@ -182,8 +182,8 @@ export interface FileRoutesById {
   '/studio/$': typeof StudioSplatRoute
   '/_docs/': typeof DocsIndexRoute
   '/_docs/komponenter/$slug': typeof DocsKomponenterSlugRoute
-  '/_docs/komponenter/badge': typeof DocsKomponenterBadgeRoute
-  '/_docs/komponenter/button': typeof DocsKomponenterButtonRoute
+  '/_docs/komponenter/baadge': typeof DocsKomponenterBaadgeRoute
+  '/_docs/komponenter/buutton': typeof DocsKomponenterBuuttonRoute
   '/_docs/komponenter/': typeof DocsKomponenterIndexRoute
 }
 
@@ -195,8 +195,8 @@ export interface FileRouteTypes {
     | '/studio/$'
     | '/'
     | '/komponenter/$slug'
-    | '/komponenter/badge'
-    | '/komponenter/button'
+    | '/komponenter/baadge'
+    | '/komponenter/buutton'
     | '/komponenter'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -204,8 +204,8 @@ export interface FileRouteTypes {
     | '/studio/$'
     | '/'
     | '/komponenter/$slug'
-    | '/komponenter/badge'
-    | '/komponenter/button'
+    | '/komponenter/baadge'
+    | '/komponenter/buutton'
     | '/komponenter'
   id:
     | '__root__'
@@ -214,8 +214,8 @@ export interface FileRouteTypes {
     | '/studio/$'
     | '/_docs/'
     | '/_docs/komponenter/$slug'
-    | '/_docs/komponenter/badge'
-    | '/_docs/komponenter/button'
+    | '/_docs/komponenter/baadge'
+    | '/_docs/komponenter/buutton'
     | '/_docs/komponenter/'
   fileRoutesById: FileRoutesById
 }
@@ -250,8 +250,8 @@ export const routeTree = rootRoute
         "/_docs/ikoner",
         "/_docs/",
         "/_docs/komponenter/$slug",
-        "/_docs/komponenter/badge",
-        "/_docs/komponenter/button",
+        "/_docs/komponenter/baadge",
+        "/_docs/komponenter/buutton",
         "/_docs/komponenter/"
       ]
     },
@@ -270,12 +270,12 @@ export const routeTree = rootRoute
       "filePath": "_docs/komponenter.$slug.tsx",
       "parent": "/_docs"
     },
-    "/_docs/komponenter/badge": {
-      "filePath": "_docs/komponenter/badge.tsx",
+    "/_docs/komponenter/baadge": {
+      "filePath": "_docs/komponenter/baadge.tsx",
       "parent": "/_docs"
     },
-    "/_docs/komponenter/button": {
-      "filePath": "_docs/komponenter/button.tsx",
+    "/_docs/komponenter/buutton": {
+      "filePath": "_docs/komponenter/buutton.tsx",
       "parent": "/_docs"
     },
     "/_docs/komponenter/": {
