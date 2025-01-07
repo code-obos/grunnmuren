@@ -1,6 +1,6 @@
 import * as badgeExamples from '@/examples/badge';
 import * as buttonExamples from '@/examples/button';
-import { sanityFetch } from '@/lib/sanity';
+import { sanityFetch } from '@/lib/sanity.server';
 import { Content } from '@/ui/content';
 import { PropsTable } from '@/ui/props-table';
 import { createFileRoute, notFound } from '@tanstack/react-router';
@@ -15,8 +15,10 @@ export const Route = createFileRoute('/_docs/komponenter/$slug')({
   component: Page,
   loader: async ({ params }) => {
     const res = await sanityFetch({
-      query: COMPONENT_QUERY,
-      params: { slug: params.slug },
+      data: {
+        query: COMPONENT_QUERY,
+        params: { slug: params.slug },
+      },
     });
 
     if (res.data == null) {

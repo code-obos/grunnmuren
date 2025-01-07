@@ -1,4 +1,5 @@
 import { sanityFetch } from '@/lib/sanity';
+import { VisualEditing } from '@/lib/visual-editing';
 import appCss from '@/styles/app.css?url';
 import { Footer } from '@/ui/footer';
 import { MainNav } from '@/ui/main-nav';
@@ -56,6 +57,7 @@ function RootLayout() {
         </div>
       </GrunnmurenProvider>
       <ScrollRestoration />
+      <VisualEditing />
     </>
   );
 }

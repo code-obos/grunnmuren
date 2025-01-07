@@ -5,6 +5,7 @@ dist/
 storybook-static/
 next-env.d.ts
 
+packages/icons-react/icons.tsx
 
 # editors
 .idea/
@@ -17,5 +18,4 @@ next-env.d.ts
 
 # Secrets
 .FIGMA_TOKEN
-.vercel
-packages/icons-react/icons.tsx
+.env.local
