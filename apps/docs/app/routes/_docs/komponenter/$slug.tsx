@@ -44,11 +44,11 @@ function Page() {
     <>
       <h1 className="heading-l mb-12 mt-9">{data.name}</h1>
 
+      <Content content={data.content ?? []} />
+
       {examples.map(({ title, code }) => (
         <ComponentPreview scope={scope} key={title} title={title} code={code} />
       ))}
-
-      <Content content={data.content ?? []} />
 
       <PropsTable props={componentProps} />
     </>
