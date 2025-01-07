@@ -9,7 +9,7 @@ export function Footer() {
     <footer className="mt-8 border-t border-t-gray-light">
       <div className="grid grid-flow-col py-8">
         <div className="flex flex-col justify-between">
-          <Link href="/" aria-label="Gå til forsiden">
+          <Link to="/" aria-label="Gå til forsiden">
             <img src={logoUrl} alt="" className="max-w-32" />
           </Link>
           <p className="flex">© {currentYear} OBOS</p>

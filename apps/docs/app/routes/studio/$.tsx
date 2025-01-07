@@ -9,4 +9,6 @@ export const Route = createFileRoute('/studio/$')({
     links: [{ rel: 'stylesheet', href: cssLink }],
   }),
   component: () => <Studio config={sanityConfig} />,
+  // Disable SSR for this route, as the studio is not meant to be rendered on the server
+  ssr: false,
 });
