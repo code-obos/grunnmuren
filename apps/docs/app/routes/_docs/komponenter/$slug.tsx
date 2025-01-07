@@ -2,13 +2,14 @@ import * as badgeExamples from '@/examples/badge';
 import * as buttonExamples from '@/examples/button';
 import { sanityFetch } from '@/lib/sanity';
 import { ComponentPreview } from '@/ui/component-preview';
+import { Content } from '@/ui/content';
 import { PropsTable } from '@/ui/props-table';
 import { createFileRoute, notFound } from '@tanstack/react-router';
 import * as props from 'docgen';
 import { defineQuery } from 'groq';
 
 const COMPONENT_QUERY = defineQuery(
-  `*[_type == "component" && slug.current == $slug][0]{ "name": coalesce(name, '') }`,
+  `*[_type == "component" && slug.current == $slug][0]{ content, "name": coalesce(name, '') }`,
 );
 
 export const Route = createFileRoute('/_docs/komponenter/$slug')({
@@ -42,6 +43,8 @@ function Page() {
   return (
     <>
       <h1 className="heading-l mb-12 mt-9">{data.name}</h1>
+
+      <Content content={data.content ?? []} />
 
       {examples.map(({ title, code }) => (
         <ComponentPreview scope={scope} key={title} title={title} code={code} />
