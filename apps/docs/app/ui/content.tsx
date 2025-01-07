@@ -1,8 +1,7 @@
 import { PortableText } from '@portabletext/react';
 import type { Content as IContent } from 'sanity.types';
 
-const components = {
-};
+const components = {};
 
 export function Content({ content }: { content: IContent }) {
   return (
