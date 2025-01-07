@@ -108,8 +108,10 @@ type CardLinkWrapperProps = {
   [K in keyof Omit<RACLinkProps, 'className' | 'children'>]?: never;
 };
 
+type S = Pick<RACLinkProps, 'href'>;
+
 type CardLinkProps =
-  | (Omit<RACLinkProps, 'href'> & { href: string })
+  | (Omit<RACLinkProps, 'href'> & Required<Pick<RACLinkProps, 'href'>>)
   | CardLinkWrapperProps;
 
 const cardLinkVariants = cva({
