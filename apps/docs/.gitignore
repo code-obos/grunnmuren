@@ -4,3 +4,6 @@
 public/resources/icons/
 public/storybook
 component-props.ts
+docgen.ts
+
+.env
