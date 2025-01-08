@@ -1,7 +1,7 @@
-import * as icons from '@obosbbl/grunnmuren-icons-react'
-import { Box, Download, Figma, Github } from '@obosbbl/grunnmuren-icons-react'
-import { Button, Card } from '@obosbbl/grunnmuren-react'
-import { createFileRoute } from '@tanstack/react-router'
+import * as icons from '@obosbbl/grunnmuren-icons-react';
+import { Box, Download, Figma, Github } from '@obosbbl/grunnmuren-icons-react';
+import { Button, Card } from '@obosbbl/grunnmuren-react';
+import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/_docs/profil/ikoner')({
   component: Page,
@@ -11,7 +11,7 @@ export const Route = createFileRoute('/_docs/profil/ikoner')({
       { name: 'description', content: 'Grunnmuren sitt ikonsett' },
     ],
   }),
-})
+});
 
 function Page() {
   return (
@@ -64,7 +64,7 @@ function Page() {
       </div>
       <IconsGrid />
     </>
-  )
+  );
 }
 
 function IconsGrid() {
@@ -76,11 +76,11 @@ function IconsGrid() {
         ))}
       </div>
     </>
-  )
+  );
 }
 
 function IconCard({ iconName, Icon }) {
-  const downloadSvgLink = `/resources/icons/${iconName}.svg`
+  const downloadSvgLink = `/resources/icons/${iconName}.svg`;
 
   return (
     <Card className="bg-gray-lightest" key={iconName}>
@@ -96,5 +96,5 @@ function IconCard({ iconName, Icon }) {
         <Download className="flex-none" />
       </Button>
     </Card>
-  )
+  );
 }
