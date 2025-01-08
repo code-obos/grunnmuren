@@ -1,14 +1,19 @@
 import { ChevronLeft } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
 import { type Ref, forwardRef } from 'react';
-import { Button, type ButtonProps, Link } from 'react-aria-components';
+import {
+  Button,
+  type ButtonProps,
+  Link,
+  type LinkProps as RACLinkProps,
+} from 'react-aria-components';
 
 type ButtonOrLinkProps = {
   children?: React.ReactNode;
   /** Additional CSS className for the element. */
   className?: string;
   /** Determines whether to use an anchor or a button for the Backlink */
-  href?: string;
+  href?: RACLinkProps['href'];
   /** To add a permanent underline on the link (not only on hover)
    * @default false
    */

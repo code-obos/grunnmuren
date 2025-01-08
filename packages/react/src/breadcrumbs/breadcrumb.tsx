@@ -5,6 +5,7 @@ import {
   Link,
   Breadcrumb as RACBreadcrumb,
   type BreadcrumbProps as RACBreadcrumbProps,
+  type LinkProps as RACLinkProps,
 } from 'react-aria-components';
 
 type BreadcrumbProps = {
@@ -16,7 +17,7 @@ type BreadcrumbProps = {
   style?: React.CSSProperties;
 
   /** The URL to navigate to when clicking the breadcrumb. */
-  href?: string;
+  href?: RACLinkProps['href'];
 } & Omit<RACBreadcrumbProps, 'className' | 'style'>;
 
 function Breadcrumb(props: BreadcrumbProps, ref: Ref<HTMLLIElement>) {

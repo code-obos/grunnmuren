@@ -115,7 +115,7 @@ const buttonVariants = cva({
 
 type ButtonOrLinkProps = VariantProps<typeof buttonVariants> & {
   children?: React.ReactNode;
-  href?: string;
+  href?: RACLinkProps['href'];
   /**
    * Display the button in a loading state
    * @deprecated Use isPending instead.
