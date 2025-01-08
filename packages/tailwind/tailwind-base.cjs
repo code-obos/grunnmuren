@@ -590,7 +590,7 @@ function hexToRgb(hex) {
   }
 
   // Parse the r, g, and b values from the hex string
-  const r = Number.parseInt(heValuex.substring(0, 2), 16);
+  const r = Number.parseInt(hexValue.substring(0, 2), 16);
   const g = Number.parseInt(hexValue.substring(2, 4), 16);
   const b = Number.parseInt(hexValue.substring(4, 6), 16);
 
