@@ -39,7 +39,7 @@ function RouteComponent() {
   // Make sure to read the colors from the custom properties when the component mounts client side
   useLayoutEffect(() => {
     setColors(getAllColors());
-  }, [colors]);
+  }, []);
 
   if (!colors) {
     // Return null if the colors are not loaded yet (usually this will only happen on the server)
