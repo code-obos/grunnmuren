@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.0.0-canary.10
+
+### Patch Changes
+
+- 585e6da: Fixes the custom colors so they work with tailwinds [opacity modifier](https://tailwindcss.com/docs/text-color#changing-the-opacity)
+
 ## 2.0.0-canary.9
 
 ### Patch Changes
