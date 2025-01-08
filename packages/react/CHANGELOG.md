@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.44
+
+### Patch Changes
+
+- 8cea558: Adding support for all RAC Link props on the CardLink component. This makes it possible to pass props like `onPress` and other events, which again enables tracking and so on.
+
 ## 2.0.0-canary.43
 
 ### Patch Changes
