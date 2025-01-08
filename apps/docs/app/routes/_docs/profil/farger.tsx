@@ -1,4 +1,6 @@
+'use client';
 import { createFileRoute } from '@tanstack/react-router';
+import { useLayoutEffect, useRef } from 'react';
 
 export const Route = createFileRoute('/_docs/profil/farger')({
   component: RouteComponent,
@@ -26,7 +28,10 @@ function getAllColors() {
 }
 
 function RouteComponent() {
-  const colors = getAllColors();
+  const colorsRef = useRef<null | >(null);
+  useLayoutEffect(() => {
+    colorsRef.current = getAllColors();
+  }, [colorsRef])
 
   return (
     <>
