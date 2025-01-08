@@ -1,11 +1,15 @@
 'use client';
 import { createFileRoute } from '@tanstack/react-router';
-import { useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useState } from 'react';
 
 export const Route = createFileRoute('/_docs/profil/farger')({
   component: RouteComponent,
 });
 
+/**
+ * Retrieves all colors from the CSS variables in the document.
+ * @returns a record of all colors
+ */
 function getAllColors() {
   const cssVariables: Record<string, string> = {};
 
@@ -28,10 +32,19 @@ function getAllColors() {
 }
 
 function RouteComponent() {
-  const colorsRef = useRef<null | >(null);
+  const [colors, setColors] = useState<null | {
+    [key: string]: string;
+  }>(null);
+
+  // Make sure to read the colors from the custom properties when the component mounts client side
   useLayoutEffect(() => {
-    colorsRef.current = getAllColors();
-  }, [colorsRef])
+    setColors(getAllColors());
+  }, [colors]);
+
+  if (!colors) {
+    // Return null if the colors are not loaded yet (usually this will only happen on the server)
+    return null;
+  }
 
   return (
     <>
