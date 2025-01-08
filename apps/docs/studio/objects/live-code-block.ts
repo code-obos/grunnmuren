@@ -1,10 +1,10 @@
 import { defineField, defineType } from 'sanity';
 
 const codeBlock = defineType({
-  name: 'code-block',
-  title: 'Code Block',
+  name: 'live-code-block',
+  title: 'Live Code Block',
   description:
-    "Great for simple code snippets that doesn't vary based on the language selected",
+    "For editable code snippets that also can control rendering. Use 'Static Code Block' for static, non editable code snippets.",
   type: 'object',
   fields: [
     defineField({
@@ -13,11 +13,9 @@ const codeBlock = defineType({
       type: 'code',
       options: {
         language: 'tsx',
-        languageAlternatives: [
-          { title: 'TypeScript / React', value: 'tsx' },
-          { title: 'Bash', value: 'bash' },
-        ],
+        languageAlternatives: [{ title: 'TypeScript / React', value: 'tsx' }],
       },
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'caption',

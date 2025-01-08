@@ -16,7 +16,8 @@ const content = defineType({
         { title: 'Quote', value: 'blockquote' },
       ],
     },
-    { type: 'code-block' },
+    { type: 'live-code-block' },
+    { type: 'static-code-block' },
   ],
 });
 
