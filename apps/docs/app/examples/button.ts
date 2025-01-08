@@ -1,15 +1,9 @@
-import { ComponentPreview } from '@/ui/component-preview';
-import { PropsTable } from '@/ui/props-table';
 import { Edit, Search } from '@obosbbl/grunnmuren-icons-react';
 import { Button } from '@obosbbl/grunnmuren-react';
-import { createFileRoute } from '@tanstack/react-router';
-import { ButtonDoc } from 'docgen';
 
-export const Route = createFileRoute('/_docs/komponenter/button')({
-  component: Page,
-});
+export const scope = { Button, Edit, Search };
 
-const examples = [
+export const examples = [
   { title: 'Knapp', code: '<Button>Knapp</Button>' },
   {
     title: 'Lenke-knapp',
@@ -140,24 +134,3 @@ const examples = [
       `,
   },
 ];
-
-function Page() {
-  return (
-    <>
-      <h1 className="heading-l mb-12 mt-9">{ButtonDoc.displayName}</h1>
-      <div className="prose">
-        <p>{ButtonDoc.description}</p>
-      </div>
-
-      {examples.map(({ title, code }) => (
-        <ComponentPreview
-          scope={{ Button, Edit, Search }}
-          key={title}
-          title={title}
-          code={code}
-        />
-      ))}
-      <PropsTable props={ButtonDoc.props} />
-    </>
-  );
-}

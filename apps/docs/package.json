@@ -11,23 +11,30 @@
     "build:assets": "mkdir -p public/resources/icons && cp -r node_modules/@obosbbl/grunnmuren-icons-svg/src/ public/resources/icons",
     "build:docgen": "node build-docs.js && prettier --write docgen.ts --ignore-path",
     "dev": "vinxi dev",
-    "start": "vinxi start"
+    "start": "vinxi start",
+    "typegen:extract": "sanity schema extract",
+    "typegen:generate": "sanity typegen generate"
   },
   "dependencies": {
     "@code-obos/sanity-auth": "1.4.0",
     "@obosbbl/grunnmuren-icons-react": "workspace:*",
     "@obosbbl/grunnmuren-icons-svg": "workspace:*",
     "@obosbbl/grunnmuren-react": "workspace:*",
-    "@tanstack/react-router": "1.91.2",
-    "@tanstack/start": "1.91.2",
+    "@portabletext/react": "3.2.0",
+    "@sanity/client": "6.24.1",
+    "@sanity/code-input": "5.1.2",
+    "@sanity/vision": "3.68.3",
+    "@tanstack/react-router": "1.95.1",
+    "@tanstack/start": "1.95.1",
     "cva": "1.0.0-beta.2",
-    "prism-react-renderer": "2.4.0",
+    "groq": "3.68.3",
+    "prism-react-renderer": "2.4.1",
     "react": "19.0.0",
     "react-aria-components": "1.5.0",
     "react-dom": "19.0.0",
     "react-element-to-jsx-string": "15.0.0",
     "react-live": "4.1.8",
-    "sanity": "3.67.1",
+    "sanity": "3.68.3",
     "vinxi": "0.5.1"
   },
   "devDependencies": {
@@ -36,7 +43,7 @@
     "autoprefixer": "10.4.20",
     "postcss": "8.4.49",
     "react-docgen-typescript": "2.2.2",
-    "tailwindcss": "3.4.15",
+    "tailwindcss": "3.4.17",
     "vite-tsconfig-paths": "5.1.4"
   }
 }

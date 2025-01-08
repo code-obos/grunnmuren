@@ -11,21 +11,14 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as StudioImport } from './routes/studio'
 import { Route as DocsImport } from './routes/_docs'
 import { Route as DocsIndexImport } from './routes/_docs/index'
-import { Route as DocsProfilIkonerImport } from './routes/_docs/profil/ikoner'
-import { Route as DocsProfilFargerImport } from './routes/_docs/profil/farger'
-import { Route as DocsKomponenterButtonImport } from './routes/_docs/komponenter/button'
-import { Route as DocsKomponenterBadgeImport } from './routes/_docs/komponenter/badge'
+import { Route as StudioSplatImport } from './routes/studio/$'
+import { Route as DocsIkonerImport } from './routes/_docs/ikoner'
+import { Route as DocsKomponenterIndexImport } from './routes/_docs/komponenter/index'
+import { Route as DocsKomponenterSlugImport } from './routes/_docs/komponenter/$slug'
 
 // Create/Update Routes
-
-const StudioRoute = StudioImport.update({
-  id: '/studio',
-  path: '/studio',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const DocsRoute = DocsImport.update({
   id: '/_docs',
@@ -38,27 +31,27 @@ const DocsIndexRoute = DocsIndexImport.update({
   getParentRoute: () => DocsRoute,
 } as any)
 
-const DocsProfilIkonerRoute = DocsProfilIkonerImport.update({
-  id: '/profil/ikoner',
-  path: '/profil/ikoner',
+const StudioSplatRoute = StudioSplatImport.update({
+  id: '/studio/$',
+  path: '/studio/$',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DocsIkonerRoute = DocsIkonerImport.update({
+  id: '/ikoner',
+  path: '/ikoner',
   getParentRoute: () => DocsRoute,
 } as any)
 
-const DocsProfilFargerRoute = DocsProfilFargerImport.update({
-  id: '/profil/farger',
-  path: '/profil/farger',
+const DocsKomponenterIndexRoute = DocsKomponenterIndexImport.update({
+  id: '/komponenter/',
+  path: '/komponenter/',
   getParentRoute: () => DocsRoute,
 } as any)
 
-const DocsKomponenterButtonRoute = DocsKomponenterButtonImport.update({
-  id: '/komponenter/button',
-  path: '/komponenter/button',
-  getParentRoute: () => DocsRoute,
-} as any)
-
-const DocsKomponenterBadgeRoute = DocsKomponenterBadgeImport.update({
-  id: '/komponenter/badge',
-  path: '/komponenter/badge',
+const DocsKomponenterSlugRoute = DocsKomponenterSlugImport.update({
+  id: '/komponenter/$slug',
+  path: '/komponenter/$slug',
   getParentRoute: () => DocsRoute,
 } as any)
 
@@ -73,11 +66,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsImport
       parentRoute: typeof rootRoute
     }
-    '/studio': {
-      id: '/studio'
-      path: '/studio'
-      fullPath: '/studio'
-      preLoaderRoute: typeof StudioImport
+    '/_docs/ikoner': {
+      id: '/_docs/ikoner'
+      path: '/ikoner'
+      fullPath: '/ikoner'
+      preLoaderRoute: typeof DocsIkonerImport
+      parentRoute: typeof DocsImport
+    }
+    '/studio/$': {
+      id: '/studio/$'
+      path: '/studio/$'
+      fullPath: '/studio/$'
+      preLoaderRoute: typeof StudioSplatImport
       parentRoute: typeof rootRoute
     }
     '/_docs/': {
@@ -87,32 +87,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsIndexImport
       parentRoute: typeof DocsImport
     }
-    '/_docs/komponenter/badge': {
-      id: '/_docs/komponenter/badge'
-      path: '/komponenter/badge'
-      fullPath: '/komponenter/badge'
-      preLoaderRoute: typeof DocsKomponenterBadgeImport
+    '/_docs/komponenter/$slug': {
+      id: '/_docs/komponenter/$slug'
+      path: '/komponenter/$slug'
+      fullPath: '/komponenter/$slug'
+      preLoaderRoute: typeof DocsKomponenterSlugImport
       parentRoute: typeof DocsImport
     }
-    '/_docs/komponenter/button': {
-      id: '/_docs/komponenter/button'
-      path: '/komponenter/button'
-      fullPath: '/komponenter/button'
-      preLoaderRoute: typeof DocsKomponenterButtonImport
-      parentRoute: typeof DocsImport
-    }
-    '/_docs/profil/farger': {
-      id: '/_docs/profil/farger'
-      path: '/profil/farger'
-      fullPath: '/profil/farger'
-      preLoaderRoute: typeof DocsProfilFargerImport
-      parentRoute: typeof DocsImport
-    }
-    '/_docs/profil/ikoner': {
-      id: '/_docs/profil/ikoner'
-      path: '/profil/ikoner'
-      fullPath: '/profil/ikoner'
-      preLoaderRoute: typeof DocsProfilIkonerImport
+    '/_docs/komponenter/': {
+      id: '/_docs/komponenter/'
+      path: '/komponenter'
+      fullPath: '/komponenter'
+      preLoaderRoute: typeof DocsKomponenterIndexImport
       parentRoute: typeof DocsImport
     }
   }
@@ -122,90 +108,75 @@ declare module '@tanstack/react-router' {
 
 interface DocsRouteChildren {
   DocsIndexRoute: typeof DocsIndexRoute
-  DocsKomponenterBadgeRoute: typeof DocsKomponenterBadgeRoute
-  DocsKomponenterButtonRoute: typeof DocsKomponenterButtonRoute
-  DocsProfilFargerRoute: typeof DocsProfilFargerRoute
-  DocsProfilIkonerRoute: typeof DocsProfilIkonerRoute
+  DocsKomponenterSlugRoute: typeof DocsKomponenterSlugRoute
+  DocsKomponenterIndexRoute: typeof DocsKomponenterIndexRoute
 }
 
 const DocsRouteChildren: DocsRouteChildren = {
   DocsIndexRoute: DocsIndexRoute,
-  DocsKomponenterBadgeRoute: DocsKomponenterBadgeRoute,
-  DocsKomponenterButtonRoute: DocsKomponenterButtonRoute,
-  DocsProfilFargerRoute: DocsProfilFargerRoute,
-  DocsProfilIkonerRoute: DocsProfilIkonerRoute,
+  DocsKomponenterSlugRoute: DocsKomponenterSlugRoute,
+  DocsKomponenterIndexRoute: DocsKomponenterIndexRoute,
 }
 
 const DocsRouteWithChildren = DocsRoute._addFileChildren(DocsRouteChildren)
 
 export interface FileRoutesByFullPath {
   '': typeof DocsRouteWithChildren
-  '/studio': typeof StudioRoute
+  '/ikoner': typeof DocsIkonerRoute
+  '/studio/$': typeof StudioSplatRoute
   '/': typeof DocsIndexRoute
-  '/komponenter/badge': typeof DocsKomponenterBadgeRoute
-  '/komponenter/button': typeof DocsKomponenterButtonRoute
-  '/profil/farger': typeof DocsProfilFargerRoute
-  '/profil/ikoner': typeof DocsProfilIkonerRoute
+  '/komponenter/$slug': typeof DocsKomponenterSlugRoute
+  '/komponenter': typeof DocsKomponenterIndexRoute
 }
 
 export interface FileRoutesByTo {
-  '/studio': typeof StudioRoute
+  '/ikoner': typeof DocsIkonerRoute
+  '/studio/$': typeof StudioSplatRoute
   '/': typeof DocsIndexRoute
-  '/komponenter/badge': typeof DocsKomponenterBadgeRoute
-  '/komponenter/button': typeof DocsKomponenterButtonRoute
-  '/profil/farger': typeof DocsProfilFargerRoute
-  '/profil/ikoner': typeof DocsProfilIkonerRoute
+  '/komponenter/$slug': typeof DocsKomponenterSlugRoute
+  '/komponenter': typeof DocsKomponenterIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_docs': typeof DocsRouteWithChildren
-  '/studio': typeof StudioRoute
+  '/_docs/ikoner': typeof DocsIkonerRoute
+  '/studio/$': typeof StudioSplatRoute
   '/_docs/': typeof DocsIndexRoute
-  '/_docs/komponenter/badge': typeof DocsKomponenterBadgeRoute
-  '/_docs/komponenter/button': typeof DocsKomponenterButtonRoute
-  '/_docs/profil/farger': typeof DocsProfilFargerRoute
-  '/_docs/profil/ikoner': typeof DocsProfilIkonerRoute
+  '/_docs/komponenter/$slug': typeof DocsKomponenterSlugRoute
+  '/_docs/komponenter/': typeof DocsKomponenterIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | ''
-    | '/studio'
+    | '/ikoner'
+    | '/studio/$'
     | '/'
-    | '/komponenter/badge'
-    | '/komponenter/button'
-    | '/profil/farger'
-    | '/profil/ikoner'
+    | '/komponenter/$slug'
+    | '/komponenter'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/studio'
-    | '/'
-    | '/komponenter/badge'
-    | '/komponenter/button'
-    | '/profil/farger'
-    | '/profil/ikoner'
+  to: '/ikoner' | '/studio/$' | '/' | '/komponenter/$slug' | '/komponenter'
   id:
     | '__root__'
     | '/_docs'
-    | '/studio'
+    | '/_docs/ikoner'
+    | '/studio/$'
     | '/_docs/'
-    | '/_docs/komponenter/badge'
-    | '/_docs/komponenter/button'
-    | '/_docs/profil/farger'
-    | '/_docs/profil/ikoner'
+    | '/_docs/komponenter/$slug'
+    | '/_docs/komponenter/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   DocsRoute: typeof DocsRouteWithChildren
-  StudioRoute: typeof StudioRoute
+  StudioSplatRoute: typeof StudioSplatRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   DocsRoute: DocsRouteWithChildren,
-  StudioRoute: StudioRoute,
+  StudioSplatRoute: StudioSplatRoute,
 }
 
 export const routeTree = rootRoute
@@ -219,40 +190,34 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/_docs",
-        "/studio"
+        "/studio/$"
       ]
     },
     "/_docs": {
       "filePath": "_docs.tsx",
       "children": [
         "/_docs/",
-        "/_docs/komponenter/badge",
-        "/_docs/komponenter/button",
-        "/_docs/profil/farger",
-        "/_docs/profil/ikoner"
+        "/_docs/komponenter/$slug",
+        "/_docs/komponenter/"
       ]
     },
-    "/studio": {
-      "filePath": "studio.tsx"
+    "/_docs/ikoner": {
+      "filePath": "_docs/ikoner.tsx",
+      "parent": "/_docs"
+    },
+    "/studio/$": {
+      "filePath": "studio/$.tsx"
     },
     "/_docs/": {
       "filePath": "_docs/index.tsx",
       "parent": "/_docs"
     },
-    "/_docs/komponenter/badge": {
-      "filePath": "_docs/komponenter/badge.tsx",
+    "/_docs/komponenter/$slug": {
+      "filePath": "_docs/komponenter/$slug.tsx",
       "parent": "/_docs"
     },
-    "/_docs/komponenter/button": {
-      "filePath": "_docs/komponenter/button.tsx",
-      "parent": "/_docs"
-    },
-    "/_docs/profil/farger": {
-      "filePath": "_docs/profil/farger.tsx",
-      "parent": "/_docs"
-    },
-    "/_docs/profil/ikoner": {
-      "filePath": "_docs/profil/ikoner.tsx",
+    "/_docs/komponenter/": {
+      "filePath": "_docs/komponenter/index.tsx",
       "parent": "/_docs"
     }
   }
