@@ -61,18 +61,23 @@ function RouteComponent() {
   );
 }
 
-const Color = ({ name, value }) => (
-  <div
-    style={{
-      backgroundColor: value,
-      // Makes sure the text has enough contrast by calculating the color based on the background color
-      // This will yield a color that is either black or white
-      // Refer to: https://til.jakelazaroff.com/css/swap-between-black-and-white-text-based-on-background-color/
-      color: `lch(from ${value} calc((54 - l) * infinity) 0 0)`,
-      border: value === '#fff' ? '1px solid var(--gm-color-blue-dark)' : '',
-    }}
-    className="grid h-32 w-32 items-end"
-  >
-    <span className="block p-2 text-sm">{name}</span>
-  </div>
-);
+const Color = ({ name, value }) => {
+  const color = `rgb(${value.split(' ').join(', ')})`;
+
+  return (
+    <div
+      style={{
+        backgroundColor: color,
+        // Makes sure the text has enough contrast by calculating the color based on the background color
+        // This will yield a color that is either black or white
+        // Refer to: https://til.jakelazaroff.com/css/swap-between-black-and-white-text-based-on-background-color/
+        color: `lch(from ${color} calc((54 - l) * infinity) 0 0)`,
+        border:
+          name === 'white' ? '1px solid rgb(var(--gm-color-blue-dark))' : '',
+      }}
+      className="grid h-32 w-32 items-end"
+    >
+      <span className="block p-2 text-sm">{name}</span>
+    </div>
+  );
+};
