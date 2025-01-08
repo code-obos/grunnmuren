@@ -579,20 +579,20 @@ module.exports = (options = {}) => {
  */
 function hexToRgb(hex) {
   // Remove the hash (#) at the start if it's there
-  hex = hex.replace(/^#/, '');
+  let hexValue = hex.replace(/^#/, '');
 
   // If the hex value is shorthand (3 characters), expand it to 6 characters
-  if (hex.length === 3) {
-    hex = hex
+  if (hexValue.length === 3) {
+    hexValue = hexValue
       .split('')
       .map((char) => char + char)
       .join('');
   }
 
   // Parse the r, g, and b values from the hex string
-  const r = parseInt(hex.substring(0, 2), 16);
-  const g = parseInt(hex.substring(2, 4), 16);
-  const b = parseInt(hex.substring(4, 6), 16);
+  const r = Number.parseInt(heValuex.substring(0, 2), 16);
+  const g = Number.parseInt(hexValue.substring(2, 4), 16);
+  const b = Number.parseInt(hexValue.substring(4, 6), 16);
 
   // Return the RGB values as a whitespace-separated string
   return `${r} ${g} ${b}`;
