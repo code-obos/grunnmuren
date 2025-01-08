@@ -12,7 +12,7 @@ function Home() {
       <div className="grid grid-cols-2 gap-4">
         <Card variant="outlined">
           <Heading level={2}>
-            <CardLink href="/">Komponenter</CardLink>
+            <CardLink href="/komponenter">Komponenter</CardLink>
           </Heading>
           Se alle byggeklossene våre
         </Card>

@@ -1,5 +1,6 @@
 import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
 import { Heading } from '@obosbbl/grunnmuren-react';
+import { getRouteApi } from '@tanstack/react-router';
 import { Link } from '@tanstack/react-router';
 import { Button, Disclosure, DisclosurePanel } from 'react-aria-components';
 
@@ -49,19 +50,6 @@ const MainNavItem = ({ title, subNavItems }: MainNavItemProps) => (
 
 const mainNavItems = [
   {
-    title: 'Komponenter',
-    subNavItems: [
-      {
-        to: '/komponenter/badge',
-        title: 'Badge',
-      },
-      {
-        to: '/komponenter/button',
-        title: 'Button',
-      },
-    ],
-  },
-  {
     title: 'Profil',
     subNavItems: [
       {
@@ -72,15 +60,26 @@ const mainNavItems = [
   },
 ];
 
-export const MainNav = () => (
-  <nav
-    className="-order-1 w-72 max-w-full bg-sky-lightest px-5 py-9"
-    aria-label="Navigasjonsmeny for grunnmuren"
-  >
-    <ul>
-      {mainNavItems.map((mainNavItem) => (
-        <MainNavItem key={mainNavItem.title} {...mainNavItem} />
-      ))}
-    </ul>
-  </nav>
-);
+export const MainNav = () => {
+  const routeApi = getRouteApi('/_docs');
+  const { data } = routeApi.useLoaderData();
+
+  const componentsNavLinks = data.map((component) => ({
+    to: `/komponenter/${component.slug}`,
+    title: component.name as string,
+  }));
+
+  return (
+    <nav
+      className="-order-1 w-72 max-w-full bg-sky-lightest px-5 py-9"
+      aria-label="Navigasjonsmeny for grunnmuren"
+    >
+      <ul>
+        <MainNavItem title="Komponenter" subNavItems={componentsNavLinks} />
+        {mainNavItems.map((mainNavItem) => (
+          <MainNavItem key={mainNavItem.title} {...mainNavItem} />
+        ))}
+      </ul>
+    </nav>
+  );
+};
