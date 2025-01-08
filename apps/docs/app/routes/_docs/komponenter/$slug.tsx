@@ -1,7 +1,6 @@
 import * as badgeExamples from '@/examples/badge';
 import * as buttonExamples from '@/examples/button';
 import { sanityFetch } from '@/lib/sanity';
-import { ComponentPreview } from '@/ui/component-preview';
 import { Content } from '@/ui/content';
 import { PropsTable } from '@/ui/props-table';
 import { createFileRoute, notFound } from '@tanstack/react-router';
@@ -45,10 +44,6 @@ function Page() {
       <h1 className="heading-l mb-12 mt-9">{data.name}</h1>
 
       <Content content={data.content ?? []} />
-
-      {examples.map(({ title, code }) => (
-        <ComponentPreview scope={scope} key={title} title={title} code={code} />
-      ))}
 
       <PropsTable props={componentProps} />
     </>
