@@ -1,5 +1,3 @@
-import { Edit, PaintRoller, Search } from '@obosbbl/grunnmuren-icons-react';
-import { Badge, Button } from '@obosbbl/grunnmuren-react';
 import { PortableText } from '@portabletext/react';
 import type { Content as IContent } from 'sanity.types';
 import { ComponentPreview } from './component-preview';
@@ -7,18 +5,14 @@ import { ComponentPreview } from './component-preview';
 const components = {
   types: {
     'live-code-block': ({ value }) => (
-      <ComponentPreview
-        scope={{ Badge, PaintRoller, Button, Edit, Search }}
-        title={value.caption}
-        code={value.code.code}
-      />
+      <ComponentPreview title={value.caption} code={value.code.code} />
     ),
   },
 };
 
 export function Content({ content }: { content: IContent }) {
   return (
-    <div>
+    <div className="prose">
       <PortableText value={content} components={components} />
     </div>
   );
