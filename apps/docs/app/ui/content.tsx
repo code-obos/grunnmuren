@@ -1,8 +1,8 @@
+import { Edit, PaintRoller, Search } from '@obosbbl/grunnmuren-icons-react';
+import { Badge, Button } from '@obosbbl/grunnmuren-react';
 import { PortableText } from '@portabletext/react';
 import type { Content as IContent } from 'sanity.types';
 import { ComponentPreview } from './component-preview';
-import { Badge, Button } from '@obosbbl/grunnmuren-react';
-import { PaintRoller, Edit, Search } from '@obosbbl/grunnmuren-icons-react';
 
 const components = {
   types: {
