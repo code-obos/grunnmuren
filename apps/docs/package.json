@@ -6,10 +6,11 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "pnpm build:assets && pnpm build:docgen && pnpm build:app",
+    "build": "pnpm build:docgen && pnpm build:tsc && pnpm build:assets && pnpm build:app",
     "build:app": "vinxi build",
     "build:assets": "mkdir -p public/resources/icons && cp -r node_modules/@obosbbl/grunnmuren-icons-svg/src/ public/resources/icons",
     "build:docgen": "node build-docs.js && prettier --write docgen.ts --ignore-path",
+    "build:tsc": "tsc",
     "dev": "vinxi dev",
     "start": "vinxi start",
     "typegen:extract": "sanity schema extract",

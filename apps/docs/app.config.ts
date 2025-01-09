@@ -17,6 +17,7 @@ export default defineConfig({
         }),
         enforce: 'pre',
       },
+      // @ts-expect-error errors due to transitive type only deps
       tsConfigPaths({
         projects: ['./tsconfig.json'],
       }),
