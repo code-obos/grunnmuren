@@ -1,6 +1,6 @@
-'use client';
 import { createFileRoute } from '@tanstack/react-router';
-import { useLayoutEffect, useState } from 'react';
+import { useState } from 'react';
+import { useLayoutEffect } from '@react-aria/utils';
 
 export const Route = createFileRoute('/_docs/profil/farger')({
   component: RouteComponent,
