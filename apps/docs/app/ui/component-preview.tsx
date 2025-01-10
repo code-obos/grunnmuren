@@ -22,11 +22,11 @@ export const ComponentPreview = ({ title, code }: ComponentPreviewProps) => {
   return (
     <LiveProvider
       code={codeString}
-      scope={{ GrunnmurenIconsScope, GrunnmurenScope }}
+      scope={{ ...GrunnmurenIconsScope, ...GrunnmurenScope }}
       theme={themes.vsDark}
     >
       <h3 className="heading-xs">{title}</h3>
-      <LivePreview className="flex gap-x-4" />
+      <LivePreview className="my-4 flex gap-x-4" />
       <div className="grid grid-cols-[1fr,auto] grid-rows-[auto,1fr] overflow-hidden rounded-lg bg-[#1e1e1e]">
         <LiveEditor
           tabMode="focus"
