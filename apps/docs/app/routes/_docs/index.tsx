@@ -18,9 +18,9 @@ function Home() {
         </Card>
         <Card variant="outlined">
           <Heading level={2}>
-            <CardLink href="/ikoner">Ikoner</CardLink>
+            <CardLink href="/profil">Profil</CardLink>
           </Heading>
-          Utforsk ikonsettet vårt
+          Utforsk profilen vår
         </Card>
       </div>
     </>
