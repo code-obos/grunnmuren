@@ -5,7 +5,7 @@ import { ComponentPreview } from './component-preview';
 const components = {
   types: {
     'live-code-block': ({ value }) => (
-      <ComponentPreview title={value.caption} code={value.code.code} />
+      <ComponentPreview caption={value.caption} code={value.code.code} />
     ),
   },
 };

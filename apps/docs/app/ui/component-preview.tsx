@@ -7,25 +7,26 @@ import reactElementToJSXString from 'react-element-to-jsx-string';
 import { LiveEditor, LivePreview, LiveProvider } from 'react-live';
 
 type ComponentPreviewProps = {
-  title: string;
+  caption: string;
   /** @alpha - Passing a React.ReactNode is currently not compatible with React 19, pass a string to make it work with React 19 until react-element-to-jsx-string supports React 19  */
   code: React.ReactNode | string;
 };
 
-export const ComponentPreview = ({ title, code }: ComponentPreviewProps) => {
+export const ComponentPreview = ({ caption, code }: ComponentPreviewProps) => {
   // Keep of the code string in state to be able to copy it
   const [codeString, setCodeString] = useState(
     typeof code === 'string' ? code : reactElementToJSXString(code),
   );
 
   const [hasCopied, setHasCopied] = useState(false);
+
   return (
     <LiveProvider
       code={codeString}
       scope={{ ...GrunnmurenIconsScope, ...GrunnmurenScope }}
       theme={themes.vsDark}
     >
-      <h3 className="heading-xs">{title}</h3>
+      <p>{caption}</p>
       <LivePreview className="my-4 flex gap-x-4" />
       <div className="grid grid-cols-[1fr,auto] grid-rows-[auto,1fr] overflow-hidden rounded-lg bg-[#1e1e1e]">
         <LiveEditor
