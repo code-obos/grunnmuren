@@ -12,7 +12,7 @@ interface PropsTableProps {
 }
 
 export const PropsTable = ({ props }: PropsTableProps) => (
-  <table className="w-full">
+  <table className="my-12 w-full">
     <caption className="heading-m mb-2 text-left">Props</caption>
     <thead>
       <tr className="bg-sky-lightest text-left align-baseline *:px-3 *:py-2">
