@@ -53,11 +53,7 @@ const mainNavItems = [
     title: 'Profil',
     subNavItems: [
       {
-        to: '/profil/farger',
-        title: 'Farger',
-      },
-      {
-        to: '/profil/ikoner',
+        to: '/ikoner',
         title: 'Ikoner',
       },
     ],
