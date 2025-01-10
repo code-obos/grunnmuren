@@ -3,7 +3,7 @@ import { Box, Download, Figma, Github } from '@obosbbl/grunnmuren-icons-react';
 import { Button, Card } from '@obosbbl/grunnmuren-react';
 import { createFileRoute } from '@tanstack/react-router';
 
-export const Route = createFileRoute('/_docs/profil/ikoner')({
+export const Route = createFileRoute('/_docs/ikoner')({
   component: Page,
   head: () => ({
     meta: [
