@@ -13,7 +13,8 @@ const COMPONENT_QUERY = defineQuery(
 
 export const Route = createFileRoute('/_docs/komponenter/$slug')({
   component: Page,
-  loader: async ({ params }) => {
+  loader: async ({ params, context }) => {
+    console.log('context in component route', context);
     const res = await sanityFetch({
       data: {
         query: COMPONENT_QUERY,
