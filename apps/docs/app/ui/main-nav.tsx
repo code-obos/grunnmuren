@@ -66,9 +66,9 @@ const mainNavItems = [
 
 export const MainNav = () => {
   const routeApi = getRouteApi('/_docs');
-  const { data } = routeApi.useLoaderData();
+  const { componentsNavItems } = routeApi.useLoaderData();
 
-  const componentsNavLinks = data.map((component) => ({
+  const componentsNavLinks = componentsNavItems.map((component) => ({
     to: `/komponenter/${component.slug}`,
     title: component.name as string,
   }));
