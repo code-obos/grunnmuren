@@ -153,7 +153,7 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
                 <div
                   className={cx(
                     'grid transition-all duration-300 after:relative after:block after:h-0 after:transition-all after:duration-300 motion-reduce:transition-none',
-                    isOpen ? 'grid-rows-[1fr] after:h-3.5' : 'grid-rows-[0fr] ',
+                    isOpen ? 'grid-rows-[1fr] after:h-3.5' : 'grid-rows-[0fr]',
                   )}
                 >
                   {children}
