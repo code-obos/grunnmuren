@@ -174,6 +174,12 @@ export type Component = {
   slug?: Slug;
   content?: Content;
   propsComponents?: Array<string>;
+  resourceLinks?: Array<{
+    linkType?: 'figma' | 'github';
+    url?: string;
+    _type: 'resourceLink';
+    _key: string;
+  }>;
 };
 
 export type Slug = {
@@ -219,11 +225,12 @@ export type COMPONENTS_NAVIGATION_QUERYResult = Array<{
 
 // Source: ./app/routes/_docs/komponenter/$slug.tsx
 // Variable: COMPONENT_QUERY
-// Query: *[_type == "component" && slug.current == $slug][0]{ content, "name": coalesce(name, ''), propsComponents }
+// Query: *[_type == "component" && slug.current == $slug][0]{ content, "name": coalesce(name, ''), propsComponents, resoureceLinks }
 export type COMPONENT_QUERYResult = {
   content: Content | null;
   name: string | '';
   propsComponents: Array<string> | null;
+  resoureceLinks: null;
 } | null;
 
 // Source: ./app/routes/_docs/komponenter/index.tsx
@@ -242,6 +249,6 @@ declare module '@sanity/client' {
     "*[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, '')} | order(name asc)":
       | COMPONENTS_NAVIGATION_QUERYResult
       | COMPONENTS_INDEX_QUERYResult;
-    '*[_type == "component" && slug.current == $slug][0]{ content, "name": coalesce(name, \'\'), propsComponents }': COMPONENT_QUERYResult;
+    '*[_type == "component" && slug.current == $slug][0]{ content, "name": coalesce(name, \'\'), propsComponents, resoureceLinks }': COMPONENT_QUERYResult;
   }
 }
