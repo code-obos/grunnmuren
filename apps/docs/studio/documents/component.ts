@@ -44,7 +44,7 @@ export default defineType({
               options: {
                 list: [
                   { title: 'Figma', value: 'figma' },
-                  { title: 'React', value: 'react' },
+                  { title: 'GitHub', value: 'github' },
                 ],
               },
               validation: (Rule) => Rule.required(),
