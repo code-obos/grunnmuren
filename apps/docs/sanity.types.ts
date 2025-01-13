@@ -125,8 +125,14 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type CodeBlock = {
-  _type: 'code-block';
+export type LiveCodeBlock = {
+  _type: 'live-code-block';
+  code?: Code;
+  caption?: string;
+};
+
+export type StaticCodeBlock = {
+  _type: 'static-code-block';
   code?: Code;
   caption?: string;
 };
@@ -152,7 +158,10 @@ export type Content = Array<
     }
   | ({
       _key: string;
-    } & CodeBlock)
+    } & LiveCodeBlock)
+  | ({
+      _key: string;
+    } & StaticCodeBlock)
 >;
 
 export type Component = {
@@ -164,6 +173,7 @@ export type Component = {
   name?: string;
   slug?: Slug;
   content?: Content;
+  propsComponents?: Array<string>;
 };
 
 export type Slug = {
@@ -191,7 +201,8 @@ export type AllSanitySchemaTypes =
   | SanityImageMetadata
   | Geopoint
   | SanityAssetSourceData
-  | CodeBlock
+  | LiveCodeBlock
+  | StaticCodeBlock
   | Content
   | Component
   | Slug
@@ -208,10 +219,11 @@ export type COMPONENTS_NAVIGATION_QUERYResult = Array<{
 
 // Source: ./app/routes/_docs/komponenter/$slug.tsx
 // Variable: COMPONENT_QUERY
-// Query: *[_type == "component" && slug.current == $slug][0]{ content, "name": coalesce(name, '') }
+// Query: *[_type == "component" && slug.current == $slug][0]{ content, "name": coalesce(name, ''), propsComponents }
 export type COMPONENT_QUERYResult = {
   content: Content | null;
   name: string | '';
+  propsComponents: Array<string> | null;
 } | null;
 
 // Source: ./app/routes/_docs/komponenter/index.tsx
@@ -230,6 +242,6 @@ declare module '@sanity/client' {
     "*[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, '')} | order(name asc)":
       | COMPONENTS_NAVIGATION_QUERYResult
       | COMPONENTS_INDEX_QUERYResult;
-    '*[_type == "component" && slug.current == $slug][0]{ content, "name": coalesce(name, \'\') }': COMPONENT_QUERYResult;
+    '*[_type == "component" && slug.current == $slug][0]{ content, "name": coalesce(name, \'\'), propsComponents }': COMPONENT_QUERYResult;
   }
 }

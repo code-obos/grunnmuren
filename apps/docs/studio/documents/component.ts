@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity';
+import { defineArrayMember, defineField, defineType } from 'sanity';
 
 export default defineType({
   name: 'component',
@@ -24,6 +24,16 @@ export default defineType({
       name: 'content',
       title: 'Content',
       type: 'content',
+    }),
+    defineField({
+      name: 'propsComponents',
+      title: 'Components to display props for',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'string',
+        }),
+      ],
     }),
     defineField({
       name: 'resourceLinks',

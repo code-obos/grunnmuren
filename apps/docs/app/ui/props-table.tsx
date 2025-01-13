@@ -1,19 +1,12 @@
+import * as props from 'docgen';
+
 interface PropsTableProps {
-  props: {
-    [key: string]: {
-      name: string;
-      required: boolean;
-      description: string;
-      defaultValue: null | {
-        value: string;
-      };
-    };
-  };
+  componentName: keyof typeof props;
 }
 
-export const PropsTable = ({ props }: PropsTableProps) => (
-  <table className="my-12 w-full">
-    <caption className="heading-m mb-2 text-left">Props</caption>
+export const PropsTable = ({ componentName }: PropsTableProps) => (
+  <table className="my-8 w-full">
+    <caption className="heading-s mb-2 text-left">{componentName}</caption>
     <thead>
       <tr className="bg-sky-lightest text-left align-baseline *:px-3 *:py-2">
         <th>Prop</th>
@@ -22,7 +15,7 @@ export const PropsTable = ({ props }: PropsTableProps) => (
       </tr>
     </thead>
     <tbody>
-      {Object.values(props).map((prop) => (
+      {Object.values(props[componentName].props).map((prop) => (
         <tr
           key={prop.name}
           className="border-t-gray-light align-baseline *:px-3 *:py-2 [&:not(:first-child)]:border-t-[1px]"
