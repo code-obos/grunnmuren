@@ -29,16 +29,30 @@ export const Route = createFileRoute('/_docs/komponenter/$slug')({
 function Page() {
   const { data } = Route.useLoaderData();
 
-  const ghLink = data.resourceLinks?.find(link => link.linkType === 'github')?.url;
-  const figmaLink = data.resourceLinks?.find(link => link.linkType === 'figma')?.url;
+  const ghLink = data.resourceLinks?.find(
+    (link) => link.linkType === 'github',
+  )?.url;
+  const figmaLink = data.resourceLinks?.find(
+    (link) => link.linkType === 'figma',
+  )?.url;
 
   return (
     <>
-      <h1 className="heading-l mt-9 mb-4">{data.name}</h1>
+      <h1 className="heading-l mb-4 mt-9">{data.name}</h1>
 
-      <div className="flex gap-6 mb-12">
-        {ghLink && <a className="flex gap-2" href={ghLink}><Github />GitHub</a>}
-        {figmaLink && <a className="flex gap-2" href={figmaLink}><Figma />Figma</a>}
+      <div className="mb-12 flex gap-6">
+        {ghLink && (
+          <a className="flex gap-2" href={ghLink}>
+            <Github />
+            GitHub
+          </a>
+        )}
+        {figmaLink && (
+          <a className="flex gap-2" href={figmaLink}>
+            <Figma />
+            Figma
+          </a>
+        )}
       </div>
 
       <Content className="mb-12" content={data.content ?? []} />
