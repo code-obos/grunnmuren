@@ -1,7 +1,7 @@
 import { PortableText } from '@portabletext/react';
+import { cx } from 'cva';
 import type { Content as IContent } from 'sanity.types';
 import { ComponentPreview } from './component-preview';
-import { cx } from 'cva';
 
 export type ContentProps = {
   content: IContent;
