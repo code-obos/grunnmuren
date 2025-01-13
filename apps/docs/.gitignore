@@ -2,3 +2,5 @@
 .vinxi
 public/resources/icons/
 docgen.ts
+
+.env

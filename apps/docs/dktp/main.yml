@@ -16,6 +16,9 @@ properties:
     containers:
       - image: dktprodacr.azurecr.io/grunnmuren/docs:${IMAGE_TAG}
         name: docs
+        env:
+          - name: SANITY_VIEWER_TOKEN
+            secretRef: ${todo}
         resources:
           cpu: 0.25
           memory: 0.5Gi
