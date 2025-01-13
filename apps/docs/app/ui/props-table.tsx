@@ -25,7 +25,7 @@ export const PropsTable = ({ props }: PropsTableProps) => (
       {Object.values(props).map((prop) => (
         <tr
           key={prop.name}
-          className="border-t-gray-light align-baseline  *:px-3 *:py-2 [&:not(:first-child)]:border-t-[1px]"
+          className="border-t-gray-light align-baseline *:px-3 *:py-2 [&:not(:first-child)]:border-t-[1px]"
         >
           <td className="italic">
             <code className="font-mono">
