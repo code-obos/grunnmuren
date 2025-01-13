@@ -1,5 +1,3 @@
-import * as badgeExamples from '@/examples/badge';
-import * as buttonExamples from '@/examples/button';
 import { sanityFetch } from '@/lib/sanity';
 import { Content } from '@/ui/content';
 import { PropsTable } from '@/ui/props-table';
@@ -29,12 +27,6 @@ export const Route = createFileRoute('/_docs/komponenter/$slug')({
 
 function Page() {
   const { data } = Route.useLoaderData();
-
-  // @ts-expect-error this works for now until we figure how to make the examples work better with Sanity
-  const { scope, examples } = {
-    Button: buttonExamples,
-    Badge: badgeExamples,
-  }[data.name];
 
   return (
     <>

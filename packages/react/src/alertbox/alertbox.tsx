@@ -5,19 +5,18 @@ import {
   CheckCircle,
   ChevronDown,
   Close,
-  CloseCircle,
+  Error as ErrorIcon,
   InfoCircle,
   Warning,
 } from '@obosbbl/grunnmuren-icons-react';
 import { useState } from 'react';
 import { type Locale, useLocale } from '../use-locale';
 
-// TODO: add new icons
 const iconMap = {
   info: InfoCircle,
   success: CheckCircle,
   warning: Warning,
-  danger: CloseCircle,
+  danger: ErrorIcon,
 };
 
 const alertVariants = cva({
