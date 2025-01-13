@@ -319,39 +319,6 @@ export const ClickableWithOtherClickableElements = () => (
         </Footer>
       </Content>
     </Card>
-    <Card variant="outlined" className="w-72">
-      <Media>
-        <img
-          alt=""
-          src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
-        />
-      </Media>
-      <Content className="flex-grow">
-        <div className="grid gap-1">
-          <Heading level={3}>
-            <CardLink href="#card">Rødbergvn 88C</CardLink>
-          </Heading>
-          <small className="description">Bjerke - Oslo</small>
-        </div>
-        <small className="description -order-1">
-          Forhåndsvarsling - Saksnr. F0347565
-        </small>
-        <p className="font-semibold">100 m² | Prisantydning 9 600 000 kr</p>
-        <p className="flex gap-x-1">
-          <House /> Rekkehus/småhus
-        </p>
-        <Badge size="small" color="mint">
-          Visning 13. oktober
-        </Badge>
-      </Content>
-      <Footer className="relative grid gap-y-2">
-        <hr className="border-t border-t-current" />
-        <Button href="#other-link" variant="tertiary">
-          Se prospekt
-          <Documents />
-        </Button>
-      </Footer>
-    </Card>
   </div>
 );
 
