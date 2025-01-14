@@ -1,3 +1,4 @@
+import { ResourceLink, ResourceLinks } from '@/ui/resource-links';
 import * as icons from '@obosbbl/grunnmuren-icons-react';
 import { Box, Download, Figma, Github } from '@obosbbl/grunnmuren-icons-react';
 import { Button, Card } from '@obosbbl/grunnmuren-react';
@@ -40,28 +41,22 @@ function Page() {
         </p>
       </div>
 
-      <div className="my-12 flex gap-4">
-        <a
-          className="flex gap-2"
+      <ResourceLinks className="my-12">
+        <ResourceLink
+          type="figma"
           href="https://www.figma.com/design/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=30-2099&t=O9zg6ynNvNWFeOy8-4"
-        >
-          <Figma /> Figma
-        </a>
+        />
 
-        <a
-          className="flex gap-2"
+        <ResourceLink
+          type="github"
           href="https://github.com/code-obos/grunnmuren/tree/main/packages/icons-svg"
-        >
-          <Github /> GitHub
-        </a>
+        />
 
-        <a
-          className="flex gap-2"
+        <ResourceLink
+          type="npm"
           href="https://www.npmjs.com/package/@obosbbl/grunnmuren-icons-react"
-        >
-          <Box /> npm
-        </a>
-      </div>
+        />
+      </ResourceLinks>
       <IconsGrid />
     </>
   );
