@@ -10,7 +10,7 @@
     "build:netlify": "pnpm --filter @obosbbl/grunnmuren-icons-react build && pnpm build:storybook",
     "build:storybook": "storybook build",
     "ci:publish": "pnpm build && changeset publish",
-    "ci:version": "changeset version && pnpm install --lockfile-only",
+    "ci:version": "changeset version && pnpm --filter './packages/**' install --lockfile-only",
     "dev": "storybook dev -p 6006 --ci",
     "lint": "pnpm lint:biome && pnpm lint:format",
     "lint:biome": "pnpm biome check .",
