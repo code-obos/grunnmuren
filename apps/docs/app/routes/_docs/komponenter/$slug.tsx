@@ -1,13 +1,14 @@
 import { sanityFetch } from '@/lib/sanity';
 import { Content } from '@/ui/content';
 import { PropsTable } from '@/ui/props-table';
+import { ResourceLink, ResourceLinks } from '@/ui/resource-links';
 import { Figma, Github } from '@obosbbl/grunnmuren-icons-react';
 import { createFileRoute, notFound } from '@tanstack/react-router';
 import type * as props from 'docgen';
 import { defineQuery } from 'groq';
 
 const COMPONENT_QUERY = defineQuery(
-  `*[_type == "component" && slug.current == $slug][0]{ content, "name": coalesce(name, ''), propsComponents, resoureceLinks }`,
+  `*[_type == "component" && slug.current == $slug][0]{ content, "name": coalesce(name, ''), propsComponents, resourceLinks }`,
 );
 
 export const Route = createFileRoute('/_docs/komponenter/$slug')({
@@ -40,20 +41,14 @@ function Page() {
     <>
       <h1 className="heading-l mb-4 mt-9">{data.name}</h1>
 
-      <div className="mb-12 flex gap-6">
-        {ghLink && (
-          <a className="flex gap-2" href={ghLink}>
-            <Github />
-            GitHub
-          </a>
-        )}
+      <ResourceLinks className="mb-12">
         {figmaLink && (
-          <a className="flex gap-2" href={figmaLink}>
-            <Figma />
-            Figma
-          </a>
+          <ResourceLink type="figma" href={figmaLink} />
         )}
-      </div>
+        {ghLink && (
+          <ResourceLink type="github" href={ghLink}/>
+        )}
+      </ResourceLinks>
 
       <Content className="mb-12" content={data.content ?? []} />
 
