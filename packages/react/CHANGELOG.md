@@ -1,5 +1,13 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.46
+
+### Patch Changes
+
+- b62c268: Change layout from grid to flex on `<Card>`, as this makes styling easier. Handy if you have Card content of variable size but need to display a set of Cards with the same height.
+- Updated dependencies [2f4a527]
+  - @obosbbl/grunnmuren-icons-react@2.0.0-canary.4
+
 ## 2.0.0-canary.45
 
 ### Major Changes

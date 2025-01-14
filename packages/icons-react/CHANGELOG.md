@@ -1,5 +1,13 @@
 # @obosbbl/grunnmuren-icons-react
 
+## 2.0.0-canary.4
+
+### Major Changes
+
+- 2f4a527: BREAKING CHANGE: updated look and feel of entire icon set. The icons are now outlined instead of filled.
+
+  See release notes for `@obosbbl/grunnmuren-icons-svg` for more details.
+
 ## 2.0.0-canary.3
 
 ### Minor Changes
