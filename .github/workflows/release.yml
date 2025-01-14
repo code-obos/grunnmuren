@@ -36,6 +36,8 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm --filter "./packages/**" install --frozen-lockfile
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Release Pull Request
         uses: changesets/action@c8bada60c408975afd1a20b3db81d6eee6789308 # v1.4.9
