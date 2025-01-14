@@ -41,19 +41,22 @@ function Page() {
         </p>
       </div>
 
-        <ResourceLinks className="my-12">
-          <ResourceLink type="figma" href="https://www.figma.com/design/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=30-2099&t=O9zg6ynNvNWFeOy8-4" />
+      <ResourceLinks className="my-12">
+        <ResourceLink
+          type="figma"
+          href="https://www.figma.com/design/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=30-2099&t=O9zg6ynNvNWFeOy8-4"
+        />
 
         <ResourceLink
           type="github"
           href="https://github.com/code-obos/grunnmuren/tree/main/packages/icons-svg"
-          />
+        />
 
         <ResourceLink
           type="npm"
           href="https://www.npmjs.com/package/@obosbbl/grunnmuren-icons-react"
-          />
-        </ResourceLinks>
+        />
+      </ResourceLinks>
       <IconsGrid />
     </>
   );
