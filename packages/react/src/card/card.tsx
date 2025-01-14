@@ -10,7 +10,7 @@ const cardVariants = cva({
   base: [
     'group/card',
     'rounded-2xl border p-3',
-    'grid auto-rows-max gap-y-4',
+    'flex flex-col gap-y-4',
     'relative', // Needed for positiong of the clickable pseudo-element (and can also be used for other absolute positioned elements the consumer might add)
 
     // **** Heading ****
@@ -23,7 +23,7 @@ const cardVariants = cva({
     '[&_[data-slot="heading"]]:[word-break:break-word]', // necessary to make hyphens work in grid containers in Safari
 
     // **** Content ****
-    '[&_[data-slot="content"]]:grid [&_[data-slot="content"]]:auto-rows-max [&_[data-slot="content"]]:gap-y-4',
+    '[&_[data-slot="content"]]:flex [&_[data-slot="content"]]:flex-col [&_[data-slot="content"]]:gap-y-4',
 
     // **** Media ****
     '[&_[data-slot="media"]]:overflow-hidden', // Prevent content from overflowing the rounded corners
