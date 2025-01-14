@@ -5,7 +5,7 @@ interface PropsTableProps {
 }
 
 export const PropsTable = ({ componentName }: PropsTableProps) => (
-  <table className="my-8 w-full">
+  <table className="my-8 w-full text-sm">
     <caption className="heading-s mb-2 text-left">{componentName}</caption>
     <thead>
       <tr className="bg-sky-lightest text-left align-baseline *:px-3 *:py-2">
