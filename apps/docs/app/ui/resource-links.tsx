@@ -38,7 +38,7 @@ export function ResourceLink(props: ResourceLinkProps) {
 
   return (
     <a className="flex gap-2" href={props.href}>
-      <Icon /> {text}
+      <Icon className="shrink-0" /> {text}
     </a>
   );
 }
