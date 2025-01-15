@@ -1,4 +1,5 @@
 import { sanityFetch } from '@/lib/sanity';
+import { AnchorHeading } from '@/ui/anchor-heading';
 import { Content } from '@/ui/content';
 import { PropsTable } from '@/ui/props-table';
 import { ResourceLink, ResourceLinks } from '@/ui/resource-links';
@@ -47,7 +48,11 @@ function Page() {
 
       <Content className="mb-12" content={data.content ?? []} />
 
-      {data.propsComponents?.length && <h2 className="heading-m">Props</h2>}
+      {data.propsComponents?.length && (
+        <AnchorHeading className="heading-m" level={2} id="props">
+          Props
+        </AnchorHeading>
+      )}
       {data.propsComponents?.map((componentName) => (
         <PropsTable
           key={componentName}
