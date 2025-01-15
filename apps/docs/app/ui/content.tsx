@@ -3,6 +3,9 @@ import { cx } from 'cva';
 import type { Content as IContent } from 'sanity.types';
 import { AnchorHeading } from './anchor-heading';
 import { ComponentPreview } from './component-preview';
+import { LiveEditor, LiveProvider } from 'react-live';
+import { themes } from 'prism-react-renderer';
+import { Code } from './code';
 
 export type ContentProps = {
   content: IContent;
@@ -21,6 +24,9 @@ export function Content({ content, className }: ContentProps) {
                 caption={value.caption}
                 code={value.code.code}
               />
+            ),
+            'static-code-block': ({ value }) => (
+              <Code value={value.code.code as string} />
             ),
           },
           block: {
