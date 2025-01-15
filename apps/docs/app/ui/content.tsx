@@ -1,11 +1,11 @@
 import { PortableText } from '@portabletext/react';
 import { cx } from 'cva';
+import { themes } from 'prism-react-renderer';
+import { LiveEditor, LiveProvider } from 'react-live';
 import type { Content as IContent } from 'sanity.types';
 import { AnchorHeading } from './anchor-heading';
-import { ComponentPreview } from './component-preview';
-import { LiveEditor, LiveProvider } from 'react-live';
-import { themes } from 'prism-react-renderer';
 import { Code } from './code';
+import { ComponentPreview } from './component-preview';
 
 export type ContentProps = {
   content: IContent;
