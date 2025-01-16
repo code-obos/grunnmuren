@@ -1,3 +1,4 @@
+import { PlayerPause, PlayerPlay } from '@obosbbl/grunnmuren-icons-react';
 import { useLayoutEffect } from '@react-aria/utils';
 import { cx } from 'cva';
 import { useEffect, useRef, useState } from 'react';
@@ -101,15 +102,9 @@ export const VideoLoop = ({
                 ],
               )}
             >
-              <span
-                className={cx(
-                  'grid h-12 w-12 place-items-center rounded-full bg-white',
-                  'outline-none',
-                  isPlaying
-                    ? 'after:text-2xl after:content-["⏸"]'
-                    : 'after:absolute after:ml-0.5 after:h-0 after:w-0 after:border-b-8 after:border-l-[16px] after:border-t-8 after:border-transparent after:border-l-black',
-                )}
-              />
+              <span className="grid h-12 w-12 place-items-center rounded-full bg-white outline-none">
+                {isPlaying ? <PlayerPause /> : <PlayerPlay />}
+              </span>
             </button>
           </>
         )}
