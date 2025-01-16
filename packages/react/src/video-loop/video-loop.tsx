@@ -81,7 +81,7 @@ export const VideoLoop = ({
               className={cx('cursor-pointer', rounded && 'rounded-3xl')}
               autoPlay={isPlaying}
               loop={isPlaying}
-              playsInline={isPlaying}
+              playsInline
               muted
             >
               <source src={src} type={`video/${format}`} />
