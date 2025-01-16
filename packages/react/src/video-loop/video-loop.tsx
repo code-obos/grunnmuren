@@ -80,9 +80,17 @@ export const VideoLoop = ({
               // cursor-pointer is not working on the button below, so we add it here for the same effect
               className={cx('cursor-pointer', rounded && 'rounded-3xl')}
               autoPlay={isPlaying}
-              loop={isPlaying}
               playsInline
               muted
+              loop={userPrefersReducedMotion === false}
+              onEnded={() => {
+                if (userPrefersReducedMotion && videoRef.current) {
+                  // Reset the video to the beginning if the user prefers reduced motion
+                  videoRef.current.currentTime = 0;
+                  setShouldPlay(false);
+                  setIsPlaying(false);
+                }
+              }}
             >
               <source src={src} type={`video/${format}`} />
             </video>
