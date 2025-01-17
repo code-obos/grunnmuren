@@ -1,6 +1,6 @@
 import { PlayerPause, PlayerPlay } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
-import { useEffect, useRef, useState, useLayoutEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 type VideoLoopProps = {
   /** The video url */
@@ -14,17 +14,21 @@ type VideoLoopProps = {
    * Think of this just as an alt text, but for a muted video - this text will not be visible, but read by screen readers.
    * */
   alt?: string;
+  /**
+   * Use this to provide a visible caption of the video content.
+   * It can be used as a brief summary of the video content. If using this, you might not need to provide an alt text.
+   * */
+  children?: React.ReactNode;
   /** @default aspect-video */
   className?: string;
-  rounded?: boolean;
 };
 
 export const VideoLoop = ({
   src,
   format,
   alt,
+  children,
   className = 'aspect-video',
-  rounded,
 }: VideoLoopProps) => {
   // Control the video playback state, so that the user can pause and play the video at will, also control the video autoplay
   const [shouldPlay, setShouldPlay] = useState(false);
@@ -78,11 +82,7 @@ export const VideoLoop = ({
         <video
           ref={videoRef}
           // cursor-pointer is not working on the button below, so we add it here for the same effect
-          className={cx(
-            'cursor-pointer',
-            rounded && 'rounded-3xl',
-            'h-full w-full object-cover',
-          )}
+          className={cx('cursor-pointer', 'h-full w-full object-cover')}
           playsInline
           loop={userPrefersReducedMotion === false}
           autoPlay={userPrefersReducedMotion === false}
@@ -103,7 +103,6 @@ export const VideoLoop = ({
             type="button"
             onClick={() => setShouldPlay((prevState) => !prevState)}
             className={cx(
-              rounded && 'rounded-3xl', // Mirror the rounded prop from the parent div to align focus outline
               'absolute bottom-0 left-0 right-0 top-0 m-auto grid place-items-center',
               'focus-visible:outline-focus focus-visible:outline-focus-offset',
               // Setting the opacity to 0 before applying the transition below will ensure the button only fades in after the video has started playing
@@ -122,6 +121,7 @@ export const VideoLoop = ({
           </button>
         )}
       </div>
+      {children}
       {alt && <p className="sr-only">{alt}</p>}
     </>
   );
