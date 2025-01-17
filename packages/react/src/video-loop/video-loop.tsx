@@ -1,38 +1,29 @@
 import { PlayerPause, PlayerPlay } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useLayoutEffect } from 'react';
 
-type VideoLoopPropsCommon = {
+type VideoLoopProps = {
+  /** The video url */
   src: string;
+  /** The video format */
   format: string;
-  /** You may specify a visible caption, but if it is very similar to the alt text. Just a caption is sufficent.  */
-  caption?: string;
   /**
-   * You may pass an alternative text, complimentary to the caption.
-   * Make sure it doesn't repeat too much of the caption text, if so just a caption is sufficent.
+   * The content of the video must have a text description, so that it is accessible to screen readers.
+   * You can either just provide a just caption, just an alt text, or both a caption and an alt text.
+   * Make sure the alt text doesn't repeat too much of the caption text, if so just a caption is sufficent.
    * Think of this just as an alt text, but for a muted video - this text will not be visible, but read by screen readers.
    * */
   alt?: string;
+  /** @default aspect-video */
   className?: string;
   rounded?: boolean;
 };
 
-type VideoLoopPropsWithAlt = VideoLoopPropsCommon & {
-  alt: string;
-};
-
-type VideoLoopPropsWithCaption = VideoLoopPropsCommon & {
-  caption: string;
-};
-
-export type VideoLoopProps = VideoLoopPropsWithAlt | VideoLoopPropsWithCaption; // Either alt or caption is required
-
 export const VideoLoop = ({
   src,
   format,
-  caption,
   alt,
-  className,
+  className = 'aspect-video',
   rounded,
 }: VideoLoopProps) => {
   // Control the video playback state, so that the user can pause and play the video at will, also control the video autoplay
@@ -45,6 +36,8 @@ export const VideoLoop = ({
     null | boolean
   >(null);
 
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
   useEffect(() => {
     const { matches: userPrefersReducedMotion } = matchMedia(
       '(prefers-reduced-motion: reduce)',
@@ -53,8 +46,6 @@ export const VideoLoop = ({
     // Autoplay the video if the user does not prefer reduced motion
     setShouldPlay(!userPrefersReducedMotion);
   }, []);
-
-  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   // Follow google's autoplay policy: https://developers.google.com/web/updates/2017/09/autoplay-policy-changes
   // "Don't assume a video will play, and don't show a pause button when the video is not actually playing."
@@ -75,16 +66,27 @@ export const VideoLoop = ({
   }, [shouldPlay]);
 
   return (
-    <div className={className}>
-      <div className="relative aspect-video" aria-hidden>
+    <>
+      <div
+        className={cx(
+          className,
+          'relative',
+          userPrefersReducedMotion === null && 'opacity-0',
+        )}
+        aria-hidden
+      >
         <video
           ref={videoRef}
           // cursor-pointer is not working on the button below, so we add it here for the same effect
-          className={cx('cursor-pointer', rounded && 'rounded-3xl')}
+          className={cx(
+            'cursor-pointer',
+            rounded && 'rounded-3xl',
+            'h-full w-full object-cover',
+          )}
           playsInline
-          muted
-          autoPlay={userPrefersReducedMotion === false}
           loop={userPrefersReducedMotion === false}
+          autoPlay={userPrefersReducedMotion === false}
+          muted
           onEnded={(event) => {
             if (userPrefersReducedMotion) {
               // Reset the video to the beginning if the user prefers reduced motion, since the video will not loop
@@ -96,29 +98,31 @@ export const VideoLoop = ({
         >
           <source src={src} type={`video/${format}`} />
         </video>
-        <button
-          type="button"
-          onClick={() => setShouldPlay((prevState) => !prevState)}
-          className={cx(
-            rounded && 'rounded-3xl', // Mirror the rounded prop from the parent div to align focus outline
-            'absolute bottom-0 left-0 right-0 top-0 m-auto grid place-items-center',
-            'focus-visible:outline-focus focus-visible:outline-focus-offset',
-            // Only show the pause button when the video is hovered or focused
-            isPlaying && [
-              'opacity-0',
-              'focus-visible:opacity-100',
-              'transition-opacity duration-200',
-              'hover:opacity-100',
-            ],
-          )}
-        >
-          <span className="grid h-12 w-12 place-items-center rounded-full bg-white outline-none">
-            {isPlaying ? <PlayerPause /> : <PlayerPlay />}
-          </span>
-        </button>
+        {userPrefersReducedMotion !== null && (
+          <button
+            type="button"
+            onClick={() => setShouldPlay((prevState) => !prevState)}
+            className={cx(
+              rounded && 'rounded-3xl', // Mirror the rounded prop from the parent div to align focus outline
+              'absolute bottom-0 left-0 right-0 top-0 m-auto grid place-items-center',
+              'focus-visible:outline-focus focus-visible:outline-focus-offset',
+              // Setting the opacity to 0 before applying the transition below will ensure the button only fades in after the video has started playing
+              shouldPlay && 'opacity-0',
+              isPlaying && [
+                'transition-opacity duration-200',
+                // Only show the pause button when the video is hovered or focused
+                'focus-visible:opacity-100',
+                'hover:opacity-100',
+              ],
+            )}
+          >
+            <span className="grid h-12 w-12 place-items-center rounded-full bg-white outline-none">
+              {isPlaying ? <PlayerPause /> : <PlayerPlay />}
+            </span>
+          </button>
+        )}
       </div>
-      {caption && <p className="description mt-4">{caption}</p>}
       {alt && <p className="sr-only">{alt}</p>}
-    </div>
+    </>
   );
 };
