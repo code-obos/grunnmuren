@@ -83,10 +83,10 @@ export const VideoLoop = ({
               playsInline
               muted
               loop={userPrefersReducedMotion === false}
-              onEnded={() => {
-                if (userPrefersReducedMotion && videoRef.current) {
-                  // Reset the video to the beginning if the user prefers reduced motion
-                  videoRef.current.currentTime = 0;
+              onEnded={(event) => {
+                if (userPrefersReducedMotion) {
+                  // Reset the video to the beginning if the user prefers reduced motion, since the video will not loop
+                  event.currentTarget.currentTime = 0;
                   setShouldPlay(false);
                   setIsPlaying(false);
                 }
