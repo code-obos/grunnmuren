@@ -3,15 +3,12 @@
 '@obosbbl/grunnmuren-icons-react': minor
 ---
 
-added new icons:
-* Flower
-* Globe
-* HouseWarning
-* Megaphone
-* Member
-* MemberBonus
-* Rain
-
-
-
-add icons
+* minor updates to some of the icons.
+* added new icons:
+  * Flower
+  * Globe
+  * HouseWarning
+  * Megaphone
+  * Member
+  * MemberBonus
+  * Rain
