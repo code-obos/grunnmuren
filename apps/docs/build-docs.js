@@ -21,6 +21,12 @@ try {
     Object.values(docs)
       .map((prop) => {
         const prettifiedName = prop.displayName.replace('_', '');
+        if (prettifiedName === 'ListBoxItem') {
+          // Quick fix to expose ListBoxItem as both ComboboxItem and ListBoxItem
+          return `export const ${prettifiedName} = ${JSON.stringify({ ...prop, displayName: prettifiedName }, null, 2)}
+          export const ComboboxItem = ${JSON.stringify({ ...prop, displayName: prettifiedName }, null, 2)}
+          `;
+        }
         return `export const ${prettifiedName} = ${JSON.stringify({ ...prop, displayName: prettifiedName }, null, 2)}`;
       })
       .join('\n'),
