@@ -21,10 +21,16 @@ try {
     Object.values(docs)
       .map((prop) => {
         const prettifiedName = prop.displayName.replace('_', '');
+        // Quick fix to expose ListBoxItem as both ComboboxItem and ListBoxItem
         if (prettifiedName === 'ListBoxItem') {
-          // Quick fix to expose ListBoxItem as both ComboboxItem and ListBoxItem
           return `export const ${prettifiedName} = ${JSON.stringify({ ...prop, displayName: prettifiedName }, null, 2)}
           export const ComboboxItem = ${JSON.stringify({ ...prop, displayName: prettifiedName }, null, 2)}
+          `;
+        }
+        // Quick fix to expose ListBoxSection as both ComboboxSection and ListBoxSection
+        if (prettifiedName === 'ListBoxSection') {
+          return `export const ${prettifiedName} = ${JSON.stringify({ ...prop, displayName: prettifiedName }, null, 2)}
+          export const ComboboxSection = ${JSON.stringify({ ...prop, displayName: prettifiedName }, null, 2)}
           `;
         }
         return `export const ${prettifiedName} = ${JSON.stringify({ ...prop, displayName: prettifiedName }, null, 2)}`;
