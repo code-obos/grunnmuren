@@ -29,6 +29,7 @@ try {
           export const ${prettifiedName.replace('ListBox', 'Combobox')} = ${JSON.stringify({ ...prop, displayName: prettifiedName }, null, 2)}
           `;
         }
+
         return output;
       })
       .join('\n'),
