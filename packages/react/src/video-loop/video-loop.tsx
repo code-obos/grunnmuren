@@ -14,21 +14,10 @@ type VideoLoopProps = {
    * Think of this just as an alt text, but for a muted video - this text will not be visible, but read by screen readers.
    * */
   alt?: string;
-  /**
-   * Use this to provide a visible caption of the video content.
-   * It can be used as a brief summary of the video content. If using this, you might not need to provide an alt text.
-   * */
-  children?: React.ReactNode;
   className?: string;
 };
 
-export const VideoLoop = ({
-  src,
-  format,
-  alt,
-  children,
-  className,
-}: VideoLoopProps) => {
+export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
   // Control the video playback state, so that the user can pause and play the video at will, also control the video autoplay
   const [shouldPlay, setShouldPlay] = useState(false);
   // Needed to show the pause button when the video is actually playing (refer to google's autoplay policy: https://developers.google.com/web/updates/2017/09/autoplay-policy-changes)
@@ -120,7 +109,6 @@ export const VideoLoop = ({
           </button>
         )}
       </div>
-      {children}
       {alt && <p className="sr-only">{alt}</p>}
     </>
   );
