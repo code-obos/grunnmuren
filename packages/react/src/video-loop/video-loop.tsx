@@ -58,58 +58,57 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
   }, [shouldPlay]);
 
   return (
-    <>
-      <div
-        className={cx(
-          className,
-          'relative',
-          userPrefersReducedMotion === null && 'opacity-0',
-        )}
+    <div
+      className={cx(
+        className,
+        'relative',
+        userPrefersReducedMotion === null && 'opacity-0',
+      )}
+    >
+      <video
         aria-hidden
+        ref={videoRef}
+        // cursor-pointer is not working on the button below, so we add it here for the same effect
+        className="h-full w-full cursor-pointer object-cover"
+        playsInline
+        loop={userPrefersReducedMotion === false}
+        autoPlay={userPrefersReducedMotion === false}
+        muted
+        onEnded={(event) => {
+          if (userPrefersReducedMotion) {
+            // Reset the video to the beginning if the user prefers reduced motion, since the video will not loop
+            event.currentTarget.currentTime = 0;
+            setShouldPlay(false);
+            setIsPlaying(false);
+          }
+        }}
       >
-        <video
-          ref={videoRef}
-          // cursor-pointer is not working on the button below, so we add it here for the same effect
-          className="h-full w-full cursor-pointer object-cover"
-          playsInline
-          loop={userPrefersReducedMotion === false}
-          autoPlay={userPrefersReducedMotion === false}
-          muted
-          onEnded={(event) => {
-            if (userPrefersReducedMotion) {
-              // Reset the video to the beginning if the user prefers reduced motion, since the video will not loop
-              event.currentTarget.currentTime = 0;
-              setShouldPlay(false);
-              setIsPlaying(false);
-            }
-          }}
+        <source src={src} type={`video/${format}`} />
+      </video>
+      {userPrefersReducedMotion !== null && (
+        <button
+          aria-hidden
+          type="button"
+          onClick={() => setShouldPlay((prevState) => !prevState)}
+          className={cx(
+            'absolute bottom-0 left-0 right-0 top-0 m-auto grid place-items-center',
+            'focus-visible:outline-focus focus-visible:outline-focus-offset',
+            // Setting the opacity to 0 before applying the transition below will ensure the button only fades in after the video has started playing
+            shouldPlay && 'opacity-0',
+            isPlaying && [
+              'transition-opacity duration-200',
+              // Only show the pause button when the video is hovered or focused
+              'focus-visible:opacity-100',
+              'hover:opacity-100',
+            ],
+          )}
         >
-          <source src={src} type={`video/${format}`} />
-        </video>
-        {userPrefersReducedMotion !== null && (
-          <button
-            type="button"
-            onClick={() => setShouldPlay((prevState) => !prevState)}
-            className={cx(
-              'absolute bottom-0 left-0 right-0 top-0 m-auto grid place-items-center',
-              'focus-visible:outline-focus focus-visible:outline-focus-offset',
-              // Setting the opacity to 0 before applying the transition below will ensure the button only fades in after the video has started playing
-              shouldPlay && 'opacity-0',
-              isPlaying && [
-                'transition-opacity duration-200',
-                // Only show the pause button when the video is hovered or focused
-                'focus-visible:opacity-100',
-                'hover:opacity-100',
-              ],
-            )}
-          >
-            <span className="grid h-12 w-12 place-items-center rounded-full bg-white outline-none">
-              {isPlaying ? <PlayerPause /> : <PlayerPlay />}
-            </span>
-          </button>
-        )}
-      </div>
+          <span className="grid h-12 w-12 place-items-center rounded-full bg-white outline-none">
+            {isPlaying ? <PlayerPause /> : <PlayerPlay />}
+          </span>
+        </button>
+      )}
       {alt && <p className="sr-only">{alt}</p>}
-    </>
+    </div>
   );
 };
