@@ -21,13 +21,15 @@ try {
     Object.values(docs)
       .map((prop) => {
         const prettifiedName = prop.displayName.replace('_', '');
+        const output = `export const ${prettifiedName} = ${JSON.stringify({ ...prop, displayName: prettifiedName }, null, 2)}`;
+
         // Quick fix to also expose ListBoxItem, ListBoxSection and ListBoxHeader as ComboboxItem, ComboboxSection and ComboboxHeader
         if (prettifiedName.startsWith('ListBox')) {
-          return `export const ${prettifiedName} = ${JSON.stringify({ ...prop, displayName: prettifiedName }, null, 2)}
+          return `${output}
           export const ${prettifiedName.replace('ListBox', 'Combobox')} = ${JSON.stringify({ ...prop, displayName: prettifiedName }, null, 2)}
           `;
         }
-        return `export const ${prettifiedName} = ${JSON.stringify({ ...prop, displayName: prettifiedName }, null, 2)}`;
+        return output;
       })
       .join('\n'),
   );
