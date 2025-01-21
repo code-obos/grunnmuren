@@ -19,7 +19,6 @@ type VideoLoopProps = {
    * It can be used as a brief summary of the video content. If using this, you might not need to provide an alt text.
    * */
   children?: React.ReactNode;
-  /** @default aspect-video */
   className?: string;
 };
 
@@ -28,7 +27,7 @@ export const VideoLoop = ({
   format,
   alt,
   children,
-  className = 'aspect-video',
+  className,
 }: VideoLoopProps) => {
   // Control the video playback state, so that the user can pause and play the video at will, also control the video autoplay
   const [shouldPlay, setShouldPlay] = useState(false);
@@ -82,7 +81,7 @@ export const VideoLoop = ({
         <video
           ref={videoRef}
           // cursor-pointer is not working on the button below, so we add it here for the same effect
-          className="cursor-pointer h-full w-full object-cover"
+          className="h-full w-full cursor-pointer object-cover"
           playsInline
           loop={userPrefersReducedMotion === false}
           autoPlay={userPrefersReducedMotion === false}
