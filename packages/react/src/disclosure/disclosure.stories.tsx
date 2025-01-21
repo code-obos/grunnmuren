@@ -17,6 +17,7 @@ const meta: Meta<typeof Disclosure> = {
           <DisclosureButton
             aria-label="Hjelp"
             className="grid place-items-center"
+            variant="dense"
           >
             <Menu />
           </DisclosureButton>

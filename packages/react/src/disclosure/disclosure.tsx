@@ -14,14 +14,15 @@ const disclosureButtonVariants = cva({
   base: 'focus-visible:outline-focus',
   variants: {
     variant: {
-      dense: '-m-6 p-6',
+      dense: '-m-2.5 p-2.5 focus-visible:outline-offset-[-0.625rem]',
+      regular: 'focus-visible:outline-inset',
     },
   },
 });
 
 const DisclosureButton = ({
   className,
-  variant,
+  variant = 'regular',
   ...restProps
 }: DisclosureButtonProps & VariantProps<typeof disclosureButtonVariants>) => (
   <Button
