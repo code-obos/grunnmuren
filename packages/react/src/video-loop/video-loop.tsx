@@ -82,7 +82,7 @@ export const VideoLoop = ({
         <video
           ref={videoRef}
           // cursor-pointer is not working on the button below, so we add it here for the same effect
-          className={cx('cursor-pointer', 'h-full w-full object-cover')}
+          className="cursor-pointer h-full w-full object-cover"
           playsInline
           loop={userPrefersReducedMotion === false}
           autoPlay={userPrefersReducedMotion === false}
