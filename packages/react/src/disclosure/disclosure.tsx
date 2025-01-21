@@ -15,7 +15,7 @@ const disclosureButtonVariants = cva({
   variants: {
     variant: {
       dense: '-m-2.5 p-2.5 focus-visible:outline-offset-[-0.625rem]',
-      regular: 'focus-visible:outline-inset',
+      regular: 'focus-visible:outline-inset min-h-11 min-w-11',
     },
   },
 });
