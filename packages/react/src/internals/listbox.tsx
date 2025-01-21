@@ -2,13 +2,13 @@ import { Check } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
 import {
   Header,
-  type HeadingProps,
+  type HeadingProps as ListBoxHeadingProps,
   type ListBoxItemProps,
   type ListBoxProps,
   ListBox as RACListBox,
   ListBoxItem as RACListBoxItem,
-  Section,
-  type SectionProps,
+  ListBoxSection as RACListBoxSection,
+  type ListBoxSectionProps,
 } from 'react-aria-components';
 import { dropdown } from '../classes';
 
@@ -54,8 +54,8 @@ const ListBoxItem = (props: ListBoxItemProps) => {
 const ListBoxSection = <T extends object>({
   className,
   ...restProps
-}: SectionProps<T>) => (
-  <Section
+}: ListBoxSectionProps<T>) => (
+  <RACListBoxSection
     {...restProps}
     // The :not(:first-child) selector adds extra spacing to all the options, but not the section (group) headings
     // This way we get the desired extra indent on all options within a group
@@ -66,7 +66,7 @@ const ListBoxSection = <T extends object>({
 /**
  * This component can be used to label grouped items in a `ListBoxSection` with a heading
  */
-const ListBoxHeader = (props: HeadingProps) => (
+const ListBoxHeader = (props: ListBoxHeadingProps) => (
   <Header
     {...props}
     className={cx(
@@ -79,7 +79,9 @@ const ListBoxHeader = (props: HeadingProps) => (
 export {
   ListBox,
   ListBoxHeader,
+  type ListBoxHeadingProps,
   ListBoxItem,
   type ListBoxItemProps,
   ListBoxSection,
+  type ListBoxSectionProps,
 };
