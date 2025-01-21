@@ -15,7 +15,7 @@ const meta: Meta<typeof Disclosure> = {
       <div className="grid gap-12 p-4">
         <Disclosure {...props}>
           <DisclosureButton
-            aria-label="Hjelp"
+            aria-label="Meny"
             className="grid place-items-center"
             variant="dense"
           >
