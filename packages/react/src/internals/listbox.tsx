@@ -5,10 +5,10 @@ import {
   type HeadingProps as ListBoxHeadingProps,
   type ListBoxItemProps,
   type ListBoxProps,
+  type ListBoxSectionProps,
   ListBox as RACListBox,
   ListBoxItem as RACListBoxItem,
   ListBoxSection as RACListBoxSection,
-  type ListBoxSectionProps,
 } from 'react-aria-components';
 import { dropdown } from '../classes';
 
