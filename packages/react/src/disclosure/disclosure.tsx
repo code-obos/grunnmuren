@@ -10,7 +10,7 @@ import {
 } from 'react-aria-components';
 
 const disclosureButtonVariants = cva({
-  base: 'inline-flex outline-none data-[focus-visible]:outline-focus',
+  base: 'inline-flex items-center rounded-lg outline-none data-[focus-visible]:outline-focus',
   variants: {
     size: {
       // Ensure a minimum click area of 44x44px, while making it look like it only has the size of the content
@@ -27,8 +27,8 @@ const disclosureButtonVariants = cva({
      * @default false
      */
     isIconOnly: {
-      true: 'p-2 [&>svg]:h-7 [&>svg]:w-7',
-      false: 'gap-2.5 px-4 py-2',
+      true: '[&>svg]:h-7 [&>svg]:w-7',
+      false: 'gap-2.5',
     },
   },
   defaultVariants: {
