@@ -13,7 +13,9 @@ const disclosureButtonVariants = cva({
   base: 'inline-flex outline-none data-[focus-visible]:outline-focus',
   variants: {
     size: {
+      // Ensure a minimum click area of 44x44px, while making it look like it only has the size of the content
       dense: '-m-2.5 p-2.5 data-[focus-visible]:outline-offset-[-0.625rem]',
+      // Ensure a minimum click area of 44x44px, and a minimum size of 44x44px
       regular: 'data-[focus-visible]:outline-offset min-h-11 min-w-11',
     },
     withChevron: {
