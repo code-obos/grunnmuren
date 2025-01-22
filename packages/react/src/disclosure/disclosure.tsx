@@ -10,11 +10,11 @@ import {
 } from 'react-aria-components';
 
 const disclosureButtonVariants = cva({
-  base: 'focus-visible:outline-focus',
+  base: 'outline-none data-[focus-visible]:outline-focus',
   variants: {
     variant: {
-      dense: '-m-2.5 p-2.5 focus-visible:outline-offset-[-0.625rem]',
-      regular: 'focus-visible:outline-inset min-h-11 min-w-11',
+      dense: '-m-2.5 p-2.5 data-[focus-visible]:outline-offset-[-0.625rem]',
+      regular: 'data-[focus-visible]:outline-inset min-h-11 min-w-11',
     },
     withChevron: {
       true: '[&[aria-expanded="true"]_svg]:rotate-180',
