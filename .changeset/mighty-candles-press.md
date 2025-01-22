@@ -10,7 +10,7 @@ Usage:
 <VideoLoop
     src="https://res.cloudinary.com/obosit-prd-ch-clry/video/upload/v1732199756/Mellom%20husene/Frysja_Loop2.mp4"
     format="mp4"
-    alt="Frysjaparken er moderne nabolag med flotte uteområder og en nydelig kafé"
+    alt="Frysjaparken er et moderne nabolag med flotte uteområder og en nydelig kafé"
 />
 
 <Media>
@@ -18,6 +18,6 @@ Usage:
         src="https://res.cloudinary.com/obosit-prd-ch-clry/video/upload/v1732199756/Mellom%20husene/Frysja_Loop2.mp4"
         format="mp4"
     />
-    <Caption>Frysjaparken er moderne nabolag med flotte uteområder og en nydelig kafé</Caption>
+    <Caption>Frysjaparken er et moderne nabolag med flotte uteområder og en nydelig kafé</Caption>
 </Media>
 ```
