@@ -2,7 +2,7 @@ import { Menu } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Checkbox, CheckboxGroup } from '../checkbox';
 import { Disclosure, DisclosureButton, DisclosurePanel } from './disclosure';
-import { useId } from 'react';
+import { useId, useState } from 'react';
 
 const meta: Meta<typeof Disclosure> = {
   title: 'Disclosure',
@@ -15,7 +15,7 @@ const meta: Meta<typeof Disclosure> = {
     return (
       <div className="p-4">
         <Disclosure {...props}>
-          <DisclosureButton className="grid place-items-center">
+          <DisclosureButton className="grid place-items-center" size="dense">
             Les mer
           </DisclosureButton>
           <DisclosurePanel>
@@ -60,18 +60,36 @@ export const Dense: Story = {
 export const WithChevron: Story = {
   render: (props) => {
     const id = useId();
+    const [selectedOptions, setSelectedItems] = useState<string[]>([]);
+    const [isExpanded, setIsExpanded] = useState(false);
     return (
       <div className="p-4">
-        <Disclosure {...props}>
+        <Disclosure
+          {...props}
+          isExpanded={isExpanded}
+          onExpandedChange={setIsExpanded}
+        >
           <DisclosureButton
-            className="flex gap-6 rounded-lg border-gray-light"
+            className="flex gap-6 border-gray-light"
             withChevron
             id={id}
+            size="dense"
           >
             Kjøpsalternativer
           </DisclosureButton>
+          {!isExpanded && (
+            <ul className="flex gap-2" aria-label="Valgte kjøpsalternativer">
+              {selectedOptions.map((option) => (
+                <li key={option}>{option}</li>
+              ))}
+            </ul>
+          )}
           <DisclosurePanel className="px-4">
-            <CheckboxGroup aria-labelledby={id}>
+            <CheckboxGroup
+              value={selectedOptions}
+              onChange={setSelectedItems}
+              aria-labelledby={id}
+            >
               <Checkbox value="deleie">Deleie</Checkbox>
               <Checkbox value="bostart">Bostart</Checkbox>
               <Checkbox value="boligbytte">Boligbytte</Checkbox>

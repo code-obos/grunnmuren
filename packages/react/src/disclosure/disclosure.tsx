@@ -1,13 +1,22 @@
 import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
 import { type VariantProps, cva } from 'cva';
 import {
-  Button,
-  type ButtonProps,
-  DisclosurePanel,
-  type DisclosurePanelProps,
-  type DisclosureProps,
-  Disclosure as RACDisclosure,
-} from 'react-aria-components';
+  createContext,
+  useContext,
+  useId,
+  useState,
+  type Dispatch,
+  type SetStateAction,
+} from 'react';
+import { Button, type ButtonProps } from 'react-aria-components';
+
+const DisclosureContext = createContext<{
+  expanded: boolean;
+  setExpanded?: Dispatch<React.SetStateAction<boolean>>;
+  id?: string;
+}>({
+  expanded: false,
+});
 
 const disclosureButtonVariants = cva({
   base: 'inline-flex items-center rounded-lg outline-none data-[focus-visible]:outline-focus',
@@ -38,7 +47,10 @@ const disclosureButtonVariants = cva({
   },
 });
 
-type DisclosureButtonProps = Omit<ButtonProps, 'slot' | 'children'> &
+type DisclosureButtonProps = Omit<
+  ButtonProps,
+  'children' | 'aria-expanded' | 'aria-controls'
+> &
   VariantProps<typeof disclosureButtonVariants> & {
     children: React.ReactNode;
   };
@@ -49,26 +61,76 @@ const DisclosureButton = ({
   withChevron,
   isIconOnly,
   children,
+  onPress,
   ...restProps
-}: DisclosureButtonProps) => (
-  <Button
-    {...restProps}
-    className={disclosureButtonVariants({
-      className,
-      size,
-      withChevron,
-      isIconOnly,
-    })}
-    slot="trigger"
-  >
-    {children}
-    {withChevron && (
-      <ChevronDown className="flex-none transition-transform duration-300 motion-reduce:transition-none" />
-    )}
-  </Button>
-);
+}: DisclosureButtonProps) => {
+  const { expanded, setExpanded, id } = useContext(DisclosureContext);
+  return (
+    <Button
+      {...restProps}
+      className={disclosureButtonVariants({
+        className,
+        size,
+        withChevron,
+        isIconOnly,
+      })}
+      aria-expanded={expanded}
+      onPress={(e) => {
+        if (setExpanded) setExpanded((prev) => !prev);
+        if (onPress) onPress(e);
+      }}
+      aria-controls={id}
+    >
+      {children}
+      {withChevron && (
+        <ChevronDown className="flex-none transition-transform duration-300 motion-reduce:transition-none" />
+      )}
+    </Button>
+  );
+};
 
-const Disclosure = (props: DisclosureProps) => <RACDisclosure {...props} />;
+type DisclosureProps = {
+  children: React.ReactNode;
+  className?: string;
+  defaultExpanded?: boolean;
+  isExpanded?: boolean;
+  onExpandedChange?: Dispatch<SetStateAction<boolean>>;
+};
+
+const Disclosure = ({
+  defaultExpanded = false,
+  isExpanded,
+  onExpandedChange,
+  ...props
+}: DisclosureProps) => {
+  const [expanded, setExpanded] = useState(defaultExpanded);
+  const id = useId();
+
+  return (
+    <DisclosureContext.Provider
+      value={{
+        expanded: isExpanded ?? expanded,
+        setExpanded: onExpandedChange ?? setExpanded,
+        id,
+      }}
+    >
+      <div {...props} />
+    </DisclosureContext.Provider>
+  );
+};
+
+type DisclosurePanelProps = {
+  children: React.ReactNode;
+  className?: string;
+  role?: 'group' | 'region';
+  'aria-labelledby'?: string;
+  'aria-label'?: string;
+};
+
+const DisclosurePanel = (props: DisclosurePanelProps) => {
+  const { expanded, id } = useContext(DisclosureContext);
+  return expanded ? <div {...props} id={id} /> : null;
+};
 
 export {
   Disclosure,
