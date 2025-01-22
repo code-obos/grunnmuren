@@ -1,5 +1,19 @@
 # @obosbbl/grunnmuren-icons-react
 
+## 2.0.0-canary.5
+
+### Minor Changes
+
+- e92b0f2: \* minor updates to some of the icons.
+  - added new icons:
+    - Flower
+    - Globe
+    - HouseWarning
+    - Megaphone
+    - Member
+    - MemberBonus
+    - Rain
+
 ## 2.0.0-canary.4
 
 ### Major Changes
