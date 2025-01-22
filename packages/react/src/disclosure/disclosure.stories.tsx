@@ -44,6 +44,7 @@ export const Dense: Story = {
             aria-label="Meny"
             className="grid place-items-center"
             variant="dense"
+            isIconOnly
           >
             <Menu />
           </DisclosureButton>
@@ -63,7 +64,7 @@ export const WithChevron: Story = {
       <div className="p-4">
         <Disclosure {...props}>
           <DisclosureButton
-            className="flex gap-6 rounded-lg border-gray-light px-2 py-3.5"
+            className="flex gap-6 rounded-lg border-gray-light"
             withChevron
             id={id}
           >

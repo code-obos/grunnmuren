@@ -10,16 +10,28 @@ import {
 } from 'react-aria-components';
 
 const disclosureButtonVariants = cva({
-  base: 'outline-none data-[focus-visible]:outline-focus',
+  base: 'inline-flex outline-none data-[focus-visible]:outline-focus',
   variants: {
     variant: {
       dense: '-m-2.5 p-2.5 data-[focus-visible]:outline-offset-[-0.625rem]',
-      regular: 'data-[focus-visible]:outline-inset min-h-11 min-w-11',
+      regular: 'data-[focus-visible]:outline-offset min-h-11 min-w-11',
     },
     withChevron: {
       true: '[&[aria-expanded="true"]_svg]:rotate-180',
       false: null,
     },
+    /**
+     * When the button is without text, but with a single icon.
+     * @default false
+     */
+    isIconOnly: {
+      true: 'p-2 [&>svg]:h-7 [&>svg]:w-7',
+      false: 'gap-2.5 px-4 py-2',
+    },
+  },
+  defaultVariants: {
+    variant: 'regular',
+    withChevron: false,
   },
 });
 
@@ -30,14 +42,20 @@ type DisclosureButtonProps = Omit<ButtonProps, 'slot' | 'children'> &
 
 const DisclosureButton = ({
   className,
-  variant = 'regular',
+  variant,
   withChevron,
+  isIconOnly,
   children,
   ...restProps
 }: DisclosureButtonProps) => (
   <Button
     {...restProps}
-    className={disclosureButtonVariants({ className, variant, withChevron })}
+    className={disclosureButtonVariants({
+      className,
+      variant,
+      withChevron,
+      isIconOnly,
+    })}
     slot="trigger"
   >
     {children}
