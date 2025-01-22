@@ -1,3 +1,4 @@
+import { cx } from 'cva';
 import { type HTMLProps, type Ref, createContext, forwardRef } from 'react';
 import { type ContextValue, useContextProps } from 'react-aria-components';
 
@@ -64,20 +65,34 @@ type FooterProps = HTMLProps<HTMLDivElement> & {
   children: React.ReactNode;
 };
 
+type CaptionProps = HTMLProps<HTMLDivElement> & {
+  children: React.ReactNode;
+};
+
+const Caption = ({ className, ...restProps }: CaptionProps) => (
+  <div
+    {...restProps}
+    className={cx('description', className)}
+    data-slot="caption"
+  />
+);
+
 const Footer = (props: FooterProps) => <div {...props} data-slot="footer" />;
 
 const _Heading = forwardRef(Heading);
 const _Content = forwardRef(Content);
 
 export {
-  type HeadingProps,
-  _Heading as Heading,
-  HeadingContext,
-  type ContentProps,
+  Caption,
   _Content as Content,
   ContentContext,
-  type MediaProps,
-  Media,
-  type FooterProps,
   Footer,
+  _Heading as Heading,
+  HeadingContext,
+  Media,
+  type CaptionProps,
+  type ContentProps,
+  type FooterProps,
+  type HeadingProps,
+  type MediaProps,
 };
