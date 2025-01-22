@@ -1,5 +1,5 @@
 import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
-import { type VariantProps, cva } from 'cva';
+import { type VariantProps, cva, cx } from 'cva';
 import {
   createContext,
   useContext,
@@ -127,9 +127,26 @@ type DisclosurePanelProps = {
   'aria-label'?: string;
 };
 
-const DisclosurePanel = (props: DisclosurePanelProps) => {
+const DisclosurePanel = ({ className, ...restProps }: DisclosurePanelProps) => {
   const { expanded, id } = useContext(DisclosureContext);
-  return expanded ? <div {...props} id={id} /> : null;
+  return (
+    <div
+      className={cx(
+        'grid transition-all duration-300 after:relative after:block after:h-0 after:transition-all after:duration-300 motion-reduce:transition-none',
+        expanded ? 'grid-rows-[1fr] after:h-3.5' : 'grid-rows-[0fr]',
+      )}
+      inert={!expanded}
+    >
+      <div
+        {...restProps}
+        className={cx(
+          className,
+          'relative overflow-hidden before:relative before:block before:h-1.5 after:relative after:block after:h-1.5',
+        )}
+        id={id}
+      />
+    </div>
+  );
 };
 
 export {
