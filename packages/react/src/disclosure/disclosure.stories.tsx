@@ -36,9 +36,11 @@ const meta: Meta<typeof Disclosure> = {
         </Disclosure>
 
         <Disclosure {...props}>
-          <DisclosureButton className="flex gap-6 rounded-lg border-gray-light px-2 py-3.5 [&[aria-expanded='true']_svg]:rotate-180">
+          <DisclosureButton
+            className="flex gap-6 rounded-lg border-gray-light px-2 py-3.5"
+            withChevron
+          >
             Her kan du velge mye forskjellig{' '}
-            <ChevronDown className="flex-none transition-transform duration-300 motion-reduce:transition-none" />
           </DisclosureButton>
           <DisclosurePanel>
             <p>Her finner du alle detaljer du måtte trenge.</p>
