@@ -12,7 +12,7 @@ import {
 const disclosureButtonVariants = cva({
   base: 'inline-flex outline-none data-[focus-visible]:outline-focus',
   variants: {
-    variant: {
+    size: {
       dense: '-m-2.5 p-2.5 data-[focus-visible]:outline-offset-[-0.625rem]',
       regular: 'data-[focus-visible]:outline-offset min-h-11 min-w-11',
     },
@@ -30,8 +30,9 @@ const disclosureButtonVariants = cva({
     },
   },
   defaultVariants: {
-    variant: 'regular',
+    size: 'regular',
     withChevron: false,
+    isIconOnly: false,
   },
 });
 
@@ -42,7 +43,7 @@ type DisclosureButtonProps = Omit<ButtonProps, 'slot' | 'children'> &
 
 const DisclosureButton = ({
   className,
-  variant,
+  size,
   withChevron,
   isIconOnly,
   children,
@@ -52,7 +53,7 @@ const DisclosureButton = ({
     {...restProps}
     className={disclosureButtonVariants({
       className,
-      variant,
+      size,
       withChevron,
       isIconOnly,
     })}

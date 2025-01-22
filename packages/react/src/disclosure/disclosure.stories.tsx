@@ -43,7 +43,7 @@ export const Dense: Story = {
           <DisclosureButton
             aria-label="Meny"
             className="grid place-items-center"
-            variant="dense"
+            size="dense"
             isIconOnly
           >
             <Menu />
