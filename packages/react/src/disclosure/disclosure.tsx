@@ -1,12 +1,12 @@
 import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
 import { type VariantProps, cva, cx } from 'cva';
 import {
+  type Dispatch,
+  type SetStateAction,
   createContext,
   useContext,
   useId,
   useState,
-  type Dispatch,
-  type SetStateAction,
 } from 'react';
 import { Button, type ButtonProps } from 'react-aria-components';
 
