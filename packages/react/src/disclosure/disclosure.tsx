@@ -1,12 +1,12 @@
 import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
-import { cva, type VariantProps } from 'cva';
+import { type VariantProps, cva } from 'cva';
 import {
   Button,
   type ButtonProps,
-  type DisclosureProps,
-  Disclosure as RACDisclosure,
   DisclosurePanel,
   type DisclosurePanelProps,
+  type DisclosureProps,
+  Disclosure as RACDisclosure,
 } from 'react-aria-components';
 
 const disclosureButtonVariants = cva({
