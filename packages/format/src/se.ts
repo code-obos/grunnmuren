@@ -7,7 +7,7 @@ const ORG_NUMBER_FORMAT = /^(\d{6})(\d{4})$/
 * Format an organization number
 * @example
 * ```
-* formatOrganizationNumber('1234567890') // => '123456-7890'
+* formatOrganizationNumber('0000000000') // => '000000-0000'
 * ```
 */
 export function formatOrganizationNumber(number: string): string {

@@ -1,9 +1,8 @@
 import { describe, expect, test } from 'vitest';
-import { formatOrganizationNumber, formatPhoneNumber
+import { formatObosMembershipNumber, formatOrganizationNumber, formatPhoneNumber
 } from './no';
 
 describe('formatPhoneNumber()', () => {
-
   test('formats mobile numbers', () => {
     const input = '40612345';
     const expected = '40 61 23 45';
@@ -26,7 +25,10 @@ describe('formatPhoneNumber()', () => {
   });
 });
 
-describe('formatOrganizationNumber()', () => {
-  expect(formatOrganizationNumber('937052766')).toBe('937 052 766');
+test('formatOrganizationNumber()', () => {
+  expect(formatOrganizationNumber('000000000')).toBe('000 000 000');
+});
 
+test('formatObosMembershipNumber()', () => {
+  expect(formatObosMembershipNumber('0000000')).toBe('000 00 00');
 });

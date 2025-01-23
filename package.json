@@ -16,7 +16,8 @@
     "lint:biome": "pnpm biome check .",
     "lint:format": "prettier --list-different .",
     "serve-storybook": "http-server storybook-static -p 6006 --silent",
-    "test": "test-storybook"
+    "test": "vitest",
+    "test:storybook": "test-storybook"
   },
   "dependencies": {
     "@biomejs/biome": "1.9.4",
