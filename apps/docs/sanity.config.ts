@@ -4,6 +4,7 @@ import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { schemaTypes } from './studio/schema-types';
+import { table } from '@sanity/table';
 
 const dataset = 'grunnmuren';
 
@@ -13,7 +14,7 @@ export default defineConfig({
   basePath: '/studio',
   title: 'Grunnmuren - Sanity Studio',
   auth: obosAuthStore({ dataset }),
-  plugins: [structureTool(), visionTool(), codeInput()],
+  plugins: [structureTool(), visionTool(), codeInput(), table()],
   schema: {
     types: schemaTypes,
   },
