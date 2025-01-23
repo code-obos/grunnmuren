@@ -25,6 +25,7 @@
     "@react-aria/utils": "3.27.0",
     "@sanity/client": "6.24.1",
     "@sanity/code-input": "5.1.2",
+    "@sanity/table": "1.1.3",
     "@sanity/vision": "3.68.3",
     "@tanstack/react-router": "1.97.3",
     "@tanstack/start": "1.97.3",

@@ -1,12 +1,11 @@
 import { PortableText } from '@portabletext/react';
 import { cx } from 'cva';
-import { themes } from 'prism-react-renderer';
-import { LiveEditor, LiveProvider } from 'react-live';
 import type { Content as IContent } from 'sanity.types';
 import { AnchorHeading } from './anchor-heading';
 import { Code } from './code';
 import { ComponentPreview } from './component-preview';
 import { ImageWithCaption } from './image-with-caption';
+import { Table, TableBody, TableCell, TableHead, TableRow } from './table';
 
 export type ContentProps = {
   content: IContent;
@@ -36,6 +35,38 @@ export function Content({ content, className }: ContentProps) {
                 caption={value.caption ?? ''}
               />
             ),
+            table: ({ value: { rows } }) => {
+              const [firstRow, ...restRows] = rows;
+              return (
+                <Table>
+                  <TableHead>
+                    {/**
+                     * Due to limitations in the @sanity/table plugin,
+                     * we just have to assume that the first row is the thead:
+                     * https://www.sanity.io/answers/discussion-about-the-limitations-of-a-table-plugin-and-alternative-solutions-for-creating-tables-in-sanity-io-
+                     */}
+                    <TableRow key={firstRow._key}>
+                      {firstRow.cells.map((cell) => (
+                        <TableCell key={`${firstRow._key}-${cell}`}>
+                          {cell}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {restRows.map((row) => (
+                      <TableRow key={row._key}>
+                        {row.cells.map((cell) => (
+                          <TableCell key={`${row._key}-${cell}`}>
+                            {cell}
+                          </TableCell>
+                        ))}
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              );
+            },
           },
           block: {
             h2: ({ children, value }) => (

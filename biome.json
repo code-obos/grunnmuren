@@ -8,7 +8,8 @@
       ".vinxi/",
       "routetree.gen.ts",
       "packages/icons-react/src",
-      "apps/docs/docgen.ts"
+      "apps/docs/docgen.ts",
+      "apps/docs/sanity.types.ts"
     ]
   },
   "linter": {
