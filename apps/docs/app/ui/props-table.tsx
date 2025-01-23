@@ -1,5 +1,6 @@
 import * as props from 'docgen';
 import { AnchorHeading } from './anchor-heading';
+import { Table, TableHead, TableRow, TableCell, TableBody } from './table';
 
 interface PropsTableProps {
   componentName: keyof typeof props;
@@ -12,32 +13,29 @@ export const PropsTable = ({ componentName }: PropsTableProps) => {
       <AnchorHeading className="heading-s my-2" level={2} id={headingId}>
         {componentName}
       </AnchorHeading>
-      <table className="mb-8 w-full text-sm" aria-describedby={headingId}>
-        <thead>
-          <tr className="bg-sky-lightest text-left align-baseline *:px-3 *:py-2">
-            <th>Prop</th>
-            <th>Description</th>
-            <th>Default</th>
-          </tr>
-        </thead>
-        <tbody>
+      <Table className="mb-8 w-full text-sm" aria-describedby={headingId}>
+        <TableHead>
+          <TableRow>
+            <TableCell>Prop</TableCell>
+            <TableCell>Description</TableCell>
+            <TableCell>Default</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
           {Object.values(props[componentName].props).map((prop) => (
-            <tr
-              key={prop.name}
-              className="border-t-gray-light align-baseline *:px-3 *:py-2 [&:not(:first-child)]:border-t-[1px]"
-            >
-              <td className="italic">
+            <TableRow key={prop.name}>
+              <TableCell className="italic">
                 <code className="font-mono">
                   {prop.name}
                   {prop.required ? '' : '?'}
                 </code>
-              </td>
-              <td>{prop.description}</td>
-              <td>{prop.defaultValue?.value ?? '-'}</td>
-            </tr>
+              </TableCell>
+              <TableCell>{prop.description}</TableCell>
+              <TableCell>{prop.defaultValue?.value ?? '-'}</TableCell>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
     </>
   );
 };
