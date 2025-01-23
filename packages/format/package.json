@@ -1,0 +1,30 @@
+{
+  "name": "@obosbbl/grunnmuren-format",
+  "version": "2.0.0-canary.0",
+  "description": "Grunnmuren format functions",
+  "repository": {
+    "url": "https://github.com/code-obos/grunnmuren"
+  },
+  "license": "MIT",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    "./no": {
+      "types": "./dist/no.d.mts",
+      "default": "./dist/no.mjs"
+    },
+    "./se": {
+      "types": "./dist/se.d.mts",
+      "default": "./dist/se.mjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "bunchee"
+  },
+  "dependencies": {
+  },
+  "peerDependencies": {}
+}
