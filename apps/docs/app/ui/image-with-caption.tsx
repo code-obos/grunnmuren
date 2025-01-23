@@ -6,13 +6,13 @@ interface ImageProps {
   height?: number;
 }
 
-export const ImageWithCaption: React.FC<ImageProps> = ({
+export function ImageWithCaption({
   src,
   alt,
   caption,
   width,
   height,
-}) => {
+}: ImageProps) {
   return (
     <div className="my-4">
       <img
@@ -25,4 +25,4 @@ export const ImageWithCaption: React.FC<ImageProps> = ({
       <p className="description">{caption}</p>
     </div>
   );
-};
+}
