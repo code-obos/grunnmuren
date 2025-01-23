@@ -6,6 +6,7 @@ import type { Content as IContent } from 'sanity.types';
 import { AnchorHeading } from './anchor-heading';
 import { Code } from './code';
 import { ComponentPreview } from './component-preview';
+import { ImageWithCaption } from './image-with-caption';
 
 export type ContentProps = {
   content: IContent;
@@ -27,6 +28,13 @@ export function Content({ content, className }: ContentProps) {
             ),
             'static-code-block': ({ value }) => (
               <Code value={value.code.code as string} />
+            ),
+            'image-with-caption': ({ value }) => (
+              <ImageWithCaption
+                src={value.asset.url}
+                alt={value.alt ?? ''}
+                caption={value.caption ?? ''}
+              />
             ),
           },
           block: {
