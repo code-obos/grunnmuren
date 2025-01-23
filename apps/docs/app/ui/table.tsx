@@ -75,13 +75,13 @@ const TableCell = ({ children, className }: TableCellProps) => {
 
 export {
   Table,
-  type TableProps,
-  TableHead,
-  type TableHeadProps,
   TableBody,
-  type TableBodyProps,
-  TableRow,
-  type TableRowProps,
   TableCell,
+  TableHead,
+  TableRow,
+  type TableBodyProps,
   type TableCellProps,
+  type TableHeadProps,
+  type TableProps,
+  type TableRowProps,
 };

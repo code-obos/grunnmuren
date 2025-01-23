@@ -5,8 +5,7 @@ import { AnchorHeading } from './anchor-heading';
 import { Code } from './code';
 import { ComponentPreview } from './component-preview';
 import { ImageWithCaption } from './image-with-caption';
-import { Table, TableHead, TableRow, TableCell, TableBody } from './table';
-import {} from 'react-aria-components';
+import { Table, TableBody, TableCell, TableHead, TableRow } from './table';
 
 export type ContentProps = {
   content: IContent;

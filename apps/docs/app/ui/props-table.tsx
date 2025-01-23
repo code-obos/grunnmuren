@@ -1,6 +1,6 @@
 import * as props from 'docgen';
 import { AnchorHeading } from './anchor-heading';
-import { Table, TableHead, TableRow, TableCell, TableBody } from './table';
+import { Table, TableBody, TableCell, TableHead, TableRow } from './table';
 
 interface PropsTableProps {
   componentName: keyof typeof props;

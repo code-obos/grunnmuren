@@ -1,10 +1,10 @@
 import { obosAuthStore } from '@code-obos/sanity-auth';
 import { codeInput } from '@sanity/code-input';
+import { table } from '@sanity/table';
 import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { schemaTypes } from './studio/schema-types';
-import { table } from '@sanity/table';
 
 const dataset = 'grunnmuren';
 
