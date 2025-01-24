@@ -1,14 +1,16 @@
 import { PortableText } from '@portabletext/react';
 import { cx } from 'cva';
-import type { Content as IContent } from 'sanity.types';
+import type { COMPONENT_QUERYResult } from 'sanity.types';
 import { AnchorHeading } from './anchor-heading';
 import { Code } from './code';
 import { ComponentPreview } from './component-preview';
 import { ImageWithCaption } from './image-with-caption';
 import { Table, TableBody, TableCell, TableHead, TableRow } from './table';
 
-export type ContentProps = {
-  content: IContent;
+export type ContentProps = Pick<
+  NonNullable<COMPONENT_QUERYResult>,
+  'content'
+> & {
   className?: string;
 };
 
@@ -16,7 +18,7 @@ export function Content({ content, className }: ContentProps) {
   return (
     <div className={cx('prose', className)}>
       <PortableText
-        value={content}
+        value={content ?? []}
         components={{
           types: {
             'live-code-block': ({ value }) => (
