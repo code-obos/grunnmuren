@@ -30,6 +30,9 @@ const config = {
     {
       name: 'sortAttrs',
     },
+    {
+      name: 'mergePaths',
+    },
   ],
 };
 
