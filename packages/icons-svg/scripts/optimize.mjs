@@ -30,7 +30,9 @@ const config = {
     {
       name: 'sortAttrs',
     },
-    { name: 'mergePaths' }
+    {
+      name: 'mergePaths',
+    },
   ],
 };
 
@@ -68,12 +70,12 @@ function printProfitInfo(inBytes, outBytes) {
   console.log(
     // biome-ignore lint/style/useTemplate: leaving this as non template literal as it is copied
     Math.round((inBytes / 1024) * 1000) / 1000 +
-    ' KiB' +
-    (profitPercents < 0 ? ' + ' : ' - ') +
-    // biome-ignore lint/style/useTemplate: leaving this as non template literal as it is copied
-    pc.green(Math.abs(Math.round(profitPercents * 10) / 10) + '%') +
-    ' = ' +
-    Math.round((outBytes / 1024) * 1000) / 1000 +
-    ' KiB',
+      ' KiB' +
+      (profitPercents < 0 ? ' + ' : ' - ') +
+      // biome-ignore lint/style/useTemplate: leaving this as non template literal as it is copied
+      pc.green(Math.abs(Math.round(profitPercents * 10) / 10) + '%') +
+      ' = ' +
+      Math.round((outBytes / 1024) * 1000) / 1000 +
+      ' KiB',
   );
 }
