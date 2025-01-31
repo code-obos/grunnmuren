@@ -6,7 +6,6 @@ import { GrunnmurenProvider } from '@obosbbl/grunnmuren-react';
 import {
   type NavigateOptions,
   Outlet,
-  ScrollRestoration,
   type ToOptions,
   createFileRoute,
   useRouter,
@@ -55,7 +54,6 @@ function RootLayout() {
           <MainNav />
         </div>
       </GrunnmurenProvider>
-      <ScrollRestoration />
     </>
   );
 }
