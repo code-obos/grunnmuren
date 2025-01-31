@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-icons-svg
 
+## 2.0.0-canary.6
+
+### Patch Changes
+
+- 36f31d9: icons: optimize SVGs by merging paths when possible
+
 ## 2.0.0-canary.5
 
 ### Minor Changes

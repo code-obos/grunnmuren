@@ -1,5 +1,13 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.48
+
+### Patch Changes
+
+- 369fd61: chore: don't pin to a specific beta version of the cva dependency
+- Updated dependencies [36f31d9]
+  - @obosbbl/grunnmuren-icons-react@2.0.0-canary.7
+
 ## 2.0.0-canary.47
 
 ### Minor Changes
