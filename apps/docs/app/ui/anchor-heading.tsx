@@ -6,7 +6,7 @@ type Props = {
 };
 
 export function AnchorHeading(props: Props) {
-  const Heading = `h${props.level}` as keyof JSX.IntrinsicElements;
+  const Heading = `h${props.level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   return (
     <Heading className={props.className} id={props.id}>
       <a className="no-underline" href={`#${props.id}`} tabIndex={-1}>
