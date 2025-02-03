@@ -29,7 +29,7 @@
     "@sanity/vision": "3.72.1",
     "@tanstack/react-router": "1.99.0",
     "@tanstack/start": "1.99.1",
-    "cva": "1.0.0-beta.2",
+    "cva": "1.0.0-beta.3",
     "groq": "3.72.1",
     "prism-react-renderer": "2.4.1",
     "react": "19.0.0",
