@@ -117,5 +117,5 @@ export const ExpandableDismissableAlert: Story = {
 
 export const WithCustomIcon: Story = {
   render: SmallTemplate,
-  args: {... defaultProps, variant:'success', icon: Subscription},
+  args: { ...defaultProps, variant: 'success', icon: Subscription },
 };
