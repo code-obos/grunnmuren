@@ -37,7 +37,8 @@ function Page() {
               {component.highlightAsNew && (
                 <Badge className="ml-4" color="mint" size="small">
                   Ny
-                </Badge>)}
+                </Badge>
+              )}
             </Heading>
           </Card>
         ))}
