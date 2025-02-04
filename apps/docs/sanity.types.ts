@@ -194,6 +194,7 @@ export type Component = {
   slug?: Slug;
   content?: Content;
   propsComponents?: Array<string>;
+  highlightAsNew?: boolean;
   resourceLinks?: Array<{
     linkType?: 'figma' | 'github';
     url?: string;
@@ -253,16 +254,17 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./app/routes/_docs.tsx
 // Variable: COMPONENTS_NAVIGATION_QUERY
-// Query: *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, '')} | order(name asc)
+// Query: *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, ''), highlightAsNew} | order(name asc)
 export type COMPONENTS_NAVIGATION_QUERYResult = Array<{
   _id: string;
   name: string | null;
   slug: string | '';
+  highlightAsNew: boolean | null;
 }>;
 
 // Source: ./app/routes/_docs/komponenter/$slug.tsx
 // Variable: COMPONENT_QUERY
-// Query: *[_type == "component" && slug.current == $slug][0]{ "content": content[] {..., _type == "image-with-caption" => {...,asset->}}, "name": coalesce(name, ''), propsComponents, resourceLinks }
+// Query: *[_type == "component" && slug.current == $slug][0]{ "content": content[] {..., _type == "image-with-caption" => {...,asset->}}, "name": coalesce(name, ''), propsComponents, resourceLinks, highlightAsNew }
 export type COMPONENT_QUERYResult = {
   content: Array<
     | {
@@ -343,24 +345,26 @@ export type COMPONENT_QUERYResult = {
     _type: 'resourceLink';
     _key: string;
   }> | null;
+  highlightAsNew: boolean | null;
 } | null;
 
 // Source: ./app/routes/_docs/komponenter/index.tsx
 // Variable: COMPONENTS_INDEX_QUERY
-// Query: *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, '')} | order(name asc)
+// Query: *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, ''), highlightAsNew} | order(name asc)
 export type COMPONENTS_INDEX_QUERYResult = Array<{
   _id: string;
   name: string | null;
   slug: string | '';
+  highlightAsNew: boolean | null;
 }>;
 
 // Query TypeMap
 import '@sanity/client';
 declare module '@sanity/client' {
   interface SanityQueries {
-    "*[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, '')} | order(name asc)":
+    "*[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, ''), highlightAsNew} | order(name asc)":
       | COMPONENTS_NAVIGATION_QUERYResult
       | COMPONENTS_INDEX_QUERYResult;
-    '*[_type == "component" && slug.current == $slug][0]{ "content": content[] {..., _type == "image-with-caption" => {...,asset->}}, "name": coalesce(name, \'\'), propsComponents, resourceLinks }': COMPONENT_QUERYResult;
+    '*[_type == "component" && slug.current == $slug][0]{ "content": content[] {..., _type == "image-with-caption" => {...,asset->}}, "name": coalesce(name, \'\'), propsComponents, resourceLinks, highlightAsNew }': COMPONENT_QUERYResult;
   }
 }

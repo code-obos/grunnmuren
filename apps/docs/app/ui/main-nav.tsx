@@ -1,5 +1,5 @@
 import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
-import { Heading } from '@obosbbl/grunnmuren-react';
+import { Badge, Heading } from '@obosbbl/grunnmuren-react';
 import { getRouteApi } from '@tanstack/react-router';
 import { Link } from '@tanstack/react-router';
 import { Button, Disclosure, DisclosurePanel } from 'react-aria-components';
@@ -7,15 +7,21 @@ import { Button, Disclosure, DisclosurePanel } from 'react-aria-components';
 type SubNavItemProps = {
   to: string;
   title: string;
+  highlightAsNew?: boolean | null;
 };
 
-const SubNavItem = ({ to, title }: SubNavItemProps) => (
+const SubNavItem = ({ to, title, highlightAsNew }: SubNavItemProps) => (
   <li>
     <Link
       to={to}
-      className="description inline-flex items-center gap-2 rounded-md px-3 py-2 focus-visible:outline-focus focus-visible:outline-focus-inset data-[status=active]:font-bold data-[status=active]:no-underline"
+      className="description flex items-center justify-between gap-2 rounded-md px-3 py-2 focus-visible:outline-focus focus-visible:outline-focus-inset data-[status=active]:font-bold data-[status=active]:no-underline"
     >
       {title}
+      {highlightAsNew && (
+        <Badge className="no-underline" color="mint" size="small">
+          Ny
+        </Badge>
+      )}
     </Link>
   </li>
 );
@@ -71,6 +77,7 @@ export const MainNav = () => {
   const componentsNavLinks = data.map((component) => ({
     to: `/komponenter/${component.slug}`,
     title: component.name as string,
+    highlightAsNew: component.highlightAsNew,
   }));
 
   return (
