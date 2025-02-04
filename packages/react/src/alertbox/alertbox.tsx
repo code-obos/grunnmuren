@@ -54,6 +54,8 @@ type Props = VariantProps<typeof alertVariants> & {
   role: 'alert' | 'status' | 'none';
   /** Additional CSS className for the element. */
   className?: string;
+  /** Overrides the default icon for the alertbox variant. Should be used sparingly as the default icons are visually connected to the color of the variant. */
+  icon?: React.ComponentType;
   /**
    * Controls if the alert is expandable or not
    * @default false
@@ -107,13 +109,14 @@ const Alertbox = ({
   children,
   role,
   className,
+  icon,
   variant = 'info',
   isDismissable = false, // Assign default value to make cva variants apply correctly
   isDismissed,
   onDismiss,
   isExpandable,
 }: Props) => {
-  const Icon = iconMap[variant];
+  const Icon = icon ?? iconMap[variant];
 
   const locale = useLocale();
 

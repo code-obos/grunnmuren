@@ -1,3 +1,4 @@
+import { Subscription } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { Alertbox, type AlertboxProps } from '.';
@@ -112,4 +113,9 @@ export const ExpandableAlert: Story = {
 export const ExpandableDismissableAlert: Story = {
   render: Template,
   args: { ...defaultProps, isExpandable: true, isDismissable: true },
+};
+
+export const WithCustomIcon: Story = {
+  render: SmallTemplate,
+  args: {... defaultProps, variant:'success', icon: Subscription},
 };
