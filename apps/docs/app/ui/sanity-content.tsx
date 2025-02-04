@@ -14,7 +14,7 @@ export type SanityContentProps = Pick<
   className?: string;
 };
 
-export function SanityContent({ content, className }: ContentProps) {
+export function SanityContent({ content, className }: SanityContentProps) {
   return (
     <div className={cx('prose', className)}>
       <PortableText
