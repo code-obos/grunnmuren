@@ -1104,6 +1104,13 @@
         },
         "optional": true
       },
+      "highlightAsNew": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
+        },
+        "optional": true
+      },
       "resourceLinks": {
         "type": "objectAttribute",
         "value": {

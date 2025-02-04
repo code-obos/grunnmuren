@@ -36,6 +36,11 @@ export default defineType({
       ],
     }),
     defineField({
+      name: 'highlightAsNew',
+      type: 'boolean',
+      title: 'Highlight as a new component',
+    }),
+    defineField({
       name: 'resourceLinks',
       title: 'Resource links',
       description:

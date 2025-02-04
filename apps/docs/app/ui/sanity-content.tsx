@@ -7,14 +7,14 @@ import { ComponentPreview } from './component-preview';
 import { ImageWithCaption } from './image-with-caption';
 import { Table, TableBody, TableCell, TableHead, TableRow } from './table';
 
-export type ContentProps = Pick<
+export type SanityContentProps = Pick<
   NonNullable<COMPONENT_QUERYResult>,
   'content'
 > & {
   className?: string;
 };
 
-export function Content({ content, className }: ContentProps) {
+export function SanityContent({ content, className }: ContentProps) {
   return (
     <div className={cx('prose', className)}>
       <PortableText
