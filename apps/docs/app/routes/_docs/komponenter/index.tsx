@@ -1,11 +1,11 @@
 import { sanityFetch } from '@/lib/sanity';
-import { Card, CardLink, Heading } from '@obosbbl/grunnmuren-react';
+import { Badge, Card, CardLink, Heading } from '@obosbbl/grunnmuren-react';
 import { createFileRoute } from '@tanstack/react-router';
 import { defineQuery } from 'groq';
 
 const COMPONENTS_INDEX_QUERY = defineQuery(
   // make sure the slug is always a string so we don't have add fallback value in code just to make TypeScript happy
-  `*[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, '')} | order(name asc)`,
+  `*[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, ''), highlightAsNew} | order(name asc)`,
 );
 
 export const Route = createFileRoute('/_docs/komponenter/')({
@@ -33,6 +33,12 @@ function Page() {
               <CardLink href={`/komponenter/${component.slug}`}>
                 {component.name}
               </CardLink>
+              {/* TODO: Figure out better way to highlight this */}
+              {component.highlightAsNew && (
+                <Badge className="ml-4" color="mint" size="small">
+                  Ny
+                </Badge>
+              )}
             </Heading>
           </Card>
         ))}
