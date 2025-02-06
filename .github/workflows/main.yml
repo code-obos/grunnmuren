@@ -35,7 +35,7 @@ jobs:
         uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a # v4.2.0
         with:
           node-version: ${{ matrix.node-version }}
-          registry-url: 'https://npm.pkg.github.com'
+          registry-url: "https://npm.pkg.github.com"
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -43,10 +43,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: biome
-        run: pnpm lint:biome
-
-      - name: Prettier formatting check
-        run: pnpm lint:format
+        run: pnpm lint:ci
 
       - name: Build packages
         run: pnpm run build

@@ -9,7 +9,8 @@
       "routetree.gen.ts",
       "packages/icons-react/src",
       "apps/docs/docgen.ts",
-      "apps/docs/sanity.types.ts"
+      "apps/docs/sanity.types.ts",
+      "packages/tailwind/fonts/font-fallback.js"
     ]
   },
   "linter": {
@@ -23,11 +24,29 @@
             "filenameCases": ["kebab-case"]
           }
         }
+      },
+      "nursery": {
+        "useSortedClasses": {
+          "level": "error",
+          "fix": "safe",
+          "options": {
+            "functions": ["cx", "cva"]
+          }
+        }
+      },
+      "correctness": {
+        "noUnusedImports": "error"
       }
     }
   },
   "formatter": {
-    "enabled": false
+    "enabled": true,
+    "indentStyle": "space"
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single"
+    }
   },
   "overrides": [
     {
@@ -36,6 +55,12 @@
         "parser": {
           "allowComments": true
         }
+      }
+    },
+    {
+      "include": ["**/package.json"],
+      "formatter": {
+        "lineWidth": 1
       }
     },
     {
