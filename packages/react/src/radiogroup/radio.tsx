@@ -8,7 +8,7 @@ import {
 import { Description } from '../label';
 
 const defaultClasses = cx([
-  'relative -ml-2.5 inline-flex max-w-fit cursor-pointer items-start gap-4 py-2.5 pl-2.5 leading-7',
+  '-ml-2.5 relative inline-flex max-w-fit cursor-pointer items-start gap-4 py-2.5 pl-2.5 leading-7',
   // the radio button itself
   'before:flex-none before:rounded-full before:border-2 before:border-black',
   // to vertically align the radio we need to calculate the label's height, which is equal to it's font size multiplied by the line height.
@@ -19,12 +19,12 @@ const defaultClasses = cx([
   // selected
   'data-[selected]:before:border-black data-[selected]:before:bg-green data-[selected]:before:shadow-[inset_0_0_0_4px_rgb(255,255,255)]',
   // hover
-  'data-[hovered]:before:border-green data-[hovered]:before:bg-green-lightest data-[hovered]:data-[invalid]:before:bg-red-light',
+  'data-[hovered]:data-[invalid]:before:bg-red-light data-[hovered]:before:border-green data-[hovered]:before:bg-green-lightest',
   // focus
   'data-[focus-visible]:before:ring-focus-offset',
   // invalid - The border is 1 px thicker when invalid. We don't actually want to change the border width, as that causes the element's size to change
   // so we use an inner outline to artifically pad the border
-  'data-[invalid]:before:outline-solid data-[invalid]:before:border-red data-[invalid]:data-[selected]:before:!bg-red data-[invalid]:before:outline data-[invalid]:before:outline-[3px] data-[invalid]:before:outline-offset-[-3px] data-[invalid]:before:outline-red',
+  'data-[invalid]:data-[selected]:before:!bg-red data-[invalid]:before:border-red data-[invalid]:before:outline data-[invalid]:before:outline-[3px] data-[invalid]:before:outline-red data-[invalid]:before:outline-solid data-[invalid]:before:outline-offset-[-3px]',
 ]);
 
 type RadioProps = {

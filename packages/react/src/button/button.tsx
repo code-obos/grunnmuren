@@ -48,7 +48,7 @@ const buttonVariants = cva({
       false: 'gap-2.5 px-4 py-2',
     },
     // Make the content of the button transparent to hide it's content, but keep the button width
-    isPending: { true: 'relative !text-transparent', false: null },
+    isPending: { true: '!text-transparent relative', false: null },
   },
   compoundVariants: [
     {
@@ -74,7 +74,7 @@ const buttonVariants = cva({
       variant: 'primary',
       // Darken bg by 20% on hover. The color is manually crafted
       className:
-        'active:[#9ddac6] bg-mint text-black hover:bg-[#8dd4bd] [&_[role="progressbar"]]:text-black',
+        'bg-mint text-black hover:bg-[#8dd4bd] active:[#9ddac6] [&_[role="progressbar"]]:text-black',
     },
     {
       color: 'mint',

@@ -52,14 +52,14 @@ function Backlink(
     >
       <ChevronLeft
         className={cx(
-          '-ml-[0.5em] flex-shrink-0 transition-transform duration-300 group-hover:-translate-x-1',
+          '-ml-[0.5em] group-hover:-translate-x-1 flex-shrink-0 transition-transform duration-300',
         )}
       />
       {/* This wrapper is required in order to support the custom underline created with border-bottom when the text spans over multiple lines */}
       <span>
         <span
           className={cx(
-            'border-b-[1px] border-t-[1px] border-transparent transition-colors duration-300',
+            'border-transparent border-t-[1px] border-b-[1px] transition-colors duration-300',
             withUnderline ? 'border-b-black' : 'group-hover:border-b-black',
           )}
         >

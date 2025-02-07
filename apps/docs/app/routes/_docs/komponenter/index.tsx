@@ -24,7 +24,7 @@ function Page() {
 
   return (
     <>
-      <h1 className="heading-l mb-12 mt-9">Komponenter</h1>
+      <h1 className="heading-l mt-9 mb-12">Komponenter</h1>
       <div className="grid grid-cols-2 gap-4">
         {components.map((component) => (
           <Card key={component._id} variant="outlined">

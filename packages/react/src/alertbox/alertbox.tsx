@@ -23,11 +23,11 @@ const alertVariants = cva({
   base: [
     'grid grid-cols-[auto_1fr_auto] items-center gap-2 rounded-md border-2 px-3 py-2',
     // Heading styles:
-    '[&_[data-slot="heading"]]:text-base [&_[data-slot="heading"]]:font-medium [&_[data-slot="heading"]]:leading-7',
+    '[&_[data-slot="heading"]]:font-medium [&_[data-slot="heading"]]:text-base [&_[data-slot="heading"]]:leading-7',
     // Content styles:
     '[&:has([data-slot="heading"])_[data-slot="content"]]:col-span-full [&_[data-slot="content"]]:text-sm [&_[data-slot="content"]]:leading-6',
     // Footer styles:
-    '[&_[data-slot="footer"]]:col-span-full [&_[data-slot="footer"]]:text-xs [&_[data-slot="footer"]]:font-light [&_[data-slot="footer"]]:leading-6',
+    '[&_[data-slot="footer"]]:col-span-full [&_[data-slot="footer"]]:font-light [&_[data-slot="footer"]]:text-xs [&_[data-slot="footer"]]:leading-6',
   ],
   variants: {
     /**
@@ -166,7 +166,7 @@ const Alertbox = ({
         <button
           className={cx(
             '-m-2 grid h-11 w-11 place-items-center rounded-xl',
-            'focus-visible:outline-focus focus-visible:-outline-offset-8',
+            'focus-visible:-outline-offset-8 focus-visible:outline-focus',
           )}
           onClick={close}
           aria-label={translations.close[locale]}
@@ -178,9 +178,9 @@ const Alertbox = ({
       {isExpandable && (
         <button
           className={cx(
-            'relative col-span-full row-start-2 -my-3 inline-flex max-w-fit cursor-pointer items-center gap-1 py-3 text-sm leading-6',
+            '-my-3 relative col-span-full row-start-2 inline-flex max-w-fit cursor-pointer items-center gap-1 py-3 text-sm leading-6',
             // Focus styles:
-            'outline-none after:absolute after:bottom-3 after:left-0 after:right-0 after:h-0',
+            'outline-none after:absolute after:right-0 after:bottom-3 after:left-0 after:h-0',
             'focus-visible:after:h-[2px] focus-visible:after:bg-black',
           )}
           onClick={() => setIsExpanded((prevState) => !prevState)}
