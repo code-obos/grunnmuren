@@ -41,7 +41,7 @@ function Page() {
 
   return (
     <>
-      <h1 className='heading-l mt-9 mb-4'>{data.name}</h1>
+      <h1 className="heading-l mt-9 mb-4">{data.name}</h1>
 
       <ResourceLinks className="mb-12">
         {figmaLink && <ResourceLink type="figma" href={figmaLink} />}

@@ -22,7 +22,7 @@ export const Route = createFileRoute('/_docs/profil/')({
 function Page() {
   return (
     <>
-      <h1 className='heading-l mt-9 mb-12'>Profil</h1>
+      <h1 className="heading-l mt-9 mb-12">Profil</h1>
       <div className="grid grid-cols-2 gap-4">
         <Card variant="outlined">
           <Heading level={2}>
