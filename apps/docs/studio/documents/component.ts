@@ -1,4 +1,4 @@
-import { defineArrayMember, defineField, defineType } from 'sanity';
+import {defineArrayMember, defineField, defineType} from 'sanity';
 
 export default defineType({
   name: 'component',
@@ -19,6 +19,12 @@ export default defineType({
         source: 'name',
       },
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'documentationIsReady',
+      title: 'Documentation is ready',
+      type: 'boolean',
+      description: 'Check this when the documentation is ready',
     }),
     defineField({
       name: 'content',
@@ -58,8 +64,8 @@ export default defineType({
               title: 'Link type',
               options: {
                 list: [
-                  { title: 'Figma', value: 'figma' },
-                  { title: 'GitHub', value: 'github' },
+                  {title: 'Figma', value: 'figma'},
+                  {title: 'GitHub', value: 'github'},
                 ],
               },
               validation: (Rule) => Rule.required(),
