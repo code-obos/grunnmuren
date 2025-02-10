@@ -41,16 +41,18 @@ function Page() {
 
   return (
     <>
-      <h1 className="heading-l mt-9 mb-4">{data.name}
+      <h1 className="heading-l mt-9 mb-4">{data.name}</h1>
+
+      <div className="flex gap-4 mb-8">
         {data.highlightAsNew && (
-          <Badge className="ml-4" color="mint" size="small">
+          <Badge color="mint" size="small">
             Ny
           </Badge>
         )}
         {!data.documentationIsReady && (
-          <Badge className="ml-4" color="gray-dark" size="small">Under arbeid</Badge>
+          <Badge color="gray-dark" size="small">Under arbeid</Badge>
         )}
-      </h1>
+      </div>
 
       <ResourceLinks className="mb-12">
         {figmaLink && <ResourceLink type="figma" href={figmaLink}/>}
