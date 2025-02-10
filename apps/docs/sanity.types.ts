@@ -153,35 +153,35 @@ export type StaticCodeBlock = {
 
 export type Content = Array<
   | {
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: 'span';
-        _key: string;
-      }>;
-      style?: 'normal' | 'h2' | 'h3' | 'h4' | 'h5' | 'blockquote';
-      listItem?: 'bullet' | 'number';
-      markDefs?: Array<{
-        href?: string;
-        _type: 'link';
-        _key: string;
-      }>;
-      level?: number;
-      _type: 'block';
-      _key: string;
-    }
+  children?: Array<{
+    marks?: Array<string>;
+    text?: string;
+    _type: 'span';
+    _key: string;
+  }>;
+  style?: 'normal' | 'h2' | 'h3' | 'h4' | 'h5' | 'blockquote';
+  listItem?: 'bullet' | 'number';
+  markDefs?: Array<{
+    href?: string;
+    _type: 'link';
+    _key: string;
+  }>;
+  level?: number;
+  _type: 'block';
+  _key: string;
+}
   | ({
-      _key: string;
-    } & LiveCodeBlock)
+  _key: string;
+} & LiveCodeBlock)
   | ({
-      _key: string;
-    } & StaticCodeBlock)
+  _key: string;
+} & StaticCodeBlock)
   | ({
-      _key: string;
-    } & ImageWithCaption)
+  _key: string;
+} & ImageWithCaption)
   | ({
-      _key: string;
-    } & Table)
+  _key: string;
+} & Table)
 >;
 
 export type Component = {
@@ -195,6 +195,7 @@ export type Component = {
   content?: Content;
   propsComponents?: Array<string>;
   highlightAsNew?: boolean;
+  documentationIsReady?: boolean;
   resourceLinks?: Array<{
     linkType?: 'figma' | 'github';
     url?: string;
@@ -268,74 +269,74 @@ export type COMPONENTS_NAVIGATION_QUERYResult = Array<{
 export type COMPONENT_QUERYResult = {
   content: Array<
     | {
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: 'span';
-          _key: string;
-        }>;
-        style?: 'blockquote' | 'h2' | 'h3' | 'h4' | 'h5' | 'normal';
-        listItem?: 'bullet' | 'number';
-        markDefs?: Array<{
-          href?: string;
-          _type: 'link';
-          _key: string;
-        }>;
-        level?: number;
-        _type: 'block';
-        _key: string;
-      }
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: 'span';
+      _key: string;
+    }>;
+    style?: 'blockquote' | 'h2' | 'h3' | 'h4' | 'h5' | 'normal';
+    listItem?: 'bullet' | 'number';
+    markDefs?: Array<{
+      href?: string;
+      _type: 'link';
+      _key: string;
+    }>;
+    level?: number;
+    _type: 'block';
+    _key: string;
+  }
     | {
-        _key: string;
-        _type: 'image-with-caption';
-        asset: {
-          _id: string;
-          _type: 'sanity.imageAsset';
-          _createdAt: string;
-          _updatedAt: string;
-          _rev: string;
-          originalFilename?: string;
-          label?: string;
-          title?: string;
-          description?: string;
-          altText?: string;
-          sha1hash?: string;
-          extension?: string;
-          mimeType?: string;
-          size?: number;
-          assetId?: string;
-          uploadId?: string;
-          path?: string;
-          url?: string;
-          metadata?: SanityImageMetadata;
-          source?: SanityAssetSourceData;
-        } | null;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        alt?: string;
-        caption?: string;
-      }
+    _key: string;
+    _type: 'image-with-caption';
+    asset: {
+      _id: string;
+      _type: 'sanity.imageAsset';
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      originalFilename?: string;
+      label?: string;
+      title?: string;
+      description?: string;
+      altText?: string;
+      sha1hash?: string;
+      extension?: string;
+      mimeType?: string;
+      size?: number;
+      assetId?: string;
+      uploadId?: string;
+      path?: string;
+      url?: string;
+      metadata?: SanityImageMetadata;
+      source?: SanityAssetSourceData;
+    } | null;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    caption?: string;
+  }
     | {
-        _key: string;
-        _type: 'live-code-block';
-        code?: Code;
-        caption?: string;
-      }
+    _key: string;
+    _type: 'live-code-block';
+    code?: Code;
+    caption?: string;
+  }
     | {
-        _key: string;
-        _type: 'static-code-block';
-        code?: Code;
-        caption?: string;
-      }
+    _key: string;
+    _type: 'static-code-block';
+    code?: Code;
+    caption?: string;
+  }
     | {
+    _key: string;
+    _type: 'table';
+    rows?: Array<
+      {
         _key: string;
-        _type: 'table';
-        rows?: Array<
-          {
-            _key: string;
-          } & TableRow
-        >;
-      }
+      } & TableRow
+    >;
+  }
   > | null;
   name: string | '';
   propsComponents: Array<string> | null;
@@ -346,6 +347,7 @@ export type COMPONENT_QUERYResult = {
     _key: string;
   }> | null;
   highlightAsNew: boolean | null;
+  documentationIsReady: boolean | null;
 } | null;
 
 // Source: ./app/routes/_docs/komponenter/index.tsx
@@ -360,9 +362,10 @@ export type COMPONENTS_INDEX_QUERYResult = Array<{
 
 // Query TypeMap
 import '@sanity/client';
+
 declare module '@sanity/client' {
   interface SanityQueries {
-    "*[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, ''), highlightAsNew} | order(name asc)":
+    '*[_type == "component"]{ _id, name, \'slug\': coalesce(slug.current, \'\'), highlightAsNew} | order(name asc)':
       | COMPONENTS_NAVIGATION_QUERYResult
       | COMPONENTS_INDEX_QUERYResult;
     '*[_type == "component" && slug.current == $slug][0]{ "content": content[] {..., _type == "image-with-caption" => {...,asset->}}, "name": coalesce(name, \'\'), propsComponents, resourceLinks, highlightAsNew }': COMPONENT_QUERYResult;
