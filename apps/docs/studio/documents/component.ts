@@ -21,6 +21,18 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'documentationIsReady',
+      title: 'Documentation is ready',
+      type: 'boolean',
+      description: 'Check this when the documentation is ready',
+    }),
+    defineField({
+      name: 'highlightAsNew',
+      type: 'boolean',
+      title: 'Highlight as a new component',
+      description: 'Check this if the component is new',
+    }),
+    defineField({
       name: 'content',
       title: 'Content',
       type: 'content',
@@ -34,11 +46,6 @@ export default defineType({
           type: 'string',
         }),
       ],
-    }),
-    defineField({
-      name: 'highlightAsNew',
-      type: 'boolean',
-      title: 'Highlight as a new component',
     }),
     defineField({
       name: 'resourceLinks',

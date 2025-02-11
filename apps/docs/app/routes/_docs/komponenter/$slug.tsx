@@ -4,7 +4,7 @@ import { PropsTable } from '@/ui/props-table';
 import { ResourceLink, ResourceLinks } from '@/ui/resource-links';
 import { SanityContent } from '@/ui/sanity-content';
 import { Child } from '@obosbbl/grunnmuren-icons-react';
-import { Alertbox, Content } from '@obosbbl/grunnmuren-react';
+import { Alertbox, Badge, Content } from '@obosbbl/grunnmuren-react';
 import { createFileRoute, notFound } from '@tanstack/react-router';
 import type * as props from 'docgen';
 import { defineQuery } from 'groq';
@@ -42,6 +42,19 @@ function Page() {
   return (
     <>
       <h1 className="heading-l mt-9 mb-4">{data.name}</h1>
+
+      <div className="mb-8 flex gap-4">
+        {data.highlightAsNew && (
+          <Badge color="mint" size="small">
+            Ny
+          </Badge>
+        )}
+        {!data.documentationIsReady && (
+          <Badge color="gray-dark" size="small">
+            Under arbeid
+          </Badge>
+        )}
+      </div>
 
       <ResourceLinks className="mb-12">
         {figmaLink && <ResourceLink type="figma" href={figmaLink} />}
