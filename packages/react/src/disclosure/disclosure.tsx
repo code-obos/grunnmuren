@@ -13,7 +13,8 @@ import { Button, type ButtonProps } from 'react-aria-components';
 const DisclosureContext = createContext<{
   expanded: boolean;
   setExpanded?: Dispatch<React.SetStateAction<boolean>>;
-  id?: string;
+  panelId?: string;
+  buttonId?: string;
 }>({
   expanded: false,
 });
@@ -64,7 +65,7 @@ const DisclosureButton = ({
   onPress,
   ...restProps
 }: DisclosureButtonProps) => {
-  const { expanded, setExpanded, id } = useContext(DisclosureContext);
+  const { expanded, setExpanded, buttonId, panelId } = useContext(DisclosureContext);
   return (
     <Button
       {...restProps}
@@ -79,7 +80,8 @@ const DisclosureButton = ({
         if (setExpanded) setExpanded((prev) => !prev);
         if (onPress) onPress(e);
       }}
-      aria-controls={id}
+      id={buttonId}
+      aria-controls={panelId}
     >
       {children}
       {withChevron && (
@@ -104,14 +106,17 @@ const Disclosure = ({
   ...props
 }: DisclosureProps) => {
   const [expanded, setExpanded] = useState(defaultExpanded);
-  const id = useId();
+  const buttonId = useId();
+  const panelId = useId();
+
 
   return (
     <DisclosureContext.Provider
       value={{
         expanded: isExpanded ?? expanded,
         setExpanded: onExpandedChange ?? setExpanded,
-        id,
+        panelId,
+        buttonId,
       }}
     >
       <div {...props} />
@@ -122,13 +127,14 @@ const Disclosure = ({
 type DisclosurePanelProps = {
   children: React.ReactNode;
   className?: string;
-  role?: 'group' | 'region';
+  role?: 'group' | 'region' | 'presentation';
   'aria-labelledby'?: string;
   'aria-label'?: string;
 };
 
-const DisclosurePanel = ({ className, ...restProps }: DisclosurePanelProps) => {
-  const { expanded, id } = useContext(DisclosureContext);
+const DisclosurePanel = ({ className, role: _role = 'group', ...restProps }: DisclosurePanelProps) => {
+  const { expanded, panelId, buttonId } = useContext(DisclosureContext);
+  const role = _role === 'presentation' ? undefined : _role;
   return (
     <div
       className={cx(
@@ -143,7 +149,9 @@ const DisclosurePanel = ({ className, ...restProps }: DisclosurePanelProps) => {
           className,
           'relative overflow-hidden before:relative before:block before:h-1.5 after:relative after:block after:h-1.5',
         )}
-        id={id}
+        id={panelId}
+        role={role}
+        aria-labelledby={restProps['aria-labelledby'] ?? buttonId}
       />
     </div>
   );
