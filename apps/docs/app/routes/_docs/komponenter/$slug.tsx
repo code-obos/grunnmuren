@@ -1,13 +1,13 @@
-import {sanityFetch} from '@/lib/sanity';
-import {AnchorHeading} from '@/ui/anchor-heading';
-import {PropsTable} from '@/ui/props-table';
-import {ResourceLink, ResourceLinks} from '@/ui/resource-links';
-import {SanityContent} from '@/ui/sanity-content';
-import {Child} from '@obosbbl/grunnmuren-icons-react';
-import {Alertbox, Badge, Content} from '@obosbbl/grunnmuren-react';
-import {createFileRoute, notFound} from '@tanstack/react-router';
+import { sanityFetch } from '@/lib/sanity';
+import { AnchorHeading } from '@/ui/anchor-heading';
+import { PropsTable } from '@/ui/props-table';
+import { ResourceLink, ResourceLinks } from '@/ui/resource-links';
+import { SanityContent } from '@/ui/sanity-content';
+import { Child } from '@obosbbl/grunnmuren-icons-react';
+import { Alertbox, Badge, Content } from '@obosbbl/grunnmuren-react';
+import { createFileRoute, notFound } from '@tanstack/react-router';
 import type * as props from 'docgen';
-import {defineQuery} from 'groq';
+import { defineQuery } from 'groq';
 
 const COMPONENT_QUERY = defineQuery(
   `*[_type == "component" && slug.current == $slug][0]{ "content": content[] {..., _type == "image-with-caption" => {...,asset->}}, "name": coalesce(name, ''), propsComponents, resourceLinks, highlightAsNew }`,
@@ -15,22 +15,22 @@ const COMPONENT_QUERY = defineQuery(
 
 export const Route = createFileRoute('/_docs/komponenter/$slug')({
   component: Page,
-  loader: async ({params}) => {
+  loader: async ({ params }) => {
     const res = await sanityFetch({
       query: COMPONENT_QUERY,
-      params: {slug: params.slug},
+      params: { slug: params.slug },
     });
 
     if (res.data == null) {
       throw notFound();
     }
 
-    return {data: res.data};
+    return { data: res.data };
   },
 });
 
 function Page() {
-  const {data} = Route.useLoaderData();
+  const { data } = Route.useLoaderData();
 
   const ghLink = data.resourceLinks?.find(
     (link) => link.linkType === 'github',
@@ -57,8 +57,8 @@ function Page() {
       </div>
 
       <ResourceLinks className="mb-12">
-        {figmaLink && <ResourceLink type="figma" href={figmaLink}/>}
-        {ghLink && <ResourceLink type="github" href={ghLink}/>}
+        {figmaLink && <ResourceLink type="figma" href={figmaLink} />}
+        {ghLink && <ResourceLink type="github" href={ghLink} />}
       </ResourceLinks>
 
       {data.highlightAsNew && (
@@ -78,7 +78,7 @@ function Page() {
         </Alertbox>
       )}
 
-      <SanityContent className="mb-12" content={data.content ?? []}/>
+      <SanityContent className="mb-12" content={data.content ?? []} />
 
       {data.propsComponents?.length && (
         <AnchorHeading className="heading-m" level={2} id="props">
