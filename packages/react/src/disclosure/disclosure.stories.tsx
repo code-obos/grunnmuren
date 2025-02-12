@@ -84,7 +84,7 @@ export const WithChevron: Story = {
               ))}
             </ul>
           )}
-          <DisclosurePanel className="px-4" role='presentation'>
+          <DisclosurePanel className="px-4" role="presentation">
             <CheckboxGroup
               value={selectedOptions}
               onChange={setSelectedItems}

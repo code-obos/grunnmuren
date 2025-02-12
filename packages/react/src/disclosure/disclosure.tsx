@@ -1,23 +1,29 @@
 import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
+import { filterDOMProps } from '@react-aria/utils';
 import { type VariantProps, cva, cx } from 'cva';
 import {
-  type Dispatch,
-  type SetStateAction,
+  type ForwardedRef,
+  type HTMLAttributes,
+  type HTMLProps,
+  type RefAttributes,
   createContext,
   useContext,
   useId,
-  useState,
+  useRef,
 } from 'react';
-import { Button, type ButtonProps } from 'react-aria-components';
-
-const DisclosureContext = createContext<{
-  expanded: boolean;
-  setExpanded?: Dispatch<React.SetStateAction<boolean>>;
-  panelId?: string;
-  buttonId?: string;
-}>({
-  expanded: false,
-});
+import { useDisclosure } from 'react-aria';
+import {
+  Button,
+  ButtonContext,
+  type ButtonProps,
+  type ContextValue,
+  DisclosureContext,
+  DisclosureGroupStateContext,
+  Provider,
+  type DisclosureProps as RACDisclosureProps,
+  useContextProps,
+} from 'react-aria-components';
+import { useDisclosureState } from 'react-stately';
 
 const disclosureButtonVariants = cva({
   base: 'inline-flex items-center rounded-lg outline-none data-[focus-visible]:outline-focus',
@@ -54,7 +60,11 @@ type DisclosureButtonProps = Omit<
 > &
   VariantProps<typeof disclosureButtonVariants> & {
     children: React.ReactNode;
-  };
+  } & RefAttributes<HTMLButtonElement>;
+
+const DisclosureButtonContext = createContext<
+  ContextValue<Partial<DisclosurePanelProps>, HTMLDivElement>
+>({});
 
 const DisclosureButton = ({
   className,
@@ -62,26 +72,24 @@ const DisclosureButton = ({
   withChevron,
   isIconOnly,
   children,
-  onPress,
+  ref: _ref,
   ...restProps
 }: DisclosureButtonProps) => {
-  const { expanded, setExpanded, buttonId, panelId } = useContext(DisclosureContext);
+  const [props, ref] = useContextProps(
+    restProps,
+    _ref as ForwardedRef<HTMLButtonElement>,
+    ButtonContext,
+  );
   return (
     <Button
-      {...restProps}
+      {...props}
+      ref={ref}
       className={disclosureButtonVariants({
         className,
         size,
         withChevron,
         isIconOnly,
       })}
-      aria-expanded={expanded}
-      onPress={(e) => {
-        if (setExpanded) setExpanded((prev) => !prev);
-        if (onPress) onPress(e);
-      }}
-      id={buttonId}
-      aria-controls={panelId}
     >
       {children}
       {withChevron && (
@@ -91,67 +99,118 @@ const DisclosureButton = ({
   );
 };
 
-type DisclosureProps = {
-  children: React.ReactNode;
-  className?: string;
-  defaultExpanded?: boolean;
-  isExpanded?: boolean;
-  onExpandedChange?: Dispatch<SetStateAction<boolean>>;
-};
+type DisclosureProps = RACDisclosureProps &
+  RefAttributes<HTMLDivElement> & {
+    children: React.ReactNode;
+  };
 
-const Disclosure = ({
-  defaultExpanded = false,
-  isExpanded,
-  onExpandedChange,
-  ...props
-}: DisclosureProps) => {
-  const [expanded, setExpanded] = useState(defaultExpanded);
-  const buttonId = useId();
-  const panelId = useId();
+const Disclosure = ({ ref: _ref, children, ..._props }: DisclosureProps) => {
+  const [props, ref] = useContextProps(
+    _props,
+    _ref as ForwardedRef<HTMLDivElement>,
+    DisclosureContext,
+  );
+  const groupState = useContext(DisclosureGroupStateContext);
 
+  let { id, ...otherProps } = props;
+  const defaultId = useId();
+  id ||= defaultId;
+  const isExpanded = groupState
+    ? groupState.expandedKeys.has(id)
+    : props.isExpanded;
+
+  const state = useDisclosureState({
+    ...props,
+    isExpanded,
+    onExpandedChange(isExpanded) {
+      if (groupState) {
+        groupState.toggleKey(id);
+      }
+
+      props.onExpandedChange?.(isExpanded);
+    },
+  });
+
+  const isDisabled = props.isDisabled || groupState?.isDisabled || false;
+
+  const domProps = filterDOMProps(otherProps as HTMLProps<HTMLDivElement>);
+
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const { buttonProps, panelProps } = useDisclosure(
+    {
+      ...props,
+      isExpanded,
+      isDisabled,
+    },
+    state,
+    panelRef,
+  );
+
+  const { role: _, ...propsWithoutRole } = panelProps;
 
   return (
-    <DisclosureContext.Provider
-      value={{
-        expanded: isExpanded ?? expanded,
-        setExpanded: onExpandedChange ?? setExpanded,
-        panelId,
-        buttonId,
-      }}
+    <Provider
+      values={[
+        [DisclosureContext, state],
+        [ButtonContext, buttonProps],
+        [DisclosurePanelContext, { ...propsWithoutRole, ref: panelRef }],
+      ]}
     >
-      <div {...props} />
-    </DisclosureContext.Provider>
+      <div
+        {...domProps}
+        ref={ref}
+        data-expanded={state.isExpanded || undefined}
+        data-disabled={isDisabled || undefined}
+      >
+        {children}
+      </div>
+    </Provider>
   );
 };
 
-type DisclosurePanelProps = {
+type DisclosurePanelProps = Omit<HTMLAttributes<HTMLDivElement>, 'role'> & {
   children: React.ReactNode;
-  className?: string;
   role?: 'group' | 'region' | 'presentation';
-  'aria-labelledby'?: string;
-  'aria-label'?: string;
-};
+} & RefAttributes<HTMLDivElement>;
 
-const DisclosurePanel = ({ className, role: _role = 'group', ...restProps }: DisclosurePanelProps) => {
-  const { expanded, panelId, buttonId } = useContext(DisclosureContext);
+const DisclosurePanelContext = createContext<
+  ContextValue<Partial<DisclosurePanelProps>, HTMLDivElement>
+>({});
+
+const DisclosurePanel = ({ ref: _ref, ..._props }: DisclosurePanelProps) => {
+  const disclosureContext = useContext(
+    DisclosureContext,
+  ) as DisclosureProps | null;
+
+  const [props, ref] = useContextProps(
+    _props,
+    _ref as ForwardedRef<HTMLDivElement>,
+    DisclosurePanelContext,
+  );
+  const { role: _role = 'group', className, ...restProps } = props;
+  const ariaLabelledby =
+    _props['aria-labelledby'] ?? restProps['aria-labelledby'];
   const role = _role === 'presentation' ? undefined : _role;
+
   return (
     <div
       className={cx(
         'grid transition-all duration-300 after:relative after:block after:h-0 after:transition-all after:duration-300 motion-reduce:transition-none',
-        expanded ? 'grid-rows-[1fr] after:h-3.5' : 'grid-rows-[0fr]',
+        disclosureContext?.isExpanded
+          ? 'grid-rows-[1fr] after:h-3.5'
+          : 'grid-rows-[0fr]',
       )}
-      inert={!expanded}
+      inert={!disclosureContext?.isExpanded}
     >
       <div
         {...restProps}
+        ref={ref}
         className={cx(
           className,
           'relative overflow-hidden before:relative before:block before:h-1.5 after:relative after:block after:h-1.5',
         )}
-        id={panelId}
         role={role}
-        aria-labelledby={restProps['aria-labelledby'] ?? buttonId}
+        aria-labelledby={ariaLabelledby}
       />
     </div>
   );
@@ -159,9 +218,9 @@ const DisclosurePanel = ({ className, role: _role = 'group', ...restProps }: Dis
 
 export {
   Disclosure,
-  type DisclosureProps,
   DisclosureButton,
-  type DisclosureButtonProps,
   DisclosurePanel,
+  type DisclosureButtonProps,
   type DisclosurePanelProps,
+  type DisclosureProps,
 };
