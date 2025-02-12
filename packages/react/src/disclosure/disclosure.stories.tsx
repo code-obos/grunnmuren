@@ -1,9 +1,9 @@
 import { Menu } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useId, useState } from 'react';
+import { DisclosureGroup } from 'react-aria-components';
 import { Checkbox, CheckboxGroup } from '../checkbox';
 import { Disclosure, DisclosureButton, DisclosurePanel } from './disclosure';
-import { DisclosureGroup } from 'react-aria-components';
 
 const meta: Meta<typeof Disclosure> = {
   title: 'Disclosure',
