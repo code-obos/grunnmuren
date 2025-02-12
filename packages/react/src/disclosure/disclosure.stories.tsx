@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useId, useState } from 'react';
 import { Checkbox, CheckboxGroup } from '../checkbox';
 import { Disclosure, DisclosureButton, DisclosurePanel } from './disclosure';
+import { DisclosureGroup } from 'react-aria-components';
 
 const meta: Meta<typeof Disclosure> = {
   title: 'Disclosure',
@@ -57,7 +58,7 @@ export const Dense: Story = {
   },
 };
 
-export const WithChevron: Story = {
+export const WithCheckboxGroup: Story = {
   render: (props) => {
     const id = useId();
     const [selectedOptions, setSelectedItems] = useState<string[]>([]);
@@ -97,6 +98,82 @@ export const WithChevron: Story = {
           </DisclosurePanel>
         </Disclosure>
       </div>
+    );
+  },
+};
+
+export const Grouped: Story = {
+  render: (props) => {
+    const id = useId();
+    const [selectedOptions, setSelectedItems] = useState<string[]>([]);
+    const [isExpanded, setIsExpanded] = useState(false);
+    return (
+      <DisclosureGroup className="p-4">
+        <Disclosure
+          {...props}
+          isExpanded={isExpanded}
+          onExpandedChange={setIsExpanded}
+        >
+          <DisclosureButton
+            className="flex gap-6 border-gray-light"
+            withChevron
+            id={id}
+            size="dense"
+          >
+            Kjøpsalternativer
+          </DisclosureButton>
+          {!isExpanded && (
+            <ul className="flex gap-2" aria-label="Valgte kjøpsalternativer">
+              {selectedOptions.map((option) => (
+                <li key={option}>{option}</li>
+              ))}
+            </ul>
+          )}
+          <DisclosurePanel className="px-4" role="presentation">
+            <CheckboxGroup
+              value={selectedOptions}
+              onChange={setSelectedItems}
+              aria-labelledby={id}
+            >
+              <Checkbox value="deleie">Deleie</Checkbox>
+              <Checkbox value="bostart">Bostart</Checkbox>
+              <Checkbox value="boligbytte">Boligbytte</Checkbox>
+            </CheckboxGroup>
+          </DisclosurePanel>
+        </Disclosure>
+        <Disclosure
+          {...props}
+          isExpanded={isExpanded}
+          onExpandedChange={setIsExpanded}
+        >
+          <DisclosureButton
+            className="flex gap-6 border-gray-light"
+            withChevron
+            id={id}
+            size="dense"
+          >
+            Område
+          </DisclosureButton>
+          {!isExpanded && (
+            <ul className="flex gap-2" aria-label="Valgte kjøpsalternativer">
+              {selectedOptions.map((option) => (
+                <li key={option}>{option}</li>
+              ))}
+            </ul>
+          )}
+          <DisclosurePanel className="px-4" role="presentation">
+            <CheckboxGroup
+              value={selectedOptions}
+              onChange={setSelectedItems}
+              aria-labelledby={id}
+            >
+              <Checkbox value="deleie">Oslo</Checkbox>
+              <Checkbox value="bostart">Bergen</Checkbox>
+              <Checkbox value="boligbytte">Trondheim</Checkbox>
+            </CheckboxGroup>
+          </DisclosurePanel>
+        </Disclosure>
+      </DisclosureGroup>
     );
   },
 };
