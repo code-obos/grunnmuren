@@ -186,7 +186,8 @@ const DisclosurePanel = ({ ref: _ref, ..._props }: DisclosurePanelProps) => {
   const { role: _role = 'group', className, ...restProps } = props;
   const ariaLabelledby =
     _props['aria-labelledby'] ?? restProps['aria-labelledby'];
-  const role = _role === 'presentation' ? undefined : _role;
+  const isWithoutRole = _role === 'presentation';
+  const role = isWithoutRole ? undefined : _role;
 
   return (
     <div
@@ -206,7 +207,7 @@ const DisclosurePanel = ({ ref: _ref, ..._props }: DisclosurePanelProps) => {
           'relative overflow-hidden before:relative before:block before:h-1.5 after:relative after:block after:h-1.5',
         )}
         role={role}
-        aria-labelledby={ariaLabelledby}
+        aria-labelledby={isWithoutRole ? undefined : ariaLabelledby}
       />
     </div>
   );
