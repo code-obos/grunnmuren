@@ -62,10 +62,6 @@ type DisclosureButtonProps = Omit<
     children: React.ReactNode;
   } & RefAttributes<HTMLButtonElement>;
 
-const DisclosureButtonContext = createContext<
-  ContextValue<Partial<DisclosurePanelProps>, HTMLDivElement>
->({});
-
 const DisclosureButton = ({
   className,
   size,
