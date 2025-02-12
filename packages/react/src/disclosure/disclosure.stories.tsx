@@ -167,9 +167,9 @@ export const Grouped: Story = {
               onChange={setSelectedItems}
               aria-labelledby={id}
             >
-              <Checkbox value="deleie">Oslo</Checkbox>
-              <Checkbox value="bostart">Bergen</Checkbox>
-              <Checkbox value="boligbytte">Trondheim</Checkbox>
+              <Checkbox value="oslo">Oslo</Checkbox>
+              <Checkbox value="bergen">Bergen</Checkbox>
+              <Checkbox value="trondheim">Trondheim</Checkbox>
             </CheckboxGroup>
           </DisclosurePanel>
         </Disclosure>
