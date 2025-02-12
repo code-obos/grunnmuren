@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-icons-svg
 
+## 2.0.0-canary.5
+
+### Minor Changes
+
+- 04e1531: add Seniority icon
+
 ## 2.0.0-canary.4
 
 ### Minor Changes

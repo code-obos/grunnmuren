@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-icons-react
 
+## 2.0.0-canary.6
+
+### Minor Changes
+
+- 04e1531: add Seniority icon
+
 ## 2.0.0-canary.5
 
 ### Minor Changes

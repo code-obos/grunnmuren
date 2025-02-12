@@ -91,7 +91,7 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
           type="button"
           onClick={() => setShouldPlay((prevState) => !prevState)}
           className={cx(
-            'absolute bottom-0 left-0 right-0 top-0 m-auto grid place-items-center',
+            'absolute top-0 right-0 bottom-0 left-0 m-auto grid place-items-center',
             'focus-visible:outline-focus focus-visible:outline-focus-offset',
             // Setting the opacity to 0 before applying the transition below will ensure the button only fades in after the video has started playing
             shouldPlay && 'opacity-0',

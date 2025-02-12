@@ -61,7 +61,7 @@ export const Code = ({
           </GrunnmurenScope.Button>
           <span
             className={cx(
-              'absolute right-2 top-full transition-opacity duration-100',
+              'absolute top-full right-2 transition-opacity duration-100',
               hasCopied ? 'opacity-100' : 'opacity-0',
             )}
             aria-hidden={!hasCopied}

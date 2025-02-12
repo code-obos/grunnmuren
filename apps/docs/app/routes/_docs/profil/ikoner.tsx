@@ -1,6 +1,6 @@
 import { ResourceLink, ResourceLinks } from '@/ui/resource-links';
 import * as icons from '@obosbbl/grunnmuren-icons-react';
-import { Box, Download, Figma, Github } from '@obosbbl/grunnmuren-icons-react';
+import { Download } from '@obosbbl/grunnmuren-icons-react';
 import { Button, Card } from '@obosbbl/grunnmuren-react';
 import { createFileRoute } from '@tanstack/react-router';
 
@@ -17,7 +17,7 @@ export const Route = createFileRoute('/_docs/profil/ikoner')({
 function Page() {
   return (
     <>
-      <h1 className="heading-l mb-12 mt-9">Ikoner</h1>
+      <h1 className="heading-l mt-9 mb-12">Ikoner</h1>
       <div className="prose">
         <p>
           Grunnmuren sitt ikonsett består av {Object.keys(icons).length}{' '}

@@ -1,6 +1,6 @@
 {
   "name": "@obosbbl/grunnmuren-icons-react",
-  "version": "2.0.0-canary.5",
+  "version": "2.0.0-canary.6",
   "description": "Grunnmuren's icon set as React components",
   "repository": {
     "url": "https://github.com/code-obos/grunnmuren"
@@ -25,7 +25,7 @@
     "@svgr/core": "8.1.0",
     "@svgr/plugin-jsx": "8.1.0",
     "@svgr/plugin-svgo": "8.1.0",
-    "fs-extra": "11.2.0"
+    "fs-extra": "11.3.0"
   },
   "peerDependencies": {
     "react": "^18 || ^19"

@@ -39,22 +39,6 @@ export type SanityImageDimensions = {
   aspectRatio?: number;
 };
 
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot';
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
-
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop';
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
 export type SanityFileAsset = {
   _id: string;
   _type: 'sanity.fileAsset';
@@ -75,6 +59,43 @@ export type SanityFileAsset = {
   path?: string;
   url?: string;
   source?: SanityAssetSourceData;
+};
+
+export type Geopoint = {
+  _type: 'geopoint';
+  lat?: number;
+  lng?: number;
+  alt?: number;
+};
+
+export type ImageWithCaption = {
+  _type: 'image-with-caption';
+  asset?: {
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+  };
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  alt?: string;
+  caption?: string;
+};
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop';
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot';
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
 };
 
 export type SanityImageAsset = {
@@ -100,6 +121,13 @@ export type SanityImageAsset = {
   source?: SanityAssetSourceData;
 };
 
+export type SanityAssetSourceData = {
+  _type: 'sanity.assetSourceData';
+  name?: string;
+  id?: string;
+  url?: string;
+};
+
 export type SanityImageMetadata = {
   _type: 'sanity.imageMetadata';
   location?: Geopoint;
@@ -109,20 +137,6 @@ export type SanityImageMetadata = {
   blurHash?: string;
   hasAlpha?: boolean;
   isOpaque?: boolean;
-};
-
-export type Geopoint = {
-  _type: 'geopoint';
-  lat?: number;
-  lng?: number;
-  alt?: number;
-};
-
-export type SanityAssetSourceData = {
-  _type: 'sanity.assetSourceData';
-  name?: string;
-  id?: string;
-  url?: string;
 };
 
 export type LiveCodeBlock = {
@@ -139,29 +153,35 @@ export type StaticCodeBlock = {
 
 export type Content = Array<
   | {
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: 'span';
-        _key: string;
-      }>;
-      style?: 'normal' | 'h2' | 'h3' | 'h4' | 'h5' | 'blockquote';
-      listItem?: 'bullet' | 'number';
-      markDefs?: Array<{
-        href?: string;
-        _type: 'link';
-        _key: string;
-      }>;
-      level?: number;
-      _type: 'block';
-      _key: string;
-    }
+  children?: Array<{
+    marks?: Array<string>;
+    text?: string;
+    _type: 'span';
+    _key: string;
+  }>;
+  style?: 'normal' | 'h2' | 'h3' | 'h4' | 'h5' | 'blockquote';
+  listItem?: 'bullet' | 'number';
+  markDefs?: Array<{
+    href?: string;
+    _type: 'link';
+    _key: string;
+  }>;
+  level?: number;
+  _type: 'block';
+  _key: string;
+}
   | ({
-      _key: string;
-    } & LiveCodeBlock)
+  _key: string;
+} & LiveCodeBlock)
   | ({
-      _key: string;
-    } & StaticCodeBlock)
+  _key: string;
+} & StaticCodeBlock)
+  | ({
+  _key: string;
+} & ImageWithCaption)
+  | ({
+  _key: string;
+} & Table)
 >;
 
 export type Component = {
@@ -174,6 +194,8 @@ export type Component = {
   slug?: Slug;
   content?: Content;
   propsComponents?: Array<string>;
+  highlightAsNew?: boolean;
+  documentationIsReady?: boolean;
   resourceLinks?: Array<{
     linkType?: 'figma' | 'github';
     url?: string;
@@ -188,6 +210,20 @@ export type Slug = {
   source?: string;
 };
 
+export type Table = {
+  _type: 'table';
+  rows?: Array<
+    {
+      _key: string;
+    } & TableRow
+  >;
+};
+
+export type TableRow = {
+  _type: 'tableRow';
+  cells?: Array<string>;
+};
+
 export type Code = {
   _type: 'code';
   language?: string;
@@ -200,34 +236,108 @@ export type AllSanitySchemaTypes =
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
-  | SanityImageHotspot
-  | SanityImageCrop
   | SanityFileAsset
-  | SanityImageAsset
-  | SanityImageMetadata
   | Geopoint
+  | ImageWithCaption
+  | SanityImageCrop
+  | SanityImageHotspot
+  | SanityImageAsset
   | SanityAssetSourceData
+  | SanityImageMetadata
   | LiveCodeBlock
   | StaticCodeBlock
   | Content
   | Component
   | Slug
+  | Table
+  | TableRow
   | Code;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./app/routes/_docs.tsx
 // Variable: COMPONENTS_NAVIGATION_QUERY
-// Query: *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, '')} | order(name asc)
+// Query: *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, ''), highlightAsNew} | order(name asc)
 export type COMPONENTS_NAVIGATION_QUERYResult = Array<{
   _id: string;
   name: string | null;
   slug: string | '';
+  highlightAsNew: boolean | null;
 }>;
 
 // Source: ./app/routes/_docs/komponenter/$slug.tsx
 // Variable: COMPONENT_QUERY
-// Query: *[_type == "component" && slug.current == $slug][0]{ content, "name": coalesce(name, ''), propsComponents, resourceLinks }
+// Query: *[_type == "component" && slug.current == $slug][0]{ "content": content[] {..., _type == "image-with-caption" => {...,asset->}}, "name": coalesce(name, ''), propsComponents, resourceLinks, highlightAsNew }
 export type COMPONENT_QUERYResult = {
-  content: Content | null;
+  content: Array<
+    | {
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: 'span';
+      _key: string;
+    }>;
+    style?: 'blockquote' | 'h2' | 'h3' | 'h4' | 'h5' | 'normal';
+    listItem?: 'bullet' | 'number';
+    markDefs?: Array<{
+      href?: string;
+      _type: 'link';
+      _key: string;
+    }>;
+    level?: number;
+    _type: 'block';
+    _key: string;
+  }
+    | {
+    _key: string;
+    _type: 'image-with-caption';
+    asset: {
+      _id: string;
+      _type: 'sanity.imageAsset';
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      originalFilename?: string;
+      label?: string;
+      title?: string;
+      description?: string;
+      altText?: string;
+      sha1hash?: string;
+      extension?: string;
+      mimeType?: string;
+      size?: number;
+      assetId?: string;
+      uploadId?: string;
+      path?: string;
+      url?: string;
+      metadata?: SanityImageMetadata;
+      source?: SanityAssetSourceData;
+    } | null;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    caption?: string;
+  }
+    | {
+    _key: string;
+    _type: 'live-code-block';
+    code?: Code;
+    caption?: string;
+  }
+    | {
+    _key: string;
+    _type: 'static-code-block';
+    code?: Code;
+    caption?: string;
+  }
+    | {
+    _key: string;
+    _type: 'table';
+    rows?: Array<
+      {
+        _key: string;
+      } & TableRow
+    >;
+  }
+  > | null;
   name: string | '';
   propsComponents: Array<string> | null;
   resourceLinks: Array<{
@@ -236,24 +346,28 @@ export type COMPONENT_QUERYResult = {
     _type: 'resourceLink';
     _key: string;
   }> | null;
+  highlightAsNew: boolean | null;
+  documentationIsReady: boolean | null;
 } | null;
 
 // Source: ./app/routes/_docs/komponenter/index.tsx
 // Variable: COMPONENTS_INDEX_QUERY
-// Query: *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, '')} | order(name asc)
+// Query: *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, ''), highlightAsNew} | order(name asc)
 export type COMPONENTS_INDEX_QUERYResult = Array<{
   _id: string;
   name: string | null;
   slug: string | '';
+  highlightAsNew: boolean | null;
 }>;
 
 // Query TypeMap
 import '@sanity/client';
+
 declare module '@sanity/client' {
   interface SanityQueries {
-    "*[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, '')} | order(name asc)":
+    '*[_type == "component"]{ _id, name, \'slug\': coalesce(slug.current, \'\'), highlightAsNew} | order(name asc)':
       | COMPONENTS_NAVIGATION_QUERYResult
       | COMPONENTS_INDEX_QUERYResult;
-    '*[_type == "component" && slug.current == $slug][0]{ content, "name": coalesce(name, \'\'), propsComponents, resourceLinks }': COMPONENT_QUERYResult;
+    '*[_type == "component" && slug.current == $slug][0]{ "content": content[] {..., _type == "image-with-caption" => {...,asset->}}, "name": coalesce(name, \'\'), propsComponents, resourceLinks, highlightAsNew }': COMPONENT_QUERYResult;
   }
 }

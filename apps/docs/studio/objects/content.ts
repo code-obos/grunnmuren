@@ -18,6 +18,8 @@ const content = defineType({
     },
     { type: 'live-code-block' },
     { type: 'static-code-block' },
+    { type: 'image-with-caption' },
+    { type: 'table' },
   ],
 });
 
