@@ -10,7 +10,7 @@ import type * as props from 'docgen';
 import { defineQuery } from 'groq';
 
 const COMPONENT_QUERY = defineQuery(
-  `*[_type == "component" && slug.current == $slug][0]{ "content": content[] {..., _type == "image-with-caption" => {...,asset->}}, "name": coalesce(name, ''), propsComponents, resourceLinks, highlightAsNew }`,
+  `*[_type == "component" && slug.current == $slug][0]{ "content": content[] {..., _type == "image-with-caption" => {...,asset->}}, "name": coalesce(name, ''), propsComponents, resourceLinks, highlightAsNew, "state": coalesce(componentState, 'In progress') }`,
 );
 
 export const Route = createFileRoute('/_docs/komponenter/$slug')({
@@ -49,11 +49,9 @@ function Page() {
             Ny
           </Badge>
         )}
-        {!data.documentationIsReady && (
-          <Badge color="gray-dark" size="small">
-            Under arbeid
-          </Badge>
-        )}
+        <Badge color="gray-dark" size="small">
+          {data.state}
+        </Badge>
       </div>
 
       <ResourceLinks className="mb-12">
