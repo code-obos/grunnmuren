@@ -108,7 +108,7 @@ export const Grouped: Story = {
     const [selectedOptions, setSelectedItems] = useState<string[]>([]);
     const [isExpanded, setIsExpanded] = useState(false);
     return (
-      <DisclosureGroup className="p-4">
+      <DisclosureGroup className="grid gap-4 p-4">
         <Disclosure
           {...props}
           isExpanded={isExpanded}
