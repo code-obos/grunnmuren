@@ -1086,6 +1086,34 @@
         },
         "optional": true
       },
+      "componentState": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "In progress"
+            },
+            {
+              "type": "string",
+              "value": "Ready"
+            },
+            {
+              "type": "string",
+              "value": "Deprecated"
+            }
+          ]
+        },
+        "optional": true
+      },
+      "highlightAsNew": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
+        },
+        "optional": true
+      },
       "content": {
         "type": "objectAttribute",
         "value": {
@@ -1101,13 +1129,6 @@
           "of": {
             "type": "string"
           }
-        },
-        "optional": true
-      },
-      "highlightAsNew": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "boolean"
         },
         "optional": true
       },
