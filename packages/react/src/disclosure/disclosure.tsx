@@ -26,7 +26,7 @@ import {
 import { useDisclosureState } from 'react-stately';
 
 const disclosureButtonVariants = cva({
-  base: 'inline-flex items-center rounded-lg outline-none data-[focus-visible]:outline-focus',
+  base: 'inline-flex cursor-pointer items-center rounded-lg outline-none data-[focus-visible]:outline-focus',
   variants: {
     size: {
       // Ensure a minimum click area of 44x44px, while making it look like it only has the size of the content
