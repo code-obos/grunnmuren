@@ -16,7 +16,7 @@ const meta: Meta<typeof Disclosure> = {
     return (
       <div className="p-4">
         <Disclosure {...props}>
-          <DisclosureButton className="grid place-items-center" size="dense">
+          <DisclosureButton className="description" size="dense" withChevron>
             Les mer
           </DisclosureButton>
           <DisclosurePanel>
