@@ -1,22 +1,22 @@
-import { Menu } from '@obosbbl/grunnmuren-icons-react';
-import type { Meta, StoryObj } from '@storybook/react';
-import { useId, useState } from 'react';
-import { DisclosureGroup } from 'react-aria-components';
-import { Checkbox, CheckboxGroup } from '../checkbox';
-import { Disclosure, DisclosureButton, DisclosurePanel } from './disclosure';
+import { Menu } from "@obosbbl/grunnmuren-icons-react";
+import type { Meta, StoryObj } from "@storybook/react";
+import { useId, useState } from "react";
+import { DisclosureGroup } from "react-aria-components";
+import { Checkbox, CheckboxGroup } from "../checkbox";
+import { Disclosure, DisclosureButton, DisclosurePanel } from "./disclosure";
 
 const meta: Meta<typeof Disclosure> = {
-  title: 'Disclosure',
+  title: "Disclosure",
   component: Disclosure,
   parameters: {
     // disable built in padding in story, because we provide our own
-    layout: 'fullscreen',
+    layout: "fullscreen",
   },
   render: (props) => {
     return (
       <div className="p-4">
         <Disclosure {...props}>
-          <DisclosureButton className="description" size="dense" withChevron>
+          <DisclosureButton className="description" withChevron>
             Les mer
           </DisclosureButton>
           <DisclosurePanel>
@@ -44,7 +44,6 @@ export const Dense: Story = {
           <DisclosureButton
             aria-label="Meny"
             className="grid place-items-center"
-            size="dense"
             isIconOnly
           >
             <Menu />
@@ -74,7 +73,6 @@ export const WithCheckboxGroup: Story = {
             className="flex gap-6 border-gray-light"
             withChevron
             id={id}
-            size="dense"
           >
             Kjøpsalternativer
           </DisclosureButton>
@@ -119,7 +117,6 @@ export const Grouped: Story = {
             className="flex gap-6 border-gray-light"
             withChevron
             id={id}
-            size="dense"
           >
             Kjøpsalternativer
           </DisclosureButton>
@@ -152,7 +149,6 @@ export const Grouped: Story = {
             className="flex gap-6 border-gray-light"
             withChevron
             id={id}
-            size="dense"
           >
             Område
           </DisclosureButton>
