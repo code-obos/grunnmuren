@@ -161,6 +161,7 @@ export const Grouped: Story = {
               ))}
             </ul>
           )}
+          {/* biome-ignore lint/a11y/useValidAriaRole: this is a custom component where role is a prop that defaults to 'group' */}
           <DisclosurePanel className="px-4" role="none">
             <CheckboxGroup
               value={selectedOptions}
