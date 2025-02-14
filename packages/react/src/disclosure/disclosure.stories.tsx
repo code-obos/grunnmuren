@@ -161,7 +161,7 @@ export const Grouped: Story = {
               ))}
             </ul>
           )}
-          <DisclosurePanel className="px-4" role="presentation">
+          <DisclosurePanel className="px-4" role="none">
             <CheckboxGroup
               value={selectedOptions}
               onChange={setSelectedItems}

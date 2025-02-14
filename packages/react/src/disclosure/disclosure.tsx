@@ -166,7 +166,7 @@ const Disclosure = ({ ref: _ref, children, ..._props }: DisclosureProps) => {
 
 type DisclosurePanelProps = Omit<HTMLAttributes<HTMLDivElement>, 'role'> & {
   children: React.ReactNode;
-  role?: 'group' | 'region' | 'presentation';
+  role?: 'group' | 'region' | 'none';
 } & RefAttributes<HTMLDivElement>;
 
 const DisclosurePanelContext = createContext<
@@ -186,7 +186,7 @@ const DisclosurePanel = ({ ref: _ref, ..._props }: DisclosurePanelProps) => {
   const { role: _role = 'group', className, ...restProps } = props;
   const ariaLabelledby =
     _props['aria-labelledby'] ?? restProps['aria-labelledby'];
-  const isWithoutRole = _role === 'presentation';
+  const isWithoutRole = _role === 'none';
   const role = isWithoutRole ? undefined : _role;
 
   return (
