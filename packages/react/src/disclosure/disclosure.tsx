@@ -198,7 +198,7 @@ const DisclosurePanel = ({ ref: _ref, ..._props }: DisclosurePanelProps) => {
         ref={ref}
         className={cx(
           className,
-          "relative overflow-hidden before:relative before:block before:h-1.5 after:relative after:block after:h-1.5"
+          "relative overflow-hidden [content-visibility:visible] before:relative before:block before:h-1.5 after:relative after:block after:h-1.5"
         )}
         role={role}
         aria-labelledby={isWithoutRole ? undefined : ariaLabelledby}
