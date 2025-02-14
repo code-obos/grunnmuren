@@ -197,7 +197,6 @@ const DisclosurePanel = ({ ref: _ref, ..._props }: DisclosurePanelProps) => {
           ? 'grid-rows-[1fr] after:h-3.5'
           : 'grid-rows-[0fr]',
       )}
-      inert={!disclosureContext?.isExpanded}
     >
       <div
         {...restProps}
