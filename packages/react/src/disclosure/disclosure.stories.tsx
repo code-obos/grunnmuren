@@ -85,7 +85,8 @@ export const WithCheckboxGroup: Story = {
               ))}
             </ul>
           )}
-          <DisclosurePanel className="px-4" role="presentation">
+          {/* biome-ignore lint/a11y/useValidAriaRole: this is a custom component where role is a prop that defaults to 'group' */}
+          <DisclosurePanel className="px-4" role="none">
             <CheckboxGroup
               value={selectedOptions}
               onChange={setSelectedItems}
@@ -129,7 +130,8 @@ export const Grouped: Story = {
               ))}
             </ul>
           )}
-          <DisclosurePanel className="px-4" role="presentation">
+          {/* biome-ignore lint/a11y/useValidAriaRole: this is a custom component where role is a prop that defaults to 'group' */}
+          <DisclosurePanel className="px-4" role="none">
             <CheckboxGroup
               value={selectedOptions}
               onChange={setSelectedItems}
