@@ -63,14 +63,14 @@ export const WithCheckboxGroup: Story = {
     const [selectedOptions, setSelectedItems] = useState<string[]>([]);
     const [isExpanded, setIsExpanded] = useState(false);
     return (
-      <div className="p-4">
+      <div className="p-12">
         <Disclosure
           {...props}
           isExpanded={isExpanded}
           onExpandedChange={setIsExpanded}
         >
           <DisclosureButton
-            className="flex gap-6 border-gray-light"
+            className="flex w-full gap-6 border-gray-light"
             withChevron
             id={id}
           >
@@ -107,14 +107,14 @@ export const Grouped: Story = {
     const [selectedOptions, setSelectedItems] = useState<string[]>([]);
     const [isExpanded, setIsExpanded] = useState(false);
     return (
-      <DisclosureGroup className="grid gap-4 p-4">
+      <DisclosureGroup className="grid gap-4 p-12">
         <Disclosure
           {...props}
           isExpanded={isExpanded}
           onExpandedChange={setIsExpanded}
         >
           <DisclosureButton
-            className="flex gap-6 border-gray-light"
+            className="flex w-full gap-6 border-gray-light"
             withChevron
             id={id}
           >
@@ -146,7 +146,7 @@ export const Grouped: Story = {
           onExpandedChange={setIsExpanded}
         >
           <DisclosureButton
-            className="flex gap-6 border-gray-light"
+            className="flex w-full gap-6 border-gray-light"
             withChevron
             id={id}
           >
