@@ -1,16 +1,16 @@
-import { Menu } from "@obosbbl/grunnmuren-icons-react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { useId, useState } from "react";
-import { DisclosureGroup } from "react-aria-components";
-import { Checkbox, CheckboxGroup } from "../checkbox";
-import { Disclosure, DisclosureButton, DisclosurePanel } from "./disclosure";
+import { Menu } from '@obosbbl/grunnmuren-icons-react';
+import type { Meta, StoryObj } from '@storybook/react';
+import { useId, useState } from 'react';
+import { DisclosureGroup } from 'react-aria-components';
+import { Checkbox, CheckboxGroup } from '../checkbox';
+import { Disclosure, DisclosureButton, DisclosurePanel } from './disclosure';
 
 const meta: Meta<typeof Disclosure> = {
-  title: "Disclosure",
+  title: 'Disclosure',
   component: Disclosure,
   parameters: {
     // disable built in padding in story, because we provide our own
-    layout: "fullscreen",
+    layout: 'fullscreen',
   },
   render: (props) => {
     return (
