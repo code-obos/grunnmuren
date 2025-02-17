@@ -95,6 +95,7 @@ const DisclosureButton = ({
 type DisclosureProps = RACDisclosureProps &
   RefAttributes<HTMLDivElement> & {
     children: React.ReactNode;
+    className?: string;
   };
 
 const Disclosure = ({ ref: _ref, children, ..._props }: DisclosureProps) => {
@@ -151,6 +152,7 @@ const Disclosure = ({ ref: _ref, children, ..._props }: DisclosureProps) => {
     >
       <div
         {...domProps}
+        className={otherProps.className}
         ref={ref}
         data-expanded={state.isExpanded || undefined}
         data-disabled={isDisabled || undefined}
