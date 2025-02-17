@@ -1,12 +1,12 @@
 import { Menu } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useId, useState } from 'react';
-import { DisclosureGroup } from 'react-aria-components';
 import { Checkbox, CheckboxGroup } from '../checkbox';
 import {
   UNSAFE_Disclosure as Disclosure,
   UNSAFE_DisclosureButton as DisclosureButton,
   UNSAFE_DisclosurePanel as DisclosurePanel,
+  UNSAFE_DisclosureGroup as DisclosureGroup,
 } from './disclosure';
 
 const meta: Meta<typeof Disclosure> = {

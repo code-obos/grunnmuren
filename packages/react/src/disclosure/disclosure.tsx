@@ -19,6 +19,8 @@ import {
   type ContextValue,
   DisclosureContext,
   DisclosureGroupStateContext,
+  DisclosureGroup,
+  type DisclosureGroupProps,
   Provider,
   type DisclosureProps as RACDisclosureProps,
   useContextProps,
@@ -211,7 +213,9 @@ export {
   Disclosure as UNSAFE_Disclosure,
   DisclosureButton as UNSAFE_DisclosureButton,
   DisclosurePanel as UNSAFE_DisclosurePanel,
+  DisclosureGroup as UNSAFE_DisclosureGroup,
   type DisclosureButtonProps as UNSAFE_DisclosureButtonProps,
   type DisclosurePanelProps as UNSAFE_DisclosurePanelProps,
   type DisclosureProps as UNSAFE_DisclosureProps,
+  type DisclosureGroupProps as UNSAFE_DisclosureGroupProps,
 };
