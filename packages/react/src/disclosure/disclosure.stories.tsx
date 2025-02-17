@@ -3,7 +3,11 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useId, useState } from 'react';
 import { DisclosureGroup } from 'react-aria-components';
 import { Checkbox, CheckboxGroup } from '../checkbox';
-import { Disclosure, DisclosureButton, DisclosurePanel } from './disclosure';
+import {
+  UNSAFE_Disclosure as Disclosure,
+  UNSAFE_DisclosureButton as DisclosureButton,
+  UNSAFE_DisclosurePanel as DisclosurePanel,
+} from './disclosure';
 
 const meta: Meta<typeof Disclosure> = {
   title: 'Disclosure',

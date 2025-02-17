@@ -208,10 +208,10 @@ const DisclosurePanel = ({ ref: _ref, ..._props }: DisclosurePanelProps) => {
 };
 
 export {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  type DisclosureButtonProps,
-  type DisclosurePanelProps,
-  type DisclosureProps,
+  Disclosure as UNSAFE_Disclosure,
+  DisclosureButton as UNSAFE_DisclosureButton,
+  DisclosurePanel as UNSAFE_DisclosurePanel,
+  type DisclosureButtonProps as UNSAFE_DisclosureButtonProps,
+  type DisclosurePanelProps as UNSAFE_DisclosurePanelProps,
+  type DisclosureProps as UNSAFE_DisclosureProps,
 };
