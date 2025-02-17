@@ -20,3 +20,4 @@ export * from './backlink';
 export * from './card';
 export * from './date-formatter';
 export * from './video-loop';
+export * from './disclosure';
