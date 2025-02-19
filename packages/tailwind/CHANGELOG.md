@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.0.0-canary.11
+
+### Major Changes
+
+- f63006a: Fix font-weight on strong tags in prose content (use 500 instead of 600)
+
 ## 2.0.0-canary.10
 
 ### Patch Changes

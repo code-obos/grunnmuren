@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.49
+
+### Minor Changes
+
+- 6ebb8af: Add support for `className` prop on `Disclosure`
+- 040cc31: New component: `<Disclosure>`, which is used to toggle (show/hide) content. Suitable for components like "Read more" buttons, Hamburger menu's etc. This is very similar to the `<Accordion/>` component. But the the `<Disclosure>` is more generic, has minimal styling and can be used as a standalone component. `<Disclosure>` is also typically used to toggle smaller pieces of content then `<Accordion/>`, and does not imply that the toggle button is a heading associated with the togglable content.
+
 ## 2.0.0-canary.48
 
 ### Minor Changes
