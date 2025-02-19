@@ -534,6 +534,20 @@ module.exports = (options = {}) => {
               strong: {
                 fontWeight: theme('fontWeight.medium'),
               },
+              code: {
+                padding: `${theme('spacing[0.5]')} ${theme('spacing.2')}`,
+                borderRadius: theme('borderRadius.DEFAULT'),
+                borderWidth: theme('borderWidth.DEFAULT'),
+                borderColor: theme('colors.gray.DEFAULT'),
+                backgroundColor: theme('colors.gray.lightest'),
+                whiteSpace: 'nowrap',
+              },
+              'code::before': {
+                content: '""',
+              },
+              'code::after': {
+                content: '""',
+              },
               blockquote: {
                 // Reset defaults:
                 marginBottom: 'unset',
