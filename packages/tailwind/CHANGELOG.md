@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.0.0-canary.12
+
+### Patch Changes
+
+- ab9d08a: Add custom styling to `<code>` in prose content
+
 ## 2.0.0-canary.11
 
 ### Major Changes
