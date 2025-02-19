@@ -531,6 +531,9 @@ module.exports = (options = {}) => {
                   ...typography.paragraphText.large,
                 },
               },
+              strong: {
+                fontWeight: theme('fontWeight.medium'),
+              },
               blockquote: {
                 // Reset defaults:
                 marginBottom: 'unset',

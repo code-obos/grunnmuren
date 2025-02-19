@@ -92,11 +92,6 @@ export function SanityContent({ content, className }: SanityContentProps) {
               </AnchorHeading>
             ),
           },
-          marks: {
-            strong: ({ children }) => (
-              <strong className="font-medium">{children}</strong>
-            ),
-          },
         }}
       />
     </div>
