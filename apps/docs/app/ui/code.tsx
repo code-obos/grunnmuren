@@ -5,6 +5,13 @@ import { themes } from 'prism-react-renderer';
 import { useState } from 'react';
 import { LiveEditor, LivePreview, LiveProvider } from 'react-live';
 
+const {
+  UNSAFE_Disclosure: Disclosure,
+  UNSAFE_DisclosureButton: DisclosureButton,
+  UNSAFE_DisclosurePanel: DisclosurePanel,
+  Button,
+} = GrunnmurenScope;
+
 export type CodeProps = {
   value: string;
   setValue?: (newCode: string) => void;
@@ -29,6 +36,8 @@ export const Code = ({
       { ...GrunnmurenIconsScope, ...GrunnmurenScope }
     : undefined;
 
+  const [isCodeExpanded, setIsCodeExpanded] = useState(false);
+
   return (
     <LiveProvider
       code={value}
@@ -40,37 +49,48 @@ export const Code = ({
       {withLivePreview && (
         <LivePreview className="not-prose my-4 flex gap-x-4" />
       )}
-      {/* Use the same black color as the background on the editor (#1e1e1e)  */}
-      <div className="grid grid-cols-[1fr,auto] grid-rows-[auto,1fr] overflow-hidden rounded-lg bg-[#1e1e1e]">
-        <LiveEditor
-          tabMode="focus"
-          className="row-span-2 font-mono"
-          onChange={setValue}
-        />
-        <div className="relative text-mint">
-          <GrunnmurenScope.Button
-            onPress={() =>
-              navigator.clipboard.writeText(value).then(() => {
-                setHasCopied(true);
-                setTimeout(() => setHasCopied(false), 2000); // Reset after 2 seconds
-              })
-            }
-            variant="tertiary"
-          >
-            <GrunnmurenIconsScope.Documents />
-          </GrunnmurenScope.Button>
-          <span
-            className={cx(
-              'absolute top-full right-2 transition-opacity duration-100',
-              hasCopied ? 'opacity-100' : 'opacity-0',
-            )}
-            aria-hidden={!hasCopied}
-            role="alert"
-          >
-            Kopiert!
-          </span>
-        </div>
-      </div>
+      <Disclosure
+        isExpanded={isCodeExpanded}
+        onExpandedChange={setIsCodeExpanded}
+        className="grid grid-cols-1"
+      >
+        <DisclosureButton withChevron className="w-fit justify-self-end">
+          {isCodeExpanded ? 'Skjul' : 'Vis'} kode
+        </DisclosureButton>
+        <DisclosurePanel>
+          {/* Use the same black color as the background on the editor (#1e1e1e)  */}
+          <div className="grid grid-cols-[1fr,auto] grid-rows-[auto,1fr] overflow-hidden rounded-lg bg-[#1e1e1e]">
+            <LiveEditor
+              tabMode="focus"
+              className="row-span-2 font-mono"
+              onChange={setValue}
+            />
+            <div className="relative text-mint">
+              <Button
+                onPress={() =>
+                  navigator.clipboard.writeText(value).then(() => {
+                    setHasCopied(true);
+                    setTimeout(() => setHasCopied(false), 2000); // Reset after 2 seconds
+                  })
+                }
+                variant="tertiary"
+              >
+                <GrunnmurenIconsScope.Documents />
+              </Button>
+              <span
+                className={cx(
+                  'absolute top-full right-2 transition-opacity duration-100',
+                  hasCopied ? 'opacity-100' : 'opacity-0',
+                )}
+                aria-hidden={!hasCopied}
+                role="alert"
+              >
+                Kopiert!
+              </span>
+            </div>
+          </div>
+        </DisclosurePanel>
+      </Disclosure>
     </LiveProvider>
   );
 };
