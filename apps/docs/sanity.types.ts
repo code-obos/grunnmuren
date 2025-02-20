@@ -14,7 +14,7 @@
 
 // Source: schema.json
 export type SanityImagePaletteSwatch = {
-  _type: 'sanity.imagePaletteSwatch';
+  _type: "sanity.imagePaletteSwatch";
   background?: string;
   foreground?: string;
   population?: number;
@@ -22,7 +22,7 @@ export type SanityImagePaletteSwatch = {
 };
 
 export type SanityImagePalette = {
-  _type: 'sanity.imagePalette';
+  _type: "sanity.imagePalette";
   darkMuted?: SanityImagePaletteSwatch;
   lightVibrant?: SanityImagePaletteSwatch;
   darkVibrant?: SanityImagePaletteSwatch;
@@ -33,7 +33,7 @@ export type SanityImagePalette = {
 };
 
 export type SanityImageDimensions = {
-  _type: 'sanity.imageDimensions';
+  _type: "sanity.imageDimensions";
   height?: number;
   width?: number;
   aspectRatio?: number;
@@ -41,7 +41,7 @@ export type SanityImageDimensions = {
 
 export type SanityFileAsset = {
   _id: string;
-  _type: 'sanity.fileAsset';
+  _type: "sanity.fileAsset";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -62,19 +62,19 @@ export type SanityFileAsset = {
 };
 
 export type Geopoint = {
-  _type: 'geopoint';
+  _type: "geopoint";
   lat?: number;
   lng?: number;
   alt?: number;
 };
 
 export type ImageWithCaption = {
-  _type: 'image-with-caption';
+  _type: "image-with-caption";
   asset?: {
     _ref: string;
-    _type: 'reference';
+    _type: "reference";
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
   };
   hotspot?: SanityImageHotspot;
   crop?: SanityImageCrop;
@@ -83,7 +83,7 @@ export type ImageWithCaption = {
 };
 
 export type SanityImageCrop = {
-  _type: 'sanity.imageCrop';
+  _type: "sanity.imageCrop";
   top?: number;
   bottom?: number;
   left?: number;
@@ -91,7 +91,7 @@ export type SanityImageCrop = {
 };
 
 export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot';
+  _type: "sanity.imageHotspot";
   x?: number;
   y?: number;
   height?: number;
@@ -100,7 +100,7 @@ export type SanityImageHotspot = {
 
 export type SanityImageAsset = {
   _id: string;
-  _type: 'sanity.imageAsset';
+  _type: "sanity.imageAsset";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -122,14 +122,14 @@ export type SanityImageAsset = {
 };
 
 export type SanityAssetSourceData = {
-  _type: 'sanity.assetSourceData';
+  _type: "sanity.assetSourceData";
   name?: string;
   id?: string;
   url?: string;
 };
 
 export type SanityImageMetadata = {
-  _type: 'sanity.imageMetadata';
+  _type: "sanity.imageMetadata";
   location?: Geopoint;
   dimensions?: SanityImageDimensions;
   palette?: SanityImagePalette;
@@ -140,13 +140,13 @@ export type SanityImageMetadata = {
 };
 
 export type LiveCodeBlock = {
-  _type: 'live-code-block';
+  _type: "live-code-block";
   code?: Code;
   caption?: string;
 };
 
 export type StaticCodeBlock = {
-  _type: 'static-code-block';
+  _type: "static-code-block";
   code?: Code;
   caption?: string;
 };
@@ -155,18 +155,18 @@ export type Content = Array<{
   children?: Array<{
     marks?: Array<string>;
     text?: string;
-    _type: 'span';
+    _type: "span";
     _key: string;
   }>;
-  style?: 'normal' | 'h2' | 'h3' | 'h4' | 'h5' | 'blockquote';
-  listItem?: 'bullet' | 'number';
+  style?: "normal" | "h2" | "h3" | "h4" | "h5" | "blockquote";
+  listItem?: "bullet" | "number";
   markDefs?: Array<{
     href?: string;
-    _type: 'link';
+    _type: "link";
     _key: string;
   }>;
   level?: number;
-  _type: 'block';
+  _type: "block";
   _key: string;
 } | {
   _key: string;
@@ -180,70 +180,52 @@ export type Content = Array<{
 
 export type Component = {
   _id: string;
-  _type: 'component';
+  _type: "component";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
   name?: string;
   slug?: Slug;
-  componentState?: 'In progress' | 'Ready' | 'Deprecated';
+  componentState?: "In progress" | "Ready" | "Deprecated";
+  documentationState?: "Docs are being written" | "Docs are finished" | "Docs are archived";
   highlightAsNew?: boolean;
   content?: Content;
   propsComponents?: Array<string>;
   resourceLinks?: Array<{
-    linkType?: 'figma' | 'github';
+    linkType?: "figma" | "github";
     url?: string;
-    _type: 'resourceLink';
+    _type: "resourceLink";
     _key: string;
   }>;
 };
 
 export type Slug = {
-  _type: 'slug';
+  _type: "slug";
   current?: string;
   source?: string;
 };
 
 export type Table = {
-  _type: 'table';
+  _type: "table";
   rows?: Array<{
     _key: string;
   } & TableRow>;
 };
 
 export type TableRow = {
-  _type: 'tableRow';
+  _type: "tableRow";
   cells?: Array<string>;
 };
 
 export type Code = {
-  _type: 'code';
+  _type: "code";
   language?: string;
   filename?: string;
   code?: string;
   highlightedLines?: Array<number>;
 };
 
-export type AllSanitySchemaTypes =
-  SanityImagePaletteSwatch
-  | SanityImagePalette
-  | SanityImageDimensions
-  | SanityFileAsset
-  | Geopoint
-  | ImageWithCaption
-  | SanityImageCrop
-  | SanityImageHotspot
-  | SanityImageAsset
-  | SanityAssetSourceData
-  | SanityImageMetadata
-  | LiveCodeBlock
-  | StaticCodeBlock
-  | Content
-  | Component
-  | Slug
-  | Table
-  | TableRow
-  | Code;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | ImageWithCaption | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | LiveCodeBlock | StaticCodeBlock | Content | Component | Slug | Table | TableRow | Code;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./app/routes/_docs.tsx
 // Variable: COMPONENTS_NAVIGATION_QUERY
@@ -251,37 +233,37 @@ export declare const internalGroqTypeReferenceTo: unique symbol;
 export type COMPONENTS_NAVIGATION_QUERYResult = Array<{
   _id: string;
   name: string | null;
-  slug: string | '';
+  slug: string | "";
   highlightAsNew: boolean | null;
 }>;
 
 // Source: ./app/routes/_docs/komponenter/$slug.tsx
 // Variable: COMPONENT_QUERY
-// Query: *[_type == "component" && slug.current == $slug][0]{ "content": content[] {..., _type == "image-with-caption" => {...,asset->}}, "name": coalesce(name, ''), propsComponents, resourceLinks, highlightAsNew }
+// Query: *[_type == "component" && slug.current == $slug][0]{ "content": content[] {..., _type == "image-with-caption" => {...,asset->}}, "name": coalesce(name, ''), propsComponents, resourceLinks, highlightAsNew, "state": coalesce(componentState, 'In progress'), "documentationState": coalesce(documentationState, 'Being written')  }
 export type COMPONENT_QUERYResult = {
   content: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
-      _type: 'span';
+      _type: "span";
       _key: string;
     }>;
-    style?: 'blockquote' | 'h2' | 'h3' | 'h4' | 'h5' | 'normal';
-    listItem?: 'bullet' | 'number';
+    style?: "blockquote" | "h2" | "h3" | "h4" | "h5" | "normal";
+    listItem?: "bullet" | "number";
     markDefs?: Array<{
       href?: string;
-      _type: 'link';
+      _type: "link";
       _key: string;
     }>;
     level?: number;
-    _type: 'block';
+    _type: "block";
     _key: string;
   } | {
     _key: string;
-    _type: 'image-with-caption';
+    _type: "image-with-caption";
     asset: {
       _id: string;
-      _type: 'sanity.imageAsset';
+      _type: "sanity.imageAsset";
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
@@ -307,30 +289,32 @@ export type COMPONENT_QUERYResult = {
     caption?: string;
   } | {
     _key: string;
-    _type: 'live-code-block';
+    _type: "live-code-block";
     code?: Code;
     caption?: string;
   } | {
     _key: string;
-    _type: 'static-code-block';
+    _type: "static-code-block";
     code?: Code;
     caption?: string;
   } | {
     _key: string;
-    _type: 'table';
+    _type: "table";
     rows?: Array<{
       _key: string;
     } & TableRow>;
   }> | null;
-  name: string | '';
+  name: string | "";
   propsComponents: Array<string> | null;
   resourceLinks: Array<{
-    linkType?: 'figma' | 'github';
+    linkType?: "figma" | "github";
     url?: string;
-    _type: 'resourceLink';
+    _type: "resourceLink";
     _key: string;
   }> | null;
   highlightAsNew: boolean | null;
+  state: "Deprecated" | "In progress" | "Ready";
+  documentationState: "Being written" | "Docs are archived" | "Docs are being written" | "Docs are finished";
 } | null;
 
 // Source: ./app/routes/_docs/komponenter/index.tsx
@@ -339,7 +323,7 @@ export type COMPONENT_QUERYResult = {
 export type COMPONENTS_INDEX_QUERYResult = Array<{
   _id: string;
   name: string | null;
-  slug: string | '';
+  slug: string | "";
   highlightAsNew: boolean | null;
 }>;
 
@@ -349,16 +333,15 @@ export type COMPONENTS_INDEX_QUERYResult = Array<{
 export type PROFILE_INDEX_QUERYResult = Array<{
   _id: string;
   name: string | null;
-  slug: string | '';
+  slug: string | "";
 }>;
 
 // Query TypeMap
-import '@sanity/client';
-
-declare module '@sanity/client' {
+import "@sanity/client";
+declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "component"]{ _id, name, \'slug\': coalesce(slug.current, \'\'), highlightAsNew} | order(name asc)': COMPONENTS_NAVIGATION_QUERYResult | COMPONENTS_INDEX_QUERYResult;
-    '*[_type == "component" && slug.current == $slug][0]{ "content": content[] {..., _type == "image-with-caption" => {...,asset->}}, "name": coalesce(name, \'\'), propsComponents, resourceLinks, highlightAsNew }': COMPONENT_QUERYResult;
-    '*[_type == "component"]{ _id, name, \'slug\': coalesce(slug.current, \'\')} | order(name asc)': PROFILE_INDEX_QUERYResult;
+    "*[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, ''), highlightAsNew} | order(name asc)": COMPONENTS_NAVIGATION_QUERYResult | COMPONENTS_INDEX_QUERYResult;
+    "*[_type == \"component\" && slug.current == $slug][0]{ \"content\": content[] {..., _type == \"image-with-caption\" => {...,asset->}}, \"name\": coalesce(name, ''), propsComponents, resourceLinks, highlightAsNew, \"state\": coalesce(componentState, 'In progress'), \"documentationState\": coalesce(documentationState, 'Being written')  }": COMPONENT_QUERYResult;
+    "*[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, '')} | order(name asc)": PROFILE_INDEX_QUERYResult;
   }
 }

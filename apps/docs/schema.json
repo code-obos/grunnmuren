@@ -1107,6 +1107,27 @@
         },
         "optional": true
       },
+      "documentationState": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "Docs are being written"
+            },
+            {
+              "type": "string",
+              "value": "Docs are finished"
+            },
+            {
+              "type": "string",
+              "value": "Docs are archived"
+            }
+          ]
+        },
+        "optional": true
+      },
       "highlightAsNew": {
         "type": "objectAttribute",
         "value": {
