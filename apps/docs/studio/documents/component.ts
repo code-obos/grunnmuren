@@ -26,10 +26,26 @@ export default defineType({
       type: 'string',
       description: 'The current state of the component',
       options: {
-        list: ['In progress', 'Ready', 'Deprecated'],
+        list: ['in progress', 'ready', 'deprecated'],
         layout: 'radio',
       },
-      initialValue: 'In progress',
+      initialValue: 'in progress',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'documentationState',
+      title: 'Documentation state',
+      type: 'string',
+      description: 'The current state of this documentation',
+      options: {
+        list: [
+          'Docs are being written',
+          'Docs are finished',
+          'Docs are archived',
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'Docs are being written',
       validation: (rule) => rule.required(),
     }),
     defineField({

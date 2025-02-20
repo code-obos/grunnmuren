@@ -10,7 +10,22 @@ import type * as props from 'docgen';
 import { defineQuery } from 'groq';
 
 const COMPONENT_QUERY = defineQuery(
-  `*[_type == "component" && slug.current == $slug][0]{ "content": content[] {..., _type == "image-with-caption" => {...,asset->}}, "name": coalesce(name, ''), propsComponents, resourceLinks, highlightAsNew, "state": coalesce(componentState, 'In progress') }`,
+  `*[_type == "component" 
+  && slug.current == $slug][0]{ 
+    "content": content[] {
+      ..., 
+      _type == "image-with-caption" => {
+        ..., 
+        asset->
+      }
+    },
+    "name": coalesce(name, ''), 
+    propsComponents, 
+    resourceLinks, 
+    highlightAsNew, 
+    "state": coalesce(componentState, 'in progress'),
+    "documentationState": coalesce(documentationState, 'Docs are being written')
+  }`,
 );
 
 export const Route = createFileRoute('/_docs/komponenter/$slug')({
@@ -46,13 +61,17 @@ function Page() {
       <div className="mb-8 flex gap-4">
         {data.highlightAsNew && (
           <Badge color="mint" size="small">
-            Ny
+            Komponenten er ny
           </Badge>
         )}
         <Badge color="gray-dark" size="small">
-          {data.state}
+          {`The component is ${data.state}`}
+        </Badge>
+        <Badge color="sky" size="small">
+          {data.documentationState}
         </Badge>
       </div>
+      <div>This component is</div>
 
       <ResourceLinks className="mb-12">
         {figmaLink && <ResourceLink type="figma" href={figmaLink} />}
