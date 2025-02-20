@@ -5,10 +5,42 @@ const options = {
   savePropValueAsString: true,
 };
 
-const docs = withDefaultConfig().parse(
+const docs = withDefaultConfig({
+  ...options,
+  componentNameResolver: (exp, source) => {
+    // Rename DisclosureGroup from grunnmuren-react to avoid name collision with react-aria-components.
+    // Docgen is not able to resolve the props for DisclosureGroup in our reexported component from react-aria-components.
+    // This seems to be because there is no way for docgen to connect DisclosureGroup to DisclosureGroupProps,
+    // since there is no function or class named DisclosureGroup that takes DisclosureGroupProps as an argument.
+    if (
+      exp.getName() === 'DisclosureGroup' &&
+      !source.fileName.includes('react-aria-components')
+    ) {
+      return 'InternalDisclosureGroup';
+    }
+
+    // Avvoid duplicate component names, since these are both exported from react-aria-components and grunnmuren-react
+    if (
+      exp.getName() === 'DisclosurePanel' &&
+      source.fileName.includes('react-aria-components')
+    ) {
+      return 'RACDisclosurePanel';
+    }
+
+    if (
+      exp.getName() === 'Disclosure' &&
+      source.fileName.includes('react-aria-components')
+    ) {
+      return 'RACDisclosure';
+    }
+
+    return;
+  },
+}).parse([
   './node_modules/@obosbbl/grunnmuren-react/src/index.ts',
-  options,
-);
+  // We reexport DisclosureGroup from react-aria-components in grunnmuren-react, so we need to parse it to get the props
+  './node_modules/@obosbbl/grunnmuren-react/node_modules/react-aria-components/src/Disclosure.tsx',
+]);
 
 const outputPath = './docgen.ts';
 console.log(`Writing props to "${outputPath}"...\n`);
