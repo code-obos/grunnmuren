@@ -1,7 +1,7 @@
 import optimizeLocales from '@react-aria/optimize-locales-plugin';
 import { mergeConfig } from 'vite';
 
-module.exports = {
+export default {
   stories: ['../packages/react/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
   addons: [
     '@storybook/addon-docs',

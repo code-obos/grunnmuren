@@ -5,6 +5,7 @@
   "repository": {
     "url": "https://github.com/code-obos/grunnmuren"
   },
+  "type": "module",
   "scripts": {
     "build": "pnpm --filter './packages/**' build",
     "build:docs": "pnpm --filter @obosbbl/grunnmuren-docs build",
@@ -15,7 +16,7 @@
     "dev:docs": "pnpm --filter @obosbbl/grunnmuren-docs dev",
     "lint": "pnpm biome check .",
     "lint:ci": "pnpm biome ci .",
-    "serve-storybook": "http-server storybook-static -p 6006 --silent",
+    "serve-storybook": "http-server ./apps/docs/public/storybook -p 6006 --silent",
     "test": "test-storybook"
   },
   "dependencies": {
