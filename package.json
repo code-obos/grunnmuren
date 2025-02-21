@@ -7,8 +7,8 @@
   },
   "scripts": {
     "build": "pnpm --filter './packages/**' build",
-    "build:netlify": "pnpm --filter @obosbbl/grunnmuren-icons-react build && pnpm build:storybook",
-    "build:storybook": "storybook build -o ./apps/docs/public/storybook-static",
+    "build:docs": "pnpm --filter @obosbbl/grunnmuren-docs build",
+    "build:storybook": "storybook build -o ./apps/docs/public/storybook",
     "ci:publish": "pnpm build && changeset publish",
     "ci:version": "changeset version",
     "dev": "storybook dev -p 6006 --ci",

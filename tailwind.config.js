@@ -1,4 +1,5 @@
 module.exports = {
   presets: [require('@obosbbl/grunnmuren-tailwind')],
-  content: ['./packages/**/*.{ts,tsx}'],
+  // pattern is overly specifi to prevent tw warning about matching node_modules
+  content: ['./packages/*/src/**/*.{ts,tsx}'],
 };

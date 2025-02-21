@@ -1,4 +1,5 @@
 .output
 .vinxi
 public/resources/icons/
+public/storybook
 docgen.ts

@@ -1,7 +1,6 @@
 # Grunnmuren - OBOS' design system
 
 [![Slack](https://img.shields.io/badge/Slack-%23grunnmuren--design--system-default?logo=slack)](https://obos.slack.com/archives/C03FR05FJ9F)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/62c234c7-3bb2-4592-a22f-ecb44d84f463/deploy-status)](https://app.netlify.com/sites/obos-grunnmuren/deploys)
 
 This is the monorepo for **Grunnmuren**, OBOS' design system.
 
@@ -13,7 +12,8 @@ If you are looking for v1 of the design system, see the [v1 branch.](https://git
 
 See these links:
 
-- [Storybook](https://obos-grunnmuren.netlify.app/)
+- [Documentation](https://grunnmuren.obos.no)
+- [Storybook](https://grunnmuren.obos/storybook)
 - [Figma](https://www.figma.com/file/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem)
 
 and check out these packages:
