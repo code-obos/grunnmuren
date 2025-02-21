@@ -8,10 +8,11 @@
   "scripts": {
     "build": "pnpm --filter './packages/**' build",
     "build:netlify": "pnpm --filter @obosbbl/grunnmuren-icons-react build && pnpm build:storybook",
-    "build:storybook": "storybook build",
+    "build:storybook": "storybook build -o ./apps/docs/public/storybook-static",
     "ci:publish": "pnpm build && changeset publish",
     "ci:version": "changeset version",
     "dev": "storybook dev -p 6006 --ci",
+    "dev:docs": "pnpm --filter @obosbbl/grunnmuren-docs dev",
     "lint": "pnpm biome check .",
     "lint:ci": "pnpm biome ci .",
     "serve-storybook": "http-server storybook-static -p 6006 --silent",
