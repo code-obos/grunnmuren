@@ -43,7 +43,7 @@ pnpm install
 
 #### Linting
 
-The following command runs both prettier and eslint.
+The following command runs Biome.
 
 ```bash
 pnpm lint
@@ -59,11 +59,20 @@ pnpm build
 
 #### Development
 
+Note that before running the Storybook or docs app for the first time, you need to build the packages first. We currently don't use tools such as Turborepo or Nx.
+
 Runs the storybook for local development, at http://localhost:6006.
 
 ```bash
 pnpm dev
 ```
+
+Runs the docs app for local development, at http://localhost:3000.
+
+```bash
+pnpm dev:docs
+```
+
 
 ### Releases and changelogs
 
