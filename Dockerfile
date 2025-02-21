@@ -20,8 +20,10 @@ RUN \
     --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 
 RUN pnpm build
-RUN pnpm build:docs
+# important to build storybook before docs app
+# so the storybook assets are copied correctly to build output
 RUN pnpm build:storybook
+RUN pnpm build:docs
 
 FROM base
 WORKDIR /app/apps/docs
