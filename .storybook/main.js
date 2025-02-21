@@ -1,8 +1,7 @@
-import path from 'node:path';
 import optimizeLocales from '@react-aria/optimize-locales-plugin';
 import { mergeConfig } from 'vite';
 
-module.exports = {
+export default {
   stories: ['../packages/react/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
   addons: [
     '@storybook/addon-docs',
@@ -21,6 +20,8 @@ module.exports = {
   async viteFinal(config) {
     // Merge custom configuration into the default config
     return mergeConfig(config, {
+      // because we're serving the storybook as part of the docs app, it needs a basepath
+      base: '/storybook',
       plugins: [
         {
           ...optimizeLocales.vite({
@@ -30,11 +31,6 @@ module.exports = {
           enforce: 'pre',
         },
       ],
-      resolve: {
-        alias: {
-          '@': path.resolve(__dirname, '../src/'),
-        },
-      },
     });
   },
   docs: {

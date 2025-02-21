@@ -20,7 +20,8 @@ RUN \
     --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 
 RUN pnpm build
-RUN pnpm --filter @obosbbl/grunnmuren-docs build
+RUN pnpm build:docs
+RUN pnpm build:storybook
 
 FROM base
 WORKDIR /app/apps/docs
