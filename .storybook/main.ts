@@ -24,6 +24,19 @@ const config: StorybookConfig = {
       // because we're serving the storybook as part of the docs app, it needs a basepath
       // This doesn't seem to be working....
       base: '/storybook/',
+      experimental: {
+        renderBuiltUrl(filename, { hostType }) {
+          console.log({ filename });
+          return '/storybook/' + filename;
+          if (hostType === 'js') {
+            return {
+              runtime: `window.__toCdnUrl(${JSON.stringify(filename)})`,
+            };
+          } else {
+            return { relative: true };
+          }
+        },
+      },
       plugins: [
         {
           ...optimizeLocales.vite({
