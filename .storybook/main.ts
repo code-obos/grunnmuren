@@ -21,9 +21,6 @@ const config: StorybookConfig = {
   async viteFinal(config) {
     // Merge custom configuration into the default config
     return mergeConfig(config, {
-      // because we're serving the storybook as part of the docs app, it needs a basepath
-      // This doesn't seem to be working....
-      base: '/storybook/',
       plugins: [
         {
           ...optimizeLocales.vite({
