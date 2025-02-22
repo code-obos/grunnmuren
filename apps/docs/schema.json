@@ -1086,6 +1086,55 @@
         },
         "optional": true
       },
+      "componentState": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "In progress"
+            },
+            {
+              "type": "string",
+              "value": "Ready"
+            },
+            {
+              "type": "string",
+              "value": "Deprecated"
+            }
+          ]
+        },
+        "optional": true
+      },
+      "documentationState": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "Docs are being written"
+            },
+            {
+              "type": "string",
+              "value": "Docs are finished"
+            },
+            {
+              "type": "string",
+              "value": "Docs are archived"
+            }
+          ]
+        },
+        "optional": true
+      },
+      "highlightAsNew": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
+        },
+        "optional": true
+      },
       "content": {
         "type": "objectAttribute",
         "value": {
@@ -1101,13 +1150,6 @@
           "of": {
             "type": "string"
           }
-        },
-        "optional": true
-      },
-      "highlightAsNew": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "boolean"
         },
         "optional": true
       },
