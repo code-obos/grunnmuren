@@ -9,7 +9,6 @@ export default defineConfig({
   },
   vite: {
     plugins: [
-      // @ts-expect-error errors due to transitive type only deps
       {
         // Optimize bundle size by only keeping the necessary locales in React Aria.
         // See https://react-spectrum.adobe.com/react-aria/internationalization.html
@@ -18,7 +17,6 @@ export default defineConfig({
         }),
         enforce: 'pre',
       },
-      // @ts-expect-error errors due to transitive type only deps
       tsConfigPaths({
         projects: ['./tsconfig.json'],
       }),
