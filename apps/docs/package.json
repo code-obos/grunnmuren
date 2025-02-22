@@ -38,7 +38,7 @@
     "react-element-to-jsx-string": "15.0.0",
     "react-live": "4.1.8",
     "sanity": "3.76.3",
-    "vinxi": "0.5.1"
+    "vinxi": "0.5.3"
   },
   "devDependencies": {
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
