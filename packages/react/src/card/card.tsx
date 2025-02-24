@@ -68,7 +68,7 @@ const cardVariants = cva({
 
     // **** Badge ****
     '[&_[data-slot="media"]_[data-slot="badge"]]:absolute [&_[data-slot="media"]_[data-slot="badge"]]:top-0',
-    // Increasing z-index Preserves badge position when media content is hovered
+    // Increasing z-index Preserves badge position when media content is hovered (the transform scale effect might otherwise move the badge behind the other media content)
     '[&_[data-slot="media"]_[data-slot="badge"]]:z-[1]',
     // Left aligned - override default corner radius of the badge
     '[&_[data-slot="media"]_[data-slot="badge"]:first-child]:rounded-tl-2xl',
