@@ -73,11 +73,11 @@ const cardVariants = cva({
     // Left aligned - override default corner radius of the badge
     '[&_[data-slot="media"]_[data-slot="badge"]:first-child]:rounded-tl-2xl',
     '[&_[data-slot="media"]_[data-slot="badge"]:first-child]:rounded-br-2xl',
-    '[&_[data-slot="media"]_[data-slot="badge"]:first-child]:rounded-tr-[0px]',
-    '[&_[data-slot="media"]_[data-slot="badge"]:first-child]:rounded-bl-[0px]',
+    '[&_[data-slot="media"]_[data-slot="badge"]:first-child]:rounded-tr-none',
+    '[&_[data-slot="media"]_[data-slot="badge"]:first-child]:rounded-bl-none',
     // Right aligned - override default corner radius of the badge
-    '[&_[data-slot="media"]_[data-slot="badge"]:last-child]:rounded-tl-[0px]',
-    '[&_[data-slot="media"]_[data-slot="badge"]:last-child]:rounded-br-[0px]',
+    '[&_[data-slot="media"]_[data-slot="badge"]:last-child]:rounded-tl-none',
+    '[&_[data-slot="media"]_[data-slot="badge"]:last-child]:rounded-br-none',
     '[&_[data-slot="media"]_[data-slot="badge"]:last-child]:rounded-tr-2xl',
     '[&_[data-slot="media"]_[data-slot="badge"]:last-child]:rounded-bl-2xl',
     // ... and position the badge at the right edge of the media content
