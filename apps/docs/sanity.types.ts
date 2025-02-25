@@ -323,21 +323,11 @@ export type COMPONENTS_INDEX_QUERYResult = Array<{
   componentState: "beta" | "deprecated" | "new" | "stable" | null;
 }>;
 
-// Source: ./app/routes/_docs/profil/index.tsx
-// Variable: PROFILE_INDEX_QUERY
-// Query: *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, '')} | order(name asc)
-export type PROFILE_INDEX_QUERYResult = Array<{
-  _id: string;
-  name: string | null;
-  slug: string | "";
-}>;
-
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc)": COMPONENTS_NAVIGATION_QUERYResult | COMPONENTS_INDEX_QUERYResult;
     "*[_type == \"component\"\n  && slug.current == $slug][0]{\n    \"content\": content[] {\n      ...,\n      _type == \"image-with-caption\" => {\n        ...,\n        asset->\n      }\n    },\n    \"name\": coalesce(name, ''),\n    propsComponents,\n    resourceLinks,\n    componentState,\n  }": COMPONENT_QUERYResult;
-    "*[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, '')} | order(name asc)": PROFILE_INDEX_QUERYResult;
   }
 }
