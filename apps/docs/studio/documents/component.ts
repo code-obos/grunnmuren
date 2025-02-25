@@ -26,33 +26,11 @@ export default defineType({
       type: 'string',
       description: 'The current state of the component',
       options: {
-        list: ['in progress', 'ready', 'deprecated'],
+        list: ['beta', 'new', 'stable', 'deprecated'],
         layout: 'radio',
       },
-      initialValue: 'in progress',
+      initialValue: 'stable',
       validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'documentationState',
-      title: 'Documentation state',
-      type: 'string',
-      description: 'The current state of this documentation',
-      options: {
-        list: [
-          'Docs are being written',
-          'Docs are finished',
-          'Docs are archived',
-        ],
-        layout: 'radio',
-      },
-      initialValue: 'Docs are being written',
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'highlightAsNew',
-      type: 'boolean',
-      title: 'Highlight as a new component',
-      description: 'Check this if the component is new',
     }),
     defineField({
       name: 'content',

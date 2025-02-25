@@ -186,9 +186,7 @@ export type Component = {
   _rev: string;
   name?: string;
   slug?: Slug;
-  componentState?: "In progress" | "Ready" | "Deprecated";
-  documentationState?: "Docs are being written" | "Docs are finished" | "Docs are archived";
-  highlightAsNew?: boolean;
+  componentState?: "beta" | "new" | "stable" | "deprecated";
   content?: Content;
   propsComponents?: Array<string>;
   resourceLinks?: Array<{
@@ -229,17 +227,17 @@ export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./app/routes/_docs.tsx
 // Variable: COMPONENTS_NAVIGATION_QUERY
-// Query: *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, ''), highlightAsNew} | order(name asc)
+// Query: *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc)
 export type COMPONENTS_NAVIGATION_QUERYResult = Array<{
   _id: string;
   name: string | null;
   slug: string | "";
-  highlightAsNew: boolean | null;
+  componentState: "beta" | "deprecated" | "new" | "stable" | null;
 }>;
 
 // Source: ./app/routes/_docs/komponenter/$slug.tsx
 // Variable: COMPONENT_QUERY
-// Query: *[_type == "component" && slug.current == $slug][0]{ "content": content[] {..., _type == "image-with-caption" => {...,asset->}}, "name": coalesce(name, ''), propsComponents, resourceLinks, highlightAsNew, "state": coalesce(componentState, 'In progress'), "documentationState": coalesce(documentationState, 'Being written')  }
+// Query: *[_type == "component"  && slug.current == $slug][0]{    "content": content[] {      ...,      _type == "image-with-caption" => {        ...,        asset->      }    },    "name": coalesce(name, ''),    propsComponents,    resourceLinks,    componentState,  }
 export type COMPONENT_QUERYResult = {
   content: Array<{
     children?: Array<{
@@ -312,19 +310,17 @@ export type COMPONENT_QUERYResult = {
     _type: "resourceLink";
     _key: string;
   }> | null;
-  highlightAsNew: boolean | null;
-  state: "Deprecated" | "In progress" | "Ready";
-  documentationState: "Being written" | "Docs are archived" | "Docs are being written" | "Docs are finished";
+  componentState: "beta" | "deprecated" | "new" | "stable" | null;
 } | null;
 
 // Source: ./app/routes/_docs/komponenter/index.tsx
 // Variable: COMPONENTS_INDEX_QUERY
-// Query: *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, ''), highlightAsNew} | order(name asc)
+// Query: *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc)
 export type COMPONENTS_INDEX_QUERYResult = Array<{
   _id: string;
   name: string | null;
   slug: string | "";
-  highlightAsNew: boolean | null;
+  componentState: "beta" | "deprecated" | "new" | "stable" | null;
 }>;
 
 // Source: ./app/routes/_docs/profil/index.tsx
@@ -340,8 +336,8 @@ export type PROFILE_INDEX_QUERYResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, ''), highlightAsNew} | order(name asc)": COMPONENTS_NAVIGATION_QUERYResult | COMPONENTS_INDEX_QUERYResult;
-    "*[_type == \"component\" && slug.current == $slug][0]{ \"content\": content[] {..., _type == \"image-with-caption\" => {...,asset->}}, \"name\": coalesce(name, ''), propsComponents, resourceLinks, highlightAsNew, \"state\": coalesce(componentState, 'In progress'), \"documentationState\": coalesce(documentationState, 'Being written')  }": COMPONENT_QUERYResult;
+    "*[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc)": COMPONENTS_NAVIGATION_QUERYResult | COMPONENTS_INDEX_QUERYResult;
+    "*[_type == \"component\"\n  && slug.current == $slug][0]{\n    \"content\": content[] {\n      ...,\n      _type == \"image-with-caption\" => {\n        ...,\n        asset->\n      }\n    },\n    \"name\": coalesce(name, ''),\n    propsComponents,\n    resourceLinks,\n    componentState,\n  }": COMPONENT_QUERYResult;
     "*[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, '')} | order(name asc)": PROFILE_INDEX_QUERYResult;
   }
 }

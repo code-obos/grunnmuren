@@ -10,7 +10,7 @@ const dataset = 'grunnmuren';
 
 export default defineConfig({
   projectId: 'tq6w17ny',
-  dataset: 'grunnmuren',
+  dataset,
   basePath: '/studio',
   title: 'Grunnmuren - Sanity Studio',
   auth: obosAuthStore({ dataset }),

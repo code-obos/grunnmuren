@@ -1093,45 +1093,21 @@
           "of": [
             {
               "type": "string",
-              "value": "In progress"
+              "value": "beta"
             },
             {
               "type": "string",
-              "value": "Ready"
+              "value": "new"
             },
             {
               "type": "string",
-              "value": "Deprecated"
+              "value": "stable"
+            },
+            {
+              "type": "string",
+              "value": "deprecated"
             }
           ]
-        },
-        "optional": true
-      },
-      "documentationState": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "union",
-          "of": [
-            {
-              "type": "string",
-              "value": "Docs are being written"
-            },
-            {
-              "type": "string",
-              "value": "Docs are finished"
-            },
-            {
-              "type": "string",
-              "value": "Docs are archived"
-            }
-          ]
-        },
-        "optional": true
-      },
-      "highlightAsNew": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "boolean"
         },
         "optional": true
       },
