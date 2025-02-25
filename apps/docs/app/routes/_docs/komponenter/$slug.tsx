@@ -3,14 +3,27 @@ import { AnchorHeading } from '@/ui/anchor-heading';
 import { PropsTable } from '@/ui/props-table';
 import { ResourceLink, ResourceLinks } from '@/ui/resource-links';
 import { SanityContent } from '@/ui/sanity-content';
-import { Child } from '@obosbbl/grunnmuren-icons-react';
-import { Alertbox, Badge, Content } from '@obosbbl/grunnmuren-react';
+import { Child, CircusTent } from '@obosbbl/grunnmuren-icons-react';
+import { Alertbox, Content } from '@obosbbl/grunnmuren-react';
 import { createFileRoute, notFound } from '@tanstack/react-router';
 import type * as props from 'docgen';
 import { defineQuery } from 'groq';
 
 const COMPONENT_QUERY = defineQuery(
-  `*[_type == "component" && slug.current == $slug][0]{ "content": content[] {..., _type == "image-with-caption" => {...,asset->}}, "name": coalesce(name, ''), propsComponents, resourceLinks, highlightAsNew }`,
+  `*[_type == "component"
+  && slug.current == $slug][0]{
+    "content": content[] {
+      ...,
+      _type == "image-with-caption" => {
+        ...,
+        asset->
+      }
+    },
+    "name": coalesce(name, ''),
+    propsComponents,
+    resourceLinks,
+    componentState,
+  }`,
 );
 
 export const Route = createFileRoute('/_docs/komponenter/$slug')({
@@ -43,25 +56,12 @@ function Page() {
     <>
       <h1 className="heading-l mt-9 mb-4">{data.name}</h1>
 
-      <div className="mb-8 flex gap-4">
-        {data.highlightAsNew && (
-          <Badge color="mint" size="small">
-            Ny
-          </Badge>
-        )}
-        {!data.documentationIsReady && (
-          <Badge color="gray-dark" size="small">
-            Under arbeid
-          </Badge>
-        )}
-      </div>
-
       <ResourceLinks className="mb-12">
         {figmaLink && <ResourceLink type="figma" href={figmaLink} />}
         {ghLink && <ResourceLink type="github" href={ghLink} />}
       </ResourceLinks>
 
-      {data.highlightAsNew && (
+      {data.componentState === 'new' && (
         // biome-ignore lint/a11y/useValidAriaRole: <explanation>
         <Alertbox
           variant="success"
@@ -70,10 +70,35 @@ function Page() {
           role="none"
         >
           <Content>
-            Denne komponenten er ny eller har nylig fått større endringer. Ta
-            den i bruk og kom gjerne med innspill til oss på{' '}
-            <a href="https://obos.slack.com/archives/C03FR05FJ9F">Slack</a>{' '}
-            hvordan du synes den fungerer.
+            <p>
+              Denne komponenten er ny eller har nylig fått større endringer.
+            </p>
+            <p>
+              Ta den i bruk og kom gjerne med innspill til oss på{' '}
+              <a href="https://obos.slack.com/archives/C03FR05FJ9F">Slack</a>{' '}
+              hvordan du synes den fungerer.
+            </p>
+          </Content>
+        </Alertbox>
+      )}
+
+      {data.componentState === 'beta' && (
+        // biome-ignore lint/a11y/useValidAriaRole: <explanation>
+        <Alertbox
+          variant="warning"
+          className="mb-12 w-fit"
+          icon={CircusTent}
+          role="none"
+        >
+          <Content>
+            <p>
+              Denne komponenten er under aktiv utvikling, og vi trenger din
+              feedback!
+            </p>
+            <p>
+              Er du eventyrlysten, test den og kom med innspill til oss på{' '}
+              <a href="https://obos.slack.com/archives/C03FR05FJ9F">Slack</a>.
+            </p>
           </Content>
         </Alertbox>
       )}
