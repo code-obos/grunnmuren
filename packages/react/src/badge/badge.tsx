@@ -39,7 +39,9 @@ function Badge(props: BadgeProps, ref: Ref<HTMLSpanElement>) {
     size,
   });
 
-  return <span className={className} {...restProps} ref={ref} />;
+  return (
+    <span className={className} {...restProps} ref={ref} data-slot="badge" />
+  );
 }
 
 const _Badge = forwardRef(Badge);

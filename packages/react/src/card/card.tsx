@@ -27,20 +27,21 @@ const cardVariants = cva({
 
     // **** Media ****
     '[&_[data-slot="media"]]:overflow-hidden', // Prevent content from overflowing the rounded corners
+    '[&_[data-slot="media"]]:relative', // Needed for positioning the <Badge> component (if present)
     '[&_[data-slot="media"]]:rounded-t-2xl', // Top corners are always rounded
     // Position media at the edges of the card (because of these negative margins the media-element must be a wrapper around the actual image or other media content)
     '[&_[data-slot="media"]]:mx-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))] [&_[data-slot="media"]]:mt-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
     // Sets the aspect ratio of the media content (width: 100% is necessary to make aspect ratio work in FF)
-    '[&_[data-slot="media"]>*]:aspect-[3/2] [&_[data-slot="media"]>*]:w-full [&_[data-slot="media"]_img]:object-cover',
+    '[&_[data-slot="media"]>*:not([data-slot="badge"])]:aspect-[3/2] [&_[data-slot="media"]>*:not([data-slot="badge"])]:w-full [&_[data-slot="media"]_img]:object-cover',
     // Prepare zoom animation for hover effects. The hover effect can also be enabled by classes on the parent component, so it is always prepared here.
     '[&_[data-slot="media"]>*]:duration-300 [&_[data-slot="media"]>*]:ease-in-out [&_[data-slot="media"]>*]:motion-safe:transition-transform',
 
     // **** Card link ****
     // **** Hover ****
     // Enables the zoom hover effect on media (note that we can't use group-hover/card here, because there might be other clickable elements in the card aside from the heading)
-    '[&:has([data-slot="card-link"]_a:hover)_[data-slot="media"]>*]:scale-110',
+    '[&:has([data-slot="card-link"]_a:hover)_[data-slot="media"]>*:not([data-slot="badge"])]:scale-110',
     // **** Card link in Heading ****
-    '[&:has([data-slot="heading"]_[data-slot="card-link"]:hover)_[data-slot="media"]>*]:scale-110',
+    '[&:has([data-slot="heading"]_[data-slot="card-link"]:hover)_[data-slot="media"]>*:not([data-slot="badge"])]:scale-110',
     // Border (bottom/top) is set to transparent to make sure the bottom underline is not visible when the card is hovered
     // Border top is set to even out the border bottom used for the underline
     '[&_[data-slot="heading"]_[data-slot="card-link"]]:no-underline',
@@ -64,6 +65,23 @@ const cardVariants = cva({
     // Place other interactive on top of the pseudo-element that makes the entire card clickable
     // by setting a higher z-index than the pseudo-element (which implicitly z-index 0)
     '[&_a:not([data-slot="card-link"])]:z-[1] [&_button]:z-[1] [&_input]:z-[1]',
+
+    // **** Badge ****
+    '[&_[data-slot="media"]_[data-slot="badge"]]:absolute [&_[data-slot="media"]_[data-slot="badge"]]:top-0',
+    // Increasing z-index Preserves badge position when media content is hovered (the transform scale effect might otherwise move the badge behind the other media content)
+    '[&_[data-slot="media"]_[data-slot="badge"]]:z-[1]',
+    // Left aligned - override default corner radius of the badge
+    '[&_[data-slot="media"]_[data-slot="badge"]:first-child]:rounded-tl-2xl',
+    '[&_[data-slot="media"]_[data-slot="badge"]:first-child]:rounded-br-2xl',
+    '[&_[data-slot="media"]_[data-slot="badge"]:first-child]:rounded-tr-none',
+    '[&_[data-slot="media"]_[data-slot="badge"]:first-child]:rounded-bl-none',
+    // Right aligned - override default corner radius of the badge
+    '[&_[data-slot="media"]_[data-slot="badge"]:last-child]:rounded-tl-none',
+    '[&_[data-slot="media"]_[data-slot="badge"]:last-child]:rounded-br-none',
+    '[&_[data-slot="media"]_[data-slot="badge"]:last-child]:rounded-tr-2xl',
+    '[&_[data-slot="media"]_[data-slot="badge"]:last-child]:rounded-bl-2xl',
+    // ... and position the badge at the right edge of the media content
+    '[&_[data-slot="media"]_[data-slot="badge"]:last-child]:right-0',
   ],
   variants: {
     /**

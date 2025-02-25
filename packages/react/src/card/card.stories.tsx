@@ -3,6 +3,7 @@ import {
   Bed,
   Documents,
   House,
+  InfoCircle,
   PiggyBank,
 } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta } from '@storybook/react';
@@ -329,6 +330,106 @@ export const ClickableWithOtherClickableElementsAndBackgroundColor = () => (
         alt=""
         src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
       />
+    </Media>
+    <Content>
+      <div className="grid gap-1">
+        <Heading level={3}>
+          <CardLink href="#card">Rødbergvn 88C</CardLink>
+        </Heading>
+        <small className="description">Bjerke - Oslo</small>
+      </div>
+      <small className="description -order-1">
+        Forhåndsvarsling - Saksnr. F0347565
+      </small>
+      <p className="font-semibold">100 m² | Prisantydning 9 600 000 kr</p>
+      <p className="flex gap-x-1">
+        <House /> Rekkehus/småhus
+      </p>
+      <p className="flex gap-x-1">
+        <Bed /> 3 soverom
+      </p>
+      <p className="flex gap-x-1">
+        <PiggyBank /> Totalpris 9 989 838
+      </p>
+      <Badge size="small" color="mint" className="text-black">
+        Visning 13. oktober
+      </Badge>
+    </Content>
+    <Footer className="relative grid gap-y-2">
+      <hr className="border-t border-t-current" />
+      <Button
+        href="#other-link"
+        variant="tertiary"
+        className="focus-visible:outline-current"
+      >
+        Se prospekt
+        <Documents />
+      </Button>
+    </Footer>
+  </Card>
+);
+
+export const ClickableWithBadge = () => (
+  <Card variant="outlined" className="w-72 bg-blue-dark text-mint">
+    <Media>
+      <Badge color="blue-dark">
+        <InfoCircle />
+        Meldefrist
+      </Badge>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+      />
+    </Media>
+    <Content>
+      <div className="grid gap-1">
+        <Heading level={3}>
+          <CardLink href="#card">Rødbergvn 88C</CardLink>
+        </Heading>
+        <small className="description">Bjerke - Oslo</small>
+      </div>
+      <small className="description -order-1">
+        Forhåndsvarsling - Saksnr. F0347565
+      </small>
+      <p className="font-semibold">100 m² | Prisantydning 9 600 000 kr</p>
+      <p className="flex gap-x-1">
+        <House /> Rekkehus/småhus
+      </p>
+      <p className="flex gap-x-1">
+        <Bed /> 3 soverom
+      </p>
+      <p className="flex gap-x-1">
+        <PiggyBank /> Totalpris 9 989 838
+      </p>
+      <Badge size="small" color="mint" className="text-black">
+        Visning 13. oktober
+      </Badge>
+    </Content>
+    <Footer className="relative grid gap-y-2">
+      <hr className="border-t border-t-current" />
+      <Button
+        href="#other-link"
+        variant="tertiary"
+        className="focus-visible:outline-current"
+      >
+        Se prospekt
+        <Documents />
+      </Button>
+    </Footer>
+  </Card>
+);
+
+export const ClickableWithBadgeRight = () => (
+  <Card variant="outlined" className="w-72 bg-blue-dark text-mint">
+    <Media>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+      />
+      <Badge color="blue-dark">
+        <InfoCircle />
+        Meldefrist
+      </Badge>
     </Media>
     <Content>
       <div className="grid gap-1">
