@@ -518,7 +518,7 @@ export const HorizontalRight = () => (
 );
 
 export const HorizontalWithIconLeft = () => (
-  <Card layout="horizontal">
+  <Card layout="horizontal" variant="outlined">
     <PiggyBank />
     <Content>
       <Heading level={3}>Med ikon til venstre</Heading>
