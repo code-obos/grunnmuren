@@ -141,9 +141,15 @@ const cardVariants = cva({
       variant: 'outlined',
       layout: 'horizontal',
       className: [
+        // **** Media ****
+        // Some rounded corners are removed when the card is outlined
         '[&_[data-slot="media"]]:rounded-t-2xl', // On small screens, the top corners are rounded
         '[&_[data-slot="media"]:first-child]:md:rounded-tr-none [&_[data-slot="media"]:first-child]:md:rounded-bl-2xl', // Both left corners are rounded when media is on the left side
         '[&_[data-slot="media"]:last-child]:md:rounded-tl-none [&_[data-slot="media"]:last-child]:md:rounded-br-2xl', // Both right corners are rounded when media is on the right side
+        // **** Badge ****
+        // Override default corner radius of the badge to match the media border radius
+        '[&_[data-slot="media"]:first-child_[data-slot="badge"]:last-child]:md:rounded-tr-none',
+        '[&_[data-slot="media"]:last-child_[data-slot="badge"]:first-child]:md:rounded-tl-none',
       ],
     },
   ],
