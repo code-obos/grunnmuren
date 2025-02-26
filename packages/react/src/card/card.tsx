@@ -10,7 +10,7 @@ const cardVariants = cva({
   base: [
     'group/card',
     'rounded-2xl border p-3',
-    'flex flex-col gap-y-4',
+    'flex gap-y-4', // y-gap ensures a vertical spacing for both verical layout and responsive horizontal layout
     'relative', // Needed for positiong of the clickable pseudo-element (and can also be used for other absolute positioned elements the consumer might add)
 
     // **** Heading ****
@@ -102,22 +102,27 @@ const cardVariants = cva({
      */
     layout: {
       vertical: [
+        'flex-col',
         // **** Media ****
         '[&_[data-slot="media"]]:rounded-t-2xl', // Both Top corners are rounded
       ],
       horizontal: [
+        'gap-x-4', // Since this does not affect the layout before the flex direction is set (at breakpoint md for Card with Media), we can set it here
         // **** With Media ****
-        '[&:has(>[data-slot="media"])]:md:flex-row [&:has(>[data-slot="media"])]:md:gap-x-4',
+        '[&:has(>[data-slot="media"])]:flex-col [&:has(>[data-slot="media"])]:md:flex-row',
         '[&_[data-slot="media"]]:md:basis-1/2',
         '[&_[data-slot="media"]]:md:mb-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
         '[&_[data-slot="media"]:first-child]:md:mr-0',
         '[&_[data-slot="media"]:last-child]:md:ml-0',
-        // **** With Icon ****
-        '[&:has(>svg)]:flex-row [&:has(>svg)]:gap-x-4',
-        '[&:has(>svg)]:flex-wrap [&:has(>svg)_[data-slot="content"]]:grow [&:has(>svg)_[data-slot="content"]]:basis-[18rem]',
 
+        // **** Without Media ****
+        '[&:not(:has(>[data-slot="media"]))]:flex-row',
+        // Make the layout responsive: when the Content reaches a minimum width of 18rem, the layout switches to vertical
+        '[&:not(:has(>[data-slot="media"]))]:flex-wrap [&:not(:has(>[data-slot="media"]))_[data-slot="content"]]:grow [&:not(:has(>[data-slot="media"]))_[data-slot="content"]]:basis-[18rem]',
+        // Make sure svg's etc. are not shrinkable
+        '[&>:not([data-slot="content"],[data-slot="media"])]:shrink-0',
+        // TODO
         '[&:has(>svg:last-child)]:justify-between', // Fixes icon alignment when icon is right aligned
-        '[&_svg]:shrink-0',
       ],
     },
   },
