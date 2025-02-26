@@ -470,7 +470,7 @@ export const ClickableWithBadgeRight = () => (
 );
 
 export const HorizontalLeft = () => (
-  <Card layout="horizontal" variant="outlined">
+  <Card layout="horizontal">
     <Media>
       <img
         alt=""
@@ -478,8 +478,11 @@ export const HorizontalLeft = () => (
       />
     </Media>
     <Content>
-      <Heading level={3}>Med bilde og CTA</Heading>
-      <p>Dette kortet har bilde og er klikkbart mot en CTA-lenke</p>
+      <Heading level={3}>Med bilde til venstre</Heading>
+      <p>
+        Dette kortet har bilde til venstre på større skjermer og er klikkbart
+        mot en CTA-lenke
+      </p>
       <CardLink className="group/cta">
         <Button href="#cta" variant="tertiary">
           Les mer
@@ -491,10 +494,13 @@ export const HorizontalLeft = () => (
 );
 
 export const HorizontalRight = () => (
-  <Card layout="horizontal" variant="outlined">
+  <Card layout="horizontal">
     <Content>
-      <Heading level={3}>Med bilde og CTA</Heading>
-      <p>Dette kortet har bilde og er klikkbart mot en CTA-lenke</p>
+      <Heading level={3}>Med bilde til høyre</Heading>
+      <p>
+        Dette kortet har bilde til høyre på større skjermer og er klikkbart mot
+        en CTA-lenke
+      </p>
       <CardLink className="group/cta">
         <Button href="#cta" variant="tertiary">
           Les mer
@@ -512,7 +518,7 @@ export const HorizontalRight = () => (
 );
 
 export const HorizontalWithIconLeft = () => (
-  <Card layout="horizontal" variant="outlined">
+  <Card layout="horizontal">
     <PiggyBank />
     <Content>
       <Heading level={3}>Med ikon til venstre</Heading>
