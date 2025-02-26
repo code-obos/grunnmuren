@@ -119,6 +119,10 @@ const cardVariants = cva({
         '[&_[data-slot="media"]:first-child]:md:mr-0',
         '[&_[data-slot="media"]:last-child]:md:ml-0',
 
+        // Make sure the card link is clickable when the media is on the right side
+        // This i necessary because the media content is positioned after the card link in the DOM
+        '[&:has(>[data-slot="media"]:last-child)_[data-slot="card-link"]]:z-[1]',
+
         // **** Without Media ****
         '[&:not(:has(>[data-slot="media"]))]:flex-row',
         // Make the layout responsive: when the Content reaches a minimum width of 18rem, the layout switches to vertical. Also makes sure Content takes up the remaining space available.
