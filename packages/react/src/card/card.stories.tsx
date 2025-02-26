@@ -469,7 +469,7 @@ export const ClickableWithBadgeRight = () => (
   </Card>
 );
 
-export const Horizontal = () => (
+export const HorizontalLeft = () => (
   <Card layout="horizontal" variant="outlined">
     <Media>
       <img
@@ -487,6 +487,27 @@ export const Horizontal = () => (
         </Button>
       </CardLink>
     </Content>
+  </Card>
+);
+
+export const HorizontalRight = () => (
+  <Card layout="horizontal" variant="outlined">
+    <Content>
+      <Heading level={3}>Med bilde og CTA</Heading>
+      <p>Dette kortet har bilde og er klikkbart mot en CTA-lenke</p>
+      <CardLink className="group/cta">
+        <Button href="#cta" variant="tertiary">
+          Les mer
+          <ArrowRight className="transition-transform group-hover/cta:motion-safe:translate-x-1" />
+        </Button>
+      </CardLink>
+    </Content>
+    <Media>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+      />
+    </Media>
   </Card>
 );
 
