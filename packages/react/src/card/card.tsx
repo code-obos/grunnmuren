@@ -117,12 +117,10 @@ const cardVariants = cva({
 
         // **** Without Media ****
         '[&:not(:has(>[data-slot="media"]))]:flex-row',
-        // Make the layout responsive: when the Content reaches a minimum width of 18rem, the layout switches to vertical
+        // Make the layout responsive: when the Content reaches a minimum width of 18rem, the layout switches to vertical. Also makes sure Content takes up the remaining space available.
         '[&:not(:has(>[data-slot="media"]))]:flex-wrap [&:not(:has(>[data-slot="media"]))_[data-slot="content"]]:grow [&:not(:has(>[data-slot="media"]))_[data-slot="content"]]:basis-[18rem]',
         // Make sure svg's etc. are not shrinkable
         '[&>:not([data-slot="content"],[data-slot="media"])]:shrink-0',
-        // TODO
-        '[&:has(>svg:last-child)]:justify-between', // Fixes icon alignment when icon is right aligned
       ],
     },
   },
