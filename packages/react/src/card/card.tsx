@@ -28,9 +28,9 @@ const cardVariants = cva({
     // **** Media ****
     '[&_[data-slot="media"]]:overflow-hidden', // Prevent content from overflowing the rounded corners
     '[&_[data-slot="media"]]:relative', // Needed for positioning the <Badge> component (if present)
-    '[&_[data-slot="media"]]:rounded-t-2xl', // Top corners are always rounded
     // Position media at the edges of the card (because of these negative margins the media-element must be a wrapper around the actual image or other media content)
     '[&_[data-slot="media"]]:mx-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))] [&_[data-slot="media"]]:mt-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
+
     // Sets the aspect ratio of the media content (width: 100% is necessary to make aspect ratio work in FF)
     '[&_[data-slot="media"]>*:not([data-slot="badge"])]:aspect-[3/2] [&_[data-slot="media"]>*:not([data-slot="badge"])]:w-full [&_[data-slot="media"]_img]:object-cover',
     // Prepare zoom animation for hover effects. The hover effect can also be enabled by classes on the parent component, so it is always prepared here.
@@ -91,26 +91,63 @@ const cardVariants = cva({
     variant: {
       subtle: [
         'border-transparent',
-        // Media styles:
-        '[&_[data-slot="media"]]:rounded-b-2xl',
+        // **** Media styles ****
+        '[&_[data-slot="media"]]:rounded-2xl', // All corners are rounded
       ],
       outlined: 'border border-black',
+    },
+    /**
+     * The layout of the card
+     * @default vertical
+     */
+    layout: {
+      vertical: [
+        // **** Media ****
+        '[&_[data-slot="media"]]:rounded-t-2xl', // Both Top corners are rounded
+      ],
+      horizontal: [
+        // **** With Media ****
+        '[&:has(>[data-slot="media"])]:md:flex-row [&:has(>[data-slot="media"])]:md:gap-x-4',
+        '[&_[data-slot="media"]]:md:basis-1/2',
+        '[&_[data-slot="media"]]:md:mb-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
+        '[&_[data-slot="media"]:first-child]:md:mr-0',
+        '[&_[data-slot="media"]:last-child]:md:ml-0',
+        // **** With Icon ****
+        '[&:has(>svg)]:flex-row [&:has(>svg)]:gap-x-4',
+        '[&:has(>svg)]:flex-wrap [&:has(>svg)_[data-slot="content"]]:grow [&:has(>svg)_[data-slot="content"]]:basis-[18rem]',
+
+        '[&:has(>svg:last-child)]:justify-between', // Fixes icon alignment when icon is right aligned
+        '[&_svg]:shrink-0',
+      ],
     },
   },
   defaultVariants: {
     variant: 'subtle',
+    layout: 'vertical',
   },
+  compoundVariants: [
+    {
+      variant: 'outlined',
+      layout: 'horizontal',
+      className: [
+        '[&_[data-slot="media"]:first-child]:md:rounded-l-2xl', // Both left corners are rounded when media is on the left side
+        '[&_[data-slot="media"]:last-child]:md:rounded-r-2xl', // Both right corners are rounded when media is on the right side
+      ],
+    },
+  ],
 });
 
 const Card = ({
   children,
   className: _className,
   variant,
+  layout,
   ...restProps
 }: CardProps) => {
   const className = cardVariants({
     className: _className,
     variant,
+    layout,
   });
   return (
     <div className={className} {...restProps}>
