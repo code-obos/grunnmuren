@@ -468,3 +468,62 @@ export const ClickableWithBadgeRight = () => (
     </Footer>
   </Card>
 );
+
+export const Horizontal = () => (
+  <Card layout="horizontal" variant="outlined">
+    <Media>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+      />
+    </Media>
+    <Content>
+      <Heading level={3}>Med bilde og CTA</Heading>
+      <p>Dette kortet har bilde og er klikkbart mot en CTA-lenke</p>
+      <CardLink className="group/cta">
+        <Button href="#cta" variant="tertiary">
+          Les mer
+          <ArrowRight className="transition-transform group-hover/cta:motion-safe:translate-x-1" />
+        </Button>
+      </CardLink>
+    </Content>
+  </Card>
+);
+
+export const HorizontalWithIconLeft = () => (
+  <Card layout="horizontal" variant="outlined">
+    <PiggyBank />
+    <Content>
+      <Heading level={3}>Med ikon til venstre</Heading>
+      <p>
+        Dette kortet er liggende, har et ikon til venstre og er klikkbart mot en
+        CTA-lenke
+      </p>
+      <CardLink className="group/cta">
+        <Button href="#cta" variant="tertiary">
+          Les mer
+          <ArrowRight className="transition-transform group-hover/cta:motion-safe:translate-x-1" />
+        </Button>
+      </CardLink>
+    </Content>
+  </Card>
+);
+
+export const HorizontalWithIconRight = () => (
+  <Card layout="horizontal" variant="outlined">
+    <Content>
+      <Heading level={3}>Med ikon til høyre</Heading>
+      <p>
+        Dette kortet er liggende, har et ikon til høyre og er klikkbart mot en
+        CTA-lenke
+      </p>
+      <CardLink className="group/cta">
+        <Button href="#cta" variant="tertiary">
+          Les mer
+          <ArrowRight className="transition-transform group-hover/cta:motion-safe:translate-x-1" />
+        </Button>
+      </CardLink>
+    </Content>
+    <PiggyBank />
+  </Card>
+);
