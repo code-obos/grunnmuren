@@ -39,58 +39,69 @@ export const Code = ({
   const [isCodeExpanded, setIsCodeExpanded] = useState(false);
 
   return (
-    <LiveProvider
-      code={value}
-      scope={scope}
-      theme={themes.vsDark}
-      disabled={!isEditable}
-    >
-      <p>{caption}</p>
-      {withLivePreview && (
-        <LivePreview className="not-prose my-4 flex gap-x-4" />
-      )}
-      <Disclosure
-        isExpanded={isCodeExpanded}
-        onExpandedChange={setIsCodeExpanded}
-        className="grid grid-cols-1"
-      >
-        <DisclosureButton withChevron className="w-fit justify-self-end">
-          {isCodeExpanded ? 'Skjul' : 'Vis'} kode
-        </DisclosureButton>
-        <DisclosurePanel>
-          {/* Use the same black color as the background on the editor (#1e1e1e)  */}
-          <div className="grid grid-cols-[1fr,auto] grid-rows-[auto,1fr] overflow-hidden rounded-lg bg-[#1e1e1e]">
-            <LiveEditor
-              tabMode="focus"
-              className="row-span-2 font-mono"
-              onChange={setValue}
-            />
-            <div className="relative text-mint">
-              <Button
-                onPress={() =>
-                  navigator.clipboard.writeText(value).then(() => {
-                    setHasCopied(true);
-                    setTimeout(() => setHasCopied(false), 2000); // Reset after 2 seconds
-                  })
-                }
-                variant="tertiary"
-              >
-                <GrunnmurenIconsScope.Documents />
-              </Button>
-              <span
-                className={cx(
-                  'absolute top-full right-2 transition-opacity duration-100',
-                  hasCopied ? 'opacity-100' : 'opacity-0',
-                )}
-                aria-hidden={!hasCopied}
-                role="alert"
-              >
-                Kopiert!
-              </span>
+    <>
+      <div className="rounded-lg border">
+        <LiveProvider
+          code={value}
+          scope={scope}
+          theme={themes.vsDark}
+          disabled={!isEditable}
+        >
+          {withLivePreview && (
+            <div className="grid place-items-center p-18">
+              <LivePreview className="not-prose" />
             </div>
-          </div>
-        </DisclosurePanel>
-      </Disclosure>
-    </LiveProvider>
+          )}
+          <Disclosure
+            isExpanded={isCodeExpanded}
+            onExpandedChange={setIsCodeExpanded}
+            className="grid grid-cols-1"
+          >
+            <Button
+              className="justify-self-end"
+              variant="tertiary"
+              slot="trigger"
+            >
+              {isCodeExpanded ? 'Skjul' : 'Vis'} kode
+            </Button>
+            <DisclosurePanel>
+              {/* Use the same black color as the background on the editor (#1e1e1e)  */}
+              <div className="grid grid-cols-[1fr,auto] grid-rows-[auto,1fr] overflow-hidden bg-[#1e1e1e]">
+                <LiveEditor
+                  tabMode="focus"
+                  className="row-span-2 font-mono"
+                  onChange={setValue}
+                />
+                <div className="relative text-mint">
+                  <button
+                    className="size-[44px]"
+                    onClick={() =>
+                      navigator.clipboard.writeText(value).then(() => {
+                        setHasCopied(true);
+                        setTimeout(() => setHasCopied(false), 2000); // Reset after 2 seconds
+                      })
+                    }
+                    type="button"
+                  >
+                    <GrunnmurenIconsScope.Documents />
+                  </button>
+                  <span
+                    className={cx(
+                      'absolute top-full right-2 transition-opacity duration-100',
+                      hasCopied ? 'opacity-100' : 'opacity-0',
+                    )}
+                    aria-hidden={!hasCopied}
+                    role="alert"
+                  >
+                    Kopiert!
+                  </span>
+                </div>
+              </div>
+            </DisclosurePanel>
+          </Disclosure>
+        </LiveProvider>
+      </div>
+      <p>{caption}</p>
+    </>
   );
 };
