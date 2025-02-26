@@ -109,8 +109,12 @@ const cardVariants = cva({
       horizontal: [
         'gap-x-4', // Since this does not affect the layout before the flex direction is set (at breakpoint md for Card with Media), we can set it here
         // **** With Media ****
-        '[&:has(>[data-slot="media"])]:flex-col [&:has(>[data-slot="media"])]:md:flex-row',
-        '[&_[data-slot="media"]]:md:basis-1/2',
+        '[&:has(>[data-slot="media"]:first-child)]:flex-col',
+        '[&:has(>[data-slot="media"]:last-child)]:flex-col-reverse', // Always display the media at the top of the card
+        '[&:has(>[data-slot="media"])]:md:!flex-row', // When need !important to override the specificity (first-/last-child) of the flex-col-reverse and flex-col classes
+
+        '[&:has(>[data-slot="media"])>*]:md:basis-1/2', // Ensures a 50/50 split of the media and content on medium screens
+        // Position media at the edges of the card
         '[&_[data-slot="media"]]:md:mb-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
         '[&_[data-slot="media"]:first-child]:md:mr-0',
         '[&_[data-slot="media"]:last-child]:md:ml-0',
@@ -133,8 +137,9 @@ const cardVariants = cva({
       variant: 'outlined',
       layout: 'horizontal',
       className: [
-        '[&_[data-slot="media"]:first-child]:md:rounded-l-2xl', // Both left corners are rounded when media is on the left side
-        '[&_[data-slot="media"]:last-child]:md:rounded-r-2xl', // Both right corners are rounded when media is on the right side
+        '[&_[data-slot="media"]]:rounded-t-2xl', // On small screens, the top corners are rounded
+        '[&_[data-slot="media"]:first-child]:md:rounded-tr-none [&_[data-slot="media"]:first-child]:md:rounded-bl-2xl', // Both left corners are rounded when media is on the left side
+        '[&_[data-slot="media"]:last-child]:md:rounded-tl-none [&_[data-slot="media"]:last-child]:md:rounded-br-2xl', // Both right corners are rounded when media is on the right side
       ],
     },
   ],
