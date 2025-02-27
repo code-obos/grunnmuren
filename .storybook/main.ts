@@ -1,7 +1,8 @@
 import optimizeLocales from '@react-aria/optimize-locales-plugin';
+import type { StorybookConfig } from '@storybook/react-vite';
 import { mergeConfig } from 'vite';
 
-export default {
+const config: StorybookConfig = {
   stories: ['../packages/react/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
   addons: [
     '@storybook/addon-docs',
@@ -20,8 +21,6 @@ export default {
   async viteFinal(config) {
     // Merge custom configuration into the default config
     return mergeConfig(config, {
-      // because we're serving the storybook as part of the docs app, it needs a basepath
-      base: '/storybook',
       plugins: [
         {
           ...optimizeLocales.vite({
@@ -37,3 +36,5 @@ export default {
     autodocs: true,
   },
 };
+
+export default config;
