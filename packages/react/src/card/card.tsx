@@ -113,6 +113,7 @@ const cardVariants = cva({
         '[&:has(>[data-slot="media"]:last-child)]:flex-col-reverse', // Always display the media at the top of the card
         '[&:has(>[data-slot="media"])]:md:!flex-row', // When need !important to override the specificity (first-/last-child) of the flex-col-reverse and flex-col classes
 
+        '[&_[data-slot="media"]]:md:h-fit', // Fail-safe for rounded corners on media content until we can use container queries for the breakpoints
         '[&:has(>[data-slot="media"])>*]:md:basis-1/2', // Ensures a 50/50 split of the media and content on medium screens
         // Position media at the edges of the card
         '[&_[data-slot="media"]]:md:mb-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
