@@ -66,7 +66,6 @@ const CodeSnippet = ({ value, setValue }: CodeSnippetProps) => {
 export const Code = ({
   value,
   setValue,
-  caption,
   withLivePreview,
   isEditable,
 }: CodeProps) => {
@@ -111,7 +110,6 @@ export const Code = ({
           )}
         </LiveProvider>
       </div>
-      <p>{caption}</p>
     </>
   );
 };
