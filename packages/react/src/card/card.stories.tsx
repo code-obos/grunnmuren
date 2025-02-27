@@ -3,6 +3,7 @@ import {
   Bed,
   Documents,
   House,
+  InfoCircle,
   PiggyBank,
 } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta } from '@storybook/react';
@@ -365,5 +366,191 @@ export const ClickableWithOtherClickableElementsAndBackgroundColor = () => (
         <Documents />
       </Button>
     </Footer>
+  </Card>
+);
+
+export const ClickableWithBadge = () => (
+  <Card variant="outlined" className="w-72 bg-blue-dark text-mint">
+    <Media>
+      <Badge color="blue-dark">
+        <InfoCircle />
+        Meldefrist
+      </Badge>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+      />
+    </Media>
+    <Content>
+      <div className="grid gap-1">
+        <Heading level={3}>
+          <CardLink href="#card">Rødbergvn 88C</CardLink>
+        </Heading>
+        <small className="description">Bjerke - Oslo</small>
+      </div>
+      <small className="description -order-1">
+        Forhåndsvarsling - Saksnr. F0347565
+      </small>
+      <p className="font-semibold">100 m² | Prisantydning 9 600 000 kr</p>
+      <p className="flex gap-x-1">
+        <House /> Rekkehus/småhus
+      </p>
+      <p className="flex gap-x-1">
+        <Bed /> 3 soverom
+      </p>
+      <p className="flex gap-x-1">
+        <PiggyBank /> Totalpris 9 989 838
+      </p>
+      <Badge size="small" color="mint" className="text-black">
+        Visning 13. oktober
+      </Badge>
+    </Content>
+    <Footer className="relative grid gap-y-2">
+      <hr className="border-t border-t-current" />
+      <Button
+        href="#other-link"
+        variant="tertiary"
+        className="focus-visible:outline-current"
+      >
+        Se prospekt
+        <Documents />
+      </Button>
+    </Footer>
+  </Card>
+);
+
+export const ClickableWithBadgeRight = () => (
+  <Card variant="outlined" className="w-72 bg-blue-dark text-mint">
+    <Media>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+      />
+      <Badge color="blue-dark">
+        <InfoCircle />
+        Meldefrist
+      </Badge>
+    </Media>
+    <Content>
+      <div className="grid gap-1">
+        <Heading level={3}>
+          <CardLink href="#card">Rødbergvn 88C</CardLink>
+        </Heading>
+        <small className="description">Bjerke - Oslo</small>
+      </div>
+      <small className="description -order-1">
+        Forhåndsvarsling - Saksnr. F0347565
+      </small>
+      <p className="font-semibold">100 m² | Prisantydning 9 600 000 kr</p>
+      <p className="flex gap-x-1">
+        <House /> Rekkehus/småhus
+      </p>
+      <p className="flex gap-x-1">
+        <Bed /> 3 soverom
+      </p>
+      <p className="flex gap-x-1">
+        <PiggyBank /> Totalpris 9 989 838
+      </p>
+      <Badge size="small" color="mint" className="text-black">
+        Visning 13. oktober
+      </Badge>
+    </Content>
+    <Footer className="relative grid gap-y-2">
+      <hr className="border-t border-t-current" />
+      <Button
+        href="#other-link"
+        variant="tertiary"
+        className="focus-visible:outline-current"
+      >
+        Se prospekt
+        <Documents />
+      </Button>
+    </Footer>
+  </Card>
+);
+
+export const HorizontalLeft = () => (
+  <Card layout="horizontal">
+    <Media>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+      />
+    </Media>
+    <Content>
+      <Heading level={3}>Med bilde til venstre</Heading>
+      <p>
+        Dette kortet har bilde til venstre på større skjermer og er klikkbart
+        mot en CTA-lenke
+      </p>
+      <CardLink className="group/cta">
+        <Button href="#cta" variant="tertiary">
+          Les mer
+          <ArrowRight className="transition-transform group-hover/cta:motion-safe:translate-x-1" />
+        </Button>
+      </CardLink>
+    </Content>
+  </Card>
+);
+
+export const HorizontalRight = () => (
+  <Card layout="horizontal">
+    <Content>
+      <Heading level={3}>Med bilde til høyre</Heading>
+      <p>
+        Dette kortet har bilde til høyre på større skjermer og er klikkbart mot
+        en CTA-lenke
+      </p>
+      <CardLink className="group/cta">
+        <Button href="#cta" variant="tertiary">
+          Les mer
+          <ArrowRight className="transition-transform group-hover/cta:motion-safe:translate-x-1" />
+        </Button>
+      </CardLink>
+    </Content>
+    <Media>
+      <img
+        alt=""
+        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+      />
+    </Media>
+  </Card>
+);
+
+export const HorizontalWithIconLeft = () => (
+  <Card layout="horizontal" variant="outlined">
+    <PiggyBank />
+    <Content>
+      <Heading level={3}>Med ikon til venstre</Heading>
+      <p>
+        Dette kortet er liggende, har et ikon til venstre og er klikkbart mot en
+        CTA-lenke
+      </p>
+      <CardLink className="group/cta">
+        <Button href="#cta" variant="tertiary">
+          Les mer
+          <ArrowRight className="transition-transform group-hover/cta:motion-safe:translate-x-1" />
+        </Button>
+      </CardLink>
+    </Content>
+  </Card>
+);
+
+export const HorizontalWithIconRight = () => (
+  <Card layout="horizontal" variant="outlined">
+    <Content>
+      <Heading level={3}>Med ikon til høyre</Heading>
+      <p>
+        Dette kortet er liggende, har et ikon til høyre og er klikkbart mot en
+        CTA-lenke
+      </p>
+      <CardLink className="group/cta">
+        <Button href="#cta" variant="tertiary">
+          Les mer
+          <ArrowRight className="transition-transform group-hover/cta:motion-safe:translate-x-1" />
+        </Button>
+      </CardLink>
+    </Content>
+    <PiggyBank />
   </Card>
 );

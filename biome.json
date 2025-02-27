@@ -6,9 +6,10 @@
       ".next/",
       ".output/",
       ".vinxi/",
+      "apps/docs/public/storybook",
       "routetree.gen.ts",
       "packages/icons-react/src",
-      "apps/docs/docgen.ts",
+      "apps/docs/component-props.ts",
       "apps/docs/sanity.types.ts",
       "packages/tailwind/fonts/font-fallback.js"
     ]

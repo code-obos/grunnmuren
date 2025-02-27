@@ -14,7 +14,7 @@ import { defineQuery } from 'groq';
 
 const COMPONENTS_NAVIGATION_QUERY = defineQuery(
   // make sure the slug is always a string so we don't have add fallback value in code just to make TypeScript happy
-  `*[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, ''), highlightAsNew} | order(name asc)`,
+  `*[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc)`,
 );
 
 // This is the shared layout for all the Grunnmuren docs pages that are "public", ie not the Sanity studio

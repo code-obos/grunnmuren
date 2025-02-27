@@ -21,16 +21,16 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'documentationIsReady',
-      title: 'Documentation is ready',
-      type: 'boolean',
-      description: 'Check this when the documentation is ready',
-    }),
-    defineField({
-      name: 'highlightAsNew',
-      type: 'boolean',
-      title: 'Highlight as a new component',
-      description: 'Check this if the component is new',
+      name: 'componentState',
+      title: 'Component state',
+      type: 'string',
+      description: 'The current state of the component',
+      options: {
+        list: ['beta', 'new', 'stable', 'deprecated'],
+        layout: 'radio',
+      },
+      initialValue: 'stable',
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'content',

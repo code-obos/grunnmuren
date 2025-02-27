@@ -5,12 +5,23 @@ const options = {
   savePropValueAsString: true,
 };
 
-const docs = withDefaultConfig().parse(
-  './node_modules/@obosbbl/grunnmuren-react/src/index.ts',
-  options,
-);
+const components = withDefaultConfig({
+  ...options,
+}).parse(['./node_modules/@obosbbl/grunnmuren-react/src/index.ts']);
 
-const outputPath = './docgen.ts';
+// see re-exports-props.ts
+const propFixes = withDefaultConfig({
+  ...options,
+}).parse(['./re-exports-props.ts']);
+
+for (const componentToFix of Object.values(propFixes)) {
+  const toUpdate = components.find(
+    (c) => c.displayName === componentToFix.displayName,
+  );
+  toUpdate.props = componentToFix.props;
+}
+
+const outputPath = './component-props.ts';
 console.log(`Writing props to "${outputPath}"...\n`);
 
 let withoutError = true;
@@ -18,7 +29,7 @@ let withoutError = true;
 try {
   fs.writeFileSync(
     outputPath,
-    Object.values(docs)
+    Object.values(components)
       .map((prop) => {
         const prettifiedName = prop.displayName.replace('_', '');
         const output = `export const ${prettifiedName} = ${JSON.stringify({ ...prop, displayName: prettifiedName }, null, 2)}`;

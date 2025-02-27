@@ -1,5 +1,22 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.51
+
+### Minor Changes
+
+- 7e9cd22: Change types for backlink in order to display props correctly in the grunnmuren docs
+
+### Patch Changes
+
+- 880e932: Fix issue with image border-radius for `<Card layout="horizontal">` that can occur in some cases where the `<Card>` has very little horizontal space.
+
+## 2.0.0-canary.50
+
+### Minor Changes
+
+- 18b0ed8: Render `<Badge>` as an overlay in `<Media>` in the `<Card>` component. This way `<Badge>` is placed on top of the other content in `<Media>` (image, illustration or video). It can be either left or right aligned, depending on it's child index of `<Media>`.
+- 7ca186c: New `layout` prop in `<Card>` to support for responsive horizontal layout.
+
 ## 2.0.0-canary.49
 
 ### Minor Changes
