@@ -7,19 +7,17 @@ const options = {
 
 const components = withDefaultConfig({
   ...options,
-}).parse([
-  './node_modules/@obosbbl/grunnmuren-react/src/index.ts',
-]);
+}).parse(['./node_modules/@obosbbl/grunnmuren-react/src/index.ts']);
 
 // see re-exports-props.ts
 const propFixes = withDefaultConfig({
   ...options,
-}).parse([
-  './re-exports-props.ts',
-]);
+}).parse(['./re-exports-props.ts']);
 
 for (const componentToFix of Object.values(propFixes)) {
-  const toUpdate = components.find(c => c.displayName === componentToFix.displayName);
+  const toUpdate = components.find(
+    (c) => c.displayName === componentToFix.displayName,
+  );
   toUpdate.props = componentToFix.props;
 }
 
