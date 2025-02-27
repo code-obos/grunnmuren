@@ -6,7 +6,7 @@ import { SanityContent } from '@/ui/sanity-content';
 import { Child, CircusTent } from '@obosbbl/grunnmuren-icons-react';
 import { Alertbox, Content } from '@obosbbl/grunnmuren-react';
 import { createFileRoute, notFound } from '@tanstack/react-router';
-import type * as props from 'docgen';
+import type * as props from 'component-props';
 import { defineQuery } from 'groq';
 
 const COMPONENT_QUERY = defineQuery(

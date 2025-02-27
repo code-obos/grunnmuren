@@ -1,4 +1,4 @@
-import * as props from 'docgen';
+import * as props from 'component-props';
 import { AnchorHeading } from './anchor-heading';
 import { Table, TableBody, TableCell, TableHead, TableRow } from './table';
 

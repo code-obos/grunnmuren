@@ -2,4 +2,4 @@
 .vinxi
 public/resources/icons/
 public/storybook
-docgen.ts
+component-props.ts
