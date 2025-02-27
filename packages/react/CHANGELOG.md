@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.50
+
+### Minor Changes
+
+- 18b0ed8: Render `<Badge>` as an overlay in `<Media>` in the `<Card>` component. This way `<Badge>` is placed on top of the other content in `<Media>` (image, illustration or video). It can be either left or right aligned, depending on it's child index of `<Media>`.
+- 7ca186c: New `layout` prop in `<Card>` to support for responsive horizontal layout.
+
 ## 2.0.0-canary.49
 
 ### Minor Changes
