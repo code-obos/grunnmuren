@@ -88,9 +88,7 @@ export const Code = ({
         >
           {withLivePreview ? (
             <>
-              <div className="grid place-items-center p-18">
-                <LivePreview className="not-prose" />
-              </div>
+              <LivePreview className="not-prose grid place-items-center gap-y-2 p-18" />
               <Disclosure
                 isExpanded={isCodeExpanded}
                 onExpandedChange={setIsCodeExpanded}
