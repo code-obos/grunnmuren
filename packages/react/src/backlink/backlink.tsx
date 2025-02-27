@@ -20,8 +20,7 @@ type ButtonOrLinkProps = {
   withUnderline?: boolean;
 };
 
-type BacklinkProps = ( ButtonProps | RACLinkProps) & ButtonOrLinkProps;
-  
+type BacklinkProps = (ButtonProps | RACLinkProps) & ButtonOrLinkProps;
 
 function isLinkProps(
   props: BacklinkProps,
