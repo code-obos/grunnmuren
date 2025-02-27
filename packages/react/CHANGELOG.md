@@ -1,5 +1,15 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.51
+
+### Minor Changes
+
+- 7e9cd22: Change types for backlink in order to display props correctly in the grunnmuren docs
+
+### Patch Changes
+
+- 880e932: Fix issue with image border-radius for `<Card layout="horizontal">` that can occur in some cases where the `<Card>` has very little horizontal space.
+
 ## 2.0.0-canary.50
 
 ### Minor Changes
