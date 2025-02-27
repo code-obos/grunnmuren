@@ -20,15 +20,11 @@ type ButtonOrLinkProps = {
   withUnderline?: boolean;
 };
 
-type BacklinkProps = (
-  | ButtonProps
-  | React.ComponentPropsWithoutRef<typeof Link>
-) &
-  ButtonOrLinkProps;
+type BacklinkProps = (ButtonProps | RACLinkProps) & ButtonOrLinkProps;
 
 function isLinkProps(
   props: BacklinkProps,
-): props is ButtonOrLinkProps & React.ComponentPropsWithoutRef<typeof Link> {
+): props is ButtonOrLinkProps & RACLinkProps {
   return !!props.href;
 }
 
