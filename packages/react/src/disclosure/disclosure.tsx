@@ -17,6 +17,7 @@ import {
   ButtonContext,
   type ButtonProps,
   type ContextValue,
+  DEFAULT_SLOT,
   DisclosureContext,
   DisclosureGroup,
   type DisclosureGroupProps,
@@ -83,6 +84,7 @@ const DisclosureButton = ({
         withChevron,
         isIconOnly,
       })}
+      slot="trigger"
     >
       {children}
       {withChevron && (
@@ -146,7 +148,15 @@ const Disclosure = ({ ref: _ref, children, ..._props }: DisclosureProps) => {
     <Provider
       values={[
         [DisclosureContext, state],
-        [ButtonContext, buttonProps],
+        [
+          ButtonContext,
+          {
+            slots: {
+              [DEFAULT_SLOT]: {},
+              trigger: buttonProps,
+            },
+          },
+        ],
         [DisclosurePanelContext, { ...propsWithoutRole, ref: panelRef }],
       ]}
     >
