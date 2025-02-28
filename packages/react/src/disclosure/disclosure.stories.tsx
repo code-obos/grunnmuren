@@ -23,7 +23,7 @@ const meta: Meta<typeof Disclosure> = {
           <DisclosureButton className="description" withChevron>
             Les mer
           </DisclosureButton>
-          <DisclosurePanel>
+          <DisclosurePanel className="pt-2">
             <p>Her finner du alle detaljer du måtte trenge.</p>
           </DisclosurePanel>
         </Disclosure>
@@ -40,7 +40,7 @@ export const DisclosureStory: Story = {
   args: {},
 };
 
-export const Dense: Story = {
+export const Hamburger: Story = {
   render: (props) => {
     return (
       <div className="p-4">
@@ -52,7 +52,7 @@ export const Dense: Story = {
           >
             <Menu />
           </DisclosureButton>
-          <DisclosurePanel>
+          <DisclosurePanel className="pt-2">
             <p>Her finner du alle detaljer du måtte trenge.</p>
           </DisclosurePanel>
         </Disclosure>
@@ -132,7 +132,7 @@ export const Grouped: Story = {
             </ul>
           )}
           {/* biome-ignore lint/a11y/useValidAriaRole: this is a custom component where role is a prop that defaults to 'group' */}
-          <DisclosurePanel className="px-4" role="none">
+          <DisclosurePanel className="p-12" role="none">
             <CheckboxGroup
               value={selectedOptions}
               onChange={setSelectedItems}
@@ -164,7 +164,7 @@ export const Grouped: Story = {
             </ul>
           )}
           {/* biome-ignore lint/a11y/useValidAriaRole: this is a custom component where role is a prop that defaults to 'group' */}
-          <DisclosurePanel className="px-4" role="none">
+          <DisclosurePanel className="p-4" role="none">
             <CheckboxGroup
               value={selectedOptions}
               onChange={setSelectedItems}
