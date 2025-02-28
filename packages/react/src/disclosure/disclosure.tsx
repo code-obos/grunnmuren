@@ -201,22 +201,19 @@ const DisclosurePanel = ({ ref: _ref, ..._props }: DisclosurePanelProps) => {
   return (
     <div
       className={cx(
-        'grid transition-all duration-300 after:relative after:block after:h-0 after:transition-all after:duration-300 motion-reduce:transition-none',
-        disclosureContext?.isExpanded
-          ? 'grid-rows-[1fr] after:h-3.5'
-          : 'grid-rows-[0fr]',
+        'grid transition-all duration-300 motion-reduce:transition-none',
+        disclosureContext?.isExpanded ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
       )}
     >
-      <div
-        {...restProps}
-        ref={ref}
-        className={cx(
-          className,
-          'relative overflow-hidden [content-visibility:visible] before:relative before:block before:h-1.5 after:relative after:block after:h-1.5',
-        )}
-        role={role}
-        aria-labelledby={isWithoutRole ? undefined : ariaLabelledby}
-      />
+      <div className="overflow-hidden">
+        <div
+          {...restProps}
+          className={cx(className, '[content-visibility:visible]')}
+          ref={ref}
+          role={role}
+          aria-labelledby={isWithoutRole ? undefined : ariaLabelledby}
+        />
+      </div>
     </div>
   );
 };
