@@ -152,7 +152,7 @@ const Disclosure = ({ ref: _ref, children, ..._props }: DisclosureProps) => {
           ButtonContext,
           {
             slots: {
-              [DEFAULT_SLOT]: {},
+              [DEFAULT_SLOT]: {}, // this is required in RAC (for non-trigger buttons)
               trigger: buttonProps,
             },
           },
