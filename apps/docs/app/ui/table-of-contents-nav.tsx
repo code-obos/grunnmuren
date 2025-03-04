@@ -16,7 +16,7 @@ const TableOfContentsNav = ({
   // @ts-expect-error: the role prop is passed to the Card component, even though it is not valid TS
   // biome-ignore lint/a11y/useSemanticElements: this is a navigation component styled as a card
   <Card role="navigation" className={cx(className, 'h-fit min-h-96 bg-mint')}>
-    <Heading level={2}>Hopp til:</Heading>
+    <Heading level={2}>Innhold</Heading>
     <ul className="grid gap-y-[inherit]">
       {sections?.map(({ href, text }) => (
         <li key={href}>
