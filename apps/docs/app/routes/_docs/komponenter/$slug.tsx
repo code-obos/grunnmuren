@@ -64,20 +64,7 @@ function Page() {
       <div className="lg:relative lg:flex lg:gap-[var(--gm-container-gutter-width)] lg:px-[var(--gm-container-gutter-width)] lg:pt-9">
         <TableOfContentsNav
           className="w-56 lg:sticky lg:top-9 lg:order-1 lg:shrink-0"
-          sections={(
-            data.content?.filter(
-              (c) =>
-                c._type === 'block' &&
-                // Only include headings (h1, h2, h3 etc)
-                c.style?.startsWith('h'),
-            ) as {
-              _key: string;
-              children: { text: string }[];
-            }[]
-          ).map(({ _key, children }) => ({
-            href: `#${_key}`,
-            text: children[0].text,
-          }))}
+          content={data.content}
         />
         <div>
           {data.componentState === 'new' && (
