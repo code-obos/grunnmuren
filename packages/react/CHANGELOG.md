@@ -1,5 +1,15 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.52
+
+### Patch Changes
+
+- 1c8171b: Fixes an issue where all `<Button>` components inside a `<Disclosure>` would trigger the Disclosure to close/open.
+- 60ff9b3: Fixes the way spacing is managed in `<DisclosurePanel>`. Pseudo-elements were used to avoid an extra `<div>` wrapper around the content. But this caused some inherent spacing around the `Disclosure` which might not be desired in some cases.
+- 7ace896: Decreases breakpoint for `Card` with horizontal layout, without `<Media>`
+- 709dddc: Fix focus ring color on `<Disclosure>` so that it works on any background
+- 7b8e090: Makes styling custom content in the `<Media>` component easier. This fixes width issues on content other than `<img/>`, `<video/>`.
+
 ## 2.0.0-canary.51
 
 ### Minor Changes
