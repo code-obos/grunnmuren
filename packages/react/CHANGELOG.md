@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.53
+
+### Patch Changes
+
+- f75bf78: More specific CSS selectors to target `<img>` inside `<Media>` in `<Card>`. This fixes issues with unwnated styles being applied to other nested `<img>` elements.
+
 ## 2.0.0-canary.52
 
 ### Patch Changes
