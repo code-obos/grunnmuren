@@ -14,6 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as DocsImport } from './routes/_docs'
 import { Route as DocsIndexImport } from './routes/_docs/index'
 import { Route as StudioSplatImport } from './routes/studio/$'
+import { Route as DocsSlugImport } from './routes/_docs/$slug'
 import { Route as DocsProfilIndexImport } from './routes/_docs/profil/index'
 import { Route as DocsKomponenterIndexImport } from './routes/_docs/komponenter/index'
 import { Route as DocsProfilIkonerImport } from './routes/_docs/profil/ikoner'
@@ -37,6 +38,12 @@ const StudioSplatRoute = StudioSplatImport.update({
   id: '/studio/$',
   path: '/studio/$',
   getParentRoute: () => rootRoute,
+} as any)
+
+const DocsSlugRoute = DocsSlugImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => DocsRoute,
 } as any)
 
 const DocsProfilIndexRoute = DocsProfilIndexImport.update({
@@ -79,6 +86,13 @@ declare module '@tanstack/react-router' {
       fullPath: ''
       preLoaderRoute: typeof DocsImport
       parentRoute: typeof rootRoute
+    }
+    '/_docs/$slug': {
+      id: '/_docs/$slug'
+      path: '/$slug'
+      fullPath: '/$slug'
+      preLoaderRoute: typeof DocsSlugImport
+      parentRoute: typeof DocsImport
     }
     '/studio/$': {
       id: '/studio/$'
@@ -135,6 +149,7 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface DocsRouteChildren {
+  DocsSlugRoute: typeof DocsSlugRoute
   DocsIndexRoute: typeof DocsIndexRoute
   DocsKomponenterSlugRoute: typeof DocsKomponenterSlugRoute
   DocsProfilFargerRoute: typeof DocsProfilFargerRoute
@@ -144,6 +159,7 @@ interface DocsRouteChildren {
 }
 
 const DocsRouteChildren: DocsRouteChildren = {
+  DocsSlugRoute: DocsSlugRoute,
   DocsIndexRoute: DocsIndexRoute,
   DocsKomponenterSlugRoute: DocsKomponenterSlugRoute,
   DocsProfilFargerRoute: DocsProfilFargerRoute,
@@ -156,6 +172,7 @@ const DocsRouteWithChildren = DocsRoute._addFileChildren(DocsRouteChildren)
 
 export interface FileRoutesByFullPath {
   '': typeof DocsRouteWithChildren
+  '/$slug': typeof DocsSlugRoute
   '/studio/$': typeof StudioSplatRoute
   '/': typeof DocsIndexRoute
   '/komponenter/$slug': typeof DocsKomponenterSlugRoute
@@ -166,6 +183,7 @@ export interface FileRoutesByFullPath {
 }
 
 export interface FileRoutesByTo {
+  '/$slug': typeof DocsSlugRoute
   '/studio/$': typeof StudioSplatRoute
   '/': typeof DocsIndexRoute
   '/komponenter/$slug': typeof DocsKomponenterSlugRoute
@@ -178,6 +196,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_docs': typeof DocsRouteWithChildren
+  '/_docs/$slug': typeof DocsSlugRoute
   '/studio/$': typeof StudioSplatRoute
   '/_docs/': typeof DocsIndexRoute
   '/_docs/komponenter/$slug': typeof DocsKomponenterSlugRoute
@@ -191,6 +210,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | ''
+    | '/$slug'
     | '/studio/$'
     | '/'
     | '/komponenter/$slug'
@@ -200,6 +220,7 @@ export interface FileRouteTypes {
     | '/profil'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/$slug'
     | '/studio/$'
     | '/'
     | '/komponenter/$slug'
@@ -210,6 +231,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/_docs'
+    | '/_docs/$slug'
     | '/studio/$'
     | '/_docs/'
     | '/_docs/komponenter/$slug'
@@ -247,6 +269,7 @@ export const routeTree = rootRoute
     "/_docs": {
       "filePath": "_docs.tsx",
       "children": [
+        "/_docs/$slug",
         "/_docs/",
         "/_docs/komponenter/$slug",
         "/_docs/profil/farger",
@@ -254,6 +277,10 @@ export const routeTree = rootRoute
         "/_docs/komponenter/",
         "/_docs/profil/"
       ]
+    },
+    "/_docs/$slug": {
+      "filePath": "_docs/$slug.tsx",
+      "parent": "/_docs"
     },
     "/studio/$": {
       "filePath": "studio/$.tsx"
