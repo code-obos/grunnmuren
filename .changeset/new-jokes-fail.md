@@ -2,4 +2,4 @@
 "@obosbbl/grunnmuren-react": patch
 ---
 
-Fix correct hover-css on cards with extra images
+Fixed missing hover CSS selector to target <img> inside <Media> in <Card>. This fixes issues where unwanted styles where applied to <img> elements during hover
