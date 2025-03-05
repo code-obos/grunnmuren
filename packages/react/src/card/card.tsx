@@ -32,7 +32,7 @@ const cardVariants = cva({
     '[&_[data-slot="media"]]:mx-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))] [&_[data-slot="media"]]:mt-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
 
     // Sets the aspect ratio of the media content (width: 100% is necessary to make aspect ratio work on images in FF)
-    '[&_[data-slot="media"]>*:not([data-slot="badge"])]:aspect-[3/2] [&_[data-slot="media"]_img]:w-full [&_[data-slot="media"]_img]:object-cover',
+    '[&_[data-slot="media"]>*:not([data-slot="badge"])]:aspect-[3/2] [&_[data-slot="media"]>img]:w-full [&_[data-slot="media"]>img]:object-cover',
     // Prepare zoom animation for hover effects. The hover effect can also be enabled by classes on the parent component, so it is always prepared here.
     '[&_[data-slot="media"]>*]:duration-300 [&_[data-slot="media"]>*]:ease-in-out [&_[data-slot="media"]>*]:motion-safe:transition-transform',
 
