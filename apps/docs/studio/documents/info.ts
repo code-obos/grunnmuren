@@ -1,5 +1,5 @@
 import { defineType } from 'sanity';
-import { name, slug, resourceLinks, content } from 'studio/fields';
+import { content, name, resourceLinks, slug } from 'studio/fields';
 
 export default defineType({
   name: 'info',
