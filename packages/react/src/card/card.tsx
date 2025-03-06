@@ -4,6 +4,7 @@ import { Link, type LinkProps as RACLinkProps } from 'react-aria-components';
 type CardProps = VariantProps<typeof cardVariants> & {
   children?: React.ReactNode;
   className?: string;
+  id?: string;
 };
 
 const cardVariants = cva({
