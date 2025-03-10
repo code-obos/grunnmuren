@@ -26,6 +26,7 @@ const cardVariants = cva({
     '[&_[data-slot="content"]]:flex [&_[data-slot="content"]]:flex-col [&_[data-slot="content"]]:gap-y-4',
 
     // **** Media ****
+    '[&_[data-slot="media"]_*]:pointer-events-none', // Passes clicks through the media content to card link (if present)
     '[&_[data-slot="media"]]:overflow-hidden', // Prevent content from overflowing the rounded corners
     '[&_[data-slot="media"]]:relative', // Needed for positioning the <Badge> component (if present)
     // Position media at the edges of the card (because of these negative margins the media-element must be a wrapper around the actual image or other media content)
