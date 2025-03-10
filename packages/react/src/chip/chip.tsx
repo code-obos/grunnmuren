@@ -1,19 +1,19 @@
-import { Close } from "@obosbbl/grunnmuren-icons-react";
-import { type VariantProps, cva } from "cva";
-import { type Ref, forwardRef, useCallback } from "react";
+import { Close } from '@obosbbl/grunnmuren-icons-react';
+import { type VariantProps, cva } from 'cva';
+import { type Ref, forwardRef, useCallback } from 'react';
 import {
   Button,
+  type TagGroupProps as RACTagGroupProps,
+  type TagProps as RACTagProps,
   Tag,
   TagGroup,
   TagList,
-  type TagGroupProps as RACTagGroupProps,
-  type TagProps as RACTagProps,
-} from "react-aria-components";
+} from 'react-aria-components';
 
 const chipVariants = cva({
   base: [
-    "inline-flex cursor-default items-center gap-2 rounded-lg font-medium text-sm transition-colors duration-200",
-    "focus-visible:outline-focus-offset [&:not([data-focus-visible])]:outline-none",
+    'inline-flex cursor-default items-center gap-2 rounded-lg font-medium text-sm transition-colors duration-200',
+    'focus-visible:outline-focus-offset [&:not([data-focus-visible])]:outline-none',
   ],
   variants: {
     /**
@@ -21,94 +21,94 @@ const chipVariants = cva({
      * @default primary
      */
     variant: {
-      primary: "",
-      secondary: "shadow-[inset_0_0_0_2px]",
+      primary: '',
+      secondary: 'shadow-[inset_0_0_0_2px]',
     },
     /**
      * The color variant of the chip
      * @default green
      */
     color: {
-      green: "data-[focus-visible]:outline-focus",
+      green: 'data-[focus-visible]:outline-focus',
       white:
-        "data-[focus-visible]:outline-focus data-[focus-visible]:outline-white",
+        'data-[focus-visible]:outline-focus data-[focus-visible]:outline-white',
     },
     /**
      * Whether the chip is selected
      * @default false
      */
     isSelected: {
-      true: "",
-      false: "",
+      true: '',
+      false: '',
     },
     /**
      * Whether the chip is disabled
      * @default false
      */
     isDisabled: {
-      true: "cursor-not-allowed opacity-50",
-      false: "",
+      true: 'cursor-not-allowed opacity-50',
+      false: '',
     },
     /**
      * Whether the chip is removable
      * @default false
      */
     isRemovable: {
-      true: "cursor-pointer",
-      false: "",
+      true: 'cursor-pointer',
+      false: '',
     },
   },
   compoundVariants: [
     {
-      variant: "primary",
-      color: "green",
-      className: "bg-green text-white hover:shadow-[inset_0_0_0_2px_#00524c]", //green-dark
+      variant: 'primary',
+      color: 'green',
+      className: 'bg-green text-white hover:shadow-[inset_0_0_0_2px_#00524c]', //green-dark
     },
     {
-      variant: "primary",
-      color: "white",
-      className: "bg-white text-black hover:shadow-[inset_0_0_0_2px_#bedfec]", //sky
+      variant: 'primary',
+      color: 'white',
+      className: 'bg-white text-black hover:shadow-[inset_0_0_0_2px_#bedfec]', //sky
     },
     {
-      variant: "secondary",
-      color: "green",
+      variant: 'secondary',
+      color: 'green',
       className:
-        "bg-white text-black shadow-green hover:shadow-green-dark active:shadow-green-dark",
+        'bg-white text-black shadow-green hover:shadow-green-dark active:shadow-green-dark',
     },
     {
-      variant: "secondary",
-      color: "white",
+      variant: 'secondary',
+      color: 'white',
       className:
-        "bg-transparent text-white shadow-white hover:shadow-sky active:shadow-sky",
+        'bg-transparent text-white shadow-white hover:shadow-sky active:shadow-sky',
     },
     {
-      color: "green",
+      color: 'green',
       isSelected: true,
-      variant: "primary",
-      className: "bg-green-dark",
+      variant: 'primary',
+      className: 'bg-green-dark',
     },
     {
-      color: "white",
+      color: 'white',
       isSelected: true,
-      variant: "primary",
-      className: "bg-sky",
+      variant: 'primary',
+      className: 'bg-sky',
     },
     {
-      color: "green",
+      color: 'green',
       isSelected: true,
-      variant: "secondary",
-      className: "bg-green text-white",
+      variant: 'secondary',
+      className: 'bg-green text-white',
     },
     {
-      color: "white",
+      color: 'white',
       isSelected: true,
-      variant: "secondary",
-      className: "bg-white text-black",
+      variant: 'secondary',
+      className: 'bg-white text-black',
     },
   ],
   defaultVariants: {
-    color: "green",
-    variant: "primary",
+    color: 'green',
+    variant: 'primary',
     isSelected: false,
     isDisabled: false,
     isRemovable: false,
@@ -117,36 +117,36 @@ const chipVariants = cva({
 
 const removeButtonVariants = cva({
   base: [
-    "ml-1 flex items-center justify-center rounded-full p-0.5",
-    "focus-visible:outline-focus-offset [&:not([data-focus-visible])]:outline-none",
-    "hover:bg-black/10",
+    'ml-1 flex items-center justify-center rounded-full p-0.5',
+    'focus-visible:outline-focus-offset [&:not([data-focus-visible])]:outline-none',
+    'hover:bg-black/10',
   ],
 });
 
-export type ChipGroupProps = Omit<RACTagGroupProps, "className"> & {
+export type ChipGroupProps = Omit<RACTagGroupProps, 'className'> & {
   /**
    * The selection mode of the chip group
    * @default single
    */
-  selectionMode?: "single" | "multiple";
+  selectionMode?: 'single' | 'multiple';
   /**
    * CSS classes to apply to the chip group
    */
   className?: string;
 };
 
-export type ChipProps = Omit<RACTagProps, "className"> & {
+export type ChipProps = Omit<RACTagProps, 'className'> & {
   children: React.ReactNode;
   /**
    * The color variant of the chip
    * @default green
    */
-  color?: VariantProps<typeof chipVariants>["color"];
+  color?: VariantProps<typeof chipVariants>['color'];
   /**
    * The variant of the chip
    * @default primary
    */
-  variant?: VariantProps<typeof chipVariants>["variant"];
+  variant?: VariantProps<typeof chipVariants>['variant'];
   /**
    * The function to call when the chip is removed
    */
@@ -166,7 +166,7 @@ export type ChipProps = Omit<RACTagProps, "className"> & {
  * A group component for Chip components that enables selection and organization of options.
  */
 function ChipGroup(props: ChipGroupProps, ref: Ref<HTMLDivElement>) {
-  const { selectionMode = "single", className, children, ...restProps } = props;
+  const { selectionMode = 'single', className, children, ...restProps } = props;
 
   return (
     <TagGroup
@@ -185,8 +185,8 @@ function ChipGroup(props: ChipGroupProps, ref: Ref<HTMLDivElement>) {
  */
 function Chip(props: ChipProps, ref: Ref<HTMLDivElement>) {
   const {
-    color = "green",
-    variant = "primary",
+    color = 'green',
+    variant = 'primary',
     onRemove,
     className,
     hideRemoveButton = false,

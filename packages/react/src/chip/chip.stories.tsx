@@ -1,15 +1,15 @@
-import { House } from "@obosbbl/grunnmuren-icons-react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
-import type { Selection } from "react-aria-components";
+import { House } from '@obosbbl/grunnmuren-icons-react';
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+import type { Selection } from 'react-aria-components';
 
-import { Chip, ChipGroup } from "./chip";
+import { Chip, ChipGroup } from './chip';
 
 const meta: Meta<typeof ChipGroup> = {
-  title: "Chip",
+  title: 'Chip',
   component: ChipGroup,
   parameters: {
-    layout: "fullscreen",
+    layout: 'fullscreen',
   },
 };
 
@@ -19,7 +19,7 @@ type Story = StoryObj<typeof ChipGroup>;
 
 export const Default: Story = {
   args: {
-    selectionMode: "single",
+    selectionMode: 'single',
   },
   render: (props) => (
     <div className="p-6">
@@ -33,7 +33,7 @@ export const Default: Story = {
 };
 
 export const WithRemove = () => {
-  const [chips, setChips] = useState(["Chip 1", "Chip 2", "Chip 3"]);
+  const [chips, setChips] = useState(['Chip 1', 'Chip 2', 'Chip 3']);
 
   const handleRemove = (key: React.Key) => {
     setChips(chips.filter((_, index) => `chip-${index}` !== key));
@@ -135,7 +135,7 @@ export const SelectionModes = () => {
     <div className="space-y-6 p-6">
       <div>
         <h2 className="mb-2 font-medium">Single Selection (default)</h2>
-        <ChipGroup selectionMode="single" defaultSelectedKeys={["chip1"]}>
+        <ChipGroup selectionMode="single" defaultSelectedKeys={['chip1']}>
           <Chip id="chip1" variant="primary">
             Chip 1
           </Chip>
@@ -152,7 +152,7 @@ export const SelectionModes = () => {
         <h2 className="mb-2 font-medium">Multiple Selection</h2>
         <ChipGroup
           selectionMode="multiple"
-          defaultSelectedKeys={["chip1", "chip3"]}
+          defaultSelectedKeys={['chip1', 'chip3']}
         >
           <Chip id="chip1" variant="primary">
             Chip 1
@@ -206,7 +206,7 @@ export const DisabledChips = () => {
 };
 
 export const RemovableChips = () => {
-  const [chips, setChips] = useState(["Click on", "The icon", "To remove"]);
+  const [chips, setChips] = useState(['Click on', 'The icon', 'To remove']);
 
   const handleRemove = (key: React.Key) => {
     setChips(chips.filter((_, index) => `chip-${index}` !== key));
@@ -236,7 +236,7 @@ export const RemovableChips = () => {
 
 export const ControlledSelection = () => {
   const [selectedKeys, setSelectedKeys] = useState<Selection>(
-    new Set(["chip1"])
+    new Set(['chip1']),
   );
 
   return (
@@ -257,7 +257,7 @@ export const ControlledSelection = () => {
         </Chip>
       </ChipGroup>
       <div className="mt-4">
-        Selected: {Array.from(selectedKeys).join(", ")}
+        Selected: {Array.from(selectedKeys).join(', ')}
       </div>
     </div>
   );
