@@ -21,3 +21,4 @@ export * from './card';
 export * from './date-formatter';
 export * from './video-loop';
 export * from './disclosure';
+export * from './utils/use-media-query';
