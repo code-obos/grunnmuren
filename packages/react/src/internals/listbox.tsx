@@ -34,7 +34,7 @@ const ListBoxItem = (props: ListBoxItemProps) => {
       {...props}
       className={cx(
         props.className,
-        'flex cursor-pointer px-6 py-3 leading-6 outline-none data-[focused]:bg-sky-lightest',
+        'flex cursor-pointer px-6 py-2.5 leading-6 outline-none data-[focused]:bg-sky-lightest',
       )}
       textValue={textValue}
     >
