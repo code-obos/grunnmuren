@@ -12,6 +12,7 @@ import {
 } from 'react';
 import {
   ButtonContext,
+  FieldErrorContext,
   FormContext,
   InputContext,
   Provider,
@@ -179,7 +180,6 @@ const FileUpload = ({
   const [value, setValue] = useControlledState<File[]>(_files, [], onChange);
   useFormReset(inputRef, value, setValue);
 
-  // TODO: Dislpay error message when file input is required and empty
   useFormValidation(
     {
       ...fileTriggerProps,
@@ -192,7 +192,9 @@ const FileUpload = ({
     inputRef,
   );
 
-  return (
+  const { displayValidation } = validationState;
+
+  const content = (
     <div
       data-slot="file-upload"
       className="group grid w-72 max-w-full gap-2"
@@ -300,6 +302,17 @@ const FileUpload = ({
       </ul>
       <ErrorMessageOrFieldError errorMessage={errorMessage} />
     </div>
+  );
+
+  // Conditionally render the validation context based on whether the component has individual file errors or a general error for the entire component
+  // This is necessary since we want to display individual errors for each file based on the validate prop
+  //  And the FieldErrorContext is used to display the general error message for the entire component (this is the best way to leverage the built-in RAC form validation)
+  return displayValidation.validationDetails.customError ? (
+    content
+  ) : (
+    <Provider values={[[FieldErrorContext, displayValidation]]}>
+      {content}
+    </Provider>
   );
 };
 
