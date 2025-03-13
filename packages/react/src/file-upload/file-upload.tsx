@@ -192,6 +192,8 @@ const FileUpload = ({
     inputRef,
   );
 
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+
   const { displayValidation } = validationState;
 
   const content = (
@@ -210,6 +212,8 @@ const FileUpload = ({
             {
               // The button acts as the trigger for the file input, which is why we connect the label to the button id
               id,
+              // Needed for RAC auto-focusing behavior to work
+              ref: buttonRef,
             },
           ],
           [InputContext, fieldProps],
@@ -240,6 +244,8 @@ const FileUpload = ({
           }}
           isInvalid={isInvalid || validationState.displayValidation.isInvalid}
           ref={inputRef}
+          // Delegate focus to the button when the hidden file input is focused (for RAC auto-focusing behavior)
+          onFocus={() => buttonRef.current?.focus()}
         >
           {children}
         </FileTrigger>
