@@ -1,15 +1,15 @@
-import { Calendar, House } from "@obosbbl/grunnmuren-icons-react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
-import type { Selection } from "react-aria-components";
+import { Calendar, House } from '@obosbbl/grunnmuren-icons-react';
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+import type { Selection } from 'react-aria-components';
 
-import { Tag, TagGroup } from "./tag";
+import { Tag, TagGroup } from './tag';
 
 const meta: Meta<typeof TagGroup> = {
-  title: "Tag | Chip",
+  title: 'Tag | Chip',
   component: TagGroup,
   parameters: {
-    layout: "fullscreen",
+    layout: 'fullscreen',
   },
 };
 
@@ -19,7 +19,7 @@ type Story = StoryObj<typeof TagGroup>;
 
 export const Default: Story = {
   args: {
-    selectionMode: "single",
+    selectionMode: 'single',
   },
   render: (props) => (
     <div className="p-6">
@@ -37,7 +37,7 @@ export const SelectionModes = () => {
     <div className="space-y-6 p-6">
       <div>
         <h2 className="mb-2 font-medium">Single Selection (default)</h2>
-        <TagGroup selectionMode="single" defaultSelectedKeys={["tag1"]}>
+        <TagGroup selectionMode="single" defaultSelectedKeys={['tag1']}>
           <Tag id="tag1">Tag 1</Tag>
           <Tag id="tag2">Tag 2</Tag>
           <Tag id="tag3">Tag 3</Tag>
@@ -48,7 +48,7 @@ export const SelectionModes = () => {
         <h2 className="mb-2 font-medium">Multiple Selection</h2>
         <TagGroup
           selectionMode="multiple"
-          defaultSelectedKeys={["tag1", "tag3"]}
+          defaultSelectedKeys={['tag1', 'tag3']}
         >
           <Tag id="tag1">Tag 1</Tag>
           <Tag id="tag2">Tag 2</Tag>
@@ -81,7 +81,7 @@ export const CalendarTags = () => {
   return (
     <div className="p-6">
       <h2 className="mb-4 font-medium">Time Slots</h2>
-      <TagGroup selectionMode="single" defaultSelectedKeys={["slot1"]}>
+      <TagGroup selectionMode="single" defaultSelectedKeys={['slot1']}>
         <Tag id="slot1">
           <Calendar /> 11:00 - 12:00
         </Tag>
@@ -97,7 +97,7 @@ export const CalendarTags = () => {
 };
 
 export const RemovableTags = () => {
-  const [tags, setTags] = useState(["Click on", "The tag", "To remove"]);
+  const [tags, setTags] = useState(['Click on', 'The tag', 'To remove']);
 
   const handleRemove = (key: React.Key) => {
     setTags(tags.filter((_, index) => `tag-${index}` !== key));
@@ -126,7 +126,7 @@ export const RemovableTags = () => {
 
 export const ControlledSelection = () => {
   const [selectedKeys, setSelectedKeys] = useState<Selection>(
-    new Set(["tag1"])
+    new Set(['tag1']),
   );
 
   return (
@@ -141,7 +141,7 @@ export const ControlledSelection = () => {
         <Tag id="tag3">Tag 3</Tag>
       </TagGroup>
       <div className="mt-4">
-        Selected: {Array.from(selectedKeys).join(", ")}
+        Selected: {Array.from(selectedKeys).join(', ')}
       </div>
     </div>
   );
