@@ -162,7 +162,9 @@ export const InForm = () => (
       <Description>
         Du må laste opp én fil. Filen kan ikke være større enn 1 MB
       </Description>
-      <Button className="w-fit">Velg fil</Button>
+      <Button className="w-fit" variant="secondary">
+        Velg fil
+      </Button>
     </FileUpload>
     <Button type="submit">Send inn</Button>
   </form>
