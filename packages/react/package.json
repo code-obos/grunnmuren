@@ -22,7 +22,11 @@
   },
   "dependencies": {
     "@obosbbl/grunnmuren-icons-react": "workspace:^2.0.0-canary.7",
+    "@react-aria/form": "^3.0.14",
+    "@react-aria/interactions": "^3.23.0",
     "@react-aria/utils": "^3.25.1",
+    "@react-stately/form": "^3.1.2",
+    "@react-stately/utils": "^3.10.5",
     "@types/node": "^22.0.0",
     "cva": "^1.0.0-0",
     "react-aria": "^3.35.1",
