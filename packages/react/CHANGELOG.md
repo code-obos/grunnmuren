@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.55
+
+### Patch Changes
+
+- 35d8078: upgrade react-aria dependencies
+
 ## 2.0.0-canary.54
 
 ### Patch Changes
