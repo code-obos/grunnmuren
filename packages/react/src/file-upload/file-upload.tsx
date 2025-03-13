@@ -25,7 +25,7 @@ import { useFormValidation } from '@react-aria/form';
 import { useFormValidationState } from '@react-stately/form';
 import { useControlledState } from '@react-stately/utils';
 import { useField } from 'react-aria';
-import { useFormReset } from '@react-aria/utils';
+import { useFormReset, useUpdateEffect } from '@react-aria/utils';
 import { ErrorMessageOrFieldError } from '../label/error-messsage-or-field-error';
 
 type Props = Omit<FileTriggerProps, 'onSelect'> & {
@@ -196,128 +196,139 @@ const FileUpload = ({
 
   const { displayValidation } = validationState;
 
-  const content = (
-    <div
-      data-slot="file-upload"
-      className="group grid w-72 max-w-full gap-2"
-      data-required={isRequired}
-    >
-      <label htmlFor={id} className="font-semibold">
-        {label}
-      </label>
-      <Provider
-        values={[
-          [
-            ButtonContext,
-            {
-              // The button acts as the trigger for the file input, which is why we connect the label to the button id
-              id,
-              // Needed for RAC auto-focusing behavior to work
-              ref: buttonRef,
-            },
-          ],
-          [InputContext, fieldProps],
-        ]}
-      >
-        <FileTrigger
-          {...fileTriggerProps}
-          isRequired={isRequired}
-          allowsMultiple={allowsMultiple}
-          onSelect={(selectedFiles) => {
-            if (selectedFiles === null) return;
+  useUpdateEffect(() => {
+    // Fixes a bug where validation state is not reset after being set to customError
+    // This happens if the file upload ends up in an invalid state and then is emptied: the old valdiations is still lingering
+    if (
+      controlledOrUncontrolledFiles.length === 0 &&
+      validationState.displayValidation.validationDetails.customError
+    ) {
+      validationState.commitValidation();
+    }
+  }, [controlledOrUncontrolledFiles]);
 
-            const newFiles = Array.from(selectedFiles);
-
-            // For controlled component
-            onChange?.((prevFiles) =>
-              allowsMultiple
-                ? uniqueFileNames(prevFiles.concat(newFiles))
-                : newFiles,
-            );
-
-            // For internal file state
-            setFiles((prevFiles) =>
-              allowsMultiple
-                ? uniqueFileNames(prevFiles.concat(newFiles))
-                : newFiles,
-            );
-          }}
-          isInvalid={isInvalid || validationState.displayValidation.isInvalid}
-          ref={inputRef}
-          // Delegate focus to the button when the hidden file input is focused (for RAC auto-focusing behavior)
-          onFocus={() => buttonRef.current?.focus()}
-        >
-          {children}
-        </FileTrigger>
-      </Provider>
-      <ul className="mt-4 grid gap-y-2">
-        {controlledOrUncontrolledFiles.map((file, fileIndex) => {
-          let fileName = file.name;
-          if (
-            fileTriggerProps.acceptDirectory &&
-            file.webkitRelativePath !== ''
-          ) {
-            fileName = file.webkitRelativePath;
-          }
-
-          const validation = validate?.(file) ?? true;
-          const hasError = validation !== true;
-
-          return (
-            <li key={fileName}>
-              <div
-                className={cx(
-                  'flex items-center justify-between gap-2 rounded-lg border-2 px-4 py-2',
-                  hasError
-                    ? 'border-red bg-red-light'
-                    : 'border-gray bg-gray-lightest',
-                )}
-              >
-                {fileName}{' '}
-                <button
-                  className={cx(
-                    '-m-2 grid h-11 w-11 shrink-0 place-items-center rounded-xl',
-                    // Focus styles
-                    'focus-visible:-outline-offset-8 focus-visible:outline-focus',
-                  )}
-                  onClick={() => {
-                    // For controlled component
-                    onChange?.((prevFiles) =>
-                      prevFiles.filter((_, index) => index !== fileIndex),
-                    );
-
-                    // For internal file state
-                    setFiles((prevFiles) =>
-                      prevFiles.filter((_, index) => index !== fileIndex),
-                    );
-                  }}
-                  aria-label={translations.remove[locale]}
-                  type="button"
-                >
-                  <Trash />
-                </button>
-              </div>
-              {hasError && (
-                <ErrorMessage className="mt-1 block w-full">
-                  {validation}
-                </ErrorMessage>
-              )}
-            </li>
-          );
-        })}
-      </ul>
-      <ErrorMessageOrFieldError errorMessage={errorMessage} />
-    </div>
-  );
-
-  // Conditionally render the validation context based on whether the component has individual file errors or a general error for the entire component
-  // This is necessary since we want to display individual errors for each file based on the validate prop
-  //  And the FieldErrorContext is used to display the general error message for the entire component (this is the best way to leverage the built-in RAC form validation)
-  return displayValidation.validationDetails.customError ? (
-    content
-  ) : (
+  return (
     <Provider values={[[FieldErrorContext, displayValidation]]}>
-      {content}
+      <div
+        data-slot="file-upload"
+        className="group grid w-72 max-w-full gap-2"
+        data-required={isRequired}
+      >
+        <label htmlFor={id} className="font-semibold">
+          {label}
+        </label>
+        <Provider
+          values={[
+            [
+              ButtonContext,
+              {
+                // The button acts as the trigger for the file input, which is why we connect the label to the button id
+                id,
+                // Needed for RAC auto-focusing behavior to work
+                ref: buttonRef,
+              },
+            ],
+            [InputContext, fieldProps],
+          ]}
+        >
+          <FileTrigger
+            {...fileTriggerProps}
+            isRequired={isRequired}
+            allowsMultiple={allowsMultiple}
+            onSelect={(selectedFiles) => {
+              if (selectedFiles === null) return;
+
+              const newFiles = Array.from(selectedFiles);
+
+              // For controlled component
+              onChange?.((prevFiles) =>
+                allowsMultiple
+                  ? uniqueFileNames(prevFiles.concat(newFiles))
+                  : newFiles,
+              );
+
+              // For internal file state
+              setFiles((prevFiles) =>
+                allowsMultiple
+                  ? uniqueFileNames(prevFiles.concat(newFiles))
+                  : newFiles,
+              );
+            }}
+            isInvalid={isInvalid || validationState.displayValidation.isInvalid}
+            ref={inputRef}
+            // Delegate focus to the button when the hidden file input is focused (for RAC auto-focusing behavior)
+            onFocus={() => buttonRef.current?.focus()}
+          >
+            {children}
+          </FileTrigger>
+        </Provider>
+        <ul className="mt-4 grid gap-y-2">
+          {controlledOrUncontrolledFiles.map((file, fileIndex) => {
+            let fileName = file.name;
+            if (
+              fileTriggerProps.acceptDirectory &&
+              file.webkitRelativePath !== ''
+            ) {
+              fileName = file.webkitRelativePath;
+            }
+
+            const validation = validate?.(file) ?? true;
+            const hasError = validation !== true;
+
+            return (
+              <li key={fileName}>
+                <div
+                  className={cx(
+                    'flex items-center justify-between gap-2 rounded-lg border-2 px-4 py-2',
+                    hasError
+                      ? 'border-red bg-red-light'
+                      : 'border-gray bg-gray-lightest',
+                  )}
+                >
+                  {fileName}{' '}
+                  <button
+                    className={cx(
+                      '-m-2 grid h-11 w-11 shrink-0 place-items-center rounded-xl',
+                      // Focus styles
+                      'focus-visible:-outline-offset-8 focus-visible:outline-focus',
+                    )}
+                    onClick={() => {
+                      // For controlled component
+                      onChange?.((prevFiles) =>
+                        prevFiles.filter((_, index) => index !== fileIndex),
+                      );
+
+                      // For internal file state
+                      setFiles((prevFiles) =>
+                        prevFiles.filter((_, index) => index !== fileIndex),
+                      );
+                    }}
+                    aria-label={translations.remove[locale]}
+                    type="button"
+                  >
+                    <Trash />
+                  </button>
+                </div>
+                {hasError && (
+                  <ErrorMessage className="mt-1 block w-full">
+                    {validation}
+                  </ErrorMessage>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+        {/*
+          This is necessary since we want to display individual errors for each file based on the validate prop.
+          But the FieldErrorContext is used to display the general error message for the entire component
+          (this is the best way to leverage the built-in RAC form validation)
+          We also want to enable the display of the general error message when there are no files selected (e.g. required but empty).
+        */}
+        {!!errorMessage ||
+          (controlledOrUncontrolledFiles.length === 0 && (
+            <ErrorMessageOrFieldError errorMessage={errorMessage} />
+          ))}
+      </div>
     </Provider>
   );
 };
