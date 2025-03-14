@@ -2,7 +2,8 @@ import { cva, cx } from 'cva';
 
 const formField = cx('group flex flex-col gap-2');
 const formFieldError = cx(
-  'w-fit rounded-sm bg-red-light px-2 py-1 text-red text-sm leading-6',
+  'w-fit bg-red-light px-2 py-1 text-red text-sm leading-6',
+  'group-data-[slot=file-upload]:rounded-lg',
 );
 
 const input = cva({
