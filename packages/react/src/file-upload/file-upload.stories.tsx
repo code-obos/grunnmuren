@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { Button } from '../button';
-import { Description } from '../label';
+import { Description, Label } from '../label';
 import { UNSAFE_FileUpload as FileUpload } from './file-upload';
 
 const meta: Meta<typeof FileUpload> = {
@@ -14,7 +14,8 @@ const meta: Meta<typeof FileUpload> = {
   render: () => {
     return (
       <div className="p-4">
-        <FileUpload label="Last opp fil">
+        <FileUpload>
+          <Label>Last opp fil</Label>
           <Description>Du kan laste opp én fil på opptil 10 mB.</Description>
           <Button className="w-fit">Velg fil</Button>
         </FileUpload>
@@ -35,7 +36,8 @@ export const AllowsMultiple: Story = {
   render: () => {
     return (
       <div className="p-4">
-        <FileUpload label="Last opp filer" allowsMultiple>
+        <FileUpload allowsMultiple>
+          <Label>Last opp filer</Label>
           <Description>
             Du kan laste flere filer. Du kan laste de opp samtidig.
           </Description>
@@ -50,7 +52,8 @@ export const LimitFileTypes: Story = {
   render: () => {
     return (
       <div className="p-4">
-        <FileUpload label="Last opp PDF" acceptedFileTypes={['.pdf']}>
+        <FileUpload acceptedFileTypes={['.pdf']}>
+          <Label>Last opp PDF</Label>
           <Description>Du kan kun laste opp PDF-er.</Description>
           <Button className="w-fit">Velg PDF</Button>
         </FileUpload>
@@ -63,7 +66,8 @@ export const AcceptDirectory: Story = {
   render: () => {
     return (
       <div className="p-4">
-        <FileUpload label="Last opp filer" acceptDirectory>
+        <FileUpload acceptDirectory>
+          <Label>Last opp mappe</Label>
           <Description>Du kan laste opp en mappe.</Description>
           <Button className="w-fit">Velg mappe</Button>
         </FileUpload>
@@ -77,12 +81,8 @@ export const Controlled: Story = {
     const [files, setFiles] = useState<File[]>([]);
     return (
       <div className="p-4">
-        <FileUpload
-          label="Last opp filer"
-          files={files}
-          onChange={setFiles}
-          allowsMultiple
-        >
+        <FileUpload files={files} onChange={setFiles} allowsMultiple>
+          <Label>Last opp filer</Label>
           <Description>Du kan laste opp flere filer.</Description>
           <Button className="w-fit">Velg filer</Button>
         </FileUpload>
@@ -109,7 +109,8 @@ export const Required: Story = {
           );
         }}
       >
-        <FileUpload label="Last opp medlemsbevis" isRequired name="file">
+        <FileUpload isRequired name="file">
+          <Label>Last opp medlemsbevis</Label>
           <Description>Du må laste opp medlemsbevis.</Description>
           <Button className="w-fit" variant="secondary">
             Velg fil
@@ -126,9 +127,9 @@ export const Validation: Story = {
     return (
       <div className="p-4">
         <FileUpload
-          label="Last opp fil"
           validate={(file) => file.size < 1000000 || 'Filen er for stor'}
         >
+          <Label>Last opp fil</Label>
           <Description>Du kan laste opp en fil på maksimalt 1 MB.</Description>
           <Button className="w-fit">Velg fil</Button>
         </FileUpload>
@@ -153,12 +154,12 @@ export const InForm = () => (
     }}
   >
     <FileUpload
-      label="Last opp filer"
       validate={(file) => file.size < 1000000 || 'Filen er for stor'}
       isRequired
       allowsMultiple
       name="files"
     >
+      <Label>Last opp filer</Label>
       <Description>
         Du må laste opp én fil. Filen kan ikke være større enn 1 MB
       </Description>

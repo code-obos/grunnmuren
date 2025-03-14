@@ -20,6 +20,7 @@ import {
   FieldErrorContext,
   FormContext,
   InputContext,
+  LabelContext,
   Provider,
   useSlottedContext,
 } from 'react-aria-components';
@@ -29,7 +30,6 @@ import { type Locale, useLocale } from '../use-locale';
 import { FileTrigger, type FileTriggerProps } from './file-trigger';
 
 type Props = Omit<FileTriggerProps, 'onSelect'> & {
-  label: string;
   children: ReactNode;
   files?: File[];
   onChange?: Dispatch<SetStateAction<File[]>>;
@@ -103,7 +103,6 @@ function uniqueFileNames(files: File[]) {
 }
 
 const FileUpload = ({
-  label,
   children,
   files: _files,
   onChange,
@@ -214,11 +213,14 @@ const FileUpload = ({
         className="group grid w-72 max-w-full gap-2"
         data-required={isRequired}
       >
-        <label htmlFor={id} className="font-semibold">
-          {label}
-        </label>
         <Provider
           values={[
+            [
+              LabelContext,
+              {
+                htmlFor: id,
+              },
+            ],
             [
               ButtonContext,
               {

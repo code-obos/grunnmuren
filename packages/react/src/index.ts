@@ -22,3 +22,4 @@ export * from './date-formatter';
 export * from './video-loop';
 export * from './disclosure';
 export * from './file-upload';
+export * from './label';
