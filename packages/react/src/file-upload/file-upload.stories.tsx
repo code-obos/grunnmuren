@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { UNSAFE_FileUpload as FileUpload } from './file-upload';
+import { useState } from 'react';
 import { Button } from '../button';
 import { Description } from '../label';
-import { useState } from 'react';
+import { UNSAFE_FileUpload as FileUpload } from './file-upload';
 
 const meta: Meta<typeof FileUpload> = {
   title: 'FileUpload',

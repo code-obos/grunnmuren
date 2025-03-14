@@ -1,4 +1,8 @@
 import { Trash } from '@obosbbl/grunnmuren-icons-react';
+import { useFormValidation } from '@react-aria/form';
+import { useFormReset, useUpdateEffect } from '@react-aria/utils';
+import { useFormValidationState } from '@react-stately/form';
+import { useControlledState } from '@react-stately/utils';
 import { cx } from 'cva';
 import {
   type Dispatch,
@@ -10,6 +14,7 @@ import {
   useRef,
   useState,
 } from 'react';
+import { useField } from 'react-aria';
 import {
   ButtonContext,
   FieldErrorContext,
@@ -18,15 +23,10 @@ import {
   Provider,
   useSlottedContext,
 } from 'react-aria-components';
-import { FileTrigger, type FileTriggerProps } from './file-trigger';
-import { type Locale, useLocale } from '../use-locale';
 import { ErrorMessage } from '../label';
-import { useFormValidation } from '@react-aria/form';
-import { useFormValidationState } from '@react-stately/form';
-import { useControlledState } from '@react-stately/utils';
-import { useField } from 'react-aria';
-import { useFormReset, useUpdateEffect } from '@react-aria/utils';
 import { ErrorMessageOrFieldError } from '../label/error-messsage-or-field-error';
+import { type Locale, useLocale } from '../use-locale';
+import { FileTrigger, type FileTriggerProps } from './file-trigger';
 
 type Props = Omit<FileTriggerProps, 'onSelect'> & {
   label: string;
