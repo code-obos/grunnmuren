@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.54
+
+### Patch Changes
+
+- 84d5bea: Fixes style on `<Media>` children when hovering a `<Card>`
+
 ## 2.0.0-canary.53
 
 ### Patch Changes

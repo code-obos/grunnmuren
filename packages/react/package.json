@@ -1,6 +1,6 @@
 {
   "name": "@obosbbl/grunnmuren-react",
-  "version": "2.0.0-canary.53",
+  "version": "2.0.0-canary.54",
   "description": "Grunnmuren components in React",
   "repository": {
     "url": "https://github.com/code-obos/grunnmuren"
@@ -22,11 +22,11 @@
   },
   "dependencies": {
     "@obosbbl/grunnmuren-icons-react": "workspace:^2.0.0-canary.7",
-    "@react-aria/utils": "^3.25.1",
+    "@react-aria/utils": "^3.28.1",
     "@types/node": "^22.0.0",
     "cva": "^1.0.0-0",
-    "react-aria": "^3.35.1",
-    "react-aria-components": "^1.3.1",
+    "react-aria": "^3.38.1",
+    "react-aria-components": "^1.7.1",
     "react-stately": "^3.35.0"
   },
   "peerDependencies": {
