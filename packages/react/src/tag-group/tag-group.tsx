@@ -7,7 +7,8 @@ import {
   TagGroup as RACTagGroup,
   type TagGroupProps as RACTagGroupProps,
   type TagProps as RACTagProps,
-  TagList,
+  TagList as RACTagList,
+  type TagListProps as RACTagListProps,
 } from "react-aria-components";
 
 const tagVariants = cva({
@@ -30,6 +31,14 @@ export type TagGroupProps = Omit<RACTagGroupProps, "className"> & {
   selectionMode?: "single" | "multiple";
   /**
    * CSS classes to apply to the tag group
+   */
+  className?: string;
+};
+
+// biome-ignore lint/suspicious/noExplicitAny: TODO FIX TYPE
+export type TagListProps = Omit<RACTagListProps<any>, "className"> & {
+  /**
+   * CSS classes to apply to the tag list
    */
   className?: string;
 };
@@ -59,8 +68,21 @@ function TagGroup(props: TagGroupProps, ref: Ref<HTMLDivElement>) {
       className={className}
       selectionMode={selectionMode}
     >
-      <TagList className="flex flex-wrap gap-2">{children}</TagList>
+      {children}
     </RACTagGroup>
+  );
+}
+
+/**
+ * A container component for Tag components within a TagGroup.
+ */
+function TagList(props: TagListProps, ref: Ref<HTMLDivElement>) {
+  const { className = "flex flex-wrap gap-2", children, ...restProps } = props;
+
+  return (
+    <RACTagList {...restProps} ref={ref} className={className}>
+      {children}
+    </RACTagList>
   );
 }
 
@@ -107,6 +129,11 @@ function Tag(props: TagProps, ref: Ref<HTMLDivElement>) {
 }
 
 const _TagGroup = forwardRef(TagGroup);
+const _TagList = forwardRef(TagList);
 const _Tag = forwardRef(Tag);
 
-export { _TagGroup as UNSAFE_TagGroup, _Tag as UNSAFE_Tag };
+export {
+  _TagGroup as UNSAFE_TagGroup,
+  _TagList as UNSAFE_TagList,
+  _Tag as UNSAFE_Tag,
+};
