@@ -1,9 +1,9 @@
-import { PressResponder } from '@react-aria/interactions';
 /**
  * This is a modified version of the original file-trigger from react-aria-components.
  * We need to modify it to support it in forms (e.g. adding a name prop).
  * We also modify the hiding of it, so that it works with the built in auto focusing of RAC.
  */
+import { PressResponder } from '@react-aria/interactions';
 import { useObjectRef } from '@react-aria/utils';
 import type { FormValidationProps } from '@react-stately/form';
 import type { HTMLAttributes, RefObject } from 'react';
