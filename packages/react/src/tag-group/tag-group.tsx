@@ -44,11 +44,6 @@ export type TagProps = Omit<RACTagProps, "className"> & {
    * CSS classes to apply to the tag
    */
   className?: string;
-  /**
-   * Whether the remove button should be hidden
-   * @default false
-   */
-  hideRemoveButton?: boolean;
 };
 
 /**
@@ -73,13 +68,7 @@ function TagGroup(props: TagGroupProps, ref: Ref<HTMLDivElement>) {
  * Interactive tag component for selections, filtering, and categorization.
  */
 function Tag(props: TagProps, ref: Ref<HTMLDivElement>) {
-  const {
-    onRemove,
-    className,
-    hideRemoveButton = false,
-    children,
-    ...restProps
-  } = props;
+  const { onRemove, className, children, ...restProps } = props;
 
   // Create a stable reference to the onRemove callback
   const handleRemove = useCallback(() => {
@@ -88,7 +77,7 @@ function Tag(props: TagProps, ref: Ref<HTMLDivElement>) {
     }
   }, [onRemove, props.id]);
 
-  const isRemovable = !!onRemove && !hideRemoveButton;
+  const isRemovable = !!onRemove;
   const spanStyling = "flex items-center gap-1 align-middle";
 
   return (
