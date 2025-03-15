@@ -268,7 +268,7 @@ importers:
         version: 1.7.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react-stately:
         specifier: ^3.35.0
-        version: 3.36.0(react@19.0.0)
+        version: 3.36.1(react@19.0.0)
 
   packages/tailwind:
     dependencies:
@@ -429,11 +429,6 @@ packages:
 
   '@babel/parser@7.26.5':
     resolution: {integrity: sha512-SRJ4jYmXRqV1/Xc+TIVG84WjHBXKlxO9sHQnA2Pf12QQEAp1LOh6kDzNHXcUnbH1QI0FDoPPVOt+vyUDucxpaw==}
-    engines: {node: '>=6.0.0'}
-    hasBin: true
-
-  '@babel/parser@7.26.7':
-    resolution: {integrity: sha512-kEvgGGgEjRUutvdVvZhbn/BxVt+5VSpwXz1j3WYXQbXDo8KzFOPNG2GQbdAiNq8g6wn1yKk7C/qrke03a84V+w==}
     engines: {node: '>=6.0.0'}
     hasBin: true
 
@@ -966,10 +961,6 @@ packages:
 
   '@babel/traverse@7.26.5':
     resolution: {integrity: sha512-rkOSPOw+AXbgtwUga3U4u8RpoK9FEFWBNAlTpcnkLFjL5CT+oyHNuUUC/xx6XefEJ16r38r8Bc/lfp6rYuHeJQ==}
-    engines: {node: '>=6.9.0'}
-
-  '@babel/traverse@7.26.7':
-    resolution: {integrity: sha512-1x1sgeyRLC3r5fQOM0/xtQKsYjyxmFjaOrLJNtZ81inNjyJHGIolTULPiSc/2qe1/qfpFLisLQYFnnZl7QoedA==}
     engines: {node: '>=6.9.0'}
 
   '@babel/traverse@7.26.9':
@@ -7833,11 +7824,6 @@ packages:
       react: ^18.3 || >=19.0.0-0
       rxjs: ^7
 
-  react-stately@3.36.0:
-    resolution: {integrity: sha512-xeoGuzZWUf6WjcmfT4x13R/BKVIF7DY/T7wGOfvpG4Pdy0p5eG6vyv1hJjk6ZxiOkwdeWKkRLXoypgZdlCavIQ==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
-
   react-stately@3.36.1:
     resolution: {integrity: sha512-H9kiGAylNec/iE5qk7qQLV1cvtSAIVq3mgt87zx2EA+f+/sYy2oBtchFPaDiBf/m7xMEKf0Fr9zSLU6G99xQ8g==}
     peerDependencies:
@@ -9542,10 +9528,6 @@ snapshots:
     dependencies:
       '@babel/types': 7.26.9
 
-  '@babel/parser@7.26.7':
-    dependencies:
-      '@babel/types': 7.26.9
-
   '@babel/parser@7.26.9':
     dependencies:
       '@babel/types': 7.26.9
@@ -10185,18 +10167,6 @@ snapshots:
       '@babel/code-frame': 7.26.2
       '@babel/generator': 7.26.9
       '@babel/parser': 7.26.9
-      '@babel/template': 7.26.9
-      '@babel/types': 7.26.9
-      debug: 4.4.0(supports-color@9.4.0)
-      globals: 11.12.0
-    transitivePeerDependencies:
-      - supports-color
-
-  '@babel/traverse@7.26.7':
-    dependencies:
-      '@babel/code-frame': 7.26.2
-      '@babel/generator': 7.26.9
-      '@babel/parser': 7.26.7
       '@babel/template': 7.26.9
       '@babel/types': 7.26.9
       debug: 4.4.0(supports-color@9.4.0)
@@ -18893,36 +18863,6 @@ snapshots:
       react-compiler-runtime: 19.0.0-beta-40c6c23-20250301(react@19.0.0)
       rxjs: 7.8.1
       use-effect-event: 1.0.2(react@19.0.0)
-
-  react-stately@3.36.0(react@19.0.0):
-    dependencies:
-      '@react-stately/calendar': 3.7.1(react@19.0.0)
-      '@react-stately/checkbox': 3.6.12(react@19.0.0)
-      '@react-stately/collections': 3.12.2(react@19.0.0)
-      '@react-stately/color': 3.8.3(react@19.0.0)
-      '@react-stately/combobox': 3.10.3(react@19.0.0)
-      '@react-stately/data': 3.12.2(react@19.0.0)
-      '@react-stately/datepicker': 3.13.0(react@19.0.0)
-      '@react-stately/disclosure': 3.0.2(react@19.0.0)
-      '@react-stately/dnd': 3.5.2(react@19.0.0)
-      '@react-stately/form': 3.1.2(react@19.0.0)
-      '@react-stately/list': 3.12.0(react@19.0.0)
-      '@react-stately/menu': 3.9.2(react@19.0.0)
-      '@react-stately/numberfield': 3.9.10(react@19.0.0)
-      '@react-stately/overlays': 3.6.14(react@19.0.0)
-      '@react-stately/radio': 3.10.11(react@19.0.0)
-      '@react-stately/searchfield': 3.5.10(react@19.0.0)
-      '@react-stately/select': 3.6.11(react@19.0.0)
-      '@react-stately/selection': 3.20.0(react@19.0.0)
-      '@react-stately/slider': 3.6.2(react@19.0.0)
-      '@react-stately/table': 3.14.0(react@19.0.0)
-      '@react-stately/tabs': 3.8.0(react@19.0.0)
-      '@react-stately/toast': 3.0.0(react@19.0.0)
-      '@react-stately/toggle': 3.8.2(react@19.0.0)
-      '@react-stately/tooltip': 3.5.2(react@19.0.0)
-      '@react-stately/tree': 3.8.8(react@19.0.0)
-      '@react-types/shared': 3.28.0(react@19.0.0)
-      react: 19.0.0
 
   react-stately@3.36.1(react@19.0.0):
     dependencies:
