@@ -74,7 +74,7 @@ export const FileTrigger = (props: FileTriggerProps) => {
         // RAC uses display: none, which prevents the file input from being focused.
         // What we do instead is to hide it visually using custom CSS, so that the native HTML validation messages are still hidden. Which is why
         // we don't use the sr-only class.
-        className="absolute left-[1000vw] opacity-0"
+        className="absolute left-[-1000vw] opacity-0"
         // Finally, we add aria-hidden to prevent the file input from being read by screen readers
         aria-hidden
         // We also attach an onFocus event listener to the file upload button, which we use to delagate focus from this input to.
