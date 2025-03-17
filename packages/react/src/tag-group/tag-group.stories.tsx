@@ -69,7 +69,7 @@ export const SelectionModes = () => {
 export const WithIcons = () => {
   return (
     <div className="p-6">
-      <UNSAFE_TagGroup>
+      <UNSAFE_TagGroup selectionMode="single" defaultSelectedKeys={["tag1"]}>
         <UNSAFE_TagList>
           <UNSAFE_Tag id="tag1">
             <House /> Bislett
@@ -111,22 +111,23 @@ export const CalendarTags = () => {
 };
 
 export const RemovableTags = () => {
-  const [tags, setTags] = useState(["Click on", "The tag", "To remove"]);
+  const [tags, setTags] = useState(["Oslo", "Stavanger", "Göteborg"]);
 
-  const handleRemove = (key: React.Key) => {
-    setTags(tags.filter((_, index) => `tag-${index}` !== key));
+  const handleRemove = (keys: React.Key | Set<React.Key>) => {
+    // Convert single key to Set for consistent handling
+    const keysSet = keys instanceof Set ? keys : new Set([keys]);
+    setTags(tags.filter((_, index) => !keysSet.has(`tag-${index}`)));
   };
 
   return (
     <div className="p-6">
-      <UNSAFE_TagGroup>
+      <UNSAFE_TagGroup onRemove={handleRemove}>
         <UNSAFE_TagList>
           {tags.map((tag, index) => (
             <UNSAFE_Tag
               id={`tag-${index}`}
               /* biome-ignore lint/suspicious/noArrayIndexKey: This is a storybook */
               key={index}
-              onRemove={handleRemove}
             >
               {tag}
             </UNSAFE_Tag>
