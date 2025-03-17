@@ -12,6 +12,8 @@ import { Badge } from '../badge';
 import { Button } from '../button';
 import { Content, Footer, Heading, Media } from '../content';
 import { Card, CardLink } from './card';
+import { UNSTABLE_Avatar as Avatar } from '../avatar';
+import { Description } from '../label';
 
 const meta: Meta<typeof Card> = {
   title: 'Card',
@@ -552,5 +554,18 @@ export const HorizontalWithIconRight = () => (
       </CardLink>
     </Content>
     <PiggyBank />
+  </Card>
+);
+
+export const WithAvatar = () => (
+  <Card layout="horizontal" variant="outlined" className="w-96 max-w-full">
+    <Avatar src="https://image.estatenyheter.no/199256.webp?imageId=199256&width=2116&height=1778&format=webp" />
+    <Content>
+      <div className="flex flex-col-reverse gap-2">
+        <Heading level={3}>Daniel Kjørberg Siraj</Heading>
+        <Description>Konsernsjef (CEO)</Description>
+      </div>
+      <p>Dette kortet er liggende, med et rundt bilde til høyre</p>
+    </Content>
   </Card>
 );
