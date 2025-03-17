@@ -1,37 +1,37 @@
-import { Close } from "@obosbbl/grunnmuren-icons-react";
-import { cva } from "cva";
-import { type Ref, forwardRef } from "react";
+import { Close } from '@obosbbl/grunnmuren-icons-react';
+import { cva } from 'cva';
+import { type Ref, forwardRef } from 'react';
 import {
   Button,
   Tag as RACTag,
   TagGroup as RACTagGroup,
   type TagGroupProps as RACTagGroupProps,
-  type TagProps as RACTagProps,
   TagList as RACTagList,
   type TagListProps as RACTagListProps,
-} from "react-aria-components";
+  type TagProps as RACTagProps,
+} from 'react-aria-components';
 
 const tagVariants = cva({
   base: [
-    "inline-flex cursor-pointer items-center gap-2 rounded-lg font-medium text-sm transition-colors duration-200",
+    'inline-flex cursor-pointer items-center gap-2 rounded-lg font-medium text-sm transition-colors duration-200',
     //Focus
-    "focus-visible:outline-focus-offset [&:not([data-focus-visible])]:outline-none",
+    'focus-visible:outline-focus-offset [&:not([data-focus-visible])]:outline-none',
     //Border
-    "shadow-[inset_0_0_0_2px_#002169]",
+    'shadow-[inset_0_0_0_2px_#002169]',
     //Backgrounds
     "bg-white text-black aria-selected:bg-sky [&:has([slot='remove'])]:bg-sky",
   ],
 });
 
 const removeButtonStyling =
-  "focus-visible:outline-focus-offset [&:not([data-focus-visible])]:outline-none flex w-full items-center px-3 py-1.5";
+  'focus-visible:outline-focus-offset [&:not([data-focus-visible])]:outline-none flex w-full items-center px-3 py-1.5';
 
-export type TagGroupProps = Omit<RACTagGroupProps, "className"> & {
+export type TagGroupProps = Omit<RACTagGroupProps, 'className'> & {
   /**
    * The selection mode of the tag group
    * @default single
    */
-  selectionMode?: "single" | "multiple";
+  selectionMode?: 'single' | 'multiple';
   /**
    * CSS classes to apply to the tag group
    */
@@ -43,14 +43,14 @@ export type TagGroupProps = Omit<RACTagGroupProps, "className"> & {
 };
 
 //The usage of <object> here could probably be replaced with a generic for more type safety in usage
-export type TagListProps = Omit<RACTagListProps<object>, "className"> & {
+export type TagListProps = Omit<RACTagListProps<object>, 'className'> & {
   /**
    * CSS classes to apply to the tag list
    */
   className?: string;
 };
 
-export type TagProps = Omit<RACTagProps, "className"> & {
+export type TagProps = Omit<RACTagProps, 'className'> & {
   children: React.ReactNode;
   /**
    * CSS classes to apply to the tag
@@ -81,7 +81,7 @@ function TagGroup(props: TagGroupProps, ref: Ref<HTMLDivElement>) {
  * A container component for Tag components within a TagGroup.
  */
 function TagList(props: TagListProps, ref: Ref<HTMLDivElement>) {
-  const { className = "flex flex-wrap gap-2", children, ...restProps } = props;
+  const { className = 'flex flex-wrap gap-2', children, ...restProps } = props;
 
   return (
     <RACTagList {...restProps} ref={ref} className={className}>
@@ -96,7 +96,7 @@ function TagList(props: TagListProps, ref: Ref<HTMLDivElement>) {
 function Tag(props: TagProps, ref: Ref<HTMLDivElement>) {
   const { className, children, ...restProps } = props;
 
-  const spanStyling = "flex items-center gap-1 align-middle";
+  const spanStyling = 'flex items-center gap-1 align-middle';
 
   return (
     <RACTag
@@ -108,7 +108,7 @@ function Tag(props: TagProps, ref: Ref<HTMLDivElement>) {
     >
       {({ allowsRemoving }) =>
         allowsRemoving ? (
-          <Button className={removeButtonStyling} slot={"remove"}>
+          <Button className={removeButtonStyling} slot={'remove'}>
             <span className={spanStyling}>{children}</span>
             <Close className="ml-1 h-4 w-4" />
           </Button>

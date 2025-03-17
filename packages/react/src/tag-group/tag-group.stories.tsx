@@ -1,16 +1,16 @@
-import { Calendar, House } from "@obosbbl/grunnmuren-icons-react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
-import { Label, type Selection } from "react-aria-components";
+import { Calendar, House } from '@obosbbl/grunnmuren-icons-react';
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+import { Label, type Selection } from 'react-aria-components';
 
-import { UNSAFE_Tag, UNSAFE_TagGroup, UNSAFE_TagList } from "./tag-group";
-import { Description } from "../label";
+import { Description } from '../label';
+import { UNSAFE_Tag, UNSAFE_TagGroup, UNSAFE_TagList } from './tag-group';
 
 const meta: Meta<typeof UNSAFE_TagGroup> = {
-  title: "TagGroup",
+  title: 'TagGroup',
   component: UNSAFE_TagGroup,
   parameters: {
-    layout: "fullscreen",
+    layout: 'fullscreen',
   },
 };
 
@@ -20,7 +20,7 @@ type Story = StoryObj<typeof UNSAFE_TagGroup>;
 
 export const Default: Story = {
   args: {
-    selectionMode: "single",
+    selectionMode: 'single',
   },
   render: (props) => (
     <div className="p-6">
@@ -40,7 +40,7 @@ export const SelectionModes = () => {
     <div className="space-y-6 p-6">
       <div>
         <h2 className="mb-2 font-medium">Single Selection (default)</h2>
-        <UNSAFE_TagGroup selectionMode="single" defaultSelectedKeys={["tag1"]}>
+        <UNSAFE_TagGroup selectionMode="single" defaultSelectedKeys={['tag1']}>
           <UNSAFE_TagList>
             <UNSAFE_Tag id="tag1">Tag 1</UNSAFE_Tag>
             <UNSAFE_Tag id="tag2">Tag 2</UNSAFE_Tag>
@@ -53,7 +53,7 @@ export const SelectionModes = () => {
         <h2 className="mb-2 font-medium">Multiple Selection</h2>
         <UNSAFE_TagGroup
           selectionMode="multiple"
-          defaultSelectedKeys={["tag1", "tag3"]}
+          defaultSelectedKeys={['tag1', 'tag3']}
         >
           <UNSAFE_TagList>
             <UNSAFE_Tag id="tag1">Tag 1</UNSAFE_Tag>
@@ -69,7 +69,7 @@ export const SelectionModes = () => {
 export const WithIcons = () => {
   return (
     <div className="p-6">
-      <UNSAFE_TagGroup selectionMode="single" defaultSelectedKeys={["tag1"]}>
+      <UNSAFE_TagGroup selectionMode="single" defaultSelectedKeys={['tag1']}>
         <UNSAFE_TagList>
           <UNSAFE_Tag id="tag1">
             <House /> Bislett
@@ -89,7 +89,7 @@ export const WithIcons = () => {
 export const CalendarTags = () => {
   return (
     <div className="p-6">
-      <UNSAFE_TagGroup selectionMode="single" defaultSelectedKeys={["slot1"]}>
+      <UNSAFE_TagGroup selectionMode="single" defaultSelectedKeys={['slot1']}>
         <Label>Velg en tid:</Label>
         <UNSAFE_TagList className="my-2 flex flex-wrap gap-2">
           <UNSAFE_Tag id="slot1">
@@ -111,7 +111,7 @@ export const CalendarTags = () => {
 };
 
 export const RemovableTags = () => {
-  const [tags, setTags] = useState(["Oslo", "Stavanger", "Göteborg"]);
+  const [tags, setTags] = useState(['Oslo', 'Stavanger', 'Göteborg']);
 
   const handleRemove = (keys: React.Key | Set<React.Key>) => {
     // Convert single key to Set for consistent handling
@@ -143,7 +143,7 @@ export const RemovableTags = () => {
 
 export const ControlledSelection = () => {
   const [selectedKeys, setSelectedKeys] = useState<Selection>(
-    new Set(["tag1"])
+    new Set(['tag1']),
   );
 
   return (
@@ -160,7 +160,7 @@ export const ControlledSelection = () => {
         </UNSAFE_TagList>
       </UNSAFE_TagGroup>
       <div className="mt-4">
-        Selected: {Array.from(selectedKeys).join(", ")}
+        Selected: {Array.from(selectedKeys).join(', ')}
       </div>
     </div>
   );
