@@ -559,7 +559,7 @@ export const HorizontalWithIconRight = () => (
 
 export const WithAvatar = () => (
   <Card layout="horizontal" variant="outlined" className="w-96 max-w-full">
-    <Avatar src="https://image.estatenyheter.no/199256.webp?imageId=199256&width=2116&height=1778&format=webp" />
+    <Avatar src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/v1578474487/Boligkonferansen/obosbk%202017/Daniel_Kj%C3%B8rberg_Siraj_1x1.jpg" />
     <Content>
       <div className="flex flex-col-reverse gap-2">
         <Heading level={3}>Daniel Kjørberg Siraj</Heading>
