@@ -19,7 +19,7 @@ const tagVariants = cva({
     //Border
     'shadow-[inset_0_0_0_2px_#002169]',
     //Backgrounds
-    "bg-white text-black aria-selected:bg-sky [&:has([slot='remove'])]:bg-sky",
+    "hover:!bg-sky bg-white text-black aria-selected:bg-sky-light [&:has([slot='remove'])]:bg-sky-light",
   ],
 });
 
