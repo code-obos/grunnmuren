@@ -39,7 +39,7 @@ export const AllowsMultiple: Story = {
         <FileUpload allowsMultiple>
           <Label>Last opp filer</Label>
           <Description>
-            Du kan laste flere filer. Du kan laste de opp samtidig.
+            Du kan laste opp flere filer. Du kan laste de opp samtidig.
           </Description>
           <Button className="w-fit">Velg filer</Button>
         </FileUpload>
