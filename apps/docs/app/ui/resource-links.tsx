@@ -1,4 +1,4 @@
-import { Box, Figma, Github } from '@obosbbl/grunnmuren-icons-react';
+import { Box, Figma, Github, Link } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
 
 type ResourceLinksProps = {
@@ -13,13 +13,14 @@ export function ResourceLinks(props: ResourceLinksProps) {
 }
 
 type ResourceLinkProps = {
-  type: 'github' | 'figma' | 'npm';
+  type: 'github' | 'figma' | 'npm' | 'other';
   href: string;
+  text?: string;
 };
 
 export function ResourceLink(props: ResourceLinkProps) {
   let Icon: typeof Figma;
-  let text: string;
+  let { text } = props;
 
   switch (props.type) {
     case 'figma':
@@ -33,6 +34,9 @@ export function ResourceLink(props: ResourceLinkProps) {
     case 'npm':
       Icon = Box;
       text = 'npm';
+      break;
+    case 'other':
+      Icon = Link;
       break;
   }
 
