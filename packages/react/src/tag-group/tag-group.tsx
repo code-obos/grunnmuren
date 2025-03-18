@@ -57,7 +57,13 @@ export type TagProps = Omit<RACTagProps, 'className'> &
  * A group component for Tag components that enables selection and organization of options.
  */
 function TagGroup(props: TagGroupProps) {
-  const { onRemove, selectionMode, className, children, ...restProps } = props;
+  const {
+    onRemove,
+    selectionMode = 'single',
+    className,
+    children,
+    ...restProps
+  } = props;
 
   return (
     <RACTagGroup

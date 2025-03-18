@@ -40,7 +40,7 @@ export const SelectionModes = () => {
     <div className="space-y-6 p-6">
       <div>
         <h2 className="mb-2 font-medium">Single Selection (default)</h2>
-        <UNSAFE_TagGroup selectionMode="single" defaultSelectedKeys={['tag1']}>
+        <UNSAFE_TagGroup defaultSelectedKeys={['tag1']}>
           <UNSAFE_TagList>
             <UNSAFE_Tag id="tag1">Tag 1</UNSAFE_Tag>
             <UNSAFE_Tag id="tag2">Tag 2</UNSAFE_Tag>
@@ -69,7 +69,7 @@ export const SelectionModes = () => {
 export const WithIcons = () => {
   return (
     <div className="p-6">
-      <UNSAFE_TagGroup selectionMode="single" defaultSelectedKeys={['tag1']}>
+      <UNSAFE_TagGroup defaultSelectedKeys={['tag1']}>
         <UNSAFE_TagList>
           <UNSAFE_Tag id="tag1">
             <House /> Bislett
@@ -89,7 +89,7 @@ export const WithIcons = () => {
 export const CalendarTags = () => {
   return (
     <div className="p-6">
-      <UNSAFE_TagGroup selectionMode="single" defaultSelectedKeys={['slot1']}>
+      <UNSAFE_TagGroup defaultSelectedKeys={['slot1']}>
         <Label>Velg en tid:</Label>
         <UNSAFE_TagList className="my-2 flex flex-wrap gap-2">
           <UNSAFE_Tag id="slot1">
