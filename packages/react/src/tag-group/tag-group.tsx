@@ -13,7 +13,7 @@ import {
 
 const tagVariants = cva({
   base: [
-    'inline-flex cursor-pointer items-center gap-2 rounded-lg font-medium text-sm transition-colors duration-200',
+    'relative flex cursor-pointer items-center gap-1 rounded-lg px-3 py-1.5 font-medium text-sm transition-colors duration-200',
     //Focus
     'focus-visible:outline-focus-offset [&:not([data-focus-visible])]:outline-none',
     //Border
@@ -90,7 +90,7 @@ function TagGroup(props: TagGroupProps) {
  * A container component for Tag components within a TagGroup.
  */
 function TagList(props: TagListProps) {
-  const { className = 'flex flex-wrap gap-2', children, ...restProps } = props;
+  const { className, children, ...restProps } = props;
 
   return (
     <RACTagList
@@ -115,23 +115,21 @@ function Tag(props: TagProps) {
         className,
       })}
     >
-      {({ allowsRemoving }) => (
-        <div className="relative flex items-center gap-1 px-3 py-1.5">
-          {allowsRemoving ? (
-            <>
-              {children}
-              <Button
-                className="after:absolute after:top-0 after:right-0 after:bottom-0 after:left-0"
-                slot="remove"
-              >
-                <Close className="ml-1" />
-              </Button>
-            </>
-          ) : (
-            children
-          )}
-        </div>
-      )}
+      {({ allowsRemoving }) =>
+        allowsRemoving ? (
+          <>
+            {children}
+            <Button
+              className="outline-none after:absolute after:top-0 after:right-0 after:bottom-0 after:left-0"
+              slot="remove"
+            >
+              <Close className="ml-1" />
+            </Button>
+          </>
+        ) : (
+          children
+        )
+      }
     </RACTag>
   );
 }
