@@ -20,6 +20,8 @@ const tagVariants = cva({
     'shadow-[inset_0_0_0_2px_#002169]',
     //Backgrounds
     'data-[hovered]:!bg-sky bg-white text-black aria-selected:bg-sky-light data-[allows-removing]:bg-sky-light',
+    //Icons
+    '[&_svg]:h-4 [&_svg]:w-4',
   ],
 });
 
@@ -106,8 +108,6 @@ function TagList(props: TagListProps) {
 function Tag(props: TagProps) {
   const { className, children, ...restProps } = props;
 
-  const spanStyling = 'flex items-center gap-1 align-middle';
-
   return (
     <RACTag
       {...restProps}
@@ -116,19 +116,19 @@ function Tag(props: TagProps) {
       })}
     >
       {({ allowsRemoving }) => (
-        <div className="relative flex items-center px-3 py-1.5">
+        <div className="relative flex items-center gap-1 px-3 py-1.5">
           {allowsRemoving ? (
             <>
-              <span className={spanStyling}>{children}</span>
+              {children}
               <Button
                 className="after:absolute after:top-0 after:right-0 after:bottom-0 after:left-0"
                 slot="remove"
               >
-                <Close className="ml-1 h-4 w-4" />
+                <Close className="ml-1" />
               </Button>
             </>
           ) : (
-            <span className={spanStyling}>{children}</span>
+            children
           )}
         </div>
       )}
