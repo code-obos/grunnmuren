@@ -4,11 +4,15 @@ import { useState } from 'react';
 import { Label, type Selection } from 'react-aria-components';
 
 import { Description } from '../label';
-import { UNSAFE_Tag, UNSAFE_TagGroup, UNSAFE_TagList } from './tag-group';
+import {
+  UNSAFE_Tag as Tag,
+  UNSAFE_TagGroup as TagGroup,
+  UNSAFE_TagList as TagList,
+} from './tag-group';
 
-const meta: Meta<typeof UNSAFE_TagGroup> = {
+const meta: Meta<typeof TagGroup> = {
   title: 'TagGroup',
-  component: UNSAFE_TagGroup,
+  component: TagGroup,
   parameters: {
     layout: 'fullscreen',
   },
@@ -16,7 +20,7 @@ const meta: Meta<typeof UNSAFE_TagGroup> = {
 
 export default meta;
 
-type Story = StoryObj<typeof UNSAFE_TagGroup>;
+type Story = StoryObj<typeof TagGroup>;
 
 export const Default: Story = {
   args: {
@@ -24,13 +28,13 @@ export const Default: Story = {
   },
   render: (props) => (
     <div className="p-6">
-      <UNSAFE_TagGroup {...props}>
-        <UNSAFE_TagList>
-          <UNSAFE_Tag id="tag1">Tag 1</UNSAFE_Tag>
-          <UNSAFE_Tag id="tag2">Tag 2</UNSAFE_Tag>
-          <UNSAFE_Tag id="tag3">Tag 3</UNSAFE_Tag>
-        </UNSAFE_TagList>
-      </UNSAFE_TagGroup>
+      <TagGroup {...props}>
+        <TagList>
+          <Tag id="tag1">Tag 1</Tag>
+          <Tag id="tag2">Tag 2</Tag>
+          <Tag id="tag3">Tag 3</Tag>
+        </TagList>
+      </TagGroup>
     </div>
   ),
 };
@@ -40,27 +44,27 @@ export const SelectionModes = () => {
     <div className="space-y-6 p-6">
       <div>
         <h2 className="mb-2 font-medium">Single Selection (default)</h2>
-        <UNSAFE_TagGroup defaultSelectedKeys={['tag1']}>
-          <UNSAFE_TagList>
-            <UNSAFE_Tag id="tag1">Tag 1</UNSAFE_Tag>
-            <UNSAFE_Tag id="tag2">Tag 2</UNSAFE_Tag>
-            <UNSAFE_Tag id="tag3">Tag 3</UNSAFE_Tag>
-          </UNSAFE_TagList>
-        </UNSAFE_TagGroup>
+        <TagGroup defaultSelectedKeys={['tag1']}>
+          <TagList>
+            <Tag id="tag1">Tag 1</Tag>
+            <Tag id="tag2">Tag 2</Tag>
+            <Tag id="tag3">Tag 3</Tag>
+          </TagList>
+        </TagGroup>
       </div>
 
       <div>
         <h2 className="mb-2 font-medium">Multiple Selection</h2>
-        <UNSAFE_TagGroup
+        <TagGroup
           selectionMode="multiple"
           defaultSelectedKeys={['tag1', 'tag3']}
         >
-          <UNSAFE_TagList>
-            <UNSAFE_Tag id="tag1">Tag 1</UNSAFE_Tag>
-            <UNSAFE_Tag id="tag2">Tag 2</UNSAFE_Tag>
-            <UNSAFE_Tag id="tag3">Tag 3</UNSAFE_Tag>
-          </UNSAFE_TagList>
-        </UNSAFE_TagGroup>
+          <TagList>
+            <Tag id="tag1">Tag 1</Tag>
+            <Tag id="tag2">Tag 2</Tag>
+            <Tag id="tag3">Tag 3</Tag>
+          </TagList>
+        </TagGroup>
       </div>
     </div>
   );
@@ -69,19 +73,19 @@ export const SelectionModes = () => {
 export const WithIcons = () => {
   return (
     <div className="p-6">
-      <UNSAFE_TagGroup defaultSelectedKeys={['tag1']}>
-        <UNSAFE_TagList>
-          <UNSAFE_Tag id="tag1">
+      <TagGroup defaultSelectedKeys={['tag1']}>
+        <TagList>
+          <Tag id="tag1">
             <House /> Bislett
-          </UNSAFE_Tag>
-          <UNSAFE_Tag id="tag2">
+          </Tag>
+          <Tag id="tag2">
             <House /> Fredensborg
-          </UNSAFE_Tag>
-          <UNSAFE_Tag id="tag3">
+          </Tag>
+          <Tag id="tag3">
             <House /> Majorstuen
-          </UNSAFE_Tag>
-        </UNSAFE_TagList>
-      </UNSAFE_TagGroup>
+          </Tag>
+        </TagList>
+      </TagGroup>
     </div>
   );
 };
@@ -89,23 +93,23 @@ export const WithIcons = () => {
 export const CalendarTags = () => {
   return (
     <div className="p-6">
-      <UNSAFE_TagGroup defaultSelectedKeys={['slot1']}>
+      <TagGroup defaultSelectedKeys={['slot1']}>
         <Label>Velg en tid:</Label>
-        <UNSAFE_TagList className="my-2 flex flex-wrap gap-2">
-          <UNSAFE_Tag id="slot1">
+        <TagList className="my-2 flex flex-wrap gap-2">
+          <Tag id="slot1">
             <Calendar /> 11:00 - 12:00
-          </UNSAFE_Tag>
-          <UNSAFE_Tag id="slot2">
+          </Tag>
+          <Tag id="slot2">
             <Calendar /> 13:30 - 14:30
-          </UNSAFE_Tag>
-          <UNSAFE_Tag id="slot3">
+          </Tag>
+          <Tag id="slot3">
             <Calendar /> 16:00 - 17:00
-          </UNSAFE_Tag>
-        </UNSAFE_TagList>
+          </Tag>
+        </TagList>
         <Description>
           Velg en tid som passer for deg. Du kan kun velge én tid.
         </Description>
-      </UNSAFE_TagGroup>
+      </TagGroup>
     </div>
   );
 };
@@ -121,19 +125,19 @@ export const RemovableTags = () => {
 
   return (
     <div className="p-6">
-      <UNSAFE_TagGroup onRemove={handleRemove}>
-        <UNSAFE_TagList>
+      <TagGroup onRemove={handleRemove}>
+        <TagList>
           {tags.map((tag, index) => (
-            <UNSAFE_Tag
+            <Tag
               id={`tag-${index}`}
               /* biome-ignore lint/suspicious/noArrayIndexKey: This is a storybook */
               key={index}
             >
               {tag}
-            </UNSAFE_Tag>
+            </Tag>
           ))}
-        </UNSAFE_TagList>
-      </UNSAFE_TagGroup>
+        </TagList>
+      </TagGroup>
       {tags.length === 0 && (
         <p className="mt-4">All tags removed! Refresh to try again.</p>
       )}
@@ -148,17 +152,17 @@ export const ControlledSelection = () => {
 
   return (
     <div className="p-6">
-      <UNSAFE_TagGroup
+      <TagGroup
         selectedKeys={selectedKeys}
         onSelectionChange={setSelectedKeys}
         selectionMode="multiple"
       >
-        <UNSAFE_TagList>
-          <UNSAFE_Tag id="tag1">Tag 1</UNSAFE_Tag>
-          <UNSAFE_Tag id="tag2">Tag 2</UNSAFE_Tag>
-          <UNSAFE_Tag id="tag3">Tag 3</UNSAFE_Tag>
-        </UNSAFE_TagList>
-      </UNSAFE_TagGroup>
+        <TagList>
+          <Tag id="tag1">Tag 1</Tag>
+          <Tag id="tag2">Tag 2</Tag>
+          <Tag id="tag3">Tag 3</Tag>
+        </TagList>
+      </TagGroup>
       <div className="mt-4">
         Selected: {Array.from(selectedKeys).join(', ')}
       </div>
