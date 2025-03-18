@@ -26,11 +26,6 @@ const tagVariants = cva({
 export type TagGroupProps = Omit<RACTagGroupProps, 'className'> &
   RefAttributes<HTMLDivElement> & {
     /**
-     * The selection mode of the tag group
-     * @default single
-     */
-    selectionMode?: 'single' | 'multiple';
-    /**
      * CSS classes to apply to the tag group
      */
     className?: string;
@@ -68,7 +63,7 @@ function TagGroup(props: TagGroupProps) {
     <RACTagGroup
       {...restProps}
       className={className}
-      selectionMode={selectionMode}
+      selectionMode={onRemove ? 'none' : selectionMode}
       onRemove={onRemove}
     >
       {children}
