@@ -1,5 +1,5 @@
 import { Close } from '@obosbbl/grunnmuren-icons-react';
-import { cva } from 'cva';
+import { cva, cx } from 'cva';
 import type { RefAttributes } from 'react';
 import {
   Button,
@@ -91,7 +91,10 @@ function TagList(props: TagListProps) {
   const { className = 'flex flex-wrap gap-2', children, ...restProps } = props;
 
   return (
-    <RACTagList {...restProps} className={className}>
+    <RACTagList
+      {...restProps}
+      className={cx('flex flex-wrap gap-2', className)}
+    >
       {children}
     </RACTagList>
   );
