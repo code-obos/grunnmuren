@@ -33,6 +33,13 @@ export type TagGroupProps = Omit<RACTagGroupProps, 'className'> &
      * The function to call when the tag is removed
      */
     onRemove?: (key: React.Key) => void;
+
+    /**
+     * The selection mode for the tag group
+     * Override this so that "none" isn't an option
+     * @default "single"
+     */
+    selectionMode?: 'single' | 'multiple';
   };
 
 //The usage of <object> here could probably be replaced with a generic for more type safety in usage
