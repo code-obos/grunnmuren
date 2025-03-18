@@ -23,9 +23,6 @@ const tagVariants = cva({
   ],
 });
 
-const removeButtonStyling =
-  'focus-visible:outline-focus-offset [&:not([data-focus-visible])]:outline-none flex w-full items-center px-3 py-1.5';
-
 export type TagGroupProps = Omit<RACTagGroupProps, 'className'> &
   RefAttributes<HTMLDivElement> & {
     /**
@@ -107,18 +104,23 @@ function Tag(props: TagProps) {
         className,
       })}
     >
-      {({ allowsRemoving }) =>
-        allowsRemoving ? (
-          <Button className={removeButtonStyling} slot={'remove'}>
+      {({ allowsRemoving }) => (
+        <div className="relative flex items-center px-3 py-1.5">
+          {allowsRemoving ? (
+            <>
+              <span className={spanStyling}>{children}</span>
+              <Button
+                className="after:absolute after:top-0 after:right-0 after:bottom-0 after:left-0"
+                slot="remove"
+              >
+                <Close className="ml-1 h-4 w-4" />
+              </Button>
+            </>
+          ) : (
             <span className={spanStyling}>{children}</span>
-            <Close className="ml-1 h-4 w-4" />
-          </Button>
-        ) : (
-          <div className="flex items-center px-3 py-1.5">
-            <span className={spanStyling}>{children}</span>
-          </div>
-        )
-      }
+          )}
+        </div>
+      )}
     </RACTag>
   );
 }
