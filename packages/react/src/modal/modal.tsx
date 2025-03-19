@@ -7,6 +7,7 @@ import {
   Dialog as RACDialog,
   type DialogProps as RACDialogProps,
   Modal as RACModal,
+  DEFAULT_SLOT,
   type ModalOverlayProps as RACModalOverlayProps,
   Provider,
   ButtonContext,
@@ -68,16 +69,39 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
       '[&_[data-slot="footer"]]:flex [&_[data-slot="footer"]]:gap-x-2',
     )}
   >
-    <Button
-      slot="close"
-      variant="tertiary"
-      className="-mt-3 !px-2.5 absolute top-0 right-0 data-[focus-visible]:outline-focus-inset"
-    >
-      <Close />
-    </Button>
-    <Provider values={[[ButtonContext, { className: 'w-fit' }]]}>
-      {children}
-    </Provider>
+    {({ close }) => (
+      <>
+        <Button
+          slot="close" // RAC Dialog suppors one close button out of the box, so we utilize that here. For other close buttons we use ButtonContext
+          variant="tertiary"
+          className="-mt-3 !px-2.5 absolute top-0 right-0 data-[focus-visible]:outline-focus-inset"
+        >
+          <Close />
+        </Button>
+        <Provider
+          values={[
+            [
+              ButtonContext,
+              {
+                // This is necessary to support multiple close buttons
+                slots: {
+                  // We need to define default slot in order to also support non-slotted buttons (i.e. buttons without slot prop)
+                  [DEFAULT_SLOT]: {
+                    className: 'w-fit',
+                  },
+                  close: {
+                    onPress: close,
+                    className: 'w-fit',
+                  },
+                },
+              },
+            ],
+          ]}
+        >
+          {children}
+        </Provider>
+      </>
+    )}
   </RACDialog>
 );
 

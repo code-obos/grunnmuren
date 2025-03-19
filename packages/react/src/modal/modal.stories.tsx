@@ -59,8 +59,10 @@ export const MultipleActions: Story = {
             tilbudet.
           </p>
           <Footer>
-            <Button slot="close">Lagre</Button>
-            <Button slot="close" variant="tertiary">
+            <Button onPress={() => console.log('SAVED!')} slot="close">
+              Lagre
+            </Button>
+            <Button variant="tertiary" slot="close">
               Avbryt
             </Button>
           </Footer>
@@ -73,23 +75,24 @@ export const MultipleActions: Story = {
 export const Controlled: Story = {
   render: (props) => {
     const [isOpen, setIsOpen] = useState(false);
+    console.log('isOpen', isOpen);
     return (
-      <>
-        <Button onPress={() => setIsOpen(true)}>Open Modal</Button>
-        {isOpen && (
-          <DialogTrigger>
-            <Modal {...props} isOpen={isOpen} onOpenChange={setIsOpen}>
-              <Dialog>
-                <Heading slot="title" level={2}>
-                  Tittel
-                </Heading>
-                <p>Denne modalen er controlled.</p>
-                <Button onPress={() => setIsOpen(false)}>Lukk</Button>
-              </Dialog>
-            </Modal>
-          </DialogTrigger>
-        )}
-      </>
+      <div>
+        <DialogTrigger>
+          <Button onPress={() => setIsOpen(true)}>Open Modal</Button>
+          <Modal {...props} isOpen={isOpen} onOpenChange={setIsOpen}>
+            <Dialog>
+              <Heading slot="title" level={2}>
+                Tittel
+              </Heading>
+              <p>Denne modalen er controlled.</p>
+              <Button onPress={() => setIsOpen(false)} slot="close">
+                Lukk
+              </Button>
+            </Dialog>
+          </Modal>
+        </DialogTrigger>
+      </div>
     );
   },
 };
