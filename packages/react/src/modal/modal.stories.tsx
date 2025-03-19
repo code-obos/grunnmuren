@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import {
-  UNSAFE_DialogTrigger as DialogTrigger,
-  UNSAFE_Modal as Modal,
-  UNSAFE_Dialog as Dialog,
-} from './modal';
 import { Button } from '../button';
 import { Footer, Heading } from '../content';
+import {
+  UNSAFE_Dialog as Dialog,
+  UNSAFE_DialogTrigger as DialogTrigger,
+  UNSAFE_Modal as Modal,
+} from './modal';
 
 const meta: Meta<typeof Modal> = {
   title: 'Modal',

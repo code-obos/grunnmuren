@@ -1,16 +1,16 @@
 import { Close } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
 import {
-  DialogTrigger as RACDialogTrigger,
-  ModalOverlay as RACModalOverlay,
-  type DialogTriggerProps as RACDialogTriggerProps,
+  ButtonContext,
+  DEFAULT_SLOT,
+  Provider,
   Dialog as RACDialog,
   type DialogProps as RACDialogProps,
+  DialogTrigger as RACDialogTrigger,
+  type DialogTriggerProps as RACDialogTriggerProps,
   Modal as RACModal,
-  DEFAULT_SLOT,
+  ModalOverlay as RACModalOverlay,
   type ModalOverlayProps as RACModalOverlayProps,
-  Provider,
-  ButtonContext,
 } from 'react-aria-components';
 import { Button } from '../button';
 
