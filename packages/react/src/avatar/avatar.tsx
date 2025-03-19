@@ -1,6 +1,6 @@
+import { User } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
 import { type ComponentProps, useState } from 'react';
-import { User } from '@obosbbl/grunnmuren-icons-react';
 
 type AvatarProps = ComponentProps<'img'>;
 
