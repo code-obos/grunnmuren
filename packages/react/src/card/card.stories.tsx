@@ -8,7 +8,7 @@ import {
 } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta } from '@storybook/react';
 import { cx } from 'cva';
-import { UNSTABLE_Avatar as Avatar } from '../avatar';
+import { UNSAFE_Avatar as Avatar } from '../avatar';
 import { Badge } from '../badge';
 import { Button } from '../button';
 import { Content, Footer, Heading, Media } from '../content';

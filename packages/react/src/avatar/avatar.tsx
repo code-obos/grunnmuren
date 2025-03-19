@@ -42,4 +42,4 @@ const Avatar = ({
   );
 };
 
-export { Avatar as UNSTABLE_Avatar, type AvatarProps as UNSTABLE_AvatarProps };
+export { Avatar as UNSAFE_Avatar, type AvatarProps as UNSAFE_AvatarProps };
