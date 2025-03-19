@@ -31,6 +31,8 @@ const ModalOverlay = (props: ModalOverlayProps) => (
         'fixed inset-0 z-10 flex min-h-full items-center justify-center overflow-y-auto bg-black/25 p-4 text-center backdrop-blur',
         isEntering && 'fade-in animate-in duration-300 ease-out',
         isExiting && 'fade-out animate-out duration-200 ease-in',
+        // Using the motion-safe class does not work, so we use motion-reduce to overwrite instead
+        'motion-reduce:animate-none',
       )
     }
   />
@@ -48,6 +50,8 @@ const Modal = ({ className, ...restProps }: ModalProps) => (
           'w-full max-w-md overflow-hidden rounded-2xl bg-white p-4 text-left align-middle shadow-xl',
           isEntering && 'zoom-in-95 animate-in duration-300 ease-out',
           isExiting && 'zoom-out-95 animate-out duration-200 ease-in',
+          // Using the motion-safe class does not work, so we use motion-reduce to overwrite instead
+          'motion-reduce:animate-none',
         )
       }
     />
