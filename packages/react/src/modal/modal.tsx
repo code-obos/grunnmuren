@@ -75,13 +75,6 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
   >
     {({ close }) => (
       <>
-        <Button
-          slot="close" // RAC Dialog suppors one close button out of the box, so we utilize that here. For other close buttons we use ButtonContext
-          variant="tertiary"
-          className="-mt-3 !px-2.5 absolute top-0 right-0 data-[focus-visible]:outline-focus-inset"
-        >
-          <Close />
-        </Button>
         <Provider
           values={[
             [
@@ -104,6 +97,13 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
         >
           {children}
         </Provider>
+        <Button
+          slot="close" // RAC Dialog suppors one close button out of the box, so we utilize that here. For other close buttons we use ButtonContext
+          variant="tertiary"
+          className="-mt-3 !px-2.5 absolute top-0 right-0 data-[focus-visible]:outline-focus-inset"
+        >
+          <Close />
+        </Button>
       </>
     )}
   </RACDialog>
