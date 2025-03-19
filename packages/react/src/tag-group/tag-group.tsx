@@ -17,7 +17,7 @@ const tagVariants = cva({
     //Focus
     'focus-visible:outline-focus-offset [&:not([data-focus-visible])]:outline-none',
     //Border
-    'shadow-[inset_0_0_0_2px_#002169]',
+    'border border-2 border-blue-dark',
     //Backgrounds
     "hover:!bg-sky bg-white text-black aria-selected:bg-sky-light [&:has([slot='remove'])]:bg-sky-light",
   ],
@@ -100,7 +100,7 @@ function Tag(props: TagProps) {
       })}
     >
       {({ allowsRemoving }) => (
-        <div className="relative flex items-center px-3 py-1.5">
+        <div className="relative flex items-center px-2 py-1">
           {allowsRemoving ? (
             <>
               <span className={spanStyling}>{children}</span>
