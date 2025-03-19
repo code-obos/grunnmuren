@@ -20,6 +20,7 @@ export const resourceLinks = defineField({
             list: [
               { title: 'Figma', value: 'figma' },
               { title: 'GitHub', value: 'github' },
+              { title: 'Other', value: 'other' },
             ],
           },
           validation: (Rule) => Rule.required(),
@@ -29,6 +30,12 @@ export const resourceLinks = defineField({
           type: 'url',
           title: 'URL',
           validation: (Rule) => Rule.required(),
+        },
+        {
+          name: 'text',
+          type: 'string',
+          title: 'Text',
+          hidden: ({ parent }) => parent.linkType !== 'other',
         },
       ],
     },

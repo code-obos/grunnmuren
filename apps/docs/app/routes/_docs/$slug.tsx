@@ -48,11 +48,20 @@ function Page() {
 
   return (
     <>
-      <h1 className="heading-l mt-9 mb-4">{data.name}</h1>
+      <h1 className="heading-l mb-4">{data.name}</h1>
       {data.resourceLinks && (
         <ResourceLinks className="mb-12">
-          {figmaLink && <ResourceLink type="figma" href={figmaLink} />}
-          {ghLink && <ResourceLink type="github" href={ghLink} />}
+          {data.resourceLinks?.map(
+            ({ url, linkType = 'other', text, _key }) =>
+              url && (
+                <ResourceLink
+                  key={_key}
+                  type={linkType}
+                  href={url}
+                  text={text}
+                />
+              ),
+          )}
         </ResourceLinks>
       )}
       <div className="lg:relative lg:flex lg:gap-[var(--gm-container-gutter-width)] lg:pt-9">
