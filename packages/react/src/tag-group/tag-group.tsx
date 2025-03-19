@@ -38,7 +38,6 @@ export type TagGroupProps = Omit<RACTagGroupProps, 'className'> &
 
     /**
      * The selection mode for the tag group
-     * Override this so that "none" isn't an option
      * @default "single"
      */
     selectionMode?: 'single' | 'multiple';
@@ -108,12 +107,15 @@ function TagList(props: TagListProps) {
 function Tag(props: TagProps) {
   const { className, children, ...restProps } = props;
 
+  const textValue = typeof children === 'string' ? children : undefined;
+
   return (
     <RACTag
-      {...restProps}
       className={tagVariants({
         className,
       })}
+      textValue={textValue}
+      {...restProps}
     >
       {({ allowsRemoving }) =>
         allowsRemoving ? (

@@ -1,9 +1,9 @@
 import { Calendar, House } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { Label, type Selection } from 'react-aria-components';
+import type { Selection } from 'react-aria-components';
 
-import { Description } from '../label';
+import { Description, Label } from '../label';
 import {
   UNSAFE_Tag as Tag,
   UNSAFE_TagGroup as TagGroup,
@@ -29,7 +29,8 @@ export const Default: Story = {
   render: (props) => (
     <div className="p-6">
       <TagGroup {...props}>
-        <TagList>
+        <Label>Velg en:</Label>
+        <TagList className="my-2">
           <Tag id="tag1">Tag 1</Tag>
           <Tag id="tag2">Tag 2</Tag>
           <Tag id="tag3">Tag 3</Tag>
@@ -43,9 +44,9 @@ export const SelectionModes = () => {
   return (
     <div className="space-y-6 p-6">
       <div>
-        <h2 className="mb-2 font-medium">Single Selection (default)</h2>
         <TagGroup defaultSelectedKeys={['tag1']}>
-          <TagList>
+          <Label>Single Selection (default)</Label>
+          <TagList className="my-2">
             <Tag id="tag1">Tag 1</Tag>
             <Tag id="tag2">Tag 2</Tag>
             <Tag id="tag3">Tag 3</Tag>
@@ -54,12 +55,13 @@ export const SelectionModes = () => {
       </div>
 
       <div>
-        <h2 className="mb-2 font-medium">Multiple Selection</h2>
         <TagGroup
           selectionMode="multiple"
           defaultSelectedKeys={['tag1', 'tag3']}
         >
-          <TagList>
+          <Label>Multiple Selection</Label>
+
+          <TagList className="my-2">
             <Tag id="tag1">Tag 1</Tag>
             <Tag id="tag2">Tag 2</Tag>
             <Tag id="tag3">Tag 3</Tag>
@@ -74,14 +76,15 @@ export const WithIcons = () => {
   return (
     <div className="p-6">
       <TagGroup defaultSelectedKeys={['tag1']}>
-        <TagList>
-          <Tag id="tag1">
+        <Label>Velg et sted:</Label>
+        <TagList className="my-2">
+          <Tag id="tag1" textValue="Bislett">
             <House /> Bislett
           </Tag>
-          <Tag id="tag2">
+          <Tag id="tag2" textValue="Fredensborg">
             <House /> Fredensborg
           </Tag>
-          <Tag id="tag3">
+          <Tag id="tag3" textValue="Majorstuen">
             <House /> Majorstuen
           </Tag>
         </TagList>
@@ -96,13 +99,13 @@ export const CalendarTags = () => {
       <TagGroup defaultSelectedKeys={['slot1']}>
         <Label>Velg en tid:</Label>
         <TagList className="my-2 flex flex-wrap gap-2">
-          <Tag id="slot1">
+          <Tag id="slot1" textValue="11:00 - 12:00">
             <Calendar /> 11:00 - 12:00
           </Tag>
-          <Tag id="slot2">
+          <Tag id="slot2" textValue="13:30 - 14:30">
             <Calendar /> 13:30 - 14:30
           </Tag>
-          <Tag id="slot3">
+          <Tag id="slot3" textValue="16:00 - 17:00">
             <Calendar /> 16:00 - 17:00
           </Tag>
         </TagList>
@@ -126,7 +129,8 @@ export const RemovableTags = () => {
   return (
     <div className="p-6">
       <TagGroup onRemove={handleRemove}>
-        <TagList>
+        <Label>Aktive filter:</Label>
+        <TagList className="my-2">
           {tags.map((tag, index) => (
             <Tag
               id={`tag-${index}`}
@@ -157,7 +161,8 @@ export const ControlledSelection = () => {
         onSelectionChange={setSelectedKeys}
         selectionMode="multiple"
       >
-        <TagList>
+        <Label>Velg flere:</Label>
+        <TagList className="my-2">
           <Tag id="tag1">Tag 1</Tag>
           <Tag id="tag2">Tag 2</Tag>
           <Tag id="tag3">Tag 3</Tag>
