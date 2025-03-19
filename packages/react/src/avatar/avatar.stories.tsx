@@ -1,4 +1,3 @@
-import { Menu } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { UNSAFE_Avatar as Avatar } from './avatar';
 
