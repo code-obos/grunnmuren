@@ -1,5 +1,5 @@
 import { Close } from '@obosbbl/grunnmuren-icons-react';
-import { cva } from 'cva';
+import { cva, cx } from 'cva';
 import type { RefAttributes } from 'react';
 import {
   Button,
@@ -13,13 +13,15 @@ import {
 
 const tagVariants = cva({
   base: [
-    'inline-flex cursor-pointer items-center gap-2 rounded-lg font-medium text-sm transition-colors duration-200',
+    'relative flex cursor-pointer items-center gap-1 rounded-lg px-3 py-1.5 font-medium text-sm transition-colors duration-200',
     //Focus
     'focus-visible:outline-focus-offset [&:not([data-focus-visible])]:outline-none',
     //Border
     'border border-2 border-blue-dark',
     //Backgrounds
-    "hover:!bg-sky bg-white text-black aria-selected:bg-sky-light [&:has([slot='remove'])]:bg-sky-light",
+    'data-[hovered]:!bg-sky bg-white text-black aria-selected:bg-sky-light data-[allows-removing]:bg-sky-light',
+    //Icons
+    '[&_svg]:h-4 [&_svg]:w-4',
   ],
 });
 
@@ -33,6 +35,12 @@ export type TagGroupProps = Omit<RACTagGroupProps, 'className'> &
      * The function to call when the tag is removed
      */
     onRemove?: (key: React.Key) => void;
+
+    /**
+     * The selection mode for the tag group
+     * @default "single"
+     */
+    selectionMode?: 'single' | 'multiple';
   };
 
 //The usage of <object> here could probably be replaced with a generic for more type safety in usage
@@ -57,7 +65,13 @@ export type TagProps = Omit<RACTagProps, 'className'> &
  * A group component for Tag components that enables selection and organization of options.
  */
 function TagGroup(props: TagGroupProps) {
-  const { onRemove, selectionMode, className, children, ...restProps } = props;
+  const {
+    onRemove,
+    selectionMode = 'single',
+    className,
+    children,
+    ...restProps
+  } = props;
 
   return (
     <RACTagGroup
@@ -75,10 +89,13 @@ function TagGroup(props: TagGroupProps) {
  * A container component for Tag components within a TagGroup.
  */
 function TagList(props: TagListProps) {
-  const { className = 'flex flex-wrap gap-2', children, ...restProps } = props;
+  const { className, children, ...restProps } = props;
 
   return (
-    <RACTagList {...restProps} className={className}>
+    <RACTagList
+      {...restProps}
+      className={cx('flex flex-wrap gap-2', className)}
+    >
       {children}
     </RACTagList>
   );
@@ -90,32 +107,31 @@ function TagList(props: TagListProps) {
 function Tag(props: TagProps) {
   const { className, children, ...restProps } = props;
 
-  const spanStyling = 'flex items-center gap-1 align-middle';
+  const textValue = typeof children === 'string' ? children : undefined;
 
   return (
     <RACTag
-      {...restProps}
       className={tagVariants({
         className,
       })}
+      textValue={textValue}
+      {...restProps}
     >
-      {({ allowsRemoving }) => (
-        <div className="relative flex items-center px-2 py-1">
-          {allowsRemoving ? (
-            <>
-              <span className={spanStyling}>{children}</span>
-              <Button
-                className="after:absolute after:top-0 after:right-0 after:bottom-0 after:left-0"
-                slot="remove"
-              >
-                <Close className="ml-1 h-4 w-4" />
-              </Button>
-            </>
-          ) : (
-            <span className={spanStyling}>{children}</span>
-          )}
-        </div>
-      )}
+      {({ allowsRemoving }) =>
+        allowsRemoving ? (
+          <>
+            {children}
+            <Button
+              className="outline-none after:absolute after:top-0 after:right-0 after:bottom-0 after:left-0"
+              slot="remove"
+            >
+              <Close className="ml-1" />
+            </Button>
+          </>
+        ) : (
+          children
+        )
+      }
     </RACTag>
   );
 }
