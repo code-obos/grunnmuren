@@ -23,3 +23,4 @@ export * from './video-loop';
 export * from './disclosure';
 export * from './file-upload';
 export * from './label';
+export * from './avatar';

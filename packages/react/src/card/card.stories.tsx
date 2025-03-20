@@ -8,9 +8,11 @@ import {
 } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta } from '@storybook/react';
 import { cx } from 'cva';
+import { UNSAFE_Avatar as Avatar } from '../avatar';
 import { Badge } from '../badge';
 import { Button } from '../button';
 import { Content, Footer, Heading, Media } from '../content';
+import { Description } from '../label';
 import { Card, CardLink } from './card';
 
 const meta: Meta<typeof Card> = {
@@ -552,5 +554,18 @@ export const HorizontalWithIconRight = () => (
       </CardLink>
     </Content>
     <PiggyBank />
+  </Card>
+);
+
+export const WithAvatar = () => (
+  <Card layout="horizontal" variant="outlined" className="w-96 max-w-full">
+    <Avatar src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/v1578474487/Boligkonferansen/obosbk%202017/Daniel_Kj%C3%B8rberg_Siraj_1x1.jpg" />
+    <Content>
+      <div className="flex flex-col-reverse gap-2">
+        <Heading level={3}>Daniel Kjørberg Siraj</Heading>
+        <Description>Konsernsjef (CEO)</Description>
+      </div>
+      <p>Dette kortet er liggende, med et rundt bilde til høyre</p>
+    </Content>
   </Card>
 );
