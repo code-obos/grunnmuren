@@ -14,6 +14,8 @@ import {
 } from 'react-aria-components';
 import { Button } from '../button';
 import { HeadingContext } from '../content';
+import { translations } from '../translations';
+import { useLocale } from '../use-locale';
 
 type DialogTriggerProps = RACDialogTriggerProps;
 
@@ -63,72 +65,77 @@ type DialogProps = RACDialogProps & {
   children: React.ReactNode;
 };
 
-const Dialog = ({ className, children, ...restProps }: DialogProps) => (
-  <RACDialog
-    {...restProps}
-    className={cx(
-      'relative grid gap-y-5 outline-none',
-      // Footer
-      '[&_[data-slot="footer"]]:flex [&_[data-slot="footer"]]:gap-x-2',
-    )}
-  >
-    {({ close }) => (
-      <>
-        <Provider
-          values={[
-            [
-              HeadingContext,
-              {
-                slots: {
-                  [DEFAULT_SLOT]: {}, // RAC requires a default slot in order to support non-slotted components
-                  title: {
-                    className: 'heading-s pr-14',
-                    _outerWrapper: (children) => (
-                      <div className="flex items-center justify-between">
-                        {children}
-                        <Button
-                          slot="close" // RAC Dialog suppors one close button out of the box, so we utilize that here. For other close buttons we use ButtonContext
-                          variant="tertiary"
-                          className="!px-2.5 data-[focus-visible]:outline-focus-inset"
-                        >
-                          <Close />
-                        </Button>
-                      </div>
-                    ),
+const Dialog = ({ className, children, ...restProps }: DialogProps) => {
+  const locale = useLocale();
+
+  return (
+    <RACDialog
+      {...restProps}
+      className={cx(
+        'relative grid gap-y-5 outline-none',
+        // Footer
+        '[&_[data-slot="footer"]]:flex [&_[data-slot="footer"]]:gap-x-2',
+      )}
+    >
+      {({ close }) => (
+        <>
+          <Provider
+            values={[
+              [
+                HeadingContext,
+                {
+                  slots: {
+                    [DEFAULT_SLOT]: {}, // RAC requires a default slot in order to support non-slotted components
+                    title: {
+                      className: 'heading-s pr-14',
+                      _outerWrapper: (children) => (
+                        <div className="flex items-center justify-between">
+                          {children}
+                          <Button
+                            slot="close" // RAC Dialog suppors one close button out of the box, so we utilize that here. For other close buttons we use ButtonContext
+                            variant="tertiary"
+                            className="!px-2.5 data-[focus-visible]:outline-focus-inset"
+                            aria-label={translations.close[locale]}
+                          >
+                            <Close />
+                          </Button>
+                        </div>
+                      ),
+                    },
                   },
                 },
-              },
-            ],
-            [
-              ButtonContext,
-              {
-                // This is necessary to support multiple close buttons
-                slots: {
-                  // We need to define default slot in order to also support non-slotted buttons (i.e. buttons without slot prop)
-                  [DEFAULT_SLOT]: {
-                    className: 'w-fit',
-                  },
-                  close: {
-                    onPress: close,
-                    className: 'w-fit',
+              ],
+              [
+                ButtonContext,
+                {
+                  // This is necessary to support multiple close buttons
+                  slots: {
+                    // We need to define default slot in order to also support non-slotted buttons (i.e. buttons without slot prop)
+                    [DEFAULT_SLOT]: {
+                      className: 'w-fit',
+                    },
+                    close: {
+                      onPress: close,
+                      className: 'w-fit',
+                    },
                   },
                 },
-              },
-            ],
-          ]}
-        >
-          {children}
-        </Provider>
-      </>
-    )}
-  </RACDialog>
-);
+              ],
+            ]}
+          >
+            {children}
+          </Provider>
+        </>
+      )}
+    </RACDialog>
+  );
+};
 
 export {
-  type DialogTriggerProps as UNSAFE_DialogTriggerProps,
+  Dialog as UNSAFE_Dialog,
   DialogTrigger as UNSAFE_DialogTrigger,
-  type ModalProps as UNSAFE_ModalProps,
   Modal as UNSAFE_Modal,
   type DialogProps as UNSAFE_DialogProps,
-  Dialog as UNSAFE_Dialog,
+  type DialogTriggerProps as UNSAFE_DialogTriggerProps,
+  type ModalProps as UNSAFE_ModalProps,
 };
