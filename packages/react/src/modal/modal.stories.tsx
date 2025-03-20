@@ -29,6 +29,21 @@ const meta: Meta<typeof Modal> = {
                 vaskemaskin, tørketrommel, oppvaskmaskin eller å avstå dette
                 tilbudet.
               </p>
+              <Heading level={3} className="heading-xs">
+                Andre tilvalg
+              </Heading>
+              <p>
+                Vi er opptatt av at du skal bli fornøyd og kan skape ditt
+                drømmehjem med tilvalg. Det er viktig å huske at når vi gjør
+                endringer i standarden på boligen, kommer blant annet montering,
+                tilpasninger og transport som en tilleggskostnad. Vi bestiller
+                varer i store kvanta, og å fjerne varer fra totalleveransen gjør
+                prisen på resten av varene høyere, som betyr at vi ikke alltid
+                har mulighet til å gi deg fradrag på varene du velger bort. Når
+                du bestiller tilvalg hos oss gir vi deg en totalpris på
+                oppgraderingen som inkluderer alt dette, hvilket gjør det litt
+                vanskeligere å sammenligne priser på lignende varer i butikk.
+              </p>
               <Button slot="close">Lukk</Button>
             </Dialog>
           </Modal>

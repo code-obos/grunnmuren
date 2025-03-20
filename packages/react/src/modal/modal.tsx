@@ -13,6 +13,7 @@ import {
   type ModalOverlayProps as RACModalOverlayProps,
 } from 'react-aria-components';
 import { Button } from '../button';
+import { HeadingContext } from '../content';
 
 type DialogTriggerProps = RACDialogTriggerProps;
 
@@ -67,8 +68,6 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
     {...restProps}
     className={cx(
       'relative grid gap-y-5 outline-none',
-      // Title
-      '[&_[slot="title"]]:heading-s [&_[slot="title"]]:pr-14',
       // Footer
       '[&_[data-slot="footer"]]:flex [&_[data-slot="footer"]]:gap-x-2',
     )}
@@ -77,6 +76,29 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
       <>
         <Provider
           values={[
+            [
+              HeadingContext,
+              {
+                slots: {
+                  [DEFAULT_SLOT]: {}, // RAC requires a default slot in order to support non-slotted components
+                  title: {
+                    className: 'heading-s pr-14',
+                    _outerWrapper: (children) => (
+                      <div className="flex items-center justify-between">
+                        {children}
+                        <Button
+                          slot="close" // RAC Dialog suppors one close button out of the box, so we utilize that here. For other close buttons we use ButtonContext
+                          variant="tertiary"
+                          className="-mt-3 !px-2.5 data-[focus-visible]:outline-focus-inset"
+                        >
+                          <Close />
+                        </Button>
+                      </div>
+                    ),
+                  },
+                },
+              },
+            ],
             [
               ButtonContext,
               {
@@ -97,13 +119,6 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
         >
           {children}
         </Provider>
-        <Button
-          slot="close" // RAC Dialog suppors one close button out of the box, so we utilize that here. For other close buttons we use ButtonContext
-          variant="tertiary"
-          className="-mt-3 !px-2.5 absolute top-0 right-0 data-[focus-visible]:outline-focus-inset"
-        >
-          <Close />
-        </Button>
       </>
     )}
   </RACDialog>
