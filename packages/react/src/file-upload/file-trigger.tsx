@@ -78,6 +78,8 @@ export const FileTrigger = (props: FileTriggerProps) => {
         // Finally, we add aria-hidden to prevent the file input from being read by screen readers
         aria-hidden
         // We also attach an onFocus event listener to the file upload button, which we use to delagate focus from this input to.
+        // Prevent focus trap when tabbing (since focus is delegated to the button)
+        tabIndex={-1}
       />
     </>
   );
