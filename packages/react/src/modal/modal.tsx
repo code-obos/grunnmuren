@@ -89,7 +89,7 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => {
                     title: {
                       className: 'heading-s',
                       _outerWrapper: (children) => (
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center justify-between gap-x-2">
                           {children}
                           <Button
                             slot="close" // RAC Dialog suppors one close button out of the box, so we utilize that here. For other close buttons we use ButtonContext
