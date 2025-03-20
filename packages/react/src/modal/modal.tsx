@@ -87,7 +87,7 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => {
                   slots: {
                     [DEFAULT_SLOT]: {}, // RAC requires a default slot in order to support non-slotted components
                     title: {
-                      className: 'heading-s pr-14',
+                      className: 'heading-s',
                       _outerWrapper: (children) => (
                         <div className="flex items-center justify-between">
                           {children}
