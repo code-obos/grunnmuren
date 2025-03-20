@@ -8,7 +8,8 @@ import {
   Link as RACLink,
   type LinkProps as RACLinkProps,
 } from 'react-aria-components';
-import { type Locale, useLocale } from '../use-locale';
+import { translations } from '../translations';
+import { useLocale } from '../use-locale';
 
 /**
  * Figma: https://www.figma.com/file/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=30%3A2574&mode=dev
@@ -133,22 +134,6 @@ function isLinkProps(
 ): props is ButtonOrLinkProps & RACLinkProps {
   return !!props.href;
 }
-
-type Translation = {
-  [key in Locale]: string;
-};
-
-type Translations = {
-  [x: string]: Translation;
-};
-
-const translations: Translations = {
-  pending: {
-    nb: 'venter',
-    sv: 'väntar',
-    en: 'pending',
-  },
-};
 
 function Button(
   props: ButtonProps,
