@@ -10,8 +10,8 @@ import {
   Warning,
 } from '@obosbbl/grunnmuren-icons-react';
 import { useState } from 'react';
-import { useLocale } from '../use-locale';
 import { translations } from '../translations';
+import { useLocale } from '../use-locale';
 
 const iconMap = {
   info: InfoCircle,
