@@ -8,6 +8,8 @@ type HeadingProps = HTMLProps<HTMLHeadingElement> & {
   level: 1 | 2 | 3 | 4 | 5 | 6;
   /** @private Used internally for slotted components */
   _innerWrapper?: (children: React.ReactNode) => React.ReactNode;
+  /** @private Used internally for slotted components */
+  _outerWrapper?: (children: React.ReactNode) => React.ReactNode;
 };
 
 const HeadingContext = createContext<
@@ -23,16 +25,19 @@ const Heading = (props: HeadingProps, ref: Ref<HTMLHeadingElement>) => {
     level,
     className,
     _innerWrapper: innerWrapper,
+    _outerWrapper: outerWrapper,
     ...restProps
   } = props;
 
   const Element = `h${level}` as const;
 
-  return (
+  const content = (
     <Element {...restProps} className={className} data-slot="heading">
       {innerWrapper ? innerWrapper(children) : children}
     </Element>
   );
+
+  return outerWrapper ? outerWrapper(content) : content;
 };
 
 const ContentContext = createContext<
