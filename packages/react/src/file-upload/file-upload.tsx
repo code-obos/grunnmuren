@@ -29,7 +29,7 @@ import { ErrorMessageOrFieldError } from '../label/error-messsage-or-field-error
 import { type Locale, useLocale } from '../use-locale';
 import { FileTrigger, type FileTriggerProps } from './file-trigger';
 
-type Props = Omit<FileTriggerProps, 'onSelect'> & {
+type FileUploadProps = Omit<FileTriggerProps, 'onSelect'> & {
   children: ReactNode;
   files?: File[];
   onChange?: Dispatch<SetStateAction<File[]>>;
@@ -113,7 +113,7 @@ const FileUpload = ({
   allowsMultiple,
   ref,
   ...fileTriggerProps
-}: Props) => {
+}: FileUploadProps) => {
   const [files, setFiles] = useState<File[]>(_files ?? []);
 
   const isInvalid = !!errorMessage || _isInvalid;
@@ -335,4 +335,7 @@ const FileUpload = ({
   );
 };
 
-export { FileUpload as UNSAFE_FileUpload };
+export {
+  FileUpload as UNSAFE_FileUpload,
+  type FileUploadProps as UNSAFE_FileUploadProps,
+};
