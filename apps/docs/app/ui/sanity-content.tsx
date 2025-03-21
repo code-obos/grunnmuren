@@ -72,22 +72,38 @@ export function SanityContent({ content, className }: SanityContentProps) {
           },
           block: {
             h2: ({ children, value }) => (
-              <AnchorHeading level={2} id={value._key ?? ''}>
+              <AnchorHeading
+                level={2}
+                id={value._key ?? ''}
+                className="heading-m"
+              >
                 {children}
               </AnchorHeading>
             ),
             h3: ({ children, value }) => (
-              <AnchorHeading level={3} id={value._key ?? ''}>
+              <AnchorHeading
+                level={3}
+                id={value._key ?? ''}
+                className="heading-s"
+              >
                 {children}
               </AnchorHeading>
             ),
             h4: ({ children, value }) => (
-              <AnchorHeading level={4} id={value._key ?? ''}>
+              <AnchorHeading
+                level={4}
+                id={value._key ?? ''}
+                className="heading-xs"
+              >
                 {children}
               </AnchorHeading>
             ),
             h5: ({ children, value }) => (
-              <AnchorHeading level={5} id={value._key ?? ''}>
+              <AnchorHeading
+                level={5}
+                id={value._key ?? ''}
+                className="font-weight-semibold"
+              >
                 {children}
               </AnchorHeading>
             ),
