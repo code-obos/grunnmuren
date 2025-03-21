@@ -16,7 +16,7 @@ const meta: Meta<typeof FileUpload> = {
       <div className="p-4">
         <FileUpload>
           <Label>Last opp fil</Label>
-          <Description>Du kan laste opp én fil på opptil 10 mB.</Description>
+          <Description>Du kan laste opp én fil.</Description>
           <Button className="w-fit">Velg fil</Button>
         </FileUpload>
       </div>
