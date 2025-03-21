@@ -54,7 +54,7 @@ export const LimitFileTypes: Story = {
       <div className="p-4">
         <FileUpload acceptedFileTypes={['.pdf']}>
           <Label>Last opp PDF</Label>
-          <Description>Du kan kun laste opp PDF-er.</Description>
+          <Description>Du kan kun laste opp én PDF.</Description>
           <Button className="w-fit">Velg PDF</Button>
         </FileUpload>
       </div>
