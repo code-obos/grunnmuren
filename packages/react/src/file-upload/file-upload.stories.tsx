@@ -17,7 +17,7 @@ const meta: Meta<typeof FileUpload> = {
         <FileUpload>
           <Label>Last opp fil</Label>
           <Description>Du kan laste opp én fil.</Description>
-          <Button className="w-fit">Velg fil</Button>
+          <Button>Velg fil</Button>
         </FileUpload>
       </div>
     );
@@ -41,7 +41,7 @@ export const AllowsMultiple: Story = {
           <Description>
             Du kan laste opp flere filer. Du kan laste de opp samtidig.
           </Description>
-          <Button className="w-fit">Velg filer</Button>
+          <Button>Velg filer</Button>
         </FileUpload>
       </div>
     );
@@ -55,7 +55,7 @@ export const LimitFileTypes: Story = {
         <FileUpload acceptedFileTypes={['.pdf']}>
           <Label>Last opp PDF</Label>
           <Description>Du kan kun laste opp én PDF.</Description>
-          <Button className="w-fit">Velg PDF</Button>
+          <Button>Velg PDF</Button>
         </FileUpload>
       </div>
     );
@@ -69,7 +69,7 @@ export const AcceptDirectory: Story = {
         <FileUpload acceptDirectory>
           <Label>Last opp mappe</Label>
           <Description>Du kan laste opp en mappe.</Description>
-          <Button className="w-fit">Velg mappe</Button>
+          <Button>Velg mappe</Button>
         </FileUpload>
       </div>
     );
@@ -84,7 +84,7 @@ export const Controlled: Story = {
         <FileUpload files={files} onChange={setFiles} allowsMultiple>
           <Label>Last opp filer</Label>
           <Description>Du kan laste opp flere filer.</Description>
-          <Button className="w-fit">Velg filer</Button>
+          <Button>Velg filer</Button>
         </FileUpload>
         Filer: {files?.map((file) => file.name).join(', ')}
       </div>
@@ -112,9 +112,7 @@ export const Required: Story = {
         <FileUpload isRequired name="file">
           <Label>Last opp medlemsbevis</Label>
           <Description>Du må laste opp medlemsbevis.</Description>
-          <Button className="w-fit" variant="secondary">
-            Velg fil
-          </Button>
+          <Button variant="secondary">Velg fil</Button>
         </FileUpload>
         <Button type="submit">Send inn</Button>
       </form>
@@ -131,7 +129,7 @@ export const Validation: Story = {
         >
           <Label>Last opp fil</Label>
           <Description>Du kan laste opp en fil på maksimalt 1 MB.</Description>
-          <Button className="w-fit">Velg fil</Button>
+          <Button>Velg fil</Button>
         </FileUpload>
       </div>
     );
@@ -164,9 +162,7 @@ export const InForm = () => (
         Du må laste opp minst én fil, du kan laste opp flere. Filene kan ikke
         være større enn 1 MB.
       </Description>
-      <Button className="w-fit" variant="secondary">
-        Velg fil
-      </Button>
+      <Button variant="secondary">Velg fil</Button>
     </FileUpload>
     <Button type="submit">Send inn</Button>
   </form>

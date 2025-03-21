@@ -228,6 +228,7 @@ const FileUpload = ({
                 id,
                 // Needed for RAC auto-focusing behavior to work
                 ref: buttonRef,
+                className: 'w-fit',
               },
             ],
             [InputContext, fieldProps],
