@@ -85,7 +85,11 @@ function uniqueFileNames(files: File[]) {
     const extension = fileName.match(/(\.[^.]+)$/)?.[0] || '';
 
     if (!fileNameCounts[baseName]) {
-      fileNameCounts[baseName] = 0;
+      // Extract any number from the file name (if any, otherwise default to 0)
+      const baseNameCount = Number.parseInt(
+        fileName.match(/\((\d+)\)/)?.[1] ?? '0',
+      );
+      fileNameCounts[baseName] = baseNameCount;
     }
 
     fileNameCounts[baseName]++;
