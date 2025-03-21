@@ -309,6 +309,10 @@ const FileUpload = ({
                       setFiles((prevFiles) =>
                         prevFiles.filter((_, index) => index !== fileIndex),
                       );
+
+                      // Make sure screen readers doesn't loose track of focus
+                      // (without this, the focus will be set to the top of the page for screen readers)
+                      buttonRef.current?.focus();
                     }}
                     aria-label={translations.remove[locale]}
                     type="button"
