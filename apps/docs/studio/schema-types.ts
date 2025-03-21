@@ -1,5 +1,7 @@
+import { category } from './documents/category';
 import component from './documents/component';
 import info from './documents/info';
+import { menu } from './documents/menu';
 import content from './objects/content';
 import imageWithCaption from './objects/image-with-caption';
 import liveCodeBlock from './objects/live-code-block';
@@ -9,6 +11,8 @@ import staticCodeBlock from './objects/static-code-block';
 export const schemaTypes = [
   component,
   info,
+  menu,
+  category,
   content,
   staticCodeBlock,
   liveCodeBlock,
