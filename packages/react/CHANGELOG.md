@@ -1,5 +1,20 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.55
+
+### Minor Changes
+
+- 25bda50: New `<Avatar>` component that can be used to create rounded images. It helps composing components like contact cards.
+- 5e88755: New FileUpload component in beta. Can be used to upload one or multiple files.
+- ae18e99: Add TagGroup component (aka Chips)
+- e665984: New `<Modal>` component that can be used for modal dialogs.
+
+### Patch Changes
+
+- 5e88755: Expose `<Label>`, `<Description>` and `<ErrorMessage>` components
+- 39bb81c: Fix file count incrementation in FileUpload.
+- 35d8078: upgrade react-aria dependencies
+
 ## 2.0.0-canary.54
 
 ### Patch Changes
