@@ -25,3 +25,4 @@ export * from './file-upload';
 export * from './label';
 export * from './avatar';
 export * from './modal';
+export * from './tag-group';
