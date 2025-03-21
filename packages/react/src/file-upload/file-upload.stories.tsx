@@ -161,7 +161,8 @@ export const InForm = () => (
     >
       <Label>Last opp filer</Label>
       <Description>
-        Du må laste opp én fil. Filen kan ikke være større enn 1 MB
+        Du må laste opp minst én fil, du kan laste opp flere. Filene kan ikke
+        være større enn 1 MB.
       </Description>
       <Button className="w-fit" variant="secondary">
         Velg fil
