@@ -69,6 +69,7 @@ function Page() {
         <TableOfContentsNav
           className="w-56 lg:sticky lg:top-9 lg:order-1 lg:shrink-0"
           content={data.content}
+          propsTables={data.propsComponents}
         />
         <div>
           {data.componentState === 'new' && (

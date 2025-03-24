@@ -5,11 +5,13 @@ import type { COMPONENT_QUERYResult } from 'sanity.types';
 type TableOfContentsNavProps = {
   className?: string;
   content: NonNullable<COMPONENT_QUERYResult>['content'];
+  propsTables: string[] | null;
 };
 
 const TableOfContentsNav = ({
   className,
   content,
+  propsTables,
 }: TableOfContentsNavProps) => {
   const sections = (
     content?.filter(
@@ -25,6 +27,20 @@ const TableOfContentsNav = ({
     href: `#${_key}`,
     text: children[0].text,
   }));
+
+  if (propsTables && propsTables.length > 0) {
+    sections.push({
+      href: '#props',
+      text: 'Props',
+    });
+
+    for (const componentName of propsTables) {
+      sections.push({
+        href: `#${componentName.toLowerCase()}-props`,
+        text: componentName,
+      });
+    }
+  }
 
   return (
     // @ts-expect-error: the role prop is passed to the Card component, even though it is not valid TS
