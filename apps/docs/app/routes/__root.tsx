@@ -1,5 +1,9 @@
-import { Outlet, createRootRoute } from '@tanstack/react-router';
-import { Meta, Scripts } from '@tanstack/react-start';
+import {
+  HeadContent,
+  Outlet,
+  Scripts,
+  createRootRoute,
+} from '@tanstack/react-router';
 
 export const Route = createRootRoute({
   head: () => ({
@@ -20,7 +24,7 @@ function RootDocument() {
   return (
     <html lang="no">
       <head>
-        <Meta />
+        <HeadContent />
       </head>
       <body>
         <Outlet />
