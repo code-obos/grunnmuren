@@ -5,7 +5,7 @@ import type { COMPONENT_QUERYResult } from 'sanity.types';
 type TableOfContentsNavProps = {
   className?: string;
   content: NonNullable<COMPONENT_QUERYResult>['content'];
-  propsTables: string[] | null;
+  propsTables?: string[] | null;
 };
 
 const TableOfContentsNav = ({
