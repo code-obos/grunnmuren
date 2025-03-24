@@ -1,3 +1,4 @@
+import logoUrl from '@/assets/obos_liggende_hus_svart_rgb.png?url';
 import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
 import { Heading } from '@obosbbl/grunnmuren-react';
 import { getRouteApi } from '@tanstack/react-router';
@@ -84,6 +85,14 @@ export const MainNav = () => {
       className="-order-1 w-72 max-w-full bg-sky-lightest px-5 py-9"
       aria-label="Navigasjonsmeny for grunnmuren"
     >
+      <Link
+        to="/"
+        aria-label="Gå til forsiden"
+        className="mb-6 ml-3 inline-block"
+      >
+        <img src={logoUrl} alt="" className="max-w-32" />
+      </Link>
+
       <ul>
         <MainNavItem title="Komponenter" subNavItems={componentsNavLinks} />
         {mainNavItems.map((mainNavItem) => (
