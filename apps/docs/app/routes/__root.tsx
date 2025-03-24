@@ -1,5 +1,5 @@
 import { Outlet, createRootRoute } from '@tanstack/react-router';
-import { Meta, Scripts } from '@tanstack/start';
+import { Meta, Scripts } from '@tanstack/react-start';
 
 export const Route = createRootRoute({
   head: () => ({

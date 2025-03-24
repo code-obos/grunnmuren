@@ -28,7 +28,7 @@
     "@sanity/table": "1.1.3",
     "@sanity/vision": "3.80.1",
     "@tanstack/react-router": "1.114.27",
-    "@tanstack/start": "1.114.27",
+    "@tanstack/react-start": "1.114.27",
     "cva": "1.0.0-beta.3",
     "groq": "3.80.1",
     "prism-react-renderer": "2.4.1",
