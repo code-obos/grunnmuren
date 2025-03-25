@@ -335,10 +335,9 @@ const FileUpload = ({
           (this is the best way to leverage the built-in RAC form validation)
           We also want to enable the display of the general error message when there are no files selected (e.g. required but empty).
         */}
-        {!!errorMessage ||
-          (controlledOrUncontrolledFiles.length === 0 && (
-            <ErrorMessageOrFieldError errorMessage={errorMessage} />
-          ))}
+        {(controlledOrUncontrolledFiles.length === 0 || !!errorMessage) && (
+          <ErrorMessageOrFieldError errorMessage={errorMessage} />
+        )}
       </div>
     </Provider>
   );
