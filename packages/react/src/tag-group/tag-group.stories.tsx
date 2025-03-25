@@ -121,9 +121,13 @@ export const RemovableTags = () => {
   const [tags, setTags] = useState(['Oslo', 'Stavanger', 'Göteborg']);
 
   const handleRemove = (keys: React.Key | Set<React.Key>) => {
-    // Convert single key to Set for consistent handling
-    const keysSet = keys instanceof Set ? keys : new Set([keys]);
-    setTags(tags.filter((_, index) => !keysSet.has(`tag-${index}`)));
+    // Convert to array for consistent handling
+    const keysArray = keys instanceof Set ? Array.from(keys) : [keys];
+
+    // Filter out removed tags
+    setTags((currentTagState) =>
+      currentTagState.filter((tag) => !keysArray.includes(tag)),
+    );
   };
 
   return (
@@ -131,12 +135,8 @@ export const RemovableTags = () => {
       <TagGroup onRemove={handleRemove}>
         <Label>Aktive filter:</Label>
         <TagList className="my-2">
-          {tags.map((tag, index) => (
-            <Tag
-              id={`tag-${index}`}
-              /* biome-ignore lint/suspicious/noArrayIndexKey: This is a storybook */
-              key={index}
-            >
+          {tags.map((tag) => (
+            <Tag id={tag} key={tag}>
               {tag}
             </Tag>
           ))}
