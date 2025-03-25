@@ -17,7 +17,7 @@ export const Route = createFileRoute('/_docs/profil/ikoner')({
 function Page() {
   return (
     <>
-      <h1 className="heading-l mt-9 mb-12">Ikoner</h1>
+      <h1 className="heading-l my-12">Ikoner</h1>
       <div className="prose">
         <p>
           Grunnmuren sitt ikonsett består av {Object.keys(icons).length}{' '}

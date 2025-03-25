@@ -8,7 +8,7 @@ export const Route = createFileRoute('/_docs/')({
 function Home() {
   return (
     <>
-      <h1 className="heading-l mb-12">Grunnmuren</h1>
+      <h1 className="heading-l my-12">Grunnmuren</h1>
       <div className="grid grid-cols-2 gap-4">
         <Card variant="outlined">
           <Heading level={2}>

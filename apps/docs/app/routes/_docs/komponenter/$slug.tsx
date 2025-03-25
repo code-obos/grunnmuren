@@ -55,7 +55,7 @@ function Page() {
 
   return (
     <>
-      <h1 className="heading-l mb-4">{data.name}</h1>
+      <h1 className="heading-l my-12">{data.name}</h1>
 
       <ResourceLinks className="mb-12">
         {data.resourceLinks?.map(
