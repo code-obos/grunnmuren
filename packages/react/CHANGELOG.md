@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.0-canary.56
+
+### Patch Changes
+
+- b74f4b7: Fix issue with focus getting lost when all files are removed from `FileUpload`. Focus is now automatically set to the file upload when deleting files.
+- b7933ac: Fix `FileUpload` so that custom `errorMessage` is displayed
+
 ## 2.0.0-canary.55
 
 ### Minor Changes
