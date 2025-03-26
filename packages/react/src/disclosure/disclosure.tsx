@@ -239,6 +239,7 @@ const DisclosurePanel = ({ ref, children, ...props }: DisclosurePanelProps) => {
         >
           <Provider
             values={[
+              // Reset the context to avoid passing the same context to children, in case of nested Disclosures
               [DisclosureContext, null],
               [ButtonContext, null],
             ]}
