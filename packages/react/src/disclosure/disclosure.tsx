@@ -1,7 +1,8 @@
 import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
-import { filterDOMProps } from '@react-aria/utils';
+import { filterDOMProps, mergeProps, mergeRefs } from '@react-aria/utils';
 import { type VariantProps, cva, cx } from 'cva';
 import {
+  type DOMAttributes,
   type ForwardedRef,
   type HTMLAttributes,
   type HTMLProps,
@@ -11,12 +12,11 @@ import {
   useId,
   useRef,
 } from 'react';
-import { useDisclosure } from 'react-aria';
+import { useDisclosure, useFocusRing } from 'react-aria';
 import {
   Button,
   ButtonContext,
   type ButtonProps,
-  type ContextValue,
   DEFAULT_SLOT,
   DisclosureContext,
   DisclosureGroup,
@@ -26,7 +26,7 @@ import {
   type DisclosureProps as RACDisclosureProps,
   useContextProps,
 } from 'react-aria-components';
-import { useDisclosureState } from 'react-stately';
+import { type DisclosureState, useDisclosureState } from 'react-stately';
 
 const disclosureButtonVariants = cva({
   base: [
@@ -96,9 +96,12 @@ const DisclosureButton = ({
 
 type DisclosureProps = RACDisclosureProps &
   RefAttributes<HTMLDivElement> & {
-    children: React.ReactNode;
     className?: string;
   };
+
+export const DisclosureStateContext = createContext<DisclosureState | null>(
+  null,
+);
 
 const Disclosure = ({ ref: _ref, children, ..._props }: DisclosureProps) => {
   const [props, ref] = useContextProps(
@@ -131,6 +134,10 @@ const Disclosure = ({ ref: _ref, children, ..._props }: DisclosureProps) => {
 
   const domProps = filterDOMProps(otherProps as HTMLProps<HTMLDivElement>);
 
+  const { isFocusVisible: isFocusVisibleWithin } = useFocusRing({
+    within: true,
+  });
+
   const panelRef = useRef<HTMLDivElement | null>(null);
   const { buttonProps, panelProps } = useDisclosure(
     {
@@ -157,17 +164,27 @@ const Disclosure = ({ ref: _ref, children, ..._props }: DisclosureProps) => {
             },
           },
         ],
-        [DisclosurePanelContext, { ...propsWithoutRole, ref: panelRef }],
+        [DisclosurePanelContext, { ...propsWithoutRole, panelRef }],
+        [DisclosureStateContext, state],
       ]}
     >
       <div
         {...domProps}
         className={otherProps.className}
         ref={ref}
+        data-focus-visible-within={isFocusVisibleWithin || undefined}
         data-expanded={state.isExpanded || undefined}
         data-disabled={isDisabled || undefined}
       >
-        {children}
+        {typeof children === 'function'
+          ? children({
+              isExpanded: state.isExpanded,
+              isFocusVisibleWithin,
+              isDisabled,
+              state,
+              defaultChildren: null,
+            })
+          : children}
       </div>
     </Provider>
   );
@@ -178,25 +195,29 @@ type DisclosurePanelProps = Omit<HTMLAttributes<HTMLDivElement>, 'role'> & {
   role?: 'group' | 'region' | 'none';
 } & RefAttributes<HTMLDivElement>;
 
-const DisclosurePanelContext = createContext<
-  ContextValue<Partial<DisclosurePanelProps>, HTMLDivElement>
->({});
+interface DisclosurePanelContextValue {
+  panelProps?: DOMAttributes<HTMLElement>;
+  panelRef?: React.RefObject<HTMLDivElement | null>;
+}
 
-const DisclosurePanel = ({ ref: _ref, ..._props }: DisclosurePanelProps) => {
+const DisclosurePanelContext = createContext<DisclosurePanelContextValue>({});
+
+const DisclosurePanel = ({ ref, children, ...props }: DisclosurePanelProps) => {
   const disclosureContext = useContext(
     DisclosureContext,
   ) as DisclosureProps | null;
 
-  const [props, ref] = useContextProps(
-    _props,
-    _ref as ForwardedRef<HTMLDivElement>,
-    DisclosurePanelContext,
-  );
+  const { panelProps, panelRef } = useContext(DisclosurePanelContext);
   const { role: _role = 'group', className, ...restProps } = props;
   const ariaLabelledby =
-    _props['aria-labelledby'] ?? restProps['aria-labelledby'];
+    props['aria-labelledby'] ?? restProps['aria-labelledby'];
   const isWithoutRole = _role === 'none';
   const role = isWithoutRole ? undefined : _role;
+
+  const { isFocusVisible: isFocusVisibleWithin, focusProps: focusWithinProps } =
+    useFocusRing({ within: true });
+
+  const domProps = filterDOMProps(props);
 
   return (
     <div
@@ -207,12 +228,25 @@ const DisclosurePanel = ({ ref: _ref, ..._props }: DisclosurePanelProps) => {
     >
       <div className="overflow-hidden">
         <div
+          ref={mergeRefs(ref, panelRef)}
+          {...mergeProps(panelProps, focusWithinProps)}
           {...restProps}
+          {...domProps}
+          data-focus-visible-within={isFocusVisibleWithin || undefined}
           className={cx(className, '[content-visibility:visible]')}
-          ref={ref}
           role={role}
           aria-labelledby={isWithoutRole ? undefined : ariaLabelledby}
-        />
+        >
+          <Provider
+            values={[
+              // Reset the context to avoid passing the same context to children, in case of nested Disclosures
+              [DisclosureContext, null],
+              [ButtonContext, null],
+            ]}
+          >
+            {children}
+          </Provider>
+        </div>
       </div>
     </div>
   );
@@ -221,10 +255,10 @@ const DisclosurePanel = ({ ref: _ref, ..._props }: DisclosurePanelProps) => {
 export {
   Disclosure as UNSAFE_Disclosure,
   DisclosureButton as UNSAFE_DisclosureButton,
-  DisclosurePanel as UNSAFE_DisclosurePanel,
   DisclosureGroup as UNSAFE_DisclosureGroup,
+  DisclosurePanel as UNSAFE_DisclosurePanel,
   type DisclosureButtonProps as UNSAFE_DisclosureButtonProps,
+  type DisclosureGroupProps as UNSAFE_DisclosureGroupProps,
   type DisclosurePanelProps as UNSAFE_DisclosurePanelProps,
   type DisclosureProps as UNSAFE_DisclosureProps,
-  type DisclosureGroupProps as UNSAFE_DisclosureGroupProps,
 };
