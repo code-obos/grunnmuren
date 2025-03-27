@@ -2,9 +2,9 @@ import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
 import { Heading } from '@obosbbl/grunnmuren-react';
 import { getRouteApi } from '@tanstack/react-router';
 import { Link } from '@tanstack/react-router';
+import { cx } from 'cva';
 import { Button, Disclosure, DisclosurePanel } from 'react-aria-components';
 import { ComponentStateBadge } from './component-state-badge';
-import { cx } from 'cva';
 
 type SubNavItemProps = {
   to: string;

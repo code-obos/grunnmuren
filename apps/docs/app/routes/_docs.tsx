@@ -5,10 +5,10 @@ import { Footer } from '@/ui/footer';
 import { MainNav } from '@/ui/main-nav';
 import { Close, Menu } from '@obosbbl/grunnmuren-icons-react';
 import {
-  GrunnmurenProvider,
   UNSAFE_Disclosure as Disclosure,
-  UNSAFE_DisclosurePanel as DisclosurePanel,
   UNSAFE_DisclosureButton as DisclosureButton,
+  UNSAFE_DisclosurePanel as DisclosurePanel,
+  GrunnmurenProvider,
 } from '@obosbbl/grunnmuren-react';
 import {
   type NavigateOptions,
