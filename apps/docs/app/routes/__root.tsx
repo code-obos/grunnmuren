@@ -26,7 +26,8 @@ function RootDocument() {
       <head>
         <HeadContent />
       </head>
-      <body>
+      {/* Setting the body position to relative enables setting the backdrop on expanded menu */}
+      <body className="relative">
         <Outlet />
         <Scripts />
       </body>

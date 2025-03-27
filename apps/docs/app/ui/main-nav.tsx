@@ -1,10 +1,10 @@
-import logoUrl from '@/assets/obos_liggende_hus_svart_rgb.png?url';
 import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
 import { Heading } from '@obosbbl/grunnmuren-react';
 import { getRouteApi } from '@tanstack/react-router';
 import { Link } from '@tanstack/react-router';
 import { Button, Disclosure, DisclosurePanel } from 'react-aria-components';
 import { ComponentStateBadge } from './component-state-badge';
+import { cx } from 'cva';
 
 type SubNavItemProps = {
   to: string;
@@ -70,7 +70,11 @@ const mainNavItems = [
   },
 ];
 
-export const MainNav = () => {
+type MainNavProps = {
+  className?: string;
+};
+
+export const MainNav = ({ className }: MainNavProps) => {
   const routeApi = getRouteApi('/_docs');
   const { data } = routeApi.useLoaderData();
 
@@ -82,17 +86,12 @@ export const MainNav = () => {
 
   return (
     <nav
-      className="-order-1 w-72 max-w-full bg-sky-lightest px-5 py-9"
+      className={cx(
+        'max-w-full flex-shrink-0 basis-80 bg-sky-lightest px-5 py-9',
+        className,
+      )}
       aria-label="Navigasjonsmeny for grunnmuren"
     >
-      <Link
-        to="/"
-        aria-label="Gå til forsiden"
-        className="mb-6 ml-3 inline-block"
-      >
-        <img src={logoUrl} alt="" className="max-w-32" />
-      </Link>
-
       <ul>
         <MainNavItem title="Komponenter" subNavItems={componentsNavLinks} />
         {mainNavItems.map((mainNavItem) => (
