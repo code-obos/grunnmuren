@@ -19,6 +19,7 @@ import {
 } from '@tanstack/react-router';
 import { Link } from '@tanstack/react-router';
 import { defineQuery } from 'groq';
+import { useEffect, useState } from 'react';
 
 const COMPONENTS_NAVIGATION_QUERY = defineQuery(
   // make sure the slug is always a string so we don't have add fallback value in code just to make TypeScript happy
@@ -42,6 +43,18 @@ export const Route = createFileRoute('/_docs')({
 function RootLayout() {
   const router = useRouter();
 
+  const [isMobileNavExpanded, setIsMobileNavExpanded] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = router.history.subscribe(() => {
+      setIsMobileNavExpanded(false);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [router]);
+
   return (
     <>
       <GrunnmurenProvider
@@ -52,32 +65,31 @@ function RootLayout() {
         navigate={(to, options) => router.navigate({ to, ...options })}
         useHref={(to) => router.buildLocation({ to }).href}
       >
-        <Disclosure>
-          {({ isExpanded }) => (
-            <>
-              <header className="relative z-[3] flex items-center justify-between bg-blue-dark px-8 py-2 text-white">
-                <Link to="/" aria-label="Gå til forsiden" className="py-2.5">
-                  <img src={logoUrl} alt="" className="h-6" />
-                </Link>
-                <DisclosureButton className="lg:hidden" aria-label="Meny">
-                  {isExpanded ? (
-                    <Close className="h-6 w-6" />
-                  ) : (
-                    <Menu className="h-6 w-6" />
-                  )}
-                </DisclosureButton>
-              </header>
-              <div className="relative lg:hidden">
-                <div className="absolute top-0 left-0 z-[3] w-full">
-                  <DisclosurePanel>
-                    <MainNav className="min-h-svh" />
-                  </DisclosurePanel>
-                </div>
-              </div>
-              {isExpanded && (
-                <div className="absolute inset-0 z-[2] bg-black opacity-70" />
+        <Disclosure
+          isExpanded={isMobileNavExpanded}
+          onExpandedChange={setIsMobileNavExpanded}
+        >
+          <header className="relative z-[3] flex items-center justify-between bg-blue-dark px-8 py-2 text-white">
+            <Link to="/" aria-label="Gå til forsiden" className="py-2.5">
+              <img src={logoUrl} alt="" className="h-6" />
+            </Link>
+            <DisclosureButton className="lg:hidden" aria-label="Meny">
+              {isMobileNavExpanded ? (
+                <Close className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
               )}
-            </>
+            </DisclosureButton>
+          </header>
+          <div className="relative lg:hidden">
+            <div className="absolute top-0 left-0 z-[3] w-full">
+              <DisclosurePanel>
+                <MainNav className="min-h-svh" />
+              </DisclosurePanel>
+            </div>
+          </div>
+          {isMobileNavExpanded && (
+            <div className="absolute inset-0 z-[2] bg-black opacity-70" />
           )}
         </Disclosure>
 
