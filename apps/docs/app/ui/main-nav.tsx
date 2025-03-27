@@ -78,11 +78,27 @@ export const MainNav = ({ className }: MainNavProps) => {
   const routeApi = getRouteApi('/_docs');
   const { data } = routeApi.useLoaderData();
 
-  const componentsNavLinks = data.map((component) => ({
+  // Extract components and menu data
+  const components = data.components || [];
+  const menuData = data.menu || { categories: [] };
+
+  const componentsNavLinks = components.map((component) => ({
     to: `/komponenter/${component.slug}`,
     title: component.name as string,
     componentState: component.componentState,
   }));
+
+  // Transform categories into nav items
+  const categoryNavItems =
+    menuData.categories?.map((category) => ({
+      title: category.title,
+      subNavItems:
+        category.categoryItems?.map((item) => ({
+          // Changed from `/${category.slug}/${item.slug}` to just `/${item.slug}, in case we want landing pages, we need to change it back`
+          to: `/${item.slug}`,
+          title: item.name,
+        })) || [],
+    })) || [];
 
   return (
     <nav
@@ -93,10 +109,17 @@ export const MainNav = ({ className }: MainNavProps) => {
       aria-label="Navigasjonsmeny for grunnmuren"
     >
       <ul>
-        <MainNavItem title="Komponenter" subNavItems={componentsNavLinks} />
         {mainNavItems.map((mainNavItem) => (
           <MainNavItem key={mainNavItem.title} {...mainNavItem} />
         ))}
+
+        {categoryNavItems.map((categoryItem) => (
+          <MainNavItem key={categoryItem.title} {...categoryItem} />
+        ))}
+
+        <hr />
+
+        <MainNavItem title="Komponenter" subNavItems={componentsNavLinks} />
       </ul>
     </nav>
   );
