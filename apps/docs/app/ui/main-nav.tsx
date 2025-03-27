@@ -94,7 +94,6 @@ export const MainNav = ({ className }: MainNavProps) => {
       title: category.title,
       subNavItems:
         category.categoryItems?.map((item) => ({
-          // Changed from `/${category.slug}/${item.slug}` to just `/${item.slug}, in case we want landing pages, we need to change it back`
           to: `/${item.slug}`,
           title: item.name,
         })) || [],
