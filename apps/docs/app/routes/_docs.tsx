@@ -89,7 +89,7 @@ function RootLayout() {
             </div>
           </div>
           {isMobileNavExpanded && (
-            <div className="absolute inset-0 z-[2] bg-black opacity-70" />
+            <div className="absolute inset-0 z-[2] bg-black opacity-70 lg:hidden" />
           )}
         </Disclosure>
 
