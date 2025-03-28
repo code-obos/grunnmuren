@@ -46,7 +46,6 @@ export default defineConfig({
                       ),
                     S.divider(),
                     ...CATEGORIES.map((category) => {
-                      console.log(category);
                       return S.listItem()
                         .title(category.title)
                         .id(category._id)
@@ -81,17 +80,15 @@ export default defineConfig({
       const singletonTypes = new Set(['menu']);
       // Check if the context is that of the top level "Create" button in the header
       if (creationContext.type === 'global') {
-        return (
-          templateItems
-            // Filter away singletons
-            .filter(({ templateId }) => {
-              return !singletonTypes.has(templateId);
-            })
-            .map((template) => ({
-              ...template,
-            }))
-        );
+        const nonSingletonTemplateItems = [] as typeof templateItems;
+        for (const item of templateItems) {
+          if (!singletonTypes.has(item.templateId)) {
+            nonSingletonTemplateItems.push(item);
+          }
+        }
+        return nonSingletonTemplateItems;
       }
+
       return templateItems;
     },
   },
