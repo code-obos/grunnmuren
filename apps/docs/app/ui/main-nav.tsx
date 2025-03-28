@@ -79,8 +79,8 @@ export const MainNav = ({ className }: MainNavProps) => {
   const { data } = routeApi.useLoaderData();
 
   // Extract components and menu data
-  const components = data.components || [];
-  const menuData = data.menu || { categories: [] };
+  const components = data.components ?? [];
+  const menuData = data.menu ?? { categories: [] };
 
   const componentsNavLinks = components.map((component) => ({
     to: `/komponenter/${component.slug}`,
@@ -96,8 +96,8 @@ export const MainNav = ({ className }: MainNavProps) => {
         category.categoryItems?.map((item) => ({
           to: `/${item.slug}`,
           title: item.name,
-        })) || [],
-    })) || [];
+        })) ?? [],
+    })) ?? [];
 
   return (
     <nav
