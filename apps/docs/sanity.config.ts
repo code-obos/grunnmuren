@@ -60,7 +60,6 @@ export default defineConfig({
                             .documentId(category._id),
                         );
                     }),
-                    //S.documentList().schemaType('category').title('Categories'),
                   ]),
               ),
             S.divider(),

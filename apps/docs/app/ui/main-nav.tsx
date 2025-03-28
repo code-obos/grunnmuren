@@ -108,15 +108,14 @@ export const MainNav = ({ className }: MainNavProps) => {
       aria-label="Navigasjonsmeny for grunnmuren"
     >
       <ul>
-        {mainNavItems.map((mainNavItem) => (
-          <MainNavItem key={mainNavItem.title} {...mainNavItem} />
-        ))}
-
         {categoryNavItems.map((categoryItem) => (
           <MainNavItem key={categoryItem.title} {...categoryItem} />
         ))}
 
         <hr />
+        {mainNavItems.map((mainNavItem) => (
+          <MainNavItem key={mainNavItem.title} {...mainNavItem} />
+        ))}
 
         <MainNavItem title="Komponenter" subNavItems={componentsNavLinks} />
       </ul>
