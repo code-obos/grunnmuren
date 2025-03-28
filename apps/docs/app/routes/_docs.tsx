@@ -21,10 +21,19 @@ import { Link } from '@tanstack/react-router';
 import { defineQuery } from 'groq';
 import { useEffect, useState } from 'react';
 
-const COMPONENTS_NAVIGATION_QUERY = defineQuery(
-  // make sure the slug is always a string so we don't have add fallback value in code just to make TypeScript happy
-  `*[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc)`,
-);
+const NAVIGATION_QUERY = defineQuery(`{
+  "components": *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc),
+  "menu": *[_type == "menu"][0]{
+    categories[]->{
+      title,
+      "slug": slug.current,
+      categoryItems[]->{
+        name,
+        "slug": slug.current
+      }
+    }
+  }
+}`);
 
 // This is the shared layout for all the Grunnmuren docs pages that are "public", ie not the Sanity studio
 export const Route = createFileRoute('/_docs')({
@@ -37,7 +46,7 @@ export const Route = createFileRoute('/_docs')({
       },
     ],
   }),
-  loader: () => sanityFetch({ query: COMPONENTS_NAVIGATION_QUERY }),
+  loader: () => sanityFetch({ query: NAVIGATION_QUERY }),
 });
 
 function RootLayout() {
