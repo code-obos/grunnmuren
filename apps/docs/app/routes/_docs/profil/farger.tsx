@@ -52,7 +52,7 @@ function RouteComponent() {
       <div className="prose mb-12">
         <p>Grunnmuren har {Object.keys(colors).length} forskjellige farger.</p>
       </div>
-      <div className="grid grid-cols-[repeat(auto-fill,_130px)] content-center gap-6">
+      <div className="grid grid-cols-[repeat(auto-fill,130px)] content-center gap-6">
         {Object.entries(colors).map(([name, value]) => (
           <Color key={name} name={name} value={value} />
         ))}
