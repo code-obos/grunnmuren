@@ -75,4 +75,24 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
   },
+  document: {
+    newDocumentOptions: (templateItems, { creationContext }) => {
+      // Define the singleton document types
+      const singletonTypes = new Set(['menu']);
+      // Check if the context is that of the top level "Create" button in the header
+      if (creationContext.type === 'global') {
+        return (
+          templateItems
+            // Filter away singletons
+            .filter(({ templateId }) => {
+              return !singletonTypes.has(templateId);
+            })
+            .map((template) => ({
+              ...template,
+            }))
+        );
+      }
+      return templateItems;
+    },
+  },
 });
