@@ -4,6 +4,7 @@ import {
   Scripts,
   createRootRoute,
 } from '@tanstack/react-router';
+import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 
 export const Route = createRootRoute({
   head: () => ({
@@ -29,6 +30,7 @@ function RootDocument() {
       {/* Setting the body position to relative enables setting the backdrop on expanded menu */}
       <body className="relative">
         <Outlet />
+        <TanStackRouterDevtools position="bottom-right" />
         <Scripts />
       </body>
     </html>
