@@ -112,7 +112,7 @@ export const MainNav = ({ className }: MainNavProps) => {
           <MainNavItem key={categoryItem.title} {...categoryItem} />
         ))}
 
-        <hr />
+        <hr className="my-4" />
         {mainNavItems.map((mainNavItem) => (
           <MainNavItem key={mainNavItem.title} {...mainNavItem} />
         ))}
