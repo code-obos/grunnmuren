@@ -8,10 +8,12 @@
   "license": "MIT",
   "type": "commonjs",
   "exports": {
-    ".": "./tailwind-base.cjs"
+    ".": "./tailwind-base.cjs",
+    "./css": "./tailwind-base.css"
   },
   "files": [
     "tailwind-base.cjs",
+    "tailwind-base.css",
     "fonts/font-fallback.js"
   ],
   "scripts": {

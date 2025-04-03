@@ -141,7 +141,7 @@ const Alertbox = ({
         <button
           className={cx(
             '-m-2 grid h-11 w-11 place-items-center rounded-xl',
-            'focus-visible:-outline-offset-8 focus-visible:outline-focus',
+            'focus-visible:-outline-offset-8 cursor-pointer focus-visible:outline-focus',
           )}
           onClick={close}
           aria-label={translations.close[locale]}

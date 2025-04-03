@@ -31,7 +31,7 @@ const ModalOverlay = (props: ModalOverlayProps) => (
     isDismissable
     className={({ isEntering, isExiting }) =>
       cx(
-        'fixed inset-0 z-10 flex min-h-full items-center justify-center overflow-y-auto bg-black/25 p-4 text-center backdrop-blur',
+        'fixed inset-0 z-10 flex min-h-full items-center justify-center overflow-y-auto bg-black/25 p-4 text-center backdrop-blur-sm',
         isEntering && 'fade-in animate-in duration-300 ease-out',
         isExiting && 'fade-out animate-out duration-200 ease-in',
         // Using the motion-safe class does not work, so we use motion-reduce to overwrite instead
@@ -94,7 +94,7 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => {
                           <Button
                             slot="close" // RAC Dialog suppors one close button out of the box, so we utilize that here. For other close buttons we use ButtonContext
                             variant="tertiary"
-                            className="!px-2.5 data-[focus-visible]:outline-focus-inset"
+                            className="!px-2.5 data-focus-visible:outline-focus-inset"
                             aria-label={translations.close[locale]}
                           >
                             <Close />

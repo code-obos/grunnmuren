@@ -201,8 +201,8 @@ const cardLinkVariants = cva({
         'after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
         // **** Focus ****
         'focus-visible:outline-none',
-        'data-[focus-visible]:after:outline-focus',
-        'data-[focus-visible]:after:outline-offset-2',
+        'data-focus-visible:after:outline-focus',
+        'data-focus-visible:after:outline-offset-2',
         // **** Hover ****
         // Links are underlined by default, and the underline is removed on hover.
         // So we make sure that also happens when the user hovers the clickable area.

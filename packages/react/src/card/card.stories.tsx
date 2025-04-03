@@ -382,7 +382,7 @@ export const ClickableWithOtherClickableElementsAndBackgroundColor = () => (
       <Button
         href="#other-link"
         variant="tertiary"
-        className="focus-visible:outline-current"
+        className="data-focus-visible:outline-current"
       >
         Se prospekt
         <Documents />

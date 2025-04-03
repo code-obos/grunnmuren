@@ -1,0 +1,188 @@
+@import "tailwindcss";
+@import "./tailwind-typography";
+
+@theme {
+  /*** Font stacks ***/
+  --font-display: OBOSDisplay, sans-serif;
+  --font-text: OBOSText, sans-serif;
+
+  /*** Widths ***/
+  --container-width: 92rem;
+  --container-gutter-width: 1rem;
+
+  /*** Colors ***/
+  --color-black: #333;
+  --color-white: #fff;
+  --color-gray: #818181;
+  --color-gray-dark: #595959;
+  --color-gray-light: #e6e6e6;
+  --color-gray-lightest: #f1f1f1;
+  --color-sky: #bedfec;
+  --color-sky-light: #deeff5;
+  --color-sky-lightest: #ebf5f9;
+  --color-mint: #cdece2;
+  --color-mint-light: #e6f5f0;
+  --color-mint-lightest: #f0f9f6;
+  --color-blue: #0047ba;
+  --color-blue-light: #bedfec;
+  --color-blue-lightest: #deeff5;
+  --color-blue-dark: #002169;
+  --color-green: #008761;
+  --color-green-dark: #00524c;
+  --color-green-light: #cdece2;
+  --color-green-lightest: #e6f5f0;
+  --color-red: #c0385d;
+  --color-red-light: #faedef;
+  --color-orange: #e8a74a;
+  --color-orange-light: #f8e5c9;
+  --color-yellow: #fff5d2;
+}
+
+@layer base {
+  /*
+      The default border color has changed to `currentColor` in Tailwind CSS v4,
+      so we've added these compatibility styles to make sure everything still
+      looks the same as it did with Tailwind CSS v3.
+    
+      If we ever want to remove these styles, we need to add an explicit border
+      color utility to any element that depends on these defaults.
+    */
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-light, currentColor);
+  }
+
+  @font-face {
+    font-family: OBOSText;
+    font-weight: 400;
+    font-style: normal;
+    src: url("https://www.obos.no/fonts/OBOSText-Regular.woff2") format("woff2");
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: OBOSText;
+    font-weight: 400;
+    font-style: italic;
+    src: url("https://www.obos.no/fonts/OBOSText-Italic.woff2") format("woff2");
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: OBOSText;
+    font-weight: 500;
+    font-style: normal;
+    src: url("https://www.obos.no/fonts/OBOSText-Medium.woff2") format("woff2");
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: OBOSDisplay;
+    font-weight: 600; /* SemiBold */
+    font-style: normal;
+    src: url("https://www.obos.no/fonts/OBOSDisplay-SemiBold.woff2")
+      format("woff2");
+    font-display: swap;
+  }
+
+  html {
+    @apply text-black antialiased font-normal font-text;
+  }
+
+  b {
+    font-weight: 500;
+  }
+
+  strong {
+    font-weight: 500;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  ::selection {
+    @apply bg-mint text-black;
+  }
+}
+
+/*** Layout ***/
+@utility page-layout {
+  @apply flex flex-col min-h-screen;
+}
+
+@utility page-layout-main {
+  @apply bg-white grow;
+}
+
+@utility container {
+  @apply w-full px-(--container-gutter-width) mx-auto max-w-(--container-width);
+}
+
+@utility container-prose {
+  @apply w-full px-(--container-gutter-width) mx-auto;
+  max-width: 45.5rem;
+}
+
+/*** Typography styles ***/
+@utility heading-xl {
+  @apply font-display font-semibold text-[2.8125rem]/[3.625rem] lg:text-[3.9375rem]/[5.125rem];
+}
+
+@utility heading-l {
+  @apply font-display font-semibold text-[1.8125rem]/[2.75rem] lg:text-[2.25rem]/[3.5rem];
+}
+
+@utility heading-m {
+  @apply font-text font-medium text-[1.4375rem]/[2.25rem] lg:text-[1.625rem]/[2.5625rem];
+}
+
+@utility heading-s {
+  @apply font-text font-medium text-[1.1875rem]/[1.1875rem] lg:text-[1.3125rem]/[2.125rem];
+}
+
+@utility heading-xs {
+  @apply font-text font-medium text-[1.125rem]/[1.75rem] lg:text-[1.1875rem]/[1.9375rem];
+}
+
+@utility paragraph {
+  @apply text-[1rem]/[1.625rem];
+}
+
+@utility lead {
+  @apply font-medium text-[1.4375rem]/[2.25rem] lg:text-[1.625rem]/[2.5625rem];
+}
+
+@utility blockquote {
+  @apply font-medium italic grid grid-cols-[3rem_1fr] gap-x-[0.4375rem] pt-4 text-[1.625rem]/[2.5625rem] lg:text-[1.4375rem]/[2.25rem] before:text-[4.6875rem]/[1.6875rem] before:font-display before:not-italic before:content-["“"];
+}
+
+@utility description {
+  @apply text-[0.875rem]/[1.375rem] lg:text-[0.875rem]/[1.4375rem];
+}
+
+/* Focus styles */
+@utility outline-focus {
+  @apply outline-2 outline-black;
+}
+
+@utility outline-focus-offset {
+  @apply outline-focus outline-offset-2;
+}
+
+@utility outline-focus-inset {
+  @apply outline-focus -outline-offset-4;
+}
+
+@utility ring-focus {
+  @apply ring-2 ring-black;
+}
+
+@utility ring-focus-offset {
+  @apply ring-focus ring-offset-2;
+}
+
+/* TODO: Font fallback */

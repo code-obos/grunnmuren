@@ -117,6 +117,16 @@ export const Prose = () => (
     </p>
 
     <p className="description">Ved stor pågang vil det være noe ventetid.</p>
+    <ul>
+      <li>hei</li>
+      <li>på</li>
+      <li>deg</li>
+    </ul>
+    <ol>
+      <li>hei</li>
+      <li>på</li>
+      <li>deg</li>
+    </ol>
   </div>
 );
 

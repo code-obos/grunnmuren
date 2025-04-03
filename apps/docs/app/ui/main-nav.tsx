@@ -37,7 +37,7 @@ const MainNavItem = ({ title, subNavItems }: MainNavItemProps) => (
       <Heading level={2}>
         <Button
           slot="trigger"
-          className="group flex w-full cursor-pointer place-items-center justify-between rounded-md p-3 font-semibold focus-visible:outline-focus-inset data-focus-visible:outline-focus [&:not([data-focus-visible])]:outline-hidden"
+          className="group flex w-full cursor-pointer place-items-center justify-between rounded-md p-3 font-semibold focus-visible:outline-focus focus-visible:outline-focus-inset"
         >
           {title}
           <ChevronDown className="flex-none transition-transform duration-300 group-aria-expanded:rotate-180 motion-reduce:transition-none" />

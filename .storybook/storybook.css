@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "@obosbbl/grunnmuren-tailwind/css";
 
 @config '../tailwind.config.ts';
 
@@ -18,4 +18,9 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
+}
+
+@theme {
+  --color-avocado-600: oklch(0.53 0.12 118.34);
+  --color-green-500: oklch(0.53 0.12 118.34);
 }

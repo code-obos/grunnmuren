@@ -17,7 +17,7 @@ import { useLocale } from '../use-locale';
 
 const buttonVariants = cva({
   base: [
-    'inline-flex min-h-[44px] cursor-pointer items-center justify-center whitespace-nowrap rounded-lg font-medium transition-colors duration-200 focus-visible:outline-focus-offset [&:not([data-focus-visible])]:outline-none',
+    'inline-flex min-h-[44px] cursor-pointer items-center justify-center whitespace-nowrap rounded-lg font-medium transition-colors duration-200 focus-visible:outline-focus-offset',
   ],
   variants: {
     /**
@@ -35,10 +35,9 @@ const buttonVariants = cva({
      * @default green
      */
     color: {
-      green: 'data-[focus-visible]:outline-focus',
-      mint: 'data-[focus-visible]:outline-focus data-[focus-visible]:outline-mint',
-      white:
-        'data-[focus-visible]:outline-focus data-[focus-visible]:outline-white',
+      green: 'focus-visible:outline-focus',
+      mint: 'focus-visible:outline-focus focus-visible:outline-mint',
+      white: 'focus-visible:outline-focus focus-visible:outline-white',
     },
     /**
      * When the button is without text, but with a single icon.
