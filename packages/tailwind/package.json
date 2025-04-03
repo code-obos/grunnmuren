@@ -8,7 +8,8 @@
   "license": "MIT",
   "type": "commonjs",
   "exports": {
-    ".": "./tailwind-base.css"
+    ".": "./tailwind-base.css",
+    "./font-fallback": "./font-fallback.css"
   },
   "files": [
     "tailwind-base.cjs",

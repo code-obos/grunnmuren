@@ -69,7 +69,33 @@ for (const [fontFamilyName, fontFiles] of Object.entries(fontFilesByFamily)) {
   }
 }
 
-await Bun.write(
-  './font-fallback.js',
-  `module.exports = ${JSON.stringify(fontFallbacks)}`,
-);
+// Generate CSS content with @layer base and @theme
+let cssContent = '@layer base {\n';
+
+// Add all font-face declarations inside the @layer base
+for (const [_, fallback] of Object.entries(fontFallbacks)) {
+  cssContent += '  @font-face {\n';
+
+  // Add all CSS properties
+  for (const [property, value] of Object.entries(
+    fallback as Record<string, string>,
+  )) {
+    cssContent += `    ${property}: ${value};\n`;
+  }
+
+  cssContent += '  }\n\n';
+}
+
+cssContent += '}\n\n@theme {\n';
+
+// Add theme variables for each font family
+for (const fontFamily of Object.keys(fontFallbacks)) {
+  // Convert first letter to lowercase for the variable name
+  const varName = fontFamily.charAt(0).toLowerCase() + fontFamily.slice(1);
+  cssContent += `  --font-${varName.replace(/(OBOS|_Fallback)/gi, '').toLowerCase()}: ${fontFamily}, __${fontFamily}_Fallback, sans-serif;\n`;
+}
+
+cssContent += '}\n';
+
+// Write to ../font-fallback.css
+await Bun.write('../font-fallback.css', cssContent);

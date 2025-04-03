@@ -1,4 +1,5 @@
 @import "@obosbbl/grunnmuren-tailwind";
+@import "@obosbbl/grunnmuren-tailwind/font-fallback";
 
 @config '../../tailwind.config.ts';
 
