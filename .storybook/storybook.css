@@ -1,4 +1,4 @@
-@import "@obosbbl/grunnmuren-tailwind/css";
+@import "@obosbbl/grunnmuren-tailwind";
 
 @config '../tailwind.config.ts';
 
