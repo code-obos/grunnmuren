@@ -63,10 +63,7 @@ function Page() {
           content={data.content}
         />
 
-        <SanityContent
-          className="mb-12 grow"
-          content={data.content ?? []}
-        />
+        <SanityContent className="mb-12 grow" content={data.content ?? []} />
       </div>
     </>
   );
