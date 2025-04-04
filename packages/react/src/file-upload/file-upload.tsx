@@ -295,7 +295,7 @@ const FileUpload = ({
                   {fileName}{' '}
                   <button
                     className={cx(
-                      '-m-2 grid h-11 w-11 shrink-0 place-items-center rounded-xl',
+                      '-m-2 grid h-11 w-11 shrink-0 cursor-pointer place-items-center rounded-xl',
                       // Focus styles
                       'focus-visible:-outline-offset-8 focus-visible:outline-focus',
                     )}

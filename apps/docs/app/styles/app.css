@@ -1,3 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "@obosbbl/grunnmuren-tailwind";
+@import "@obosbbl/grunnmuren-tailwind/font-fallback";
+
+@source "../../node_modules/@obosbbl/grunnmuren-react/dist";

@@ -30,9 +30,9 @@ import { type DisclosureState, useDisclosureState } from 'react-stately';
 
 const disclosureButtonVariants = cva({
   base: [
-    'inline-flex cursor-pointer items-center justify-between rounded-lg outline-none data-[focus-visible]:outline-current data-[focus-visible]:outline-focus',
+    'inline-flex cursor-pointer items-center justify-between rounded-lg focus-visible:outline-current focus-visible:outline-focus',
     // Ensure a minimum click area of 44x44px, while making it look like it only has the size of the content
-    '-m-2.5 p-2.5 data-[focus-visible]:outline-offset-[-0.625rem]',
+    '-m-2.5 p-2.5 focus-visible:outline-offset-[-0.625rem]',
   ],
   variants: {
     withChevron: {

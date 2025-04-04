@@ -17,14 +17,14 @@ const defaultClasses = cx([
   // TODO: 1.75 here is the unit less lineheight, altough we use 1.75rem as the line height, so there is a mismatch here. Revisit this when we've worked on typography in v2. Should this be a CSS custom property instead?
   'before:mt-[calc((1em_*_1.75_-_24px)_/_2)] before:h-[24px] before:w-[24px]',
   // selected
-  'data-[selected]:before:border-black data-[selected]:before:bg-green data-[selected]:before:shadow-[inset_0_0_0_4px_rgb(255,255,255)]',
+  'data-selected:before:border-black data-selected:before:bg-green data-selected:before:shadow-[inset_0_0_0_4px_rgb(255,255,255)]',
   // hover
-  'data-[hovered]:data-[invalid]:before:bg-red-light data-[hovered]:before:border-green data-[hovered]:before:bg-green-lightest',
+  'data-hovered:data-invalid:before:bg-red-light data-hovered:before:border-green data-hovered:before:bg-green-lightest',
   // focus
-  'data-[focus-visible]:before:ring-focus-offset',
+  'data-focus-visible:before:ring-focus-offset',
   // invalid - The border is 1 px thicker when invalid. We don't actually want to change the border width, as that causes the element's size to change
   // so we use an inner outline to artifically pad the border
-  'data-[invalid]:data-[selected]:before:!bg-red data-[invalid]:before:border-red data-[invalid]:before:outline data-[invalid]:before:outline-[3px] data-[invalid]:before:outline-red data-[invalid]:before:outline-solid data-[invalid]:before:outline-offset-[-3px]',
+  'data-invalid:data-selected:before:!bg-red data-invalid:before:border-red data-invalid:before:outline data-invalid:before:outline-[3px] data-invalid:before:outline-red data-invalid:before:outline-solid data-invalid:before:outline-offset-[-3px]',
 ]);
 
 type RadioProps = {

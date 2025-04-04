@@ -27,17 +27,17 @@ function CheckmarkBox() {
         // TODO: 1.75 here is the unit less lineheight, altough we use 1.75rem as the line height, so there is a mismatch here. Revisit this when we've worked on typography in v2. Should this be a CSS custom property instead?
         'mt-[calc((1em_*_1.75_-_24px)_/_2)] h-[24px] w-[24px]',
         // selected
-        'group-data-[selected]:!border-green group-data-[selected]:!bg-green',
+        'group-data-selected:!border-green group-data-selected:!bg-green',
         // focus
-        'group-data-[focus-visible]:outline-focus-offset',
+        'group-data-focus-visible:outline-focus-offset',
         // hovered
-        'group-data-[hovered]:group-data-[invalid]:border-red group-data-[hovered]:group-data-[invalid]:bg-red-light group-data-[hovered]:border-green group-data-[hovered]:bg-green-lightest',
+        'group-data-hovered:group-data-invalid:border-red group-data-hovered:group-data-invalid:bg-red-light group-data-hovered:border-green group-data-hovered:bg-green-lightest',
         // invalid - The border is 1 px thicker when invalid. We don't actually want to change the border width, as that causes the element's size to change
         // so we use an inner shadow of 1 px instead to pad the actual border
-        'group-data-[invalid]:group-data-[selected]:shadow-none group-data-[invalid]:border-red group-data-[invalid]:shadow-[inset_0_0_0_1px] group-data-[invalid]:shadow-red',
+        'group-data-invalid:group-data-selected:shadow-none group-data-invalid:border-red group-data-invalid:shadow-[inset_0_0_0_1px] group-data-invalid:shadow-red',
       ])}
     >
-      <CheckIcon className="h-full w-full opacity-0 group-data-[selected]:opacity-100" />
+      <CheckIcon className="h-full w-full opacity-0 group-data-selected:opacity-100" />
     </span>
   );
 }

@@ -1,0 +1,25 @@
+@layer base {
+  @font-face {
+    font-family: "__OBOSText_Fallback";
+    src: local("Arial");
+    size-adjust: 100%;
+    ascent-override: 94%;
+    descent-override: 26%;
+    line-gap-override: 0%;
+  }
+
+  @font-face {
+    font-family: "__OBOSDisplay_Fallback";
+    src: local("Arial");
+    size-adjust: 100%;
+    ascent-override: 94%;
+    descent-override: 26%;
+    line-gap-override: 0%;
+  }
+
+}
+
+@theme {
+  --font-text: OBOSText, __OBOSText_Fallback, sans-serif;
+  --font-display: OBOSDisplay, __OBOSDisplay_Fallback, sans-serif;
+}

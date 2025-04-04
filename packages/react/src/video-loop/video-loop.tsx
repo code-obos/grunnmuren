@@ -103,7 +103,7 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
             ],
           )}
         >
-          <span className="grid h-12 w-12 place-items-center rounded-full bg-white outline-none">
+          <span className="grid h-12 w-12 place-items-center rounded-full bg-white outline-hidden">
             {isPlaying ? <PlayerPause /> : <PlayerPlay />}
           </span>
         </button>

@@ -15,11 +15,11 @@ const tagVariants = cva({
   base: [
     'relative flex cursor-pointer items-center gap-1 rounded-lg px-2 py-1 font-medium text-sm transition-colors duration-200',
     //Focus
-    'focus-visible:outline-focus-offset [&:not([data-focus-visible])]:outline-none',
+    'focus-visible:outline-focus-offset',
     //Border
-    'border border-2 border-blue-dark',
+    'border-2 border-blue-dark',
     //Backgrounds
-    'data-[hovered]:!bg-sky bg-white text-black aria-selected:bg-sky-light data-[allows-removing]:bg-sky-light',
+    'data-hovered:!bg-sky bg-white text-black aria-selected:bg-sky-light data-allows-removing:bg-sky-light',
     //Icons
     '[&_svg]:h-4 [&_svg]:w-4',
   ],
@@ -122,7 +122,7 @@ function Tag(props: TagProps) {
           <>
             {children}
             <Button
-              className="outline-none after:absolute after:top-0 after:right-0 after:bottom-0 after:left-0"
+              className="cursor-pointer outline-none after:absolute after:top-0 after:right-0 after:bottom-0 after:left-0"
               slot="remove"
             >
               <Close className="ml-1" />

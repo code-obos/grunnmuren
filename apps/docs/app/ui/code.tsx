@@ -29,7 +29,7 @@ const CodeSnippet = ({ value, setValue }: CodeSnippetProps) => {
   const [hasCopied, setHasCopied] = useState(false);
   // Use the same black color as the background on the editor (#1e1e1e)
   return (
-    <div className="grid grid-cols-[1fr,auto] grid-rows-[auto,1fr] bg-[#1e1e1e]">
+    <div className="grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] bg-[#1e1e1e]">
       <LiveEditor
         tabMode="focus"
         className="row-span-2 font-mono"

@@ -78,7 +78,7 @@ function RootLayout() {
           isExpanded={isMobileNavExpanded}
           onExpandedChange={setIsMobileNavExpanded}
         >
-          <header className="relative z-[3] flex items-center justify-between bg-blue-dark px-8 py-2 text-white">
+          <header className="relative z-3 flex items-center justify-between bg-blue-dark px-8 py-2 text-white">
             <Link to="/" aria-label="Gå til forsiden" className="py-2.5">
               <img src={logoUrl} alt="" className="h-6" />
             </Link>
@@ -91,14 +91,14 @@ function RootLayout() {
             </DisclosureButton>
           </header>
           <div className="relative lg:hidden">
-            <div className="absolute top-0 left-0 z-[3] w-full">
+            <div className="absolute top-0 left-0 z-3 w-full">
               <DisclosurePanel>
                 <MainNav className="min-h-svh" />
               </DisclosurePanel>
             </div>
           </div>
           {isMobileNavExpanded && (
-            <div className="absolute inset-0 z-[2] bg-black opacity-70 lg:hidden" />
+            <div className="absolute inset-0 z-2 bg-black opacity-70 lg:hidden" />
           )}
         </Disclosure>
 
