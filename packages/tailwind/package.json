@@ -12,7 +12,6 @@
     "./font-fallback": "./font-fallback.css"
   },
   "files": [
-    "tailwind-base.cjs",
     "tailwind-base.css",
     "fonts/font-fallback.js"
   ],
