@@ -22,6 +22,8 @@ The `legacyV1Compatibility` option is now removed, so your project has to be ful
 @import "@obosbbl/grunnmuren-tailwind/font-fallback";
 ```
 
+The order matters here, since the `@obosbbl/grunnmuren-tailwind/font-fallback` config overrides the font definitions of `"@obosbbl/grunnmuren-tailwind"`.
+
 Here is an example of what your main CSS file __might__ look like after migration:
 
 ``` CSS
