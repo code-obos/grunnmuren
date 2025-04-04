@@ -11,7 +11,7 @@
       "packages/icons-react/src",
       "apps/docs/component-props.ts",
       "apps/docs/sanity.types.ts",
-      "packages/tailwind/fonts/font-fallback.css",
+      "packages/tailwind/font-fallback.css",
       "./apps/docs/app.config.timestamp*"
     ]
   },
