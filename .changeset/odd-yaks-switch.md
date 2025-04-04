@@ -5,7 +5,7 @@
 
 # Upgrade to Tailwind 4
 
-Tailwind is upgraded to v4. The grunnmuren-tailwind package is now CSS-first configured. And the previously exposed JS config file is now replaced by a CSS config file.
+Tailwind is upgraded to v4. The `grunnmuren-tailwind` package is now CSS-first configured. And the previously exposed JS config file is now replaced by a CSS config file.
 
 The `legacyV1Compatibility` option is now removed, so your project has to be fully upgraded to Grunnmuren v2.
 
