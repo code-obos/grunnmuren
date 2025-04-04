@@ -90,9 +90,9 @@ cssContent += '}\n\n@theme {\n';
 
 // Add theme variables for each font family
 for (const fontFamily of Object.keys(fontFallbacks)) {
-  // Convert first letter to lowercase for the variable name
-  const varName = fontFamily.charAt(0).toLowerCase() + fontFamily.slice(1);
-  cssContent += `  --font-${varName.replace(/(OBOS|_Fallback)/gi, '').toLowerCase()}: ${fontFamily}, __${fontFamily}_Fallback, sans-serif;\n`;
+  // Define the CSS variable for each font family
+  // and remove the OBOS prefix and _Fallback suffix in the variable name
+  cssContent += `  --font-${fontFamily.replace(/(OBOS|_Fallback)/gi, '').toLowerCase()}: ${fontFamily}, __${fontFamily}_Fallback, sans-serif;\n`;
 }
 
 cssContent += '}\n';
