@@ -184,5 +184,3 @@
 @utility ring-focus-offset {
   @apply ring-focus ring-offset-2;
 }
-
-/* TODO: Font fallback */
