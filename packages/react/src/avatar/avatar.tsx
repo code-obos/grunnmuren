@@ -4,7 +4,7 @@ import { type ComponentProps, useState } from 'react';
 
 type AvatarProps = ComponentProps<'img'>;
 
-const baseClassName = 'h-20 w-20 flex-shrink-0 rounded-full';
+const baseClassName = 'h-20 w-20 shrink-0 rounded-full';
 
 const Avatar = ({
   src,
