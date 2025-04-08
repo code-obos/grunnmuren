@@ -9,7 +9,7 @@ type VideoLoopProps = {
   format: string;
   /**
    * The content of the video must have a text description, so that it is accessible to screen readers.
-   * You can either provide a just caption, just an alt text, or both a caption and an alt text.
+   * You can either provide just a caption, just an alt text, or both a caption and an alt text.
    * Make sure the alt text doesn't repeat too much of the caption text, if so just a caption is sufficent.
    * Think of this just as an alt text, but for a muted video - this text will not be visible, but read by screen readers.
    * */
