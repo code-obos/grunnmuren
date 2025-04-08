@@ -1,4 +1,5 @@
 import optimizeLocales from '@react-aria/optimize-locales-plugin';
+import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from '@tanstack/react-start/config';
 import tsConfigPaths from 'vite-tsconfig-paths';
 
@@ -20,6 +21,7 @@ export default defineConfig({
       tsConfigPaths({
         projects: ['./tsconfig.json'],
       }),
+      tailwindcss(),
     ],
     esbuild: {
       // We need to disable minification of identifiers to preserve React component names in auto generated code snippets (see `reactElementToJSXString` in file:///./app/ui/component-preview.tsx).
