@@ -1,5 +1,5 @@
 import { defineType } from 'sanity';
-import HorizontalDivider from 'studio/components/HorizontalDivider';
+import HorizontalDivider from 'studio/components/horizontal-divider';
 
 const content = defineType({
   name: 'content',
