@@ -1,4 +1,5 @@
 import { defineType } from 'sanity';
+import HorizontalDivider from 'studio/components/HorizontalDivider';
 
 const content = defineType({
   name: 'content',
@@ -14,6 +15,11 @@ const content = defineType({
         { title: 'Small heading', value: 'h4' },
         { title: 'Tiny heading', value: 'h5' },
         { title: 'Quote', value: 'blockquote' },
+        {
+          title: 'Horizontal divider',
+          value: 'hr',
+          component: HorizontalDivider,
+        },
       ],
     },
     { type: 'live-code-block' },
