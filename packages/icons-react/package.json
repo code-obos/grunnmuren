@@ -28,6 +28,6 @@
     "fs-extra": "11.3.0"
   },
   "peerDependencies": {
-    "react": "^18 || ^19"
+    "react": "^19"
   }
 }
