@@ -19,7 +19,3 @@
 
 }
 
-@theme {
-  --font-text: OBOSText, __OBOSText_Fallback, sans-serif;
-  --font-display: OBOSDisplay, __OBOSDisplay_Fallback, sans-serif;
-}

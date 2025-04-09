@@ -8,12 +8,10 @@
   "license": "MIT",
   "type": "commonjs",
   "exports": {
-    ".": "./tailwind-base.css",
-    "./font-fallback": "./font-fallback.css"
+    ".": "./tailwind-base.css"
   },
   "files": [
-    "tailwind-base.css",
-    "fonts/font-fallback.js"
+    "tailwind-base.css"
   ],
   "scripts": {
     "font-fallback": "bun --cwd=./fonts ./generate-font-fallback.ts"

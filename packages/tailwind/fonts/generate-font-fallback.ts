@@ -86,16 +86,7 @@ for (const [_, fallback] of Object.entries(fontFallbacks)) {
   cssContent += '  }\n\n';
 }
 
-cssContent += '}\n\n@theme {\n';
+cssContent += '}\n\n';
 
-// Add theme variables for each font family
-for (const fontFamily of Object.keys(fontFallbacks)) {
-  // Define the CSS variable for each font family
-  // and remove the OBOS prefix and _Fallback suffix in the variable name
-  cssContent += `  --font-${fontFamily.replace(/(OBOS|_Fallback)/gi, '').toLowerCase()}: ${fontFamily}, __${fontFamily}_Fallback, sans-serif;\n`;
-}
-
-cssContent += '}\n';
-
-// Write to ../font-fallback.css
-await Bun.write('../font-fallback.css', cssContent);
+// Write to ../font.css
+await Bun.write('../font.css', cssContent);
