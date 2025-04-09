@@ -1,10 +1,11 @@
 @import "tailwindcss";
 @import "./tailwind-typography";
+@import "./font";
 
 @theme {
   /*** Font stacks ***/
-  --font-display: OBOSDisplay, sans-serif;
-  --font-text: OBOSText, sans-serif;
+  --font-text: OBOSText, __OBOSText_Fallback, sans-serif;
+  --font-display: OBOSDisplay, __OBOSDisplay_Fallback, sans-serif;
 
   /*** Widths ***/
   --container-width: 92rem;

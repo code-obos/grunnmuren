@@ -22,8 +22,6 @@ Configure Tailwind to use the preset
 /* globals.css */
 
 @import "@obosbbl/grunnmuren-tailwind";
-/** Add this if you want to use a fallback font for the OBOS fonts */
-@import "@obosbbl/grunnmuren-tailwind/font-fallback";
 
 /** Add any auto excluded sources (typically residing in node_modules) */
 @source "../../node_modules/@obosbbl/grunnmuren-react/dist";
@@ -36,7 +34,7 @@ Fonts are automatically loaded from OBOS' CDN, so you don't have to host the fon
 
 If you use [Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP), you have to allow `https://www.obos.no` as a [font-src](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/font-src), otherwise the fonts will be blocked from loading.
 
-The preset includes a (local) fallback font to prevent [CLS](https://web.dev/articles/cls) while the fonts are loading. This is similar to the [font optimization in Next](https://nextjs.org/docs/app/building-your-application/optimizing/fonts). This is enabled by default, but can be disabled with the `includeFontFallback` option.
+The preset includes a (local) fallback font to prevent [CLS](https://web.dev/articles/cls) while the fonts are loading. This is similar to the [font optimization in Next](https://nextjs.org/docs/app/building-your-application/optimizing/fonts). This is enabled by default, and can only be disabled by a @theme override of the font variables in your own main tailwind CSS file.
 
 The fallback font metrics is generated with a script that can be run with `pnpm font-fallback` (requires [Bun](https://bun.sh/)). If the fonts are changed, the script must be rerun and the resulting file commited.
 
@@ -68,25 +66,23 @@ The preset supports the following options:
 | legacyV1Compatibility | `false`       | Configures partial compatibility with Grunnmuren v1 |
 
 ## Migrating from v2?
+Tailwind is upgraded to v4. The `grunnmuren-tailwind` package is now CSS-first configured. And the previously exposed JS config file is now replaced by a CSS config file.
+
+The `legacyV1Compatibility` option is removed, so your project has to be fully upgraded to Grunnmuren v2.
+
+The `includeFontFallback` option is also removed, and a font fallback will automatically be applied to the OBOS fonts by defaullt.
+
+## Migration
 1. Upgrade your project to Tailwind 4. You can try the [migration guide](https://tailwindcss.com/docs/upgrade-guide)
  from tailwind.
 2. Add `@import "@obosbbl/grunnmuren-tailwind";` to the top of the main CSS file of your project. This is the new CSS configuration file for Grunnmuren.
 3. If you have a JS/TS `tailwind.config` in your project and would like to keep it. You can include it in the main CSS file (mentioned in step 2), by using the `@config` directive, e.g: `@config '../tailwind.config.ts';`. Read more [here](https://tailwindcss.com/docs/functions-and-directives#compatibility).
-4. If you would like to get rid of the old `tailwind.config`. You can move all your configuration to the main CSS file of your project. Tailwind 4 has automatic content detection, but if you need to include some excluded source you can use the `@source` directive, e.g: `@source "./node_modules/@obosbbl/grunnmuren-react/dist";`. You can also extend the `@obosbbl/grunnmuren-tailwind` config by using various directives such as `@base` or `@theme`.
-5. Finally, if you want to use the font fallback option: add `@import "@obosbbl/grunnmuren-tailwind/font-fallback";` **below** `@import "@obosbbl/grunnmuren-tailwind";`:
-
-``` CSS
-@import "@obosbbl/grunnmuren-tailwind";
-@import "@obosbbl/grunnmuren-tailwind/font-fallback";
-```
-
-The order matters here, since the `@obosbbl/grunnmuren-tailwind/font-fallback` config overrides the font definitions of `"@obosbbl/grunnmuren-tailwind"`.
+4. Finally, if you would like to get rid of the old `tailwind.config`. You can move all your configuration to the main CSS file of your project. Tailwind 4 has automatic content detection, but if you need to include some excluded source you can use the `@source` directive, e.g: `@source "./node_modules/@obosbbl/grunnmuren-react/dist";`. You can also extend the `@obosbbl/grunnmuren-tailwind` config by using various directives such as `@base` or `@theme`.
 
 Here is an example of what your main CSS file __might__ look like after migration:
 
 ``` CSS
 @import "@obosbbl/grunnmuren-tailwind";
-@import "@obosbbl/grunnmuren-tailwind/font-fallback";
 
 @source "../../node_modules/@obosbbl/grunnmuren-react/dist";
 @source "../../node_modules/@code-obos/obos-layout/dist"
