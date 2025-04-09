@@ -8,10 +8,11 @@
   "license": "MIT",
   "type": "commonjs",
   "exports": {
-    ".": "./tailwind-base.cjs"
+    ".": "./tailwind-base.css",
+    "./font-fallback": "./font-fallback.css"
   },
   "files": [
-    "tailwind-base.cjs",
+    "tailwind-base.css",
     "fonts/font-fallback.js"
   ],
   "scripts": {
@@ -23,9 +24,9 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "tailwindcss": "3.4.17"
+    "tailwindcss": "4.0.17"
   },
   "peerDependencies": {
-    "tailwindcss": "^3.4.0"
+    "tailwindcss": "^4.0.0"
   }
 }

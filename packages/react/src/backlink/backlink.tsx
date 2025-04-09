@@ -40,7 +40,7 @@ function Backlink(
     <Component
       className={cx(
         className,
-        'group flex max-w-fit cursor-pointer items-center gap-3 rounded-md p-2.5 no-underline data-[focus-visible]:outline-focus [&:not([data-focus-visible])]:outline-none',
+        'group flex max-w-fit cursor-pointer items-center gap-3 rounded-md p-2.5 no-underline focus-visible:outline-focus',
       )}
       {...restProps}
       // @ts-expect-error ignore the type of the ref here
@@ -48,7 +48,7 @@ function Backlink(
     >
       <ChevronLeft
         className={cx(
-          '-ml-[0.5em] group-hover:-translate-x-1 flex-shrink-0 transition-transform duration-300',
+          '-ml-[0.5em] group-hover:-translate-x-1 shrink-0 transition-transform duration-300',
         )}
       />
       {/* This wrapper is required in order to support the custom underline created with border-bottom when the text spans over multiple lines */}

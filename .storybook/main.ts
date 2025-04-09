@@ -29,6 +29,9 @@ const config: StorybookConfig = {
           }),
           enforce: 'pre',
         },
+        // temp fix for Storybook using CJS
+        // see https://github.com/tailwindlabs/tailwindcss/discussions/16687#discussioncomment-12374574
+        (await import('@tailwindcss/vite')).default(),
       ],
     });
   },
