@@ -36,17 +36,13 @@ type AccordionItemProps = {
   ref?: Ref<HTMLDivElement>;
 };
 
-function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
+function Accordion(props: AccordionProps) {
   const { children, className, ...restProps } = props;
 
   const childCount = Children.count(children);
 
   return (
-    <div
-      {...restProps}
-      ref={ref}
-      className={cx('rounded-lg bg-white', className)}
-    >
+    <div {...restProps} className={cx('rounded-lg bg-white', className)}>
       {Children.map(children, (child, index) => (
         <>
           {child}
@@ -60,7 +56,7 @@ function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
   );
 }
 
-function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
+function AccordionItem(props: AccordionItemProps) {
   const {
     className,
     children,
@@ -109,7 +105,6 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
     <div
       {...restProps}
       className={cx('relative px-2', className)}
-      ref={ref}
       data-open={isOpen}
     >
       <Provider
