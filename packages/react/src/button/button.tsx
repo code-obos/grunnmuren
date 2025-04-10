@@ -1,6 +1,6 @@
 import { LoadingSpinner } from '@obosbbl/grunnmuren-icons-react';
 import { type VariantProps, cva } from 'cva';
-import { type Ref, forwardRef } from 'react';
+import type { Ref } from 'react';
 import { useProgressBar } from 'react-aria';
 import {
   Button as RACButton,
@@ -124,6 +124,8 @@ type ButtonOrLinkProps = VariantProps<typeof buttonVariants> & {
   isLoading?: boolean;
   /** Additional style properties for the element. */
   style?: React.CSSProperties;
+  /** Ref to the element. */
+  ref?: Ref<HTMLButtonElement | HTMLAnchorElement>;
 };
 
 type ButtonProps = (RACButtonProps | RACLinkProps) & ButtonOrLinkProps;
@@ -134,10 +136,7 @@ function isLinkProps(
   return !!props.href;
 }
 
-function Button(
-  props: ButtonProps,
-  ref: Ref<HTMLButtonElement | HTMLAnchorElement>,
-) {
+function Button(props: ButtonProps) {
   const {
     children: _children,
     color,
@@ -145,6 +144,7 @@ function Button(
     isLoading,
     variant,
     isPending: _isPending,
+    ref,
     ...restProps
   } = props;
 
@@ -181,7 +181,7 @@ function Button(
     <RACLink
       {...restProps}
       className={className}
-      ref={ref as React.ForwardedRef<HTMLAnchorElement>}
+      ref={ref as Ref<HTMLAnchorElement>}
     >
       {children}
     </RACLink>
@@ -190,12 +190,11 @@ function Button(
       {...restProps}
       className={className}
       isPending={isPending}
-      ref={ref as React.ForwardedRef<HTMLButtonElement>}
+      ref={ref as Ref<HTMLButtonElement>}
     >
       {children}
     </RACButton>
   );
 }
 
-const _Button = forwardRef(Button);
-export { _Button as Button, type ButtonProps };
+export { Button, type ButtonProps };

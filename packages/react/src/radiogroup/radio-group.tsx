@@ -1,5 +1,5 @@
 import { cx } from 'cva';
-import { type Ref, forwardRef } from 'react';
+import type { Ref } from 'react';
 import {
   RadioGroup as RACRadioGroup,
   type RadioGroupProps as RACRadioGroupProps,
@@ -21,6 +21,8 @@ type RadioGroupProps = {
   label?: React.ReactNode;
   /** Additional style properties for the element. */
   style?: React.CSSProperties;
+  /** Ref for the element. */
+  ref?: Ref<HTMLDivElement>;
 } & Omit<
   RACRadioGroupProps,
   | 'className'
@@ -31,7 +33,7 @@ type RadioGroupProps = {
   | 'orientation'
 >;
 
-function RadioGroup(props: RadioGroupProps, ref: Ref<HTMLDivElement>) {
+function RadioGroup(props: RadioGroupProps) {
   const {
     children,
     className,
@@ -53,7 +55,6 @@ function RadioGroup(props: RadioGroupProps, ref: Ref<HTMLDivElement>) {
       className={cx(className, 'flex flex-col gap-2')}
       isInvalid={isInvalid}
       isRequired={isRequired}
-      ref={ref}
     >
       {label && <Label>{label}</Label>}
       {description && <Description>{description}</Description>}
@@ -63,5 +64,4 @@ function RadioGroup(props: RadioGroupProps, ref: Ref<HTMLDivElement>) {
   );
 }
 
-const _RadioGroup = forwardRef(RadioGroup);
-export { _RadioGroup as RadioGroup, type RadioGroupProps };
+export { RadioGroup, type RadioGroupProps };

@@ -1,6 +1,6 @@
 import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
-import { type Ref, forwardRef } from 'react';
+import type { Ref } from 'react';
 import {
   Button,
   Popover,
@@ -35,15 +35,14 @@ type SelectProps<T extends object> = {
   placeholder?: string;
   /** Additional style properties for the element. */
   style?: React.CSSProperties;
+  /** Ref for the button element. */
+  ref?: Ref<HTMLButtonElement>;
 } & Omit<
   RACSelectProps<T>,
   'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style'
 >;
 
-function Select<T extends object>(
-  props: SelectProps<T>,
-  ref: Ref<HTMLButtonElement>,
-) {
+function Select<T extends object>(props: SelectProps<T>) {
   const {
     className,
     children,
@@ -51,6 +50,7 @@ function Select<T extends object>(
     errorMessage,
     label,
     isInvalid: _isInvalid,
+    ref,
     ...restProps
   } = props;
 
@@ -89,9 +89,8 @@ function Select<T extends object>(
   );
 }
 
-const _Select = forwardRef(Select);
 export {
-  _Select as Select,
+  Select,
   ListBoxItem as SelectItem,
   type SelectProps,
   type ListBoxItemProps as SelectItemProps,

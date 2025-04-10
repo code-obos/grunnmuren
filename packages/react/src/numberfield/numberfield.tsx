@@ -1,6 +1,6 @@
 // This component is based on a copy of ../textfield/TextField, refactoring is TBD: https://github.com/code-obos/grunnmuren/pull/722#issuecomment-1931478786
 import { compose, cva, cx } from 'cva';
-import { type Ref, forwardRef } from 'react';
+import type { Ref } from 'react';
 import {
   Group,
   Input,
@@ -44,6 +44,8 @@ type NumberFieldProps = {
   maxValue?: number;
   /** Defines the minimum numeric value */
   minValue?: number;
+  /** Ref for the input element. */
+  ref?: Ref<HTMLInputElement>;
 } & Omit<
   RACNumberFieldProps,
   | 'className'
@@ -71,7 +73,7 @@ const inputVariants = compose(
   }),
 );
 
-function NumberField(props: NumberFieldProps, ref: Ref<HTMLInputElement>) {
+function NumberField(props: NumberFieldProps) {
   const {
     className,
     description,
@@ -83,6 +85,7 @@ function NumberField(props: NumberFieldProps, ref: Ref<HTMLInputElement>) {
     rightAddon,
     withAddonDivider,
     size,
+    ref,
     ...restProps
   } = props;
 
@@ -128,5 +131,4 @@ function NumberField(props: NumberFieldProps, ref: Ref<HTMLInputElement>) {
   );
 }
 
-const _NumberField = forwardRef(NumberField);
-export { _NumberField as NumberField, type NumberFieldProps };
+export { NumberField, type NumberFieldProps };

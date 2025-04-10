@@ -1,6 +1,6 @@
 import { ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
-import { type Ref, forwardRef } from 'react';
+import type { Ref } from 'react';
 import {
   Link,
   Breadcrumb as RACBreadcrumb,
@@ -18,16 +18,17 @@ type BreadcrumbProps = {
 
   /** The URL to navigate to when clicking the breadcrumb. */
   href?: RACLinkProps['href'];
+  /** Ref to the element. */
+  ref?: Ref<HTMLLIElement>;
 } & Omit<RACBreadcrumbProps, 'className' | 'style'>;
 
-function Breadcrumb(props: BreadcrumbProps, ref: Ref<HTMLLIElement>) {
+function Breadcrumb(props: BreadcrumbProps) {
   const { className, children, href, ...restProps } = props;
 
   return (
     <RACBreadcrumb
       className={cx(className, 'group flex items-center')}
       {...restProps}
-      ref={ref}
     >
       {href ? (
         <Link
@@ -45,5 +46,4 @@ function Breadcrumb(props: BreadcrumbProps, ref: Ref<HTMLLIElement>) {
   );
 }
 
-const _Breadcrumb = forwardRef(Breadcrumb);
-export { _Breadcrumb as Breadcrumb, type BreadcrumbProps };
+export { Breadcrumb, type BreadcrumbProps };

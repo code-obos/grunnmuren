@@ -1,6 +1,6 @@
 import { ChevronDown, LoadingSpinner } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
-import { type Ref, forwardRef } from 'react';
+import type { Ref } from 'react';
 import {
   Button,
   Group,
@@ -46,15 +46,14 @@ type ComboboxProps<T extends object> = {
   placeholder?: string;
   /** Additional style properties for the element. */
   style?: React.CSSProperties;
+  /** Ref for the input element. */
+  ref?: Ref<HTMLInputElement>;
 } & Omit<
   RACComboboxProps<T>,
   'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style'
 >;
 
-function Combobox<T extends object>(
-  props: ComboboxProps<T>,
-  ref: Ref<HTMLInputElement>,
-) {
+function Combobox<T extends object>(props: ComboboxProps<T>) {
   const {
     className,
     children,
@@ -64,6 +63,7 @@ function Combobox<T extends object>(
     isPending: _isPending,
     label,
     isInvalid: _isInvalid,
+    ref,
     ...restProps
   } = props;
 
@@ -112,10 +112,8 @@ function Combobox<T extends object>(
   );
 }
 
-const _Combobox = forwardRef(Combobox);
-
 export {
-  _Combobox as Combobox,
+  Combobox,
   ListBoxHeader as ComboboxHeader,
   ListBoxItem as ComboboxItem,
   ListBoxSection as ComboboxSection,

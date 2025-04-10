@@ -1,5 +1,5 @@
 import { cx } from 'cva';
-import { type HTMLProps, type Ref, createContext, forwardRef } from 'react';
+import { type HTMLProps, type Ref, createContext } from 'react';
 import { type ContextValue, useContextProps } from 'react-aria-components';
 
 type HeadingProps = HTMLProps<HTMLHeadingElement> & {
@@ -10,14 +10,15 @@ type HeadingProps = HTMLProps<HTMLHeadingElement> & {
   _innerWrapper?: (children: React.ReactNode) => React.ReactNode;
   /** @private Used internally for slotted components */
   _outerWrapper?: (children: React.ReactNode) => React.ReactNode;
+  /** Ref for the element. */
+  ref?: Ref<HTMLHeadingElement>;
 };
 
 const HeadingContext = createContext<
   ContextValue<Partial<HeadingProps>, HTMLHeadingElement>
 >({});
 
-const Heading = (props: HeadingProps, ref: Ref<HTMLHeadingElement>) => {
-  // biome-ignore lint/style/noParameterAssign: fix when removing refs for React 19
+const Heading = ({ ref = null, ...props }: HeadingProps) => {
   [props, ref] = useContextProps(props, ref, HeadingContext);
 
   const {
@@ -48,10 +49,11 @@ type ContentProps = HTMLProps<HTMLDivElement> & {
   children: React.ReactNode;
   /** @private Used internally for slotted components */
   _outerWrapper?: (children: React.ReactNode) => React.ReactNode;
+  /** Ref for the element. */
+  ref?: Ref<HTMLDivElement>;
 };
 
-const Content = (props: ContentProps, ref: Ref<HTMLDivElement>) => {
-  // biome-ignore lint/style/noParameterAssign: fix when removing refs for React 19
+const Content = ({ ref = null, ...props }: ContentProps) => {
   [props, ref] = useContextProps(props, ref, ContentContext);
   const { _outerWrapper: outerWrapper, ...restProps } = props;
 
@@ -84,15 +86,12 @@ const Caption = ({ className, ...restProps }: CaptionProps) => (
 
 const Footer = (props: FooterProps) => <div {...props} data-slot="footer" />;
 
-const _Heading = forwardRef(Heading);
-const _Content = forwardRef(Content);
-
 export {
   Caption,
-  _Content as Content,
+  Content,
   ContentContext,
   Footer,
-  _Heading as Heading,
+  Heading,
   HeadingContext,
   Media,
   type CaptionProps,

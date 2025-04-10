@@ -1,7 +1,7 @@
 import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
 import { useLayoutEffect } from '@react-aria/utils';
 import { cx } from 'cva';
-import { Children, type Ref, forwardRef, useId, useState } from 'react';
+import { Children, type Ref, useId, useState } from 'react';
 import { Provider } from 'react-aria-components';
 
 import { ContentContext, HeadingContext } from '../content';
@@ -14,6 +14,8 @@ type AccordionProps = {
 
   /** Additional style properties for the element. */
   style?: React.CSSProperties;
+  /** Ref to the element. */
+  ref?: Ref<HTMLDivElement>;
 };
 
 type AccordionItemProps = {
@@ -31,6 +33,7 @@ type AccordionItemProps = {
   defaultOpen?: boolean;
   /** Handler that is called when the accordion's open state changes */
   onOpenChange?: (isOpen: boolean) => void;
+  ref?: Ref<HTMLDivElement>;
 };
 
 function Accordion(props: AccordionProps, ref: Ref<HTMLDivElement>) {
@@ -169,11 +172,9 @@ function AccordionItem(props: AccordionItemProps, ref: Ref<HTMLDivElement>) {
   );
 }
 
-const _Accordion = forwardRef(Accordion);
-const _AccordionItem = forwardRef(AccordionItem);
 export {
-  _Accordion as Accordion,
-  _AccordionItem as AccordionItem,
+  Accordion,
+  AccordionItem,
   type AccordionItemProps,
   type AccordionProps,
 };
