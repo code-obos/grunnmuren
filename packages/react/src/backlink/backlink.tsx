@@ -1,6 +1,6 @@
 import { ChevronLeft } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
-import type { Ref, CSSProperties } from 'react';
+import type { CSSProperties, Ref } from 'react';
 import {
   Button,
   type ButtonProps,
