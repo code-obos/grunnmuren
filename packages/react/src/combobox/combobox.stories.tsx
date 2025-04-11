@@ -56,7 +56,7 @@ const Template = <T extends object>(args: ComboboxProps<T>) => {
 };
 
 const ControlledTemplate = <T extends object>(args: ComboboxProps<T>) => {
-  const [value, setValue] = useState<string | number>(counties[0].name);
+  const [value, setValue] = useState<string | number | null>(counties[0].name);
 
   return (
     <div className="flex flex-col gap-2">

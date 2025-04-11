@@ -1,6 +1,6 @@
 import { ChevronLeft } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
-import { type Ref, forwardRef } from 'react';
+import type { CSSProperties, Ref } from 'react';
 import {
   Button,
   type ButtonProps,
@@ -18,6 +18,8 @@ type ButtonOrLinkProps = {
    * @default false
    */
   withUnderline?: boolean;
+  /** Ref to the element. */
+  ref?: Ref<HTMLAnchorElement | HTMLButtonElement>;
 };
 
 type BacklinkProps = (ButtonProps | RACLinkProps) & ButtonOrLinkProps;
@@ -28,24 +30,17 @@ function isLinkProps(
   return !!props.href;
 }
 
-function Backlink(
-  props: BacklinkProps,
-  ref: Ref<HTMLAnchorElement | HTMLButtonElement>,
-) {
-  const { className, children, withUnderline, ...restProps } = props;
+function Backlink(props: BacklinkProps) {
+  const { className, style, children, withUnderline, ref, ...restProps } =
+    props;
 
-  const Component = isLinkProps(props) ? Link : Button;
+  const _className = cx(
+    className,
+    'group flex max-w-fit cursor-pointer items-center gap-3 rounded-md p-2.5 no-underline focus-visible:outline-focus',
+  );
 
-  return (
-    <Component
-      className={cx(
-        className,
-        'group flex max-w-fit cursor-pointer items-center gap-3 rounded-md p-2.5 no-underline focus-visible:outline-focus',
-      )}
-      {...restProps}
-      // @ts-expect-error ignore the type of the ref here
-      ref={ref}
-    >
+  const content = (
+    <>
       <ChevronLeft
         className={cx(
           '-ml-[0.5em] group-hover:-translate-x-1 shrink-0 transition-transform duration-300',
@@ -62,9 +57,32 @@ function Backlink(
           {children}
         </span>
       </span>
-    </Component>
+    </>
+  );
+
+  if (isLinkProps(props)) {
+    return (
+      <Link
+        {...restProps}
+        className={_className}
+        style={style as CSSProperties}
+        ref={ref as Ref<HTMLAnchorElement>}
+      >
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <Button
+      {...restProps}
+      className={_className}
+      style={style as CSSProperties}
+      ref={ref as Ref<HTMLButtonElement>}
+    >
+      {content}
+    </Button>
   );
 }
 
-const _Backlink = forwardRef(Backlink);
-export { _Backlink as Backlink, type BacklinkProps };
+export { Backlink, type BacklinkProps };

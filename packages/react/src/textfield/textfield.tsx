@@ -1,5 +1,5 @@
 import { compose, cva, cx } from 'cva';
-import { type Ref, forwardRef } from 'react';
+import type { Ref } from 'react';
 import {
   Group,
   Input,
@@ -39,6 +39,8 @@ type TextFieldProps = {
   withAddonDivider?: boolean;
   /** Defines the number of characters and determines the width of the input element */
   size?: number;
+  /** Ref for the input element. */
+  ref?: Ref<HTMLInputElement>;
 } & Omit<
   RACTextFieldProps,
   'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style'
@@ -61,7 +63,7 @@ const inputVariants = compose(
   }),
 );
 
-function TextField(props: TextFieldProps, ref: Ref<HTMLInputElement>) {
+function TextField(props: TextFieldProps) {
   const {
     className,
     description,
@@ -73,6 +75,7 @@ function TextField(props: TextFieldProps, ref: Ref<HTMLInputElement>) {
     rightAddon,
     withAddonDivider,
     size,
+    ref,
     ...restProps
   } = props;
 
@@ -118,5 +121,4 @@ function TextField(props: TextFieldProps, ref: Ref<HTMLInputElement>) {
   );
 }
 
-const _TextField = forwardRef(TextField);
-export { _TextField as TextField, type TextFieldProps };
+export { TextField, type TextFieldProps };

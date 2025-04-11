@@ -1,5 +1,5 @@
 import { cx } from 'cva';
-import { type Ref, forwardRef } from 'react';
+import type { Ref } from 'react';
 import {
   TextArea as RACTextArea,
   TextField as RACTextField,
@@ -29,12 +29,14 @@ type TextAreaProps = {
    * @default 2
    */
   rows?: number;
+  /** Ref for the textarea element. */
+  ref?: Ref<HTMLTextAreaElement>;
 } & Omit<
   RACTextFieldProps,
   'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style'
 >;
 
-function TextArea(props: TextAreaProps, ref: Ref<HTMLTextAreaElement>) {
+function TextArea(props: TextAreaProps) {
   const {
     className,
     description,
@@ -42,6 +44,7 @@ function TextArea(props: TextAreaProps, ref: Ref<HTMLTextAreaElement>) {
     label,
     isInvalid: _isInvalid,
     rows,
+    ref,
     ...restProps
   } = props;
 
@@ -61,5 +64,4 @@ function TextArea(props: TextAreaProps, ref: Ref<HTMLTextAreaElement>) {
   );
 }
 
-const _TextArea = forwardRef(TextArea);
-export { _TextArea as TextArea, type TextAreaProps };
+export { TextArea, type TextAreaProps };

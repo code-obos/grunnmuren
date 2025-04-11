@@ -1,9 +1,12 @@
 import { type VariantProps, cva } from 'cva';
-import { type Ref, forwardRef } from 'react';
+import type { Ref } from 'react';
 
 type BadgeProps = VariantProps<typeof badgeVariants> & {
   children?: React.ReactNode;
+  /** Additional CSS className for the element. */
   className?: string;
+  /** Ref to the element. */
+  ref?: Ref<HTMLSpanElement>;
 };
 
 const badgeVariants = cva({
@@ -30,7 +33,7 @@ const badgeVariants = cva({
   },
 });
 
-function Badge(props: BadgeProps, ref: Ref<HTMLSpanElement>) {
+function Badge(props: BadgeProps) {
   const { className: _className, color, size, ...restProps } = props;
 
   const className = badgeVariants({
@@ -39,10 +42,7 @@ function Badge(props: BadgeProps, ref: Ref<HTMLSpanElement>) {
     size,
   });
 
-  return (
-    <span className={className} {...restProps} ref={ref} data-slot="badge" />
-  );
+  return <span className={className} {...restProps} data-slot="badge" />;
 }
 
-const _Badge = forwardRef(Badge);
-export { _Badge as Badge, type BadgeProps };
+export { Badge, type BadgeProps };

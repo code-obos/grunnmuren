@@ -1,6 +1,6 @@
 import { Check as CheckIcon } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
-import { type Ref, forwardRef } from 'react';
+import type { Ref } from 'react';
 import { useId } from 'react';
 import {
   CheckboxContext,
@@ -52,12 +52,14 @@ type CheckboxProps = {
   errorMessage?: React.ReactNode;
   /** Additional style properties for the element. */
   style?: React.CSSProperties;
+  /** Ref for the element. */
+  ref?: Ref<HTMLLabelElement>;
 } & Omit<
   RACCheckboxProps,
   'isDisabled' | 'style' | 'children' | 'isIndeterminate' | 'isReadOnly'
 >;
 
-function Checkbox(props: CheckboxProps, ref: Ref<HTMLLabelElement>) {
+function Checkbox(props: CheckboxProps) {
   const {
     children,
     className,
@@ -86,7 +88,6 @@ function Checkbox(props: CheckboxProps, ref: Ref<HTMLLabelElement>) {
           {...restProps}
           className={cx(className, defaultClasses)}
           isInvalid={isInvalid}
-          ref={ref}
         >
           <CheckmarkBox />
           {children}
@@ -112,5 +113,4 @@ function Checkbox(props: CheckboxProps, ref: Ref<HTMLLabelElement>) {
   );
 }
 
-const _Checkbox = forwardRef(Checkbox);
-export { _Checkbox as Checkbox, type CheckboxProps };
+export { Checkbox, type CheckboxProps };

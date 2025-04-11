@@ -1,5 +1,5 @@
 import { cx } from 'cva';
-import { type Ref, forwardRef } from 'react';
+import type { Ref } from 'react';
 import {
   type RadioProps as RACRAdioProps,
   Radio as RACRadio,
@@ -35,16 +35,14 @@ type RadioProps = {
   description?: React.ReactNode;
   /** Additional style properties for the element. */
   style?: React.CSSProperties;
+  /** Ref for the element. */
+  ref?: Ref<HTMLLabelElement>;
 } & Omit<RACRAdioProps, 'isDisabled' | 'children' | 'style'>;
 
-function Radio(props: RadioProps, ref: Ref<HTMLLabelElement>) {
+function Radio(props: RadioProps) {
   const { children, className, description, ...restProps } = props;
   return (
-    <RACRadio
-      {...restProps}
-      className={cx(className, defaultClasses)}
-      ref={ref}
-    >
+    <RACRadio {...restProps} className={cx(className, defaultClasses)}>
       <div>
         {children}
         {description && (
@@ -55,5 +53,4 @@ function Radio(props: RadioProps, ref: Ref<HTMLLabelElement>) {
   );
 }
 
-const _Radio = forwardRef(Radio);
-export { _Radio as Radio, type RadioProps };
+export { Radio, type RadioProps };
