@@ -4,7 +4,7 @@
 
 This is the monorepo for **Grunnmuren**, OBOS' design system.
 
-**⚠️ This branch is v2 of the design system, which is in active development and released with a canary tag. Expect frequent changes and breakage.**
+**⚠️ This branch is v2 of the design system**
 
 If you are looking for v1 of the design system, see the [v1 branch.](https://github.com/code-obos/grunnmuren/tree/v1)
 
