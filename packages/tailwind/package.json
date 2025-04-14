@@ -19,8 +19,6 @@
     "font-fallback": "bun --cwd=./fonts ./generate-font-fallback.ts"
   },
   "dependencies": {
-    "@tailwindcss/aspect-ratio": "^0.4.2",
-    "@tailwindcss/typography": "^0.5.10",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
