@@ -4,6 +4,11 @@ import { Link, type LinkProps as RACLinkProps } from 'react-aria-components';
 type CardProps = VariantProps<typeof cardVariants> & {
   children?: React.ReactNode;
   className?: string;
+  /**
+   * ARIA role for the `Card`.
+   * This is handy if you can not, or don't want to add an extra semantic HTML tag to your `Card` content, or as a wrapper for your `Card`
+   * */
+  role?: 'complementary' | 'listitem';
 };
 
 const cardVariants = cva({
