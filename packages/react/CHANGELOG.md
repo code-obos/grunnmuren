@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.2
+
+### Patch Changes
+
+- 190b924: Remove unused tailwind-deps
+
 ## 2.0.1
 
 ### Major Changes
