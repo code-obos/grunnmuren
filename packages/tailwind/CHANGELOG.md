@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.0.2
+
+### Patch Changes
+
+- 04533db: export font.css and tailwind-typography.css to the bundle
+- 190b924: Remove unused tailwind-deps
+
 ## 2.0.1
 
 ### Major Changes
