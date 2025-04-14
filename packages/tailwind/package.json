@@ -11,7 +11,10 @@
     ".": "./tailwind-base.css"
   },
   "files": [
-    "tailwind-base.css"
+    "tailwind-base.css",
+    "tailwind-typography.css",
+    "font.css",
+    "./fonts"
   ],
   "scripts": {
     "font-fallback": "bun --cwd=./fonts ./generate-font-fallback.ts"
