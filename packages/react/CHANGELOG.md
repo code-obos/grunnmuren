@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.0.3
+
+### Patch Changes
+
+- 20d8488: Fix bug where `inert` prop in `<Accordion>` is set opposite of intended.
+
 ## 2.0.2
 
 ### Patch Changes
