@@ -107,6 +107,7 @@ export function SanityContent({ content, className }: SanityContentProps) {
                 {children}
               </AnchorHeading>
             ),
+            hr: () => <hr />,
           },
         }}
       />
