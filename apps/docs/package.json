@@ -35,7 +35,7 @@
     "react": "19.0.0",
     "react-aria-components": "1.7.1",
     "react-dom": "19.0.0",
-    "react-element-to-jsx-string": "15.0.0",
+    "react-element-to-jsx-string": "17.0.1",
     "react-live": "4.1.8",
     "sanity": "3.82.0",
     "vinxi": "0.5.3"
