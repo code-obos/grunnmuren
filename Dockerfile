@@ -31,6 +31,7 @@ ENV NODE_ENV="production"
 
 COPY --from=builder /app/apps/docs/.output .output
 COPY --from=builder /app/apps/docs/.vinxi .vinxi
+COPY --from=builder /app/apps/docs/public public
 COPY --from=prod-deps /app/apps/docs/node_modules node_modules
 
 ENV PORT=3000
