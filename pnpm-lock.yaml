@@ -90,8 +90,8 @@ importers:
   apps/docs:
     dependencies:
       '@code-obos/sanity-auth':
-        specifier: 1.4.0
-        version: 1.4.0(sanity@3.82.0(@emotion/is-prop-valid@1.2.2)(@types/node@22.13.13)(@types/react@19.0.12)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.37.0)(tsx@4.19.2)(yaml@2.7.0))(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
+        specifier: 1.4.1
+        version: 1.4.1(sanity@3.82.0(@emotion/is-prop-valid@1.2.2)(@types/node@22.13.13)(@types/react@19.0.12)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.37.0)(tsx@4.19.2)(yaml@2.7.0))(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
       '@obosbbl/grunnmuren-icons-react':
         specifier: workspace:*
         version: link:../../packages/icons-react
@@ -1098,8 +1098,8 @@ packages:
     resolution: {integrity: sha512-YLPHc8yASwjNkmcDMQMY35yiWjoKAKnhUbPRszBRS0YgH+IXtsMp61j+yTcnCE3oO2DgP0U3iejLC8FTtKDC8Q==}
     engines: {node: '>=16.13'}
 
-  '@code-obos/sanity-auth@1.4.0':
-    resolution: {integrity: sha512-hOFf0ZexckPhuf5DID98Uiclgwr/lthoxLtMHAMrrhkyN7uqVomZxnrzcd30lGhfDGeg5/tEx75W9eivNRTUHA==, tarball: https://npm.pkg.github.com/download/@code-obos/sanity-auth/1.4.0/e034322684793444ff7cb90dbe4ab3abc761504f}
+  '@code-obos/sanity-auth@1.4.1':
+    resolution: {integrity: sha512-ioWvvUrgusa7IdcOeYbUINIg6UXd6PqgoR48a+8tsJ4ZON/uWh5hugsDiaDbvNkaYpXT419OIi2wiX95oUm0Bw==, tarball: https://npm.pkg.github.com/download/@code-obos/sanity-auth/1.4.1/12e933dbc0747c002bc2eb6cbce9ccf7b12219dd}
     engines: {node: '>=20'}
     peerDependencies:
       sanity: ^3.37.1
@@ -10252,7 +10252,7 @@ snapshots:
     dependencies:
       mime: 3.0.0
 
-  '@code-obos/sanity-auth@1.4.0(sanity@3.82.0(@emotion/is-prop-valid@1.2.2)(@types/node@22.13.13)(@types/react@19.0.12)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.37.0)(tsx@4.19.2)(yaml@2.7.0))(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))':
+  '@code-obos/sanity-auth@1.4.1(sanity@3.82.0(@emotion/is-prop-valid@1.2.2)(@types/node@22.13.13)(@types/react@19.0.12)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.37.0)(tsx@4.19.2)(yaml@2.7.0))(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))':
     dependencies:
       sanity: 3.82.0(@emotion/is-prop-valid@1.2.2)(@types/node@22.13.13)(@types/react@19.0.12)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.37.0)(tsx@4.19.2)(yaml@2.7.0)
       styled-components: 6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
