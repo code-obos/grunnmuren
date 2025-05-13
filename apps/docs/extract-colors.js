@@ -7,15 +7,18 @@ try {
   const file = fs.readFileSync(
     'node_modules/@obosbbl/grunnmuren-tailwind/tailwind-base.css',
   );
+
+  const colorVarPrefix = '--color-';
+
   const colors = Object.fromEntries(
     file
       .toString()
       .split('\n')
-      .filter((line) => line.includes('--color-'))
+      .filter((line) => line.includes(colorVarPrefix))
       .map((line) => {
         const [name, value] = line.split(':');
         return [
-          name.replace('--color-', '').trim(),
+          name.replace(colorVarPrefix, '').trim(),
           value.replace(';', '').trim(),
         ];
       }),
