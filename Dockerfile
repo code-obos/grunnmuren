@@ -33,9 +33,6 @@ COPY --from=builder /app/apps/docs/.output .output
 COPY --from=builder /app/apps/docs/.vinxi .vinxi
 COPY --from=prod-deps /app/apps/docs/node_modules node_modules
 
-# Verify the icons exist in the expected location
-RUN ls -la .output/public/resources/icons || echo "Icons directory not found in .output/public!"
-RUN ls -la public/resources/icons 2>/dev/null || echo "Icons directory not found in public/ (expected if properly included in .output)"
 
 ENV PORT=3000
 EXPOSE 3000
