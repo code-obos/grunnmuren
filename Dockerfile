@@ -34,7 +34,7 @@ COPY --from=builder /app/apps/docs/.vinxi .vinxi
 COPY --from=prod-deps /app/apps/docs/node_modules node_modules
 
 # Directly copy the icons to where the application expects them in production
-COPY --from=builder /app/node_modules/@obosbbl/grunnmuren-icons-svg/src/* .output/public/resources/icons/
+COPY --from=prod-deps /app/node_modules/@obosbbl/grunnmuren-icons-svg/src/* .output/public/resources/icons/
 
 # Verify the icons exist in the expected location
 RUN ls -la .output/public/resources/icons || echo "Icons directory not found in .output/public!"
