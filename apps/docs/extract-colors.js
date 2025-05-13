@@ -11,7 +11,7 @@ try {
     file
       .toString()
       .split('\n')
-      .filter((line) => line.includes('color-'))
+      .filter((line) => line.includes('--color-'))
       .map((line) => {
         const [name, value] = line.split(':');
         return [
