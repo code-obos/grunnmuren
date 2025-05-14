@@ -74,7 +74,7 @@ function Checkbox(props: CheckboxProps) {
   const descriptionId = `desc${id}`;
   const errorMessageId = `error${id}`;
 
-  const isInvalid = errorMessage != null || _isInvalid;
+  const isInvalid = !!errorMessage || _isInvalid;
 
   return (
     <div>
