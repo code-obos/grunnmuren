@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-icons-svg
 
+## 2.1.0
+
+### Minor Changes
+
+- 62fd91f: New icons: ChevronFirstPage and ChevronLastPage
+
 ## 2.0.0
 
 ### Major Changes
