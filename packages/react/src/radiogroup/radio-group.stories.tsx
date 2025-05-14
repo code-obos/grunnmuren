@@ -143,7 +143,6 @@ export const WithErrorMessage: Story = {
 
   args: {
     ...defaultProps,
-    isInvalid: true,
     errorMessage: 'Det valgte alternativet er ikke gyldig',
   },
 };
