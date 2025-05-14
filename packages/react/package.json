@@ -1,6 +1,6 @@
 {
   "name": "@obosbbl/grunnmuren-react",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Grunnmuren components in React",
   "repository": {
     "url": "https://github.com/code-obos/grunnmuren"
@@ -21,7 +21,7 @@
     "build": "bunchee"
   },
   "dependencies": {
-    "@obosbbl/grunnmuren-icons-react": "workspace:^2.0.0",
+    "@obosbbl/grunnmuren-icons-react": "workspace:^2.1.0",
     "@react-aria/form": "^3.0.14",
     "@react-aria/interactions": "^3.24.1",
     "@react-aria/utils": "^3.28.1",
