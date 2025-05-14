@@ -243,7 +243,7 @@ importers:
   packages/react:
     dependencies:
       '@obosbbl/grunnmuren-icons-react':
-        specifier: workspace:^2.0.0
+        specifier: workspace:^2.1.0
         version: link:../icons-react
       '@react-aria/form':
         specifier: ^3.0.14
