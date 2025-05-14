@@ -127,7 +127,7 @@
 }
 
 @utility heading-s {
-  @apply font-text font-medium text-[1.1875rem]/[1.1875rem] lg:text-[1.3125rem]/[2.125rem];
+  @apply font-text font-medium text-[1.1875rem]/[1.875rem] lg:text-[1.3125rem]/[2.125rem];
 }
 
 @utility heading-xs {
