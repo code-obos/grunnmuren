@@ -101,11 +101,14 @@ export const Required: Story = {
         onSubmit={(e) => {
           e.preventDefault();
           const formData = new FormData(e.target as HTMLFormElement);
+          const files = formData
+            .getAll('files')
+            .filter(
+              (file) => file instanceof File && file.size > 0 && file.name,
+            );
+
           alert(
-            `Lastet opp ${formData
-              .getAll('files')
-              .map((file) => (file as File).name)
-              .join(', ')}`,
+            `Lastet opp ${files.map((file) => (file as File).name).join(', ')}`,
           );
         }}
       >
@@ -143,17 +146,17 @@ export const InForm = () => (
     onSubmit={(e) => {
       e.preventDefault();
       const formData = new FormData(e.target as HTMLFormElement);
+      const files = formData
+        .getAll('files')
+        .filter((file) => file instanceof File && file.size > 0 && file.name);
+
       alert(
-        `Lastet opp ${formData
-          .getAll('files')
-          .map((file) => (file as File).name)
-          .join(', ')}`,
+        `Lastet opp ${files.map((file) => (file as File).name).join(', ')}`,
       );
     }}
   >
     <FileUpload
       validate={(file) => file.size < 1000000 || 'Filen er for stor'}
-      isRequired
       allowsMultiple
       name="files"
     >
