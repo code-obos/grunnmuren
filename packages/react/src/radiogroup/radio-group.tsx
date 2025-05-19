@@ -42,6 +42,7 @@ function RadioGroup(props: RadioGroupProps) {
     label,
     isRequired,
     isInvalid: _isInvalid,
+    value,
     ...restProps
   } = props;
 
@@ -52,6 +53,8 @@ function RadioGroup(props: RadioGroupProps) {
   return (
     <RACRadioGroup
       {...restProps}
+      // Tabindex is set to -1 when the value is an empty string, which makes the radio input not focusable
+      value={value === '' ? undefined : value}
       className={cx(className, 'flex flex-col gap-2')}
       isInvalid={isInvalid}
       isRequired={isRequired}
