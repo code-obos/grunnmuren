@@ -37,6 +37,6 @@
     "react": "^19"
   },
   "devDependencies": {
-    "tailwindcss": "4.0.17"
+    "tailwindcss": "4.1.7"
   }
 }
