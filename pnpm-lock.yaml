@@ -45,8 +45,8 @@ importers:
         specifier: 8.6.14
         version: 8.6.14(storybook@8.6.14(prettier@3.5.2))
       '@storybook/test-runner':
-        specifier: 0.21.3
-        version: 0.21.3(@swc/helpers@0.5.15)(@types/node@22.13.13)(storybook@8.6.14(prettier@3.5.2))
+        specifier: 0.22.0
+        version: 0.22.0(@swc/helpers@0.5.15)(@types/node@22.13.13)(storybook@8.6.14(prettier@3.5.2))
       '@tailwindcss/vite':
         specifier: 4.1.7
         version: 4.1.7(vite@6.1.1(@types/node@22.13.13)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.37.0)(tsx@4.19.2)(yaml@2.7.0))
@@ -3592,12 +3592,12 @@ packages:
       typescript:
         optional: true
 
-  '@storybook/test-runner@0.21.3':
-    resolution: {integrity: sha512-tsorR0IVYElcaTZrT/ZrH/8YDw7c+wrLDN0e3qj1WdbqU8l2IU4+a32HLXaakzdDpuTn+d8xCk4VZMlzMrmToA==}
+  '@storybook/test-runner@0.22.0':
+    resolution: {integrity: sha512-fKY6MTE/bcvMaulKXy+z0fPmRXJx1REkYMOMcGn8zn6uffyBigGgaVf/sZ+AZfibwvjzg/StWhJ9HvAM8pc14g==}
     engines: {node: ^16.10.0 || ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
-      storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
+      storybook: ^0.0.0-0 || ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0 || ^9.0.0-0
 
   '@storybook/test@8.6.14':
     resolution: {integrity: sha512-GkPNBbbZmz+XRdrhMtkxPotCLOQ1BaGNp/gFZYdGDk2KmUWBKmvc5JxxOhtoXM2703IzNFlQHSSNnhrDZYuLlw==}
@@ -13407,7 +13407,7 @@ snapshots:
       '@storybook/test': 8.6.14(storybook@8.6.14(prettier@3.5.2))
       typescript: 5.8.3
 
-  '@storybook/test-runner@0.21.3(@swc/helpers@0.5.15)(@types/node@22.13.13)(storybook@8.6.14(prettier@3.5.2))':
+  '@storybook/test-runner@0.22.0(@swc/helpers@0.5.15)(@types/node@22.13.13)(storybook@8.6.14(prettier@3.5.2))':
     dependencies:
       '@babel/core': 7.26.9
       '@babel/generator': 7.26.9
