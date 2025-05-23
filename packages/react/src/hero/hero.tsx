@@ -29,4 +29,4 @@ const Hero = ({ className, children }: HeroProps) => {
   );
 };
 
-export { Hero as UNSAFE_Hero };
+export { Hero as UNSAFE_Hero, type HeroProps as UNSAFE_HeroProps };
