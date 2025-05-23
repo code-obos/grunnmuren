@@ -69,7 +69,7 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
         aria-hidden
         ref={videoRef}
         // cursor-pointer is not working on the button below, so we add it here for the same effect
-        className="h-full w-full cursor-pointer object-cover"
+        className="h-full max-h-[inherit] w-full cursor-pointer object-cover"
         playsInline
         loop={userPrefersReducedMotion === false}
         autoPlay={userPrefersReducedMotion === false}

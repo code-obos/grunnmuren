@@ -38,6 +38,10 @@
   --color-orange: #e8a74a;
   --color-orange-light: #f8e5c9;
   --color-yellow: #fff5d2;
+
+  /** Breakpoints ***/
+  --breakpoint-3xl: 108rem;
+  --breakpoint-4xl: 120rem;
 }
 
 @layer base {
