@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { UNSAFE_Avatar as Avatar } from './avatar';
+import { Avatar } from './avatar';
 
 const meta: Meta<typeof Avatar> = {
   title: 'Avatar',
