@@ -1,5 +1,5 @@
-import type { HTMLProps } from 'react';
 import { cx } from 'cva';
+import type { HTMLProps } from 'react';
 
 type HeroProps = HTMLProps<HTMLDivElement> & {
   children: React.ReactNode;

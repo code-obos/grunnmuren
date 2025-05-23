@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Heading, Media, Content } from '../content';
-import { UNSAFE_Hero as Hero } from './hero';
+import { Content, Heading, Media } from '../content';
 import { Description } from '../label';
 import { VideoLoop } from '../video-loop';
+import { UNSAFE_Hero as Hero } from './hero';
 
 const meta: Meta<typeof Hero> = {
   title: 'Hero',
