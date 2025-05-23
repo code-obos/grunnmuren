@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.1.0
+
+### Minor Changes
+
+- 387463d: Added new breakpoints for large screens: 3xl (108rem) and 4xl (120rem). This enables better control of elements that spans the entire viewport.
+
 ## 2.0.3
 
 ### Patch Changes
