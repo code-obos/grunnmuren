@@ -25,36 +25,6 @@ const meta: Meta<typeof Hero> = {
           />
         </Media>
       </Hero>
-      <div>
-        <h2 className="heading-l">Typografi i Grunnmuren</h2>
-        <p className="paragraph">
-          Typografien i Grunnmuren defineres av tailwind-klasser. Denne teksten
-          har for eksempel klassen <code>paragraph</code>.
-        </p>
-        <h3 className="heading-m">Sitater</h3>
-        <p className="paragraph">
-          Lengre sitater kan framheves med klassen <code>blockquote</code>:
-        </p>
-        <blockquote className="blockquote">
-          Typografi er grunnmuren i all visuell kommunikasjon; den bærer
-          budskapets vekt og gir strukturen vi bygger vår forståelse på.
-        </blockquote>
-        <h3 className="heading-m">Bildetekster</h3>
-        <p className="paragraph">
-          Klassen <code>description</code> kan f.eks. brukes for bildetekster:
-        </p>
-        <figure>
-          <img
-            className="mb-4 max-w-96 bg-blue-dark p-4"
-            src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/q_auto/v1619689575/OBOS%20Merkevare/OBOS/Liggende/obos_liggende_hus_hvit.svg"
-            alt="OBOS logo"
-          />
-          <figcaption className="description">
-            OBOS sin logo har hvit tekst, og bildet må derfor ha en mørk
-            bakgrunn. Slik at man kan se hva det står.
-          </figcaption>
-        </figure>
-      </div>
     </main>
   ),
 };
@@ -82,35 +52,5 @@ export const WithVideoLoop = () => (
         />
       </Media>
     </Hero>
-    <div>
-      <h2 className="heading-l">Typografi i Grunnmuren</h2>
-      <p className="paragraph">
-        Typografien i Grunnmuren defineres av tailwind-klasser. Denne teksten
-        har for eksempel klassen <code>paragraph</code>.
-      </p>
-      <h3 className="heading-m">Sitater</h3>
-      <p className="paragraph">
-        Lengre sitater kan framheves med klassen <code>blockquote</code>:
-      </p>
-      <blockquote className="blockquote">
-        Typografi er grunnmuren i all visuell kommunikasjon; den bærer
-        budskapets vekt og gir strukturen vi bygger vår forståelse på.
-      </blockquote>
-      <h3 className="heading-m">Bildetekster</h3>
-      <p className="paragraph">
-        Klassen <code>description</code> kan f.eks. brukes for bildetekster:
-      </p>
-      <figure>
-        <img
-          className="mb-4 max-w-96 bg-blue-dark p-4"
-          src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/q_auto/v1619689575/OBOS%20Merkevare/OBOS/Liggende/obos_liggende_hus_hvit.svg"
-          alt="OBOS logo"
-        />
-        <figcaption className="description">
-          OBOS sin logo har hvit tekst, og bildet må derfor ha en mørk bakgrunn.
-          Slik at man kan se hva det står.
-        </figcaption>
-      </figure>
-    </div>
   </main>
 );
