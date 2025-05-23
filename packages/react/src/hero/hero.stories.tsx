@@ -21,7 +21,7 @@ const meta: Meta<typeof Hero> = {
         <Media>
           <img
             src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
-            alt="Random"
+            alt=""
           />
         </Media>
       </Hero>
