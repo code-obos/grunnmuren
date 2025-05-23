@@ -1,5 +1,16 @@
 # @obosbbl/grunnmuren-react
 
+## 2.1.0
+
+### Minor Changes
+
+- 14f78f3: Unflag `Avatar` as stable, you can now import without the `UNSAFE_` prefix: `import { Avatar } from '@obosbbl/grunnmuren-react'`
+- 387463d: New (unstable) `<Hero>` component that supports a `<Heading>`, `<Description>` and `<Media>`. This initial version only has one single layout, but will be extended with other layout variants in the future (breaking layout/api changes are to be expected).
+
+### Patch Changes
+
+- e3bd5a6: Fixes an accessibility issue with the `<RadioGroup>` component, where passing `value=""` as a prop caused the radio input to get `tabindex="-1"`. Which would make it inaccessible to keyboard and screen reader users.
+
 ## 2.0.4
 
 ### Patch Changes
