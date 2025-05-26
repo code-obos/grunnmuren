@@ -1,5 +1,6 @@
 import { cva, cx, type VariantProps } from 'cva';
 import type { HTMLProps } from 'react';
+import { GroupContext, Provider } from 'react-aria-components';
 
 type HeroProps = HTMLProps<HTMLDivElement> &
   VariantProps<typeof variants> & {
@@ -41,8 +42,7 @@ const variants = cva({
         // Use a grid layout for two-column layout
         'grid gap-x-16 gap-y-10 lg:grid-cols-2 lg:items-center',
         // Vertical spacing in the text content
-        '*:data-[slot="content"]:flex *:data-[slot="content"]:flex-wrap *:data-[slot="content"]:gap-x-3 *:data-[slot="content"]:gap-y-7',
-        '*:data-[slot="content"]:*:data-[slot="button"]:w-fit *:data-[slot="content"]:*:w-full',
+        '*:data-[slot="content"]:grid *:data-[slot="content"]:gap-y-7',
         // Round the corners of the media content
         '*:data-[slot="media"]:*:rounded-3xl',
         '*:data-[slot="media"]:*:aspect-[1/1]',
@@ -88,7 +88,23 @@ const Hero = ({ layout, level, className, children }: HeroProps) => {
     level,
     className,
   });
-  return <div className={cx(variantsClassName, className)}>{children}</div>;
+  return (
+    <Provider
+      values={[
+        [
+          GroupContext,
+          {
+            // Prevents the group from being announced as a group by screen readers
+            // The Group component is used to group the Hero's CTA buttons together visually, and has no semantic meaning
+            role: 'presentation',
+            className: 'flex flex-wrap gap-3 *:w-fit',
+          },
+        ],
+      ]}
+    >
+      <div className={cx(variantsClassName, className)}>{children}</div>
+    </Provider>
+  );
 };
 
 export { Hero as UNSAFE_Hero, type HeroProps as UNSAFE_HeroProps };

@@ -182,7 +182,6 @@ function Button(props: ButtonProps) {
       {...restProps}
       className={className}
       ref={ref as Ref<HTMLAnchorElement>}
-      data-slot="button"
     >
       {children}
     </RACLink>
@@ -192,7 +191,6 @@ function Button(props: ButtonProps) {
       className={className}
       isPending={isPending}
       ref={ref as Ref<HTMLButtonElement>}
-      data-slot="button"
     >
       {children}
     </RACButton>

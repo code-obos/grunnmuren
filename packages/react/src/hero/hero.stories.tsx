@@ -4,6 +4,7 @@ import { Description } from '../label';
 import { VideoLoop } from '../video-loop';
 import { UNSAFE_Hero as Hero } from './hero';
 import { Button } from '../button';
+import { Group } from 'react-aria-components';
 
 const meta: Meta<typeof Hero> = {
   title: 'Hero',
@@ -69,15 +70,17 @@ export const LandingPageTwoColumn = () => (
           spanderer både etablerings- og tinglysingsgebyret på alle medlemmer
           som flytter lånet til oss før 31. mai. Det er bank på OBOS-måten.
         </p>
-        <Button href="https://www.obos.no/bank/registrer-deg">
-          Bli bankkunde
-        </Button>
-        <Button
-          variant="secondary"
-          href="https://www.obos.no/bank/registrer-deg"
-        >
-          Mer om bank på OBOS-måten
-        </Button>
+        <Group>
+          <Button href="https://www.obos.no/bank/registrer-deg">
+            Bli bankkunde
+          </Button>
+          <Button
+            variant="secondary"
+            href="https://www.obos.no/bank/registrer-deg"
+          >
+            Mer om bank på OBOS-måten
+          </Button>
+        </Group>
       </Content>
       <Media>
         <img
