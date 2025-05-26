@@ -40,7 +40,7 @@
     "bunchee": "6.0.3",
     "fontaine": "0.5.0",
     "http-server": "14.1.1",
-    "playwright": "1.49.1",
+    "playwright": "1.52.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "storybook": "8.6.14",
