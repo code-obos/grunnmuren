@@ -54,22 +54,6 @@ const MainNavItem = ({ title, subNavItems }: MainNavItemProps) => (
   </li>
 );
 
-const mainNavItems = [
-  {
-    title: 'Profil',
-    subNavItems: [
-      {
-        to: '/profil/farger',
-        title: 'Farger',
-      },
-      {
-        to: '/profil/ikoner',
-        title: 'Ikoner',
-      },
-    ],
-  },
-];
-
 type MainNavProps = {
   className?: string;
 };
@@ -88,16 +72,46 @@ export const MainNav = ({ className }: MainNavProps) => {
     componentState: component.componentState,
   }));
 
+  const profileNavLinks =
+    menuData.categories
+      ?.filter((category) => category.title === 'Profil')
+      .flatMap(
+        ({ categoryItems }) =>
+          categoryItems?.map((item) => ({
+            to: `/${item.slug}`,
+            title: item.name ?? '',
+          })) ?? [],
+      ) ?? [];
+
+  const mainNavItems = [
+    {
+      title: 'Profil',
+      subNavItems: [
+        {
+          to: '/profil/farger',
+          title: 'Farger',
+        },
+        {
+          to: '/profil/ikoner',
+          title: 'Ikoner',
+        },
+        ...profileNavLinks,
+      ],
+    },
+  ];
+
   // Transform categories into nav items
   const categoryNavItems =
-    menuData.categories?.map((category) => ({
-      title: category.title,
-      subNavItems:
-        category.categoryItems?.map((item) => ({
-          to: `/${item.slug}`,
-          title: item.name,
-        })) ?? [],
-    })) ?? [];
+    menuData.categories
+      ?.filter((category) => category.title !== 'Profil')
+      .map((category) => ({
+        title: category.title ?? '',
+        subNavItems:
+          category.categoryItems?.map((item) => ({
+            to: `/${item.slug}`,
+            title: item.name ?? '',
+          })) ?? [],
+      })) ?? [];
 
   return (
     <nav
@@ -108,8 +122,8 @@ export const MainNav = ({ className }: MainNavProps) => {
       aria-label="Navigasjonsmeny for grunnmuren"
     >
       <ul>
-        {categoryNavItems.map((categoryItem) => (
-          <MainNavItem key={categoryItem.title} {...categoryItem} />
+        {categoryNavItems.map((categoryNavItems) => (
+          <MainNavItem key={categoryNavItems.title} {...categoryNavItems} />
         ))}
 
         <hr className="my-4" />
