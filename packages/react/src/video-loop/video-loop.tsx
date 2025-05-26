@@ -69,7 +69,7 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
         aria-hidden
         ref={videoRef}
         // cursor-pointer is not working on the button below, so we add it here for the same effect
-        className="h-full max-h-[inherit] w-full cursor-pointer object-cover"
+        className="h-full max-h-[inherit] w-full cursor-pointer rounded-[inherit] object-cover"
         playsInline
         loop={userPrefersReducedMotion === false}
         autoPlay={userPrefersReducedMotion === false}
@@ -93,6 +93,7 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
           className={cx(
             'absolute top-0 right-0 bottom-0 left-0 m-auto grid place-items-center',
             'focus-visible:outline-focus focus-visible:outline-focus-offset',
+            'rounded-[inherit]',
             // Setting the opacity to 0 before applying the transition below will ensure the button only fades in after the video has started playing
             shouldPlay && 'opacity-0',
             isPlaying && [

@@ -3,6 +3,7 @@ import { Content, Heading, Media } from '../content';
 import { Description } from '../label';
 import { VideoLoop } from '../video-loop';
 import { UNSAFE_Hero as Hero } from './hero';
+import { Button } from '../button';
 
 const meta: Meta<typeof Hero> = {
   title: 'Hero',
@@ -15,7 +16,7 @@ const meta: Meta<typeof Hero> = {
     <main className="container grid gap-y-8">
       <Hero>
         <Content>
-          <Heading level={2}>Dette er en Hero</Heading>
+          <Heading level={1}>Dette er en Hero</Heading>
           <Description>– et samarbeidsprosjekt med Nordr</Description>
         </Content>
         <Media>
@@ -39,16 +40,64 @@ export const WithImage: Story = {
 
 export const WithVideoLoop = () => (
   <main className="container grid gap-y-8">
-    <Hero>
+    <Hero layout="full-bleed">
       <Content>
-        <Heading level={2}>Dette er en Hero</Heading>
-        <Description>– et samarbeidsprosjekt med Nordr</Description>
+        <Heading level={1}>Frysjaparken</Heading>
+        <Description>
+          – det gamle industriområdet på Frysja har blitt et ettertraktet
+          nabolag
+        </Description>
       </Content>
       <Media>
         <VideoLoop
           src="https://res.cloudinary.com/obosit-prd-ch-clry/video/upload/v1732199756/Mellom%20husene/Frysja_Loop2.mp4"
           format="mp4"
           alt="En postbil kjører rundt i det moderne nabolaget på Frysja. Her finnes det fine uteområder, med husker og kafeer."
+        />
+      </Media>
+    </Hero>
+  </main>
+);
+
+export const LandingPageTwoColumn = () => (
+  <main className="container grid gap-y-8">
+    <Hero layout="two-column">
+      <Content>
+        <Heading level={1}>Bank på OBOS-måten</Heading>
+        <p>
+          Vi har satt ned renta på flere av boliglånene våre fra 2. april – og
+          spanderer både etablerings- og tinglysingsgebyret på alle medlemmer
+          som flytter lånet til oss før 31. mai. Det er bank på OBOS-måten.
+        </p>
+        <Button href="https://www.obos.no/bank/registrer-deg">
+          Bli bankkunde
+        </Button>
+        <Button
+          variant="secondary"
+          href="https://www.obos.no/bank/registrer-deg"
+        >
+          Mer om bank på OBOS-måten
+        </Button>
+      </Content>
+      <Media>
+        <img
+          src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+          alt=""
+        />
+      </Media>
+    </Hero>
+  </main>
+);
+export const LandingPageStandard = () => (
+  <main className="container grid gap-y-8">
+    <Hero level={1}>
+      <Content>
+        <Heading level={1}>Bank på OBOS-måten</Heading>
+      </Content>
+      <Media>
+        <img
+          src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+          alt=""
         />
       </Media>
     </Hero>
