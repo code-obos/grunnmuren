@@ -18,10 +18,20 @@ const variants = cva({
       standard: [
         // Wrap content in a container
         'container',
-        // Spacing between the media and the text content above it
-        '*:data-[slot="media"]:mt-10 lg:*:data-[slot="media"]:mt-12',
         // Round the corners of the media content
         '*:data-[slot="media"]:*:rounded-3xl',
+
+        // Style for aside content (badge, CTA, SVG logo etc.)
+        'grid md:grid-cols-12 md:gap-x-16',
+        'gap-y-10 lg:gap-y-12',
+        // Main text content takes up 9 columns on medium screens and above
+        'md:*:data-[slot="content"]:col-span-9',
+        // Other elements than <Content> and <Media> (e.g. CTA, SVG logo or Badge) take up 3 columns on medium screens and above, and are right aligned
+        'md:*:not-data-[slot="content"]:not-data-[slot="media"]:col-span-3 md:*:not-data-[slot="content"]:not-data-[slot="media"]:justify-self-end',
+        // <Media> content takes up the full width on medium screens and above
+        'md:*:data-[slot="media"]:col-span-full md:*:data-[slot="media"]:*:w-full',
+        // Aligns <Content> and any element beside it (e.g. <Media>, <Badge>, <CTA> etc.) to the bottom of the <Content> container
+        'md:items-end',
       ],
       'full-bleed': [
         // Wrap text content in a container
