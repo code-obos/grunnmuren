@@ -1,12 +1,12 @@
+import { ArrowRight, InfoCircle } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { Group } from 'react-aria-components';
+import { Badge } from '../badge';
+import { Button } from '../button';
 import { Content, Heading, Media } from '../content';
 import { Description } from '../label';
 import { VideoLoop } from '../video-loop';
 import { UNSAFE_Hero as Hero } from './hero';
-import { Button } from '../button';
-import { Group } from 'react-aria-components';
-import { Badge } from '../badge';
-import { ArrowRight, InfoCircle } from '@obosbbl/grunnmuren-icons-react';
 
 const meta: Meta<typeof Hero> = {
   title: 'Hero',

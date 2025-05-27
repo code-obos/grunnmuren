@@ -1,4 +1,4 @@
-import { cva, cx, type VariantProps } from 'cva';
+import { type VariantProps, cva, cx } from 'cva';
 import type { HTMLProps } from 'react';
 import { GroupContext, Provider } from 'react-aria-components';
 
@@ -11,24 +11,30 @@ const roundedMediaCorners = '*:data-[slot="media"]:*:rounded-3xl';
 
 // Common layout for "standard" and "full-bleed" Hero layouts
 const oneColumnLayout = [
+  // Vertical spacing in the <Content>
+  'lg:*:data-[slot="content"]:gap-y-4',
   // Main text content takes up 9 columns on medium screens and above
-  'md:*:data-[slot="content"]:col-span-9',
+  'lg:*:data-[slot="content"]:col-span-9',
   // Make sure other elements than <Content> and <Media> (i.e CTA) does not span the full width on small screens
   '*:not-data-[slot="content"]:not-data-[slot="media"]:w-fit',
   // Other elements than <Content> and <Media> (e.g. CTA, SVG logo or Badge) take up 3 columns on medium screens and above, and are right aligned
-  'md:*:not-data-[slot="content"]:not-data-[slot="media"]:col-span-3 md:*:not-data-[slot="content"]:not-data-[slot="media"]:justify-self-end',
+  'lg:*:not-data-[slot="content"]:not-data-[slot="media"]:col-span-3 lg:*:not-data-[slot="content"]:not-data-[slot="media"]:justify-self-end',
   // <Media> content takes up the full width on medium screens and above
-  'md:*:data-[slot="media"]:col-span-full *:data-[slot="media"]:*:w-full',
+  'lg:*:data-[slot="media"]:col-span-full *:data-[slot="media"]:*:w-full',
   // Aligns <Content> and any element beside it (e.g. <Media>, <Badge>, <CTA> etc.) to the bottom of the <Content> container
-  'md:items-end',
+  'lg:items-end',
 ];
 
 const variants = cva({
   base: [
     'container',
     // Grid layout to position the Hero's content
-    'grid md:grid-cols-12 md:gap-x-16',
+    'grid lg:grid-cols-12 lg:gap-x-12 xl:gap-x-16',
     'gap-y-10 lg:gap-y-12',
+    // Enable vertical gap within <Content>
+    '*:data-[slot="content"]:grid',
+    // Vertical spacing in the <Content>
+    '*:data-[slot="content"]:gap-y-3',
     // Make sure <Media> content fills any available vertical and horizontal space
     '*:data-[slot="media"]:*:object-cover',
   ],
@@ -42,20 +48,20 @@ const variants = cva({
       'full-bleed': [
         oneColumnLayout,
         // biome-ignore lint/nursery/useSortedClasses: biome is unable to sort the custom classes for 3xl and 4xl breakpoints
-        '*:data-[slot="media"]:h-70 sm:*:data-[slot="media"]:h-[25rem] md:*:data-[slot="media"]:h-[30rem] lg:*:data-[slot="media"]:h-[35rem] xl:*:data-[slot="media"]:h-[40rem] 2xl:*:data-[slot="media"]:h-[42rem] 3xl:*:data-[slot="media"]:h-[48rem] 4xl:*:data-[slot="media"]:h-[53rem]',
+        '*:data-[slot="media"]:h-70 sm:*:data-[slot="media"]:h-[25rem] lg:*:data-[slot="media"]:h-[30rem] lg:*:data-[slot="media"]:h-[35rem] xl:*:data-[slot="media"]:h-[40rem] 2xl:*:data-[slot="media"]:h-[42rem] 3xl:*:data-[slot="media"]:h-[48rem] 4xl:*:data-[slot="media"]:h-[53rem]',
         // Match the heights of the <Media> wrapper for the Media content (e.g. image, VideoLoop, video etc.)
         // biome-ignore lint/nursery/useSortedClasses: biome is unable to sort the custom classes for 3xl and 4xl breakpoints
-        '*:data-[slot="media"]:*:h-70 sm:*:data-[slot="media"]:*:h-[25rem] md:*:data-[slot="media"]:*:h-[30rem] lg:*:data-[slot="media"]:*:h-[35rem] xl:*:data-[slot="media"]:*:h-[40rem] 2xl:*:data-[slot="media"]:*:h-[42rem] 3xl:*:data-[slot="media"]:*:h-[48rem] 4xl:*:data-[slot="media"]:*:h-[53rem]',
+        '*:data-[slot="media"]:*:h-70 sm:*:data-[slot="media"]:*:h-[25rem] lg:*:data-[slot="media"]:*:h-[30rem] lg:*:data-[slot="media"]:*:h-[35rem] xl:*:data-[slot="media"]:*:h-[40rem] 2xl:*:data-[slot="media"]:*:h-[42rem] 3xl:*:data-[slot="media"]:*:h-[48rem] 4xl:*:data-[slot="media"]:*:h-[53rem]',
         // Position the media content to fill the entire viewport width
         '*:data-[slot="media"]:*:absolute *:data-[slot="media"]:*:left-0',
       ],
       'two-column': [
-        'md:items-center md:*:col-span-6',
+        'lg:items-center lg:*:col-span-6',
         // Vertical spacing in the <Content>
-        '*:data-[slot="content"]:grid *:data-[slot="content"]:gap-y-7',
+        'lg:*:data-[slot="content"]:gap-y-7',
         roundedMediaCorners,
         // Set media aspect ratio to 1:1 (square)
-        '*:data-[slot="media"]:*:aspect-[1/1]',
+        'lg:*:data-[slot="media"]:*:aspect-[1/1]',
       ],
     },
     /**
