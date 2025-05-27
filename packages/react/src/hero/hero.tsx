@@ -13,6 +13,7 @@ const roundedMediaCorners = '*:data-[slot="media"]:*:rounded-3xl';
 const oneColumnLayout = [
   // Main text content takes up 9 columns on medium screens and above
   'md:*:data-[slot="content"]:col-span-9',
+  // Make sure other elements than <Content> and <Media> (i.e CTA) does not span the full width on small screens
   '*:not-data-[slot="content"]:not-data-[slot="media"]:w-fit',
   // Other elements than <Content> and <Media> (e.g. CTA, SVG logo or Badge) take up 3 columns on medium screens and above, and are right aligned
   'md:*:not-data-[slot="content"]:not-data-[slot="media"]:col-span-3 md:*:not-data-[slot="content"]:not-data-[slot="media"]:justify-self-end',
