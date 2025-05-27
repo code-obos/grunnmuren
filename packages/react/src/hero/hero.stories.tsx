@@ -6,7 +6,7 @@ import { UNSAFE_Hero as Hero } from './hero';
 import { Button } from '../button';
 import { Group } from 'react-aria-components';
 import { Badge } from '../badge';
-import { InfoCircle } from '@obosbbl/grunnmuren-icons-react';
+import { ArrowRight, InfoCircle } from '@obosbbl/grunnmuren-icons-react';
 
 const meta: Meta<typeof Hero> = {
   title: 'Hero',
@@ -19,8 +19,11 @@ const meta: Meta<typeof Hero> = {
     <main className="container grid gap-y-8">
       <Hero>
         <Content>
-          <Heading level={1}>Dette er en Hero</Heading>
-          <Description>– et samarbeidsprosjekt med Nordr</Description>
+          <Heading level={1}>Jobb i OBOS</Heading>
+          <p className="lead">
+            Bli med å oppfylle boligdrømmer! Vi søker engasjerte og dyktige
+            personer som vil ta OBOS videre. Søk på våre ledige stillinger!
+          </p>
         </Content>
         <Media>
           <img
@@ -37,11 +40,19 @@ export default meta;
 
 type Story = StoryObj<typeof Hero>;
 
-export const WithImage: Story = {
+export const StandardWithLeadAndImage: Story = {
   args: {},
 };
 
-export const WithVideoLoop = () => (
+const Logo = () => (
+  <img
+    alt=""
+    src="https://brauten-eiendom.no/wp-content/uploads/sites/13/2021/08/Nordr.png"
+    className="h-12"
+  />
+);
+
+export const FullBleedWithVideoLoop = () => (
   <main className="container grid gap-y-8">
     <Hero layout="full-bleed">
       <Content>
@@ -51,6 +62,7 @@ export const WithVideoLoop = () => (
           nabolag
         </Description>
       </Content>
+      <Logo />
       <Media>
         <VideoLoop
           src="https://res.cloudinary.com/obosit-prd-ch-clry/video/upload/v1732199756/Mellom%20husene/Frysja_Loop2.mp4"
@@ -72,6 +84,7 @@ export const FullBleedWithImage = () => (
           nabolag
         </Description>
       </Content>
+      <Logo />
       <Media>
         <img
           src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
@@ -82,7 +95,7 @@ export const FullBleedWithImage = () => (
   </main>
 );
 
-export const LandingPageTwoColumn = () => (
+export const TwoColumn = () => (
   <main className="container grid gap-y-8">
     <Hero layout="two-column">
       <Content>
@@ -114,16 +127,40 @@ export const LandingPageTwoColumn = () => (
   </main>
 );
 
-export const LandingPageWithBadge = () => (
+export const StandardWithBadge = () => (
+  <main className="container grid gap-y-8">
+    <Hero level={1}>
+      <Content>
+        <Heading level={1}>Bank på OBOS-måten</Heading>
+        <Description>– et samarbeidsprosjekt med Nordr</Description>
+      </Content>
+      <Badge color="sky">
+        <InfoCircle />I salg – ingen forkjøpsrett
+      </Badge>
+      <Media>
+        <img
+          src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+          alt=""
+        />
+      </Media>
+    </Hero>
+  </main>
+);
+
+export const StandardLandingPageWithCTA = () => (
   <main className="container grid gap-y-8">
     <Hero level={1}>
       <Content>
         <Heading level={1}>Bank på OBOS-måten</Heading>
       </Content>
-      <Badge color="sky">
-        <InfoCircle />
-        Meldefrist
-      </Badge>
+      <Button
+        className="group"
+        variant="tertiary"
+        href="https://www.obos.no/bank/registrer-deg"
+      >
+        Bli bankkunde
+        <ArrowRight className="transition-transform group-hover:motion-safe:translate-x-1" />
+      </Button>
       <Media>
         <img
           src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
@@ -140,11 +177,7 @@ export const LandingPageWithLogo = () => (
       <Content>
         <Heading level={1}>Frysjaparken</Heading>
       </Content>
-      <img
-        alt=""
-        src="https://brauten-eiendom.no/wp-content/uploads/sites/13/2021/08/Nordr.png"
-        className="h-12"
-      />
+      <Logo />
       <Media>
         <VideoLoop
           src="https://res.cloudinary.com/obosit-prd-ch-clry/video/upload/v1732199756/Mellom%20husene/Frysja_Loop2.mp4"
