@@ -15,6 +15,25 @@ const meta: Meta<typeof Hero> = {
     // disable built in padding in story, because we provide our own
     layout: 'fullscreen',
   },
+  render: () => (
+    <main className="container grid gap-y-8">
+      <Hero>
+        <Content>
+          <Heading level={1}>Jobb i OBOS</Heading>
+          <p className="lead">
+            Bli med å oppfylle boligdrømmer! Vi søker engasjerte og dyktige
+            personer som vil ta OBOS videre. Søk på våre ledige stillinger!
+          </p>
+        </Content>
+        <Media>
+          <img
+            src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+            alt=""
+          />
+        </Media>
+      </Hero>
+    </main>
+  ),
 };
 
 export default meta;

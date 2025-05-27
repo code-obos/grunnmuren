@@ -2,10 +2,21 @@ import { type VariantProps, cva, cx } from 'cva';
 import type { HTMLProps } from 'react';
 import { GroupContext, Provider } from 'react-aria-components';
 
-type HeroProps = HTMLProps<HTMLDivElement> &
-  VariantProps<typeof variants> & {
-    children: React.ReactNode;
-  };
+type Variants = VariantProps<typeof variants>;
+
+type ExcludeVariants<T> = {
+  [K in keyof Variants]?: Exclude<Variants[K], T | undefined>;
+};
+
+type HeroBaseProps = HTMLProps<HTMLDivElement> & {
+  children: React.ReactNode;
+};
+
+type HeroProps1 = HeroBaseProps & ExcludeVariants<'full-bleed' | 2>;
+
+type HeroProps2 = HeroBaseProps & ExcludeVariants<'two-column' | 1>;
+
+type HeroProps = HeroProps1 | HeroProps2;
 
 const roundedMediaCorners = '*:data-[slot="media"]:*:rounded-3xl';
 
