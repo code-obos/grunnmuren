@@ -44,7 +44,7 @@
   "devDependencies": {
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
     "@react-aria/optimize-locales-plugin": "1.1.4",
-    "@tailwindcss/vite": "4.1.7",
+    "@tailwindcss/vite": "4.1.8",
     "@tanstack/react-router-devtools": "1.114.27",
     "react-docgen-typescript": "2.2.2",
     "tailwindcss": "4.1.7",
