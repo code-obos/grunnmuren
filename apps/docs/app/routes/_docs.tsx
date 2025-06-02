@@ -71,7 +71,7 @@ function RootLayout() {
         // This integrates RAC/Grunnmuren with TanStack router
         // Giving us typesafe routes
         // See https://react-spectrum.adobe.com/react-aria/routing.html#tanstack-router
-        navigate={(to, options) => router.navigate({ to, ...options })}
+        navigate={(to) => router.navigate({ to })}
         useHref={(to) => router.buildLocation({ to }).href}
       >
         <Disclosure
