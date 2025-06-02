@@ -36,6 +36,9 @@ const oneColumnLayout = [
   'lg:items-end',
 ];
 
+const level1Heading = '**:data-[slot="heading"]:heading-xl';
+const level2Heading = '**:data-[slot="heading"]:heading-l';
+
 const variants = cva({
   base: [
     'container',
@@ -80,8 +83,8 @@ const variants = cva({
      * @default 2 when layout is standard or full-bleed, 1 when layout is two-column
      */
     level: {
-      1: '**:data-[slot="heading"]:heading-xl',
-      2: '**:data-[slot="heading"]:heading-l',
+      1: level1Heading,
+      2: level2Heading,
     },
   },
   defaultVariants: {
@@ -92,19 +95,19 @@ const variants = cva({
     {
       layout: 'standard',
       level: undefined,
-      className: '**:data-[slot="heading"]:heading-l',
+      className: level2Heading,
     },
     // If the layout is full-bleed, default to level 2
     {
       layout: 'full-bleed',
       level: undefined,
-      className: '**:data-[slot="heading"]:heading-l',
+      className: level2Heading,
     },
     // If the layout is two-column, default to level 1
     {
       layout: 'two-column',
       level: undefined,
-      className: '**:data-[slot="heading"]:heading-xl',
+      className: level1Heading,
     },
   ],
 });
