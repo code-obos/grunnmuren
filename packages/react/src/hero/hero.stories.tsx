@@ -74,7 +74,7 @@ export const TwoColumn = () => (
 
 export const StandardLandingPageWithCTA = () => (
   <main className="container grid gap-y-8">
-    <Hero level={1}>
+    <Hero headingSize="xl">
       <Content>
         <Heading level={1}>Dette er OBOS</Heading>
       </Content>

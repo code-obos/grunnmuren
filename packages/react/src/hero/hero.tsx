@@ -2,21 +2,10 @@ import { type VariantProps, cva, cx } from 'cva';
 import type { HTMLProps } from 'react';
 import { GroupContext, Provider } from 'react-aria-components';
 
-type Variants = VariantProps<typeof variants>;
-
-type ExcludeVariants<T> = {
-  [K in keyof Variants]?: Exclude<Variants[K], T | undefined>;
-};
-
-type HeroBaseProps = HTMLProps<HTMLDivElement> & {
-  children: React.ReactNode;
-};
-
-type HeroProps1 = HeroBaseProps & ExcludeVariants<'full-bleed' | 2>;
-
-type HeroProps2 = HeroBaseProps & ExcludeVariants<'two-column' | 1>;
-
-type HeroProps = HeroProps1 | HeroProps2;
+type HeroProps = HTMLProps<HTMLDivElement> &
+  VariantProps<typeof variants> & {
+    children: React.ReactNode;
+  };
 
 const roundedMediaCorners = '*:data-[slot="media"]:*:rounded-3xl';
 
@@ -36,8 +25,8 @@ const oneColumnLayout = [
   'lg:items-end',
 ];
 
-const level1Heading = '**:data-[slot="heading"]:heading-xl';
-const level2Heading = '**:data-[slot="heading"]:heading-l';
+const headingXL = '**:data-[slot="heading"]:heading-xl';
+const headingL = '**:data-[slot="heading"]:heading-l';
 
 const variants = cva({
   base: [
@@ -83,31 +72,39 @@ const variants = cva({
      * @default 2 when layout is standard or full-bleed, 1 when layout is two-column
      */
     level: {
-      1: level1Heading,
-      2: level2Heading,
+      1: headingXL,
+      2: headingL,
+    },
+    /**
+     * Defines the level of the Hero in the page hierarchy
+     * @default xl
+     */
+    headingSize: {
+      xl: headingXL,
+      l: headingL,
     },
   },
   defaultVariants: {
     layout: 'standard',
   },
   compoundVariants: [
-    // If the layout is standard or unset, default to level 2
+    // If the layout is standard or unset, default to heading L
     {
       layout: 'standard',
       level: undefined,
-      className: level2Heading,
+      className: headingL,
     },
-    // If the layout is full-bleed, default to level 2
+    // If the layout is full-bleed, default to heading L
     {
       layout: 'full-bleed',
       level: undefined,
-      className: level2Heading,
+      className: headingL,
     },
-    // If the layout is two-column, default to level 1
+    // If the layout is two-column, default to level XL
     {
       layout: 'two-column',
       level: undefined,
-      className: level1Heading,
+      className: headingXL,
     },
   ],
 });
