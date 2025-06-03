@@ -1,5 +1,5 @@
 'use client';
-export { Form } from 'react-aria-components';
+export { Form, Group } from 'react-aria-components';
 
 export * from './grunnmuren-provider';
 export * from './use-locale';
