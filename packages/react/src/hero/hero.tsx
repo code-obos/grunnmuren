@@ -1,6 +1,7 @@
 import { type VariantProps, cva, cx } from 'cva';
 import type { HTMLProps } from 'react';
 import { GroupContext, Provider } from 'react-aria-components';
+import { HeadingContext } from '../content';
 
 type HeroProps = HTMLProps<HTMLDivElement> &
   VariantProps<typeof variants> & {
@@ -24,9 +25,6 @@ const oneColumnLayout = [
   // Aligns <Content> and any element beside it (e.g. <Media>, <Badge>, <CTA> etc.) to the bottom of the <Content> container
   'lg:items-end',
 ];
-
-const headingXL = '**:data-[slot="heading"]:heading-xl';
-const headingL = '**:data-[slot="heading"]:heading-l';
 
 const variants = cva({
   base: [
@@ -67,57 +65,27 @@ const variants = cva({
         'lg:*:data-[slot="media"]:*:aspect-[1/1]',
       ],
     },
-    /**
-     * Defines the level of the Hero in the page hierarchy
-     * @default 2 when layout is standard or full-bleed, 1 when layout is two-column
-     */
-    level: {
-      1: headingXL,
-      2: headingL,
-    },
-    /**
-     * Defines the level of the Hero in the page hierarchy
-     * @default xl
-     */
-    headingSize: {
-      xl: headingXL,
-      l: headingL,
-    },
   },
   defaultVariants: {
     layout: 'standard',
   },
-  compoundVariants: [
-    // If the layout is standard or unset, default to heading L
-    {
-      layout: 'standard',
-      level: undefined,
-      className: headingL,
-    },
-    // If the layout is full-bleed, default to heading L
-    {
-      layout: 'full-bleed',
-      level: undefined,
-      className: headingL,
-    },
-    // If the layout is two-column, default to level XL
-    {
-      layout: 'two-column',
-      level: undefined,
-      className: headingXL,
-    },
-  ],
 });
 
-const Hero = ({ layout, level, className, children }: HeroProps) => {
+const Hero = ({ layout, className, children }: HeroProps) => {
   const variantsClassName = variants({
     layout,
-    level,
     className,
   });
   return (
     <Provider
       values={[
+        [
+          HeadingContext,
+          {
+            // Sets the default heading size for the Hero based on the layout
+            size: layout === 'two-column' ? 'xl' : 'l',
+          },
+        ],
         [
           GroupContext,
           {

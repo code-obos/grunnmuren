@@ -19,7 +19,9 @@ const meta: Meta<typeof Hero> = {
     <main className="container grid gap-y-8">
       <Hero>
         <Content>
-          <Heading level={1}>Jobb i OBOS</Heading>
+          <Heading level={1} size="xl">
+            Jobb i OBOS
+          </Heading>
           <p className="lead">
             Bli med å oppfylle boligdrømmer! Vi søker engasjerte og dyktige
             personer som vil ta OBOS videre. Søk på våre ledige stillinger!
@@ -39,6 +41,10 @@ const meta: Meta<typeof Hero> = {
 export default meta;
 
 type Story = StoryObj<typeof Hero>;
+
+export const StandardWithLeadAndImage: Story = {
+  args: {},
+};
 
 export const TwoColumn = () => (
   <main className="container grid gap-y-8">
@@ -72,9 +78,9 @@ export const TwoColumn = () => (
   </main>
 );
 
-export const StandardLandingPageWithCTA = () => (
+export const StandardPageWithCTA = () => (
   <main className="container grid gap-y-8">
-    <Hero headingSize="xl">
+    <Hero>
       <Content>
         <Heading level={1}>Dette er OBOS</Heading>
       </Content>
@@ -95,10 +101,6 @@ export const StandardLandingPageWithCTA = () => (
     </Hero>
   </main>
 );
-
-export const StandardWithLeadAndImage: Story = {
-  args: {},
-};
 
 const Logo = () => (
   <img
