@@ -13,7 +13,7 @@ const meta: Meta<typeof Hero> = {
   component: Hero,
   parameters: {
     // disable built in padding in story, because we provide our own
-    layout: 'fullscreen',
+    variant: 'fullscreen',
   },
   render: () => (
     <main className="container grid gap-y-8">
@@ -48,7 +48,7 @@ export const StandardWithLeadAndImage: Story = {
 
 export const TwoColumn = () => (
   <main className="container grid gap-y-8">
-    <Hero layout="two-column">
+    <Hero variant="two-column">
       <Content>
         <Heading level={1}>Bank på OBOS-måten</Heading>
         <p>
@@ -112,7 +112,7 @@ const Logo = () => (
 
 export const FullBleedWithVideoLoop = () => (
   <main className="container grid gap-y-8">
-    <Hero layout="full-bleed">
+    <Hero variant="full-bleed">
       <Content>
         <Heading level={1}>Frysjaparken</Heading>
         <Description>
@@ -134,7 +134,7 @@ export const FullBleedWithVideoLoop = () => (
 
 export const FullBleedWithImageAndBadge = () => (
   <main className="container grid gap-y-8">
-    <Hero layout="full-bleed">
+    <Hero variant="full-bleed">
       <Content>
         <Heading level={1}>Vollebekk</Heading>
         <Description>– nabolaget for store og små</Description>

@@ -10,7 +10,7 @@ type HeroProps = HTMLProps<HTMLDivElement> &
 
 const roundedMediaCorners = '*:data-[slot="media"]:*:rounded-3xl';
 
-// Common layout for "standard" and "full-bleed" Hero layouts
+// Common variant for "standard" and "full-bleed" Hero variants
 const oneColumnLayout = [
   // Vertical spacing in the <Content>
   'lg:*:data-[slot="content"]:gap-y-4',
@@ -29,7 +29,7 @@ const oneColumnLayout = [
 const variants = cva({
   base: [
     'container',
-    // Grid layout to position the Hero's content
+    // Grid variant to position the Hero's content
     'grid lg:grid-cols-12 lg:gap-x-12 xl:gap-x-16',
     'gap-y-10 lg:gap-y-12',
     // Enable vertical gap within <Content>
@@ -41,10 +41,10 @@ const variants = cva({
   ],
   variants: {
     /**
-     * Defines the layout of the Hero
+     * Defines the variant of the Hero
      * @default standard
      * */
-    layout: {
+    variant: {
       standard: [roundedMediaCorners, oneColumnLayout],
       'full-bleed': [
         oneColumnLayout,
@@ -67,13 +67,13 @@ const variants = cva({
     },
   },
   defaultVariants: {
-    layout: 'standard',
+    variant: 'standard',
   },
 });
 
-const Hero = ({ layout, className, children }: HeroProps) => {
+const Hero = ({ variant, className, children }: HeroProps) => {
   const variantsClassName = variants({
-    layout,
+    variant,
     className,
   });
   return (
@@ -82,8 +82,8 @@ const Hero = ({ layout, className, children }: HeroProps) => {
         [
           HeadingContext,
           {
-            // Sets the default heading size for the Hero based on the layout
-            size: layout === 'two-column' ? 'xl' : 'l',
+            // Sets the default heading size for the Hero based on the variant
+            size: variant === 'two-column' ? 'xl' : 'l',
           },
         ],
         [
