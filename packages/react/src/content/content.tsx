@@ -1,4 +1,4 @@
-import { cva, cx, type VariantProps } from 'cva';
+import { type VariantProps, cva, cx } from 'cva';
 import { type HTMLProps, type Ref, createContext } from 'react';
 import { type ContextValue, useContextProps } from 'react-aria-components';
 
