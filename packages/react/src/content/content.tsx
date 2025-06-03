@@ -1,22 +1,36 @@
-import { cx } from 'cva';
+import { cva, cx, type VariantProps } from 'cva';
 import { type HTMLProps, type Ref, createContext } from 'react';
 import { type ContextValue, useContextProps } from 'react-aria-components';
 
-type HeadingProps = HTMLProps<HTMLHeadingElement> & {
-  children?: React.ReactNode;
-  /** The level of the heading */
-  level: 1 | 2 | 3 | 4 | 5 | 6;
-  /** @private Used internally for slotted components */
-  _innerWrapper?: (children: React.ReactNode) => React.ReactNode;
-  /** @private Used internally for slotted components */
-  _outerWrapper?: (children: React.ReactNode) => React.ReactNode;
-  /** Ref for the element. */
-  ref?: Ref<HTMLHeadingElement>;
-};
+type HeadingProps = Omit<HTMLProps<HTMLHeadingElement>, 'size'> &
+  VariantProps<typeof headingVariants> & {
+    children?: React.ReactNode;
+    /** The semantic level of the heading */
+    level: 1 | 2 | 3 | 4 | 5 | 6;
+    /** @private Used internally for slotted components */
+    _innerWrapper?: (children: React.ReactNode) => React.ReactNode;
+    /** @private Used internally for slotted components */
+    _outerWrapper?: (children: React.ReactNode) => React.ReactNode;
+    /** Ref for the element. */
+    ref?: Ref<HTMLHeadingElement>;
+  };
 
 const HeadingContext = createContext<
   ContextValue<Partial<HeadingProps>, HTMLHeadingElement>
 >({});
+
+const headingVariants = cva({
+  variants: {
+    /** The visual text size of the heading */
+    size: {
+      xl: 'heading-xl',
+      l: 'heading-l',
+      m: 'heading-m',
+      s: 'heading-s',
+      xs: 'heading-xs',
+    },
+  },
+});
 
 const Heading = ({ ref = null, ...props }: HeadingProps) => {
   [props, ref] = useContextProps(props, ref, HeadingContext);
@@ -24,16 +38,27 @@ const Heading = ({ ref = null, ...props }: HeadingProps) => {
   const {
     children,
     level,
+    size,
     className,
     _innerWrapper: innerWrapper,
     _outerWrapper: outerWrapper,
     ...restProps
   } = props;
 
+  console.log(size);
+
+  const _className = headingVariants({
+    size,
+  });
+
   const Element = `h${level}` as const;
 
   const content = (
-    <Element {...restProps} className={className} data-slot="heading">
+    <Element
+      {...restProps}
+      className={cx(className, _className)}
+      data-slot="heading"
+    >
       {innerWrapper ? innerWrapper(children) : children}
     </Element>
   );
