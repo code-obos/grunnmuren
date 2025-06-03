@@ -74,7 +74,7 @@ The `variant` is tied to an intended default heading size, either `xl` or `l`. W
 ```
 
 ### Heading
-To achieve this control of the heading size, I have added a new `size` prop to the `<Heading>` component. This way we can implement the same API for the Card component (which should support different heading sizes as well).
+To achieve this control of the heading size a new `size` prop has been added to the `<Heading>` component. This way we can implement the same API for the Card component (which should support different heading sizes as well).
 
 ### Breaking change to `UNSAFE_Hero`
 This introduces a breaking change to the beta version of the `<Hero>`, which is to be expected without a major release. If you are currently using `UNSAFE_Hero` you would now have to pass `variant="full-bleed"` as a prop to your component to get the same design as before.
