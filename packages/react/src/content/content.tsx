@@ -45,8 +45,6 @@ const Heading = ({ ref = null, ...props }: HeadingProps) => {
     ...restProps
   } = props;
 
-  console.log(size);
-
   const _className = headingVariants({
     size,
   });
