@@ -65,7 +65,7 @@ function Page() {
             ),
         )}
       </ResourceLinks>
-      <div className="lg:relative lg:flex lg:gap-[var(--gm-container-gutter-width)]">
+      <div className="lg:relative lg:flex lg:gap-4">
         <TableOfContentsNav
           className="hidden w-56 lg:sticky lg:top-9 lg:order-1 lg:block lg:shrink-0"
           content={data.content}
