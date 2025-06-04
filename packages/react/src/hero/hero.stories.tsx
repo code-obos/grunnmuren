@@ -7,6 +7,10 @@ import { Content, Heading, Media } from '../content';
 import { Description } from '../label';
 import { VideoLoop } from '../video-loop';
 import { UNSAFE_Hero as Hero } from './hero';
+import {
+  UNSAFE_Carousel as Carousel,
+  UNSAFE_CarouselItem as CarouselItem,
+} from '../carousel';
 
 const meta: Meta<typeof Hero> = {
   title: 'Hero',
@@ -28,10 +32,20 @@ const meta: Meta<typeof Hero> = {
           </p>
         </Content>
         <Media>
-          <img
-            src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
-            alt=""
-          />
+          <Carousel>
+            <CarouselItem>
+              <img
+                src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+                alt=""
+              />
+            </CarouselItem>
+            <CarouselItem>
+              <img
+                src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+                alt=""
+              />
+            </CarouselItem>
+          </Carousel>
         </Media>
       </Hero>
     </main>
@@ -102,6 +116,33 @@ export const StandardPageWithCTA = () => (
   </main>
 );
 
+export const StandardWithCarousel = () => (
+  <main className="container grid gap-y-8">
+    <Hero>
+      <Content>
+        <Heading level={1}>OBOS-butikken</Heading>
+        <Description>– din lokale OBOS-butikk i Oslo sentrum</Description>
+      </Content>
+      <Media>
+        <Carousel>
+          <CarouselItem>
+            <img
+              src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+              alt=""
+            />
+          </CarouselItem>
+          <CarouselItem>
+            <img
+              src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+              alt=""
+            />
+          </CarouselItem>
+        </Carousel>
+      </Media>
+    </Hero>
+  </main>
+);
+
 const Logo = () => (
   <img
     alt=""
@@ -147,6 +188,45 @@ export const FullBleedWithImageAndBadge = () => (
           src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_3840,q_auto:best/v1731662987/Mellom%20husene/Byutvikling/Nabolag/Vollebekk/OBOS_bygulv_vollebekk_vannspeil-og-grontareal-foran-leilighetsbygg.jpg"
           alt=""
         />
+      </Media>
+    </Hero>
+  </main>
+);
+
+export const FullBleedWithCarousel = () => (
+  <main className="container grid gap-y-8">
+    <Hero variant="full-bleed">
+      <Content>
+        <Heading level={1}>Ulven</Heading>
+        <Description>– et nytt nabolag i Oslo</Description>
+      </Content>
+      <Media>
+        <Carousel>
+          <CarouselItem>
+            <img
+              src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+              alt=""
+            />
+          </CarouselItem>
+          <CarouselItem>
+            <img
+              src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+              alt=""
+            />
+          </CarouselItem>
+          <CarouselItem>
+            <img
+              src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+              alt=""
+            />
+          </CarouselItem>
+          <CarouselItem>
+            <img
+              src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+              alt=""
+            />
+          </CarouselItem>
+        </Carousel>
       </Media>
     </Hero>
   </main>
