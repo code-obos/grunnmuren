@@ -118,8 +118,7 @@ const Carousel = ({ className, children }: CarouselProps) => {
                   },
                   className: cx(
                     'group/carousel-previous',
-                    'transition-opacity',
-                    hasReachedScrollStart && 'pointer-events-none opacity-0',
+                    hasReachedScrollStart && 'invisible',
                   ),
                   isDisabled: hasReachedScrollStart,
                   children: (
@@ -139,8 +138,7 @@ const Carousel = ({ className, children }: CarouselProps) => {
                   },
                   className: cx(
                     'group/carousel-next',
-                    'transition-opacity',
-                    hasReachedScrollEnd && 'pointer-events-none opacity-0',
+                    hasReachedScrollEnd && 'invisible',
                   ),
                   isDisabled: hasReachedScrollEnd,
                   children: (
