@@ -217,14 +217,15 @@ const carouselItemVariant = cva({
       cover: '*:object-cover',
       contain: 'bg-blue-dark *:object-contain',
     },
-    default: {
-      fit: 'cover',
-    },
+  },
+  defaultVariants: {
+    fit: 'cover',
   },
 });
 
 const CarouselItem = ({ fit, className, children }: CarouselItemProps) => {
   const _className = carouselItemVariant({ fit });
+  console.log('_className', _className);
 
   return (
     <div className={cx(className, _className)} data-slot="carousel-item">
