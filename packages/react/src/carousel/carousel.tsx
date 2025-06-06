@@ -1,10 +1,12 @@
-import { ArrowLeft, ArrowRight } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
-import { useEffect, useRef, useState } from 'react';
-import { Button } from '../button';
+import { createContext, useEffect, useRef, useState } from 'react';
+import { ButtonContext } from '../button';
 import { useLocale } from '../use-locale';
 import { translations } from '../translations';
 import { useUpdateEffect } from '@react-aria/utils';
+import { GroupContext, Provider } from 'react-aria-components';
+import { ArrowLeft, ArrowRight } from '@obosbbl/grunnmuren-icons-react';
+import { useDebouncedCallback } from 'use-debounce';
 
 type CarouselProps = {
   /** The <CarouselItem/> components to be displayed within the carousel. */
@@ -20,19 +22,20 @@ const Carousel = ({ className, children }: CarouselProps) => {
 
   const [scrollTargetIndex, setScrollTargetIndex] = useState(0);
 
-  const hasReachedScrollStart = scrollTargetIndex === 0;
+  const [hasReachedScrollStart, setHasReachedScrollStart] = useState(
+    scrollTargetIndex === 0,
+  );
 
-  //   const hasReachedScrollEnd = !ref.current || ref.current.children.length - 1 === scrollTargetIndex;
   const [hasReachedScrollEnd, setHasReachedScrollEnd] = useState(
     !ref.current || ref.current.children.length - 1 === scrollTargetIndex,
   );
 
   useEffect(() => {
-    // Check if the current scroll target index is the last item
+    setHasReachedScrollStart(scrollTargetIndex === 0);
     setHasReachedScrollEnd(
       !ref.current || ref.current.children.length - 1 === scrollTargetIndex,
     );
-  });
+  }, [scrollTargetIndex]);
 
   // Handle scrolling when user clicks the arrow icons
   useUpdateEffect(() => {
@@ -45,10 +48,121 @@ const Carousel = ({ className, children }: CarouselProps) => {
     });
   }, [scrollTargetIndex]);
 
+  const onScroll = useDebouncedCallback(
+    (event: React.UIEvent<HTMLDivElement>) => {
+      const target = event.target as HTMLDivElement;
+
+      // Calculate the index of the item that is currently in view
+      const newScrollTargetIndex = Array.from(target.children).findIndex(
+        (child) => {
+          const rect = child.getBoundingClientRect();
+          return (
+            rect.left >= 0 && rect.right <= window.innerWidth && rect.top >= 0
+          );
+        },
+      );
+
+      if (newScrollTargetIndex !== -1) {
+        setScrollTargetIndex(newScrollTargetIndex);
+      }
+    },
+    100,
+  );
+
   return (
     <div className="relative">
+      <Provider
+        values={[
+          [
+            CarouselItemsContext,
+            {
+              ref,
+              onScroll,
+            },
+          ],
+          [
+            GroupContext,
+            {
+              className: 'absolute right-6 bottom-6 flex gap-x-2',
+              // Prevents the group from being announced as a group by screen readers
+              // The Group component is used to group the prev/next buttons together visually, and has no semantic meaning
+              role: 'presentation',
+            },
+          ],
+          [
+            ButtonContext,
+            {
+              slots: {
+                prev: {
+                  isIconOnly: true,
+                  'aria-label': previous[locale],
+                  variant: 'primary',
+                  color: 'white',
+                  onPress: () => {
+                    if (scrollTargetIndex > 0) {
+                      setScrollTargetIndex((prev) => prev - 1);
+                    }
+                  },
+                  className: cx(
+                    'group/carousel-previous',
+                    hasReachedScrollStart && 'invisible',
+                  ),
+                  isDisabled: hasReachedScrollStart,
+                  children: (
+                    <ArrowLeft className="group-hover/carousel-previous:motion-safe:-translate-x-1 transition-transform" />
+                  ),
+                },
+                next: {
+                  isIconOnly: true,
+                  'aria-label': next[locale],
+                  variant: 'primary',
+                  color: 'white',
+                  onPress: () => {
+                    if (!ref.current) return;
+                    if (scrollTargetIndex < ref.current.children.length - 1) {
+                      setScrollTargetIndex((prev) => prev + 1);
+                    }
+                  },
+                  className: cx(
+                    'group/carousel-next',
+                    hasReachedScrollEnd && 'invisible',
+                  ),
+                  isDisabled: hasReachedScrollEnd,
+                  children: (
+                    <ArrowRight className="transition-transform group-hover/carousel-next:motion-safe:translate-x-1" />
+                  ),
+                },
+              },
+            },
+          ],
+        ]}
+      >
+        {children}
+      </Provider>
+    </div>
+  );
+};
+
+type CarouselItemsProps = {
+  /** Additional CSS className for the element. */
+  children: React.ReactNode;
+  /** The <CarouselItem/> components to be displayed within the carousel. */
+  className?: string;
+};
+
+type CarouselItemsContextValue = {
+  ref: React.Ref<HTMLDivElement>;
+  onScroll?: (event: React.UIEvent<HTMLDivElement>) => void;
+};
+
+const CarouselItemsContext = createContext({
+  ref: null,
+} as CarouselItemsContextValue);
+
+const CarouselItems = ({ className, children }: CarouselItemsProps) => (
+  <CarouselItemsContext.Consumer>
+    {({ ref, onScroll }) => (
       <div
-        ref={ref}
         className={cx(className, [
           'scrollbar-hidden',
           'flex',
@@ -61,46 +175,18 @@ const Carousel = ({ className, children }: CarouselProps) => {
           'h-full',
           'rounded-[inherit]',
         ])}
-        data-slot="carousel"
+        ref={ref}
+        // When the SnapEvent is supported: https://developer.mozilla.org/en-US/docs/Web/API/SnapEvent
+        // We can use the scrollsnapchange event to detect when the user has scrolled to a new item.
+        // We can then use Array.from(event.target.children).indexOf(event.snapTargetInline) to calculate the index of the item that is currently in view.
+        // Another option is to use the scrollEnd event, when Safiri supports it: https://developer.apple.com/documentation/webkitjs/snap_event/scrollend_event
+        onScroll={onScroll}
       >
         {children}
       </div>
-      <div className="absolute right-6 bottom-6 flex gap-x-2">
-        <Button
-          isIconOnly
-          aria-label={previous[locale]}
-          variant="primary"
-          color="white"
-          onPress={() => {
-            if (scrollTargetIndex > 0) {
-              setScrollTargetIndex((prev) => prev - 1);
-            }
-          }}
-          className={cx(hasReachedScrollStart && 'invisible')}
-          isDisabled={hasReachedScrollStart}
-        >
-          <ArrowLeft />
-        </Button>
-        <Button
-          isIconOnly
-          aria-label={next[locale]}
-          variant="primary"
-          color="white"
-          onPress={() => {
-            if (!ref.current) return;
-            if (scrollTargetIndex < ref.current.children.length - 1) {
-              setScrollTargetIndex((prev) => prev + 1);
-            }
-          }}
-          className={cx(hasReachedScrollEnd && 'invisible')}
-          isDisabled={hasReachedScrollEnd}
-        >
-          <ArrowRight />
-        </Button>
-      </div>
-    </div>
-  );
-};
+    )}
+  </CarouselItemsContext.Consumer>
+);
 
 type CarouselItemProps = {
   className?: string;
@@ -122,6 +208,8 @@ const CarouselItem = ({ className, children }: CarouselItemProps) => (
 export {
   Carousel as UNSAFE_Carousel,
   CarouselItem as UNSAFE_CarouselItem,
+  CarouselItems as UNSAFE_CarouselItems,
+  type CarouselItemsProps as UNSAFE_CarouselItemsProps,
   type CarouselItemProps as UNSAFE_CarouselItemProps,
   type CarouselProps as UNSAFE_CarouselProps,
 };
