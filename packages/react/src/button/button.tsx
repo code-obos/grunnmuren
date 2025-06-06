@@ -1,12 +1,14 @@
 import { LoadingSpinner } from '@obosbbl/grunnmuren-icons-react';
 import { type VariantProps, cva } from 'cva';
-import type { Ref } from 'react';
+import { type Ref, createContext } from 'react';
 import { useProgressBar } from 'react-aria';
 import {
+  type ContextValue,
   Button as RACButton,
   type ButtonProps as RACButtonProps,
   Link as RACLink,
   type LinkProps as RACLinkProps,
+  useContextProps,
 } from 'react-aria-components';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
@@ -130,13 +132,18 @@ type ButtonOrLinkProps = VariantProps<typeof buttonVariants> & {
 
 type ButtonProps = (RACButtonProps | RACLinkProps) & ButtonOrLinkProps;
 
+const ButtonContext = createContext<
+  ContextValue<ButtonProps, HTMLButtonElement | HTMLAnchorElement>
+>({});
+
 function isLinkProps(
   props: ButtonProps,
 ): props is ButtonOrLinkProps & RACLinkProps {
   return !!props.href;
 }
 
-function Button(props: ButtonProps) {
+function Button({ ref = null, ...props }: ButtonProps) {
+  [props, ref] = useContextProps(props, ref, ButtonContext);
   const {
     children: _children,
     color,
@@ -144,7 +151,6 @@ function Button(props: ButtonProps) {
     isLoading,
     variant,
     isPending: _isPending,
-    ref,
     ...restProps
   } = props;
 
@@ -197,4 +203,4 @@ function Button(props: ButtonProps) {
   );
 }
 
-export { Button, type ButtonProps };
+export { Button, ButtonContext, type ButtonProps };

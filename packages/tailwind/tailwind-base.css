@@ -174,3 +174,15 @@
 @utility ring-focus-offset {
   @apply ring-focus ring-offset-2;
 }
+
+/** Hides the scrollbar visually */
+@utility scrollbar-hidden {
+  /* For IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  /* For Webkit-based browsers (Chrome, Safari and Opera) */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

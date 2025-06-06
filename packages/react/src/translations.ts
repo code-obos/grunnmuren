@@ -29,6 +29,16 @@ const translations: Translations = {
     sv: 'Dölj',
     en: 'Show less',
   },
+  previous: {
+    nb: 'Forrige',
+    sv: 'Föregående',
+    en: 'Previous',
+  },
+  next: {
+    nb: 'Neste',
+    sv: 'Nästa',
+    en: 'Next',
+  },
 };
 
 export { translations, type Translation, type Translations };
