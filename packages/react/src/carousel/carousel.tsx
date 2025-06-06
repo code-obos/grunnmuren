@@ -1,4 +1,4 @@
-import { cx } from 'cva';
+import { cva, cx, type VariantProps } from 'cva';
 import { createContext, useEffect, useRef, useState } from 'react';
 import { ButtonContext } from '../button';
 import { useLocale } from '../use-locale';
@@ -70,7 +70,18 @@ const Carousel = ({ className, children }: CarouselProps) => {
   );
 
   return (
-    <div className="relative">
+    <div
+      data-slot="carousel"
+      className={cx(
+        className,
+        'relative rounded-3xl',
+        '[&:has([data-slot="carousel-items"]:focus-visible,[data-slot="video-loop-button"]:focus-visible)]:outline-focus [&:has([data-slot="carousel-items"]:focus-visible,[data-slot="video-loop-button"]:focus-visible)]:outline-focus-offset',
+        // Unset the default focus outline for potential video loop buttons, as it interferes with the custom focus styles for the carousel
+        '**:data-[slot="video-loop-button"]:focus-visible:outline-none',
+        // biome-ignore lint/nursery/useSortedClasses: biome is unable to sort the custom classes for 3xl and 4xl breakpoints
+        'h-70 sm:h-[25rem] lg:h-[35rem] xl:h-[40rem] 2xl:h-[42rem] 3xl:h-[48rem] 4xl:h-[53rem]',
+      )}
+    >
       <Provider
         values={[
           [
@@ -105,7 +116,8 @@ const Carousel = ({ className, children }: CarouselProps) => {
                   },
                   className: cx(
                     'group/carousel-previous',
-                    hasReachedScrollStart && 'invisible',
+                    'transition-opacity',
+                    hasReachedScrollStart && 'pointer-events-none opacity-0',
                   ),
                   isDisabled: hasReachedScrollStart,
                   children: (
@@ -125,7 +137,8 @@ const Carousel = ({ className, children }: CarouselProps) => {
                   },
                   className: cx(
                     'group/carousel-next',
-                    hasReachedScrollEnd && 'invisible',
+                    'transition-opacity',
+                    hasReachedScrollEnd && 'pointer-events-none opacity-0',
                   ),
                   isDisabled: hasReachedScrollEnd,
                   children: (
@@ -163,6 +176,7 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => (
   <CarouselItemsContext.Consumer>
     {({ ref, onScroll }) => (
       <div
+        data-slot="carousel-items"
         className={cx(className, [
           'scrollbar-hidden',
           'flex',
@@ -170,8 +184,6 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => (
           'snap-mandatory',
           'overflow-x-auto',
           'outline-none',
-          'focus-visible:ring-focus',
-          'focus-visible:ring-focus-offset',
           'h-full',
           'rounded-[inherit]',
         ])}
@@ -188,22 +200,38 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => (
   </CarouselItemsContext.Consumer>
 );
 
-type CarouselItemProps = {
+type CarouselItemProps = VariantProps<typeof carouselItemVariant> & {
   className?: string;
   children: React.ReactNode;
 };
 
-const CarouselItem = ({ className, children }: CarouselItemProps) => (
-  <div
-    className={cx(
-      className,
-      'shrink-0 basis-full snap-start *:h-full *:w-full *:object-cover',
-    )}
-    data-slot="carousel-item"
-  >
-    {children}
-  </div>
-);
+const carouselItemVariant = cva({
+  base: 'shrink-0 basis-full snap-start *:h-full *:w-full',
+  variants: {
+    /**
+     * Control how the content should be placed with the object-fit property
+     * You might for example want to use `fit="contain"` portrait images that should not be cropped
+     * @default cover
+     * */
+    fit: {
+      cover: '*:object-cover',
+      contain: 'bg-blue-dark *:object-contain',
+    },
+    default: {
+      fit: 'cover',
+    },
+  },
+});
+
+const CarouselItem = ({ fit, className, children }: CarouselItemProps) => {
+  const _className = carouselItemVariant({ fit });
+
+  return (
+    <div className={cx(className, _className)} data-slot="carousel-item">
+      {children}
+    </div>
+  );
+};
 
 export {
   Carousel as UNSAFE_Carousel,

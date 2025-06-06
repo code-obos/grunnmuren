@@ -6,7 +6,6 @@ import {
   UNSAFE_CarouselItem as CarouselItem,
   UNSAFE_CarouselItems as CarouselItems,
 } from '../carousel';
-import { VideoLoop } from '../video-loop';
 
 const meta: Meta<typeof Carousel> = {
   title: 'Carousel',
@@ -26,10 +25,15 @@ const meta: Meta<typeof Carousel> = {
             />
           </CarouselItem>
           <CarouselItem>
-            <VideoLoop
-              src="https://res.cloudinary.com/obosit-prd-ch-clry/video/upload/v1732199756/Mellom%20husene/Frysja_Loop2.mp4"
-              format="mp4"
-              alt="En postbil kjører rundt i det moderne nabolaget på Frysja. Her finnes det fine uteområder, med husker og kafeer."
+            <img
+              src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+              alt=""
+            />
+          </CarouselItem>
+          <CarouselItem fit="contain">
+            <img
+              src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_1080,q_auto:best/t_2_3/v1747985572/Temasider/Folk/Hans%20Petter%20%20-%20Trang%20f%C3%B8dsel/Obos-Hans-Petter-Aaserud-Photo-Einar-Aslaksen-03093_web.jpg"
+              alt=""
             />
           </CarouselItem>
           <CarouselItem>
