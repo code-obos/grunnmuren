@@ -28,7 +28,7 @@ const oneColumnLayout = [
 
 const variants = cva({
   base: [
-    'container',
+    'container px-0', // We want to eliminate the default padding on the container, as this component will typically be put inside a container
     // Grid variant to position the Hero's content
     'grid lg:grid-cols-12 lg:gap-x-12 xl:gap-x-16',
     'gap-y-10 lg:gap-y-12',
