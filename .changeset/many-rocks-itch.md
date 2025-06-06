@@ -45,7 +45,9 @@ New `Carousel` component that can be used for any content, all though primarily 
 </Carousel>
 ```
 
-Use the `fit` prop on the `<Carouseltem>` primitive to control the `object-fit` behavior of the item, this is a way to prevent cropping of images in portrait format.
+Use the `fit` prop on the `<Carouseltem>` primitive to control the `object-fit` (`cover` | `contain`) behavior of the item, this is a way to prevent cropping of images in portrait format. This defaults to `cover`, so for portrait images set it to `contain`.
+
+### In Hero
 
 The component can also be used inside the `<Hero>` component:
 ``` tsx
