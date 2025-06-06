@@ -48,10 +48,6 @@ const meta: Meta<typeof Hero> = {
                 />
               </CarouselItem>
             </CarouselItems>
-            <Group>
-              <Button slot="prev" />
-              <Button slot="next" />
-            </Group>
           </Carousel>
         </Media>
       </Hero>
@@ -153,10 +149,6 @@ export const StandardWithCarousel = () => (
               />
             </CarouselItem>
           </CarouselItems>
-          <Group>
-            <Button slot="prev" />
-            <Button slot="next" />
-          </Group>
         </Carousel>
       </Media>
     </Hero>
@@ -257,10 +249,6 @@ export const FullBleedWithCarousel = () => (
               />
             </CarouselItem>
           </CarouselItems>
-          <Group>
-            <Button slot="prev" />
-            <Button slot="next" />
-          </Group>
         </Carousel>
       </Media>
     </Hero>

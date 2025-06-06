@@ -38,10 +38,6 @@ New `Carousel` component that can be used for any content, all though primarily 
       />
     </CarouselItem>
   </CarouselItems>
-  <Group>
-    <Button slot="prev" />
-    <Button slot="next" />
-  </Group>
 </Carousel>
 ```
 
@@ -94,10 +90,6 @@ The component can also be used inside the `<Hero>` component:
           />
         </CarouselItem>
       </CarouselItems>
-      <Group>
-        <Button slot="prev" />
-        <Button slot="next" />
-      </Group>
     </Carousel>
   </Media>
 </Hero>

@@ -1,10 +1,10 @@
-import { ArrowLeft, ArrowRight } from '@obosbbl/grunnmuren-icons-react';
+import { ChevronLeft, ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 import { useUpdateEffect } from '@react-aria/utils';
 import { type VariantProps, cva, cx } from 'cva';
 import { createContext, useEffect, useRef, useState } from 'react';
-import { GroupContext, Provider } from 'react-aria-components';
+import { Provider } from 'react-aria-components';
 import { useDebouncedCallback } from 'use-debounce';
-import { ButtonContext } from '../button';
+import { Button, ButtonContext } from '../button';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 
@@ -94,56 +94,28 @@ const Carousel = ({ className, children }: CarouselProps) => {
             },
           ],
           [
-            GroupContext,
-            {
-              className: 'absolute right-6 bottom-6 flex gap-x-2',
-              // Prevents the group from being announced as a group by screen readers
-              // The Group component is used to group the prev/next buttons together visually, and has no semantic meaning
-              role: 'presentation',
-            },
-          ],
-          [
             ButtonContext,
             {
               slots: {
                 prev: {
-                  isIconOnly: true,
                   'aria-label': previous[locale],
-                  variant: 'primary',
-                  color: 'white',
                   onPress: () => {
                     if (scrollTargetIndex > 0) {
                       setScrollTargetIndex((prev) => prev - 1);
                     }
                   },
-                  className: cx(
-                    'group/carousel-previous',
-                    hasReachedScrollStart && 'invisible',
-                  ),
                   isDisabled: hasReachedScrollStart,
-                  children: (
-                    <ArrowLeft className="group-hover/carousel-previous:motion-safe:-translate-x-1 transition-transform" />
-                  ),
                 },
                 next: {
                   isIconOnly: true,
                   'aria-label': next[locale],
-                  variant: 'primary',
-                  color: 'white',
                   onPress: () => {
                     if (!ref.current) return;
                     if (scrollTargetIndex < ref.current.children.length - 1) {
                       setScrollTargetIndex((prev) => prev + 1);
                     }
                   },
-                  className: cx(
-                    'group/carousel-next',
-                    hasReachedScrollEnd && 'invisible',
-                  ),
                   isDisabled: hasReachedScrollEnd,
-                  children: (
-                    <ArrowRight className="transition-transform group-hover/carousel-next:motion-safe:translate-x-1" />
-                  ),
                 },
               },
             },
@@ -151,10 +123,56 @@ const Carousel = ({ className, children }: CarouselProps) => {
         ]}
       >
         {children}
+        <_CarouselControls>
+          <Button
+            isIconOnly
+            slot="prev"
+            variant="primary"
+            color="white"
+            className={cx(
+              'group/carousel-previous',
+              hasReachedScrollStart && 'invisible',
+            )}
+          >
+            <ChevronLeft className="group-hover/carousel-previous:motion-safe:-translate-x-1 transition-transform" />
+          </Button>
+          <Button
+            isIconOnly
+            slot="next"
+            variant="primary"
+            color="white"
+            className={cx(
+              'group/carousel-next',
+              hasReachedScrollEnd && 'invisible',
+            )}
+          >
+            <ChevronRight className="transition-transform group-hover/carousel-next:motion-safe:translate-x-1" />
+          </Button>
+        </_CarouselControls>
       </Provider>
     </div>
   );
 };
+
+type _CarouselControlsProps = {
+  /** The <CarouselItem/> components to be displayed within the carousel. */
+  children: React.ReactNode;
+  /** Additional CSS className for the element. */
+  className?: string;
+};
+
+/**
+ * This is internal for now, but we will expose it in the future when we support more flexible positioning of prev/next and other actions.
+ * It is used to render the prev/next buttons in the carousel for now.
+ */
+const _CarouselControls = ({ children, className }: _CarouselControlsProps) => (
+  <div
+    className={cx(className, 'absolute right-6 bottom-6 flex gap-x-2')}
+    data-slot="carousel-controls"
+  >
+    {children}
+  </div>
+);
 
 type CarouselItemsProps = {
   /** Additional CSS className for the element. */

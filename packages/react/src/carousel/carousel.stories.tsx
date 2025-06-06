@@ -1,6 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Group } from 'react-aria-components';
-import { Button } from '../button';
 import {
   UNSAFE_Carousel as Carousel,
   UNSAFE_CarouselItem as CarouselItem,
@@ -43,10 +41,6 @@ const meta: Meta<typeof Carousel> = {
             />
           </CarouselItem>
         </CarouselItems>
-        <Group>
-          <Button slot="prev" />
-          <Button slot="next" />
-        </Group>
       </Carousel>
     </main>
   ),
