@@ -1,12 +1,12 @@
-import { cva, cx, type VariantProps } from 'cva';
-import { createContext, useEffect, useRef, useState } from 'react';
-import { ButtonContext } from '../button';
-import { useLocale } from '../use-locale';
-import { translations } from '../translations';
-import { useUpdateEffect } from '@react-aria/utils';
-import { GroupContext, Provider } from 'react-aria-components';
 import { ArrowLeft, ArrowRight } from '@obosbbl/grunnmuren-icons-react';
+import { useUpdateEffect } from '@react-aria/utils';
+import { type VariantProps, cva, cx } from 'cva';
+import { createContext, useEffect, useRef, useState } from 'react';
+import { GroupContext, Provider } from 'react-aria-components';
 import { useDebouncedCallback } from 'use-debounce';
+import { ButtonContext } from '../button';
+import { translations } from '../translations';
+import { useLocale } from '../use-locale';
 
 type CarouselProps = {
   /** The <CarouselItem/> components to be displayed within the carousel. */
