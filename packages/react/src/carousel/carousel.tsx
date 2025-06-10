@@ -5,9 +5,9 @@ import { createContext, useEffect, useRef, useState } from 'react';
 import { Provider } from 'react-aria-components';
 import { useDebouncedCallback } from 'use-debounce';
 import { Button, ButtonContext } from '../button';
+import { MediaContext } from '../content';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
-import { MediaContext } from '../content';
 
 type CarouselProps = {
   /** The <CarouselItem/> components to be displayed within the carousel. */
