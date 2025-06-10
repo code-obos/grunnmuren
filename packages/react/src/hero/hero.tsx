@@ -38,7 +38,6 @@ const variants = cva({
     // Vertical spacing in the <Content>
     '*:data-[slot="content"]:gap-y-3',
     // Make sure <Media> content fills any available vertical and horizontal space
-    // TODO move to context
     '*:data-[slot="media"]:*:object-cover',
   ],
   variants: {
