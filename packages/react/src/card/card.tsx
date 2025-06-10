@@ -1,5 +1,10 @@
-import { type VariantProps, cva } from 'cva';
-import { Link, type LinkProps as RACLinkProps } from 'react-aria-components';
+import { type VariantProps, cva, cx } from 'cva';
+import {
+  Link,
+  Provider,
+  type LinkProps as RACLinkProps,
+} from 'react-aria-components';
+import { HeadingContext } from '../content';
 
 type CardProps = VariantProps<typeof cardVariants> & {
   children?: React.ReactNode;
@@ -12,15 +17,6 @@ const cardVariants = cva({
     'rounded-2xl border p-3',
     'flex gap-y-4', // y-gap ensures a vertical spacing for both verical layout and responsive horizontal layout
     'relative', // Needed for positiong of the clickable pseudo-element (and can also be used for other absolute positioned elements the consumer might add)
-
-    // **** Heading ****
-    '[&_[data-slot="heading"]]:inline',
-    '[&_[data-slot="heading"]]:heading-s',
-    '[&_[data-slot="heading"]]:leading-6', // A bit more line height than the default is necessary to make the underline align with the text if the heading has a card link
-    '[&_[data-slot="heading"]]:w-fit',
-    '[&_[data-slot="heading"]]:text-pretty',
-    '[&_[data-slot="heading"]]:hyphens-auto',
-    '[&_[data-slot="heading"]]:[word-break:break-word]', // necessary to make hyphens work in grid containers in Safari
 
     // **** Content ****
     '[&_[data-slot="content"]]:flex [&_[data-slot="content"]]:flex-col [&_[data-slot="content"]]:gap-y-4',
@@ -41,21 +37,7 @@ const cardVariants = cva({
     // **** Hover ****
     // Enables the zoom hover effect on media (note that we can't use group-hover/card here, because there might be other clickable elements in the card aside from the heading)
     '[&:has([data-slot="card-link"]_a:hover)_[data-slot="media"]>img]:scale-110',
-    // **** Card link in Heading ****
     '[&:has([data-slot="heading"]_[data-slot="card-link"]:hover)_[data-slot="media"]>img]:scale-110',
-    // Border (bottom/top) is set to transparent to make sure the bottom underline is not visible when the card is hovered
-    // Border top is set to even out the border bottom used for the underline
-    '[&_[data-slot="heading"]_[data-slot="card-link"]]:no-underline',
-    '[&_[data-slot="heading"]_[data-slot="card-link"]]:border-y-2',
-    '[&_[data-slot="heading"]_[data-slot="card-link"]]:border-y-transparent',
-    '[&_[data-slot="heading"]_[data-slot="card-link"]]:transition-colors',
-    '[&_[data-slot="heading"]_[data-slot="card-link"]:hover]:border-b-current',
-    // Mimic heading styles for the card link if placed in the heading slot. This is necessary to make the custom underline align with the link text
-    '[&_[data-slot="heading"]_[data-slot="card-link"]]:heading-s',
-    '[&_[data-slot="heading"]_[data-slot="card-link"]]:leading-6',
-    '[&_[data-slot="heading"]_[data-slot="card-link"]]:text-pretty',
-    '[&_[data-slot="heading"]_[data-slot="card-link"]]:hyphens-auto',
-    '[&_[data-slot="heading"]_[data-slot="card-link"]]:[word-break:break-word]', // necessary to make hyphens work in grid containers in Safari
 
     // **** Fail-safe for interactive elements ****
     // Make interactive elements clickable by themselves, while the rest of the card is clickable as a whole
@@ -171,7 +153,38 @@ const Card = ({
   });
   return (
     <div className={className} {...restProps}>
-      {children}
+      <Provider
+        values={[
+          [
+            HeadingContext,
+            {
+              size: 's',
+              className: cx([
+                'inline',
+                'w-fit',
+                'text-pretty',
+                'hyphens-auto',
+                '[word-break:break-word]', // necessary to make hyphens work in grid containers in Safari
+                // **** Card link in Heading ****
+                // Border (bottom/top) is set to transparent to make sure the bottom underline is not visible when the card is hovered
+                // Border top is set to even out the border bottom used for the underline
+                '*:data-[slot="card-link"]:no-underline',
+                '*:data-[slot="card-link"]:border-y-2',
+                '*:data-[slot="card-link"]:border-y-transparent',
+                '*:data-[slot="card-link"]:transition-colors',
+                '*:data-[slot="card-link"]:hover:border-b-current',
+                // Mimic heading styles for the card link if placed in the heading slot. This is necessary to make the custom underline align with the link text
+                '*:data-[slot="card-link"]:font-inherit',
+                '*:data-[slot="card-link"]:text-pretty',
+                '*:data-[slot="card-link"]:hyphens-auto',
+                '*:data-[slot="card-link"]:[word-break:break-word]', // necessary to make hyphens work in grid containers in Safari
+              ]),
+            },
+          ],
+        ]}
+      >
+        {children}
+      </Provider>
     </div>
   );
 };
