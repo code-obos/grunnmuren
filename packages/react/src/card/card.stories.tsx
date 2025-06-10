@@ -21,9 +21,7 @@ const meta: Meta<typeof Card> = {
   render: () => (
     <Card>
       <Content>
-        <Heading className="heading-s" level={3}>
-          Min bolig
-        </Heading>
+        <Heading level={3}>Min bolig</Heading>
         <p>
           Her finner du alt om din nye bolig og hva som venter deg fremover. Du
           finner dine dokumenter, salgsoppgave og mye mer.
@@ -54,9 +52,7 @@ export const WithBackground = () => {
           key={bgColor}
         >
           <Content>
-            <Heading className="heading-s" level={3}>
-              Bakgrunn {bgColor}
-            </Heading>
+            <Heading level={3}>Bakgrunn {bgColor}</Heading>
             <p>Dette kortet har {bgColor} som bakgrunnsfarge</p>
           </Content>
         </Card>
@@ -74,9 +70,7 @@ export const WithImage = () => (
       />
     </Media>
     <Content>
-      <Heading className="heading-s" level={3}>
-        Kort med bilde
-      </Heading>
+      <Heading level={3}>Kort med bilde</Heading>
       <p>
         Dette kortet har et bilde og er uten border. Derfor er alle hjørner på
         bildet avrundet.
@@ -94,9 +88,7 @@ export const OutlinedWithImageAnd = () => (
       />
     </Media>
     <Content>
-      <Heading className="heading-s" level={3}>
-        Kort med bilde og border
-      </Heading>
+      <Heading level={3}>Kort med bilde og border</Heading>
       <p>
         Dette kortet har et bilde og border. Derfor er kun hjørnene i toppen
         avrundet.
@@ -109,9 +101,7 @@ export const WithIconTop = () => (
   <Card variant="outlined">
     <PiggyBank />
     <Content>
-      <Heading className="heading-s" level={3}>
-        Kort med ikon i topp
-      </Heading>
+      <Heading level={3}>Kort med ikon i topp</Heading>
       <p>Dette kortet har svart border og et ikon i toppen</p>
     </Content>
   </Card>
@@ -120,9 +110,7 @@ export const WithIconTop = () => (
 export const WithIconBottom = () => (
   <Card variant="outlined">
     <Content>
-      <Heading className="heading-s" level={3}>
-        Kort med ikon i bunn
-      </Heading>
+      <Heading level={3}>Kort med ikon i bunn</Heading>
       <p>Dette kortet har svart border og et ikon i bunn</p>
     </Content>
     <PiggyBank />
@@ -174,9 +162,7 @@ export const CardWithInlineTopIllustration = () => (
   <Card variant="outlined" className="w-72">
     <Illustration />
     <Content>
-      <Heading className="heading-s" level={3}>
-        Utemiljø og grøntanlegg
-      </Heading>
+      <Heading level={3}>Utemiljø og grøntanlegg</Heading>
       <p>
         Et godt utemiljø er viktig for trivselen. Vi har en egen utenhusavdeling
         med flinke folk som kan hjelpe med realisering av nye prosjekter.
@@ -192,9 +178,7 @@ export const CardWithCoveringIllustration = () => (
     </Media>
     <Content>
       <div className="grid gap-1">
-        <Heading className="heading-s" level={3}>
-          Rødbergvn 88C
-        </Heading>
+        <Heading level={3}>Rødbergvn 88C</Heading>
         <small className="description">Bjerke - Oslo</small>
       </div>
       <small className="description -order-1">
@@ -220,7 +204,7 @@ export const CardWithCoveringIllustration = () => (
 export const ClickableWithIcon = () => (
   <Card variant="outlined">
     <Content>
-      <Heading className="heading-s" level={3}>
+      <Heading level={3}>
         <CardLink href="#card">Klikkbar med ikon</CardLink>
       </Heading>
       <p>Dette kortet er klikkbart og har svart border med et ikon</p>
@@ -238,7 +222,7 @@ export const ClickableWithImage = () => (
       />
     </Media>
     <Content>
-      <Heading className="heading-s" level={3}>
+      <Heading level={3}>
         <CardLink href="#card">Klikkbar med bilde</CardLink>
       </Heading>
       <p>
@@ -252,7 +236,7 @@ export const ClickableWithImage = () => (
 export const ClickableWithBackground = () => (
   <Card className="bg-blue-dark text-white">
     <Content>
-      <Heading className="heading-s" level={3}>
+      <Heading level={3}>
         <CardLink href="#card">Klikkbar med bakgrunnsfarge</CardLink>
       </Heading>
       <p>Dette kortet er klikkbart og har en bakgrunnsfarge</p>
@@ -270,9 +254,7 @@ export const ClickableWithImageAndCTA = () => (
       />
     </Media>
     <Content>
-      <Heading className="heading-s" level={3}>
-        Med bilde og CTA
-      </Heading>
+      <Heading level={3}>Med bilde og CTA</Heading>
       <p>Dette kortet har bilde og er klikkbart mot en CTA-lenke</p>
       <CardLink className="group/cta">
         <Button href="#cta" variant="tertiary">
@@ -287,9 +269,7 @@ export const ClickableWithImageAndCTA = () => (
 export const ClickableWithBackgroundAndCTA = () => (
   <Card className="bg-blue-dark text-white">
     <Content>
-      <Heading className="heading-s" level={3}>
-        Bakgrunnsfarge og CTA
-      </Heading>
+      <Heading level={3}>Bakgrunnsfarge og CTA</Heading>
       <p>Dette kortet har bakgrunnsfarge og er klikkbart mot en CTA-lenke.</p>
       <CardLink className="group/cta mt-1">
         <Button href="#cta" variant="tertiary">
@@ -312,7 +292,7 @@ export const ClickableWithOtherClickableElements = () => (
       </Media>
       <Content className="grow">
         <div className="grid gap-1">
-          <Heading className="heading-s" level={3}>
+          <Heading level={3}>
             <CardLink href="#card">Rødbergvn 88C</CardLink>
           </Heading>
           <small className="description">Bjerke - Oslo</small>
@@ -355,7 +335,7 @@ export const ClickableWithOtherClickableElementsAndBackgroundColor = () => (
     </Media>
     <Content>
       <div className="grid gap-1">
-        <Heading className="heading-s" level={3}>
+        <Heading level={3}>
           <CardLink href="#card">Rødbergvn 88C</CardLink>
         </Heading>
         <small className="description">Bjerke - Oslo</small>
@@ -405,7 +385,7 @@ export const ClickableWithBadge = () => (
     </Media>
     <Content>
       <div className="grid gap-1">
-        <Heading className="heading-s" level={3}>
+        <Heading level={3}>
           <CardLink href="#card">Rødbergvn 88C</CardLink>
         </Heading>
         <small className="description">Bjerke - Oslo</small>
@@ -455,7 +435,7 @@ export const ClickableWithBadgeRight = () => (
     </Media>
     <Content>
       <div className="grid gap-1">
-        <Heading className="heading-s" level={3}>
+        <Heading level={3}>
           <CardLink href="#card">Rødbergvn 88C</CardLink>
         </Heading>
         <small className="description">Bjerke - Oslo</small>
@@ -500,9 +480,7 @@ export const HorizontalLeft = () => (
       />
     </Media>
     <Content>
-      <Heading className="heading-s" level={3}>
-        Med bilde til venstre
-      </Heading>
+      <Heading level={3}>Med bilde til venstre</Heading>
       <p>
         Dette kortet har bilde til venstre på større skjermer og er klikkbart
         mot en CTA-lenke
@@ -520,9 +498,7 @@ export const HorizontalLeft = () => (
 export const HorizontalRight = () => (
   <Card layout="horizontal">
     <Content>
-      <Heading className="heading-s" level={3}>
-        Med bilde til høyre
-      </Heading>
+      <Heading level={3}>Med bilde til høyre</Heading>
       <p>
         Dette kortet har bilde til høyre på større skjermer og er klikkbart mot
         en CTA-lenke
@@ -547,9 +523,7 @@ export const HorizontalWithIconLeft = () => (
   <Card layout="horizontal" variant="outlined">
     <PiggyBank />
     <Content>
-      <Heading className="heading-s" level={3}>
-        Med ikon til venstre
-      </Heading>
+      <Heading level={3}>Med ikon til venstre</Heading>
       <p>
         Dette kortet er liggende, har et ikon til venstre og er klikkbart mot en
         CTA-lenke
@@ -567,9 +541,7 @@ export const HorizontalWithIconLeft = () => (
 export const HorizontalWithIconRight = () => (
   <Card layout="horizontal" variant="outlined">
     <Content>
-      <Heading className="heading-s" level={3}>
-        Med ikon til høyre
-      </Heading>
+      <Heading level={3}>Med ikon til høyre</Heading>
       <p>
         Dette kortet er liggende, har et ikon til høyre og er klikkbart mot en
         CTA-lenke
@@ -590,9 +562,7 @@ export const WithAvatar = () => (
     <Avatar src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/v1578474487/Boligkonferansen/obosbk%202017/Daniel_Kj%C3%B8rberg_Siraj_1x1.jpg" />
     <Content>
       <div className="flex flex-col-reverse gap-2">
-        <Heading className="heading-s" level={3}>
-          Daniel Kjørberg Siraj
-        </Heading>
+        <Heading level={3}>Daniel Kjørberg Siraj</Heading>
         <Description>Konsernsjef (CEO)</Description>
       </div>
       <p>Dette kortet er liggende, med et rundt bilde til høyre</p>
