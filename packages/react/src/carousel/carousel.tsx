@@ -1,12 +1,13 @@
 import { ChevronLeft, ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 import { useUpdateEffect } from '@react-aria/utils';
-import { type VariantProps, cva, cx } from 'cva';
+import { cx } from 'cva';
 import { createContext, useEffect, useRef, useState } from 'react';
 import { Provider } from 'react-aria-components';
 import { useDebouncedCallback } from 'use-debounce';
 import { Button, ButtonContext } from '../button';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
+import { MediaContext } from '../content';
 
 type CarouselProps = {
   /** The <CarouselItem/> components to be displayed within the carousel. */
@@ -70,20 +71,7 @@ const Carousel = ({ className, children }: CarouselProps) => {
   );
 
   return (
-    <div
-      data-slot="carousel"
-      className={cx(
-        className,
-        'relative rounded-3xl',
-        // If any <CarouselItems/> (the scroll-snap container) or <VideoLoop/> component is focused, apply custom focus styles around the carousel, this makes ensures that the focus outline is visible around the carousel in all cases
-        '[&:has([data-slot="carousel-items"]:focus-visible,[data-slot="video-loop-button"]:focus-visible)]:outline-focus',
-        '[&:has([data-slot="carousel-items"]:focus-visible,[data-slot="video-loop-button"]:focus-visible)]:outline-focus-offset',
-        // Unset the default focus outline for potential video loop buttons, as it interferes with the custom focus styles for the carousel
-        '**:data-[slot="video-loop-button"]:focus-visible:outline-none',
-        // biome-ignore lint/nursery/useSortedClasses: biome is unable to sort the custom classes for 3xl and 4xl breakpoints
-        'h-70 sm:h-[25rem] lg:h-[35rem] xl:h-[40rem] 2xl:h-[42rem] 3xl:h-[48rem] 4xl:h-[53rem]',
-      )}
-    >
+    <div data-slot="carousel">
       <Provider
         values={[
           [
@@ -122,33 +110,45 @@ const Carousel = ({ className, children }: CarouselProps) => {
           ],
         ]}
       >
-        {children}
-        <_CarouselControls>
-          <Button
-            isIconOnly
-            slot="prev"
-            variant="primary"
-            color="white"
-            className={cx(
-              'group/carousel-previous',
-              hasReachedScrollStart && 'invisible',
-            )}
-          >
-            <ChevronLeft className="group-hover/carousel-previous:motion-safe:-translate-x-1 transition-transform" />
-          </Button>
-          <Button
-            isIconOnly
-            slot="next"
-            variant="primary"
-            color="white"
-            className={cx(
-              'group/carousel-next',
-              hasReachedScrollEnd && 'invisible',
-            )}
-          >
-            <ChevronRight className="transition-transform group-hover/carousel-next:motion-safe:translate-x-1" />
-          </Button>
-        </_CarouselControls>
+        <div
+          className={cx(
+            className,
+            'relative rounded-3xl',
+            // If any <CarouselItems/> (the scroll-snap container) or <VideoLoop/> component is focused, apply custom focus styles around the carousel, this makes ensures that the focus outline is visible around the carousel in all cases
+            '[&:has([data-slot="carousel-items"]:focus-visible,[data-slot="video-loop-button"]:focus-visible)]:outline-focus',
+            '[&:has([data-slot="carousel-items"]:focus-visible,[data-slot="video-loop-button"]:focus-visible)]:outline-focus-offset',
+            // Unset the default focus outline for potential video loop buttons, as it interferes with the custom focus styles for the carousel
+            '**:data-[slot="video-loop-button"]:focus-visible:outline-none',
+          )}
+        >
+          {children}
+          <_CarouselControls>
+            <Button
+              isIconOnly
+              slot="prev"
+              variant="primary"
+              color="white"
+              className={cx(
+                'group/carousel-previous',
+                hasReachedScrollStart && 'invisible',
+              )}
+            >
+              <ChevronLeft className="group-hover/carousel-previous:motion-safe:-translate-x-1 transition-transform" />
+            </Button>
+            <Button
+              isIconOnly
+              slot="next"
+              variant="primary"
+              color="white"
+              className={cx(
+                'group/carousel-next',
+                hasReachedScrollEnd && 'invisible',
+              )}
+            >
+              <ChevronRight className="transition-transform group-hover/carousel-next:motion-safe:translate-x-1" />
+            </Button>
+          </_CarouselControls>
+        </div>
       </Provider>
     </div>
   );
@@ -167,7 +167,12 @@ type _CarouselControlsProps = {
  */
 const _CarouselControls = ({ children, className }: _CarouselControlsProps) => (
   <div
-    className={cx(className, 'absolute right-6 bottom-6 flex gap-x-2')}
+    className={cx(
+      className,
+      'absolute right-6 bottom-6 flex gap-x-2',
+      // Make it easier to position in full-bleed hero variants (these style have no other side effects)
+      'items-end *:h-fit',
+    )}
     data-slot="carousel-controls"
   >
     {children}
@@ -202,7 +207,6 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => (
           'snap-mandatory',
           'overflow-x-auto',
           'outline-none',
-          'h-full',
           'rounded-[inherit]',
         ])}
         ref={ref}
@@ -218,35 +222,35 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => (
   </CarouselItemsContext.Consumer>
 );
 
-type CarouselItemProps = VariantProps<typeof carouselItemVariant> & {
+type CarouselItemProps = {
   className?: string;
   children: React.ReactNode;
 };
 
-const carouselItemVariant = cva({
-  base: 'shrink-0 basis-full snap-start *:h-full *:w-full',
-  variants: {
-    /**
-     * Control how the content should be placed with the object-fit property
-     * You might for example want to use `fit="contain"` portrait images that should not be cropped
-     * @default cover
-     * */
-    fit: {
-      cover: '*:object-cover',
-      contain: 'bg-blue-dark *:object-contain',
-    },
-  },
-  defaultVariants: {
-    fit: 'cover',
-  },
-});
-
-const CarouselItem = ({ fit, className, children }: CarouselItemProps) => {
-  const _className = carouselItemVariant({ fit });
-
+const CarouselItem = ({ className, children }: CarouselItemProps) => {
   return (
-    <div className={cx(className, _className)} data-slot="carousel-item">
-      {children}
+    <div
+      className={cx(className, 'shrink-0 basis-full snap-start')}
+      data-slot="carousel-item"
+    >
+      <Provider
+        values={[
+          [
+            MediaContext,
+            {
+              fit: 'cover',
+              className: cx(
+                'bg-blue-dark',
+                '*:w-full',
+                // biome-ignore lint/nursery/useSortedClasses: biome is unable to sort the custom classes for 3xl and 4xl breakpoints
+                '*:h-70 sm:*:h-[25rem] lg:*:h-[35rem] xl:*:h-[40rem] 2xl:*:h-[42rem] 3xl:*:h-[48rem] 4xl:*:h-[53rem]',
+              ),
+            },
+          ],
+        ]}
+      >
+        {children}
+      </Provider>
     </div>
   );
 };

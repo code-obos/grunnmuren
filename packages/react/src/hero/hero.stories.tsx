@@ -32,24 +32,26 @@ const meta: Meta<typeof Hero> = {
             personer som vil ta OBOS videre. Søk på våre ledige stillinger!
           </p>
         </Content>
-        <Media>
-          <Carousel>
-            <CarouselItems>
-              <CarouselItem>
+        <Carousel>
+          <CarouselItems>
+            <CarouselItem>
+              <Media>
                 <img
                   src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
                   alt=""
                 />
-              </CarouselItem>
-              <CarouselItem>
+              </Media>
+            </CarouselItem>
+            <CarouselItem>
+              <Media>
                 <img
                   src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
                   alt=""
                 />
-              </CarouselItem>
-            </CarouselItems>
-          </Carousel>
-        </Media>
+              </Media>
+            </CarouselItem>
+          </CarouselItems>
+        </Carousel>
       </Hero>
     </main>
   ),
@@ -126,31 +128,35 @@ export const StandardWithCarousel = () => (
         <Heading level={1}>OBOS-butikken</Heading>
         <Description>– din lokale OBOS-butikk i Oslo sentrum</Description>
       </Content>
-      <Media>
-        <Carousel>
-          <CarouselItems>
-            <CarouselItem>
+      <Carousel>
+        <CarouselItems>
+          <CarouselItem>
+            <Media>
               <VideoLoop
                 src="https://res.cloudinary.com/obosit-prd-ch-clry/video/upload/v1732199756/Mellom%20husene/Frysja_Loop2.mp4"
                 format="mp4"
                 alt="En postbil kjører rundt i det moderne nabolaget på Frysja. Her finnes det fine uteområder, med husker og kafeer."
               />
-            </CarouselItem>
-            <CarouselItem fit="contain">
+            </Media>
+          </CarouselItem>
+          <CarouselItem>
+            <Media fit="contain">
               <img
                 src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_1080,q_auto:best/t_2_3/v1747985572/Temasider/Folk/Hans%20Petter%20%20-%20Trang%20f%C3%B8dsel/Obos-Hans-Petter-Aaserud-Photo-Einar-Aslaksen-03093_web.jpg"
                 alt=""
               />
-            </CarouselItem>
-            <CarouselItem>
+            </Media>
+          </CarouselItem>
+          <CarouselItem>
+            <Media>
               <img
                 src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
                 alt=""
               />
-            </CarouselItem>
-          </CarouselItems>
-        </Carousel>
-      </Media>
+            </Media>
+          </CarouselItem>
+        </CarouselItems>
+      </Carousel>
     </Hero>
   </main>
 );
@@ -212,45 +218,53 @@ export const FullBleedWithCarousel = () => (
         <Heading level={1}>Ulven</Heading>
         <Description>– et nytt nabolag i Oslo</Description>
       </Content>
-      <Media>
-        <Carousel>
-          <CarouselItems>
+      <Carousel>
+        <CarouselItems>
+          <CarouselItem>
             <CarouselItem>
-              <CarouselItem>
+              <Media>
                 <VideoLoop
                   src="https://res.cloudinary.com/obosit-prd-ch-clry/video/upload/v1732199756/Mellom%20husene/Frysja_Loop2.mp4"
                   format="mp4"
                   alt="En postbil kjører rundt i det moderne nabolaget på Frysja. Her finnes det fine uteområder, med husker og kafeer."
                 />
-              </CarouselItem>
+              </Media>
             </CarouselItem>
-            <CarouselItem>
+          </CarouselItem>
+          <CarouselItem>
+            <Media>
               <img
                 src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
                 alt=""
               />
-            </CarouselItem>
-            <CarouselItem>
+            </Media>
+          </CarouselItem>
+          <CarouselItem>
+            <Media>
               <img
                 src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/v1587988823/Boligprosjekter/Oslo/Frysjaparken/Frysjalia/Frysjaparken_interi%C3%B8r_30.jpg"
                 alt=""
               />
-            </CarouselItem>
-            <CarouselItem fit="contain">
+            </Media>
+          </CarouselItem>
+          <CarouselItem>
+            <Media fit="contain">
               <img
                 src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_1080,q_auto:best/t_2_3/v1747985572/Temasider/Folk/Hans%20Petter%20%20-%20Trang%20f%C3%B8dsel/Obos-Hans-Petter-Aaserud-Photo-Einar-Aslaksen-03093_web.jpg"
                 alt=""
               />
-            </CarouselItem>
-            <CarouselItem>
+            </Media>
+          </CarouselItem>
+          <CarouselItem>
+            <Media>
               <img
                 src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/v1699879884/Boligprosjekter/Oslo/Frysjaparken/Ager/Originale%20bilder/OBOS_Frysja-Ager-Illustrasjon_av_Frysja_torg_i_Ager_borettslag.jpg"
                 alt=""
               />
-            </CarouselItem>
-          </CarouselItems>
-        </Carousel>
-      </Media>
+            </Media>
+          </CarouselItem>
+        </CarouselItems>
+      </Carousel>
     </Hero>
   </main>
 );

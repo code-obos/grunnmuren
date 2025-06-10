@@ -85,11 +85,49 @@ const Content = ({ ref = null, ...props }: ContentProps) => {
   return outerWrapper ? outerWrapper(content) : content;
 };
 
-type MediaProps = HTMLProps<HTMLDivElement> & {
-  children: React.ReactNode;
-};
+type MediaProps = HTMLProps<HTMLDivElement> &
+  VariantProps<typeof mediaVariant> & {
+    children: React.ReactNode;
+    /** Ref for the element. */
+    ref?: Ref<HTMLDivElement>;
+  };
 
-const Media = (props: MediaProps) => <div {...props} data-slot="media" />;
+const mediaVariant = cva({
+  variants: {
+    /**
+     * Control how the content should be placed with the object-fit property
+     * You might for example want to use `fit="contain"` portrait images that should not be cropped
+     * @default cover
+     * */
+    fit: {
+      cover: '*:object-cover',
+      contain: '*:object-contain',
+    },
+  },
+});
+
+const MediaContext = createContext<
+  ContextValue<Partial<MediaProps>, HTMLDivElement>
+>({});
+
+const Media = ({ ref = null, ...props }: MediaProps) => {
+  [props, ref] = useContextProps(props, ref, MediaContext);
+
+  const { className, fit, ...restProps } = props;
+
+  const _className = mediaVariant({
+    fit,
+  });
+
+  return (
+    <div
+      ref={ref}
+      className={cx(className, _className)}
+      {...restProps}
+      data-slot="media"
+    />
+  );
+};
 
 type FooterProps = HTMLProps<HTMLDivElement> & {
   children: React.ReactNode;
@@ -117,6 +155,7 @@ export {
   Heading,
   HeadingContext,
   Media,
+  MediaContext,
   type CaptionProps,
   type ContentProps,
   type FooterProps,
