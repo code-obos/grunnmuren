@@ -123,6 +123,9 @@ const Media = ({ ref = null, ...props }: MediaProps) => {
     <div
       ref={ref}
       className={cx(className, _className)}
+      // This can be used (internally) in other components
+      // to apply custom styles to the media element depending on the fit
+      data-fit={fit}
       {...restProps}
       data-slot="media"
     />

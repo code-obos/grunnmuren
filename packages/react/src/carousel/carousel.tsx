@@ -240,7 +240,7 @@ const CarouselItem = ({ className, children }: CarouselItemProps) => {
             {
               fit: 'cover',
               className: cx(
-                'bg-blue-dark',
+                'data-[fit="contain"]:bg-blue-dark',
                 '*:w-full',
                 // biome-ignore lint/nursery/useSortedClasses: biome is unable to sort the custom classes for 3xl and 4xl breakpoints
                 '*:h-70 sm:*:h-[25rem] lg:*:h-[35rem] xl:*:h-[40rem] 2xl:*:h-[42rem] 3xl:*:h-[48rem] 4xl:*:h-[53rem]',
