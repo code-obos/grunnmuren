@@ -49,7 +49,7 @@ New `Carousel` component that can be used for any content, all though primarily 
 </Carousel>
 ```
 
-Use the `fit` prop on the `<Media>` primitive to control the `object-fit` (`cover` | `contain`) behavior of the item, this is a way to prevent cropping of images in portrait format. This defaults to `cover`, so for portrait images set it to `contain`.
+Use the `fit` prop on the `<Media>` primitive to control the `object-fit` (`cover` | `contain`) behavior of it's children, this is a way to prevent cropping of images in portrait format. This defaults to `cover`, so for portrait images set it to `contain`.
 
 ### In Hero
 
