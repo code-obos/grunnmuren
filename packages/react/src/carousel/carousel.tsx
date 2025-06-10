@@ -243,7 +243,6 @@ const carouselItemVariant = cva({
 
 const CarouselItem = ({ fit, className, children }: CarouselItemProps) => {
   const _className = carouselItemVariant({ fit });
-  console.log('_className', _className);
 
   return (
     <div className={cx(className, _className)} data-slot="carousel-item">
