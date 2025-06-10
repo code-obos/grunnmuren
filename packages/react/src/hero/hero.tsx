@@ -20,7 +20,7 @@ const oneColumnLayout = [
   '*:not-data-[slot="content"]:not-data-[slot="media"]:w-fit',
   // Other elements than <Content> and <Media> (e.g. CTA, SVG logo or Badge) take up 3 columns on medium screens and above, and are right aligned
   'lg:*:not-data-[slot="content"]:not-data-[slot="media"]:not-data-[slot="carousel"]:col-span-3 lg:*:not-data-[slot="content"]:not-data-[slot="media"]:justify-self-end',
-  // <Media> content takes up the full width on medium screens and above
+  // <Media> and <Carousel> content takes up the full width on medium screens and above
   'lg:*:data-[slot="media"]:col-span-full *:data-[slot="media"]:*:w-full',
   'lg:*:data-[slot="carousel"]:col-span-full  *:data-[slot="carousel"]:*:w-full',
   // Aligns <Content> and any element beside it (e.g. <Media>, <Badge>, <CTA> etc.) to the bottom of the <Content> container
