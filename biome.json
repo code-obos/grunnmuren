@@ -5,7 +5,7 @@
       "dist/",
       ".next/",
       ".output/",
-      ".vinxi/",
+      "vite.config.timestamp_*",
       "apps/docs/public/storybook",
       "routetree.gen.ts",
       "packages/icons-react/src",
