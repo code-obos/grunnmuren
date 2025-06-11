@@ -180,9 +180,9 @@ const _CarouselControls = ({ children, className }: _CarouselControlsProps) => (
 );
 
 type CarouselItemsProps = {
-  /** Additional CSS className for the element. */
-  children: React.ReactNode;
   /** The <CarouselItem/> components to be displayed within the carousel. */
+  children: React.ReactNode;
+  /** Additional CSS className for the element. */
   className?: string;
 };
 
@@ -223,8 +223,10 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => (
 );
 
 type CarouselItemProps = {
-  className?: string;
+  /** The component/components to display as the <CarouselItem/>. */
   children: React.ReactNode;
+  /** Additional CSS className for the element. */
+  className?: string;
 };
 
 const CarouselItem = ({ className, children }: CarouselItemProps) => {
