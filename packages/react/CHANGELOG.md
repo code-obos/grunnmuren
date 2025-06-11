@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.3.1
+
+### Patch Changes
+
+- d470365: Fixes a layout bug in `<Hero variant="full-bleed">` that causes content below it to be placed behind `<Carousel>` children.
+
 ## 2.3.0
 
 ### Minor Changes
