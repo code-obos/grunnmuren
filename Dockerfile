@@ -30,7 +30,6 @@ WORKDIR /app/apps/docs
 ENV NODE_ENV="production"
 
 COPY --from=builder /app/apps/docs/.output .output
-COPY --from=builder /app/apps/docs/.vinxi .vinxi
 COPY --from=prod-deps /app/apps/docs/node_modules node_modules
 
 

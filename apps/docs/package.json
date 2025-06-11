@@ -7,13 +7,13 @@
   "type": "module",
   "scripts": {
     "build": "pnpm build:props && pnpm build:colors && pnpm build:tsc && pnpm build:assets && pnpm build:app",
-    "build:app": "vinxi build",
+    "build:app": "vite build",
     "build:assets": "mkdir -p public/resources/icons && cp -r node_modules/@obosbbl/grunnmuren-icons-svg/src/* public/resources/icons/",
     "build:props": "node extract-component-props.js && biome lint --write component-props.ts --files-max-size=4000000",
     "build:colors": "node extract-colors.js && biome format --write colors.ts",
     "build:tsc": "tsc",
-    "dev": "vinxi dev",
-    "start": "vinxi start",
+    "dev": "vite dev --port 3000",
+    "start": "node .output/server/index.mjs",
     "typegen:extract": "sanity schema extract",
     "typegen:generate": "sanity typegen generate"
   },
@@ -47,6 +47,7 @@
     "@tanstack/react-router-devtools": "1.121.0",
     "react-docgen-typescript": "2.2.2",
     "tailwindcss": "4.1.7",
+    "vite": "6.3.5",
     "vite-tsconfig-paths": "5.1.4"
   }
 }
