@@ -186,6 +186,7 @@ function Button({ ref = null, ...props }: ButtonProps) {
   return isLinkProps(restProps) ? (
     <RACLink
       {...restProps}
+      routerOptions={restProps.routerOptions}
       className={className}
       ref={ref as Ref<HTMLAnchorElement>}
     >
