@@ -1,5 +1,6 @@
 .output
-.vinxi
+.tanstack
+.nitro
 public/resources/icons/
 public/storybook
 component-props.ts

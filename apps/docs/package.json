@@ -7,13 +7,13 @@
   "type": "module",
   "scripts": {
     "build": "pnpm build:props && pnpm build:colors && pnpm build:tsc && pnpm build:assets && pnpm build:app",
-    "build:app": "vinxi build",
+    "build:app": "vite build",
     "build:assets": "mkdir -p public/resources/icons && cp -r node_modules/@obosbbl/grunnmuren-icons-svg/src/* public/resources/icons/",
     "build:props": "node extract-component-props.js && biome lint --write component-props.ts --files-max-size=4000000",
     "build:colors": "node extract-colors.js && biome format --write colors.ts",
     "build:tsc": "tsc",
-    "dev": "vinxi dev",
-    "start": "vinxi start",
+    "dev": "vite dev --port 3000",
+    "start": "node .output/server/index.mjs",
     "typegen:extract": "sanity schema extract",
     "typegen:generate": "sanity typegen generate"
   },
@@ -28,8 +28,8 @@
     "@sanity/code-input": "5.1.2",
     "@sanity/table": "1.1.3",
     "@sanity/vision": "3.82.0",
-    "@tanstack/react-router": "1.114.27",
-    "@tanstack/react-start": "1.114.27",
+    "@tanstack/react-router": "1.121.0",
+    "@tanstack/react-start": "1.121.0",
     "cva": "1.0.0-beta.4",
     "groq": "3.82.0",
     "prism-react-renderer": "2.4.1",
@@ -38,16 +38,16 @@
     "react-dom": "19.0.0",
     "react-element-to-jsx-string": "17.0.1",
     "react-live": "4.1.8",
-    "sanity": "3.82.0",
-    "vinxi": "0.5.3"
+    "sanity": "3.82.0"
   },
   "devDependencies": {
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
     "@react-aria/optimize-locales-plugin": "1.1.4",
     "@tailwindcss/vite": "4.1.8",
-    "@tanstack/react-router-devtools": "1.114.27",
+    "@tanstack/react-router-devtools": "1.121.0",
     "react-docgen-typescript": "2.2.2",
     "tailwindcss": "4.1.7",
+    "vite": "6.3.5",
     "vite-tsconfig-paths": "5.1.4"
   }
 }
