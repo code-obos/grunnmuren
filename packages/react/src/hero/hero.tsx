@@ -19,9 +19,10 @@ const oneColumnLayout = [
   // Make sure other elements than <Content> and <Media> (i.e CTA) does not span the full width on small screens
   '*:not-data-[slot="content"]:not-data-[slot="media"]:w-fit',
   // Other elements than <Content> and <Media> (e.g. CTA, SVG logo or Badge) take up 3 columns on medium screens and above, and are right aligned
-  'lg:*:not-data-[slot="content"]:not-data-[slot="media"]:col-span-3 lg:*:not-data-[slot="content"]:not-data-[slot="media"]:justify-self-end',
-  // <Media> content takes up the full width on medium screens and above
+  'lg:*:not-data-[slot="content"]:not-data-[slot="media"]:not-data-[slot="carousel"]:col-span-3 lg:*:not-data-[slot="content"]:not-data-[slot="media"]:justify-self-end',
+  // <Media> and <Carousel> content takes up the full width on medium screens and above
   'lg:*:data-[slot="media"]:col-span-full *:data-[slot="media"]:*:w-full',
+  'lg:*:data-[slot="carousel"]:col-span-full  *:data-[slot="carousel"]:*:w-full',
   // Aligns <Content> and any element beside it (e.g. <Media>, <Badge>, <CTA> etc.) to the bottom of the <Content> container
   'lg:items-end',
 ];
@@ -48,13 +49,15 @@ const variants = cva({
       standard: [roundedMediaCorners, oneColumnLayout],
       'full-bleed': [
         oneColumnLayout,
-        // biome-ignore lint/nursery/useSortedClasses: biome is unable to sort the custom classes for 3xl and 4xl breakpoints
-        '*:data-[slot="media"]:h-70 sm:*:data-[slot="media"]:h-[25rem] lg:*:data-[slot="media"]:h-[30rem] lg:*:data-[slot="media"]:h-[35rem] xl:*:data-[slot="media"]:h-[40rem] 2xl:*:data-[slot="media"]:h-[42rem] 3xl:*:data-[slot="media"]:h-[48rem] 4xl:*:data-[slot="media"]:h-[53rem]',
         // Match the heights of the <Media> wrapper for the Media content (e.g. image, VideoLoop, video etc.)
         // biome-ignore lint/nursery/useSortedClasses: biome is unable to sort the custom classes for 3xl and 4xl breakpoints
-        '*:data-[slot="media"]:*:h-70 sm:*:data-[slot="media"]:*:h-[25rem] lg:*:data-[slot="media"]:*:h-[30rem] lg:*:data-[slot="media"]:*:h-[35rem] xl:*:data-[slot="media"]:*:h-[40rem] 2xl:*:data-[slot="media"]:*:h-[42rem] 3xl:*:data-[slot="media"]:*:h-[48rem] 4xl:*:data-[slot="media"]:*:h-[53rem]',
-        // Position the media content to fill the entire viewport width
+        '*:data-[slot="media"]:*:h-70 sm:*:data-[slot="media"]:*:h-[25rem] md:*:data-[slot="media"]:*:h-[30rem] lg:*:data-[slot="media"]:*:h-[35rem] xl:*:data-[slot="media"]:*:h-[40rem] 2xl:*:data-[slot="media"]:*:h-[42rem] 3xl:*:data-[slot="media"]:*:h-[48rem] 4xl:*:data-[slot="media"]:*:h-[53rem]',
+        // Position the media and carousel content to fill the entire viewport width
         '*:data-[slot="media"]:*:absolute *:data-[slot="media"]:*:left-0',
+        '*:data-[slot="carousel"]:*:absolute *:data-[slot="carousel"]:*:left-0',
+        '**:data-[slot="carousel-controls"]:container **:data-[slot="carousel-controls"]:right-0 **:data-[slot="carousel-controls"]:bottom-4 **:data-[slot="carousel-controls"]:left-0 **:data-[slot="carousel-controls"]:justify-end',
+        // Override rounded corners of Carousel slots
+        '*:data-[slot="carousel"]:*:rounded-none',
       ],
       'two-column': [
         'lg:items-center lg:*:col-span-6',

@@ -87,6 +87,7 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
       </video>
       {userPrefersReducedMotion !== null && (
         <button
+          data-slot="video-loop-button"
           aria-hidden
           type="button"
           onClick={() => setShouldPlay((prevState) => !prevState)}
