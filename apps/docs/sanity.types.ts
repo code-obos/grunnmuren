@@ -76,6 +76,7 @@ export type ImageWithCaption = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
   };
+  media?: unknown;
   hotspot?: SanityImageHotspot;
   crop?: SanityImageCrop;
   alt?: string;
@@ -158,7 +159,7 @@ export type Content = Array<{
     _type: "span";
     _key: string;
   }>;
-  style?: "normal" | "h2" | "h3" | "h4" | "h5" | "blockquote";
+  style?: "normal" | "h2" | "h3" | "h4" | "h5" | "blockquote" | "hr";
   listItem?: "bullet" | "number";
   markDefs?: Array<{
     href?: string;
@@ -177,6 +178,37 @@ export type Content = Array<{
 } & ImageWithCaption | {
   _key: string;
 } & Table>;
+
+export type Category = {
+  _id: string;
+  _type: "category";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  categoryItems?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "info";
+  }>;
+};
+
+export type Menu = {
+  _id: string;
+  _type: "menu";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  categories?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "category";
+  }>;
+};
 
 export type Info = {
   _id: string;
@@ -242,19 +274,31 @@ export type Code = {
   highlightedLines?: Array<number>;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | ImageWithCaption | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | LiveCodeBlock | StaticCodeBlock | Content | Info | Component | Slug | Table | TableRow | Code;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | ImageWithCaption | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | LiveCodeBlock | StaticCodeBlock | Content | Category | Menu | Info | Component | Slug | Table | TableRow | Code;
 export declare const internalGroqTypeReferenceTo: unique symbol;
-// Source: ./app/routes/_docs.tsx
-// Variable: COMPONENTS_NAVIGATION_QUERY
-// Query: *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc)
-export type COMPONENTS_NAVIGATION_QUERYResult = Array<{
-  _id: string;
-  name: string | null;
-  slug: string | "";
-  componentState: "beta" | "deprecated" | "new" | "stable" | null;
-}>;
+// Source: ./src/routes/_docs.tsx
+// Variable: NAVIGATION_QUERY
+// Query: {  "components": *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc),  "menu": *[_type == "menu"][0]{    categories[]->{      title,      "slug": slug.current,      categoryItems[]->{        name,        "slug": slug.current      }    }  }}
+export type NAVIGATION_QUERYResult = {
+  components: Array<{
+    _id: string;
+    name: string | null;
+    slug: string | "";
+    componentState: "beta" | "deprecated" | "new" | "stable" | null;
+  }>;
+  menu: {
+    categories: Array<{
+      title: string | null;
+      slug: null;
+      categoryItems: Array<{
+        name: string | null;
+        slug: string | null;
+      }> | null;
+    }> | null;
+  } | null;
+};
 
-// Source: ./app/routes/_docs/$slug.tsx
+// Source: ./src/routes/_docs/$slug.tsx
 // Variable: INFO_QUERY
 // Query: *[_type == "info"  && slug.current == $slug][0]{    "content": content[] {      ...,      _type == "image-with-caption" => {        ...,        asset->      }    },    "name": coalesce(name, ''),    resourceLinks,  }
 export type INFO_QUERYResult = {
@@ -265,7 +309,7 @@ export type INFO_QUERYResult = {
       _type: "span";
       _key: string;
     }>;
-    style?: "blockquote" | "h2" | "h3" | "h4" | "h5" | "normal";
+    style?: "blockquote" | "h2" | "h3" | "h4" | "h5" | "hr" | "normal";
     listItem?: "bullet" | "number";
     markDefs?: Array<{
       href?: string;
@@ -300,6 +344,7 @@ export type INFO_QUERYResult = {
       metadata?: SanityImageMetadata;
       source?: SanityAssetSourceData;
     } | null;
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
@@ -331,7 +376,7 @@ export type INFO_QUERYResult = {
   }> | null;
 } | null;
 
-// Source: ./app/routes/_docs/komponenter/$slug.tsx
+// Source: ./src/routes/_docs/komponenter/$slug.tsx
 // Variable: COMPONENT_QUERY
 // Query: *[_type == "component"  && slug.current == $slug][0]{    "content": content[] {      ...,      _type == "image-with-caption" => {        ...,        asset->      }    },    "name": coalesce(name, ''),    propsComponents,    resourceLinks,    componentState,  }
 export type COMPONENT_QUERYResult = {
@@ -342,7 +387,7 @@ export type COMPONENT_QUERYResult = {
       _type: "span";
       _key: string;
     }>;
-    style?: "blockquote" | "h2" | "h3" | "h4" | "h5" | "normal";
+    style?: "blockquote" | "h2" | "h3" | "h4" | "h5" | "hr" | "normal";
     listItem?: "bullet" | "number";
     markDefs?: Array<{
       href?: string;
@@ -377,6 +422,7 @@ export type COMPONENT_QUERYResult = {
       metadata?: SanityImageMetadata;
       source?: SanityAssetSourceData;
     } | null;
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
@@ -410,7 +456,7 @@ export type COMPONENT_QUERYResult = {
   componentState: "beta" | "deprecated" | "new" | "stable" | null;
 } | null;
 
-// Source: ./app/routes/_docs/komponenter/index.tsx
+// Source: ./src/routes/_docs/komponenter/index.tsx
 // Variable: COMPONENTS_INDEX_QUERY
 // Query: *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc)
 export type COMPONENTS_INDEX_QUERYResult = Array<{
@@ -424,8 +470,9 @@ export type COMPONENTS_INDEX_QUERYResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc)": COMPONENTS_NAVIGATION_QUERYResult | COMPONENTS_INDEX_QUERYResult;
+    "{\n  \"components\": *[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc),\n  \"menu\": *[_type == \"menu\"][0]{\n    categories[]->{\n      title,\n      \"slug\": slug.current,\n      categoryItems[]->{\n        name,\n        \"slug\": slug.current\n      }\n    }\n  }\n}": NAVIGATION_QUERYResult;
     "*[_type == \"info\"\n  && slug.current == $slug][0]{\n    \"content\": content[] {\n      ...,\n      _type == \"image-with-caption\" => {\n        ...,\n        asset->\n      }\n    },\n    \"name\": coalesce(name, ''),\n    resourceLinks,\n  }": INFO_QUERYResult;
     "*[_type == \"component\"\n  && slug.current == $slug][0]{\n    \"content\": content[] {\n      ...,\n      _type == \"image-with-caption\" => {\n        ...,\n        asset->\n      }\n    },\n    \"name\": coalesce(name, ''),\n    propsComponents,\n    resourceLinks,\n    componentState,\n  }": COMPONENT_QUERYResult;
+    "*[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc)": COMPONENTS_INDEX_QUERYResult;
   }
 }

@@ -91,11 +91,11 @@ export const MainNav = ({ className }: MainNavProps) => {
   // Transform categories into nav items
   const categoryNavItems =
     menuData.categories?.map((category) => ({
-      title: category.title,
+      title: category.title ?? '',
       subNavItems:
         category.categoryItems?.map((item) => ({
           to: `/${item.slug}`,
-          title: item.name,
+          title: item.name ?? '',
         })) ?? [],
     })) ?? [];
 
