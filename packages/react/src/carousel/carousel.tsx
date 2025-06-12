@@ -9,14 +9,23 @@ import { MediaContext } from '../content';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 
+type OnNavigateProps = Pick<CarouselItemProps, 'id'> & {
+  /** The index of the item that is currently in view */
+  index: number;
+};
+
 type CarouselProps = {
   /** The <CarouselItem/> components to be displayed within the carousel. */
   children: React.ReactNode;
   /** Additional CSS className for the element. */
   className?: string;
+  /** Callback that is triggered when a user navigates to the previous item in the Carousel */
+  onPrev?: (item: OnNavigateProps) => void;
+  /** Callback that is triggered when a user navigates to the next item in the Carousel */
+  onNext?: (item: OnNavigateProps) => void;
 };
 
-const Carousel = ({ className, children }: CarouselProps) => {
+const Carousel = ({ className, children, onPrev, onNext }: CarouselProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const locale = useLocale();
   const { previous, next } = translations;
@@ -38,6 +47,10 @@ const Carousel = ({ className, children }: CarouselProps) => {
     );
   }, [scrollTargetIndex]);
 
+  // Keep track of the previous index to determine if the user is scrolling forward or backward
+  // This is used to determine which callback to call (onPrev or onNext)
+  const prevIndex = useRef(0);
+
   // Handle scrolling when user clicks the arrow icons
   useUpdateEffect(() => {
     if (!ref.current) return;
@@ -47,6 +60,22 @@ const Carousel = ({ className, children }: CarouselProps) => {
       inline: 'start',
       block: 'nearest',
     });
+
+    if (prevIndex.current > scrollTargetIndex && onPrev) {
+      onPrev({
+        index: scrollTargetIndex,
+        id: ref.current.children[scrollTargetIndex]?.id,
+      });
+    }
+
+    if (prevIndex.current < scrollTargetIndex && onNext) {
+      onNext({
+        index: scrollTargetIndex,
+        id: ref.current.children[scrollTargetIndex]?.id,
+      });
+    }
+
+    prevIndex.current = scrollTargetIndex;
   }, [scrollTargetIndex]);
 
   const onScroll = useDebouncedCallback(
@@ -227,13 +256,15 @@ type CarouselItemProps = {
   children: React.ReactNode;
   /** Additional CSS className for the element. */
   className?: string;
+  id?: string;
 };
 
-const CarouselItem = ({ className, children }: CarouselItemProps) => {
+const CarouselItem = ({ className, children, id }: CarouselItemProps) => {
   return (
     <div
       className={cx(className, 'shrink-0 basis-full snap-start')}
       data-slot="carousel-item"
+      id={id}
     >
       <Provider
         values={[
