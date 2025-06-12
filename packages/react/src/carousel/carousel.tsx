@@ -12,6 +12,10 @@ import { useLocale } from '../use-locale';
 type OnNavigateProps = Pick<CarouselItemProps, 'id'> & {
   /** The index of the item that is currently in view */
   index: number;
+  /** The index of the previous item that was in view */
+  prevIndex: number;
+  /** The id of the previous item that was in view */
+  prevId?: CarouselItemProps['id'];
 };
 
 type CarouselProps = {
@@ -19,13 +23,17 @@ type CarouselProps = {
   children: React.ReactNode;
   /** Additional CSS className for the element. */
   className?: string;
-  /** Callback that is triggered when a user navigates to the previous item in the Carousel */
-  onPrev?: (item: OnNavigateProps) => void;
-  /** Callback that is triggered when a user navigates to the next item in the Carousel */
-  onNext?: (item: OnNavigateProps) => void;
+  /**
+   * Callback that is triggered when a user navigates to new item in the Carousel.
+   * The argument to the callback is an object containing `index` of the new item scrolled into view and the `id` of that item (if set on the <CarouselItem>)
+   * It also provides `prevIndex` which is the index of the previous item that was in view
+   * And `prevId`, which is the id of the previous item that was in view (if set on the <CarouselItem>)
+   * @param item { index: number; id?: string; prevIndex: number; prevId?: string }
+   */
+  onChange?: (item: OnNavigateProps) => void;
 };
 
-const Carousel = ({ className, children, onPrev, onNext }: CarouselProps) => {
+const Carousel = ({ className, children, onChange }: CarouselProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const locale = useLocale();
   const { previous, next } = translations;
@@ -61,17 +69,12 @@ const Carousel = ({ className, children, onPrev, onNext }: CarouselProps) => {
       block: 'nearest',
     });
 
-    if (prevIndex.current > scrollTargetIndex && onPrev) {
-      onPrev({
+    if (prevIndex.current !== scrollTargetIndex && onChange) {
+      onChange({
         index: scrollTargetIndex,
         id: ref.current.children[scrollTargetIndex]?.id,
-      });
-    }
-
-    if (prevIndex.current < scrollTargetIndex && onNext) {
-      onNext({
-        index: scrollTargetIndex,
-        id: ref.current.children[scrollTargetIndex]?.id,
+        prevIndex: prevIndex.current,
+        prevId: ref.current.children[prevIndex.current]?.id,
       });
     }
 

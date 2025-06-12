@@ -65,10 +65,7 @@ export const StandardWithLeadAndImage: Story = {
 
 export const WithNavigationCallbacks = () => (
   <main className="container grid gap-y-8">
-    <Carousel
-      onNext={(props) => console.log('Next clicked', props)}
-      onPrev={(props) => console.log('Prev clicked', props)}
-    >
+    <Carousel onChange={(props) => console.log('Change', props)}>
       <CarouselItems>
         <CarouselItem id="first">
           <Media>
