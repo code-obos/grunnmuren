@@ -1,5 +1,5 @@
 ---
-"@obosbbl/grunnmuren-react": minor
+"@obosbbl/grunnmuren-react": patch
 ---
 
 Adding an `onChange` prop to the `<Carousel>` component. This prop can be used to track navigation within the `<Carousel>`.
