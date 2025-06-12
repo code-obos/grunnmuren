@@ -9,7 +9,7 @@ import { MediaContext } from '../content';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 
-type OnNavigateProps = Pick<CarouselItemProps, 'id'> & {
+type CarouselItem = Pick<CarouselItemProps, 'id'> & {
   /** The index of the item that is currently in view */
   index: number;
   /** The index of the previous item that was in view */
@@ -25,12 +25,12 @@ type CarouselProps = {
   className?: string;
   /**
    * Callback that is triggered when a user navigates to new item in the Carousel.
-   * The argument to the callback is an object containing `index` of the new item scrolled into view and the `id` of that item (if set on the <CarouselItem>)
+   * The argument to the callback is an object containing `index` of the new item scrolled into view and the `id` of that item (if set on the `<CarouselItem>`)
    * It also provides `prevIndex` which is the index of the previous item that was in view
-   * And `prevId`, which is the id of the previous item that was in view (if set on the <CarouselItem>)
+   * And `prevId`, which is the id of the previous item that was in view (if set on the `<CarouselItem>`)
    * @param item { index: number; id?: string; prevIndex: number; prevId?: string }
    */
-  onChange?: (item: OnNavigateProps) => void;
+  onChange?: (item: CarouselItem) => void;
 };
 
 const Carousel = ({ className, children, onChange }: CarouselProps) => {
