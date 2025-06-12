@@ -68,8 +68,8 @@ export const WithNavigationCallbacks = () => (
     <Carousel
       onChange={({ id, index, prevId, prevIndex }) => {
         console.log(`
-        Carousel changed to item with id: ${id} and index: ${index}.
-        The previous item id was: ${prevId} and index: ${prevIndex}.
+        Carousel changed to item with id: "${id}" and index: ${index}.
+        The previous item id was: "${prevId}" and index: ${prevIndex}.
         This indicates that the user navigated to the ${prevIndex < index ? 'next' : 'previous'} item.
       `);
       }}
