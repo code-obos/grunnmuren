@@ -99,6 +99,9 @@ function uniqueFileNames(files: File[]) {
         [file],
         // Follow the pattern of adding a number in parentheses to the base name (e.g. "file (1).txt")
         `${baseName} (${fileNameCounts[baseName] - 1})${extension}`,
+        {
+          type: file.type,
+        },
       );
     }
 
