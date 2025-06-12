@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 2.3.2
+
+### Patch Changes
+
+- 2a0445e: FileUpload: fix bug with not adding fileType to files that have been renamed
+
 ## 2.3.1
 
 ### Patch Changes
