@@ -3,7 +3,7 @@
 ---
 
 Adding an `onChange` prop to the `<Carousel>` component. This prop can be used to track navigation within the `<Carousel>`.
-The `onChange` callback that is triggered when a user navigates to new item in the Carousel. The argument to the callback is an object containing `index` of the a new item scrolled into view and the `id` of that item (if set on the `<CarouselItem>`). It also provides `prevIndex` which is the index of the previous item that was in view. And `prevId`, which is the id of the previous item that was in view (if set on the `<CarouselItem>`)
+The `onChange` callback that is triggered when a user navigates to a new item in the Carousel. The argument to the callback is an object containing `index` of the new item scrolled into view and the `id` of that item (if set on the `<CarouselItem>`). It also provides `prevIndex` which is the index of the previous item that was in view. And `prevId`, which is the id of the previous item that was in view (if set on the `<CarouselItem>`)
 
 Usage:
 
