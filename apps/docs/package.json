@@ -46,7 +46,7 @@
     "@tailwindcss/vite": "4.1.8",
     "@tanstack/react-router-devtools": "1.121.0",
     "react-docgen-typescript": "2.2.2",
-    "tailwindcss": "4.1.7",
+    "tailwindcss": "4.1.10",
     "vite": "6.3.5",
     "vite-tsconfig-paths": "5.1.4"
   }
