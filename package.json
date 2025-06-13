@@ -33,7 +33,7 @@
     "@storybook/react-vite": "8.6.14",
     "@storybook/test": "8.6.14",
     "@storybook/test-runner": "0.22.0",
-    "@tailwindcss/vite": "4.1.8",
+    "@tailwindcss/vite": "4.1.10",
     "@types/bun": "1.2.16",
     "@types/react": "19.1.8",
     "@types/react-dom": "19.1.6",
