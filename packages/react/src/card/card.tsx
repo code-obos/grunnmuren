@@ -9,6 +9,7 @@ import { HeadingContext } from '../content';
 type CardProps = VariantProps<typeof cardVariants> & {
   children?: React.ReactNode;
   className?: string;
+  id?: string;
 };
 
 const cardVariants = cva({
