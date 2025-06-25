@@ -90,6 +90,9 @@ const Hero = ({ variant, className, children }: HeroProps) => {
           {
             // Sets the default heading size for the Hero based on the variant
             size: variant === 'two-column' ? 'xl' : 'l',
+            className:
+              // word-break:break-word to allow long words to break (this is necessary to make hyphens work in grid containers in Safari)
+              'hyphens-auto text-pretty [word-break:break-word]',
           },
         ],
         [
