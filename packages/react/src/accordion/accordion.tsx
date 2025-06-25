@@ -113,7 +113,7 @@ function AccordionItem(props: AccordionItemProps) {
             HeadingContext,
             {
               // Negative margin to strech the button to the entire with of the accordion (to support containers with a background color)
-              className: 'font-semibold leading-7 -mx-2 text-base',
+              className: 'font-medium leading-7 -mx-2 text-base',
               // Supply a default level here to make this typecheck ok. Will be overwritten with the consumers set heading level anyways
               level: 3,
               _innerWrapper: (children) => (
