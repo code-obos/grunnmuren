@@ -27,6 +27,9 @@ const oneColumnLayout = [
   'lg:items-end',
 ];
 
+const nonFullBleedAspectRatiosForSmallScreens =
+  '*:data-[slot="media"]:*:aspect-[1/1] sm:*:data-[slot="media"]:*:aspect-4/3 md:*:data-[slot="media"]:*:aspect-3/2';
+
 const variants = cva({
   base: [
     'container px-0', // We want to eliminate the default padding on the container, as this component will typically be put inside a container
@@ -46,18 +49,29 @@ const variants = cva({
      * @default standard
      * */
     variant: {
-      standard: [roundedMediaCorners, oneColumnLayout],
+      standard: [
+        roundedMediaCorners,
+        oneColumnLayout,
+        nonFullBleedAspectRatiosForSmallScreens,
+        'lg:*:data-[slot="media"]:*:aspect-2/1',
+      ],
       'full-bleed': [
         oneColumnLayout,
         // Position the media and carousel content to fill the entire viewport width
         '*:data-[slot="media"]:*:absolute *:data-[slot="media"]:*:left-0',
-        '*:data-[slot="carousel"]:*:absolute *:data-[slot="carousel"]:*:left-0',
+        // Special case for Carousel, where the Media is nested inside a CarouselItem
+        '*:data-[slot="carousel"]:**:data-[slot="media"]:w-full *:data-[slot="carousel"]:*:absolute *:data-[slot="carousel"]:*:left-0',
         // Match the heights of the <Media> or <Carousel> wrapper for the Media content (e.g. image, VideoLoop, video etc.)
         // This is necessary due to the absolute positioning of the media and carousel containers in this variant
         // biome-ignore lint/nursery/useSortedClasses: biome is unable to sort the custom classes for 3xl and 4xl breakpoints
-        '*:data-[slot="media"]:*:h-70 sm:*:data-[slot="media"]:*:h-[25rem] md:*:data-[slot="media"]:*:h-[30rem] lg:*:data-[slot="media"]:*:h-[35rem] xl:*:data-[slot="media"]:*:h-[40rem] 2xl:*:data-[slot="media"]:*:h-[42rem] 3xl:*:data-[slot="media"]:*:h-[48rem] 4xl:*:data-[slot="media"]:*:h-[53rem]',
+        '**:data-[slot="media"]:h-70 sm:**:data-[slot="media"]:h-[25rem] md:**:data-[slot="media"]:h-[30rem] lg:**:data-[slot="media"]:h-[35rem] xl:**:data-[slot="media"]:h-[40rem] 2xl:**:data-[slot="media"]:h-[42rem] 3xl:**:data-[slot="media"]:h-[48rem] 4xl:**:data-[slot="media"]:h-[53rem]',
+        // biome-ignore lint/nursery/useSortedClasses: biome is unable to sort the custom classes for 3xl and 4xl breakpoints
+        '**:data-[slot="media"]:*:h-70 sm:**:data-[slot="media"]:*:h-[25rem] md:**:data-[slot="media"]:*:h-[30rem] lg:**:data-[slot="media"]:*:h-[35rem] xl:**:data-[slot="media"]:*:h-[40rem] 2xl:**:data-[slot="media"]:*:h-[42rem] 3xl:**:data-[slot="media"]:*:h-[48rem] 4xl:**:data-[slot="media"]:*:h-[53rem]',
         // biome-ignore lint/nursery/useSortedClasses: biome is unable to sort the custom classes for 3xl and 4xl breakpoints
         '*:data-[slot="carousel"]:h-70 sm:*:data-[slot="carousel"]:h-[25rem] md:*:data-[slot="carousel"]:h-[30rem] lg:*:data-[slot="carousel"]:h-[35rem] xl:*:data-[slot="carousel"]:h-[40rem] 2xl:*:data-[slot="carousel"]:h-[42rem] 3xl:*:data-[slot="carousel"]:h-[48rem] 4xl:*:data-[slot="carousel"]:h-[53rem]',
+
+        // Override aspect ratio of the media and carousel-item slots (since we can not use aspect for full-bleed layout)
+        '**:data-[slot="carousel-item"]:data-[slot="media"]:*:aspect-none',
         '**:data-[slot="carousel-controls"]:container **:data-[slot="carousel-controls"]:right-0 **:data-[slot="carousel-controls"]:bottom-4 **:data-[slot="carousel-controls"]:left-0 **:data-[slot="carousel-controls"]:justify-end',
         // Override rounded corners of Carousel slots
         '*:data-[slot="carousel"]:*:rounded-none',
@@ -67,6 +81,7 @@ const variants = cva({
         // Vertical spacing in the <Content>
         'lg:*:data-[slot="content"]:gap-y-7',
         roundedMediaCorners,
+        nonFullBleedAspectRatiosForSmallScreens,
         // Set media aspect ratio to 1:1 (square)
         'lg:*:data-[slot="media"]:*:aspect-[1/1]',
       ],
