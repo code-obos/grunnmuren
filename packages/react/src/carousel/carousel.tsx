@@ -277,8 +277,9 @@ const CarouselItem = ({ className, children, id }: CarouselItemProps) => {
               fit: 'cover',
               className: cx(
                 'data-[fit="contain"]:bg-blue-dark',
-                '*:h-full *:w-full',
-                'aspect-1/1 max-sm:data-[fit="contain"]:*:object-cover sm:aspect-4/3 md:aspect-3/2 lg:aspect-2/1',
+                '*:w-full',
+                // biome-ignore lint/nursery/useSortedClasses: biome is unable to sort the custom classes for 3xl and 4xl breakpoints
+                '*:h-70 sm:*:h-[25rem] lg:*:h-[35rem] xl:*:h-[40rem] 2xl:*:h-[42rem] 3xl:*:h-[48rem] 4xl:*:h-[53rem]',
               ),
             },
           ],
