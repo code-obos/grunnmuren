@@ -1,5 +1,13 @@
 # @obosbbl/grunnmuren-react
 
+## 2.3.4
+
+### Patch Changes
+
+- 5abf6d0: The `Hero` component now renders `<Media>` in responsive aspect ratios for the `standard` and `two-column` variants. The same behaviour is also applied to the `<Carousel>` component.
+- 90538a4: Change font-weight from semibold to medium in `<Accordion>`
+- 6831caf: Auto hyphenation for headings in `Hero`
+
 ## 2.3.3
 
 ### Patch Changes
