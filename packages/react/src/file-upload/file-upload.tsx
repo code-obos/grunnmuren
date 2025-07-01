@@ -272,66 +272,68 @@ const FileUpload = ({
             {children}
           </FileTrigger>
         </Provider>
-        <ul className="mt-4 grid gap-y-2">
-          {controlledOrUncontrolledFiles.map((file, fileIndex) => {
-            let fileName = file.name;
-            if (
-              fileTriggerProps.acceptDirectory &&
-              file.webkitRelativePath !== ''
-            ) {
-              fileName = file.webkitRelativePath;
-            }
+        {controlledOrUncontrolledFiles.length > 0 && (
+          <ul className="mt-4 grid gap-y-2">
+            {controlledOrUncontrolledFiles.map((file, fileIndex) => {
+              let fileName = file.name;
+              if (
+                fileTriggerProps.acceptDirectory &&
+                file.webkitRelativePath !== ''
+              ) {
+                fileName = file.webkitRelativePath;
+              }
 
-            const validation = validate?.(file) ?? true;
-            const hasError = validation !== true;
+              const validation = validate?.(file) ?? true;
+              const hasError = validation !== true;
 
-            return (
-              <li key={fileName}>
-                <div
-                  className={cx(
-                    'flex items-center justify-between gap-2 rounded-lg border-2 px-4 py-2',
-                    hasError
-                      ? 'border-red bg-red-light'
-                      : 'border-gray bg-gray-lightest',
-                  )}
-                >
-                  {fileName}{' '}
-                  <button
+              return (
+                <li key={fileName}>
+                  <div
                     className={cx(
-                      '-m-2 grid h-11 w-11 shrink-0 cursor-pointer place-items-center rounded-xl',
-                      // Focus styles
-                      'focus-visible:-outline-offset-8 focus-visible:outline-focus',
+                      'flex items-center justify-between gap-2 rounded-lg border-2 px-4 py-2',
+                      hasError
+                        ? 'border-red bg-red-light'
+                        : 'border-gray bg-gray-lightest',
                     )}
-                    onClick={() => {
-                      // For controlled component
-                      onChange?.((prevFiles) =>
-                        prevFiles.filter((_, index) => index !== fileIndex),
-                      );
-
-                      // For internal file state
-                      setFiles((prevFiles) =>
-                        prevFiles.filter((_, index) => index !== fileIndex),
-                      );
-
-                      // Make sure screen readers doesn't loose track of focus
-                      // (without this, the focus will be set to the top of the page for screen readers)
-                      buttonRef.current?.focus();
-                    }}
-                    aria-label={translations.remove[locale]}
-                    type="button"
                   >
-                    <Trash />
-                  </button>
-                </div>
-                {hasError && (
-                  <ErrorMessage className="mt-1 block w-full">
-                    {validation}
-                  </ErrorMessage>
-                )}
-              </li>
-            );
-          })}
-        </ul>
+                    {fileName}{' '}
+                    <button
+                      className={cx(
+                        '-m-2 grid h-11 w-11 shrink-0 cursor-pointer place-items-center rounded-xl',
+                        // Focus styles
+                        'focus-visible:-outline-offset-8 focus-visible:outline-focus',
+                      )}
+                      onClick={() => {
+                        // For controlled component
+                        onChange?.((prevFiles) =>
+                          prevFiles.filter((_, index) => index !== fileIndex),
+                        );
+
+                        // For internal file state
+                        setFiles((prevFiles) =>
+                          prevFiles.filter((_, index) => index !== fileIndex),
+                        );
+
+                        // Make sure screen readers doesn't loose track of focus
+                        // (without this, the focus will be set to the top of the page for screen readers)
+                        buttonRef.current?.focus();
+                      }}
+                      aria-label={translations.remove[locale]}
+                      type="button"
+                    >
+                      <Trash />
+                    </button>
+                  </div>
+                  {hasError && (
+                    <ErrorMessage className="mt-1 block w-full">
+                      {validation}
+                    </ErrorMessage>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        )}
         {/*
           This is necessary since we want to display individual errors for each file based on the validate prop.
           But the FieldErrorContext is used to display the general error message for the entire component
