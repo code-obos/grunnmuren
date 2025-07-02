@@ -35,7 +35,7 @@ const buttonVariants = cva({
     },
     /**
      * Adjusts the color of the button for usage on different backgrounds.
-     * @default green
+     * @default blue
      */
     color: {
       blue: 'focus-visible:outline-focus',
