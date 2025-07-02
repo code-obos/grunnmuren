@@ -29,15 +29,16 @@ const buttonVariants = cva({
     variant: {
       primary: 'no-underline',
       // by using an inset box-shadow to emulate a border instead of an actual border, the button size will be equal regardless of the variant
-      secondary: 'no-underline shadow-[inset_0_0_0_2px]',
+      secondary:
+        'border-2 border-current no-underline hover:border-transparent',
       tertiary: 'underline hover:no-underline',
     },
     /**
      * Adjusts the color of the button for usage on different backgrounds.
-     * @default green
+     * @default blue
      */
     color: {
-      green: 'focus-visible:outline-focus',
+      blue: 'focus-visible:outline-focus',
       mint: 'focus-visible:outline-focus focus-visible:outline-mint',
       white: 'focus-visible:outline-focus focus-visible:outline-white',
     },
@@ -54,20 +55,20 @@ const buttonVariants = cva({
   },
   compoundVariants: [
     {
-      color: 'green',
+      color: 'blue',
       variant: 'primary',
       // Darken bg by 20% on hover. The color is manually crafted
       className:
-        'bg-green text-white hover:bg-green-dark active:bg-[#007352] [&_[role="progressbar"]]:text-white',
+        'bg-blue-dark text-white hover:bg-blue active:bg-[#0536A0] active:text-white [&_[role="progressbar"]]:text-white',
     },
     {
-      color: 'green',
+      color: 'blue',
       variant: 'secondary',
       className:
-        'text-black shadow-green hover:bg-green hover:text-white active:bg-green [&:hover_[role="progressbar"]]:text-white [&_[role="progressbar"]]:text-black',
+        'text-blue-dark hover:border-transparent hover:bg-blue hover:text-blue-dark hover:text-white active:bg-[#0536A0] [&:hover_[role="progressbar"]]:text-white [&_[role="progressbar"]]:text-blue-dark',
     },
     {
-      color: 'green',
+      color: 'blue',
       variant: 'tertiary',
       className: '[&_[role="progressbar"]]:text-black',
     },
@@ -82,7 +83,7 @@ const buttonVariants = cva({
       color: 'mint',
       variant: 'secondary',
       className:
-        'text-mint shadow-mint hover:bg-mint hover:text-black [&:hover_[role="progressbar"]]:text-black [&_[role="progressbar"]]:text-mint',
+        'text-mint hover:bg-mint hover:text-black [&:hover_[role="progressbar"]]:text-black [&_[role="progressbar"]]:text-mint',
     },
     {
       color: 'mint',
@@ -99,7 +100,7 @@ const buttonVariants = cva({
       color: 'white',
       variant: 'secondary',
       className:
-        'text-white shadow-white hover:bg-white hover:text-black [&:hover_[role="progressbar"]]:text-black [&_[role="progressbar"]]:text-white',
+        'text-white hover:bg-white hover:text-black [&:hover_[role="progressbar"]]:text-black [&_[role="progressbar"]]:text-white',
     },
     {
       color: 'white',
@@ -109,7 +110,7 @@ const buttonVariants = cva({
   ],
   defaultVariants: {
     variant: 'primary',
-    color: 'green',
+    color: 'blue',
     isIconOnly: false,
     isPending: false,
   },

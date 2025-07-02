@@ -15,7 +15,7 @@ const meta: Meta<typeof Button> = {
     let bgColor = '';
 
     if (props.color === 'mint') {
-      bgColor = 'bg-green-dark';
+      bgColor = 'bg-blue-dark';
     } else if (props.color === 'white') {
       bgColor = 'bg-blue';
     }
@@ -37,7 +37,6 @@ type Story = StoryObj<typeof Button>;
 
 export const Primary: Story = {
   args: {
-    color: 'green',
     variant: 'primary',
     isPending: false,
   },
@@ -105,7 +104,7 @@ export const ButtonSandbox = () => {
         <Button variant="tertiary">Tertiary</Button>
       </div>
 
-      <div className="bg-mint-lightest p-8">
+      <div className="bg-sky-lightest p-8">
         <div className="flex gap-8">
           <Button>Primary</Button>
           <Button variant="secondary">Secondary</Button>
@@ -113,25 +112,25 @@ export const ButtonSandbox = () => {
         </div>
       </div>
 
-      <div className="bg-green-dark">
+      <div className="bg-blue-dark">
         <div className="flex gap-8 p-8">
-          <Button color="mint">Primary</Button>
-          <Button color="mint" variant="secondary">
-            Secondary
-          </Button>
-          <Button color="mint" variant="tertiary">
-            Tertiary
-          </Button>
-        </div>
-      </div>
-
-      <div className="bg-blue p-8">
-        <div className="flex gap-8">
           <Button color="white">Primary</Button>
           <Button color="white" variant="secondary">
             Secondary
           </Button>
           <Button color="white" variant="tertiary">
+            Tertiary
+          </Button>
+        </div>
+      </div>
+
+      <div className="bg-green-dark p-8">
+        <div className="flex gap-8">
+          <Button color="mint">Primary</Button>
+          <Button color="mint" variant="secondary">
+            Secondary
+          </Button>
+          <Button color="mint" variant="tertiary">
             Tertiary
           </Button>
         </div>
