@@ -487,3 +487,10 @@
     }
   }
 }
+
+@utility prose-white {
+  --tw-prose-body: --theme(--color-white, initial);
+  --tw-prose-bullets: --theme(--color-white, initial);
+  --tw-prose-counters: --theme(--color-white, initial);
+  --tw-prose-hr: --theme(--color-white, initial);
+}

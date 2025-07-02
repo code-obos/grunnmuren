@@ -88,45 +88,60 @@ export const Description = () => (
   </figcaption>
 );
 
+const ProseContent = () => {
+  return (
+    <>
+      <h1 className="text-center">Woops!</h1>
+
+      <p className="lead text-center">Nå er det noe som er galt her.</p>
+
+      <p className="text-center">
+        Sidene på fluks.obosblockwatne.no er dessverre ikke tilgjengelige
+        akkurat nå. De digitale bygningsarbeiderne våre jobber på spreng for å
+        fikse feilen, og vanligvis er sidene oppe og går igjen i løpet av kort
+        tid. Nedenfor finner du kontaktinformasjon.
+      </p>
+
+      <h2>Kontakt Fluks — OBOS Block Watne</h2>
+
+      <blockquote>
+        Det er et tøft boligmarked, og med de prisene det er på bolig i Oslo,
+        virket det nesten umulig å komme inn på markedet. Jeg var på noen
+        visninger, men det ble enten for lite eller for gammelt og slitt
+      </blockquote>
+
+      <p>
+        Telefon: <a href="tel:23246000">+47 23 24 60 00</a>
+      </p>
+      <hr />
+      <p>
+        E-post: <a href="mailto:obw.flukspost@obos.no">obw.flukspost@obos.no</a>
+      </p>
+
+      <p className="description">Ved stor pågang vil det være noe ventetid.</p>
+      <ul>
+        <li>hei</li>
+        <li>på</li>
+        <li>deg</li>
+      </ul>
+      <ol>
+        <li>hei</li>
+        <li>på</li>
+        <li>deg</li>
+      </ol>
+    </>
+  );
+};
+
 export const Prose = () => (
-  <div className="prose container-prose my-12 md:my-20" id="main">
-    <h1 className="text-center">Woops!</h1>
+  <div className="prose container-prose my-12md:my-20">
+    <ProseContent />
+  </div>
+);
 
-    <p className="lead text-center">Nå er det noe som er galt her.</p>
-
-    <p className="text-center">
-      Sidene på fluks.obosblockwatne.no er dessverre ikke tilgjengelige akkurat
-      nå. De digitale bygningsarbeiderne våre jobber på spreng for å fikse
-      feilen, og vanligvis er sidene oppe og går igjen i løpet av kort tid.
-      Nedenfor finner du kontaktinformasjon.
-    </p>
-
-    <h2>Kontakt Fluks — OBOS Block Watne</h2>
-
-    <blockquote>
-      Det er et tøft boligmarked, og med de prisene det er på bolig i Oslo,
-      virket det nesten umulig å komme inn på markedet. Jeg var på noen
-      visninger, men det ble enten for lite eller for gammelt og slitt
-    </blockquote>
-
-    <p>
-      Telefon: <a href="tel:23246000">+47 23 24 60 00</a>
-    </p>
-    <p>
-      E-post: <a href="mailto:obw.flukspost@obos.no">obw.flukspost@obos.no</a>
-    </p>
-
-    <p className="description">Ved stor pågang vil det være noe ventetid.</p>
-    <ul>
-      <li>hei</li>
-      <li>på</li>
-      <li>deg</li>
-    </ul>
-    <ol>
-      <li>hei</li>
-      <li>på</li>
-      <li>deg</li>
-    </ol>
+export const ProseWhite = () => (
+  <div className="prose prose-white container-prose my-12md:my-20 bg-blue-dark">
+    <ProseContent />
   </div>
 );
 
