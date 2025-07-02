@@ -32,11 +32,6 @@ type ComboboxProps<T extends object> = {
   errorMessage?: React.ReactNode;
   /**
    * Display the dropdown button trigger in a pending state
-   * @deprecated Use isPending instead.
-   */
-  isLoading?: boolean;
-  /**
-   * Display the dropdown button trigger in a pending state
    * @default false
    */
   isPending?: boolean;
@@ -59,15 +54,12 @@ function Combobox<T extends object>(props: ComboboxProps<T>) {
     children,
     description,
     errorMessage,
-    isLoading,
-    isPending: _isPending,
+    isPending,
     label,
     isInvalid: _isInvalid,
     ref,
     ...restProps
   } = props;
-
-  const isPending = _isPending || isLoading;
 
   // the order of the conditions matter here, because providing a value for isInvalid makes the validation state "controlled",
   // which will override any built in validation

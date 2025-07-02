@@ -119,12 +119,6 @@ const buttonVariants = cva({
 type ButtonOrLinkProps = VariantProps<typeof buttonVariants> & {
   children?: React.ReactNode;
   href?: RACLinkProps['href'];
-  /**
-   * Display the button in a loading state
-   * @deprecated Use isPending instead.
-   * @default false
-   */
-  isLoading?: boolean;
   /** Additional style properties for the element. */
   style?: React.CSSProperties;
   /** Ref to the element. */
@@ -149,13 +143,10 @@ function Button({ ref = null, ...props }: ButtonProps) {
     children: _children,
     color,
     isIconOnly,
-    isLoading,
     variant,
-    isPending: _isPending,
+    isPending,
     ...restProps
   } = props;
-
-  const isPending = _isPending || isLoading;
 
   const className = buttonVariants({
     className: props.className,
