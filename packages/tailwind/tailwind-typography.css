@@ -40,8 +40,6 @@
   --tw-prose-counters: --theme(--color-black, initial);
   --tw-prose-bullets: --theme(--color-black, initial);
   --tw-prose-hr: --theme(--color-gray-200, initial);
-  --tw-prose-quotes: inherit;
-  --tw-prose-quote-borders: --theme(--color-gray-200, initial);
   --tw-prose-captions: --theme(--color-gray-500, initial);
   --tw-prose-kbd: --theme(--color-gray-900, initial);
   --tw-prose-kbd-shadows: --theme(--color-gray-900, initial);
@@ -50,24 +48,6 @@
   --tw-prose-pre-bg: --theme(--color-gray-800, initial);
   --tw-prose-th-borders: --theme(--color-gray-300, initial);
   --tw-prose-td-borders: --theme(--color-gray-200, initial);
-  --tw-prose-invert-body: --theme(--color-gray-300, initial);
-  --tw-prose-invert-headings: --theme(--color-white, initial);
-  --tw-prose-invert-lead: --theme(--color-gray-400, initial);
-  --tw-prose-invert-links: --theme(--color-white, initial);
-  --tw-prose-invert-bold: --theme(--color-white, initial);
-  --tw-prose-invert-counters: --theme(--color-gray-400, initial);
-  --tw-prose-invert-bullets: --theme(--color-gray-600, initial);
-  --tw-prose-invert-hr: --theme(--color-gray-700, initial);
-  --tw-prose-invert-quotes: --theme(--color-gray-100, initial);
-  --tw-prose-invert-quote-borders: --theme(--color-gray-700, initial);
-  --tw-prose-invert-captions: --theme(--color-gray-400, initial);
-  --tw-prose-invert-kbd: --theme(--color-white, initial);
-  --tw-prose-invert-kbd-shadows: --theme(--color-white, initial);
-  --tw-prose-invert-code: --theme(--color-white, initial);
-  --tw-prose-invert-pre-code: --theme(--color-gray-300, initial);
-  --tw-prose-invert-pre-bg: rgb(0 0 0 / 50%);
-  --tw-prose-invert-th-borders: --theme(--color-gray-600, initial);
-  --tw-prose-invert-td-borders: --theme(--color-gray-700, initial);
 
   font-size: 1rem;
   line-height: 1.75;
@@ -506,4 +486,11 @@
       margin-bottom: 0;
     }
   }
+}
+
+@utility prose-white {
+  --tw-prose-body: --theme(--color-white, initial);
+  --tw-prose-bullets: --theme(--color-white, initial);
+  --tw-prose-counters: --theme(--color-white, initial);
+  --tw-prose-hr: --theme(--color-white, initial);
 }
