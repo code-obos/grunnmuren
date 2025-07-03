@@ -1,5 +1,13 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.2.1
+
+### Patch Changes
+
+- d611103: add `prose-white` to override `prose` to use white text, suitable for use on dark blue backgrounds.
+
+  eg: `<div class="bg-blue-dark prose prose-white">...</div>`
+
 ## 2.2.0
 
 ### Minor Changes
