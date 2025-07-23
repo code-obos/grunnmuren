@@ -13,15 +13,6 @@ import {
 
 const tabsVariants = cva({
   base: ['flex gap-4'],
-  variants: {
-    orientation: {
-      horizontal: 'flex-col',
-      vertical: 'flex-row',
-    },
-  },
-  defaultVariants: {
-    orientation: 'horizontal',
-  },
 });
 
 export type TabsProps = Omit<RACTabsProps, 'className'> &
@@ -30,11 +21,6 @@ export type TabsProps = Omit<RACTabsProps, 'className'> &
      * CSS classes to apply to the tabs container
      */
     className?: string;
-    /**
-     * The orientation of the tabs
-     * @default "horizontal"
-     */
-    orientation?: 'horizontal' | 'vertical';
   };
 
 export type TabListProps = Omit<RACTabListProps<object>, 'className'> &
