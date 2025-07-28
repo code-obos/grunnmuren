@@ -34,6 +34,8 @@ export const Default: Story = {
         <Tab id="leilighet">Leilighet</Tab>
         <Tab id="rekkehus">Rekkehus</Tab>
         <Tab id="enebolig">Enebolig</Tab>
+        <Tab id="villa">Villa</Tab>
+        <Tab id="hytte">Hytte</Tab>
       </TabList>
       <TabPanel id="leilighet">
         <h3 className="mb-4 font-semibold text-lg">Leilighet</h3>
@@ -56,6 +58,21 @@ export const Default: Story = {
         <p>
           Drømmer du om egen enebolig med stor hage? Vi har flotte eneboliger i
           rolige strøk, både nybygg og etablerte hus i gode bomiljø.
+        </p>
+      </TabPanel>
+      <TabPanel id="villa">
+        <h3 className="mb-4 font-semibold text-lg">Villa</h3>
+        <p>
+          Våre villaer kombinerer stil og komfort med moderne løsninger. Her får
+          du romslige boliger med høy standard og gode kvaliteter.
+        </p>
+      </TabPanel>
+      <TabPanel id="hytte">
+        <h3 className="mb-4 font-semibold text-lg">Hytte</h3>
+        <p>
+          Våre hytter ligger i naturskjønne omgivelser og tilbyr en perfekt
+          tilflukt fra hverdagens stress. Her kan du nyte roen og stillheten i
+          vakre omgivelser.
         </p>
       </TabPanel>
     </Tabs>
