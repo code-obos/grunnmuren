@@ -12,7 +12,7 @@ import {
 } from 'react-aria-components';
 
 const tabsVariants = cva({
-  base: ['flex gap-4'],
+  base: ['flex flex-col gap-4'],
 });
 
 export type TabsProps = Omit<RACTabsProps, 'className'> &
@@ -90,7 +90,7 @@ function Tab(props: TabProps) {
       {...restProps}
       className={cx(
         className,
-        'relative cursor-pointer px-4 py-2 font-light text-sm outline-hidden transition-colors duration-200',
+        'relative cursor-pointer px-4 py-2 font-light text-sm outline-hidden transition-all duration-150 ease-out',
         // Focus
         'data-focus-visible:outline-focus-offset',
         // Disabled
@@ -100,8 +100,8 @@ function Tab(props: TabProps) {
         // Hover with layout shift prevention using pseudo-element
         'after:invisible after:block after:h-0 after:overflow-hidden after:font-medium after:content-[attr(data-text)]',
         'data-hovered:font-medium',
-        // Pressed
-        'data-pressed:bg-blue-lightest',
+        // Pressed - prevent layout shift by using inset box-shadow instead of border
+        'data-pressed:shadow-[inset_0_-1px_0_0_theme(colors.blue.dark)]',
         // Basic tab styling (horizontal orientation by default)
         '-mb-[1px] rounded-t-md border-transparent border-b-2',
       )}
