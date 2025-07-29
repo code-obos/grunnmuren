@@ -115,6 +115,53 @@ function TabList(props: TabListProps) {
     });
   }, []);
 
+  const scrollSelectedTabIntoView = useCallback(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    // Find the selected tab element
+    const selectedTab = container.querySelector(
+      '[data-selected="true"]',
+    ) as HTMLElement;
+    if (!selectedTab) return;
+
+    const containerRect = container.getBoundingClientRect();
+    const tabRect = selectedTab.getBoundingClientRect();
+    const margin = 44; // Minimum margin to avoid chevron buttons
+
+    // Calculate the visible area considering margins
+    const visibleLeft = containerRect.left + margin;
+    const visibleRight = containerRect.right - margin;
+
+    // Check if tab needs scrolling
+    const needsScrolling =
+      tabRect.left < visibleLeft || tabRect.right > visibleRight;
+
+    if (needsScrolling) {
+      const tabOffsetLeft = selectedTab.offsetLeft;
+      const tabWidth = selectedTab.offsetWidth;
+
+      let scrollPosition: number;
+
+      if (tabRect.left < visibleLeft) {
+        // Tab is cut off on the left, scroll left with margin
+        scrollPosition = tabOffsetLeft - margin;
+      } else {
+        // Tab is cut off on the right, scroll right with margin
+        scrollPosition =
+          tabOffsetLeft - container.clientWidth + tabWidth + margin;
+      }
+
+      container.scrollTo({
+        left: Math.max(0, scrollPosition),
+        behavior: 'smooth',
+      });
+
+      // Update scroll buttons after scrolling
+      setTimeout(checkScrollButtons, 150);
+    }
+  }, [checkScrollButtons]);
+
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
@@ -131,6 +178,24 @@ function TabList(props: TabListProps) {
     };
   }, [checkScrollButtons]);
 
+  // Add listeners for both keyboard and click interactions
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const handleInteraction = () => {
+      // Small delay to let React Aria update the selection
+      setTimeout(scrollSelectedTabIntoView, 100);
+    };
+
+    // Listen for clicks on tab elements
+    container.addEventListener('click', handleInteraction);
+
+    return () => {
+      container.removeEventListener('click', handleInteraction);
+    };
+  }, [scrollSelectedTabIntoView]);
+
   return (
     <div className="relative">
       {/* Scrollable tab container */}
@@ -142,9 +207,6 @@ function TabList(props: TabListProps) {
           'scrollbar-hidden overflow-x-auto',
           // Focus outline for accessibility
           'has-data-focus-visible:outline-focus-offset',
-          // Add padding when chevrons are visible
-          canScrollLeft && 'pl-10',
-          canScrollRight && 'pr-10',
         )}
         style={{
           WebkitOverflowScrolling: 'touch', // Smooth scrolling on iOS
@@ -163,7 +225,6 @@ function TabList(props: TabListProps) {
             'data-[orientation=horizontal]:*:-mb-[1px]',
 
             'data-[orientation=vertical]:flex-col data-[orientation=vertical]:border-r',
-            //'data-[orientation=vertical]:*:data-pressed:shadow-[inset_-1px_0_0_0_theme(colors.blue.dark)]',
             'data-[orientation=vertical]:*:border-r-2',
             'data-[orientation=vertical]:*:-mr-[1px]',
           )}
@@ -176,9 +237,11 @@ function TabList(props: TabListProps) {
         // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
         <div
           onClick={() => scrollTo('left')}
-          className="absolute top-0 -left-4 z-20 flex h-full w-10 items-center justify-center transition-all duration-200 bg-white"
+          className="-left-3 absolute top-0 z-20 flex h-full w-11 items-center justify-center transition-all duration-200 "
         >
-          <ChevronLeft className="h-4 w-4 text-black bg-white" />
+          <div className="flex h-full items-center bg-white pr-2.5">
+            <ChevronLeft className="-ml-1 h-4 w-4 text-black" />
+          </div>
         </div>
       )}
 
@@ -187,9 +250,11 @@ function TabList(props: TabListProps) {
         // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
         <div
           onClick={() => scrollTo('right')}
-          className="absolute top-0 -right-4 z-20 flex h-full w-10 items-center justify-center transition-all duration-200 bg-white"
+          className="-right-4 absolute top-0 z-20 flex h-full w-11 items-center justify-center bg-white transition-all duration-200"
         >
-          <ChevronRight className="h-4 w-4 text-black bg-white" />
+          <div className="bg-white">
+            <ChevronRight className="-ml-1 h-4 w-4 bg-white text-black " />
+          </div>
         </div>
       )}
     </div>
@@ -207,7 +272,9 @@ function Tab(props: TabProps) {
       {...restProps}
       className={cx(
         className,
-        'cursor-pointer px-4 py-2 font-light text-sm outline-hidden transition-all duration-150 ease-out',
+        'cursor-pointer border-transparent px-4 py-2 font-light text-sm outline-hidden',
+        // Transition
+        'transition-all duration-150 ease-out',
         // Disabled
         'data-disabled:cursor-not-allowed data-disabled:opacity-50',
         // Selection
@@ -217,8 +284,6 @@ function Tab(props: TabProps) {
         'data-hovered:font-medium',
         // Pressed
         'data-pressed:font-medium data-pressed:text-blue-dark',
-        // Basic tab styling (horizontal orientation by default)
-        'border-transparent',
       )}
       data-text={typeof children === 'string' ? children : ''}
     >
