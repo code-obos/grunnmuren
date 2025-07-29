@@ -82,9 +82,10 @@ export const Default: Story = {
 export const WithDefaultSelection: Story = {
   args: {
     defaultSelectedKey: 'tilvalg',
+    orientation: 'vertical',
   },
   render: (args) => (
-    <Tabs {...args}>
+    <Tabs {...args} orientation="vertical">
       <TabList aria-label="Boligkjøp">
         <Tab id="grunnpris">Grunnpris</Tab>
         <Tab id="tilvalg">Tilvalg</Tab>
@@ -115,27 +116,56 @@ export const WithDefaultSelection: Story = {
   ),
 };
 
-export const WithDisabledTab: Story = {
+export const WithVerticalOrientation: Story = {
   render: (args) => (
-    <Tabs {...args}>
+    <Tabs {...args} orientation="vertical">
       <TabList aria-label="Boliger i Norge">
         <Tab id="oslo">Oslo</Tab>
         <Tab id="bergen">Bergen</Tab>
-        <Tab id="trondheim" isDisabled>
-          Trondheim
-        </Tab>
+        <Tab id="trondheim">Trondheim</Tab>
+        <Tab id="stavanger">Stavanger</Tab>
+        <Tab id="tromsø">Tromsø</Tab>
       </TabList>
       <TabPanel id="oslo">
         <h3 className="mb-4 font-semibold text-lg">Oslo</h3>
-        <p>Se våre boliger i Oslo.</p>
+        <p>
+          Opplev hovedstadens pulserende byliv med moderne leiligheter i
+          sentrale strøk. Fra trendy Grünerløkka til elegante Frogner - finn
+          ditt urbane hjem midt i kulturens og næringslivets hjerte.
+        </p>
       </TabPanel>
       <TabPanel id="bergen">
         <h3 className="mb-4 font-semibold text-lg">Bergen</h3>
-        <p>Se våre boliger i Bergen.</p>
+        <p>
+          Mellom de syv fjell finner du sjarmerende boliger med unik karakter.
+          Våre bergenske hjem kombinerer historisk sjel med moderne komfort,
+          omgitt av spektakulær natur og vestlandsk hygge.
+        </p>
       </TabPanel>
       <TabPanel id="trondheim">
         <h3 className="mb-4 font-semibold text-lg">Trondheim</h3>
-        <p>Se våre boliger i Trondheim.</p>
+        <p>
+          Studentbyen ved Nidelva byr på rike tradisjoner og innovativ
+          arkitektur. Våre boliger ligger perfekt plassert for å nyte både byens
+          akademiske atmosfære og den vakre trondheimsfjorden.
+        </p>
+      </TabPanel>
+      <TabPanel id="stavanger">
+        <h3 className="mb-4 font-semibold text-lg">Stavanger</h3>
+        <p>
+          Energihovedstaden kombinerer internasjonalt miljø med norsk
+          kystkultur. Utforsk våre boliger fra den pittoreske gamlebyen til
+          moderne boligområder med kort vei til både jobb og fantastiske
+          strender.
+        </p>
+      </TabPanel>
+      <TabPanel id="tromsø">
+        <h3 className="mb-4 font-semibold text-lg">Tromsø</h3>
+        <p>
+          Under nordlyset og midnattssola ligger vår nordligste storby. Her
+          tilbyr vi unike boliger med arktisk sjarm, hvor du kan nyte
+          spektakulær natur og en livlig kulturscene året rundt.
+        </p>
       </TabPanel>
     </Tabs>
   ),
