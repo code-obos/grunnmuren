@@ -256,10 +256,10 @@ importers:
         version: 3.30.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@react-stately/form':
         specifier: ^3.1.5
-        version: 3.1.5(react@19.0.0)
+        version: 3.2.0(react@19.0.0)
       '@react-stately/utils':
         specifier: ^3.10.7
-        version: 3.10.7(react@19.0.0)
+        version: 3.10.8(react@19.0.0)
       '@types/node':
         specifier: ^22.0.0
         version: 22.13.13
@@ -2741,11 +2741,6 @@ packages:
   '@react-stately/flags@3.1.2':
     resolution: {integrity: sha512-2HjFcZx1MyQXoPqcBGALwWWmgFVUk2TuKVIQxCbRq7fPyWXIl6VHcakCLurdtYC2Iks7zizvz0Idv48MQ38DWg==}
 
-  '@react-stately/form@3.1.5':
-    resolution: {integrity: sha512-wOs0SVXFgNr1aIdywiNH1MhxrFlN5YxBr1k9y3Z7lX+pc/MGRJFTgfDDw5JDxvwLH9joJ9ciniCdWep9L/TqcQ==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
-
   '@react-stately/form@3.2.0':
     resolution: {integrity: sha512-PfefxvT7/BIhAGpD4oQpdcxnL8cfN0ZTQxQq+Wmb9z3YzK1oM8GFxb8eGdDRG71JeF8WUNMAQVZFhgl00Z/YKg==}
     peerDependencies:
@@ -2834,11 +2829,6 @@ packages:
 
   '@react-stately/tree@3.9.1':
     resolution: {integrity: sha512-dyoPIvPK/cs03Tg/MQSODi2kKYW1zaiOG9KC2P0c8b44mywU2ojBKzhSJky3dBkJ4VVGy7L+voBh50ELMjEa8Q==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
-
-  '@react-stately/utils@3.10.7':
-    resolution: {integrity: sha512-cWvjGAocvy4abO9zbr6PW6taHgF24Mwy/LbQ4TC4Aq3tKdKDntxyD+sh7AkSRfJRT2ccMVaHVv2+FfHThd3PKQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
@@ -2955,11 +2945,6 @@ packages:
 
   '@react-types/select@3.10.0':
     resolution: {integrity: sha512-+xJwYWJoJTCGsaiPAqb6QB79ub1WKIHSmOS9lh/fPUXfUszVs05jhajaN9KjrKmnXds5uh4u6l1JH5J1l2K5pw==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
-
-  '@react-types/shared@3.30.0':
-    resolution: {integrity: sha512-COIazDAx1ncDg046cTJ8SFYsX8aS3lB/08LDnbkH/SkdYrFPWDlXMrO/sUam8j1WWM+PJ+4d1mj7tODIKNiFog==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
@@ -13137,12 +13122,6 @@ snapshots:
     dependencies:
       '@swc/helpers': 0.5.17
 
-  '@react-stately/form@3.1.5(react@19.0.0)':
-    dependencies:
-      '@react-types/shared': 3.30.0(react@19.0.0)
-      '@swc/helpers': 0.5.15
-      react: 19.0.0
-
   '@react-stately/form@3.2.0(react@19.0.0)':
     dependencies:
       '@react-types/shared': 3.31.0(react@19.0.0)
@@ -13296,11 +13275,6 @@ snapshots:
       '@swc/helpers': 0.5.17
       react: 19.0.0
 
-  '@react-stately/utils@3.10.7(react@19.0.0)':
-    dependencies:
-      '@swc/helpers': 0.5.15
-      react: 19.0.0
-
   '@react-stately/utils@3.10.8(react@19.0.0)':
     dependencies:
       '@swc/helpers': 0.5.17
@@ -13428,10 +13402,6 @@ snapshots:
   '@react-types/select@3.10.0(react@19.0.0)':
     dependencies:
       '@react-types/shared': 3.31.0(react@19.0.0)
-      react: 19.0.0
-
-  '@react-types/shared@3.30.0(react@19.0.0)':
-    dependencies:
       react: 19.0.0
 
   '@react-types/shared@3.31.0(react@19.0.0)':
