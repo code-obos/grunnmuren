@@ -177,8 +177,7 @@ function Button({ ref = null, ...props }: ButtonProps) {
 
   return isLinkProps(restProps) ? (
     <RACLink
-      {...restProps}
-      routerOptions={restProps.routerOptions}
+      {...(restProps as RACLinkProps)}
       className={className}
       ref={ref as Ref<HTMLAnchorElement>}
     >
@@ -186,7 +185,7 @@ function Button({ ref = null, ...props }: ButtonProps) {
     </RACLink>
   ) : (
     <RACButton
-      {...restProps}
+      {...(restProps as RACButtonProps)}
       className={className}
       isPending={isPending}
       ref={ref as Ref<HTMLButtonElement>}

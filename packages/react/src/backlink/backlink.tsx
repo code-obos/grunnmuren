@@ -63,7 +63,7 @@ function Backlink(props: BacklinkProps) {
   if (isLinkProps(props)) {
     return (
       <Link
-        {...restProps}
+        {...(restProps as RACLinkProps)}
         className={_className}
         style={style as CSSProperties}
         ref={ref as Ref<HTMLAnchorElement>}
@@ -75,7 +75,7 @@ function Backlink(props: BacklinkProps) {
 
   return (
     <Button
-      {...restProps}
+      {...(restProps as ButtonProps)}
       className={_className}
       style={style as CSSProperties}
       ref={ref as Ref<HTMLButtonElement>}
