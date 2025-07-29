@@ -1,7 +1,7 @@
 import { ChevronLeft, ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 import { useUpdateEffect } from '@react-aria/utils';
 import { cx } from 'cva';
-import { createContext, useEffect, useRef, useState } from 'react';
+import { createContext, useEffect, useRef, useState, type JSX } from 'react';
 import { Provider } from 'react-aria-components';
 import { useDebouncedCallback } from 'use-debounce';
 import { Button, ButtonContext } from '../button';
@@ -256,7 +256,7 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => (
 
 type CarouselItemProps = {
   /** The component/components to display as the <CarouselItem/>. */
-  children: React.ReactNode;
+  children: JSX.Element | JSX.Element[];
   /** Additional CSS className for the element. */
   className?: string;
   id?: string;
