@@ -291,9 +291,7 @@ function TabPanel(props: TabPanelProps) {
       {...restProps}
       className={cx(
         className,
-        'flex-1 outline-hidden',
-        // Focus
-        'data-focus-visible:outline-focus-offset',
+        'flex-1 data-focus-visible:outline-focus-offset',
       )}
     >
       {children}
