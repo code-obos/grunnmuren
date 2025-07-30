@@ -199,39 +199,30 @@ function TabList(props: TabListProps) {
   return (
     <div className="relative">
       {/* Scrollable tab container */}
-      <div
+      <RACTabList
         ref={scrollContainerRef}
+        {...restProps}
         className={cx(
-          'max-w-fit',
-          // Hide scrollbar on all browsers
-          'scrollbar-hidden overflow-x-auto',
+          className,
+          'scrollbar-hidden snap-x snap-mandatory overflow-x-auto',
           // Focus outline for accessibility
           'has-data-focus-visible:outline-focus-offset',
+          'flex w-fit max-w-full border-gray-light',
+          // Ensure tabs don't shrink and maintain min-width
+          '[&>*]:min-w-fit [&>*]:flex-shrink-0',
+          // Flex direction based on orientation
+          'data-[orientation=horizontal]:border-b',
+          'data-[orientation=horizontal]:*:border-b-2',
+
+          'data-[orientation=vertical]:flex-col data-[orientation=vertical]:border-r',
+          'data-[orientation=vertical]:*:border-r-2',
         )}
         style={{
           WebkitOverflowScrolling: 'touch', // Smooth scrolling on iOS
         }}
       >
-        <RACTabList
-          {...restProps}
-          className={cx(
-            className,
-            'flex w-fit border-gray-light',
-            // Ensure tabs don't shrink and maintain min-width
-            '[&>*]:min-w-fit [&>*]:flex-shrink-0',
-            // Flex direction based on orientation
-            'data-[orientation=horizontal]:border-b',
-            'data-[orientation=horizontal]:*:border-b-2',
-            'data-[orientation=horizontal]:*:-mb-[1px]',
-
-            'data-[orientation=vertical]:flex-col data-[orientation=vertical]:border-r',
-            'data-[orientation=vertical]:*:border-r-2',
-            'data-[orientation=vertical]:*:-mr-[1px]',
-          )}
-        >
-          {children}
-        </RACTabList>
-      </div>
+        {children}
+      </RACTabList>
       {/* Left scroll button */}
       {canScrollLeft && (
         // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
@@ -268,6 +259,7 @@ function Tab(props: TabProps) {
       {...restProps}
       className={cx(
         className,
+        'snap-start',
         'cursor-pointer border-transparent px-4 py-2 font-light text-sm outline-hidden',
         // Transition
         'transition-all duration-150 ease-out',
