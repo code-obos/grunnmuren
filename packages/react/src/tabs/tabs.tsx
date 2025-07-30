@@ -237,11 +237,9 @@ function TabList(props: TabListProps) {
         // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
         <div
           onClick={() => scrollTo('left')}
-          className="-left-3 absolute top-0 z-20 flex h-full w-11 items-center justify-center transition-all duration-200 "
+          className="-left-3 absolute top-0 z-1 flex h-full w-11 items-center justify-end transition-all duration-200 "
         >
-          <div className="flex h-full items-center bg-white pr-2.5">
-            <ChevronLeft className="-ml-1 h-4 w-4 text-black" />
-          </div>
+          <ChevronLeft className="w-8 bg-white text-black" />
         </div>
       )}
 
@@ -250,11 +248,9 @@ function TabList(props: TabListProps) {
         // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
         <div
           onClick={() => scrollTo('right')}
-          className="-right-4 absolute top-0 z-20 flex h-full w-11 items-center justify-center bg-white transition-all duration-200"
+          className="-right-3 absolute top-0 z-1 flex h-full w-11 items-center transition-all duration-200"
         >
-          <div className="bg-white">
-            <ChevronRight className="-ml-1 h-4 w-4 bg-white text-black " />
-          </div>
+          <ChevronRight className="w-8 bg-white text-black " />
         </div>
       )}
     </div>
