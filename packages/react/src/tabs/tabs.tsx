@@ -1,3 +1,4 @@
+import { ChevronLeft, ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 import { cva, cx } from 'cva';
 import type { RefAttributes } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -11,7 +12,6 @@ import {
   Tabs as RACTabs,
   type TabsProps as RACTabsProps,
 } from 'react-aria-components';
-import { ChevronLeft, ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 
 const tabsVariants = cva({
   base: ['flex gap-4'],
