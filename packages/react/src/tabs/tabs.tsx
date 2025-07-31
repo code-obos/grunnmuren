@@ -209,7 +209,7 @@ function TabList(props: TabListProps) {
             canScrollLeft ? 'opacity-100' : 'pointer-events-none opacity-0',
           )}
         >
-          <ChevronLeft className="w-full bg-[linear-gradient(90deg,white,white_calc(100%-10px),transparent)] text-black" />
+          <ChevronLeft className="h-1/2 w-full bg-[linear-gradient(90deg,white,white_calc(100%-10px),transparent)] text-black" />
         </div>
       }
 
