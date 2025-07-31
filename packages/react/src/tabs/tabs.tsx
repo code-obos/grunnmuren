@@ -152,7 +152,7 @@ function TabList(props: TabListProps) {
 
     // Scroll to the selected tab when it changes
     const selectedTab = container.querySelector(
-      `[data-key="${state?.selectedKey}"]`,
+      `[data-key="${state.selectedKey}"]`,
     ) as HTMLElement | null;
 
     if (selectedTab) {
