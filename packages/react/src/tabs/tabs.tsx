@@ -174,7 +174,7 @@ function TabList(props: TabListProps) {
   }, [state?.selectedKey]);
 
   return (
-    <div className="relative has-data-focus-visible:outline-focus-offset">
+    <div className="relative">
       {/* Scrollable tab container */}
       <RACTabList
         {...restProps}
@@ -241,9 +241,10 @@ function Tab(props: TabProps) {
       {...restProps}
       className={cx(
         className,
-        'cursor-pointer border-y-2 border-y-transparent px-4 py-2 font-light text-sm outline-hidden',
+        'data-focus-visible:-outline-offset-10 data-focus-visible:outline-2 data-focus-visible:outline-black',
+        'cursor-pointer border-y-2 border-y-transparent px-4 py-2 font-light text-sm',
         // Transition
-        'transition-all duration-150 ease-out',
+        'transition-colors duration-150 ease-out',
         // TODO: Should disabled tabs just be hidden?
         'data-disabled:cursor-not-allowed data-disabled:opacity-50',
         // Selection
