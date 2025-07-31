@@ -200,26 +200,32 @@ function TabList(props: TabListProps) {
         {children}
       </RACTabList>
       {/* Left scroll button */}
-      {canScrollLeft && (
+      {
         // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
         <div
           onClick={onPrev}
-          className="-left-3 absolute top-0 z-1 flex h-full w-11 items-center justify-end transition-colors duration-200"
+          className={cx(
+            '-left-3 absolute top-0 z-1 flex h-full w-11 items-center justify-end transition-opacity duration-200',
+            canScrollLeft ? 'opacity-100' : 'pointer-events-none opacity-0',
+          )}
         >
-          <ChevronLeft className="w-12 bg-[linear-gradient(90deg,white,white_calc(100%-10px),transparent)] text-black" />
+          <ChevronLeft className="w-full bg-[linear-gradient(90deg,white,white_calc(100%-10px),transparent)] text-black" />
         </div>
-      )}
+      }
 
       {/* Right scroll button */}
-      {canScrollRight && (
+      {
         // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
         <div
           onClick={onNext}
-          className="-right-3 absolute top-0 z-1 flex h-full w-11 items-center transition-all duration-200"
+          className={cx(
+            '-right-3 absolute top-0 z-1 flex h-full w-11 items-center transition-opacity duration-200',
+            canScrollRight ? 'opacity-100' : 'pointer-events-none opacity-0',
+          )}
         >
-          <ChevronRight className="w-12 bg-[linear-gradient(90deg,transparent,white_calc(10px),white)] text-black " />
+          <ChevronRight className="w-full bg-[linear-gradient(90deg,transparent,white_calc(10px),white)] text-black " />
         </div>
-      )}
+      }
     </div>
   );
 }
