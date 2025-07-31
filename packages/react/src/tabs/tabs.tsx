@@ -201,7 +201,7 @@ function TabList(props: TabListProps) {
       </RACTabList>
       {/* Left scroll button */}
       {
-        // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+        // biome-ignore lint/a11y/useKeyWithClickEvents: These are just for scrolling, and not necessary for keyboard or screen reader users. They can use the tablist's keyboard navigation pattern to navigate the entire list.
         <div
           onClick={onPrev}
           className={cx(
@@ -215,7 +215,7 @@ function TabList(props: TabListProps) {
 
       {/* Right scroll button */}
       {
-        // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+        // biome-ignore lint/a11y/useKeyWithClickEvents: These are just for scrolling, and not necessary for keyboard or screen reader users. They can use the tablist's keyboard navigation pattern to navigate the entire list.
         <div
           onClick={onNext}
           className={cx(
