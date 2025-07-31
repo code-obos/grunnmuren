@@ -176,8 +176,8 @@ function TabList(props: TabListProps) {
     <div className="relative has-data-focus-visible:outline-focus-offset">
       {/* Scrollable tab container */}
       <RACTabList
-        ref={scrollContainerRef}
         {...restProps}
+        ref={scrollContainerRef}
         className={cx(
           className,
           'scrollbar-hidden snap-x snap-mandatory overflow-x-auto',
