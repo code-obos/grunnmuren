@@ -1,7 +1,13 @@
 import { ChevronLeft, ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 import { cva, cx } from 'cva';
-import type { RefAttributes } from 'react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import {
+  type RefAttributes,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import {
   Tab as RACTab,
   TabList as RACTabList,
@@ -11,7 +17,9 @@ import {
   type TabProps as RACTabProps,
   Tabs as RACTabs,
   type TabsProps as RACTabsProps,
+  TabListStateContext,
 } from 'react-aria-components';
+import { useDebouncedCallback } from 'use-debounce';
 
 const tabsVariants = cva({
   base: ['flex gap-4'],
@@ -81,16 +89,33 @@ function Tabs(props: TabsProps) {
   );
 }
 
+// This is not automatically inferred by TypeScript, so we need define it explicitly according to the RAC docs:
+// https://react-spectrum.adobe.com/react-aria/Tabs.html#advanced-customization
+type _TabListStateContextType = {
+  collection: {
+    getKeyBefore: (key: string) => string | null;
+    getKeyAfter: (key: string) => string | null;
+  };
+  selectedKey: string;
+  setSelectedKey: (key: string | null) => void;
+} | null;
+
 /**
  * A container component for Tab components within Tabs.
  */
 function TabList(props: TabListProps) {
+  const state = useContext(TabListStateContext) as _TabListStateContextType;
+  const prevKey = state?.collection.getKeyBefore(state.selectedKey);
+  const nextKey = state?.collection.getKeyAfter(state.selectedKey);
+  const onPrev = prevKey ? () => state?.setSelectedKey(prevKey) : undefined;
+  const onNext = nextKey ? () => state?.setSelectedKey(nextKey) : undefined;
+
   const { className, children, ...restProps } = props;
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
 
-  const checkScrollButtons = useCallback(() => {
+  const checkScrollOverflow = useCallback(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
@@ -99,105 +124,56 @@ function TabList(props: TabListProps) {
     setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
   }, []);
 
-  const scrollTo = useCallback((direction: 'left' | 'right') => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    const scrollAmount = container.clientWidth * 0.75;
-    const newScrollLeft =
-      direction === 'left'
-        ? container.scrollLeft - scrollAmount
-        : container.scrollLeft + scrollAmount;
-
-    container.scrollTo({
-      left: newScrollLeft,
-      behavior: 'smooth',
-    });
-  }, []);
-
-  const scrollSelectedTabIntoView = useCallback(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    // Find the selected tab element
-    const selectedTab = container.querySelector(
-      '[data-selected="true"]',
-    ) as HTMLElement;
-    if (!selectedTab) return;
-
-    const containerRect = container.getBoundingClientRect();
-    const tabRect = selectedTab.getBoundingClientRect();
-    const margin = 44; // Minimum margin to avoid chevron buttons
-
-    // Calculate the visible area considering margins
-    const visibleLeft = containerRect.left + margin;
-    const visibleRight = containerRect.right - margin;
-
-    // Check if tab needs scrolling
-    const needsScrolling =
-      tabRect.left < visibleLeft || tabRect.right > visibleRight;
-
-    if (needsScrolling) {
-      const tabOffsetLeft = selectedTab.offsetLeft;
-      const tabWidth = selectedTab.offsetWidth;
-
-      let scrollPosition: number;
-
-      if (tabRect.left < visibleLeft) {
-        // Tab is cut off on the left, scroll left with margin
-        scrollPosition = tabOffsetLeft - margin;
-      } else {
-        // Tab is cut off on the right, scroll right with margin
-        scrollPosition =
-          tabOffsetLeft - container.clientWidth + tabWidth + margin;
-      }
-
-      container.scrollTo({
-        left: Math.max(0, scrollPosition),
-        behavior: 'smooth',
-      });
-
-      // Update scroll buttons after scrolling
-      setTimeout(checkScrollButtons, 150);
-    }
-  }, [checkScrollButtons]);
+  // Debounce the scroll handler to avoid performance issues with frequent scroll events
+  const scrollHandler = useDebouncedCallback(() => {
+    checkScrollOverflow();
+  }, 100);
 
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
-    checkScrollButtons();
-    container.addEventListener('scroll', checkScrollButtons);
+    checkScrollOverflow();
 
-    const resizeObserver = new ResizeObserver(checkScrollButtons);
+    container.addEventListener('scroll', scrollHandler);
+
+    const resizeObserver = new ResizeObserver(checkScrollOverflow);
     resizeObserver.observe(container);
 
     return () => {
-      container.removeEventListener('scroll', checkScrollButtons);
+      container.removeEventListener('scroll', scrollHandler);
       resizeObserver.disconnect();
     };
-  }, [checkScrollButtons]);
+  }, [checkScrollOverflow, scrollHandler]);
 
-  // Add listeners for both keyboard and click interactions
   useEffect(() => {
     const container = scrollContainerRef.current;
-    if (!container) return;
+    if (!container || !state?.selectedKey) return;
 
-    const handleInteraction = () => {
-      // Small delay to let React Aria update the selection
-      setTimeout(scrollSelectedTabIntoView, 100);
-    };
+    // Scroll to the selected tab when it changes
+    const selectedTab = container.querySelector(
+      `[data-key="${state?.selectedKey}"]`,
+    ) as HTMLElement | null;
 
-    // Listen for clicks on tab elements
-    container.addEventListener('click', handleInteraction);
+    if (selectedTab) {
+      const offsetLeft = selectedTab.offsetLeft;
+      const containerWidth = container.clientWidth;
+      // Set the scroll position to try and ish center the selected tab
+      const scrollLeft =
+        offsetLeft - (containerWidth - selectedTab.clientWidth) / 2;
 
-    return () => {
-      container.removeEventListener('click', handleInteraction);
-    };
-  }, [scrollSelectedTabIntoView]);
+      console.log('new scrollLeft', scrollLeft);
+      console.log('container.scrollLeft', container.scrollLeft);
+
+      container.scrollTo({
+        left: scrollLeft,
+        behavior: 'smooth',
+      });
+    }
+  }, [state?.selectedKey]);
 
   return (
-    <div className="relative">
+    <div className="relative has-data-focus-visible:outline-focus-offset">
       {/* Scrollable tab container */}
       <RACTabList
         ref={scrollContainerRef}
@@ -205,17 +181,16 @@ function TabList(props: TabListProps) {
         className={cx(
           className,
           'scrollbar-hidden snap-x snap-mandatory overflow-x-auto',
-          // Focus outline for accessibility
-          'has-data-focus-visible:outline-focus-offset',
-          'flex w-fit max-w-full border-gray-light',
+          'flex w-fit max-w-full',
           // Ensure tabs don't shrink and maintain min-width
           '[&>*]:min-w-fit [&>*]:flex-shrink-0',
-          // Flex direction based on orientation
+          // Divider line
+          'border-gray-light',
           'data-[orientation=horizontal]:border-b',
-          'data-[orientation=horizontal]:*:border-b-2',
+          'data-[orientation=vertical]:border-r',
 
-          'data-[orientation=vertical]:flex-col data-[orientation=vertical]:border-r',
-          'data-[orientation=vertical]:*:border-r-2',
+          // Flex direction based on orientation
+          'data-[orientation=vertical]:flex-col',
         )}
         style={{
           WebkitOverflowScrolling: 'touch', // Smooth scrolling on iOS
@@ -227,7 +202,7 @@ function TabList(props: TabListProps) {
       {canScrollLeft && (
         // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
         <div
-          onClick={() => scrollTo('left')}
+          onClick={onPrev}
           className="-left-3 absolute top-0 z-1 flex h-full w-11 items-center justify-end transition-all duration-200 "
         >
           <ChevronLeft className="w-8 bg-white text-black" />
@@ -238,7 +213,7 @@ function TabList(props: TabListProps) {
       {canScrollRight && (
         // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
         <div
-          onClick={() => scrollTo('right')}
+          onClick={onNext}
           className="-right-3 absolute top-0 z-1 flex h-full w-11 items-center transition-all duration-200"
         >
           <ChevronRight className="w-8 bg-white text-black " />
@@ -259,14 +234,14 @@ function Tab(props: TabProps) {
       {...restProps}
       className={cx(
         className,
-        'snap-start',
-        'cursor-pointer border-transparent px-4 py-2 font-light text-sm outline-hidden',
+        'snap-center',
+        'cursor-pointer border-y-2 border-y-transparent px-4 py-2 font-light text-sm outline-hidden',
         // Transition
         'transition-all duration-150 ease-out',
-        // Disabled
+        // TODO: Should disabled tabs just be hidden?
         'data-disabled:cursor-not-allowed data-disabled:opacity-50',
         // Selection
-        'data-selected:border-blue-dark data-selected:font-medium data-selected:text-blue-dark',
+        'data-selected:border-b-blue-dark data-selected:font-medium data-selected:text-blue-dark',
         // Hover with layout shift prevention using pseudo-element
         'after:invisible after:block after:h-0 after:overflow-hidden after:font-medium after:content-[attr(data-text)]',
         'data-hovered:font-medium',
