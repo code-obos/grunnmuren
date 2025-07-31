@@ -204,9 +204,9 @@ function TabList(props: TabListProps) {
         // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
         <div
           onClick={onPrev}
-          className="-left-3 absolute top-0 z-1 flex h-full w-11 items-center justify-end transition-all duration-200 "
+          className="-left-3 absolute top-0 z-1 flex h-full w-11 items-center justify-end transition-colors duration-200"
         >
-          <ChevronLeft className="w-8 bg-white text-black" />
+          <ChevronLeft className="w-12 bg-[linear-gradient(90deg,white,white_calc(100%-10px),transparent)] text-black" />
         </div>
       )}
 
@@ -217,7 +217,7 @@ function TabList(props: TabListProps) {
           onClick={onNext}
           className="-right-3 absolute top-0 z-1 flex h-full w-11 items-center transition-all duration-200"
         >
-          <ChevronRight className="w-8 bg-white text-black " />
+          <ChevronRight className="w-12 bg-[linear-gradient(90deg,transparent,white_calc(10px),white)] text-black " />
         </div>
       )}
     </div>
