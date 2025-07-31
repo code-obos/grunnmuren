@@ -274,4 +274,4 @@ function TabPanel(props: TabPanelProps) {
   );
 }
 
-export { Tabs, TabList, Tab, TabPanel };
+export { Tab, TabList, TabPanel, Tabs };
