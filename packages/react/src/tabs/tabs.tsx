@@ -31,7 +31,7 @@ const tabsVariants = cva({
   },
 });
 
-export type TabsProps = Omit<RACTabsProps, 'className'> &
+type TabsProps = Omit<RACTabsProps, 'className'> &
   RefAttributes<HTMLDivElement> & {
     /**
      * CSS classes to apply to the tabs container
@@ -40,7 +40,7 @@ export type TabsProps = Omit<RACTabsProps, 'className'> &
     orientation?: 'horizontal' | 'vertical';
   };
 
-export type TabListProps = Omit<RACTabListProps<object>, 'className'> &
+type TabListProps = Omit<RACTabListProps<object>, 'className'> &
   RefAttributes<HTMLDivElement> & {
     /**
      * CSS classes to apply to the tab list
@@ -48,7 +48,7 @@ export type TabListProps = Omit<RACTabListProps<object>, 'className'> &
     className?: string;
   };
 
-export type TabProps = Omit<RACTabProps, 'className'> &
+type TabProps = Omit<RACTabProps, 'className'> &
   RefAttributes<HTMLDivElement> & {
     children: React.ReactNode;
     /**
@@ -57,7 +57,7 @@ export type TabProps = Omit<RACTabProps, 'className'> &
     className?: string;
   };
 
-export type TabPanelProps = Omit<RACTabPanelProps, 'className'> &
+type TabPanelProps = Omit<RACTabPanelProps, 'className'> &
   RefAttributes<HTMLDivElement> & {
     children: React.ReactNode;
     /**
@@ -274,4 +274,13 @@ function TabPanel(props: TabPanelProps) {
   );
 }
 
-export { Tab, TabList, TabPanel, Tabs };
+export {
+  Tab as UNSAFE_Tab,
+  TabList as UNSAFE_TabList,
+  TabPanel as UNSAFE_TabPanel,
+  Tabs as UNSAFE_Tabs,
+  type TabListProps as UNSAFE_TabListProps,
+  type TabPanelProps as UNSAFE_TabPanelProps,
+  type TabProps as UNSAFE_TabProps,
+  type TabsProps as UNSAFE_TabsProps,
+};

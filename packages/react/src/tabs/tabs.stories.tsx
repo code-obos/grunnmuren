@@ -1,5 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Tab, TabList, TabPanel, Tabs } from './tabs';
+import {
+  UNSAFE_Tab as Tab,
+  UNSAFE_TabList as TabList,
+  UNSAFE_TabPanel as TabPanel,
+  UNSAFE_Tabs as Tabs,
+} from './tabs';
 
 const meta: Meta<typeof Tabs> = {
   title: 'Tabs',
