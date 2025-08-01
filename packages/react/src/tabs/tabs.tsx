@@ -205,11 +205,19 @@ function TabList(props: TabListProps) {
         <div
           onClick={onPrev}
           className={cx(
-            '-left-3 absolute top-0 z-1 flex h-full w-11 items-center justify-end transition-opacity duration-200',
+            'flex items-center',
+            // Ensure click are of 44px by 44px.
+            'size-11',
+            // Position the button at the left of the tab list, with a small (left) offset to avoid overlap with the tabs.
+            // The bottom offset is to avoid overlap with the tab lists bottom border.
+            '-left-3 absolute bottom-0.25',
+            // Creates a gradient background that fades to transparent on the right side, which creates a smooth overlay effect over the tabs that are scrolled out of view.
+            'bg-[linear-gradient(90deg,white,white_calc(100%-10px),transparent)] transition-opacity duration-200',
+            // Fade in and out based on scroll position
             canScrollLeft ? 'opacity-100' : 'pointer-events-none opacity-0',
           )}
         >
-          <ChevronLeft className="h-1/2 w-full bg-[linear-gradient(90deg,white,white_calc(100%-10px),transparent)] text-black" />
+          <ChevronLeft className="mt-0.25 h-6 w-full text-black" />
         </div>
       }
 
@@ -219,11 +227,19 @@ function TabList(props: TabListProps) {
         <div
           onClick={onNext}
           className={cx(
-            '-right-3 absolute top-0 z-1 flex h-full w-11 items-center transition-opacity duration-200',
+            'flex items-center',
+            // Ensure click are of 44px by 44px.
+            'size-11',
+            // Position the button at the right of the tab list, with a small (right) offset to avoid overlap with the tabs.
+            // The bottom offset is to avoid overlap with the tab lists bottom border.
+            '-right-3 absolute bottom-0.25',
+            // Creates a gradient background that fades to transparent on the left side, which creates a smooth overlay effect over the tabs that are scrolled out of view.
+            'bg-[linear-gradient(90deg,transparent,white_calc(10px),white)] transition-opacity duration-200',
+            // Fade in and out based on scroll position
             canScrollRight ? 'opacity-100' : 'pointer-events-none opacity-0',
           )}
         >
-          <ChevronRight className="w-full bg-[linear-gradient(90deg,transparent,white_calc(10px),white)] text-black " />
+          <ChevronRight className="mt-0.25 h-6 w-full text-black " />
         </div>
       }
     </div>
