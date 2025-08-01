@@ -187,8 +187,11 @@ function TabList(props: TabListProps) {
           '[&>*]:min-w-fit [&>*]:flex-shrink-0',
           // Divider line
           'border-gray-light',
-          'data-[orientation=horizontal]:border-b',
-          'data-[orientation=vertical]:border-r',
+          // Selection highlight based on orientation
+          'data-[orientation=horizontal]:*:border-y-2',
+          'data-[orientation=horizontal]:*:data-selected:border-b-blue-dark',
+          'data-[orientation=vertical]:*:border-r-2',
+          'data-[orientation=vertical]:*:data-selected:border-r-blue-dark',
 
           // Flex direction based on orientation
           'data-[orientation=vertical]:flex-col',
@@ -258,13 +261,13 @@ function Tab(props: TabProps) {
       className={cx(
         className,
         'data-focus-visible:-outline-offset-10 data-focus-visible:outline-2 data-focus-visible:outline-black',
-        'cursor-pointer border-y-2 border-y-transparent px-4 py-2 font-light text-sm',
+        'cursor-pointer border-transparent px-4 py-2 font-light text-sm',
         // Transition
         'transition-colors duration-150 ease-out',
         // TODO: Should disabled tabs just be hidden?
         'data-disabled:cursor-not-allowed data-disabled:opacity-50',
         // Selection
-        'data-selected:border-b-blue-dark data-selected:font-medium data-selected:text-blue-dark',
+        'data-selected:font-medium data-selected:text-blue-dark',
         // Hover with layout shift prevention using pseudo-element
         'after:invisible after:block after:h-0 after:overflow-hidden after:font-medium after:content-[attr(data-text)]',
         'data-hovered:font-medium',
