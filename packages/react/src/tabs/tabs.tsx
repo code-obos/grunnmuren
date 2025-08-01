@@ -174,7 +174,7 @@ function TabList(props: TabListProps) {
   }, [state?.selectedKey]);
 
   return (
-    <div className="relative">
+    <div className="relative overflow-hidden">
       {/* Scrollable tab container */}
       <RACTabList
         {...restProps}
@@ -217,9 +217,10 @@ function TabList(props: TabListProps) {
             // The bottom offset is to avoid overlap with the tab lists bottom border.
             '-left-3 absolute bottom-0.25',
             // Creates a gradient background that fades to transparent on the right side, which creates a smooth overlay effect over the tabs that are scrolled out of view.
-            'bg-[linear-gradient(90deg,white,white_calc(100%-10px),transparent)] transition-opacity duration-200',
-            // Fade in and out based on scroll position
-            canScrollLeft ? 'opacity-100' : 'pointer-events-none opacity-0',
+            'bg-[linear-gradient(90deg,white,white_calc(100%-10px),transparent)]',
+            // Slide in and out based on scroll position, match duration with the debounce delay of the scrollHandler function
+            'duration-100 ease-in motion-safe:transition-transform',
+            !canScrollLeft && '-translate-x-full pointer-events-none',
           )}
         >
           <ChevronLeft className="mt-0.25 h-6 w-full text-black" />
@@ -235,13 +236,14 @@ function TabList(props: TabListProps) {
             'flex items-center',
             // Ensure click are of 44px by 44px.
             'size-11',
-            // Position the button at the right of the ta the same wayb list, with a small (right) offset to avoid overlap with the tabs.
+            // Position the button at the right of the tab list, with a small (right) offset to avoid overlap with the tabs.
             // The bottom offset is to avoid overlap with the tab lists bottom border.
             '-right-3 absolute bottom-0.25',
             // Creates a gradient background that fades to transparent on the left side, which creates a smooth overlay effect over the tabs that are scrolled out of view.
-            'bg-[linear-gradient(90deg,transparent,white_calc(10px),white)] transition-opacity duration-200',
-            // Fade in and out based on scroll position
-            canScrollRight ? 'opacity-100' : 'pointer-events-none opacity-0',
+            'bg-[linear-gradient(90deg,transparent,white_calc(10px),white)]',
+            // Slide in and out based on scroll position, match duration with the debounce delay of the scrollHandler function
+            'duration-100 ease-in motion-safe:transition-transform',
+            !canScrollRight && 'pointer-events-none translate-x-full',
           )}
         >
           <ChevronRight className="mt-0.25 h-6 w-full text-black " />
