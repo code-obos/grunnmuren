@@ -28,3 +28,4 @@ export * from './modal';
 export * from './tag-group';
 export * from './hero';
 export * from './carousel';
+export * from './tabs';
