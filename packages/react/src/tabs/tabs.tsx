@@ -201,7 +201,7 @@ function TabList(props: TabListProps) {
       </RACTabList>
       {/* Left scroll button */}
       {
-        // biome-ignore lint/a11y/useKeyWithClickEvents: These are just for scrolling, and not necessary for keyboard or screen reader users. They can use the tablist's keyboard navigation pattern to navigate the entire list.
+        // biome-ignore lint/a11y/useKeyWithClickEvents: These are just for scrolling, and not necessary for keyboard or screen reader users. They can use the tablist's keyboard navigation pattern to navigate the entire list the same way.
         <div
           onClick={onPrev}
           className={cx(
@@ -223,14 +223,14 @@ function TabList(props: TabListProps) {
 
       {/* Right scroll button */}
       {
-        // biome-ignore lint/a11y/useKeyWithClickEvents: These are just for scrolling, and not necessary for keyboard or screen reader users. They can use the tablist's keyboard navigation pattern to navigate the entire list.
+        // biome-ignore lint/a11y/useKeyWithClickEvents: These are just for scrolling, and not necessary for keyboard or screen reader users. They can use the tablist's keyboard navigation pattern to navigate the entire list the same way.
         <div
           onClick={onNext}
           className={cx(
             'flex items-center',
             // Ensure click are of 44px by 44px.
             'size-11',
-            // Position the button at the right of the tab list, with a small (right) offset to avoid overlap with the tabs.
+            // Position the button at the right of the ta the same wayb list, with a small (right) offset to avoid overlap with the tabs.
             // The bottom offset is to avoid overlap with the tab lists bottom border.
             '-right-3 absolute bottom-0.25',
             // Creates a gradient background that fades to transparent on the left side, which creates a smooth overlay effect over the tabs that are scrolled out of view.
