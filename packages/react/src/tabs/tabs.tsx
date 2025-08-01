@@ -187,6 +187,8 @@ function TabList(props: TabListProps) {
           '[&>*]:min-w-fit [&>*]:flex-shrink-0',
           // Divider line
           'border-gray-light',
+          'data-[orientation=horizontal]:border-b',
+          'data-[orientation=vertical]:border-r',
           // Selection highlight based on orientation
           'data-[orientation=horizontal]:*:border-y-2',
           'data-[orientation=horizontal]:*:data-selected:border-b-blue-dark',
