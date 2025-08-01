@@ -95,22 +95,17 @@ type _TabListStateContextType = {
   collection: {
     getKeyBefore: (key: string) => string | null;
     getKeyAfter: (key: string) => string | null;
+    lastKey: string | null;
+    firstKey: string | null;
   };
-  selectedKey: string;
+  selectedKey: string | null;
   setSelectedKey: (key: string | null) => void;
 } | null;
 
 /**
  * A container component for Tab components within Tabs.
  */
-function TabList(props: TabListProps) {
-  const state = useContext(TabListStateContext) as _TabListStateContextType;
-  const prevKey = state?.collection.getKeyBefore(state.selectedKey);
-  const nextKey = state?.collection.getKeyAfter(state.selectedKey);
-  const onPrev = prevKey ? () => state?.setSelectedKey(prevKey) : undefined;
-  const onNext = nextKey ? () => state?.setSelectedKey(nextKey) : undefined;
-
-  const { className, children, ...restProps } = props;
+function TabList({ className, children, ...restProps }: TabListProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
@@ -123,6 +118,42 @@ function TabList(props: TabListProps) {
     setCanScrollLeft(scrollLeft > 0);
     setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
   }, []);
+
+  const state = useContext(TabListStateContext) as _TabListStateContextType;
+
+  const prevKey =
+    state?.selectedKey && state?.collection.getKeyBefore(state.selectedKey);
+  const onPrev = prevKey
+    ? () => state?.setSelectedKey(prevKey)
+    : () => {
+        if (
+          canScrollLeft &&
+          state?.selectedKey === state?.collection.firstKey
+        ) {
+          // Scroll to the start of the tab list if we are at the first tab but it is scrolled out of view
+          scrollContainerRef.current?.scrollTo({
+            left: 0,
+            behavior: 'smooth',
+          });
+        }
+      };
+
+  const nextKey =
+    state?.selectedKey && state?.collection.getKeyAfter(state.selectedKey);
+  const onNext = nextKey
+    ? () => state?.setSelectedKey(nextKey)
+    : () => {
+        if (
+          canScrollRight &&
+          state?.selectedKey === state?.collection.lastKey
+        ) {
+          // Scroll to the end of the tab list if we are at the last tab but it is scrolled out of view
+          scrollContainerRef.current?.scrollTo({
+            left: scrollContainerRef.current.scrollWidth,
+            behavior: 'smooth',
+          });
+        }
+      };
 
   // Debounce the scroll handler to avoid performance issues with frequent scroll events
   const scrollHandler = useDebouncedCallback(() => {
@@ -146,6 +177,7 @@ function TabList(props: TabListProps) {
     };
   }, [checkScrollOverflow, scrollHandler]);
 
+  // Scroll to the selected tab when the component mounts or when the selected key changes
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container || !state?.selectedKey) return;
