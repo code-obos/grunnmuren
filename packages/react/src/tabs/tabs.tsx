@@ -210,6 +210,7 @@ function TabList(props: TabListProps) {
         <div
           onClick={onPrev}
           className={cx(
+            'cursor-pointer',
             'flex items-center',
             // Ensure click are of 44px by 44px.
             'size-11',
@@ -233,6 +234,7 @@ function TabList(props: TabListProps) {
         <div
           onClick={onNext}
           className={cx(
+            'cursor-pointer',
             'flex items-center',
             // Ensure click are of 44px by 44px.
             'size-11',
