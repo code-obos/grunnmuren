@@ -33,32 +33,12 @@ type CarouselProps = {
   onChange?: (item: CarouselItem) => void;
 };
 
-/**
- *
- * @param onChange Callback that is triggered when a user navigates to new item in the Carousel.
- * The argument to the callback is an object containing `index` of the new item scrolled into view and the `id` of that item (if set on the `<CarouselItem>`)
- * It also provides `prevIndex` which is the index of the previous item that was in view
- * And `prevId`, which is the id of the previous item that was in view (if set on the `<CarouselItem>`)
- * @returns States, refs and functions to control the carousel behavior.
- */
-function useCarousel<E extends HTMLElement>(
-  onChange?: (item: CarouselItem) => void,
-) {
-  const ref = useRef<E>(null);
+const Carousel = ({ className, children, onChange }: CarouselProps) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const locale = useLocale();
+  const { previous, next } = translations;
+
   const [scrollTargetIndex, setScrollTargetIndex] = useState(0);
-
-  const scrollToPrev = () => {
-    if (scrollTargetIndex > 0) {
-      setScrollTargetIndex((prev) => prev - 1);
-    }
-  };
-
-  const scrollToNext = () => {
-    if (!ref.current) return;
-    if (scrollTargetIndex < ref.current.children.length - 1) {
-      setScrollTargetIndex((prev) => prev + 1);
-    }
-  };
 
   const [hasReachedScrollStart, setHasReachedScrollStart] = useState(
     scrollTargetIndex === 0,
@@ -74,12 +54,6 @@ function useCarousel<E extends HTMLElement>(
       !ref.current || ref.current.children.length - 1 === scrollTargetIndex,
     );
   }, [scrollTargetIndex]);
-
-  const scrollToIndex = (index: number) => {
-    if (!ref.current || index < 0 || index >= ref.current.children.length)
-      return;
-    setScrollTargetIndex(index);
-  };
 
   // Keep track of the previous index to determine if the user is scrolling forward or backward
   // This is used to determine which callback to call (onPrev or onNext)
@@ -128,29 +102,6 @@ function useCarousel<E extends HTMLElement>(
     100,
   );
 
-  return {
-    ref,
-    scrollToIndex,
-    scrollToPrev,
-    scrollToNext,
-    hasReachedScrollStart,
-    hasReachedScrollEnd,
-    onScroll,
-  };
-}
-
-const Carousel = ({ className, children, onChange }: CarouselProps) => {
-  const locale = useLocale();
-  const { previous, next } = translations;
-  const {
-    ref,
-    scrollToPrev,
-    scrollToNext,
-    hasReachedScrollStart,
-    hasReachedScrollEnd,
-    onScroll,
-  } = useCarousel<HTMLDivElement>(onChange);
-
   return (
     <div data-slot="carousel">
       <Provider
@@ -168,13 +119,22 @@ const Carousel = ({ className, children, onChange }: CarouselProps) => {
               slots: {
                 prev: {
                   'aria-label': previous[locale],
-                  onPress: scrollToPrev,
+                  onPress: () => {
+                    if (scrollTargetIndex > 0) {
+                      setScrollTargetIndex((prev) => prev - 1);
+                    }
+                  },
                   isDisabled: hasReachedScrollStart,
                 },
                 next: {
                   isIconOnly: true,
                   'aria-label': next[locale],
-                  onPress: scrollToNext,
+                  onPress: () => {
+                    if (!ref.current) return;
+                    if (scrollTargetIndex < ref.current.children.length - 1) {
+                      setScrollTargetIndex((prev) => prev + 1);
+                    }
+                  },
                   isDisabled: hasReachedScrollEnd,
                 },
               },
@@ -331,7 +291,6 @@ const CarouselItem = ({ className, children, id }: CarouselItemProps) => {
 };
 
 export {
-  useCarousel,
   Carousel as UNSAFE_Carousel,
   CarouselItem as UNSAFE_CarouselItem,
   CarouselItems as UNSAFE_CarouselItems,
