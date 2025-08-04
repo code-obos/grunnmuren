@@ -42,7 +42,11 @@ const MyTabs = () => (
     </TabPanel>
   </Tabs>
 );
+```
 
+The component supports both horizontal and vertical orientation:
+
+``` tsx
 const MyVerticalTabs = () => (
   <Tabs orientation="vertical">
     <TabList aria-label="Boligkjøp">
@@ -73,4 +77,6 @@ const MyVerticalTabs = () => (
     </TabPanel>
   </Tabs>
 );
-``` 
+```
+
+Horizontal tabs will be scrollable if the `<Tabs>` overflows it's container.
