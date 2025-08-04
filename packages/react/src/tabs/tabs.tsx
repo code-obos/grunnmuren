@@ -157,6 +157,8 @@ function TabList({ className, children, ...restProps }: TabListProps) {
         }
       };
 
+  // State to controll if the animation for the scroll buttons should be applied
+  // This is used to prevent the scroll buttons from animating on mount
   const [hasUserScrolled, setHasUserScrolled] = useState(false);
   // Debounce the scroll handler to avoid performance issues with frequent scroll events
   const scrollHandler = useDebouncedCallback(() => {
