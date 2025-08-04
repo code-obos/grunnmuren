@@ -98,7 +98,9 @@ type _TabListStateContextType = {
     lastKey: string | null;
     firstKey: string | null;
   };
+  defaultSelectedKey: string | null;
   selectedKey: string | null;
+  selectedItem: { key: null | string } | null;
   setSelectedKey: (key: string | null) => void;
 } | null;
 
@@ -177,32 +179,62 @@ function TabList({ className, children, ...restProps }: TabListProps) {
     };
   }, [checkScrollOverflow, scrollHandler]);
 
-  // Scroll to the selected tab when the component mounts or when the selected key changes
+  // Scroll to the selected tab when the component mounts the default selected key is set
   useEffect(() => {
     const container = scrollContainerRef.current;
-    if (!container || !state?.selectedKey) return;
+    if (!container) return;
+
+    const defaultSelectedKey = state?.selectedItem?.key;
+    if (!defaultSelectedKey) return;
 
     // Scroll to the selected tab when it changes
     const selectedTab = container.querySelector(
-      `[data-key="${state.selectedKey}"]`,
+      `[data-key="${defaultSelectedKey}"]`,
     ) as HTMLElement | null;
 
-    if (selectedTab) {
-      const offsetLeft = selectedTab.offsetLeft;
-      const containerWidth = container.clientWidth;
-      // Set the scroll position to try and ish center the selected tab
-      const scrollLeft =
-        offsetLeft - (containerWidth - selectedTab.clientWidth) / 2;
+    if (!selectedTab) return;
 
-      // The RAC TabList component prevents us from using scroll snapping, so by using requestAnimationFrame, we can ensure the scroll position is set correctly.
-      // We want the active tab to be centered in the view when navigating with the scroll buttons, selecting a tab with the keyboard, or clicking on a tab.
-      requestAnimationFrame(() => {
-        container.scrollTo({
-          left: scrollLeft,
-          behavior: 'smooth',
-        });
+    const offsetLeft = selectedTab.offsetLeft;
+    const containerWidth = container.clientWidth;
+    // Set the scroll position to try and ish center the selected tab
+    const scrollLeft =
+      offsetLeft - (containerWidth - selectedTab.clientWidth) / 2;
+
+    container.scrollTo({
+      left: scrollLeft,
+      behavior: 'instant',
+    });
+  }, [state?.selectedItem]);
+
+  // Scroll to the selected tab when the selected key changes
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const selectedKey = state?.selectedKey;
+    if (!selectedKey) return;
+
+    // Scroll to the selected tab when it changes
+    const selectedTab = container.querySelector(
+      `[data-key="${selectedKey}"]`,
+    ) as HTMLElement | null;
+
+    if (!selectedTab) return;
+
+    const offsetLeft = selectedTab.offsetLeft;
+    const containerWidth = container.clientWidth;
+    // Set the scroll position to try and ish center the selected tab
+    const scrollLeft =
+      offsetLeft - (containerWidth - selectedTab.clientWidth) / 2;
+
+    // The RAC TabList component prevents us from using scroll snapping, so by using requestAnimationFrame, we can ensure the scroll position is set correctly.
+    // We want the active tab to be centered in the view when navigating with the scroll buttons, selecting a tab with the keyboard, or clicking on a tab.
+    requestAnimationFrame(() => {
+      container.scrollTo({
+        left: scrollLeft,
+        behavior: 'smooth',
       });
-    }
+    });
   }, [state?.selectedKey]);
 
   return (
@@ -211,8 +243,11 @@ function TabList({ className, children, ...restProps }: TabListProps) {
       <RACTabList
         {...restProps}
         ref={scrollContainerRef}
+        data-scroll-animation={false}
         className={cx(
           className,
+          'group/tablist',
+          // Ensure the tab list is scrollable
           'scrollbar-hidden overflow-x-auto',
           'flex w-fit max-w-full',
           // Ensure tabs don't shrink and maintain min-width
