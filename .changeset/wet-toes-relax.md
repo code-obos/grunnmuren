@@ -44,6 +44,8 @@ const MyTabs = () => (
 );
 ```
 
+Note that the `id` of each `<Tab>` must correspond to the `id` of a `<Tabpanel>`. The order of the `<Tab>` components determines the order, and the order of the `<TabPanel>` components is insignificant. 
+
 The component supports both horizontal and vertical orientation:
 
 ``` tsx
