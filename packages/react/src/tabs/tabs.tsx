@@ -157,9 +157,11 @@ function TabList({ className, children, ...restProps }: TabListProps) {
         }
       };
 
+  const [hasUserScrolled, setHasUserScrolled] = useState(false);
   // Debounce the scroll handler to avoid performance issues with frequent scroll events
   const scrollHandler = useDebouncedCallback(() => {
     checkScrollOverflow();
+    setHasUserScrolled(true);
   }, 100);
 
   useEffect(() => {
@@ -287,7 +289,9 @@ function TabList({ className, children, ...restProps }: TabListProps) {
             // Creates a gradient background that fades to transparent on the right side, which creates a smooth overlay effect over the tabs that are scrolled out of view.
             'bg-[linear-gradient(90deg,white,white_calc(100%-10px),transparent)]',
             // Slide in and out based on scroll position, match duration with the debounce delay of the scrollHandler function
-            'duration-100 ease-in motion-safe:transition-transform',
+            // Wait until user started scrolling until animation is applied, to prevent the animation from running on mount
+            hasUserScrolled &&
+              'duration-100 ease-in motion-safe:transition-transform',
             !canScrollLeft && '-translate-x-full pointer-events-none',
           )}
         >
@@ -311,7 +315,9 @@ function TabList({ className, children, ...restProps }: TabListProps) {
             // Creates a gradient background that fades to transparent on the left side, which creates a smooth overlay effect over the tabs that are scrolled out of view.
             'bg-[linear-gradient(90deg,transparent,white_calc(10px),white)]',
             // Slide in and out based on scroll position, match duration with the debounce delay of the scrollHandler function
-            'duration-100 ease-in motion-safe:transition-transform',
+            // Wait until user started scrolling until animation is applied, to prevent the animation from running on mount
+            hasUserScrolled &&
+              'duration-100 ease-in motion-safe:transition-transform',
             !canScrollRight && 'pointer-events-none translate-x-full',
           )}
         >
