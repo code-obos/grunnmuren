@@ -98,7 +98,6 @@ type _TabListStateContextType = {
     lastKey: string | null;
     firstKey: string | null;
   };
-  defaultSelectedKey: string | null;
   selectedKey: string | null;
   selectedItem: { key: null | string } | null;
   setSelectedKey: (key: string | null) => void;
@@ -157,13 +156,14 @@ function TabList({ className, children, ...restProps }: TabListProps) {
         }
       };
 
-  // State to controll if the animation for the scroll buttons should be applied
-  // This is used to prevent the scroll buttons from animating on mount
-  const [hasUserScrolled, setHasUserScrolled] = useState(false);
+  // To controll if the animation for the scroll buttons and the scrolling behavior
+  // This is used to prevent animations from running when the component mounts
+  // We use a ref here to prevent redundant render cycles and potentially uninteded scrolling.
+  const hasScrollingOccurredRef = useRef(false);
   // Debounce the scroll handler to avoid performance issues with frequent scroll events
   const scrollHandler = useDebouncedCallback(() => {
     checkScrollOverflow();
-    setHasUserScrolled(true);
+    hasScrollingOccurredRef.current = true;
   }, 100);
 
   useEffect(() => {
@@ -183,39 +183,12 @@ function TabList({ className, children, ...restProps }: TabListProps) {
     };
   }, [checkScrollOverflow, scrollHandler]);
 
-  // Scroll to the selected tab when the component mounts the default selected key is set
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    const defaultSelectedKey = state?.selectedItem?.key;
-    if (!defaultSelectedKey) return;
-
-    // Scroll to the selected tab when it changes
-    const selectedTab = container.querySelector(
-      `[data-key="${defaultSelectedKey}"]`,
-    ) as HTMLElement | null;
-
-    if (!selectedTab) return;
-
-    const offsetLeft = selectedTab.offsetLeft;
-    const containerWidth = container.clientWidth;
-    // Set the scroll position to try and ish center the selected tab
-    const scrollLeft =
-      offsetLeft - (containerWidth - selectedTab.clientWidth) / 2;
-
-    container.scrollTo({
-      left: scrollLeft,
-      behavior: 'instant',
-    });
-  }, [state?.selectedItem]);
-
   // Scroll to the selected tab when the selected key changes
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
-    const selectedKey = state?.selectedKey;
+    const selectedKey = state?.selectedItem?.key;
     if (!selectedKey) return;
 
     // Scroll to the selected tab when it changes
@@ -231,15 +204,24 @@ function TabList({ className, children, ...restProps }: TabListProps) {
     const scrollLeft =
       offsetLeft - (containerWidth - selectedTab.clientWidth) / 2;
 
-    // The RAC TabList component prevents us from using scroll snapping, so by using requestAnimationFrame, we can ensure the scroll position is set correctly.
-    // We want the active tab to be centered in the view when navigating with the scroll buttons, selecting a tab with the keyboard, or clicking on a tab.
-    requestAnimationFrame(() => {
+    // When the scroll is initiated by the user we want a smooth scroll
+    if (hasScrollingOccurredRef.current) {
+      // The RAC TabList component prevents us from using scroll snapping, so by using requestAnimationFrame, we can ensure the scroll position is set correctly.
+      // We want the active tab to be centered in the view when navigating with the scroll buttons, selecting a tab with the keyboard, or clicking on a tab.
+      requestAnimationFrame(() => {
+        container.scrollTo({
+          left: scrollLeft,
+          behavior: 'smooth',
+        });
+      });
+    } else {
+      // When the scroll is done to ensure the default selected tab is in view, we want instant scrolling
       container.scrollTo({
         left: scrollLeft,
-        behavior: 'smooth',
+        behavior: 'instant',
       });
-    });
-  }, [state?.selectedKey]);
+    }
+  }, [state?.selectedItem]);
 
   return (
     <div className="relative overflow-hidden">
@@ -292,7 +274,7 @@ function TabList({ className, children, ...restProps }: TabListProps) {
             'bg-[linear-gradient(90deg,white,white_calc(100%-10px),transparent)]',
             // Slide in and out based on scroll position, match duration with the debounce delay of the scrollHandler function
             // Wait until user started scrolling until animation is applied, to prevent the animation from running on mount
-            hasUserScrolled &&
+            hasScrollingOccurredRef.current &&
               'duration-100 ease-in motion-safe:transition-transform',
             !canScrollLeft && '-translate-x-full pointer-events-none',
           )}
@@ -318,7 +300,7 @@ function TabList({ className, children, ...restProps }: TabListProps) {
             'bg-[linear-gradient(90deg,transparent,white_calc(10px),white)]',
             // Slide in and out based on scroll position, match duration with the debounce delay of the scrollHandler function
             // Wait until user started scrolling until animation is applied, to prevent the animation from running on mount
-            hasUserScrolled &&
+            hasScrollingOccurredRef.current &&
               'duration-100 ease-in motion-safe:transition-transform',
             !canScrollRight && 'pointer-events-none translate-x-full',
           )}
