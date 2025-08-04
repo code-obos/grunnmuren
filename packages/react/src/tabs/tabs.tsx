@@ -184,6 +184,8 @@ function TabList({ className, children, ...restProps }: TabListProps) {
   }, [checkScrollOverflow, scrollHandler]);
 
   // Scroll to the selected tab when the selected key changes
+  // We use the state.selectedItem here instead of just the state.selectedKey, since state.selectedItem is set when the tab list is mounted
+  // This way we can make sure the default selected tab is scrolled into view.
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
