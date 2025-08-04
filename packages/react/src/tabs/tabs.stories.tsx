@@ -6,37 +6,6 @@ import {
   UNSAFE_Tabs as Tabs,
 } from './tabs';
 
-const MyTabs = () => (
-  <Tabs>
-    <TabList aria-label="Boligkjøp">
-      <Tab id="grunnpris">Grunnpris</Tab>
-      <Tab id="tilvalg">Tilvalg</Tab>
-      <Tab id="finansiering">Finansiering</Tab>
-    </TabList>
-    <TabPanel id="grunnpris">
-      <h3 className="mb-4 font-semibold text-lg">Grunnpris</h3>
-      <p>
-        Grunnprisen inkluderer alle standardspesifikasjoner som er definert for
-        boligen. Dette omfatter kjøkken, bad, gulv og andre grunnutstyr.
-      </p>
-    </TabPanel>
-    <TabPanel id="tilvalg">
-      <p>
-        <h3 className="mb-4 font-semibold text-lg">Tilvalg</h3>
-        Her kan du velge oppgraderinger som hvitevarer, gulvtyper, fliser og
-        andre tilpasningsmuligheter for å skape ditt drømmehjem.
-      </p>
-    </TabPanel>
-    <TabPanel id="finansiering">
-      <h3 className="mb-4 font-semibold text-lg">Finansiering</h3>
-      <p>
-        OBOS Bank tilbyr konkurransedyktige boliglån med gunstige vilkår for
-        våre medlemmer. Få hjelp til å finansiere ditt boligkjøp.
-      </p>
-    </TabPanel>
-  </Tabs>
-);
-
 const meta: Meta<typeof Tabs> = {
   title: 'Tabs',
   component: Tabs,
@@ -65,7 +34,7 @@ type Story = StoryObj<typeof Tabs>;
 
 export const Default: Story = {
   render: (args) => (
-    <Tabs {...args} defaultSelectedKey="hytte">
+    <Tabs {...args}>
       <TabList aria-label="Boligtyper">
         <Tab id="leilighet">Leilighet</Tab>
         <Tab id="rekkehus">Rekkehus</Tab>
