@@ -146,12 +146,14 @@ function Page() {
               Props
             </AnchorHeading>
           )}
-          {data.propsComponents?.map((componentName) => (
-            <PropsTable
-              key={componentName}
-              componentName={componentName as keyof typeof props}
-            />
-          ))}
+          <div className="overflow-x-auto">
+            {data.propsComponents?.map((componentName) => (
+              <PropsTable
+                key={componentName}
+                componentName={componentName as keyof typeof props}
+              />
+            ))}
+          </div>
         </div>
       </div>
 

@@ -102,7 +102,7 @@ function RootLayout() {
           )}
         </Disclosure>
 
-        <div className="grid min-h-screen lg:flex">
+        <div className="min-h-screen lg:flex">
           <MainNav className="hidden lg:block" />
           <div className="flex grow flex-col px-6">
             <main className="grow">
