@@ -2,7 +2,7 @@
 "@obosbbl/grunnmuren-react": patch
 ---
 
-New `<Tab>` component in alpha, usage:
+New `<Tab>` component in beta, usage:
 
 ``` tsx
 import {
