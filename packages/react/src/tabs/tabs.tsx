@@ -22,11 +22,11 @@ import {
 import { useDebouncedCallback } from 'use-debounce';
 
 const tabsVariants = cva({
-  base: ['flex gap-4'],
+  base: ['grid gap-4'],
   variants: {
     orientation: {
-      horizontal: 'flex-col',
-      vertical: '',
+      horizontal: '',
+      vertical: 'grid-cols-[auto_1fr]',
     },
   },
 });
