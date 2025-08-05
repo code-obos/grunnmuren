@@ -42,11 +42,17 @@ interface ScrollToTopButtonProps {
  * Scroll to top button component
  * Displays a floating button with "Til tops" text that scrolls to the top of the page
  */
-export function ScrollToTopButton({ show, onClick, className }: ScrollToTopButtonProps) {
+export function ScrollToTopButton({
+  show,
+  onClick,
+  className,
+}: ScrollToTopButtonProps) {
   if (!show) return null;
 
   return (
-    <div className={`fixed right-4 bottom-4 z-50 flex flex-col items-center md:right-16 md:bottom-16 ${className || ''}`}>
+    <div
+      className={`fixed right-4 bottom-4 z-50 flex flex-col items-center md:right-16 md:bottom-16 ${className || ''}`}
+    >
       <button
         onClick={onClick}
         className="hover:-translate-y-1 flex h-12 w-12 items-center justify-center rounded-full bg-blue-dark transition-all duration-300 focus-visible:outline-focus"
@@ -64,8 +70,17 @@ export function ScrollToTopButton({ show, onClick, className }: ScrollToTopButto
  * Combined scroll-to-top component that includes both the hook and button
  * Easy to use - just drop it into any page component
  */
-export function ScrollToTop({ threshold = 300, className }: { threshold?: number; className?: string }) {
+export function ScrollToTop({
+  threshold = 300,
+  className,
+}: { threshold?: number; className?: string }) {
   const { showButton, scrollToTop } = useScrollToTop(threshold);
-  
-  return <ScrollToTopButton show={showButton} onClick={scrollToTop} className={className} />;
+
+  return (
+    <ScrollToTopButton
+      show={showButton}
+      onClick={scrollToTop}
+      className={className}
+    />
+  );
 }
