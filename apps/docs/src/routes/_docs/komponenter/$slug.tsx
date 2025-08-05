@@ -4,9 +4,10 @@ import { PropsTable } from '@/ui/props-table';
 import { ResourceLink, ResourceLinks } from '@/ui/resource-links';
 import { SanityContent } from '@/ui/sanity-content';
 import { TableOfContentsNav } from '@/ui/table-of-contents-nav';
-import { Child, CircusTent } from '@obosbbl/grunnmuren-icons-react';
+import { ArrowUp, Child, CircusTent } from '@obosbbl/grunnmuren-icons-react';
 import { Alertbox, Content } from '@obosbbl/grunnmuren-react';
 import { createFileRoute, notFound } from '@tanstack/react-router';
+import { useEffect, useState } from 'react';
 import type * as props from 'component-props';
 import { defineQuery } from 'groq';
 
@@ -45,6 +46,25 @@ export const Route = createFileRoute('/_docs/komponenter/$slug')({
 
 function Page() {
   const { data } = Route.useLoaderData();
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
+
+  // Show/hide scroll to top button based on scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      setShowScrollToTop(scrollTop > 300); // Show after scrolling 300px
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
 
   const ghLink = data.resourceLinks?.find(
     (link) => link.linkType === 'github',
@@ -134,6 +154,21 @@ function Page() {
           ))}
         </div>
       </div>
+
+      {/* Scroll to top button */}
+      {showScrollToTop && (
+        <div className="fixed right-4 bottom-4 z-50 flex flex-col items-center md:right-16 md:bottom-16">
+          <button
+            onClick={scrollToTop}
+            className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-dark transition-all duration-300 hover:animate-spin focus-visible:outline-focus"
+            aria-label="Scroll to top"
+            type="button"
+          >
+            <ArrowUp className="h-6 w-6 text-white" />
+          </button>
+          <span className="mt-2 font-medium">Til tops</span>
+        </div>
+      )}
     </>
   );
 }
