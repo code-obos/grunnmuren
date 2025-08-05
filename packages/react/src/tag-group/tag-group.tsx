@@ -14,12 +14,15 @@ import {
 const tagVariants = cva({
   base: [
     'relative flex cursor-pointer items-center gap-1 rounded-lg px-2 py-1 font-medium text-sm transition-colors duration-200',
+    // Resting
+    'border-2 border-black bg-white text-black',
     //Focus
     'focus-visible:outline-focus-offset',
-    //Border
-    'border-2 border-blue-dark',
-    //Backgrounds
-    'data-hovered:!bg-sky bg-white text-black aria-selected:bg-sky-light data-allows-removing:bg-sky-light',
+    // Hover
+    ' data-hovered:bg-sky',
+    // Selected
+    'data-allows-removing:border-blue-dark data-allows-removing:not-data-hovered:bg-sky-light data-allows-removing:font-bold data-allows-removing:text-blue-dark data-allows-removing:**:stroke-[2.5]',
+    'aria-selected:border-blue-dark aria-selected:not-data-hovered:bg-sky-light aria-selected:font-bold aria-selected:text-blue-dark aria-selected:**:stroke-[2.5]',
     //Icons
     '[&_svg]:h-4 [&_svg]:w-4',
   ],
@@ -115,6 +118,7 @@ function Tag(props: TagProps) {
         className,
       })}
       textValue={textValue}
+      data-text={textValue}
       {...restProps}
     >
       {({ allowsRemoving }) =>
