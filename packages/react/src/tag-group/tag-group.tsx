@@ -118,7 +118,6 @@ function Tag(props: TagProps) {
         className,
       })}
       textValue={textValue}
-      data-text={textValue}
       {...restProps}
     >
       {({ allowsRemoving }) =>
