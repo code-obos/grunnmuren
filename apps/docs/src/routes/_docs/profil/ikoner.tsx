@@ -1,4 +1,5 @@
 import { ResourceLink, ResourceLinks } from '@/ui/resource-links';
+import { ScrollToTop } from '@/ui/scroll-to-top';
 import * as icons from '@obosbbl/grunnmuren-icons-react';
 import { Download } from '@obosbbl/grunnmuren-icons-react';
 import { Button, Card } from '@obosbbl/grunnmuren-react';
@@ -58,6 +59,7 @@ function Page() {
         />
       </ResourceLinks>
       <IconsGrid />
+      <ScrollToTop />
     </>
   );
 }
