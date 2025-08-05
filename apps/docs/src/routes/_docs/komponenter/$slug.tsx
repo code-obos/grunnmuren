@@ -162,7 +162,7 @@ function Page() {
         <div className="fixed right-4 bottom-4 z-50 flex flex-col items-center md:right-16 md:bottom-16">
           <button
             onClick={scrollToTop}
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-dark transition-all duration-300 hover:animate-spin focus-visible:outline-focus"
+            className="hover:-translate-y-1 flex h-12 w-12 items-center justify-center rounded-full bg-blue-dark transition-all duration-300 focus-visible:outline-focus"
             aria-label="Scroll to top"
             type="button"
           >
