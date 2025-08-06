@@ -9,7 +9,7 @@ interface PropsTableProps {
 export const PropsTable = ({ componentName }: PropsTableProps) => {
   const headingId = `${componentName.toLowerCase()}-props`;
   return (
-    <>
+    <div className="overflow-x-auto">
       <AnchorHeading className="heading-s my-2" level={2} id={headingId}>
         {componentName}
       </AnchorHeading>
@@ -36,6 +36,6 @@ export const PropsTable = ({ componentName }: PropsTableProps) => {
           ))}
         </TableBody>
       </Table>
-    </>
+    </div>
   );
 };
