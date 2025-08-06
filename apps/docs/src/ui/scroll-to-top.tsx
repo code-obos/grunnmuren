@@ -1,5 +1,6 @@
 import { ArrowUp } from '@obosbbl/grunnmuren-icons-react';
 import { useEffect, useState } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
 
 /**
  * Custom hook for scroll-to-top functionality
@@ -9,15 +10,16 @@ import { useEffect, useState } from 'react';
 export function useScrollToTop(threshold = 300) {
   const [showButton, setShowButton] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
-      setShowButton(scrollTop > threshold);
-    };
+  // Debounce the scroll handler to avoid performance issues with frequent scroll events
+  const debouncedScrollHandler = useDebouncedCallback(() => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    setShowButton(scrollTop > threshold);
+  }, 100);
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [threshold]);
+  useEffect(() => {
+    window.addEventListener('scroll', debouncedScrollHandler);
+    return () => window.removeEventListener('scroll', debouncedScrollHandler);
+  }, [debouncedScrollHandler]);
 
   const scrollToTop = () => {
     window.scrollTo({
