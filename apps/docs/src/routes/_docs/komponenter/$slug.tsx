@@ -3,6 +3,7 @@ import { AnchorHeading } from '@/ui/anchor-heading';
 import { PropsTable } from '@/ui/props-table';
 import { ResourceLink, ResourceLinks } from '@/ui/resource-links';
 import { SanityContent } from '@/ui/sanity-content';
+import { ScrollToTop } from '@/ui/scroll-to-top';
 import { TableOfContentsNav } from '@/ui/table-of-contents-nav';
 import { Child, CircusTent } from '@obosbbl/grunnmuren-icons-react';
 import { Alertbox, Content } from '@obosbbl/grunnmuren-react';
@@ -134,6 +135,8 @@ function Page() {
           ))}
         </div>
       </div>
+
+      <ScrollToTop />
     </>
   );
 }
