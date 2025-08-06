@@ -30,7 +30,7 @@ const tagVariants = cva({
     // Selected: border, background, font, text, icon
     'aria-selected:border-blue-dark',
     'aria-selected:not-data-hovered:bg-sky-light',
-    'aria-selected:font-bold',
+    'aria-selected:font-semibold',
     'aria-selected:text-blue-dark',
     'aria-selected:**:stroke-[2.5]',
     //Icons
