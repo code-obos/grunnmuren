@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 3.0.2
+
+### Patch Changes
+
+- 739eefb: Make selected `Tags` visible not only through color. The visual style of a selected/removable `Tag` is now enhanced with a reversed contrast.
+
 ## 3.0.1
 
 ### Patch Changes
