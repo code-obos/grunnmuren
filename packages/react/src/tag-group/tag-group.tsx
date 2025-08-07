@@ -1,6 +1,7 @@
 import { Close } from '@obosbbl/grunnmuren-icons-react';
 import { cva, cx } from 'cva';
 import type { RefAttributes } from 'react';
+import { useEffect } from 'react';
 import {
   Button,
   Tag as RACTag,
@@ -10,6 +11,7 @@ import {
   type TagListProps as RACTagListProps,
   type TagProps as RACTagProps,
 } from 'react-aria-components';
+import { useDebouncedCallback } from 'use-debounce';
 
 const tagVariants = cva({
   base: [
@@ -21,18 +23,16 @@ const tagVariants = cva({
     // Hover
     ' data-hovered:bg-sky',
     // Selected
-    // Allows removing: border, background, font, text, icon
-    'data-allows-removing:border-blue-dark',
-    'data-allows-removing:not-data-hovered:bg-sky-light',
-    'data-allows-removing:font-bold',
-    'data-allows-removing:text-blue-dark',
-    'data-allows-removing:**:stroke-[2.5]',
-    // Selected: border, background, font, text, icon
-    'aria-selected:border-blue-dark',
-    'aria-selected:not-data-hovered:bg-sky-light',
-    'aria-selected:font-semibold',
-    'aria-selected:text-blue-dark',
-    'aria-selected:**:stroke-[2.5]',
+    // Allows removing
+    'data-allows-removing:border-transparent',
+    'data-allows-removing:bg-blue',
+    'data-allows-removing:data-hovered:bg-blue-dark',
+    'data-allows-removing:text-white',
+    // Selected
+    'aria-selected:border-transparent',
+    'aria-selected:bg-blue',
+    'aria-selected:data-hovered:bg-blue-dark',
+    'aria-selected:text-white',
     //Icons
     '[&_svg]:h-4 [&_svg]:w-4',
   ],
@@ -121,6 +121,12 @@ function Tag(props: TagProps) {
   const { className, children, ...restProps } = props;
 
   const textValue = typeof children === 'string' ? children : undefined;
+
+  const myFunction = useDebouncedCallback(() => console.log('debounce'), 100);
+
+  useEffect(() => {
+    myFunction();
+  }, [myFunction]);
 
   return (
     <RACTag
