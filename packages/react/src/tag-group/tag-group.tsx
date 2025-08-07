@@ -14,12 +14,23 @@ import {
 const tagVariants = cva({
   base: [
     'relative flex cursor-pointer items-center gap-1 rounded-lg px-2 py-1 font-medium text-sm transition-colors duration-200',
+    // Resting
+    'border-2 border-black bg-white text-black',
     //Focus
     'focus-visible:outline-focus-offset',
-    //Border
-    'border-2 border-blue-dark',
-    //Backgrounds
-    'data-hovered:!bg-sky bg-white text-black aria-selected:bg-sky-light data-allows-removing:bg-sky-light',
+    // Hover
+    ' data-hovered:bg-sky',
+    // Selected
+    // Allows removing
+    'data-allows-removing:border-transparent',
+    'data-allows-removing:bg-blue',
+    'data-allows-removing:data-hovered:bg-blue-dark',
+    'data-allows-removing:text-white',
+    // Selected
+    'aria-selected:border-transparent',
+    'aria-selected:bg-blue',
+    'aria-selected:data-hovered:bg-blue-dark',
+    'aria-selected:text-white',
     //Icons
     '[&_svg]:h-4 [&_svg]:w-4',
   ],
