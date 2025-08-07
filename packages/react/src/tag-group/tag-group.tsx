@@ -1,7 +1,6 @@
 import { Close } from '@obosbbl/grunnmuren-icons-react';
 import { cva, cx } from 'cva';
 import type { RefAttributes } from 'react';
-import { useEffect } from 'react';
 import {
   Button,
   Tag as RACTag,
@@ -11,7 +10,6 @@ import {
   type TagListProps as RACTagListProps,
   type TagProps as RACTagProps,
 } from 'react-aria-components';
-import { useDebouncedCallback } from 'use-debounce';
 
 const tagVariants = cva({
   base: [
@@ -121,12 +119,6 @@ function Tag(props: TagProps) {
   const { className, children, ...restProps } = props;
 
   const textValue = typeof children === 'string' ? children : undefined;
-
-  const myFunction = useDebouncedCallback(() => console.log('debounce'), 100);
-
-  useEffect(() => {
-    myFunction();
-  }, [myFunction]);
 
   return (
     <RACTag
