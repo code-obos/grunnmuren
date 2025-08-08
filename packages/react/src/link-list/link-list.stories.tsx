@@ -41,7 +41,7 @@ export const ExternalLinkListItems = () => (
 );
 
 export const InMultipleColumns = () => (
-  <LinkList className="md:grid-cols-2 lg:grid-cols-3">
+  <LinkList>
     <LinkListItem href="/">Home</LinkListItem>
     <LinkListItem href="/about">About</LinkListItem>
     <LinkListItem href="/services">Services</LinkListItem>
@@ -49,6 +49,8 @@ export const InMultipleColumns = () => (
     <LinkListItem href="/about">About</LinkListItem>
     <LinkListItem href="/services">Services</LinkListItem>
     <LinkListItem href="/">Home</LinkListItem>
+    <LinkListItem href="/about">About</LinkListItem>
+    <LinkListItem href="/services">Services</LinkListItem>
     <LinkListItem href="/about">About</LinkListItem>
     <LinkListItem href="/services">Services</LinkListItem>
   </LinkList>

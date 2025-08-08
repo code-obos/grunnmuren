@@ -4,29 +4,38 @@ import {
   LinkExternal,
 } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
-import type { JSX, ReactNode } from 'react';
+import { Children, type JSX, type ReactNode } from 'react';
 import { Link, type LinkProps } from 'react-aria-components';
 
 type _LinkListProps = React.HTMLProps<HTMLUListElement> & {
   children: JSX.Element | JSX.Element[];
 };
 
-const LinkList = ({ className, children, ...restProps }: _LinkListProps) => (
-  <ul
-    {...restProps}
-    className={cx(
-      className,
-      // Hide dividers at the top of the list (overflow-y) and prevents arrow icon from overflowing container when animated to the right (overflow-x)
-      'overflow-hidden',
-      // Add a small gap between items that fits the divider lines (this way the divider line don't take up any space in each item)
-      'grid gap-y-0.25',
-      // Add a gap between items if the list is displayed in multiple columns
-      'sm:gap-x-4 md:gap-x-9 lg:gap-x-12 xl:gap-x-16',
-    )}
-  >
-    {children}
-  </ul>
-);
+const LinkList = ({ className, children, ...restProps }: _LinkListProps) => {
+  const numberofLinks = Children.count(children);
+  return (
+    <div className="@container">
+      <ul
+        {...restProps}
+        className={cx(
+          className,
+          // Hide dividers at the top of the list (overflow-y) and prevents arrow icon from overflowing container when animated to the right (overflow-x)
+          'overflow-hidden',
+          // Add a small gap between items that fits the divider lines (this way the divider line don't take up any space in each item)
+          'grid gap-y-0.25',
+          // Add a gap between items if the list is displayed in multiple columns
+          '@lg:gap-x-12 @md:gap-x-9 @sm:gap-x-4 @xl:gap-x-16',
+          numberofLinks > 5 && [
+            '@md:grid-cols-2',
+            numberofLinks > 10 && '@2xl:grid-cols-3 @xl:grid-cols-2',
+          ],
+        )}
+      >
+        {children}
+      </ul>
+    </div>
+  );
+};
 
 type LinkListItemProps = LinkProps & {
   children: ReactNode;
