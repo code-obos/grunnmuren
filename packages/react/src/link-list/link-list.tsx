@@ -4,16 +4,17 @@ import {
   LinkExternal,
 } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
-import type { HTMLProps, JSX, ReactNode } from 'react';
+import type { ComponentPropsWithoutRef, JSX, ReactNode } from 'react';
 import { Link, type LinkProps } from 'react-aria-components';
 
-type _LinkListProps = HTMLProps<HTMLUListElement> & {
+type _LinkListProps = ComponentPropsWithoutRef<'ul'> & {
   children: JSX.Element | JSX.Element[];
+  ref?: React.Ref<HTMLUListElement>;
 };
 
 const LinkList = ({ className, children, ...restProps }: _LinkListProps) => (
   <ul
-    // {...restProps}
+    {...restProps}
     className={cx(
       className,
       // Hide dividers at the top of the list (overflow-y) and prevents arrow icon from overflowing container when animated to the right (overflow-x)
