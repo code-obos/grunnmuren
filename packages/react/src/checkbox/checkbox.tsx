@@ -32,7 +32,12 @@ function CheckmarkBox() {
         // focus
         'group-data-focus-visible:outline-focus-offset',
         // hovered
-        ' group-data-hovered:group-data-invalid:bg-red-light group-data-hovered:border-blue group-data-hovered:bg-sky group-data-hovered:group-data-selected:group-not-data-invalid:border-blue-dark group-data-hovered:group-data-selected:group-not-data-invalid:bg-blue-dark',
+        // hovered
+        'group-data-hovered:group-data-invalid:bg-red-light',
+        'group-data-hovered:border-blue',
+        'group-data-hovered:bg-sky',
+        'group-data-hovered:group-data-selected:group-not-data-invalid:border-blue-dark',
+        'group-data-hovered:group-data-selected:group-not-data-invalid:bg-blue-dark',
         // invalid - The border is 1 px thicker when invalid. We don't actually want to change the border width, as that causes the element's size to change
         // so we use an inner shadow of 1 px instead to pad the actual border
         'group-data-invalid:border-red group-data-invalid:shadow-[inset_0_0_0_1px] group-data-invalid:shadow-red',
