@@ -4,12 +4,11 @@ import {
   LinkExternal,
 } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
-import type { ComponentPropsWithoutRef, JSX, ReactNode } from 'react';
+import type { JSX, ReactNode } from 'react';
 import { Link, type LinkProps } from 'react-aria-components';
 
-type _LinkListProps = ComponentPropsWithoutRef<'ul'> & {
+type _LinkListProps = React.HTMLProps<HTMLUListElement> & {
   children: JSX.Element | JSX.Element[];
-  ref?: React.Ref<HTMLUListElement>;
 };
 
 const LinkList = ({ className, children, ...restProps }: _LinkListProps) => (
