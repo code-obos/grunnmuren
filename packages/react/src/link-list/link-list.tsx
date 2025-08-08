@@ -55,7 +55,7 @@ const LinkListItem = ({
     >
       <Link
         className={cx(
-          'group paragraph flex cursor-pointer justify-between gap-x-3.5 py-3.5 font-medium no-underline focus-visible:outline-focus',
+          'group paragraph flex cursor-pointer justify-between gap-x-2 py-3.5 font-medium no-underline focus-visible:outline-focus',
         )}
         {...restProps}
       >
