@@ -32,7 +32,6 @@ function CheckmarkBox() {
         // focus
         'group-data-focus-visible:outline-focus-offset',
         // hovered
-        // hovered
         'group-data-hovered:group-data-invalid:bg-red-light',
         'group-data-hovered:border-blue',
         'group-data-hovered:bg-sky',
