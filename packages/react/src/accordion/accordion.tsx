@@ -120,7 +120,7 @@ function AccordionItem(props: AccordionItemProps) {
                 <button
                   aria-controls={contentId}
                   aria-expanded={isOpen}
-                  // Use outline with offset as focus indicator, this does not cover the left mint border on the expanded content and works with or without a background color on the accordion container
+                  // Use outline with offset as focus indicator, this does not cover the left sky border on the expanded content and works with or without a background color on the accordion container
                   className="flex min-h-[44px] w-full cursor-pointer items-center justify-between gap-1.5 rounded-lg px-2 py-3.5 text-left focus-visible:outline-focus focus-visible:outline-focus-inset"
                   id={buttonId}
                   onClick={handleOpenChange}
@@ -142,7 +142,7 @@ function AccordionItem(props: AccordionItemProps) {
             {
               className:
                 // Uses pseudo element for vertical padding, since that doesn't affect the height when the accordion is closed
-                'text-sm font-light leading-6 px-3.5 relative overflow-hidden border-mint border-l-[3px] before:relative before:block before:h-1.5 after:relative after:block after:h-1.5',
+                'text-sm font-light leading-6 px-3.5 relative overflow-hidden border-sky border-l-[3px] before:relative before:block before:h-1.5 after:relative after:block after:h-1.5',
               role: 'region',
               inert: !isOpen,
               'aria-labelledby': buttonId,
