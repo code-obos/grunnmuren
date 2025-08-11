@@ -14,11 +14,11 @@ type LinkListProps = React.HTMLProps<HTMLUListElement> & {
 const LinkList = ({ className, children, ...restProps }: LinkListProps) => {
   const numberofLinks = Children.count(children);
   return (
-    <div className="@container">
+    <div className={cx(className, '@container')}>
       <ul
         {...restProps}
         className={cx(
-          className,
+          'min-w-fit',
           // Hide dividers at the top of the list (overflow-y) and prevents arrow icon from overflowing container when animated to the right (overflow-x)
           'overflow-hidden',
           // Add a small gap between items that fits the divider lines (this way the divider line don't take up any space in each item)
@@ -45,6 +45,7 @@ type LinkListItemProps = LinkProps & {
 const LinkListItem = ({
   children,
   isExternal,
+  className,
   ...restProps
 }: LinkListItemProps) => {
   let Icon = ArrowRight;
@@ -63,10 +64,11 @@ const LinkListItem = ({
       className="after:-top-0.25 relative p-0.75 after:absolute after:right-0 after:left-0 after:h-0.25 after:w-full after:bg-gray-light"
     >
       <Link
+        {...restProps}
         className={cx(
+          className,
           'group paragraph flex cursor-pointer justify-between gap-x-2 py-3.5 font-medium no-underline focus-visible:outline-focus',
         )}
-        {...restProps}
       >
         <span>{children}</span>
         <Icon
