@@ -156,7 +156,7 @@ const ColoredTemplate = (args: AccordionItemProps) => {
 
 const ColoredStandaloneTemplate = (args: AccordionItemProps) => {
   return (
-    <div className="bg-green-dark p-10">
+    <div className="bg-blue-dark p-10">
       <Accordion>
         <AccordionItem
           onOpenChange={args.onOpenChange}
