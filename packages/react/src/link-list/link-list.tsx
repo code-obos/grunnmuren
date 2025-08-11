@@ -26,8 +26,8 @@ const LinkList = ({ className, children, ...restProps }: _LinkListProps) => {
           // Gaps for when the list is displayed in multiple columns
           '@lg:gap-x-12 @md:gap-x-9 @sm:gap-x-4 @xl:gap-x-16',
           numberofLinks > 5 && [
-            '@md:grid-cols-2',
-            numberofLinks > 10 && '@4xl:grid-cols-3 @xl:grid-cols-2',
+            '@xl:grid-cols-2',
+            numberofLinks > 10 && '@4xl:grid-cols-3',
           ],
         )}
       >
