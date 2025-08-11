@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 3.0.3
+
+### Patch Changes
+
+- 93947b9: Fix `LinkList` exports
+
 ## 3.0.2
 
 ### Patch Changes
