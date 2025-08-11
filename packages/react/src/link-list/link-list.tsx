@@ -23,7 +23,7 @@ const LinkList = ({ className, children, ...restProps }: _LinkListProps) => {
           'overflow-hidden',
           // Add a small gap between items that fits the divider lines (this way the divider line don't take up any space in each item)
           'grid gap-y-0.25',
-          // Add a gap between items if the list is displayed in multiple columns
+          // Gaps for when the list is displayed in multiple columns
           '@lg:gap-x-12 @md:gap-x-9 @sm:gap-x-4 @xl:gap-x-16',
           numberofLinks > 5 && [
             '@md:grid-cols-2',
@@ -59,7 +59,7 @@ const LinkListItem = ({
   }
   return (
     <li
-      // Creates divider lines that works in any grid layout and the focus ring
+      // Creates divider lines that works in any grid layout and with the focus ring
       className="after:-top-0.25 relative p-0.75 after:absolute after:right-0 after:left-0 after:h-0.25 after:w-full after:bg-gray-light"
     >
       <Link
