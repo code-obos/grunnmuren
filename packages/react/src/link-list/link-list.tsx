@@ -7,11 +7,11 @@ import { cx } from 'cva';
 import { Children, type JSX, type ReactNode } from 'react';
 import { Link, type LinkProps } from 'react-aria-components';
 
-type _LinkListProps = React.HTMLProps<HTMLUListElement> & {
+type LinkListProps = React.HTMLProps<HTMLUListElement> & {
   children: JSX.Element | JSX.Element[];
 };
 
-const LinkList = ({ className, children, ...restProps }: _LinkListProps) => {
+const LinkList = ({ className, children, ...restProps }: LinkListProps) => {
   const numberofLinks = Children.count(children);
   return (
     <div className="@container">
@@ -82,7 +82,7 @@ const LinkListItem = ({
 
 export {
   LinkList as UNSAFE_LinkList,
-  type _LinkListProps as UNSAFE__LinkListProps,
+  type LinkListProps as UNSAFE_LinkListProps,
   LinkListItem as UNSAFE_LinkListItem,
   type LinkListItemProps as UNSAFE_LinkListItemProps,
 };
