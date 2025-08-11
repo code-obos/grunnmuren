@@ -4,7 +4,7 @@
 
 # LinkList
 
-New `LinkList` component in beta. Use it to display a set of releated links. You can choose between rendering regular, download or external links on each `LinkListItem`. The `LinkListItem` uses `Link` from react aria components under the hood. Which means that you can use it with `routerOptions`. Refer to [https://react-spectrum.adobe.com/react-aria/routing.html](https://react-spectrum.adobe.com/react-aria/routing.html) for more.
+New `LinkList` component in beta. Use it to display a set of related links. You can choose between rendering regular, download or external links on each `LinkListItem`. The `LinkListItem` uses `Link` from react aria components under the hood. Which means that you can use it with `routerOptions`. Refer to [https://react-spectrum.adobe.com/react-aria/routing.html](https://react-spectrum.adobe.com/react-aria/routing.html) for more.
 
 ## Usage
 
