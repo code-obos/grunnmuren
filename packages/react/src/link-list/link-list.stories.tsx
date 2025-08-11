@@ -5,7 +5,7 @@ import {
 } from './link-list';
 
 const meta: Meta<typeof LinkList> = {
-  title: 'LinkListItemList',
+  title: 'LinkList',
   component: LinkList,
 
   tags: ['autodocs'],
