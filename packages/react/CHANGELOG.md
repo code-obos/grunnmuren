@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 3.0.4
+
+### Patch Changes
+
+- 1f965ac: Bugfixes for `LinkList`: `className` passing and layout fixes for rendering inside `flex` and `grid` containers.
+
 ## 3.0.3
 
 ### Patch Changes
