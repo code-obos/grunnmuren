@@ -42,7 +42,7 @@ interface ScrollToTopButtonProps {
 
 /**
  * Scroll to top button component
- * Displays a floating button with "Til tops" text that scrolls to the top of the page
+ * Displays a floating button with "Til toppen" text that scrolls to the top of the page
  */
 export function ScrollToTopButton({
   show,
@@ -63,7 +63,7 @@ export function ScrollToTopButton({
       >
         <ArrowUp className="h-6 w-6 text-white" />
       </button>
-      <span className="mt-2 font-medium">Til tops</span>
+      <span className="mt-2 font-medium">Til toppen</span>
     </div>
   );
 }
