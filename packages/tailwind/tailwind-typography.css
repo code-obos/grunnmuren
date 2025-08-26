@@ -75,7 +75,7 @@
 
     &:where(strong) {
       color: var(--tw-prose-bold);
-      font-weight: 600;
+      font-weight: 500;
     }
 
     &:where(a strong) {
@@ -151,7 +151,7 @@
 
     &:where(dt) {
       color: var(--tw-prose-headings);
-      font-weight: 600;
+      font-weight: 500;
       margin-top: 1.25em;
     }
 
@@ -335,7 +335,7 @@
 
     &:where(thead th) {
       color: var(--tw-prose-headings);
-      font-weight: 600;
+      font-weight: 500;
       vertical-align: bottom;
       padding-right: 0.5714286em;
       padding-bottom: 0.5714286em;
