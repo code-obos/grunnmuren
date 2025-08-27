@@ -22,7 +22,7 @@ const LinkList = ({ className, children, ...restProps }: LinkListProps) => {
           // Hide dividers at the top of the list (overflow-y) and prevents arrow icon from overflowing container when animated to the right (overflow-x)
           'overflow-hidden',
           // Add a small gap between items that fits the divider lines (this way the divider line don't take up any space in each item)
-          'grid gap-y-0.25',
+          'grid auto-rows-max gap-y-0.25',
           // Gaps for when the list is displayed in multiple columns
           '@lg:gap-x-12 @md:gap-x-9 @sm:gap-x-4 @xl:gap-x-16',
           numberofLinks > 5 && [
