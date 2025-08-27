@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.2.2
+
+### Patch Changes
+
+- 0d0b664: Use `font-weight 500` in prose instead of `600`.
+
 ## 2.2.1
 
 ### Patch Changes
