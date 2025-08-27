@@ -259,10 +259,10 @@ importers:
         version: 3.30.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@react-stately/form':
         specifier: ^3.1.5
-        version: 3.1.5(react@19.0.0)
+        version: 3.2.1(react@19.0.0)
       '@react-stately/utils':
         specifier: ^3.10.7
-        version: 3.10.7(react@19.0.0)
+        version: 3.10.8(react@19.0.0)
       '@types/node':
         specifier: ^22.0.0
         version: 22.13.13
@@ -2753,13 +2753,8 @@ packages:
   '@react-stately/flags@3.1.2':
     resolution: {integrity: sha512-2HjFcZx1MyQXoPqcBGALwWWmgFVUk2TuKVIQxCbRq7fPyWXIl6VHcakCLurdtYC2Iks7zizvz0Idv48MQ38DWg==}
 
-  '@react-stately/form@3.1.5':
-    resolution: {integrity: sha512-wOs0SVXFgNr1aIdywiNH1MhxrFlN5YxBr1k9y3Z7lX+pc/MGRJFTgfDDw5JDxvwLH9joJ9ciniCdWep9L/TqcQ==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
-
-  '@react-stately/form@3.2.0':
-    resolution: {integrity: sha512-PfefxvT7/BIhAGpD4oQpdcxnL8cfN0ZTQxQq+Wmb9z3YzK1oM8GFxb8eGdDRG71JeF8WUNMAQVZFhgl00Z/YKg==}
+  '@react-stately/form@3.2.1':
+    resolution: {integrity: sha512-btgOPXkwvd6fdWKoepy5Ue43o2932OSkQxozsR7US1ffFLcQc3SNlADHaRChIXSG8ffPo9t0/Sl4eRzaKu3RgQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
@@ -2846,11 +2841,6 @@ packages:
 
   '@react-stately/tree@3.9.1':
     resolution: {integrity: sha512-dyoPIvPK/cs03Tg/MQSODi2kKYW1zaiOG9KC2P0c8b44mywU2ojBKzhSJky3dBkJ4VVGy7L+voBh50ELMjEa8Q==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
-
-  '@react-stately/utils@3.10.7':
-    resolution: {integrity: sha512-cWvjGAocvy4abO9zbr6PW6taHgF24Mwy/LbQ4TC4Aq3tKdKDntxyD+sh7AkSRfJRT2ccMVaHVv2+FfHThd3PKQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
@@ -2970,13 +2960,13 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
-  '@react-types/shared@3.30.0':
-    resolution: {integrity: sha512-COIazDAx1ncDg046cTJ8SFYsX8aS3lB/08LDnbkH/SkdYrFPWDlXMrO/sUam8j1WWM+PJ+4d1mj7tODIKNiFog==}
+  '@react-types/shared@3.31.0':
+    resolution: {integrity: sha512-ua5U6V66gDcbLZe4P2QeyNgPp4YWD1ymGA6j3n+s8CGExtrCPe64v+g4mvpT8Bnb985R96e4zFT61+m0YCwqMg==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
-  '@react-types/shared@3.31.0':
-    resolution: {integrity: sha512-ua5U6V66gDcbLZe4P2QeyNgPp4YWD1ymGA6j3n+s8CGExtrCPe64v+g4mvpT8Bnb985R96e4zFT61+m0YCwqMg==}
+  '@react-types/shared@3.32.0':
+    resolution: {integrity: sha512-t+cligIJsZYFMSPFMvsJMjzlzde06tZMOIOFa1OV5Z0BcMowrb2g4mB57j/9nP28iJIRYn10xCniQts+qadrqQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
@@ -12493,7 +12483,7 @@ snapshots:
       '@react-aria/toggle': 3.12.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@react-aria/utils': 3.30.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@react-stately/checkbox': 3.7.0(react@19.0.0)
-      '@react-stately/form': 3.2.0(react@19.0.0)
+      '@react-stately/form': 3.2.1(react@19.0.0)
       '@react-stately/toggle': 3.9.0(react@19.0.0)
       '@react-types/checkbox': 3.10.0(react@19.0.0)
       '@react-types/shared': 3.31.0(react@19.0.0)
@@ -12523,7 +12513,7 @@ snapshots:
       '@react-aria/utils': 3.30.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@react-aria/visually-hidden': 3.8.26(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@react-stately/color': 3.9.0(react@19.0.0)
-      '@react-stately/form': 3.2.0(react@19.0.0)
+      '@react-stately/form': 3.2.1(react@19.0.0)
       '@react-types/color': 3.1.0(react@19.0.0)
       '@react-types/shared': 3.31.0(react@19.0.0)
       '@swc/helpers': 0.5.17
@@ -12543,7 +12533,7 @@ snapshots:
       '@react-aria/utils': 3.30.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@react-stately/collections': 3.12.6(react@19.0.0)
       '@react-stately/combobox': 3.11.0(react@19.0.0)
-      '@react-stately/form': 3.2.0(react@19.0.0)
+      '@react-stately/form': 3.2.1(react@19.0.0)
       '@react-types/button': 3.13.0(react@19.0.0)
       '@react-types/combobox': 3.13.7(react@19.0.0)
       '@react-types/shared': 3.31.0(react@19.0.0)
@@ -12564,7 +12554,7 @@ snapshots:
       '@react-aria/spinbutton': 3.6.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@react-aria/utils': 3.30.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@react-stately/datepicker': 3.15.0(react@19.0.0)
-      '@react-stately/form': 3.2.0(react@19.0.0)
+      '@react-stately/form': 3.2.1(react@19.0.0)
       '@react-types/button': 3.13.0(react@19.0.0)
       '@react-types/calendar': 3.7.3(react@19.0.0)
       '@react-types/datepicker': 3.13.0(react@19.0.0)
@@ -12625,7 +12615,7 @@ snapshots:
     dependencies:
       '@react-aria/interactions': 3.25.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@react-aria/utils': 3.30.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@react-stately/form': 3.2.0(react@19.0.0)
+      '@react-stately/form': 3.2.1(react@19.0.0)
       '@react-types/shared': 3.31.0(react@19.0.0)
       '@swc/helpers': 0.5.17
       react: 19.0.0
@@ -12767,7 +12757,7 @@ snapshots:
       '@react-aria/spinbutton': 3.6.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@react-aria/textfield': 3.18.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@react-aria/utils': 3.30.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@react-stately/form': 3.2.0(react@19.0.0)
+      '@react-stately/form': 3.2.1(react@19.0.0)
       '@react-stately/numberfield': 3.10.0(react@19.0.0)
       '@react-types/button': 3.13.0(react@19.0.0)
       '@react-types/numberfield': 3.8.13(react@19.0.0)
@@ -12967,7 +12957,7 @@ snapshots:
       '@react-aria/interactions': 3.25.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@react-aria/label': 3.7.20(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@react-aria/utils': 3.30.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@react-stately/form': 3.2.0(react@19.0.0)
+      '@react-stately/form': 3.2.1(react@19.0.0)
       '@react-stately/utils': 3.10.8(react@19.0.0)
       '@react-types/shared': 3.31.0(react@19.0.0)
       '@react-types/textfield': 3.12.4(react@19.0.0)
@@ -13081,7 +13071,7 @@ snapshots:
 
   '@react-stately/checkbox@3.7.0(react@19.0.0)':
     dependencies:
-      '@react-stately/form': 3.2.0(react@19.0.0)
+      '@react-stately/form': 3.2.1(react@19.0.0)
       '@react-stately/utils': 3.10.8(react@19.0.0)
       '@react-types/checkbox': 3.10.0(react@19.0.0)
       '@react-types/shared': 3.31.0(react@19.0.0)
@@ -13098,7 +13088,7 @@ snapshots:
     dependencies:
       '@internationalized/number': 3.6.4
       '@internationalized/string': 3.2.7
-      '@react-stately/form': 3.2.0(react@19.0.0)
+      '@react-stately/form': 3.2.1(react@19.0.0)
       '@react-stately/numberfield': 3.10.0(react@19.0.0)
       '@react-stately/slider': 3.7.0(react@19.0.0)
       '@react-stately/utils': 3.10.8(react@19.0.0)
@@ -13110,7 +13100,7 @@ snapshots:
   '@react-stately/combobox@3.11.0(react@19.0.0)':
     dependencies:
       '@react-stately/collections': 3.12.6(react@19.0.0)
-      '@react-stately/form': 3.2.0(react@19.0.0)
+      '@react-stately/form': 3.2.1(react@19.0.0)
       '@react-stately/list': 3.12.4(react@19.0.0)
       '@react-stately/overlays': 3.6.18(react@19.0.0)
       '@react-stately/select': 3.7.0(react@19.0.0)
@@ -13130,7 +13120,7 @@ snapshots:
     dependencies:
       '@internationalized/date': 3.8.2
       '@internationalized/string': 3.2.7
-      '@react-stately/form': 3.2.0(react@19.0.0)
+      '@react-stately/form': 3.2.1(react@19.0.0)
       '@react-stately/overlays': 3.6.18(react@19.0.0)
       '@react-stately/utils': 3.10.8(react@19.0.0)
       '@react-types/datepicker': 3.13.0(react@19.0.0)
@@ -13156,15 +13146,9 @@ snapshots:
     dependencies:
       '@swc/helpers': 0.5.17
 
-  '@react-stately/form@3.1.5(react@19.0.0)':
+  '@react-stately/form@3.2.1(react@19.0.0)':
     dependencies:
-      '@react-types/shared': 3.30.0(react@19.0.0)
-      '@swc/helpers': 0.5.15
-      react: 19.0.0
-
-  '@react-stately/form@3.2.0(react@19.0.0)':
-    dependencies:
-      '@react-types/shared': 3.31.0(react@19.0.0)
+      '@react-types/shared': 3.32.0(react@19.0.0)
       '@swc/helpers': 0.5.17
       react: 19.0.0
 
@@ -13209,7 +13193,7 @@ snapshots:
   '@react-stately/numberfield@3.10.0(react@19.0.0)':
     dependencies:
       '@internationalized/number': 3.6.4
-      '@react-stately/form': 3.2.0(react@19.0.0)
+      '@react-stately/form': 3.2.1(react@19.0.0)
       '@react-stately/utils': 3.10.8(react@19.0.0)
       '@react-types/numberfield': 3.8.13(react@19.0.0)
       '@swc/helpers': 0.5.17
@@ -13224,7 +13208,7 @@ snapshots:
 
   '@react-stately/radio@3.11.0(react@19.0.0)':
     dependencies:
-      '@react-stately/form': 3.2.0(react@19.0.0)
+      '@react-stately/form': 3.2.1(react@19.0.0)
       '@react-stately/utils': 3.10.8(react@19.0.0)
       '@react-types/radio': 3.9.0(react@19.0.0)
       '@react-types/shared': 3.31.0(react@19.0.0)
@@ -13240,7 +13224,7 @@ snapshots:
 
   '@react-stately/select@3.7.0(react@19.0.0)':
     dependencies:
-      '@react-stately/form': 3.2.0(react@19.0.0)
+      '@react-stately/form': 3.2.1(react@19.0.0)
       '@react-stately/list': 3.12.4(react@19.0.0)
       '@react-stately/overlays': 3.6.18(react@19.0.0)
       '@react-types/select': 3.10.0(react@19.0.0)
@@ -13313,11 +13297,6 @@ snapshots:
       '@react-stately/utils': 3.10.8(react@19.0.0)
       '@react-types/shared': 3.31.0(react@19.0.0)
       '@swc/helpers': 0.5.17
-      react: 19.0.0
-
-  '@react-stately/utils@3.10.7(react@19.0.0)':
-    dependencies:
-      '@swc/helpers': 0.5.15
       react: 19.0.0
 
   '@react-stately/utils@3.10.8(react@19.0.0)':
@@ -13449,11 +13428,11 @@ snapshots:
       '@react-types/shared': 3.31.0(react@19.0.0)
       react: 19.0.0
 
-  '@react-types/shared@3.30.0(react@19.0.0)':
+  '@react-types/shared@3.31.0(react@19.0.0)':
     dependencies:
       react: 19.0.0
 
-  '@react-types/shared@3.31.0(react@19.0.0)':
+  '@react-types/shared@3.32.0(react@19.0.0)':
     dependencies:
       react: 19.0.0
 
@@ -19805,7 +19784,7 @@ snapshots:
       '@react-stately/datepicker': 3.15.0(react@19.0.0)
       '@react-stately/disclosure': 3.0.6(react@19.0.0)
       '@react-stately/dnd': 3.6.1(react@19.0.0)
-      '@react-stately/form': 3.2.0(react@19.0.0)
+      '@react-stately/form': 3.2.1(react@19.0.0)
       '@react-stately/list': 3.12.4(react@19.0.0)
       '@react-stately/menu': 3.9.6(react@19.0.0)
       '@react-stately/numberfield': 3.10.0(react@19.0.0)
