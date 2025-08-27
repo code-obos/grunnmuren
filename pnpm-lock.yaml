@@ -90,8 +90,8 @@ importers:
   apps/docs:
     dependencies:
       '@code-obos/sanity-auth':
-        specifier: 1.4.1
-        version: 1.4.1(sanity@3.92.0(@emotion/is-prop-valid@1.2.2)(@types/node@24.0.0)(@types/react@19.1.8)(immer@10.1.1)(jiti@2.4.2)(lightningcss@1.30.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.37.0)(tsx@4.19.2)(typescript@5.9.2)(yaml@2.7.0))(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
+        specifier: 1.4.2
+        version: 1.4.2(sanity@3.92.0(@emotion/is-prop-valid@1.2.2)(@types/node@24.0.0)(@types/react@19.1.8)(immer@10.1.1)(jiti@2.4.2)(lightningcss@1.30.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.37.0)(tsx@4.19.2)(typescript@5.9.2)(yaml@2.7.0))(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
       '@obosbbl/grunnmuren-icons-react':
         specifier: workspace:*
         version: link:../../packages/icons-react
@@ -154,7 +154,7 @@ importers:
         version: 3.92.0(@emotion/is-prop-valid@1.2.2)(@types/node@24.0.0)(@types/react@19.1.8)(immer@10.1.1)(jiti@2.4.2)(lightningcss@1.30.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.37.0)(tsx@4.19.2)(typescript@5.9.2)(yaml@2.7.0)
       use-debounce:
         specifier: 10.0.4
-        version: 10.0.5(react@19.0.0)
+        version: 10.0.4(react@19.0.0)
     devDependencies:
       '@obosbbl/grunnmuren-tailwind':
         specifier: workspace:*
@@ -188,7 +188,7 @@ importers:
         version: link:../packages/react
       next:
         specifier: 15.3.3
-        version: 15.3.3(@babel/core@7.27.4)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 15.3.3(@babel/core@7.26.9)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       zod:
         specifier: 3.24.2
         version: 3.24.2
@@ -1189,11 +1189,11 @@ packages:
     resolution: {integrity: sha512-+tv3z+SPp+gqTIcImN9o0hqE9xyfQjI1XD9pL6NuKjua9B1y7mNYv0S9cP+QEbA4ppVgGZEmKOvHX5G5Ei1CVA==}
     engines: {node: '>=18.0.0'}
 
-  '@code-obos/sanity-auth@1.4.1':
-    resolution: {integrity: sha512-ioWvvUrgusa7IdcOeYbUINIg6UXd6PqgoR48a+8tsJ4ZON/uWh5hugsDiaDbvNkaYpXT419OIi2wiX95oUm0Bw==, tarball: https://npm.pkg.github.com/download/@code-obos/sanity-auth/1.4.1/12e933dbc0747c002bc2eb6cbce9ccf7b12219dd}
+  '@code-obos/sanity-auth@1.4.2':
+    resolution: {integrity: sha512-yFNPQwzFBGmop3itueXtc8+7OUIu9AB1nLcJvDk+oZ6P9UbP4C6qJ5iEN2Q4xGyXh00dIL5pWLIFsu810JYIDQ==, tarball: https://npm.pkg.github.com/download/@code-obos/sanity-auth/1.4.2/6b5e7e1be46dae46e59fb8e161d9b9124f057151}
     engines: {node: '>=20'}
     peerDependencies:
-      sanity: ^3.37.1
+      sanity: ^3.86.1  || ^4.0.0-0
       styled-components: ^6.1
 
   '@codemirror/autocomplete@6.18.6':
@@ -9492,6 +9492,12 @@ packages:
       '@types/react':
         optional: true
 
+  use-debounce@10.0.4:
+    resolution: {integrity: sha512-6Cf7Yr7Wk7Kdv77nnJMf6de4HuDE4dTxKij+RqE9rufDsI6zsbjyAxcH5y2ueJCQAnfgKbzXbZHYlkFwmBlWkw==}
+    engines: {node: '>= 16.0.0'}
+    peerDependencies:
+      react: '*'
+
   use-debounce@10.0.5:
     resolution: {integrity: sha512-Q76E3lnIV+4YT9AHcrHEHYmAd9LKwUAbPXDm7FlqVGDHiSOhX3RDjT8dm0AxbJup6WgOb1YEcKyCr11kBJR5KQ==}
     engines: {node: '>= 16.0.0'}
@@ -11115,7 +11121,7 @@ snapshots:
     dependencies:
       mime: 3.0.0
 
-  '@code-obos/sanity-auth@1.4.1(sanity@3.92.0(@emotion/is-prop-valid@1.2.2)(@types/node@24.0.0)(@types/react@19.1.8)(immer@10.1.1)(jiti@2.4.2)(lightningcss@1.30.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.37.0)(tsx@4.19.2)(typescript@5.9.2)(yaml@2.7.0))(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))':
+  '@code-obos/sanity-auth@1.4.2(sanity@3.92.0(@emotion/is-prop-valid@1.2.2)(@types/node@24.0.0)(@types/react@19.1.8)(immer@10.1.1)(jiti@2.4.2)(lightningcss@1.30.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.37.0)(tsx@4.19.2)(typescript@5.9.2)(yaml@2.7.0))(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))':
     dependencies:
       sanity: 3.92.0(@emotion/is-prop-valid@1.2.2)(@types/node@24.0.0)(@types/react@19.1.8)(immer@10.1.1)(jiti@2.4.2)(lightningcss@1.30.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.37.0)(tsx@4.19.2)(typescript@5.9.2)(yaml@2.7.0)
       styled-components: 6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -18824,7 +18830,7 @@ snapshots:
       p-wait-for: 5.0.2
       qs: 6.14.0
 
-  next@15.3.3(@babel/core@7.27.4)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+  next@15.3.3(@babel/core@7.26.9)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
       '@next/env': 15.3.3
       '@swc/counter': 0.1.3
@@ -18834,7 +18840,7 @@ snapshots:
       postcss: 8.4.31
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
-      styled-jsx: 5.1.6(@babel/core@7.27.4)(react@19.0.0)
+      styled-jsx: 5.1.6(@babel/core@7.26.9)(react@19.0.0)
     optionalDependencies:
       '@next/swc-darwin-arm64': 15.3.3
       '@next/swc-darwin-x64': 15.3.3
@@ -20725,12 +20731,12 @@ snapshots:
       stylis: 4.3.2
       tslib: 2.6.2
 
-  styled-jsx@5.1.6(@babel/core@7.27.4)(react@19.0.0):
+  styled-jsx@5.1.6(@babel/core@7.26.9)(react@19.0.0):
     dependencies:
       client-only: 0.0.1
       react: 19.0.0
     optionalDependencies:
-      '@babel/core': 7.27.4
+      '@babel/core': 7.26.9
 
   stylis@4.3.2: {}
 
@@ -21210,6 +21216,10 @@ snapshots:
       tslib: 2.8.1
     optionalDependencies:
       '@types/react': 19.1.8
+
+  use-debounce@10.0.4(react@19.0.0):
+    dependencies:
+      react: 19.0.0
 
   use-debounce@10.0.5(react@19.0.0):
     dependencies:
