@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 3.0.5
+
+### Patch Changes
+
+- cdf9237: Fixes a layout issue in the `LinkList` component that caused the list items to stretch if the component was placed in a container that caused it to stretch to a height greater than its natural height.
+
 ## 3.0.4
 
 ### Patch Changes
