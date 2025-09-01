@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 3.0.6
+
+### Patch Changes
+
+- 811d3a5: The responsive behavior of the `<Card>` component is now controlled with container queries. This makes the responsive behavior more consistent and predictable.
+
 ## 3.0.5
 
 ### Patch Changes
