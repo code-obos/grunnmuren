@@ -93,7 +93,7 @@ const cardVariants = cva({
         'gap-x-4', // Since this does not affect the layout before the flex direction is set (at breakpoint @2xl for Card with Media), we can set it here
         // **** With Media ****
         '[&:has(>[data-slot="media"]:last-child)]:flex-col-reverse', // Always display the media at the top of the card
-        'has-data-[slot=media]:@2xl:!flex-row', // When need !important to override the specificity (first-/last-child) of the flex-col-reverse and flex-col classes
+        'has-data-[slot=media]:@2xl:!flex-row', // We need !important to override the specificity (first-/last-child) of the flex-col-reverse and flex-col classes
 
         '*:data-[slot=media]:@2xl:h-fit', // Fail-safe for rounded corners on media content
         'has-data-[slot=media]:*:@2xl:basis-1/2', // Ensures a 50/50 split of the media and content on medium screens
