@@ -21217,6 +21217,10 @@ snapshots:
     dependencies:
       react: 19.0.0
 
+  use-debounce@10.0.4(react@19.0.0):
+    dependencies:
+      react: 19.0.0
+
   use-debounce@10.0.5(react@19.0.0):
     dependencies:
       react: 19.0.0
