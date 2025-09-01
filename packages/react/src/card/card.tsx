@@ -15,7 +15,7 @@ const cardVariants = cva({
   base: [
     'group/card',
     'rounded-2xl border p-3',
-    'flex flex-col gap-y-4', // y-gap ensures a vertical spacing for both verical layout and responsive horizontal layout
+    'flex flex-col gap-y-4', // y-gap ensures a vertical spacing for both vertical layout and responsive horizontal layout
     'relative', // Needed for positiong of the clickable pseudo-element (and can also be used for other absolute positioned elements the consumer might add)
 
     // **** Content ****
