@@ -539,21 +539,17 @@ export const HorizontalWithIconLeft = () => (
 );
 
 export const HorizontalWithIconRight = () => (
-  <Card layout="horizontal" variant="outlined">
+  <Card className="group/cta" layout="horizontal" variant="outlined">
     <Content>
-      <Heading level={3}>Med ikon til høyre</Heading>
+      <Heading level={3}>
+        <CardLink href="#cta">Med ikon til høyre</CardLink>
+      </Heading>
       <p>
         Dette kortet er liggende, har et ikon til høyre og er klikkbart mot en
         CTA-lenke
       </p>
-      <CardLink className="group/cta">
-        <Button href="#cta" variant="tertiary">
-          Les mer
-          <ArrowRight className="transition-transform group-hover/cta:motion-safe:translate-x-1" />
-        </Button>
-      </CardLink>
     </Content>
-    <PiggyBank />
+    <ArrowRight className="transition-transform group-hover/cta:motion-safe:translate-x-1" />
   </Card>
 );
 
