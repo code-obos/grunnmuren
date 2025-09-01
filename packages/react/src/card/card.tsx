@@ -15,7 +15,7 @@ const cardVariants = cva({
   base: [
     'group/card',
     'rounded-2xl border p-3',
-    'flex gap-y-4', // y-gap ensures a vertical spacing for both verical layout and responsive horizontal layout
+    'flex flex-col gap-y-4', // y-gap ensures a vertical spacing for both verical layout and responsive horizontal layout
     'relative', // Needed for positiong of the clickable pseudo-element (and can also be used for other absolute positioned elements the consumer might add)
 
     // **** Content ****
@@ -90,27 +90,26 @@ const cardVariants = cva({
         '[&_[data-slot="media"]]:rounded-t-2xl', // Both Top corners are rounded
       ],
       horizontal: [
-        'gap-x-4', // Since this does not affect the layout before the flex direction is set (at breakpoint md for Card with Media), we can set it here
+        'gap-x-4', // Since this does not affect the layout before the flex direction is set (at breakpoint @2xl for Card with Media), we can set it here
         // **** With Media ****
-        '[&:has(>[data-slot="media"]:first-child)]:flex-col',
         '[&:has(>[data-slot="media"]:last-child)]:flex-col-reverse', // Always display the media at the top of the card
-        '[&:has(>[data-slot="media"])]:md:!flex-row', // When need !important to override the specificity (first-/last-child) of the flex-col-reverse and flex-col classes
+        'has-data-[slot=media]:@2xl:!flex-row', // When need !important to override the specificity (first-/last-child) of the flex-col-reverse and flex-col classes
 
-        '[&_[data-slot="media"]]:md:h-fit', // Fail-safe for rounded corners on media content until we can use container queries for the breakpoints
-        '[&:has(>[data-slot="media"])>*]:md:basis-1/2', // Ensures a 50/50 split of the media and content on medium screens
+        '*:data-[slot=media]:@2xl:h-fit', // Fail-safe for rounded corners on media content
+        'has-data-[slot=media]:*:@2xl:basis-1/2', // Ensures a 50/50 split of the media and content on medium screens
         // Position media at the edges of the card
-        '[&_[data-slot="media"]]:md:mb-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
-        '[&_[data-slot="media"]:first-child]:md:mr-0',
-        '[&_[data-slot="media"]:last-child]:md:ml-0',
+        '*:data-[slot=media]:@2xl:mb-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
+        '*:data-[slot=media]:first:@2xl:mr-0',
+        '*:data-[slot=media]:last:@2xl:ml-0',
 
         // Make sure the card link is clickable when the media is on the right side
         // This i necessary because the media content is positioned after the card link in the DOM
         '[&:has(>[data-slot="media"]:last-child)_[data-slot="card-link"]]:z-[1]',
 
         // **** Without Media ****
-        '[&:not(:has(>[data-slot="media"]))]:flex-row',
+        'not-has-data-[slot=media]:@md:flex-row',
         // Make the layout responsive: when the Content reaches a minimum width of 12rem, the layout switches to vertical. Also makes sure Content takes up the remaining space available.
-        '[&:not(:has(>[data-slot="media"]))]:flex-wrap [&:not(:has(>[data-slot="media"]))_[data-slot="content"]]:grow [&:not(:has(>[data-slot="media"]))_[data-slot="content"]]:basis-[12rem]',
+        'not-has-data-[slot=media]:**:data-[slot=content]:grow',
         // Make sure svg's etc. are not shrinkable
         '[&>:not([data-slot="content"],[data-slot="media"])]:shrink-0',
       ],
@@ -128,12 +127,12 @@ const cardVariants = cva({
         // **** Media ****
         // Some rounded corners are removed when the card is outlined
         '[&_[data-slot="media"]]:rounded-t-2xl', // On small screens, the top corners are rounded
-        '[&_[data-slot="media"]:first-child]:md:rounded-tr-none [&_[data-slot="media"]:first-child]:md:rounded-bl-2xl', // Both left corners are rounded when media is on the left side
-        '[&_[data-slot="media"]:last-child]:md:rounded-tl-none [&_[data-slot="media"]:last-child]:md:rounded-br-2xl', // Both right corners are rounded when media is on the right side
+        '*:data-[slot=media]:first:@2xl:rounded-tr-none *:data-[slot=media]:first:@2xl:rounded-bl-2xl', // Both left corners are rounded when media is on the left side
+        '*:data-[slot=media]:last:@2xl:rounded-tl-none *:data-[slot=media]:last:@2xl:rounded-br-2xl', // Both right corners are rounded when media is on the right side
         // **** Badge ****
         // Override default corner radius of the badge to match the media border radius
-        '[&_[data-slot="media"]:first-child_[data-slot="badge"]:last-child]:md:rounded-tr-none',
-        '[&_[data-slot="media"]:last-child_[data-slot="badge"]:first-child]:md:rounded-tl-none',
+        '[&_[data-slot="media"]:first-child_[data-slot="badge"]:last-child]:@2xl:rounded-tr-none',
+        '[&_[data-slot="media"]:last-child_[data-slot="badge"]:first-child]:@2xl:rounded-tl-none',
       ],
     },
   ],
@@ -152,39 +151,41 @@ const Card = ({
     layout,
   });
   return (
-    <div className={className} {...restProps}>
-      <Provider
-        values={[
-          [
-            HeadingContext,
-            {
-              size: 's',
-              className: cx([
-                'inline',
-                'w-fit',
-                'text-pretty',
-                'hyphens-auto',
-                '[word-break:break-word]', // necessary to make hyphens work in grid containers in Safari
-                // **** Card link in Heading ****
-                // Border (bottom/top) is set to transparent to make sure the bottom underline is not visible when the card is hovered
-                // Border top is set to even out the border bottom used for the underline
-                '*:data-[slot="card-link"]:no-underline',
-                '*:data-[slot="card-link"]:border-y-2',
-                '*:data-[slot="card-link"]:border-y-transparent',
-                '*:data-[slot="card-link"]:transition-colors',
-                '*:data-[slot="card-link"]:hover:border-b-current',
-                // Mimic heading styles for the card link if placed in the heading slot. This is necessary to make the custom underline align with the link text
-                '*:data-[slot="card-link"]:font-inherit',
-                '*:data-[slot="card-link"]:text-pretty',
-                '*:data-[slot="card-link"]:hyphens-auto',
-                '*:data-[slot="card-link"]:[word-break:break-word]', // necessary to make hyphens work in grid containers in Safari
-              ]),
-            },
-          ],
-        ]}
-      >
-        {children}
-      </Provider>
+    <div className="@container">
+      <div className={className} {...restProps}>
+        <Provider
+          values={[
+            [
+              HeadingContext,
+              {
+                size: 's',
+                className: cx([
+                  'inline',
+                  'w-fit',
+                  'text-pretty',
+                  'hyphens-auto',
+                  '[word-break:break-word]', // necessary to make hyphens work in grid containers in Safari
+                  // **** Card link in Heading ****
+                  // Border (bottom/top) is set to transparent to make sure the bottom underline is not visible when the card is hovered
+                  // Border top is set to even out the border bottom used for the underline
+                  '*:data-[slot="card-link"]:no-underline',
+                  '*:data-[slot="card-link"]:border-y-2',
+                  '*:data-[slot="card-link"]:border-y-transparent',
+                  '*:data-[slot="card-link"]:transition-colors',
+                  '*:data-[slot="card-link"]:hover:border-b-current',
+                  // Mimic heading styles for the card link if placed in the heading slot. This is necessary to make the custom underline align with the link text
+                  '*:data-[slot="card-link"]:font-inherit',
+                  '*:data-[slot="card-link"]:text-pretty',
+                  '*:data-[slot="card-link"]:hyphens-auto',
+                  '*:data-[slot="card-link"]:[word-break:break-word]', // necessary to make hyphens work in grid containers in Safari
+                ]),
+              },
+            ],
+          ]}
+        >
+          {children}
+        </Provider>
+      </div>
     </div>
   );
 };
