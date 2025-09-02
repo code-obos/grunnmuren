@@ -15,7 +15,6 @@ const TableOfContentsNav = ({
   const sections: Array<{
     href: string;
     text: string;
-    subSections: Array<{ href: string; text: string }>;
   }> = [];
 
   for (const block of content ?? []) {
@@ -24,7 +23,6 @@ const TableOfContentsNav = ({
       const section = {
         href: `#${block._key}`,
         text: block.children?.[0].text ?? '',
-        subSections: [],
       };
 
       sections.push(section);
@@ -35,10 +33,6 @@ const TableOfContentsNav = ({
     sections.push({
       href: '#props',
       text: 'Props',
-      subSections: propsTables.map((componentName) => ({
-        href: `#${componentName.toLowerCase()}-props`,
-        text: componentName,
-      })),
     });
   }
 
@@ -47,11 +41,11 @@ const TableOfContentsNav = ({
       aria-label="Innholdsfortegnelse"
       className={cx(
         className,
-        'prose mb-12 flex w-fit flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-x-8 md:mb-6',
+        'prose mb-12 grid gap-x-8 gap-y-3 sm:grid-cols-2 md:mb-6',
       )}
     >
       {sections?.map(({ href, text }) => (
-        <div key={href} className="w-fit sm:basis-[calc(50%-1rem)]">
+        <div key={href} className="w-fit">
           <a
             href={href}
             className="flex w-fit items-center gap-2 font-medium no-underline focus:outline-2 focus:outline-blue-600 focus:outline-offset-2"
