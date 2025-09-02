@@ -14,7 +14,8 @@ type CardProps = VariantProps<typeof cardVariants> & {
 const cardVariants = cva({
   base: [
     'group/card',
-    'rounded-2xl border p-3',
+    'rounded-[inherit]', // Inherits rounded corners from the parent container
+    'border p-3',
     'flex flex-col gap-y-4', // y-gap ensures a vertical spacing for both vertical layout and responsive horizontal layout
     'relative', // Needed for positiong of the clickable pseudo-element (and can also be used for other absolute positioned elements the consumer might add)
 
@@ -140,19 +141,20 @@ const cardVariants = cva({
 
 const Card = ({
   children,
-  className: _className,
+  className,
   variant,
   layout,
   ...restProps
 }: CardProps) => {
-  const className = cardVariants({
-    className: _className,
+  const cardClassName = cardVariants({
     variant,
     layout,
   });
   return (
-    <div className="@container">
-      <div className={className} {...restProps}>
+    // The border-radius is set on the outer container to make it act as an invisible wrapper, only used for container queries
+    // Since passing the className prop to this container is necessary to make custom styles behave as expected, we need to apply the border-radius here incase the consumer passes a custom background color
+    <div {...restProps} className={cx(className, '@container rounded-2xl')}>
+      <div className={cardClassName}>
         <Provider
           values={[
             [
