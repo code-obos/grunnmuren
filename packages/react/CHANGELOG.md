@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 3.0.7
+
+### Patch Changes
+
+- 867a895: Fixes the `className` passing for the `<Card>` component. This was previously passed to the inner container, the "card" itself. It is now passed to the newly added outer container, used for container queries. This avoids some layout bugs where the cards have an implicit width.
+
 ## 3.0.6
 
 ### Patch Changes
