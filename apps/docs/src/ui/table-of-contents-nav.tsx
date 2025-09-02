@@ -1,4 +1,3 @@
-import { Card, Heading } from '@obosbbl/grunnmuren-react';
 import { cx } from 'cva';
 import type { COMPONENT_QUERYResult } from 'sanity.types';
 
@@ -16,7 +15,6 @@ const TableOfContentsNav = ({
   const sections: Array<{
     href: string;
     text: string;
-    subSections: Array<{ href: string; text: string }>;
   }> = [];
 
   for (const block of content ?? []) {
@@ -25,20 +23,9 @@ const TableOfContentsNav = ({
       const section = {
         href: `#${block._key}`,
         text: block.children?.[0].text ?? '',
-        subSections: [],
       };
 
       sections.push(section);
-    }
-
-    // every h3 we discover is added to the latest section, as that is the section we are currently in
-    if (block._type === 'block' && block.style === 'h3') {
-      const latestSection = sections.at(-1);
-
-      latestSection?.subSections.push({
-        href: `#${block._key}`,
-        text: block.children?.[0].text ?? '',
-      });
     }
   }
 
@@ -46,36 +33,31 @@ const TableOfContentsNav = ({
     sections.push({
       href: '#props',
       text: 'Props',
-      subSections: propsTables.map((componentName) => ({
-        href: `#${componentName.toLowerCase()}-props`,
-        text: componentName,
-      })),
     });
   }
 
   return (
-    // @ts-expect-error: the role prop is passed to the Card component, even though it is not valid TS
-    // biome-ignore lint/a11y/useSemanticElements: this is a navigation component styled as a card
-    <Card role="navigation" className={cx(className, 'h-fit min-h-96 bg-mint')}>
-      <Heading level={2}>Innhold</Heading>
-      <ul className="grid gap-y-4">
-        {sections?.map(({ href, text, subSections = [] }) => (
-          <li key={href}>
-            <a href={href}>{text}</a>
-
-            {subSections.length > 0 && (
-              <ul className="description mt-4 ml-4 grid gap-y-4">
-                {subSections.map(({ href, text }) => (
-                  <li key={href}>
-                    <a href={href}>{text}</a>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </li>
-        ))}
-      </ul>
-    </Card>
+    <nav
+      aria-label="Innholdsfortegnelse"
+      className={cx(
+        className,
+        'prose mb-12 grid gap-x-8 gap-y-3 sm:grid-cols-2 md:mb-6',
+      )}
+    >
+      {sections?.map(({ href, text }) => (
+        <div key={href} className="w-fit">
+          <a
+            href={href}
+            className="flex w-fit items-center gap-2 font-medium no-underline focus:outline-2 focus:outline-blue-600 focus:outline-offset-2"
+          >
+            <span aria-hidden="true" className="shrink-0">
+              ↳
+            </span>
+            {text}
+          </a>
+        </div>
+      ))}
+    </nav>
   );
 };
 
