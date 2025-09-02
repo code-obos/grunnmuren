@@ -50,7 +50,9 @@ const TableOfContentsNav = ({
             href={href}
             className="flex w-fit items-center gap-2 font-medium no-underline focus:outline-2 focus:outline-blue-600 focus:outline-offset-2"
           >
-            <span aria-hidden="true">↳</span>
+            <span aria-hidden="true" className="shrink-0">
+              ↳
+            </span>
             {text}
           </a>
         </div>
