@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 3.0.8
+
+### Patch Changes
+
+- 1449289: Render `<LinkList>` with 9 items over three columns on large screens
+
 ## 3.0.7
 
 ### Patch Changes
