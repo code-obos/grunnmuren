@@ -25,7 +25,7 @@ Configure Tailwind to use the preset
 
 /** Add any auto excluded sources (typically residing in node_modules) */
 @source "../../node_modules/@obosbbl/grunnmuren-react/dist";
-@source "../../node_modules/@code-obos/obos-layout/dist"
+@source "../../node_modules/@code-obos/obos-layout/dist";
 ```
 
 ## Fonts
