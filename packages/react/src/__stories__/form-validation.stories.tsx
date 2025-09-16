@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import { type FormEvent, useState } from 'react';
 import { Form as RACForm } from 'react-aria-components';
 import { Button } from '../button/button';

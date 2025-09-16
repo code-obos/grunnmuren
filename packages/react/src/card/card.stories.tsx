@@ -6,7 +6,7 @@ import {
   InfoCircle,
   PiggyBank,
 } from '@obosbbl/grunnmuren-icons-react';
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import { cx } from 'cva';
 import { Avatar } from '../avatar';
 import { Badge } from '../badge';

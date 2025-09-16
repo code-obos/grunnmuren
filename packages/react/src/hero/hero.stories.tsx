@@ -1,5 +1,5 @@
 import { ArrowRight, InfoCircle } from '@obosbbl/grunnmuren-icons-react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Group } from 'react-aria-components';
 import { Badge } from '../badge';
 import { Button } from '../button';

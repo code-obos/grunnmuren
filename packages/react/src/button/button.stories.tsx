@@ -1,5 +1,5 @@
 import { Edit, Search } from '@obosbbl/grunnmuren-icons-react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { cx } from 'cva';
 
 import { Button } from './button';

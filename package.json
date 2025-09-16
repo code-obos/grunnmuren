@@ -24,15 +24,10 @@
     "@changesets/cli": "2.29.6",
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
     "@react-aria/optimize-locales-plugin": "1.1.5",
-    "@storybook/addon-actions": "9.0.8",
-    "@storybook/addon-controls": "9.0.8",
     "@storybook/addon-docs": "9.1.6",
-    "@storybook/addon-interactions": "8.6.14",
     "@storybook/builder-vite": "9.1.6",
-    "@storybook/react": "9.1.6",
     "@storybook/react-vite": "9.1.6",
-    "@storybook/test": "8.6.14",
-    "@storybook/test-runner": "0.22.0",
+    "@storybook/test-runner": "0.23.0",
     "@tailwindcss/vite": "4.1.10",
     "@types/bun": "1.2.21",
     "@types/react": "19.1.12",
@@ -50,5 +45,8 @@
   "packageManager": "pnpm@10.12.1",
   "engines": {
     "node": ">=22.11 <23"
+  },
+  "devDependencies": {
+    "vite": "6.3.6"
   }
 }
