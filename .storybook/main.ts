@@ -32,7 +32,7 @@ const config: StorybookConfig = {
         (await import('@tailwindcss/vite')).default(),
       ],
     });
-  }
+  },
 };
 
 export default config;
