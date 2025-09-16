@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import {
   UNSAFE_Tab as Tab,
   UNSAFE_TabList as TabList,

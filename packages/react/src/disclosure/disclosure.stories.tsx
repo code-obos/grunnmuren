@@ -1,5 +1,5 @@
 import { Menu } from '@obosbbl/grunnmuren-icons-react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useId, useState } from 'react';
 import { Checkbox, CheckboxGroup } from '../checkbox';
 import {

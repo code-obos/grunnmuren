@@ -4,20 +4,18 @@ import { mergeConfig } from 'vite';
 
 const config: StorybookConfig = {
   stories: ['../packages/react/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
-  addons: [
-    '@storybook/addon-docs',
-    '@storybook/addon-controls',
-    '@storybook/addon-actions',
-    '@storybook/addon-interactions',
-  ],
+  addons: ['@storybook/addon-docs'],
+
   framework: {
     name: '@storybook/react-vite',
     options: {},
   },
+
   core: {
     builder: '@storybook/builder-vite',
     disableTelemetry: true,
   },
+
   async viteFinal(config) {
     // Merge custom configuration into the default config
     return mergeConfig(config, {
@@ -34,9 +32,6 @@ const config: StorybookConfig = {
         (await import('@tailwindcss/vite')).default(),
       ],
     });
-  },
-  docs: {
-    autodocs: true,
   },
 };
 

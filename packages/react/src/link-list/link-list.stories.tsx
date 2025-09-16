@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import {
   UNSAFE_LinkList as LinkList,
   UNSAFE_LinkListItem as LinkListItem,
