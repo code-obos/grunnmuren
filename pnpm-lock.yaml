@@ -69,8 +69,8 @@ importers:
         specifier: 14.1.1
         version: 14.1.1
       playwright:
-        specifier: 1.52.0
-        version: 1.52.0
+        specifier: 1.55.0
+        version: 1.55.0
       react:
         specifier: 19.0.0
         version: 19.0.0
@@ -154,7 +154,7 @@ importers:
         version: 3.92.0(@emotion/is-prop-valid@1.2.2)(@types/node@24.3.0)(@types/react@19.1.12)(immer@10.1.1)(jiti@2.4.2)(lightningcss@1.30.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.37.0)(tsx@4.19.2)(typescript@5.9.2)(yaml@2.7.0)
       use-debounce:
         specifier: 10.0.4
-        version: 10.0.6(react@19.0.0)
+        version: 10.0.4(react@19.0.0)
     devDependencies:
       '@obosbbl/grunnmuren-tailwind':
         specifier: workspace:*
@@ -7922,18 +7922,18 @@ packages:
   pkg-types@2.1.0:
     resolution: {integrity: sha512-wmJwA+8ihJixSoHKxZJRBQG1oY8Yr9pGLzRmSsNms0iNWyHHAlZCa7mmKiFR10YPZuz/2k169JiS/inOjBCZ2A==}
 
-  playwright-core@1.52.0:
-    resolution: {integrity: sha512-l2osTgLXSMeuLZOML9qYODUQoPPnUsKsb5/P6LJ2e6uPKXUdPK5WYhN4z03G+YNbWmGDY4YENauNu4ZKczreHg==}
-    engines: {node: '>=18'}
-    hasBin: true
-
   playwright-core@1.53.0:
     resolution: {integrity: sha512-mGLg8m0pm4+mmtB7M89Xw/GSqoNC+twivl8ITteqvAndachozYe2ZA7srU6uleV1vEdAHYqjq+SV8SNxRRFYBw==}
     engines: {node: '>=18'}
     hasBin: true
 
-  playwright@1.52.0:
-    resolution: {integrity: sha512-JAwMNMBlxJ2oD1kce4KPtMkDeKGHQstdpFPcPH3maElAXon/QZeTvtsfXmTMRyO9TslfoYOXkSsvao2nE1ilTw==}
+  playwright-core@1.55.0:
+    resolution: {integrity: sha512-GvZs4vU3U5ro2nZpeiwyb0zuFaqb9sUiAJuyrWpcGouD8y9/HLgGbNRjIph7zU9D3hnPaisMl9zG9CgFi/biIg==}
+    engines: {node: '>=18'}
+    hasBin: true
+
+  playwright@1.55.0:
+    resolution: {integrity: sha512-sdCWStblvV1YU909Xqx0DhOjPZE4/5lJsIS84IfN9dAZfcl/CIZ5O8l3o0j7hPMjDvqoTF8ZUcc+i/GL5erstA==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -9383,6 +9383,12 @@ packages:
     peerDependenciesMeta:
       '@types/react':
         optional: true
+
+  use-debounce@10.0.4:
+    resolution: {integrity: sha512-6Cf7Yr7Wk7Kdv77nnJMf6de4HuDE4dTxKij+RqE9rufDsI6zsbjyAxcH5y2ueJCQAnfgKbzXbZHYlkFwmBlWkw==}
+    engines: {node: '>= 16.0.0'}
+    peerDependencies:
+      react: '*'
 
   use-debounce@10.0.6:
     resolution: {integrity: sha512-C5OtPyhAZgVoteO9heXMTdW7v/IbFI+8bSVKYCJrSmiWWCLsbUxiBSp4t9v0hNBTGY97bT72ydDIDyGSFWfwXg==}
@@ -14330,7 +14336,7 @@ snapshots:
       jest-serializer-html: 7.1.0
       jest-watch-typeahead: 2.2.2(jest@29.7.0(@types/node@24.3.0))
       nyc: 15.1.0
-      playwright: 1.52.0
+      playwright: 1.55.0
       storybook: 8.6.14(prettier@3.5.2)
     transitivePeerDependencies:
       - '@swc/helpers'
@@ -19210,13 +19216,13 @@ snapshots:
       exsolve: 1.0.5
       pathe: 2.0.3
 
-  playwright-core@1.52.0: {}
-
   playwright-core@1.53.0: {}
 
-  playwright@1.52.0:
+  playwright-core@1.55.0: {}
+
+  playwright@1.55.0:
     dependencies:
-      playwright-core: 1.52.0
+      playwright-core: 1.55.0
     optionalDependencies:
       fsevents: 2.3.2
 
@@ -21007,6 +21013,10 @@ snapshots:
       tslib: 2.8.1
     optionalDependencies:
       '@types/react': 19.1.12
+
+  use-debounce@10.0.4(react@19.0.0):
+    dependencies:
+      react: 19.0.0
 
   use-debounce@10.0.6(react@19.0.0):
     dependencies:
