@@ -132,12 +132,12 @@ export const ControlledValidation = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
-  let nameError: string;
+  let nameError = '';
   if (!name) {
     nameError = 'Fyll ut navn';
   }
 
-  let emailError: string;
+  let emailError = '';
   if (!email.endsWith('.no')) {
     emailError = emailErrorMessage;
   }
