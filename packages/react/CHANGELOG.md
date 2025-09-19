@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-react
 
+## 3.0.9
+
+### Patch Changes
+
+- 2dadcbd: Adjust `row-gap` in horizontal `<Card>` with `<Media>` to match layout grid.
+- 7581bdc: Increase the height of `<Media>` inside `full-bleed` `<Hero>` on small screens.
+
 ## 3.0.8
 
 ### Patch Changes
