@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.3.0
+
+### Minor Changes
+
+- 709a82a: Add new utility classes for layout x/y gap.
+
 ## 2.2.2
 
 ### Patch Changes
