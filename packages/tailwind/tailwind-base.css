@@ -108,6 +108,14 @@
   @apply bg-white grow;
 }
 
+@utility layout-gap-x {
+  @apply gap-x-2 sm:gap-x-4 md:gap-x-9 lg:gap-x-12 xl:gap-x-16;
+}
+
+@utility layout-gap-y {
+  @apply gap-y-4 sm:gap-y-6 md:gap-y-8 lg:gap-y-10 xl:gap-y-12;
+}
+
 @utility container {
   @apply w-full px-(--container-gutter-width) mx-auto max-w-(--container-width);
 }
