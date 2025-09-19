@@ -113,7 +113,7 @@
 }
 
 @utility layout-gap-y {
-  @apply py-4 sm:py-6 md:py-8 lg:py-10 xl:py-12;
+  @apply gap-y-4 sm:gap-y-6 md:gap-y-8 lg:gap-y-10 xl:gap-y-12;
 }
 
 @utility container {
