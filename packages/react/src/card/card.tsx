@@ -91,7 +91,9 @@ const cardVariants = cva({
         '[&_[data-slot="media"]]:rounded-t-2xl', // Both Top corners are rounded
       ],
       horizontal: [
-        'gap-x-4', // Since this does not affect the layout before the flex direction is set (at breakpoint @2xl for Card with Media), we can set it here
+        // Use more gap for horizontal cards that have media
+        // Since this does not affect the layout before the flex direction is set (at breakpoint @2xl for Card with Media), we can set it here
+        'has-data-[slot=media]:layout-gap-x not-has-data-[slot=media]:gap-x-4',
         // **** With Media ****
         '[&:has(>[data-slot="media"]:last-child)]:flex-col-reverse', // Always display the media at the top of the card
         'has-data-[slot=media]:@2xl:!flex-row', // We need !important to override the specificity (first-/last-child) of the flex-col-reverse and flex-col classes
