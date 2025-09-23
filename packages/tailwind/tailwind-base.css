@@ -125,6 +125,7 @@
   max-width: 45.5rem;
 }
 
+/*** Typography styles***/
 @layer components {
   .heading-xl {
     @apply font-display font-semibold text-[2.8125rem]/[3.625rem] lg:text-[3.9375rem]/[5.125rem];
