@@ -13,7 +13,7 @@ const meta: Meta<typeof FileUpload> = {
   },
   render: () => {
     return (
-      <div className="p-4">
+      <div className="container p-4">
         <FileUpload>
           <Label>Last opp fil</Label>
           <Description>Du kan laste opp én fil.</Description>
@@ -35,7 +35,7 @@ export const FileUploadStory: Story = {
 export const AllowsMultiple: Story = {
   render: () => {
     return (
-      <div className="p-4">
+      <div className="container p-4">
         <FileUpload allowsMultiple>
           <Label>Last opp filer</Label>
           <Description>
@@ -51,7 +51,7 @@ export const AllowsMultiple: Story = {
 export const LimitFileTypes: Story = {
   render: () => {
     return (
-      <div className="p-4">
+      <div className="w-72 max-w-full p-4">
         <FileUpload acceptedFileTypes={['.pdf']}>
           <Label>Last opp PDF</Label>
           <Description>Du kan kun laste opp én PDF.</Description>
@@ -65,7 +65,7 @@ export const LimitFileTypes: Story = {
 export const AcceptDirectory: Story = {
   render: () => {
     return (
-      <div className="p-4">
+      <div className="w-72 max-w-full p-4">
         <FileUpload acceptDirectory>
           <Label>Last opp mappe</Label>
           <Description>Du kan laste opp en mappe.</Description>
@@ -80,7 +80,7 @@ export const Controlled: Story = {
   render: () => {
     const [files, setFiles] = useState<File[]>([]);
     return (
-      <div className="p-4">
+      <div className="w-72 max-w-full p-4">
         <FileUpload files={files} onChange={setFiles} allowsMultiple>
           <Label>Last opp filer</Label>
           <Description>Du kan laste opp flere filer.</Description>
@@ -97,7 +97,7 @@ export const Required: Story = {
     return (
       <form
         encType="multipart/form-data"
-        className="flex flex-col items-start gap-4 p-4"
+        className="flex w-72 max-w-full flex-col items-start gap-4 p-4"
         onSubmit={(e) => {
           e.preventDefault();
           const formData = new FormData(e.target as HTMLFormElement);
@@ -126,7 +126,7 @@ export const Required: Story = {
 export const Validation: Story = {
   render: () => {
     return (
-      <div className="p-4">
+      <div className="w-72 max-w-full p-4">
         <FileUpload
           validate={(file) => file.size < 1000000 || 'Filen er for stor'}
         >
@@ -141,7 +141,7 @@ export const Validation: Story = {
 
 export const InForm = () => (
   <form
-    className="flex flex-col items-start gap-4 p-4"
+    className="flex w-72 max-w-full flex-col items-start gap-4 p-4"
     encType="multipart/form-data"
     onSubmit={(e) => {
       e.preventDefault();

@@ -217,7 +217,7 @@ const FileUpload = ({
     <Provider values={[[FieldErrorContext, displayValidation]]}>
       <div
         data-slot="file-upload"
-        className="group grid w-72 max-w-full gap-2"
+        className="group grid gap-2"
         data-required={isRequired}
       >
         <Provider
@@ -273,7 +273,7 @@ const FileUpload = ({
           </FileTrigger>
         </Provider>
         {controlledOrUncontrolledFiles.length > 0 && (
-          <ul className="mt-4 grid gap-y-2">
+          <ul className="mt-4 grid max-w-fit gap-y-2">
             {controlledOrUncontrolledFiles.map((file, fileIndex) => {
               let fileName = file.name;
               if (
@@ -296,9 +296,10 @@ const FileUpload = ({
                         : 'border-gray bg-gray-lightest',
                     )}
                   >
-                    {fileName}{' '}
+                    {fileName}
                     <button
                       className={cx(
+                        'self-start',
                         '-m-2 grid h-11 w-11 shrink-0 cursor-pointer place-items-center rounded-xl',
                         // Focus styles
                         'focus-visible:-outline-offset-8 focus-visible:outline-focus',
