@@ -125,6 +125,39 @@
   max-width: 45.5rem;
 }
 
+/* Focus styles */
+@utility outline-focus {
+  @apply outline-2 outline-black;
+}
+
+@utility outline-focus-offset {
+  @apply outline-focus outline-offset-2;
+}
+
+@utility outline-focus-inset {
+  @apply outline-focus -outline-offset-4;
+}
+
+@utility ring-focus {
+  @apply ring-2 ring-black;
+}
+
+@utility ring-focus-offset {
+  @apply ring-focus ring-offset-2;
+}
+
+/** Hides the scrollbar visually */
+@utility scrollbar-hidden {
+  /* For IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  /* For Webkit-based browsers (Chrome, Safari and Opera) */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /*** Typography styles***/
 @layer components {
   .heading-xl {
@@ -161,38 +194,5 @@
 
   .description {
     @apply text-[0.875rem]/[1.375rem] lg:text-[0.875rem]/[1.4375rem];
-  }
-}
-
-/* Focus styles */
-@utility outline-focus {
-  @apply outline-2 outline-black;
-}
-
-@utility outline-focus-offset {
-  @apply outline-focus outline-offset-2;
-}
-
-@utility outline-focus-inset {
-  @apply outline-focus -outline-offset-4;
-}
-
-@utility ring-focus {
-  @apply ring-2 ring-black;
-}
-
-@utility ring-focus-offset {
-  @apply ring-focus ring-offset-2;
-}
-
-/** Hides the scrollbar visually */
-@utility scrollbar-hidden {
-  /* For IE, Edge and Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-
-  /* For Webkit-based browsers (Chrome, Safari and Opera) */
-  &::-webkit-scrollbar {
-    display: none;
   }
 }
