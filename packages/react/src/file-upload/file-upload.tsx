@@ -290,13 +290,13 @@ const FileUpload = ({
                 <li key={fileName}>
                   <div
                     className={cx(
-                      'flex justify-between gap-2 rounded-lg border-2 px-4 py-2',
+                      'flex justify-between gap-2 rounded-lg border-2 px-4 py-2 align-baseline',
                       hasError
                         ? 'border-red bg-red-light'
                         : 'border-gray bg-gray-lightest',
                     )}
                   >
-                    {fileName}{' '}
+                    <span className="self-center">{fileName}</span>
                     <button
                       className={cx(
                         '-m-2 grid h-11 w-11 shrink-0 cursor-pointer place-items-center rounded-xl',
