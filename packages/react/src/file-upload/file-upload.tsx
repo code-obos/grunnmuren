@@ -217,7 +217,7 @@ const FileUpload = ({
     <Provider values={[[FieldErrorContext, displayValidation]]}>
       <div
         data-slot="file-upload"
-        className="group grid w-72 max-w-full gap-2"
+        className="group grid gap-2"
         data-required={isRequired}
       >
         <Provider
@@ -273,7 +273,7 @@ const FileUpload = ({
           </FileTrigger>
         </Provider>
         {controlledOrUncontrolledFiles.length > 0 && (
-          <ul className="mt-4 grid gap-y-2">
+          <ul className="mt-4 grid max-w-fit gap-y-2">
             {controlledOrUncontrolledFiles.map((file, fileIndex) => {
               let fileName = file.name;
               if (
@@ -290,7 +290,7 @@ const FileUpload = ({
                 <li key={fileName}>
                   <div
                     className={cx(
-                      'flex items-center justify-between gap-2 rounded-lg border-2 px-4 py-2',
+                      'flex justify-between gap-2 rounded-lg border-2 px-4 py-2',
                       hasError
                         ? 'border-red bg-red-light'
                         : 'border-gray bg-gray-lightest',
