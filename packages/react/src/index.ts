@@ -29,4 +29,5 @@ export * from './tag-group';
 export * from './hero';
 export * from './carousel';
 export * from './tabs';
+export * from './link';
 export * from './link-list';
