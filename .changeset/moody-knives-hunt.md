@@ -2,4 +2,4 @@
 "@obosbbl/grunnmuren-react": patch
 ---
 
-Add Link component
+New `<Link>` component in beta. This is a very small style-wrapper for the `<Link>` component from `react-aria-components`.
