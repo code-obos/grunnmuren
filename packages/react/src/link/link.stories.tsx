@@ -1,6 +1,6 @@
+import { File } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta } from '@storybook/react-vite';
 import { Link } from './link';
-import { File } from '@obosbbl/grunnmuren-icons-react';
 
 const meta: Meta<typeof Link> = {
   title: 'Link',
