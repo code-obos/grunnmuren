@@ -1,4 +1,4 @@
-import { File } from '@obosbbl/grunnmuren-icons-react';
+import { Download } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta } from '@storybook/react-vite';
 import { Link } from './link';
 
@@ -24,7 +24,7 @@ export const WithIcon = () => (
     href="/document.pdf"
     className="inline-flex items-center gap-1"
   >
-    Last ned dokument <File />
+    Last ned dokument <Download />
   </Link>
 );
 
