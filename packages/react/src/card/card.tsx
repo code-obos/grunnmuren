@@ -1,4 +1,5 @@
 import { type VariantProps, cva, cx } from 'cva';
+import type { HTMLAttributes } from 'react';
 import {
   Link,
   Provider,
@@ -6,10 +7,10 @@ import {
 } from 'react-aria-components';
 import { HeadingContext } from '../content';
 
-type CardProps = VariantProps<typeof cardVariants> & {
-  children?: React.ReactNode;
-  className?: string;
-};
+type CardProps = VariantProps<typeof cardVariants> &
+  HTMLAttributes<HTMLDivElement> & {
+    children?: React.ReactNode;
+  };
 
 const cardVariants = cva({
   base: [
