@@ -7,16 +7,15 @@ import { cx } from 'cva';
 import { Children, type JSX, type ReactNode } from 'react';
 import { Link, type LinkProps } from 'react-aria-components';
 
-type LinkListProps = React.HTMLProps<HTMLUListElement> & {
+type LinkListProps = React.HTMLProps<HTMLDivElement> & {
   children: JSX.Element | JSX.Element[];
 };
 
 const LinkList = ({ className, children, ...restProps }: LinkListProps) => {
   const numberofLinks = Children.count(children);
   return (
-    <div className={cx(className, '@container')}>
+    <div className={cx(className, '@container')} {...restProps}>
       <ul
-        {...restProps}
         className={cx(
           'min-w-fit',
           // Hide dividers at the top of the list (overflow-y) and prevents arrow icon from overflowing container when animated to the right (overflow-x)
