@@ -1,5 +1,15 @@
 # @obosbbl/grunnmuren-react
 
+## 3.0.10
+
+### Patch Changes
+
+- c212899: Changes alignment of the delete button for files in `<FileUpload>` from center to top.
+- e867dac: New `<Link>` component in beta. This is a very small style-wrapper for the `<Link>` component from `react-aria-components`.
+- e086013: Passes rest props to the root element of the component, not the `<ul>` tag. If you are passing other HTML props than `className` to the `<LinkList>` this will be a breaking change.
+- c212899: Removes implicit width from files in `<FileUpload>`. These now span the maximum width of the widest filename, while also respecting max-width of any container.
+- b971ad6: The `<Card>` component now supports all HTML (`<div>`) props.
+
 ## 3.0.9
 
 ### Patch Changes
