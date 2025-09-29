@@ -27,41 +27,40 @@ const tableVariants = cva({
   base: ['relative'],
 });
 
-interface BaseTableComponentProps {
-  className?: string;
-}
-
 type TableProps = Omit<RACTableProps, 'className'> &
-  RefAttributes<HTMLTableElement> &
-  BaseTableComponentProps;
+  RefAttributes<HTMLTableElement> & {
+    className?: string;
+  };
 
 type TableHeaderProps = Omit<RACTableHeaderProps<object>, 'className'> &
-  RefAttributes<HTMLTableSectionElement> &
-  BaseTableComponentProps;
+  RefAttributes<HTMLTableSectionElement> & {
+    className?: string;
+  };
 
 type TableColumnProps = Omit<RACColumnProps, 'className'> &
-  RefAttributes<HTMLTableCellElement> &
-  BaseTableComponentProps & {
+  RefAttributes<HTMLTableCellElement> & {
+    className?: string;
     children: React.ReactNode;
   };
 
 type TableBodyProps = Omit<RACTableBodyProps<object>, 'className'> &
-  RefAttributes<HTMLTableSectionElement> &
-  BaseTableComponentProps;
+  RefAttributes<HTMLTableSectionElement> & {
+    className?: string;
+  };
 
 type TableRowProps = Omit<RACRowProps<object>, 'className'> &
-  RefAttributes<HTMLTableRowElement> &
-  BaseTableComponentProps;
+  RefAttributes<HTMLTableRowElement> & {
+    className?: string;
+  };
 
 type TableCellProps = Omit<RACCellProps, 'className'> &
-  RefAttributes<HTMLTableCellElement> &
-  BaseTableComponentProps & {
+  RefAttributes<HTMLTableCellElement> & {
+    className?: string;
     children: React.ReactNode;
   };
 
 /**
  * A container component for displaying tabular data with horizontal scrolling support.
- * Follows WCAG 2.1 AA accessibility guidelines.
  */
 function Table(props: TableProps) {
   const { className, children, ...restProps } = props;
@@ -192,8 +191,12 @@ function NavigationButton({
   canScroll,
 }: NavigationButtonProps) {
   const Icon = direction === 'left' ? ChevronLeft : ChevronRight;
-  const position = direction === 'left' ? 'left-2' : 'right-2';
+  const position = direction === 'left' ? 'left-0' : 'right-0';
   const ariaLabel = `Scroll table ${direction}`;
+  const bg =
+    direction === 'left'
+      ? 'bg-[linear-gradient(90deg,white,white_calc(100%-10px),transparent)]'
+      : 'bg-[linear-gradient(90deg,transparent,white_calc(10px),white)]';
 
   return (
     <button
@@ -201,25 +204,19 @@ function NavigationButton({
       onClick={onClick}
       onKeyDown={onKeyDown}
       className={cx(
-        '-translate-y-1/2 absolute top-6 z-10',
+        '-translate-y-1/2 absolute top-5 z-10',
         position,
-        'flex h-8 w-8 items-center justify-center', // Increased size for better touch target (WCAG 2.5.5)
-        'cursor-pointer text-black transition-colors duration-150 ease-out',
-        'bg-white/95 backdrop-blur-sm', // Higher opacity for better contrast
-        'hover:bg-white hover:text-gray-dark',
-        'active:text-gray-darker',
-        'focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2',
-        'motion-safe:transition-all motion-reduce:transition-none', // Respect reduced motion preference
+        'flex h-11 w-11 items-center justify-center',
+        'cursor-pointer text-black transition-all duration-150 ease-out',
+        bg,
+        'hover:bg-white',
+        'data-focus-visible:outline-focus-offset',
+        'motion-safe:transition-all motion-reduce:transition-none',
         canScroll ? 'visible opacity-100' : 'invisible opacity-0',
       )}
       aria-label={ariaLabel}
       aria-hidden={!canScroll}
       tabIndex={canScroll ? 0 : -1}
-      // Better contrast ratio for disabled state
-      style={{
-        color: canScroll ? 'inherit' : '#6B7280',
-        backgroundColor: canScroll ? undefined : 'rgba(255,255,255,0.7)',
-      }}
     >
       <Icon className="h-5 w-5" aria-hidden="true" />
     </button>
@@ -239,10 +236,6 @@ function TableHeader({ className, children, ...restProps }: TableHeaderProps) {
     </RACTableHeader>
   );
 }
-/**
- * An individual column header in the table.
- * Includes proper ARIA attributes for screen readers.
- */
 function TableColumn(props: TableColumnProps) {
   const { className, children, ...restProps } = props;
 
@@ -252,7 +245,7 @@ function TableColumn(props: TableColumnProps) {
       className={cx(
         className,
         'px-4 py-3 text-left font-medium text-black text-sm',
-        'focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-inset',
+        'data-focus-visible:outline-focus-offset',
         'min-w-fit whitespace-nowrap',
       )}
     >
@@ -266,16 +259,12 @@ function TableColumn(props: TableColumnProps) {
  */
 function TableBody({ className, children, ...restProps }: TableBodyProps) {
   return (
-    <RACTableBody {...restProps} className={cx(className)}>
+    <RACTableBody {...restProps} className={className}>
       {children}
     </RACTableBody>
   );
 }
 
-/**
- * An individual row in the table.
- * Enhanced with better focus management and hover states.
- */
 function TableRow(props: TableRowProps) {
   const { className, children, ...restProps } = props;
 
@@ -284,10 +273,9 @@ function TableRow(props: TableRowProps) {
       {...restProps}
       className={cx(
         className,
-        // Alternating row backgrounds with better contrast ratios
-        'odd:bg-white even:bg-blue-lightest/30',
-        'focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-inset',
-        'hover:bg-blue-lightest/50 motion-safe:transition-colors motion-reduce:transition-none',
+        'odd:bg-white even:bg-sky-lightest/50',
+        'data-focus-visible:outline-focus-offset',
+        'motion-safe:transition-colors motion-reduce:transition-none',
       )}
     >
       {children}
@@ -295,10 +283,6 @@ function TableRow(props: TableRowProps) {
   );
 }
 
-/**
- * An individual cell in the table.
- * Optimized for readability and accessibility.
- */
 function TableCell(props: TableCellProps) {
   const { className, children, ...restProps } = props;
 
@@ -307,9 +291,9 @@ function TableCell(props: TableCellProps) {
       {...restProps}
       className={cx(
         className,
-        'px-4 py-3 text-black text-sm leading-relaxed', // Better line height for readability
+        'px-4 py-3 text-black text-sm leading-relaxed',
         'min-w-fit whitespace-nowrap',
-        'focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-inset',
+        'data-focus-visible:outline-focus-offset',
       )}
     >
       {children}

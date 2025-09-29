@@ -129,27 +129,27 @@ export const Default: Story = {
 
 export const Simple: Story = {
   render: () => (
-    <Table aria-label="Simple table example">
+    <Table aria-label="Eiendomsforvaltere">
       <TableHeader>
-        <TableColumn>Name</TableColumn>
-        <TableColumn>Email</TableColumn>
-        <TableColumn>Role</TableColumn>
+        <TableColumn>Navn</TableColumn>
+        <TableColumn>E-post</TableColumn>
+        <TableColumn>Område</TableColumn>
       </TableHeader>
       <TableBody>
         <TableRow>
-          <TableCell>John Doe</TableCell>
-          <TableCell>john@example.com</TableCell>
-          <TableCell>Administrator</TableCell>
+          <TableCell>Kari Hansen</TableCell>
+          <TableCell>kari.hansen@obos.no</TableCell>
+          <TableCell>Grünerløkka</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell>Jane Smith</TableCell>
-          <TableCell>jane@example.com</TableCell>
-          <TableCell>User</TableCell>
+          <TableCell>Lars Olsen</TableCell>
+          <TableCell>lars.olsen@obos.no</TableCell>
+          <TableCell>Frogner</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell>Bob Johnson</TableCell>
-          <TableCell>bob@example.com</TableCell>
-          <TableCell>Moderator</TableCell>
+          <TableCell>Ingrid Svendsen</TableCell>
+          <TableCell>ingrid.svendsen@obos.no</TableCell>
+          <TableCell>Majorstuen</TableCell>
         </TableRow>
       </TableBody>
     </Table>
@@ -159,47 +159,47 @@ export const Simple: Story = {
 export const WithScrolling: Story = {
   render: () => (
     <div className="max-w-md">
-      <Table aria-label="Wide content table (scroll to see navigation)">
+      <Table aria-label="Tilgjengelige OBOS-boliger (scroll for å se navigasjon)">
         <TableHeader>
-          <TableColumn>Product Name</TableColumn>
-          <TableColumn>Description</TableColumn>
-          <TableColumn>Category</TableColumn>
-          <TableColumn>Price</TableColumn>
-          <TableColumn>Availability</TableColumn>
-          <TableColumn>Rating</TableColumn>
-          <TableColumn>Actions</TableColumn>
+          <TableColumn>Adresse</TableColumn>
+          <TableColumn>Bydel</TableColumn>
+          <TableColumn>Type</TableColumn>
+          <TableColumn>Pris</TableColumn>
+          <TableColumn>Kvadratmeter</TableColumn>
+          <TableColumn>Soverom</TableColumn>
+          <TableColumn>Felleskost</TableColumn>
+          <TableColumn>Status</TableColumn>
         </TableHeader>
         <TableBody>
           <TableRow>
-            <TableCell>Advanced Widget Pro</TableCell>
-            <TableCell>
-              A comprehensive solution for all your widget needs
-            </TableCell>
-            <TableCell>Electronics</TableCell>
-            <TableCell>$299.99</TableCell>
-            <TableCell>In Stock</TableCell>
-            <TableCell>4.8/5</TableCell>
-            <TableCell>View Details</TableCell>
+            <TableCell>Trondheimsveien 42A</TableCell>
+            <TableCell>Grünerløkka</TableCell>
+            <TableCell>3-roms</TableCell>
+            <TableCell>4 850 000 kr</TableCell>
+            <TableCell>75 kvm</TableCell>
+            <TableCell>2</TableCell>
+            <TableCell>3 500 kr/mnd</TableCell>
+            <TableCell>Ledig</TableCell>
           </TableRow>
           <TableRow>
-            <TableCell>Smart Device Ultra</TableCell>
-            <TableCell>
-              Next-generation smart device with AI capabilities
-            </TableCell>
-            <TableCell>Technology</TableCell>
-            <TableCell>$599.99</TableCell>
-            <TableCell>Limited</TableCell>
-            <TableCell>4.9/5</TableCell>
-            <TableCell>Pre-order</TableCell>
+            <TableCell>Frognerveien 15B</TableCell>
+            <TableCell>Frogner</TableCell>
+            <TableCell>4-roms</TableCell>
+            <TableCell>7 200 000 kr</TableCell>
+            <TableCell>95 kvm</TableCell>
+            <TableCell>3</TableCell>
+            <TableCell>4 200 kr/mnd</TableCell>
+            <TableCell>Reservert</TableCell>
           </TableRow>
           <TableRow>
-            <TableCell>Basic Tool Kit</TableCell>
-            <TableCell>Essential tools for everyday tasks</TableCell>
-            <TableCell>Tools</TableCell>
-            <TableCell>$49.99</TableCell>
-            <TableCell>In Stock</TableCell>
-            <TableCell>4.2/5</TableCell>
-            <TableCell>Add to Cart</TableCell>
+            <TableCell>Majorstuen gate 8C</TableCell>
+            <TableCell>Majorstuen</TableCell>
+            <TableCell>2-roms</TableCell>
+            <TableCell>3 900 000 kr</TableCell>
+            <TableCell>55 kvm</TableCell>
+            <TableCell>1</TableCell>
+            <TableCell>2 800 kr/mnd</TableCell>
+            <TableCell>Ledig</TableCell>
           </TableRow>
         </TableBody>
       </Table>
