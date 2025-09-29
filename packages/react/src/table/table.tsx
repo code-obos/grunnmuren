@@ -133,15 +133,15 @@ function Table(props: TableProps) {
   return (
     <section
       className={tableVariants({ className })}
-      aria-label="Data table with horizontal scrolling"
+      aria-label="Datatabell med horisontal scrolling"
     >
       <div className="relative">
         {/* Screen reader live region for scroll announcements */}
         <div aria-live="polite" aria-atomic="true" className="sr-only">
-          {scrollPosition === 'start' && 'Table at start'}
+          {scrollPosition === 'start' && 'Tabell ved start'}
           {scrollPosition === 'middle' &&
-            'Table scrolled, more content available in both directions'}
-          {scrollPosition === 'end' && 'Table at end'}
+            'Tabell scrollet, mer innhold tilgjengelig i begge retninger'}
+          {scrollPosition === 'end' && 'Tabell ved slutt'}
         </div>
 
         <NavigationButton
@@ -162,7 +162,7 @@ function Table(props: TableProps) {
           ref={scrollContainerRef}
           className="scrollbar-hidden overflow-x-auto"
           style={{ WebkitOverflowScrolling: 'touch' }}
-          aria-label="Scrollable table content"
+          aria-label="Scrollbart tabellinnhold"
         >
           <RACTable {...restProps} className="w-full min-w-fit">
             {children}
@@ -192,7 +192,7 @@ function NavigationButton({
 }: NavigationButtonProps) {
   const Icon = direction === 'left' ? ChevronLeft : ChevronRight;
   const position = direction === 'left' ? 'left-0' : 'right-0';
-  const ariaLabel = `Scroll table ${direction}`;
+  const ariaLabel = `Scroll tabell ${direction === 'left' ? 'til venstre' : 'til høyre'}`;
   const bg =
     direction === 'left'
       ? 'bg-[linear-gradient(90deg,white,white_calc(100%-10px),transparent)]'
