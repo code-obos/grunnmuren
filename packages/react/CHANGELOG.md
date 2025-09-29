@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 3.0.11
+
+### Patch Changes
+
+- a600f77: Add `UNSAFE_` prefix to the `Link` component
+
 ## 3.0.10
 
 ### Patch Changes
