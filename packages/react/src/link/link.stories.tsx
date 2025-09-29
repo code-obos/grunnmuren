@@ -1,6 +1,6 @@
 import { Download, LinkExternal } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta } from '@storybook/react-vite';
-import { Link } from './link';
+import { UNSAFE_Link as Link } from './link';
 
 const meta: Meta<typeof Link> = {
   title: 'Link',
