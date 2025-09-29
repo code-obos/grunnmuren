@@ -24,4 +24,4 @@ const CustomLink = ({ children, className, ...restProps }: CustomLinkProps) => {
   );
 };
 
-export { CustomLink as Link, type CustomLinkProps as LinkProps };
+export { CustomLink as UNSAFE_Link, type CustomLinkProps as UNSAFE_LinkProps };
