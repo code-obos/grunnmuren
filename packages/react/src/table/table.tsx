@@ -101,17 +101,6 @@ function Table(props: TableProps) {
     });
   }, []);
 
-  const handleKeyDown = useCallback(
-    (event: React.KeyboardEvent, direction: 'left' | 'right') => {
-      // Support Enter and Space for activation (WCAG 2.1.1)
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        handleScroll(direction);
-      }
-    },
-    [handleScroll],
-  );
-
   const scrollHandler = useDebouncedCallback(checkScrollOverflow, 100);
 
   useEffect(() => {
@@ -144,17 +133,15 @@ function Table(props: TableProps) {
           {scrollPosition === 'end' && 'Tabell ved slutt'}
         </div>
 
-        <NavigationButton
+        <ScrollButton
           direction="left"
           onClick={() => handleScroll('left')}
-          onKeyDown={(e) => handleKeyDown(e, 'left')}
           canScroll={canScrollLeft}
         />
 
-        <NavigationButton
+        <ScrollButton
           direction="right"
           onClick={() => handleScroll('right')}
-          onKeyDown={(e) => handleKeyDown(e, 'right')}
           canScroll={canScrollRight}
         />
 
@@ -174,35 +161,27 @@ function Table(props: TableProps) {
 }
 
 /**
- * Navigation button component for table scrolling
- * Supports keyboard interaction and proper WCAG compliance
+ * Scroll button component for table horizontal scrolling
+ * Simple div-based button for mouse interaction only
  */
-interface NavigationButtonProps {
+interface ScrollButtonProps {
   direction: 'left' | 'right';
   onClick: () => void;
-  onKeyDown: (event: React.KeyboardEvent) => void;
   canScroll: boolean;
 }
 
-function NavigationButton({
-  direction,
-  onClick,
-  onKeyDown,
-  canScroll,
-}: NavigationButtonProps) {
+function ScrollButton({ direction, onClick, canScroll }: ScrollButtonProps) {
   const Icon = direction === 'left' ? ChevronLeft : ChevronRight;
   const position = direction === 'left' ? 'left-0' : 'right-0';
-  const ariaLabel = `Scroll tabell ${direction === 'left' ? 'til venstre' : 'til høyre'}`;
   const bg =
     direction === 'left'
       ? 'bg-[linear-gradient(90deg,white,white_calc(100%-10px),transparent)]'
       : 'bg-[linear-gradient(90deg,transparent,white_calc(10px),white)]';
 
   return (
-    <button
-      type="button"
+    // biome-ignore lint/a11y/useKeyWithClickEvents: This button is only for mouse interaction to help users scroll. Keyboard and screen reader users can navigate the table content directly without needing these scroll helpers.
+    <div
       onClick={onClick}
-      onKeyDown={onKeyDown}
       className={cx(
         '-translate-y-1/2 absolute top-5 z-10',
         position,
@@ -210,16 +189,12 @@ function NavigationButton({
         'cursor-pointer text-black transition-all duration-150 ease-out',
         bg,
         'hover:bg-white',
-        'data-focus-visible:outline-focus-offset',
         'motion-safe:transition-all motion-reduce:transition-none',
         canScroll ? 'visible opacity-100' : 'invisible opacity-0',
       )}
-      aria-label={ariaLabel}
-      aria-hidden={!canScroll}
-      tabIndex={canScroll ? 0 : -1}
     >
-      <Icon className="h-5 w-5" aria-hidden="true" />
-    </button>
+      <Icon className="h-5 w-5" />
+    </div>
   );
 }
 
