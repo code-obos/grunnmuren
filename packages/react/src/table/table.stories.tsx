@@ -156,6 +156,51 @@ export const Simple: Story = {
   ),
 };
 
+export const ZebraVariant: Story = {
+  render: () => (
+    <Table aria-label="Eiendomsforvaltere med zebra-stripete rader">
+      <TableHeader>
+        <TableColumn>Navn</TableColumn>
+        <TableColumn>E-post</TableColumn>
+        <TableColumn>Område</TableColumn>
+        <TableColumn>Telefon</TableColumn>
+      </TableHeader>
+      <TableBody>
+        <TableRow variant="zebra">
+          <TableCell>Kari Hansen</TableCell>
+          <TableCell>kari.hansen@obos.no</TableCell>
+          <TableCell>Grünerløkka</TableCell>
+          <TableCell>+47 123 45 678</TableCell>
+        </TableRow>
+        <TableRow variant="zebra">
+          <TableCell>Lars Olsen</TableCell>
+          <TableCell>lars.olsen@obos.no</TableCell>
+          <TableCell>Frogner</TableCell>
+          <TableCell>+47 234 56 789</TableCell>
+        </TableRow>
+        <TableRow variant="zebra">
+          <TableCell>Ingrid Svendsen</TableCell>
+          <TableCell>ingrid.svendsen@obos.no</TableCell>
+          <TableCell>Majorstuen</TableCell>
+          <TableCell>+47 345 67 890</TableCell>
+        </TableRow>
+        <TableRow variant="zebra">
+          <TableCell>Ola Nordmann</TableCell>
+          <TableCell>ola.nordmann@obos.no</TableCell>
+          <TableCell>Sagene</TableCell>
+          <TableCell>+47 456 78 901</TableCell>
+        </TableRow>
+        <TableRow variant="zebra">
+          <TableCell>Anne Berger</TableCell>
+          <TableCell>anne.berger@obos.no</TableCell>
+          <TableCell>Bislett</TableCell>
+          <TableCell>+47 567 89 012</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  ),
+};
+
 export const WithScrolling: Story = {
   render: () => (
     <div className="max-w-md">
@@ -204,95 +249,5 @@ export const WithScrolling: Story = {
         </TableBody>
       </Table>
     </div>
-  ),
-};
-
-export const ZebraVariant: Story = {
-  render: () => (
-    <Table aria-label="Eiendomsforvaltere med zebra-stripete rader">
-      <TableHeader>
-        <TableColumn>Navn</TableColumn>
-        <TableColumn>E-post</TableColumn>
-        <TableColumn>Område</TableColumn>
-        <TableColumn>Telefon</TableColumn>
-      </TableHeader>
-      <TableBody>
-        <TableRow variant="zebra">
-          <TableCell>Kari Hansen</TableCell>
-          <TableCell>kari.hansen@obos.no</TableCell>
-          <TableCell>Grünerløkka</TableCell>
-          <TableCell>+47 123 45 678</TableCell>
-        </TableRow>
-        <TableRow variant="zebra">
-          <TableCell>Lars Olsen</TableCell>
-          <TableCell>lars.olsen@obos.no</TableCell>
-          <TableCell>Frogner</TableCell>
-          <TableCell>+47 234 56 789</TableCell>
-        </TableRow>
-        <TableRow variant="zebra">
-          <TableCell>Ingrid Svendsen</TableCell>
-          <TableCell>ingrid.svendsen@obos.no</TableCell>
-          <TableCell>Majorstuen</TableCell>
-          <TableCell>+47 345 67 890</TableCell>
-        </TableRow>
-        <TableRow variant="zebra">
-          <TableCell>Ola Nordmann</TableCell>
-          <TableCell>ola.nordmann@obos.no</TableCell>
-          <TableCell>Sagene</TableCell>
-          <TableCell>+47 456 78 901</TableCell>
-        </TableRow>
-        <TableRow variant="zebra">
-          <TableCell>Anne Berger</TableCell>
-          <TableCell>anne.berger@obos.no</TableCell>
-          <TableCell>Bislett</TableCell>
-          <TableCell>+47 567 89 012</TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
-  ),
-};
-
-export const DefaultVariant: Story = {
-  render: () => (
-    <Table aria-label="Eiendomsforvaltere uten zebra-stripete rader">
-      <TableHeader>
-        <TableColumn>Navn</TableColumn>
-        <TableColumn>E-post</TableColumn>
-        <TableColumn>Område</TableColumn>
-        <TableColumn>Telefon</TableColumn>
-      </TableHeader>
-      <TableBody>
-        <TableRow variant="default">
-          <TableCell>Kari Hansen</TableCell>
-          <TableCell>kari.hansen@obos.no</TableCell>
-          <TableCell>Grünerløkka</TableCell>
-          <TableCell>+47 123 45 678</TableCell>
-        </TableRow>
-        <TableRow variant="default">
-          <TableCell>Lars Olsen</TableCell>
-          <TableCell>lars.olsen@obos.no</TableCell>
-          <TableCell>Frogner</TableCell>
-          <TableCell>+47 234 56 789</TableCell>
-        </TableRow>
-        <TableRow variant="default">
-          <TableCell>Ingrid Svendsen</TableCell>
-          <TableCell>ingrid.svendsen@obos.no</TableCell>
-          <TableCell>Majorstuen</TableCell>
-          <TableCell>+47 345 67 890</TableCell>
-        </TableRow>
-        <TableRow variant="default">
-          <TableCell>Ola Nordmann</TableCell>
-          <TableCell>ola.nordmann@obos.no</TableCell>
-          <TableCell>Sagene</TableCell>
-          <TableCell>+47 456 78 901</TableCell>
-        </TableRow>
-        <TableRow variant="default">
-          <TableCell>Anne Berger</TableCell>
-          <TableCell>anne.berger@obos.no</TableCell>
-          <TableCell>Bislett</TableCell>
-          <TableCell>+47 567 89 012</TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
   ),
 };
