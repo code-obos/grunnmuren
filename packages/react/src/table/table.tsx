@@ -1,12 +1,5 @@
-import { ChevronLeft, ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 import { cva, cx } from 'cva';
-import {
-  type RefAttributes,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { type RefAttributes, useCallback, useState } from 'react';
 import {
   Cell as RACCell,
   type CellProps as RACCellProps,
@@ -21,7 +14,7 @@ import {
   type TableHeaderProps as RACTableHeaderProps,
   type TableProps as RACTableProps,
 } from 'react-aria-components';
-import { useDebouncedCallback } from 'use-debounce';
+import { ScrollButton, useHorizontalScroll } from '../utils';
 
 const tableVariants = cva({
   base: ['relative'],
@@ -88,68 +81,40 @@ type TableCellProps = Omit<RACCellProps, 'className'> &
  */
 function Table(props: TableProps) {
   const { className, children, ...restProps } = props;
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
   const [scrollPosition, setScrollPosition] = useState('start');
 
-  const checkScrollOverflow = useCallback(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
+  const {
+    scrollContainerRef,
+    canScrollLeft,
+    canScrollRight,
+    hasScrollingOccurred,
+  } = useHorizontalScroll();
 
-    const { scrollLeft, scrollWidth, clientWidth } = container;
-    const newCanScrollLeft = scrollLeft > 0;
-    const newCanScrollRight = scrollLeft < scrollWidth - clientWidth - 1;
+  const handleScroll = useCallback(
+    (direction: 'left' | 'right') => {
+      const container = scrollContainerRef.current;
+      if (!container) return;
 
-    setCanScrollLeft(newCanScrollLeft);
-    setCanScrollRight(newCanScrollRight);
+      const scrollAmount = container.clientWidth * 0.8;
+      container.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth',
+      });
 
-    // Update scroll position for screen readers
-    if (scrollLeft === 0) {
-      setScrollPosition('start');
-    } else if (scrollLeft >= scrollWidth - clientWidth - 1) {
-      setScrollPosition('end');
-    } else {
-      setScrollPosition('middle');
-    }
-  }, []);
-
-  const handleScroll = useCallback((direction: 'left' | 'right') => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    const scrollAmount = container.clientWidth * 0.8;
-    container.scrollBy({
-      left: direction === 'left' ? -scrollAmount : scrollAmount,
-      behavior: 'smooth',
-    });
-  }, []);
-
-  // To control if the animation for the scroll buttons and the scrolling behavior
-  // This is used to prevent animations from running when the component mounts
-  // We use a ref here to prevent redundant render cycles and potentially unintended scrolling.
-  const hasScrollingOccurredRef = useRef(false);
-  const scrollHandler = useDebouncedCallback(() => {
-    checkScrollOverflow();
-    hasScrollingOccurredRef.current = true;
-  }, 100);
-
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    checkScrollOverflow();
-    container.addEventListener('scroll', scrollHandler);
-
-    const resizeObserver = new ResizeObserver(checkScrollOverflow);
-    resizeObserver.observe(container);
-
-    return () => {
-      container.removeEventListener('scroll', scrollHandler);
-      resizeObserver.disconnect();
-    };
-  }, [checkScrollOverflow, scrollHandler]);
-
+      // Update scroll position for screen readers after scroll
+      setTimeout(() => {
+        const { scrollLeft, scrollWidth, clientWidth } = container;
+        if (scrollLeft === 0) {
+          setScrollPosition('start');
+        } else if (scrollLeft >= scrollWidth - clientWidth - 1) {
+          setScrollPosition('end');
+        } else {
+          setScrollPosition('middle');
+        }
+      }, 150);
+    },
+    [scrollContainerRef],
+  );
   return (
     <section
       className={tableVariants({ className })}
@@ -167,15 +132,19 @@ function Table(props: TableProps) {
         <ScrollButton
           direction="left"
           onClick={() => handleScroll('left')}
-          canScroll={canScrollLeft}
-          hasScrollingOccurred={hasScrollingOccurredRef.current}
+          isVisible={canScrollLeft}
+          hasScrollingOccurred={hasScrollingOccurred}
+          className="-translate-y-1/2 -left-3 absolute top-5 z-10 h-11 w-11"
+          iconClassName="h-5 w-5"
         />
 
         <ScrollButton
           direction="right"
           onClick={() => handleScroll('right')}
-          canScroll={canScrollRight}
-          hasScrollingOccurred={hasScrollingOccurredRef.current}
+          isVisible={canScrollRight}
+          hasScrollingOccurred={hasScrollingOccurred}
+          className="-translate-y-1/2 -right-3 absolute top-5 z-10 h-11 w-11"
+          iconClassName="h-5 w-5"
         />
 
         <section
@@ -190,56 +159,6 @@ function Table(props: TableProps) {
         </section>
       </div>
     </section>
-  );
-}
-
-/**
- * Scroll button component for table horizontal scrolling
- * Simple div-based button for mouse interaction only
- */
-interface ScrollButtonProps {
-  direction: 'left' | 'right';
-  onClick: () => void;
-  canScroll: boolean;
-  hasScrollingOccurred: boolean;
-}
-
-function ScrollButton({
-  direction,
-  onClick,
-  canScroll,
-  hasScrollingOccurred,
-}: ScrollButtonProps) {
-  const Icon = direction === 'left' ? ChevronLeft : ChevronRight;
-  const position = direction === 'left' ? '-left-3' : '-right-3';
-  const bg =
-    direction === 'left'
-      ? 'bg-[linear-gradient(90deg,white,white_calc(100%-10px),transparent)]'
-      : 'bg-[linear-gradient(90deg,transparent,white_calc(10px),white)]';
-
-  return (
-    // biome-ignore lint/a11y/useKeyWithClickEvents: This button is only for mouse interaction to help users scroll. Keyboard and screen reader users can navigate the table content directly without needing these scroll helpers.
-    <div
-      onClick={onClick}
-      className={cx(
-        '-translate-y-1/2 absolute top-5 z-10',
-        position,
-        'flex h-11 w-11 items-center justify-center',
-        'cursor-pointer text-black',
-        bg,
-        'hover:bg-white',
-        // Slide in and out based on scroll position, match duration with the debounce delay of the scrollHandler function
-        // Wait until user started scrolling until animation is applied, to prevent the animation from running on mount
-        hasScrollingOccurred &&
-          'duration-100 ease-in motion-safe:transition-transform',
-        // Use the same transform pattern as tabs for consistent animation - transforms always apply when not scrollable
-        direction === 'left'
-          ? !canScroll && '-translate-x-full pointer-events-none'
-          : !canScroll && 'pointer-events-none translate-x-full',
-      )}
-    >
-      <Icon className="h-5 w-5" />
-    </div>
   );
 }
 

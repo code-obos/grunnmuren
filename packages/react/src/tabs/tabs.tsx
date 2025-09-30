@@ -1,13 +1,5 @@
-import { ChevronLeft, ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 import { cva, cx } from 'cva';
-import {
-  type RefAttributes,
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { type RefAttributes, useContext, useEffect } from 'react';
 import {
   Tab as RACTab,
   TabList as RACTabList,
@@ -19,7 +11,7 @@ import {
   type TabsProps as RACTabsProps,
   TabListStateContext,
 } from 'react-aria-components';
-import { useDebouncedCallback } from 'use-debounce';
+import { ScrollButton, useHorizontalScroll } from '../utils';
 
 const tabsVariants = cva({
   base: ['grid gap-4'],
@@ -107,21 +99,16 @@ type _TabListStateContextType = {
  * A container component for Tab components within Tabs.
  */
 function TabList({ className, children, ...restProps }: TabListProps) {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
-
-  const checkScrollOverflow = useCallback(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    const { scrollLeft, scrollWidth, clientWidth } = container;
-    setCanScrollLeft(scrollLeft > 0);
-    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
-  }, []);
-
   const state = useContext(TabListStateContext) as _TabListStateContextType;
 
+  const {
+    scrollContainerRef,
+    canScrollLeft,
+    canScrollRight,
+    hasScrollingOccurred,
+  } = useHorizontalScroll();
+
+  // Tab-specific navigation logic
   const prevKey =
     state?.selectedKey && state?.collection.getKeyBefore(state.selectedKey);
   const onPrev = prevKey
@@ -156,33 +143,6 @@ function TabList({ className, children, ...restProps }: TabListProps) {
         }
       };
 
-  // To controll if the animation for the scroll buttons and the scrolling behavior
-  // This is used to prevent animations from running when the component mounts
-  // We use a ref here to prevent redundant render cycles and potentially uninteded scrolling.
-  const hasScrollingOccurredRef = useRef(false);
-  // Debounce the scroll handler to avoid performance issues with frequent scroll events
-  const scrollHandler = useDebouncedCallback(() => {
-    checkScrollOverflow();
-    hasScrollingOccurredRef.current = true;
-  }, 100);
-
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    checkScrollOverflow();
-
-    container.addEventListener('scroll', scrollHandler);
-
-    const resizeObserver = new ResizeObserver(checkScrollOverflow);
-    resizeObserver.observe(container);
-
-    return () => {
-      container.removeEventListener('scroll', scrollHandler);
-      resizeObserver.disconnect();
-    };
-  }, [checkScrollOverflow, scrollHandler]);
-
   // Scroll to the selected tab when the selected key changes
   // We use the state.selectedItem here instead of just the state.selectedKey, since state.selectedItem is set when the tab list is mounted
   // This way we can make sure the default selected tab is scrolled into view.
@@ -207,7 +167,7 @@ function TabList({ className, children, ...restProps }: TabListProps) {
       offsetLeft - (containerWidth - selectedTab.clientWidth) / 2;
 
     // When the scroll is initiated by the user we want a smooth scroll
-    if (hasScrollingOccurredRef.current) {
+    if (hasScrollingOccurred) {
       // The RAC TabList component prevents us from using scroll snapping, so by using requestAnimationFrame, we can ensure the scroll position is set correctly.
       // We want the active tab to be centered in the view when navigating with the scroll buttons, selecting a tab with the keyboard, or clicking on a tab.
       requestAnimationFrame(() => {
@@ -223,7 +183,7 @@ function TabList({ className, children, ...restProps }: TabListProps) {
         behavior: 'instant',
       });
     }
-  }, [state?.selectedItem]);
+  }, [state?.selectedItem, hasScrollingOccurred, scrollContainerRef]);
 
   return (
     <div className="relative overflow-hidden">
@@ -259,57 +219,23 @@ function TabList({ className, children, ...restProps }: TabListProps) {
       >
         {children}
       </RACTabList>
-      {/* Left scroll button */}
-      {
-        // biome-ignore lint/a11y/useKeyWithClickEvents: These are just for scrolling, and not necessary for keyboard or screen reader users. They can use the tablist's keyboard navigation pattern to navigate the entire list the same way.
-        <div
-          onClick={onPrev}
-          className={cx(
-            'cursor-pointer',
-            'flex items-center',
-            // Ensure click are of 44px by 44px.
-            'size-11',
-            // Position the button at the left of the tab list, with a small (left) offset to avoid overlap with the tabs.
-            // The bottom offset is to avoid overlap with the tab lists bottom border.
-            '-left-3 absolute bottom-0.25',
-            // Creates a gradient background that fades to transparent on the right side, which creates a smooth overlay effect over the tabs that are scrolled out of view.
-            'bg-[linear-gradient(90deg,white,white_calc(100%-10px),transparent)]',
-            // Slide in and out based on scroll position, match duration with the debounce delay of the scrollHandler function
-            // Wait until user started scrolling until animation is applied, to prevent the animation from running on mount
-            hasScrollingOccurredRef.current &&
-              'duration-100 ease-in motion-safe:transition-transform',
-            !canScrollLeft && '-translate-x-full pointer-events-none',
-          )}
-        >
-          <ChevronLeft className="mt-0.25 h-6 w-full text-black" />
-        </div>
-      }
+      <ScrollButton
+        direction="left"
+        onClick={onPrev}
+        isVisible={canScrollLeft}
+        hasScrollingOccurred={hasScrollingOccurred}
+        className="-left-3 absolute bottom-0.25 size-11"
+        iconClassName="mt-0.25 h-6 w-full text-black"
+      />
 
-      {/* Right scroll button */}
-      {
-        // biome-ignore lint/a11y/useKeyWithClickEvents: These are just for scrolling, and not necessary for keyboard or screen reader users. They can use the tablist's keyboard navigation pattern to navigate the entire list the same way.
-        <div
-          onClick={onNext}
-          className={cx(
-            'cursor-pointer',
-            'flex items-center',
-            // Ensure click are of 44px by 44px.
-            'size-11',
-            // Position the button at the right of the tab list, with a small (right) offset to avoid overlap with the tabs.
-            // The bottom offset is to avoid overlap with the tab lists bottom border.
-            '-right-3 absolute bottom-0.25',
-            // Creates a gradient background that fades to transparent on the left side, which creates a smooth overlay effect over the tabs that are scrolled out of view.
-            'bg-[linear-gradient(90deg,transparent,white_calc(10px),white)]',
-            // Slide in and out based on scroll position, match duration with the debounce delay of the scrollHandler function
-            // Wait until user started scrolling until animation is applied, to prevent the animation from running on mount
-            hasScrollingOccurredRef.current &&
-              'duration-100 ease-in motion-safe:transition-transform',
-            !canScrollRight && 'pointer-events-none translate-x-full',
-          )}
-        >
-          <ChevronRight className="mt-0.25 h-6 w-full text-black " />
-        </div>
-      }
+      <ScrollButton
+        direction="right"
+        onClick={onNext}
+        isVisible={canScrollRight}
+        hasScrollingOccurred={hasScrollingOccurred}
+        className="-right-3 absolute bottom-0.25 size-11"
+        iconClassName="mt-0.25 h-6 w-full text-black"
+      />
     </div>
   );
 }
