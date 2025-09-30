@@ -25,6 +25,25 @@ import { useDebouncedCallback } from 'use-debounce';
 
 const tableVariants = cva({
   base: ['relative'],
+  variants: {
+    variant: {
+      default: '',
+      zebra: '',
+    },
+  },
+});
+
+const tableRowVariants = cva({
+  base: [
+    'data-focus-visible:outline-focus-offset',
+    'motion-safe:transition-colors motion-reduce:transition-none',
+  ],
+  variants: {
+    variant: {
+      default: '',
+      zebra: 'odd:bg-white even:bg-sky-lightest',
+    },
+  },
 });
 
 type TableProps = Omit<RACTableProps, 'className'> &
@@ -51,6 +70,11 @@ type TableBodyProps = Omit<RACTableBodyProps<object>, 'className'> &
 type TableRowProps = Omit<RACRowProps<object>, 'className'> &
   RefAttributes<HTMLTableRowElement> & {
     className?: string;
+    /**
+     * Visual variant of the table row
+     * @default 'default'
+     */
+    variant?: 'default' | 'zebra';
   };
 
 type TableCellProps = Omit<RACCellProps, 'className'> &
@@ -241,18 +265,10 @@ function TableBody({ className, children, ...restProps }: TableBodyProps) {
 }
 
 function TableRow(props: TableRowProps) {
-  const { className, children, ...restProps } = props;
+  const { className, children, variant = 'default', ...restProps } = props;
 
   return (
-    <RACRow
-      {...restProps}
-      className={cx(
-        className,
-        'odd:bg-white even:bg-sky-lightest/50',
-        'data-focus-visible:outline-focus-offset',
-        'motion-safe:transition-colors motion-reduce:transition-none',
-      )}
-    >
+    <RACRow {...restProps} className={tableRowVariants({ className, variant })}>
       {children}
     </RACRow>
   );
@@ -268,6 +284,7 @@ function TableCell(props: TableCellProps) {
         className,
         'px-4 py-3 text-black text-sm leading-relaxed',
         'min-w-fit whitespace-nowrap',
+        'align-top',
         'data-focus-visible:outline-focus-offset',
       )}
     >
