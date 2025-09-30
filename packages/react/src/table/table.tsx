@@ -112,10 +112,7 @@ function Table(props: TableProps) {
     [scrollContainerRef],
   );
   return (
-    <section
-      className={tableVariants({ className, variant })}
-      data-variant={variant}
-    >
+    <section className={tableVariants({ className, variant })}>
       <div className="relative overflow-hidden">
         {/* Screen reader live region for scroll announcements */}
         <div aria-live="polite" aria-atomic="true" className="sr-only">
@@ -149,7 +146,11 @@ function Table(props: TableProps) {
           style={{ WebkitOverflowScrolling: 'touch' }}
           aria-label="Scrollbart tabellinnhold"
         >
-          <RACTable {...restProps} className="group w-full min-w-fit">
+          <RACTable
+            {...restProps}
+            className="group w-full min-w-fit"
+            data-variant={variant}
+          >
             {children}
           </RACTable>
         </section>
