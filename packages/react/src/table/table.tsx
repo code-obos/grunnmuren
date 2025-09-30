@@ -1,11 +1,5 @@
 import { cva, cx } from 'cva';
-import {
-  type RefAttributes,
-  createContext,
-  useCallback,
-  useContext,
-  useState,
-} from 'react';
+import { type RefAttributes, useCallback, useState } from 'react';
 import {
   Cell as RACCell,
   type CellProps as RACCellProps,
@@ -36,20 +30,10 @@ const tableRowVariants = cva({
   base: [
     'data-focus-visible:outline-focus-offset',
     'motion-safe:transition-colors motion-reduce:transition-none',
+    'group-data-[variant=zebra]:odd:bg-white',
+    'group-data-[variant=zebra]:even:bg-sky-lightest',
   ],
-  variants: {
-    variant: {
-      default: '',
-      zebra: 'odd:bg-white even:bg-sky-lightest',
-    },
-  },
 });
-
-// Context for sharing table variant with child components
-const TableContext = createContext<{ variant: 'default' | 'zebra' }>({
-  variant: 'default',
-});
-const useTableContext = () => useContext(TableContext);
 
 type TableProps = Omit<RACTableProps, 'className'> &
   RefAttributes<HTMLTableElement> & {
@@ -128,48 +112,49 @@ function Table(props: TableProps) {
     [scrollContainerRef],
   );
   return (
-    <TableContext.Provider value={{ variant }}>
-      <section className={tableVariants({ className, variant })}>
-        <div className="relative overflow-hidden">
-          {/* Screen reader live region for scroll announcements */}
-          <div aria-live="polite" aria-atomic="true" className="sr-only">
-            {scrollPosition === 'start' && 'Tabell ved start'}
-            {scrollPosition === 'middle' &&
-              'Tabell scrollet, mer innhold tilgjengelig i begge retninger'}
-            {scrollPosition === 'end' && 'Tabell ved slutt'}
-          </div>
-
-          <ScrollButton
-            direction="left"
-            onClick={() => handleScroll('left')}
-            isVisible={canScrollLeft}
-            hasScrollingOccurred={hasScrollingOccurred}
-            className="-translate-y-1/2 -left-3 absolute top-5 z-10 h-11 w-11"
-            iconClassName="h-5 w-5"
-          />
-
-          <ScrollButton
-            direction="right"
-            onClick={() => handleScroll('right')}
-            isVisible={canScrollRight}
-            hasScrollingOccurred={hasScrollingOccurred}
-            className="-translate-y-1/2 -right-3 absolute top-5 z-10 h-11 w-11"
-            iconClassName="h-5 w-5"
-          />
-
-          <section
-            ref={scrollContainerRef}
-            className="scrollbar-hidden overflow-x-auto"
-            style={{ WebkitOverflowScrolling: 'touch' }}
-            aria-label="Scrollbart tabellinnhold"
-          >
-            <RACTable {...restProps} className="w-full min-w-fit">
-              {children}
-            </RACTable>
-          </section>
+    <section
+      className={tableVariants({ className, variant })}
+      data-variant={variant}
+    >
+      <div className="relative overflow-hidden">
+        {/* Screen reader live region for scroll announcements */}
+        <div aria-live="polite" aria-atomic="true" className="sr-only">
+          {scrollPosition === 'start' && 'Tabell ved start'}
+          {scrollPosition === 'middle' &&
+            'Tabell scrollet, mer innhold tilgjengelig i begge retninger'}
+          {scrollPosition === 'end' && 'Tabell ved slutt'}
         </div>
-      </section>
-    </TableContext.Provider>
+
+        <ScrollButton
+          direction="left"
+          onClick={() => handleScroll('left')}
+          isVisible={canScrollLeft}
+          hasScrollingOccurred={hasScrollingOccurred}
+          className="-translate-y-1/2 -left-3 absolute top-5 z-10 h-11 w-11"
+          iconClassName="h-5 w-5"
+        />
+
+        <ScrollButton
+          direction="right"
+          onClick={() => handleScroll('right')}
+          isVisible={canScrollRight}
+          hasScrollingOccurred={hasScrollingOccurred}
+          className="-translate-y-1/2 -right-3 absolute top-5 z-10 h-11 w-11"
+          iconClassName="h-5 w-5"
+        />
+
+        <section
+          ref={scrollContainerRef}
+          className="scrollbar-hidden overflow-x-auto"
+          style={{ WebkitOverflowScrolling: 'touch' }}
+          aria-label="Scrollbart tabellinnhold"
+        >
+          <RACTable {...restProps} className="group w-full min-w-fit">
+            {children}
+          </RACTable>
+        </section>
+      </div>
+    </section>
   );
 }
 
@@ -217,10 +202,9 @@ function TableBody({ className, children, ...restProps }: TableBodyProps) {
 
 function TableRow(props: TableRowProps) {
   const { className, children, ...restProps } = props;
-  const { variant } = useTableContext();
 
   return (
-    <RACRow {...restProps} className={tableRowVariants({ className, variant })}>
+    <RACRow {...restProps} className={tableRowVariants({ className })}>
       {children}
     </RACRow>
   );
