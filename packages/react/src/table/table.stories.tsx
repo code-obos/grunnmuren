@@ -158,7 +158,10 @@ export const Simple: Story = {
 
 export const ZebraVariant: Story = {
   render: () => (
-    <Table aria-label="Eiendomsforvaltere med zebra-stripete rader">
+    <Table
+      aria-label="Eiendomsforvaltere med zebra-stripete rader"
+      variant="zebra"
+    >
       <TableHeader>
         <TableColumn>Navn</TableColumn>
         <TableColumn>E-post</TableColumn>
@@ -166,31 +169,31 @@ export const ZebraVariant: Story = {
         <TableColumn>Telefon</TableColumn>
       </TableHeader>
       <TableBody>
-        <TableRow variant="zebra">
+        <TableRow>
           <TableCell>Kari Hansen</TableCell>
           <TableCell>kari.hansen@obos.no</TableCell>
           <TableCell>Grünerløkka</TableCell>
           <TableCell>+47 123 45 678</TableCell>
         </TableRow>
-        <TableRow variant="zebra">
+        <TableRow>
           <TableCell>Lars Olsen</TableCell>
           <TableCell>lars.olsen@obos.no</TableCell>
           <TableCell>Frogner</TableCell>
           <TableCell>+47 234 56 789</TableCell>
         </TableRow>
-        <TableRow variant="zebra">
+        <TableRow>
           <TableCell>Ingrid Svendsen</TableCell>
           <TableCell>ingrid.svendsen@obos.no</TableCell>
           <TableCell>Majorstuen</TableCell>
           <TableCell>+47 345 67 890</TableCell>
         </TableRow>
-        <TableRow variant="zebra">
+        <TableRow>
           <TableCell>Ola Nordmann</TableCell>
           <TableCell>ola.nordmann@obos.no</TableCell>
           <TableCell>Sagene</TableCell>
           <TableCell>+47 456 78 901</TableCell>
         </TableRow>
-        <TableRow variant="zebra">
+        <TableRow>
           <TableCell>Anne Berger</TableCell>
           <TableCell>anne.berger@obos.no</TableCell>
           <TableCell>Bislett</TableCell>
