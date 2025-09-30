@@ -104,7 +104,7 @@ export const Default: Story = {
             <TableCell>
               <div>
                 <div className="font-medium">{item.product}</div>
-                <div className="text-gray-medium text-xs">{item.subtitle}</div>
+                <div className="text-xs">{item.subtitle}</div>
               </div>
             </TableCell>
             <TableCell>
