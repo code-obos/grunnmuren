@@ -125,7 +125,14 @@ function Table(props: TableProps) {
     });
   }, []);
 
-  const scrollHandler = useDebouncedCallback(checkScrollOverflow, 100);
+  // To control if the animation for the scroll buttons and the scrolling behavior
+  // This is used to prevent animations from running when the component mounts
+  // We use a ref here to prevent redundant render cycles and potentially unintended scrolling.
+  const hasScrollingOccurredRef = useRef(false);
+  const scrollHandler = useDebouncedCallback(() => {
+    checkScrollOverflow();
+    hasScrollingOccurredRef.current = true;
+  }, 100);
 
   useEffect(() => {
     const container = scrollContainerRef.current;
@@ -148,7 +155,7 @@ function Table(props: TableProps) {
       className={tableVariants({ className })}
       aria-label="Datatabell med horisontal scrolling"
     >
-      <div className="relative">
+      <div className="relative overflow-hidden">
         {/* Screen reader live region for scroll announcements */}
         <div aria-live="polite" aria-atomic="true" className="sr-only">
           {scrollPosition === 'start' && 'Tabell ved start'}
@@ -161,12 +168,14 @@ function Table(props: TableProps) {
           direction="left"
           onClick={() => handleScroll('left')}
           canScroll={canScrollLeft}
+          hasScrollingOccurred={hasScrollingOccurredRef.current}
         />
 
         <ScrollButton
           direction="right"
           onClick={() => handleScroll('right')}
           canScroll={canScrollRight}
+          hasScrollingOccurred={hasScrollingOccurredRef.current}
         />
 
         <section
@@ -192,11 +201,17 @@ interface ScrollButtonProps {
   direction: 'left' | 'right';
   onClick: () => void;
   canScroll: boolean;
+  hasScrollingOccurred: boolean;
 }
 
-function ScrollButton({ direction, onClick, canScroll }: ScrollButtonProps) {
+function ScrollButton({
+  direction,
+  onClick,
+  canScroll,
+  hasScrollingOccurred,
+}: ScrollButtonProps) {
   const Icon = direction === 'left' ? ChevronLeft : ChevronRight;
-  const position = direction === 'left' ? 'left-0' : 'right-0';
+  const position = direction === 'left' ? '-left-3' : '-right-3';
   const bg =
     direction === 'left'
       ? 'bg-[linear-gradient(90deg,white,white_calc(100%-10px),transparent)]'
@@ -210,11 +225,17 @@ function ScrollButton({ direction, onClick, canScroll }: ScrollButtonProps) {
         '-translate-y-1/2 absolute top-5 z-10',
         position,
         'flex h-11 w-11 items-center justify-center',
-        'cursor-pointer text-black transition-all duration-150 ease-out',
+        'cursor-pointer text-black',
         bg,
         'hover:bg-white',
-        'motion-safe:transition-all motion-reduce:transition-none',
-        canScroll ? 'visible opacity-100' : 'invisible opacity-0',
+        // Slide in and out based on scroll position, match duration with the debounce delay of the scrollHandler function
+        // Wait until user started scrolling until animation is applied, to prevent the animation from running on mount
+        hasScrollingOccurred &&
+          'duration-100 ease-in motion-safe:transition-transform',
+        // Use the same transform pattern as tabs for consistent animation - transforms always apply when not scrollable
+        direction === 'left'
+          ? !canScroll && '-translate-x-full pointer-events-none'
+          : !canScroll && 'pointer-events-none translate-x-full',
       )}
     >
       <Icon className="h-5 w-5" />
