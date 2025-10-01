@@ -3,12 +3,13 @@
  * To support the prose styles from the tailwindcss-typography plugin.
  */
 
-@custom-variant prose-headings (& :is(h1, h2, h3, h4, th):not(:where([class~='not-prose'], [class~='not-prose'] *)));
+@custom-variant prose-headings (& :is(h1, h2, h3, h4, h5, th):not(:where([class~='not-prose'], [class~='not-prose'] *)));
 @custom-variant prose-lead (& :is([class~="lead"]):not(:where([class~='not-prose'], [class~='not-prose'] *)));
 @custom-variant prose-h1 (& :is(h1):not(:where([class~='not-prose'], [class~='not-prose'] *)));
 @custom-variant prose-h2 (& :is(h2):not(:where([class~='not-prose'], [class~='not-prose'] *)));
 @custom-variant prose-h3 (& :is(h3):not(:where([class~='not-prose'], [class~='not-prose'] *)));
 @custom-variant prose-h4 (& :is(h4):not(:where([class~='not-prose'], [class~='not-prose'] *)));
+@custom-variant prose-h5 (& :is(h5):not(:where([class~='not-prose'], [class~='not-prose'] *)));
 @custom-variant prose-p (& :is(p):not(:where([class~='not-prose'], [class~='not-prose'] *)));
 @custom-variant prose-a (& :is(a):not(:where([class~='not-prose'], [class~='not-prose'] *)));
 @custom-variant prose-blockquote (& :is(blockquote):not(:where([class~='not-prose'], [class~='not-prose'] *)));
@@ -217,6 +218,12 @@
       @apply heading-s;
       margin-top: 1.5em;
       margin-bottom: 0.5em;
+    }
+
+    &:where(h5) {
+      @apply heading-xs;
+      margin-top: 1.4em;
+      margin-bottom: 0.4em;
     }
 
     &:where(h4 strong) {
@@ -448,6 +455,10 @@
     }
 
     &:where(h4 + *) {
+      margin-top: 0;
+    }
+
+    &:where(h5 + *) {
       margin-top: 0;
     }
 
