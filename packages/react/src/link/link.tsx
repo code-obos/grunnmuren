@@ -16,7 +16,7 @@ const CustomLink = ({ children, className, ...restProps }: CustomLinkProps) => {
       {...restProps}
       className={cx(
         className,
-        'cursor-pointer font-medium focus-visible:outline-focus-offset',
+        'cursor-pointer font-medium hover:no-underline focus-visible:outline-current focus-visible:outline-focus-offset',
       )}
     >
       {children}
