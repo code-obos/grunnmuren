@@ -70,7 +70,8 @@
     &:where(a) {
       color: var(--tw-prose-links);
       text-decoration: underline;
-      font-weight: 500;
+      /** Copied from the Link component:  **/
+      @apply inline-flex cursor-pointer items-center gap-1 font-medium hover:no-underline focus-visible:outline-current focus-visible:outline-focus-offset [&>svg]:shrink-0;
     }
 
     &:where(strong) {
