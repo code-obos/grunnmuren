@@ -1,6 +1,6 @@
 import { Download, LinkExternal } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta } from '@storybook/react-vite';
-import { Link } from './link';
+import { UNSAFE_Link as Link } from './link';
 
 const meta: Meta<typeof Link> = {
   title: 'Link',
@@ -17,7 +17,7 @@ export const External = () => (
     href="https://obos.no"
     target="_blank"
     rel="noreferrer"
-    className="group inline-flex items-center gap-1"
+    className="group"
   >
     Ekstern lenke
     <LinkExternal className="group-hover:motion-safe:-translate-y-0.5 shrink-0 transition-transform group-hover:motion-safe:translate-x-0.5" />
@@ -25,11 +25,7 @@ export const External = () => (
 );
 
 export const WithIcon = () => (
-  <Link
-    download
-    href="/document.pdf"
-    className="group inline-flex items-center gap-1"
-  >
+  <Link download href="/document.pdf" className="group">
     Last ned dokument{' '}
     <Download className="shrink-0 transition-transform group-hover:motion-safe:translate-y-1" />
   </Link>

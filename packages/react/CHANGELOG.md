@@ -1,5 +1,17 @@
 # @obosbbl/grunnmuren-react
 
+## 3.0.12
+
+### Patch Changes
+
+- f5af2da: Add flex styles to `<UNSAFE_Link>` for better out-of-the-box layout with icons.
+
+## 3.0.11
+
+### Patch Changes
+
+- a600f77: Add `UNSAFE_` prefix to the `Link` component
+
 ## 3.0.10
 
 ### Patch Changes
