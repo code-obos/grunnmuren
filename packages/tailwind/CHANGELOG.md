@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.3.1
+
+### Patch Changes
+
+- 0b9df57: Use same styles for links in prose as the `<Link>` component in grunnmuren-react.
+
 ## 2.3.0
 
 ### Minor Changes
