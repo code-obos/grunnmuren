@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 3.0.13
+
+### Patch Changes
+
+- f3d2db5: Fix current color on focus ring color for `<Link>` and make underline disappear on hover (to match `<Button variant="tertiary">`)
+
 ## 3.0.12
 
 ### Patch Changes
