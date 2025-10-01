@@ -36,3 +36,9 @@ export const WithLongerText = () => (
     Dette er et avsnitt med en <Link href="/innebygd">lenke</Link> inni.
   </p>
 );
+
+export const WithBgColor = () => (
+  <div className="bg-blue-dark p-6 text-mint">
+    <Link href="/ti-side">Lenke</Link>
+  </div>
+);
