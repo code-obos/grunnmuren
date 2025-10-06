@@ -35,9 +35,8 @@ const tableRowVariants = cva({
   ],
 });
 
-type TableProps = Omit<RACTableProps, 'className'> &
+type TableProps = RACTableProps &
   RefAttributes<HTMLTableElement> & {
-    className?: string;
     /**
      * Visual variant of the table
      * @default 'default'
@@ -45,30 +44,21 @@ type TableProps = Omit<RACTableProps, 'className'> &
     variant?: 'default' | 'zebra';
   };
 
-type TableHeaderProps = Omit<RACTableHeaderProps<object>, 'className'> &
-  RefAttributes<HTMLTableSectionElement> & {
-    className?: string;
-  };
+type TableHeaderProps = RACTableHeaderProps<object> &
+  RefAttributes<HTMLTableSectionElement>;
 
-type TableColumnProps = Omit<RACColumnProps, 'className'> &
+type TableColumnProps = RACColumnProps &
   RefAttributes<HTMLTableCellElement> & {
-    className?: string;
     children: React.ReactNode;
   };
 
-type TableBodyProps = Omit<RACTableBodyProps<object>, 'className'> &
-  RefAttributes<HTMLTableSectionElement> & {
-    className?: string;
-  };
+type TableBodyProps = RACTableBodyProps<object> &
+  RefAttributes<HTMLTableSectionElement>;
 
-type TableRowProps = Omit<RACRowProps<object>, 'className'> &
-  RefAttributes<HTMLTableRowElement> & {
-    className?: string;
-  };
+type TableRowProps = RACRowProps<object> & RefAttributes<HTMLTableRowElement>;
 
-type TableCellProps = Omit<RACCellProps, 'className'> &
+type TableCellProps = RACCellProps &
   RefAttributes<HTMLTableCellElement> & {
-    className?: string;
     children: React.ReactNode;
   };
 
@@ -127,8 +117,6 @@ function Table(props: TableProps) {
           onClick={() => handleScroll('left')}
           isVisible={canScrollLeft}
           hasScrollingOccurred={hasScrollingOccurred}
-          className="-translate-y-1/2 -left-3 absolute top-5 z-10 h-11 w-11"
-          iconClassName="h-5 w-5"
         />
 
         <ScrollButton
@@ -136,8 +124,6 @@ function Table(props: TableProps) {
           onClick={() => handleScroll('right')}
           isVisible={canScrollRight}
           hasScrollingOccurred={hasScrollingOccurred}
-          className="-translate-y-1/2 -right-3 absolute top-5 z-10 h-11 w-11"
-          iconClassName="h-5 w-5"
         />
 
         <section
