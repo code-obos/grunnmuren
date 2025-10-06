@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.3.2
+
+### Patch Changes
+
+- 9112180: Fix `<h5>` styles in `prose`
+
 ## 2.3.1
 
 ### Patch Changes
