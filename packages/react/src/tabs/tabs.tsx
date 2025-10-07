@@ -224,7 +224,7 @@ function TabList({ className, children, ...restProps }: TabListProps) {
         onClick={onPrev}
         isVisible={canScrollLeft}
         hasScrollingOccurred={hasScrollingOccurred}
-        className="-left-3 absolute bottom-0.25 size-11"
+        className="absolute bottom-0.25 size-11"
         iconClassName="mt-0.25 h-6 w-full text-black"
       />
 
@@ -233,7 +233,7 @@ function TabList({ className, children, ...restProps }: TabListProps) {
         onClick={onNext}
         isVisible={canScrollRight}
         hasScrollingOccurred={hasScrollingOccurred}
-        className="-right-3 absolute bottom-0.25 size-11"
+        className="absolute bottom-0.25 size-11"
         iconClassName="mt-0.25 h-6 w-full text-black"
       />
     </div>

@@ -12,6 +12,9 @@ interface ScrollButtonProps {
   onClick: () => void;
   isVisible: boolean;
   hasScrollingOccurred: boolean;
+  /** Additional classes for positioning and styling */
+  className?: string;
+  iconClassName?: string;
 }
 
 export function ScrollButton({
@@ -19,6 +22,8 @@ export function ScrollButton({
   onClick,
   isVisible,
   hasScrollingOccurred,
+  className,
+  iconClassName,
 }: ScrollButtonProps) {
   const Icon = direction === 'left' ? ChevronLeft : ChevronRight;
 
@@ -49,10 +54,12 @@ export function ScrollButton({
 
         direction === 'left' ? '-left-3' : '-right-3',
 
-        '-translate-y-1/2 absolute top-5 z-10 h-11 w-11',
+        // Custom positioning and styling
+
+        className,
       )}
     >
-      <Icon className="h-5 w-5" />
+      <Icon className={iconClassName} />
     </div>
   );
 }
