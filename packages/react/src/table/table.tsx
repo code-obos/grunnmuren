@@ -1,5 +1,5 @@
 import { cva, cx } from 'cva';
-import { type RefAttributes, useCallback, useState } from 'react';
+import { type RefAttributes, useCallback } from 'react';
 import {
   Cell as RACCell,
   type CellProps as RACCellProps,
@@ -14,7 +14,11 @@ import {
   type TableHeaderProps as RACTableHeaderProps,
   type TableProps as RACTableProps,
 } from 'react-aria-components';
-import { ScrollButton, useHorizontalScroll } from '../utils';
+import {
+  ScrollButton,
+  type ScrollDirection,
+  useHorizontalScroll,
+} from '../utils';
 
 const tableVariants = cva({
   base: ['relative'],
@@ -67,7 +71,6 @@ type TableCellProps = RACCellProps &
  */
 function Table(props: TableProps) {
   const { className, children, variant = 'default', ...restProps } = props;
-  const [scrollPosition, setScrollPosition] = useState('start');
 
   const {
     scrollContainerRef,
@@ -77,7 +80,7 @@ function Table(props: TableProps) {
   } = useHorizontalScroll();
 
   const handleScroll = useCallback(
-    (direction: 'left' | 'right') => {
+    (direction: ScrollDirection) => {
       const container = scrollContainerRef.current;
       if (!container) return;
 
@@ -86,32 +89,12 @@ function Table(props: TableProps) {
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth',
       });
-
-      // Update scroll position for screen readers after scroll
-      setTimeout(() => {
-        const { scrollLeft, scrollWidth, clientWidth } = container;
-        if (scrollLeft === 0) {
-          setScrollPosition('start');
-        } else if (scrollLeft >= scrollWidth - clientWidth - 1) {
-          setScrollPosition('end');
-        } else {
-          setScrollPosition('middle');
-        }
-      }, 150);
     },
     [scrollContainerRef],
   );
   return (
     <section className={tableVariants({ className, variant })}>
       <div className="relative overflow-hidden">
-        {/* Screen reader live region for scroll announcements */}
-        <div aria-live="polite" aria-atomic="true" className="sr-only">
-          {scrollPosition === 'start' && 'Tabell ved start'}
-          {scrollPosition === 'middle' &&
-            'Tabell scrollet, mer innhold tilgjengelig i begge retninger'}
-          {scrollPosition === 'end' && 'Tabell ved slutt'}
-        </div>
-
         <ScrollButton
           direction="left"
           onClick={() => handleScroll('left')}
@@ -134,7 +117,6 @@ function Table(props: TableProps) {
           ref={scrollContainerRef}
           className="scrollbar-hidden overflow-x-auto"
           style={{ WebkitOverflowScrolling: 'touch' }}
-          aria-label="Scrollbart tabellinnhold"
         >
           <RACTable
             {...restProps}

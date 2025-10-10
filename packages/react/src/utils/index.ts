@@ -1,1 +1,5 @@
-export { useHorizontalScroll, ScrollButton } from './horizontal-scroll';
+export {
+  useHorizontalScroll,
+  ScrollButton,
+  type ScrollDirection,
+} from './horizontal-scroll';

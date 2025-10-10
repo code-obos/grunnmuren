@@ -3,12 +3,14 @@ import { cx } from 'cva';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 
+export type ScrollDirection = 'left' | 'right';
+
 /**
  * Simple scroll button component that captures common patterns
  * without being overly complex
  */
 interface ScrollButtonProps {
-  direction: 'left' | 'right';
+  direction: ScrollDirection;
   onClick: () => void;
   isVisible: boolean;
   hasScrollingOccurred: boolean;

@@ -32,4 +32,3 @@ export * from './tabs';
 export * from './table';
 export * from './link';
 export * from './link-list';
-export * from './utils';
