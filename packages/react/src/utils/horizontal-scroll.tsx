@@ -29,12 +29,6 @@ export function ScrollButton({
 }: ScrollButtonProps) {
   const Icon = direction === 'left' ? ChevronLeft : ChevronRight;
 
-  // Default gradient backgrounds
-  const gradientBg =
-    direction === 'left'
-      ? 'bg-[linear-gradient(90deg,white,white_calc(100%-10px),transparent)]'
-      : 'bg-[linear-gradient(90deg,transparent,white_calc(10px),white)]';
-
   return (
     // biome-ignore lint/a11y/useKeyWithClickEvents: This button is only for mouse interaction to help users scroll. Keyboard and screen reader users can navigate the content directly without needing these scroll helpers.
     <div
@@ -43,7 +37,9 @@ export function ScrollButton({
         // Base scroll button styling
         'flex cursor-pointer items-center justify-center',
         'text-black hover:bg-white',
-        gradientBg,
+        direction === 'left'
+          ? 'bg-[linear-gradient(90deg,white,white_calc(100%-10px),transparent)]'
+          : 'bg-[linear-gradient(90deg,transparent,white_calc(10px),white)]',
 
         // Animation
         hasScrollingOccurred &&
@@ -55,9 +51,6 @@ export function ScrollButton({
           : !isVisible && 'pointer-events-none translate-x-full',
 
         direction === 'left' ? '-left-3' : '-right-3',
-
-        // Custom positioning and styling
-
         className,
       )}
     >
@@ -66,50 +59,70 @@ export function ScrollButton({
   );
 }
 
+interface ScrollState {
+  canScrollLeft: boolean;
+  canScrollRight: boolean;
+  hasScrollingOccurred: boolean;
+}
+
 /**
  * Simple hook for detecting horizontal scroll capabilities
  * Returns scroll state and a ref to attach to your scrollable container
  */
 export function useHorizontalScroll() {
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
-  const hasScrollingOccurredRef = useRef(false);
+  const [scrollState, setScrollState] = useState<ScrollState>({
+    canScrollLeft: false,
+    canScrollRight: false,
+    hasScrollingOccurred: false,
+  });
 
-  const checkScrollOverflow = useCallback(() => {
+  const updateScrollState = useCallback(() => {
     const container = scrollContainerRef.current;
-    if (!container) return;
+    if (!container) {
+      return;
+    }
 
     const { scrollLeft, scrollWidth, clientWidth } = container;
-    setCanScrollLeft(scrollLeft > 0);
-    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
+    const isAtStart = scrollLeft <= 0;
+    const isAtEnd = scrollLeft >= scrollWidth - clientWidth;
+
+    setScrollState((prev) => ({
+      canScrollLeft: !isAtStart,
+      canScrollRight: !isAtEnd,
+      hasScrollingOccurred: prev.hasScrollingOccurred || scrollLeft > 0,
+    }));
   }, []);
 
-  const scrollHandler = useDebouncedCallback(() => {
-    checkScrollOverflow();
-    hasScrollingOccurredRef.current = true;
-  }, 100);
+  const debouncedUpdateScrollState = useDebouncedCallback(
+    updateScrollState,
+    100,
+  );
 
   useEffect(() => {
     const container = scrollContainerRef.current;
-    if (!container) return;
+    if (!container) {
+      return;
+    }
 
-    checkScrollOverflow();
-    container.addEventListener('scroll', scrollHandler);
+    // Initial check
+    updateScrollState();
 
-    const resizeObserver = new ResizeObserver(checkScrollOverflow);
+    // Listen for scroll events
+    container.addEventListener('scroll', debouncedUpdateScrollState);
+
+    // Listen for resize events (content or container size changes)
+    const resizeObserver = new ResizeObserver(updateScrollState);
     resizeObserver.observe(container);
 
     return () => {
-      container.removeEventListener('scroll', scrollHandler);
+      container.removeEventListener('scroll', debouncedUpdateScrollState);
       resizeObserver.disconnect();
     };
-  }, [checkScrollOverflow, scrollHandler]);
+  }, [updateScrollState, debouncedUpdateScrollState]);
 
   return {
     scrollContainerRef,
-    canScrollLeft,
-    canScrollRight,
-    hasScrollingOccurred: hasScrollingOccurredRef.current,
+    ...scrollState,
   };
 }
