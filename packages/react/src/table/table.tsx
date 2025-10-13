@@ -25,28 +25,30 @@ const tableVariants = cva({
   variants: {
     variant: {
       default: '',
-      zebra: '',
+      'zebra-striped': '',
     },
   },
 });
 
 const tableRowVariants = cva({
   base: [
-    'data-focus-visible:outline-focus-offset',
-    'motion-safe:transition-colors motion-reduce:transition-none',
-    'group-data-[variant=zebra]:odd:bg-white',
-    'group-data-[variant=zebra]:even:bg-sky-lightest',
+    'data-focus-visible:outline-focus-inset',
+    'group-data-[variant=zebra-striped]:odd:bg-white',
+    'group-data-[variant=zebra-striped]:even:bg-sky-lightest',
   ],
 });
 
-type TableProps = RACTableProps &
+type TableProps = Omit<RACTableProps, 'aria-label' | 'aria-labelledby'> &
   RefAttributes<HTMLTableElement> & {
     /**
      * Visual variant of the table
      * @default 'default'
      */
-    variant?: 'default' | 'zebra';
-  };
+    variant?: 'default' | 'zebra-striped';
+  } & (
+    | { 'aria-label': string; 'aria-labelledby'?: never }
+    | { 'aria-label'?: never; 'aria-labelledby': string }
+  );
 
 type TableHeaderProps = RACTableHeaderProps<object> &
   RefAttributes<HTMLTableSectionElement>;
@@ -93,7 +95,7 @@ function Table(props: TableProps) {
     [scrollContainerRef],
   );
   return (
-    <section className={tableVariants({ className, variant })}>
+    <div className={tableVariants({ className, variant })}>
       <div className="relative overflow-hidden">
         <ScrollButton
           direction="left"
@@ -113,7 +115,7 @@ function Table(props: TableProps) {
           iconClassName="h-5 w-5"
         />
 
-        <section
+        <div
           ref={scrollContainerRef}
           className="scrollbar-hidden overflow-x-auto"
           style={{ WebkitOverflowScrolling: 'touch' }}
@@ -125,9 +127,9 @@ function Table(props: TableProps) {
           >
             {children}
           </RACTable>
-        </section>
+        </div>
       </div>
-    </section>
+    </div>
   );
 }
 
@@ -153,7 +155,7 @@ function TableColumn(props: TableColumnProps) {
       className={cx(
         className,
         'px-4 py-3 text-left font-medium text-black text-sm',
-        'data-focus-visible:outline-focus-offset',
+        'data-focus-visible:outline-focus-inset',
         'min-w-fit whitespace-nowrap',
       )}
     >
@@ -194,7 +196,7 @@ function TableCell(props: TableCellProps) {
         'px-4 py-3 text-black text-sm leading-relaxed',
         'min-w-fit whitespace-nowrap',
         'align-top',
-        'data-focus-visible:outline-focus-offset',
+        'data-focus-visible:outline-focus-inset',
       )}
     >
       {children}
