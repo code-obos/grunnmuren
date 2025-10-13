@@ -1,5 +1,5 @@
 ---
-"@obosbbl/grunnmuren-react": minor
+"@obosbbl/grunnmuren-react": patch
 ---
 
 New component `Table` component is in beta.
