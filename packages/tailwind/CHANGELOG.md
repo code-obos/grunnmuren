@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.3.2
+
+### Patch Changes
+
+- 5bacc38: Removes redundant margin on first-child/last-child elements inside lists in `prose`.
+- 9112180: Fix `<h5>` styles in `prose`
+
 ## 2.3.1
 
 ### Patch Changes
