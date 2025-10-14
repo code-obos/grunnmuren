@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@biomejs/biome": "1.9.4",
-    "@changesets/cli": "2.29.6",
+    "@changesets/cli": "2.29.7",
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
     "@react-aria/optimize-locales-plugin": "1.1.5",
     "@storybook/addon-docs": "9.1.10",
