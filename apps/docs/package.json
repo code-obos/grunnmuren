@@ -39,7 +39,7 @@
     "react-element-to-jsx-string": "17.0.1",
     "react-live": "4.1.8",
     "sanity": "3.92.0",
-    "use-debounce": "10.0.4"
+    "use-debounce": "10.0.6"
   },
   "devDependencies": {
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
