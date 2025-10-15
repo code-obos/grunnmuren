@@ -281,9 +281,10 @@ function TabPanel(props: TabPanelProps) {
   return (
     <RACTabPanel
       {...restProps}
+      shouldForceMount
       className={cx(
         className,
-        'flex-1 data-focus-visible:outline-focus-offset',
+        'flex-1 data-inert:hidden data-focus-visible:outline-focus-offset',
       )}
     >
       {children}
