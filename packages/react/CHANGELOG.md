@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 3.0.15
+
+### Patch Changes
+
+- fc27a88: SEO fix for `<Tabs>`: Force hidden TabPanels to render, while being `inert` and visually hidden. This ensures that `<TabPanel>` content is always crawlable by search engines.
+
 ## 3.0.14
 
 ### Patch Changes
