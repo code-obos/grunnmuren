@@ -12,7 +12,7 @@
     "build:storybook": "storybook build -o ./apps/docs/public/storybook",
     "ci:publish": "pnpm build && changeset publish",
     "ci:version": "changeset version",
-    "dev": "storybook dev -p 6006 --ci",
+    "dev": "storybook dev -p 6006 --ci --initial-path=/story/home--page",
     "dev:docs": "pnpm --filter @obosbbl/grunnmuren-docs dev",
     "lint": "pnpm biome check .",
     "lint:ci": "pnpm biome ci .",
