@@ -37,7 +37,7 @@ const meta: Meta<typeof Hero> = {
             <CarouselItem>
               <Media>
                 <img
-                  src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
                   alt=""
                 />
               </Media>
@@ -45,7 +45,7 @@ const meta: Meta<typeof Hero> = {
             <CarouselItem>
               <Media>
                 <img
-                  src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
                   alt=""
                 />
               </Media>
@@ -89,7 +89,7 @@ export const TwoColumn = () => (
       </Content>
       <Media>
         <img
-          src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/ar_1.234,w_1440,f_auto,q_auto,g_auto,c_fill/v1662557719/Kampanjer/obos-medlem-ungt-par-hjemme.jpg"
+          src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/da49bd3a8e2175a547da4c69c9dbce718c077fcb-1920x1280.jpg?auto=format"
           alt=""
         />
       </Media>
@@ -113,7 +113,7 @@ export const StandardPageWithCTA = () => (
       </Button>
       <Media>
         <img
-          src="https://res.cloudinary.com/obosit-prd-ch-clry/f_auto,c_limit,w_1200,q_auto/v1578908385/Samfunnsansvar/OBOS-innovasjon-livet-mellom-husene"
+          src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/da49bd3a8e2175a547da4c69c9dbce718c077fcb-1920x1280.jpg?auto=format"
           alt=""
         />
       </Media>
@@ -142,7 +142,7 @@ export const StandardWithCarousel = () => (
           <CarouselItem>
             <Media fit="contain">
               <img
-                src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_1080,q_auto:best/t_2_3/v1747985572/Temasider/Folk/Hans%20Petter%20%20-%20Trang%20f%C3%B8dsel/Obos-Hans-Petter-Aaserud-Photo-Einar-Aslaksen-03093_web.jpg"
+                src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/9a29374fde57a12bedf17149525c325a8c3254ae-850x180.svg?auto=format"
                 alt=""
               />
             </Media>
@@ -150,7 +150,7 @@ export const StandardWithCarousel = () => (
           <CarouselItem>
             <Media>
               <img
-                src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+                src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
                 alt=""
               />
             </Media>
@@ -203,7 +203,7 @@ export const FullBleedWithImageAndBadge = () => (
       </Badge>
       <Media>
         <img
-          src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_3840,q_auto:best/v1731662987/Mellom%20husene/Byutvikling/Nabolag/Vollebekk/OBOS_bygulv_vollebekk_vannspeil-og-grontareal-foran-leilighetsbygg.jpg"
+          src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/da49bd3a8e2175a547da4c69c9dbce718c077fcb-1920x1280.jpg?auto=format"
           alt=""
         />
       </Media>
@@ -221,20 +221,9 @@ export const FullBleedWithCarousel = () => (
       <Carousel>
         <CarouselItems>
           <CarouselItem>
-            <CarouselItem>
-              <Media>
-                <VideoLoop
-                  src="https://res.cloudinary.com/obosit-prd-ch-clry/video/upload/v1732199756/Mellom%20husene/Frysja_Loop2.mp4"
-                  format="mp4"
-                  alt="En postbil kjører rundt i det moderne nabolaget på Frysja. Her finnes det fine uteområder, med husker og kafeer."
-                />
-              </Media>
-            </CarouselItem>
-          </CarouselItem>
-          <CarouselItem>
             <Media>
               <img
-                src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+                src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
                 alt=""
               />
             </Media>
@@ -242,7 +231,7 @@ export const FullBleedWithCarousel = () => (
           <CarouselItem>
             <Media>
               <img
-                src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/v1587988823/Boligprosjekter/Oslo/Frysjaparken/Frysjalia/Frysjaparken_interi%C3%B8r_30.jpg"
+                src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/7d2285ccee9b9545e018115b8e0ecc8b06aa0729-1620x1080.jpg?auto=format"
                 alt=""
               />
             </Media>
@@ -250,7 +239,7 @@ export const FullBleedWithCarousel = () => (
           <CarouselItem>
             <Media fit="contain">
               <img
-                src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_1080,q_auto:best/t_2_3/v1747985572/Temasider/Folk/Hans%20Petter%20%20-%20Trang%20f%C3%B8dsel/Obos-Hans-Petter-Aaserud-Photo-Einar-Aslaksen-03093_web.jpg"
+                src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/32a53eec782e6cbe15d75961f82ecca48dbe30ed-1920x1080.png?auto=format"
                 alt=""
               />
             </Media>
@@ -258,7 +247,7 @@ export const FullBleedWithCarousel = () => (
           <CarouselItem>
             <Media>
               <img
-                src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/v1699879884/Boligprosjekter/Oslo/Frysjaparken/Ager/Originale%20bilder/OBOS_Frysja-Ager-Illustrasjon_av_Frysja_torg_i_Ager_borettslag.jpg"
+                src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/a3c4b263f72128f5c6259333a224054ed3b539fe-1440x788.heif?auto=format"
                 alt=""
               />
             </Media>

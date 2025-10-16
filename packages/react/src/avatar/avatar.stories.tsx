@@ -23,7 +23,7 @@ type Story = StoryObj<typeof Avatar>;
 
 export const DisclosureStory: Story = {
   args: {
-    src: 'https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/v1578474487/Boligkonferansen/obosbk%202017/Daniel_Kj%C3%B8rberg_Siraj_1x1.jpg',
+    src: 'https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/3c7245912b338f058f6f555a4b6c964911658d46-820x447.jpg?auto=format',
   },
 };
 

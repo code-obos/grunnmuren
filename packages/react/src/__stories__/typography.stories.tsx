@@ -25,7 +25,7 @@ export const Default = () => {
       <figure>
         <img
           className="mb-4 max-w-96 bg-blue-dark p-4"
-          src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/q_auto/v1619689575/OBOS%20Merkevare/OBOS/Liggende/obos_liggende_hus_hvit.svg"
+          src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/9a29374fde57a12bedf17149525c325a8c3254ae-850x180.svg?auto=format"
           alt="OBOS logo"
         />
         <figcaption className="description">
