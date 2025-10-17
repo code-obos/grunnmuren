@@ -15,7 +15,7 @@ export default meta;
 export const Page = {
   render: () => (
     <div>
-      <h1 className="heading-xl mb-8">Velkommen til OBOS Grunnmuren</h1>
+      <h1 className="heading-xl mb-8">Storybook for OBOS Grunnmuren</h1>
       <blockquote className="blockquote mb-8">
         Grunnmuren er... eh, grunnmuren i all visuell kommunikasjon; den bærer
         budskapets vekt og gir strukturen vi bygger vår forståelse på.
