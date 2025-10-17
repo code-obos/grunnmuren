@@ -11,8 +11,14 @@ const preview: Preview = {
       </GrunnmurenProvider>
     ),
   ],
-
   tags: ['autodocs'],
+  parameters: {
+    options: {
+      storySort: {
+        order: ['Home', '*'],
+      },
+    },
+  },
 };
 
 export default preview;
