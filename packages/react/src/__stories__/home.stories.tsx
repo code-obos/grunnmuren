@@ -16,10 +16,9 @@ export const Page = {
   render: () => (
     <div>
       <h1 className="heading-xl mb-8">Storybook for OBOS Grunnmuren</h1>
-      <blockquote className="blockquote mb-8">
-        Grunnmuren er... eh, grunnmuren i all visuell kommunikasjon; den bærer
-        budskapets vekt og gir strukturen vi bygger vår forståelse på.
-      </blockquote>
+      <p className="lead mb-8">
+          Storybooken brukes fremst til å lage eksempler under utvikling. Men her finner du kodeeksempler og litt dokumentasjon for React-komponenter og tailwind-klasser.
+      </p>
       <span className="text-9xl">🐩</span>
     </div>
   ),
