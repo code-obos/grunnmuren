@@ -1,0 +1,14 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: grunnmuren
+  description: Frontend for grunnmuren.obos.no documentation site
+  tags:
+    - node
+    - typescript
+    - tanstack-start
+    - react
+spec:
+  type: website
+  owner: nettsted
+  lifecycle: production
