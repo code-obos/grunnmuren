@@ -8,6 +8,10 @@ metadata:
     - typescript
     - tanstack-start
     - react
+  links:
+    - url: https://grunnmuren.obos.no
+      title: Grunnmuren documentation
+      icon: docs
 spec:
   type: website
   owner: nettsted
@@ -22,6 +26,10 @@ metadata:
   description: Frontend React component library based on OBOS Grunnmuren Design System
   tags:
     - react
+  links:
+    - url: https://github.com/code-obos/grunnmuren/packages/react
+      title: Grunnmuren react package documentation
+      icon: docs
 spec:
   type: library
   owner: nettsted
@@ -36,6 +44,10 @@ metadata:
   description: Frontend Tailwind CSS library based on OBOS Grunnmuren Design System
   tags:
     - tailwind
+  links:
+    - url: https://github.com/code-obos/grunnmuren/packages/tailwind
+      title: Grunnmuren tailwind package documentation
+      icon: docs
 spec:
   type: library
   owner: nettsted
@@ -50,6 +62,10 @@ metadata:
   description: Grunnmuren icons as react components
   tags:
     - react
+  links:
+    - url: https://github.com/code-obos/grunnmuren/packages/icons-react
+      title: Grunnmuren icons react package documentation
+      icon: docs
 spec:
   type: library
   owner: nettsted
@@ -64,6 +80,10 @@ metadata:
   description: Grunnmuren icons as SVG components
   tags:
     - svg
+  links:
+    - url: https://github.com/code-obos/grunnmuren/packages/icons-svg
+      title: Grunnmuren icons svg package documentation
+      icon: docs
 spec:
   type: library
   owner: nettsted
