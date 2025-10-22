@@ -1,0 +1,70 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: grunnmuren
+  description: Frontend for grunnmuren.obos.no documentation site
+  tags:
+    - node
+    - typescript
+    - tanstack-start
+    - react
+spec:
+  type: website
+  owner: nettsted
+  lifecycle: production
+
+---
+
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: grunnmuren-react
+  description: Frontend React component library based on OBOS Grunnmuren Design System
+  tags:
+    - react
+spec:
+  type: library
+  owner: nettsted
+  lifecycle: production
+
+---
+
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: grunnmuren-tailwind
+  description: Frontend Tailwind CSS library based on OBOS Grunnmuren Design System
+  tags:
+    - tailwind
+spec:
+  type: library
+  owner: nettsted
+  lifecycle: production
+
+---
+
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: grunnmuren-icons-react
+  description: Grunnmuren icons as react components
+  tags:
+    - react
+spec:
+  type: library
+  owner: nettsted
+  lifecycle: production
+
+---
+
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: grunnmuren-icons-svg
+  description: Grunnmuren icons as SVG components
+  tags:
+    - svg
+spec:
+  type: library
+  owner: nettsted
+  lifecycle: production
