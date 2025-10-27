@@ -8,17 +8,21 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createServerRootRoute } from '@tanstack/react-start/server'
+
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as DocsRouteImport } from './routes/_docs'
 import { Route as DocsIndexRouteImport } from './routes/_docs/index'
 import { Route as StudioSplatRouteImport } from './routes/studio/$'
-import { Route as ApiHealthRouteImport } from './routes/api/health'
 import { Route as DocsSlugRouteImport } from './routes/_docs/$slug'
 import { Route as DocsProfilIndexRouteImport } from './routes/_docs/profil/index'
 import { Route as DocsKomponenterIndexRouteImport } from './routes/_docs/komponenter/index'
 import { Route as DocsProfilIkonerRouteImport } from './routes/_docs/profil/ikoner'
 import { Route as DocsProfilFargerRouteImport } from './routes/_docs/profil/farger'
 import { Route as DocsKomponenterSlugRouteImport } from './routes/_docs/komponenter/$slug'
+import { ServerRoute as ApiHealthServerRouteImport } from './routes/api/health'
+
+const rootServerRouteImport = createServerRootRoute()
 
 const DocsRoute = DocsRouteImport.update({
   id: '/_docs',
@@ -32,11 +36,6 @@ const DocsIndexRoute = DocsIndexRouteImport.update({
 const StudioSplatRoute = StudioSplatRouteImport.update({
   id: '/studio/$',
   path: '/studio/$',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiHealthRoute = ApiHealthRouteImport.update({
-  id: '/api/health',
-  path: '/api/health',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DocsSlugRoute = DocsSlugRouteImport.update({
@@ -69,10 +68,15 @@ const DocsKomponenterSlugRoute = DocsKomponenterSlugRouteImport.update({
   path: '/komponenter/$slug',
   getParentRoute: () => DocsRoute,
 } as any)
+const ApiHealthServerRoute = ApiHealthServerRouteImport.update({
+  id: '/api/health',
+  path: '/api/health',
+  getParentRoute: () => rootServerRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
+  '': typeof DocsRouteWithChildren
   '/$slug': typeof DocsSlugRoute
-  '/api/health': typeof ApiHealthRoute
   '/studio/$': typeof StudioSplatRoute
   '/': typeof DocsIndexRoute
   '/komponenter/$slug': typeof DocsKomponenterSlugRoute
@@ -83,7 +87,6 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/$slug': typeof DocsSlugRoute
-  '/api/health': typeof ApiHealthRoute
   '/studio/$': typeof StudioSplatRoute
   '/': typeof DocsIndexRoute
   '/komponenter/$slug': typeof DocsKomponenterSlugRoute
@@ -96,7 +99,6 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_docs': typeof DocsRouteWithChildren
   '/_docs/$slug': typeof DocsSlugRoute
-  '/api/health': typeof ApiHealthRoute
   '/studio/$': typeof StudioSplatRoute
   '/_docs/': typeof DocsIndexRoute
   '/_docs/komponenter/$slug': typeof DocsKomponenterSlugRoute
@@ -108,8 +110,8 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | ''
     | '/$slug'
-    | '/api/health'
     | '/studio/$'
     | '/'
     | '/komponenter/$slug'
@@ -120,7 +122,6 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/$slug'
-    | '/api/health'
     | '/studio/$'
     | '/'
     | '/komponenter/$slug'
@@ -132,7 +133,6 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_docs'
     | '/_docs/$slug'
-    | '/api/health'
     | '/studio/$'
     | '/_docs/'
     | '/_docs/komponenter/$slug'
@@ -144,8 +144,28 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   DocsRoute: typeof DocsRouteWithChildren
-  ApiHealthRoute: typeof ApiHealthRoute
   StudioSplatRoute: typeof StudioSplatRoute
+}
+export interface FileServerRoutesByFullPath {
+  '/api/health': typeof ApiHealthServerRoute
+}
+export interface FileServerRoutesByTo {
+  '/api/health': typeof ApiHealthServerRoute
+}
+export interface FileServerRoutesById {
+  __root__: typeof rootServerRouteImport
+  '/api/health': typeof ApiHealthServerRoute
+}
+export interface FileServerRouteTypes {
+  fileServerRoutesByFullPath: FileServerRoutesByFullPath
+  fullPaths: '/api/health'
+  fileServerRoutesByTo: FileServerRoutesByTo
+  to: '/api/health'
+  id: '__root__' | '/api/health'
+  fileServerRoutesById: FileServerRoutesById
+}
+export interface RootServerRouteChildren {
+  ApiHealthServerRoute: typeof ApiHealthServerRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -157,12 +177,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_docs/': {
-      id: '/_docs/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof DocsIndexRouteImport
+    '/_docs/$slug': {
+      id: '/_docs/$slug'
+      path: '/$slug'
+      fullPath: '/$slug'
+      preLoaderRoute: typeof DocsSlugRouteImport
       parentRoute: typeof DocsRoute
+    }
+    '/api/health': {
+      id: '/api/health'
+      path: ''
+      fullPath: '/api/health'
+      preLoaderRoute: unknown
+      parentRoute: typeof rootRouteImport
     }
     '/studio/$': {
       id: '/studio/$'
@@ -171,39 +198,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudioSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/health': {
-      id: '/api/health'
-      path: '/api/health'
-      fullPath: '/api/health'
-      preLoaderRoute: typeof ApiHealthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_docs/$slug': {
-      id: '/_docs/$slug'
-      path: '/$slug'
-      fullPath: '/$slug'
-      preLoaderRoute: typeof DocsSlugRouteImport
+    '/_docs/': {
+      id: '/_docs/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof DocsIndexRouteImport
       parentRoute: typeof DocsRoute
     }
-    '/_docs/profil/': {
-      id: '/_docs/profil/'
-      path: '/profil'
-      fullPath: '/profil'
-      preLoaderRoute: typeof DocsProfilIndexRouteImport
-      parentRoute: typeof DocsRoute
-    }
-    '/_docs/komponenter/': {
-      id: '/_docs/komponenter/'
-      path: '/komponenter'
-      fullPath: '/komponenter'
-      preLoaderRoute: typeof DocsKomponenterIndexRouteImport
-      parentRoute: typeof DocsRoute
-    }
-    '/_docs/profil/ikoner': {
-      id: '/_docs/profil/ikoner'
-      path: '/profil/ikoner'
-      fullPath: '/profil/ikoner'
-      preLoaderRoute: typeof DocsProfilIkonerRouteImport
+    '/_docs/komponenter/$slug': {
+      id: '/_docs/komponenter/$slug'
+      path: '/komponenter/$slug'
+      fullPath: '/komponenter/$slug'
+      preLoaderRoute: typeof DocsKomponenterSlugRouteImport
       parentRoute: typeof DocsRoute
     }
     '/_docs/profil/farger': {
@@ -213,12 +219,100 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsProfilFargerRouteImport
       parentRoute: typeof DocsRoute
     }
+    '/_docs/profil/ikoner': {
+      id: '/_docs/profil/ikoner'
+      path: '/profil/ikoner'
+      fullPath: '/profil/ikoner'
+      preLoaderRoute: typeof DocsProfilIkonerRouteImport
+      parentRoute: typeof DocsRoute
+    }
+    '/_docs/komponenter/': {
+      id: '/_docs/komponenter/'
+      path: '/komponenter'
+      fullPath: '/komponenter'
+      preLoaderRoute: typeof DocsKomponenterIndexRouteImport
+      parentRoute: typeof DocsRoute
+    }
+    '/_docs/profil/': {
+      id: '/_docs/profil/'
+      path: '/profil'
+      fullPath: '/profil'
+      preLoaderRoute: typeof DocsProfilIndexRouteImport
+      parentRoute: typeof DocsRoute
+    }
+  }
+}
+declare module '@tanstack/react-start/server' {
+  interface ServerFileRoutesByPath {
+    '/_docs': {
+      id: '/_docs'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: unknown
+      parentRoute: typeof rootServerRouteImport
+    }
+    '/_docs/$slug': {
+      id: '/_docs/$slug'
+      path: '/$slug'
+      fullPath: '/$slug'
+      preLoaderRoute: unknown
+      parentRoute: typeof rootServerRouteImport
+    }
+    '/api/health': {
+      id: '/api/health'
+      path: '/api/health'
+      fullPath: '/api/health'
+      preLoaderRoute: typeof ApiHealthServerRouteImport
+      parentRoute: typeof rootServerRouteImport
+    }
+    '/studio/$': {
+      id: '/studio/$'
+      path: '/studio/$'
+      fullPath: '/studio/$'
+      preLoaderRoute: unknown
+      parentRoute: typeof rootServerRouteImport
+    }
+    '/_docs/': {
+      id: '/_docs/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: unknown
+      parentRoute: typeof rootServerRouteImport
+    }
     '/_docs/komponenter/$slug': {
       id: '/_docs/komponenter/$slug'
       path: '/komponenter/$slug'
       fullPath: '/komponenter/$slug'
-      preLoaderRoute: typeof DocsKomponenterSlugRouteImport
-      parentRoute: typeof DocsRoute
+      preLoaderRoute: unknown
+      parentRoute: typeof rootServerRouteImport
+    }
+    '/_docs/profil/farger': {
+      id: '/_docs/profil/farger'
+      path: '/profil/farger'
+      fullPath: '/profil/farger'
+      preLoaderRoute: unknown
+      parentRoute: typeof rootServerRouteImport
+    }
+    '/_docs/profil/ikoner': {
+      id: '/_docs/profil/ikoner'
+      path: '/profil/ikoner'
+      fullPath: '/profil/ikoner'
+      preLoaderRoute: unknown
+      parentRoute: typeof rootServerRouteImport
+    }
+    '/_docs/komponenter/': {
+      id: '/_docs/komponenter/'
+      path: '/komponenter'
+      fullPath: '/komponenter'
+      preLoaderRoute: unknown
+      parentRoute: typeof rootServerRouteImport
+    }
+    '/_docs/profil/': {
+      id: '/_docs/profil/'
+      path: '/profil'
+      fullPath: '/profil'
+      preLoaderRoute: unknown
+      parentRoute: typeof rootServerRouteImport
     }
   }
 }
@@ -247,18 +341,14 @@ const DocsRouteWithChildren = DocsRoute._addFileChildren(DocsRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   DocsRoute: DocsRouteWithChildren,
-  ApiHealthRoute: ApiHealthRoute,
   StudioSplatRoute: StudioSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
+const rootServerRouteChildren: RootServerRouteChildren = {
+  ApiHealthServerRoute: ApiHealthServerRoute,
 }
+export const serverRouteTree = rootServerRouteImport
+  ._addFileChildren(rootServerRouteChildren)
+  ._addFileTypes<FileServerRouteTypes>()

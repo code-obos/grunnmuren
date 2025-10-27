@@ -12,7 +12,7 @@ export function ResourceLinks(props: ResourceLinksProps) {
   );
 }
 
-export type ResourceLinkProps = {
+type ResourceLinkProps = {
   type: 'github' | 'figma' | 'npm' | 'other';
   href: string;
   text?: string;
