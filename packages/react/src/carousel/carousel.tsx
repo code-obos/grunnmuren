@@ -294,8 +294,6 @@ const CarouselItem = ({ className, children, id }: CarouselItemProps) => {
 export {
   Carousel as UNSAFE_Carousel,
   CarouselItem as UNSAFE_CarouselItem,
-  CarouselItems as UNSAFE_CarouselItems,
-  type CarouselItemsProps as UNSAFE_CarouselItemsProps,
-  type CarouselItemProps as UNSAFE_CarouselItemProps,
-  type CarouselProps as UNSAFE_CarouselProps,
+  CarouselItems as UNSAFE_CarouselItems, type CarouselItemProps as UNSAFE_CarouselItemProps, type CarouselItemsProps as UNSAFE_CarouselItemsProps, type CarouselProps as UNSAFE_CarouselProps
 };
+
