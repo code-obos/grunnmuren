@@ -5,6 +5,7 @@ import {
   UNSAFE_CarouselItems as CarouselItems,
 } from '../carousel';
 import { Media } from '../content';
+import { Button } from '../button';
 
 const meta: Meta<typeof Carousel> = {
   title: 'Carousel',
@@ -82,6 +83,7 @@ export const WithNavigationCallbacks = () => (
               alt=""
             />
           </Media>
+          <Button href="/asfd">Min knapp</Button>
         </CarouselItem>
         <CarouselItem id="second">
           <Media>
