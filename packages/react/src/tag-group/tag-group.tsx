@@ -147,8 +147,4 @@ function Tag(props: TagProps) {
   );
 }
 
-export {
-  TagGroup as UNSAFE_TagGroup,
-  TagList as UNSAFE_TagList,
-  Tag as UNSAFE_Tag,
-};
+export { TagGroup, TagList, Tag };
