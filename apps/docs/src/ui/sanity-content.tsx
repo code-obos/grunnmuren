@@ -31,11 +31,7 @@ export function SanityContent({ content, className }: SanityContentProps) {
               <Code value={value.code.code as string} />
             ),
             'image-with-caption': ({ value }) => (
-              <ImageWithCaption
-                src={value.asset.url}
-                alt={value.alt ?? ''}
-                caption={value.caption ?? ''}
-              />
+              <ImageWithCaption asset={value} />
             ),
             table: ({ value: { rows } }) => {
               const [firstRow, ...restRows] = rows;

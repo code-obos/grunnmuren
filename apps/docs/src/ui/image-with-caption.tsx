@@ -1,28 +1,33 @@
+import { getImageDimensions } from '@sanity/asset-utils';
+import type { COMPONENT_QUERYResult } from 'sanity.types';
+import { urlForImage } from '@/lib/image-url';
+
+type TSanityImage = Extract<
+  NonNullable<NonNullable<COMPONENT_QUERYResult>['content']>[number],
+  { _type: 'image-with-caption' }
+>;
+
 interface ImageProps {
-  src: string;
-  alt: string;
-  caption?: string;
-  width?: number;
-  height?: number;
+  asset: TSanityImage;
 }
 
-export function ImageWithCaption({
-  src,
-  alt,
-  caption,
-  width,
-  height,
-}: ImageProps) {
+export function ImageWithCaption({ asset }: ImageProps) {
+  if (!asset.asset) {
+    return null;
+  }
+
+  const image = getImageDimensions(asset.asset);
+
   return (
     <div className="my-4">
       <img
-        src={src}
-        alt={alt}
-        width={width}
-        height={height}
+        src={urlForImage(asset.asset).url()}
+        alt={asset.alt}
+        width={image?.width}
+        height={image?.height}
         className="m-0 w-full"
       />
-      <p className="description">{caption}</p>
+      <p className="description">{asset.caption}</p>
     </div>
   );
 }

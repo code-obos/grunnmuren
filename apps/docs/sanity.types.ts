@@ -344,7 +344,7 @@ export type NAVIGATION_QUERYResult = {
 
 // Source: ./src/routes/_docs/$slug.tsx
 // Variable: INFO_QUERY
-// Query: *[_type == "info"  && slug.current == $slug][0]{    "content": content[] {      ...,      _type == "image-with-caption" => {        ...,        asset->      }    },    "name": coalesce(name, ''),    resourceLinks,  }
+// Query: *[_type == "info"  && slug.current == $slug][0]{    "content": content[] {      ...,      _type == "image-with-caption" => {        ...,      }    },    "name": coalesce(name, ''),    resourceLinks,  }
 export type INFO_QUERYResult = {
   content: Array<{
     children?: Array<{
@@ -366,28 +366,12 @@ export type INFO_QUERYResult = {
   } | {
     _key: string;
     _type: "image-with-caption";
-    asset: {
-      _id: string;
-      _type: "sanity.imageAsset";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      originalFilename?: string;
-      label?: string;
-      title?: string;
-      description?: string;
-      altText?: string;
-      sha1hash?: string;
-      extension?: string;
-      mimeType?: string;
-      size?: number;
-      assetId?: string;
-      uploadId?: string;
-      path?: string;
-      url?: string;
-      metadata?: SanityImageMetadata;
-      source?: SanityAssetSourceData;
-    } | null;
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -422,7 +406,7 @@ export type INFO_QUERYResult = {
 
 // Source: ./src/routes/_docs/komponenter/$slug.tsx
 // Variable: COMPONENT_QUERY
-// Query: *[_type == "component"  && slug.current == $slug][0]{    "content": content[] {      ...,      _type == "image-with-caption" => {        ...,        asset->      }    },    "name": coalesce(name, ''),    propsComponents,    resourceLinks,    componentState,  }
+// Query: *[_type == "component"  && slug.current == $slug][0]{    "content": content[] {      ...,      _type == "image-with-caption" => {        ...,      }    },    "name": coalesce(name, ''),    propsComponents,    resourceLinks,    componentState,  }
 export type COMPONENT_QUERYResult = {
   content: Array<{
     children?: Array<{
@@ -444,28 +428,12 @@ export type COMPONENT_QUERYResult = {
   } | {
     _key: string;
     _type: "image-with-caption";
-    asset: {
-      _id: string;
-      _type: "sanity.imageAsset";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      originalFilename?: string;
-      label?: string;
-      title?: string;
-      description?: string;
-      altText?: string;
-      sha1hash?: string;
-      extension?: string;
-      mimeType?: string;
-      size?: number;
-      assetId?: string;
-      uploadId?: string;
-      path?: string;
-      url?: string;
-      metadata?: SanityImageMetadata;
-      source?: SanityAssetSourceData;
-    } | null;
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -515,8 +483,8 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "{\n  \"components\": *[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc),\n  \"menu\": *[_type == \"menu\"][0]{\n    categories[]->{\n      title,\n      \"slug\": slug.current,\n      categoryItems[]->{\n        name,\n        \"slug\": slug.current\n      }\n    }\n  }\n}": NAVIGATION_QUERYResult;
-    "*[_type == \"info\"\n  && slug.current == $slug][0]{\n    \"content\": content[] {\n      ...,\n      _type == \"image-with-caption\" => {\n        ...,\n        asset->\n      }\n    },\n    \"name\": coalesce(name, ''),\n    resourceLinks,\n  }": INFO_QUERYResult;
-    "*[_type == \"component\"\n  && slug.current == $slug][0]{\n    \"content\": content[] {\n      ...,\n      _type == \"image-with-caption\" => {\n        ...,\n        asset->\n      }\n    },\n    \"name\": coalesce(name, ''),\n    propsComponents,\n    resourceLinks,\n    componentState,\n  }": COMPONENT_QUERYResult;
+    "*[_type == \"info\"\n  && slug.current == $slug][0]{\n    \"content\": content[] {\n      ...,\n      _type == \"image-with-caption\" => {\n        ...,\n      }\n    },\n    \"name\": coalesce(name, ''),\n    resourceLinks,\n  }": INFO_QUERYResult;
+    "*[_type == \"component\"\n  && slug.current == $slug][0]{\n    \"content\": content[] {\n      ...,\n      _type == \"image-with-caption\" => {\n        ...,\n      }\n    },\n    \"name\": coalesce(name, ''),\n    propsComponents,\n    resourceLinks,\n    componentState,\n  }": COMPONENT_QUERYResult;
     "*[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc)": COMPONENTS_INDEX_QUERYResult;
   }
 }
