@@ -44,10 +44,10 @@
   "devDependencies": {
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
     "@react-aria/optimize-locales-plugin": "1.1.5",
-    "@tailwindcss/vite": "4.1.10",
+    "@tailwindcss/vite": "4.1.16",
     "@tanstack/react-router-devtools": "1.121.0",
     "react-docgen-typescript": "2.2.2",
-    "tailwindcss": "4.1.10",
+    "tailwindcss": "4.1.16",
     "vite": "7.1.11",
     "vite-tsconfig-paths": "5.1.4"
   }
