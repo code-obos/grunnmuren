@@ -1,11 +1,7 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createServerFileRoute } from '@tanstack/react-start/server';
 
-export const Route = createFileRoute('/api/health')({
-  server: {
-    handlers: {
-      GET: async () => {
-        return new Response('Im alive!');
-      },
-    },
+export const ServerRoute = createServerFileRoute('/api/health').methods({
+  GET: () => {
+    return new Response('Im alive!');
   },
 });
