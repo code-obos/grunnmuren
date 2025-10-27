@@ -237,6 +237,7 @@ const DisclosurePanel = ({ ref, children, ...props }: DisclosurePanelProps) => {
           className={cx(className, '[content-visibility:visible]')}
           role={role}
           aria-labelledby={isWithoutRole ? undefined : ariaLabelledby}
+          inert={disclosureContext?.isExpanded ? undefined : true}
         >
           <Provider
             values={[
