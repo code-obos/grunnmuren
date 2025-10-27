@@ -77,39 +77,37 @@ export const Code = ({
   const [isCodeExpanded, setIsCodeExpanded] = useState(false);
 
   return (
-    <>
-      <div className="overflow-hidden rounded-lg border">
-        <LiveProvider
-          code={value}
-          scope={scope}
-          theme={themes.vsDark}
-          disabled={!isEditable}
-        >
-          {withLivePreview ? (
-            <>
-              <LivePreview className="not-prose grid place-items-center gap-y-2 p-18" />
-              <Disclosure
-                isExpanded={isCodeExpanded}
-                onExpandedChange={setIsCodeExpanded}
-                className="grid grid-cols-1"
+    <div className="overflow-hidden rounded-lg border">
+      <LiveProvider
+        code={value}
+        scope={scope}
+        theme={themes.vsDark}
+        disabled={!isEditable}
+      >
+        {withLivePreview ? (
+          <>
+            <LivePreview className="not-prose grid place-items-center gap-y-2 p-18" />
+            <Disclosure
+              isExpanded={isCodeExpanded}
+              onExpandedChange={setIsCodeExpanded}
+              className="grid grid-cols-1"
+            >
+              <Button
+                className="justify-self-end"
+                variant="tertiary"
+                slot="trigger"
               >
-                <Button
-                  className="justify-self-end"
-                  variant="tertiary"
-                  slot="trigger"
-                >
-                  {isCodeExpanded ? 'Skjul' : 'Vis'} kode
-                </Button>
-                <DisclosurePanel>
-                  <CodeSnippet value={value} setValue={setValue} />
-                </DisclosurePanel>
-              </Disclosure>
-            </>
-          ) : (
-            <CodeSnippet value={value} />
-          )}
-        </LiveProvider>
-      </div>
-    </>
+                {isCodeExpanded ? 'Skjul' : 'Vis'} kode
+              </Button>
+              <DisclosurePanel>
+                <CodeSnippet value={value} setValue={setValue} />
+              </DisclosurePanel>
+            </Disclosure>
+          </>
+        ) : (
+          <CodeSnippet value={value} />
+        )}
+      </LiveProvider>
+    </div>
   );
 };

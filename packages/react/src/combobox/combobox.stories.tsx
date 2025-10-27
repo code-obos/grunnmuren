@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useEffect, useState } from 'react';
 
 import { Button } from '../button/button';
+import { counties } from '../mocks';
 import {
   Combobox,
   ComboboxHeader,
@@ -9,8 +10,6 @@ import {
   type ComboboxProps,
   ComboboxSection,
 } from './combobox';
-
-import { counties } from '../mocks';
 
 const meta: Meta<typeof Combobox> = {
   title: 'Combobox',

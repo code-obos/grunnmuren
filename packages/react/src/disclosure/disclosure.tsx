@@ -1,13 +1,13 @@
 import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
 import { filterDOMProps, mergeProps, mergeRefs } from '@react-aria/utils';
-import { type VariantProps, cva, cx } from 'cva';
+import { cva, cx, type VariantProps } from 'cva';
 import {
+  createContext,
   type DOMAttributes,
   type ForwardedRef,
   type HTMLAttributes,
   type HTMLProps,
   type RefAttributes,
-  createContext,
   useContext,
   useId,
   useRef,
@@ -227,6 +227,7 @@ const DisclosurePanel = ({ ref, children, ...props }: DisclosurePanelProps) => {
       )}
     >
       <div className="overflow-hidden">
+        {/* biome-ignore lint/a11y/useAriaPropsSupportedByRole: TODO: fix this */}
         <div
           ref={mergeRefs(ref, panelRef)}
           {...mergeProps(panelProps, focusWithinProps)}

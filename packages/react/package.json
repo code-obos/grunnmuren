@@ -1,6 +1,6 @@
 {
   "name": "@obosbbl/grunnmuren-react",
-  "version": "3.0.14",
+  "version": "3.0.15",
   "description": "Grunnmuren components in React",
   "repository": {
     "url": "https://github.com/code-obos/grunnmuren"
@@ -38,6 +38,6 @@
     "react": "^19"
   },
   "devDependencies": {
-    "tailwindcss": "4.1.10"
+    "tailwindcss": "4.1.16"
   }
 }

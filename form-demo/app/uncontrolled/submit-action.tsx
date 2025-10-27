@@ -11,7 +11,7 @@ type SubmitFormResult = {
 };
 
 export async function submitForm(
-  prevState: SubmitFormResult,
+  _prevState: SubmitFormResult,
   formData: FormData,
 ): Promise<SubmitFormResult> {
   const result = schema.safeParse(Object.fromEntries(formData));

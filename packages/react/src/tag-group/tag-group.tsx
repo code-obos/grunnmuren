@@ -19,7 +19,7 @@ const tagVariants = cva({
     //Focus
     'focus-visible:outline-focus-offset',
     // Hover
-    ' data-hovered:bg-sky',
+    'data-hovered:bg-sky',
     // Selected
     // Allows removing
     'data-allows-removing:border-transparent',

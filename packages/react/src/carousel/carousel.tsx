@@ -1,7 +1,7 @@
 import { ChevronLeft, ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 import { useUpdateEffect } from '@react-aria/utils';
 import { cx } from 'cva';
-import { type JSX, createContext, useEffect, useRef, useState } from 'react';
+import { createContext, type JSX, useEffect, useRef, useState } from 'react';
 import { DEFAULT_SLOT, Provider } from 'react-aria-components';
 import { useDebouncedCallback } from 'use-debounce';
 import { Button, ButtonContext } from '../button';

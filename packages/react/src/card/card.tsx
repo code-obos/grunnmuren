@@ -1,4 +1,4 @@
-import { type VariantProps, cva, cx } from 'cva';
+import { cva, cx, type VariantProps } from 'cva';
 import type { HTMLAttributes } from 'react';
 import {
   Link,
@@ -202,7 +202,7 @@ type CardLinkWrapperProps = {
   [K in keyof Omit<RACLinkProps, 'className' | 'children'>]?: never;
 };
 
-type S = Pick<RACLinkProps, 'href'>;
+type _S = Pick<RACLinkProps, 'href'>;
 
 type CardLinkProps =
   | (Omit<RACLinkProps, 'href'> & Required<Pick<RACLinkProps, 'href'>>)

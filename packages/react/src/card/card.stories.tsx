@@ -66,7 +66,7 @@ export const WithImage = () => (
     <Media>
       <img
         alt=""
-        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+        src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/99ef2e1ea751dbdebd992a6bc54f6b6c91915697-1600x837.jpg?auto=format"
       />
     </Media>
     <Content>
@@ -84,7 +84,7 @@ export const OutlinedWithImageAnd = () => (
     <Media>
       <img
         alt=""
-        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+        src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/99ef2e1ea751dbdebd992a6bc54f6b6c91915697-1600x837.jpg?auto=format"
       />
     </Media>
     <Content>
@@ -218,7 +218,7 @@ export const ClickableWithImage = () => (
     <Media>
       <img
         alt=""
-        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+        src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/99ef2e1ea751dbdebd992a6bc54f6b6c91915697-1600x837.jpg?auto=format"
       />
     </Media>
     <Content>
@@ -250,7 +250,7 @@ export const ClickableWithImageAndCTA = () => (
     <Media>
       <img
         alt=""
-        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+        src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/99ef2e1ea751dbdebd992a6bc54f6b6c91915697-1600x837.jpg?auto=format"
       />
     </Media>
     <Content>
@@ -287,7 +287,7 @@ export const ClickableWithOtherClickableElements = () => (
       <Media>
         <img
           alt=""
-          src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+          src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
         />
       </Media>
       <Content className="grow">
@@ -330,7 +330,7 @@ export const ClickableWithOtherClickableElementsAndBackgroundColor = () => (
     <Media>
       <img
         alt=""
-        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+        src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
       />
     </Media>
     <Content>
@@ -380,7 +380,7 @@ export const ClickableWithBadge = () => (
       </Badge>
       <img
         alt=""
-        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+        src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
       />
     </Media>
     <Content>
@@ -426,7 +426,7 @@ export const ClickableWithBadgeRight = () => (
     <Media>
       <img
         alt=""
-        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+        src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
       />
       <Badge color="blue-dark">
         <InfoCircle />
@@ -476,7 +476,7 @@ export const HorizontalLeft = () => (
     <Media>
       <img
         alt=""
-        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+        src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/99ef2e1ea751dbdebd992a6bc54f6b6c91915697-1600x837.jpg?auto=format"
       />
     </Media>
     <Content>
@@ -513,7 +513,7 @@ export const HorizontalRight = () => (
     <Media>
       <img
         alt=""
-        src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+        src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/99ef2e1ea751dbdebd992a6bc54f6b6c91915697-1600x837.jpg?auto=format"
       />
     </Media>
   </Card>
@@ -555,7 +555,7 @@ export const HorizontalWithIconRight = () => (
 
 export const WithAvatar = () => (
   <Card layout="horizontal" variant="outlined" className="w-96 max-w-full">
-    <Avatar src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/v1578474487/Boligkonferansen/obosbk%202017/Daniel_Kj%C3%B8rberg_Siraj_1x1.jpg" />
+    <Avatar src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/3c7245912b338f058f6f555a4b6c964911658d46-820x447.jpg?auto=format" />
     <Content>
       <div className="flex flex-col-reverse gap-2">
         <Heading level={3}>Daniel Kjørberg Siraj</Heading>

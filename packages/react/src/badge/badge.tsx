@@ -1,4 +1,4 @@
-import { type VariantProps, cva } from 'cva';
+import { cva, type VariantProps } from 'cva';
 import type { Ref } from 'react';
 
 type BadgeProps = VariantProps<typeof badgeVariants> & {

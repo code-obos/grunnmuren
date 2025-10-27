@@ -1,9 +1,9 @@
-import { ResourceLink, ResourceLinks } from '@/ui/resource-links';
-import { ScrollToTop } from '@/ui/scroll-to-top';
 import * as icons from '@obosbbl/grunnmuren-icons-react';
 import { Download } from '@obosbbl/grunnmuren-icons-react';
 import { Button, Card } from '@obosbbl/grunnmuren-react';
 import { createFileRoute } from '@tanstack/react-router';
+import { ResourceLink, ResourceLinks } from '@/ui/resource-links';
+import { ScrollToTop } from '@/ui/scroll-to-top';
 
 export const Route = createFileRoute('/_docs/profil/ikoner')({
   component: Page,
@@ -66,13 +66,11 @@ function Page() {
 
 function IconsGrid() {
   return (
-    <>
-      <div className="grid grid-cols-[repeat(auto-fill,130px)] content-center gap-6">
-        {Object.entries(icons).map(([iconName, Icon]) => (
-          <IconCard key={iconName} iconName={iconName} Icon={Icon} />
-        ))}
-      </div>
-    </>
+    <div className="grid grid-cols-[repeat(auto-fill,130px)] content-center gap-6">
+      {Object.entries(icons).map(([iconName, Icon]) => (
+        <IconCard key={iconName} iconName={iconName} Icon={Icon} />
+      ))}
+    </div>
   );
 }
 
