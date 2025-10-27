@@ -19,8 +19,6 @@ const config: StorybookConfig = {
   async viteFinal(config) {
     // Merge custom configuration into the default config
     return mergeConfig(config, {
-      base: '/storybook/', // Add this line
-
       plugins: [
         {
           ...optimizeLocales.vite({
