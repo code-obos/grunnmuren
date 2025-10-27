@@ -3,7 +3,6 @@ import { Alertbox, Content } from '@obosbbl/grunnmuren-react';
 import { createFileRoute, notFound } from '@tanstack/react-router';
 import type * as props from 'component-props';
 import { defineQuery } from 'groq';
-import type { COMPONENT_QUERYResult } from 'sanity.types';
 import { sanityFetch } from '@/lib/sanity';
 import { AnchorHeading } from '@/ui/anchor-heading';
 import { PropsTable } from '@/ui/props-table';
@@ -34,7 +33,7 @@ const COMPONENT_QUERY = defineQuery(
 
 export const Route = createFileRoute('/_docs/komponenter/$slug')({
   component: Page,
-  loader: async ({ params }): Promise<{ data: COMPONENT_QUERYResult }> => {
+  loader: async ({ params }) => {
     const res = await sanityFetch({
       query: COMPONENT_QUERY,
       params: { slug: params.slug },
@@ -44,12 +43,12 @@ export const Route = createFileRoute('/_docs/komponenter/$slug')({
       throw notFound();
     }
 
-    return res;
+    return res.data as any;
   },
 });
 
 function Page() {
-  const { data } = Route.useLoaderData() || {};
+  const data = Route.useLoaderData();
 
   const _ghLink = data.resourceLinks?.find(
     (link) => link.linkType === 'github',

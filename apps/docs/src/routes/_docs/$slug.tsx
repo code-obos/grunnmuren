@@ -36,7 +36,7 @@ export const Route = createFileRoute('/_docs/$slug')({
       throw notFound();
     }
 
-    return { data: res.data };
+    return res as any;
   },
 });
 
