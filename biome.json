@@ -5,6 +5,7 @@
       "**",
       "!**/.tanstack",
       "!**/node_modules",
+      "!**/storybook-static",
       "!**/dist",
       "!**/.next",
       "!**/.output",
