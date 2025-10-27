@@ -1,9 +1,9 @@
 import { Subscription } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { Alertbox, type AlertboxProps } from '.';
 import { Button } from '..';
 import { Content, Footer, Heading } from '../content';
+import { Alertbox, type AlertboxProps } from '.';
 
 const meta: Meta<typeof Alertbox> = {
   title: 'Alertbox',

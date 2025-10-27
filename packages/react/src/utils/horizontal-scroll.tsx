@@ -31,6 +31,7 @@ export function ScrollButton({
 
   return (
     // biome-ignore lint/a11y/useKeyWithClickEvents: This button is only for mouse interaction to help users scroll. Keyboard and screen reader users can navigate the content directly without needing these scroll helpers.
+    // biome-ignore lint/a11y/noStaticElementInteractions: This button is only for mouse interaction to help users scroll. Keyboard and screen reader users can navigate the content directly without needing these scroll helpers.
     <div
       onClick={onClick}
       className={cx(

@@ -1,6 +1,3 @@
-import { type VariantProps, cva, cx } from 'cva';
-import { Children, useId } from 'react';
-
 import {
   CheckCircle,
   ChevronDown,
@@ -9,7 +6,8 @@ import {
   InfoCircle,
   Warning,
 } from '@obosbbl/grunnmuren-icons-react';
-import { useState } from 'react';
+import { cva, cx, type VariantProps } from 'cva';
+import { Children, useId, useState } from 'react';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 

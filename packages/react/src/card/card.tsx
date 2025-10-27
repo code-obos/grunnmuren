@@ -1,4 +1,4 @@
-import { type VariantProps, cva, cx } from 'cva';
+import { cva, cx, type VariantProps } from 'cva';
 import type { HTMLAttributes } from 'react';
 import {
   Link,

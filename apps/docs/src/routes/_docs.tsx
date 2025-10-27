@@ -1,8 +1,3 @@
-import logoUrl from '@/assets/OBOS_Hvit_Liggende.png?url';
-import { sanityFetch } from '@/lib/sanity';
-import appCss from '@/styles/app.css?url';
-import { Footer } from '@/ui/footer';
-import { MainNav } from '@/ui/main-nav';
 import { Close, Menu } from '@obosbbl/grunnmuren-icons-react';
 import {
   UNSAFE_Disclosure as Disclosure,
@@ -11,15 +6,20 @@ import {
   GrunnmurenProvider,
 } from '@obosbbl/grunnmuren-react';
 import {
+  createFileRoute,
+  Link,
   type NavigateOptions,
   Outlet,
   type ToOptions,
-  createFileRoute,
   useRouter,
 } from '@tanstack/react-router';
-import { Link } from '@tanstack/react-router';
 import { defineQuery } from 'groq';
 import { useEffect, useState } from 'react';
+import logoUrl from '@/assets/OBOS_Hvit_Liggende.png?url';
+import { sanityFetch } from '@/lib/sanity';
+import appCss from '@/styles/app.css?url';
+import { Footer } from '@/ui/footer';
+import { MainNav } from '@/ui/main-nav';
 
 const NAVIGATION_QUERY = defineQuery(`{
   "components": *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc),

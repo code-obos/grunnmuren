@@ -1,8 +1,8 @@
 export {
   Combobox,
-  ComboboxItem,
-  ComboboxSection,
   ComboboxHeader,
-  type ComboboxProps,
+  ComboboxItem,
   type ComboboxItemProps,
+  type ComboboxProps,
+  ComboboxSection,
 } from './combobox';
