@@ -1,7 +1,11 @@
 import { createFileRoute, notFound } from '@tanstack/react-router';
 import { defineQuery } from 'groq';
 import { sanityFetch } from '@/lib/sanity';
-import { ResourceLink, ResourceLinks } from '@/ui/resource-links';
+import {
+  ResourceLink,
+  type ResourceLinkProps,
+  ResourceLinks,
+} from '@/ui/resource-links';
 import { SanityContent } from '@/ui/sanity-content';
 import { ScrollToTop } from '@/ui/scroll-to-top';
 import { TableOfContentsNav } from '@/ui/table-of-contents-nav';
@@ -32,7 +36,7 @@ export const Route = createFileRoute('/_docs/$slug')({
       throw notFound();
     }
 
-    return { data: res.data };
+    return res as any;
   },
 });
 
@@ -49,7 +53,7 @@ function Page() {
               url && (
                 <ResourceLink
                   key={_key}
-                  type={linkType}
+                  type={linkType as ResourceLinkProps['type']}
                   href={url}
                   text={text}
                 />

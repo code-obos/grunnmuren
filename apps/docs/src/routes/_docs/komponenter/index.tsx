@@ -17,7 +17,7 @@ export const Route = createFileRoute('/_docs/komponenter/')({
       { name: 'description', content: 'Grunnmuren sine komponenter' },
     ],
   }),
-  loader: () => sanityFetch({ query: COMPONENTS_INDEX_QUERY }),
+  loader: async () => await sanityFetch({ query: COMPONENTS_INDEX_QUERY }),
 });
 
 function Page() {

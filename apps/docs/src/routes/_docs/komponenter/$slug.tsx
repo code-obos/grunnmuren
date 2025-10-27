@@ -6,7 +6,11 @@ import { defineQuery } from 'groq';
 import { sanityFetch } from '@/lib/sanity';
 import { AnchorHeading } from '@/ui/anchor-heading';
 import { PropsTable } from '@/ui/props-table';
-import { ResourceLink, ResourceLinks } from '@/ui/resource-links';
+import {
+  ResourceLink,
+  type ResourceLinkProps,
+  ResourceLinks,
+} from '@/ui/resource-links';
 import { SanityContent } from '@/ui/sanity-content';
 import { ScrollToTop } from '@/ui/scroll-to-top';
 import { TableOfContentsNav } from '@/ui/table-of-contents-nav';
@@ -35,16 +39,16 @@ export const Route = createFileRoute('/_docs/komponenter/$slug')({
       params: { slug: params.slug },
     });
 
-    if (res.data == null) {
+    if (res.data === null) {
       throw notFound();
     }
 
-    return { data: res.data };
+    return res.data as any;
   },
 });
 
 function Page() {
-  const { data } = Route.useLoaderData();
+  const data = Route.useLoaderData();
 
   const _ghLink = data.resourceLinks?.find(
     (link) => link.linkType === 'github',
@@ -61,7 +65,12 @@ function Page() {
         {data.resourceLinks?.map(
           ({ url, linkType = 'other', text, _key }) =>
             url && (
-              <ResourceLink key={_key} type={linkType} href={url} text={text} />
+              <ResourceLink
+                key={_key}
+                type={linkType as ResourceLinkProps['type']}
+                href={url}
+                text={text}
+              />
             ),
         )}
       </ResourceLinks>
