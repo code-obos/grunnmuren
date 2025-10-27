@@ -10,7 +10,6 @@
       "!**/apps/docs/public/storybook",
       "!**/routeTree.gen.ts",
       "!**/packages/icons-react/src",
-      "!**/apps/docs/component-props.ts",
       "!**/apps/docs/sanity.types.ts",
       "!**/packages/tailwind/font.css"
     ]
