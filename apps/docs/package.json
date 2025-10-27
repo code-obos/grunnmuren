@@ -14,8 +14,9 @@
     "build:tsc": "tsc",
     "dev": "vite dev --port 3000",
     "start": "node .output/server/index.mjs",
-    "typegen:extract": "sanity schema extract",
-    "typegen:generate": "sanity typegen generate"
+    "sanity:typegen": "pnpm sanity:typegen:extract && pnpm sanity:typegen:generate",
+    "sanity:typegen:extract": "sanity schema extract",
+    "sanity:typegen:generate": "sanity typegen generate"
   },
   "dependencies": {
     "@code-obos/sanity-auth": "1.4.3",
