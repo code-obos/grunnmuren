@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
 import { Button } from '../button/button';
+import { counties } from '../mocks';
 import {
   Select,
   SelectHeader,
@@ -9,8 +10,6 @@ import {
   type SelectProps,
   SelectSection,
 } from './select';
-
-import { counties } from '../mocks';
 
 const meta: Meta<typeof Select> = {
   title: 'Select',

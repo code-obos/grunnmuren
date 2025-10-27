@@ -75,7 +75,10 @@ export function ScrollToTopButton({
 export function ScrollToTop({
   threshold = 300,
   className,
-}: { threshold?: number; className?: string }) {
+}: {
+  threshold?: number;
+  className?: string;
+}) {
   const { showButton, scrollToTop } = useScrollToTop(threshold);
 
   return (

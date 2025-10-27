@@ -1,9 +1,9 @@
-import { ResourceLink, ResourceLinks } from '@/ui/resource-links';
-import { ScrollToTop } from '@/ui/scroll-to-top';
 import * as icons from '@obosbbl/grunnmuren-icons-react';
 import { Download } from '@obosbbl/grunnmuren-icons-react';
 import { Button, Card } from '@obosbbl/grunnmuren-react';
 import { createFileRoute } from '@tanstack/react-router';
+import { ResourceLink, ResourceLinks } from '@/ui/resource-links';
+import { ScrollToTop } from '@/ui/scroll-to-top';
 
 export const Route = createFileRoute('/_docs/profil/ikoner')({
   component: Page,

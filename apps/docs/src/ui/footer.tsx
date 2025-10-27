@@ -1,6 +1,6 @@
-import logoUrl from '@/assets/OBOS_Svart_Liggende.png?url';
 import { Figma, Github, Slack } from '@obosbbl/grunnmuren-icons-react';
 import { Link } from '@tanstack/react-router';
+import logoUrl from '@/assets/OBOS_Svart_Liggende.png?url';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();

@@ -1,4 +1,4 @@
-import { type VariantProps, cva, cx } from 'cva';
+import { cva, cx, type VariantProps } from 'cva';
 import type { HTMLProps } from 'react';
 import { GroupContext, Provider } from 'react-aria-components';
 import { HeadingContext } from '../content';

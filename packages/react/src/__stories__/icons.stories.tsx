@@ -1,6 +1,5 @@
-import type { Meta } from '@storybook/react-vite';
-
 import * as icons from '@obosbbl/grunnmuren-icons-react';
+import type { Meta } from '@storybook/react-vite';
 
 const meta: Meta = {
   title: 'Icons',

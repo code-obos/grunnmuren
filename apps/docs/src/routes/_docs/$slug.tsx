@@ -1,10 +1,10 @@
+import { createFileRoute, notFound } from '@tanstack/react-router';
+import { defineQuery } from 'groq';
 import { sanityFetch } from '@/lib/sanity';
 import { ResourceLink, ResourceLinks } from '@/ui/resource-links';
 import { SanityContent } from '@/ui/sanity-content';
 import { ScrollToTop } from '@/ui/scroll-to-top';
 import { TableOfContentsNav } from '@/ui/table-of-contents-nav';
-import { createFileRoute, notFound } from '@tanstack/react-router';
-import { defineQuery } from 'groq';
 
 const INFO_QUERY = defineQuery(
   `*[_type == "info"

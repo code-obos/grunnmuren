@@ -1,8 +1,8 @@
 export {
   Select,
-  SelectItem,
-  SelectSection,
   SelectHeader,
-  type SelectProps,
+  SelectItem,
   type SelectItemProps,
+  type SelectProps,
+  SelectSection,
 } from './select';

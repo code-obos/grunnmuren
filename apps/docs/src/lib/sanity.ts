@@ -1,4 +1,4 @@
-import { type QueryParams, createClient } from '@sanity/client';
+import { createClient, type QueryParams } from '@sanity/client';
 
 export const client = createClient({
   projectId: 'tq6w17ny',

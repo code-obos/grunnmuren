@@ -1,6 +1,6 @@
 import { LoadingSpinner } from '@obosbbl/grunnmuren-icons-react';
-import { type VariantProps, cva } from 'cva';
-import { type Ref, createContext } from 'react';
+import { cva, type VariantProps } from 'cva';
+import { createContext, type Ref } from 'react';
 import { useProgressBar } from 'react-aria';
 import {
   type ContextValue,
