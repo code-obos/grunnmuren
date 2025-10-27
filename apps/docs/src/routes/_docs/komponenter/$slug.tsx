@@ -47,10 +47,10 @@ export const Route = createFileRoute('/_docs/komponenter/$slug')({
 function Page() {
   const { data } = Route.useLoaderData();
 
-  const ghLink = data.resourceLinks?.find(
+  const _ghLink = data.resourceLinks?.find(
     (link) => link.linkType === 'github',
   )?.url;
-  const figmaLink = data.resourceLinks?.find(
+  const _figmaLink = data.resourceLinks?.find(
     (link) => link.linkType === 'figma',
   )?.url;
 
@@ -73,7 +73,6 @@ function Page() {
       <div className="lg:relative lg:flex lg:gap-4">
         <div>
           {data.componentState === 'new' && (
-            // biome-ignore lint/a11y/useValidAriaRole: <explanation>
             <Alertbox
               variant="success"
               className="mb-12 w-fit"
@@ -96,7 +95,6 @@ function Page() {
           )}
 
           {data.componentState === 'beta' && (
-            // biome-ignore lint/a11y/useValidAriaRole: <explanation>
             <Alertbox
               variant="warning"
               className="mb-12 w-fit"

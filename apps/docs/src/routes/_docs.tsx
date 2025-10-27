@@ -65,54 +65,52 @@ function RootLayout() {
   }, [router]);
 
   return (
-    <>
-      <GrunnmurenProvider
-        locale="nb"
-        // This integrates RAC/Grunnmuren with TanStack router
-        // Giving us typesafe routes
-        // See https://react-spectrum.adobe.com/react-aria/routing.html#tanstack-router
-        navigate={(to, options) => router.navigate({ to, ...options })}
-        useHref={(to) => router.buildLocation({ to }).href}
+    <GrunnmurenProvider
+      locale="nb"
+      // This integrates RAC/Grunnmuren with TanStack router
+      // Giving us typesafe routes
+      // See https://react-spectrum.adobe.com/react-aria/routing.html#tanstack-router
+      navigate={(to, options) => router.navigate({ to, ...options })}
+      useHref={(to) => router.buildLocation({ to }).href}
+    >
+      <Disclosure
+        isExpanded={isMobileNavExpanded}
+        onExpandedChange={setIsMobileNavExpanded}
       >
-        <Disclosure
-          isExpanded={isMobileNavExpanded}
-          onExpandedChange={setIsMobileNavExpanded}
-        >
-          <header className="relative z-3 flex items-center justify-between bg-blue-dark px-8 py-2 text-white">
-            <Link to="/" aria-label="Gå til forsiden" className="py-2.5">
-              <img src={logoUrl} alt="" className="h-6" />
-            </Link>
-            <DisclosureButton className="lg:hidden" aria-label="Meny">
-              {isMobileNavExpanded ? (
-                <Close className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
-            </DisclosureButton>
-          </header>
-          <div className="relative lg:hidden">
-            <div className="absolute top-0 left-0 z-3 w-full">
-              <DisclosurePanel>
-                <MainNav className="min-h-svh" />
-              </DisclosurePanel>
-            </div>
-          </div>
-          {isMobileNavExpanded && (
-            <div className="absolute inset-0 z-2 bg-black opacity-70 lg:hidden" />
-          )}
-        </Disclosure>
-
-        <div className="min-h-screen lg:flex">
-          <MainNav className="hidden lg:block" />
-          <div className="flex grow flex-col px-6">
-            <main className="grow">
-              <Outlet />
-            </main>
-            <Footer />
+        <header className="relative z-3 flex items-center justify-between bg-blue-dark px-8 py-2 text-white">
+          <Link to="/" aria-label="Gå til forsiden" className="py-2.5">
+            <img src={logoUrl} alt="" className="h-6" />
+          </Link>
+          <DisclosureButton className="lg:hidden" aria-label="Meny">
+            {isMobileNavExpanded ? (
+              <Close className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
+          </DisclosureButton>
+        </header>
+        <div className="relative lg:hidden">
+          <div className="absolute top-0 left-0 z-3 w-full">
+            <DisclosurePanel>
+              <MainNav className="min-h-svh" />
+            </DisclosurePanel>
           </div>
         </div>
-      </GrunnmurenProvider>
-    </>
+        {isMobileNavExpanded && (
+          <div className="absolute inset-0 z-2 bg-black opacity-70 lg:hidden" />
+        )}
+      </Disclosure>
+
+      <div className="min-h-screen lg:flex">
+        <MainNav className="hidden lg:block" />
+        <div className="flex grow flex-col px-6">
+          <main className="grow">
+            <Outlet />
+          </main>
+          <Footer />
+        </div>
+      </div>
+    </GrunnmurenProvider>
   );
 }
 
