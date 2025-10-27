@@ -3,6 +3,8 @@
   "files": {
     "includes": [
       "**",
+      "!**/.tanstack",
+      "!**/node_modules",
       "!**/dist",
       "!**/.next",
       "!**/.output",
@@ -79,10 +81,5 @@
         }
       }
     }
-  ],
-  "vcs": {
-    "enabled": true,
-    "clientKind": "git",
-    "useIgnoreFile": true
-  }
+  ]
 }

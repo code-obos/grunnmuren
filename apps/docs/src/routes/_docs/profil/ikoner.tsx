@@ -66,13 +66,11 @@ function Page() {
 
 function IconsGrid() {
   return (
-    <>
-      <div className="grid grid-cols-[repeat(auto-fill,130px)] content-center gap-6">
-        {Object.entries(icons).map(([iconName, Icon]) => (
-          <IconCard key={iconName} iconName={iconName} Icon={Icon} />
-        ))}
-      </div>
-    </>
+    <div className="grid grid-cols-[repeat(auto-fill,130px)] content-center gap-6">
+      {Object.entries(icons).map(([iconName, Icon]) => (
+        <IconCard key={iconName} iconName={iconName} Icon={Icon} />
+      ))}
+    </div>
   );
 }
 

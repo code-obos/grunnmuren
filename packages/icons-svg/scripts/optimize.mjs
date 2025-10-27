@@ -37,7 +37,6 @@ const config = {
 };
 
 const files = listSvgs();
-// biome-ignore lint/complexity/noForEach: leaving this as is in biome migration. Fix when updating this script
 files.forEach(async (filePath) => {
   const rawData = await fs.readFile(filePath, 'utf-8');
 
@@ -68,7 +67,6 @@ function printProfitInfo(inBytes, outBytes) {
   const profitPercents = 100 - (outBytes * 100) / inBytes;
 
   console.log(
-    // biome-ignore lint/style/useTemplate: leaving this as non template literal as it is copied
     Math.round((inBytes / 1024) * 1000) / 1000 +
       ' KiB' +
       (profitPercents < 0 ? ' + ' : ' - ') +
