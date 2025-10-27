@@ -2,7 +2,7 @@ import { ChevronLeft, ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 import { useUpdateEffect } from '@react-aria/utils';
 import { cx } from 'cva';
 import { type JSX, createContext, useEffect, useRef, useState } from 'react';
-import { Provider } from 'react-aria-components';
+import { DEFAULT_SLOT, Provider } from 'react-aria-components';
 import { useDebouncedCallback } from 'use-debounce';
 import { Button, ButtonContext } from '../button';
 import { MediaContext } from '../content';
@@ -117,6 +117,7 @@ const Carousel = ({ className, children, onChange }: CarouselProps) => {
             ButtonContext,
             {
               slots: {
+                [DEFAULT_SLOT]: {}, // this is required in RAC (for non-trigger buttons)
                 prev: {
                   'aria-label': previous[locale],
                   onPress: () => {
