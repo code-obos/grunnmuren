@@ -14,8 +14,9 @@
     "build:tsc": "tsc",
     "dev": "vite dev --port 3000",
     "start": "node .output/server/index.mjs",
-    "typegen:extract": "sanity schema extract",
-    "typegen:generate": "sanity typegen generate"
+    "sanity:typegen": "pnpm sanity:typegen:extract && pnpm sanity:typegen:generate",
+    "sanity:typegen:extract": "sanity schema extract",
+    "sanity:typegen:generate": "sanity typegen generate"
   },
   "dependencies": {
     "@code-obos/sanity-auth": "1.4.3",
@@ -24,8 +25,10 @@
     "@obosbbl/grunnmuren-react": "workspace:*",
     "@portabletext/react": "4.0.3",
     "@react-aria/utils": "3.31.0",
+    "@sanity/asset-utils": "^2.3.0",
     "@sanity/client": "7.12.0",
     "@sanity/code-input": "6.0.3",
+    "@sanity/image-url": "^1.2.0",
     "@sanity/table": "2.0.0",
     "@sanity/vision": "4.11.0",
     "@tanstack/react-router": "1.121.0",

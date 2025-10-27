@@ -18,7 +18,6 @@ const COMPONENT_QUERY = defineQuery(
       ...,
       _type == "image-with-caption" => {
         ...,
-        asset->
       }
     },
     "name": coalesce(name, ''),

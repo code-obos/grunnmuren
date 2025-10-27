@@ -13,61 +13,6 @@
  */
 
 // Source: schema.json
-export type SanityImagePaletteSwatch = {
-  _type: "sanity.imagePaletteSwatch";
-  background?: string;
-  foreground?: string;
-  population?: number;
-  title?: string;
-};
-
-export type SanityImagePalette = {
-  _type: "sanity.imagePalette";
-  darkMuted?: SanityImagePaletteSwatch;
-  lightVibrant?: SanityImagePaletteSwatch;
-  darkVibrant?: SanityImagePaletteSwatch;
-  vibrant?: SanityImagePaletteSwatch;
-  dominant?: SanityImagePaletteSwatch;
-  lightMuted?: SanityImagePaletteSwatch;
-  muted?: SanityImagePaletteSwatch;
-};
-
-export type SanityImageDimensions = {
-  _type: "sanity.imageDimensions";
-  height?: number;
-  width?: number;
-  aspectRatio?: number;
-};
-
-export type SanityFileAsset = {
-  _id: string;
-  _type: "sanity.fileAsset";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  source?: SanityAssetSourceData;
-};
-
-export type Geopoint = {
-  _type: "geopoint";
-  lat?: number;
-  lng?: number;
-  alt?: number;
-};
-
 export type ImageWithCaption = {
   _type: "image-with-caption";
   asset?: {
@@ -81,63 +26,6 @@ export type ImageWithCaption = {
   crop?: SanityImageCrop;
   alt?: string;
   caption?: string;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
-
-export type SanityImageAsset = {
-  _id: string;
-  _type: "sanity.imageAsset";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  metadata?: SanityImageMetadata;
-  source?: SanityAssetSourceData;
-};
-
-export type SanityAssetSourceData = {
-  _type: "sanity.assetSourceData";
-  name?: string;
-  id?: string;
-  url?: string;
-};
-
-export type SanityImageMetadata = {
-  _type: "sanity.imageMetadata";
-  location?: Geopoint;
-  dimensions?: SanityImageDimensions;
-  palette?: SanityImagePalette;
-  lqip?: string;
-  blurHash?: string;
-  hasAlpha?: boolean;
-  isOpaque?: boolean;
 };
 
 export type LiveCodeBlock = {
@@ -248,10 +136,48 @@ export type Component = {
   }>;
 };
 
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
+export type SanityVideoMetadataPlayback = {
+  _type: "sanity.videoMetadata.playback";
+  policy?: string;
+};
+
+export type SanityVideoAsset = {
+  _id: string;
+  _type: "sanity.videoAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  creditLine?: string;
+  metadata?: SanityVideoMetadata;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+};
+
+export type SanityVideoMetadata = {
+  _type: "sanity.videoMetadata";
+  duration?: number;
+  framerate?: number;
+  aspectRatio?: number;
+  hasAudio?: boolean;
+  codec?: string;
+  bitrate?: number;
+};
+
+export type SanityVideo = {
+  _type: "sanity.video";
+  asset?: unknown;
+  media?: unknown;
 };
 
 export type Table = {
@@ -274,7 +200,125 @@ export type Code = {
   highlightedLines?: Array<number>;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | ImageWithCaption | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | LiveCodeBlock | StaticCodeBlock | Content | Category | Menu | Info | Component | Slug | Table | TableRow | Code;
+export type SanityImagePaletteSwatch = {
+  _type: "sanity.imagePaletteSwatch";
+  background?: string;
+  foreground?: string;
+  population?: number;
+  title?: string;
+};
+
+export type SanityImagePalette = {
+  _type: "sanity.imagePalette";
+  darkMuted?: SanityImagePaletteSwatch;
+  lightVibrant?: SanityImagePaletteSwatch;
+  darkVibrant?: SanityImagePaletteSwatch;
+  vibrant?: SanityImagePaletteSwatch;
+  dominant?: SanityImagePaletteSwatch;
+  lightMuted?: SanityImagePaletteSwatch;
+  muted?: SanityImagePaletteSwatch;
+};
+
+export type SanityImageDimensions = {
+  _type: "sanity.imageDimensions";
+  height?: number;
+  width?: number;
+  aspectRatio?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityFileAsset = {
+  _id: string;
+  _type: "sanity.fileAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  source?: SanityAssetSourceData;
+};
+
+export type SanityImageAsset = {
+  _id: string;
+  _type: "sanity.imageAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  metadata?: SanityImageMetadata;
+  source?: SanityAssetSourceData;
+};
+
+export type SanityImageMetadata = {
+  _type: "sanity.imageMetadata";
+  location?: Geopoint;
+  dimensions?: SanityImageDimensions;
+  palette?: SanityImagePalette;
+  lqip?: string;
+  blurHash?: string;
+  hasAlpha?: boolean;
+  isOpaque?: boolean;
+};
+
+export type Geopoint = {
+  _type: "geopoint";
+  lat?: number;
+  lng?: number;
+  alt?: number;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
+export type SanityAssetSourceData = {
+  _type: "sanity.assetSourceData";
+  name?: string;
+  id?: string;
+  url?: string;
+};
+
+export type AllSanitySchemaTypes = ImageWithCaption | LiveCodeBlock | StaticCodeBlock | Content | Category | Menu | Info | Component | SanityVideoMetadataPlayback | SanityVideoAsset | SanityVideoMetadata | SanityVideo | Table | TableRow | Code | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/routes/_docs.tsx
 // Variable: NAVIGATION_QUERY
@@ -300,7 +344,7 @@ export type NAVIGATION_QUERYResult = {
 
 // Source: ./src/routes/_docs/$slug.tsx
 // Variable: INFO_QUERY
-// Query: *[_type == "info"  && slug.current == $slug][0]{    "content": content[] {      ...,      _type == "image-with-caption" => {        ...,        asset->      }    },    "name": coalesce(name, ''),    resourceLinks,  }
+// Query: *[_type == "info"  && slug.current == $slug][0]{    "content": content[] {      ...,      _type == "image-with-caption" => {        ...,      }    },    "name": coalesce(name, ''),    resourceLinks,  }
 export type INFO_QUERYResult = {
   content: Array<{
     children?: Array<{
@@ -322,28 +366,12 @@ export type INFO_QUERYResult = {
   } | {
     _key: string;
     _type: "image-with-caption";
-    asset: {
-      _id: string;
-      _type: "sanity.imageAsset";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      originalFilename?: string;
-      label?: string;
-      title?: string;
-      description?: string;
-      altText?: string;
-      sha1hash?: string;
-      extension?: string;
-      mimeType?: string;
-      size?: number;
-      assetId?: string;
-      uploadId?: string;
-      path?: string;
-      url?: string;
-      metadata?: SanityImageMetadata;
-      source?: SanityAssetSourceData;
-    } | null;
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -378,7 +406,7 @@ export type INFO_QUERYResult = {
 
 // Source: ./src/routes/_docs/komponenter/$slug.tsx
 // Variable: COMPONENT_QUERY
-// Query: *[_type == "component"  && slug.current == $slug][0]{    "content": content[] {      ...,      _type == "image-with-caption" => {        ...,        asset->      }    },    "name": coalesce(name, ''),    propsComponents,    resourceLinks,    componentState,  }
+// Query: *[_type == "component"  && slug.current == $slug][0]{    "content": content[] {      ...,      _type == "image-with-caption" => {        ...,      }    },    "name": coalesce(name, ''),    propsComponents,    resourceLinks,    componentState,  }
 export type COMPONENT_QUERYResult = {
   content: Array<{
     children?: Array<{
@@ -400,28 +428,12 @@ export type COMPONENT_QUERYResult = {
   } | {
     _key: string;
     _type: "image-with-caption";
-    asset: {
-      _id: string;
-      _type: "sanity.imageAsset";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      originalFilename?: string;
-      label?: string;
-      title?: string;
-      description?: string;
-      altText?: string;
-      sha1hash?: string;
-      extension?: string;
-      mimeType?: string;
-      size?: number;
-      assetId?: string;
-      uploadId?: string;
-      path?: string;
-      url?: string;
-      metadata?: SanityImageMetadata;
-      source?: SanityAssetSourceData;
-    } | null;
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -471,8 +483,8 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "{\n  \"components\": *[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc),\n  \"menu\": *[_type == \"menu\"][0]{\n    categories[]->{\n      title,\n      \"slug\": slug.current,\n      categoryItems[]->{\n        name,\n        \"slug\": slug.current\n      }\n    }\n  }\n}": NAVIGATION_QUERYResult;
-    "*[_type == \"info\"\n  && slug.current == $slug][0]{\n    \"content\": content[] {\n      ...,\n      _type == \"image-with-caption\" => {\n        ...,\n        asset->\n      }\n    },\n    \"name\": coalesce(name, ''),\n    resourceLinks,\n  }": INFO_QUERYResult;
-    "*[_type == \"component\"\n  && slug.current == $slug][0]{\n    \"content\": content[] {\n      ...,\n      _type == \"image-with-caption\" => {\n        ...,\n        asset->\n      }\n    },\n    \"name\": coalesce(name, ''),\n    propsComponents,\n    resourceLinks,\n    componentState,\n  }": COMPONENT_QUERYResult;
+    "*[_type == \"info\"\n  && slug.current == $slug][0]{\n    \"content\": content[] {\n      ...,\n      _type == \"image-with-caption\" => {\n        ...,\n      }\n    },\n    \"name\": coalesce(name, ''),\n    resourceLinks,\n  }": INFO_QUERYResult;
+    "*[_type == \"component\"\n  && slug.current == $slug][0]{\n    \"content\": content[] {\n      ...,\n      _type == \"image-with-caption\" => {\n        ...,\n      }\n    },\n    \"name\": coalesce(name, ''),\n    propsComponents,\n    resourceLinks,\n    componentState,\n  }": COMPONENT_QUERYResult;
     "*[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc)": COMPONENTS_INDEX_QUERYResult;
   }
 }

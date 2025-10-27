@@ -74,6 +74,24 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
   },
+  mediaLibrary: {
+    enabled: true,
+  },
+  // Remove Sanity's asset library that's connected to the dataset.
+  // we want the (organization wide) media library only
+  // ref https://www.sanity.io/docs/media-library/configure-studio#k948a9e8d13e6
+  form: {
+    // Disable the default for image assets
+    image: {
+      assetSources: (sources) =>
+        sources.filter((source) => source.name !== 'sanity-default'),
+    },
+    // Disable the default for file assets
+    file: {
+      assetSources: (sources) =>
+        sources.filter((source) => source.name !== 'sanity-default'),
+    },
+  },
   document: {
     newDocumentOptions: (templateItems, { creationContext }) => {
       // Define the singleton document types
