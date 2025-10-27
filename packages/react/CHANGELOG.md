@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 3.0.16
+
+### Patch Changes
+
+- 1f476d5: Support unslotted buttons in `<Carousel>`. With this fix you can pass buttons as children to the `<CarouselItem>` component.
+
 ## 3.0.15
 
 ### Patch Changes
@@ -278,7 +284,6 @@
 - fd89afd: Changes background colors on buttons. The `green` color prop value is now replaced by `blue`. So upgrading to this version means you have to migrate any `<Button color="green">` to `<Button color="blue">`. You also have to make sure the new colors have sufficent contranst against your backgrounds.
 
   Buttons like these will need a visual check against their backgrounds:
-
   - `<Button>`
   - `<Button variant="primary">`
   - `<Button color="blue">`
@@ -624,7 +629,6 @@
 - 58704e7: BREAKING CHANGE: updated look and feel of entire icon set. The icons are now outlined instead of filled.
 
   The following icons are renamed:
-
   - Expand -> ArrowsMaximize
   - BriefcaseMedical -> FirstAidKit
   - Columns -> LayoutGrid
@@ -632,7 +636,6 @@
   - Twitter -> X
 
   The following icons are removed:
-
   - BikeExercise (use Bike or Excerise instead)
   - BuildingAlt
   - CookingPot (use ChefHat instead)
@@ -643,7 +646,6 @@
   - StairsFloor
 
   Added new icons:
-
   - ArrowDownLeft
   - BuildingBank
   - Buildings
@@ -671,7 +673,6 @@
   The `includeFontFallback` option is also removed, and a font fallback will automatically be applied to the OBOS fonts by defaullt.
 
   ## Migration
-
   1. Upgrade your project to Tailwind 4. You can try the [migration guide](https://tailwindcss.com/docs/upgrade-guide)
      from tailwind.
   2. Add `@import "@obosbbl/grunnmuren-tailwind";` to the top of the main CSS file of your project. This is the new CSS configuration file for Grunnmuren.
@@ -709,7 +710,6 @@
 ### Minor Changes
 
 - 3cb2008: Button: deprecate isLoading in favor of isPending
-
   - change prop name to align with React Aria and the useActionState hook in React.
   - improved accessibility for pending state by [utilizing React aria](https://react-spectrum.adobe.com/react-aria/Button.html#pending)
   - button events are now disabled when the button is in a pending state.
@@ -718,7 +718,6 @@
 - 7e9cd22: Change types for backlink in order to display props correctly in the grunnmuren docs
 - 25bda50: New `<Avatar>` component that can be used to create rounded images. It helps composing components like contact cards.
 - ee10040: Button: change implementation to use Button/Link from react-aria-components.
-
   - `onClick` prop is now called `onPress`.
   - Button, when used with a href, now works as expected with the `navigate` prop in `<GrunnmurenProvider>`.
 
@@ -909,7 +908,6 @@
 - 53ae6f0: RadioGroup/CheckboxGroup: add support for displaying error messages when used in a `<Form>` component with the `validationErrors` prop. This enables the use of server side validation for these components.
 - ce83bec: Fixes issue with custom underline on backlinks that wraps over multiple lines.
 - 8bdd3e3: Combobox: deprecate isLoading in favor of isPending
-
   - change prop name to align with React Aria and the useActionState hook in React.
 
 - 58704e7: Alertbox: adjust icons after updated icon set
@@ -1105,7 +1103,6 @@
 - 58704e7: BREAKING CHANGE: updated look and feel of entire icon set. The icons are now outlined instead of filled.
 
   The following icons are renamed:
-
   - Expand -> ArrowsMaximize
   - BriefcaseMedical -> FirstAidKit
   - Columns -> LayoutGrid
@@ -1113,7 +1110,6 @@
   - Twitter -> X
 
   The following icons are removed:
-
   - BikeExercise (use Bike or Excerise instead)
   - BuildingAlt
   - CookingPot (use ChefHat instead)
@@ -1124,7 +1120,6 @@
   - StairsFloor
 
   Added new icons:
-
   - ArrowDownLeft
   - BuildingBank
   - Buildings
@@ -1184,7 +1179,6 @@
 ### Minor Changes
 
 - 3cb2008: Button: deprecate isLoading in favor of isPending
-
   - change prop name to align with React Aria and the useActionState hook in React.
   - improved accessibility for pending state by [utilizing React aria](https://react-spectrum.adobe.com/react-aria/Button.html#pending)
   - button events are now disabled when the button is in a pending state.
@@ -1195,7 +1189,6 @@
 - bcd1ad3: Fixes line-height on `<CardLink>` so that underline on hover aligns better with the text.
 - 87da523: Fixes focus styles on all components using either `<Link>` or `<Button>` from react-aria-components internally.
 - 8bdd3e3: Combobox: deprecate isLoading in favor of isPending
-
   - change prop name to align with React Aria and the useActionState hook in React.
 
 ## 2.0.0-canary.39
@@ -1310,7 +1303,6 @@
 ### Minor Changes
 
 - ee10040: Button: change implementation to use Button/Link from react-aria-components.
-
   - `onClick` prop is now called `onPress`.
   - Button, when used with a href, now works as expected with the `navigate` prop in `<GrunnmurenProvider>`.
 
