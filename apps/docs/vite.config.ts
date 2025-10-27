@@ -20,7 +20,9 @@ export default defineConfig({
       projects: ['./tsconfig.json'],
     }),
     tailwindcss(),
-    nitroV2Plugin(),
+    nitroV2Plugin({
+      compatibilityDate: '2024-04-03',
+    }),
     tanstackStart({
       srcDirectory: 'src',
     }),
