@@ -2,26 +2,31 @@
 "@obosbbl/grunnmuren-react": patch
 ---
 
-Accordions: use Disclosure internally. This means that we are dogfooding components with our own components. Disclosure is beeing using under the hood of Accordion. We have added more props to Accordion, but at the same time some props are deprecated. Accordion now accepts all the same props as Disclosure. 
+**Accordion now uses Disclosure internally**
 
-Accordion -> DisclosureGroupProps
-AccordionItem -> DisclosureProps
+The `Accordion` component has been refactored to use `Disclosure` components under the hood, improving consistency across the component library.
 
-```ts
-AccordionItem:
-isOpen -> isExpanded
-defaultOpen -> defaultExpanded
-onOpenChange -> onExpandedChange
-```
+**Breaking changes (deprecated, will be removed in v4.0):**
 
-Accordion will let all accordions be open by default, but can be switched off:
+The following `AccordionItem` props have been renamed to align with `Disclosure`:
+- `isOpen` → `isExpanded`
+- `defaultOpen` → `defaultExpanded`  
+- `onOpenChange` → `onExpandedChange`
 
-```ts
+The old prop names still work in this version but will be removed in Grunnmuren v4.0.
+
+**New features:**
+
+- `Accordion` now accepts all `DisclosureGroup` props
+- `AccordionItem` now accepts all `Disclosure` props
+- By default, multiple accordion items can be expanded simultaneously
+- Use `allowsMultipleExpanded={false}` to allow only one item open at a time:
+
+```tsx
 <Accordion allowsMultipleExpanded={false}>
-    ...,
+  <AccordionItem>...</AccordionItem>
+  <AccordionItem>...</AccordionItem>
 </Accordion>
 ```
 
-They will still work throughout this major version, but will be removed in GM@4
-
-We will move Disclosure out of BETA after we have tested that this is working as it should throughout our user's usage
+**Note:** The `Disclosure` component will be moved out of BETA status once we've validated this implementation through user testing.
