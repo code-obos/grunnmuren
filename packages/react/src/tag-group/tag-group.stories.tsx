@@ -4,11 +4,7 @@ import { useState } from 'react';
 import type { Selection } from 'react-aria-components';
 
 import { Description, Label } from '../label';
-import {
-  UNSAFE_Tag as Tag,
-  UNSAFE_TagGroup as TagGroup,
-  UNSAFE_TagList as TagList,
-} from './tag-group';
+import { Tag, TagGroup, TagList } from './tag-group';
 
 const meta: Meta<typeof TagGroup> = {
   title: 'TagGroup',

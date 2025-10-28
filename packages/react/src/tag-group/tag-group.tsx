@@ -36,7 +36,7 @@ const tagVariants = cva({
   ],
 });
 
-export type TagGroupProps = Omit<RACTagGroupProps, 'className'> &
+type TagGroupProps = Omit<RACTagGroupProps, 'className'> &
   RefAttributes<HTMLDivElement> & {
     /**
      * CSS classes to apply to the tag group
@@ -55,7 +55,7 @@ export type TagGroupProps = Omit<RACTagGroupProps, 'className'> &
   };
 
 //The usage of <object> here could probably be replaced with a generic for more type safety in usage
-export type TagListProps = Omit<RACTagListProps<object>, 'className'> &
+type TagListProps = Omit<RACTagListProps<object>, 'className'> &
   RefAttributes<HTMLDivElement> & {
     /**
      * CSS classes to apply to the tag list
@@ -63,7 +63,7 @@ export type TagListProps = Omit<RACTagListProps<object>, 'className'> &
     className?: string;
   };
 
-export type TagProps = Omit<RACTagProps, 'className'> &
+type TagProps = Omit<RACTagProps, 'className'> &
   RefAttributes<HTMLDivElement> & {
     children: React.ReactNode;
     /**
@@ -148,7 +148,10 @@ function Tag(props: TagProps) {
 }
 
 export {
-  TagGroup as UNSAFE_TagGroup,
-  TagList as UNSAFE_TagList,
-  Tag as UNSAFE_Tag,
+  TagGroup,
+  TagList,
+  Tag,
+  type TagGroupProps,
+  type TagListProps,
+  type TagProps,
 };
