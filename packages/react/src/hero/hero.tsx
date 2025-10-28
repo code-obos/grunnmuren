@@ -121,7 +121,9 @@ const Hero = ({ variant, className, children, ...rest }: HeroProps) => {
         ],
       ]}
     >
-      <div className={cx(variantsClassName, className)} {...rest}>{children}</div>
+      <div className={cx(variantsClassName, className)} {...rest}>
+        {children}
+      </div>
     </Provider>
   );
 };
