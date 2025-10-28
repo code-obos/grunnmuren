@@ -49,6 +49,9 @@ const Carousel = ({
   const { previous, next } = translations;
 
   const [scrollTargetIndex, setScrollTargetIndex] = useState(0);
+  const isScrollingProgrammatically = useRef(false);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const scrollQueue = useRef<number[]>([]);
 
   const [hasReachedScrollStart, setHasReachedScrollStart] = useState(
     scrollTargetIndex === 0,
@@ -69,9 +72,33 @@ const Carousel = ({
   // This is used to determine which callback to call (onPrev or onNext)
   const prevIndex = useRef(0);
 
+  // Processes the next scroll action in the queue, if any
+  // All clicks on the prev/next buttons are queued while a programmatic scroll is in progress
+  // This is to ensure that rapid clicks on the buttons do not cause janky scrolling behavior
+  // while still a snappy response to user clicks
+  const processQueue = () => {
+    if (
+      scrollQueue.current.length > 0 &&
+      !isScrollingProgrammatically.current
+    ) {
+      const nextIndex = scrollQueue.current?.shift();
+      if (nextIndex !== undefined) {
+        setScrollTargetIndex(nextIndex);
+      }
+    }
+  };
+
   // Handle scrolling when user clicks the arrow icons
   useUpdateEffect(() => {
-    if (!ref.current) return;
+    if (!ref.current) {
+      return;
+    }
+
+    if (scrollTimeoutRef.current) {
+      clearTimeout(scrollTimeoutRef.current);
+    }
+
+    isScrollingProgrammatically.current = true;
 
     ref.current.children[scrollTargetIndex]?.scrollIntoView({
       behavior: 'smooth',
@@ -89,28 +116,91 @@ const Carousel = ({
     }
 
     prevIndex.current = scrollTargetIndex;
+
+    scrollTimeoutRef.current = setTimeout(() => {
+      isScrollingProgrammatically.current = false;
+      scrollTimeoutRef.current = null;
+      processQueue(); // Process any queued scrolls
+    }, 500);
   }, [scrollTargetIndex]);
+
+  // Clean up timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const onScroll = useDebouncedCallback(
     (event: React.UIEvent<HTMLDivElement>) => {
+      // Ignore scroll events when we're programmatically scrolling
+      if (isScrollingProgrammatically.current) {
+        return;
+      }
+
       const target = event.target as HTMLDivElement;
+      const containerRect = target.getBoundingClientRect();
 
       // Calculate the index of the item that is currently in view
       const newScrollTargetIndex = Array.from(target.children).findIndex(
         (child) => {
           const rect = child.getBoundingClientRect();
-          return (
-            rect.left >= 0 && rect.right <= window.innerWidth && rect.top >= 0
-          );
+          // Check if the item is more than 50% visible within the container
+          const visibleWidth =
+            Math.min(rect.right, containerRect.right) -
+            Math.max(rect.left, containerRect.left);
+          const itemWidth = rect.width;
+          return visibleWidth / itemWidth > 0.5;
         },
       );
 
-      if (newScrollTargetIndex !== -1) {
+      if (
+        newScrollTargetIndex !== -1 &&
+        newScrollTargetIndex !== scrollTargetIndex
+      ) {
+        if (onChange) {
+          onChange({
+            index: newScrollTargetIndex,
+            id: target.children[newScrollTargetIndex]?.id,
+            prevIndex: prevIndex.current,
+            prevId: target.children[prevIndex.current]?.id,
+          });
+        }
+
+        // Update the index and prevIndex
         setScrollTargetIndex(newScrollTargetIndex);
+        prevIndex.current = newScrollTargetIndex;
       }
     },
-    100,
+    150, // Debounce scroll events by 150ms
   );
+
+  const handlePrevious = () => {
+    const targetIndex = scrollTargetIndex - 1;
+    if (targetIndex < 0) return;
+
+    if (isScrollingProgrammatically.current) {
+      // If we're already scrolling, queue this action
+      scrollQueue.current = [targetIndex];
+    } else {
+      setScrollTargetIndex(targetIndex);
+    }
+  };
+
+  const handleNext = () => {
+    if (!ref.current) return;
+    const targetIndex = scrollTargetIndex + 1;
+    if (targetIndex >= ref.current.children.length) return;
+
+    if (isScrollingProgrammatically.current) {
+      // If we're already scrolling, queue this action
+      scrollQueue.current = [targetIndex];
+    } else {
+      setScrollTargetIndex(targetIndex);
+    }
+  };
 
   return (
     <div data-slot="carousel">
@@ -130,23 +220,12 @@ const Carousel = ({
                 [DEFAULT_SLOT]: {}, // this is required in RAC (for non-trigger buttons)
                 prev: {
                   'aria-label': previous[locale],
-                  onPress: () => {
-                    if (scrollTargetIndex > 0) {
-                      setScrollTargetIndex((prev) => prev - 1);
-                    }
-                  },
-                  isDisabled: hasReachedScrollStart,
+                  onPress: handlePrevious,
                 },
                 next: {
                   isIconOnly: true,
                   'aria-label': next[locale],
-                  onPress: () => {
-                    if (!ref.current) return;
-                    if (scrollTargetIndex < ref.current.children.length - 1) {
-                      setScrollTargetIndex((prev) => prev + 1);
-                    }
-                  },
-                  isDisabled: hasReachedScrollEnd,
+                  onPress: handleNext,
                 },
               },
             },
@@ -235,32 +314,43 @@ const CarouselItemsContext = createContext({
   ref: null,
 } as CarouselItemsContextValue);
 
-const CarouselItems = ({ className, children }: CarouselItemsProps) => (
-  <CarouselItemsContext.Consumer>
-    {({ ref, onScroll }) => (
-      <div
-        data-slot="carousel-items"
-        className={cx(className, [
-          'scrollbar-hidden',
-          'flex',
-          'snap-x',
-          'snap-mandatory',
-          'overflow-x-auto',
-          'outline-none',
-          'rounded-[inherit]',
-        ])}
-        ref={ref}
-        // When the SnapEvent is supported: https://developer.mozilla.org/en-US/docs/Web/API/SnapEvent
-        // We can use the scrollsnapchange event to detect when the user has scrolled to a new item.
-        // We can then use Array.from(event.target.children).indexOf(event.snapTargetInline) to calculate the index of the item that is currently in view.
-        // Another option is to use the scrollEnd event, when Safiri supports it: https://developer.apple.com/documentation/webkitjs/snap_event/scrollend_event
-        onScroll={onScroll}
-      >
-        {children}
-      </div>
-    )}
-  </CarouselItemsContext.Consumer>
-);
+const CarouselItems = ({ className, children }: CarouselItemsProps) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    // Prevent default behavior when holding down arrow keys (when repeat is true)
+    // The default behavior in scroll snapping causes a staggering scroll effect that feels janky
+    if (
+      event.repeat &&
+      (event.key === 'ArrowLeft' || event.key === 'ArrowRight')
+    ) {
+      event.preventDefault();
+    }
+  };
+
+  return (
+    <CarouselItemsContext.Consumer>
+      {({ ref, onScroll }) => (
+        // biome-ignore lint/a11y/noStaticElementInteractions: The keydown handler is only to prevent undesired scrolling behavior when using the arrow keys
+        <div
+          data-slot="carousel-items"
+          className={cx(className, [
+            'scrollbar-hidden',
+            'flex',
+            'snap-x',
+            'snap-mandatory',
+            'overflow-x-auto',
+            'outline-none',
+            'rounded-[inherit]',
+          ])}
+          ref={ref}
+          onScroll={onScroll}
+          onKeyDown={handleKeyDown}
+        >
+          {children}
+        </div>
+      )}
+    </CarouselItemsContext.Consumer>
+  );
+};
 
 type CarouselItemProps = HTMLProps<HTMLDivElement> & {
   /** The component/components to display as the <CarouselItem/>. */
