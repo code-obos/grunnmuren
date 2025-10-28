@@ -135,8 +135,8 @@ const Carousel = ({
     (event: React.UIEvent<HTMLDivElement>) => {
       // Ignore scroll events when we're programmatically scrolling
       if (isScrollingProgrammatically.current) {
-        return
-      };
+        return;
+      }
 
       const target = event.target as HTMLDivElement;
       const containerRect = target.getBoundingClientRect();
