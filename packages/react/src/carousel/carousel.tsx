@@ -90,7 +90,9 @@ const Carousel = ({
 
   // Handle scrolling when user clicks the arrow icons
   useUpdateEffect(() => {
-    if (!ref.current) return;
+    if (!ref.current) {
+      return
+    };
 
     if (scrollTimeoutRef.current) {
       clearTimeout(scrollTimeoutRef.current);
