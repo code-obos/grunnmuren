@@ -92,7 +92,7 @@ const variants = cva({
   },
 });
 
-const Hero = ({ variant, className, ...rest }: HeroProps) => {
+const Hero = ({ variant, className, children, ...rest }: HeroProps) => {
   const variantsClassName = variants({
     variant,
     className,
@@ -121,7 +121,7 @@ const Hero = ({ variant, className, ...rest }: HeroProps) => {
         ],
       ]}
     >
-      <div className={cx(variantsClassName, className)} {...rest} />
+      <div className={cx(variantsClassName, className)} {...rest}>{children}</div>
     </Provider>
   );
 };
