@@ -181,7 +181,7 @@ const Carousel = ({
 
     if (isScrollingProgrammatically.current) {
       // If we're already scrolling, queue this action
-      scrollQueue.current = [targetIndex]; // Replace queue with latest action
+      scrollQueue.current = [targetIndex];
     } else {
       setScrollTargetIndex(targetIndex);
     }
@@ -194,7 +194,7 @@ const Carousel = ({
 
     if (isScrollingProgrammatically.current) {
       // If we're already scrolling, queue this action
-      scrollQueue.current = [targetIndex]; // Replace queue with latest action
+      scrollQueue.current = [targetIndex];
     } else {
       setScrollTargetIndex(targetIndex);
     }
