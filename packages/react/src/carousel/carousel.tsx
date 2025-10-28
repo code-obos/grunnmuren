@@ -1,7 +1,14 @@
 import { ChevronLeft, ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 import { useUpdateEffect } from '@react-aria/utils';
 import { cx } from 'cva';
-import { createContext, type JSX, useEffect, useRef, useState } from 'react';
+import {
+  createContext,
+  type HTMLProps,
+  type JSX,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { DEFAULT_SLOT, Provider } from 'react-aria-components';
 import { useDebouncedCallback } from 'use-debounce';
 import { Button, ButtonContext } from '../button';
@@ -18,11 +25,9 @@ type CarouselItem = Pick<CarouselItemProps, 'id'> & {
   prevId?: CarouselItemProps['id'];
 };
 
-type CarouselProps = {
+type CarouselProps = HTMLProps<HTMLDivElement> & {
   /** The <CarouselItem/> components to be displayed within the carousel. */
   children: React.ReactNode;
-  /** Additional CSS className for the element. */
-  className?: string;
   /**
    * Callback that is triggered when a user navigates to new item in the Carousel.
    * The argument to the callback is an object containing `index` of the new item scrolled into view and the `id` of that item (if set on the `<CarouselItem>`)
@@ -33,7 +38,12 @@ type CarouselProps = {
   onChange?: (item: CarouselItem) => void;
 };
 
-const Carousel = ({ className, children, onChange }: CarouselProps) => {
+const Carousel = ({
+  className,
+  children,
+  onChange,
+  ...rest
+}: CarouselProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const locale = useLocale();
   const { previous, next } = translations;
@@ -144,6 +154,7 @@ const Carousel = ({ className, children, onChange }: CarouselProps) => {
         ]}
       >
         <div
+          {...rest}
           className={cx(
             className,
             'relative rounded-3xl',
@@ -187,11 +198,9 @@ const Carousel = ({ className, children, onChange }: CarouselProps) => {
   );
 };
 
-type _CarouselControlsProps = {
+type _CarouselControlsProps = HTMLProps<HTMLDivElement> & {
   /** The <CarouselItem/> components to be displayed within the carousel. */
   children: React.ReactNode;
-  /** Additional CSS className for the element. */
-  className?: string;
 };
 
 /**
@@ -212,11 +221,9 @@ const _CarouselControls = ({ children, className }: _CarouselControlsProps) => (
   </div>
 );
 
-type CarouselItemsProps = {
+type CarouselItemsProps = HTMLProps<HTMLDivElement> & {
   /** The <CarouselItem/> components to be displayed within the carousel. */
   children: React.ReactNode;
-  /** Additional CSS className for the element. */
-  className?: string;
 };
 
 type CarouselItemsContextValue = {
@@ -255,12 +262,9 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => (
   </CarouselItemsContext.Consumer>
 );
 
-type CarouselItemProps = {
+type CarouselItemProps = HTMLProps<HTMLDivElement> & {
   /** The component/components to display as the <CarouselItem/>. */
   children: JSX.Element | JSX.Element[];
-  /** Additional CSS className for the element. */
-  className?: string;
-  id?: string;
 };
 
 const CarouselItem = ({ className, children, id }: CarouselItemProps) => {
@@ -279,7 +283,7 @@ const CarouselItem = ({ className, children, id }: CarouselItemProps) => {
               className: cx(
                 'data-[fit="contain"]:bg-blue-dark',
                 '*:h-full *:w-full',
-                'aspect-1/1 max-sm:data-[fit="contain"]:*:object-cover sm:aspect-4/3 md:aspect-3/2 lg:aspect-2/1',
+                'aspect-square max-sm:data-[fit="contain"]:*:object-cover sm:aspect-4/3 md:aspect-3/2 lg:aspect-2/1',
               ),
             },
           ],
