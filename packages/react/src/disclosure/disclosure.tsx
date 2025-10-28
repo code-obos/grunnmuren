@@ -32,7 +32,8 @@ const disclosureButtonVariants = cva({
   base: [
     'inline-flex cursor-pointer items-center justify-between rounded-lg focus-visible:outline-current focus-visible:outline-focus',
     // Ensure a minimum click area of 44x44px, while making it look like it only has the size of the content
-    '-m-2.5 p-2.5 focus-visible:outline-offset-[-0.625rem]',
+    'p-2.5 focus-visible:outline-offset-[-0.625rem]',
+    '!data-[accordion]:-m-2.5',
   ],
   variants: {
     withChevron: {
@@ -223,8 +224,11 @@ const DisclosurePanel = ({ ref, children, ...props }: DisclosurePanelProps) => {
     <div
       className={cx(
         'grid transition-all duration-300 motion-reduce:transition-none',
-        disclosureContext?.isExpanded ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
+        disclosureContext?.isExpanded
+          ? 'grid-rows-[1fr] after:h-3.5'
+          : 'grid-rows-[0fr]',
       )}
+      data-expanded={disclosureContext?.isExpanded || undefined}
     >
       <div className="overflow-hidden">
         {/* biome-ignore lint/a11y/useAriaPropsSupportedByRole: TODO: fix this */}

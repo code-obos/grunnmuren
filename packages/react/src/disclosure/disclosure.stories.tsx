@@ -5,7 +5,6 @@ import { Checkbox, CheckboxGroup } from '../checkbox';
 import {
   UNSAFE_Disclosure as Disclosure,
   UNSAFE_DisclosureButton as DisclosureButton,
-  UNSAFE_DisclosureGroup as DisclosureGroup,
   UNSAFE_DisclosurePanel as DisclosurePanel,
 } from './disclosure';
 
@@ -100,80 +99,6 @@ export const WithCheckboxGroup: Story = {
           </DisclosurePanel>
         </Disclosure>
       </div>
-    );
-  },
-};
-
-export const Grouped: Story = {
-  render: (props) => {
-    const id = useId();
-    const [selectedOptions, setSelectedItems] = useState<string[]>([]);
-    const [isExpanded, setIsExpanded] = useState(false);
-    return (
-      <DisclosureGroup className="grid gap-4 p-12">
-        <Disclosure
-          {...props}
-          isExpanded={isExpanded}
-          onExpandedChange={setIsExpanded}
-        >
-          <DisclosureButton
-            className="flex w-full gap-6 border-gray-light"
-            withChevron
-            id={id}
-          >
-            Kjøpsalternativer
-          </DisclosureButton>
-          {!isExpanded && (
-            <ul className="flex gap-2" aria-label="Valgte kjøpsalternativer">
-              {selectedOptions.map((option) => (
-                <li key={option}>{option}</li>
-              ))}
-            </ul>
-          )}
-          <DisclosurePanel className="p-4" role="none">
-            <CheckboxGroup
-              value={selectedOptions}
-              onChange={setSelectedItems}
-              aria-labelledby={id}
-            >
-              <Checkbox value="deleie">Deleie</Checkbox>
-              <Checkbox value="bostart">Bostart</Checkbox>
-              <Checkbox value="boligbytte">Boligbytte</Checkbox>
-            </CheckboxGroup>
-          </DisclosurePanel>
-        </Disclosure>
-        <Disclosure
-          {...props}
-          isExpanded={isExpanded}
-          onExpandedChange={setIsExpanded}
-        >
-          <DisclosureButton
-            className="flex w-full gap-6 border-gray-light"
-            withChevron
-            id={id}
-          >
-            Område
-          </DisclosureButton>
-          {!isExpanded && (
-            <ul className="flex gap-2" aria-label="Valgte kjøpsalternativer">
-              {selectedOptions.map((option) => (
-                <li key={option}>{option}</li>
-              ))}
-            </ul>
-          )}
-          <DisclosurePanel className="p-4" role="none">
-            <CheckboxGroup
-              value={selectedOptions}
-              onChange={setSelectedItems}
-              aria-labelledby={id}
-            >
-              <Checkbox value="oslo">Oslo</Checkbox>
-              <Checkbox value="bergen">Bergen</Checkbox>
-              <Checkbox value="trondheim">Trondheim</Checkbox>
-            </CheckboxGroup>
-          </DisclosurePanel>
-        </Disclosure>
-      </DisclosureGroup>
     );
   },
 };
