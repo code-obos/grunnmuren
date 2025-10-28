@@ -20,6 +20,8 @@ type AccordionProps = DisclosureGroupProps & {
 };
 
 type AccordionItemProps = DisclosureProps & {
+  children?: React.ReactNode;
+
   /** @deprecated use isExpanded instead */
   isOpen?: boolean;
 
