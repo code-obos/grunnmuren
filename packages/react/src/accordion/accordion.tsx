@@ -20,15 +20,13 @@ type AccordionProps = DisclosureGroupProps & {
 };
 
 type AccordionItemProps = DisclosureProps & {
-  children?: React.ReactNode;
-
-  /** DEPRECATED (use isExpanded): Whether the accordion is open (controlled) */
+  /** @deprecated use isExpanded instead */
   isOpen?: boolean;
 
-  /** DEPRECATED (use defaultExpanded): Whether the accordion is open by default (uncontrolled) */
+  /** @deprecated use defaultExpanded instead */
   defaultOpen?: boolean;
 
-  /** DEPRECATED (use onExpandedChange): Handler that is called when the accordion's open state changes */
+  /** @deprecated use onExpandedChange instead */
   onOpenChange?: (isOpen: boolean) => void;
 };
 
