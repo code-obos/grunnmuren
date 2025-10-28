@@ -1,4 +1,3 @@
-import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
 import { Children } from 'react';
 import { Provider } from 'react-aria-components';
@@ -101,13 +100,9 @@ function AccordionItem(props: AccordionItemProps) {
                   // Use outline with offset as focus indicator, this does not cover the left sky border on the expanded content and works with or without a background color on the accordion container
                   className="flex min-h-11 w-full cursor-pointer items-center justify-between gap-1.5 rounded-lg px-2 py-3.5 text-left focus-visible:outline-focus focus-visible:outline-focus-inset aria-expanded:*:rotate-180"
                   type="button"
+                  withChevron
                 >
                   {children}
-                  <ChevronDown
-                    className={cx(
-                      'flex-none transition-transform duration-300 motion-reduce:transition-none',
-                    )}
-                  />
                 </DisclosureButton>
               ),
             },

@@ -33,7 +33,7 @@ const disclosureButtonVariants = cva({
     'inline-flex cursor-pointer items-center justify-between rounded-lg focus-visible:outline-current focus-visible:outline-focus',
     // Ensure a minimum click area of 44x44px, while making it look like it only has the size of the content
     'p-2.5 focus-visible:outline-offset-[-0.625rem]',
-    '!data-accordion:-m-2.5',
+    'data-accordion:-m-2.5',
   ],
   variants: {
     withChevron: {
