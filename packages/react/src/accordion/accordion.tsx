@@ -1,21 +1,16 @@
 import { cx } from 'cva';
-import { Children } from 'react';
+import { Children, type HTMLProps } from 'react';
 import { Provider } from 'react-aria-components';
 import { ContentContext, HeadingContext } from '../content';
 import {
   UNSAFE_Disclosure as Disclosure,
   UNSAFE_DisclosureButton as DisclosureButton,
-  UNSAFE_DisclosureGroup as DisclosureGroup,
-  type UNSAFE_DisclosureGroupProps as DisclosureGroupProps,
   UNSAFE_DisclosurePanel as DisclosurePanel,
   type UNSAFE_DisclosureProps as DisclosureProps,
 } from '../disclosure';
 
-type AccordionProps = DisclosureGroupProps & {
+type AccordionProps = HTMLProps<HTMLDivElement> & {
   children: React.ReactNode;
-
-  /** Whether multiple accordion items can be expanded at the same time. Default is true */
-  allowsMultipleExpanded?: boolean;
 };
 
 type AccordionItemProps = DisclosureProps & {
@@ -32,20 +27,14 @@ type AccordionItemProps = DisclosureProps & {
 };
 
 function Accordion(props: AccordionProps) {
-  const {
-    children,
-    className,
-    allowsMultipleExpanded = true,
-    ...restProps
-  } = props;
+  const { children, className, ...restProps } = props;
 
   const childCount = Children.count(children);
 
   return (
-    <DisclosureGroup
+    <div
       {...restProps}
       data-accordion
-      allowsMultipleExpanded={allowsMultipleExpanded}
       className={cx('rounded-lg bg-white', className)}
     >
       {Children.map(children, (child, index) => (
@@ -57,7 +46,7 @@ function Accordion(props: AccordionProps) {
           )}
         </>
       ))}
-    </DisclosureGroup>
+    </div>
   );
 }
 
@@ -65,11 +54,11 @@ function AccordionItem(props: AccordionItemProps) {
   const {
     className,
     children,
-    defaultOpen = false,
+    defaultOpen,
     isOpen: controlledIsOpen,
     onOpenChange,
-    defaultExpanded,
-    isExpanded,
+    defaultExpanded = false,
+    isExpanded = false,
     onExpandedChange,
     ...restProps
   } = props;
