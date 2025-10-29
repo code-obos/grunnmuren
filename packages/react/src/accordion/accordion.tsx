@@ -57,7 +57,7 @@ function AccordionItem(props: AccordionItemProps) {
     defaultOpen,
     isOpen: controlledIsOpen,
     onOpenChange,
-    defaultExpanded = false,
+    defaultExpanded,
     isExpanded = false,
     onExpandedChange,
     ...restProps
