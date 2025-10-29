@@ -25,7 +25,7 @@ type CarouselItem = Pick<CarouselItemProps, 'id'> & {
   prevId?: CarouselItemProps['id'];
 };
 
-type CarouselProps = HTMLProps<HTMLDivElement> & {
+type CarouselProps = Omit<HTMLProps<HTMLDivElement>, 'onChange'> & {
   /** The <CarouselItem/> components to be displayed within the carousel. */
   children: React.ReactNode;
   /**
