@@ -111,7 +111,7 @@ function AccordionItem(props: AccordionItemProps) {
             ContentContext,
             {
               className:
-                // Uses pseudo element for vertical padding, since that doesn't affect the height when the accordion is closed
+                // Uses pseudo elements for vertical padding, since that doesn't affect the height when the accordion is closed
                 'text-sm font-light leading-6 px-3.5 data-[expanded]:after:h-3.5 relative overflow-hidden border-sky border-l-[3px] before:relative before:block before:h-1.5 after:relative after:block after:h-1.5',
               role: 'region',
               _outerWrapper: (children) => (
