@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useReducer } from 'react';
-import { Content, Heading } from '..';
+import { Content, Heading } from '../content';
 import { Accordion, AccordionItem, type AccordionItemProps } from './accordion';
 
 const Template = (args: AccordionItemProps) => {
   return (
     <Accordion>
       <AccordionItem
-        onOpenChange={args.onOpenChange}
-        defaultOpen={args.defaultOpen}
+        onExpandedChange={args.onExpandedChange}
+        defaultExpanded={args.defaultExpanded}
       >
         <Heading level={2}>Hvordan betaler jeg ned på rammelånet?</Heading>
         <Content className="prose">
@@ -25,8 +25,8 @@ const Template = (args: AccordionItemProps) => {
         </Content>
       </AccordionItem>
       <AccordionItem
-        onOpenChange={args.onOpenChange}
-        defaultOpen={args.defaultOpen}
+        onExpandedChange={args.onExpandedChange}
+        defaultExpanded={args.defaultExpanded}
       >
         <Heading level={2}>Bør jeg velge rammelån eller boliglån?</Heading>
         <Content className="prose">
@@ -59,8 +59,8 @@ const Template = (args: AccordionItemProps) => {
         </Content>
       </AccordionItem>
       <AccordionItem
-        onOpenChange={args.onOpenChange}
-        defaultOpen={args.defaultOpen}
+        onExpandedChange={args.onExpandedChange}
+        defaultExpanded={args.defaultExpanded}
       >
         <Heading level={2}>Overfør penger fra Boligspar Ung?</Heading>
         <Content className="prose">
@@ -98,7 +98,7 @@ const ControlledTemplate = () => {
             isOpen={isOpen}
             // biome-ignore lint/suspicious/noArrayIndexKey: storybook example
             key={index}
-            onOpenChange={() => dispatch(index)}
+            onExpandedChange={() => dispatch(index)}
           >
             <Heading level={2}>Heading {accordionNumber}</Heading>
             <Content>Item {accordionNumber}</Content>
@@ -114,8 +114,8 @@ const ColoredTemplate = (args: AccordionItemProps) => {
     <div className="bg-green-dark p-10">
       <Accordion>
         <AccordionItem
-          onOpenChange={args.onOpenChange}
-          defaultOpen={args.defaultOpen}
+          onExpandedChange={args.onExpandedChange}
+          defaultExpanded={args.defaultExpanded}
         >
           <Heading level={2}>Bør jeg velge rammelån eller boliglån?</Heading>
           <Content className="prose">
@@ -133,8 +133,8 @@ const ColoredTemplate = (args: AccordionItemProps) => {
           </Content>
         </AccordionItem>
         <AccordionItem
-          onOpenChange={args.onOpenChange}
-          defaultOpen={args.defaultOpen}
+          onExpandedChange={args.onExpandedChange}
+          defaultExpanded={args.defaultExpanded}
         >
           <Heading level={2}>Overfør penger fra Boligspar Ung?</Heading>
           <Content className="prose">
@@ -159,8 +159,8 @@ const ColoredStandaloneTemplate = (args: AccordionItemProps) => {
     <div className="bg-blue-dark p-10">
       <Accordion>
         <AccordionItem
-          onOpenChange={args.onOpenChange}
-          defaultOpen={args.defaultOpen}
+          onExpandedChange={args.onExpandedChange}
+          defaultExpanded={args.defaultExpanded}
         >
           <Heading level={2}>Bør jeg velge rammelån eller boliglån?</Heading>
           <Content className="prose">
@@ -186,16 +186,16 @@ const meta: Meta<typeof AccordionItem> = {
   title: 'Accordion',
   component: AccordionItem,
   argTypes: {
-    onOpenChange: { action: 'open change' },
+    onExpandedChange: { action: 'expanded change' },
   },
 };
 
 export default meta;
 
-type Story = StoryObj<typeof Accordion>;
+type Story = StoryObj<typeof AccordionItem>;
 
 const defaultProps: AccordionItemProps = {
-  defaultOpen: false,
+  defaultExpanded: false,
 };
 
 export const Default: Story = {

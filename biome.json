@@ -3,6 +3,7 @@
   "files": {
     "includes": [
       "**",
+      "!**/.nitro",
       "!**/.tanstack",
       "!**/node_modules",
       "!**/storybook-static",

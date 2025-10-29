@@ -1,48 +1,53 @@
-import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
-import { useLayoutEffect } from '@react-aria/utils';
 import { cx } from 'cva';
-import { Children, type Ref, useId, useState } from 'react';
+import { Children } from 'react';
 import { Provider } from 'react-aria-components';
-
 import { ContentContext, HeadingContext } from '../content';
+import {
+  UNSAFE_Disclosure as Disclosure,
+  UNSAFE_DisclosureButton as DisclosureButton,
+  UNSAFE_DisclosureGroup as DisclosureGroup,
+  type UNSAFE_DisclosureGroupProps as DisclosureGroupProps,
+  UNSAFE_DisclosurePanel as DisclosurePanel,
+  type UNSAFE_DisclosureProps as DisclosureProps,
+} from '../disclosure';
 
-type AccordionProps = {
+type AccordionProps = DisclosureGroupProps & {
   children: React.ReactNode;
 
-  /** Additional CSS className for the element. */
-  className?: string;
-
-  /** Additional style properties for the element. */
-  style?: React.CSSProperties;
-  /** Ref to the element. */
-  ref?: Ref<HTMLDivElement>;
+  /** Whether multiple accordion items can be expanded at the same time. Default is true */
+  allowsMultipleExpanded?: boolean;
 };
 
-type AccordionItemProps = {
+type AccordionItemProps = DisclosureProps & {
   children?: React.ReactNode;
 
-  /** Additional CSS className for the element. */
-  className?: string;
-
-  /** Additional style properties for the element. */
-  style?: React.CSSProperties;
-
-  /** Whether the accordion is open (controlled) */
+  /** @deprecated use isExpanded instead */
   isOpen?: boolean;
-  /** Whether the accordion is open by default (uncontrolled) */
+
+  /** @deprecated use defaultExpanded instead */
   defaultOpen?: boolean;
-  /** Handler that is called when the accordion's open state changes */
+
+  /** @deprecated use onExpandedChange instead */
   onOpenChange?: (isOpen: boolean) => void;
-  ref?: Ref<HTMLDivElement>;
 };
 
 function Accordion(props: AccordionProps) {
-  const { children, className, ...restProps } = props;
+  const {
+    children,
+    className,
+    allowsMultipleExpanded = true,
+    ...restProps
+  } = props;
 
   const childCount = Children.count(children);
 
   return (
-    <div {...restProps} className={cx('rounded-lg bg-white', className)}>
+    <DisclosureGroup
+      {...restProps}
+      data-accordion
+      allowsMultipleExpanded={allowsMultipleExpanded}
+      className={cx('rounded-lg bg-white', className)}
+    >
       {Children.map(children, (child, index) => (
         <>
           {child}
@@ -52,7 +57,7 @@ function Accordion(props: AccordionProps) {
           )}
         </>
       ))}
-    </div>
+    </DisclosureGroup>
   );
 }
 
@@ -63,49 +68,23 @@ function AccordionItem(props: AccordionItemProps) {
     defaultOpen = false,
     isOpen: controlledIsOpen,
     onOpenChange,
+    defaultExpanded,
+    isExpanded,
+    onExpandedChange,
     ...restProps
   } = props;
 
-  const contentId = useId();
-  const buttonId = useId();
-
-  const isControlled = controlledIsOpen != null;
-
-  // This component has internal state that controls whether it is open or not,
-  // regardless if we are controlled or uncontrolled.
-  // If we are controlled, we use a layout effect to sync the controlled state
-  // with the internal state.
-  //
-  const [isOpen, setIsOpen] = useState(
-    // If we are controlled, use that open state, otherwise use the uncontrolled
-    isControlled ? controlledIsOpen : defaultOpen,
-  );
-
-  useLayoutEffect(() => {
-    if (isControlled) {
-      setIsOpen(controlledIsOpen);
-    }
-  }, [controlledIsOpen, isControlled]);
-
-  const handleOpenChange = () => {
-    const newOpenState = !isOpen;
-
-    if (!isControlled) {
-      setIsOpen(newOpenState);
-    }
-
-    // Always call the change handler, even if we're uncontrolled.
-    // Easier to add stuff such as tracking etc.
-    if (onOpenChange) {
-      onOpenChange(newOpenState);
-    }
-  };
+  const _defaultExpanded = defaultOpen ?? defaultExpanded;
+  const _isExpanded = controlledIsOpen ?? isExpanded;
+  const _onExpandedChange = onOpenChange ?? onExpandedChange;
 
   return (
-    <div
+    <Disclosure
       {...restProps}
       className={cx('relative px-2', className)}
-      data-open={isOpen}
+      defaultExpanded={_defaultExpanded}
+      onExpandedChange={_onExpandedChange}
+      isExpanded={_isExpanded}
     >
       <Provider
         values={[
@@ -117,23 +96,14 @@ function AccordionItem(props: AccordionItemProps) {
               // Supply a default level here to make this typecheck ok. Will be overwritten with the consumers set heading level anyways
               level: 3,
               _innerWrapper: (children) => (
-                <button
-                  aria-controls={contentId}
-                  aria-expanded={isOpen}
+                <DisclosureButton
                   // Use outline with offset as focus indicator, this does not cover the left sky border on the expanded content and works with or without a background color on the accordion container
-                  className="flex min-h-[44px] w-full cursor-pointer items-center justify-between gap-1.5 rounded-lg px-2 py-3.5 text-left focus-visible:outline-focus focus-visible:outline-focus-inset"
-                  id={buttonId}
-                  onClick={handleOpenChange}
+                  className="flex min-h-11 w-full gap-1.5 rounded-lg px-2 py-3.5 text-left focus-visible:outline-focus-inset!"
                   type="button"
+                  withChevron
                 >
                   {children}
-                  <ChevronDown
-                    className={cx(
-                      'flex-none transition-transform duration-300 motion-reduce:transition-none',
-                      isOpen && 'rotate-180',
-                    )}
-                  />
-                </button>
+                </DisclosureButton>
               ),
             },
           ],
@@ -141,20 +111,11 @@ function AccordionItem(props: AccordionItemProps) {
             ContentContext,
             {
               className:
-                // Uses pseudo element for vertical padding, since that doesn't affect the height when the accordion is closed
-                'text-sm font-light leading-6 px-3.5 relative overflow-hidden border-sky border-l-[3px] before:relative before:block before:h-1.5 after:relative after:block after:h-1.5',
+                // Uses pseudo elements for vertical padding, since that doesn't affect the height when the accordion is closed
+                'text-sm font-light leading-6 px-3.5 data-[expanded]:after:h-3.5 relative overflow-hidden border-sky border-l-[3px] before:relative before:block before:h-1.5 after:relative after:block after:h-1.5',
               role: 'region',
-              inert: !isOpen,
-              'aria-labelledby': buttonId,
               _outerWrapper: (children) => (
-                <div
-                  className={cx(
-                    'grid transition-all duration-300 after:relative after:block after:h-0 after:transition-all after:duration-300 motion-reduce:transition-none',
-                    isOpen ? 'grid-rows-[1fr] after:h-3.5' : 'grid-rows-[0fr]',
-                  )}
-                >
-                  {children}
-                </div>
+                <DisclosurePanel>{children}</DisclosurePanel>
               ),
             },
           ],
@@ -162,7 +123,7 @@ function AccordionItem(props: AccordionItemProps) {
       >
         {children}
       </Provider>
-    </div>
+    </Disclosure>
   );
 }
 
