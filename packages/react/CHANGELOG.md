@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 3.1.1
+
+### Patch Changes
+
+- 6d732f2: Reverts the `DisclosureGroup` implementation of `Accordion`. This means `allowsMultipleExpanded` can not be supported after all. For those use cases: see [`DisclosureGroup`](https://grunnmuren.obos.no/komponenter/disclosure#11cea02cc7fc)
+
 ## 3.1.0
 
 ### Minor Changes
