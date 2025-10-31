@@ -1,5 +1,13 @@
 # @obosbbl/grunnmuren-react
 
+## 3.1.2
+
+### Patch Changes
+
+- 1ef9bd0: Backlink/Breadcrumbs: use our own Link internally to dogfood our library
+- 2c6661e: Link/LinkList: use our own Link component to build up our LinkList component. One step closer to stable versions of both components.
+- 96d1ef6: Set carousel items out of view to inert. This makes it easier for keyboard users and screen reader users to skip long carousels.
+
 ## 3.1.1
 
 ### Patch Changes
