@@ -125,43 +125,6 @@
   max-width: 45.5rem;
 }
 
-/*** Typography styles ***/
-@utility heading-xl {
-  @apply font-display font-semibold text-[2.8125rem]/[3.625rem] lg:text-[3.9375rem]/[5.125rem];
-}
-
-@utility heading-l {
-  @apply font-display font-semibold text-[1.8125rem]/[2.75rem] lg:text-[2.25rem]/[3.5rem];
-}
-
-@utility heading-m {
-  @apply font-text font-medium text-[1.4375rem]/[2.25rem] lg:text-[1.625rem]/[2.5625rem];
-}
-
-@utility heading-s {
-  @apply font-text font-medium text-[1.1875rem]/[1.875rem] lg:text-[1.3125rem]/[2.125rem];
-}
-
-@utility heading-xs {
-  @apply font-text font-medium text-[1.125rem]/[1.75rem] lg:text-[1.1875rem]/[1.9375rem];
-}
-
-@utility paragraph {
-  @apply text-[1rem]/[1.625rem];
-}
-
-@utility lead {
-  @apply font-medium text-[1.4375rem]/[2.25rem] lg:text-[1.625rem]/[2.5625rem];
-}
-
-@utility blockquote {
-  @apply font-medium italic grid grid-cols-[3rem_1fr] gap-x-[0.4375rem] pt-4 text-[1.625rem]/[2.5625rem] lg:text-[1.4375rem]/[2.25rem] before:text-[4.6875rem]/[1.6875rem] before:font-display before:not-italic before:content-["“"];
-}
-
-@utility description {
-  @apply text-[0.875rem]/[1.375rem] lg:text-[0.875rem]/[1.4375rem];
-}
-
 /* Focus styles */
 @utility outline-focus {
   @apply outline-2 outline-black;
@@ -192,5 +155,44 @@
   /* For Webkit-based browsers (Chrome, Safari and Opera) */
   &::-webkit-scrollbar {
     display: none;
+  }
+}
+
+/*** Typography styles***/
+@layer components {
+  .heading-xl {
+    @apply font-display font-semibold text-[2.8125rem]/[3.625rem] lg:text-[3.9375rem]/[5.125rem];
+  }
+
+  .heading-l {
+    @apply font-display font-semibold text-[1.8125rem]/[2.75rem] lg:text-[2.25rem]/[3.5rem];
+  }
+
+  .heading-m {
+    @apply font-text font-medium text-[1.4375rem]/[2.25rem] lg:text-[1.625rem]/[2.5625rem];
+  }
+
+  .heading-s {
+    @apply font-text font-medium text-[1.1875rem]/[1.875rem] lg:text-[1.3125rem]/[2.125rem];
+  }
+
+  .heading-xs {
+    @apply font-text font-medium text-[1.125rem]/[1.75rem] lg:text-[1.1875rem]/[1.9375rem];
+  }
+
+  .paragraph {
+    @apply text-[1rem]/[1.625rem];
+  }
+
+  .lead {
+    @apply font-medium text-[1.4375rem]/[2.25rem] lg:text-[1.625rem]/[2.5625rem];
+  }
+
+  .blockquote {
+    @apply font-medium italic grid grid-cols-[3rem_1fr] gap-x-[0.4375rem] pt-4 text-[1.625rem]/[2.5625rem] lg:text-[1.4375rem]/[2.25rem] before:text-[4.6875rem]/[1.6875rem] before:font-display before:not-italic before:content-["“"];
+  }
+
+  .description {
+    @apply text-[0.875rem]/[1.375rem] lg:text-[0.875rem]/[1.4375rem];
   }
 }
