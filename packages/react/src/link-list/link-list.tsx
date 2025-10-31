@@ -51,7 +51,7 @@ const LinkListItem = ({
   ...restProps
 }: LinkListItemProps) => {
   let Icon = ArrowRight;
-  let iconTransition = 'group-hover:motion-safe:translate-x-1';
+  let iconTransition = cx('group-hover:motion-safe:translate-x-1');
 
   if (restProps.download) {
     Icon = Download;
