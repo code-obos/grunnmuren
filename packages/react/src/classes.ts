@@ -49,7 +49,7 @@ const dropdown = {
     'data-entering:fade-in data-exiting:fade-out min-w-(--trigger-width) overflow-y-auto rounded-md border border-black bg-white shadow-sm data-entering:animate-in data-exiting:animate-out',
   ),
   // overflow-x-hidden is needed to prevent visible vertical scrollbars from overflowing the border radius of the popover
-  listbox: cx('max-h-[25rem] overflow-x-hidden text-sm outline-hidden'),
+  listbox: cx('max-h-100 overflow-x-hidden text-sm outline-hidden'),
   chevronIcon: cx(
     'text-base transition-transform duration-150 group-data-open:rotate-180 motion-reduce:transition-none',
   ),
