@@ -1,16 +1,20 @@
 import { cx } from 'cva';
 import type { ReactNode } from 'react';
-import { Link as _Link, type LinkProps } from 'react-aria-components';
+import {
+  Link as _Link,
+  type LinkProps as _LinkProps,
+} from 'react-aria-components';
 
-type CustomLinkProps = LinkProps & {
-  children: ReactNode;
-};
+type LinkProps = _LinkProps &
+  React.RefAttributes<HTMLAnchorElement> & {
+    children: ReactNode;
+  };
 
 /**
  * A basic link component that extends react-aria-components Link with consistent styling.
  * Provides accessible focus styles and maintains design system consistency.
  */
-const Link = ({ children, className, ...restProps }: CustomLinkProps) => {
+const Link = ({ children, className, ...restProps }: LinkProps) => {
   return (
     <_Link
       {...restProps}
@@ -24,4 +28,4 @@ const Link = ({ children, className, ...restProps }: CustomLinkProps) => {
   );
 };
 
-export { Link as UNSAFE_Link, type CustomLinkProps as UNSAFE_LinkProps };
+export { Link as UNSAFE_Link, type LinkProps as UNSAFE_LinkProps };
