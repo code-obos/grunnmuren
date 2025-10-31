@@ -2,9 +2,13 @@ import { ChevronLeft, ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 import { useUpdateEffect } from '@react-aria/utils';
 import { cx } from 'cva';
 import {
+  Children,
+  cloneElement,
   createContext,
   type HTMLProps,
+  isValidElement,
   type JSX,
+  useContext,
   useEffect,
   useRef,
   useState,
@@ -44,7 +48,9 @@ const Carousel = ({
   onChange,
   ...rest
 }: CarouselProps) => {
-  const ref = useRef<HTMLDivElement>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  const carouselItemsRef = useRef<HTMLDivElement>(null);
   const locale = useLocale();
   const { previous, next } = translations;
 
@@ -58,13 +64,15 @@ const Carousel = ({
   );
 
   const [hasReachedScrollEnd, setHasReachedScrollEnd] = useState(
-    !ref.current || ref.current.children.length - 1 === scrollTargetIndex,
+    !carouselItemsRef.current ||
+      carouselItemsRef.current.children.length - 1 === scrollTargetIndex,
   );
 
   useEffect(() => {
     setHasReachedScrollStart(scrollTargetIndex === 0);
     setHasReachedScrollEnd(
-      !ref.current || ref.current.children.length - 1 === scrollTargetIndex,
+      !carouselItemsRef.current ||
+        carouselItemsRef.current.children.length - 1 === scrollTargetIndex,
     );
   }, [scrollTargetIndex]);
 
@@ -90,7 +98,7 @@ const Carousel = ({
 
   // Handle scrolling when user clicks the arrow icons
   useUpdateEffect(() => {
-    if (!ref.current) {
+    if (!carouselItemsRef.current) {
       return;
     }
 
@@ -100,7 +108,10 @@ const Carousel = ({
 
     isScrollingProgrammatically.current = true;
 
-    ref.current.children[scrollTargetIndex]?.scrollIntoView({
+    const elementWithFocusVisible =
+      carouselRef.current?.querySelector(':focus-visible');
+
+    carouselItemsRef.current.children[scrollTargetIndex]?.scrollIntoView({
       behavior: 'smooth',
       inline: 'start',
       block: 'nearest',
@@ -109,9 +120,9 @@ const Carousel = ({
     if (prevIndex.current !== scrollTargetIndex && onChange) {
       onChange({
         index: scrollTargetIndex,
-        id: ref.current.children[scrollTargetIndex]?.id,
+        id: carouselItemsRef.current.children[scrollTargetIndex]?.id,
         prevIndex: prevIndex.current,
-        prevId: ref.current.children[prevIndex.current]?.id,
+        prevId: carouselItemsRef.current.children[prevIndex.current]?.id,
       });
     }
 
@@ -120,6 +131,38 @@ const Carousel = ({
     scrollTimeoutRef.current = setTimeout(() => {
       isScrollingProgrammatically.current = false;
       scrollTimeoutRef.current = null;
+      if (
+        elementWithFocusVisible &&
+        !carouselRef.current?.contains(document.activeElement)
+      ) {
+        // Restore focus to the appropriate element after scrolling
+        // First check if the prev or next buttons just got hidden due to reaching the start/end of the carousel
+        // If so, move focus to the other button. This is to avoid a scroll jank that occurs if instead focus is restored to the carousel container
+        // This jank happens because of the delays used for scrolling with these buttons (debounce, queuing etc.).
+        switch (elementWithFocusVisible.slot) {
+          case 'prev': {
+            // Focus was lost when the prev button turned invisible, set it to the next button
+            const nextButton = carouselRef.current?.querySelector(
+              '[slot="next"]',
+            ) as HTMLElement | null;
+            nextButton?.focus();
+            break;
+          }
+          case 'next': {
+            // Focus was lost when the next button turned invisible, set it to the prev button
+            const prevButton = carouselRef.current?.querySelector(
+              '[slot="prev"]',
+            ) as HTMLElement | null;
+            prevButton?.focus();
+            break;
+          }
+          default: {
+            // Focus was lost during while scrolling with left/right arrows, restore it to the carousel container
+            carouselItemsRef.current?.focus();
+            break;
+          }
+        }
+      }
       processQueue(); // Process any queued scrolls
     }, 500);
   }, [scrollTargetIndex]);
@@ -179,7 +222,9 @@ const Carousel = ({
 
   const handlePrevious = () => {
     const targetIndex = scrollTargetIndex - 1;
-    if (targetIndex < 0) return;
+    if (targetIndex < 0) {
+      return;
+    }
 
     if (isScrollingProgrammatically.current) {
       // If we're already scrolling, queue this action
@@ -190,9 +235,11 @@ const Carousel = ({
   };
 
   const handleNext = () => {
-    if (!ref.current) return;
+    if (!carouselItemsRef.current) return;
     const targetIndex = scrollTargetIndex + 1;
-    if (targetIndex >= ref.current.children.length) return;
+    if (targetIndex >= carouselItemsRef.current.children.length) {
+      return;
+    }
 
     if (isScrollingProgrammatically.current) {
       // If we're already scrolling, queue this action
@@ -203,14 +250,15 @@ const Carousel = ({
   };
 
   return (
-    <div data-slot="carousel">
+    <div data-slot="carousel" ref={carouselRef}>
       <Provider
         values={[
           [
             CarouselItemsContext,
             {
-              ref,
+              carouselItemsRef,
               onScroll,
+              activeIndex: scrollTargetIndex,
             },
           ],
           [
@@ -306,12 +354,14 @@ type CarouselItemsProps = HTMLProps<HTMLDivElement> & {
 };
 
 type CarouselItemsContextValue = {
-  ref: React.Ref<HTMLDivElement>;
+  carouselItemsRef: React.Ref<HTMLDivElement>;
   onScroll?: (event: React.UIEvent<HTMLDivElement>) => void;
+  activeIndex: number;
 };
 
 const CarouselItemsContext = createContext({
-  ref: null,
+  carouselItemsRef: null,
+  activeIndex: 0,
 } as CarouselItemsContextValue);
 
 const CarouselItems = ({ className, children }: CarouselItemsProps) => {
@@ -326,29 +376,34 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => {
     }
   };
 
+  const { carouselItemsRef, onScroll, activeIndex } =
+    useContext(CarouselItemsContext);
+
   return (
-    <CarouselItemsContext.Consumer>
-      {({ ref, onScroll }) => (
-        // biome-ignore lint/a11y/noStaticElementInteractions: The keydown handler is only to prevent undesired scrolling behavior when using the arrow keys
-        <div
-          data-slot="carousel-items"
-          className={cx(className, [
-            'scrollbar-hidden',
-            'flex',
-            'snap-x',
-            'snap-mandatory',
-            'overflow-x-auto',
-            'outline-none',
-            'rounded-[inherit]',
-          ])}
-          ref={ref}
-          onScroll={onScroll}
-          onKeyDown={handleKeyDown}
-        >
-          {children}
-        </div>
-      )}
-    </CarouselItemsContext.Consumer>
+    // biome-ignore lint/a11y/noStaticElementInteractions: The keydown handler is only to prevent undesired scrolling behavior when using the arrow keys
+    <div
+      data-slot="carousel-items"
+      className={cx(className, [
+        'scrollbar-hidden',
+        'flex',
+        'snap-x',
+        'snap-mandatory',
+        'overflow-x-auto',
+        'outline-none',
+        'rounded-[inherit]',
+      ])}
+      ref={carouselItemsRef}
+      onScroll={onScroll}
+      onKeyDown={handleKeyDown}
+    >
+      {Children.map(children, (child, index) => {
+        if (isValidElement(child)) {
+          return cloneElement(child as JSX.Element, {
+            inert: activeIndex === index ? undefined : true,
+          });
+        }
+      })}
+    </div>
   );
 };
 
@@ -357,12 +412,12 @@ type CarouselItemProps = HTMLProps<HTMLDivElement> & {
   children: JSX.Element | JSX.Element[];
 };
 
-const CarouselItem = ({ className, children, id }: CarouselItemProps) => {
+const CarouselItem = ({ className, children, ...rest }: CarouselItemProps) => {
   return (
     <div
       className={cx(className, 'shrink-0 basis-full snap-start')}
       data-slot="carousel-item"
-      id={id}
+      {...rest}
     >
       <Provider
         values={[
