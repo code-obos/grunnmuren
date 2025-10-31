@@ -36,7 +36,7 @@ function Breadcrumb(props: BreadcrumbProps) {
         <Link
           href={href}
           // use outline instead of ring-3 for focus marker that can be offset without creating a white background between the focus marker and the element content
-          className="rounded-xs hover:underline focus-visible:outline-focus group-last:no-underline"
+          className="rounded-xs font-normal hover:underline focus-visible:outline-focus group-last:no-underline"
         >
           {children}
         </Link>
