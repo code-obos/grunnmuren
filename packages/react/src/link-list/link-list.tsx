@@ -8,7 +8,7 @@ import { Children, type JSX, type ReactNode } from 'react';
 import {
   UNSAFE_Link as Link,
   type UNSAFE_LinkProps as LinkProps,
-} from '../link/link';
+} from '../link';
 
 type LinkListProps = React.HTMLProps<HTMLDivElement> & {
   children: JSX.Element | JSX.Element[];
