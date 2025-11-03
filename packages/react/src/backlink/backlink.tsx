@@ -35,7 +35,7 @@ function Backlink(props: BacklinkProps) {
 
   const _className = cx(
     className,
-    'group flex! max-w-fit cursor-pointer items-center gap-3 rounded-md p-2.5 font-normal no-underline focus-visible:outline-focus',
+    'group flex max-w-fit cursor-pointer items-center gap-3 rounded-md p-2.5 font-normal no-underline focus-visible:outline-focus',
   );
 
   const content = (
