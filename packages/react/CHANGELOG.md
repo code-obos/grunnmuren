@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-react
 
+## 3.1.3
+
+### Patch Changes
+
+- 73bd887: Link: fix link having a force flex, should respect the consumers css
+- 56d249c: Refactor state management for next / prev buttons in `Carousel`. This ensures the current items index is set correctly even during batched state updates.
+
 ## 3.1.2
 
 ### Patch Changes
