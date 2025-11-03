@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useState } from 'react';
 import {
   UNSAFE_Carousel as Carousel,
   UNSAFE_CarouselItem as CarouselItem,
@@ -111,3 +112,49 @@ export const WithNavigationCallbacks = () => (
     </Carousel>
   </main>
 );
+
+export const Controlled = () => {
+  const [selectedIndex, setSelectedIndex] = useState(1);
+
+  return (
+    <Carousel
+      selectedIndex={selectedIndex}
+      onSelectedIndexChange={setSelectedIndex}
+    >
+      <CarouselItems>
+        <CarouselItem>
+          <Media>
+            <img
+              src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
+              alt=""
+            />
+          </Media>
+        </CarouselItem>
+        <CarouselItem>
+          <Media>
+            <img
+              src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/7d2285ccee9b9545e018115b8e0ecc8b06aa0729-1620x1080.jpg?auto=format"
+              alt=""
+            />
+          </Media>
+        </CarouselItem>
+        <CarouselItem>
+          <Media fit="contain">
+            <img
+              src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/32a53eec782e6cbe15d75961f82ecca48dbe30ed-1920x1080.png?auto=format"
+              alt=""
+            />
+          </Media>
+        </CarouselItem>
+        <CarouselItem>
+          <Media>
+            <img
+              src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/a3c4b263f72128f5c6259333a224054ed3b539fe-1440x788.heif?auto=format"
+              alt=""
+            />
+          </Media>
+        </CarouselItem>
+      </CarouselItems>
+    </Carousel>
+  );
+};
