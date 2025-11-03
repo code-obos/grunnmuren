@@ -221,32 +221,41 @@ const Carousel = ({
   );
 
   const handlePrevious = () => {
-    const targetIndex = scrollTargetIndex - 1;
-    if (targetIndex < 0) {
-      return;
-    }
+    setScrollTargetIndex((currentTargetIndex) => {
+      const targetIndex = currentTargetIndex - 1;
 
-    if (isScrollingProgrammatically.current) {
-      // If we're already scrolling, queue this action
-      scrollQueue.current = [targetIndex];
-    } else {
-      setScrollTargetIndex(targetIndex);
-    }
+      if (targetIndex < 0) {
+        return currentTargetIndex;
+      }
+
+      if (isScrollingProgrammatically.current) {
+        // If we're already scrolling, queue this action
+        scrollQueue.current = [targetIndex];
+        return currentTargetIndex;
+      }
+
+      return targetIndex;
+    });
   };
 
   const handleNext = () => {
-    if (!carouselItemsRef.current) return;
-    const targetIndex = scrollTargetIndex + 1;
-    if (targetIndex >= carouselItemsRef.current.children.length) {
-      return;
-    }
+    setScrollTargetIndex((currentTargetIndex) => {
+      const targetIndex = currentTargetIndex + 1;
+      if (
+        !carouselItemsRef.current ||
+        targetIndex >= carouselItemsRef.current.children.length
+      ) {
+        return currentTargetIndex;
+      }
 
-    if (isScrollingProgrammatically.current) {
-      // If we're already scrolling, queue this action
-      scrollQueue.current = [targetIndex];
-    } else {
-      setScrollTargetIndex(targetIndex);
-    }
+      if (isScrollingProgrammatically.current) {
+        // If we're already scrolling, queue this action
+        scrollQueue.current = [targetIndex];
+        return currentTargetIndex;
+      }
+
+      return targetIndex;
+    });
   };
 
   return (
