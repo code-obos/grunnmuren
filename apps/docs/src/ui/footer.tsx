@@ -21,29 +21,9 @@ export function Footer() {
             <li>
               <a
                 className="flex gap-2"
-                href="https://www.figma.com/design/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?m=auto&t=ntAI3MrnoPScqEm9-6"
-              >
-                <Figma /> Figma
-              </a>
-            </li>
-
-            <li>
-              <a
-                className="flex gap-2"
                 href="https://github.com/code-obos/grunnmuren"
               >
                 <Github /> GitHub
-              </a>
-            </li>
-
-            <li>
-              <a
-                className="flex gap-2"
-                href="https://obos.slack.com/archives/C03FR05FJ9F"
-              >
-                <Slack />
-                <span className="sr-only">Slack:</span>{' '}
-                #grunnmuren-design-system
               </a>
             </li>
           </ul>
