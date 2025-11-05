@@ -1,4 +1,4 @@
-import { Figma, Github, Slack } from '@obosbbl/grunnmuren-icons-react';
+import { Github } from '@obosbbl/grunnmuren-icons-react';
 import { Link } from '@tanstack/react-router';
 import logoUrl from '@/assets/OBOS_Svart_Liggende.png?url';
 
