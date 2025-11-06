@@ -1,4 +1,4 @@
-import { Github } from '@obosbbl/grunnmuren-icons-react';
+import { Github, Mail } from '@obosbbl/grunnmuren-icons-react';
 import { Link } from '@tanstack/react-router';
 import logoUrl from '@/assets/OBOS_Svart_Liggende.png?url';
 
@@ -24,6 +24,12 @@ export function Footer() {
                 href="https://github.com/code-obos/grunnmuren"
               >
                 <Github /> GitHub
+              </a>
+            </li>
+            <li>
+              <a className="flex gap-2" href="mailto:grunnmuren@obos.no">
+                <Mail />
+                grunnmuren@obos.no
               </a>
             </li>
           </ul>
