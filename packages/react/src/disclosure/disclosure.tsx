@@ -55,12 +55,9 @@ const disclosureButtonVariants = cva({
   },
 });
 
-type DisclosureButtonProps = Omit<
-  ButtonProps,
-  'children' | 'aria-expanded' | 'aria-controls'
-> &
+type DisclosureButtonProps = Omit<ButtonProps, 'children'> &
   VariantProps<typeof disclosureButtonVariants> & {
-    children: React.ReactNode;
+    children?: React.ReactNode;
   } & RefAttributes<HTMLButtonElement>;
 
 const DisclosureButton = ({
@@ -76,6 +73,9 @@ const DisclosureButton = ({
     _ref as ForwardedRef<HTMLButtonElement>,
     ButtonContext,
   );
+
+  const hasContext = !!useContext(DisclosureContext);
+
   return (
     <Button
       {...props}
@@ -85,7 +85,7 @@ const DisclosureButton = ({
         withChevron,
         isIconOnly,
       })}
-      slot="trigger"
+      slot={hasContext ? 'trigger' : undefined}
     >
       {children}
       {withChevron && (
