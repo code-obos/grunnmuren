@@ -10,7 +10,7 @@ export const ExpandableRows = () => {
   const [expandedYears, setExpandedYears] = useState(
     Object.fromEntries(years.map((year) => [year, false])),
   );
-  
+
   const months = [
     'januar',
     'februar',
@@ -32,7 +32,7 @@ export const ExpandableRows = () => {
         <TableHeader>
           <TableColumn>Termin</TableColumn>
           <TableColumn>Renter</TableColumn>
-          <TableColumn>Terminbeløp</TableColumn>
+          <TableColumn>Avdrag</TableColumn>
           <TableColumn>Månedskostnader</TableColumn>
         </TableHeader>
         <TableBody>

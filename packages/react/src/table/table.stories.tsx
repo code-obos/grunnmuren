@@ -275,7 +275,7 @@ export const ExpandableRows = () => {
         <TableHeader>
           <TableColumn>Termin</TableColumn>
           <TableColumn>Renter</TableColumn>
-          <TableColumn>Terminbeløp</TableColumn>
+          <TableColumn>Avdrag</TableColumn>
           <TableColumn>Månedskostnader</TableColumn>
         </TableHeader>
         <TableBody>
