@@ -49,7 +49,7 @@ export const ExpandableRows = () => {
                       .map((month) => `${year}-${month}`)
                       .join(' ')}
                     aria-expanded={expandedYears[year]}
-                    aria-label={`Måndedlige kostnader for ${year}`}
+                    aria-label={`Månedlige kostnader for ${year}`}
                     onPress={() =>
                       setExpandedYears((prevState) => ({
                         ...prevState,
