@@ -1,7 +1,7 @@
 import type { Meta } from '@storybook/react-vite';
 import { Fragment, useState } from 'react';
 import { Content } from '../content';
-import { UNSAFE_DisclosureButton as DisclosureButton } from '../disclosure';
+import { DisclosureButton } from '../disclosure';
 import {
   UNSAFE_Table as Table,
   UNSAFE_TableBody as TableBody,
