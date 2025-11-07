@@ -20,7 +20,7 @@ const Link = ({ children, className, ...restProps }: LinkProps) => {
       {...restProps}
       className={cx(
         className,
-        'inline-flex cursor-pointer items-center gap-1 font-medium hover:no-underline focus-visible:outline-current focus-visible:outline-focus-offset [&>svg]:shrink-0',
+        'inline-flex cursor-pointer items-center gap-1 font-medium hover:no-underline focus-visible:outline-current focus-visible:outline-focus-offset [&>svg]:shrink-0 [&>svg]:transition-transform',
       )}
     >
       {children}
