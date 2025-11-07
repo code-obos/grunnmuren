@@ -1,8 +1,8 @@
 import { Close, Menu } from '@obosbbl/grunnmuren-icons-react';
 import {
-  UNSAFE_Disclosure as Disclosure,
-  UNSAFE_DisclosureButton as DisclosureButton,
-  UNSAFE_DisclosurePanel as DisclosurePanel,
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
   GrunnmurenProvider,
 } from '@obosbbl/grunnmuren-react';
 import {

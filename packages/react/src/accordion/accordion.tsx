@@ -3,10 +3,10 @@ import { Children, type HTMLProps } from 'react';
 import { Provider } from 'react-aria-components';
 import { ContentContext, HeadingContext } from '../content';
 import {
-  UNSAFE_Disclosure as Disclosure,
-  UNSAFE_DisclosureButton as DisclosureButton,
-  UNSAFE_DisclosurePanel as DisclosurePanel,
-  type UNSAFE_DisclosureProps as DisclosureProps,
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+  type DisclosureProps,
 } from '../disclosure';
 
 type AccordionProps = HTMLProps<HTMLDivElement> & {
