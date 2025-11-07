@@ -197,9 +197,9 @@ const TableColumnResizer = ({
     {...restProps}
     className={cx(
       className,
-      '-my-3 size-11 flex-none',
+      '-my-3 -mr-4.5 size-11 flex-none',
       'cursor-ew-resize',
-      'relative after:absolute after:top-2 after:right-0 after:bottom-2 after:w-px after:bg-black',
+      'relative after:absolute after:top-2 after:right-5 after:bottom-2 after:w-px after:bg-black',
       'data-focused:after:outline-focus-offset',
     )}
     data-slot="table-column-resizer"
