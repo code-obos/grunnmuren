@@ -1,9 +1,13 @@
 import type { Meta } from '@storybook/react-vite';
+import { Fragment, useState } from 'react';
+import { UNSAFE_DisclosureButton as DisclosureButton } from '../disclosure';
 import {
   UNSAFE_Table as Table,
   UNSAFE_TableBody as TableBody,
   UNSAFE_TableCell as TableCell,
   UNSAFE_TableColumn as TableColumn,
+  UNSAFE_TableColumnResizer as TableColumnResizer,
+  UNSAFE_TableContainer as TableContainer,
   UNSAFE_TableHeader as TableHeader,
   UNSAFE_TableRow as TableRow,
 } from './table';
@@ -245,3 +249,141 @@ export const WithScrolling = () => (
     </Table>
   </div>
 );
+
+export const FixedColumns = () => (
+  <TableContainer>
+    <Table aria-label="Eiendomsforvaltere">
+      <TableHeader>
+        <TableColumn maxWidth={144}>Navn</TableColumn>
+        <TableColumn maxWidth={144}>E-post</TableColumn>
+        <TableColumn maxWidth={144}>Område</TableColumn>
+      </TableHeader>
+      <TableBody>
+        <TableRow>
+          <TableCell>Kari Hansen</TableCell>
+          <TableCell>kari.hansen@obos.no</TableCell>
+          <TableCell>Grünerløkka</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Lars Olsen</TableCell>
+          <TableCell>lars.olsen@obos.no</TableCell>
+          <TableCell>Frogner</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Ingrid Svendsen</TableCell>
+          <TableCell>ingrid.svendsen@obos.no</TableCell>
+          <TableCell>Majorstuen</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  </TableContainer>
+);
+
+export const ResizeableColumns = () => (
+  <TableContainer>
+    <Table aria-label="Table with resizable columns">
+      <TableHeader>
+        <TableColumn id="file" isRowHeader>
+          <div className="flex-wrapper">
+            <span tabIndex={-1} className="column-name">
+              Filnavn
+            </span>
+            <TableColumnResizer />
+          </div>
+        </TableColumn>
+        <TableColumn id="size">Størrelse</TableColumn>
+        <TableColumn id="date">
+          <div className="flex-wrapper">
+            <span tabIndex={-1} className="column-name">
+              Dato
+            </span>
+            <TableColumnResizer />
+          </div>
+        </TableColumn>
+      </TableHeader>
+      <TableBody>
+        <TableRow>
+          <TableCell>2022-Roadmap-Proposal-Revision-012822-Copy(2)</TableCell>
+          <TableCell>214 KB</TableCell>
+          <TableCell>November 27, 2022 at 4:56PM</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>62259692_p0_master1200</TableCell>
+          <TableCell>120 KB</TableCell>
+          <TableCell>January 27, 2021 at 1:56AM</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  </TableContainer>
+);
+
+export const ExpandableRows = () => {
+  const years = [2025, 2026, 2027];
+  const [expandedYears, setExpandedYears] = useState(
+    Object.fromEntries(years.map((year) => [year, false])),
+  );
+
+  const months = [
+    'januar',
+    'februar',
+    'mars',
+    'april',
+    'mai',
+    'juni',
+    'juli',
+    'august',
+    'september',
+    'oktober',
+    'november',
+    'desember',
+  ];
+
+  return (
+    <TableContainer className="container">
+      <Table aria-label="Lånekostnader" variant="zebra-striped">
+        <TableHeader>
+          <TableColumn maxWidth={144}>Termin</TableColumn>
+          <TableColumn maxWidth={144}>Renter</TableColumn>
+          <TableColumn maxWidth={144}>Avdrag</TableColumn>
+          <TableColumn maxWidth={44}>Månedskostnader</TableColumn>
+        </TableHeader>
+        <TableBody>
+          {years.map((year) => (
+            <Fragment key={year}>
+              <TableRow className="*:align-middle">
+                <TableCell>{year}</TableCell>
+                <TableCell>1 200 kr</TableCell>
+                <TableCell>18 000 kr</TableCell>
+                <TableCell>
+                  <DisclosureButton
+                    withChevron
+                    aria-controls={months
+                      .map((month) => `${year}-${month}`)
+                      .join(' ')}
+                    aria-expanded={expandedYears[year]}
+                    aria-label={`Månedlige kostnader for ${year}`}
+                    onPress={() =>
+                      setExpandedYears((prevState) => ({
+                        ...prevState,
+                        [year]: !expandedYears[year],
+                      }))
+                    }
+                    isIconOnly
+                  />
+                </TableCell>
+              </TableRow>
+              {expandedYears[year] &&
+                months.map((month) => (
+                  <TableRow key={`${year}-${month}`} id={`${year}-${month}`}>
+                    <TableCell className="capitalize">{month}</TableCell>
+                    <TableCell>120 kr</TableCell>
+                    <TableCell colSpan={2}>1 500 kr</TableCell>
+                  </TableRow>
+                ))}
+            </Fragment>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+};

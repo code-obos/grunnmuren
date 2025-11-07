@@ -1,10 +1,19 @@
 import { cva, cx } from 'cva';
-import { type RefAttributes, useCallback } from 'react';
 import {
+  createContext,
+  type RefAttributes,
+  useCallback,
+  useContext,
+  useState,
+} from 'react';
+import {
+  Provider,
   Cell as RACCell,
   type CellProps as RACCellProps,
   Column as RACColumn,
   type ColumnProps as RACColumnProps,
+  ColumnResizer as RACColumnResizer,
+  type ColumnResizerProps as RACColumnResizerProps,
   Row as RACRow,
   type RowProps as RACRowProps,
   Table as RACTable,
@@ -70,18 +79,27 @@ type TableCellProps = RACCellProps &
     children: React.ReactNode;
   };
 
+// Used to deal with showing or hiding scroll indicators during column resizing
+const TableScrollContainerContext = createContext<{
+  isResizing: boolean;
+}>({
+  isResizing: false,
+});
+
 /**
  * A container component for displaying tabular data with horizontal scrolling support.
  */
 function Table(props: TableProps) {
   const { className, children, variant = 'default', ...restProps } = props;
 
+  const { isResizing } = useContext(TableScrollContainerContext);
+
   const {
     scrollContainerRef,
     canScrollLeft,
     canScrollRight,
     hasScrollingOccurred,
-  } = useHorizontalScroll();
+  } = useHorizontalScroll([isResizing]);
 
   const handleScroll = useCallback(
     (direction: ScrollDirection) => {
@@ -159,12 +177,33 @@ function TableColumn(props: TableColumnProps) {
         'px-4 py-3 text-left font-medium text-black text-sm',
         'data-focus-visible:outline-focus-inset',
         'min-w-fit whitespace-nowrap',
+        'has-data-[slot=table-column-resizer]:*:flex has-data-[slot=table-column-resizer]:*:justify-between has-data-[slot=table-column-resizer]:*:gap-2',
       )}
+      data-slot="table-column"
     >
       {children}
     </RACColumn>
   );
 }
+
+type TableColumnResizerProps = RACColumnResizerProps;
+
+const TableColumnResizer = ({
+  className,
+  ...restProps
+}: TableColumnResizerProps) => (
+  <RACColumnResizer
+    {...restProps}
+    className={cx(
+      className,
+      '-my-3 size-11 flex-none',
+      'cursor-ew-resize',
+      'relative after:absolute after:top-2 after:right-0 after:bottom-2 after:w-px after:bg-black',
+      'data-focused:after:outline-focus-offset',
+    )}
+    data-slot="table-column-resizer"
+  />
+);
 
 /**
  * Container for table rows.
@@ -200,6 +239,7 @@ function TableCell(props: TableCellProps) {
         'align-top',
         'data-focus-visible:outline-focus-inset',
       )}
+      data-slot="table-cell"
     >
       {children}
     </RACCell>
@@ -208,11 +248,29 @@ function TableCell(props: TableCellProps) {
 
 type TableContainerProps = ResizableTableContainerProps;
 
-const TableContainer = (props: ResizableTableContainerProps) => (
-  <ResizableTableContainer {...props} />
-);
+const TableContainer = ({
+  className,
+  ...restProps
+}: ResizableTableContainerProps) => {
+  const [isResizing, setIsResizing] = useState(false);
+  return (
+    <Provider values={[[TableScrollContainerContext, { isResizing }]]}>
+      <ResizableTableContainer
+        {...restProps}
+        className={cx(
+          className,
+          '**:data-[slot=table-column]:overflow-hidden **:data-[slot=table-column]:text-ellipsis',
+          '**:data-[slot=table-cell]:overflow-hidden **:data-[slot=table-cell]:text-ellipsis',
+        )}
+        onResizeStart={() => setIsResizing(true)}
+        onResizeEnd={() => setIsResizing(false)}
+      />
+    </Provider>
+  );
+};
 
 export {
+  TableColumnResizer as UNSAFE_TableColumnResizer,
   Table as UNSAFE_Table,
   TableBody as UNSAFE_TableBody,
   TableCell as UNSAFE_TableCell,
@@ -220,6 +278,7 @@ export {
   TableContainer as UNSAFE_TableContainer,
   TableHeader as UNSAFE_TableHeader,
   TableRow as UNSAFE_TableRow,
+  type TableColumnResizerProps as UNSAFE_TableColumnResizerProps,
   type TableBodyProps as UNSAFE_TableBodyProps,
   type TableCellProps as UNSAFE_TableCellProps,
   type TableColumnProps as UNSAFE_TableColumnProps,
