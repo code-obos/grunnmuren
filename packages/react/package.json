@@ -27,7 +27,7 @@
     "@react-aria/utils": "^3.29.1",
     "@react-stately/form": "^3.1.5",
     "@react-stately/utils": "^3.10.7",
-    "@types/node": "^22.0.0",
+    "@types/node": "^24.0.0",
     "cva": "^1.0.0-0",
     "react-aria": "^3.41.1",
     "react-aria-components": "^1.10.1",
