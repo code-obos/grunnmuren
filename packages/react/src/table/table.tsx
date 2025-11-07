@@ -176,6 +176,7 @@ function TableColumn(props: TableColumnProps) {
         className,
         'px-4 py-3 text-left font-medium text-black text-sm',
         'data-focus-visible:outline-focus-inset',
+        '[&_:not([data-slot="table-column-resizer"]):focus-visible]:outline-focus-offset',
         'min-w-fit whitespace-nowrap',
         'has-data-[slot=table-column-resizer]:*:data-[slot=content]:flex has-data-[slot=table-column-resizer]:*:data-[slot=content]:justify-between has-data-[slot=table-column-resizer]:*:data-[slot=content]:gap-2',
       )}
