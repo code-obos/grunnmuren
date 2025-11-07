@@ -67,7 +67,7 @@ export const ExpandableRows = () => {
                     onPress={() =>
                       setExpandedYears((prevState) => ({
                         ...prevState,
-                        [year]: !expandedYears[year],
+                        [year]: !prevState[year],
                       }))
                     }
                     isIconOnly
