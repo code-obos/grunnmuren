@@ -1,5 +1,7 @@
 import type { Meta } from '@storybook/react-vite';
+import { Fragment, useState } from 'react';
 import { Content } from '../content';
+import { UNSAFE_DisclosureButton as DisclosureButton } from '../disclosure';
 import {
   UNSAFE_Table as Table,
   UNSAFE_TableBody as TableBody,
@@ -315,3 +317,74 @@ export const ResizeableColumns = () => (
     </Table>
   </TableContainer>
 );
+
+export const ExpandableRows = () => {
+  const years = [2025, 2026, 2027];
+  const [expandedYears, setExpandedYears] = useState(
+    Object.fromEntries(years.map((year) => [year, false])),
+  );
+
+  const months = [
+    'januar',
+    'februar',
+    'mars',
+    'april',
+    'mai',
+    'juni',
+    'juli',
+    'august',
+    'september',
+    'oktober',
+    'november',
+    'desember',
+  ];
+
+  return (
+    <TableContainer className="container">
+      <Table aria-label="Lånekostnader" variant="zebra-striped">
+        <TableHeader>
+          <TableColumn maxWidth={200}>Termin</TableColumn>
+          <TableColumn maxWidth={200}>Renter</TableColumn>
+          <TableColumn maxWidth={200}>Avdrag</TableColumn>
+          <TableColumn maxWidth={200}>Månedskostnader</TableColumn>
+        </TableHeader>
+        <TableBody>
+          {years.map((year) => (
+            <Fragment key={year}>
+              <TableRow className="*:align-middle">
+                <TableCell>{year}</TableCell>
+                <TableCell>1 200 kr</TableCell>
+                <TableCell>18 000 kr</TableCell>
+                <TableCell>
+                  <DisclosureButton
+                    withChevron
+                    aria-controls={months
+                      .map((month) => `${year}-${month}`)
+                      .join(' ')}
+                    aria-expanded={expandedYears[year]}
+                    aria-label={`Månedlige kostnader for ${year}`}
+                    onPress={() =>
+                      setExpandedYears((prevState) => ({
+                        ...prevState,
+                        [year]: !expandedYears[year],
+                      }))
+                    }
+                    isIconOnly
+                  />
+                </TableCell>
+              </TableRow>
+              {expandedYears[year] &&
+                months.map((month) => (
+                  <TableRow key={`${year}-${month}`} id={`${year}-${month}`}>
+                    <TableCell className="capitalize">{month}</TableCell>
+                    <TableCell>120 kr</TableCell>
+                    <TableCell colSpan={2}>1 500 kr</TableCell>
+                  </TableRow>
+                ))}
+            </Fragment>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+};

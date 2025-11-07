@@ -5,6 +5,20 @@
 Support for rendering standalone `<DisclosureButton>` without wrapping it in a `<Disclosure>` parent. The expand/collapse state can then be managed through the `aria-expanded`, `aria-controls` and `onPress`/`onClick` props. This will allow for a bit more flexibility to compose expandable and collapsable widgets. Such as tables:
 
 ``` tsx
+import { Fragment, useState } from 'react';
+
+import {
+  UNSAFE_DisclosureButton as DisclosureButton
+  UNSAFE_Table as Table,
+  UNSAFE_TableBody as TableBody,
+  UNSAFE_TableCell as TableCell,
+  UNSAFE_TableColumn as TableColumn,
+  UNSAFE_TableColumnResizer as TableColumnResizer,
+  UNSAFE_TableContainer as TableContainer,
+  UNSAFE_TableHeader as TableHeader,
+  UNSAFE_TableRow as TableRow,
+} from '@obosbbl/grunnmuren-react';
+
 export const ExpandableRows = () => {
   const years = [2025, 2026, 2027];
   const [expandedYears, setExpandedYears] = useState(
@@ -27,13 +41,13 @@ export const ExpandableRows = () => {
   ];
 
   return (
-    <div className="container">
+    <TableContainer className="container">
       <Table aria-label="Lånekostnader" variant="zebra-striped">
         <TableHeader>
-          <TableColumn>Termin</TableColumn>
-          <TableColumn>Renter</TableColumn>
-          <TableColumn>Avdrag</TableColumn>
-          <TableColumn>Månedskostnader</TableColumn>
+          <TableColumn maxWidth={200}>Termin</TableColumn>
+          <TableColumn maxWidth={200}>Renter</TableColumn>
+          <TableColumn maxWidth={200}>Avdrag</TableColumn>
+          <TableColumn maxWidth={200}>Månedskostnader</TableColumn>
         </TableHeader>
         <TableBody>
           {years.map((year) => (
@@ -72,7 +86,7 @@ export const ExpandableRows = () => {
           ))}
         </TableBody>
       </Table>
-    </div>
+    </TableContainer>
   );
 };
 ```
