@@ -8,7 +8,7 @@ Support for rendering standalone `<DisclosureButton>` without wrapping it in a `
 import { Fragment, useState } from 'react';
 
 import {
-  UNSAFE_DisclosureButton as DisclosureButton
+  DisclosureButton as DisclosureButton
   UNSAFE_Table as Table,
   UNSAFE_TableBody as TableBody,
   UNSAFE_TableCell as TableCell,
