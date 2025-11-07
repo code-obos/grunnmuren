@@ -70,7 +70,7 @@ interface ScrollState {
  * Simple hook for detecting horizontal scroll capabilities
  * Returns scroll state and a ref to attach to your scrollable container
  */
-export function useHorizontalScroll() {
+export function useHorizontalScroll(scrollStateDeps: unknown[] = []) {
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
   const [scrollState, setScrollState] = useState<ScrollState>({
     canScrollLeft: false,
@@ -100,14 +100,14 @@ export function useHorizontalScroll() {
     100,
   );
 
+  // Initial check and react to dependency changes
+  useEffect(updateScrollState, [...scrollStateDeps]);
+
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) {
       return;
     }
-
-    // Initial check
-    updateScrollState();
 
     // Listen for scroll events
     container.addEventListener('scroll', debouncedUpdateScrollState);
