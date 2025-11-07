@@ -292,9 +292,7 @@ export const ResizeableColumns = () => (
             <TableColumnResizer />
           </Content>
         </TableColumn>
-        <TableColumn id="size" width={50}>
-          Størrelse
-        </TableColumn>
+        <TableColumn id="size">Størrelse</TableColumn>
         <TableColumn id="date">
           <Content>
             <span tabIndex={-1} className="column-name">

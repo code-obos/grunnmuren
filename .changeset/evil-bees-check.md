@@ -60,7 +60,7 @@ export const ResizeableColumns = () => (
             <TableColumnResizer />
           </Content>
         </TableColumn>
-        <TableColumn id="size" width={50}>
+        <TableColumn id="size">
           Størrelse
         </TableColumn>
         <TableColumn id="date">
