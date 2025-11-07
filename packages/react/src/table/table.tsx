@@ -13,6 +13,8 @@ import {
   TableHeader as RACTableHeader,
   type TableHeaderProps as RACTableHeaderProps,
   type TableProps as RACTableProps,
+  ResizableTableContainer,
+  type ResizableTableContainerProps,
 } from 'react-aria-components';
 import {
   ScrollButton,
@@ -204,16 +206,24 @@ function TableCell(props: TableCellProps) {
   );
 }
 
+type TableContainerProps = ResizableTableContainerProps;
+
+const TableContainer = (props: ResizableTableContainerProps) => (
+  <ResizableTableContainer {...props} />
+);
+
 export {
   Table as UNSAFE_Table,
   TableBody as UNSAFE_TableBody,
   TableCell as UNSAFE_TableCell,
   TableColumn as UNSAFE_TableColumn,
+  TableContainer as UNSAFE_TableContainer,
   TableHeader as UNSAFE_TableHeader,
   TableRow as UNSAFE_TableRow,
   type TableBodyProps as UNSAFE_TableBodyProps,
   type TableCellProps as UNSAFE_TableCellProps,
   type TableColumnProps as UNSAFE_TableColumnProps,
+  type TableContainerProps as UNSAFE_TableContainerProps,
   type TableHeaderProps as UNSAFE_TableHeaderProps,
   type TableProps as UNSAFE_TableProps,
   type TableRowProps as UNSAFE_TableRowProps,
