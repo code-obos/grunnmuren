@@ -8,6 +8,7 @@ Usage:
 
 ``` tsx
 import {
+  Content,
   UNSAFE_Table as Table,
   UNSAFE_TableBody as TableBody,
   UNSAFE_TableCell as TableCell,
@@ -16,7 +17,8 @@ import {
   UNSAFE_TableContainer as TableContainer,
   UNSAFE_TableHeader as TableHeader,
   UNSAFE_TableRow as TableRow,
-} from './table';
+} from '@obosbbl/grunnmuren-react';
+
 export const FixedColumns = () => (
   <TableContainer>
     <Table aria-label="Eiendomsforvaltere">
@@ -51,21 +53,23 @@ export const ResizeableColumns = () => (
     <Table aria-label="Table with resizable columns">
       <TableHeader>
         <TableColumn id="file" isRowHeader>
-          <div className="flex-wrapper">
+          <Content>
             <span tabIndex={-1} className="column-name">
               Filnavn
             </span>
             <TableColumnResizer />
-          </div>
+          </Content>
         </TableColumn>
-        <TableColumn id="size">Størrelse</TableColumn>
+        <TableColumn id="size" width={50}>
+          Størrelse
+        </TableColumn>
         <TableColumn id="date">
-          <div className="flex-wrapper">
+          <Content>
             <span tabIndex={-1} className="column-name">
               Dato
             </span>
             <TableColumnResizer />
-          </div>
+          </Content>
         </TableColumn>
       </TableHeader>
       <TableBody>

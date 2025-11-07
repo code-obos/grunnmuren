@@ -1,5 +1,6 @@
 import type { Meta } from '@storybook/react-vite';
 import { Fragment, useState } from 'react';
+import { Content } from '../content';
 import { UNSAFE_DisclosureButton as DisclosureButton } from '../disclosure';
 import {
   UNSAFE_Table as Table,
@@ -284,21 +285,23 @@ export const ResizeableColumns = () => (
     <Table aria-label="Table with resizable columns">
       <TableHeader>
         <TableColumn id="file" isRowHeader>
-          <div className="flex-wrapper">
+          <Content>
             <span tabIndex={-1} className="column-name">
               Filnavn
             </span>
             <TableColumnResizer />
-          </div>
+          </Content>
         </TableColumn>
-        <TableColumn id="size">Størrelse</TableColumn>
+        <TableColumn id="size" width={50}>
+          Størrelse
+        </TableColumn>
         <TableColumn id="date">
-          <div className="flex-wrapper">
+          <Content>
             <span tabIndex={-1} className="column-name">
               Dato
             </span>
             <TableColumnResizer />
-          </div>
+          </Content>
         </TableColumn>
       </TableHeader>
       <TableBody>

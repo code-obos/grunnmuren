@@ -177,7 +177,7 @@ function TableColumn(props: TableColumnProps) {
         'px-4 py-3 text-left font-medium text-black text-sm',
         'data-focus-visible:outline-focus-inset',
         'min-w-fit whitespace-nowrap',
-        'has-data-[slot=table-column-resizer]:*:flex has-data-[slot=table-column-resizer]:*:justify-between has-data-[slot=table-column-resizer]:*:gap-2',
+        'has-data-[slot=table-column-resizer]:*:data-[slot=content]:flex has-data-[slot=table-column-resizer]:*:data-[slot=content]:justify-between has-data-[slot=table-column-resizer]:*:data-[slot=content]:gap-2',
       )}
       data-slot="table-column"
     >
