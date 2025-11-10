@@ -20,7 +20,7 @@
     "test": "test-storybook"
   },
   "dependencies": {
-    "@biomejs/biome": "2.3.1",
+    "@biomejs/biome": "2.3.4",
     "@changesets/cli": "2.29.7",
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
     "@react-aria/optimize-locales-plugin": "1.1.5",
