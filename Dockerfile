@@ -1,4 +1,4 @@
-FROM dktprodacr.azurecr.io/dktp/node22:1.0.8 AS base
+FROM dktprodacr.azurecr.io/dktp/node24:1.0.5 AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable

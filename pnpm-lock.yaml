@@ -263,9 +263,6 @@ importers:
       '@react-stately/utils':
         specifier: ^3.10.7
         version: 3.10.8(react@19.0.0)
-      '@types/node':
-        specifier: ^24.0.0
-        version: 24.10.0
       cva:
         specifier: ^1.0.0-0
         version: 1.0.0-beta.4(typescript@5.9.3)
@@ -285,6 +282,9 @@ importers:
         specifier: ^10.0.4
         version: 10.0.6(react@19.0.0)
     devDependencies:
+      '@types/node':
+        specifier: ^24.0.0
+        version: 24.10.0
       tailwindcss:
         specifier: 4.1.17
         version: 4.1.17
@@ -9391,9 +9391,6 @@ packages:
   xregexp@2.0.0:
     resolution: {integrity: sha512-xl/50/Cf32VsGq/1R8jJE5ajH1yMCQkpmoS10QbFZWl2Oor4H0Me64Pu2yxvsRWK3m6soJbmGfzSR7BYmDcWAA==}
 
-  xstate@5.23.0:
-    resolution: {integrity: sha512-jo126xWXkU6ySQ91n51+H2xcgnMuZcCQpQoD3FQ79d32a6RQvryRh8rrDHnH4WDdN/yg5xNjlIRol9ispMvzeg==}
-
   xstate@5.24.0:
     resolution: {integrity: sha512-h/213ThFfZbOefUWrLc9ZvYggEVBr0jrD2dNxErxNMLQfZRN19v+80TaXFho17hs8Q2E1mULtm/6nv12um0C4A==}
 
@@ -13492,19 +13489,19 @@ snapshots:
     dependencies:
       rxjs: 7.8.2
       uuid: 11.1.0
-      xstate: 5.23.0
+      xstate: 5.24.0
 
   '@sanity/comlink@3.1.1':
     dependencies:
       rxjs: 7.8.2
       uuid: 11.1.0
-      xstate: 5.23.0
+      xstate: 5.24.0
 
   '@sanity/comlink@4.0.0':
     dependencies:
       rxjs: 7.8.2
       uuid: 11.1.0
-      xstate: 5.23.0
+      xstate: 5.24.0
 
   '@sanity/descriptors@1.1.1':
     dependencies:
@@ -14937,16 +14934,6 @@ snapshots:
       '@vitest/pretty-format': 3.2.4
       loupe: 3.2.1
       tinyrainbow: 2.0.0
-
-  '@xstate/react@6.0.0(@types/react@19.2.0)(react@19.0.0)(xstate@5.23.0)':
-    dependencies:
-      react: 19.0.0
-      use-isomorphic-layout-effect: 1.2.0(@types/react@19.2.0)(react@19.0.0)
-      use-sync-external-store: 1.6.0(react@19.0.0)
-    optionalDependencies:
-      xstate: 5.23.0
-    transitivePeerDependencies:
-      - '@types/react'
 
   '@xstate/react@6.0.0(@types/react@19.2.0)(react@19.0.0)(xstate@5.24.0)':
     dependencies:
@@ -19207,7 +19194,7 @@ snapshots:
       '@types/use-sync-external-store': 1.5.0
       '@types/which': 3.0.4
       '@vitejs/plugin-react': 4.7.0(vite@7.2.2(@types/node@24.10.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.7.0))
-      '@xstate/react': 6.0.0(@types/react@19.2.0)(react@19.0.0)(xstate@5.23.0)
+      '@xstate/react': 6.0.0(@types/react@19.2.0)(react@19.0.0)(xstate@5.24.0)
       archiver: 7.0.1
       arrify: 2.0.1
       async-mutex: 0.5.0
@@ -19297,7 +19284,7 @@ snapshots:
       uuid: 11.1.0
       vite: 7.2.2(@types/node@24.10.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.7.0)
       which: 5.0.0
-      xstate: 5.23.0
+      xstate: 5.24.0
       yargs: 17.7.2
     transitivePeerDependencies:
       - '@emotion/is-prop-valid'
@@ -20444,8 +20431,6 @@ snapshots:
   xmlchars@2.2.0: {}
 
   xregexp@2.0.0: {}
-
-  xstate@5.23.0: {}
 
   xstate@5.24.0: {}
 
