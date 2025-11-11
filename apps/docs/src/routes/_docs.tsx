@@ -15,7 +15,7 @@ import {
 } from '@tanstack/react-router';
 import { defineQuery } from 'groq';
 import { useEffect, useState } from 'react';
-import logoUrl from '@/assets/OBOS_Hvit_Liggende.png?url';
+import logoUrl from '@/assets/OBOS_Hvit_Liggende.svg?url';
 import { sanityFetch } from '@/lib/sanity';
 import appCss from '@/styles/app.css?url';
 import { Footer } from '@/ui/footer';
