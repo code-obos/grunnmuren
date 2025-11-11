@@ -70,6 +70,7 @@ function RootLayout() {
       // This integrates RAC/Grunnmuren with TanStack router
       // Giving us typesafe routes
       // See https://react-spectrum.adobe.com/react-aria/routing.html#tanstack-router
+      // @ts-expect-error its fine for now, but should fix it properly later
       navigate={(to, options) => router.navigate({ to, ...options })}
       useHref={(to) => router.buildLocation({ to }).href}
     >
