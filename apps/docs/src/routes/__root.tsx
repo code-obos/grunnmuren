@@ -38,13 +38,10 @@ function RootDocument() {
             <script type="text/javascript">function OptanonWrapper() {}</script>
             <script
               src="https://www.obos.no/collector.js"
-              strategy="afterInteractive"
               type="module"
               id="collector-script"
               data-api-key="4426822b50f2893bb0bc6cd74521848c"
               data-app-name="grunnmuren"
-              data-collect-url="/collect"
-              data-session-replay-collect-url="/collect-sr"
               data-enable-session-replay="true"
               crossOrigin=""
             />
