@@ -26,7 +26,7 @@ function RootDocument() {
     <html lang="no">
       <head>
         <HeadContent />
-        {process.env.NODE_ENV === 'development' && (
+        {process.env.NODE_ENV === 'production' && (
           <>
             <script
               src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
