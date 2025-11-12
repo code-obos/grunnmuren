@@ -32,9 +32,8 @@ function RootDocument() {
               src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
               data-language="no"
               type="text/javascript"
-              charset="UTF-8"
               data-domain-script="ea448f9e-5a74-4f6e-9260-c61b81f67013"
-            ></script>
+            />
             <script type="text/javascript">function OptanonWrapper() {}</script>
             <script
               src="https://www.obos.no/collector.js"
