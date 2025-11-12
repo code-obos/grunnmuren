@@ -40,7 +40,7 @@ function RootDocument() {
               src="https://www.obos.no/collector.js"
               type="module"
               id="collector-script"
-              data-api-key="4426822b50f2893bb0bc6cd74521848c"
+              data-api-key="b85ae7f346517c8070821d6b66e9d69e"
               data-app-name="grunnmuren"
               data-enable-session-replay="true"
               crossOrigin=""
