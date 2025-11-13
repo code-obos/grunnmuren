@@ -3,6 +3,12 @@ import colors from '../../../../colors';
 
 export const Route = createFileRoute('/_docs/profil/farger')({
   component: RouteComponent,
+  head: () => ({
+    meta: [
+      { title: 'Farger - Grunnmuren' },
+      { name: 'description', content: 'Grunnmuren sine farger' },
+    ],
+  }),
 });
 
 function RouteComponent() {
