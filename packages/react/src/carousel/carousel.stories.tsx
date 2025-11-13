@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   UNSAFE_Carousel as Carousel,
   UNSAFE_CarouselItem as CarouselItem,
@@ -114,7 +114,15 @@ export const WithNavigationCallbacks = () => (
 );
 
 export const Controlled = () => {
-  const [selectedIndex, setSelectedIndex] = useState(1);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSelectedIndex((prevIndex) => (prevIndex + 1) % 4);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <Carousel
