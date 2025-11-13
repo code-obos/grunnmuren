@@ -47,7 +47,7 @@ export const Route = createFileRoute('/_docs/komponenter/$slug')({
   },
   head: (ctx) => ({
     meta: [
-      { title: `Komponenter - ${ctx.loaderData.name} - Grunnmuren` },
+      { title: `Komponenter | ${ctx.loaderData.name} | Grunnmuren` },
       {
         name: 'description',
         content: `Grunnmuren sine komponenter - ${ctx.loaderData.name}`,

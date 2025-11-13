@@ -13,7 +13,7 @@ export const Route = createFileRoute('/_docs/komponenter/')({
   component: Page,
   head: () => ({
     meta: [
-      { title: 'Komponenter - Grunnmuren' },
+      { title: 'Komponenter | Grunnmuren' },
       { name: 'description', content: 'Grunnmuren sine komponenter' },
     ],
   }),

@@ -5,7 +5,7 @@ export const Route = createFileRoute('/_docs/profil/farger')({
   component: RouteComponent,
   head: () => ({
     meta: [
-      { title: 'Farger - Grunnmuren' },
+      { title: 'Farger | Grunnmuren' },
       { name: 'description', content: 'Grunnmuren sine farger' },
     ],
   }),

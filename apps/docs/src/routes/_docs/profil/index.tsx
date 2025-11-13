@@ -5,7 +5,7 @@ export const Route = createFileRoute('/_docs/profil/')({
   component: Page,
   head: () => ({
     meta: [
-      { title: 'Profil - Grunnmuren' },
+      { title: 'Profil | Grunnmuren' },
       { name: 'description', content: 'Grunnmuren sin grafiske profil' },
     ],
   }),

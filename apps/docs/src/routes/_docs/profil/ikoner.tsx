@@ -9,7 +9,7 @@ export const Route = createFileRoute('/_docs/profil/ikoner')({
   component: Page,
   head: () => ({
     meta: [
-      { title: 'Ikoner - Grunnmuren' },
+      { title: 'Ikoner | Grunnmuren' },
       { name: 'description', content: 'Grunnmuren sitt ikonsett' },
     ],
   }),
