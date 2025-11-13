@@ -4,4 +4,4 @@ export {
   useHorizontalScroll,
 } from './horizontal-scroll';
 
-export { useMountEffect } from './useMountEffect';
+export { useMountEffect } from './use-mount-effect';
