@@ -45,6 +45,15 @@ export const Route = createFileRoute('/_docs/komponenter/$slug')({
 
     return res.data as any;
   },
+  head: (ctx) => ({
+    meta: [
+      { title: `Komponenter | ${ctx.loaderData.name} | Grunnmuren` },
+      {
+        name: 'description',
+        content: `Grunnmuren sine komponenter - ${ctx.loaderData.name}`,
+      },
+    ],
+  }),
 });
 
 function Page() {
