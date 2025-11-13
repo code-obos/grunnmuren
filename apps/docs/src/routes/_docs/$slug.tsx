@@ -38,17 +38,15 @@ export const Route = createFileRoute('/_docs/$slug')({
 
     return res as any;
   },
-  head: (ctx) => {
-    return {
-      meta: [
-        { title: `${ctx.loaderData.data.name} | Grunnmuren` },
-        {
-          name: 'description',
-          content: `Grunnmuren dokumentasjon - ${ctx.loaderData.data.name}`,
-        },
-      ],
-    };
-  },
+  head: (ctx) => ({
+    meta: [
+      { title: `${ctx.loaderData.data.name} | Grunnmuren` },
+      {
+        name: 'description',
+        content: `Grunnmuren dokumentasjon - ${ctx.loaderData.data.name}`,
+      },
+    ],
+  }),
 });
 
 function Page() {
