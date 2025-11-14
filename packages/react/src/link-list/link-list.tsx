@@ -4,40 +4,32 @@ import {
   LinkExternal,
 } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
-import { Children, type JSX, type ReactNode } from 'react';
+import type { JSX, ReactNode } from 'react';
 import {
   UNSAFE_Link as Link,
   type UNSAFE_LinkProps as LinkProps,
 } from '../link';
 
+type LinkListContainerProps = React.HTMLProps<HTMLDivElement> & {
+  children: JSX.Element | JSX.Element[];
+};
+
+const LinkListContainer = ({
+  className,
+  ...restProps
+}: LinkListContainerProps) => (
+  <div className={cx(className, 'link-list-container')} {...restProps} />
+);
+
 type LinkListProps = React.HTMLProps<HTMLDivElement> & {
   children: JSX.Element | JSX.Element[];
 };
 
-const LinkList = ({ className, children, ...restProps }: LinkListProps) => {
-  const numberofLinks = Children.count(children);
-  return (
-    <div className={cx(className, '@container')} {...restProps}>
-      <ul
-        className={cx(
-          'min-w-fit',
-          // Hide dividers at the top of the list (overflow-y) and prevents arrow icon from overflowing container when animated to the right (overflow-x)
-          'overflow-hidden',
-          // Add a small gap between items that fits the divider lines (this way the divider line don't take up any space in each item)
-          'grid auto-rows-max gap-y-px',
-          // Gaps for when the list is displayed in multiple columns
-          '@lg:gap-x-12 @md:gap-x-9 @sm:gap-x-4 @xl:gap-x-16',
-          numberofLinks > 5 && [
-            '@xl:grid-cols-2',
-            (numberofLinks === 9 || numberofLinks > 10) && '@4xl:grid-cols-3',
-          ],
-        )}
-      >
-        {children}
-      </ul>
-    </div>
-  );
-};
+const LinkList = ({ className, children, ...restProps }: LinkListProps) => (
+  <LinkListContainer className={className} {...restProps}>
+    <ul data-slot="link-list">{children}</ul>
+  </LinkListContainer>
+);
 
 type LinkListItemProps = LinkProps & {
   children: ReactNode;
@@ -64,10 +56,7 @@ const LinkListItem = ({
   }
 
   return (
-    <li
-      // Creates divider lines that works in any grid layout and with the focus ring
-      className="after:-top-px relative p-0.75 after:absolute after:right-0 after:left-0 after:h-px after:w-full after:bg-gray-light"
-    >
+    <li data-slot="link-list-item">
       <Link
         {...restProps}
         className={cx(
@@ -83,6 +72,8 @@ const LinkListItem = ({
 };
 
 export {
+  type LinkListContainerProps as UNSAFE_LinkListContainerProps,
+  LinkListContainer as UNSAFE_LinkListContainer,
   LinkList as UNSAFE_LinkList,
   type LinkListProps as UNSAFE_LinkListProps,
   LinkListItem as UNSAFE_LinkListItem,
