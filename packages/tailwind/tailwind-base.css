@@ -194,3 +194,39 @@
     display: none;
   }
 }
+
+@layer components {
+  /*** Link List component styles ***/
+  .link-list-container {
+    @apply @container;
+
+    [data-slot="link-list"] {
+      @apply @sm:gap-x-4 @md:gap-x-9 @lg:gap-x-12 @xl:gap-x-16;
+
+      &:has([data-slot="link-list-item"]:nth-child(6)):not(
+          :has([data-slot="link-list-item"]:nth-child(9):last-child)
+        ):not(:has([data-slot="link-list-item"]:nth-child(11))) {
+        @apply @4xl:grid-cols-2;
+      }
+      &:has([data-slot="link-list-item"]:nth-child(9):last-child),
+      &:has([data-slot="link-list-item"]:nth-child(11)) {
+        @apply @4xl:grid-cols-3;
+      }
+    }
+  }
+
+  .link-list,
+  [data-slot="link-list"] {
+    /**
+     * Hides dividers at the top of the list (overflow-y)
+     * while preventing arrow icons from overflowing container when animated to the right (overflow-x)
+     */
+    @apply min-w-fit overflow-hidden grid auto-rows-max gap-y-px;
+  }
+
+  .link-list-item,
+  [data-slot="link-list-item"] {
+    /** Creates divider lines that works in any grid layout and with the focus ring */
+    @apply after:-top-px relative p-0.75 after:absolute after:right-0 after:left-0 after:h-px after:w-full after:bg-gray-light;
+  }
+}
