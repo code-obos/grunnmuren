@@ -47,6 +47,7 @@ export const ExternalLinkListItems = () => (
 
 export const AutoResponsive = () => (
   <div className="grid gap-y-8">
+    <h2 className="heading-l">2 items</h2>
     <LinkListContainer>
       <LinkList>
         <LinkListItem download href="/">
@@ -57,6 +58,7 @@ export const AutoResponsive = () => (
         </LinkListItem>
       </LinkList>
     </LinkListContainer>
+    <h2 className="heading-l">3 items</h2>
     <LinkListContainer>
       <LinkList>
         <LinkListItem href="/bolig">Bolig</LinkListItem>
@@ -64,6 +66,7 @@ export const AutoResponsive = () => (
         <LinkListItem href="/medlem">Medlem</LinkListItem>
       </LinkList>
     </LinkListContainer>
+    <h2 className="heading-l">5 items</h2>
     <LinkListContainer>
       <LinkList>
         <LinkListItem href="/konsernledelsen">Konsernledelsen</LinkListItem>
@@ -79,6 +82,7 @@ export const AutoResponsive = () => (
         </LinkListItem>
       </LinkList>
     </LinkListContainer>
+    <h2 className="heading-l">6 items</h2>
     <LinkListContainer>
       <LinkList>
         <LinkListItem href="/konsernledelsen">Konsernledelsen</LinkListItem>
@@ -97,6 +101,7 @@ export const AutoResponsive = () => (
         </LinkListItem>
       </LinkList>
     </LinkListContainer>
+    <h2 className="heading-l">7 items</h2>
     <LinkListContainer>
       <LinkList>
         <LinkListItem href="/konsernledelsen">Konsernledelsen</LinkListItem>
@@ -116,6 +121,7 @@ export const AutoResponsive = () => (
         <LinkListItem href="/jobb-i-obos">Jobb i OBOS</LinkListItem>
       </LinkList>
     </LinkListContainer>
+    <h2 className="heading-l">9 items</h2>
     <LinkListContainer>
       <LinkList>
         <LinkListItem href="/konsernledelsen">Konsernledelsen</LinkListItem>
@@ -137,6 +143,7 @@ export const AutoResponsive = () => (
         <LinkListItem href="/logoer">Logoer</LinkListItem>
       </LinkList>
     </LinkListContainer>
+    <h2 className="heading-l">10 items</h2>
     <LinkListContainer>
       <LinkList>
         <LinkListItem href="/konsernledelsen">Konsernledelsen</LinkListItem>
@@ -161,6 +168,7 @@ export const AutoResponsive = () => (
         </LinkListItem>
       </LinkList>
     </LinkListContainer>
+    <h2 className="heading-l">15 items</h2>
     <LinkListContainer>
       <LinkList>
         <LinkListItem href="/konsernledelsen">Konsernledelsen</LinkListItem>
