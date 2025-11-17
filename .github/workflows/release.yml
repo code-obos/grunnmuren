@@ -17,6 +17,8 @@ jobs:
       pull-requests: write
       # Write permission is required so that it can push to github registry
       packages: write
+      # required for OIDC
+      id-token: write
 
     name: Release
     runs-on: ubuntu-latest
@@ -51,4 +53,3 @@ jobs:
           publish: pnpm ci:publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
