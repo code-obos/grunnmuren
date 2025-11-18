@@ -200,6 +200,28 @@
   .link-list-container {
     @apply @container;
 
+    &:has([data-slot="heading"]) {
+      .link-list,
+      [data-slot="link-list"] {
+        @apply overflow-visible;
+      }
+    }
+
+    [data-slot="heading"] {
+      @apply p-1.25;
+
+      [data-slot="link"] {
+        @apply py-2.25;
+        & > svg {
+          @apply text-base;
+        }
+      }
+
+      &:not(:has([data-slot="link"])) {
+        @apply my-2.25;
+      }
+    }
+
     [data-slot="link-list"] {
       @apply @sm:gap-x-4 @md:gap-x-9 @lg:gap-x-12 @xl:gap-x-16;
 
@@ -227,6 +249,30 @@
   .link-list-item,
   [data-slot="link-list-item"] {
     /** Creates divider lines that works in any grid layout and with the focus ring */
-    @apply after:-top-px relative p-0.75 after:absolute after:right-0 after:left-0 after:h-px after:w-full after:bg-gray-light;
+    @apply after:-top-px relative p-1.25 after:absolute after:right-0 after:left-0 after:h-px after:w-full after:bg-gray-light;
+    [data-slot="link"] {
+      @apply paragraph;
+    }
+  }
+
+  .link-list-container,
+  .link-list-item,
+  [data-slot="link-list-item"] {
+    [data-slot="link"] {
+      @apply flex w-full cursor-pointer justify-between gap-x-2 py-3.5 font-medium no-underline focus-visible:outline-focus;
+    }
+  }
+
+  .link-list-container [data-slot="link"],
+  [data-slot="link-list-item"] [data-slot="link"] {
+    &:hover:not([download]):not([rel~="external"]) svg {
+      @apply motion-safe:translate-x-1;
+    }
+    &[download]:hover svg {
+      @apply motion-safe:translate-y-1;
+    }
+    &[rel~="external"]:hover svg {
+      @apply motion-safe:-translate-y-0.5 motion-safe:translate-x-0.5;
+    }
   }
 }

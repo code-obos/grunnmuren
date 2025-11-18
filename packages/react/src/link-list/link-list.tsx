@@ -5,71 +5,78 @@ import {
 } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
 import type { JSX, ReactNode } from 'react';
-import {
-  UNSAFE_Link as Link,
-  type UNSAFE_LinkProps as LinkProps,
-} from '../link';
+import { type LinkRenderProps, Provider } from 'react-aria-components';
+import { HeadingContext } from '../content';
+import { _LinkContext, type UNSAFE_LinkProps as LinkProps } from '../link';
 
 type LinkListContainerProps = React.HTMLProps<HTMLDivElement> & {
   children: JSX.Element | JSX.Element[];
 };
 
+// Sets the correct icons for each link in the link list
+const _LinkProvider = ({ children }: { children: ReactNode }) => (
+  <Provider
+    values={[
+      [
+        _LinkContext,
+        {
+          _innerWrapper:
+            ({ children, download, rel }: LinkProps) =>
+            (values: LinkRenderProps) => {
+              let Icon = ArrowRight;
+
+              if (download) {
+                Icon = Download;
+              } else if (rel?.includes('external')) {
+                Icon = LinkExternal;
+              }
+
+              return (
+                <>
+                  {typeof children === 'function'
+                    ? children({ ...values, defaultChildren: null })
+                    : children}
+                  <Icon />
+                </>
+              );
+            },
+        },
+      ],
+    ]}
+  >
+    {children}
+  </Provider>
+);
+
 const LinkListContainer = ({
   className,
   ...restProps
 }: LinkListContainerProps) => (
-  <div className={cx(className, 'link-list-container')} {...restProps} />
+  // Dual providers makes for easier typing and more readable code
+  <Provider values={[[HeadingContext, { size: 'm' }]]}>
+    <_LinkProvider>
+      <div className={cx(className, 'link-list-container')} {...restProps} />
+    </_LinkProvider>
+  </Provider>
 );
 
-type LinkListProps = React.HTMLProps<HTMLDivElement> & {
+type LinkListProps = React.HTMLProps<HTMLUListElement> & {
   children: JSX.Element | JSX.Element[];
 };
 
-const LinkList = ({ className, children, ...restProps }: LinkListProps) => (
-  <LinkListContainer className={className} {...restProps}>
-    <ul data-slot="link-list">{children}</ul>
-  </LinkListContainer>
+const LinkList = (props: LinkListProps) => (
+  <_LinkProvider>
+    <ul {...props} data-slot="link-list" />
+  </_LinkProvider>
 );
 
-type LinkListItemProps = LinkProps & {
+type LinkListItemProps = React.HTMLProps<HTMLLIElement> & {
   children: ReactNode;
-  isExternal?: boolean;
 };
 
-const LinkListItem = ({
-  children,
-  isExternal,
-  className,
-  ...restProps
-}: LinkListItemProps) => {
-  let Icon = ArrowRight;
-  let iconTransition = cx('group-hover:motion-safe:translate-x-1');
-
-  if (restProps.download) {
-    Icon = Download;
-    iconTransition = cx('group-hover:motion-safe:translate-y-1');
-  } else if (isExternal) {
-    iconTransition = cx(
-      'group-hover:motion-safe:-translate-y-0.5 group-hover:motion-safe:translate-x-0.5',
-    );
-    Icon = LinkExternal;
-  }
-
-  return (
-    <li data-slot="link-list-item">
-      <Link
-        {...restProps}
-        className={cx(
-          className,
-          'group paragraph flex w-full cursor-pointer justify-between gap-x-2 py-3.5 font-medium no-underline focus-visible:outline-focus',
-        )}
-      >
-        <span>{children}</span>
-        <Icon className={iconTransition} />
-      </Link>
-    </li>
-  );
-};
+const LinkListItem = (props: LinkListItemProps) => (
+  <li {...props} data-slot="link-list-item" />
+);
 
 export {
   LinkList as UNSAFE_LinkList,
