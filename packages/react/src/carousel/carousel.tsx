@@ -5,9 +5,11 @@ import {
   Children,
   cloneElement,
   createContext,
+  type Dispatch,
   type HTMLProps,
   isValidElement,
   type JSX,
+  type SetStateAction,
   useContext,
   useEffect,
   useRef,
@@ -19,6 +21,7 @@ import { Button, ButtonContext } from '../button';
 import { MediaContext } from '../content';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
+import { useMountEffect } from '../utils';
 
 type CarouselItem = Pick<CarouselItemProps, 'id'> & {
   /** The index of the item that is currently in view */
@@ -40,12 +43,22 @@ type CarouselProps = Omit<HTMLProps<HTMLDivElement>, 'onChange'> & {
    * @param item { index: number; id?: string; prevIndex: number; prevId?: string }
    */
   onChange?: (item: CarouselItem) => void;
+  /**
+   * For controlled selection, the index of the item that should be currently in view.
+   */
+  selectedIndex?: number;
+  /**
+   * For controlled selection, callback that is called when the selected index changes.
+   */
+  onSelectedIndexChange?: Dispatch<SetStateAction<number>>;
 };
 
 const Carousel = ({
   className,
   children,
   onChange,
+  selectedIndex: controlledIndex,
+  onSelectedIndexChange: controlledOnIndexChange,
   ...rest
 }: CarouselProps) => {
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -54,7 +67,14 @@ const Carousel = ({
   const locale = useLocale();
   const { previous, next } = translations;
 
-  const [scrollTargetIndex, setScrollTargetIndex] = useState(0);
+  // Internal state for uncontrolled usage
+  const [_scrollTargetIndex, _setScrollTargetIndex] = useState(0);
+  // Resolve controlled vs uncontrolled state
+  const [scrollTargetIndex, setScrollTargetIndex] = [
+    controlledIndex ?? _scrollTargetIndex,
+    controlledOnIndexChange ?? _setScrollTargetIndex,
+  ];
+
   const isScrollingProgrammatically = useRef(false);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const scrollQueue = useRef<number[]>([]);
@@ -67,6 +87,18 @@ const Carousel = ({
     !carouselItemsRef.current ||
       carouselItemsRef.current.children.length - 1 === scrollTargetIndex,
   );
+
+  // Scroll to the correct item on mount if controlled
+  useMountEffect(() => {
+    if (controlledIndex !== undefined) {
+      // The carousel's selected index is controlled, ensure we scroll to the correct item on mount
+      carouselItemsRef.current?.children[controlledIndex]?.scrollIntoView({
+        behavior: 'instant',
+        inline: 'start',
+        block: 'nearest',
+      });
+    }
+  }, [controlledIndex]);
 
   useEffect(() => {
     setHasReachedScrollStart(scrollTargetIndex === 0);
