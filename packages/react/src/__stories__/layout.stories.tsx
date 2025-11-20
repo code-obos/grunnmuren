@@ -35,7 +35,7 @@ export const GridContainer = () => (
 export const GridContainerWithSubGrids = () => (
   <main className="layout-grid-container layout-gap-y">
     <h1 className="heading-xl sm:col-end-9">Dette er OBOS</h1>
-    <ul className="layout-subgrid-12 *:md:col-span-3">
+    <ul className="md:layout-subgrid-12 *:md:col-span-2 *:lg:col-span-3">
       <Card role="listitem">
         <Content>
           <Heading level={2}>
