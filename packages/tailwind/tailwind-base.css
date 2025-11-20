@@ -108,8 +108,13 @@
   @apply bg-white grow;
 }
 
+/** Grid column spacing */
+@utility layout-grid-gap-x {
+  @apply sm:gap-x-4 md:gap-x-9 lg:gap-x-12 xl:gap-x-16;
+}
+
 @utility layout-gap-x {
-  @apply gap-x-2 sm:gap-x-4 md:gap-x-9 lg:gap-x-12 xl:gap-x-16;
+  @apply gap-x-2 layout-grid-gap-x;
 }
 
 @utility layout-gap-y {
@@ -196,6 +201,64 @@
 }
 
 @layer components {
+  /*** Grid Layout ***/
+
+  .layout-grid,
+  .layout-grid-container {
+    /** Grid base, defines the grid columns and their spacing */
+    @apply layout-grid-gap-x sm:grid-cols-14 grid;
+
+    /** Grid container that applies the grid columns, grid spacing and the container component class */
+    &.layout-grid-container {
+      @apply container;
+      /** Make content of the grid span the mid 12 columns as a default (unless it has another explicit col-span class) */
+      & > * {
+        @apply sm:col-start-2 sm:col-span-12;
+      }
+    }
+  }
+
+  [class^="layout-subgrid-"] {
+    @apply layout-grid-gap-x grid;
+  }
+
+  .layout-subgrid-1 {
+    @apply sm:grid-cols-1;
+  }
+  .layout-subgrid-2 {
+    @apply sm:grid-cols-2;
+  }
+  .layout-subgrid-3 {
+    @apply sm:grid-cols-3;
+  }
+  .layout-subgrid-4 {
+    @apply sm:grid-cols-4;
+  }
+  .layout-subgrid-5 {
+    @apply sm:grid-cols-5;
+  }
+  .layout-subgrid-6 {
+    @apply sm:grid-cols-6;
+  }
+  .layout-subgrid-7 {
+    @apply sm:grid-cols-7;
+  }
+  .layout-subgrid-8 {
+    @apply sm:grid-cols-8;
+  }
+  .layout-subgrid-9 {
+    @apply sm:grid-cols-9;
+  }
+  .layout-subgrid-10 {
+    @apply sm:grid-cols-10;
+  }
+  .layout-subgrid-11 {
+    @apply sm:grid-cols-11;
+  }
+  .layout-subgrid-12 {
+    @apply sm:grid-cols-12;
+  }
+
   /*** Link List component styles ***/
   .link-list-container {
     @apply @container;
