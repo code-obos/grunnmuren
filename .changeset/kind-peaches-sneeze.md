@@ -7,7 +7,7 @@ You can now use the classes `layout-grid-gap-x`, `layout-grid`, `layout-grid-con
 
 
 ### `layout-grid-gap-x`
-Defines the layout grid column spacing responsively 
+Defines the layout grid column spacing responsively.
 
 ### `layout-grid`
 Sets up a responsive 14 column grid with `layout-grid-gap-x`.
