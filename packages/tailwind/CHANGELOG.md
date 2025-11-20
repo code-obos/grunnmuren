@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.4.1
+
+### Patch Changes
+
+- 25b08b0: Fixes incorrect composition of the `layout-gap-x` utility class. The issue caused the wrong gap on on all screen sizes larger than the `sm` breakpoint. This was visible in the `Card` component in `grunnmuren-react` as well.
+
 ## 2.4.0
 
 ### Minor Changes
