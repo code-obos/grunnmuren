@@ -1,5 +1,108 @@
 # @obosbbl/grunnmuren-react
 
+## 3.2.1
+
+### Patch Changes
+
+- 0f8cd6d: ## Breaking Beta change
+  The `<LinkList>` API has now been refactored to support headings inside link lists.
+  - `<LinkListItem>` no longer supports link props, the component must now receive a `<Link>` as a child to which link props are passed
+  - The `isExternal` prop has been removed `<LinkListItem>`. External links are now identified byt the `rel` prop on the `<Link>` child (e.g `<Link rel="external">`)
+
+  ### Before
+
+  ```tsx
+  <LinkList>
+    <LinkListItem href="/medlem">Les mer</LinkListItem>
+    <LinkListItem download href="/medlemsvilkar.pdf">
+      Medlemsvilkår
+    </LinkListItem>
+    <LinkListItem
+      href="https://www.tryg.no/forsikringer/fordeler-hos-tryg/bruk-medlemsfordelene-dine/obos/index.html?cmpid=obos_tryggjennomlivet"
+      rel="external"
+    >
+      Tryg forsikring
+    </LinkListItem>
+  </LinkList>
+  ```
+
+  ### Now
+
+  ```tsx
+  <LinkList>
+    <LinkListItem>
+      <Link href="/bolig">Bolig</Link>
+    </LinkListItem>
+    <LinkListItem>
+      <Link href="/bank" download href="/medlemsvilkar.pdf">
+        Medlemsvilkår
+      </Link>
+    </LinkListItem>
+    <LinkListItem>
+      <Link
+        href="/medlem"
+        href="https://www.tryg.no/forsikringer/fordeler-hos-tryg/bruk-medlemsfordelene-dine/obos/index.html?cmpid=obos_tryggjennomlivet"
+        rel="external"
+      >
+        Tryg forsikring
+      </Link>
+    </LinkListItem>
+  </LinkList>
+  ```
+
+  ## Use Headings (with links)
+
+  ```tsx
+  <LinkListContainer>
+    <Heading level={2}>
+      <Link href="/om">OBOS</Link>
+    </Heading>
+    <LinkList>
+      <LinkListItem>
+        <Link href="/bolig">Bolig</Link>
+      </LinkListItem>
+      <LinkListItem>
+        <Link href="/bank">Bank</Link>
+      </LinkListItem>
+      <LinkListItem>
+        <Link href="/medlem">Medlem</Link>
+      </LinkListItem>
+    </LinkList>
+  </LinkListContainer>
+  ```
+
+- 1c04f75: # Breaking Beta Change
+  Exposing `<LinkListContainer>` as part of the `<LinkList>` API. This allows for easier customization and flexibility. Since it is now possible to style the container and the list individually. This means you can still just render shorter lists (less than 6 LinkListItems) like before:
+
+  ```tsx
+  <LinkList>
+    <LinkListItem href="/bolig">Bolig</LinkListItem>
+    <LinkListItem href="/bank">Bank</LinkListItem>
+    <LinkListItem href="/medlem">Medlem</LinkListItem>
+  </LinkList>
+  ```
+
+  But the `<LinkList>` itself will no longer divide larger list (more than 5 LinkListItems) into multiple columns like before. For that you will now need to wrap it in the `<LinkListContainer>`:
+
+  ```tsx
+  <LinkListContainer>
+    <LinkList>
+      <LinkListItem href="/konsernledelsen">Konsernledelsen</LinkListItem>
+      <LinkListItem href="/styret">Styret</LinkListItem>
+      <LinkListItem href="/representantskapet">Representantskapet</LinkListItem>
+      <LinkListItem href="/boligpriser-og-statistikk">
+        Boligpriser og statistikk
+      </LinkListItem>
+      <LinkListItem href="/investor-relations">Investor Relations</LinkListItem>
+      <LinkListItem href="/digital-arsrapport">Digital årsrapport</LinkListItem>
+    </LinkList>
+  </LinkListContainer>
+  ```
+
+  This also paves way for supporting `<Heading>` inside the `<LinkListContainer>`, above the `<LinkListContainer>`. Stay tuned!
+
+- 0f8cd6d: Better screen reader support in the `<Link>` component: annonuce external links.
+
 ## 3.2.0
 
 ### Minor Changes
