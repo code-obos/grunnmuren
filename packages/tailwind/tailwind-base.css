@@ -114,7 +114,8 @@
 }
 
 @utility layout-gap-x {
-  @apply gap-x-2 layout-grid-gap-x;
+  @apply gap-x-2;
+  @apply layout-grid-gap-x;
 }
 
 @utility layout-gap-y {
