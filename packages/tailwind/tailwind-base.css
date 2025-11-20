@@ -205,7 +205,7 @@
 
   .layout-grid,
   .layout-grid-container {
-    /** Grid base, defines the grid columns and their spacing */
+    /** Grid base: defines the grid columns and their spacing */
     @apply layout-grid-gap-x sm:grid-cols-14 grid;
 
     /** Grid container that applies the grid columns, grid spacing and the container component class */
