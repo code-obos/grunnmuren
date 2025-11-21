@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.4.2
+
+### Patch Changes
+
+- 6dd0def: The layout-grid classes are moved to the @utility layer, this way the classes work with IntelliSense and has better compatability with other utility classes (especially important for controlling the `display` CSS property)
+
 ## 2.4.1
 
 ### Patch Changes
