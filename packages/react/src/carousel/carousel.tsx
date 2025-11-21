@@ -111,8 +111,12 @@ const Carousel = ({
     const elementWithFocusVisible =
       carouselRef.current?.querySelector(':focus-visible');
 
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+
     carouselItemsRef.current.children[scrollTargetIndex]?.scrollIntoView({
-      behavior: 'smooth',
+      behavior: prefersReducedMotion ? 'instant' : 'smooth',
       inline: 'start',
       block: 'nearest',
     });
