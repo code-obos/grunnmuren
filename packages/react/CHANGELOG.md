@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 3.2.2
+
+### Patch Changes
+
+- 5cb5f28: Respect prefers-reduced-motion when user clicks the prev/next buttons in the `<Carousel>` component.
+
 ## 3.2.1
 
 ### Patch Changes
