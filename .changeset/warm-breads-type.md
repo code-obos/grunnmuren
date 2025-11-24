@@ -57,7 +57,7 @@ import { Link, LinkList, LinkListItem } from '@obosbbl/grunnmuren-react';
     </Link>
   </LinkListItem>
   <LinkListItem>
-    <Link download href="/about">
+    <Link download href="/consent.pdf">
       Samtykke
     </Link>
   </LinkListItem>
