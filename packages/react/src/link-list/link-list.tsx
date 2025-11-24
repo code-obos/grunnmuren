@@ -79,10 +79,10 @@ const LinkListItem = (props: LinkListItemProps) => (
 );
 
 export {
-  LinkList as UNSAFE_LinkList,
-  LinkListContainer as UNSAFE_LinkListContainer,
-  LinkListItem as UNSAFE_LinkListItem,
-  type LinkListContainerProps as UNSAFE_LinkListContainerProps,
-  type LinkListItemProps as UNSAFE_LinkListItemProps,
-  type LinkListProps as UNSAFE_LinkListProps,
+  LinkList,
+  LinkListContainer,
+  LinkListItem,
+  type LinkListContainerProps,
+  type LinkListItemProps,
+  type LinkListProps,
 };
