@@ -272,6 +272,8 @@ const Carousel = ({
               carouselItemsRef,
               onScroll,
               activeIndex: scrollTargetIndex,
+              handlePrevious,
+              handleNext,
             },
           ],
           [
@@ -370,6 +372,8 @@ type CarouselItemsContextValue = {
   carouselItemsRef: React.Ref<HTMLDivElement>;
   onScroll?: (event: React.UIEvent<HTMLDivElement>) => void;
   activeIndex: number;
+  handlePrevious?: () => void;
+  handleNext?: () => void;
 };
 
 const CarouselItemsContext = createContext({
@@ -378,6 +382,28 @@ const CarouselItemsContext = createContext({
 } as CarouselItemsContextValue);
 
 const CarouselItems = ({ className, children }: CarouselItemsProps) => {
+  const {
+    carouselItemsRef,
+    onScroll,
+    activeIndex,
+    handlePrevious,
+    handleNext,
+  } = useContext(CarouselItemsContext);
+
+  const prefersReducedMotion = useRef(
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  );
+
+  // Update the ref when the media query changes
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const handleChange = (e: MediaQueryListEvent) => {
+      prefersReducedMotion.current = e.matches;
+    };
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     // Prevent default behavior when holding down arrow keys (when repeat is true)
     // The default behavior in scroll snapping causes a staggering scroll effect that feels janky
@@ -386,11 +412,20 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => {
       (event.key === 'ArrowLeft' || event.key === 'ArrowRight')
     ) {
       event.preventDefault();
+      return;
+    }
+
+    // For users with prefers-reduced-motion, trigger button click behavior instead of native scroll
+    if (prefersReducedMotion.current) {
+      if (event.key === 'ArrowLeft' && handlePrevious) {
+        event.preventDefault();
+        handlePrevious();
+      } else if (event.key === 'ArrowRight' && handleNext) {
+        event.preventDefault();
+        handleNext();
+      }
     }
   };
-
-  const { carouselItemsRef, onScroll, activeIndex } =
-    useContext(CarouselItemsContext);
 
   return (
     // biome-ignore lint/a11y/noStaticElementInteractions: The keydown handler is only to prevent undesired scrolling behavior when using the arrow keys
