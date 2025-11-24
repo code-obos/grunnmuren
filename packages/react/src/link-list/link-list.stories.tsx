@@ -1,11 +1,7 @@
 import type { Meta } from '@storybook/react-vite';
 import { Heading } from '../content';
 import { UNSAFE_Link as Link } from '../link';
-import {
-  UNSAFE_LinkList as LinkList,
-  UNSAFE_LinkListContainer as LinkListContainer,
-  UNSAFE_LinkListItem as LinkListItem,
-} from './link-list';
+import { LinkList, LinkListContainer, LinkListItem } from './link-list';
 
 const meta: Meta<typeof LinkList> = {
   title: 'LinkList',
