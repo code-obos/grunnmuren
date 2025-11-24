@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as DocsRouteImport } from './routes/_docs'
+import { Route as StudioIndexRouteImport } from './routes/studio/index'
 import { Route as DocsIndexRouteImport } from './routes/_docs/index'
 import { Route as StudioSplatRouteImport } from './routes/studio/$'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
@@ -22,6 +23,11 @@ import { Route as DocsKomponenterSlugRouteImport } from './routes/_docs/komponen
 
 const DocsRoute = DocsRouteImport.update({
   id: '/_docs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudioIndexRoute = StudioIndexRouteImport.update({
+  id: '/studio/',
+  path: '/studio/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DocsIndexRoute = DocsIndexRouteImport.update({
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/api/health': typeof ApiHealthRoute
   '/studio/$': typeof StudioSplatRoute
   '/': typeof DocsIndexRoute
+  '/studio': typeof StudioIndexRoute
   '/komponenter/$slug': typeof DocsKomponenterSlugRoute
   '/profil/farger': typeof DocsProfilFargerRoute
   '/profil/ikoner': typeof DocsProfilIkonerRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByTo {
   '/api/health': typeof ApiHealthRoute
   '/studio/$': typeof StudioSplatRoute
   '/': typeof DocsIndexRoute
+  '/studio': typeof StudioIndexRoute
   '/komponenter/$slug': typeof DocsKomponenterSlugRoute
   '/profil/farger': typeof DocsProfilFargerRoute
   '/profil/ikoner': typeof DocsProfilIkonerRoute
@@ -99,6 +107,7 @@ export interface FileRoutesById {
   '/api/health': typeof ApiHealthRoute
   '/studio/$': typeof StudioSplatRoute
   '/_docs/': typeof DocsIndexRoute
+  '/studio/': typeof StudioIndexRoute
   '/_docs/komponenter/$slug': typeof DocsKomponenterSlugRoute
   '/_docs/profil/farger': typeof DocsProfilFargerRoute
   '/_docs/profil/ikoner': typeof DocsProfilIkonerRoute
@@ -112,6 +121,7 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/studio/$'
     | '/'
+    | '/studio'
     | '/komponenter/$slug'
     | '/profil/farger'
     | '/profil/ikoner'
@@ -123,6 +133,7 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/studio/$'
     | '/'
+    | '/studio'
     | '/komponenter/$slug'
     | '/profil/farger'
     | '/profil/ikoner'
@@ -135,6 +146,7 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/studio/$'
     | '/_docs/'
+    | '/studio/'
     | '/_docs/komponenter/$slug'
     | '/_docs/profil/farger'
     | '/_docs/profil/ikoner'
@@ -146,6 +158,7 @@ export interface RootRouteChildren {
   DocsRoute: typeof DocsRouteWithChildren
   ApiHealthRoute: typeof ApiHealthRoute
   StudioSplatRoute: typeof StudioSplatRoute
+  StudioIndexRoute: typeof StudioIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -155,6 +168,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: ''
       preLoaderRoute: typeof DocsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/studio/': {
+      id: '/studio/'
+      path: '/studio'
+      fullPath: '/studio'
+      preLoaderRoute: typeof StudioIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_docs/': {
@@ -249,6 +269,7 @@ const rootRouteChildren: RootRouteChildren = {
   DocsRoute: DocsRouteWithChildren,
   ApiHealthRoute: ApiHealthRoute,
   StudioSplatRoute: StudioSplatRoute,
+  StudioIndexRoute: StudioIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
