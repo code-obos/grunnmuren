@@ -1,5 +1,105 @@
 # @obosbbl/grunnmuren-react
 
+## 3.3.0
+
+### Minor Changes
+
+- 7a22a4a: `LinkList` is now stable. Usage:
+
+  Basic list of links:
+
+  ```tsx
+  import { Link, LinkList, LinkListItem } from "@obosbbl/grunnmuren-react";
+
+  <LinkList>
+    <LinkListItem>
+      <Link href="/bolig">Bolig</Link>
+    </LinkListItem>
+    <LinkListItem>
+      <Link href="/bank">Bank</Link>
+    </LinkListItem>
+    <LinkListItem>
+      <Link href="/medlem">Medlem</Link>
+    </LinkListItem>
+  </LinkList>;
+  ```
+
+  External links:
+
+  ```tsx
+  import { Link, LinkList, LinkListItem } from "@obosbbl/grunnmuren-react";
+
+  <LinkList>
+    <LinkListItem>
+      <Link href="https://minside.obosnett.no/login" rel="external">
+        OBOS Nett - Min side
+      </Link>
+    </LinkListItem>
+    <LinkListItem>
+      <Link
+        href="https://www.tryg.no"
+        rel="external noopener noreferrer"
+        target="_blank"
+      >
+        Les mer om trygg forsikring
+      </Link>
+    </LinkListItem>
+  </LinkList>;
+  ```
+
+  Downloadable files:
+
+  ```tsx
+  import { Link, LinkList, LinkListItem } from "@obosbbl/grunnmuren-react";
+
+  <LinkList>
+    <LinkListItem>
+      <Link download href="/vilkar.pdf">
+        Medlemsvilkår
+      </Link>
+    </LinkListItem>
+    <LinkListItem>
+      <Link download href="/consent.pdf">
+        Samtykke
+      </Link>
+    </LinkListItem>
+  </LinkList>;
+  ```
+
+  With headings:
+
+  ```tsx
+  import {
+    Heading,
+    Link,
+    LinkList,
+    LinkListContainer,
+    LinkListItem,
+  } from "@obosbbl/grunnmuren-react";
+
+  <LinkListContainer>
+    <Heading level={2}>
+      <Link href="/om">OBOS</Link>
+    </Heading>
+    <LinkList>
+      <LinkListItem>
+        <Link href="/bolig">Bolig</Link>
+      </LinkListItem>
+      <LinkListItem>
+        <Link href="/bank">Bank</Link>
+      </LinkListItem>
+      <LinkListItem>
+        <Link href="/medlem">Medlem</Link>
+      </LinkListItem>
+    </LinkList>
+  </LinkListContainer>;
+  ```
+
+### Patch Changes
+
+- 6dc3cf2: Movments in the `Carousel` are now eliminated when using arrow keys for users that has a reduced motion preferrence
+- 5cb5f28: Respect prefers-reduced-motion when user clicks the prev/next buttons in the `<Carousel>` component.
+
 ## 3.2.1
 
 ### Patch Changes
