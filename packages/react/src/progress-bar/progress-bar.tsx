@@ -10,12 +10,12 @@ import {
 
 type ProgressBarProps = RACProgressBarProps;
 
-type ProgressBarValueTextProps = HTMLProps<HTMLParagraphElement> & {
+type ProgressBarValueTextProps = HTMLProps<HTMLSpanElement> & {
   className?: string;
 };
 
 export const _ProgressBarValueTextContext = createContext<
-  ContextValue<ProgressBarValueTextProps, HTMLParagraphElement>
+  ContextValue<ProgressBarValueTextProps, HTMLSpanElement>
 >({});
 
 const ProgressBarValueText = ({
@@ -29,9 +29,9 @@ const ProgressBarValueText = ({
   );
   const { children, ...restProps } = props;
   return (
-    <p {...restProps} ref={ref}>
+    <span {...restProps} ref={ref}>
       {children}
-    </p>
+    </span>
   );
 };
 
