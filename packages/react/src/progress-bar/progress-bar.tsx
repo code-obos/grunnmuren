@@ -20,14 +20,19 @@ export const _ProgressBarValueTextContext = createContext<string | undefined>(
 
 const _ProgressBarValueTextProvider = _ProgressBarValueTextContext.Provider;
 
-const ProgressBarValueText = (props: ProgressBarValueTextProps) => {
+const ProgressBarValueText = ({
+  className,
+  ...restProps
+}: ProgressBarValueTextProps) => {
   const value = useContext(_ProgressBarValueTextContext);
   return (
-    value && (
-      <span {...props} data-slot="progress-bar-value-text">
-        {value}
-      </span>
-    )
+    <span
+      {...restProps}
+      className={cx(className, 'px-2 leading-7')}
+      data-slot="progress-bar-value-text"
+    >
+      {value}
+    </span>
   );
 };
 
