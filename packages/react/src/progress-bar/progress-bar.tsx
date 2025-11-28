@@ -29,7 +29,7 @@ const ProgressBarValueText = ({
   );
   const { children, ...restProps } = props;
   return (
-    <span {...restProps} ref={ref}>
+    <span {...restProps} data-slot="progress-bar-value-text" ref={ref}>
       {children}
     </span>
   );
@@ -41,7 +41,11 @@ const ProgressBar = ({
   ...restProps
 }: ProgressBarProps) => {
   return (
-    <RACProgressBar {...restProps} className={cx(className, 'max-w-full')}>
+    <RACProgressBar
+      data-slot="progress-bar"
+      {...restProps}
+      className={cx(className, 'max-w-full')}
+    >
       {({ percentage, valueText, ...restArgs }) => (
         <Provider
           values={[[_ProgressBarValueTextContext, { children: valueText }]]}
