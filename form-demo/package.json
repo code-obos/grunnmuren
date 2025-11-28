@@ -12,7 +12,7 @@
   "dependencies": {
     "@obosbbl/grunnmuren-react": "workspace:*",
     "next": "16.0.3",
-    "zod": "4.1.12"
+    "zod": "4.1.13"
   },
   "devDependencies": {
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
