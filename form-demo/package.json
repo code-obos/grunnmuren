@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@obosbbl/grunnmuren-react": "workspace:*",
-    "next": "16.0.3",
+    "next": "16.0.5",
     "zod": "4.1.12"
   },
   "devDependencies": {
