@@ -22,6 +22,7 @@ export * from './link';
 export * from './link-list';
 export * from './modal';
 export * from './numberfield';
+export * from './progress-bar';
 export * from './radiogroup';
 export * from './select';
 export * from './table';
