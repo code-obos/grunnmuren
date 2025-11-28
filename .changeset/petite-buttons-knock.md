@@ -9,7 +9,7 @@ import {
   UNSAFE_ProgressBar as ProgressBar,
 } from '@obosbbl/grunnmuren-react';
 
-const MyProgressBar = () => <ProgressBar value={30} classsName="w-96"/>
+const MyProgressBar = () => <ProgressBar value={30} classsName="w-96" aria-label="Laster..."/>
 ```
 
 ``` tsx
@@ -20,6 +20,7 @@ import {
 
 const MyProgressBar = () => (
     <ProgressBar value={50}  classsName="w-96">
+        <Label>Laster:</Label>
       <ProgressBarValueText />
     </ProgressBar>
 )

@@ -27,9 +27,14 @@ const ProgressBarValueText = ({
     _ref,
     _ProgressBarValueTextContext,
   );
-  const { children, ...restProps } = props;
+  const { children, className, ...restProps } = props;
   return (
-    <span {...restProps} data-slot="progress-bar-value-text" ref={ref}>
+    <span
+      {...restProps}
+      className={cx(className, 'px-2 leading-7')}
+      data-slot="progress-bar-value-text"
+      ref={ref}
+    >
       {children}
     </span>
   );

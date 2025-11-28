@@ -1,7 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta } from '@storybook/react-vite';
 import { cx } from 'cva';
 import { useState } from 'react';
 import { Button } from '../button';
+import { Label } from '../label';
 import {
   UNSAFE_ProgressBar as ProgressBar,
   type UNSAFE_ProgressBarProps as ProgressBarProps,
@@ -21,42 +22,51 @@ const meta: Meta<typeof ProgressBar> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {
-    value: 50,
-  },
+export const Default = (args: ProgressBarProps) => {
+  return (
+    <ProgressBar value={50} {...args}>
+      <Label>Laster...</Label>
+    </ProgressBar>
+  );
 };
 
-export const Empty: Story = {
-  args: {
-    value: 0,
-  },
+export const Empty = (args: ProgressBarProps) => {
+  return (
+    <ProgressBar value={0} {...args}>
+      <Label>Laster...</Label>
+    </ProgressBar>
+  );
 };
 
-export const Complete: Story = {
-  args: {
-    value: 100,
-  },
+export const Complete = (args: ProgressBarProps) => {
+  return (
+    <ProgressBar value={100} {...args}>
+      <Label>Laster...</Label>
+    </ProgressBar>
+  );
 };
 
-export const Indeterminate: Story = {
-  args: {
-    isIndeterminate: true,
-  },
+export const Indeterminate = (args: ProgressBarProps) => {
+  return (
+    <ProgressBar isIndeterminate={true} {...args}>
+      <Label>Laster...</Label>
+    </ProgressBar>
+  );
 };
 
-export const WithCustomLabel: Story = {
-  args: {
-    value: 75,
-    valueLabel: '3 of 4 steps completed',
-  },
+export const WithCustomLabel = (args: ProgressBarProps) => {
+  return (
+    <ProgressBar value={75} valueLabel="3 of 4 steps completed" {...args}>
+      <Label>Laster...</Label>
+    </ProgressBar>
+  );
 };
 
 export const WithValueText = (args: ProgressBarProps) => {
   return (
     <ProgressBar value={50} {...args}>
+      <Label>Laster:</Label>
       <ProgressBarValueText />
     </ProgressBar>
   );
@@ -68,6 +78,7 @@ export const WithValueTextRight = ({
 }: ProgressBarProps) => {
   return (
     <ProgressBar value={50} {...args} className={cx(className, 'text-right')}>
+      <Label>Laster:</Label>
       <ProgressBarValueText />
     </ProgressBar>
   );
@@ -78,7 +89,9 @@ export const Interactive = () => {
 
   return (
     <div className="flex w-96 flex-col gap-4">
-      <ProgressBar value={value} valueLabel={`${value}% completed`} />
+      <ProgressBar value={value} valueLabel={`${value}% completed`}>
+        <Label>Velg progresjon:</Label>
+      </ProgressBar>
       <div className="flex gap-2">
         <Button onPress={() => setValue(Math.max(0, value - 10))}>- 10%</Button>
         <Button onPress={() => setValue(Math.min(100, value + 10))}>
