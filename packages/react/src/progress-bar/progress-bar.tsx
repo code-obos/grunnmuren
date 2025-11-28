@@ -1,37 +1,33 @@
 import { cx } from 'cva';
-import { createContext, type HTMLProps } from 'react';
+import { createContext, type HTMLProps, useContext } from 'react';
 import {
-  type ContextValue,
-  Provider,
   ProgressBar as RACProgressBar,
   type ProgressBarProps as RACProgressBarProps,
-  useContextProps,
 } from 'react-aria-components';
 
 type ProgressBarProps = RACProgressBarProps;
 
-type ProgressBarValueTextProps = HTMLProps<HTMLSpanElement> & {
+type ProgressBarValueTextProps = Omit<
+  HTMLProps<HTMLSpanElement>,
+  'children'
+> & {
   className?: string;
 };
 
-export const _ProgressBarValueTextContext = createContext<
-  ContextValue<ProgressBarValueTextProps, HTMLSpanElement>
->({});
+export const _ProgressBarValueTextContext = createContext<string | undefined>(
+  undefined,
+);
 
-const ProgressBarValueText = ({
-  ref: _ref,
-  ..._props
-}: ProgressBarValueTextProps) => {
-  const [props, ref] = useContextProps(
-    _props,
-    _ref,
-    _ProgressBarValueTextContext,
-  );
-  const { children, ...restProps } = props;
+const _ProgressBarValueTextProvider = _ProgressBarValueTextContext.Provider;
+
+const ProgressBarValueText = (props: ProgressBarValueTextProps) => {
+  const value = useContext(_ProgressBarValueTextContext);
   return (
-    <span {...restProps} data-slot="progress-bar-value-text" ref={ref}>
-      {children}
-    </span>
+    value && (
+      <span {...props} data-slot="progress-bar-value-text">
+        {value}
+      </span>
+    )
   );
 };
 
@@ -47,9 +43,7 @@ const ProgressBar = ({
       className={cx(className, 'max-w-full')}
     >
       {({ percentage, valueText, ...restArgs }) => (
-        <Provider
-          values={[[_ProgressBarValueTextContext, { children: valueText }]]}
-        >
+        <_ProgressBarValueTextProvider value={valueText}>
           {typeof children === 'function'
             ? children({ percentage, valueText, ...restArgs })
             : children}
@@ -59,7 +53,7 @@ const ProgressBar = ({
               style={{ width: `${percentage}%` }}
             />
           </div>
-        </Provider>
+        </_ProgressBarValueTextProvider>
       )}
     </RACProgressBar>
   );
