@@ -277,46 +277,6 @@ export const SevenCompleted: Story = {
       </FormStep>
       <FormStep state="current">
         <Link href="/steg-8-oppsummering">Oppsummering</Link>
-        <ProgressBar value={50} />
-      </FormStep>
-    </FormSteps>
-  ),
-};
-
-export const AllCompleted: Story = {
-  render: () => (
-    <FormSteps>
-      <FormStep state="completed">
-        <Link href="/steg-1-personalia">Personalia</Link>
-        <ProgressBar value={100} />
-      </FormStep>
-      <FormStep state="completed">
-        <Link href="/steg-2-kontaktinformasjon">Kontaktinformasjon</Link>
-        <ProgressBar value={100} />
-      </FormStep>
-      <FormStep state="completed">
-        <Link href="/steg-3-fakturainformasjon">Fakturainformasjon</Link>
-        <ProgressBar value={100} />
-      </FormStep>
-      <FormStep state="completed">
-        <Link href="/steg-4-samtykke">Samtykke</Link>
-        <ProgressBar value={100} />
-      </FormStep>
-      <FormStep state="completed">
-        <Link href="/steg-5-betalingsinformasjon">Betalingsinformasjon</Link>
-        <ProgressBar value={100} />
-      </FormStep>
-      <FormStep state="completed">
-        <Link href="/steg-6-leveringsadresse">Leveringsadresse</Link>
-        <ProgressBar value={100} />
-      </FormStep>
-      <FormStep state="completed">
-        <Link href="/steg-7-bekrefelse">Bekrefelse</Link>
-        <ProgressBar value={100} />
-      </FormStep>
-      <FormStep state="completed">
-        <Link href="/steg-8-oppsummering">Oppsummering</Link>
-        <ProgressBar value={100} />
       </FormStep>
     </FormSteps>
   ),

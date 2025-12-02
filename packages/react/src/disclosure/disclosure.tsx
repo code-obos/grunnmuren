@@ -104,15 +104,16 @@ export const DisclosureStateContext = createContext<DisclosureState | null>(
   null,
 );
 
-const Disclosure = ({ ref: _ref, children, ..._props }: DisclosureProps) => {
+const Disclosure = ({ ref: _ref, ..._props }: DisclosureProps) => {
   const [props, ref] = useContextProps(
     _props,
     _ref as ForwardedRef<HTMLDivElement>,
     DisclosureContext,
   );
+
   const groupState = useContext(DisclosureGroupStateContext);
 
-  let { id, ...otherProps } = props;
+  let { id, children, ...otherProps } = props;
   const defaultId = useId();
   id ||= defaultId;
   const isExpanded = groupState
@@ -176,6 +177,7 @@ const Disclosure = ({ ref: _ref, children, ..._props }: DisclosureProps) => {
         data-focus-visible-within={isFocusVisibleWithin || undefined}
         data-expanded={state.isExpanded || undefined}
         data-disabled={isDisabled || undefined}
+        data-slot="disclosure"
       >
         {typeof children === 'function'
           ? children({
@@ -229,6 +231,7 @@ const DisclosurePanel = ({ ref, children, ...props }: DisclosurePanelProps) => {
           : 'grid-rows-[0fr]',
       )}
       data-expanded={disclosureContext?.isExpanded || undefined}
+      data-slot="disclosure-panel"
     >
       <div className="overflow-hidden">
         {/* biome-ignore lint/a11y/useAriaPropsSupportedByRole: TODO: fix this */}
