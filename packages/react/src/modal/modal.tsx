@@ -85,7 +85,7 @@ const Modal = ({ ref: _ref, ..._props }: ModalProps) => {
                     {children}
                     {isDismissable && (
                       <Button
-                        slot="close" // RAC Dialog suppors one close button out of the box, so we utilize that here. For other close buttons we use ButtonContext
+                        slot="close" // RAC Dialog supports one close button out of the box, so we utilize that here. For other close buttons we use ButtonContext
                         variant="tertiary"
                         className="!px-2.5 data-focus-visible:outline-focus-inset"
                         aria-label={translations.close[locale]}
