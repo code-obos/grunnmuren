@@ -177,7 +177,6 @@ const Disclosure = ({ ref: _ref, ..._props }: DisclosureProps) => {
         data-focus-visible-within={isFocusVisibleWithin || undefined}
         data-expanded={state.isExpanded || undefined}
         data-disabled={isDisabled || undefined}
-        data-slot="disclosure"
       >
         {typeof children === 'function'
           ? children({
@@ -231,7 +230,6 @@ const DisclosurePanel = ({ ref, children, ...props }: DisclosurePanelProps) => {
           : 'grid-rows-[0fr]',
       )}
       data-expanded={disclosureContext?.isExpanded || undefined}
-      data-slot="disclosure-panel"
     >
       <div className="overflow-hidden">
         {/* biome-ignore lint/a11y/useAriaPropsSupportedByRole: TODO: fix this */}
