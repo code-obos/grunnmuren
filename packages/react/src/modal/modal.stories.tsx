@@ -152,7 +152,7 @@ export const FullyControlled: Story = {
                 <Heading slot="title" level={2}>
                   Tittel
                 </Heading>
-                <p>Denna modalen er controlled.</p>
+                <p>Denne modalen er controlled.</p>
                 {countdown > 0 && <strong>Lukkes om {countdown} s.</strong>}
                 <Button onPress={handleClose}>Lukk</Button>
               </Dialog>
