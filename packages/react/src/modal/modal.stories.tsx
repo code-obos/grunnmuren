@@ -105,7 +105,7 @@ export const Controlled: Story = {
         <DialogTrigger>
           <Button onPress={() => setIsOpen(true)}>Open Modal</Button>
           <ModalOverlay isDismissable isOpen={isOpen} onOpenChange={setIsOpen}>
-            <Modal isDismissable>
+            <Modal>
               <Dialog>
                 <Heading slot="title" level={2}>
                   Tittel
