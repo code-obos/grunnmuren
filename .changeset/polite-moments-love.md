@@ -11,7 +11,7 @@
 ## Breaking BETA changes
 
 - You now have to render the <ModalOverlay> yourself, as it is no longer rendered by the `<Modal>` component.
-- You need to explicitly pass `isDismissable` on `<ModalOverlay>` to make the dialog dismissable. If you are not using `<ModalOveraly>` you need to pass this prop to the `<Modal>` component instead. The `isDismissable` prop on `<ModalOverlay>` will make the modal closable by clicking the overaly, pressing `Esc` or clicking the x-button that renders in the dialog when this prop is passed.
+- You need to explicitly pass `isDismissable` on `<ModalOverlay>` to make the dialog dismissable. If you are not using `<ModalOverlay>` you need to pass this prop to the `<Modal>` component instead. The `isDismissable` prop on `<ModalOverlay>` will make the modal closable by clicking the overlay, pressing `Esc` or clicking the x-button that renders in the dialog when this prop is passed.
 
 ### Before
 ``` tsx
