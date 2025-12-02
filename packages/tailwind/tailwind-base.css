@@ -346,12 +346,13 @@
       counter-increment: form-step-counter;
       @apply flex items-center gap-x-3 relative;
 
-      &::before {
-        content: counter(form-step-counter, decimal);
+      &::before,
+      &[data-expanded="true"]::after {
+        content: counter(form-step-counter);
       }
 
-      [data-slot="disclosure"] [slot="trigger"],
-      &::before {
+      &::before,
+      &[data-expanded="true"]::after {
         @apply shrink-0 font-semibold size-8 border-2 rounded-full border-blue-dark grid place-content-center;
       }
 
@@ -362,14 +363,15 @@
         }
       }
 
-      [data-slot="link"]:not(:is(& [data-slot="disclosure"] *)) {
+      [data-slot="link"] {
         @apply focus-visible:outline-none;
         @apply after:absolute after:h-11 max-lg:after:w-11;
       }
 
       &[data-state="current"],
       &[data-state="completed"] {
-        &::before {
+        &::before,
+        &[data-expanded="true"]::after {
           @apply bg-blue-dark text-white;
         }
       }
@@ -422,24 +424,6 @@
       }
     }
 
-    [data-slot="disclosure"] {
-      @apply sm:hidden;
-      [data-slot="progress-bar"] {
-        @apply hidden;
-      }
-
-      [data-slot="disclosure-panel"] {
-        @apply absolute left-0 right-0 pt-2 transition-none!;
-        [data-slot="form-steps-collapsable"] {
-          @apply grid gap-y-3 rounded-lg border p-4;
-        }
-      }
-
-      [slot="trigger"] {
-        @apply focus-visible:outline-focus-offset;
-      }
-    }
-
     &:has([data-slot="form-step"]:nth-child(5)) {
       &:has(
           [data-slot="form-step"]:nth-child(5):is(
@@ -473,23 +457,75 @@
       &:has([data-slot="form-step"]:nth-child(3):is([data-state="completed"])) {
         [data-slot="form-step"] {
           &:nth-child(2) {
-            @apply max-sm:static;
-            &::before,
-            & > *:not([data-slot="disclosure"], [data-slot="progress-bar"]) {
-              @apply max-sm:hidden!;
+            &::before {
+              /** Different content (alt text) for screen readers here, since we want to hide this from screen readers **/
+              @apply max-sm:content-['...'_/_''];
             }
-            [data-slot="form-steps-collapsable"] {
-              [data-state="pending"] {
-                @apply hidden;
+          }
+        }
+
+        &:not(
+            :has(
+                [data-state="completed"]:not(:nth-child(1)):not(
+                    :nth-last-child(2)
+                  ):focus-within
+              ),
+            :has([data-slot="form-step"][data-expanded="true"])
+          ) {
+          [data-slot="form-step"] {
+            &:nth-child(3),
+            &:nth-child(4),
+            &:nth-last-child(4),
+            &:nth-last-child(3) {
+              &[data-state="completed"] {
+                @apply max-sm:sr-only;
               }
             }
           }
-          &:nth-child(3),
-          &:nth-child(4),
-          &:nth-child(5),
-          &:nth-child(6) {
-            &[data-state="completed"] {
-              @apply max-sm:invisible max-sm:absolute;
+        }
+
+        &:has(
+            [data-state="completed"]:not(:nth-child(1)):not(
+                :nth-last-child(2)
+              ):focus-within
+          ),
+        &:has([data-slot="form-step"][data-expanded="true"]) {
+          [data-slot="form-step"] {
+            &:nth-child(2),
+            &:nth-child(3),
+            &:nth-child(4),
+            &:nth-last-child(4),
+            &:nth-last-child(3) {
+              &[data-state="completed"] {
+                &:nth-child(2) {
+                  &::after,
+                  [data-slot="link"],
+                  [data-slot="toggle-check-icon"] {
+                    @apply max-sm:absolute max-sm:top-[125%];
+                  }
+                }
+                &:not(:nth-child(2)) {
+                  @apply max-sm:absolute max-sm:left-4;
+                  [data-slot="progress-bar"] {
+                    @apply max-sm:sr-only;
+                  }
+                }
+                [data-slot="link"] {
+                  @apply max-sm:opacity-100 max-sm:static;
+                }
+                &:nth-child(3) {
+                  @apply max-sm:top-[225%];
+                }
+                &:nth-child(4) {
+                  @apply max-sm:top-[325%];
+                }
+                &:nth-child(5) {
+                  @apply max-sm:top-[425%];
+                }
+                &:nth-child(6) {
+                  @apply max-sm:top-[525%];
+                }
+              }
             }
           }
         }

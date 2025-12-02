@@ -1,20 +1,15 @@
 import { Check } from '@obosbbl/grunnmuren-icons-react';
 import {
   Children,
-  cloneElement,
+  createContext,
   type HTMLAttributes,
   type HTMLProps,
-  isValidElement,
   type JSX,
+  use,
   useId,
+  useState,
 } from 'react';
-import {
-  Button,
-  DisclosureContext,
-  ProgressBarContext,
-  Provider,
-} from 'react-aria-components';
-import { Disclosure, DisclosureButton, DisclosurePanel } from '../disclosure';
+import { ProgressBarContext, Provider } from 'react-aria-components';
 import { _LinkContext } from '../link';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
@@ -27,6 +22,12 @@ type FormStepProps = HTMLProps<HTMLLIElement> & {
   state?: 'completed' | 'current' | 'pending';
 };
 
+const _FormStepContext = createContext<{ isTogglableOnSmallScreens: boolean }>({
+  isTogglableOnSmallScreens: false,
+});
+
+const _FormStepProvider = _FormStepContext.Provider;
+
 const FormStep = ({
   state = 'pending',
   children,
@@ -34,8 +35,26 @@ const FormStep = ({
 }: FormStepProps) => {
   const locale = useLocale();
   const id = useId();
+  const { isTogglableOnSmallScreens } = use(_FormStepContext);
+
+  const [_isExpanded, _setIsExpanded] = useState<boolean | undefined>(
+    isTogglableOnSmallScreens ? false : undefined,
+  );
+
   return (
-    <li {...restProps} data-slot="form-step" data-state={state} id={id}>
+    // biome-ignore lint/a11y/useKeyWithClickEvents: The collapsed content is accessible through keyboard focus
+    <li
+      {...restProps}
+      data-slot="form-step"
+      data-state={state}
+      id={id}
+      onClick={() => {
+        if (isTogglableOnSmallScreens) {
+          _setIsExpanded((prevState) => !prevState);
+        }
+      }}
+      data-expanded={_isExpanded}
+    >
       <Provider
         values={[
           [
@@ -56,7 +75,7 @@ const FormStep = ({
         {state === 'completed' && (
           <Check aria-label={translations.completed[locale]} />
         )}
-        {restProps['data-n'] === 2 && <Disclosure aria-label="TODO" />}
+        {isTogglableOnSmallScreens && <Check data-slot="toggle-check-icon" />}
         {children}
       </Provider>
     </li>
@@ -79,55 +98,25 @@ type FormStepsProps = HTMLAttributes<HTMLOListElement> & {
 
 const FormSteps = ({ children, ...restProps }: FormStepsProps) => {
   const locale = useLocale();
-  const ariaLabel = restProps['aria-label'] || translations.formSteps[locale];
   const childrenArray = Children.toArray(children);
   return (
-    <ol {...restProps} aria-label={ariaLabel} data-slot="form-steps">
-      <Provider
-        values={[
-          [
-            DisclosureContext,
-            {
-              children: (
-                <>
-                  <Button slot="trigger">...</Button>
-                  <DisclosurePanel role="group">
-                    <ol data-slot="form-steps-collapsable">
-                      {childrenArray.slice(1).map(
-                        (child) =>
-                          isValidElement(child) && (
-                            <li
-                              key={child.key}
-                              data-state={
-                                (child.props as FormStepProps).state ??
-                                'pending'
-                              }
-                            >
-                              {(child.props as FormStepProps).children}
-                            </li>
-                          ),
-                      )}
-                    </ol>
-                  </DisclosurePanel>
-                </>
-              ),
-            },
-          ],
-        ]}
-      >
-        {childrenArray.map(
-          (child, index) =>
-            (childrenArray.length > 5 &&
-            child &&
-            typeof child === 'object' &&
-            'props' in child
-              ? {
-                  ...child,
-                  props: { ...(child.props ?? {}), 'data-n': index + 1 },
-                }
-              : child) as JSX.Element,
-        )}
-      </Provider>
+    <ol
+      aria-label={translations.formSteps[locale]} // Spread props after to allow overriding of aria-label
+      {...restProps}
+      data-slot="form-steps"
+    >
+      {childrenArray.map((child, index) =>
+        index === 1 && childrenArray.length >= 5 ? (
+          <_FormStepProvider
+            key={(child as JSX.Element).props.key}
+            value={{ isTogglableOnSmallScreens: true }}
+          >
+            {child}
+          </_FormStepProvider>
+        ) : (
+          child
+        ),
+      )}
     </ol>
   );
 };
