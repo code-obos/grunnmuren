@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '../button';
 import { Footer, Heading } from '../content';
 import {
@@ -130,17 +130,23 @@ export const FullyControlled: Story = {
 
     const handleClose = () => {
       setCountdown(3);
-      const interval = setInterval(() => {
-        setCountdown((prev) => {
-          if (prev <= 1) {
-            clearInterval(interval);
-            setIsOpen(false);
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
     };
+
+    useEffect(() => {
+      if (countdown > 0) {
+        const interval = setInterval(() => {
+          setCountdown((prev) => {
+            if (prev <= 1) {
+              setIsOpen(false);
+              return 0;
+            }
+            return prev - 1;
+          });
+        }, 1000);
+
+        return () => clearInterval(interval);
+      }
+    }, [countdown]);
 
     return (
       <div className="p-4">
