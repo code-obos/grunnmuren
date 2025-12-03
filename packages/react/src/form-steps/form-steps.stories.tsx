@@ -19,17 +19,55 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => (
     <FormSteps>
+      <FormStep state="current">
+        <Text>Personalia</Text>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep>
+        <Text>Kontaktinformasjon</Text>
+        <ProgressBar value={50} />
+      </FormStep>
+      <FormStep>
+        <Text>Fakturainformasjon</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Samtykke</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Betalingsinformasjon</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Leveringsadresse</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Bekrefelse</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Oppsummering</Text>
+      </FormStep>
+    </FormSteps>
+  ),
+};
+
+export const OneCompleted: Story = {
+  render: () => (
+    <FormSteps>
       <FormStep state="completed">
         <Link href="/steg-1-personalia">Personalia</Link>
         <ProgressBar value={100} />
       </FormStep>
       <FormStep state="current">
         <Link href="/steg-2-kontaktinformasjon">Kontaktinformasjon</Link>
-        <ProgressBar value={50} />
+        <ProgressBar value={100} />
       </FormStep>
       <FormStep>
-        <Text>Fakturainformasjon</Text>
-        <ProgressBar value={0} />
+        <Link href="/steg-3-fakturainformasjon">Fakturainformasjon</Link>
+        <ProgressBar value={50} />
       </FormStep>
       <FormStep>
         <Text>Samtykke</Text>

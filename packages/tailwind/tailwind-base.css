@@ -427,15 +427,19 @@
       }
     }
 
+    [data-slot="toggle-check-icon"] {
+      @apply hidden;
+    }
+
     &:has([data-slot="form-step"]:nth-child(5)) {
       &:has(
-          [data-slot="form-step"]:nth-child(5):is(
+          [data-slot="form-step"]:nth-child(6):is(
               :not([data-state="completed"])
             )
         ) {
         [data-state="pending"] {
           &:nth-child(n + 4) {
-            &:not([data-state="current"] + *) {
+            &:not([data-state="current"] + *, :nth-child(4)) {
               @apply max-sm:-ml-9;
             }
             [data-slot="progress-bar"] {
@@ -524,7 +528,7 @@
                     @apply max-sm:-left-3 max-sm:top-16 max-sm:z-1;
                   }
                   [data-slot="toggle-check-icon"] {
-                    @apply max-sm:-left-10 max-sm:z-2 max-sm:top-12.5;
+                    @apply max-sm:-left-10 max-sm:z-2 max-sm:top-12.5 max-sm:block;
                   }
                 }
 
