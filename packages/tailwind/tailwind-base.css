@@ -337,22 +337,26 @@
     }
   }
 
+  .form-steps-container,
+  [data-slot="form-steps-container"] {
+    @apply max-lg:pt-9;
+  }
+
   .form-steps,
   [data-slot="form-steps"] {
     counter-reset: form-step-counter;
-    @apply flex gap-x-3 lg:flex-col lg:gap-y-14 max-w-full min-w-0 max-lg:pt-9 relative;
+    @apply flex gap-x-3 lg:flex-col lg:gap-y-14 max-w-full min-w-0 relative;
 
     [data-slot="form-step"] {
       counter-increment: form-step-counter;
       @apply flex items-center gap-x-3 relative;
 
-      &::before,
-      &[data-expanded="true"]::after {
+      &::before {
         content: counter(form-step-counter);
       }
 
       &::before,
-      &[data-expanded="true"]::after {
+      &[data-expanded]::after {
         @apply shrink-0 font-semibold size-8 border-2 rounded-full border-blue-dark grid place-content-center;
       }
 
@@ -371,7 +375,7 @@
       &[data-state="current"],
       &[data-state="completed"] {
         &::before,
-        &[data-expanded="true"]::after {
+        &[data-expanded]::after {
           @apply bg-blue-dark text-white;
         }
       }
@@ -501,9 +505,30 @@
                   &::after,
                   [data-slot="link"],
                   [data-slot="toggle-check-icon"] {
-                    @apply max-sm:absolute max-sm:top-[125%];
+                    @apply max-sm:absolute;
+                  }
+                  &::after {
+                    @apply max-sm:-left-13.5 max-sm:top-15;
+                    /** Makes this pseudo element visible, while also reflecting the order in the list  */
+                    content: counter(form-step-counter);
+                  }
+                  /** Place the focus styles on the ::after element instead of the link, to match the rest of the list items */
+                  &:has([data-slot="link"]:focus-visible) {
+                    &::after {
+                      @apply outline-focus-offset;
+                    }
+                  }
+                  &::before {
+                    @apply outline-none;
+                  }
+                  [data-slot="link"] {
+                    @apply max-sm:-left-3 max-sm:top-16;
+                  }
+                  [data-slot="toggle-check-icon"] {
+                    @apply max-sm:-left-10 max-sm:z-1 max-sm:top-12.5;
                   }
                 }
+
                 &:not(:nth-child(2)) {
                   @apply max-sm:absolute max-sm:left-4;
                   [data-slot="progress-bar"] {
@@ -514,16 +539,16 @@
                   @apply max-sm:opacity-100 max-sm:static;
                 }
                 &:nth-child(3) {
-                  @apply max-sm:top-[225%];
+                  @apply max-sm:top-30;
                 }
                 &:nth-child(4) {
-                  @apply max-sm:top-[325%];
+                  @apply max-sm:top-45;
                 }
                 &:nth-child(5) {
-                  @apply max-sm:top-[425%];
+                  @apply max-sm:top-60;
                 }
                 &:nth-child(6) {
-                  @apply max-sm:top-[525%];
+                  @apply max-sm:top-75;
                 }
               }
             }

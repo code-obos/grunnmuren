@@ -100,24 +100,26 @@ const FormSteps = ({ children, ...restProps }: FormStepsProps) => {
   const locale = useLocale();
   const childrenArray = Children.toArray(children);
   return (
-    <ol
-      aria-label={translations.formSteps[locale]} // Spread props after to allow overriding of aria-label
-      {...restProps}
-      data-slot="form-steps"
-    >
-      {childrenArray.map((child, index) =>
-        index === 1 && childrenArray.length >= 5 ? (
-          <_FormStepProvider
-            key={(child as JSX.Element).props.key}
-            value={{ isTogglableOnSmallScreens: true }}
-          >
-            {child}
-          </_FormStepProvider>
-        ) : (
-          child
-        ),
-      )}
-    </ol>
+    <div data-slot="form-steps-container">
+      <ol
+        aria-label={translations.formSteps[locale]} // Spread props after to allow overriding of aria-label
+        {...restProps}
+        data-slot="form-steps"
+      >
+        {childrenArray.map((child, index) =>
+          index === 1 && childrenArray.length >= 5 ? (
+            <_FormStepProvider
+              key={(child as JSX.Element).props.key}
+              value={{ isTogglableOnSmallScreens: true }}
+            >
+              {child}
+            </_FormStepProvider>
+          ) : (
+            child
+          ),
+        )}
+      </ol>
+    </div>
   );
 };
 
