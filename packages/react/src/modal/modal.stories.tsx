@@ -98,7 +98,7 @@ export const Controlled: Story = {
       <div className="p-4">
         <DialogTrigger>
           <Button onPress={() => setIsOpen(true)}>Open Modal</Button>
-          <Modal isDismissable isOpen={isOpen} onOpenChange={setIsOpen}>
+          <Modal isOpen={isOpen} onOpenChange={setIsOpen}>
             <Dialog>
               <Heading slot="title" level={2}>
                 Tittel
