@@ -372,7 +372,12 @@
         @apply after:absolute after:h-11 max-lg:after:w-11;
       }
 
-      &[data-state="current"],
+      &[data-state="current"] {
+        &::before {
+          @apply bg-sky-light;
+        }
+      }
+
       &[data-state="completed"] {
         &::before,
         &[data-expanded]::after {
