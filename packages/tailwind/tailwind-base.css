@@ -508,7 +508,7 @@
                     @apply max-sm:absolute;
                   }
                   &::after {
-                    @apply max-sm:-left-13.5 max-sm:top-15;
+                    @apply max-sm:-left-14 max-sm:top-15 max-sm:z-1;
                     /** Makes this pseudo element visible, while also reflecting the order in the list, while hiding it for screen reader users. This is because the list item counter is reflected in the ::before element for screen readers  */
                     @apply max-sm:content-[counter(form-step-counter)_/_''];
                   }
@@ -522,15 +522,23 @@
                     @apply outline-none;
                   }
                   [data-slot="link"] {
-                    @apply max-sm:-left-3 max-sm:top-16;
+                    @apply max-sm:-left-3 max-sm:top-16 max-sm:z-1;
                   }
                   [data-slot="toggle-check-icon"] {
-                    @apply max-sm:-left-10 max-sm:z-1 max-sm:top-12.5;
+                    @apply max-sm:-left-10 max-sm:z-2 max-sm:top-12.5;
                   }
                 }
 
                 &:not(:nth-child(2)) {
-                  @apply max-sm:absolute max-sm:left-4;
+                  @apply max-sm:absolute max-sm:left-4 max-sm:w-full;
+                  & > *:is([data-slot="text"], [data-slot="link"]) {
+                    @apply max-sm:relative;
+                  }
+                  & > *:is([data-slot="text"], [data-slot="link"], svg),
+                  &::before {
+                    @apply max-sm:z-1;
+                  }
+                  @apply max-sm:after:absolute max-sm:after:-left-4 max-sm:after:right-0 max-sm:after:-top-[250%] max-sm:after:-bottom-[100%] max-sm:after:bg-white max-sm:after:border-x max-sm:after:border-b max-sm:after:rounded-b-lg;
                   [data-slot="progress-bar"] {
                     @apply max-sm:sr-only;
                   }
@@ -550,6 +558,9 @@
                 &:nth-child(6) {
                   @apply max-sm:top-75;
                 }
+              }
+              &:nth-child(3) {
+                @apply max-sm:after:border-t max-sm:after:rounded-t-lg;
               }
             }
           }
