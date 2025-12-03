@@ -1,10 +1,8 @@
 import { Close } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
-import type { RefAttributes } from 'react';
 import {
   ButtonContext,
   DEFAULT_SLOT,
-  ModalContext,
   Provider,
   Dialog as RACDialog,
   type DialogProps as RACDialogProps,
@@ -13,7 +11,6 @@ import {
   Modal as RACModal,
   ModalOverlay as RACModalOverlay,
   type ModalOverlayProps as RACModalOverlayProps,
-  useContextProps,
 } from 'react-aria-components';
 import { Button } from '../button';
 import { HeadingContext } from '../content';
@@ -26,50 +23,45 @@ const DialogTrigger = (props: DialogTriggerProps) => (
   <RACDialogTrigger {...props} />
 );
 
-type ModalOverlayProps = RACModalOverlayProps & {
+type ModalOverlayProps = Omit<RACModalOverlayProps, 'isDismissable'> & {
   /** @default 10 Controls the z-index of the modal overlay */
   zIndex?: number;
+  /** @default true Makes the modal dismissable */
+  isDismissable?: boolean;
 };
 
-const ModalOverlay = ({
-  className,
+const _ModalOverlay = ({
   style = {},
   zIndex = 10,
   ...restProps
 }: ModalOverlayProps) => (
-  <Provider
-    values={[
-      [
-        ModalContext,
-        {
-          isDismissable: restProps.isDismissable, // Force forward isDismissable to any Modal children, as RACModalOverlay does not do this automatically
-        },
-      ],
-    ]}
-  >
-    <RACModalOverlay
-      {...restProps}
-      className={({ isEntering, isExiting }) =>
-        cx(
-          className,
-          'fixed inset-0 flex min-h-full items-center justify-center overflow-y-auto bg-black/25 p-4 text-center backdrop-blur-sm',
-          isEntering && 'fade-in animate-in duration-300 ease-out',
-          isExiting && 'fade-out animate-out duration-200 ease-in',
-          // Using the motion-safe class does not work, so we use motion-reduce to overwrite instead
-          'motion-reduce:animate-none',
-        )
-      }
-      style={{ zIndex, ...style }}
-    />
-  </Provider>
+  <RACModalOverlay
+    {...restProps}
+    className={({ isEntering, isExiting }) =>
+      cx(
+        'fixed inset-0 flex min-h-full items-center justify-center overflow-y-auto bg-black/25 p-4 text-center backdrop-blur-sm',
+        isEntering && 'fade-in animate-in duration-300 ease-out',
+        isExiting && 'fade-out animate-out duration-200 ease-in',
+        // Using the motion-safe class does not work, so we use motion-reduce to overwrite instead
+        'motion-reduce:animate-none',
+      )
+    }
+    style={{ zIndex, ...style }}
+  />
 );
 
-type ModalProps = RACModalOverlayProps & RefAttributes<HTMLDivElement>;
+type ModalProps = ModalOverlayProps;
 
-const Modal = ({ ref: _ref, ..._props }: ModalProps) => {
+const Modal = ({
+  isDismissable = true,
+  isOpen,
+  onOpenChange,
+  defaultOpen,
+  className,
+  zIndex,
+  ...restProps
+}: ModalProps) => {
   const locale = useLocale();
-  const [props, ref] = useContextProps(_props, _ref, ModalContext);
-  const { isDismissable, className, ...restProps } = props;
   return (
     <Provider
       values={[
@@ -87,8 +79,9 @@ const Modal = ({ ref: _ref, ..._props }: ModalProps) => {
                       <Button
                         slot="close" // RAC Dialog supports one close button out of the box, so we utilize that here. For other close buttons we use ButtonContext
                         variant="tertiary"
-                        className="!px-2.5 data-focus-visible:outline-focus-inset"
+                        className="px-2.5! data-focus-visible:outline-focus-inset"
                         aria-label={translations.close[locale]}
+                        onPress={() => onOpenChange?.(false)}
                       >
                         <Close />
                       </Button>
@@ -101,20 +94,27 @@ const Modal = ({ ref: _ref, ..._props }: ModalProps) => {
         ],
       ]}
     >
-      <RACModal
-        {...restProps}
-        ref={ref}
-        className={({ isEntering, isExiting }) =>
-          cx(
-            className,
-            'w-full max-w-md overflow-hidden rounded-2xl bg-white p-4 text-left align-middle shadow-xl',
-            isEntering && 'zoom-in-95 animate-in duration-300 ease-out',
-            isExiting && 'zoom-out-95 animate-out duration-200 ease-in',
-            // Using the motion-safe class does not work, so we use motion-reduce to overwrite instead
-            'motion-reduce:animate-none',
-          )
-        }
-      />
+      <_ModalOverlay
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        defaultOpen={defaultOpen}
+        isDismissable={isDismissable}
+        zIndex={zIndex}
+      >
+        <RACModal
+          {...restProps}
+          className={({ isEntering, isExiting }) =>
+            cx(
+              className,
+              'w-full max-w-md overflow-hidden rounded-2xl bg-white p-4 text-left align-middle shadow-xl',
+              isEntering && 'zoom-in-95 animate-in duration-300 ease-out',
+              isExiting && 'zoom-out-95 animate-out duration-200 ease-in',
+              // Using the motion-safe class does not work, so we use motion-reduce to overwrite instead
+              'motion-reduce:animate-none',
+            )
+          }
+        />
+      </_ModalOverlay>
     </Provider>
   );
 };
@@ -165,8 +165,6 @@ export {
   Dialog as UNSAFE_Dialog,
   DialogTrigger as UNSAFE_DialogTrigger,
   Modal as UNSAFE_Modal,
-  ModalOverlay as UNSAFE_ModalOverlay,
-  type ModalOverlayProps as UNSAFE_ModalOverlayProps,
   type DialogProps as UNSAFE_DialogProps,
   type DialogTriggerProps as UNSAFE_DialogTriggerProps,
   type ModalProps as UNSAFE_ModalProps,
