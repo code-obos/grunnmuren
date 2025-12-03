@@ -408,8 +408,7 @@
         }
       }
 
-      &:not([data-state="current"])
-        > *:is([data-slot="text"], [data-slot="link"]) {
+      & > *:is([data-slot="text"], [data-slot="link"]) {
         @apply max-lg:opacity-0;
       }
 
