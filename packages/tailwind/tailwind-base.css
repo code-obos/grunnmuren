@@ -462,8 +462,8 @@
         [data-slot="form-step"] {
           &:nth-child(2) {
             &::before {
-              /** Different content (alt text) for screen readers here, since we want to hide this from screen readers **/
-              @apply max-sm:content-['...'_/_''];
+              /** Different content (alt text) for screen readers here, since we want to render this a regular step 2 for screen readers **/
+              @apply max-sm:content-['...'_/_'2'];
             }
           }
         }
@@ -509,8 +509,8 @@
                   }
                   &::after {
                     @apply max-sm:-left-13.5 max-sm:top-15;
-                    /** Makes this pseudo element visible, while also reflecting the order in the list  */
-                    content: counter(form-step-counter);
+                    /** Makes this pseudo element visible, while also reflecting the order in the list, while hiding it for screen reader users. This is because the list item counter is reflected in the ::before element for screen readers  */
+                    @apply max-sm:content-[counter(form-step-counter)_/_''];
                   }
                   /** Place the focus styles on the ::after element instead of the link, to match the rest of the list items */
                   &:has([data-slot="link"]:focus-visible) {
