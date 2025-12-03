@@ -541,7 +541,7 @@
                   &::before {
                     @apply max-sm:z-1;
                   }
-                  @apply max-sm:after:absolute max-sm:after:-left-4 max-sm:after:right-0 max-sm:after:-top-[calc(200%+var(--spacing)*4)] max-sm:after:-bottom-4 max-sm:after:bg-white max-sm:after:border-x max-sm:after:border-b max-sm:after:rounded-b-lg;
+                  @apply max-sm:after:absolute max-sm:after:-left-4 max-sm:after:right-4 max-sm:after:-top-[calc(200%+var(--spacing)*4)] max-sm:after:-bottom-4 max-sm:after:bg-white max-sm:after:border-x max-sm:after:border-b max-sm:after:rounded-b-lg;
                   [data-slot="progress-bar"] {
                     @apply max-sm:sr-only;
                   }
