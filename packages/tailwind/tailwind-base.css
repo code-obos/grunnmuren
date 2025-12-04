@@ -438,9 +438,7 @@
 
     &:has([data-slot="form-step"]:nth-child(5)) {
       &:has(
-          [data-slot="form-step"]:nth-child(6):is(
-              :not([data-state="completed"])
-            )
+          [data-slot="form-step"]:nth-last-child(2):is([data-state="pending"])
         ) {
         [data-state="pending"] {
           &:nth-child(n + 4) {
