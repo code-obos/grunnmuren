@@ -12,7 +12,7 @@ import {
   useState,
 } from 'react';
 import { ProgressBarContext, Provider } from 'react-aria-components';
-import { useClickOutsideRef } from '../hooks';
+import { useClickOutsideRef, useComponentDidMount } from '../hooks';
 import { _LinkContext } from '../link';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
@@ -74,6 +74,10 @@ const FormStep = ({
         {state === 'completed' && (
           <Check aria-label={translations.completed[locale]} />
         )}
+        {/*
+         * Render an extra checkmark in the list item acting as the toggle for the collapsible steps (popover) on small screens.
+         * This indicates (visually) that all collapsed steps are completed. Screen reader users will already be informed about completed steps through the individual step items.
+         */}
         {onToggle && <Check data-slot="toggle-check-icon" />}
         {children}
       </Provider>
@@ -101,20 +105,46 @@ const FormSteps = ({ children, ...restProps }: FormStepsProps) => {
 
   const isTogglableOnSmallScreens = childCount >= 5;
 
+  // State to track whether the collapsible steps (popover) is expanded or collapsed
   const [isExpanded, setIsExpanded] = useState<boolean | undefined>(
     isTogglableOnSmallScreens ? false : undefined,
   );
 
+  // Handles toggling of the collapsible steps (popover) on small screens
   const onToggle = () => {
     if (isTogglableOnSmallScreens) {
       setIsExpanded((prevState) => !prevState);
     }
   };
 
+  // Closes the popover (if visible) when clicking outside the component
   const ref = useClickOutsideRef<HTMLOListElement>(() => {
     if (isTogglableOnSmallScreens) {
       setIsExpanded(false);
     }
+  });
+
+  // Closes the popover (if visible) when focusing outside the popover itself
+  useComponentDidMount(() => {
+    const focusOutsideHandler = () => {
+      if (isTogglableOnSmallScreens) {
+        const focusedElement = document.activeElement;
+        if (
+          focusedElement &&
+          // If any of the completed steps (from 2nd step and onwards) does NOT contain the focused element, close the popover
+          !Array.from(ref.current?.children || [])
+            .slice(1) // Skip first li child
+            .filter((li) => li.getAttribute('data-state') === 'completed') // Only completed steps, counting from 2nd step can be collapsable
+            .some((li) => li.contains(focusedElement))
+        ) {
+          setIsExpanded(false);
+        }
+      }
+    };
+
+    document.addEventListener('focus', focusOutsideHandler, true);
+    return () =>
+      document.removeEventListener('focus', focusOutsideHandler, true);
   });
 
   return (
@@ -132,6 +162,7 @@ const FormSteps = ({ children, ...restProps }: FormStepsProps) => {
             isValidElement<FormStepProps>(child)
           ) {
             return (
+              // The second list item acts as the toggle for the collapsible steps (popover) on small screens
               <_FormStepProvider value={{ onToggle, isExpanded }}>
                 {cloneElement(child)}
               </_FormStepProvider>
