@@ -436,7 +436,9 @@
       @apply hidden;
     }
 
+    /** If there are 5 or more form steps: **/
     &:has([data-slot="form-step"]:nth-child(5)) {
+      /** Where the second last step is still pending: We stack all the pending steps on top of each other on small screens. **/
       &:has(
           [data-slot="form-step"]:nth-last-child(2):is([data-state="pending"])
         ) {
@@ -464,16 +466,20 @@
         }
       }
 
+      /** Where the third step is completed: We hide all the completed steps in a "popover" **/
       &:has([data-slot="form-step"]:nth-child(3):is([data-state="completed"])) {
+        /** Styles the "popover" trigger used for touch/mouse interactions to display the popover **/
         [data-slot="form-step"] {
           &:nth-child(2) {
             &::before {
-              /** Different content (alt text) for screen readers here, since we want to render this a regular step 2 for screen readers **/
+              /** Announce as "2" for screen readers (since this is rendered in step 2) but display as '...' visually **/
               @apply max-sm:content-['...'_/_'2'];
             }
           }
         }
 
+        /** Hides all the completed steps between step 2 and the current **/
+        /** For both keyboard users and touch/mouse users (screen reader users will not notice this) **/
         &:not(
             :has(
                 [data-state="completed"]:not(:nth-child(1)):not(
@@ -497,6 +503,8 @@
           }
         }
 
+        /** Displays all the completed steps between step 2 and the current in a "popover" **/
+        /** For both keyboard users and touch/mouse users (screen reader users will not notice this) **/
         &:has(
             [data-state="completed"]:not(:nth-child(1)):not(
                 :nth-last-child(2)
@@ -510,7 +518,9 @@
               &:nth-child(4):not(:nth-last-child(2)),
             &:nth-last-child(4),
             &:nth-last-child(3) {
+              /** All the completed steps needs to be absolutely positioned, with an offset that makes them stack vertically. **/
               &[data-state="completed"] {
+                /** For the step 2, the ::before element is now acting as the popover trigger. So we need to use the ::after element as a visual step number indicator instead **/
                 &:nth-child(2) {
                   &::after,
                   [data-slot="link"],
@@ -529,6 +539,7 @@
                     }
                   }
                   &::before {
+                    /** Hide the focus outline on the element acting as the "popover" trigger **/
                     @apply outline-none;
                   }
                   [data-slot="link"] {
@@ -541,6 +552,12 @@
 
                 &:not(:nth-child(2)) {
                   @apply max-sm:absolute max-sm:left-4 max-sm:w-full;
+                  /** Use stacked pseudo elements to create the illusion of a popover container **/
+                  @apply max-sm:after:absolute max-sm:after:-left-4 max-sm:after:right-4;
+                  @apply max-sm:after:-top-[calc(200%+var(--spacing)*4)] max-sm:after:-bottom-4;
+                  /** Paints the "popover container" **/
+                  @apply max-sm:after:bg-white max-sm:after:border-x max-sm:after:border-b max-sm:after:rounded-b-lg;
+
                   & > *:is([data-slot="text"], [data-slot="link"]) {
                     @apply max-sm:relative;
                   }
@@ -548,14 +565,16 @@
                   &::before {
                     @apply max-sm:z-1;
                   }
-                  @apply max-sm:after:absolute max-sm:after:-left-4 max-sm:after:right-4 max-sm:after:-top-[calc(200%+var(--spacing)*4)] max-sm:after:-bottom-4 max-sm:after:bg-white max-sm:after:border-x max-sm:after:border-b max-sm:after:rounded-b-lg;
                   [data-slot="progress-bar"] {
                     @apply max-sm:sr-only;
                   }
                 }
                 [data-slot="link"] {
+                  /** Make the link appear visually and position the link pseudo element acting as click area for the step number **/
                   @apply max-sm:opacity-100 max-sm:static max-sm:after:-left-11;
                 }
+
+                /** Position each step correctly inside the "popover" (with an even spacing) **/
                 &:nth-child(3) {
                   @apply max-sm:top-30;
                 }
@@ -570,6 +589,7 @@
                 }
               }
               &:nth-child(3) {
+                /** Paints the top part of the "popover container" **/
                 @apply max-sm:after:border-t max-sm:after:rounded-t-lg;
               }
             }
