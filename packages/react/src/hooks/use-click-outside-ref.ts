@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { useComponentDidMount } from './useComponentDidMount';
+import { useComponentDidMount } from './use-component-did-mount';
 
 /**
  * Helper function to create the event listener and add it it the document

@@ -1,2 +1,2 @@
-export * from './useClickOutsideRef';
-export * from './useComponentDidMount';
+export * from './use-click-outside-ref';
+export * from './use-component-did-mount';
