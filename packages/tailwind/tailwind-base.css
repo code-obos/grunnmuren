@@ -337,11 +337,7 @@
     }
   }
 
-  .form-steps-container,
-  [data-slot="form-steps-container"] {
-    @apply max-lg:pt-9;
-  }
-
+  /*** FormSteps component styles ***/
   .form-steps,
   [data-slot="form-steps"] {
     counter-reset: form-step-counter;
@@ -573,6 +569,9 @@
                 [data-slot="link"] {
                   /** Make the link appear visually and position the link pseudo element acting as click area for the step number **/
                   @apply max-sm:opacity-100 max-sm:static max-sm:after:-left-11;
+                  /** Truncate texts that does not fit the width of the popover (the inline-flex of the link must be overridden as block) **/
+                  /** We need to do this because we can't wrap over multiple lines, due to the absolute positioning of each step in the popover **/
+                  @apply max-sm:max-w-42.5 max-sm:text-ellipsis max-sm:overflow-hidden max-sm:whitespace-nowrap max-sm:block!;
                 }
 
                 /** Position each step correctly inside the "popover" (with an even spacing) **/
