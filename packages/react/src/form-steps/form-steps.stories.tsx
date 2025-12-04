@@ -319,3 +319,698 @@ export const SevenCompleted: Story = {
     </FormSteps>
   ),
 };
+
+// 3 Steps variants
+export const ThreeSteps: Story = {
+  render: () => (
+    <FormSteps>
+      <FormStep state="current">
+        <Link href="/steg-1-personalia">Personalia</Link>
+        <ProgressBar value={50} />
+      </FormStep>
+      <FormStep>
+        <Text>Kontaktinformasjon</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Oppsummering</Text>
+      </FormStep>
+    </FormSteps>
+  ),
+};
+
+export const ThreeStepsOneCompleted: Story = {
+  render: () => (
+    <FormSteps>
+      <FormStep state="completed">
+        <Link href="/steg-1-personalia">Personalia</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="current">
+        <Link href="/steg-2-kontaktinformasjon">Kontaktinformasjon</Link>
+        <ProgressBar value={50} />
+      </FormStep>
+      <FormStep>
+        <Text>Oppsummering</Text>
+      </FormStep>
+    </FormSteps>
+  ),
+};
+
+export const ThreeStepsAllCompleted: Story = {
+  render: () => (
+    <FormSteps>
+      <FormStep state="completed">
+        <Link href="/steg-1-personalia">Personalia</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-2-kontaktinformasjon">Kontaktinformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="current">
+        <Link href="/steg-3-oppsummering">Oppsummering</Link>
+      </FormStep>
+    </FormSteps>
+  ),
+};
+
+// 4 Steps variants
+export const FourSteps: Story = {
+  render: () => (
+    <FormSteps>
+      <FormStep state="current">
+        <Link href="/steg-1-personalia">Personalia</Link>
+        <ProgressBar value={50} />
+      </FormStep>
+      <FormStep>
+        <Text>Kontaktinformasjon</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Fakturainformasjon</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Oppsummering</Text>
+      </FormStep>
+    </FormSteps>
+  ),
+};
+
+export const FourStepsOneCompleted: Story = {
+  render: () => (
+    <FormSteps>
+      <FormStep state="completed">
+        <Link href="/steg-1-personalia">Personalia</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="current">
+        <Link href="/steg-2-kontaktinformasjon">Kontaktinformasjon</Link>
+        <ProgressBar value={50} />
+      </FormStep>
+      <FormStep>
+        <Text>Fakturainformasjon</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Oppsummering</Text>
+      </FormStep>
+    </FormSteps>
+  ),
+};
+
+export const FourStepsTwoCompleted: Story = {
+  render: () => (
+    <FormSteps>
+      <FormStep state="completed">
+        <Link href="/steg-1-personalia">Personalia</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-2-kontaktinformasjon">Kontaktinformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="current">
+        <Link href="/steg-3-fakturainformasjon">Fakturainformasjon</Link>
+        <ProgressBar value={50} />
+      </FormStep>
+      <FormStep>
+        <Text>Oppsummering</Text>
+      </FormStep>
+    </FormSteps>
+  ),
+};
+
+export const FourStepsAllCompleted: Story = {
+  render: () => (
+    <FormSteps>
+      <FormStep state="completed">
+        <Link href="/steg-1-personalia">Personalia</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-2-kontaktinformasjon">Kontaktinformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-3-fakturainformasjon">Fakturainformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="current">
+        <Link href="/steg-4-oppsummering">Oppsummering</Link>
+      </FormStep>
+    </FormSteps>
+  ),
+};
+
+// 5 Steps variants
+export const FiveSteps: Story = {
+  render: () => (
+    <FormSteps>
+      <FormStep state="current">
+        <Link href="/steg-1-personalia">Personalia</Link>
+        <ProgressBar value={50} />
+      </FormStep>
+      <FormStep>
+        <Text>Kontaktinformasjon</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Fakturainformasjon</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Samtykke</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Oppsummering</Text>
+      </FormStep>
+    </FormSteps>
+  ),
+};
+
+export const FiveStepsOneCompleted: Story = {
+  render: () => (
+    <FormSteps>
+      <FormStep state="completed">
+        <Link href="/steg-1-personalia">Personalia</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="current">
+        <Link href="/steg-2-kontaktinformasjon">Kontaktinformasjon</Link>
+        <ProgressBar value={50} />
+      </FormStep>
+      <FormStep>
+        <Text>Fakturainformasjon</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Samtykke</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Oppsummering</Text>
+      </FormStep>
+    </FormSteps>
+  ),
+};
+
+export const FiveStepsTwoCompleted: Story = {
+  render: () => (
+    <FormSteps>
+      <FormStep state="completed">
+        <Link href="/steg-1-personalia">Personalia</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-2-kontaktinformasjon">Kontaktinformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="current">
+        <Link href="/steg-3-fakturainformasjon">Fakturainformasjon</Link>
+        <ProgressBar value={50} />
+      </FormStep>
+      <FormStep>
+        <Text>Samtykke</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Oppsummering</Text>
+      </FormStep>
+    </FormSteps>
+  ),
+};
+
+export const FiveStepsThreeCompleted: Story = {
+  render: () => (
+    <FormSteps>
+      <FormStep state="completed">
+        <Link href="/steg-1-personalia">Personalia</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-2-kontaktinformasjon">Kontaktinformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-3-fakturainformasjon">Fakturainformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="current">
+        <Link href="/steg-4-samtykke">Samtykke</Link>
+        <ProgressBar value={50} />
+      </FormStep>
+      <FormStep>
+        <Text>Oppsummering</Text>
+      </FormStep>
+    </FormSteps>
+  ),
+};
+
+export const FiveStepsAllCompleted: Story = {
+  render: () => (
+    <FormSteps>
+      <FormStep state="completed">
+        <Link href="/steg-1-personalia">Personalia</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-2-kontaktinformasjon">Kontaktinformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-3-fakturainformasjon">Fakturainformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-4-samtykke">Samtykke</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="current">
+        <Link href="/steg-5-oppsummering">Oppsummering</Link>
+      </FormStep>
+    </FormSteps>
+  ),
+};
+
+// 6 Steps variants
+export const SixSteps: Story = {
+  render: () => (
+    <FormSteps>
+      <FormStep state="current">
+        <Link href="/steg-1-personalia">Personalia</Link>
+        <ProgressBar value={50} />
+      </FormStep>
+      <FormStep>
+        <Text>Kontaktinformasjon</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Fakturainformasjon</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Samtykke</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Betalingsinformasjon</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Oppsummering</Text>
+      </FormStep>
+    </FormSteps>
+  ),
+};
+
+export const SixStepsOneCompleted: Story = {
+  render: () => (
+    <FormSteps>
+      <FormStep state="completed">
+        <Link href="/steg-1-personalia">Personalia</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="current">
+        <Link href="/steg-2-kontaktinformasjon">Kontaktinformasjon</Link>
+        <ProgressBar value={50} />
+      </FormStep>
+      <FormStep>
+        <Text>Fakturainformasjon</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Samtykke</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Betalingsinformasjon</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Oppsummering</Text>
+      </FormStep>
+    </FormSteps>
+  ),
+};
+
+export const SixStepsTwoCompleted: Story = {
+  render: () => (
+    <FormSteps>
+      <FormStep state="completed">
+        <Link href="/steg-1-personalia">Personalia</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-2-kontaktinformasjon">Kontaktinformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="current">
+        <Link href="/steg-3-fakturainformasjon">Fakturainformasjon</Link>
+        <ProgressBar value={50} />
+      </FormStep>
+      <FormStep>
+        <Text>Samtykke</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Betalingsinformasjon</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Oppsummering</Text>
+      </FormStep>
+    </FormSteps>
+  ),
+};
+
+export const SixStepsThreeCompleted: Story = {
+  render: () => (
+    <FormSteps>
+      <FormStep state="completed">
+        <Link href="/steg-1-personalia">Personalia</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-2-kontaktinformasjon">Kontaktinformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-3-fakturainformasjon">Fakturainformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="current">
+        <Link href="/steg-4-samtykke">Samtykke</Link>
+        <ProgressBar value={50} />
+      </FormStep>
+      <FormStep>
+        <Text>Betalingsinformasjon</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Oppsummering</Text>
+      </FormStep>
+    </FormSteps>
+  ),
+};
+
+export const SixStepsFourCompleted: Story = {
+  render: () => (
+    <FormSteps>
+      <FormStep state="completed">
+        <Link href="/steg-1-personalia">Personalia</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-2-kontaktinformasjon">Kontaktinformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-3-fakturainformasjon">Fakturainformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-4-samtykke">Samtykke</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="current">
+        <Link href="/steg-5-betalingsinformasjon">Betalingsinformasjon</Link>
+        <ProgressBar value={50} />
+      </FormStep>
+      <FormStep>
+        <Text>Oppsummering</Text>
+      </FormStep>
+    </FormSteps>
+  ),
+};
+
+export const SixStepsAllCompleted: Story = {
+  render: () => (
+    <FormSteps>
+      <FormStep state="completed">
+        <Link href="/steg-1-personalia">Personalia</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-2-kontaktinformasjon">Kontaktinformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-3-fakturainformasjon">Fakturainformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-4-samtykke">Samtykke</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-5-betalingsinformasjon">Betalingsinformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="current">
+        <Link href="/steg-6-oppsummering">Oppsummering</Link>
+      </FormStep>
+    </FormSteps>
+  ),
+};
+
+// 7 Steps variants
+export const SevenSteps: Story = {
+  render: () => (
+    <FormSteps>
+      <FormStep state="current">
+        <Link href="/steg-1-personalia">Personalia</Link>
+        <ProgressBar value={50} />
+      </FormStep>
+      <FormStep>
+        <Text>Kontaktinformasjon</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Fakturainformasjon</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Samtykke</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Betalingsinformasjon</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Leveringsadresse</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Oppsummering</Text>
+      </FormStep>
+    </FormSteps>
+  ),
+};
+
+export const SevenStepsOneCompleted: Story = {
+  render: () => (
+    <FormSteps>
+      <FormStep state="completed">
+        <Link href="/steg-1-personalia">Personalia</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="current">
+        <Link href="/steg-2-kontaktinformasjon">Kontaktinformasjon</Link>
+        <ProgressBar value={50} />
+      </FormStep>
+      <FormStep>
+        <Text>Fakturainformasjon</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Samtykke</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Betalingsinformasjon</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Leveringsadresse</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Oppsummering</Text>
+      </FormStep>
+    </FormSteps>
+  ),
+};
+
+export const SevenStepsTwoCompleted: Story = {
+  render: () => (
+    <FormSteps>
+      <FormStep state="completed">
+        <Link href="/steg-1-personalia">Personalia</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-2-kontaktinformasjon">Kontaktinformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="current">
+        <Link href="/steg-3-fakturainformasjon">Fakturainformasjon</Link>
+        <ProgressBar value={50} />
+      </FormStep>
+      <FormStep>
+        <Text>Samtykke</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Betalingsinformasjon</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Leveringsadresse</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Oppsummering</Text>
+      </FormStep>
+    </FormSteps>
+  ),
+};
+
+export const SevenStepsThreeCompleted: Story = {
+  render: () => (
+    <FormSteps>
+      <FormStep state="completed">
+        <Link href="/steg-1-personalia">Personalia</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-2-kontaktinformasjon">Kontaktinformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-3-fakturainformasjon">Fakturainformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="current">
+        <Link href="/steg-4-samtykke">Samtykke</Link>
+        <ProgressBar value={50} />
+      </FormStep>
+      <FormStep>
+        <Text>Betalingsinformasjon</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Leveringsadresse</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Oppsummering</Text>
+      </FormStep>
+    </FormSteps>
+  ),
+};
+
+export const SevenStepsFourCompleted: Story = {
+  render: () => (
+    <FormSteps>
+      <FormStep state="completed">
+        <Link href="/steg-1-personalia">Personalia</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-2-kontaktinformasjon">Kontaktinformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-3-fakturainformasjon">Fakturainformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-4-samtykke">Samtykke</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="current">
+        <Link href="/steg-5-betalingsinformasjon">Betalingsinformasjon</Link>
+        <ProgressBar value={50} />
+      </FormStep>
+      <FormStep>
+        <Text>Leveringsadresse</Text>
+        <ProgressBar value={0} />
+      </FormStep>
+      <FormStep>
+        <Text>Oppsummering</Text>
+      </FormStep>
+    </FormSteps>
+  ),
+};
+
+export const SevenStepsFiveCompleted: Story = {
+  render: () => (
+    <FormSteps>
+      <FormStep state="completed">
+        <Link href="/steg-1-personalia">Personalia</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-2-kontaktinformasjon">Kontaktinformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-3-fakturainformasjon">Fakturainformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-4-samtykke">Samtykke</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-5-betalingsinformasjon">Betalingsinformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="current">
+        <Link href="/steg-6-leveringsadresse">Leveringsadresse</Link>
+        <ProgressBar value={50} />
+      </FormStep>
+      <FormStep>
+        <Text>Oppsummering</Text>
+      </FormStep>
+    </FormSteps>
+  ),
+};
+
+export const SevenStepsAllCompleted: Story = {
+  render: () => (
+    <FormSteps>
+      <FormStep state="completed">
+        <Link href="/steg-1-personalia">Personalia</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-2-kontaktinformasjon">Kontaktinformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-3-fakturainformasjon">Fakturainformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-4-samtykke">Samtykke</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-5-betalingsinformasjon">Betalingsinformasjon</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="completed">
+        <Link href="/steg-6-leveringsadresse">Leveringsadresse</Link>
+        <ProgressBar value={100} />
+      </FormStep>
+      <FormStep state="current">
+        <Link href="/steg-7-oppsummering">Oppsummering</Link>
+      </FormStep>
+    </FormSteps>
+  ),
+};
