@@ -374,7 +374,7 @@
 
       &[data-state="current"] {
         &::before {
-          @apply bg-sky-light outline-2 outline-blue-dark -outline-offset-4;
+          @apply bg-sky-light border-4;
         }
       }
 
