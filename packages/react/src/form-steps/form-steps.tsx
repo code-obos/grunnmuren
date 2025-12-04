@@ -124,7 +124,8 @@ const FormSteps = ({ children, ...restProps }: FormStepsProps) => {
     }
   });
 
-  // Closes the popover (if visible) when focusing outside the popover itself
+  // Closes the popover (if visible) when focusing outside the popover itself.
+  // We need these incase the user combines both mouse/touch and keyboard navigation.
   useComponentDidMount(() => {
     const focusOutsideHandler = () => {
       if (isTogglableOnSmallScreens) {
