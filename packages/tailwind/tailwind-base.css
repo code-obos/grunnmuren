@@ -374,7 +374,7 @@
 
       &[data-state="current"] {
         &::before {
-          @apply bg-sky-light border-4;
+          @apply bg-sky-light border-4 text-blue-dark;
         }
       }
 
