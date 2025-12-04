@@ -486,8 +486,9 @@
           ) {
           [data-slot="form-step"] {
             &:nth-child(3),
-            &:nth-child(4),
-            /** Impotant to exclude if the second child is the same as the 4th from the back, i.e. 5 items */
+            /** Impotant to exclude if the fourth child is the same as the second from the back, i.e. 5 items */
+              &:nth-child(4):not(:nth-last-child(2)),
+            /** Impotant to exclude if the second child is the same as the fourth from the back, i.e. 5 items */
               /** This is because the second child is used as a disclosure toggle on smaller screens.*/
               &:nth-last-child(4):not(:nth-child(2)),
             &:nth-last-child(3) {
