@@ -374,7 +374,7 @@
 
       &[data-state="current"] {
         &::before {
-          @apply bg-sky-light;
+          @apply bg-sky-light outline-2 outline-blue-dark -outline-offset-4;
         }
       }
 
@@ -554,7 +554,7 @@
                   }
                 }
                 [data-slot="link"] {
-                  @apply max-sm:opacity-100 max-sm:static;
+                  @apply max-sm:opacity-100 max-sm:static max-sm:after:-left-11;
                 }
                 &:nth-child(3) {
                   @apply max-sm:top-30;
