@@ -1,5 +1,43 @@
 # @obosbbl/grunnmuren-react
 
+## 3.3.1
+
+### Patch Changes
+
+- 751eeca: Accordion bug fixes:
+  - Removes a redundant role="group" that was added to the AccordionPanel content
+  - Restore the accordion button text - accordion panel relation: the accordion panel should be labelledby the text in the accordion button.
+- 0954c2d: New `<ProgressBar>` component in beta, usage:
+
+  ```tsx
+  import { UNSAFE_ProgressBar as ProgressBar } from "@obosbbl/grunnmuren-react";
+
+  const MyProgressBar = () => (
+    <ProgressBar value={30} classsName="w-96" aria-label="Laster..." />
+  );
+  ```
+
+  ```tsx
+  import {
+    UNSAFE_ProgressBar as ProgressBar,
+    UNSAFE_ProgressBarValueText as ProgressBarValueText,
+  } from "@obosbbl/grunnmuren-react";
+
+  const MyProgressBar = () => (
+    <ProgressBar value={50} classsName="w-96">
+      <Label>Laster:</Label>
+      <ProgressBarValueText />
+    </ProgressBar>
+  );
+  ```
+
+  Note that the `<ProgressBar>` does not have a natural width, so you might have to give it an explicit `width` using the `className` prop. It does however have a `max-width`, set to `100%`.
+
+- b22c21e: # Bugfixes for the `<UNSAFE_Modal>` component:
+  - Fix bugs with controlled modals.
+  - Expose the `isDismissable` prop from RAC - this defaults to `true` but can now be overridden to `false` if you wish to prevent a user from dismissing a modal.
+  - Support overriding of the `z-index` of the modal overlay: a new `zIndex` prop is added to <UNSAFE_Modal>
+
 ## 3.3.0
 
 ### Minor Changes
