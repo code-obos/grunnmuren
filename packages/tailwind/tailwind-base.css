@@ -542,8 +542,9 @@
                     /** Hide the focus outline on the element acting as the "popover" trigger **/
                     @apply outline-none;
                   }
+                  /** Position the link and pseudo element acting as click area for the step number **/
                   [data-slot="link"] {
-                    @apply max-sm:-left-3 max-sm:top-16 max-sm:z-1;
+                    @apply max-sm:-left-3 max-sm:top-16 max-sm:z-2 max-sm:after:-left-11;
                   }
                   [data-slot="toggle-check-icon"] {
                     @apply max-sm:-left-10 max-sm:z-2 max-sm:top-12.5 max-sm:block;
