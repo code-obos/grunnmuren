@@ -1,9 +1,11 @@
 import { Check } from '@obosbbl/grunnmuren-icons-react';
 import {
   Children,
+  cloneElement,
   createContext,
   type HTMLAttributes,
   type HTMLProps,
+  isValidElement,
   type JSX,
   use,
   useId,
@@ -95,9 +97,9 @@ type FormStepsProps = HTMLAttributes<HTMLOListElement> & {
 
 const FormSteps = ({ children, ...restProps }: FormStepsProps) => {
   const locale = useLocale();
-  const childrenArray = Children.toArray(children);
+  const childCount = Children.count(children);
 
-  const isTogglableOnSmallScreens = childrenArray.length >= 5;
+  const isTogglableOnSmallScreens = childCount >= 5;
 
   const [isExpanded, setIsExpanded] = useState<boolean | undefined>(
     isTogglableOnSmallScreens ? false : undefined,
@@ -123,18 +125,20 @@ const FormSteps = ({ children, ...restProps }: FormStepsProps) => {
         data-slot="form-steps"
         ref={ref}
       >
-        {childrenArray.map((child, index) =>
-          isTogglableOnSmallScreens && index === 1 ? (
-            <_FormStepProvider
-              key={(child as JSX.Element).props.key}
-              value={{ onToggle, isExpanded: isExpanded }}
-            >
-              {child}
-            </_FormStepProvider>
-          ) : (
-            child
-          ),
-        )}
+        {Children.map(children, (child, index) => {
+          if (
+            isTogglableOnSmallScreens &&
+            index === 1 &&
+            isValidElement<FormStepProps>(child)
+          ) {
+            return (
+              <_FormStepProvider value={{ onToggle, isExpanded }}>
+                {cloneElement(child)}
+              </_FormStepProvider>
+            );
+          }
+          return child;
+        })}
       </ol>
     </div>
   );
