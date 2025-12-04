@@ -535,12 +535,12 @@
                   /** Place the focus styles on the ::after element instead of the link, to match the rest of the list items */
                   &:has([data-slot="link"]:focus-visible) {
                     &::after {
-                      @apply outline-focus-offset;
+                      @apply max-sm:outline-focus-offset;
                     }
                   }
                   &::before {
                     /** Hide the focus outline on the element acting as the "popover" trigger **/
-                    @apply outline-none;
+                    @apply max-sm:outline-none;
                   }
                   /** Position the link and pseudo element acting as click area for the step number **/
                   [data-slot="link"] {
