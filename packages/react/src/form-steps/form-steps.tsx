@@ -109,7 +109,11 @@ const FormSteps = ({ children, ...restProps }: FormStepsProps) => {
     }
   };
 
-  const ref = useClickOutsideRef<HTMLOListElement>(onToggle);
+  const ref = useClickOutsideRef<HTMLOListElement>(() => {
+    if (isTogglableOnSmallScreens) {
+      setIsExpanded(false);
+    }
+  });
 
   return (
     <div data-slot="form-steps-container">
