@@ -19,30 +19,36 @@ import { useLocale } from '../use-locale';
 
 type FormStepProps = HTMLProps<HTMLLIElement> & {
   /**
-   * Indicates whether the step is completed, current or pending.
-   * @default 'pending'
+   * Indicates whether the step is completed or not.
+   * A completed step means that the user has filled out and submitted the corresponding section of the form.
+   * And that all the data entered in that section is valid.
+   * @default false
    */
-  state?: 'completed' | 'current' | 'pending';
+  isCompleted?: boolean;
 };
 
 const _FormStepContext = createContext<{
   onToggle?: () => void;
   isExpanded?: boolean;
+  isCurrent: boolean;
 }>({
   onToggle: undefined,
   isExpanded: undefined,
+  isCurrent: false,
 });
 
 const _FormStepProvider = _FormStepContext.Provider;
 
 const FormStep = ({
-  state = 'pending',
+  isCompleted = false,
   children,
   ...restProps
 }: FormStepProps) => {
   const locale = useLocale();
   const id = useId();
-  const { onToggle, isExpanded } = use(_FormStepContext);
+  const { onToggle, isExpanded, isCurrent } = use(_FormStepContext);
+
+  const state = isCompleted ? 'completed' : 'pending';
 
   return (
     // biome-ignore lint/a11y/useKeyWithClickEvents: The collapsed content is accessible through keyboard focus
@@ -50,6 +56,7 @@ const FormStep = ({
       {...restProps}
       data-slot="form-step"
       data-state={state}
+      data-is-current={isCurrent}
       id={id}
       onClick={onToggle}
       data-expanded={isExpanded}
@@ -59,7 +66,7 @@ const FormStep = ({
           [
             _LinkContext,
             {
-              'aria-current': state === 'current' ? 'step' : undefined,
+              'aria-current': isCurrent ? 'step' : undefined,
               role: state === 'pending' ? 'none' : undefined,
             },
           ],
@@ -97,9 +104,10 @@ type FormStepsProps = HTMLAttributes<HTMLOListElement> & {
     JSX.Element?,
     JSX.Element?,
   ];
+  currentStep: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 };
 
-const FormSteps = ({ children, ...restProps }: FormStepsProps) => {
+const FormSteps = ({ children, currentStep, ...restProps }: FormStepsProps) => {
   const locale = useLocale();
   const childCount = Children.count(children);
 
@@ -157,6 +165,7 @@ const FormSteps = ({ children, ...restProps }: FormStepsProps) => {
         ref={ref}
       >
         {Children.map(children, (child, index) => {
+          const isCurrent = index + 1 === currentStep;
           if (
             isTogglableOnSmallScreens &&
             index === 1 &&
@@ -164,12 +173,14 @@ const FormSteps = ({ children, ...restProps }: FormStepsProps) => {
           ) {
             return (
               // The second list item acts as the toggle for the collapsible steps (popover) on small screens
-              <_FormStepProvider value={{ onToggle, isExpanded }}>
+              <_FormStepProvider value={{ onToggle, isExpanded, isCurrent }}>
                 {cloneElement(child)}
               </_FormStepProvider>
             );
           }
-          return child;
+          return (
+            <_FormStepProvider value={{ isCurrent }}>{child}</_FormStepProvider>
+          );
         })}
       </ol>
     </div>

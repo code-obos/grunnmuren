@@ -369,7 +369,7 @@
         @apply py-2.5 pl-11 -ml-11 -my-2.5;
       }
 
-      &[data-state="current"] {
+      &[data-is-current="true"] {
         &::before {
           @apply bg-sky-light border-4 text-blue-dark;
         }
@@ -388,21 +388,13 @@
         }
       }
 
-      &[data-state="pending"]::before {
+      &[data-state="pending"]:not([data-is-current="true"])::before {
         @apply bg-white text-blue-dark;
       }
 
       &:not(:last-child) {
         [data-slot="progress-bar"] {
           @apply w-4 max-lg:grow lg:w-14 lg:rotate-90 lg:absolute lg:-left-3 lg:px-1.5 lg:-bottom-[calc(100%-2px)];
-        }
-
-        &[data-state="pending"] {
-          @apply max-lg:shrink;
-
-          [data-slot="progress-bar"] {
-            @apply max-lg:shrink;
-          }
         }
       }
 
@@ -414,7 +406,7 @@
         @apply max-lg:absolute;
       }
 
-      &[data-state="current"] {
+      &[data-is-current="true"] {
         @apply max-lg:justify-center;
         & > *:is([data-slot="text"], [data-slot="link"]) {
           @apply max-lg:-top-full;
@@ -433,11 +425,13 @@
     &:has([data-slot="form-step"]:nth-child(5)) {
       /** Where the second last step is still pending: We stack all the pending steps on top of each other on small screens. **/
       &:has(
-          [data-slot="form-step"]:nth-last-child(2):is([data-state="pending"])
+          [data-slot="form-step"]:nth-last-child(2):is(
+              [data-state="pending"]:not([data-is-current="true"])
+            )
         ) {
-        [data-state="pending"] {
+        [data-state="pending"]:not([data-is-current="true"]) {
           &:nth-child(n + 4) {
-            &:not([data-state="current"] + *, :nth-child(4)) {
+            &:not([data-is-current="true"] + *, :nth-child(4)) {
               @apply max-sm:-ml-9;
             }
             [data-slot="progress-bar"] {
