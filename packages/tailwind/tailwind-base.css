@@ -365,7 +365,8 @@
 
       [data-slot="link"] {
         @apply focus-visible:outline-none;
-        @apply after:absolute after:h-11 max-lg:after:w-11;
+        /** Create a 44x44 px clickable area, where the step number next to each link will also be covered **/
+        @apply py-2.5 pl-11 -ml-11 -my-2.5;
       }
 
       &[data-state="current"] {
@@ -401,10 +402,6 @@
 
           [data-slot="progress-bar"] {
             @apply max-lg:shrink;
-          }
-
-          [data-slot="link"] {
-            @apply after:-top-1.75 after:left-0 after:right-0;
           }
         }
       }
@@ -538,9 +535,9 @@
                     /** Hide the focus outline on the element acting as the "popover" trigger **/
                     @apply max-sm:outline-none;
                   }
-                  /** Position the link and pseudo element acting as click area for the step number **/
+
                   [data-slot="link"] {
-                    @apply max-sm:-left-3 max-sm:top-16 max-sm:z-2 max-sm:after:-left-11;
+                    @apply max-sm:-left-3 max-sm:top-16 max-sm:z-2;
                   }
                   [data-slot="toggle-check-icon"] {
                     @apply max-sm:-left-10 max-sm:z-2 max-sm:top-12.5 max-sm:block;
@@ -571,7 +568,7 @@
                   @apply max-sm:opacity-100 max-sm:static max-sm:after:-left-11;
                   /** Truncate texts that does not fit the width of the popover (the inline-flex of the link must be overridden as block) **/
                   /** We need to do this because we can't wrap over multiple lines, due to the absolute positioning of each step in the popover **/
-                  @apply max-sm:max-w-42.5 max-sm:text-ellipsis max-sm:overflow-hidden max-sm:whitespace-nowrap max-sm:block!;
+                  @apply max-sm:max-w-53.5 max-sm:text-ellipsis max-sm:overflow-hidden max-sm:whitespace-nowrap max-sm:block!;
                 }
 
                 /** Position each step correctly inside the "popover" (with an even spacing) **/
