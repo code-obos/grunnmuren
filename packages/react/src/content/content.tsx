@@ -1,6 +1,11 @@
 import { cva, cx, type VariantProps } from 'cva';
 import { createContext, type HTMLProps, type Ref } from 'react';
-import { type ContextValue, useContextProps } from 'react-aria-components';
+import {
+  type ContextValue,
+  Text as RACText,
+  type TextProps as RACTextProps,
+  useContextProps,
+} from 'react-aria-components';
 
 type HeadingProps = Omit<HTMLProps<HTMLHeadingElement>, 'size'> &
   VariantProps<typeof headingVariants> & {
@@ -150,6 +155,10 @@ const Caption = ({ className, ...restProps }: CaptionProps) => (
 
 const Footer = (props: FooterProps) => <div {...props} data-slot="footer" />;
 
+type TextProps = RACTextProps;
+
+const Text = (props: TextProps) => <RACText {...props} data-slot="text" />;
+
 export {
   Caption,
   Content,
@@ -159,9 +168,11 @@ export {
   HeadingContext,
   Media,
   MediaContext,
+  Text,
   type CaptionProps,
   type ContentProps,
   type FooterProps,
   type HeadingProps,
   type MediaProps,
+  type TextProps,
 };
