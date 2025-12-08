@@ -1,4 +1,4 @@
-import { Check } from '@obosbbl/grunnmuren-icons-react';
+import { Check, Edit } from '@obosbbl/grunnmuren-icons-react';
 import {
   Children,
   cloneElement,
@@ -28,12 +28,20 @@ type FormStepProps = HTMLProps<HTMLLIElement> & {
 };
 
 const _FormStepContext = createContext<{
-  onToggle?: () => void;
-  isExpanded?: boolean;
+  onTogglePrev?: () => void;
+  onToggleNext?: () => void;
+  isPrevStepsExpanded?: boolean;
+  isNextStepsExpanded?: boolean;
+  setIsPrevStepsExpanded?: (expanded: boolean) => void;
+  setIsNextStepsExpanded?: (expanded: boolean) => void;
   isCurrent: boolean;
 }>({
-  onToggle: undefined,
-  isExpanded: undefined,
+  onTogglePrev: undefined,
+  onToggleNext: undefined,
+  isPrevStepsExpanded: undefined,
+  isNextStepsExpanded: undefined,
+  setIsPrevStepsExpanded: undefined,
+  setIsNextStepsExpanded: undefined,
   isCurrent: false,
 });
 
@@ -46,9 +54,22 @@ const FormStep = ({
 }: FormStepProps) => {
   const locale = useLocale();
   const id = useId();
-  const { onToggle, isExpanded, isCurrent } = use(_FormStepContext);
+  const {
+    onTogglePrev,
+    onToggleNext,
+    isPrevStepsExpanded,
+    isNextStepsExpanded,
+    setIsPrevStepsExpanded,
+    setIsNextStepsExpanded,
+    isCurrent,
+  } = use(_FormStepContext);
 
   const state = isCompleted ? 'completed' : 'pending';
+
+  const handleLinkPress = () => {
+    setIsPrevStepsExpanded?.(false);
+    setIsNextStepsExpanded?.(false);
+  };
 
   return (
     // biome-ignore lint/a11y/useKeyWithClickEvents: The collapsed content is accessible through keyboard focus
@@ -58,8 +79,9 @@ const FormStep = ({
       data-state={state}
       data-is-current={isCurrent}
       id={id}
-      onClick={onToggle}
-      data-expanded={isExpanded}
+      onClick={onTogglePrev || onToggleNext}
+      data-prev-steps-expanded={isPrevStepsExpanded}
+      data-next-steps-expanded={isNextStepsExpanded}
     >
       <Provider
         values={[
@@ -68,6 +90,8 @@ const FormStep = ({
             {
               'aria-current': isCurrent ? 'step' : undefined,
               role: state === 'pending' ? 'none' : undefined,
+              onPress: handleLinkPress,
+              className: 'underline',
             },
           ],
           [
@@ -78,21 +102,27 @@ const FormStep = ({
           ],
         ]}
       >
-        {state === 'completed' && (
+        {state === 'completed' ? (
           <Check aria-label={translations.completed[locale]} />
+        ) : (
+          <Edit
+            data-slot="in-progress-icon"
+            aria-label={translations.pending[locale]}
+          />
         )}
         {/*
          * Render an extra checkmark in the list item acting as the toggle for the collapsible steps (popover) on small screens.
          * This indicates (visually) that all collapsed steps are completed. Screen reader users will already be informed about completed steps through the individual step items.
          */}
-        {onToggle && <Check data-slot="toggle-check-icon" />}
+        {onTogglePrev && <Check data-slot="toggle-prev-check-icon" />}
+        {onToggleNext && <Check data-slot="toggle-next-check-icon" />}
         {children}
       </Provider>
     </li>
   );
 };
 
-type FormStepsProps = HTMLAttributes<HTMLOListElement> & {
+type FormStepsProps = HTMLAttributes<HTMLDivElement> & {
   /** 3-8 <FormStep> children */
   children: [
     JSX.Element,
@@ -104,49 +134,88 @@ type FormStepsProps = HTMLAttributes<HTMLOListElement> & {
     JSX.Element?,
     JSX.Element?,
   ];
-  currentStep: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+  currentStep: number;
 };
 
 const FormSteps = ({ children, currentStep, ...restProps }: FormStepsProps) => {
   const locale = useLocale();
   const childCount = Children.count(children);
 
-  const isTogglableOnSmallScreens = childCount >= 5;
+  if (currentStep > childCount) {
+    console.error(
+      `FormSteps: currentStep (${currentStep}) is greater than the number of children (${childCount})`,
+    );
+  }
 
-  // State to track whether the collapsible steps (popover) is expanded or collapsed
-  const [isExpanded, setIsExpanded] = useState<boolean | undefined>(
-    isTogglableOnSmallScreens ? false : undefined,
-  );
+  const isPrevStepsTogglable = childCount >= 5;
+  const isNextStepsTogglable = childCount >= 7;
 
-  // Handles toggling of the collapsible steps (popover) on small screens
-  const onToggle = () => {
-    if (isTogglableOnSmallScreens) {
-      setIsExpanded((prevState) => !prevState);
+  // State to track whether the collapsible prev steps (popover) is expanded or collapsed
+  const [isPrevStepsExpanded, setIsPrevStepsExpanded] = useState<
+    boolean | undefined
+  >(isPrevStepsTogglable ? false : undefined);
+
+  // State to track whether the collapsible next steps (popover) is expanded or collapsed
+  const [isNextStepsExpanded, setIsNextStepsExpanded] = useState<
+    boolean | undefined
+  >(isNextStepsTogglable ? false : undefined);
+
+  // Handles toggling of the prev steps popover on small screens
+  const onTogglePrev = () => {
+    if (isPrevStepsTogglable) {
+      setIsPrevStepsExpanded((prevState) => !prevState);
+      setIsNextStepsExpanded(false);
     }
   };
 
-  // Closes the popover (if visible) when clicking outside the component
+  // Handles toggling of the next steps popover on small screens
+  const onToggleNext = () => {
+    if (isNextStepsTogglable) {
+      setIsNextStepsExpanded((prevState) => !prevState);
+      setIsPrevStepsExpanded(false);
+    }
+  };
+
+  // Closes the popovers (if visible) when clicking outside the component
   const ref = useClickOutsideRef<HTMLOListElement>(() => {
-    if (isTogglableOnSmallScreens) {
-      setIsExpanded(false);
+    if (isPrevStepsTogglable) {
+      setIsPrevStepsExpanded(false);
+    }
+    if (isNextStepsTogglable) {
+      setIsNextStepsExpanded(false);
     }
   });
 
-  // Closes the popover (if visible) when focusing outside the popover itself.
+  // Closes the popovers (if visible) when focusing outside the popover itself.
   // We need these incase the user combines both mouse/touch and keyboard navigation.
   useComponentDidMount(() => {
     const focusOutsideHandler = () => {
-      if (isTogglableOnSmallScreens) {
-        const focusedElement = document.activeElement;
-        if (
-          focusedElement &&
-          // If any of the completed steps (from 2nd step and onwards) does NOT contain the focused element, close the popover
-          !Array.from(ref.current?.children || [])
-            .slice(1) // Skip first li child
-            .filter((li) => li.getAttribute('data-state') === 'completed') // Only completed steps, counting from 2nd step can be collapsable
-            .some((li) => li.contains(focusedElement))
-        ) {
-          setIsExpanded(false);
+      const focusedElement = document.activeElement;
+      if (focusedElement) {
+        const children = Array.from(ref.current?.children || []);
+
+        if (isPrevStepsTogglable) {
+          // If any of the completed steps (from 2nd step and onwards) does NOT contain the focused element, close the prev popover
+          if (
+            !children
+              .slice(1, currentStep) // Only children between the 2nd step and the current step
+              .filter((li) => li.getAttribute('data-state') === 'completed')
+              .some((li) => li.contains(focusedElement))
+          ) {
+            setIsPrevStepsExpanded(false);
+          }
+        }
+
+        if (isNextStepsTogglable) {
+          // If any of the completed steps after the 4th step does NOT contain the focused element, close the next popover
+          if (
+            !children
+              .slice(currentStep) // Only children after the current step
+              .filter((li) => li.getAttribute('data-state') === 'completed')
+              .some((li) => li.contains(focusedElement))
+          ) {
+            setIsNextStepsExpanded(false);
+          }
         }
       }
     };
@@ -157,29 +226,68 @@ const FormSteps = ({ children, currentStep, ...restProps }: FormStepsProps) => {
   });
 
   return (
-    <div data-slot="form-steps-container">
+    <div data-slot="form-steps-container" {...restProps}>
       <ol
         aria-label={translations.formSteps[locale]} // Spread props after to allow overriding of aria-label
-        {...restProps}
         data-slot="form-steps"
         ref={ref}
       >
         {Children.map(children, (child, index) => {
           const isCurrent = index + 1 === currentStep;
+
+          // The second list item acts as the toggle for the collapsible prev steps (popover) on small screens
           if (
-            isTogglableOnSmallScreens &&
+            isPrevStepsTogglable &&
             index === 1 &&
             isValidElement<FormStepProps>(child)
           ) {
             return (
-              // The second list item acts as the toggle for the collapsible steps (popover) on small screens
-              <_FormStepProvider value={{ onToggle, isExpanded, isCurrent }}>
+              <_FormStepProvider
+                value={{
+                  onTogglePrev,
+                  isPrevStepsExpanded,
+                  isCurrent,
+                  setIsPrevStepsExpanded,
+                  setIsNextStepsExpanded,
+                }}
+              >
                 {cloneElement(child)}
               </_FormStepProvider>
             );
           }
+
+          // The fourth list item acts as the toggle for the collapsible next steps (popover) on small screens
+          // Only when there are more than 7 steps
+          if (
+            isNextStepsTogglable &&
+            index === 3 &&
+            isValidElement<FormStepProps>(child)
+          ) {
+            return (
+              <_FormStepProvider
+                value={{
+                  onToggleNext,
+                  isNextStepsExpanded,
+                  isCurrent,
+                  setIsPrevStepsExpanded,
+                  setIsNextStepsExpanded,
+                }}
+              >
+                {cloneElement(child)}
+              </_FormStepProvider>
+            );
+          }
+
           return (
-            <_FormStepProvider value={{ isCurrent }}>{child}</_FormStepProvider>
+            <_FormStepProvider
+              value={{
+                isCurrent,
+                setIsPrevStepsExpanded,
+                setIsNextStepsExpanded,
+              }}
+            >
+              {child}
+            </_FormStepProvider>
           );
         })}
       </ol>

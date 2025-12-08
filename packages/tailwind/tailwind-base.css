@@ -352,7 +352,8 @@
       }
 
       &::before,
-      &[data-expanded]::after {
+      &[data-prev-steps-expanded]::after,
+      &[data-next-steps-expanded="true"]::after {
         @apply shrink-0 font-semibold size-8 border-2 rounded-full border-blue-dark grid place-content-center;
       }
 
@@ -375,16 +376,21 @@
         }
       }
 
-      &[data-state="completed"] {
+      &[data-state="completed"]:not([data-is-current="true"]) {
         &::before,
-        &[data-expanded]::after {
+        &[data-prev-steps-expanded]::after,
+        &[data-next-steps-expanded]::after {
           @apply bg-blue-dark text-white;
         }
       }
 
-      &[data-state="completed"] {
-        svg {
-          @apply text-white absolute scale-60 border-2 border-white bg-blue-dark rounded-full left-4 -top-2;
+      svg {
+        @apply text-white absolute scale-60 border-2 border-white bg-blue-dark rounded-full left-4 -top-2;
+      }
+
+      &[data-state="pending"]:not(:has([data-slot="link"])) {
+        [data-slot="in-progress-icon"] {
+          @apply hidden;
         }
       }
 
@@ -417,7 +423,8 @@
       }
     }
 
-    [data-slot="toggle-check-icon"] {
+    [data-slot="toggle-prev-check-icon"],
+    [data-slot="toggle-next-check-icon"] {
       @apply hidden;
     }
 
@@ -438,23 +445,23 @@
               @apply max-sm:sr-only;
             }
           }
-          &:nth-child(4)::before {
+          &:nth-child(4) {
             @apply max-sm:z-4;
           }
-          &:nth-child(5)::before {
+          &:nth-child(5) {
             @apply max-sm:z-3;
           }
-          &:nth-child(6)::before {
+          &:nth-child(6) {
             @apply max-sm:z-2;
           }
-          &:nth-child(7)::before {
+          &:nth-child(7) {
             @apply max-sm:z-1;
           }
         }
       }
 
-      /** Where the third step is completed: We hide all the completed steps in a "popover" **/
-      &:has([data-slot="form-step"]:nth-child(3):is([data-state="completed"])) {
+      /** On the third step or above: hide all the completed steps before it in a "popover" **/
+      &:has([data-is-current="true"]:nth-child(n + 4)) {
         /** Styles the "popover" trigger used for touch/mouse interactions to display the popover **/
         [data-slot="form-step"] {
           &:nth-child(2) {
@@ -473,9 +480,11 @@
                     :nth-last-child(2)
                   ):focus-within
               ),
-            :has([data-slot="form-step"][data-expanded="true"])
+            :has([data-slot="form-step"][data-prev-steps-expanded="true"])
           ) {
-          [data-slot="form-step"] {
+          [data-slot="form-step"]:not([data-is-current="true"]):not(
+              [data-is-current="true"] ~ *
+            ) {
             &:nth-child(3),
             /** Impotant to exclude if the fourth child is the same as the second from the back, i.e. 5 items */
               &:nth-child(4):not(:nth-last-child(2)),
@@ -497,8 +506,10 @@
                 :nth-last-child(2)
               ):focus-within
           ),
-        &:has([data-slot="form-step"][data-expanded="true"]) {
-          [data-slot="form-step"] {
+        &:has([data-slot="form-step"][data-prev-steps-expanded="true"]) {
+          [data-slot="form-step"]:not([data-is-current="true"]):not(
+              [data-is-current="true"] ~ *
+            ) {
             &:nth-child(2),
             &:nth-child(3),
             /** Impotant to exclude if the fourth child is the same as the second from the back, i.e. 5 items */
@@ -511,7 +522,7 @@
                 &:nth-child(2) {
                   &::after,
                   [data-slot="link"],
-                  [data-slot="toggle-check-icon"] {
+                  [data-slot="toggle-prev-check-icon"] {
                     @apply max-sm:absolute;
                   }
                   &::after {
@@ -533,7 +544,7 @@
                   [data-slot="link"] {
                     @apply max-sm:-left-3 max-sm:top-16 max-sm:z-2;
                   }
-                  [data-slot="toggle-check-icon"] {
+                  [data-slot="toggle-prev-check-icon"] {
                     @apply max-sm:-left-10 max-sm:z-2 max-sm:top-12.5 max-sm:block;
                   }
                 }
@@ -544,7 +555,7 @@
                   @apply max-sm:after:absolute max-sm:after:-left-4 max-sm:after:right-4;
                   @apply max-sm:after:-top-[calc(200%+var(--spacing)*4)] max-sm:after:-bottom-4;
                   /** Paints the "popover container" **/
-                  @apply max-sm:after:bg-white max-sm:after:border-x max-sm:after:border-b max-sm:after:rounded-b-lg;
+                  @apply max-sm:after:bg-white max-sm:after:border-black max-sm:after:border-x max-sm:after:border-b max-sm:after:rounded-b-lg;
 
                   & > *:is([data-slot="text"], [data-slot="link"]) {
                     @apply max-sm:relative;
