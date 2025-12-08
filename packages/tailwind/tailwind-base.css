@@ -353,7 +353,7 @@
 
       &::before,
       &[data-prev-steps-expanded]::after,
-      &[data-next-steps-expanded="true"]::after {
+      &[data-next-steps-expanded]::after {
         @apply shrink-0 font-semibold size-8 border-2 rounded-full border-blue-dark grid place-content-center;
       }
 
@@ -388,9 +388,12 @@
         @apply text-white absolute scale-60 border-2 border-white bg-blue-dark rounded-full left-4 -top-2;
       }
 
-      &[data-state="pending"]:not(:has([data-slot="link"])) {
-        [data-slot="in-progress-icon"] {
-          @apply hidden;
+      &[data-state="pending"] {
+        &:not(:has([data-slot="link"])),
+        &:not(:has([data-slot="progress-bar"])) {
+          [data-slot="in-progress-icon"] {
+            @apply hidden;
+          }
         }
       }
 
@@ -438,7 +441,11 @@
         ) {
         [data-state="pending"]:not([data-is-current="true"]) {
           &:nth-child(n + 4) {
-            &:not([data-is-current="true"] + *, :nth-child(4)) {
+            &:not(
+                [data-state="completed"] + *,
+                [data-is-current="true"] + *,
+                :nth-child(4)
+              ) {
               @apply max-sm:-ml-9;
             }
             [data-slot="progress-bar"] {
@@ -479,6 +486,7 @@
                 [data-state="completed"]:not(:nth-child(1)):not(
                     :nth-last-child(2)
                   ):focus-within
+                  ~ [data-is-current="true"]
               ),
             :has([data-slot="form-step"][data-prev-steps-expanded="true"])
           ) {
@@ -505,6 +513,7 @@
             [data-state="completed"]:not(:nth-child(1)):not(
                 :nth-last-child(2)
               ):focus-within
+              ~ [data-is-current="true"]
           ),
         &:has([data-slot="form-step"][data-prev-steps-expanded="true"]) {
           [data-slot="form-step"]:not([data-is-current="true"]):not(
@@ -593,6 +602,141 @@
               &:nth-child(3) {
                 /** Paints the top part of the "popover container" **/
                 @apply max-sm:after:border-t max-sm:after:rounded-t-lg;
+              }
+            }
+          }
+        }
+      }
+
+      /** Has two or more completed steps after the current step: hide them in a "popover" **/
+      &:has(
+          [data-is-current="true"]
+            + [data-state="completed"]
+            + [data-state="completed"]
+        ) {
+        /** Styles the "popover" trigger used for touch/mouse interactions to display the popover **/
+        [data-slot="form-step"] {
+          &:is([data-is-current="true"] + [data-state="completed"]) {
+            &::before {
+              /** Announce as counter for screen readers but display as '...' visually **/
+              @apply max-sm:content-['...'_/_counter(form-step-counter)];
+            }
+          }
+        }
+
+        /** Hides all the completed steps after the current **/
+        /** For both keyboard users and touch/mouse users (screen reader users will not notice this) **/
+        &:not(
+            :has(
+                [data-is-current="true"] ~ [data-state="completed"]:focus-within
+              ),
+            :has([data-slot="form-step"][data-next-steps-expanded="true"])
+          ) {
+          [data-slot="form-step"]:not([data-is-current="true"]):not(
+              :is(* ~ [data-is-current="true"])
+            ):not(:is([data-is-current="true"] + *)) {
+            &:is([data-is-current="true"] ~ [data-state="completed"]) {
+              &[data-state="completed"] {
+                @apply max-sm:sr-only;
+              }
+            }
+          }
+        }
+
+        &:has([data-is-current="true"] ~ [data-state="completed"]:focus-within),
+        &:has([data-slot="form-step"][data-next-steps-expanded="true"]) {
+          [data-slot="form-step"] {
+            &:is([data-is-current="true"] ~ [data-state="completed"]) {
+              [data-slot="link"] {
+                /** Make the link appear visually and position the link pseudo element acting as click area for the step number **/
+                @apply max-sm:opacity-100 max-sm:static max-sm:after:-left-11;
+                /** Truncate texts that does not fit the width of the popover (the inline-flex of the link must be overridden as block) **/
+                /** We need to do this because we can't wrap over multiple lines, due to the absolute positioning of each step in the popover **/
+                @apply max-sm:w-53.5 max-sm:text-ellipsis max-sm:overflow-hidden max-sm:whitespace-nowrap max-sm:block!;
+              }
+            }
+
+            &:is([data-is-current="true"] + [data-state="completed"]) {
+              &::after,
+              [data-slot="link"],
+              [data-slot="toggle-next-check-icon"] {
+                @apply max-sm:absolute;
+              }
+              &::after {
+                @apply max-sm:right-57 max-sm:top-15 max-sm:z-1;
+                /** Makes this pseudo element visible, while also reflecting the order in the list, while hiding it for screen reader users. This is because the list item counter is reflected in the ::before element for screen readers  */
+                @apply max-sm:content-[counter(form-step-counter)_/_''];
+              }
+              /** Place the focus styles on the ::after element instead of the link, to match the rest of the list items */
+              &:has([data-slot="link"]:focus-visible) {
+                &::after {
+                  @apply max-sm:outline-focus-offset;
+                }
+              }
+              &::before {
+                /** Hide the focus outline on the element acting as the "popover" trigger **/
+                @apply max-sm:outline-none;
+              }
+
+              [data-slot="link"] {
+                @apply max-sm:right-11.5 max-sm:top-16 max-sm:z-2;
+              }
+              [data-slot="toggle-next-check-icon"] {
+                @apply max-sm:right-55 max-sm:left-auto max-sm:z-2 max-sm:top-12.5 max-sm:block;
+              }
+            }
+
+            &:is([data-is-current="true"] + * ~ [data-state="completed"]) {
+              @apply max-sm:absolute max-sm:left-4 max-sm:w-full;
+              /** Use stacked pseudo elements to create the illusion of a popover container **/
+              @apply max-sm:after:absolute max-sm:after:-left-4 max-sm:after:right-4;
+              @apply max-sm:after:-top-[calc(200%+var(--spacing)*4)] max-sm:after:-bottom-4;
+              /** Paints the "popover container" **/
+              @apply max-sm:after:bg-white max-sm:after:border-black max-sm:after:border-x max-sm:after:border-b max-sm:after:rounded-b-lg;
+
+              & > *:is([data-slot="text"], [data-slot="link"]) {
+                @apply max-sm:relative;
+              }
+              & > *:is([data-slot="text"], [data-slot="link"], svg),
+              &::before {
+                @apply max-sm:z-1;
+              }
+              [data-slot="progress-bar"] {
+                @apply max-sm:sr-only;
+              }
+
+              /** Position each step correctly inside the "popover" (with an even spacing) **/
+              &:is([data-is-current="true"] + * + [data-state="completed"]) {
+                @apply max-sm:top-30;
+                /** Paints the top part of the "popover container" **/
+                @apply max-sm:after:border-t max-sm:after:rounded-t-lg;
+              }
+              &:is(
+                  [data-is-current="true"]
+                    + *
+                    + [data-state="completed"]
+                    + [data-state="completed"]
+                ) {
+                @apply max-sm:top-45;
+              }
+              &:is(
+                  [data-is-current="true"]
+                    + *
+                    + [data-state="completed"]
+                    + [data-state="completed"]
+                    + [data-state="completed"]
+                ) {
+                @apply max-sm:top-60;
+              }
+              &:is(
+                  [data-is-current="true"]
+                    + *
+                    + [data-state="completed"]
+                    + [data-state="completed"]
+                    + [data-state="completed"]
+                    + [data-state="completed"]
+                ) {
+                @apply max-sm:top-75;
               }
             }
           }

@@ -256,11 +256,10 @@ const FormSteps = ({ children, currentStep, ...restProps }: FormStepsProps) => {
             );
           }
 
-          // The fourth list item acts as the toggle for the collapsible next steps (popover) on small screens
-          // Only when there are more than 7 steps
+          // The list item following the current step acts as the toggle for the collapsible next steps (popover) on small screens (currentStep is 1-based, index is 0-based)
           if (
             isNextStepsTogglable &&
-            index === 3 &&
+            index === currentStep &&
             isValidElement<FormStepProps>(child)
           ) {
             return (
