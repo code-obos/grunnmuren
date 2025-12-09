@@ -517,9 +517,9 @@
           ),
         &:has([data-slot="form-step"][data-prev-steps-expanded="true"]) {
           /** Target all the completed steps, except step 1, before the current steps. **/
-          [data-state="completed"]:not(:first-child):has(
-              ~ [data-is-current="true"]
-            ) {
+          [data-state="completed"]:not(:first-child):not(
+              :nth-last-child(2)
+            ):has(~ [data-is-current="true"]) {
             /** They need to be absolutely positioned, with an offset that makes them stack vertically. **/
             /** For the step 2, the ::before element is now acting as the popover trigger. So we need to use the ::after element as a visual step number indicator instead **/
             &:nth-child(2) {
