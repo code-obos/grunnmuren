@@ -467,7 +467,7 @@
         }
       }
 
-      /** On the third step or above: hide all the completed steps before it in a "popover" **/
+      /** On the fourth step or above: hide all the completed steps before it in a "popover" **/
       &:has([data-is-current="true"]:nth-child(n + 4)) {
         /** Styles the "popover" trigger used for touch/mouse interactions to display the popover **/
         [data-slot="form-step"] {
