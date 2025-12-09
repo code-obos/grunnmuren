@@ -663,7 +663,7 @@
                 @apply max-sm:absolute;
               }
               &::after {
-                @apply max-sm:right-57 max-sm:top-15 max-sm:z-1;
+                @apply max-sm:right-39 max-sm:top-15 max-sm:z-1;
                 /** Makes this pseudo element visible, while also reflecting the order in the list, while hiding it for screen reader users. This is because the list item counter is reflected in the ::before element for screen readers  */
                 @apply max-sm:content-[counter(form-step-counter)_/_''];
               }
@@ -679,10 +679,10 @@
               }
 
               [data-slot="link"] {
-                @apply max-sm:right-11.5 max-sm:top-16 max-sm:z-2;
+                @apply max-sm:-right-6.5 max-sm:top-16 max-sm:z-2;
               }
               [data-slot="toggle-next-check-icon"] {
-                @apply max-sm:right-55 max-sm:left-auto max-sm:z-2 max-sm:top-12.5 max-sm:block;
+                @apply max-sm:right-37 max-sm:left-auto max-sm:z-2 max-sm:top-12.5 max-sm:block;
               }
             }
 
