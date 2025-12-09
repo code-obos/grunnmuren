@@ -516,7 +516,7 @@
               ~ [data-is-current="true"]
           ),
         &:has([data-slot="form-step"][data-prev-steps-expanded="true"]) {
-          /** Target all the completed steps, except step 1, before the current steps. **/
+          /** Target all the completed steps, except step 1 and the second last, before the current step. **/
           [data-state="completed"]:not(:first-child):not(
               :nth-last-child(2)
             ):has(~ [data-is-current="true"]) {
