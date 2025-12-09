@@ -1344,7 +1344,7 @@ const FormWith8StepsDemo = () => {
   };
 
   return (
-    <div className="flex w-full max-w-2xl gap-8 max-lg:flex-col lg:gap-x-20">
+    <div className="flex w-full max-w-2xl gap-8 px-4 max-lg:flex-col lg:gap-x-20">
       <FormSteps currentStep={currentStep} className="max-lg:mx-auto">
         <FormStep isCompleted={completedSteps.has(1)}>
           {isStepNavigable(1) ? (
