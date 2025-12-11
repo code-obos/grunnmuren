@@ -29,8 +29,10 @@ type StepProps = HTMLProps<HTMLLIElement> & {
 
 const _StepContext = createContext<{
   isCurrent: boolean;
+  isLast: boolean;
 }>({
   isCurrent: false,
+  isLast: false,
 });
 
 const _StepProvider = _StepContext.Provider;
@@ -38,7 +40,7 @@ const _StepProvider = _StepContext.Provider;
 const Step = ({ isCompleted = false, children, ...restProps }: StepProps) => {
   const locale = useLocale();
   const id = useId();
-  const { isCurrent } = use(_StepContext);
+  const { isCurrent, isLast } = use(_StepContext);
 
   const state = isCompleted ? 'completed' : 'pending';
 
@@ -71,10 +73,12 @@ const Step = ({ isCompleted = false, children, ...restProps }: StepProps) => {
         {state === 'completed' ? (
           <Check aria-label={translations.completed[locale]} />
         ) : (
-          <Edit
-            data-slot="in-progress-icon"
-            aria-label={translations.pending[locale]}
-          />
+          !isLast && (
+            <Edit
+              data-slot="in-progress-icon"
+              aria-label={translations.pending[locale]}
+            />
+          )
         )}
         {children}
       </Provider>
@@ -235,6 +239,7 @@ const Stepper = ({
             <_StepProvider
               value={{
                 isCurrent,
+                isLast: index + 1 === childCount,
               }}
             >
               {child}
@@ -247,16 +252,12 @@ const Stepper = ({
         onClick={onPrev}
         isVisible={canScrollLeft}
         hasScrollingOccurred={hasScrollingOccurred}
-        className="absolute bottom-px size-11"
-        iconClassName="mt-0.25 h-6 w-full text-black"
       />
       <ScrollButton
         direction="right"
         onClick={onNext}
         isVisible={canScrollRight}
         hasScrollingOccurred={hasScrollingOccurred}
-        className="absolute bottom-px size-11"
-        iconClassName="mt-0.25 h-6 w-full text-black"
       />
     </div>
   );

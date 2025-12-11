@@ -340,17 +340,17 @@
   /*** FormSteps component styles ***/
   .form-steps-container,
   [data-slot="form-steps-container"] {
-    @apply relative overflow-hidden flex items-center;
+    @apply relative overflow-hidden;
   }
 
   .form-steps,
   [data-slot="form-steps"] {
     counter-reset: form-step-counter;
-    @apply flex gap-x-3 lg:flex-col lg:gap-y-14 scrollbar-hidden overflow-x-auto max-lg:p-1;
+    @apply flex gap-x-3 lg:flex-col lg:gap-y-14 scrollbar-hidden overflow-x-auto;
 
     [data-slot="form-step"] {
       counter-increment: form-step-counter;
-      @apply flex items-center gap-x-3 relative;
+      @apply flex items-center gap-x-3 relative max-lg:my-1.5;
 
       &::before {
         content: counter(form-step-counter);
@@ -412,7 +412,7 @@
       }
 
       & > *:is([data-slot="text"], [data-slot="link"]) {
-        @apply max-lg:absolute max-lg:opacity-0;
+        @apply max-lg:absolute max-lg:opacity-0 max-lg:w-11;
       }
     }
   }
