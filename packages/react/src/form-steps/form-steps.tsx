@@ -12,6 +12,7 @@ import { ProgressBarContext, Provider } from 'react-aria-components';
 import { _LinkContext } from '../link';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
+import { ScrollButton, useHorizontalScroll } from '../utils';
 
 type FormStepProps = HTMLProps<HTMLLIElement> & {
   /**
@@ -97,7 +98,12 @@ type FormStepsProps = HTMLAttributes<HTMLDivElement> & {
   currentStep: number;
 };
 
-const FormSteps = ({ children, currentStep, ...restProps }: FormStepsProps) => {
+const FormSteps = ({
+  children,
+  currentStep,
+  className,
+  ...restProps
+}: FormStepsProps) => {
   const locale = useLocale();
   const childCount = Children.count(children);
 
@@ -107,9 +113,37 @@ const FormSteps = ({ children, currentStep, ...restProps }: FormStepsProps) => {
     );
   }
 
+  const {
+    scrollContainerRef,
+    canScrollLeft,
+    canScrollRight,
+    hasScrollingOccurred,
+  } = useHorizontalScroll<HTMLOListElement>();
+
+  const onPrev = () => {
+    if (canScrollLeft) {
+      // Scroll to the start of the tab list if we are at the first tab but it is scrolled out of view
+      scrollContainerRef.current?.scrollBy({
+        left: -298, // Fixed scroll amount
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  const onNext = () => {
+    if (canScrollRight) {
+      // Scroll to the start of the tab list if we are at the first tab but it is scrolled out of view
+      scrollContainerRef.current?.scrollBy({
+        left: 298, // Fixed scroll amount
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return (
-    <div data-slot="form-steps-container" {...restProps}>
+    <div {...restProps} data-slot="form-steps-container">
       <ol
+        ref={scrollContainerRef}
         aria-label={translations.formSteps[locale]} // Spread props after to allow overriding of aria-label
         data-slot="form-steps"
       >
@@ -127,6 +161,22 @@ const FormSteps = ({ children, currentStep, ...restProps }: FormStepsProps) => {
           );
         })}
       </ol>
+      <ScrollButton
+        direction="left"
+        onClick={onPrev}
+        isVisible={canScrollLeft}
+        hasScrollingOccurred={hasScrollingOccurred}
+        className="absolute bottom-px size-11"
+        iconClassName="mt-0.25 h-6 w-full text-black"
+      />
+      <ScrollButton
+        direction="right"
+        onClick={onNext}
+        isVisible={canScrollRight}
+        hasScrollingOccurred={hasScrollingOccurred}
+        className="absolute bottom-px size-11"
+        iconClassName="mt-0.25 h-6 w-full text-black"
+      />
     </div>
   );
 };

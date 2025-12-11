@@ -99,7 +99,7 @@ function Table(props: TableProps) {
     canScrollLeft,
     canScrollRight,
     hasScrollingOccurred,
-  } = useHorizontalScroll([isResizing]);
+  } = useHorizontalScroll<HTMLDivElement>([isResizing]);
 
   const handleScroll = useCallback(
     (direction: ScrollDirection) => {

@@ -106,7 +106,7 @@ function TabList({ className, children, ...restProps }: TabListProps) {
     canScrollLeft,
     canScrollRight,
     hasScrollingOccurred,
-  } = useHorizontalScroll();
+  } = useHorizontalScroll<HTMLDivElement>();
 
   // Tab-specific navigation logic
   const prevKey =

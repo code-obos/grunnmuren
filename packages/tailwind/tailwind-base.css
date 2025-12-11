@@ -338,10 +338,15 @@
   }
 
   /*** FormSteps component styles ***/
+  .form-steps-container,
+  [data-slot="form-steps-container"] {
+    @apply relative overflow-hidden flex items-center max-lg:h-11;
+  }
+
   .form-steps,
   [data-slot="form-steps"] {
     counter-reset: form-step-counter;
-    @apply flex gap-x-3 lg:flex-col lg:gap-y-14 max-w-full min-w-0 relative;
+    @apply flex gap-x-3 lg:flex-col lg:gap-y-14 scrollbar-hidden overflow-x-auto;
 
     [data-slot="form-step"] {
       counter-increment: form-step-counter;
@@ -389,6 +394,7 @@
       &[data-state="pending"] {
         &:not(:has([data-slot="link"])),
         &:not(:has([data-slot="progress-bar"])) {
+          /** Hide in-progress icon when there is no link or a step without progress bar **/
           [data-slot="in-progress-icon"] {
             @apply hidden;
           }
