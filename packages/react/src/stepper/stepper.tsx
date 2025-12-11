@@ -29,10 +29,10 @@ type StepProps = HTMLProps<HTMLLIElement> & {
 
 const _StepContext = createContext<{
   isCurrent: boolean;
-  isLast: boolean;
+  isSummary: boolean;
 }>({
   isCurrent: false,
-  isLast: false,
+  isSummary: false,
 });
 
 const _StepProvider = _StepContext.Provider;
@@ -40,14 +40,14 @@ const _StepProvider = _StepContext.Provider;
 const Step = ({ isCompleted = false, children, ...restProps }: StepProps) => {
   const locale = useLocale();
   const id = useId();
-  const { isCurrent, isLast } = use(_StepContext);
+  const { isCurrent, isSummary } = use(_StepContext);
 
   const state = isCompleted ? 'completed' : 'pending';
 
   return (
     <li
       {...restProps}
-      data-slot="form-step"
+      data-slot="step"
       data-state={state}
       data-is-current={isCurrent}
       id={id}
@@ -73,7 +73,7 @@ const Step = ({ isCompleted = false, children, ...restProps }: StepProps) => {
         {state === 'completed' ? (
           <Check aria-label={translations.completed[locale]} />
         ) : (
-          !isLast && (
+          !isSummary && (
             <Edit
               data-slot="in-progress-icon"
               aria-label={translations.pending[locale]}
@@ -226,11 +226,11 @@ const Stepper = ({
   };
 
   return (
-    <div {...restProps} data-slot="form-steps-container">
+    <div {...restProps} data-slot="stepper-container">
       <ol
         ref={scrollContainerRef}
         aria-label={translations.formSteps[locale]} // Spread props after to allow overriding of aria-label
-        data-slot="form-steps"
+        data-slot="stepper"
       >
         {Children.map(children, (child, index) => {
           const isCurrent = index + 1 === currentStep;
@@ -239,7 +239,7 @@ const Stepper = ({
             <_StepProvider
               value={{
                 isCurrent,
-                isLast: index + 1 === childCount,
+                isSummary: index + 1 === childCount,
               }}
             >
               {child}

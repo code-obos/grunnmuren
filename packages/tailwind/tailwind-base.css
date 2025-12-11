@@ -338,24 +338,24 @@
   }
 
   /*** FormSteps component styles ***/
-  .form-steps-container,
-  [data-slot="form-steps-container"] {
+  .stepper-container,
+  [data-slot="stepper-container"] {
     @apply relative overflow-hidden;
   }
 
-  .form-steps,
-  [data-slot="form-steps"] {
-    counter-reset: form-step-counter;
+  .stepper,
+  [data-slot="stepper"] {
+    counter-reset: step-counter;
     @apply flex gap-x-3 lg:flex-col lg:gap-y-14 scrollbar-hidden overflow-x-auto;
     /** Make room for the absolutely positioned check icon on the first item */
     @apply lg:pt-1;
 
-    [data-slot="form-step"] {
-      counter-increment: form-step-counter;
+    [data-slot="step"] {
+      counter-increment: step-counter;
       @apply flex items-center gap-x-3 relative max-lg:my-1.5;
 
       &::before {
-        content: counter(form-step-counter);
+        content: counter(step-counter);
       }
 
       &::before,
