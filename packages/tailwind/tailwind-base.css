@@ -340,13 +340,13 @@
   /*** FormSteps component styles ***/
   .form-steps-container,
   [data-slot="form-steps-container"] {
-    @apply relative overflow-hidden flex items-center max-lg:h-11;
+    @apply relative overflow-hidden flex items-center;
   }
 
   .form-steps,
   [data-slot="form-steps"] {
     counter-reset: form-step-counter;
-    @apply flex gap-x-3 lg:flex-col lg:gap-y-14 scrollbar-hidden overflow-x-auto;
+    @apply flex gap-x-3 lg:flex-col lg:gap-y-14 scrollbar-hidden overflow-x-auto max-lg:p-1;
 
     [data-slot="form-step"] {
       counter-increment: form-step-counter;
@@ -372,7 +372,7 @@
       [data-slot="link"] {
         @apply focus-visible:outline-none;
         /** Create a 44x44 px clickable area, where the step number next to each link will also be covered **/
-        @apply py-2.5 pl-11 -ml-11 -my-2.5;
+        @apply py-2.5 lg:pl-11 lg:-ml-11 -my-2.5;
       }
 
       &[data-is-current="true"] {
@@ -412,7 +412,7 @@
       }
 
       & > *:is([data-slot="text"], [data-slot="link"]) {
-        @apply max-lg:sr-only;
+        @apply max-lg:absolute max-lg:opacity-0 max-lg:z-1;
       }
     }
   }
