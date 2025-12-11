@@ -407,12 +407,12 @@
 
       &:not(:last-child) {
         [data-slot="progress-bar"] {
-          @apply w-4 max-lg:grow lg:w-14 lg:rotate-90 lg:absolute lg:-left-3 lg:px-1.5 lg:-bottom-[calc(100%-2px)] max-lg:pointer-events-none;
+          @apply w-4 max-lg:grow lg:w-14 lg:rotate-90 lg:absolute lg:-left-3 lg:px-1.5 lg:-bottom-[calc(100%-2px)];
         }
       }
 
       & > *:is([data-slot="text"], [data-slot="link"]) {
-        @apply max-lg:absolute max-lg:opacity-0 max-lg:w-11;
+        @apply max-lg:absolute max-lg:opacity-0 max-lg:max-w-11 max-lg:overflow-x-hidden;
       }
     }
   }
