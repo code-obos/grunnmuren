@@ -167,7 +167,6 @@ const Stepper = ({
     const containerRect = scrollContainer.getBoundingClientRect();
     const stepRect = targetStepElement.getBoundingClientRect();
 
-    // Calculate if the step is fully visible
     const isFullyVisible =
       stepRect.left >= containerRect.left &&
       stepRect.right <= containerRect.right;
