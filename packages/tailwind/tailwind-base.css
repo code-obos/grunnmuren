@@ -337,7 +337,7 @@
     }
   }
 
-  /*** FormSteps component styles ***/
+  /*** Stepper component styles ***/
   .stepper-container,
   [data-slot="stepper-container"] {
     @apply relative overflow-hidden;
