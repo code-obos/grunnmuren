@@ -88,15 +88,35 @@ const initialFormData: FormData = {
   step8: {},
 };
 
-const stepTitles: Record<number, string> = {
-  1: 'Personalia',
-  2: 'Kontaktinformasjon',
-  3: 'Fakturainformasjon',
-  4: 'Samtykke',
-  5: 'Betalingsinformasjon',
-  6: 'Leveringsadresse',
-  7: 'Bekrefelse',
-  8: 'Oppsummering',
+const stepTitles = {
+  step1: 'Personalia',
+  step2: 'Kontaktinformasjon',
+  step3: 'Fakturainformasjon',
+  step4: 'Samtykke',
+  step5: 'Betalingsinformasjon',
+  step6: 'Leveringsadresse',
+  step7: 'Bekrefelse',
+  summary: 'Oppsummering',
+};
+
+// Field labels for each form step
+const FieldLabels: Record<keyof FormData, Record<string, string>> = {
+  step1: {
+    fornavn: 'Fornavn',
+    etternavn: 'Etternavn',
+    fodselsdato: 'Fødselsdato',
+  },
+  step2: { epost: 'E-post', telefon: 'Telefon' },
+  step3: { adresse: 'Adresse', postnummer: 'Postnummer', poststed: 'Poststed' },
+  step4: { samtykke: 'Samtykke' },
+  step5: { kontonummer: 'Kontonummer', banknavn: 'Banknavn' },
+  step6: {
+    leveringsadresse: 'Leveringsadresse',
+    leveringspostnummer: 'Postnummer',
+    leveringspoststed: 'Poststed',
+  },
+  step7: { kommentar: 'Kommentar' },
+  step8: {},
 };
 
 // Shared container component for form demos
@@ -295,169 +315,44 @@ const FormStep7 = ({
   </div>
 );
 
-const FormStep8 = ({ formData }: StepComponentProps) => (
-  <div className="flex flex-col gap-4">
-    <Text>Oppsummering av skjema:</Text>
-    <pre className="rounded bg-gray-100 p-4 text-sm">
-      {JSON.stringify(formData, null, 2)}
-    </pre>
-  </div>
-);
+type SummaryStepProps = StepComponentProps & { maxStep: number };
 
-type SummaryStepProps = StepComponentProps & { maxSteps: number };
-
-const SummaryStep = ({ formData, maxSteps }: SummaryStepProps) => {
-  // Create an array of step sections to render based on maxSteps
-  // Exclude the last step as it's the summary step itself
+const SummaryStep = ({ formData, maxStep }: SummaryStepProps) => {
+  // Dynamically render tables for each step up to maxStep (excluding the summary step itself)
   const stepSections = [];
 
-  if (maxSteps > 1) {
+  for (let stepNum = 1; stepNum < maxStep; stepNum++) {
+    const stepKey = `step${stepNum}` as keyof FormData;
+    const stepData = formData[stepKey];
+    const stepTitle = stepTitles[stepKey as keyof typeof stepTitles];
+    const fieldLabels = FieldLabels[stepKey];
+
+    // Skip if step data is empty or doesn't exist
+    if (!stepData || Object.keys(stepData).length === 0) continue;
+
     stepSections.push(
-      <table key="step1" className="w-full border-collapse">
-        <caption className="mb-4 text-left font-semibold text-lg">
-          Personalia
+      <table
+        key={stepKey}
+        className="grid w-full border-collapse gap-y-6 not-last-of-type:border-b pb-8"
+      >
+        <caption className="text-left font-semibold text-lg">
+          {stepTitle}
         </caption>
-        <tbody>
-          <tr className="border-b">
-            <th className="py-2 pr-4 text-left font-medium">Fornavn</th>
-            <td className="py-2">{formData.step1.fornavn}</td>
-          </tr>
-          <tr className="border-b">
-            <th className="py-2 pr-4 text-left font-medium">Etternavn</th>
-            <td className="py-2">{formData.step1.etternavn}</td>
-          </tr>
-          <tr className="border-b">
-            <th className="py-2 pr-4 text-left font-medium">Fødselsdato</th>
-            <td className="py-2">{formData.step1.fodselsdato}</td>
-          </tr>
+        <tbody className="grid gap-y-4">
+          {Object.entries(stepData).map(([fieldKey, fieldValue]) => (
+            <tr key={fieldKey} className="grid">
+              <th className="py-0.5 text-left font-bold">
+                {fieldLabels[fieldKey] || fieldKey}
+              </th>
+              <td className="py-0.5">{fieldValue as string}</td>
+            </tr>
+          ))}
         </tbody>
       </table>,
     );
   }
 
-  if (maxSteps > 2) {
-    stepSections.push(
-      <table key="step2" className="w-full border-collapse">
-        <caption className="mb-4 text-left font-semibold text-lg">
-          Kontaktinformasjon
-        </caption>
-        <tbody>
-          <tr className="border-b">
-            <th className="py-2 pr-4 text-left font-medium">E-post</th>
-            <td className="py-2">{formData.step2.epost}</td>
-          </tr>
-          <tr className="border-b">
-            <th className="py-2 pr-4 text-left font-medium">Telefon</th>
-            <td className="py-2">{formData.step2.telefon}</td>
-          </tr>
-        </tbody>
-      </table>,
-    );
-  }
-
-  if (maxSteps > 3) {
-    stepSections.push(
-      <table key="step3" className="w-full border-collapse">
-        <caption className="mb-4 text-left font-semibold text-lg">
-          Fakturainformasjon
-        </caption>
-        <tbody>
-          <tr className="border-b">
-            <th className="py-2 pr-4 text-left font-medium">Adresse</th>
-            <td className="py-2">{formData.step3.adresse}</td>
-          </tr>
-          <tr className="border-b">
-            <th className="py-2 pr-4 text-left font-medium">Postnummer</th>
-            <td className="py-2">{formData.step3.postnummer}</td>
-          </tr>
-          <tr className="border-b">
-            <th className="py-2 pr-4 text-left font-medium">Poststed</th>
-            <td className="py-2">{formData.step3.poststed}</td>
-          </tr>
-        </tbody>
-      </table>,
-    );
-  }
-
-  if (maxSteps > 4) {
-    stepSections.push(
-      <table key="step4" className="w-full border-collapse">
-        <caption className="mb-4 text-left font-semibold text-lg">
-          Samtykke
-        </caption>
-        <tbody>
-          <tr className="border-b">
-            <th className="py-2 pr-4 text-left font-medium">Samtykke</th>
-            <td className="py-2">{formData.step4.samtykke}</td>
-          </tr>
-        </tbody>
-      </table>,
-    );
-  }
-
-  if (maxSteps > 5) {
-    stepSections.push(
-      <table key="step5" className="w-full border-collapse">
-        <caption className="mb-4 text-left font-semibold text-lg">
-          Betalingsinformasjon
-        </caption>
-        <tbody>
-          <tr className="border-b">
-            <th className="py-2 pr-4 text-left font-medium">Kontonummer</th>
-            <td className="py-2">{formData.step5.kontonummer}</td>
-          </tr>
-          <tr className="border-b">
-            <th className="py-2 pr-4 text-left font-medium">Banknavn</th>
-            <td className="py-2">{formData.step5.banknavn}</td>
-          </tr>
-        </tbody>
-      </table>,
-    );
-  }
-
-  if (maxSteps > 6) {
-    stepSections.push(
-      <table key="step6" className="w-full border-collapse">
-        <caption className="mb-4 text-left font-semibold text-lg">
-          Leveringsadresse
-        </caption>
-        <tbody>
-          <tr className="border-b">
-            <th className="py-2 pr-4 text-left font-medium">
-              Leveringsadresse
-            </th>
-            <td className="py-2">{formData.step6.leveringsadresse}</td>
-          </tr>
-          <tr className="border-b">
-            <th className="py-2 pr-4 text-left font-medium">Postnummer</th>
-            <td className="py-2">{formData.step6.leveringspostnummer}</td>
-          </tr>
-          <tr className="border-b">
-            <th className="py-2 pr-4 text-left font-medium">Poststed</th>
-            <td className="py-2">{formData.step6.leveringspoststed}</td>
-          </tr>
-        </tbody>
-      </table>,
-    );
-  }
-
-  if (maxSteps > 7) {
-    stepSections.push(
-      <table key="step7" className="w-full border-collapse">
-        <caption className="mb-4 text-left font-semibold text-lg">
-          Bekrefelse
-        </caption>
-        <tbody>
-          <tr className="border-b">
-            <th className="py-2 pr-4 text-left font-medium">Kommentar</th>
-            <td className="py-2">{formData.step7.kommentar}</td>
-          </tr>
-        </tbody>
-      </table>,
-    );
-  }
-
-  return <div className="flex flex-col gap-4">{stepSections}</div>;
+  return <div className="mt-8 flex flex-col gap-8">{stepSections}</div>;
 };
 
 // Map step numbers to components (used for 8-step form only)
@@ -472,7 +367,6 @@ const stepComponents: Record<
   5: FormStep5,
   6: FormStep6,
   7: FormStep7,
-  8: FormStep8,
 };
 
 // Shared form logic hook
@@ -577,7 +471,10 @@ const useStepperFormDemo = (maxSteps: number) => {
     const steps = [];
     for (let i = 1; i <= totalSteps; i++) {
       // For the last step, always use "Oppsummering"
-      const stepTitle = i === totalSteps ? 'Oppsummering' : stepTitles[i];
+      const stepTitle =
+        i === totalSteps
+          ? stepTitles.summary
+          : stepTitles[`step${i}` as keyof typeof stepTitles];
       const isLastStep = i === totalSteps;
 
       steps.push(
@@ -598,10 +495,10 @@ const useStepperFormDemo = (maxSteps: number) => {
   const getStepComponent = (
     step: number,
   ): React.ComponentType<StepComponentProps> => {
-    // If it's the last step, always return SummaryStep with maxSteps
+    // If it's the last step, always return SummaryStep with maxStep
     if (step === maxSteps) {
       return (props: StepComponentProps) => (
-        <SummaryStep {...props} maxSteps={maxSteps} />
+        <SummaryStep {...props} maxStep={maxSteps} />
       );
     }
     // Otherwise return the regular step component
@@ -651,8 +548,8 @@ const FormDemoTemplate = ({ totalSteps }: { totalSteps: number }) => {
           <Heading level={2} size="m" className="mb-4">
             {currentStep}.{' '}
             {currentStep === totalSteps
-              ? 'Oppsummering'
-              : stepTitles[currentStep]}
+              ? stepTitles.summary
+              : stepTitles[`step${currentStep}` as keyof typeof stepTitles]}
           </Heading>
           <CurrentStepComponent
             formData={formData}
