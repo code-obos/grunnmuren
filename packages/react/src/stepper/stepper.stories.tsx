@@ -70,54 +70,97 @@ type FormData = {
     leveringspoststed: string;
   };
   step7: { kommentar: string };
-  step8: Record<string, never>;
 };
 
-const initialFormData: FormData = {
-  step1: { fornavn: '', etternavn: '', fodselsdato: '' },
-  step2: { epost: '', telefon: '' },
-  step3: { adresse: '', postnummer: '', poststed: '' },
-  step4: { samtykke: '' },
-  step5: { kontonummer: '', banknavn: '' },
-  step6: {
-    leveringsadresse: '',
-    leveringspostnummer: '',
-    leveringspoststed: '',
-  },
-  step7: { kommentar: '' },
-  step8: {},
-};
-
-const stepTitles = {
-  step1: 'Personalia',
-  step2: 'Kontaktinformasjon',
-  step3: 'Fakturainformasjon',
-  step4: 'Samtykke',
-  step5: 'Betalingsinformasjon',
-  step6: 'Leveringsadresse',
-  step7: 'Bekrefelse',
-  summary: 'Oppsummering',
-};
-
-// Field labels for each form step
-const FieldLabels: Record<keyof FormData, Record<string, string>> = {
+const formSteps = {
   step1: {
-    fornavn: 'Fornavn',
-    etternavn: 'Etternavn',
-    fodselsdato: 'Fødselsdato',
+    title: 'Personalia',
+    fields: {
+      fornavn: { label: 'Fornavn', initialValue: '', inputType: 'string' },
+      etternavn: { label: 'Etternavn', initialValue: '', inputType: 'string' },
+      fodselsdato: {
+        label: 'Fødselsdato',
+        initialValue: '',
+        inputType: 'string',
+      },
+    },
   },
-  step2: { epost: 'E-post', telefon: 'Telefon' },
-  step3: { adresse: 'Adresse', postnummer: 'Postnummer', poststed: 'Poststed' },
-  step4: { samtykke: 'Samtykke' },
-  step5: { kontonummer: 'Kontonummer', banknavn: 'Banknavn' },
+  step2: {
+    title: 'Kontaktinformasjon',
+    fields: {
+      epost: { label: 'E-post', initialValue: '', inputType: 'string' },
+      telefon: { label: 'Telefon', initialValue: '', inputType: 'string' },
+    },
+  },
+  step3: {
+    title: 'Fakturainformasjon',
+    fields: {
+      adresse: { label: 'Adresse', initialValue: '', inputType: 'string' },
+      postnummer: {
+        label: 'Postnummer',
+        initialValue: '',
+        inputType: 'string',
+      },
+      poststed: { label: 'Poststed', initialValue: '', inputType: 'string' },
+    },
+  },
+  step4: {
+    title: 'Samtykke',
+    fields: {
+      samtykke: {
+        label: 'Samtykke',
+        initialValue: '',
+        inputType: 'text',
+        description: 'Beskriv hva du samtykker til',
+      },
+    },
+  },
+  step5: {
+    title: 'Betalingsinformasjon',
+    fields: {
+      kontonummer: {
+        label: 'Kontonummer',
+        initialValue: '',
+        inputType: 'string',
+      },
+      banknavn: { label: 'Banknavn', initialValue: '', inputType: 'string' },
+    },
+  },
   step6: {
-    leveringsadresse: 'Leveringsadresse',
-    leveringspostnummer: 'Postnummer',
-    leveringspoststed: 'Poststed',
+    title: 'Leveringsadresse',
+    fields: {
+      leveringsadresse: {
+        label: 'Leveringsadresse',
+        initialValue: '',
+        inputType: 'string',
+      },
+      leveringspostnummer: {
+        label: 'Postnummer',
+        initialValue: '',
+        inputType: 'string',
+      },
+      leveringspoststed: {
+        label: 'Poststed',
+        initialValue: '',
+        inputType: 'string',
+      },
+    },
   },
-  step7: { kommentar: 'Kommentar' },
-  step8: {},
-};
+  step7: {
+    title: 'Bekrefelse',
+    fields: {
+      kommentar: {
+        label: 'Kommentar',
+        initialValue: '',
+        inputType: 'text',
+        description: 'Legg til eventuelle kommentarer',
+      },
+    },
+  },
+  summary: {
+    title: 'Oppsummering',
+  },
+} as const;
 
 // Shared container component for form demos
 const FormDemoContainer = ({
@@ -145,175 +188,69 @@ type StepComponentProps = {
   isStepComplete: boolean;
 };
 
-const FormStep1 = ({
-  formData,
-  updateFormData,
-  handleNext,
-  isStepComplete,
-}: StepComponentProps) => (
-  <div className="flex flex-col gap-4">
-    <TextField
-      label="Fornavn"
-      value={formData.step1.fornavn}
-      onChange={(value) => updateFormData('step1', 'fornavn', value)}
-    />
-    <TextField
-      label="Etternavn"
-      value={formData.step1.etternavn}
-      onChange={(value) => updateFormData('step1', 'etternavn', value)}
-    />
-    <TextField
-      label="Fødselsdato"
-      value={formData.step1.fodselsdato}
-      onChange={(value) => updateFormData('step1', 'fodselsdato', value)}
-    />
-    <Button onPress={handleNext} isDisabled={!isStepComplete}>
-      Neste
-    </Button>
-  </div>
-);
+type FormStepRendererProps = StepComponentProps & {
+  stepKey: keyof FormData;
+};
 
-const FormStep2 = ({
+// Generic component that renders any form step based on formSteps configuration
+const FormStepRenderer = ({
+  stepKey,
   formData,
   updateFormData,
   handleNext,
   isStepComplete,
-}: StepComponentProps) => (
-  <div className="flex flex-col gap-4">
-    <TextField
-      label="E-post"
-      value={formData.step2.epost}
-      onChange={(value) => updateFormData('step2', 'epost', value)}
-    />
-    <TextField
-      label="Telefon"
-      value={formData.step2.telefon}
-      onChange={(value) => updateFormData('step2', 'telefon', value)}
-    />
-    <Button onPress={handleNext} isDisabled={!isStepComplete}>
-      Neste
-    </Button>
-  </div>
-);
+}: FormStepRendererProps) => {
+  const stepConfig = formSteps[stepKey as keyof typeof formSteps];
 
-const FormStep3 = ({
-  formData,
-  updateFormData,
-  handleNext,
-  isStepComplete,
-}: StepComponentProps) => (
-  <div className="flex flex-col gap-4">
-    <TextField
-      label="Adresse"
-      value={formData.step3.adresse}
-      onChange={(value) => updateFormData('step3', 'adresse', value)}
-    />
-    <TextField
-      label="Postnummer"
-      value={formData.step3.postnummer}
-      onChange={(value) => updateFormData('step3', 'postnummer', value)}
-    />
-    <TextField
-      label="Poststed"
-      value={formData.step3.poststed}
-      onChange={(value) => updateFormData('step3', 'poststed', value)}
-    />
-    <Button onPress={handleNext} isDisabled={!isStepComplete}>
-      Neste
-    </Button>
-  </div>
-);
+  if (!stepConfig || !('fields' in stepConfig)) return null;
 
-const FormStep4 = ({
-  formData,
-  updateFormData,
-  handleNext,
-  isStepComplete,
-}: StepComponentProps) => (
-  <div className="flex flex-col gap-4">
-    <TextArea
-      label="Samtykke"
-      description="Beskriv hva du samtykker til"
-      value={formData.step4.samtykke}
-      onChange={(value) => updateFormData('step4', 'samtykke', value)}
-    />
-    <Button onPress={handleNext} isDisabled={!isStepComplete}>
-      Neste
-    </Button>
-  </div>
-);
+  const stepData = formData[stepKey];
+  const { fields } = stepConfig;
 
-const FormStep5 = ({
-  formData,
-  updateFormData,
-  handleNext,
-  isStepComplete,
-}: StepComponentProps) => (
-  <div className="flex flex-col gap-4">
-    <TextField
-      label="Kontonummer"
-      value={formData.step5.kontonummer}
-      onChange={(value) => updateFormData('step5', 'kontonummer', value)}
-    />
-    <TextField
-      label="Banknavn"
-      value={formData.step5.banknavn}
-      onChange={(value) => updateFormData('step5', 'banknavn', value)}
-    />
-    <Button onPress={handleNext} isDisabled={!isStepComplete}>
-      Neste
-    </Button>
-  </div>
-);
+  return (
+    <div className="flex flex-col gap-4">
+      {Object.entries(fields).map(([fieldKey, fieldConfig]) => {
+        const value = stepData[fieldKey as keyof typeof stepData] as string;
 
-const FormStep6 = ({
-  formData,
-  updateFormData,
-  handleNext,
-  isStepComplete,
-}: StepComponentProps) => (
-  <div className="flex flex-col gap-4">
-    <TextField
-      label="Leveringsadresse"
-      value={formData.step6.leveringsadresse}
-      onChange={(value) => updateFormData('step6', 'leveringsadresse', value)}
-    />
-    <TextField
-      label="Postnummer"
-      value={formData.step6.leveringspostnummer}
-      onChange={(value) =>
-        updateFormData('step6', 'leveringspostnummer', value)
-      }
-    />
-    <TextField
-      label="Poststed"
-      value={formData.step6.leveringspoststed}
-      onChange={(value) => updateFormData('step6', 'leveringspoststed', value)}
-    />
-    <Button onPress={handleNext} isDisabled={!isStepComplete}>
-      Neste
-    </Button>
-  </div>
-);
+        if (fieldConfig.inputType === 'text') {
+          return (
+            <TextArea
+              key={fieldKey}
+              label={fieldConfig.label}
+              description={fieldConfig.description}
+              value={value}
+              onChange={(newValue) =>
+                updateFormData(
+                  stepKey,
+                  fieldKey as keyof typeof stepData,
+                  newValue,
+                )
+              }
+            />
+          );
+        }
 
-const FormStep7 = ({
-  formData,
-  updateFormData,
-  handleNext,
-  isStepComplete,
-}: StepComponentProps) => (
-  <div className="flex flex-col gap-4">
-    <TextArea
-      label="Kommentar"
-      description="Legg til eventuelle kommentarer"
-      value={formData.step7.kommentar}
-      onChange={(value) => updateFormData('step7', 'kommentar', value)}
-    />
-    <Button onPress={handleNext} isDisabled={!isStepComplete}>
-      Neste
-    </Button>
-  </div>
-);
+        return (
+          <TextField
+            key={fieldKey}
+            label={fieldConfig.label}
+            value={value}
+            onChange={(newValue) =>
+              updateFormData(
+                stepKey,
+                fieldKey as keyof typeof stepData,
+                newValue,
+              )
+            }
+          />
+        );
+      })}
+      <Button onPress={handleNext} isDisabled={!isStepComplete}>
+        Neste
+      </Button>
+    </div>
+  );
+};
 
 type SummaryStepProps = StepComponentProps & { maxStep: number };
 
@@ -324,11 +261,15 @@ const SummaryStep = ({ formData, maxStep }: SummaryStepProps) => {
   for (let stepNum = 1; stepNum < maxStep; stepNum++) {
     const stepKey = `step${stepNum}` as keyof FormData;
     const stepData = formData[stepKey];
-    const stepTitle = stepTitles[stepKey as keyof typeof stepTitles];
-    const fieldLabels = FieldLabels[stepKey];
+    const stepConfig = formSteps[stepKey as keyof typeof formSteps];
 
     // Skip if step data is empty or doesn't exist
-    if (!stepData || Object.keys(stepData).length === 0) continue;
+    if (!stepData || Object.keys(stepData).length === 0 || !stepConfig)
+      continue;
+    if (!('fields' in stepConfig)) continue;
+
+    const stepTitle = stepConfig.title;
+    const fieldLabels = stepConfig.fields;
 
     stepSections.push(
       <table
@@ -339,14 +280,21 @@ const SummaryStep = ({ formData, maxStep }: SummaryStepProps) => {
           {stepTitle}
         </caption>
         <tbody className="grid gap-y-4">
-          {Object.entries(stepData).map(([fieldKey, fieldValue]) => (
-            <tr key={fieldKey} className="grid">
-              <th className="py-0.5 text-left font-bold">
-                {fieldLabels[fieldKey] || fieldKey}
-              </th>
-              <td className="py-0.5">{fieldValue as string}</td>
-            </tr>
-          ))}
+          {Object.entries(stepData).map(([fieldKey, fieldValue]) => {
+            const fieldConfig = (
+              fieldLabels as Record<
+                string,
+                { label: string; initialValue: string }
+              >
+            )[fieldKey];
+            const label = fieldConfig?.label || fieldKey;
+            return (
+              <tr key={fieldKey} className="grid">
+                <th className="py-0.5 text-left font-bold">{label}</th>
+                <td className="py-0.5">{fieldValue as string}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>,
     );
@@ -355,24 +303,55 @@ const SummaryStep = ({ formData, maxStep }: SummaryStepProps) => {
   return <div className="mt-8 flex flex-col gap-8">{stepSections}</div>;
 };
 
-// Map step numbers to components (used for 8-step form only)
+// Map step numbers to components
 const stepComponents: Record<
   number,
   React.ComponentType<StepComponentProps>
 > = {
-  1: FormStep1,
-  2: FormStep2,
-  3: FormStep3,
-  4: FormStep4,
-  5: FormStep5,
-  6: FormStep6,
-  7: FormStep7,
+  1: (props) => <FormStepRenderer {...props} stepKey="step1" />,
+  2: (props) => <FormStepRenderer {...props} stepKey="step2" />,
+  3: (props) => <FormStepRenderer {...props} stepKey="step3" />,
+  4: (props) => <FormStepRenderer {...props} stepKey="step4" />,
+  5: (props) => <FormStepRenderer {...props} stepKey="step5" />,
+  6: (props) => <FormStepRenderer {...props} stepKey="step6" />,
+  7: (props) => <FormStepRenderer {...props} stepKey="step7" />,
 };
 
-// Shared form logic hook
-const useStepperFormDemo = (maxSteps: number) => {
+// Template component for form demos
+const FormDemoTemplate = ({ totalSteps }: { totalSteps: number }) => {
   const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [formData, setFormData] = useState<FormData>({
+    step1: {
+      fornavn: formSteps.step1.fields.fornavn.initialValue,
+      etternavn: formSteps.step1.fields.etternavn.initialValue,
+      fodselsdato: formSteps.step1.fields.fodselsdato.initialValue,
+    },
+    step2: {
+      epost: formSteps.step2.fields.epost.initialValue,
+      telefon: formSteps.step2.fields.telefon.initialValue,
+    },
+    step3: {
+      adresse: formSteps.step3.fields.adresse.initialValue,
+      postnummer: formSteps.step3.fields.postnummer.initialValue,
+      poststed: formSteps.step3.fields.poststed.initialValue,
+    },
+    step4: {
+      samtykke: formSteps.step4.fields.samtykke.initialValue,
+    },
+    step5: {
+      kontonummer: formSteps.step5.fields.kontonummer.initialValue,
+      banknavn: formSteps.step5.fields.banknavn.initialValue,
+    },
+    step6: {
+      leveringsadresse: formSteps.step6.fields.leveringsadresse.initialValue,
+      leveringspostnummer:
+        formSteps.step6.fields.leveringspostnummer.initialValue,
+      leveringspoststed: formSteps.step6.fields.leveringspoststed.initialValue,
+    },
+    step7: {
+      kommentar: formSteps.step7.fields.kommentar.initialValue,
+    },
+  });
   const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set());
 
   const updateFormData = <K extends keyof FormData>(
@@ -430,7 +409,7 @@ const useStepperFormDemo = (maxSteps: number) => {
   };
 
   const handleNext = () => {
-    if (currentStep < maxSteps && isStepComplete(currentStep)) {
+    if (currentStep < totalSteps && isStepComplete(currentStep)) {
       setCompletedSteps((prev) => new Set(prev).add(currentStep));
       setCurrentStep((prev) => prev + 1);
     }
@@ -444,7 +423,7 @@ const useStepperFormDemo = (maxSteps: number) => {
     ) {
       setCurrentStep(step);
       // Update URL without navigation (only for 8 steps demo)
-      if (maxSteps === 8) {
+      if (totalSteps === 8) {
         const url = new URL(window.location.href);
         url.searchParams.set('currentStep', String(step));
         window.history.pushState({}, '', url.toString());
@@ -467,80 +446,52 @@ const useStepperFormDemo = (maxSteps: number) => {
     return canNavigateToStep(step);
   };
 
-  const renderSteps = (totalSteps: number) => {
-    const steps = [];
-    for (let i = 1; i <= totalSteps; i++) {
-      // For the last step, always use "Oppsummering"
-      const stepTitle =
-        i === totalSteps
-          ? stepTitles.summary
-          : stepTitles[`step${i}` as keyof typeof stepTitles];
-      const isLastStep = i === totalSteps;
-
-      steps.push(
-        <Step key={i} isCompleted={completedSteps.has(i)}>
-          {isStepNavigable(i) ? (
-            <Link onPress={handleGoToStep(i)}>{stepTitle}</Link>
-          ) : (
-            <Text>{stepTitle}</Text>
-          )}
-          {!isLastStep && <ProgressBar value={getProgressValue(i)} />}
-        </Step>,
-      );
-    }
-    return steps;
-  };
-
   // Get the appropriate component for the current step
   const getStepComponent = (
     step: number,
   ): React.ComponentType<StepComponentProps> => {
     // If it's the last step, always return SummaryStep with maxStep
-    if (step === maxSteps) {
+    if (step === totalSteps) {
       return (props: StepComponentProps) => (
-        <SummaryStep {...props} maxStep={maxSteps} />
+        <SummaryStep {...props} maxStep={totalSteps} />
       );
     }
     // Otherwise return the regular step component
     return stepComponents[step];
   };
 
-  return {
-    currentStep,
-    formData,
-    completedSteps,
-    updateFormData,
-    isStepComplete,
-    getProgressValue,
-    handleNext,
-    handleGoToStep,
-    canNavigateToStep,
-    isStepNavigable,
-    getStepComponent,
-    renderSteps,
-  };
-};
-
-// Template component for form demos
-const FormDemoTemplate = ({ totalSteps }: { totalSteps: number }) => {
-  const {
-    currentStep,
-    renderSteps,
-    getStepComponent,
-    formData,
-    updateFormData,
-    handleNext,
-    isStepComplete,
-  } = useStepperFormDemo(totalSteps);
-
   const CurrentStepComponent = getStepComponent(currentStep);
+
+  const steps = Array.from({ length: totalSteps }, (_, i) => i + 1);
 
   return (
     <FormDemoContainer
       stepper={
         <Stepper currentStep={currentStep} className="max-lg:mx-auto">
-          {/* biome-ignore lint/suspicious/noExplicitAny: Stepper requires strict tuple type for children */}
-          {renderSteps(totalSteps) as any}
+          {steps.map((stepNumber) => {
+            const stepTitle =
+              stepNumber === totalSteps
+                ? formSteps.summary.title
+                : formSteps[`step${stepNumber}` as keyof typeof formSteps]
+                    .title;
+            const isLastStep = stepNumber === totalSteps;
+
+            return (
+              <Step
+                key={stepNumber}
+                isCompleted={completedSteps.has(stepNumber)}
+              >
+                {isStepNavigable(stepNumber) ? (
+                  <Link onPress={handleGoToStep(stepNumber)}>{stepTitle}</Link>
+                ) : (
+                  <Text>{stepTitle}</Text>
+                )}
+                {!isLastStep && (
+                  <ProgressBar value={getProgressValue(stepNumber)} />
+                )}
+              </Step>
+            );
+          })}
         </Stepper>
       }
       content={
@@ -548,8 +499,8 @@ const FormDemoTemplate = ({ totalSteps }: { totalSteps: number }) => {
           <Heading level={2} size="m" className="mb-4">
             {currentStep}.{' '}
             {currentStep === totalSteps
-              ? stepTitles.summary
-              : stepTitles[`step${currentStep}` as keyof typeof stepTitles]}
+              ? formSteps.summary.title
+              : formSteps[`step${currentStep}` as keyof typeof formSteps].title}
           </Heading>
           <CurrentStepComponent
             formData={formData}

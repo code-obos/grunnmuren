@@ -88,16 +88,7 @@ const Step = ({ isCompleted = false, children, ...restProps }: StepProps) => {
 
 type StepperProps = HTMLAttributes<HTMLDivElement> & {
   /** 3-8 <Step> children */
-  children: [
-    JSX.Element,
-    JSX.Element,
-    JSX.Element,
-    JSX.Element?,
-    JSX.Element?,
-    JSX.Element?,
-    JSX.Element?,
-    JSX.Element?,
-  ];
+  children: JSX.Element[];
   currentStep: number;
 };
 
