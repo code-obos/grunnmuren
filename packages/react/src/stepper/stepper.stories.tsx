@@ -72,7 +72,7 @@ type FormData = {
   step7: { kommentar: string };
 };
 
-const formSteps = {
+const stepper = {
   step1: {
     title: 'Personalia',
     fields: {
@@ -178,7 +178,7 @@ type FormStepProps = StepComponentProps & {
   stepKey: keyof FormData;
 };
 
-// Generic component that renders any form step based on formSteps configuration
+// Generic component that renders any form step based on stepper configuration
 const FormStep = ({
   stepKey,
   formData,
@@ -186,7 +186,7 @@ const FormStep = ({
   handleNext,
   isStepComplete,
 }: FormStepProps) => {
-  const stepConfig = formSteps[stepKey as keyof typeof formSteps];
+  const stepConfig = stepper[stepKey as keyof typeof stepper];
 
   if (!stepConfig || !('fields' in stepConfig)) return null;
 
@@ -247,7 +247,7 @@ const SummaryStep = ({ formData, maxStep }: SummaryStepProps) => {
   for (let stepNum = 1; stepNum < maxStep; stepNum++) {
     const stepKey = `step${stepNum}` as keyof FormData;
     const stepData = formData[stepKey];
-    const stepConfig = formSteps[stepKey as keyof typeof formSteps];
+    const stepConfig = stepper[stepKey as keyof typeof stepper];
 
     // Skip if step data is empty or doesn't exist
     if (!stepData || Object.keys(stepData).length === 0 || !stepConfig)
@@ -308,34 +308,34 @@ const FormDemoTemplate = ({ totalSteps }: { totalSteps: number }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({
     step1: {
-      fornavn: formSteps.step1.fields.fornavn.initialValue,
-      etternavn: formSteps.step1.fields.etternavn.initialValue,
-      fodselsdato: formSteps.step1.fields.fodselsdato.initialValue,
+      fornavn: stepper.step1.fields.fornavn.initialValue,
+      etternavn: stepper.step1.fields.etternavn.initialValue,
+      fodselsdato: stepper.step1.fields.fodselsdato.initialValue,
     },
     step2: {
-      epost: formSteps.step2.fields.epost.initialValue,
-      telefon: formSteps.step2.fields.telefon.initialValue,
+      epost: stepper.step2.fields.epost.initialValue,
+      telefon: stepper.step2.fields.telefon.initialValue,
     },
     step3: {
-      adresse: formSteps.step3.fields.adresse.initialValue,
-      postnummer: formSteps.step3.fields.postnummer.initialValue,
-      poststed: formSteps.step3.fields.poststed.initialValue,
+      adresse: stepper.step3.fields.adresse.initialValue,
+      postnummer: stepper.step3.fields.postnummer.initialValue,
+      poststed: stepper.step3.fields.poststed.initialValue,
     },
     step4: {
-      samtykke: formSteps.step4.fields.samtykke.initialValue,
+      samtykke: stepper.step4.fields.samtykke.initialValue,
     },
     step5: {
-      kontonummer: formSteps.step5.fields.kontonummer.initialValue,
-      banknavn: formSteps.step5.fields.banknavn.initialValue,
+      kontonummer: stepper.step5.fields.kontonummer.initialValue,
+      banknavn: stepper.step5.fields.banknavn.initialValue,
     },
     step6: {
-      leveringsadresse: formSteps.step6.fields.leveringsadresse.initialValue,
+      leveringsadresse: stepper.step6.fields.leveringsadresse.initialValue,
       leveringspostnummer:
-        formSteps.step6.fields.leveringspostnummer.initialValue,
-      leveringspoststed: formSteps.step6.fields.leveringspoststed.initialValue,
+        stepper.step6.fields.leveringspostnummer.initialValue,
+      leveringspoststed: stepper.step6.fields.leveringspoststed.initialValue,
     },
     step7: {
-      kommentar: formSteps.step7.fields.kommentar.initialValue,
+      kommentar: stepper.step7.fields.kommentar.initialValue,
     },
   });
   const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set());
@@ -456,8 +456,8 @@ const FormDemoTemplate = ({ totalSteps }: { totalSteps: number }) => {
         {steps.map((stepNumber) => {
           const stepTitle =
             stepNumber === totalSteps
-              ? formSteps.summary.title
-              : formSteps[`step${stepNumber}` as keyof typeof formSteps].title;
+              ? stepper.summary.title
+              : stepper[`step${stepNumber}` as keyof typeof stepper].title;
           const isLastStep = stepNumber === totalSteps;
 
           return (
@@ -478,8 +478,8 @@ const FormDemoTemplate = ({ totalSteps }: { totalSteps: number }) => {
         <Heading level={2} size="m" className="mb-4">
           {currentStep}.{' '}
           {currentStep === totalSteps
-            ? formSteps.summary.title
-            : formSteps[`step${currentStep}` as keyof typeof formSteps].title}
+            ? stepper.summary.title
+            : stepper[`step${currentStep}` as keyof typeof stepper].title}
         </Heading>
         <CurrentStepComponent
           formData={formData}

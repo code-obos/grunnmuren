@@ -76,7 +76,7 @@ const Step = ({ isCompleted = false, children, ...restProps }: StepProps) => {
           !isSummary && (
             <Edit
               data-slot="in-progress-icon"
-              aria-label={translations.pending[locale]}
+              aria-label={translations.inProgress[locale]}
             />
           )
         )}
@@ -220,7 +220,7 @@ const Stepper = ({
     <div {...restProps} data-slot="stepper-container">
       <ol
         ref={scrollContainerRef}
-        aria-label={translations.formSteps[locale]} // Spread props after to allow overriding of aria-label
+        aria-label={translations.stepper[locale]} // Spread props after to allow overriding of aria-label
         data-slot="stepper"
       >
         {Children.map(children, (child, index) => {
