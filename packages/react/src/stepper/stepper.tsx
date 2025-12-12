@@ -167,7 +167,6 @@ const Stepper = ({
     const containerRect = scrollContainer.getBoundingClientRect();
     const stepRect = targetStepElement.getBoundingClientRect();
 
-    // Calculate if the step is fully visible
     const isFullyVisible =
       stepRect.left >= containerRect.left &&
       stepRect.right <= containerRect.right;
@@ -237,7 +236,7 @@ const Stepper = ({
     <div {...restProps} data-slot="stepper-container">
       <ol
         ref={scrollContainerRef}
-        aria-label={translations.stepper[locale]} // Spread props after to allow overriding of aria-label
+        aria-label={translations.stepper[locale]}
         data-slot="stepper"
       >
         {Children.map(children, (child, index) => {
