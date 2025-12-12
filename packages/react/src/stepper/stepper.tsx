@@ -70,7 +70,7 @@ const Step = ({ isCompleted = false, children, ...restProps }: StepProps) => {
           ],
         ]}
       >
-        {state === 'completed' ? (
+        {isCompleted ? (
           <Check aria-label={translations.completed[locale]} />
         ) : (
           !isSummary && (
