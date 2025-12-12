@@ -349,6 +349,8 @@
     @apply flex gap-x-2 lg:flex-col lg:gap-y-14 scrollbar-hidden overflow-x-auto;
     /** Make room for the absolutely positioned check icon on the first item */
     @apply lg:pt-1;
+    /** Make room for the focus outline */
+    @apply px-1;
 
     [data-slot="step"] {
       counter-increment: step-counter;
