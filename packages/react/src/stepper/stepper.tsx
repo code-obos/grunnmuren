@@ -133,9 +133,9 @@ const Stepper = ({
 
       // Calculate the scroll position to center the target step
       const stepOffsetLeft = targetStepElement.offsetLeft;
-      const stepWidth = targetStepElement.offsetWidth;
-      const containerWidth = scrollContainer.offsetWidth;
-      const targetScroll = stepOffsetLeft - containerWidth / 2 + stepWidth / 2;
+      const halfStepWidth = targetStepElement.offsetWidth / 2;
+      const halfContainerWidth = scrollContainer.offsetWidth / 2;
+      const targetScroll = stepOffsetLeft - halfContainerWidth + halfStepWidth;
 
       // Respect reduced motion preferences
       const prefersReducedMotion = window.matchMedia(
