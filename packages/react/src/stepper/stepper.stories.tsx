@@ -162,20 +162,6 @@ const formSteps = {
   },
 } as const;
 
-// Shared container component for form demos
-const FormDemoContainer = ({
-  stepper,
-  content,
-}: {
-  stepper: React.ReactNode;
-  content: React.ReactNode;
-}) => (
-  <div className="flex w-full max-w-2xl gap-8 px-4 max-lg:flex-col lg:gap-x-20">
-    {stepper}
-    <div className="pt-8">{content}</div>
-  </div>
-);
-
 // Step components
 type StepComponentProps = {
   formData: FormData;
@@ -188,18 +174,18 @@ type StepComponentProps = {
   isStepComplete: boolean;
 };
 
-type FormStepRendererProps = StepComponentProps & {
+type FormStepProps = StepComponentProps & {
   stepKey: keyof FormData;
 };
 
 // Generic component that renders any form step based on formSteps configuration
-const FormStepRenderer = ({
+const FormStep = ({
   stepKey,
   formData,
   updateFormData,
   handleNext,
   isStepComplete,
-}: FormStepRendererProps) => {
+}: FormStepProps) => {
   const stepConfig = formSteps[stepKey as keyof typeof formSteps];
 
   if (!stepConfig || !('fields' in stepConfig)) return null;
@@ -308,13 +294,13 @@ const stepComponents: Record<
   number,
   React.ComponentType<StepComponentProps>
 > = {
-  1: (props) => <FormStepRenderer {...props} stepKey="step1" />,
-  2: (props) => <FormStepRenderer {...props} stepKey="step2" />,
-  3: (props) => <FormStepRenderer {...props} stepKey="step3" />,
-  4: (props) => <FormStepRenderer {...props} stepKey="step4" />,
-  5: (props) => <FormStepRenderer {...props} stepKey="step5" />,
-  6: (props) => <FormStepRenderer {...props} stepKey="step6" />,
-  7: (props) => <FormStepRenderer {...props} stepKey="step7" />,
+  1: (props) => <FormStep {...props} stepKey="step1" />,
+  2: (props) => <FormStep {...props} stepKey="step2" />,
+  3: (props) => <FormStep {...props} stepKey="step3" />,
+  4: (props) => <FormStep {...props} stepKey="step4" />,
+  5: (props) => <FormStep {...props} stepKey="step5" />,
+  6: (props) => <FormStep {...props} stepKey="step6" />,
+  7: (props) => <FormStep {...props} stepKey="step7" />,
 };
 
 // Template component for form demos
@@ -465,52 +451,44 @@ const FormDemoTemplate = ({ totalSteps }: { totalSteps: number }) => {
   const steps = Array.from({ length: totalSteps }, (_, i) => i + 1);
 
   return (
-    <FormDemoContainer
-      stepper={
-        <Stepper currentStep={currentStep} className="max-lg:mx-auto">
-          {steps.map((stepNumber) => {
-            const stepTitle =
-              stepNumber === totalSteps
-                ? formSteps.summary.title
-                : formSteps[`step${stepNumber}` as keyof typeof formSteps]
-                    .title;
-            const isLastStep = stepNumber === totalSteps;
-
-            return (
-              <Step
-                key={stepNumber}
-                isCompleted={completedSteps.has(stepNumber)}
-              >
-                {isStepNavigable(stepNumber) ? (
-                  <Link onPress={handleGoToStep(stepNumber)}>{stepTitle}</Link>
-                ) : (
-                  <Text>{stepTitle}</Text>
-                )}
-                {!isLastStep && (
-                  <ProgressBar value={getProgressValue(stepNumber)} />
-                )}
-              </Step>
-            );
-          })}
-        </Stepper>
-      }
-      content={
-        <>
-          <Heading level={2} size="m" className="mb-4">
-            {currentStep}.{' '}
-            {currentStep === totalSteps
+    <div className="flex w-full max-w-2xl gap-8 px-4 max-lg:flex-col lg:gap-x-20">
+      <Stepper currentStep={currentStep} className="max-lg:mx-auto">
+        {steps.map((stepNumber) => {
+          const stepTitle =
+            stepNumber === totalSteps
               ? formSteps.summary.title
-              : formSteps[`step${currentStep}` as keyof typeof formSteps].title}
-          </Heading>
-          <CurrentStepComponent
-            formData={formData}
-            updateFormData={updateFormData}
-            handleNext={handleNext}
-            isStepComplete={isStepComplete(currentStep)}
-          />
-        </>
-      }
-    />
+              : formSteps[`step${stepNumber}` as keyof typeof formSteps].title;
+          const isLastStep = stepNumber === totalSteps;
+
+          return (
+            <Step key={stepNumber} isCompleted={completedSteps.has(stepNumber)}>
+              {isStepNavigable(stepNumber) ? (
+                <Link onPress={handleGoToStep(stepNumber)}>{stepTitle}</Link>
+              ) : (
+                <Text>{stepTitle}</Text>
+              )}
+              {!isLastStep && (
+                <ProgressBar value={getProgressValue(stepNumber)} />
+              )}
+            </Step>
+          );
+        })}
+      </Stepper>
+      <div className="pt-8">
+        <Heading level={2} size="m" className="mb-4">
+          {currentStep}.{' '}
+          {currentStep === totalSteps
+            ? formSteps.summary.title
+            : formSteps[`step${currentStep}` as keyof typeof formSteps].title}
+        </Heading>
+        <CurrentStepComponent
+          formData={formData}
+          updateFormData={updateFormData}
+          handleNext={handleNext}
+          isStepComplete={isStepComplete(currentStep)}
+        />
+      </div>
+    </div>
   );
 };
 
