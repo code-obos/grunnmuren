@@ -58,7 +58,6 @@ export const Default: Story = {
   ),
 };
 
-// Interactive form story with 8 steps
 type FormData = {
   step1: { fornavn: string; etternavn: string; fodselsdato: string };
   step2: { epost: string; telefon: string };
@@ -305,7 +304,163 @@ const FormStep8 = ({ formData }: StepComponentProps) => (
   </div>
 );
 
-// Map step numbers to components
+type SummaryStepProps = StepComponentProps & { maxSteps: number };
+
+const SummaryStep = ({ formData, maxSteps }: SummaryStepProps) => {
+  // Create an array of step sections to render based on maxSteps
+  // Exclude the last step as it's the summary step itself
+  const stepSections = [];
+
+  if (maxSteps > 1) {
+    stepSections.push(
+      <table key="step1" className="w-full border-collapse">
+        <caption className="mb-4 text-left font-semibold text-lg">
+          Personalia
+        </caption>
+        <tbody>
+          <tr className="border-b">
+            <th className="py-2 pr-4 text-left font-medium">Fornavn</th>
+            <td className="py-2">{formData.step1.fornavn}</td>
+          </tr>
+          <tr className="border-b">
+            <th className="py-2 pr-4 text-left font-medium">Etternavn</th>
+            <td className="py-2">{formData.step1.etternavn}</td>
+          </tr>
+          <tr className="border-b">
+            <th className="py-2 pr-4 text-left font-medium">Fødselsdato</th>
+            <td className="py-2">{formData.step1.fodselsdato}</td>
+          </tr>
+        </tbody>
+      </table>,
+    );
+  }
+
+  if (maxSteps > 2) {
+    stepSections.push(
+      <table key="step2" className="w-full border-collapse">
+        <caption className="mb-4 text-left font-semibold text-lg">
+          Kontaktinformasjon
+        </caption>
+        <tbody>
+          <tr className="border-b">
+            <th className="py-2 pr-4 text-left font-medium">E-post</th>
+            <td className="py-2">{formData.step2.epost}</td>
+          </tr>
+          <tr className="border-b">
+            <th className="py-2 pr-4 text-left font-medium">Telefon</th>
+            <td className="py-2">{formData.step2.telefon}</td>
+          </tr>
+        </tbody>
+      </table>,
+    );
+  }
+
+  if (maxSteps > 3) {
+    stepSections.push(
+      <table key="step3" className="w-full border-collapse">
+        <caption className="mb-4 text-left font-semibold text-lg">
+          Fakturainformasjon
+        </caption>
+        <tbody>
+          <tr className="border-b">
+            <th className="py-2 pr-4 text-left font-medium">Adresse</th>
+            <td className="py-2">{formData.step3.adresse}</td>
+          </tr>
+          <tr className="border-b">
+            <th className="py-2 pr-4 text-left font-medium">Postnummer</th>
+            <td className="py-2">{formData.step3.postnummer}</td>
+          </tr>
+          <tr className="border-b">
+            <th className="py-2 pr-4 text-left font-medium">Poststed</th>
+            <td className="py-2">{formData.step3.poststed}</td>
+          </tr>
+        </tbody>
+      </table>,
+    );
+  }
+
+  if (maxSteps > 4) {
+    stepSections.push(
+      <table key="step4" className="w-full border-collapse">
+        <caption className="mb-4 text-left font-semibold text-lg">
+          Samtykke
+        </caption>
+        <tbody>
+          <tr className="border-b">
+            <th className="py-2 pr-4 text-left font-medium">Samtykke</th>
+            <td className="py-2">{formData.step4.samtykke}</td>
+          </tr>
+        </tbody>
+      </table>,
+    );
+  }
+
+  if (maxSteps > 5) {
+    stepSections.push(
+      <table key="step5" className="w-full border-collapse">
+        <caption className="mb-4 text-left font-semibold text-lg">
+          Betalingsinformasjon
+        </caption>
+        <tbody>
+          <tr className="border-b">
+            <th className="py-2 pr-4 text-left font-medium">Kontonummer</th>
+            <td className="py-2">{formData.step5.kontonummer}</td>
+          </tr>
+          <tr className="border-b">
+            <th className="py-2 pr-4 text-left font-medium">Banknavn</th>
+            <td className="py-2">{formData.step5.banknavn}</td>
+          </tr>
+        </tbody>
+      </table>,
+    );
+  }
+
+  if (maxSteps > 6) {
+    stepSections.push(
+      <table key="step6" className="w-full border-collapse">
+        <caption className="mb-4 text-left font-semibold text-lg">
+          Leveringsadresse
+        </caption>
+        <tbody>
+          <tr className="border-b">
+            <th className="py-2 pr-4 text-left font-medium">
+              Leveringsadresse
+            </th>
+            <td className="py-2">{formData.step6.leveringsadresse}</td>
+          </tr>
+          <tr className="border-b">
+            <th className="py-2 pr-4 text-left font-medium">Postnummer</th>
+            <td className="py-2">{formData.step6.leveringspostnummer}</td>
+          </tr>
+          <tr className="border-b">
+            <th className="py-2 pr-4 text-left font-medium">Poststed</th>
+            <td className="py-2">{formData.step6.leveringspoststed}</td>
+          </tr>
+        </tbody>
+      </table>,
+    );
+  }
+
+  if (maxSteps > 7) {
+    stepSections.push(
+      <table key="step7" className="w-full border-collapse">
+        <caption className="mb-4 text-left font-semibold text-lg">
+          Bekrefelse
+        </caption>
+        <tbody>
+          <tr className="border-b">
+            <th className="py-2 pr-4 text-left font-medium">Kommentar</th>
+            <td className="py-2">{formData.step7.kommentar}</td>
+          </tr>
+        </tbody>
+      </table>,
+    );
+  }
+
+  return <div className="flex flex-col gap-4">{stepSections}</div>;
+};
+
+// Map step numbers to components (used for 8-step form only)
 const stepComponents: Record<
   number,
   React.ComponentType<StepComponentProps>
@@ -421,7 +576,8 @@ const useStepperFormDemo = (maxSteps: number) => {
   const renderSteps = (totalSteps: number) => {
     const steps = [];
     for (let i = 1; i <= totalSteps; i++) {
-      const stepTitle = stepTitles[i];
+      // For the last step, always use "Oppsummering"
+      const stepTitle = i === totalSteps ? 'Oppsummering' : stepTitles[i];
       const isLastStep = i === totalSteps;
 
       steps.push(
@@ -435,7 +591,21 @@ const useStepperFormDemo = (maxSteps: number) => {
         </Step>,
       );
     }
-    return (<>{steps}</>) as React.ReactNode;
+    return steps;
+  };
+
+  // Get the appropriate component for the current step
+  const getStepComponent = (
+    step: number,
+  ): React.ComponentType<StepComponentProps> => {
+    // If it's the last step, always return SummaryStep with maxSteps
+    if (step === maxSteps) {
+      return (props: StepComponentProps) => (
+        <SummaryStep {...props} maxSteps={maxSteps} />
+      );
+    }
+    // Otherwise return the regular step component
+    return stepComponents[step];
   };
 
   return {
@@ -449,36 +619,40 @@ const useStepperFormDemo = (maxSteps: number) => {
     handleGoToStep,
     canNavigateToStep,
     isStepNavigable,
-    stepComponents,
+    getStepComponent,
     renderSteps,
   };
 };
 
-const FormWith8StepsDemo = () => {
+// Template component for form demos
+const FormDemoTemplate = ({ totalSteps }: { totalSteps: number }) => {
   const {
     currentStep,
     renderSteps,
-    stepComponents,
+    getStepComponent,
     formData,
     updateFormData,
     handleNext,
     isStepComplete,
-  } = useStepperFormDemo(8);
+  } = useStepperFormDemo(totalSteps);
 
-  const CurrentStepComponent = stepComponents[currentStep];
+  const CurrentStepComponent = getStepComponent(currentStep);
 
   return (
     <FormDemoContainer
       stepper={
         <Stepper currentStep={currentStep} className="max-lg:mx-auto">
           {/* biome-ignore lint/suspicious/noExplicitAny: Stepper requires strict tuple type for children */}
-          {renderSteps(8) as any}
+          {renderSteps(totalSteps) as any}
         </Stepper>
       }
       content={
         <>
           <Heading level={2} size="m" className="mb-4">
-            {currentStep}. {stepTitles[currentStep]}
+            {currentStep}.{' '}
+            {currentStep === totalSteps
+              ? 'Oppsummering'
+              : stepTitles[currentStep]}
           </Heading>
           <CurrentStepComponent
             formData={formData}
@@ -493,237 +667,42 @@ const FormWith8StepsDemo = () => {
 };
 
 export const FormWith8Steps: Story = {
-  render: () => <FormWith8StepsDemo />,
+  render: () => <FormDemoTemplate totalSteps={8} />,
   parameters: {
     layout: 'padded',
   },
-};
-
-// 7 Steps Demo
-const FormWith7StepsDemo = () => {
-  const {
-    currentStep,
-    renderSteps,
-    stepComponents,
-    formData,
-    updateFormData,
-    handleNext,
-    isStepComplete,
-  } = useStepperFormDemo(7);
-
-  const CurrentStepComponent = stepComponents[currentStep];
-
-  return (
-    <FormDemoContainer
-      stepper={
-        <Stepper currentStep={currentStep} className="max-lg:mx-auto">
-          {/* biome-ignore lint/suspicious/noExplicitAny: Stepper requires strict tuple type for children */}
-          {renderSteps(7) as any}
-        </Stepper>
-      }
-      content={
-        <>
-          <Heading level={2} size="m" className="mb-4">
-            {currentStep}. {stepTitles[currentStep]}
-          </Heading>
-          <CurrentStepComponent
-            formData={formData}
-            updateFormData={updateFormData}
-            handleNext={handleNext}
-            isStepComplete={isStepComplete(currentStep)}
-          />
-        </>
-      }
-    />
-  );
 };
 
 export const FormWith7Steps: Story = {
-  render: () => <FormWith7StepsDemo />,
+  render: () => <FormDemoTemplate totalSteps={7} />,
   parameters: {
     layout: 'padded',
   },
-};
-
-// 6 Steps Demo
-const FormWith6StepsDemo = () => {
-  const {
-    currentStep,
-    renderSteps,
-    stepComponents,
-    formData,
-    updateFormData,
-    handleNext,
-    isStepComplete,
-  } = useStepperFormDemo(6);
-
-  const CurrentStepComponent = stepComponents[currentStep];
-
-  return (
-    <FormDemoContainer
-      stepper={
-        <Stepper currentStep={currentStep} className="max-lg:mx-auto">
-          {/* biome-ignore lint/suspicious/noExplicitAny: Stepper requires strict tuple type for children */}
-          {renderSteps(6) as any}
-        </Stepper>
-      }
-      content={
-        <>
-          <Heading level={2} size="m" className="mb-4">
-            {currentStep}. {stepTitles[currentStep]}
-          </Heading>
-          <CurrentStepComponent
-            formData={formData}
-            updateFormData={updateFormData}
-            handleNext={handleNext}
-            isStepComplete={isStepComplete(currentStep)}
-          />
-        </>
-      }
-    />
-  );
 };
 
 export const FormWith6Steps: Story = {
-  render: () => <FormWith6StepsDemo />,
+  render: () => <FormDemoTemplate totalSteps={6} />,
   parameters: {
     layout: 'padded',
   },
-};
-
-// 5 Steps Demo
-const FormWith5StepsDemo = () => {
-  const {
-    currentStep,
-    renderSteps,
-    stepComponents,
-    formData,
-    updateFormData,
-    handleNext,
-    isStepComplete,
-  } = useStepperFormDemo(5);
-
-  const CurrentStepComponent = stepComponents[currentStep];
-
-  return (
-    <FormDemoContainer
-      stepper={
-        <Stepper currentStep={currentStep} className="max-lg:mx-auto">
-          {/* biome-ignore lint/suspicious/noExplicitAny: Stepper requires strict tuple type for children */}
-          {renderSteps(5) as any}
-        </Stepper>
-      }
-      content={
-        <>
-          <Heading level={2} size="m" className="mb-4">
-            {currentStep}. {stepTitles[currentStep]}
-          </Heading>
-          <CurrentStepComponent
-            formData={formData}
-            updateFormData={updateFormData}
-            handleNext={handleNext}
-            isStepComplete={isStepComplete(currentStep)}
-          />
-        </>
-      }
-    />
-  );
 };
 
 export const FormWith5Steps: Story = {
-  render: () => <FormWith5StepsDemo />,
+  render: () => <FormDemoTemplate totalSteps={5} />,
   parameters: {
     layout: 'padded',
   },
-};
-
-// 4 Steps Demo
-const FormWith4StepsDemo = () => {
-  const {
-    currentStep,
-    renderSteps,
-    stepComponents,
-    formData,
-    updateFormData,
-    handleNext,
-    isStepComplete,
-  } = useStepperFormDemo(4);
-
-  const CurrentStepComponent = stepComponents[currentStep];
-
-  return (
-    <FormDemoContainer
-      stepper={
-        <Stepper currentStep={currentStep} className="max-lg:mx-auto">
-          {/* biome-ignore lint/suspicious/noExplicitAny: Stepper requires strict tuple type for children */}
-          {renderSteps(4) as any}
-        </Stepper>
-      }
-      content={
-        <>
-          <Heading level={2} size="m" className="mb-4">
-            {currentStep}. {stepTitles[currentStep]}
-          </Heading>
-          <CurrentStepComponent
-            formData={formData}
-            updateFormData={updateFormData}
-            handleNext={handleNext}
-            isStepComplete={isStepComplete(currentStep)}
-          />
-        </>
-      }
-    />
-  );
 };
 
 export const FormWith4Steps: Story = {
-  render: () => <FormWith4StepsDemo />,
+  render: () => <FormDemoTemplate totalSteps={4} />,
   parameters: {
     layout: 'padded',
   },
 };
 
-// 3 Steps Demo
-const FormWith3StepsDemo = () => {
-  const {
-    currentStep,
-    renderSteps,
-    stepComponents,
-    formData,
-    updateFormData,
-    handleNext,
-    isStepComplete,
-  } = useStepperFormDemo(3);
-
-  const CurrentStepComponent = stepComponents[currentStep];
-
-  return (
-    <FormDemoContainer
-      stepper={
-        <Stepper currentStep={currentStep} className="max-lg:mx-auto">
-          {/* biome-ignore lint/suspicious/noExplicitAny: Stepper requires strict tuple type for children */}
-          {renderSteps(3) as any}
-        </Stepper>
-      }
-      content={
-        <>
-          <Heading level={2} size="m" className="mb-4">
-            {currentStep}. {stepTitles[currentStep]}
-          </Heading>
-          <CurrentStepComponent
-            formData={formData}
-            updateFormData={updateFormData}
-            handleNext={handleNext}
-            isStepComplete={isStepComplete(currentStep)}
-          />
-        </>
-      }
-    />
-  );
-};
-
 export const FormWith3Steps: Story = {
-  render: () => <FormWith3StepsDemo />,
+  render: () => <FormDemoTemplate totalSteps={3} />,
   parameters: {
     layout: 'padded',
   },
