@@ -164,17 +164,65 @@ const Stepper = ({
       return;
     }
 
-    const containerRect = scrollContainer.getBoundingClientRect();
-    const stepRect = targetStepElement.getBoundingClientRect();
-
-    const isFullyVisible =
-      stepRect.left >= containerRect.left &&
-      stepRect.right <= containerRect.right;
-
-    if (!isFullyVisible) {
-      performScroll(currentStep);
-    }
+    performScroll(currentStep);
   }, [currentStep, scrollContainerRef, performScroll]);
+
+  // Scroll focused links into view when they receive focus-visible
+  useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    if (!scrollContainer) {
+      return;
+    }
+
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (
+          mutation.type === 'attributes' &&
+          mutation.attributeName === 'data-focus-visible'
+        ) {
+          const target = mutation.target as HTMLElement;
+
+          // Check if the element has focus-visible (data-focus-visible attribute present)
+          const hasFocusVisible = target.hasAttribute('data-focus-visible');
+          if (!hasFocusVisible) {
+            continue;
+          }
+
+          // Find which step this link belongs to
+          const step = target.closest('[data-slot="step"]') as HTMLElement;
+          if (!step) {
+            continue;
+          }
+
+          // Find which step number this is
+          const stepIndex = Array.from(scrollContainer.children).indexOf(step);
+          if (stepIndex === -1) {
+            continue;
+          }
+
+          const stepNumber = stepIndex + 1;
+
+          performScroll(stepNumber);
+        }
+      }
+    });
+
+    // Observe all link elements within the scroll container
+    const steps = scrollContainer.querySelectorAll('[data-slot="step"]');
+    for (const step of steps) {
+      const links = step.querySelectorAll('[data-slot="link"]');
+      for (const link of links) {
+        observer.observe(link, {
+          attributes: true,
+          attributeFilter: ['data-focus-visible'],
+        });
+      }
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [scrollContainerRef, performScroll]);
 
   // Triggered when next/prev "buttons" are clicked
   useEffect(() => {
