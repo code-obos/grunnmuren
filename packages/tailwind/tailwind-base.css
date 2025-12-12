@@ -346,13 +346,13 @@
   .stepper,
   [data-slot="stepper"] {
     counter-reset: step-counter;
-    @apply flex gap-x-3 lg:flex-col lg:gap-y-14 scrollbar-hidden overflow-x-auto;
+    @apply flex gap-x-2 lg:flex-col lg:gap-y-14 scrollbar-hidden overflow-x-auto;
     /** Make room for the absolutely positioned check icon on the first item */
     @apply lg:pt-1;
 
     [data-slot="step"] {
       counter-increment: step-counter;
-      @apply flex items-center gap-x-3 relative max-lg:my-1.5;
+      @apply flex items-center gap-x-2 relative max-lg:my-1.5;
 
       &::before {
         content: counter(step-counter);
