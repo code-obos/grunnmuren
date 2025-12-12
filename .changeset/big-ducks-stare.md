@@ -28,4 +28,4 @@ const MySteps = () => (
 );
 ```
 
-Note that you have to calculate the progress in your form and pass the completed percentage to the <ProgressBar> component.
+Note that you have to calculate the progress yourself and pass the completed percentage to the <ProgressBar> component.
