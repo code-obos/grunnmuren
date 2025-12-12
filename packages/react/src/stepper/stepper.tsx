@@ -236,7 +236,7 @@ const Stepper = ({
     <div {...restProps} data-slot="stepper-container">
       <ol
         ref={scrollContainerRef}
-        aria-label={translations.stepper[locale]} // Spread props after to allow overriding of aria-label
+        aria-label={translations.stepper[locale]}
         data-slot="stepper"
       >
         {Children.map(children, (child, index) => {
