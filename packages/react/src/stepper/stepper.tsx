@@ -120,12 +120,16 @@ const Stepper = ({
   const performScroll = useCallback(
     (targetStep: number) => {
       const scrollContainer = scrollContainerRef.current;
-      if (!scrollContainer) return;
+      if (!scrollContainer) {
+        return;
+      }
 
       const targetStepElement = scrollContainer.children[
         targetStep - 1
       ] as HTMLElement;
-      if (!targetStepElement) return;
+      if (!targetStepElement) {
+        return;
+      }
 
       // Calculate the scroll position to center the target step
       const stepOffsetLeft = targetStepElement.offsetLeft;
@@ -149,12 +153,16 @@ const Stepper = ({
   // Scroll when the currentStep prop changes (only if not fully visible)
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
-    if (!scrollContainer) return;
+    if (!scrollContainer) {
+      return;
+    }
 
     const targetStepElement = scrollContainer.children[
       currentStep - 1
     ] as HTMLElement;
-    if (!targetStepElement) return;
+    if (!targetStepElement) {
+      return;
+    }
 
     const containerRect = scrollContainer.getBoundingClientRect();
     const stepRect = targetStepElement.getBoundingClientRect();
@@ -171,17 +179,23 @@ const Stepper = ({
 
   // Triggered when next/prev "buttons" are clicked
   useEffect(() => {
-    if (scrollToStep === null) return;
+    if (scrollToStep === null) {
+      return;
+    }
 
     performScroll(scrollToStep);
     setScrollToStep(null); // Reset after scrolling to setup for next scroll
   }, [scrollToStep, performScroll]);
 
   const onPrev = () => {
-    if (!canScrollLeft) return;
+    if (!canScrollLeft) {
+      return;
+    }
 
     const scrollContainer = scrollContainerRef.current;
-    if (!scrollContainer) return;
+    if (!scrollContainer) {
+      return;
+    }
 
     // Find the first visible step and scroll one step before it
     const containerRect = scrollContainer.getBoundingClientRect();
@@ -197,10 +211,14 @@ const Stepper = ({
   };
 
   const onNext = () => {
-    if (!canScrollRight) return;
+    if (!canScrollRight) {
+      return;
+    }
 
     const scrollContainer = scrollContainerRef.current;
-    if (!scrollContainer) return;
+    if (!scrollContainer) {
+      return;
+    }
 
     // Find the last visible step and scroll one step after it
     const containerRect = scrollContainer.getBoundingClientRect();
