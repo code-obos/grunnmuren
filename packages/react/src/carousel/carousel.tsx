@@ -69,6 +69,8 @@ const Carousel = ({
       carouselItemsRef.current.children.length - 1 === scrollTargetIndex,
   );
 
+  const prefersReducedMotion = usePrefersReducedMotion();
+
   useEffect(() => {
     setHasReachedScrollStart(scrollTargetIndex === 0);
     setHasReachedScrollEnd(
@@ -111,10 +113,6 @@ const Carousel = ({
 
     const elementWithFocusVisible =
       carouselRef.current?.querySelector(':focus-visible');
-
-    const prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)',
-    ).matches;
 
     carouselItemsRef.current.children[scrollTargetIndex]?.scrollIntoView({
       behavior: prefersReducedMotion ? 'instant' : 'smooth',
@@ -170,7 +168,7 @@ const Carousel = ({
       }
       processQueue(); // Process any queued scrolls
     }, 500);
-  }, [scrollTargetIndex]);
+  }, [scrollTargetIndex, prefersReducedMotion]);
 
   // Clean up timeout on unmount
   useEffect(() => {

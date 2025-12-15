@@ -1,6 +1,7 @@
 import { PlayerPause, PlayerPlay } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
 import { useEffect, useRef, useState } from 'react';
+import { usePrefersReducedMotion } from '../use-prefers-reduced-motion';
 
 type VideoLoopProps = {
   /** The video url */
@@ -23,21 +24,19 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
   // Needed to show the pause button when the video is actually playing (refer to google's autoplay policy: https://developers.google.com/web/updates/2017/09/autoplay-policy-changes)
   const [isPlaying, setIsPlaying] = useState(false);
 
-  // We need to check if the user prefers reduced motion, so that we can prevent the video from autoplaying if so
-  const [userPrefersReducedMotion, setUserPrefersReducedMotion] = useState<
-    null | boolean
-  >(null);
+  // // We need to check if the user prefers reduced motion, so that we can prevent the video from autoplaying if so
+  // const [userPrefersReducedMotion, setUserPrefersReducedMotion] = useState<
+  //   null | boolean
+  // >(null);
+
+  const prefersReducedMotion = usePrefersReducedMotion(null);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
-    const { matches: userPrefersReducedMotion } = matchMedia(
-      '(prefers-reduced-motion: reduce)',
-    );
-    setUserPrefersReducedMotion(userPrefersReducedMotion);
     // Autoplay the video if the user does not prefer reduced motion
-    setShouldPlay(!userPrefersReducedMotion);
-  }, []);
+    setShouldPlay(!prefersReducedMotion);
+  }, [prefersReducedMotion]);
 
   // Follow google's autoplay policy: https://developers.google.com/web/updates/2017/09/autoplay-policy-changes
   // "Don't assume a video will play, and don't show a pause button when the video is not actually playing."
@@ -62,7 +61,7 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
       className={cx(
         className,
         'relative',
-        userPrefersReducedMotion === null && 'opacity-0',
+        prefersReducedMotion === null && 'opacity-0',
       )}
     >
       <video
@@ -71,11 +70,11 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
         // cursor-pointer is not working on the button below, so we add it here for the same effect
         className="h-full max-h-[inherit] w-full cursor-pointer rounded-[inherit] object-cover"
         playsInline
-        loop={userPrefersReducedMotion === false}
-        autoPlay={userPrefersReducedMotion === false}
+        loop={prefersReducedMotion === false}
+        autoPlay={prefersReducedMotion === false}
         muted
         onEnded={(event) => {
-          if (userPrefersReducedMotion) {
+          if (prefersReducedMotion) {
             // Reset the video to the beginning if the user prefers reduced motion, since the video will not loop
             event.currentTarget.currentTime = 0;
             setShouldPlay(false);
@@ -85,7 +84,7 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
       >
         <source src={src} type={`video/${format}`} />
       </video>
-      {userPrefersReducedMotion !== null && (
+      {prefersReducedMotion !== null && (
         <button
           data-slot="video-loop-button"
           aria-hidden
