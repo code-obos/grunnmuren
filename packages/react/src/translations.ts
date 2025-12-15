@@ -45,9 +45,9 @@ const translations: Translations = {
     en: '(external link)',
   },
   stepper: {
-    nb: 'Stegindikator',
-    sv: 'Stegindikator',
-    en: 'Form steps',
+    nb: 'Steg',
+    sv: 'Steg',
+    en: 'Steps',
   },
   completed: {
     nb: 'Fullført',
