@@ -19,6 +19,7 @@ import { Button, ButtonContext } from '../button';
 import { MediaContext } from '../content';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
+import { usePrefersReducedMotion } from '../use-prefers-reduced-motion';
 
 type CarouselItem = Pick<CarouselItemProps, 'id'> & {
   /** The index of the item that is currently in view */
@@ -68,6 +69,8 @@ const Carousel = ({
       carouselItemsRef.current.children.length - 1 === scrollTargetIndex,
   );
 
+  const prefersReducedMotion = usePrefersReducedMotion();
+
   useEffect(() => {
     setHasReachedScrollStart(scrollTargetIndex === 0);
     setHasReachedScrollEnd(
@@ -110,10 +113,6 @@ const Carousel = ({
 
     const elementWithFocusVisible =
       carouselRef.current?.querySelector(':focus-visible');
-
-    const prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)',
-    ).matches;
 
     carouselItemsRef.current.children[scrollTargetIndex]?.scrollIntoView({
       behavior: prefersReducedMotion ? 'instant' : 'smooth',
@@ -169,7 +168,7 @@ const Carousel = ({
       }
       processQueue(); // Process any queued scrolls
     }, 500);
-  }, [scrollTargetIndex]);
+  }, [scrollTargetIndex, prefersReducedMotion]);
 
   // Clean up timeout on unmount
   useEffect(() => {
@@ -390,19 +389,7 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => {
     handleNext,
   } = useContext(CarouselItemsContext);
 
-  const prefersReducedMotion = useRef(
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches,
-  );
-
-  // Update the ref when the media query changes
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const handleChange = (e: MediaQueryListEvent) => {
-      prefersReducedMotion.current = e.matches;
-    };
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     // Prevent default behavior when holding down arrow keys (when repeat is true)
@@ -416,7 +403,7 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => {
     }
 
     // For users with prefers-reduced-motion, trigger button click behavior instead of native scroll
-    if (prefersReducedMotion.current) {
+    if (prefersReducedMotion) {
       if (event.key === 'ArrowLeft' && handlePrevious) {
         event.preventDefault();
         handlePrevious();
