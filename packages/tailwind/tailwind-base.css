@@ -409,10 +409,8 @@
         @apply bg-white text-blue-dark;
       }
 
-      &:not(:last-child) {
-        [data-slot="progress-bar"] {
-          @apply w-4 max-lg:grow lg:w-14 lg:rotate-90 lg:absolute lg:-left-3 lg:px-1.5 lg:-bottom-[calc(100%-2px)];
-        }
+      [data-slot="progress-bar"] {
+        @apply w-4 max-lg:grow lg:w-14 lg:rotate-90 lg:absolute lg:-left-3 lg:px-1.5 lg:-bottom-[calc(100%-2px)];
       }
 
       & > *:is([data-slot="text"], [data-slot="link"]) {
