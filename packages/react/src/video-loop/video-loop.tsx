@@ -24,11 +24,6 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
   // Needed to show the pause button when the video is actually playing (refer to google's autoplay policy: https://developers.google.com/web/updates/2017/09/autoplay-policy-changes)
   const [isPlaying, setIsPlaying] = useState(false);
 
-  // // We need to check if the user prefers reduced motion, so that we can prevent the video from autoplaying if so
-  // const [userPrefersReducedMotion, setUserPrefersReducedMotion] = useState<
-  //   null | boolean
-  // >(null);
-
   const prefersReducedMotion = usePrefersReducedMotion(null);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
