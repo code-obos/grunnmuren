@@ -104,7 +104,7 @@ export const DisclosureStateContext = createContext<DisclosureState | null>(
   null,
 );
 
-const Disclosure = ({ ref: _ref, ..._props }: DisclosureProps) => {
+const Disclosure = ({ ref: _ref, children, ..._props }: DisclosureProps) => {
   const [props, ref] = useContextProps(
     _props,
     _ref as ForwardedRef<HTMLDivElement>,
@@ -113,7 +113,7 @@ const Disclosure = ({ ref: _ref, ..._props }: DisclosureProps) => {
 
   const groupState = useContext(DisclosureGroupStateContext);
 
-  let { id, children, ...otherProps } = props;
+  let { id, ...otherProps } = props;
   const defaultId = useId();
   id ||= defaultId;
   const isExpanded = groupState
