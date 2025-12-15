@@ -29,10 +29,8 @@ type StepProps = HTMLProps<HTMLLIElement> & {
 
 const _StepContext = createContext<{
   isCurrent: boolean;
-  isSummary: boolean;
 }>({
   isCurrent: false,
-  isSummary: false,
 });
 
 const _StepProvider = _StepContext.Provider;
@@ -40,7 +38,7 @@ const _StepProvider = _StepContext.Provider;
 const Step = ({ isCompleted = false, children, ...restProps }: StepProps) => {
   const locale = useLocale();
   const id = useId();
-  const { isCurrent, isSummary } = use(_StepContext);
+  const { isCurrent } = use(_StepContext);
 
   const state = isCompleted ? 'completed' : 'pending';
 
@@ -73,12 +71,10 @@ const Step = ({ isCompleted = false, children, ...restProps }: StepProps) => {
         {isCompleted ? (
           <Check aria-label={translations.completed[locale]} />
         ) : (
-          !isSummary && (
-            <Edit
-              data-slot="in-progress-icon"
-              aria-label={translations.inProgress[locale]}
-            />
-          )
+          <Edit
+            data-slot="in-progress-icon"
+            aria-label={translations.inProgress[locale]}
+          />
         )}
         {children}
       </Provider>
@@ -294,7 +290,6 @@ const Stepper = ({
             <_StepProvider
               value={{
                 isCurrent,
-                isSummary: index + 1 === childCount,
               }}
             >
               {child}
