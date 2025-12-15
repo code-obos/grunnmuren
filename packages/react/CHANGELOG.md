@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 3.3.2
+
+### Patch Changes
+
+- 7939bee: fix bug where <Carousel> applied a media query outside of an effect, causing SSR issues
+
 ## 3.3.1
 
 ### Patch Changes
