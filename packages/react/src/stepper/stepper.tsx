@@ -20,8 +20,6 @@ import { ScrollButton, useHorizontalScroll } from '../utils';
 type StepProps = HTMLProps<HTMLLIElement> & {
   /**
    * Indicates whether the step is completed or not.
-   * A completed step means that the user has filled out and submitted the corresponding section.
-   * And that all the data entered in that section is valid.
    * @default false
    */
   isCompleted?: boolean;
