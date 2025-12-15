@@ -144,7 +144,7 @@ const Stepper = ({
     [scrollContainerRef],
   );
 
-  // Scroll when the currentStep prop changes (only if not fully visible)
+  // Scroll when the currentStep prop changes
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
     if (!scrollContainer) {
