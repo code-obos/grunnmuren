@@ -110,7 +110,6 @@ const Disclosure = ({ ref: _ref, children, ..._props }: DisclosureProps) => {
     _ref as ForwardedRef<HTMLDivElement>,
     DisclosureContext,
   );
-
   const groupState = useContext(DisclosureGroupStateContext);
 
   let { id, ...otherProps } = props;
