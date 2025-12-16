@@ -38,6 +38,6 @@
   },
   "devDependencies": {
     "@types/node": "^24.0.0",
-    "tailwindcss": "4.1.17"
+    "tailwindcss": "4.1.18"
   }
 }
