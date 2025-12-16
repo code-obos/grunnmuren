@@ -31,16 +31,6 @@ import {
   useHorizontalScroll,
 } from '../utils';
 
-const tableVariants = cva({
-  base: ['relative'],
-  variants: {
-    variant: {
-      default: '',
-      'zebra-striped': '',
-    },
-  },
-});
-
 const tableRowVariants = cva({
   base: [
     'data-focus-visible:outline-focus-inset',
@@ -114,41 +104,36 @@ function Table(props: TableProps) {
     },
     [scrollContainerRef],
   );
+
   return (
-    <div className={tableVariants({ className, variant })}>
-      <div className="relative overflow-hidden">
-        <ScrollButton
-          direction="left"
-          onClick={() => handleScroll('left')}
-          isVisible={canScrollLeft}
-          hasScrollingOccurred={hasScrollingOccurred}
-          className="-translate-y-1/2 absolute top-5 z-10 h-11 w-11"
-          iconClassName="h-5 w-5"
-        />
-
-        <ScrollButton
-          direction="right"
-          onClick={() => handleScroll('right')}
-          isVisible={canScrollRight}
-          hasScrollingOccurred={hasScrollingOccurred}
-          className="-translate-y-1/2 absolute top-5 z-10 h-11 w-11"
-          iconClassName="h-5 w-5"
-        />
-
-        <div
-          ref={scrollContainerRef}
-          className="scrollbar-hidden overflow-x-auto"
-          style={{ WebkitOverflowScrolling: 'touch' }}
+    <div className={cx('relative overflow-hidden', className)}>
+      <div
+        ref={scrollContainerRef}
+        className="scrollbar-hidden overflow-x-auto"
+        style={{ WebkitOverflowScrolling: 'touch' }}
+      >
+        <RACTable
+          {...restProps}
+          className="group w-full min-w-fit"
+          data-variant={variant}
         >
-          <RACTable
-            {...restProps}
-            className="group w-full min-w-fit"
-            data-variant={variant}
-          >
-            {children}
-          </RACTable>
-        </div>
+          {children}
+        </RACTable>
       </div>
+
+      <ScrollButton
+        direction="left"
+        onClick={() => handleScroll('left')}
+        isVisible={canScrollLeft}
+        hasScrollingOccurred={hasScrollingOccurred}
+      />
+
+      <ScrollButton
+        direction="right"
+        onClick={() => handleScroll('right')}
+        isVisible={canScrollRight}
+        hasScrollingOccurred={hasScrollingOccurred}
+      />
     </div>
   );
 }
