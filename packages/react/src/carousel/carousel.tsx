@@ -114,11 +114,22 @@ const Carousel = ({
     const elementWithFocusVisible =
       carouselRef.current?.querySelector(':focus-visible');
 
-    carouselItemsRef.current.children[scrollTargetIndex]?.scrollIntoView({
-      behavior: prefersReducedMotion ? 'instant' : 'smooth',
-      inline: 'start',
-      block: 'nearest',
-    });
+    const targetElement = carouselItemsRef.current.children[
+      scrollTargetIndex
+    ] as HTMLElement;
+    if (targetElement) {
+      // Calculate the scroll position to scroll the target element into view
+      const containerRect = carouselItemsRef.current.getBoundingClientRect();
+      const targetRect = targetElement.getBoundingClientRect();
+      const scrollLeft =
+        carouselItemsRef.current.scrollLeft +
+        (targetRect.left - containerRect.left);
+
+      carouselItemsRef.current.scrollTo({
+        left: Math.round(scrollLeft),
+        behavior: prefersReducedMotion ? 'instant' : 'smooth',
+      });
+    }
 
     if (prevIndex.current !== scrollTargetIndex && onChange) {
       onChange({
