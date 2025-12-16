@@ -90,8 +90,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/react
       '@portabletext/react':
-        specifier: 5.0.0
-        version: 5.0.0(react@19.2.0)
+        specifier: 6.0.0
+        version: 6.0.0(react@19.2.0)
       '@react-aria/utils':
         specifier: 3.31.0
         version: 3.31.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -2674,6 +2674,12 @@ packages:
     peerDependencies:
       react: ^18.2 || ^19
 
+  '@portabletext/react@6.0.0':
+    resolution: {integrity: sha512-8jzmFruC6fhC8A47c+RdiFfldzRq/rRW/FwRsr5ZMeNeCf3S0dXVlM/LJQRWH5JLQXbH3oxINN1UV2mbuZQJ9w==}
+    engines: {node: '>=20.19 <22 || >=22.12'}
+    peerDependencies:
+      react: ^18.2 || ^19
+
   '@portabletext/sanity-bridge@1.2.4':
     resolution: {integrity: sha512-ph94+vTx3+sHhnnJutf72Gy7PFFeCR512VpD0T0g4x/gPNVpeIUGidtM/8PTUsoXGNqfp99AaRtrJ7tRmOU+gg==}
     engines: {node: '>=20.19 <22 || >=22.12'}
@@ -2693,8 +2699,16 @@ packages:
     resolution: {integrity: sha512-Jj/QIy3vzZCNcxiUGM7KjGhUhyVjch+9pOzotWRARPNe07R6nbF/cRsKL70q5Xizf+6PVtFYwks4CSXKInC+wg==}
     engines: {node: '>=20.19 <22 || >=22.12'}
 
+  '@portabletext/toolkit@5.0.0':
+    resolution: {integrity: sha512-jcDOv1RKO/j08pdnc/6i5tULcAzEYCR41XDVYOqmmX8bvEJbWJabhpVjHT1ls6p27v9gtA4NG2SO5xdMpgWSQQ==}
+    engines: {node: '>=20.19 <22 || >=22.12'}
+
   '@portabletext/types@3.0.0':
     resolution: {integrity: sha512-7U8+bFcnguNtXr4rwMDj0EvJJDRzLaaof2mQqCjUcqxuuJpAppFaATZgrKmPI1uBgtFMi4unk1nIaOOmLHrX8Q==}
+    engines: {node: '>=20.19 <22 || >=22.12'}
+
+  '@portabletext/types@4.0.0':
+    resolution: {integrity: sha512-mEoN82OQckrshqRx8idp+x8B/OpMfUMSjQp1w1wZFM3hf8cplGhK59Sa/UuGU6XdgAnFq90vJtnj5ejOmZmhvw==}
     engines: {node: '>=20.19 <22 || >=22.12'}
 
   '@react-aria/autocomplete@3.0.0-rc.3':
@@ -7298,6 +7312,7 @@ packages:
   next@16.0.6:
     resolution: {integrity: sha512-2zOZ/4FdaAp5hfCU/RnzARlZzBsjaTZ/XjNQmuyYLluAPM7kcrbIkdeO2SL0Ysd1vnrSgU+GwugfeWX1cUCgCg==}
     engines: {node: '>=20.9.0'}
+    deprecated: This version has a security vulnerability. Please upgrade to a patched version. See https://nextjs.org/blog/CVE-2025-66478 for more details.
     hasBin: true
     peerDependencies:
       '@opentelemetry/api': ^1.1.0
@@ -12128,6 +12143,12 @@ snapshots:
       '@portabletext/types': 3.0.0
       react: 19.2.0
 
+  '@portabletext/react@6.0.0(react@19.2.0)':
+    dependencies:
+      '@portabletext/toolkit': 5.0.0
+      '@portabletext/types': 4.0.0
+      react: 19.2.0
+
   '@portabletext/sanity-bridge@1.2.4(@sanity/schema@4.19.0(@types/react@19.2.7)(debug@4.4.3))(@sanity/types@4.19.0(@types/react@19.2.7)(debug@4.4.3))':
     dependencies:
       '@portabletext/schema': 2.0.0
@@ -12146,7 +12167,13 @@ snapshots:
     dependencies:
       '@portabletext/types': 3.0.0
 
+  '@portabletext/toolkit@5.0.0':
+    dependencies:
+      '@portabletext/types': 4.0.0
+
   '@portabletext/types@3.0.0': {}
+
+  '@portabletext/types@4.0.0': {}
 
   '@react-aria/autocomplete@3.0.0-rc.3(react-dom@19.2.0(react@19.0.0))(react@19.0.0)':
     dependencies:
