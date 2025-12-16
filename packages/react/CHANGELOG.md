@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-react
 
+## 3.3.3
+
+### Patch Changes
+
+- 257cec7: Alertbox: always keep the icon to the top, even when heading/content is in multiple lines
+- d6cf4cf: Fixes the `<Disclosure>` component so that it can receive `children` through `DisclosureContext`
+
 ## 3.3.2
 
 ### Patch Changes
