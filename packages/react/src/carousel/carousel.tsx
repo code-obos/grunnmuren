@@ -5,9 +5,11 @@ import {
   Children,
   cloneElement,
   createContext,
+  type Dispatch,
   type HTMLProps,
   isValidElement,
   type JSX,
+  type SetStateAction,
   useContext,
   useEffect,
   useRef,
@@ -20,6 +22,7 @@ import { MediaContext } from '../content';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 import { usePrefersReducedMotion } from '../use-prefers-reduced-motion';
+import { useMountEffect } from '../utils';
 
 type CarouselItem = Pick<CarouselItemProps, 'id'> & {
   /** The index of the item that is currently in view */
@@ -38,15 +41,27 @@ type CarouselProps = Omit<HTMLProps<HTMLDivElement>, 'onChange'> & {
    * The argument to the callback is an object containing `index` of the new item scrolled into view and the `id` of that item (if set on the `<CarouselItem>`)
    * It also provides `prevIndex` which is the index of the previous item that was in view
    * And `prevId`, which is the id of the previous item that was in view (if set on the `<CarouselItem>`)
+   * You can use this callback to track which item is currently in view, for example for analytics or updating other parts of your UI.
+   * When you want to avoid using controlled state for the carousel, you can use this callback to with the carousel's current item.
    * @param item { index: number; id?: string; prevIndex: number; prevId?: string }
    */
   onChange?: (item: CarouselItem) => void;
+  /**
+   * For controlled selection, the index of the item that should be currently in view.
+   */
+  selectedIndex?: number;
+  /**
+   * For controlled selection, callback that is called when the selected index changes.
+   */
+  onSelectedIndexChange?: Dispatch<SetStateAction<number>>;
 };
 
 const Carousel = ({
   className,
   children,
   onChange,
+  selectedIndex: controlledIndex,
+  onSelectedIndexChange: controlledOnIndexChange,
   ...rest
 }: CarouselProps) => {
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -55,7 +70,21 @@ const Carousel = ({
   const locale = useLocale();
   const { previous, next } = translations;
 
-  const [scrollTargetIndex, setScrollTargetIndex] = useState(0);
+  // Internal state for uncontrolled usage
+  const [_scrollTargetIndex, _setScrollTargetIndex] = useState(0);
+  const setScrollTargetIndex =
+    controlledIndex !== undefined && controlledOnIndexChange
+      ? controlledOnIndexChange
+      : _setScrollTargetIndex;
+
+  useEffect(() => {
+    if (controlledIndex === undefined) {
+      controlledOnIndexChange?.(_scrollTargetIndex);
+    }
+  }, [_scrollTargetIndex, controlledIndex, controlledOnIndexChange]);
+
+  const scrollTargetIndex = controlledIndex ?? _scrollTargetIndex;
+
   const isScrollingProgrammatically = useRef(false);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const scrollQueue = useRef<number[]>([]);
@@ -68,6 +97,37 @@ const Carousel = ({
     !carouselItemsRef.current ||
       carouselItemsRef.current.children.length - 1 === scrollTargetIndex,
   );
+
+  const scrollToIndex = (index: number, options?: ScrollToOptions) => {
+    if (!carouselItemsRef.current) {
+      return;
+    }
+    const targetElement = carouselItemsRef.current.children[
+      index
+    ] as HTMLElement;
+    if (targetElement) {
+      // Calculate the scroll position to scroll the target element into view
+      const containerRect = carouselItemsRef.current.getBoundingClientRect();
+      const targetRect = targetElement.getBoundingClientRect();
+      const scrollLeft =
+        carouselItemsRef.current.scrollLeft +
+        (targetRect.left - containerRect.left);
+      carouselItemsRef.current.scrollTo({
+        ...options,
+        left: Math.round(scrollLeft),
+      });
+    }
+  };
+
+  // Scroll to the correct item on mount if controlled
+  useMountEffect(() => {
+    if (controlledIndex !== undefined) {
+      // The carousel's selected index is controlled, ensure we scroll to the correct item on mount
+      scrollToIndex(controlledIndex, {
+        behavior: 'instant',
+      });
+    }
+  }, [controlledIndex]);
 
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -114,31 +174,9 @@ const Carousel = ({
     const elementWithFocusVisible =
       carouselRef.current?.querySelector(':focus-visible');
 
-    const targetElement = carouselItemsRef.current.children[
-      scrollTargetIndex
-    ] as HTMLElement;
-    if (targetElement) {
-      // Calculate the scroll position to scroll the target element into view
-      const containerRect = carouselItemsRef.current.getBoundingClientRect();
-      const targetRect = targetElement.getBoundingClientRect();
-      const scrollLeft =
-        carouselItemsRef.current.scrollLeft +
-        (targetRect.left - containerRect.left);
-
-      carouselItemsRef.current.scrollTo({
-        left: Math.round(scrollLeft),
-        behavior: prefersReducedMotion ? 'instant' : 'smooth',
-      });
-    }
-
-    if (prevIndex.current !== scrollTargetIndex && onChange) {
-      onChange({
-        index: scrollTargetIndex,
-        id: carouselItemsRef.current.children[scrollTargetIndex]?.id,
-        prevIndex: prevIndex.current,
-        prevId: carouselItemsRef.current.children[prevIndex.current]?.id,
-      });
-    }
+    scrollToIndex(scrollTargetIndex, {
+      behavior: prefersReducedMotion ? 'instant' : 'smooth',
+    });
 
     prevIndex.current = scrollTargetIndex;
 
