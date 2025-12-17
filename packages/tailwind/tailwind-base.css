@@ -336,4 +336,86 @@
       @apply motion-safe:-translate-y-0.5 motion-safe:translate-x-0.5;
     }
   }
+
+  /*** Stepper component styles ***/
+  .stepper-container,
+  [data-slot="stepper-container"] {
+    @apply relative overflow-hidden;
+  }
+
+  .stepper,
+  [data-slot="stepper"] {
+    counter-reset: step-counter;
+    @apply flex gap-x-2 lg:flex-col lg:gap-y-14 scrollbar-hidden overflow-x-auto;
+    /** Make room for the absolutely positioned check icon on the first item */
+    @apply lg:pt-1;
+    /** Make room for the focus outline */
+    @apply px-1;
+
+    [data-slot="step"] {
+      counter-increment: step-counter;
+      @apply flex items-center gap-x-2 relative max-lg:my-1.5;
+
+      &::before {
+        content: counter(step-counter);
+      }
+
+      &::before,
+      &[data-prev-steps-expanded]::after,
+      &[data-next-steps-expanded]::after {
+        @apply shrink-0 font-semibold size-8 border-2 rounded-full border-blue-dark grid place-content-center;
+      }
+
+      /** Place the focus styles on the ::before element instead of the link, since the link text is not visible on smaller screens */
+      &:has([data-slot="link"]:focus-visible) {
+        &::before {
+          @apply outline-focus-offset;
+        }
+      }
+
+      [data-slot="link"] {
+        @apply focus-visible:outline-none;
+        /** Create a 44x44 px clickable area, where the step number next to each link will also be covered **/
+        @apply py-2.5 lg:pl-11 lg:-ml-11 -my-2.5;
+      }
+
+      &[data-is-current="true"] {
+        &::before {
+          @apply bg-sky-light border-4 text-blue-dark;
+        }
+      }
+
+      &[data-state="completed"]:not([data-is-current="true"]) {
+        &::before {
+          @apply bg-blue-dark text-white;
+        }
+      }
+
+      svg {
+        @apply text-white absolute scale-60 border-2 border-white bg-blue-dark rounded-full left-4 -top-2;
+      }
+
+      &[data-state="pending"] {
+        &:not(:has([data-slot="link"])),
+        &:not(:has([data-slot="progress-bar"])) {
+          /** Hide in-progress icon when there is no link or a step without progress bar **/
+          [data-slot="in-progress-icon"] {
+            @apply hidden;
+          }
+        }
+      }
+
+      &[data-state="pending"]:not([data-is-current="true"])::before {
+        @apply bg-white text-blue-dark;
+      }
+
+      [data-slot="progress-bar"] {
+        @apply w-4 max-lg:grow lg:w-14 lg:rotate-90 lg:absolute lg:-left-3 lg:px-1.5 lg:-bottom-[calc(100%-2px)];
+      }
+
+      & > *:is([data-slot="text"], [data-slot="link"]) {
+        @apply max-lg:absolute max-lg:opacity-0 max-lg:max-w-11 max-lg:overflow-x-hidden;
+      }
+    }
+  }
 }

@@ -25,6 +25,7 @@ export * from './numberfield';
 export * from './progress-bar';
 export * from './radiogroup';
 export * from './select';
+export * from './stepper';
 export * from './table';
 export * from './tabs';
 export * from './tag-group';
