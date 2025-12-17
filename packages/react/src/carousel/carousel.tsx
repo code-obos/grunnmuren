@@ -5,24 +5,19 @@ import {
   Children,
   cloneElement,
   createContext,
-  type Dispatch,
-  type HTMLProps,
   isValidElement,
   type JSX,
-  type SetStateAction,
   useContext,
   useEffect,
   useRef,
   useState,
 } from 'react';
 import { DEFAULT_SLOT, Provider } from 'react-aria-components';
-import { useDebouncedCallback } from 'use-debounce';
 import { Button, ButtonContext } from '../button';
 import { MediaContext } from '../content';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 import { usePrefersReducedMotion } from '../use-prefers-reduced-motion';
-import { useMountEffect } from '../utils';
 
 type CarouselItem = Pick<CarouselItemProps, 'id'> & {
   /** The index of the item that is currently in view */
@@ -36,16 +31,19 @@ type CarouselItem = Pick<CarouselItemProps, 'id'> & {
 type CarouselProps = Omit<HTMLProps<HTMLDivElement>, 'onChange'> & {
   /** The <CarouselItem/> components to be displayed within the carousel. */
   children: React.ReactNode;
-  /**
-   * Callback that is triggered when a user navigates to new item in the Carousel.
-   * The argument to the callback is an object containing `index` of the new item scrolled into view and the `id` of that item (if set on the `<CarouselItem>`)
-   * It also provides `prevIndex` which is the index of the previous item that was in view
-   * And `prevId`, which is the id of the previous item that was in view (if set on the `<CarouselItem>`)
-   * You can use this callback to track which item is currently in view, for example for analytics or updating other parts of your UI.
-   * When you want to avoid using controlled state for the carousel, you can use this callback to with the carousel's current item.
-   * @param item { index: number; id?: string; prevIndex: number; prevId?: string }
-   */
-  onChange?: (item: CarouselItem) => void;
+  // /**
+  //  * Callback that is triggered when a user navigates to new item in the Carousel.
+  //  * The argument to the callback is an object containing `index` of the new item scrolled into view and the `id` of that item (if set on the `<CarouselItem>`)
+  //  * It also provides `prevIndex` which is the index of the previous item that was in view
+  //  * And `prevId`, which is the id of the previous item that was in view (if set on the `<CarouselItem>`)
+  //  * You can use this callback to track which item is currently in view, for example for analytics or updating other parts of your UI.
+  //  * When you want to avoid using controlled state for the carousel, you can use this callback to with the carousel's current item.
+  //  * @param item { index: number; id?: string; prevIndex: number; prevId?: string }
+  //  */
+  // onChange?: (item: CarouselItem) => void;
+  defaultSelectedIndex?: number;
+  /** Enables infinite looping of the carousel */
+  loop?: boolean;
   /**
    * For controlled selection, the index of the item that should be currently in view.
    */
@@ -53,51 +51,67 @@ type CarouselProps = Omit<HTMLProps<HTMLDivElement>, 'onChange'> & {
   /**
    * For controlled selection, callback that is called when the selected index changes.
    */
-  onSelectedIndexChange?: Dispatch<SetStateAction<number>>;
+  onSelectedIndexChange?: (index: number) => void;
 };
 
 const Carousel = ({
   className,
   children,
   onChange,
-  selectedIndex: controlledIndex,
-  onSelectedIndexChange: controlledOnIndexChange,
+  defaultSelectedIndex = 0,
+  selectedIndex,
+  onSelectedIndexChange,
   ...rest
 }: CarouselProps) => {
+  const isControlled = selectedIndex !== undefined;
   const carouselRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   const carouselItemsRef = useRef<HTMLDivElement>(null);
   const locale = useLocale();
   const { previous, next } = translations;
 
-  // Internal state for uncontrolled usage
-  const [_scrollTargetIndex, _setScrollTargetIndex] = useState(0);
-  // Resolve controlled vs uncontrolled state
-  const [scrollTargetIndex, setScrollTargetIndex] = [
-    controlledIndex ?? _scrollTargetIndex,
-    controlledOnIndexChange ?? _setScrollTargetIndex,
-  ];
-
-  const isScrollingProgrammatically = useRef(false);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const scrollQueue = useRef<number[]>([]);
-
-  const [hasReachedScrollStart, setHasReachedScrollStart] = useState(
-    scrollTargetIndex === 0,
+  const [scrollIndex, setScrollIndex] = useState(
+    selectedIndex ?? defaultSelectedIndex,
   );
 
-  const [hasReachedScrollEnd, setHasReachedScrollEnd] = useState(
-    !carouselItemsRef.current ||
-      carouselItemsRef.current.children.length - 1 === scrollTargetIndex,
-  );
+  const itemCount = carouselItemsRef.current?.children.length ?? 0;
 
-  const scrollToIndex = (index: number, options?: ScrollToOptions) => {
+  useUpdateEffect(() => {
+    setScrollIndex(selectedIndex ?? defaultSelectedIndex);
+  }, [selectedIndex]);
+
+  // // Internal state for uncontrolled usage
+  // const [_scrollTargetIndex, _setScrollTargetIndex] = useState(0);
+  // // Resolve controlled vs uncontrolled state
+  // const [scrollTargetIndex, setScrollTargetIndex] = [
+  //   controlledIndex ?? _scrollTargetIndex,
+  //   controlledOnIndexChange ?? _setScrollTargetIndex,
+  // ];
+
+  // const isScrollingProgrammatically = useRef(false);
+  // const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  // const scrollQueue = useRef<number[]>([]);
+
+  // const [hasReachedScrollStart, setHasReachedScrollStart] = useState(
+  //   scrollTargetIndex === 0,
+  // );
+
+  // const [hasReachedScrollEnd, setHasReachedScrollEnd] = useState(
+  //   !carouselItemsRef.current ||
+  //     carouselItemsRef.current.children.length - 1 === scrollTargetIndex,
+  // );
+  //
+
+  useEffect(() => {
     if (!carouselItemsRef.current) {
       return;
     }
+
     const targetElement = carouselItemsRef.current.children[
-      index
+      scrollIndex
     ] as HTMLElement;
+
     if (targetElement) {
       // Calculate the scroll position to scroll the target element into view
       const containerRect = carouselItemsRef.current.getBoundingClientRect();
@@ -105,211 +119,239 @@ const Carousel = ({
       const scrollLeft =
         carouselItemsRef.current.scrollLeft +
         (targetRect.left - containerRect.left);
+
       carouselItemsRef.current.scrollTo({
-        ...options,
+        behavior: prefersReducedMotion ? 'instant' : 'smooth',
         left: Math.round(scrollLeft),
       });
     }
-  };
+  }, [scrollIndex, prefersReducedMotion]);
 
-  // Scroll to the correct item on mount if controlled
-  useMountEffect(() => {
-    if (controlledIndex !== undefined) {
-      // The carousel's selected index is controlled, ensure we scroll to the correct item on mount
-      scrollToIndex(controlledIndex, {
-        behavior: 'instant',
-      });
-    }
-  }, [controlledIndex]);
+  // const scrollToIndex = (index: number, options?: ScrollToOptions) => {
+  //   if (!carouselItemsRef.current) {
+  //     return;
+  //   }
+  //   const targetElement = carouselItemsRef.current.children[
+  //     index
+  //   ] as HTMLElement;
+  //   if (targetElement) {
+  //     // Calculate the scroll position to scroll the target element into view
+  //     const containerRect = carouselItemsRef.current.getBoundingClientRect();
+  //     const targetRect = targetElement.getBoundingClientRect();
+  //     const scrollLeft =
+  //       carouselItemsRef.current.scrollLeft +
+  //       (targetRect.left - containerRect.left);
+  //     carouselItemsRef.current.scrollTo({
+  //       ...options,
+  //       left: Math.round(scrollLeft),
+  //     });
+  //   }
+  // };
 
-  const prefersReducedMotion = usePrefersReducedMotion();
+  // // Scroll to the correct item on mount if controlled
+  // useMountEffect(() => {
+  //   if (controlledIndex !== undefined) {
+  //     // The carousel's selected index is controlled, ensure we scroll to the correct item on mount
+  //     scrollToIndex(controlledIndex, {
+  //       behavior: 'instant',
+  //     });
+  //   }
+  // }, [controlledIndex]);
 
-  useEffect(() => {
-    setHasReachedScrollStart(scrollTargetIndex === 0);
-    setHasReachedScrollEnd(
-      !carouselItemsRef.current ||
-        carouselItemsRef.current.children.length - 1 === scrollTargetIndex,
-    );
-  }, [scrollTargetIndex]);
+  // useEffect(() => {
+  //   setHasReachedScrollStart(scrollTargetIndex === 0);
+  //   setHasReachedScrollEnd(
+  //     !carouselItemsRef.current ||
+  //       carouselItemsRef.current.children.length - 1 === scrollTargetIndex,
+  //   );
+  // }, [scrollTargetIndex]);
 
   // Keep track of the previous index to determine if the user is scrolling forward or backward
   // This is used to determine which callback to call (onPrev or onNext)
-  const prevIndex = useRef(0);
+  // const prevIndex = useRef(0);
 
   // Processes the next scroll action in the queue, if any
   // All clicks on the prev/next buttons are queued while a programmatic scroll is in progress
   // This is to ensure that rapid clicks on the buttons do not cause janky scrolling behavior
   // while still a snappy response to user clicks
-  const processQueue = () => {
-    if (
-      scrollQueue.current.length > 0 &&
-      !isScrollingProgrammatically.current
-    ) {
-      const nextIndex = scrollQueue.current?.shift();
-      if (nextIndex !== undefined) {
-        setScrollTargetIndex(nextIndex);
-      }
-    }
-  };
+  // const processQueue = () => {
+  //   if (
+  //     scrollQueue.current.length > 0 &&
+  //     !isScrollingProgrammatically.current
+  //   ) {
+  //     const nextIndex = scrollQueue.current?.shift();
+  //     if (nextIndex !== undefined) {
+  //       setScrollTargetIndex(nextIndex);
+  //     }
+  //   }
+  // };
 
   // Handle scrolling when user clicks the arrow icons
-  useUpdateEffect(() => {
-    if (!carouselItemsRef.current) {
-      return;
-    }
+  // useUpdateEffect(() => {
+  //   if (!carouselItemsRef.current) {
+  //     return;
+  //   }
 
-    if (scrollTimeoutRef.current) {
-      clearTimeout(scrollTimeoutRef.current);
-    }
+  //   if (scrollTimeoutRef.current) {
+  //     clearTimeout(scrollTimeoutRef.current);
+  //   }
 
-    isScrollingProgrammatically.current = true;
+  //   isScrollingProgrammatically.current = true;
 
-    const elementWithFocusVisible =
-      carouselRef.current?.querySelector(':focus-visible');
+  //   const elementWithFocusVisible =
+  //     carouselRef.current?.querySelector(':focus-visible');
 
-    scrollToIndex(scrollTargetIndex, {
-      behavior: prefersReducedMotion ? 'instant' : 'smooth',
-    });
+  //   scrollToIndex(scrollTargetIndex, {
+  //     behavior: prefersReducedMotion ? 'instant' : 'smooth',
+  //   });
 
-    if (prevIndex.current !== scrollTargetIndex && onChange) {
-      onChange({
-        index: scrollTargetIndex,
-        id: carouselItemsRef.current.children[scrollTargetIndex]?.id,
-        prevIndex: prevIndex.current,
-        prevId: carouselItemsRef.current.children[prevIndex.current]?.id,
-      });
-    }
+  //   if (prevIndex.current !== scrollTargetIndex && onChange) {
+  //     onChange({
+  //       index: scrollTargetIndex,
+  //       id: carouselItemsRef.current.children[scrollTargetIndex]?.id,
+  //       prevIndex: prevIndex.current,
+  //       prevId: carouselItemsRef.current.children[prevIndex.current]?.id,
+  //     });
+  //   }
 
-    prevIndex.current = scrollTargetIndex;
+  //   prevIndex.current = scrollTargetIndex;
 
-    scrollTimeoutRef.current = setTimeout(() => {
-      isScrollingProgrammatically.current = false;
-      scrollTimeoutRef.current = null;
-      if (
-        elementWithFocusVisible &&
-        !carouselRef.current?.contains(document.activeElement)
-      ) {
-        // Restore focus to the appropriate element after scrolling
-        // First check if the prev or next buttons just got hidden due to reaching the start/end of the carousel
-        // If so, move focus to the other button. This is to avoid a scroll jank that occurs if instead focus is restored to the carousel container
-        // This jank happens because of the delays used for scrolling with these buttons (debounce, queuing etc.).
-        switch (elementWithFocusVisible.slot) {
-          case 'prev': {
-            // Focus was lost when the prev button turned invisible, set it to the next button
-            const nextButton = carouselRef.current?.querySelector(
-              '[slot="next"]',
-            ) as HTMLElement | null;
-            nextButton?.focus();
-            break;
-          }
-          case 'next': {
-            // Focus was lost when the next button turned invisible, set it to the prev button
-            const prevButton = carouselRef.current?.querySelector(
-              '[slot="prev"]',
-            ) as HTMLElement | null;
-            prevButton?.focus();
-            break;
-          }
-          default: {
-            // Focus was lost during while scrolling with left/right arrows, restore it to the carousel container
-            carouselItemsRef.current?.focus();
-            break;
-          }
-        }
-      }
-      processQueue(); // Process any queued scrolls
-    }, 500);
-  }, [scrollTargetIndex, prefersReducedMotion]);
+  //   scrollTimeoutRef.current = setTimeout(() => {
+  //     isScrollingProgrammatically.current = false;
+  //     scrollTimeoutRef.current = null;
+  //     if (
+  //       elementWithFocusVisible &&
+  //       !carouselRef.current?.contains(document.activeElement)
+  //     ) {
+  //       // Restore focus to the appropriate element after scrolling
+  //       // First check if the prev or next buttons just got hidden due to reaching the start/end of the carousel
+  //       // If so, move focus to the other button. This is to avoid a scroll jank that occurs if instead focus is restored to the carousel container
+  //       // This jank happens because of the delays used for scrolling with these buttons (debounce, queuing etc.).
+  //       switch (elementWithFocusVisible.slot) {
+  //         case 'prev': {
+  //           // Focus was lost when the prev button turned invisible, set it to the next button
+  //           const nextButton = carouselRef.current?.querySelector(
+  //             '[slot="next"]',
+  //           ) as HTMLElement | null;
+  //           nextButton?.focus();
+  //           break;
+  //         }
+  //         case 'next': {
+  //           // Focus was lost when the next button turned invisible, set it to the prev button
+  //           const prevButton = carouselRef.current?.querySelector(
+  //             '[slot="prev"]',
+  //           ) as HTMLElement | null;
+  //           prevButton?.focus();
+  //           break;
+  //         }
+  //         default: {
+  //           // Focus was lost during while scrolling with left/right arrows, restore it to the carousel container
+  //           carouselItemsRef.current?.focus();
+  //           break;
+  //         }
+  //       }
+  //     }
+  //     processQueue(); // Process any queued scrolls
+  //   }, 500);
+  // }, [scrollTargetIndex, prefersReducedMotion]);
 
   // Clean up timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
-    };
-  }, []);
+  // useEffect(() => {
+  //   return () => {
+  //     if (scrollTimeoutRef.current) {
+  //       clearTimeout(scrollTimeoutRef.current);
+  //     }
+  //   };
+  // }, []);
 
-  const onScroll = useDebouncedCallback(
-    (event: React.UIEvent<HTMLDivElement>) => {
-      // Ignore scroll events when we're programmatically scrolling
-      if (isScrollingProgrammatically.current) {
-        return;
-      }
+  // const onScroll = useDebouncedCallback(
+  //   (event: React.UIEvent<HTMLDivElement>) => {
+  //     // Ignore scroll events when we're programmatically scrolling
+  //     if (isScrollingProgrammatically.current) {
+  //       return;
+  //     }
 
-      const target = event.target as HTMLDivElement;
-      const containerRect = target.getBoundingClientRect();
+  //     const target = event.target as HTMLDivElement;
+  //     const containerRect = target.getBoundingClientRect();
 
-      // Calculate the index of the item that is currently in view
-      const newScrollTargetIndex = Array.from(target.children).findIndex(
-        (child) => {
-          const rect = child.getBoundingClientRect();
-          // Check if the item is more than 50% visible within the container
-          const visibleWidth =
-            Math.min(rect.right, containerRect.right) -
-            Math.max(rect.left, containerRect.left);
-          const itemWidth = rect.width;
-          return visibleWidth / itemWidth > 0.5;
-        },
-      );
+  //     // Calculate the index of the item that is currently in view
+  //     const newScrollTargetIndex = Array.from(target.children).findIndex(
+  //       (child) => {
+  //         const rect = child.getBoundingClientRect();
+  //         // Check if the item is more than 50% visible within the container
+  //         const visibleWidth =
+  //           Math.min(rect.right, containerRect.right) -
+  //           Math.max(rect.left, containerRect.left);
+  //         const itemWidth = rect.width;
+  //         return visibleWidth / itemWidth > 0.5;
+  //       },
+  //     );
 
-      if (
-        newScrollTargetIndex !== -1 &&
-        newScrollTargetIndex !== scrollTargetIndex
-      ) {
-        if (onChange) {
-          onChange({
-            index: newScrollTargetIndex,
-            id: target.children[newScrollTargetIndex]?.id,
-            prevIndex: prevIndex.current,
-            prevId: target.children[prevIndex.current]?.id,
-          });
-        }
+  //     if (
+  //       newScrollTargetIndex !== -1 &&
+  //       newScrollTargetIndex !== scrollTargetIndex
+  //     ) {
+  //       if (onChange) {
+  //         onChange({
+  //           index: newScrollTargetIndex,
+  //           id: target.children[newScrollTargetIndex]?.id,
+  //           prevIndex: prevIndex.current,
+  //           prevId: target.children[prevIndex.current]?.id,
+  //         });
+  //       }
 
-        // Update the index and prevIndex
-        setScrollTargetIndex(newScrollTargetIndex);
-        prevIndex.current = newScrollTargetIndex;
-      }
-    },
-    150, // Debounce scroll events by 150ms
-  );
+  //       // Update the index and prevIndex
+  //       setScrollTargetIndex(newScrollTargetIndex);
+  //       prevIndex.current = newScrollTargetIndex;
+  //     }
+  //   },
+  //   150, // Debounce scroll events by 150ms
+  // );
 
   const handlePrevious = () => {
-    setScrollTargetIndex((currentTargetIndex) => {
-      const targetIndex = currentTargetIndex - 1;
+    // setScrollTargetIndex((currentTargetIndex) => {
+    //   const targetIndex = currentTargetIndex - 1;
 
-      if (targetIndex < 0) {
-        return currentTargetIndex;
-      }
+    //   if (targetIndex < 0) {
+    //     return currentTargetIndex;
+    //   }
 
-      if (isScrollingProgrammatically.current) {
-        // If we're already scrolling, queue this action
-        scrollQueue.current = [targetIndex];
-        return currentTargetIndex;
-      }
+    //   if (isScrollingProgrammatically.current) {
+    //     // If we're already scrolling, queue this action
+    //     scrollQueue.current = [targetIndex];
+    //     return currentTargetIndex;
+    //   }
 
-      return targetIndex;
-    });
+    //   return targetIndex;
+    // });
+    onSelectedIndexChange?.(scrollIndex - 1);
+
+    if (!isControlled) {
+      setScrollIndex((index) => index - 1);
+    }
   };
 
   const handleNext = () => {
-    setScrollTargetIndex((currentTargetIndex) => {
-      const targetIndex = currentTargetIndex + 1;
-      if (
-        !carouselItemsRef.current ||
-        targetIndex >= carouselItemsRef.current.children.length
-      ) {
-        return currentTargetIndex;
-      }
+    onSelectedIndexChange?.(scrollIndex + 1);
 
-      if (isScrollingProgrammatically.current) {
-        // If we're already scrolling, queue this action
-        scrollQueue.current = [targetIndex];
-        return currentTargetIndex;
-      }
-
-      return targetIndex;
-    });
+    if (!isControlled) {
+      setScrollIndex((index) => index + 1);
+    }
+    // setScrollTargetIndex((currentTargetIndex) => {
+    //   const targetIndex = currentTargetIndex + 1;
+    //   if (
+    //     !carouselItemsRef.current ||
+    //     targetIndex >= carouselItemsRef.current.children.length
+    //   ) {
+    //     return currentTargetIndex;
+    //   }
+    //   if (isScrollingProgrammatically.current) {
+    //     // If we're already scrolling, queue this action
+    //     scrollQueue.current = [targetIndex];
+    //     return currentTargetIndex;
+    //   }
+    //   return targetIndex;
+    // });
   };
 
   return (
@@ -320,8 +362,8 @@ const Carousel = ({
             CarouselItemsContext,
             {
               carouselItemsRef,
-              onScroll,
-              activeIndex: scrollTargetIndex,
+              onScroll: () => {},
+              activeIndex: scrollIndex,
               handlePrevious,
               handleNext,
             },
@@ -366,7 +408,7 @@ const Carousel = ({
               color="white"
               className={cx(
                 'group/carousel-previous',
-                hasReachedScrollStart && 'invisible',
+                // hasReachedScrollStart && 'invisible',
               )}
             >
               <ChevronLeft className="group-hover/carousel-previous:motion-safe:-translate-x-1 transition-transform" />
@@ -378,7 +420,7 @@ const Carousel = ({
               color="white"
               className={cx(
                 'group/carousel-next',
-                hasReachedScrollEnd && 'invisible',
+                // hasReachedScrollEnd && 'invisible',
               )}
             >
               <ChevronRight className="transition-transform group-hover/carousel-next:motion-safe:translate-x-1" />
