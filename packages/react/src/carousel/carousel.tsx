@@ -41,6 +41,8 @@ type CarouselProps = Omit<HTMLProps<HTMLDivElement>, 'onChange'> & {
    * The argument to the callback is an object containing `index` of the new item scrolled into view and the `id` of that item (if set on the `<CarouselItem>`)
    * It also provides `prevIndex` which is the index of the previous item that was in view
    * And `prevId`, which is the id of the previous item that was in view (if set on the `<CarouselItem>`)
+   * You can use this callback to track which item is currently in view, for example for analytics or updating other parts of your UI.
+   * When you want to avoid using controlled state for the carousel, you can use this callback to with the carousel's current item.
    * @param item { index: number; id?: string; prevIndex: number; prevId?: string }
    */
   onChange?: (item: CarouselItem) => void;
@@ -89,14 +91,33 @@ const Carousel = ({
       carouselItemsRef.current.children.length - 1 === scrollTargetIndex,
   );
 
+  const scrollToIndex = (index: number, options?: ScrollToOptions) => {
+    if (!carouselItemsRef.current) {
+      return;
+    }
+    const targetElement = carouselItemsRef.current.children[
+      index
+    ] as HTMLElement;
+    if (targetElement) {
+      // Calculate the scroll position to scroll the target element into view
+      const containerRect = carouselItemsRef.current.getBoundingClientRect();
+      const targetRect = targetElement.getBoundingClientRect();
+      const scrollLeft =
+        carouselItemsRef.current.scrollLeft +
+        (targetRect.left - containerRect.left);
+      carouselItemsRef.current.scrollTo({
+        ...options,
+        left: Math.round(scrollLeft),
+      });
+    }
+  };
+
   // Scroll to the correct item on mount if controlled
   useMountEffect(() => {
     if (controlledIndex !== undefined) {
       // The carousel's selected index is controlled, ensure we scroll to the correct item on mount
-      carouselItemsRef.current?.children[controlledIndex]?.scrollIntoView({
+      scrollToIndex(controlledIndex, {
         behavior: 'instant',
-        inline: 'start',
-        block: 'nearest',
       });
     }
   }, [controlledIndex]);
@@ -146,22 +167,9 @@ const Carousel = ({
     const elementWithFocusVisible =
       carouselRef.current?.querySelector(':focus-visible');
 
-    const targetElement = carouselItemsRef.current.children[
-      scrollTargetIndex
-    ] as HTMLElement;
-    if (targetElement) {
-      // Calculate the scroll position to scroll the target element into view
-      const containerRect = carouselItemsRef.current.getBoundingClientRect();
-      const targetRect = targetElement.getBoundingClientRect();
-      const scrollLeft =
-        carouselItemsRef.current.scrollLeft +
-        (targetRect.left - containerRect.left);
-
-      carouselItemsRef.current.scrollTo({
-        left: Math.round(scrollLeft),
-        behavior: prefersReducedMotion ? 'instant' : 'smooth',
-      });
-    }
+    scrollToIndex(scrollTargetIndex, {
+      behavior: prefersReducedMotion ? 'instant' : 'smooth',
+    });
 
     if (prevIndex.current !== scrollTargetIndex && onChange) {
       onChange({
