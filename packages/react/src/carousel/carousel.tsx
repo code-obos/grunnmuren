@@ -72,11 +72,18 @@ const Carousel = ({
 
   // Internal state for uncontrolled usage
   const [_scrollTargetIndex, _setScrollTargetIndex] = useState(0);
-  // Resolve controlled vs uncontrolled state
-  const [scrollTargetIndex, setScrollTargetIndex] = [
-    controlledIndex ?? _scrollTargetIndex,
-    controlledOnIndexChange ?? _setScrollTargetIndex,
-  ];
+  const setScrollTargetIndex =
+    controlledIndex !== undefined && controlledOnIndexChange
+      ? controlledOnIndexChange
+      : _setScrollTargetIndex;
+
+  useEffect(() => {
+    if (controlledIndex === undefined) {
+      controlledOnIndexChange?.(_scrollTargetIndex);
+    }
+  }, [_scrollTargetIndex, controlledIndex, controlledOnIndexChange]);
+
+  const scrollTargetIndex = controlledIndex ?? _scrollTargetIndex;
 
   const isScrollingProgrammatically = useRef(false);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -170,15 +177,6 @@ const Carousel = ({
     scrollToIndex(scrollTargetIndex, {
       behavior: prefersReducedMotion ? 'instant' : 'smooth',
     });
-
-    if (prevIndex.current !== scrollTargetIndex && onChange) {
-      onChange({
-        index: scrollTargetIndex,
-        id: carouselItemsRef.current.children[scrollTargetIndex]?.id,
-        prevIndex: prevIndex.current,
-        prevId: carouselItemsRef.current.children[prevIndex.current]?.id,
-      });
-    }
 
     prevIndex.current = scrollTargetIndex;
 

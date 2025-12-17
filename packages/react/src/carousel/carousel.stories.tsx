@@ -67,11 +67,9 @@ export const StandardWithLeadAndImage: Story = {
 export const WithNavigationCallbacks = () => (
   <main className="container grid gap-y-8">
     <Carousel
-      onChange={({ id, index, prevId, prevIndex }) => {
+      onSelectedIndexChange={(index) => {
         console.log(`
-        Carousel changed to item with id: "${id}" and index: ${index}.
-        The previous item id was: "${prevId}" and index: ${prevIndex}.
-        This indicates that the user navigated to the ${prevIndex < index ? 'next' : 'previous'} item.
+        Carousel changed to item with index: ${index}.
       `);
       }}
     >
