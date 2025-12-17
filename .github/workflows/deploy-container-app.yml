@@ -38,27 +38,27 @@ jobs:
       id-token: write
     steps:
       - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
       - name: Prepare config
-        uses: falti/dotenv-action@a33be0b8cf6a6e6f1b82cc9f3782061ab1022be5 # v1.1.4
+        uses: falti/dotenv-action@f4656c46de6bc223dda660f6724d52537bc0642a # v1.1.5
         with:
           path: ${{ env.DKTP_ENV_FILE }}
           export-variables: true
           keys-case: bypass
 
       - name: Validate yaml
-        uses: mikefarah/yq@0ecdce24e83f0fa127940334be98c86b07b0c488 # v4.48.1
+        uses: mikefarah/yq@7ccaf8e700ce99eb3f0f6cef7f5930a0b3c827cd # v4.49.2
         with:
           # https://mikefarah.gitbook.io/yq/usage/tips-and-tricks#validating-yaml-files
           cmd: yq --exit-status 'tag == "!!map" or tag== "!!seq"' ${{ env.DKTP_CONFIG_FILE }} > /dev/null
       - name: Create config
-        uses: mikefarah/yq@0ecdce24e83f0fa127940334be98c86b07b0c488 # v4.48.1
+        uses: mikefarah/yq@7ccaf8e700ce99eb3f0f6cef7f5930a0b3c827cd # v4.49.2
         with:
           # https://mikefarah.gitbook.io/yq/operators/env-variable-operators#tip
           cmd: yq '(.. | select(tag == "!!str")) |= envsubst' ${{ env.DKTP_CONFIG_FILE }} > ${{ env.CONFIG_FILE_OUTPUT }}
       - name: Validate updated yaml
-        uses: mikefarah/yq@0ecdce24e83f0fa127940334be98c86b07b0c488 # v4.48.1
+        uses: mikefarah/yq@7ccaf8e700ce99eb3f0f6cef7f5930a0b3c827cd # v4.49.2
         with:
           # https://mikefarah.gitbook.io/yq/usage/tips-and-tricks#validating-yaml-files
           cmd: yq --exit-status 'tag == "!!map" or tag== "!!seq"' ${{ env.CONFIG_FILE_OUTPUT }} > /dev/null

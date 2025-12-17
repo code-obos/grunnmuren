@@ -11,11 +11,11 @@
   },
   "dependencies": {
     "@obosbbl/grunnmuren-react": "workspace:*",
-    "next": "16.0.0",
-    "zod": "4.1.12"
+    "next": "16.0.10",
+    "zod": "4.1.13"
   },
   "devDependencies": {
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
-    "tailwindcss": "4.1.16"
+    "tailwindcss": "4.1.17"
   }
 }

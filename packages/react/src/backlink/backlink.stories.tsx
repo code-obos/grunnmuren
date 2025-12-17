@@ -6,7 +6,7 @@ const Template = (args: BacklinkProps) => {
   const { href, ...rest } = args;
   return (
     <div className="flex gap-20">
-      <div>
+      <div className="flex flex-col">
         Link
         <Backlink href={href} {...rest}>
           Tilbake

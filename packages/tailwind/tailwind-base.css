@@ -108,8 +108,69 @@
   @apply bg-white grow;
 }
 
+/** Grid column spacing */
+@utility layout-grid-gap-x {
+  @apply sm:gap-x-4 md:gap-x-9 lg:gap-x-12 xl:gap-x-16;
+}
+
+/** Grid base, defines the grid columns and their spacing */
+@utility layout-grid {
+  @apply layout-grid-gap-x sm:grid-cols-14 grid;
+}
+
+/** Grid container that applies the grid columns, grid spacing and the container component class */
+@utility layout-grid-container {
+  @apply layout-grid container;
+  /** Make content of the grid span the mid 12 columns as a default (unless it has another explicit col-span class) */
+  & > * {
+    @apply sm:col-start-2 sm:col-span-12;
+  }
+}
+
+@utility layout-subgrid-* {
+  @apply layout-grid-gap-x grid;
+}
+
+@utility layout-subgrid-1 {
+  @apply grid-cols-1;
+}
+@utility layout-subgrid-2 {
+  @apply grid-cols-2;
+}
+@utility layout-subgrid-3 {
+  @apply grid-cols-3;
+}
+@utility layout-subgrid-4 {
+  @apply grid-cols-4;
+}
+@utility layout-subgrid-5 {
+  @apply grid-cols-5;
+}
+@utility layout-subgrid-6 {
+  @apply grid-cols-6;
+}
+@utility layout-subgrid-7 {
+  @apply grid-cols-7;
+}
+@utility layout-subgrid-8 {
+  @apply grid-cols-8;
+}
+@utility layout-subgrid-9 {
+  @apply grid-cols-9;
+}
+@utility layout-subgrid-10 {
+  @apply grid-cols-10;
+}
+@utility layout-subgrid-11 {
+  @apply grid-cols-11;
+}
+@utility layout-subgrid-12 {
+  @apply grid-cols-12;
+}
+
 @utility layout-gap-x {
-  @apply gap-x-2 sm:gap-x-4 md:gap-x-9 lg:gap-x-12 xl:gap-x-16;
+  @apply gap-x-2;
+  @apply layout-grid-gap-x;
 }
 
 @utility layout-gap-y {
@@ -192,5 +253,87 @@
   /* For Webkit-based browsers (Chrome, Safari and Opera) */
   &::-webkit-scrollbar {
     display: none;
+  }
+}
+
+@layer components {
+  /*** Link List component styles ***/
+  .link-list-container {
+    @apply @container;
+
+    &:has([data-slot="heading"]) {
+      .link-list,
+      [data-slot="link-list"] {
+        @apply overflow-visible;
+      }
+    }
+
+    [data-slot="heading"] {
+      @apply p-1.25;
+
+      [data-slot="link"] {
+        @apply py-2.25;
+        & > svg {
+          @apply text-base;
+        }
+      }
+
+      &:not(:has([data-slot="link"])) {
+        @apply my-2.25;
+      }
+    }
+
+    [data-slot="link-list"] {
+      @apply @sm:gap-x-4 @md:gap-x-9 @lg:gap-x-12 @xl:gap-x-16;
+
+      &:has([data-slot="link-list-item"]:nth-child(6)):not(
+          :has([data-slot="link-list-item"]:nth-child(9):last-child)
+        ):not(:has([data-slot="link-list-item"]:nth-child(11))) {
+        @apply @4xl:grid-cols-2;
+      }
+      &:has([data-slot="link-list-item"]:nth-child(9):last-child),
+      &:has([data-slot="link-list-item"]:nth-child(11)) {
+        @apply @4xl:grid-cols-3;
+      }
+    }
+  }
+
+  .link-list,
+  [data-slot="link-list"] {
+    /**
+     * Hides dividers at the top of the list (overflow-y)
+     * while preventing arrow icons from overflowing container when animated to the right (overflow-x)
+     */
+    @apply min-w-fit overflow-hidden grid auto-rows-max gap-y-px;
+  }
+
+  .link-list-item,
+  [data-slot="link-list-item"] {
+    /** Creates divider lines that works in any grid layout and with the focus ring */
+    @apply after:-top-px relative p-1.25 after:absolute after:right-0 after:left-0 after:h-px after:w-full after:bg-gray-light;
+    [data-slot="link"] {
+      @apply paragraph;
+    }
+  }
+
+  .link-list-container,
+  .link-list-item,
+  [data-slot="link-list-item"] {
+    [data-slot="link"] {
+      @apply flex w-full cursor-pointer justify-between gap-x-2 py-3.5 font-medium no-underline focus-visible:outline-focus;
+    }
+  }
+
+  .link-list-container [data-slot="link"],
+  [data-slot="link-list-item"] [data-slot="link"] {
+    &:hover:not([download]):not([rel~="external"]) svg {
+      @apply motion-safe:translate-x-1;
+    }
+    &[download]:hover svg {
+      @apply motion-safe:translate-y-1;
+    }
+    &[rel~="external"]:hover svg {
+      @apply motion-safe:-translate-y-0.5 motion-safe:translate-x-0.5;
+    }
   }
 }

@@ -9,7 +9,7 @@ export const Route = createFileRoute('/_docs/profil/ikoner')({
   component: Page,
   head: () => ({
     meta: [
-      { title: 'Ikoner - Grunnmuren' },
+      { title: 'Ikoner | Grunnmuren' },
       { name: 'description', content: 'Grunnmuren sitt ikonsett' },
     ],
   }),
@@ -83,8 +83,6 @@ function IconCard({ iconName, Icon }) {
       <span className="block text-center text-sm">{iconName}</span>
       <Button
         variant="tertiary"
-        // @ts-expect-error how can we make this work when we've augmented grunnmuren with tanstack's router?
-        // In that case we don't want TSR's typesafty, because it's an external link. See https://github.com/adobe/react-spectrum/issues/6397
         href={downloadSvgLink}
         download
         className="ml-auto w-[44px]"

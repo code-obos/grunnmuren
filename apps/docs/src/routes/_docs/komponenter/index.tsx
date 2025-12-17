@@ -13,7 +13,7 @@ export const Route = createFileRoute('/_docs/komponenter/')({
   component: Page,
   head: () => ({
     meta: [
-      { title: 'Komponenter - Grunnmuren' },
+      { title: 'Komponenter | Grunnmuren' },
       { name: 'description', content: 'Grunnmuren sine komponenter' },
     ],
   }),
@@ -30,7 +30,6 @@ function Page() {
         {components.map((component) => (
           <Card key={component._id} variant="outlined">
             <Heading level={2}>
-              {/* @ts-expect-error figure out how to make this typesafe. Seems like routerOptions doesn't accept params. See https://github.com/adobe/react-spectrum/issues/6587 */}
               <CardLink href={`/komponenter/${component.slug}`}>
                 {component.name}
               </CardLink>

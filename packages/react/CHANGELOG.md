@@ -1,5 +1,451 @@
 # @obosbbl/grunnmuren-react
 
+## 3.3.3
+
+### Patch Changes
+
+- 257cec7: Alertbox: always keep the icon to the top, even when heading/content is in multiple lines
+- d6cf4cf: Fixes the `<Disclosure>` component so that it can receive `children` through `DisclosureContext`
+
+## 3.3.2
+
+### Patch Changes
+
+- 7939bee: fix bug where <Carousel> applied a media query outside of an effect, causing SSR issues
+
+## 3.3.1
+
+### Patch Changes
+
+- 751eeca: Accordion bug fixes:
+  - Removes a redundant role="group" that was added to the AccordionPanel content
+  - Restore the accordion button text - accordion panel relation: the accordion panel should be labelledby the text in the accordion button.
+- 0954c2d: New `<ProgressBar>` component in beta, usage:
+
+  ```tsx
+  import { UNSAFE_ProgressBar as ProgressBar } from "@obosbbl/grunnmuren-react";
+
+  const MyProgressBar = () => (
+    <ProgressBar value={30} classsName="w-96" aria-label="Laster..." />
+  );
+  ```
+
+  ```tsx
+  import {
+    UNSAFE_ProgressBar as ProgressBar,
+    UNSAFE_ProgressBarValueText as ProgressBarValueText,
+  } from "@obosbbl/grunnmuren-react";
+
+  const MyProgressBar = () => (
+    <ProgressBar value={50} classsName="w-96">
+      <Label>Laster:</Label>
+      <ProgressBarValueText />
+    </ProgressBar>
+  );
+  ```
+
+  Note that the `<ProgressBar>` does not have a natural width, so you might have to give it an explicit `width` using the `className` prop. It does however have a `max-width`, set to `100%`.
+
+- b22c21e: # Bugfixes for the `<UNSAFE_Modal>` component:
+  - Fix bugs with controlled modals.
+  - Expose the `isDismissable` prop from RAC - this defaults to `true` but can now be overridden to `false` if you wish to prevent a user from dismissing a modal.
+  - Support overriding of the `z-index` of the modal overlay: a new `zIndex` prop is added to <UNSAFE_Modal>
+
+## 3.3.0
+
+### Minor Changes
+
+- 7a22a4a: `LinkList` is now stable. Usage:
+
+  Basic list of links:
+
+  ```tsx
+  import { Link, LinkList, LinkListItem } from "@obosbbl/grunnmuren-react";
+
+  <LinkList>
+    <LinkListItem>
+      <Link href="/bolig">Bolig</Link>
+    </LinkListItem>
+    <LinkListItem>
+      <Link href="/bank">Bank</Link>
+    </LinkListItem>
+    <LinkListItem>
+      <Link href="/medlem">Medlem</Link>
+    </LinkListItem>
+  </LinkList>;
+  ```
+
+  External links:
+
+  ```tsx
+  import { Link, LinkList, LinkListItem } from "@obosbbl/grunnmuren-react";
+
+  <LinkList>
+    <LinkListItem>
+      <Link href="https://minside.obosnett.no/login" rel="external">
+        OBOS Nett - Min side
+      </Link>
+    </LinkListItem>
+    <LinkListItem>
+      <Link
+        href="https://www.tryg.no"
+        rel="external noopener noreferrer"
+        target="_blank"
+      >
+        Les mer om trygg forsikring
+      </Link>
+    </LinkListItem>
+  </LinkList>;
+  ```
+
+  Downloadable files:
+
+  ```tsx
+  import { Link, LinkList, LinkListItem } from "@obosbbl/grunnmuren-react";
+
+  <LinkList>
+    <LinkListItem>
+      <Link download href="/vilkar.pdf">
+        Medlemsvilkår
+      </Link>
+    </LinkListItem>
+    <LinkListItem>
+      <Link download href="/consent.pdf">
+        Samtykke
+      </Link>
+    </LinkListItem>
+  </LinkList>;
+  ```
+
+  With headings:
+
+  ```tsx
+  import {
+    Heading,
+    Link,
+    LinkList,
+    LinkListContainer,
+    LinkListItem,
+  } from "@obosbbl/grunnmuren-react";
+
+  <LinkListContainer>
+    <Heading level={2}>
+      <Link href="/om">OBOS</Link>
+    </Heading>
+    <LinkList>
+      <LinkListItem>
+        <Link href="/bolig">Bolig</Link>
+      </LinkListItem>
+      <LinkListItem>
+        <Link href="/bank">Bank</Link>
+      </LinkListItem>
+      <LinkListItem>
+        <Link href="/medlem">Medlem</Link>
+      </LinkListItem>
+    </LinkList>
+  </LinkListContainer>;
+  ```
+
+### Patch Changes
+
+- 6dc3cf2: Movments in the `Carousel` are now eliminated when using arrow keys for users that has a reduced motion preferrence
+- 5cb5f28: Respect prefers-reduced-motion when user clicks the prev/next buttons in the `<Carousel>` component.
+
+## 3.2.1
+
+### Patch Changes
+
+- 0f8cd6d: ## Breaking Beta change
+  The `<LinkList>` API has now been refactored to support headings inside link lists.
+  - `<LinkListItem>` no longer supports link props, the component must now receive a `<Link>` as a child to which link props are passed
+  - The `isExternal` prop has been removed `<LinkListItem>`. External links are now identified byt the `rel` prop on the `<Link>` child (e.g `<Link rel="external">`)
+
+  ### Before
+
+  ```tsx
+  <LinkList>
+    <LinkListItem href="/medlem">Les mer</LinkListItem>
+    <LinkListItem download href="/medlemsvilkar.pdf">
+      Medlemsvilkår
+    </LinkListItem>
+    <LinkListItem
+      href="https://www.tryg.no/forsikringer/fordeler-hos-tryg/bruk-medlemsfordelene-dine/obos/index.html?cmpid=obos_tryggjennomlivet"
+      rel="external"
+    >
+      Tryg forsikring
+    </LinkListItem>
+  </LinkList>
+  ```
+
+  ### Now
+
+  ```tsx
+  <LinkList>
+    <LinkListItem>
+      <Link href="/bolig">Bolig</Link>
+    </LinkListItem>
+    <LinkListItem>
+      <Link href="/bank" download href="/medlemsvilkar.pdf">
+        Medlemsvilkår
+      </Link>
+    </LinkListItem>
+    <LinkListItem>
+      <Link
+        href="/medlem"
+        href="https://www.tryg.no/forsikringer/fordeler-hos-tryg/bruk-medlemsfordelene-dine/obos/index.html?cmpid=obos_tryggjennomlivet"
+        rel="external"
+      >
+        Tryg forsikring
+      </Link>
+    </LinkListItem>
+  </LinkList>
+  ```
+
+  ## Use Headings (with links)
+
+  ```tsx
+  <LinkListContainer>
+    <Heading level={2}>
+      <Link href="/om">OBOS</Link>
+    </Heading>
+    <LinkList>
+      <LinkListItem>
+        <Link href="/bolig">Bolig</Link>
+      </LinkListItem>
+      <LinkListItem>
+        <Link href="/bank">Bank</Link>
+      </LinkListItem>
+      <LinkListItem>
+        <Link href="/medlem">Medlem</Link>
+      </LinkListItem>
+    </LinkList>
+  </LinkListContainer>
+  ```
+
+- 1c04f75: # Breaking Beta Change
+  Exposing `<LinkListContainer>` as part of the `<LinkList>` API. This allows for easier customization and flexibility. Since it is now possible to style the container and the list individually. This means you can still just render shorter lists (less than 6 LinkListItems) like before:
+
+  ```tsx
+  <LinkList>
+    <LinkListItem href="/bolig">Bolig</LinkListItem>
+    <LinkListItem href="/bank">Bank</LinkListItem>
+    <LinkListItem href="/medlem">Medlem</LinkListItem>
+  </LinkList>
+  ```
+
+  But the `<LinkList>` itself will no longer divide larger list (more than 5 LinkListItems) into multiple columns like before. For that you will now need to wrap it in the `<LinkListContainer>`:
+
+  ```tsx
+  <LinkListContainer>
+    <LinkList>
+      <LinkListItem href="/konsernledelsen">Konsernledelsen</LinkListItem>
+      <LinkListItem href="/styret">Styret</LinkListItem>
+      <LinkListItem href="/representantskapet">Representantskapet</LinkListItem>
+      <LinkListItem href="/boligpriser-og-statistikk">
+        Boligpriser og statistikk
+      </LinkListItem>
+      <LinkListItem href="/investor-relations">Investor Relations</LinkListItem>
+      <LinkListItem href="/digital-arsrapport">Digital årsrapport</LinkListItem>
+    </LinkList>
+  </LinkListContainer>
+  ```
+
+  This also paves way for supporting `<Heading>` inside the `<LinkListContainer>`, above the `<LinkListContainer>`. Stay tuned!
+
+- 0f8cd6d: Better screen reader support in the `<Link>` component: annonuce external links.
+
+## 3.2.0
+
+### Minor Changes
+
+- 2cd13e7: Disclosure: out of BETA 🚀
+
+### Patch Changes
+
+- 21fde1f: Link: fix transition animation not triggering in LinkList
+- 5a1734a: Expose `<UNSAFE_TableContainer>`, a tiny wrapper for the `<ResizableTableContainer>` [from RAC](https://react-spectrum.adobe.com/react-aria/Table.html#resizabletablecontainer-1). Along with `<UNSAFE_TableColumnResizer>` that can be used to resize and set width limits to columns in the `<UNSAFE_Table>` component.
+
+  Usage:
+
+  ```tsx
+  import {
+    Content,
+    UNSAFE_Table as Table,
+    UNSAFE_TableBody as TableBody,
+    UNSAFE_TableCell as TableCell,
+    UNSAFE_TableColumn as TableColumn,
+    UNSAFE_TableColumnResizer as TableColumnResizer,
+    UNSAFE_TableContainer as TableContainer,
+    UNSAFE_TableHeader as TableHeader,
+    UNSAFE_TableRow as TableRow,
+  } from "@obosbbl/grunnmuren-react";
+
+  export const FixedColumns = () => (
+    <TableContainer>
+      <Table aria-label="Eiendomsforvaltere">
+        <TableHeader>
+          <TableColumn maxWidth={144}>Navn</TableColumn>
+          <TableColumn maxWidth={144}>E-post</TableColumn>
+          <TableColumn maxWidth={144}>Område</TableColumn>
+        </TableHeader>
+        <TableBody>
+          <TableRow>
+            <TableCell>Kari Hansen</TableCell>
+            <TableCell>kari.hansen@obos.no</TableCell>
+            <TableCell>Grünerløkka</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Lars Olsen</TableCell>
+            <TableCell>lars.olsen@obos.no</TableCell>
+            <TableCell>Frogner</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Ingrid Svendsen</TableCell>
+            <TableCell>ingrid.svendsen@obos.no</TableCell>
+            <TableCell>Majorstuen</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+
+  export const ResizeableColumns = () => (
+    <TableContainer>
+      <Table aria-label="Table with resizable columns">
+        <TableHeader>
+          <TableColumn id="file" isRowHeader>
+            <Content>
+              <span tabIndex={-1} className="column-name">
+                Filnavn
+              </span>
+              <TableColumnResizer />
+            </Content>
+          </TableColumn>
+          <TableColumn id="size">Størrelse</TableColumn>
+          <TableColumn id="date">
+            <Content>
+              <span tabIndex={-1} className="column-name">
+                Dato
+              </span>
+              <TableColumnResizer />
+            </Content>
+          </TableColumn>
+        </TableHeader>
+        <TableBody>
+          <TableRow>
+            <TableCell>2022-Roadmap-Proposal-Revision-012822-Copy(2)</TableCell>
+            <TableCell>214 KB</TableCell>
+            <TableCell>November 27, 2022 at 4:56PM</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>62259692_p0_master1200</TableCell>
+            <TableCell>120 KB</TableCell>
+            <TableCell>January 27, 2021 at 1:56AM</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+  ```
+
+- e51ad09: Support for rendering standalone `<DisclosureButton>` without wrapping it in a `<Disclosure>` parent. The expand/collapse state can then be managed through the `aria-expanded`, `aria-controls` and `onPress`/`onClick` props. This will allow for a bit more flexibility to compose expandable and collapsable widgets. Such as tables:
+
+  ```tsx
+  import { Fragment, useState } from 'react';
+
+  import {
+    DisclosureButton as DisclosureButton
+    UNSAFE_Table as Table,
+    UNSAFE_TableBody as TableBody,
+    UNSAFE_TableCell as TableCell,
+    UNSAFE_TableColumn as TableColumn,
+    UNSAFE_TableColumnResizer as TableColumnResizer,
+    UNSAFE_TableContainer as TableContainer,
+    UNSAFE_TableHeader as TableHeader,
+    UNSAFE_TableRow as TableRow,
+  } from '@obosbbl/grunnmuren-react';
+
+  export const ExpandableRows = () => {
+    const years = [2025, 2026, 2027];
+    const [expandedYears, setExpandedYears] = useState(
+      Object.fromEntries(years.map((year) => [year, false])),
+    );
+
+    const months = [
+      'januar',
+      'februar',
+      'mars',
+      'april',
+      'mai',
+      'juni',
+      'juli',
+      'august',
+      'september',
+      'oktober',
+      'november',
+      'desember',
+    ];
+
+    return (
+      <TableContainer className="container">
+        <Table aria-label="Lånekostnader" variant="zebra-striped">
+          <TableHeader>
+            <TableColumn maxWidth={200}>Termin</TableColumn>
+            <TableColumn maxWidth={200}>Renter</TableColumn>
+            <TableColumn maxWidth={200}>Avdrag</TableColumn>
+            <TableColumn maxWidth={200}>Månedskostnader</TableColumn>
+          </TableHeader>
+          <TableBody>
+            {years.map((year) => (
+              <Fragment key={year}>
+                <TableRow className="*:align-middle">
+                  <TableCell>{year}</TableCell>
+                  <TableCell>1 200 kr</TableCell>
+                  <TableCell>18 000 kr</TableCell>
+                  <TableCell>
+                    <DisclosureButton
+                      withChevron
+                      aria-controls={months
+                        .map((month) => `${year}-${month}`)
+                        .join(' ')}
+                      aria-expanded={expandedYears[year]}
+                      aria-label={`Månedlige kostnader for ${year}`}
+                      onPress={() =>
+                        setExpandedYears((prevState) => ({
+                          ...prevState,
+                          [year]: !prevState[year],
+                        }))
+                      }
+                      isIconOnly
+                    />
+                  </TableCell>
+                </TableRow>
+                {expandedYears[year] &&
+                  months.map((month) => (
+                    <TableRow key={`${year}-${month}`} id={`${year}-${month}`}>
+                      <TableCell className="capitalize">{month}</TableCell>
+                      <TableCell>120 kr</TableCell>
+                      <TableCell colSpan={2}>1 500 kr</TableCell>
+                    </TableRow>
+                  ))}
+              </Fragment>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    );
+  };
+  ```
+
+  **_Note that an uncontrolled `<DisclosureButton>` without a `<Disclosure>` parent is not supported, as this would not have any practical application._**
+
+## 3.1.3
+
+### Patch Changes
+
+- 73bd887: Link: fix link having a force flex, should respect the consumers css
+- 56d249c: Refactor state management for next / prev buttons in `Carousel`. This ensures the current items index is set correctly even during batched state updates.
+
 ## 3.1.2
 
 ### Patch Changes

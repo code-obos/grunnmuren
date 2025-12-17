@@ -4,87 +4,85 @@ import {
   LinkExternal,
 } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
-import { Children, type JSX, type ReactNode } from 'react';
-import {
-  UNSAFE_Link as Link,
-  type UNSAFE_LinkProps as LinkProps,
-} from '../link';
+import type { JSX, ReactNode } from 'react';
+import { type LinkRenderProps, Provider } from 'react-aria-components';
+import { HeadingContext } from '../content';
+import { _LinkContext, type UNSAFE_LinkProps as LinkProps } from '../link';
 
-type LinkListProps = React.HTMLProps<HTMLDivElement> & {
+type LinkListContainerProps = React.HTMLProps<HTMLDivElement> & {
   children: JSX.Element | JSX.Element[];
 };
 
-const LinkList = ({ className, children, ...restProps }: LinkListProps) => {
-  const numberofLinks = Children.count(children);
-  return (
-    <div className={cx(className, '@container')} {...restProps}>
-      <ul
-        className={cx(
-          'min-w-fit',
-          // Hide dividers at the top of the list (overflow-y) and prevents arrow icon from overflowing container when animated to the right (overflow-x)
-          'overflow-hidden',
-          // Add a small gap between items that fits the divider lines (this way the divider line don't take up any space in each item)
-          'grid auto-rows-max gap-y-px',
-          // Gaps for when the list is displayed in multiple columns
-          '@lg:gap-x-12 @md:gap-x-9 @sm:gap-x-4 @xl:gap-x-16',
-          numberofLinks > 5 && [
-            '@xl:grid-cols-2',
-            (numberofLinks === 9 || numberofLinks > 10) && '@4xl:grid-cols-3',
-          ],
-        )}
-      >
-        {children}
-      </ul>
-    </div>
-  );
-};
+// Sets the correct icons for each link in the link list
+const _LinkProvider = ({ children }: { children: ReactNode }) => (
+  <Provider
+    values={[
+      [
+        _LinkContext,
+        {
+          _innerWrapper:
+            ({ children, download, rel }: LinkProps) =>
+            (values: LinkRenderProps) => {
+              let Icon = ArrowRight;
 
-type LinkListItemProps = LinkProps & {
-  children: ReactNode;
-  isExternal?: boolean;
-};
+              if (download) {
+                Icon = Download;
+              } else if (rel?.includes('external')) {
+                Icon = LinkExternal;
+              }
 
-const LinkListItem = ({
-  children,
-  isExternal,
+              return (
+                <>
+                  {typeof children === 'function'
+                    ? children({ ...values, defaultChildren: null })
+                    : children}
+                  <Icon />
+                </>
+              );
+            },
+        },
+      ],
+    ]}
+  >
+    {children}
+  </Provider>
+);
+
+const LinkListContainer = ({
   className,
   ...restProps
-}: LinkListItemProps) => {
-  let Icon = ArrowRight;
-  let iconTransition = cx('group-hover:motion-safe:translate-x-1');
+}: LinkListContainerProps) => (
+  // Dual providers makes for easier typing and more readable code
+  <Provider values={[[HeadingContext, { size: 'm' }]]}>
+    <_LinkProvider>
+      <div className={cx(className, 'link-list-container')} {...restProps} />
+    </_LinkProvider>
+  </Provider>
+);
 
-  if (restProps.download) {
-    Icon = Download;
-    iconTransition = cx('group-hover:motion-safe:translate-y-1');
-  } else if (isExternal) {
-    iconTransition = cx(
-      'group-hover:motion-safe:-translate-y-0.5 group-hover:motion-safe:translate-x-0.5',
-    );
-    Icon = LinkExternal;
-  }
-
-  return (
-    <li
-      // Creates divider lines that works in any grid layout and with the focus ring
-      className="after:-top-px relative p-0.75 after:absolute after:right-0 after:left-0 after:h-px after:w-full after:bg-gray-light"
-    >
-      <Link
-        {...restProps}
-        className={cx(
-          className,
-          'group paragraph flex w-full cursor-pointer justify-between gap-x-2 py-3.5 font-medium no-underline focus-visible:outline-focus',
-        )}
-      >
-        <span>{children}</span>
-        <Icon className={iconTransition} />
-      </Link>
-    </li>
-  );
+type LinkListProps = React.HTMLProps<HTMLUListElement> & {
+  children: JSX.Element | JSX.Element[];
 };
 
+const LinkList = (props: LinkListProps) => (
+  <_LinkProvider>
+    <ul {...props} data-slot="link-list" />
+  </_LinkProvider>
+);
+
+type LinkListItemProps = React.HTMLProps<HTMLLIElement> & {
+  children: ReactNode;
+};
+
+const LinkListItem = (props: LinkListItemProps) => (
+  <li {...props} data-slot="link-list-item" />
+);
+
 export {
-  LinkList as UNSAFE_LinkList,
-  type LinkListProps as UNSAFE_LinkListProps,
-  LinkListItem as UNSAFE_LinkListItem,
-  type LinkListItemProps as UNSAFE_LinkListItemProps,
+  LinkList,
+  LinkListContainer,
+  LinkListItem,
+  type LinkListContainerProps,
+  type LinkListItemProps,
+  type LinkListProps,
 };

@@ -1,5 +1,45 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.4.2
+
+### Patch Changes
+
+- 6dd0def: The layout-grid classes are moved to the @utility layer, this way the classes work with IntelliSense and has better compatability with other utility classes (especially important for controlling the `display` CSS property)
+
+## 2.4.1
+
+### Patch Changes
+
+- 25b08b0: Fixes incorrect composition of the `layout-gap-x` utility class. The issue caused the wrong gap on on all screen sizes larger than the `sm` breakpoint. This was visible in the `Card` component in `grunnmuren-react` as well.
+
+## 2.4.0
+
+### Minor Changes
+
+- 440543f: ## New classes for layout grids
+  You can now use the classes `layout-grid-gap-x`, `layout-grid`, `layout-grid-container` and `layout-subgrid-1`-`layout-subgrid-12` to set up layout grids pages so that all your content aligns.
+
+  ### `layout-grid-gap-x`
+
+  Defines the layout grid column spacing responsively.
+
+  ### `layout-grid`
+
+  Sets up a responsive 14 column grid with `layout-grid-gap-x`.
+
+  ### `layout-grid-container`
+
+  Combines `layout-grid` with the `container` class, which makes up the new page container.
+
+  ### `layout-subgrid-1`-`layout-subgrid-12`
+
+  Until there is better support for `subgrid` in CSS, you can use these classes to set up subgrids that aligns with `layout-grid`.
+
+### Patch Changes
+
+- 1c04f75: Extract styles for the `<LinkList>` components to component classes. This makes them reusable outside React, and makes the implementation and CSS for the component more readable.
+- 0f8cd6d: Styles for headings and icons inside link lists.
+
 ## 2.3.2
 
 ### Patch Changes
@@ -186,7 +226,6 @@
   The `includeFontFallback` option is also removed, and a font fallback will automatically be applied to the OBOS fonts by defaullt.
 
   ## Migration
-
   1. Upgrade your project to Tailwind 4. You can try the [migration guide](https://tailwindcss.com/docs/upgrade-guide)
      from tailwind.
   2. Add `@import "@obosbbl/grunnmuren-tailwind";` to the top of the main CSS file of your project. This is the new CSS configuration file for Grunnmuren.
@@ -220,7 +259,6 @@
   ```
 
 - 5a9534b: BREAKING CHANGE: Update font setup to include new font-family, `OBOSDisplay`.
-
   - Remove OBOSText-Bold in favor of OBOSDisplay-SemiBold.
   - Change font-family of `heading-xl` and `heading-l` to OBOSDisplay.
   - Change name of font-family `OBOSFont` to `OBOSText` to make the distinction between OBOSDisplay and OBOSText clearer.
@@ -228,7 +266,6 @@
     - If you were previously using next/font and extending the font family in your Tailwind configuration to support that, you should remove all this as the preset now includes an in built font-fallback.
 
 - 6482fad: Updated typography design.
-
   - BREAKING: Deprecate `.h1`, `.h2`, `.h3` and `.h4` classes
   - Add heading classes with "t-shirt sizes": `.heading-xl`, `.heading-l`, `.heading-m`, `.heading-s` and `.heading-xs`
   - Add classes: `.paragraph`, `.lead`, `.blockquote` and `.description`
@@ -321,7 +358,6 @@
 ### Major Changes
 
 - 5a9534b: BREAKING CHANGE: Update font setup to include new font-family, `OBOSDisplay`.
-
   - Remove OBOSText-Bold in favor of OBOSDisplay-SemiBold.
   - Change font-family of `heading-xl` and `heading-l` to OBOSDisplay.
   - Change name of font-family `OBOSFont` to `OBOSText` to make the distinction between OBOSDisplay and OBOSText clearer.
@@ -329,7 +365,6 @@
     - If you were previously using next/font and extending the font family in your Tailwind configuration to support that, you should remove all this as the preset now includes an in built font-fallback.
 
 - 6482fad: Updated typography design.
-
   - BREAKING: Deprecate `.h1`, `.h2`, `.h3` and `.h4` classes
   - Add heading classes with "t-shirt sizes": `.heading-xl`, `.heading-l`, `.heading-m`, `.heading-s` and `.heading-xs`
   - Add classes: `.paragraph`, `.lead`, `.blockquote` and `.description`

@@ -55,12 +55,9 @@ const disclosureButtonVariants = cva({
   },
 });
 
-type DisclosureButtonProps = Omit<
-  ButtonProps,
-  'children' | 'aria-expanded' | 'aria-controls'
-> &
+type DisclosureButtonProps = Omit<ButtonProps, 'children'> &
   VariantProps<typeof disclosureButtonVariants> & {
-    children: React.ReactNode;
+    children?: React.ReactNode;
   } & RefAttributes<HTMLButtonElement>;
 
 const DisclosureButton = ({
@@ -76,6 +73,9 @@ const DisclosureButton = ({
     _ref as ForwardedRef<HTMLButtonElement>,
     ButtonContext,
   );
+
+  const hasContext = !!useContext(DisclosureContext);
+
   return (
     <Button
       {...props}
@@ -85,7 +85,7 @@ const DisclosureButton = ({
         withChevron,
         isIconOnly,
       })}
-      slot="trigger"
+      slot={hasContext ? 'trigger' : undefined}
     >
       {children}
       {withChevron && (
@@ -104,15 +104,16 @@ export const DisclosureStateContext = createContext<DisclosureState | null>(
   null,
 );
 
-const Disclosure = ({ ref: _ref, children, ..._props }: DisclosureProps) => {
+const Disclosure = ({ ref: _ref, ..._props }: DisclosureProps) => {
   const [props, ref] = useContextProps(
     _props,
     _ref as ForwardedRef<HTMLDivElement>,
     DisclosureContext,
   );
+
   const groupState = useContext(DisclosureGroupStateContext);
 
-  let { id, ...otherProps } = props;
+  let { id, children, ...otherProps } = props;
   const defaultId = useId();
   id ||= defaultId;
   const isExpanded = groupState
@@ -259,12 +260,12 @@ const DisclosurePanel = ({ ref, children, ...props }: DisclosurePanelProps) => {
 };
 
 export {
-  Disclosure as UNSAFE_Disclosure,
-  DisclosureButton as UNSAFE_DisclosureButton,
-  DisclosureGroup as UNSAFE_DisclosureGroup,
-  DisclosurePanel as UNSAFE_DisclosurePanel,
-  type DisclosureButtonProps as UNSAFE_DisclosureButtonProps,
-  type DisclosureGroupProps as UNSAFE_DisclosureGroupProps,
-  type DisclosurePanelProps as UNSAFE_DisclosurePanelProps,
-  type DisclosureProps as UNSAFE_DisclosureProps,
+  Disclosure,
+  DisclosureButton,
+  DisclosureGroup,
+  DisclosurePanel,
+  type DisclosureButtonProps,
+  type DisclosureGroupProps,
+  type DisclosurePanelProps,
+  type DisclosureProps,
 };

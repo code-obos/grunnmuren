@@ -1,8 +1,8 @@
 import { Close, Menu } from '@obosbbl/grunnmuren-icons-react';
 import {
-  UNSAFE_Disclosure as Disclosure,
-  UNSAFE_DisclosureButton as DisclosureButton,
-  UNSAFE_DisclosurePanel as DisclosurePanel,
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
   GrunnmurenProvider,
 } from '@obosbbl/grunnmuren-react';
 import {
@@ -15,7 +15,7 @@ import {
 } from '@tanstack/react-router';
 import { defineQuery } from 'groq';
 import { useEffect, useState } from 'react';
-import logoUrl from '@/assets/OBOS_Hvit_Liggende.png?url';
+import logoUrl from '@/assets/OBOS_Hvit_Liggende.svg?url';
 import { sanityFetch } from '@/lib/sanity';
 import appCss from '@/styles/app.css?url';
 import { Footer } from '@/ui/footer';
@@ -70,6 +70,7 @@ function RootLayout() {
       // This integrates RAC/Grunnmuren with TanStack router
       // Giving us typesafe routes
       // See https://react-spectrum.adobe.com/react-aria/routing.html#tanstack-router
+      // @ts-expect-error its fine for now, but should fix it properly later
       navigate={(to, options) => router.navigate({ to, ...options })}
       useHref={(to) => router.buildLocation({ to }).href}
     >

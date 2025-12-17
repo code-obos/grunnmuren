@@ -39,6 +39,11 @@ const translations: Translations = {
     sv: 'Nästa',
     en: 'Next',
   },
+  externalLink: {
+    nb: '(ekstern lenke)',
+    sv: '(extern länk)',
+    en: '(external link)',
+  },
 };
 
 export { translations, type Translation, type Translations };
