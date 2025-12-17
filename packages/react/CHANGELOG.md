@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 3.3.4
+
+### Patch Changes
+
+- b044ca0: Replace `scrollIntoView` with `scrollTo` in `<UNSAFE_Carousel>` to prevent vertical scrolling.
+
 ## 3.3.3
 
 ### Patch Changes
