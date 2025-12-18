@@ -32,7 +32,7 @@ type CarouselItem = Pick<CarouselItemProps, 'id'> & {
 
 type CarouselProps = Omit<HTMLProps<HTMLDivElement>, 'onChange'> & {
   /** The <CarouselItem/> components to be displayed within the carousel. */
-  children: React.ReactNode;
+  children?: React.ReactNode;
   // /**
   //  * Callback that is triggered when a user navigates to new item in the Carousel.
   //  * The argument to the callback is an object containing `index` of the new item scrolled into view and the `id` of that item (if set on the `<CarouselItem>`)
@@ -44,10 +44,6 @@ type CarouselProps = Omit<HTMLProps<HTMLDivElement>, 'onChange'> & {
   //  */
   // onChange?: (item: CarouselItem) => void;
   //
-  /** Delay in milliseconds between each auto scroll of the gallery. Any interaction with the carousel from the user will immediately suspend the autoscroll. */
-  autoPlayDelay?: number;
-  /** Whether the carousel loops. Caveat: Currently it only works with autoPlay and next/prev buttons */
-  loop?: boolean;
   /**
    * For controlled selection, callback that is called when the selected index changes.
    */
@@ -63,32 +59,23 @@ function getCarouselItems(ref: RefObject<HTMLDivElement | null>) {
 }
 
 const Carousel = ({
-  autoPlayDelay,
   className,
   children,
   onChange,
-  loop,
+  onSelectedIndexChange = () => {},
   ...rest
 }: CarouselProps) => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
   const firstIntersectionCallImminent = useRef(true);
-
-  // Used to suspend autoplay if the user interacts with the carousel
-  const [userHasInteracted, setUserHasInteracted] = useState(false);
+  const isScrollingProgrammaticallyToIndex = useRef<number>(null);
 
   const carouselItemsRef = useRef<HTMLDivElement>(null);
   const locale = useLocale();
   const { previous, next } = translations;
 
 
-  const [scrollIndex, _setScrollIndex] = useState(0);
-
-
-  const setScrollIndex = useCallback((index: number) => {
-    _setScrollIndex(index)
-    onChange?.(index);
-  }, []);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const scrollTo = useCallback(
     (index: number) => {
@@ -97,36 +84,19 @@ const Carousel = ({
       const target = items?.[index];
 
       if (target) {
+        isScrollingProgrammaticallyToIndex.current = index;
+        setActiveIndex(index);
+        onSelectedIndexChange(index);
+
         carouselItemsRef.current?.scrollTo({
           behavior: prefersReducedMotion ? 'instant' : 'smooth',
           left: target.offsetLeft,
         });
       }
+
     },
     [prefersReducedMotion],
   );
-
-  /** Auto scroll the carousel. This will suspend immediately if the user interacts with the carousel in any way */
-  useEffect(() => {
-    if (!userHasInteracted && autoPlayDelay) {
-
-      const timerId = setInterval(() => {
-        const items = getCarouselItems(carouselItemsRef);
-        const newIndex = scrollIndex + 1;
-
-        if (loop && newIndex >= items?.length) {
-            scrollTo(0);
-        } else {
-          scrollTo(newIndex);
-        }
-
-      }, autoPlayDelay);
-
-      return () => {
-        clearInterval(timerId)
-      }
-    }
-  }, [autoPlayDelay, scrollIndex, scrollTo, loop, userHasInteracted])
 
   useEffect(() => {
     function getItemIndex(element: Element) {
@@ -136,12 +106,15 @@ const Carousel = ({
 
     if ('onscrollsnapchanging' in window) {
       const scrollSnapChange = (event: Event) => {
+        if (isScrollingProgrammaticallyToIndex.current != null) {
+          isScrollingProgrammaticallyToIndex.current = null;
+          return;
+        }
 
         const newIndex = getItemIndex(event.snapTargetInline)
         console.log({newIndex})
-
-        setScrollIndex(newIndex);
-        // setUserHasInteracted(true)
+        setActiveIndex(newIndex);
+        onSelectedIndexChange(newIndex);
       };
 
       carouselItemsRef.current?.addEventListener(
@@ -155,21 +128,27 @@ const Carousel = ({
           scrollSnapChange,
         );
     } else {
-
+      // For browers (non chromium) that don't support scroll snap events we fall back to using intersection observer
       const instersectionCallback = (entries: IntersectionObserverEntry[]) => {
         if (firstIntersectionCallImminent.current) {
           firstIntersectionCallImminent.current = false;
           return;
         }
-        entries.forEach((entry) => {
+
+        // use a for iteration here so we can break out of the loop early. Of the observered elements we only care about the first one that is intersecting.
+        for (const entry of entries) {
           if (entry.isIntersecting) {
             const newIndex = getItemIndex(entry.target);
-            console.log({newIndex})
 
-            setScrollIndex(newIndex);
-            // setUserHasInteracted(true)
+            if (isScrollingProgrammaticallyToIndex.current == null) {
+              setActiveIndex(newIndex)
+              onSelectedIndexChange(newIndex);
+            } else if (newIndex === isScrollingProgrammaticallyToIndex.current) {
+              isScrollingProgrammaticallyToIndex.current = null;
+            }
+            break;
           }
-        });
+        }
       };
 
       const observer = new IntersectionObserver(instersectionCallback, {
@@ -192,24 +171,22 @@ const Carousel = ({
   }, []);
 
   const handlePrevious = () => {
-    scrollTo(scrollIndex - 1);
-    setUserHasInteracted(true)
+    scrollTo(activeIndex - 1);
   };
 
   const handleNext = () => {
-    scrollTo(scrollIndex + 1);
-    setUserHasInteracted(true)
+    scrollTo(activeIndex + 1);
   };
 
   return (
-    <div data-slot="carousel" ref={carouselRef} onClick={() => setUserHasInteracted(true)}>
+    <div data-slot="carousel" ref={carouselRef}>
       <Provider
         values={[
           [
             CarouselItemsContext,
             {
               carouselItemsRef,
-              activeIndex: scrollIndex,
+              activeIndex: activeIndex,
               handlePrevious,
               handleNext,
             },
@@ -313,10 +290,10 @@ type CarouselItemsContextValue = {
   handleNext?: () => void;
 };
 
-const CarouselItemsContext = createContext({
+const CarouselItemsContext = createContext<CarouselItemsContextValue>({
   carouselItemsRef: null,
   activeIndex: 0,
-} as CarouselItemsContextValue);
+});
 
 const CarouselItems = ({ className, children }: CarouselItemsProps) => {
   const {
