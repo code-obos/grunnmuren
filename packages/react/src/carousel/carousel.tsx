@@ -61,7 +61,6 @@ function getCarouselItems(ref: RefObject<HTMLDivElement | null>) {
 const Carousel = ({
   className,
   children,
-  onChange,
   onSelectedIndexChange = () => {},
   ...rest
 }: CarouselProps) => {
@@ -101,7 +100,7 @@ const Carousel = ({
   useEffect(() => {
     function getItemIndex(element: Element) {
       const items = getCarouselItems(carouselItemsRef);
-      return Array.from(items ?? []).indexOf(element);
+      return Array.from(items ?? []).indexOf(element as HTMLElement);
     }
 
     if ('onscrollsnapchanging' in window) {
@@ -111,8 +110,7 @@ const Carousel = ({
           return;
         }
 
-        const newIndex = getItemIndex(event.snapTargetInline)
-        console.log({newIndex})
+        const newIndex = getItemIndex((event as Event & { snapTargetInline: Element }).snapTargetInline);
         setActiveIndex(newIndex);
         onSelectedIndexChange(newIndex);
       };
