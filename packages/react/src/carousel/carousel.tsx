@@ -7,6 +7,7 @@ import {
   createContext,
   isValidElement,
   type JSX,
+  useCallback,
   useContext,
   useEffect,
   useRef,
@@ -43,7 +44,7 @@ type CarouselProps = Omit<HTMLProps<HTMLDivElement>, 'onChange'> & {
   // onChange?: (item: CarouselItem) => void;
   defaultSelectedIndex?: number;
   /** Enables infinite looping of the carousel */
-  loop?: boolean;
+  autoPlayMs?: boolean;
   /**
    * For controlled selection, the index of the item that should be currently in view.
    */
@@ -58,12 +59,9 @@ const Carousel = ({
   className,
   children,
   onChange,
-  defaultSelectedIndex = 0,
-  selectedIndex,
   onSelectedIndexChange,
   ...rest
 }: CarouselProps) => {
-  const isControlled = selectedIndex !== undefined;
   const carouselRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -71,37 +69,83 @@ const Carousel = ({
   const locale = useLocale();
   const { previous, next } = translations;
 
-  const [scrollIndex, setScrollIndex] = useState(
-    selectedIndex ?? defaultSelectedIndex,
+  const [scrollIndex, setScrollIndex] = useState(0);
+  console.log({ scrollIndex });
+
+  const scrollTo = useCallback(
+    (index: number) => {
+      const items = carouselItemsRef.current?.querySelectorAll(
+        '[data-slot="carousel-item"]',
+      );
+
+      const target = items?.[index];
+
+      if (target) {
+        carouselItemsRef.current?.scrollTo({
+          behavior: prefersReducedMotion ? 'instant' : 'smooth',
+          left: target.offsetLeft,
+        });
+      }
+    },
+    [prefersReducedMotion],
   );
 
-  const itemCount = carouselItemsRef.current?.children.length ?? 0;
+  useEffect(() => {
+    if ('onscrollsnapchanging' in window) {
+      const scrollSnapChange = (event) => {
+        const items = carouselItemsRef.current?.querySelectorAll(
+          '[data-slot="carousel-item"]',
+        );
 
-  useUpdateEffect(() => {
-    setScrollIndex(selectedIndex ?? defaultSelectedIndex);
-  }, [selectedIndex]);
+        const newIndex = Array.from(items).indexOf(event.snapTargetInline);
 
-  // // Internal state for uncontrolled usage
-  // const [_scrollTargetIndex, _setScrollTargetIndex] = useState(0);
-  // // Resolve controlled vs uncontrolled state
-  // const [scrollTargetIndex, setScrollTargetIndex] = [
-  //   controlledIndex ?? _scrollTargetIndex,
-  //   controlledOnIndexChange ?? _setScrollTargetIndex,
-  // ];
+        setScrollIndex(newIndex);
+      };
 
-  // const isScrollingProgrammatically = useRef(false);
-  // const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  // const scrollQueue = useRef<number[]>([]);
+      carouselItemsRef.current?.addEventListener(
+        'scrollsnapchanging',
+        scrollSnapChange,
+      );
 
-  // const [hasReachedScrollStart, setHasReachedScrollStart] = useState(
-  //   scrollTargetIndex === 0,
-  // );
+      return () =>
+        carouselItemsRef.current?.removeEventListener(
+          'scrollsnapchanging',
+          scrollSnapChange,
+        );
+    } else {
+      const instersectionCallback = (entries: IntersectionObserverEntry[]) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const items = carouselItemsRef.current?.querySelectorAll(
+              '[data-slot="carousel-item"]',
+            );
 
-  // const [hasReachedScrollEnd, setHasReachedScrollEnd] = useState(
-  //   !carouselItemsRef.current ||
-  //     carouselItemsRef.current.children.length - 1 === scrollTargetIndex,
-  // );
-  //
+            const newIndex = Array.from(items).indexOf(entry.target);
+
+            setScrollIndex(newIndex);
+          }
+        });
+      };
+
+      const observer = new IntersectionObserver(instersectionCallback, {
+        root: carouselRef.current,
+        rootMargin: '0px',
+        threshold: 0.8,
+      });
+
+      const items = carouselItemsRef.current?.querySelectorAll(
+        '[data-slot="carousel-item"]',
+      );
+
+      items?.forEach((slide) => {
+        observer.observe(slide);
+      });
+
+      return () => {
+        observer.disconnect();
+      };
+    }
+  }, []);
 
   useEffect(() => {
     if (!carouselItemsRef.current) {
@@ -309,49 +353,11 @@ const Carousel = ({
   // );
 
   const handlePrevious = () => {
-    // setScrollTargetIndex((currentTargetIndex) => {
-    //   const targetIndex = currentTargetIndex - 1;
-
-    //   if (targetIndex < 0) {
-    //     return currentTargetIndex;
-    //   }
-
-    //   if (isScrollingProgrammatically.current) {
-    //     // If we're already scrolling, queue this action
-    //     scrollQueue.current = [targetIndex];
-    //     return currentTargetIndex;
-    //   }
-
-    //   return targetIndex;
-    // });
-    onSelectedIndexChange?.(scrollIndex - 1);
-
-    if (!isControlled) {
-      setScrollIndex((index) => index - 1);
-    }
+    scrollTo(scrollIndex - 1);
   };
 
   const handleNext = () => {
-    onSelectedIndexChange?.(scrollIndex + 1);
-
-    if (!isControlled) {
-      setScrollIndex((index) => index + 1);
-    }
-    // setScrollTargetIndex((currentTargetIndex) => {
-    //   const targetIndex = currentTargetIndex + 1;
-    //   if (
-    //     !carouselItemsRef.current ||
-    //     targetIndex >= carouselItemsRef.current.children.length
-    //   ) {
-    //     return currentTargetIndex;
-    //   }
-    //   if (isScrollingProgrammatically.current) {
-    //     // If we're already scrolling, queue this action
-    //     scrollQueue.current = [targetIndex];
-    //     return currentTargetIndex;
-    //   }
-    //   return targetIndex;
-    // });
+    scrollTo(scrollIndex + 1);
   };
 
   return (
