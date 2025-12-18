@@ -15,7 +15,7 @@ const meta: Meta<typeof Carousel> = {
   },
   render: () => (
     <main className="container grid gap-y-8">
-      <Carousel autoPlayDelay={3000}>
+      <Carousel autoPlayDelay={3000} loop>
         <CarouselItems>
           <CarouselItem>
             <Media>

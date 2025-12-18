@@ -7,6 +7,7 @@ import {
   HTMLProps,
   isValidElement,
   type JSX,
+  RefObject,
   useCallback,
   useContext,
   useEffect,
@@ -45,13 +46,21 @@ type CarouselProps = Omit<HTMLProps<HTMLDivElement>, 'onChange'> & {
   //
   /** Delay in milliseconds between each auto scroll of the gallery. Any interaction with the carousel from the user will immediately suspend the autoscroll. */
   autoPlayDelay?: number;
-  /** Whether the carousel loops */
+  /** Whether the carousel loops. Caveat: Currently it only works with autoPlay and next/prev buttons */
   loop?: boolean;
   /**
    * For controlled selection, callback that is called when the selected index changes.
    */
   onSelectedIndexChange?: (index: number) => void;
 };
+
+function getCarouselItems(ref: RefObject<HTMLDivElement | null>) {
+  const items = ref.current?.querySelectorAll<HTMLElement>(
+    '[data-slot="carousel-item"]',
+  );
+
+  return items;
+}
 
 const Carousel = ({
   autoPlayDelay,
@@ -74,7 +83,6 @@ const Carousel = ({
 
 
   const [scrollIndex, _setScrollIndex] = useState(0);
-  console.log({scrollIndex})
 
 
   const setScrollIndex = useCallback((index: number) => {
@@ -84,10 +92,8 @@ const Carousel = ({
 
   const scrollTo = useCallback(
     (index: number) => {
-      const items = carouselItemsRef.current?.querySelectorAll<HTMLElement>(
-        '[data-slot="carousel-item"]',
-      );
 
+      const items = getCarouselItems(carouselItemsRef);
       const target = items?.[index];
 
       if (target) {
@@ -105,8 +111,15 @@ const Carousel = ({
     if (!userHasInteracted && autoPlayDelay) {
 
       const timerId = setInterval(() => {
+        const items = getCarouselItems(carouselItemsRef);
+        const newIndex = scrollIndex + 1;
 
-        scrollTo(scrollIndex + 1);
+        if (loop && newIndex >= items?.length) {
+            scrollTo(0);
+        } else {
+          scrollTo(newIndex);
+        }
+
       }, autoPlayDelay);
 
       return () => {
@@ -116,20 +129,16 @@ const Carousel = ({
   }, [autoPlayDelay, scrollIndex, scrollTo, loop, userHasInteracted])
 
   useEffect(() => {
-
     function getItemIndex(element: Element) {
-      const items = carouselItemsRef.current?.querySelectorAll(
-        '[data-slot="carousel-item"]',
-      );
-
+      const items = getCarouselItems(carouselItemsRef);
       return Array.from(items ?? []).indexOf(element);
-
     }
 
     if ('onscrollsnapchanging' in window) {
-      const scrollSnapChange = (event) => {
+      const scrollSnapChange = (event: Event) => {
 
         const newIndex = getItemIndex(event.snapTargetInline)
+        console.log({newIndex})
 
         setScrollIndex(newIndex);
         // setUserHasInteracted(true)
@@ -154,8 +163,8 @@ const Carousel = ({
         }
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-
             const newIndex = getItemIndex(entry.target);
+            console.log({newIndex})
 
             setScrollIndex(newIndex);
             // setUserHasInteracted(true)
@@ -169,9 +178,7 @@ const Carousel = ({
         threshold: 0.8,
       });
 
-      const items = carouselItemsRef.current?.querySelectorAll(
-        '[data-slot="carousel-item"]',
-      );
+      const items = getCarouselItems(carouselItemsRef);
 
       items?.forEach((slide) => {
         observer.observe(slide);
