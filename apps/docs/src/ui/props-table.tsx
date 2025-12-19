@@ -15,7 +15,11 @@ export const PropsTable = ({ componentName }: PropsTableProps) => {
   const groupedProps = Object.groupBy(componentProps, (prop) => {
     if (prop.name.startsWith('on')) {
       return 'Events';
-    } else if (prop.name.startsWith('aria-')) {
+    } else if (
+      prop.name.startsWith('aria-') ||
+      // If the id prop is part of DOMProps, we know it's not actually necessary for the component, so we group it under 'Accessibility'
+      (prop.name === 'id' && prop.parent?.name === 'DOMProps')
+    ) {
       return 'Accessibility';
     } else {
       return 'Props';
