@@ -19,6 +19,7 @@ export const PropsTable = ({ componentName }: PropsTableProps) => {
       case prop.name.startsWith('aria-'):
       // If the id prop is part of DOMProps, we know it's not actually necessary for the component, so we group it under 'Accessibility'
       case prop.name === 'id' && prop.parent?.name === 'DOMProps':
+      case prop.name === 'role':
         return 'Accessibility';
       case prop.name === 'style':
       case prop.name === 'className':

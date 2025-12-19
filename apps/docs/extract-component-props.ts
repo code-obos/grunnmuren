@@ -17,11 +17,13 @@ const options: ParserOptions = {
   savePropValueAsString: true,
   propFilter: (prop: PropItem) => {
     switch (true) {
-      case prop.parent && prop.name !== 'id':
-        return !ignoreParents.includes(prop.parent.name);
       // remove ref props, as they are considered special
       case prop.name === 'ref':
+      // Ignore RAC unstable props in doc
+      case prop.name.startsWith('UNSTABLE_'):
         return false;
+      case prop.parent && prop.name !== 'id':
+        return !ignoreParents.includes(prop.parent.name);
       default:
         return true;
     }
