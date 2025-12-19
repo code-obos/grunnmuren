@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "fs-extra": "11.3.2",
-    "glob": "11.1.0",
+    "glob": "13.0.0",
     "ora": "9.0.0",
     "picocolors": "1.1.1",
     "prompts": "2.4.2",
