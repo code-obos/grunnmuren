@@ -23,6 +23,8 @@ export const PropsTable = ({ componentName }: PropsTableProps) => {
       case prop.name === 'style':
       case prop.name === 'className':
         return 'Styles';
+      case prop.parent?.name === 'LinkDOMProps':
+        return 'Links';
       default:
         return 'Props';
     }
@@ -44,6 +46,7 @@ export const PropsTable = ({ componentName }: PropsTableProps) => {
         <TableBody>
           <PropRows props={groupedProps.Props} />
           <PropRows props={groupedProps.Events} heading="Events" />
+          <PropRows props={groupedProps.Links} heading="Links" />
           <PropRows props={groupedProps.Styles} heading="Styles" />
           <PropRows
             props={groupedProps.Accessibility}
