@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import { withDefaultConfig, type ParserOptions } from 'react-docgen-typescript';
+import { type ParserOptions, withDefaultConfig } from 'react-docgen-typescript';
 
 const options: ParserOptions = {
   savePropValueAsString: true,
