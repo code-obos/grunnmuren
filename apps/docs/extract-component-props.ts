@@ -1,8 +1,26 @@
 import fs from 'node:fs';
-import { type ParserOptions, withDefaultConfig } from 'react-docgen-typescript';
+import {
+  type ParserOptions,
+  type PropItem,
+  withDefaultConfig,
+} from 'react-docgen-typescript';
+
+const ignoreParents = [
+  'DOMProps',
+  'GlobalDOMEvents',
+  'GlobalDOMAttributes',
+  // Ignore for now. Do we support slots in the react aria way?
+  'SlotProps',
+];
 
 const options: ParserOptions = {
   savePropValueAsString: true,
+  propFilter: (prop: PropItem) => {
+    if (prop.parent) {
+      return !ignoreParents.includes(prop.parent.name);
+    }
+    return true;
+  },
 };
 
 const components = withDefaultConfig({
