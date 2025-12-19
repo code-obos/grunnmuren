@@ -9,20 +9,14 @@ import {
   UNSAFE_Link as Link,
   type UNSAFE_LinkProps as LinkProps,
 } from '../link';
+import type { OmitRACStyleProps } from '../type-helpers';
 
 type BreadcrumbProps = {
-  /** Additional CSS className for the element. */
-  className?: string;
   children?: React.ReactNode;
-
-  /** Additional style properties for the element. */
-  style?: React.CSSProperties;
-
   /** The URL to navigate to when clicking the breadcrumb. */
   href?: LinkProps['href'];
-  /** Ref to the element. */
   ref?: Ref<HTMLLIElement>;
-} & Omit<RACBreadcrumbProps, 'className' | 'style'>;
+} & OmitRACStyleProps<RACBreadcrumbProps>;
 
 function Breadcrumb(props: BreadcrumbProps) {
   const { className, children, href, ...restProps } = props;

@@ -16,10 +16,15 @@ const ignoreParents = [
 const options: ParserOptions = {
   savePropValueAsString: true,
   propFilter: (prop: PropItem) => {
-    if (prop.parent && prop.name !== 'id') {
-      return !ignoreParents.includes(prop.parent.name);
+    switch (true) {
+      case prop.parent && prop.name !== 'id':
+        return !ignoreParents.includes(prop.parent.name);
+      // remove ref props, as they are considered special
+      case prop.name === 'ref':
+        return false;
+      default:
+        return true;
     }
-    return true;
   },
 };
 

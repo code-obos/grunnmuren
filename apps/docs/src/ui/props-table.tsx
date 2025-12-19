@@ -13,16 +13,18 @@ export const PropsTable = ({ componentName }: PropsTableProps) => {
   const componentProps = Object.values(props[componentName].props);
 
   const groupedProps = Object.groupBy(componentProps, (prop) => {
-    if (prop.name.startsWith('on')) {
-      return 'Events';
-    } else if (
-      prop.name.startsWith('aria-') ||
+    switch (true) {
+      case prop.name.startsWith('on'):
+        return 'Events';
+      case prop.name.startsWith('aria-'):
       // If the id prop is part of DOMProps, we know it's not actually necessary for the component, so we group it under 'Accessibility'
-      (prop.name === 'id' && prop.parent?.name === 'DOMProps')
-    ) {
-      return 'Accessibility';
-    } else {
-      return 'Props';
+      case prop.name === 'id' && prop.parent?.name === 'DOMProps':
+        return 'Accessibility';
+      case prop.name === 'style':
+      case prop.name === 'className':
+        return 'Styles';
+      default:
+        return 'Props';
     }
   });
 
@@ -42,6 +44,7 @@ export const PropsTable = ({ componentName }: PropsTableProps) => {
         <TableBody>
           <PropRows props={groupedProps.Props} />
           <PropRows props={groupedProps.Events} heading="Events" />
+          <PropRows props={groupedProps.Styles} heading="Styles" />
           <PropRows
             props={groupedProps.Accessibility}
             heading="Accessibility"
