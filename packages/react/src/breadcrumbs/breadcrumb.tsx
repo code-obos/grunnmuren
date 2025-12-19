@@ -1,6 +1,5 @@
 import { ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
-import type { Ref } from 'react';
 import {
   Breadcrumb as RACBreadcrumb,
   type BreadcrumbProps as RACBreadcrumbProps,
@@ -9,14 +8,12 @@ import {
   UNSAFE_Link as Link,
   type UNSAFE_LinkProps as LinkProps,
 } from '../link';
-import type { OmitRACStyleProps } from '../type-helpers';
+import type { RACTypeHelper } from '../type-helpers';
 
 type BreadcrumbProps = {
-  children?: React.ReactNode;
   /** The URL to navigate to when clicking the breadcrumb. */
   href?: LinkProps['href'];
-  ref?: Ref<HTMLLIElement>;
-} & OmitRACStyleProps<RACBreadcrumbProps>;
+} & RACTypeHelper<RACBreadcrumbProps, HTMLLIElement>;
 
 function Breadcrumb(props: BreadcrumbProps) {
   const { className, children, href, ...restProps } = props;
