@@ -1,6 +1,5 @@
 import { Close } from '@obosbbl/grunnmuren-icons-react';
 import { cva, cx } from 'cva';
-import type { RefAttributes } from 'react';
 import {
   Button,
   Tag as RACTag,
@@ -10,6 +9,7 @@ import {
   type TagListProps as RACTagListProps,
   type TagProps as RACTagProps,
 } from 'react-aria-components';
+import type { RACTypeHelper } from '../type-helpers';
 
 const tagVariants = cva({
   base: [
@@ -36,60 +36,27 @@ const tagVariants = cva({
   ],
 });
 
-type TagGroupProps = Omit<RACTagGroupProps, 'className'> &
-  RefAttributes<HTMLDivElement> & {
-    /**
-     * CSS classes to apply to the tag group
-     */
-    className?: string;
-    /**
-     * The function to call when the tag is removed
-     */
-    onRemove?: (key: React.Key) => void;
+type TagGroupProps = {
+  /**
+   * @default "single"
+   */
+  selectionMode?: RACTagGroupProps['selectionMode'];
+} & RACTypeHelper<RACTagGroupProps, HTMLDivElement>;
 
-    /**
-     * The selection mode for the tag group
-     * @default "single"
-     */
-    selectionMode?: 'single' | 'multiple';
-  };
+type TagListProps = RACTypeHelper<RACTagListProps<object>, HTMLDivElement>;
 
-//The usage of <object> here could probably be replaced with a generic for more type safety in usage
-type TagListProps = Omit<RACTagListProps<object>, 'className'> &
-  RefAttributes<HTMLDivElement> & {
-    /**
-     * CSS classes to apply to the tag list
-     */
-    className?: string;
-  };
-
-type TagProps = Omit<RACTagProps, 'className'> &
-  RefAttributes<HTMLDivElement> & {
-    children: React.ReactNode;
-    /**
-     * CSS classes to apply to the tag
-     */
-    className?: string;
-  };
+type TagProps = RACTypeHelper<RACTagProps, HTMLDivElement>;
 
 /**
  * A group component for Tag components that enables selection and organization of options.
  */
 function TagGroup(props: TagGroupProps) {
-  const {
-    onRemove,
-    selectionMode = 'single',
-    className,
-    children,
-    ...restProps
-  } = props;
+  const { selectionMode = 'single', children, ...restProps } = props;
 
   return (
     <RACTagGroup
       {...restProps}
-      className={className}
-      selectionMode={onRemove ? 'none' : selectionMode}
-      onRemove={onRemove}
+      selectionMode={props.onRemove ? 'none' : selectionMode}
     >
       {children}
     </RACTagGroup>

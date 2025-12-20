@@ -15,6 +15,7 @@ import {
 import { Button } from '../button';
 import { HeadingContext } from '../content';
 import { translations } from '../translations';
+import type { RACTypeHelper } from '../type-helpers';
 import { useLocale } from '../use-locale';
 
 type DialogTriggerProps = RACDialogTriggerProps;
@@ -23,12 +24,15 @@ const DialogTrigger = (props: DialogTriggerProps) => (
   <RACDialogTrigger {...props} />
 );
 
-type ModalOverlayProps = Omit<RACModalOverlayProps, 'isDismissable'> & {
-  /** @default 10 Controls the z-index of the modal overlay */
+type ModalOverlayProps = {
+  /**
+   * Controls the z-index of the modal overlay
+   * @default 10
+   */
   zIndex?: number;
-  /** @default true Makes the modal dismissable */
+  /** @default true */
   isDismissable?: boolean;
-};
+} & RACModalOverlayProps;
 
 const _ModalOverlay = ({
   style = {},
@@ -119,9 +123,7 @@ const Modal = ({
   );
 };
 
-type DialogProps = RACDialogProps & {
-  children: React.ReactNode;
-};
+type DialogProps = RACTypeHelper<RACDialogProps, HTMLElement>;
 
 const Dialog = ({ className, children, ...restProps }: DialogProps) => (
   <RACDialog
@@ -130,33 +132,32 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
       'relative grid gap-y-5 outline-none',
       // Footer
       '[&_[data-slot="footer"]]:flex [&_[data-slot="footer"]]:gap-x-2',
+      className,
     )}
   >
     {({ close }) => (
-      <>
-        <Provider
-          values={[
-            [
-              ButtonContext,
-              {
-                // This is necessary to support multiple close buttons
-                slots: {
-                  // We need to define default slot in order to also support non-slotted buttons (i.e. buttons without slot prop)
-                  [DEFAULT_SLOT]: {
-                    className: 'w-fit',
-                  },
-                  close: {
-                    onPress: close,
-                    className: 'w-fit',
-                  },
+      <Provider
+        values={[
+          [
+            ButtonContext,
+            {
+              // This is necessary to support multiple close buttons
+              slots: {
+                // We need to define default slot in order to also support non-slotted buttons (i.e. buttons without slot prop)
+                [DEFAULT_SLOT]: {
+                  className: 'w-fit',
+                },
+                close: {
+                  onPress: close,
+                  className: 'w-fit',
                 },
               },
-            ],
-          ]}
-        >
-          {children}
-        </Provider>
-      </>
+            },
+          ],
+        ]}
+      >
+        {children}
+      </Provider>
     )}
   </RACDialog>
 );

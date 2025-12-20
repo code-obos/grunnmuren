@@ -1,5 +1,5 @@
 import { cva, cx } from 'cva';
-import { type RefAttributes, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import {
   Tab as RACTab,
   TabList as RACTabList,
@@ -11,6 +11,7 @@ import {
   type TabsProps as RACTabsProps,
   TabListStateContext,
 } from 'react-aria-components';
+import type { RACTypeHelper } from '../type-helpers';
 import { ScrollButton, useHorizontalScroll } from '../utils';
 
 const tabsVariants = cva({
@@ -23,40 +24,13 @@ const tabsVariants = cva({
   },
 });
 
-type TabsProps = Omit<RACTabsProps, 'className'> &
-  RefAttributes<HTMLDivElement> & {
-    /**
-     * CSS classes to apply to the tabs container
-     */
-    className?: string;
-    orientation?: 'horizontal' | 'vertical';
-  };
+type TabsProps = RACTypeHelper<RACTabsProps, HTMLDivElement>;
 
-type TabListProps = Omit<RACTabListProps<object>, 'className'> &
-  RefAttributes<HTMLDivElement> & {
-    /**
-     * CSS classes to apply to the tab list
-     */
-    className?: string;
-  };
+type TabListProps = RACTypeHelper<RACTabListProps<object>, HTMLDivElement>;
 
-type TabProps = Omit<RACTabProps, 'className'> &
-  RefAttributes<HTMLDivElement> & {
-    children: React.ReactNode;
-    /**
-     * CSS classes to apply to the tab
-     */
-    className?: string;
-  };
+type TabProps = RACTypeHelper<RACTabProps, HTMLDivElement>;
 
-type TabPanelProps = Omit<RACTabPanelProps, 'className'> &
-  RefAttributes<HTMLDivElement> & {
-    children: React.ReactNode;
-    /**
-     * CSS classes to apply to the tab panel
-     */
-    className?: string;
-  };
+type TabPanelProps = RACTypeHelper<RACTabPanelProps, HTMLDivElement>;
 
 /**
  * A container component that organizes content into multiple sections
