@@ -44,6 +44,21 @@ const translations: Translations = {
     sv: '(extern länk)',
     en: '(external link)',
   },
+  stepper: {
+    nb: 'Steg',
+    sv: 'Steg',
+    en: 'Steps',
+  },
+  completed: {
+    nb: 'Fullført',
+    sv: 'Slutförd',
+    en: 'Completed',
+  },
+  inProgress: {
+    nb: 'Påbegynt',
+    sv: 'Påbörjad',
+    en: 'In progress',
+  },
 };
 
 export { translations, type Translation, type Translations };
