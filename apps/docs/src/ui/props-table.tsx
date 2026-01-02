@@ -85,7 +85,8 @@ const PropRows = ({
               {prop.required ? '' : '?'}
             </code>
           </TableCell>
-          <TableCell>{prop.description}</TableCell>
+          {/** biome-ignore lint/security/noDangerouslySetInnerHtml: we consider the prop description safe */}
+          <TableCell dangerouslySetInnerHTML={{ __html: prop.description }} />
           <TableCell>{prop.defaultValue?.value ?? '-'}</TableCell>
         </TableRow>
       ))}

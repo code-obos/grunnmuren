@@ -51,6 +51,7 @@
     "@react-aria/optimize-locales-plugin": "1.1.5",
     "@tailwindcss/vite": "4.1.17",
     "@tanstack/react-router-devtools": "1.141.2",
+    "marked": "17.0.1",
     "react-docgen-typescript": "2.4.0",
     "tailwindcss": "4.1.17",
     "vite": "7.3.0",
