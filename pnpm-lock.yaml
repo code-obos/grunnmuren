@@ -230,9 +230,6 @@ importers:
       fs-extra:
         specifier: 11.3.2
         version: 11.3.2
-      glob:
-        specifier: 11.1.0
-        version: 11.1.0
       ora:
         specifier: 9.0.0
         version: 9.0.0
