@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 3.3.5
+
+### Patch Changes
+
+- 792bb25: fix: forward className prop to element in `<Dialog>` component
+
 ## 3.3.4
 
 ### Patch Changes
