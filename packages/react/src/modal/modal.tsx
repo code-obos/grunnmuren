@@ -127,36 +127,35 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
   <RACDialog
     {...restProps}
     className={cx(
+      className,
       'relative grid gap-y-5 outline-none',
       // Footer
       '[&_[data-slot="footer"]]:flex [&_[data-slot="footer"]]:gap-x-2',
     )}
   >
     {({ close }) => (
-      <>
-        <Provider
-          values={[
-            [
-              ButtonContext,
-              {
-                // This is necessary to support multiple close buttons
-                slots: {
-                  // We need to define default slot in order to also support non-slotted buttons (i.e. buttons without slot prop)
-                  [DEFAULT_SLOT]: {
-                    className: 'w-fit',
-                  },
-                  close: {
-                    onPress: close,
-                    className: 'w-fit',
-                  },
+      <Provider
+        values={[
+          [
+            ButtonContext,
+            {
+              // This is necessary to support multiple close buttons
+              slots: {
+                // We need to define default slot in order to also support non-slotted buttons (i.e. buttons without slot prop)
+                [DEFAULT_SLOT]: {
+                  className: 'w-fit',
+                },
+                close: {
+                  onPress: close,
+                  className: 'w-fit',
                 },
               },
-            ],
-          ]}
-        >
-          {children}
-        </Provider>
-      </>
+            },
+          ],
+        ]}
+      >
+        {children}
+      </Provider>
     )}
   </RACDialog>
 );
