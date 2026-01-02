@@ -1,8 +1,36 @@
 import fs from 'node:fs';
-import { withDefaultConfig } from 'react-docgen-typescript';
+import {
+  type ParserOptions,
+  type PropItem,
+  withDefaultConfig,
+} from 'react-docgen-typescript';
 
-const options = {
+const ignoreParents = [
+  'DOMProps',
+  'GlobalDOMEvents',
+  'GlobalDOMAttributes',
+  // Ignore for now. Do we support slots in the react aria way?
+  'SlotProps',
+];
+
+const options: ParserOptions = {
   savePropValueAsString: true,
+  propFilter: (prop: PropItem) => {
+    switch (true) {
+      // remove ref props, as they are considered special
+      case prop.name === 'ref':
+      // Ignore RAC unstable props in doc
+      case prop.name.startsWith('UNSTABLE_'):
+      // key isn't a regular prop, but a special react prop
+      case prop.name === 'key':
+        return false;
+      // check parent ignore list (except for a few special ones which we want to include)
+      case prop.parent && !['id', 'children'].includes(prop.name):
+        return !ignoreParents.includes(prop.parent.name);
+      default:
+        return true;
+    }
+  },
 };
 
 const components = withDefaultConfig({
