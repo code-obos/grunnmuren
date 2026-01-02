@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import { marked } from 'marked';
 import {
   type ParserOptions,
   type PropItem,
@@ -49,6 +50,15 @@ for (const componentToFix of Object.values(propFixes)) {
 
   if (toUpdate) {
     toUpdate.props = componentToFix.props;
+  }
+}
+
+// convert the prop description to HTML instead of markdown
+for (const component of components) {
+  for (const prop of Object.values(component.props)) {
+    if (prop.description) {
+      prop.description = await marked.parseInline(prop.description);
+    }
   }
 }
 
