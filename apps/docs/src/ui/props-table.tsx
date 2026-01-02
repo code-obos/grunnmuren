@@ -72,7 +72,7 @@ const PropRows = ({
     <>
       {heading && (
         <TableRow>
-          <th colSpan={3} className="font-bold">
+          <th colSpan={3} className="text-left font-bold">
             {heading}
           </th>
         </TableRow>
