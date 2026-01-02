@@ -18,7 +18,10 @@ for (const componentToFix of Object.values(propFixes)) {
   const toUpdate = components.find(
     (c) => c.displayName === componentToFix.displayName,
   );
-  toUpdate.props = componentToFix.props;
+
+  if (toUpdate) {
+    toUpdate.props = componentToFix.props;
+  }
 }
 
 const outputPath = './component-props.ts';
