@@ -315,7 +315,7 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => {
   };
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: The keydown handler is only to prevent undesired scrolling behavior when using the arrow keys
+    // biome-ignore lint/a11y/useSemanticElements: we prefer div over fieldset
     <div
       aria-label={translations.carousel[locale]}
       data-slot="carousel-items"
@@ -328,8 +328,9 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => {
         'outline-none',
         'rounded-[inherit]',
       ])}
-      // If this is not set, left/right keyboard events won't trigger correctly when first clicking on the carousel with the cursor
+      // biome-ignore lint/a11y/noNoninteractiveTabindex: If this is not set, left/right keyboard events won't trigger correctly when first clicking on the carousel with the cursor
       tabIndex={0}
+      role="group"
       onKeyDown={handleKeyDown}
       ref={carouselItemsRef}
     >
