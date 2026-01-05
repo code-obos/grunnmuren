@@ -58,10 +58,14 @@ const Carousel = ({
   const locale = useLocale();
 
   const [activeSlide, setActiveSlide] = useState(defaultInitialSlide);
+  const [slideCount, setSlideCount] = useState(0);
 
-  // If initial slide is something other than the first, scroll to it.
-  // We do this in layoutEffect on mount, without smooth scroll
+  // Get the number of carousel items and set the slide count.
   useLayoutEffect(() => {
+    const items = getCarouselItems(carouselItemsRef)?.length;
+    setSlideCount(items ?? 0);
+
+    // If initial slide is something other than the first, scroll to it (without smooth scroll).
     if (activeSlide > 0) {
       scrollTo(activeSlide, true);
     }
@@ -76,6 +80,7 @@ const Carousel = ({
         isScrollingProgrammaticallyToSlide.current = slideIndex;
         if (!jumpWithoutCallbacks) {
           setActiveSlide(slideIndex);
+          setSlideCount(items.length);
           onSlideChange(slideIndex);
         }
 
@@ -90,9 +95,12 @@ const Carousel = ({
   );
 
   useEffect(() => {
-    function getSlideIndex(element: Element) {
-      const items = getCarouselItems(carouselItemsRef);
-      return Array.from(items ?? []).indexOf(element as HTMLElement);
+    function getSlideIndex(
+      element: Element,
+    ): [index: number, slideCount: number] {
+      const items = getCarouselItems(carouselItemsRef) ?? [];
+
+      return [Array.from(items).indexOf(element as HTMLElement), items.length];
     }
 
     if ('onscrollsnapchanging' in window) {
@@ -102,10 +110,11 @@ const Carousel = ({
           return;
         }
 
-        const newIndex = getSlideIndex(
+        const [newIndex, slideCount] = getSlideIndex(
           (event as Event & { snapTargetInline: Element }).snapTargetInline,
         );
         setActiveSlide(newIndex);
+        setSlideCount(slideCount);
         onSlideChange(newIndex);
       };
 
@@ -131,10 +140,11 @@ const Carousel = ({
         // use a for iteration here so we can break out of the loop early. Of the observered elements we only care about the first one that is intersecting.
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            const newIndex = getSlideIndex(entry.target);
+            const [newIndex, slideCount] = getSlideIndex(entry.target);
 
             if (isScrollingProgrammaticallyToSlide.current == null) {
               setActiveSlide(newIndex);
+              setSlideCount(slideCount);
               onSlideChange(newIndex);
             } else if (
               newIndex === isScrollingProgrammaticallyToSlide.current
@@ -194,11 +204,13 @@ const Carousel = ({
                 prev: {
                   'aria-label': translations.previous[locale],
                   onPress: handlePrevious,
+                  isDisabled: activeSlide === 0,
                 },
                 next: {
                   isIconOnly: true,
                   'aria-label': translations.next[locale],
                   onPress: handleNext,
+                  isDisabled: slideCount - 1 <= activeSlide,
                 },
               },
             },
@@ -224,7 +236,7 @@ const Carousel = ({
               slot="prev"
               variant="primary"
               color="white"
-              className="group/carousel-previous"
+              className="group/carousel-previous data-disabled:invisible"
             >
               <ChevronLeft className="group-hover/carousel-previous:motion-safe:-translate-x-1 transition-transform" />
             </Button>
@@ -233,7 +245,7 @@ const Carousel = ({
               slot="next"
               variant="primary"
               color="white"
-              className="group/carousel-next"
+              className="group/carousel-next data-disabled:invisible"
             >
               <ChevronRight className="transition-transform group-hover/carousel-next:motion-safe:translate-x-1" />
             </Button>
