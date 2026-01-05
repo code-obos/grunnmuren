@@ -289,7 +289,6 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => {
     useContext(CarouselItemsContext);
 
   const locale = useLocale();
-  const prefersReducedMotion = usePrefersReducedMotion();
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     // Prevent default behavior when holding down arrow keys (when repeat is true)
@@ -302,15 +301,14 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => {
       return;
     }
 
-    // For users with prefers-reduced-motion, trigger button click behavior instead of native scroll
-    if (prefersReducedMotion) {
-      if (event.key === 'ArrowLeft' && handlePrevious) {
-        event.preventDefault();
-        handlePrevious();
-      } else if (event.key === 'ArrowRight' && handleNext) {
-        event.preventDefault();
-        handleNext();
-      }
+    // Trigger next/prev ourselves instead of native scroll snapping keyboard behavior.
+    // This fixes the "halfway" scroll effect when hitting the keys multiple times in quick succession.
+    if (event.key === 'ArrowLeft' && handlePrevious) {
+      event.preventDefault();
+      handlePrevious();
+    } else if (event.key === 'ArrowRight' && handleNext) {
+      event.preventDefault();
+      handleNext();
     }
   };
 
