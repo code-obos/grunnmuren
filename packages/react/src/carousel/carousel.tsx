@@ -56,7 +56,6 @@ const Carousel = ({
 
   const carouselItemsRef = useRef<HTMLDivElement>(null);
   const locale = useLocale();
-  const { previous, next } = translations;
 
   const [activeSlide, setActiveSlide] = useState(defaultInitialSlide);
 
@@ -125,6 +124,7 @@ const Carousel = ({
       const instersectionCallback = (entries: IntersectionObserverEntry[]) => {
         if (firstIntersectionCallImminent.current) {
           firstIntersectionCallImminent.current = false;
+          isScrollingProgrammaticallyToSlide.current = null;
           return;
         }
 
@@ -192,12 +192,12 @@ const Carousel = ({
               slots: {
                 [DEFAULT_SLOT]: {}, // this is required in RAC (for non-trigger buttons)
                 prev: {
-                  'aria-label': previous[locale],
+                  'aria-label': translations.previous[locale],
                   onPress: handlePrevious,
                 },
                 next: {
                   isIconOnly: true,
-                  'aria-label': next[locale],
+                  'aria-label': translations.next[locale],
                   onPress: handleNext,
                 },
               },
@@ -285,10 +285,39 @@ const CarouselItemsContext = createContext<CarouselItemsContextValue>({
 });
 
 const CarouselItems = ({ className, children }: CarouselItemsProps) => {
-  const { carouselItemsRef, activeSlide } = useContext(CarouselItemsContext);
+  const { carouselItemsRef, activeSlide, handleNext, handlePrevious } =
+    useContext(CarouselItemsContext);
+
+  const locale = useLocale();
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    // Prevent default behavior when holding down arrow keys (when repeat is true)
+    // The default behavior in scroll snapping causes a staggering scroll effect that feels janky
+    if (
+      event.repeat &&
+      (event.key === 'ArrowLeft' || event.key === 'ArrowRight')
+    ) {
+      event.preventDefault();
+      return;
+    }
+
+    // For users with prefers-reduced-motion, trigger button click behavior instead of native scroll
+    if (prefersReducedMotion) {
+      if (event.key === 'ArrowLeft' && handlePrevious) {
+        event.preventDefault();
+        handlePrevious();
+      } else if (event.key === 'ArrowRight' && handleNext) {
+        event.preventDefault();
+        handleNext();
+      }
+    }
+  };
 
   return (
+    // biome-ignore lint/a11y/noStaticElementInteractions: The keydown handler is only to prevent undesired scrolling behavior when using the arrow keys
     <div
+      aria-label={translations.carousel[locale]}
       data-slot="carousel-items"
       className={cx(className, [
         'scrollbar-hidden',
@@ -299,6 +328,9 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => {
         'outline-none',
         'rounded-[inherit]',
       ])}
+      // If this is not set, left/right keyboard events won't trigger correctly when first clicking on the carousel with the cursor
+      tabIndex={0}
+      onKeyDown={handleKeyDown}
       ref={carouselItemsRef}
     >
       {Children.map(children, (child, index) => {
