@@ -13,14 +13,7 @@ const meta = {
   parameters: {
     variant: 'fullscreen',
   },
-  args: {onSelectedIndexChange: fn()},
-} satisfies Meta<typeof Carousel>;
-
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Basic = {
+  args: { onSlideChange: fn() },
   render: (args) => (
     <main className="container grid gap-y-8">
       <Carousel {...args}>
@@ -64,4 +57,16 @@ export const Basic = {
       </Carousel>
     </main>
   ),
-} satisfies Story;
+} satisfies Meta<typeof Carousel>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Basic: Story = {};
+
+export const DefaultSelectedIndex: Story = {
+  args: {
+    defaultInitialSlide: 1,
+  },
+};

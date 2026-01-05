@@ -1,13 +1,13 @@
 import { ChevronLeft, ChevronRight } from '@obosbbl/grunnmuren-icons-react';
+import { useLayoutEffect } from '@react-aria/utils';
 import { cx } from 'cva';
 import {
   Children,
   cloneElement,
   createContext,
-  HTMLProps,
+  type HTMLProps,
   isValidElement,
-  type JSX,
-  RefObject,
+  type RefObject,
   useCallback,
   useContext,
   useEffect,
@@ -21,33 +21,17 @@ import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 import { usePrefersReducedMotion } from '../use-prefers-reduced-motion';
 
-type CarouselItem = Pick<CarouselItemProps, 'id'> & {
-  /** The index of the item that is currently in view */
-  index: number;
-  /** The index of the previous item that was in view */
-  prevIndex: number;
-  /** The id of the previous item that was in view */
-  prevId?: CarouselItemProps['id'];
-};
-
 type CarouselProps = Omit<HTMLProps<HTMLDivElement>, 'onChange'> & {
-  /** The <CarouselItem/> components to be displayed within the carousel. */
   children?: React.ReactNode;
-  // /**
-  //  * Callback that is triggered when a user navigates to new item in the Carousel.
-  //  * The argument to the callback is an object containing `index` of the new item scrolled into view and the `id` of that item (if set on the `<CarouselItem>`)
-  //  * It also provides `prevIndex` which is the index of the previous item that was in view
-  //  * And `prevId`, which is the id of the previous item that was in view (if set on the `<CarouselItem>`)
-  //  * You can use this callback to track which item is currently in view, for example for analytics or updating other parts of your UI.
-  //  * When you want to avoid using controlled state for the carousel, you can use this callback to with the carousel's current item.
-  //  * @param item { index: number; id?: string; prevIndex: number; prevId?: string }
-  //  */
-  // onChange?: (item: CarouselItem) => void;
-  //
   /**
-   * For controlled selection, callback that is called when the selected index changes.
+   * The initial slide to display when the carousel is mounted.
+   * @default 0
    */
-  onSelectedIndexChange?: (index: number) => void;
+  defaultInitialSlide?: number;
+  /**
+   * Callback invoked when the slide changes.
+   */
+  onSlideChange?: (index: number) => void;
 };
 
 function getCarouselItems(ref: RefObject<HTMLDivElement | null>) {
@@ -61,58 +45,69 @@ function getCarouselItems(ref: RefObject<HTMLDivElement | null>) {
 const Carousel = ({
   className,
   children,
-  onSelectedIndexChange = () => {},
+  defaultInitialSlide = 0,
+  onSlideChange = () => {},
   ...rest
 }: CarouselProps) => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
   const firstIntersectionCallImminent = useRef(true);
-  const isScrollingProgrammaticallyToIndex = useRef<number>(null);
+  const isScrollingProgrammaticallyToSlide = useRef<number>(null);
 
   const carouselItemsRef = useRef<HTMLDivElement>(null);
   const locale = useLocale();
   const { previous, next } = translations;
 
+  const [activeSlide, setActiveSlide] = useState(defaultInitialSlide);
 
-  const [activeIndex, setActiveIndex] = useState(0);
+  // If initial slide is something other than the first, scroll to it.
+  // We do this in layoutEffect on mount, without smooth scroll
+  useLayoutEffect(() => {
+    if (activeSlide > 0) {
+      scrollTo(activeSlide, true);
+    }
+  }, []);
 
   const scrollTo = useCallback(
-    (index: number) => {
-
+    (slideIndex: number, jumpWithoutCallbacks = false) => {
       const items = getCarouselItems(carouselItemsRef);
-      const target = items?.[index];
+      const target = items?.[slideIndex];
 
       if (target) {
-        isScrollingProgrammaticallyToIndex.current = index;
-        setActiveIndex(index);
-        onSelectedIndexChange(index);
+        isScrollingProgrammaticallyToSlide.current = slideIndex;
+        if (!jumpWithoutCallbacks) {
+          setActiveSlide(slideIndex);
+          onSlideChange(slideIndex);
+        }
 
         carouselItemsRef.current?.scrollTo({
-          behavior: prefersReducedMotion ? 'instant' : 'smooth',
+          behavior:
+            jumpWithoutCallbacks || prefersReducedMotion ? 'instant' : 'smooth',
           left: target.offsetLeft,
         });
       }
-
     },
-    [prefersReducedMotion],
+    [onSlideChange, prefersReducedMotion],
   );
 
   useEffect(() => {
-    function getItemIndex(element: Element) {
+    function getSlideIndex(element: Element) {
       const items = getCarouselItems(carouselItemsRef);
       return Array.from(items ?? []).indexOf(element as HTMLElement);
     }
 
     if ('onscrollsnapchanging' in window) {
       const scrollSnapChange = (event: Event) => {
-        if (isScrollingProgrammaticallyToIndex.current != null) {
-          isScrollingProgrammaticallyToIndex.current = null;
+        if (isScrollingProgrammaticallyToSlide.current != null) {
+          isScrollingProgrammaticallyToSlide.current = null;
           return;
         }
 
-        const newIndex = getItemIndex((event as Event & { snapTargetInline: Element }).snapTargetInline);
-        setActiveIndex(newIndex);
-        onSelectedIndexChange(newIndex);
+        const newIndex = getSlideIndex(
+          (event as Event & { snapTargetInline: Element }).snapTargetInline,
+        );
+        setActiveSlide(newIndex);
+        onSlideChange(newIndex);
       };
 
       carouselItemsRef.current?.addEventListener(
@@ -136,13 +131,15 @@ const Carousel = ({
         // use a for iteration here so we can break out of the loop early. Of the observered elements we only care about the first one that is intersecting.
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            const newIndex = getItemIndex(entry.target);
+            const newIndex = getSlideIndex(entry.target);
 
-            if (isScrollingProgrammaticallyToIndex.current == null) {
-              setActiveIndex(newIndex)
-              onSelectedIndexChange(newIndex);
-            } else if (newIndex === isScrollingProgrammaticallyToIndex.current) {
-              isScrollingProgrammaticallyToIndex.current = null;
+            if (isScrollingProgrammaticallyToSlide.current == null) {
+              setActiveSlide(newIndex);
+              onSlideChange(newIndex);
+            } else if (
+              newIndex === isScrollingProgrammaticallyToSlide.current
+            ) {
+              isScrollingProgrammaticallyToSlide.current = null;
             }
             break;
           }
@@ -166,14 +163,14 @@ const Carousel = ({
         firstIntersectionCallImminent.current = true;
       };
     }
-  }, []);
+  }, [onSlideChange]);
 
   const handlePrevious = () => {
-    scrollTo(activeIndex - 1);
+    scrollTo(activeSlide - 1);
   };
 
   const handleNext = () => {
-    scrollTo(activeIndex + 1);
+    scrollTo(activeSlide + 1);
   };
 
   return (
@@ -184,7 +181,7 @@ const Carousel = ({
             CarouselItemsContext,
             {
               carouselItemsRef,
-              activeIndex: activeIndex,
+              activeSlide: activeSlide,
               handlePrevious,
               handleNext,
             },
@@ -227,10 +224,7 @@ const Carousel = ({
               slot="prev"
               variant="primary"
               color="white"
-              className={cx(
-                'group/carousel-previous',
-                // hasReachedScrollStart && 'invisible',
-              )}
+              className="group/carousel-previous"
             >
               <ChevronLeft className="group-hover/carousel-previous:motion-safe:-translate-x-1 transition-transform" />
             </Button>
@@ -239,10 +233,7 @@ const Carousel = ({
               slot="next"
               variant="primary"
               color="white"
-              className={cx(
-                'group/carousel-next',
-                // hasReachedScrollEnd && 'invisible',
-              )}
+              className="group/carousel-next"
             >
               <ChevronRight className="transition-transform group-hover/carousel-next:motion-safe:translate-x-1" />
             </Button>
@@ -283,51 +274,20 @@ type CarouselItemsProps = HTMLProps<HTMLDivElement> & {
 
 type CarouselItemsContextValue = {
   carouselItemsRef: React.Ref<HTMLDivElement>;
-  activeIndex: number;
+  activeSlide: number;
   handlePrevious?: () => void;
   handleNext?: () => void;
 };
 
 const CarouselItemsContext = createContext<CarouselItemsContextValue>({
   carouselItemsRef: null,
-  activeIndex: 0,
+  activeSlide: 0,
 });
 
 const CarouselItems = ({ className, children }: CarouselItemsProps) => {
-  const {
-    carouselItemsRef,
-    activeIndex,
-    handlePrevious,
-    handleNext,
-  } = useContext(CarouselItemsContext);
-
-  const prefersReducedMotion = usePrefersReducedMotion();
-
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    // Prevent default behavior when holding down arrow keys (when repeat is true)
-    // The default behavior in scroll snapping causes a staggering scroll effect that feels janky
-    if (
-      event.repeat &&
-      (event.key === 'ArrowLeft' || event.key === 'ArrowRight')
-    ) {
-      event.preventDefault();
-      return;
-    }
-
-    // For users with prefers-reduced-motion, trigger button click behavior instead of native scroll
-    if (prefersReducedMotion) {
-      if (event.key === 'ArrowLeft' && handlePrevious) {
-        event.preventDefault();
-        handlePrevious();
-      } else if (event.key === 'ArrowRight' && handleNext) {
-        event.preventDefault();
-        handleNext();
-      }
-    }
-  };
+  const { carouselItemsRef, activeSlide } = useContext(CarouselItemsContext);
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: The keydown handler is only to prevent undesired scrolling behavior when using the arrow keys
     <div
       data-slot="carousel-items"
       className={cx(className, [
@@ -340,12 +300,11 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => {
         'rounded-[inherit]',
       ])}
       ref={carouselItemsRef}
-      onKeyDown={handleKeyDown}
     >
       {Children.map(children, (child, index) => {
         if (isValidElement(child)) {
-          return cloneElement(child as JSX.Element, {
-            inert: activeIndex === index ? undefined : true,
+          return cloneElement(child as React.ReactElement<CarouselItemProps>, {
+            inert: activeSlide === index ? undefined : true,
           });
         }
       })}
@@ -355,7 +314,7 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => {
 
 type CarouselItemProps = HTMLProps<HTMLDivElement> & {
   /** The component/components to display as the <CarouselItem/>. */
-  children: JSX.Element | JSX.Element[];
+  children: React.ReactNode;
 };
 
 const CarouselItem = ({ className, children, ...rest }: CarouselItemProps) => {
