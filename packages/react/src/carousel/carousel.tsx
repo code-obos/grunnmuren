@@ -14,7 +14,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { DEFAULT_SLOT, Provider } from 'react-aria-components';
+import { DEFAULT_SLOT, type PressEvent, Provider } from 'react-aria-components';
 import { Button, ButtonContext } from '../button';
 import { MediaContext } from '../content';
 import { translations } from '../translations';
@@ -175,12 +175,31 @@ const Carousel = ({
     }
   }, [onSlideChange]);
 
-  const handlePrevious = () => {
-    scrollTo(activeSlide - 1);
+  const handlePrevious = (evt?: PressEvent) => {
+    const nextSlide = activeSlide - 1;
+
+    scrollTo(nextSlide);
+
+    // This method is used both when clicking the button and scrolling the carousel with keys
+    // if this is a button press, we need to move focus if  we are about to disable this button due to start/end of carousel
+    if (evt && nextSlide <= 0) {
+      carouselRef.current
+        ?.querySelector<HTMLButtonElement>('button[slot="next"]')
+        ?.focus();
+    }
   };
 
-  const handleNext = () => {
-    scrollTo(activeSlide + 1);
+  const handleNext = (evt?: PressEvent) => {
+    const nextSlide = activeSlide + 1;
+    scrollTo(nextSlide);
+
+    // This method is used both when clicking the button and scrolling the carousel with keys
+    // if this is a button press, we need to move focus if  we are about to disable this button due to start/end of carousel
+    if (evt && nextSlide >= slideCount - 1) {
+      carouselRef.current
+        ?.querySelector<HTMLButtonElement>('button[slot="prev"]')
+        ?.focus();
+    }
   };
 
   return (
@@ -287,8 +306,8 @@ type CarouselItemsProps = HTMLProps<HTMLDivElement> & {
 type CarouselItemsContextValue = {
   carouselItemsRef: React.Ref<HTMLDivElement>;
   activeSlide: number;
-  handlePrevious?: () => void;
-  handleNext?: () => void;
+  handlePrevious?: (evt?: PressEvent) => void;
+  handleNext?: (evt?: PressEvent) => void;
 };
 
 const CarouselItemsContext = createContext<CarouselItemsContextValue>({
