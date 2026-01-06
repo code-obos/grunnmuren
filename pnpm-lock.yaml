@@ -78,8 +78,8 @@ importers:
   apps/docs:
     dependencies:
       '@code-obos/sanity-auth':
-        specifier: 1.4.3
-        version: 1.4.3(sanity@4.19.0(@emotion/is-prop-valid@1.2.2)(@portabletext/sanity-bridge@1.2.4(@sanity/schema@4.19.0(@types/react@19.2.7)(debug@4.4.3))(@sanity/types@4.19.0(@types/react@19.2.7)(debug@4.4.3)))(@types/node@24.10.0)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(immer@10.2.0)(jiti@2.6.1)(lightningcss@1.30.2)(postcss@8.5.6)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(styled-components@6.1.14(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(terser@5.37.0)(tsx@4.19.2)(typescript@5.9.3)(yaml@2.7.0))(styled-components@6.1.14(react-dom@19.2.3(react@19.2.3))(react@19.2.3))
+        specifier: 1.4.4
+        version: 1.4.4(sanity@4.19.0(@emotion/is-prop-valid@1.2.2)(@portabletext/sanity-bridge@1.2.4(@sanity/schema@4.19.0(@types/react@19.2.7)(debug@4.4.3))(@sanity/types@4.19.0(@types/react@19.2.7)(debug@4.4.3)))(@types/node@24.10.0)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(immer@10.2.0)(jiti@2.6.1)(lightningcss@1.30.2)(postcss@8.5.6)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(styled-components@6.1.14(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(terser@5.37.0)(tsx@4.19.2)(typescript@5.9.3)(yaml@2.7.0))(styled-components@6.1.14(react-dom@19.2.3(react@19.2.3))(react@19.2.3))
       '@obosbbl/grunnmuren-icons-react':
         specifier: workspace:*
         version: link:../../packages/icons-react
@@ -1193,11 +1193,11 @@ packages:
     resolution: {integrity: sha512-+tv3z+SPp+gqTIcImN9o0hqE9xyfQjI1XD9pL6NuKjua9B1y7mNYv0S9cP+QEbA4ppVgGZEmKOvHX5G5Ei1CVA==}
     engines: {node: '>=18.0.0'}
 
-  '@code-obos/sanity-auth@1.4.3':
-    resolution: {integrity: sha512-iMg/wU06r5nCoSb4ErW4nlw0Sgt/DieeAAvRE3gLXkI7hWWfVz/BzIHii/MpbiKyW4WipJeGwlztMbwekJufZw==, tarball: https://npm.pkg.github.com/download/@code-obos/sanity-auth/1.4.3/70a68595888be74dcdd40e3f55c4e04941d0cdc6}
+  '@code-obos/sanity-auth@1.4.4':
+    resolution: {integrity: sha512-rwGxeXsoRdiuy8pQ/x1YQ0BJUR5o1gxbIS9ya8sHEiISUwBmogxzaF1wa1o+oJgKmSeX3GIOUk6WOXjsSFdogw==, tarball: https://npm.pkg.github.com/download/@code-obos/sanity-auth/1.4.4/50f8b663583878958b97b4e21911b72048753985}
     engines: {node: '>=20'}
     peerDependencies:
-      sanity: ^3.86.1  || ^4.0.0-0
+      sanity: ^3.86.1  || ^4.0.0-0 || ^5.0.0-0
       styled-components: ^6.1
 
   '@codemirror/autocomplete@6.19.1':
@@ -10696,7 +10696,7 @@ snapshots:
     dependencies:
       mime: 3.0.0
 
-  '@code-obos/sanity-auth@1.4.3(sanity@4.19.0(@emotion/is-prop-valid@1.2.2)(@portabletext/sanity-bridge@1.2.4(@sanity/schema@4.19.0(@types/react@19.2.7)(debug@4.4.3))(@sanity/types@4.19.0(@types/react@19.2.7)(debug@4.4.3)))(@types/node@24.10.0)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(immer@10.2.0)(jiti@2.6.1)(lightningcss@1.30.2)(postcss@8.5.6)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(styled-components@6.1.14(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(terser@5.37.0)(tsx@4.19.2)(typescript@5.9.3)(yaml@2.7.0))(styled-components@6.1.14(react-dom@19.2.3(react@19.2.3))(react@19.2.3))':
+  '@code-obos/sanity-auth@1.4.4(sanity@4.19.0(@emotion/is-prop-valid@1.2.2)(@portabletext/sanity-bridge@1.2.4(@sanity/schema@4.19.0(@types/react@19.2.7)(debug@4.4.3))(@sanity/types@4.19.0(@types/react@19.2.7)(debug@4.4.3)))(@types/node@24.10.0)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(immer@10.2.0)(jiti@2.6.1)(lightningcss@1.30.2)(postcss@8.5.6)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(styled-components@6.1.14(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(terser@5.37.0)(tsx@4.19.2)(typescript@5.9.3)(yaml@2.7.0))(styled-components@6.1.14(react-dom@19.2.3(react@19.2.3))(react@19.2.3))':
     dependencies:
       sanity: 4.19.0(@emotion/is-prop-valid@1.2.2)(@portabletext/sanity-bridge@1.2.4(@sanity/schema@4.19.0(@types/react@19.2.7)(debug@4.4.3))(@sanity/types@4.19.0(@types/react@19.2.7)(debug@4.4.3)))(@types/node@24.10.0)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(immer@10.2.0)(jiti@2.6.1)(lightningcss@1.30.2)(postcss@8.5.6)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(styled-components@6.1.14(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(terser@5.37.0)(tsx@4.19.2)(typescript@5.9.3)(yaml@2.7.0)
       styled-components: 6.1.14(react-dom@19.2.3(react@19.2.3))(react@19.2.3)

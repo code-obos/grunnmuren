@@ -19,7 +19,7 @@
     "sanity:typegen:generate": "sanity typegen generate"
   },
   "dependencies": {
-    "@code-obos/sanity-auth": "1.4.3",
+    "@code-obos/sanity-auth": "1.4.4",
     "@obosbbl/grunnmuren-icons-react": "workspace:*",
     "@obosbbl/grunnmuren-icons-svg": "workspace:*",
     "@obosbbl/grunnmuren-react": "workspace:*",
