@@ -1,6 +1,7 @@
 import { ChevronLeft, ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 import { useLayoutEffect } from '@react-aria/utils';
 import { cx } from 'cva';
+import useEmblaCarousel from 'embla-carousel-react';
 import {
   Children,
   cloneElement,
@@ -49,6 +50,7 @@ const Carousel = ({
   onSlideChange = () => {},
   ...rest
 }: CarouselProps) => {
+  const [emblaRef] = useEmblaCarousel();
   const carouselRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
   const firstIntersectionCallImminent = useRef(true);
@@ -203,7 +205,7 @@ const Carousel = ({
   };
 
   return (
-    <div data-slot="carousel" ref={carouselRef}>
+    <div data-slot="carousel" ref={emblaRef}>
       <Provider
         values={[
           [
