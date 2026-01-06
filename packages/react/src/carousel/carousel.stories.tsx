@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn } from 'storybook/test';
 import {
   UNSAFE_Carousel as Carousel,
+  CarouselButton,
+  CarouselControls,
   UNSAFE_CarouselItem as CarouselItem,
   UNSAFE_CarouselItems as CarouselItems,
 } from '../carousel';
@@ -54,6 +56,10 @@ const meta = {
             </Media>
           </CarouselItem>
         </CarouselItems>
+        <CarouselControls>
+          <CarouselButton slot="prev" />
+          <CarouselButton slot="next" />
+        </CarouselControls>
       </Carousel>
     </main>
   ),
