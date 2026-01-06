@@ -39,6 +39,11 @@ const translations: Translations = {
     sv: 'Nästa',
     en: 'Next',
   },
+  carousel: {
+    nb: 'Karusell',
+    sv: 'Karusell',
+    en: 'Carousel',
+  },
   externalLink: {
     nb: '(ekstern lenke)',
     sv: '(extern länk)',
