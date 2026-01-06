@@ -1,6 +1,7 @@
 import { ChevronLeft, ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 import { useLayoutEffect } from '@react-aria/utils';
 import { cx } from 'cva';
+import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel from 'embla-carousel-react';
 import {
   Children,
@@ -12,6 +13,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -24,11 +26,18 @@ import { usePrefersReducedMotion } from '../use-prefers-reduced-motion';
 
 type CarouselProps = Omit<HTMLProps<HTMLDivElement>, 'onChange'> & {
   children?: React.ReactNode;
+  /** Delay in milliseconds between each auto scroll of the gallery. Any interaction with the carousel from the user will immediately suspend the autoscroll. */
+  autoPlayDelay?: number;
   /**
    * The initial slide to display when the carousel is mounted.
    * @default 0
    */
   defaultInitialSlide?: number;
+  /**
+   * Whether the carousel loops. Caveat: Currently it only works with autoPlay and next/prev buttons
+   * @default false
+   */
+  loop?: boolean;
   /**
    * Callback invoked when the slide changes.
    */
@@ -44,169 +53,192 @@ function getCarouselItems(ref: RefObject<HTMLDivElement | null>) {
 }
 
 const Carousel = ({
+  autoPlayDelay,
   className,
   children,
   defaultInitialSlide = 0,
   onSlideChange = () => {},
+  loop = false,
   ...rest
 }: CarouselProps) => {
-  const [emblaRef] = useEmblaCarousel();
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const prefersReducedMotion = usePrefersReducedMotion();
-  const firstIntersectionCallImminent = useRef(true);
-  const isScrollingProgrammaticallyToSlide = useRef<number>(null);
-
-  const carouselItemsRef = useRef<HTMLDivElement>(null);
-  const locale = useLocale();
-
-  const [activeSlide, setActiveSlide] = useState(defaultInitialSlide);
-  const [slideCount, setSlideCount] = useState(0);
-
-  // Get the number of carousel items and set the slide count.
-  useLayoutEffect(() => {
-    const items = getCarouselItems(carouselItemsRef)?.length;
-    setSlideCount(items ?? 0);
-
-    // If initial slide is something other than the first, scroll to it (without smooth scroll).
-    if (activeSlide > 0) {
-      scrollTo(activeSlide, true);
+  const plugins = useMemo(() => {
+    if (autoPlayDelay) {
+      return [Autoplay({ delay: autoPlayDelay, stopOnLastSnap: !loop })];
     }
-  }, []);
+    return undefined;
+  }, [autoPlayDelay, loop]);
 
-  const scrollTo = useCallback(
-    (slideIndex: number, jumpWithoutCallbacks = false) => {
-      const items = getCarouselItems(carouselItemsRef);
-      const target = items?.[slideIndex];
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop }, plugins);
 
-      if (target) {
-        isScrollingProgrammaticallyToSlide.current = slideIndex;
-        if (!jumpWithoutCallbacks) {
-          setActiveSlide(slideIndex);
-          setSlideCount(items.length);
-          onSlideChange(slideIndex);
-        }
+  const scrollPrev = useCallback(() => {
+    emblaApi?.scrollPrev();
+  }, [emblaApi]);
 
-        carouselItemsRef.current?.scrollTo({
-          behavior:
-            jumpWithoutCallbacks || prefersReducedMotion ? 'instant' : 'smooth',
-          left: target.offsetLeft,
-        });
-      }
-    },
-    [onSlideChange, prefersReducedMotion],
+  const scrollNext = useCallback(() => {
+    emblaApi?.scrollNext();
+  }, [emblaApi]);
+
+  // const prefersReducedMotion = usePrefersReducedMotion();
+  // const firstIntersectionCallImminent = useRef(true);
+  // const isScrollingProgrammaticallyToSlide = useRef<number>(null);
+
+  // const carouselItemsRef = useRef<HTMLDivElement>(null);
+  // const locale = useLocale();
+
+  // const [activeSlide, setActiveSlide] = useState(defaultInitialSlide);
+  // const [slideCount, setSlideCount] = useState(0);
+
+  // // Get the number of carousel items and set the slide count.
+  // useLayoutEffect(() => {
+  //   const items = getCarouselItems(carouselItemsRef)?.length;
+  //   setSlideCount(items ?? 0);
+
+  //   // If initial slide is something other than the first, scroll to it (without smooth scroll).
+  //   if (activeSlide > 0) {
+  //     scrollTo(activeSlide, true);
+  //   }
+  // }, []);
+
+  // const scrollTo = useCallback(
+  //   (slideIndex: number, jumpWithoutCallbacks = false) => {
+  //     const items = getCarouselItems(carouselItemsRef);
+  //     const target = items?.[slideIndex];
+
+  //     if (target) {
+  //       isScrollingProgrammaticallyToSlide.current = slideIndex;
+  //       if (!jumpWithoutCallbacks) {
+  //         setActiveSlide(slideIndex);
+  //         setSlideCount(items.length);
+  //         onSlideChange(slideIndex);
+  //       }
+
+  //       carouselItemsRef.current?.scrollTo({
+  //         behavior:
+  //           jumpWithoutCallbacks || prefersReducedMotion ? 'instant' : 'smooth',
+  //         left: target.offsetLeft,
+  //       });
+  //     }
+  //   },
+  //   [onSlideChange, prefersReducedMotion],
+  // );
+
+  // useEffect(() => {
+  //   function getSlideIndex(
+  //     element: Element,
+  //   ): [index: number, slideCount: number] {
+  //     const items = getCarouselItems(carouselItemsRef) ?? [];
+
+  //     return [Array.from(items).indexOf(element as HTMLElement), items.length];
+  //   }
+
+  //   if ('onscrollsnapchanging' in window) {
+  //     const scrollSnapChange = (event: Event) => {
+  //       if (isScrollingProgrammaticallyToSlide.current != null) {
+  //         isScrollingProgrammaticallyToSlide.current = null;
+  //         return;
+  //       }
+
+  //       const [newIndex, slideCount] = getSlideIndex(
+  //         (event as Event & { snapTargetInline: Element }).snapTargetInline,
+  //       );
+  //       setActiveSlide(newIndex);
+  //       setSlideCount(slideCount);
+  //       onSlideChange(newIndex);
+  //     };
+
+  //     carouselItemsRef.current?.addEventListener(
+  //       'scrollsnapchanging',
+  //       scrollSnapChange,
+  //     );
+
+  //     return () =>
+  //       carouselItemsRef.current?.removeEventListener(
+  //         'scrollsnapchanging',
+  //         scrollSnapChange,
+  //       );
+  //   } else {
+  //     // For browers (non chromium) that don't support scroll snap events we fall back to using intersection observer
+  //     const instersectionCallback = (entries: IntersectionObserverEntry[]) => {
+  //       if (firstIntersectionCallImminent.current) {
+  //         firstIntersectionCallImminent.current = false;
+  //         isScrollingProgrammaticallyToSlide.current = null;
+  //         return;
+  //       }
+
+  //       // use a for iteration here so we can break out of the loop early. Of the observered elements we only care about the first one that is intersecting.
+  //       for (const entry of entries) {
+  //         if (entry.isIntersecting) {
+  //           const [newIndex, slideCount] = getSlideIndex(entry.target);
+
+  //           if (isScrollingProgrammaticallyToSlide.current == null) {
+  //             setActiveSlide(newIndex);
+  //             setSlideCount(slideCount);
+  //             onSlideChange(newIndex);
+  //           } else if (
+  //             newIndex === isScrollingProgrammaticallyToSlide.current
+  //           ) {
+  //             isScrollingProgrammaticallyToSlide.current = null;
+  //           }
+  //           break;
+  //         }
+  //       }
+  //     };
+
+  //     const observer = new IntersectionObserver(instersectionCallback, {
+  //       root: carouselRef.current,
+  //       rootMargin: '0px',
+  //       threshold: 0.8,
+  //     });
+
+  //     const items = getCarouselItems(carouselItemsRef);
+
+  //     items?.forEach((slide) => {
+  //       observer.observe(slide);
+  //     });
+
+  //     return () => {
+  //       observer.disconnect();
+  //       firstIntersectionCallImminent.current = true;
+  //     };
+  //   }
+  // }, [onSlideChange]);
+
+  // const handlePrevious = (evt?: PressEvent) => {
+  //   const nextSlide = activeSlide - 1;
+
+  //   scrollTo(nextSlide);
+
+  //   // This method is used both when clicking the button and scrolling the carousel with keys
+  //   // if this is a button press, we need to move focus if  we are about to disable this button due to start/end of carousel
+  //   if (evt && nextSlide <= 0) {
+  //     carouselRef.current
+  //       ?.querySelector<HTMLButtonElement>('button[slot="next"]')
+  //       ?.focus();
+  //   }
+  // };
+
+  // const handleNext = (evt?: PressEvent) => {
+  //   const nextSlide = activeSlide + 1;
+  //   scrollTo(nextSlide);
+
+  //   // This method is used both when clicking the button and scrolling the carousel with keys
+  //   // if this is a button press, we need to move focus if  we are about to disable this button due to start/end of carousel
+  //   if (evt && nextSlide >= slideCount - 1) {
+  //     carouselRef.current
+  //       ?.querySelector<HTMLButtonElement>('button[slot="prev"]')
+  //       ?.focus();
+  //   }
+  // };
+  //
+  return (
+    <div className="embla overflow-hidden" data-slot="carousel" ref={emblaRef}>
+      {children}
+    </div>
   );
 
-  useEffect(() => {
-    function getSlideIndex(
-      element: Element,
-    ): [index: number, slideCount: number] {
-      const items = getCarouselItems(carouselItemsRef) ?? [];
-
-      return [Array.from(items).indexOf(element as HTMLElement), items.length];
-    }
-
-    if ('onscrollsnapchanging' in window) {
-      const scrollSnapChange = (event: Event) => {
-        if (isScrollingProgrammaticallyToSlide.current != null) {
-          isScrollingProgrammaticallyToSlide.current = null;
-          return;
-        }
-
-        const [newIndex, slideCount] = getSlideIndex(
-          (event as Event & { snapTargetInline: Element }).snapTargetInline,
-        );
-        setActiveSlide(newIndex);
-        setSlideCount(slideCount);
-        onSlideChange(newIndex);
-      };
-
-      carouselItemsRef.current?.addEventListener(
-        'scrollsnapchanging',
-        scrollSnapChange,
-      );
-
-      return () =>
-        carouselItemsRef.current?.removeEventListener(
-          'scrollsnapchanging',
-          scrollSnapChange,
-        );
-    } else {
-      // For browers (non chromium) that don't support scroll snap events we fall back to using intersection observer
-      const instersectionCallback = (entries: IntersectionObserverEntry[]) => {
-        if (firstIntersectionCallImminent.current) {
-          firstIntersectionCallImminent.current = false;
-          isScrollingProgrammaticallyToSlide.current = null;
-          return;
-        }
-
-        // use a for iteration here so we can break out of the loop early. Of the observered elements we only care about the first one that is intersecting.
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            const [newIndex, slideCount] = getSlideIndex(entry.target);
-
-            if (isScrollingProgrammaticallyToSlide.current == null) {
-              setActiveSlide(newIndex);
-              setSlideCount(slideCount);
-              onSlideChange(newIndex);
-            } else if (
-              newIndex === isScrollingProgrammaticallyToSlide.current
-            ) {
-              isScrollingProgrammaticallyToSlide.current = null;
-            }
-            break;
-          }
-        }
-      };
-
-      const observer = new IntersectionObserver(instersectionCallback, {
-        root: carouselRef.current,
-        rootMargin: '0px',
-        threshold: 0.8,
-      });
-
-      const items = getCarouselItems(carouselItemsRef);
-
-      items?.forEach((slide) => {
-        observer.observe(slide);
-      });
-
-      return () => {
-        observer.disconnect();
-        firstIntersectionCallImminent.current = true;
-      };
-    }
-  }, [onSlideChange]);
-
-  const handlePrevious = (evt?: PressEvent) => {
-    const nextSlide = activeSlide - 1;
-
-    scrollTo(nextSlide);
-
-    // This method is used both when clicking the button and scrolling the carousel with keys
-    // if this is a button press, we need to move focus if  we are about to disable this button due to start/end of carousel
-    if (evt && nextSlide <= 0) {
-      carouselRef.current
-        ?.querySelector<HTMLButtonElement>('button[slot="next"]')
-        ?.focus();
-    }
-  };
-
-  const handleNext = (evt?: PressEvent) => {
-    const nextSlide = activeSlide + 1;
-    scrollTo(nextSlide);
-
-    // This method is used both when clicking the button and scrolling the carousel with keys
-    // if this is a button press, we need to move focus if  we are about to disable this button due to start/end of carousel
-    if (evt && nextSlide >= slideCount - 1) {
-      carouselRef.current
-        ?.querySelector<HTMLButtonElement>('button[slot="prev"]')
-        ?.focus();
-    }
-  };
-
   return (
-    <div data-slot="carousel" ref={emblaRef}>
-      <Provider
+    <div className="embla overflow-hidden" data-slot="carousel" ref={emblaRef}>
+      {/*<Provider
         values={[
           [
             CarouselItemsContext,
@@ -237,42 +269,42 @@ const Carousel = ({
             },
           ],
         ]}
+      >*/}
+      <div
+        {...rest}
+        className={cx(
+          className,
+          'relative rounded-3xl',
+          // If any <CarouselItems/> (the scroll-snap container) or <VideoLoop/> component is focused, apply custom focus styles around the carousel, this makes ensures that the focus outline is visible around the carousel in all cases
+          '[&:has([data-slot="carousel-items"]:focus-visible,[data-slot="video-loop-button"]:focus-visible)]:outline-focus',
+          '[&:has([data-slot="carousel-items"]:focus-visible,[data-slot="video-loop-button"]:focus-visible)]:outline-focus-offset',
+          // Unset the default focus outline for potential video loop buttons, as it interferes with the custom focus styles for the carousel
+          '**:data-[slot="video-loop-button"]:focus-visible:outline-none',
+        )}
       >
-        <div
-          {...rest}
-          className={cx(
-            className,
-            'relative rounded-3xl',
-            // If any <CarouselItems/> (the scroll-snap container) or <VideoLoop/> component is focused, apply custom focus styles around the carousel, this makes ensures that the focus outline is visible around the carousel in all cases
-            '[&:has([data-slot="carousel-items"]:focus-visible,[data-slot="video-loop-button"]:focus-visible)]:outline-focus',
-            '[&:has([data-slot="carousel-items"]:focus-visible,[data-slot="video-loop-button"]:focus-visible)]:outline-focus-offset',
-            // Unset the default focus outline for potential video loop buttons, as it interferes with the custom focus styles for the carousel
-            '**:data-[slot="video-loop-button"]:focus-visible:outline-none',
-          )}
-        >
-          {children}
-          <_CarouselControls>
-            <Button
-              isIconOnly
-              slot="prev"
-              variant="primary"
-              color="white"
-              className="group/carousel-previous data-disabled:invisible"
-            >
-              <ChevronLeft className="group-hover/carousel-previous:motion-safe:-translate-x-1 transition-transform" />
-            </Button>
-            <Button
-              isIconOnly
-              slot="next"
-              variant="primary"
-              color="white"
-              className="group/carousel-next data-disabled:invisible"
-            >
-              <ChevronRight className="transition-transform group-hover/carousel-next:motion-safe:translate-x-1" />
-            </Button>
-          </_CarouselControls>
-        </div>
-      </Provider>
+        {children}
+        <_CarouselControls>
+          <Button
+            isIconOnly
+            slot="prev"
+            variant="primary"
+            color="white"
+            className="group/carousel-previous data-disabled:invisible"
+          >
+            <ChevronLeft className="group-hover/carousel-previous:motion-safe:-translate-x-1 transition-transform" />
+          </Button>
+          <Button
+            isIconOnly
+            slot="next"
+            variant="primary"
+            color="white"
+            className="group/carousel-next data-disabled:invisible"
+          >
+            <ChevronRight className="transition-transform group-hover/carousel-next:motion-safe:translate-x-1" />
+          </Button>
+        </_CarouselControls>
+      </div>
+      {/*</Provider>*/}
     </div>
   );
 };
@@ -345,6 +377,8 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => {
     }
   };
 
+  return <div className="embla__container flex">{children}</div>;
+
   return (
     // biome-ignore lint/a11y/useSemanticElements: we prefer div over fieldset
     <div
@@ -384,7 +418,8 @@ type CarouselItemProps = HTMLProps<HTMLDivElement> & {
 const CarouselItem = ({ className, children, ...rest }: CarouselItemProps) => {
   return (
     <div
-      className={cx(className, 'shrink-0 basis-full snap-start')}
+      // className={cx(className, 'shrink-0 basis-full snap-start')}
+      className="embla__slide min-w-0 shrink-0 grow-0 basis-full"
       data-slot="carousel-item"
       {...rest}
     >

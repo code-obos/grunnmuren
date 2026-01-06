@@ -70,3 +70,22 @@ export const DefaultSelectedIndex: Story = {
     defaultInitialSlide: 3,
   },
 };
+
+export const Looping: Story = {
+  args: {
+    loop: true,
+  },
+};
+
+export const AutoPlay: Story = {
+  args: {
+    autoPlayDelay: 3000,
+  },
+};
+
+export const AutoPlayLooping: Story = {
+  args: {
+    autoPlayDelay: 3000,
+    loop: true,
+  },
+};
