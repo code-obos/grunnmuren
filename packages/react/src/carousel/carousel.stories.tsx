@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn } from 'storybook/test';
 import {
   UNSAFE_Carousel as Carousel,
-  CarouselButton,
-  CarouselControls,
+  UNSAFE_CarouselButton as CarouselButton,
+  UNSAFE_CarouselControls as CarouselControls,
   UNSAFE_CarouselItem as CarouselItem,
   UNSAFE_CarouselItems as CarouselItems,
 } from '../carousel';
@@ -90,6 +90,13 @@ export const AutoPlay: Story = {
 };
 
 export const AutoPlayLooping: Story = {
+  args: {
+    autoPlayDelay: 3000,
+    loop: true,
+  },
+};
+
+export const CustomControls: Story = {
   args: {
     autoPlayDelay: 3000,
     loop: true,

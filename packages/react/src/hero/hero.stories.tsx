@@ -5,6 +5,8 @@ import { Badge } from '../badge';
 import { Button } from '../button';
 import {
   UNSAFE_Carousel as Carousel,
+  UNSAFE_CarouselButton as CarouselButton,
+  UNSAFE_CarouselControls as CarouselControls,
   UNSAFE_CarouselItem as CarouselItem,
   UNSAFE_CarouselItems as CarouselItems,
 } from '../carousel';
@@ -51,6 +53,10 @@ const meta: Meta<typeof Hero> = {
               </Media>
             </CarouselItem>
           </CarouselItems>
+          <CarouselControls>
+            <CarouselButton slot="prev" />
+            <CarouselButton slot="next" />
+          </CarouselControls>
         </Carousel>
       </Hero>
     </main>
@@ -61,7 +67,7 @@ export default meta;
 
 type Story = StoryObj<typeof Hero>;
 
-export const StandardWithLeadAndImage: Story = {
+export const StandardWithLeadAndImageAndCarousel: Story = {
   args: {},
 };
 
@@ -156,6 +162,10 @@ export const StandardWithCarousel = () => (
             </Media>
           </CarouselItem>
         </CarouselItems>
+        <CarouselControls>
+          <CarouselButton slot="prev" />
+          <CarouselButton slot="next" />
+        </CarouselControls>
       </Carousel>
     </Hero>
   </main>
@@ -253,6 +263,10 @@ export const FullBleedWithCarousel = () => (
             </Media>
           </CarouselItem>
         </CarouselItems>
+        <CarouselControls>
+          <CarouselButton slot="prev" />
+          <CarouselButton slot="next" />
+        </CarouselControls>
       </Carousel>
     </Hero>
     <h2>Tittel</h2>
