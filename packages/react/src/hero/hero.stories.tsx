@@ -263,11 +263,11 @@ export const FullBleedWithCarousel = () => (
             </Media>
           </CarouselItem>
         </CarouselItems>
-        <CarouselControls>
-          <CarouselButton slot="prev" />
-          <CarouselButton slot="next" />
-        </CarouselControls>
       </Carousel>
+      <CarouselControls>
+        <CarouselButton slot="prev" />
+        <CarouselButton slot="next" />
+      </CarouselControls>
     </Hero>
     <h2>Tittel</h2>
     <p>
