@@ -86,11 +86,17 @@ const Carousel = ({
   useEffect(() => {
     if (!emblaApi) return;
 
-    emblaApi.on('select', () => {
+    const onSelect = () => {
       const scrollSnap = emblaApi.selectedScrollSnap();
       setSlidesInView([scrollSnap]);
       onSlideChange(scrollSnap);
-    });
+    };
+
+    emblaApi.on('select', onSelect);
+
+    return () => {
+      emblaApi.off('select', onSelect);
+    };
   }, [emblaApi, onSlideChange]);
 
   const handleNextPress = useCallback(() => {
