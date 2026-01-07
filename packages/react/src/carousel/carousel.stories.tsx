@@ -73,7 +73,7 @@ export const Basic: Story = {};
 
 export const DefaultSelectedIndex: Story = {
   args: {
-    defaultInitialSlide: 3,
+    initialIndex: 3,
   },
 };
 
