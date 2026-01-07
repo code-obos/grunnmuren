@@ -178,7 +178,7 @@ const Carousel = ({
   return (
     // biome-ignore lint/a11y/noStaticElementInteractions: we want to support keyboard navigations for the carousel
     <div
-      className={cx('embla relative', className)}
+      className={cx('relative', className)}
       data-slot="carousel"
       ref={mergeRefs(ref, carouselRef)}
       onKeyDown={handleKeyDown}
@@ -242,11 +242,11 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => {
 
   return (
     <div
-      className={cx(className, 'embla__viewport overflow-hidden rounded-3xl')}
+      className={cx(className, 'overflow-hidden rounded-3xl')}
       ref={emblaRef}
       data-slot="carousel-viewport"
     >
-      <div className="embla__container flex" data-slot="carousel-items">
+      <div className="flex" data-slot="carousel-items">
         {Children.map(children, (child, index) => {
           if (isValidElement(child)) {
             return cloneElement(
@@ -340,7 +340,7 @@ const CarouselItem = ({ className, children, ...rest }: CarouselItemProps) => {
     <div
       className={cx(
         className,
-        'embla__slide min-w-0 shrink-0 grow-0 basis-full',
+        'min-w-0 shrink-0 grow-0 basis-full',
       )}
       data-slot="carousel-item"
       {...rest}
