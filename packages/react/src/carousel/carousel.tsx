@@ -20,7 +20,7 @@ import {
   useState,
 } from 'react';
 import { DEFAULT_SLOT, Provider } from 'react-aria-components';
-import { Button, ButtonContext } from '../button';
+import { Button, ButtonContext, type ButtonProps } from '../button';
 import { MediaContext } from '../content';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
@@ -105,7 +105,13 @@ const Carousel = ({
     emblaApi.scrollNext(prefersReducedMotion ?? false);
 
     // we need to move focus if  we are about to disable this button due to start/end of carousel
-    if (!loop && !emblaApi.canScrollNext()) {
+    if (
+      !loop &&
+      !emblaApi.canScrollNext() &&
+      carouselRef.current
+        ?.querySelector<HTMLButtonElement>('button[slot="next"]')
+        ?.matches(':focus-visible')
+    ) {
       carouselRef.current
         ?.querySelector<HTMLButtonElement>('button[slot="prev"]')
         ?.focus();
@@ -118,7 +124,13 @@ const Carousel = ({
     emblaApi.scrollPrev(prefersReducedMotion ?? false);
 
     // we need to move focus if  we are about to disable this button due to start/end of carousel
-    if (!loop && !emblaApi.canScrollPrev()) {
+    if (
+      !loop &&
+      !emblaApi.canScrollPrev() &&
+      carouselRef.current
+        ?.querySelector<HTMLButtonElement>('button[slot="prev"]')
+        ?.matches(':focus-visible')
+    ) {
       carouselRef.current
         ?.querySelector<HTMLButtonElement>('button[slot="next"]')
         ?.focus();
@@ -264,20 +276,25 @@ const carouselButtonIconSlotVariants = cva({
   },
 });
 
+type CarouselButtonProps = ButtonProps & {
+  slot: 'next' | 'prev';
+};
+
 const CarouselButton = ({
   className,
+  isIconOnly = true,
+  color = 'white',
+  variant = 'primary',
   slot,
   ...rest
-}: {
-  slot: 'next' | 'prev';
-}) => {
+}: CarouselButtonProps) => {
   return (
     <Button
-      isIconOnly
-      slot={slot}
-      variant="primary"
-      color="white"
       className={carouselButtonVariants({ className })}
+      isIconOnly={isIconOnly}
+      slot={slot}
+      variant={variant}
+      color={color}
       {...rest}
     >
       <ChevronRight className={carouselButtonIconSlotVariants({ slot })} />
@@ -327,6 +344,8 @@ export {
   CarouselItems as UNSAFE_CarouselItems,
   CarouselButton as UNSAFE_CarouselButton,
   CarouselControls as UNSAFE_CarouselControls,
+  type CarouselControlsProps as UNSAFE_CarouselControlsProps,
+  type CarouselButtonProps as UNSAFE_CarouselButtonProps,
   type CarouselItemProps as UNSAFE_CarouselItemProps,
   type CarouselItemsProps as UNSAFE_CarouselItemsProps,
   type CarouselProps as UNSAFE_CarouselProps,
