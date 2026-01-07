@@ -121,11 +121,24 @@ const Carousel = ({
 
   const locale = useLocale();
 
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (e.key === 'ArrowRight' && !e.repeat) {
+        handleNextPress();
+      } else if (e.key === 'ArrowLeft' && !e.repeat) {
+        handlePrevPress();
+      }
+    },
+    [handleNextPress, handlePrevPress],
+  );
+
   return (
+    // biome-ignore lint/a11y/noStaticElementInteractions: we want to support keyboard navigations for the carousel
     <div
       className={cx('embla relative', className)}
       data-slot="carousel"
       ref={mergeRefs(ref, carouselRef)}
+      onKeyDown={handleKeyDown}
       {...rest}
     >
       <Provider
