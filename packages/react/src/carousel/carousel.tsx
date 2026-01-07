@@ -4,6 +4,7 @@ import { cva, cx } from 'cva';
 import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel, {
   type EmblaViewportRefType,
+  type UseEmblaCarouselType,
 } from 'embla-carousel-react';
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 import {
@@ -44,14 +45,23 @@ type CarouselProps = Omit<HTMLProps<HTMLDivElement>, 'onChange'> & {
    * Callback invoked when the slide changes.
    */
   onSlideChange?: (index: number) => void;
+  /**
+   * Callback invoked after the carousel scrolling "settles".
+   */
+  onSettled?: (index: number) => void;
 };
+
+type EmblaEventHandler = Parameters<
+  NonNullable<UseEmblaCarouselType[1]>['on']
+>[1];
 
 const Carousel = ({
   autoPlayDelay,
   className,
   children,
   defaultInitialSlide = 0,
-  onSlideChange = () => {},
+  onSlideChange,
+  onSettled,
   loop = false,
   ref,
   ...rest
@@ -71,7 +81,7 @@ const Carousel = ({
     {
       loop,
       startIndex: defaultInitialSlide,
-      // we set inert for the inactive slides
+      // we set inert for the inactive items, so they are not focusable
       watchFocus: false,
     },
     emblaPlugins,
@@ -86,18 +96,29 @@ const Carousel = ({
   useEffect(() => {
     if (!emblaApi) return;
 
-    const onSelect = () => {
-      const scrollSnap = emblaApi.selectedScrollSnap();
-      setSlidesInView([scrollSnap]);
-      onSlideChange(scrollSnap);
+    const emblaHandler: EmblaEventHandler = (_, type) => {
+      const scrollSnapIndex = emblaApi.selectedScrollSnap();
+
+      switch (type) {
+        case 'select':
+          setSlidesInView([scrollSnapIndex]);
+          onSlideChange?.(scrollSnapIndex);
+          break;
+        case 'settle': {
+          onSettled?.(scrollSnapIndex);
+          break;
+        }
+      }
     };
 
-    emblaApi.on('select', onSelect);
+    emblaApi.on('select', emblaHandler);
+    emblaApi.on('settle', emblaHandler);
 
     return () => {
-      emblaApi.off('select', onSelect);
+      emblaApi.off('select', emblaHandler);
+      emblaApi.off('settle', emblaHandler);
     };
-  }, [emblaApi, onSlideChange]);
+  }, [emblaApi, onSlideChange, onSettled]);
 
   const handleNextPress = useCallback(() => {
     if (!emblaApi) return;
@@ -162,10 +183,10 @@ const Carousel = ({
       <Provider
         values={[
           [
-            CarouselItemsContext,
+            CarouselContext,
             {
               slidesInView,
-              emblaRef,
+              '~emblaRef': emblaRef,
             },
           ],
           [
@@ -199,18 +220,21 @@ type CarouselItemsProps = HTMLProps<HTMLDivElement> & {
   children: React.ReactNode;
 };
 
-type CarouselItemsContextValue = {
+type CarouselContextValue = {
   slidesInView: number[];
-  emblaRef: EmblaViewportRefType | null;
+  /**
+   * @private
+   */
+  '~emblaRef': EmblaViewportRefType | null;
 };
 
-const CarouselItemsContext = createContext<CarouselItemsContextValue>({
-  emblaRef: null,
+const CarouselContext = createContext<CarouselContextValue>({
+  '~emblaRef': null,
   slidesInView: [],
 });
 
 const CarouselItems = ({ className, children }: CarouselItemsProps) => {
-  const { slidesInView, emblaRef } = useContext(CarouselItemsContext);
+  const { slidesInView, '~emblaRef': emblaRef } = useContext(CarouselContext);
 
   return (
     <div
