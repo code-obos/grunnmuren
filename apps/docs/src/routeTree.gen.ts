@@ -17,6 +17,7 @@ import { Route as ApiHealthRouteImport } from './routes/api/health'
 import { Route as DocsSlugRouteImport } from './routes/_docs/$slug'
 import { Route as DocsProfilIndexRouteImport } from './routes/_docs/profil/index'
 import { Route as DocsKomponenterIndexRouteImport } from './routes/_docs/komponenter/index'
+import { Route as DocsProfilLayoutRouteImport } from './routes/_docs/profil/layout'
 import { Route as DocsProfilIkonerRouteImport } from './routes/_docs/profil/ikoner'
 import { Route as DocsProfilFargerRouteImport } from './routes/_docs/profil/farger'
 import { Route as DocsKomponenterSlugRouteImport } from './routes/_docs/komponenter/$slug'
@@ -60,6 +61,11 @@ const DocsKomponenterIndexRoute = DocsKomponenterIndexRouteImport.update({
   path: '/komponenter/',
   getParentRoute: () => DocsRoute,
 } as any)
+const DocsProfilLayoutRoute = DocsProfilLayoutRouteImport.update({
+  id: '/profil/layout',
+  path: '/profil/layout',
+  getParentRoute: () => DocsRoute,
+} as any)
 const DocsProfilIkonerRoute = DocsProfilIkonerRouteImport.update({
   id: '/profil/ikoner',
   path: '/profil/ikoner',
@@ -85,6 +91,7 @@ export interface FileRoutesByFullPath {
   '/komponenter/$slug': typeof DocsKomponenterSlugRoute
   '/profil/farger': typeof DocsProfilFargerRoute
   '/profil/ikoner': typeof DocsProfilIkonerRoute
+  '/profil/layout': typeof DocsProfilLayoutRoute
   '/komponenter': typeof DocsKomponenterIndexRoute
   '/profil': typeof DocsProfilIndexRoute
 }
@@ -97,6 +104,7 @@ export interface FileRoutesByTo {
   '/komponenter/$slug': typeof DocsKomponenterSlugRoute
   '/profil/farger': typeof DocsProfilFargerRoute
   '/profil/ikoner': typeof DocsProfilIkonerRoute
+  '/profil/layout': typeof DocsProfilLayoutRoute
   '/komponenter': typeof DocsKomponenterIndexRoute
   '/profil': typeof DocsProfilIndexRoute
 }
@@ -111,6 +119,7 @@ export interface FileRoutesById {
   '/_docs/komponenter/$slug': typeof DocsKomponenterSlugRoute
   '/_docs/profil/farger': typeof DocsProfilFargerRoute
   '/_docs/profil/ikoner': typeof DocsProfilIkonerRoute
+  '/_docs/profil/layout': typeof DocsProfilLayoutRoute
   '/_docs/komponenter/': typeof DocsKomponenterIndexRoute
   '/_docs/profil/': typeof DocsProfilIndexRoute
 }
@@ -125,6 +134,7 @@ export interface FileRouteTypes {
     | '/komponenter/$slug'
     | '/profil/farger'
     | '/profil/ikoner'
+    | '/profil/layout'
     | '/komponenter'
     | '/profil'
   fileRoutesByTo: FileRoutesByTo
@@ -137,6 +147,7 @@ export interface FileRouteTypes {
     | '/komponenter/$slug'
     | '/profil/farger'
     | '/profil/ikoner'
+    | '/profil/layout'
     | '/komponenter'
     | '/profil'
   id:
@@ -150,6 +161,7 @@ export interface FileRouteTypes {
     | '/_docs/komponenter/$slug'
     | '/_docs/profil/farger'
     | '/_docs/profil/ikoner'
+    | '/_docs/profil/layout'
     | '/_docs/komponenter/'
     | '/_docs/profil/'
   fileRoutesById: FileRoutesById
@@ -219,6 +231,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsKomponenterIndexRouteImport
       parentRoute: typeof DocsRoute
     }
+    '/_docs/profil/layout': {
+      id: '/_docs/profil/layout'
+      path: '/profil/layout'
+      fullPath: '/profil/layout'
+      preLoaderRoute: typeof DocsProfilLayoutRouteImport
+      parentRoute: typeof DocsRoute
+    }
     '/_docs/profil/ikoner': {
       id: '/_docs/profil/ikoner'
       path: '/profil/ikoner'
@@ -249,6 +268,7 @@ interface DocsRouteChildren {
   DocsKomponenterSlugRoute: typeof DocsKomponenterSlugRoute
   DocsProfilFargerRoute: typeof DocsProfilFargerRoute
   DocsProfilIkonerRoute: typeof DocsProfilIkonerRoute
+  DocsProfilLayoutRoute: typeof DocsProfilLayoutRoute
   DocsKomponenterIndexRoute: typeof DocsKomponenterIndexRoute
   DocsProfilIndexRoute: typeof DocsProfilIndexRoute
 }
@@ -259,6 +279,7 @@ const DocsRouteChildren: DocsRouteChildren = {
   DocsKomponenterSlugRoute: DocsKomponenterSlugRoute,
   DocsProfilFargerRoute: DocsProfilFargerRoute,
   DocsProfilIkonerRoute: DocsProfilIkonerRoute,
+  DocsProfilLayoutRoute: DocsProfilLayoutRoute,
   DocsKomponenterIndexRoute: DocsKomponenterIndexRoute,
   DocsProfilIndexRoute: DocsProfilIndexRoute,
 }
