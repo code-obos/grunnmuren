@@ -15,7 +15,7 @@ const meta = {
   parameters: {
     variant: 'fullscreen',
   },
-  args: { onSlideChange: fn() },
+  args: { onSlideChange: fn(), onSettled: fn() },
   render: (args) => (
     <main className="container grid gap-y-8">
       <Carousel {...args}>
