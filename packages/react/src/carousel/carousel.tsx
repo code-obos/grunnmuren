@@ -1,4 +1,5 @@
 import { ChevronRight } from '@obosbbl/grunnmuren-icons-react';
+import { mergeRefs } from '@react-aria/utils';
 import { cva, cx } from 'cva';
 import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel, {
@@ -15,6 +16,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 import { DEFAULT_SLOT, Provider } from 'react-aria-components';
@@ -54,6 +56,8 @@ const Carousel = ({
   ref,
   ...rest
 }: CarouselProps) => {
+  const carouselRef = useRef<HTMLDivElement>(null);
+
   const emblaPlugins = useMemo(() => {
     const plugins = [WheelGesturesPlugin()];
 
@@ -91,11 +95,11 @@ const Carousel = ({
 
   const handleNextPress = useCallback(() => {
     if (!emblaApi) return;
-    console.log(ref);
 
     emblaApi.scrollNext(prefersReducedMotion ?? false);
 
-    if (loop && !emblaApi.canScrollNext()) {
+    // we need to move focus if  we are about to disable this button due to start/end of carousel
+    if (!loop && !emblaApi.canScrollNext()) {
       carouselRef.current
         ?.querySelector<HTMLButtonElement>('button[slot="prev"]')
         ?.focus();
@@ -107,9 +111,10 @@ const Carousel = ({
 
     emblaApi.scrollPrev(prefersReducedMotion ?? false);
 
-    if (loop && !emblaApi.canScrollNext()) {
+    // we need to move focus if  we are about to disable this button due to start/end of carousel
+    if (!loop && !emblaApi.canScrollPrev()) {
       carouselRef.current
-        ?.querySelector<HTMLButtonElement>('button[slot="prev"]')
+        ?.querySelector<HTMLButtonElement>('button[slot="next"]')
         ?.focus();
     }
   }, [emblaApi, prefersReducedMotion, loop]);
@@ -120,7 +125,7 @@ const Carousel = ({
     <div
       className={cx('embla relative', className)}
       data-slot="carousel"
-      ref={ref}
+      ref={mergeRefs(ref, carouselRef)}
       {...rest}
     >
       <Provider
