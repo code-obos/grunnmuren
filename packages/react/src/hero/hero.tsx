@@ -22,7 +22,7 @@ const oneColumnLayout = [
   'lg:*:not-data-[slot="content"]:not-data-[slot="media"]:not-data-[slot="carousel"]:col-span-3 lg:*:not-data-[slot="content"]:not-data-[slot="media"]:justify-self-end',
   // <Media> and <Carousel> content takes up the full width on medium screens and above
   'lg:*:data-[slot="media"]:col-span-full *:data-[slot="media"]:*:w-full',
-  'lg:*:data-[slot="carousel"]:col-span-full  *:data-[slot="carousel"]:*:w-full',
+  'lg:*:data-[slot="carousel"]:col-span-full  ',
   // Aligns <Content> and any element beside it (e.g. <Media>, <Badge>, <CTA> etc.) to the bottom of the <Content> container
   'lg:items-end',
 ];
@@ -57,6 +57,7 @@ const variants = cva({
       ],
       'full-bleed': [
         oneColumnLayout,
+        '*:data-[slot="carousel"]:*:w-full',
         // Position the media and carousel content to fill the entire viewport width
         '*:data-[slot="media"]:*:absolute *:data-[slot="media"]:*:left-0',
         // Special case for Carousel, where the Media is nested inside a CarouselItem
