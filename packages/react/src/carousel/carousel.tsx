@@ -29,15 +29,15 @@ import { usePrefersReducedMotion } from '../use-prefers-reduced-motion';
 
 type CarouselProps = Omit<HTMLProps<HTMLDivElement>, 'onChange'> & {
   children?: React.ReactNode;
-  /** Delay in milliseconds between each auto scroll of the gallery. Any interaction with the carousel from the user will immediately suspend the autoscroll. */
+  /** Delay in milliseconds between each automatic transition of the carousel. Any interaction with the carousel will immediately stop the autoplay. */
   autoPlayDelay?: number;
   /**
-   * The initial slide to display when the carousel is mounted.
+   * The initial snapped index of the carousel.
    * @default 0
    */
-  defaultInitialSlide?: number;
+  initialIndex?: number;
   /**
-   * Whether the carousel loops. Caveat: Currently it only works with autoPlay and next/prev buttons
+   * Whether the carousel infinitely loops.
    * @default false
    */
   loop?: boolean;
@@ -59,7 +59,7 @@ const Carousel = ({
   autoPlayDelay,
   className,
   children,
-  defaultInitialSlide = 0,
+  initialIndex = 0,
   onSlideChange,
   onSettled,
   loop = false,
@@ -68,30 +68,34 @@ const Carousel = ({
 }: CarouselProps) => {
   const carouselRef = useRef<HTMLDivElement>(null);
 
+  const prefersReducedMotion = usePrefersReducedMotion() ?? false;
+
   const emblaPlugins = useMemo(() => {
     const plugins = [WheelGesturesPlugin()];
 
     if (autoPlayDelay) {
-      plugins.push(Autoplay({ delay: autoPlayDelay, stopOnLastSnap: !loop }));
+      plugins.push(
+        Autoplay({
+          delay: autoPlayDelay,
+          stopOnLastSnap: !loop,
+          jump: prefersReducedMotion,
+        }),
+      );
     }
     return plugins;
-  }, [autoPlayDelay, loop]);
+  }, [autoPlayDelay, loop, prefersReducedMotion]);
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       loop,
-      startIndex: defaultInitialSlide,
+      startIndex: initialIndex,
       // we set inert for the inactive items, so they are not focusable
       watchFocus: false,
     },
     emblaPlugins,
   );
 
-  const prefersReducedMotion = usePrefersReducedMotion();
-
-  const [slidesInView, setSlidesInView] = useState<number[]>([
-    defaultInitialSlide,
-  ]);
+  const [slidesInView, setSlidesInView] = useState<number[]>([initialIndex]);
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -123,7 +127,7 @@ const Carousel = ({
   const handleNextPress = useCallback(() => {
     if (!emblaApi) return;
 
-    emblaApi.scrollNext(prefersReducedMotion ?? false);
+    emblaApi.scrollNext(prefersReducedMotion);
 
     // we need to move focus if  we are about to disable this button due to start/end of carousel
     if (
@@ -142,7 +146,7 @@ const Carousel = ({
   const handlePrevPress = useCallback(() => {
     if (!emblaApi) return;
 
-    emblaApi.scrollPrev(prefersReducedMotion ?? false);
+    emblaApi.scrollPrev(prefersReducedMotion);
 
     // we need to move focus if  we are about to disable this button due to start/end of carousel
     if (
