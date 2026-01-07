@@ -22,7 +22,7 @@ const oneColumnLayout = [
   'lg:*:not-data-[slot="content"]:not-data-[slot="media"]:not-data-[slot="carousel"]:col-span-3 lg:*:not-data-[slot="content"]:not-data-[slot="media"]:justify-self-end',
   // <Media> and <Carousel> content takes up the full width on medium screens and above
   'lg:*:data-[slot="media"]:col-span-full *:data-[slot="media"]:*:w-full',
-  'lg:*:data-[slot="carousel"]:col-span-full  ',
+  'lg:*:data-[slot="carousel"]:col-span-full',
   // Aligns <Content> and any element beside it (e.g. <Media>, <Badge>, <CTA> etc.) to the bottom of the <Content> container
   'lg:items-end',
 ];
@@ -57,11 +57,11 @@ const variants = cva({
       ],
       'full-bleed': [
         oneColumnLayout,
-        '*:data-[slot="carousel"]:*:w-full',
+        '*:data-[slot="carousel"]:w-full',
         // Position the media and carousel content to fill the entire viewport width
         '*:data-[slot="media"]:*:absolute *:data-[slot="media"]:*:left-0',
         // Special case for Carousel, where the Media is nested inside a CarouselItem
-        '*:data-[slot="carousel"]:**:data-[slot="media"]:w-full *:data-[slot="carousel"]:*:absolute *:data-[slot="carousel"]:*:left-0',
+        '*:data-[slot="carousel"]:**:data-[slot="media"]:w-full *:data-[slot="carousel"]:absolute *:data-[slot="carousel"]:left-0',
         // Match the heights of the <Media> or <Carousel> wrapper for the Media content (e.g. image, VideoLoop, video etc.)
         // This is necessary due to the absolute positioning of the media and carousel containers in this variant
         // biome-ignore lint/nursery/useSortedClasses: biome is unable to sort the custom classes for 3xl and 4xl breakpoints
@@ -69,7 +69,7 @@ const variants = cva({
         // biome-ignore lint/nursery/useSortedClasses: biome is unable to sort the custom classes for 3xl and 4xl breakpoints
         '**:data-[slot="media"]:*:h-80 sm:**:data-[slot="media"]:*:h-[25rem] md:**:data-[slot="media"]:*:h-[30rem] lg:**:data-[slot="media"]:*:h-[35rem] xl:**:data-[slot="media"]:*:h-[40rem] 2xl:**:data-[slot="media"]:*:h-[42rem] 3xl:**:data-[slot="media"]:*:h-[48rem] 4xl:**:data-[slot="media"]:*:h-[53rem]',
         // biome-ignore lint/nursery/useSortedClasses: biome is unable to sort the custom classes for 3xl and 4xl breakpoints
-        '*:data-[slot="carousel"]:h-80 sm:*:data-[slot="carousel"]:h-[25rem] md:*:data-[slot="carousel"]:h-[30rem] lg:*:data-[slot="carousel"]:h-[35rem] xl:*:data-[slot="carousel"]:h-[40rem] 2xl:*:data-[slot="carousel"]:h-[42rem] 3xl:*:data-[slot="carousel"]:h-[48rem] 4xl:*:data-[slot="carousel"]:h-[53rem]',
+        '*:data-[slot="carousel-viewport"]:h-80 sm:*:data-[slot="carousel-viewport"]:h-[25rem] md:*:data-[slot="carousel-viewport"]:h-[30rem] lg:*:data-[slot="carousel-viewport"]:h-[35rem] xl:*:data-[slot="carousel-viewport"]:h-[40rem] 2xl:*:data-[slot="carousel-viewport"]:h-[42rem] 3xl:*:data-[slot="carousel-viewport"]:h-[48rem] 4xl:*:data-[slot="carousel-viewport"]:h-[53rem]',
 
         // Override aspect ratio of the media and carousel-item slots (since we can not use aspect for full-bleed layout)
         '**:data-[slot="carousel-item"]:data-[slot="media"]:*:aspect-none',

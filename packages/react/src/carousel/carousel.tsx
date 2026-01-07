@@ -206,8 +206,9 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => {
       className={cx(className, 'embla__viewport overflow-hidden rounded-3xl')}
       ref={emblaRef}
       onKeyDown={(e) => console.log(e)}
+      data-slot="carousel-viewport"
     >
-      <div className="embla__container flex">
+      <div className="embla__container flex" data-slot="carousel-items">
         {Children.map(children, (child, index) => {
           if (isValidElement(child)) {
             return cloneElement(
