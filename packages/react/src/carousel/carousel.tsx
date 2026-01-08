@@ -192,7 +192,7 @@ const Carousel = ({
   return (
     // biome-ignore lint/a11y/noStaticElementInteractions: we want to support keyboard navigations for the carousel
     <div
-      className={cx('', className)}
+      className={cx('relative', className)}
       data-orientation={orientation}
       data-slot="carousel"
       ref={mergeRefs(ref, carouselRef)}
@@ -235,10 +235,6 @@ const Carousel = ({
   );
 };
 
-type CarouselItemsProps = HTMLProps<HTMLDivElement> & {
-  /** The <CarouselItem/> components to be displayed within the carousel. */
-  children: React.ReactNode;
-};
 
 type CarouselContextValue = {
   slidesInView: number[];
@@ -255,16 +251,36 @@ const CarouselContext = createContext<CarouselContextValue>({
   slidesInView: [],
 });
 
-const CarouselItems = ({ className, children }: CarouselItemsProps) => {
-  const { slidesInView, orientation, '~emblaRef': emblaRef } = useContext(CarouselContext);
+type CarouselContainerProps = HTMLProps<HTMLDivElement> & {
+  children: React.ReactNode;
+};
+
+const CarouselContainer = ({ children, className, ...rest }: CarouselContainerProps) => {
+  const { '~emblaRef': emblaRef } = useContext(CarouselContext);
 
   return (
     <div
       className={cx(className, 'overflow-hidden')}
       ref={emblaRef}
-      data-slot="carousel-viewport"
+      data-slot="carousel-container"
+      {...rest}
     >
-      <div className={cx('flex', orientation === 'vertical' && 'flex-col max-h-full')} data-slot="carousel-items">
+      {children}
+    </div>
+  );
+};
+
+type CarouselItemsProps = HTMLProps<HTMLDivElement> & {
+  /** The <CarouselItem/> components to be displayed within the carousel. */
+  children: React.ReactNode;
+};
+
+const CarouselItems = ({ className, children }: CarouselItemsProps) => {
+  const { slidesInView, orientation } = useContext(CarouselContext);
+
+  return (
+      <div className={cx(className, 'flex', orientation === 'vertical' && 'flex-col')} data-slot="carousel-items"
+      >
         {Children.map(children, (child, index) => {
           if (isValidElement(child)) {
             return cloneElement(
@@ -276,7 +292,6 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => {
           }
         })}
       </div>
-    </div>
   );
 };
 
@@ -414,9 +429,11 @@ export {
   CarouselItems as UNSAFE_CarouselItems,
   CarouselButton as UNSAFE_CarouselButton,
   CarouselControls as UNSAFE_CarouselControls,
+  CarouselContainer as UNSAFE_CarouselContainer,
   type CarouselControlsProps as UNSAFE_CarouselControlsProps,
   type CarouselButtonProps as UNSAFE_CarouselButtonProps,
   type CarouselItemProps as UNSAFE_CarouselItemProps,
   type CarouselItemsProps as UNSAFE_CarouselItemsProps,
   type CarouselProps as UNSAFE_CarouselProps,
+  type CarouselContainerProps as UNSAFE_CarouselContainerProps,
 };
