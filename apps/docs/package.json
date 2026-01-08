@@ -23,7 +23,7 @@
     "@obosbbl/grunnmuren-icons-react": "workspace:*",
     "@obosbbl/grunnmuren-icons-svg": "workspace:*",
     "@obosbbl/grunnmuren-react": "workspace:*",
-    "@portabletext/react": "6.0.0",
+    "@portabletext/react": "6.0.2",
     "@react-aria/utils": "3.32.0",
     "@sanity/asset-utils": "2.3.0",
     "@sanity/client": "7.14.0",
