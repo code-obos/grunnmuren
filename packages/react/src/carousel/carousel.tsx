@@ -260,7 +260,7 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => {
 
   return (
     <div
-      className={cx(className, 'overflow-hidden rounded-3xl')}
+      className={cx(className, 'overflow-hidden')}
       ref={emblaRef}
       data-slot="carousel-viewport"
     >
