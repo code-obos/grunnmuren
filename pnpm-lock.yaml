@@ -90,8 +90,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/react
       '@portabletext/react':
-        specifier: 6.0.0
-        version: 6.0.0(react@19.2.3)
+        specifier: 6.0.2
+        version: 6.0.2(react@19.2.3)
       '@react-aria/utils':
         specifier: 3.32.0
         version: 3.32.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -2989,12 +2989,6 @@ packages:
       '@portabletext/editor': ^4.2.1
       react: ^19.2
 
-  '@portabletext/react@6.0.0':
-    resolution: {integrity: sha512-8jzmFruC6fhC8A47c+RdiFfldzRq/rRW/FwRsr5ZMeNeCf3S0dXVlM/LJQRWH5JLQXbH3oxINN1UV2mbuZQJ9w==}
-    engines: {node: '>=20.19 <22 || >=22.12'}
-    peerDependencies:
-      react: ^18.2 || ^19
-
   '@portabletext/react@6.0.2':
     resolution: {integrity: sha512-qE3/Fg8PqzGzZ6+lxVXKPDqthJTRG3T1R0R6wrUCVAYeC5e0JtXWwhOiWa0daLG9TEOwn2SUeB2SuWxQlTq+5g==}
     engines: {node: '>=20.19 <22 || >=22.12'}
@@ -3013,16 +3007,8 @@ packages:
     resolution: {integrity: sha512-cLaxxEoe3e8Py/t+hZEw2+sOIWPCpO9fyruUlRdZMQ65IkdyFaJEJlXkpNDqwV0+BO2GVJqaQVM5T6MeGdt8Xg==}
     engines: {node: '>=20.19 <22 || >=22.12'}
 
-  '@portabletext/toolkit@5.0.0':
-    resolution: {integrity: sha512-jcDOv1RKO/j08pdnc/6i5tULcAzEYCR41XDVYOqmmX8bvEJbWJabhpVjHT1ls6p27v9gtA4NG2SO5xdMpgWSQQ==}
-    engines: {node: '>=20.19 <22 || >=22.12'}
-
   '@portabletext/toolkit@5.0.1':
     resolution: {integrity: sha512-qcwnWd15J2Ziwi0YfWHRx+DRqp87cPb+EBcYuEbDW0ChZwwxCdfIjDazzFpQeXnqhJn8own1c8UB3iHB61DiWg==}
-    engines: {node: '>=20.19 <22 || >=22.12'}
-
-  '@portabletext/types@4.0.0':
-    resolution: {integrity: sha512-mEoN82OQckrshqRx8idp+x8B/OpMfUMSjQp1w1wZFM3hf8cplGhK59Sa/UuGU6XdgAnFq90vJtnj5ejOmZmhvw==}
     engines: {node: '>=20.19 <22 || >=22.12'}
 
   '@portabletext/types@4.0.1':
@@ -12714,12 +12700,6 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@portabletext/react@6.0.0(react@19.2.3)':
-    dependencies:
-      '@portabletext/toolkit': 5.0.0
-      '@portabletext/types': 4.0.0
-      react: 19.2.3
-
   '@portabletext/react@6.0.2(react@19.2.3)':
     dependencies:
       '@portabletext/toolkit': 5.0.1
@@ -12743,15 +12723,9 @@ snapshots:
       '@portabletext/toolkit': 5.0.1
       '@portabletext/types': 4.0.1
 
-  '@portabletext/toolkit@5.0.0':
-    dependencies:
-      '@portabletext/types': 4.0.0
-
   '@portabletext/toolkit@5.0.1':
     dependencies:
       '@portabletext/types': 4.0.1
-
-  '@portabletext/types@4.0.0': {}
 
   '@portabletext/types@4.0.1': {}
 
