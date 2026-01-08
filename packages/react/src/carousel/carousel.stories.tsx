@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn } from 'storybook/test';
+import { cx } from 'cva';
 import {
   UNSAFE_Carousel as Carousel,
   UNSAFE_CarouselButton as CarouselButton,
@@ -16,10 +17,10 @@ const meta = {
     variant: 'fullscreen',
   },
   args: { onSlideChange: fn(), onSettled: fn() },
-  render: (args) => (
-    <main className="container grid gap-y-8">
+  render: ({rounded, ...args}) => (
+    <main className="container">
       <Carousel {...args}>
-        <CarouselItems className={args.orientation === 'vertical' ? 'h-64' : ''}>
+        <CarouselItems className={cx(rounded && 'rounded-3xl **:[img]:rounded-3xl', args.orientation === 'vertical' && 'h-64')}>
           <CarouselItem className="basis-1/2">
             <Media>
               <img
@@ -56,7 +57,7 @@ const meta = {
             </Media>
           </CarouselItem>
         </CarouselItems>
-        <CarouselControls>
+        <CarouselControls className="pt-4">
           <CarouselButton slot="prev" />
           <CarouselButton slot="next" />
         </CarouselControls>
@@ -100,5 +101,11 @@ export const VerticalOrientation: Story = {
   args: {
     orientation: 'vertical',
     className: "max-w-xs",
+  },
+};
+
+export const RoundedExample: Story = {
+  args: {
+    rounded: true,
   },
 };
