@@ -42,6 +42,8 @@ const variants = cva({
     '*:data-[slot="content"]:gap-y-3',
     // Make sure <Media> content fills any available vertical and horizontal space
     '*:data-[slot="media"]:*:object-cover',
+    // Make the carousel items full width, so we scroll one at a time
+    '**:data-[slot="carousel-item"]:basis-full'
   ],
   variants: {
     /**
@@ -73,9 +75,7 @@ const variants = cva({
 
         // Override aspect ratio of the media and carousel-item slots (since we can not use aspect for full-bleed layout)
         '**:data-[slot="carousel-item"]:data-[slot="media"]:*:aspect-none',
-        '**:data-[slot="carousel-controls"]:container **:data-[slot="carousel-controls"]:right-0 **:data-[slot="carousel-controls"]:bottom-4 **:data-[slot="carousel-controls"]:left-0 **:data-[slot="carousel-controls"]:justify-end',
-        // Override rounded corners of Carousel slots
-        '*:data-[slot="carousel"]:*:rounded-none',
+        '**:data-[slot="carousel-controls"]:container **:data-[slot="carousel-controls"]:right-0 **:data-[slot="carousel-controls"]:bottom-4 **:data-[slot="carousel-controls"]:left-0',
       ],
       'two-column': [
         'lg:items-center lg:*:col-span-6',
