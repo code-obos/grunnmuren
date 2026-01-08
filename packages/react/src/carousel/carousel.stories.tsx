@@ -19,8 +19,8 @@ const meta = {
   render: (args) => (
     <main className="container grid gap-y-8">
       <Carousel {...args}>
-        <CarouselItems>
-          <CarouselItem>
+        <CarouselItems className={args.orientation === 'vertical' ? 'h-64' : ''}>
+          <CarouselItem className="basis-1/2">
             <Media>
               <img
                 src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
@@ -28,7 +28,7 @@ const meta = {
               />
             </Media>
           </CarouselItem>
-          <CarouselItem>
+          <CarouselItem className="basis-1/2">
             <Media>
               <img
                 src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/7d2285ccee9b9545e018115b8e0ecc8b06aa0729-1620x1080.jpg?auto=format"
@@ -37,7 +37,7 @@ const meta = {
               />
             </Media>
           </CarouselItem>
-          <CarouselItem>
+          <CarouselItem className="basis-1/2">
             <Media fit="contain">
               <img
                 src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/32a53eec782e6cbe15d75961f82ecca48dbe30ed-1920x1080.png?auto=format"
@@ -46,7 +46,7 @@ const meta = {
               />
             </Media>
           </CarouselItem>
-          <CarouselItem>
+          <CarouselItem className="basis-1/2">
             <Media>
               <img
                 src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/a3c4b263f72128f5c6259333a224054ed3b539fe-1440x788.heif?auto=format"
@@ -96,9 +96,9 @@ export const AutoPlayLooping: Story = {
   },
 };
 
-export const CustomControls: Story = {
+export const VerticalOrientation: Story = {
   args: {
-    autoPlayDelay: 3000,
-    loop: true,
+    orientation: 'vertical',
+    className: "max-w-xs",
   },
 };

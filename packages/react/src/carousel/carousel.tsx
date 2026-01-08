@@ -29,6 +29,11 @@ import { usePrefersReducedMotion } from '../use-prefers-reduced-motion';
 
 type CarouselProps = Omit<HTMLProps<HTMLDivElement>, 'onChange'> & {
   children?: React.ReactNode;
+  /**
+   * Alignment of the carousel items relative to the carousel viewport.
+   * @default 'center'
+   */
+  align?: 'start' | 'center' | 'end';
   /** Delay in milliseconds between each automatic transition of the carousel. Any interaction with the carousel will immediately stop the autoplay. */
   autoPlayDelay?: number;
   /**
@@ -41,6 +46,11 @@ type CarouselProps = Omit<HTMLProps<HTMLDivElement>, 'onChange'> & {
    * @default false
    */
   loop?: boolean;
+  /**
+   * Orientation of the carousel.
+   * @default 'horizontal'
+   */
+  orientation?: 'horizontal' | 'vertical';
   /**
    * Callback invoked when the slide changes.
    */
@@ -57,9 +67,11 @@ type EmblaEventHandler = Parameters<
 
 const Carousel = ({
   autoPlayDelay,
+  align = 'center',
   className,
   children,
   initialIndex = 0,
+  orientation = 'horizontal',
   onSlideChange,
   onSettled,
   loop = false,
@@ -87,8 +99,10 @@ const Carousel = ({
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
+      align,
       loop,
       startIndex: initialIndex,
+      axis: orientation === 'horizontal' ? 'x' : 'y',
       // we set inert for the inactive items, so they are not focusable
       watchFocus: false,
     },
@@ -178,7 +192,8 @@ const Carousel = ({
   return (
     // biome-ignore lint/a11y/noStaticElementInteractions: we want to support keyboard navigations for the carousel
     <div
-      className={cx('relative', className)}
+      className={cx('', className)}
+      data-orientation={orientation}
       data-slot="carousel"
       ref={mergeRefs(ref, carouselRef)}
       onKeyDown={handleKeyDown}
@@ -191,6 +206,7 @@ const Carousel = ({
             {
               slidesInView,
               '~emblaRef': emblaRef,
+              orientation,
             },
           ],
           [
@@ -226,6 +242,7 @@ type CarouselItemsProps = HTMLProps<HTMLDivElement> & {
 
 type CarouselContextValue = {
   slidesInView: number[];
+  orientation: 'horizontal' | 'vertical';
   /**
    * @private
    */
@@ -234,11 +251,12 @@ type CarouselContextValue = {
 
 const CarouselContext = createContext<CarouselContextValue>({
   '~emblaRef': null,
+  orientation: 'horizontal',
   slidesInView: [],
 });
 
 const CarouselItems = ({ className, children }: CarouselItemsProps) => {
-  const { slidesInView, '~emblaRef': emblaRef } = useContext(CarouselContext);
+  const { slidesInView, orientation, '~emblaRef': emblaRef } = useContext(CarouselContext);
 
   return (
     <div
@@ -246,7 +264,7 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => {
       ref={emblaRef}
       data-slot="carousel-viewport"
     >
-      <div className="flex" data-slot="carousel-items">
+      <div className={cx('flex', orientation === 'vertical' && 'flex-col max-h-full')} data-slot="carousel-items">
         {Children.map(children, (child, index) => {
           if (isValidElement(child)) {
             return cloneElement(
@@ -277,12 +295,7 @@ const CarouselControls = ({
   ...rest
 }: CarouselControlsProps) => (
   <div
-    className={cx(
-      className,
-      'absolute right-6 bottom-6 flex gap-x-2',
-      // // Make it easier to position in full-bleed hero variants (these style have no other side effects)
-      // 'items-end *:h-fit',
-    )}
+    className={cx(className, 'flex gap-x-2 justify-end')}
     data-slot="carousel-controls"
     {...rest}
   >
@@ -298,10 +311,38 @@ const carouselButtonIconSlotVariants = cva({
   base: 'transition-transform',
   variants: {
     slot: {
-      next: 'group-hover:motion-safe:translate-x-1',
-      prev: 'group-hover:motion-safe:-translate-x-1 rotate-180',
+      next: null,
+      prev: null,
+    },
+    orientation: {
+      horizontal: null,
+      vertical: null,
     },
   },
+  compoundVariants: [
+    // horizontal controls
+    {
+      slot: 'next',
+      orientation: 'horizontal',
+      className: 'group-hover:motion-safe:translate-x-1',
+    },
+    {
+      slot: 'prev',
+      orientation: 'horizontal',
+      className: 'group-hover:motion-safe:-translate-x-1 rotate-180',
+    },
+    // vertical controls
+    {
+      slot: 'next',
+      orientation: 'vertical',
+      className: 'group-hover:motion-safe:translate-y-1 rotate-90',
+    },
+    {
+      slot: 'prev',
+      orientation: 'vertical',
+      className: 'group-hover:motion-safe:-translate-y-1 -rotate-90',
+    },
+  ],
 });
 
 type CarouselButtonProps = ButtonProps & {
@@ -316,6 +357,7 @@ const CarouselButton = ({
   slot,
   ...rest
 }: CarouselButtonProps) => {
+  const { orientation } = useContext(CarouselContext);
   return (
     <Button
       className={carouselButtonVariants({ className })}
@@ -325,7 +367,7 @@ const CarouselButton = ({
       color={color}
       {...rest}
     >
-      <ChevronRight className={carouselButtonIconSlotVariants({ slot })} />
+      <ChevronRight className={carouselButtonIconSlotVariants({ orientation, slot })} />
     </Button>
   );
 };
@@ -340,7 +382,7 @@ const CarouselItem = ({ className, children, ...rest }: CarouselItemProps) => {
     <div
       className={cx(
         className,
-        'min-w-0 shrink-0 grow-0 basis-full',
+        'min-w-0 shrink-0 grow-0',
       )}
       data-slot="carousel-item"
       {...rest}
