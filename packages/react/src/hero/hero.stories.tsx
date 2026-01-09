@@ -6,10 +6,10 @@ import { Button } from '../button';
 import {
   UNSAFE_Carousel as Carousel,
   UNSAFE_CarouselButton as CarouselButton,
+  UNSAFE_CarouselContainer as CarouselContainer,
   UNSAFE_CarouselControls as CarouselControls,
   UNSAFE_CarouselItem as CarouselItem,
   UNSAFE_CarouselItems as CarouselItems,
-  UNSAFE_CarouselContainer as CarouselContainer,
 } from '../carousel';
 import { Content, Heading, Media } from '../content';
 import { Description } from '../label';

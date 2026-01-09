@@ -74,12 +74,11 @@ const variants = cva({
         // '*:data-[slot="carousel"]:h-80 sm:*:data-[slot="carousel"]:h-[25rem] md:*:data-[slot="carousel-carousel"]:h-[30rem] lg:*:data-[slot="carousel-carousel"]:h-[35rem] xl:*:data-[slot="carousel-carousel"]:h-[40rem] 2xl:*:data-[slot="carousel-carousel"]:h-[42rem] 3xl:*:data-[slot="carousel-carousel"]:h-[48rem] 4xl:*:data-[slot="carousel-carousel"]:h-[53rem]',
         // Override aspect ratio of the media and carousel-item slots (since we can not use aspect for full-bleed layout)
         '**:data-[slot="carousel-item"]:data-[slot="media"]:*:aspect-none',
-        '*:data-[slot="carousel"]:!w-full *:data-[slot="carousel"]:h-80',
+        '*:data-[slot="carousel"]:h-80 *:data-[slot="carousel"]:w-full!',
         // break out the carousel out of the container
-        '**:data-[slot="carousel-container"]:h-[inherit] **:data-[slot="carousel-container"]:absolute **:data-[slot="carousel-container"]:left-0 **:data-[slot="carousel-container"]:right-0',
+        '**:data-[slot="carousel-container"]:absolute **:data-[slot="carousel-container"]:right-0 **:data-[slot="carousel-container"]:left-0 **:data-[slot="carousel-container"]:h-[inherit]',
         // Positions the carousel controls inside the carousel
-        '*:data-[slot="carousel"]:flex *:data-[slot="carousel"]:justify-end *:data-[slot="carousel"]:items-end **:data-[slot="carousel-controls"]:mb-4 **:data-[slot="carousel-controls"]:z-10',
-
+        '**:data-[slot="carousel-controls"]:z-10 **:data-[slot="carousel-controls"]:mb-4 *:data-[slot="carousel"]:flex *:data-[slot="carousel"]:items-end *:data-[slot="carousel"]:justify-end',
       ],
       'two-column': [
         'lg:items-center lg:*:col-span-6',
@@ -95,7 +94,8 @@ const variants = cva({
   compoundVariants: [
     {
       variant: ['standard', 'two-column'],
-      className: '**:data-[slot="carousel-container"]:rounded-3xl *:data-[slot="carousel"]:relative **:data-[slot="carousel-controls"]:absolute **:data-[slot="carousel-controls"]:right-4 **:data-[slot="carousel-controls"]:bottom-4',
+      className:
+        '**:data-[slot="carousel-controls"]:absolute *:data-[slot="carousel"]:relative **:data-[slot="carousel-controls"]:right-4 **:data-[slot="carousel-controls"]:bottom-4 **:data-[slot="carousel-container"]:rounded-3xl',
     },
   ],
   defaultVariants: {

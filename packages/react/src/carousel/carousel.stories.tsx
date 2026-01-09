@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn } from 'storybook/test';
 import { cx } from 'cva';
+import { fn } from 'storybook/test';
 import {
   UNSAFE_Carousel as Carousel,
   UNSAFE_CarouselButton as CarouselButton,
+  UNSAFE_CarouselContainer as CarouselContainer,
   UNSAFE_CarouselControls as CarouselControls,
   UNSAFE_CarouselItem as CarouselItem,
   UNSAFE_CarouselItems as CarouselItems,
-  UNSAFE_CarouselContainer as CarouselContainer,
 } from '../carousel';
 import { Media } from '../content';
 
@@ -18,11 +18,17 @@ const meta = {
     variant: 'fullscreen',
   },
   args: { onSlideChange: fn(), onSettled: fn() },
-  render: ({rounded, ...args}) => (
+  render: ({ rounded, ...args }) => (
     <main className="container">
       <Carousel {...args}>
         <CarouselContainer>
-          <CarouselItems className={cx('gap-4', rounded && 'rounded-3xl **:[img]:rounded-3xl', args.orientation === 'vertical' && 'h-64')}>
+          <CarouselItems
+            className={cx(
+              'gap-4',
+              rounded && 'rounded-3xl **:[img]:rounded-3xl',
+              args.orientation === 'vertical' && 'h-64',
+            )}
+          >
             <CarouselItem className="basis-1/2">
               <Media>
                 <img
@@ -103,7 +109,7 @@ export const AutoPlayLooping: Story = {
 export const VerticalOrientation: Story = {
   args: {
     orientation: 'vertical',
-    className: "max-w-xs",
+    className: 'max-w-xs',
   },
 };
 
