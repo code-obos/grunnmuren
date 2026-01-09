@@ -192,12 +192,11 @@ const Carousel = ({
   return (
     // biome-ignore lint/a11y/noStaticElementInteractions: we want to support keyboard navigations for the carousel
     <div
-      className={cx('relative', className)}
+      {...rest}
       data-orientation={orientation}
       data-slot="carousel"
       ref={mergeRefs(ref, carouselRef)}
       onKeyDown={handleKeyDown}
-      {...rest}
     >
       <Provider
         values={[
