@@ -35,7 +35,7 @@ export const GridContainer = () => (
 export const GridContainerWithSubGrids = () => (
   <main className="layout-grid-container layout-gap-y">
     <h1 className="heading-xl sm:col-end-9">Dette er OBOS</h1>
-    <ul className="md:layout-subgrid-12 *:md:col-span-2 *:lg:col-span-3">
+    <ul className="md:layout-subgrid-12 *:md:col-span-6 *:lg:col-span-3">
       <Card role="listitem">
         <Content>
           <Heading level={2}>
@@ -78,5 +78,38 @@ export const GridContainerWithSubGrids = () => (
         <ArrowRight className="transition-transform group-hover/card:motion-safe:translate-x-1" />
       </Card>
     </ul>
+  </main>
+);
+
+export const OverridedColSpans = () => (
+  <main className="layout-grid-container">
+    <h1 className="heading-xl sm:col-end-9">Dette er OBOS</h1>
+    <img
+      className="sm:col-end-8"
+      src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
+      alt=""
+    />
+    <p className="sm:col-start-6 sm:col-end-12">
+      Som er ett nettsted for alt om OBOS.
+    </p>
+    <img
+      className="sm:col-span-6 sm:col-start-6"
+      src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
+      alt=""
+    />
+    <p className="sm:col-end-15">
+      Masse tekst for å teste grid container med sub grids. Lorem ipsum dolor
+      sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+      labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+      exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+      aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+      fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+      sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    <img
+      className="sm:col-span-full"
+      src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
+      alt=""
+    />
   </main>
 );

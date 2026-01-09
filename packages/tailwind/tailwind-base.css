@@ -122,8 +122,12 @@
 @utility layout-grid-container {
   @apply layout-grid container;
   /** Make content of the grid span the mid 12 columns as a default (unless it has another explicit col-span class) */
-  & > * {
-    @apply sm:col-start-2 sm:col-span-12;
+  & > *:not([class^="col-span-"]):not([class^="col-end-"]):not([class*=" col-span-"]):not([class*=" col-end-"]):not([class*=" sm:col-span-"]):not([class*=" sm:col-end-"]):not([class^="sm:col-span-"]):not([class^="sm:col-end-"]) {
+    @apply sm:col-span-12;
+  }
+
+  & > *:not([class^="col-start-"]):not([class^="col-span-full"]):not([class*=" col-start-"]):not([class*=" col-span-full"]):not([class*=" sm:col-start-"]):not([class*=" sm:col-span-full"]):not([class^="sm:col-start-"]):not([class^="sm:col-span-full"]) {
+    @apply sm:col-start-2 
   }
 }
 
@@ -166,6 +170,15 @@
 }
 @utility layout-subgrid-12 {
   @apply grid-cols-12;
+}
+@utility layout-subgrid-13 {
+  @apply grid-cols-13;
+}
+@utility layout-subgrid-14 {
+  @apply grid-cols-14;
+}
+@utility layout-subgrid-full {
+  @apply layout-subgrid-14;
 }
 
 @utility layout-gap-x {
