@@ -61,17 +61,16 @@ const translations: Translations = {
  * @returns A simple file extension (e.g., "pdf", "jpg", "svg")
  */
 function getFileExtension(file: File): string {
-  // First try to get extension from file name
   const match = file.name.match(/\.([^.]+)$/);
   if (match) {
     return match[1].toUpperCase();
   }
 
-  // Fallback to MIME type conversion if no extension in file name
   const mimeType = file.type;
-  if (!mimeType) return '';
+  if (!mimeType) {
+    return '';
+  }
 
-  // Extract the subtype after the slash (e.g., "image/svg+xml" -> "svg")
   const parts = mimeType.split('/');
   if (parts.length === 2) {
     const subtype = parts[1].split('+')[0]; // Handle cases like "svg+xml"
@@ -87,14 +86,15 @@ function getFileExtension(file: File): string {
  * @returns A formatted string with the appropriate unit
  */
 function formatFileSize(bytes: number): string {
-  if (bytes === 0) return '0 B';
+  if (bytes === 0) {
+    return '0 B';
+  }
 
   const units = ['B', 'KB', 'MB', 'GB', 'TB'];
   const base = 1024;
   const unitIndex = Math.floor(Math.log(bytes) / Math.log(base));
   const size = bytes / base ** unitIndex;
 
-  // Use up to 2 decimal places, but remove trailing zeros
   return `${size.toFixed(2).replace(/\.?0+$/, '')} ${units[unitIndex]}`;
 }
 
@@ -131,6 +131,7 @@ function uniqueFileNames(files: File[]) {
       // Extract any number from the file name (if any, otherwise default to 0)
       const baseNameCount = Number.parseInt(
         fileName.match(/\((\d+)\)/)?.[1] ?? '0',
+        10,
       );
       fileNameCounts[baseName] = baseNameCount;
     }
@@ -318,7 +319,6 @@ const FileUpload = ({
         {controlledOrUncontrolledFiles.length > 0 && (
           <ul className="mt-4 grid max-w-fit gap-y-2">
             {controlledOrUncontrolledFiles.map((file, fileIndex) => {
-              const fileSize = file.size;
               let fileName = file.name;
               if (
                 fileTriggerProps.acceptDirectory &&
@@ -339,19 +339,21 @@ const FileUpload = ({
                     )}
                   >
                     <div className="flex items-center gap-3">
-                      <div className="footnote flex items-center justify-center rounded-md border border-gray-light bg-gray-lightest px-2.5 py-2">
+                      <div className="footnote rounded-md border border-gray-light bg-gray-lightest px-2.5 py-2">
                         {getFileExtension(file)}
                       </div>
-                      <span className="flex flex-col">
+                      <div className="flex flex-col">
                         <span className="description truncate font-medium">
                           {fileName}
                         </span>
                         <span className="footnote text-gray-dark">
-                          {formatFileSize(fileSize)}
+                          {formatFileSize(file.size)}
                         </span>
-                      </span>
+                      </div>
                     </div>
                     <button
+                      type="button"
+                      aria-label={translations.remove[locale]}
                       className={cx(
                         '-m-2 grid h-11 w-11 shrink-0 cursor-pointer place-items-center rounded-xl',
                         // Focus styles
@@ -372,8 +374,6 @@ const FileUpload = ({
                         // (without this, the focus will be set to the top of the page for screen readers)
                         buttonRef.current?.focus();
                       }}
-                      aria-label={translations.remove[locale]}
-                      type="button"
                     >
                       <Trash />
                     </button>
