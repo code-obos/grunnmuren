@@ -76,9 +76,9 @@ const variants = cva({
         '**:data-[slot="carousel-item"]:data-[slot="media"]:*:aspect-none',
         '*:data-[slot="carousel"]:!w-full *:data-[slot="carousel"]:h-80',
         // break out the carousel out of the container
-        '**:data-[slot="carousel-container"]:h-[inherit] **:data-[slot="carousel-container"]:absolute **:data-[slot="carousel-container"]:left-0',
+        '**:data-[slot="carousel-container"]:h-[inherit] **:data-[slot="carousel-container"]:absolute **:data-[slot="carousel-container"]:left-0 **:data-[slot="carousel-container"]:right-0',
         // Positions the carousel controls inside the carousel
-        '*:data-[slot="carousel"]:flex *:data-[slot="carousel"]:justify-end *:data-[slot="carousel"]:items-end **:data-[slot="carousel-controls"]:mb-4',
+        '*:data-[slot="carousel"]:flex *:data-[slot="carousel"]:justify-end *:data-[slot="carousel"]:items-end **:data-[slot="carousel-controls"]:mb-4 **:data-[slot="carousel-controls"]:z-10',
 
       ],
       'two-column': [
