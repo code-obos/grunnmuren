@@ -234,7 +234,6 @@ const Carousel = ({
   );
 };
 
-
 type CarouselContextValue = {
   slidesInView: number[];
   orientation: 'horizontal' | 'vertical';
@@ -254,7 +253,11 @@ type CarouselContainerProps = HTMLProps<HTMLDivElement> & {
   children: React.ReactNode;
 };
 
-const CarouselContainer = ({ children, className, ...rest }: CarouselContainerProps) => {
+const CarouselContainer = ({
+  children,
+  className,
+  ...rest
+}: CarouselContainerProps) => {
   const { '~emblaRef': emblaRef } = useContext(CarouselContext);
 
   return (
@@ -278,19 +281,22 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => {
   const { slidesInView, orientation } = useContext(CarouselContext);
 
   return (
-      <div className={cx(className, 'flex', orientation === 'vertical' && 'flex-col')} data-slot="carousel-items"
-      >
-        {Children.map(children, (child, index) => {
-          if (isValidElement(child)) {
-            return cloneElement(
-              child as React.ReactElement<CarouselItemProps>,
-              {
-                inert: slidesInView.includes(index) ? undefined : true,
-              },
-            );
-          }
-        })}
-      </div>
+    <div
+      className={cx(
+        className,
+        'flex',
+        orientation === 'vertical' && 'flex-col',
+      )}
+      data-slot="carousel-items"
+    >
+      {Children.map(children, (child, index) => {
+        if (isValidElement(child)) {
+          return cloneElement(child as React.ReactElement<CarouselItemProps>, {
+            inert: slidesInView.includes(index) ? undefined : true,
+          });
+        }
+      })}
+    </div>
   );
 };
 
@@ -309,7 +315,7 @@ const CarouselControls = ({
   ...rest
 }: CarouselControlsProps) => (
   <div
-    className={cx(className, 'flex gap-x-2 justify-end')}
+    className={cx(className, 'flex justify-end gap-x-2')}
     data-slot="carousel-controls"
     {...rest}
   >
@@ -349,7 +355,7 @@ const carouselButtonIconSlotVariants = cva({
     {
       slot: 'next',
       orientation: 'vertical',
-      className: 'group-hover:motion-safe:translate-y-1 rotate-90',
+      className: 'rotate-90 group-hover:motion-safe:translate-y-1',
     },
     {
       slot: 'prev',
@@ -381,7 +387,9 @@ const CarouselButton = ({
       color={color}
       {...rest}
     >
-      <ChevronRight className={carouselButtonIconSlotVariants({ orientation, slot })} />
+      <ChevronRight
+        className={carouselButtonIconSlotVariants({ orientation, slot })}
+      />
     </Button>
   );
 };
@@ -394,10 +402,7 @@ type CarouselItemProps = HTMLProps<HTMLDivElement> & {
 const CarouselItem = ({ className, children, ...rest }: CarouselItemProps) => {
   return (
     <div
-      className={cx(
-        className,
-        'min-w-0 shrink-0 grow-0',
-      )}
+      className={cx(className, 'min-w-0 shrink-0 grow-0')}
       data-slot="carousel-item"
       {...rest}
     >
