@@ -122,12 +122,22 @@
 @utility layout-grid-container {
   @apply layout-grid container;
   /** Make content of the grid span the mid 12 columns as a default (unless it has another explicit col-span class) */
-  & > *:not([class^="col-span-"]):not([class^="col-end-"]):not([class*=" col-span-"]):not([class*=" col-end-"]):not([class*=" sm:col-span-"]):not([class*=" sm:col-end-"]):not([class^="sm:col-span-"]):not([class^="sm:col-end-"]) {
+  &
+    > *:not([class^="col-span-"]):not([class^="col-end-"]):not(
+      [class*=" col-span-"]
+    ):not([class*=" col-end-"]):not([class*=" sm:col-span-"]):not(
+      [class*=" sm:col-end-"]
+    ):not([class^="sm:col-span-"]):not([class^="sm:col-end-"]) {
     @apply sm:col-span-12;
   }
 
-  & > *:not([class^="col-start-"]):not([class^="col-span-full"]):not([class*=" col-start-"]):not([class*=" col-span-full"]):not([class*=" sm:col-start-"]):not([class*=" sm:col-span-full"]):not([class^="sm:col-start-"]):not([class^="sm:col-span-full"]) {
-    @apply sm:col-start-2 
+  &
+    > *:not([class^="col-start-"]):not([class^="col-span-full"]):not(
+      [class*=" col-start-"]
+    ):not([class*=" col-span-full"]):not([class*=" sm:col-start-"]):not(
+      [class*=" sm:col-span-full"]
+    ):not([class^="sm:col-start-"]):not([class^="sm:col-span-full"]) {
+    @apply sm:col-start-2;
   }
 }
 
