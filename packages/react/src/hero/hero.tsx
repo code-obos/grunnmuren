@@ -66,15 +66,12 @@ const variants = cva({
         // Match the heights of the <Media> or <Carousel> wrapper for the Media content (e.g. image, VideoLoop, video etc.)
         // This is necessary due to the absolute positioning of the media and carousel containers in this variant
         // biome-ignore lint/nursery/useSortedClasses: biome is unable to sort the custom classes for 3xl and 4xl breakpoints
-        // '**:data-[slot="media"]:h-80 sm:**:data-[slot="media"]:h-[25rem] md:**:data-[slot="media"]:h-[30rem] lg:**:data-[slot="media"]:h-[35rem] xl:**:data-[slot="media"]:h-[40rem] 2xl:**:data-[slot="media"]:h-[42rem] 3xl:**:data-[slot="media"]:h-[48rem] 4xl:**:data-[slot="media"]:h-[53rem]',
+        '**:data-[slot="media"]:h-80 sm:**:data-[slot="media"]:h-[25rem] md:**:data-[slot="media"]:h-[30rem] lg:**:data-[slot="media"]:h-[35rem] xl:**:data-[slot="media"]:h-[40rem] 2xl:**:data-[slot="media"]:h-[42rem] 3xl:**:data-[slot="media"]:h-[48rem] 4xl:**:data-[slot="media"]:h-[53rem]',
         // biome-ignore lint/nursery/useSortedClasses: biome is unable to sort the custom classes for 3xl and 4xl breakpoints
-        // '**:data-[slot="media"]:*:h-80 sm:**:data-[slot="media"]:*:h-[25rem] md:**:data-[slot="media"]:*:h-[30rem] lg:**:data-[slot="media"]:*:h-[35rem] xl:**:data-[slot="media"]:*:h-[40rem] 2xl:**:data-[slot="media"]:*:h-[42rem] 3xl:**:data-[slot="media"]:*:h-[48rem] 4xl:**:data-[slot="media"]:*:h-[53rem]',
-        // biome-ignore lint/nursery/useSortedClasses: biome is unable to sort the custom classes for 3xl and 4xl breakpoints
-        // '**:data-[slot="carousel-items"]:h-80 sm:*:data-[slot="carousel-container"]:h-[25rem] md:*:data-[slot="carousel-container"]:h-[30rem] lg:*:data-[slot="carousel-container"]:h-[35rem] xl:*:data-[slot="carousel-container"]:h-[40rem] 2xl:*:data-[slot="carousel-container"]:h-[42rem] 3xl:*:data-[slot="carousel-container"]:h-[48rem] 4xl:*:data-[slot="carousel-container"]:h-[53rem]',
-        // '*:data-[slot="carousel"]:h-80 sm:*:data-[slot="carousel"]:h-[25rem] md:*:data-[slot="carousel-carousel"]:h-[30rem] lg:*:data-[slot="carousel-carousel"]:h-[35rem] xl:*:data-[slot="carousel-carousel"]:h-[40rem] 2xl:*:data-[slot="carousel-carousel"]:h-[42rem] 3xl:*:data-[slot="carousel-carousel"]:h-[48rem] 4xl:*:data-[slot="carousel-carousel"]:h-[53rem]',
+        '*:data-[slot="carousel"]:h-80 sm:*:data-[slot="carousel"]:h-[25rem] md:*:data-[slot="carousel"]:h-[30rem] lg:*:data-[slot="carousel"]:h-[35rem] xl:*:data-[slot="carousel"]:h-[40rem] 2xl:*:data-[slot="carousel"]:h-[42rem] 3xl:*:data-[slot="carousel"]:h-[48rem] 4xl:*:data-[slot="carousel"]:h-[53rem]',
+        '*:data-[slot="carousel"]:w-full!',
         // Override aspect ratio of the media and carousel-item slots (since we can not use aspect for full-bleed layout)
         '**:data-[slot="carousel-item"]:data-[slot="media"]:*:aspect-none',
-        '*:data-[slot="carousel"]:h-80 *:data-[slot="carousel"]:w-full!',
         // break out the carousel out of the container
         '**:data-[slot="carousel-container"]:absolute **:data-[slot="carousel-container"]:right-0 **:data-[slot="carousel-container"]:left-0 **:data-[slot="carousel-container"]:h-[inherit]',
         // Positions the carousel controls inside the carousel
@@ -87,7 +84,7 @@ const variants = cva({
         roundedMediaCorners,
         nonFullBleedAspectRatiosForSmallScreens,
         // Set media aspect ratio to 1:1 (square)
-        'lg:*:data-[slot="media"]:*:aspect-[1/1]',
+        'lg:*:data-[slot="media"]:*:aspect-square',
       ],
     },
   },
