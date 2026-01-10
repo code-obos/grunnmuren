@@ -68,7 +68,6 @@ type EmblaEventHandler = Parameters<
 const Carousel = ({
   autoPlayDelay,
   align = 'center',
-  className,
   children,
   initialIndex = 0,
   orientation = 'horizontal',

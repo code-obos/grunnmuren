@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { cx } from 'cva';
+import { cva } from 'cva';
 import { fn } from 'storybook/test';
 import {
   UNSAFE_Carousel as Carousel,
@@ -17,62 +17,85 @@ const meta = {
   parameters: {
     variant: 'fullscreen',
   },
-  args: { onSlideChange: fn(), onSettled: fn() },
-  render: ({ rounded, ...args }) => (
-    <main className="container">
-      <Carousel {...args}>
-        <CarouselContainer>
-          <CarouselItems
-            className={cx(
-              'gap-4',
-              rounded && 'rounded-3xl **:[img]:rounded-3xl',
-              args.orientation === 'vertical' && 'h-64',
-            )}
-          >
-            <CarouselItem className="basis-1/2">
-              <Media>
-                <img
-                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
-                  alt=""
-                />
-              </Media>
-            </CarouselItem>
-            <CarouselItem className="basis-1/2">
-              <Media>
-                <img
-                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/7d2285ccee9b9545e018115b8e0ecc8b06aa0729-1620x1080.jpg?auto=format"
-                  alt=""
-                  loading="lazy"
-                />
-              </Media>
-            </CarouselItem>
-            <CarouselItem className="basis-1/2">
-              <Media fit="contain">
-                <img
-                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/32a53eec782e6cbe15d75961f82ecca48dbe30ed-1920x1080.png?auto=format"
-                  alt=""
-                  loading="lazy"
-                />
-              </Media>
-            </CarouselItem>
-            <CarouselItem className="basis-1/2">
-              <Media>
-                <img
-                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/a3c4b263f72128f5c6259333a224054ed3b539fe-1440x788.heif?auto=format"
-                  alt=""
-                  loading="lazy"
-                />
-              </Media>
-            </CarouselItem>
-          </CarouselItems>
-        </CarouselContainer>
-        <CarouselControls className="pt-4">
-          <CarouselButton slot="prev" />
-          <CarouselButton slot="next" />
-        </CarouselControls>
-      </Carousel>
-    </main>
-  ),
+  args: {
+    onSlideChange: fn(),
+    onSettled: fn(),
+    align: 'center',
+    loop: false,
+    orientation: 'horizontal',
+  },
+  render: ({ ...props }) => {
+    const itemsVariants = cva({
+      base: 'gap-4 *:basis-1/2',
+      variants: {
+        orientation: { vertical: 'h-[336px] max-w-xs', horizontal: null },
+        loop: { false: null, true: null },
+      },
+      // Add the correct padding to the container based on the orientation if we're looping
+      compoundVariants: [
+        {
+          orientation: 'vertical',
+          loop: true,
+          className: 'pt-4',
+        },
+        {
+          orientation: 'horizontal',
+          loop: true,
+          className: 'pl-4',
+        },
+      ],
+    });
+
+    return (
+      <main className="container flex">
+        <Carousel {...props}>
+          <CarouselContainer>
+            <CarouselItems className={itemsVariants(props)}>
+              <CarouselItem>
+                <Media>
+                  <img
+                    src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
+                    alt=""
+                  />
+                </Media>
+              </CarouselItem>
+              <CarouselItem>
+                <Media>
+                  <img
+                    src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/7d2285ccee9b9545e018115b8e0ecc8b06aa0729-1620x1080.jpg?auto=format"
+                    alt=""
+                    loading="lazy"
+                  />
+                </Media>
+              </CarouselItem>
+              <CarouselItem>
+                <Media fit="contain">
+                  <img
+                    src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/32a53eec782e6cbe15d75961f82ecca48dbe30ed-1920x1080.png?auto=format"
+                    alt=""
+                    loading="lazy"
+                  />
+                </Media>
+              </CarouselItem>
+              <CarouselItem>
+                <Media>
+                  <img
+                    src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/a3c4b263f72128f5c6259333a224054ed3b539fe-1440x788.heif?auto=format"
+                    alt=""
+                    loading="lazy"
+                  />
+                </Media>
+              </CarouselItem>
+            </CarouselItems>
+          </CarouselContainer>
+          <CarouselControls className="pt-4">
+            <CarouselButton slot="prev" />
+            <CarouselButton slot="next" />
+          </CarouselControls>
+        </Carousel>
+      </main>
+    );
+  },
 } satisfies Meta<typeof Carousel>;
 
 export default meta;
@@ -106,15 +129,28 @@ export const AutoPlayLooping: Story = {
   },
 };
 
-export const VerticalOrientation: Story = {
+export const OneSlidePerView: Story = {
   args: {
-    orientation: 'vertical',
-    className: 'max-w-xs',
+    className: '**:data-[slot="carousel-item"]:basis-full',
   },
 };
 
-export const RoundedExample: Story = {
+export const RoundedCorners: Story = {
   args: {
-    rounded: true,
+    className:
+      '**:data-[slot="carousel-item"]:rounded-3xl **:data-[slot="carousel-item"]:overflow-hidden',
+  },
+};
+
+export const VariableWidth: Story = {
+  args: {
+    className:
+      '**:data-[slot="carousel-item"]:nth-2:basis-1/3 **:data-[slot="carousel-item"]:nth-4:basis-1/5',
+  },
+};
+
+export const VerticalOrientation: Story = {
+  args: {
+    orientation: 'vertical',
   },
 };
