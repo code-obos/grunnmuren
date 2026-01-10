@@ -73,7 +73,7 @@ const variants = cva({
         // Override aspect ratio of the media and carousel-item slots (since we can not use aspect for full-bleed layout)
         '**:data-[slot="carousel-item"]:data-[slot="media"]:*:aspect-none',
         // break out the carousel out of the container
-        '**:data-[slot="carousel-container"]:absolute **:data-[slot="carousel-container"]:right-0 **:data-[slot="carousel-container"]:left-0 **:data-[slot="carousel-container"]:h-[inherit]',
+        '**:data-[slot="carousel-items-container"]:absolute **:data-[slot="carousel-items-container"]:right-0 **:data-[slot="carousel-items-container"]:left-0 **:data-[slot="carousel-items-container"]:h-[inherit]',
         // Positions the carousel controls inside the carousel
         '**:data-[slot="carousel-controls"]:z-10 **:data-[slot="carousel-controls"]:mb-4 *:data-[slot="carousel"]:flex *:data-[slot="carousel"]:items-end *:data-[slot="carousel"]:justify-end',
       ],

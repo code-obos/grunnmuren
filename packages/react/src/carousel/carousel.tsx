@@ -30,7 +30,7 @@ import { usePrefersReducedMotion } from '../use-prefers-reduced-motion';
 type CarouselProps = Omit<HTMLProps<HTMLDivElement>, 'onChange'> & {
   children?: React.ReactNode;
   /**
-   * Alignment of the carousel items relative to the carousel viewport.
+   * Alignment of the items relative to the carousel viewport.
    * @default 'center'
    */
   align?: 'start' | 'center' | 'end';
@@ -248,22 +248,22 @@ const CarouselContext = createContext<CarouselContextValue>({
   slidesInView: [],
 });
 
-type CarouselContainerProps = HTMLProps<HTMLDivElement> & {
+type CarouselItemsContainer = HTMLProps<HTMLDivElement> & {
   children: React.ReactNode;
 };
 
-const CarouselContainer = ({
+const CarouselItemsContainer = ({
   children,
   className,
   ...rest
-}: CarouselContainerProps) => {
+}: CarouselItemsContainer) => {
   const { '~emblaRef': emblaRef } = useContext(CarouselContext);
 
   return (
     <div
       className={cx(className, 'overflow-hidden')}
       ref={emblaRef}
-      data-slot="carousel-container"
+      data-slot="carousel-items-container"
       {...rest}
     >
       {children}
@@ -432,11 +432,11 @@ export {
   CarouselItems as UNSAFE_CarouselItems,
   CarouselButton as UNSAFE_CarouselButton,
   CarouselControls as UNSAFE_CarouselControls,
-  CarouselContainer as UNSAFE_CarouselContainer,
+  CarouselItemsContainer as UNSAFE_CarouselItemsContainer,
   type CarouselControlsProps as UNSAFE_CarouselControlsProps,
   type CarouselButtonProps as UNSAFE_CarouselButtonProps,
   type CarouselItemProps as UNSAFE_CarouselItemProps,
   type CarouselItemsProps as UNSAFE_CarouselItemsProps,
   type CarouselProps as UNSAFE_CarouselProps,
-  type CarouselContainerProps as UNSAFE_CarouselContainerProps,
+  type CarouselItemsContainer as UNSAFE_CarouselItemsContainerProps,
 };

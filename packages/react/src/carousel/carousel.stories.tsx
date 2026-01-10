@@ -4,10 +4,10 @@ import { fn } from 'storybook/test';
 import {
   UNSAFE_Carousel as Carousel,
   UNSAFE_CarouselButton as CarouselButton,
-  UNSAFE_CarouselContainer as CarouselContainer,
   UNSAFE_CarouselControls as CarouselControls,
   UNSAFE_CarouselItem as CarouselItem,
   UNSAFE_CarouselItems as CarouselItems,
+  UNSAFE_CarouselItemsContainer as CarouselItemsContainer,
 } from '../carousel';
 import { Media } from '../content';
 
@@ -49,7 +49,7 @@ const meta = {
     return (
       <main className="container flex">
         <Carousel {...props}>
-          <CarouselContainer>
+          <CarouselItemsContainer>
             <CarouselItems className={itemsVariants(props)}>
               <CarouselItem>
                 <Media>
@@ -87,7 +87,7 @@ const meta = {
                 </Media>
               </CarouselItem>
             </CarouselItems>
-          </CarouselContainer>
+          </CarouselItemsContainer>
           <CarouselControls className="pt-4">
             <CarouselButton slot="prev" />
             <CarouselButton slot="next" />

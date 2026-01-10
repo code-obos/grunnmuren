@@ -6,10 +6,10 @@ import { Button } from '../button';
 import {
   UNSAFE_Carousel as Carousel,
   UNSAFE_CarouselButton as CarouselButton,
-  UNSAFE_CarouselContainer as CarouselContainer,
   UNSAFE_CarouselControls as CarouselControls,
   UNSAFE_CarouselItem as CarouselItem,
   UNSAFE_CarouselItems as CarouselItems,
+  UNSAFE_CarouselItemsContainer as CarouselItemsContainer,
 } from '../carousel';
 import { Content, Heading, Media } from '../content';
 import { Description } from '../label';
@@ -36,7 +36,7 @@ const meta: Meta<typeof Hero> = {
           </p>
         </Content>
         <Carousel>
-          <CarouselContainer>
+          <CarouselItemsContainer>
             <CarouselItems>
               <CarouselItem>
                 <Media>
@@ -56,7 +56,7 @@ const meta: Meta<typeof Hero> = {
                 </Media>
               </CarouselItem>
             </CarouselItems>
-          </CarouselContainer>
+          </CarouselItemsContainer>
           <CarouselControls>
             <CarouselButton slot="prev" />
             <CarouselButton slot="next" />
@@ -139,7 +139,7 @@ export const StandardWithCarousel = () => (
         <Description>– din lokale OBOS-butikk i Oslo sentrum</Description>
       </Content>
       <Carousel>
-        <CarouselContainer>
+        <CarouselItemsContainer>
           <CarouselItems>
             <CarouselItem>
               <Media>
@@ -168,7 +168,7 @@ export const StandardWithCarousel = () => (
               </Media>
             </CarouselItem>
           </CarouselItems>
-        </CarouselContainer>
+        </CarouselItemsContainer>
         <CarouselControls>
           <CarouselButton slot="prev" />
           <CarouselButton slot="next" />
@@ -236,7 +236,7 @@ export const FullBleedWithCarousel = () => (
         <Description>– et nytt nabolag i Oslo</Description>
       </Content>
       <Carousel>
-        <CarouselContainer>
+        <CarouselItemsContainer>
           <CarouselItems>
             <CarouselItem>
               <Media>
@@ -274,7 +274,7 @@ export const FullBleedWithCarousel = () => (
               </Media>
             </CarouselItem>
           </CarouselItems>
-        </CarouselContainer>
+        </CarouselItemsContainer>
         <CarouselControls>
           <CarouselButton slot="prev" />
           <CarouselButton slot="next" />
