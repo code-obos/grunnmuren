@@ -189,13 +189,15 @@ const Carousel = ({
   );
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: we want to support keyboard navigations for the carousel
+    // biome-ignore lint/a11y/useSemanticElements: we want to use a div
     <div
       {...rest}
       data-orientation={orientation}
       data-slot="carousel"
       ref={mergeRefs(ref, carouselRef)}
       onKeyDown={handleKeyDown}
+      role="region"
+      aria-roledescription="carousel"
     >
       <Provider
         values={[
