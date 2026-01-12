@@ -12,6 +12,11 @@ const ignoreParents = [
   'GlobalDOMAttributes',
   // Ignore for now. Do we support slots in the react aria way?
   'SlotProps',
+  // Ignores all HTMLProps/HTMLAttributes definitions
+  'AllHTMLAttributes',
+  'HTMLAttributes',
+  'DOMAttributes',
+  'AriaAttributes',
 ];
 
 const options: ParserOptions = {
