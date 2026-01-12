@@ -12,7 +12,7 @@
     "build:props": "node extract-component-props.ts && biome lint --write component-props.ts --files-max-size=8000000",
     "build:colors": "node extract-colors.ts && biome format --write colors.ts",
     "build:tsc": "tsc",
-    "dev": "vite dev --port 3000",
+    "dev": "vite dev --port 3003",
     "start": "node .output/server/index.mjs",
     "sanity:typegen": "pnpm sanity:typegen:extract && pnpm sanity:typegen:generate",
     "sanity:typegen:extract": "sanity schema extract",
