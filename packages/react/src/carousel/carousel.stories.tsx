@@ -18,7 +18,7 @@ const meta = {
     variant: 'fullscreen',
   },
   args: {
-    onSlideChange: fn(),
+    onSelect: fn(),
     onSettled: fn(),
     align: 'center',
     loop: false,

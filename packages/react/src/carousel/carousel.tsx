@@ -52,11 +52,11 @@ type CarouselProps = Omit<HTMLProps<HTMLDivElement>, 'onChange'> & {
    */
   orientation?: 'horizontal' | 'vertical';
   /**
-   * Callback invoked when the slide changes.
+   * Callback invoked when the snapped index changes.
    */
-  onSlideChange?: (index: number) => void;
+  onSelect?: (index: number) => void;
   /**
-   * Callback invoked after the carousel scrolling "settles".
+   * Callback invoked after the carousel scrolling "settles". Think of this as the debounced version of `onSelect`.
    */
   onSettled?: (index: number) => void;
 };
@@ -71,7 +71,7 @@ const Carousel = ({
   children,
   initialIndex = 0,
   orientation = 'horizontal',
-  onSlideChange,
+  onSelect,
   onSettled,
   loop = false,
   ref,
@@ -102,13 +102,13 @@ const Carousel = ({
       loop,
       startIndex: initialIndex,
       axis: orientation === 'horizontal' ? 'x' : 'y',
-      // we set inert for the inactive items, so they are not focusable
-      watchFocus: false,
+      inViewThreshold: 0.2,
     },
     emblaPlugins,
   );
 
   const [slidesInView, setSlidesInView] = useState<number[]>([initialIndex]);
+  const previousSettledScrollIndex = useRef(initialIndex);
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -118,24 +118,34 @@ const Carousel = ({
 
       switch (type) {
         case 'select':
-          setSlidesInView([scrollSnapIndex]);
-          onSlideChange?.(scrollSnapIndex);
+          onSelect?.(scrollSnapIndex);
           break;
         case 'settle': {
-          onSettled?.(scrollSnapIndex);
+          // We only invoke the callback if the scroll index actually changed from the previous settled index
+          // Otherwise this gets triggered if the user does the tiniest bit of scrolling in the carousel, but doesn't transition to the next slide
+          if (scrollSnapIndex !== previousSettledScrollIndex.current) {
+            previousSettledScrollIndex.current = scrollSnapIndex;
+            onSettled?.(scrollSnapIndex);
+          }
+          break;
+        }
+        case 'slidesInView': {
+          setSlidesInView(emblaApi.slidesInView());
           break;
         }
       }
     };
 
     emblaApi.on('select', emblaHandler);
+    emblaApi.on('slidesInView', emblaHandler);
     emblaApi.on('settle', emblaHandler);
 
     return () => {
       emblaApi.off('select', emblaHandler);
       emblaApi.off('settle', emblaHandler);
+      emblaApi.off('slidesInView', emblaHandler);
     };
-  }, [emblaApi, onSlideChange, onSettled]);
+  }, [emblaApi, onSelect, onSettled]);
 
   const handleNextPress = useCallback(() => {
     if (!emblaApi) return;
