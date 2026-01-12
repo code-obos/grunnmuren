@@ -8,8 +8,6 @@ type HeroProps = HTMLProps<HTMLDivElement> &
     children: React.ReactNode;
   };
 
-const roundedMediaCorners = '*:data-[slot="media"]:*:rounded-3xl';
-
 // Common variant for "standard" and "full-bleed" Hero variants
 const oneColumnLayout = [
   // Vertical spacing in the <Content>
@@ -42,6 +40,8 @@ const variants = cva({
     '*:data-[slot="content"]:gap-y-3',
     // Make sure <Media> content fills any available vertical and horizontal space
     '*:data-[slot="media"]:*:object-cover',
+    // TODO: Target all media instead? Ask Oscar
+    '*:data-[slot="carousel"]:overflow-hidden *:data-[slot="carousel"]:rounded-3xl',
     // Make the carousel items full width, so we scroll one at a time
     '**:data-[slot="carousel-item"]:basis-full',
   ],
@@ -52,7 +52,6 @@ const variants = cva({
      * */
     variant: {
       standard: [
-        roundedMediaCorners,
         oneColumnLayout,
         nonFullBleedAspectRatiosForSmallScreens,
         'lg:*:data-[slot="media"]:*:aspect-2/1',
@@ -67,6 +66,7 @@ const variants = cva({
         // This is necessary due to the absolute positioning of the media and carousel containers in this variant
         // biome-ignore lint/nursery/useSortedClasses: biome is unable to sort the custom classes for 3xl and 4xl breakpoints
         '**:data-[slot="media"]:h-80 sm:**:data-[slot="media"]:h-[25rem] md:**:data-[slot="media"]:h-[30rem] lg:**:data-[slot="media"]:h-[35rem] xl:**:data-[slot="media"]:h-[40rem] 2xl:**:data-[slot="media"]:h-[42rem] 3xl:**:data-[slot="media"]:h-[48rem] 4xl:**:data-[slot="media"]:h-[53rem]',
+        '**:data-[slot="media"]:*:h-[inherit]',
         // biome-ignore lint/nursery/useSortedClasses: biome is unable to sort the custom classes for 3xl and 4xl breakpoints
         '*:data-[slot="carousel"]:h-80 sm:*:data-[slot="carousel"]:h-[25rem] md:*:data-[slot="carousel"]:h-[30rem] lg:*:data-[slot="carousel"]:h-[35rem] xl:*:data-[slot="carousel"]:h-[40rem] 2xl:*:data-[slot="carousel"]:h-[42rem] 3xl:*:data-[slot="carousel"]:h-[48rem] 4xl:*:data-[slot="carousel"]:h-[53rem]',
         '*:data-[slot="carousel"]:w-full!',
@@ -81,7 +81,6 @@ const variants = cva({
         'lg:items-center lg:*:col-span-6',
         // Vertical spacing in the <Content>
         'lg:*:data-[slot="content"]:gap-y-7',
-        roundedMediaCorners,
         nonFullBleedAspectRatiosForSmallScreens,
         // Set media aspect ratio to 1:1 (square)
         'lg:*:data-[slot="media"]:*:aspect-square',
@@ -91,8 +90,10 @@ const variants = cva({
   compoundVariants: [
     {
       variant: ['standard', 'two-column'],
-      className:
+      className: [
+        '*:data-[slot="media"]:*:rounded-3xl',
         '**:data-[slot="carousel-controls"]:absolute *:data-[slot="carousel"]:relative **:data-[slot="carousel-controls"]:right-4 **:data-[slot="carousel-controls"]:bottom-4 **:data-[slot="carousel-container"]:rounded-3xl',
+      ],
     },
   ],
   defaultVariants: {
