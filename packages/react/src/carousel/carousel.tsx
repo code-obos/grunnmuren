@@ -197,7 +197,7 @@ const Carousel = ({
       ref={mergeRefs(ref, carouselRef)}
       onKeyDown={handleKeyDown}
       role="region"
-      aria-roledescription="carousel"
+      aria-label={translations.carousel[locale]}
     >
       <Provider
         values={[
