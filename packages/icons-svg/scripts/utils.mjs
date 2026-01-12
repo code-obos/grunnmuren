@@ -1,6 +1,6 @@
+import { globSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { globSync } from 'glob';
 
 export const __dirname = path.dirname(fileURLToPath(import.meta.url));
 

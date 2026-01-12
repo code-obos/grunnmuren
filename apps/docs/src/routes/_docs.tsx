@@ -70,9 +70,13 @@ function RootLayout() {
       // This integrates RAC/Grunnmuren with TanStack router
       // Giving us typesafe routes
       // See https://react-spectrum.adobe.com/react-aria/routing.html#tanstack-router
-      // @ts-expect-error its fine for now, but should fix it properly later
-      navigate={(to, options) => router.navigate({ to, ...options })}
-      useHref={(to) => router.buildLocation({ to }).href}
+      navigate={(href, options) =>
+        router.navigate({
+          ...href,
+          ...options,
+        })
+      }
+      useHref={(href) => router.buildLocation({ ...href }).href}
     >
       <Disclosure
         isExpanded={isMobileNavExpanded}
@@ -115,10 +119,10 @@ function RootLayout() {
   );
 }
 
-// See comments on GrunnmurenProvider in <RootLayout />
+// Configure the type of the `href` and `routerOptions` props on all React Aria components.
 declare module 'react-aria-components' {
   interface RouterConfig {
-    href: ToOptions['to'];
+    href: ToOptions;
     routerOptions: Omit<NavigateOptions, keyof ToOptions>;
   }
 }

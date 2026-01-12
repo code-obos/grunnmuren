@@ -1,8 +1,37 @@
 import fs from 'node:fs';
-import { withDefaultConfig } from 'react-docgen-typescript';
+import { marked } from 'marked';
+import {
+  type ParserOptions,
+  type PropItem,
+  withDefaultConfig,
+} from 'react-docgen-typescript';
 
-const options = {
+const ignoreParents = [
+  'DOMProps',
+  'GlobalDOMEvents',
+  'GlobalDOMAttributes',
+  // Ignore for now. Do we support slots in the react aria way?
+  'SlotProps',
+];
+
+const options: ParserOptions = {
   savePropValueAsString: true,
+  propFilter: (prop: PropItem) => {
+    switch (true) {
+      // remove ref props, as they are considered special
+      case prop.name === 'ref':
+      // Ignore RAC unstable props in doc
+      case prop.name.startsWith('UNSTABLE_'):
+      // key isn't a regular prop, but a special react prop
+      case prop.name === 'key':
+        return false;
+      // check parent ignore list (except for a few special ones which we want to include)
+      case prop.parent && !['id', 'children'].includes(prop.name):
+        return !ignoreParents.includes(prop.parent.name);
+      default:
+        return true;
+    }
+  },
 };
 
 const components = withDefaultConfig({
@@ -18,7 +47,19 @@ for (const componentToFix of Object.values(propFixes)) {
   const toUpdate = components.find(
     (c) => c.displayName === componentToFix.displayName,
   );
-  toUpdate.props = componentToFix.props;
+
+  if (toUpdate) {
+    toUpdate.props = componentToFix.props;
+  }
+}
+
+// convert the prop description to HTML instead of markdown
+for (const component of components) {
+  for (const prop of Object.values(component.props)) {
+    if (prop.description) {
+      prop.description = await marked.parseInline(prop.description);
+    }
+  }
 }
 
 const outputPath = './component-props.ts';

@@ -1,6 +1,6 @@
 import { PortableText } from '@portabletext/react';
 import { cx } from 'cva';
-import type { COMPONENT_QUERYResult } from 'sanity.types';
+import type { COMPONENT_QUERY_RESULT } from 'sanity.types';
 import { AnchorHeading } from './anchor-heading';
 import { Code } from './code';
 import { ComponentPreview } from './component-preview';
@@ -8,7 +8,7 @@ import { ImageWithCaption } from './image-with-caption';
 import { Table, TableBody, TableCell, TableHead, TableRow } from './table';
 
 export type SanityContentProps = Pick<
-  NonNullable<COMPONENT_QUERYResult>,
+  NonNullable<COMPONENT_QUERY_RESULT>,
   'content'
 > & {
   className?: string;

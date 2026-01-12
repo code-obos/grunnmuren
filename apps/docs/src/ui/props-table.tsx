@@ -1,4 +1,5 @@
 import * as props from 'component-props';
+import type { PropItem } from 'react-docgen-typescript';
 import { AnchorHeading } from './anchor-heading';
 import { Table, TableBody, TableCell, TableHead, TableRow } from './table';
 
@@ -8,6 +9,28 @@ interface PropsTableProps {
 
 export const PropsTable = ({ componentName }: PropsTableProps) => {
   const headingId = `${componentName.toLowerCase()}-props`;
+
+  const componentProps = Object.values(props[componentName].props);
+
+  const groupedProps = Object.groupBy(componentProps, (prop: PropItem) => {
+    switch (true) {
+      case prop.name.startsWith('on'):
+        return 'Events';
+      case prop.name.startsWith('aria-'):
+      // If the id prop comes from DOMProps, we know it's not required/neccesary for the component, so we group it under 'Accessibility'
+      case prop.name === 'id' && prop.parent?.name === 'DOMProps':
+      case prop.name === 'role':
+        return 'Accessibility';
+      case prop.name === 'style':
+      case prop.name === 'className':
+        return 'Styles';
+      case prop.parent?.name === 'LinkDOMProps':
+        return 'Links';
+      default:
+        return 'Props';
+    }
+  });
+
   return (
     <div className="overflow-x-auto">
       <AnchorHeading className="heading-s my-2" level={2} id={headingId}>
@@ -22,20 +45,51 @@ export const PropsTable = ({ componentName }: PropsTableProps) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {Object.values(props[componentName].props).map((prop) => (
-            <TableRow key={prop.name}>
-              <TableCell className="italic">
-                <code className="font-mono">
-                  {prop.name}
-                  {prop.required ? '' : '?'}
-                </code>
-              </TableCell>
-              <TableCell>{prop.description}</TableCell>
-              <TableCell>{prop.defaultValue?.value ?? '-'}</TableCell>
-            </TableRow>
-          ))}
+          <PropRows props={groupedProps.Props} />
+          <PropRows props={groupedProps.Events} heading="Events" />
+          <PropRows props={groupedProps.Links} heading="Links" />
+          <PropRows props={groupedProps.Styles} heading="Styles" />
+          <PropRows
+            props={groupedProps.Accessibility}
+            heading="Accessibility"
+          />
         </TableBody>
       </Table>
     </div>
+  );
+};
+
+const PropRows = ({
+  props,
+  heading,
+}: {
+  props?: Array<PropItem>;
+  heading?: string;
+}) => {
+  if (!props) return null;
+
+  return (
+    <>
+      {heading && (
+        <TableRow>
+          <th colSpan={3} className="text-left font-bold">
+            {heading}
+          </th>
+        </TableRow>
+      )}
+      {props.map((prop) => (
+        <TableRow key={prop.name}>
+          <TableCell className="italic">
+            <code className="font-mono">
+              {prop.name}
+              {prop.required ? '' : '?'}
+            </code>
+          </TableCell>
+          {/** biome-ignore lint/security/noDangerouslySetInnerHtml: we consider the prop description safe */}
+          <TableCell dangerouslySetInnerHTML={{ __html: prop.description }} />
+          <TableCell>{prop.defaultValue?.value ?? '-'}</TableCell>
+        </TableRow>
+      ))}
+    </>
   );
 };

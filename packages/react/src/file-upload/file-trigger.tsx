@@ -38,7 +38,6 @@ export const FileTrigger = (props: FileTriggerProps) => {
     isInvalid,
     isRequired,
     name,
-    value,
     ...rest
   } = props;
   const inputRef = useObjectRef(ref);

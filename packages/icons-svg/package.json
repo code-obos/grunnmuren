@@ -19,8 +19,7 @@
     "update:optimize": "node ./scripts/optimize.mjs"
   },
   "devDependencies": {
-    "fs-extra": "11.3.2",
-    "glob": "11.1.0",
+    "fs-extra": "11.3.3",
     "ora": "9.0.0",
     "picocolors": "1.1.1",
     "prompts": "2.4.2",
