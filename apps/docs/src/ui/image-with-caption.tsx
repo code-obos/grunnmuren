@@ -1,9 +1,9 @@
 import { getImageDimensions } from '@sanity/asset-utils';
-import type { COMPONENT_QUERYResult } from 'sanity.types';
+import type { COMPONENT_QUERY_RESULT } from 'sanity.types';
 import { urlForImage } from '@/lib/image-url';
 
 type TSanityImage = Extract<
-  NonNullable<NonNullable<COMPONENT_QUERYResult>['content']>[number],
+  NonNullable<NonNullable<COMPONENT_QUERY_RESULT>['content']>[number],
   { _type: 'image-with-caption' }
 >;
 
