@@ -340,4 +340,402 @@
       @apply motion-safe:-translate-y-0.5 motion-safe:translate-x-0.5;
     }
   }
+
+  /*** FormSteps component styles ***/
+  .form-steps,
+  [data-slot="form-steps"] {
+    counter-reset: form-step-counter;
+    @apply flex gap-x-3 lg:flex-col lg:gap-y-14 max-w-full min-w-0 relative;
+
+    [data-slot="form-step"] {
+      counter-increment: form-step-counter;
+      @apply flex items-center gap-x-3 relative;
+
+      &::before {
+        content: counter(form-step-counter);
+      }
+
+      &::before,
+      &[data-prev-steps-expanded]::after,
+      &[data-next-steps-expanded]::after {
+        @apply shrink-0 font-semibold size-8 border-2 rounded-full border-blue-dark grid place-content-center;
+      }
+
+      /** Place the focus styles on the ::before element instead of the link, since the link text is not visible on smaller screens */
+      &:has([data-slot="link"]:focus-visible) {
+        &::before {
+          @apply outline-focus-offset;
+        }
+      }
+
+      [data-slot="link"] {
+        @apply focus-visible:outline-none;
+        /** Create a 44x44 px clickable area, where the step number next to each link will also be covered **/
+        @apply py-2.5 pl-11 -ml-11 -my-2.5;
+      }
+
+      &[data-is-current="true"] {
+        &::before {
+          @apply bg-sky-light border-4 text-blue-dark;
+        }
+      }
+
+      &[data-state="completed"]:not([data-is-current="true"]) {
+        &::before,
+        &[data-prev-steps-expanded]::after,
+        &[data-next-steps-expanded]::after {
+          @apply bg-blue-dark text-white;
+        }
+      }
+
+      svg {
+        @apply text-white absolute scale-60 border-2 border-white bg-blue-dark rounded-full left-4 -top-2;
+      }
+
+      &[data-state="pending"] {
+        &:not(:has([data-slot="link"])),
+        &:not(:has([data-slot="progress-bar"])) {
+          [data-slot="in-progress-icon"] {
+            @apply hidden;
+          }
+        }
+      }
+
+      &[data-state="pending"]:not([data-is-current="true"])::before {
+        @apply bg-white text-blue-dark;
+      }
+
+      &:not(:last-child) {
+        [data-slot="progress-bar"] {
+          @apply w-4 max-lg:grow lg:w-14 lg:rotate-90 lg:absolute lg:-left-3 lg:px-1.5 lg:-bottom-[calc(100%-2px)];
+        }
+      }
+
+      & > *:is([data-slot="text"], [data-slot="link"]) {
+        @apply max-lg:opacity-0;
+      }
+
+      & > *:is([data-slot="text"], [data-slot="link"]) {
+        @apply max-lg:absolute;
+      }
+
+      &[data-is-current="true"] {
+        @apply max-lg:justify-center;
+        & > *:is([data-slot="text"], [data-slot="link"]) {
+          @apply max-lg:-top-full;
+          &::after {
+            @apply max-lg:-bottom-[200%] max-lg:ml-9.5;
+          }
+        }
+      }
+    }
+
+    [data-slot="toggle-prev-check-icon"],
+    [data-slot="toggle-next-check-icon"] {
+      @apply hidden;
+    }
+
+    /** If there are 5 or more form steps: **/
+    &:has([data-slot="form-step"]:nth-child(5)) {
+      /** Where the second last step is still pending: We stack all the pending steps on top of each other on small screens. **/
+      &:has(
+          [data-slot="form-step"]:nth-last-child(2):is(
+              [data-state="pending"]:not([data-is-current="true"])
+            )
+        ) {
+        [data-state="pending"]:not([data-is-current="true"]) {
+          &:nth-child(n + 4) {
+            &:not(
+                [data-state="completed"] + *,
+                [data-is-current="true"] + *,
+                :nth-child(4)
+              ) {
+              @apply max-sm:-ml-9;
+            }
+            [data-slot="progress-bar"] {
+              @apply max-sm:sr-only;
+            }
+          }
+          &:nth-child(4) {
+            @apply max-sm:z-4;
+          }
+          &:nth-child(5) {
+            @apply max-sm:z-3;
+          }
+          &:nth-child(6) {
+            @apply max-sm:z-2;
+          }
+          &:nth-child(7) {
+            @apply max-sm:z-1;
+          }
+        }
+      }
+
+      /** On the fourth step or above: hide all the completed steps before it in a "popover" **/
+      &:has([data-is-current="true"]:nth-child(n + 4)) {
+        /** Styles the "popover" trigger used for touch/mouse interactions to display the popover **/
+        [data-slot="form-step"] {
+          &:nth-child(2) {
+            &::before {
+              /** Announce as "2" for screen readers (since this is rendered in step 2) but display as '...' visually **/
+              @apply max-sm:content-['...'_/_'2'];
+            }
+          }
+        }
+
+        /** Hides all the completed steps between step 2 and the current **/
+        /** For both keyboard users and touch/mouse users (screen reader users will not notice this) **/
+        &:not(
+            :has(
+                [data-state="completed"]:not(:nth-child(1)):not(
+                    :nth-last-child(2)
+                  ):focus-within
+                  ~ [data-is-current="true"]
+              ),
+            :has([data-slot="form-step"][data-prev-steps-expanded="true"])
+          ) {
+          [data-slot="form-step"]:not([data-is-current="true"]):not(
+              [data-is-current="true"] ~ *
+            ) {
+            &:nth-child(3),
+            /** Impotant to exclude if the fourth child is the same as the second from the back, i.e. 5 items */
+              &:nth-child(4):not(:nth-last-child(2)),
+            /** Impotant to exclude if the second child is the same as the fourth from the back, i.e. 5 items */
+              /** This is because the second child is used as a disclosure toggle on smaller screens.*/
+              &:nth-last-child(4):not(:nth-child(2)),
+            &:nth-last-child(3) {
+              &[data-state="completed"] {
+                @apply max-sm:sr-only;
+              }
+            }
+          }
+        }
+
+        /** Displays all the completed steps between step 2 and the current in a "popover" **/
+        /** For both keyboard users and touch/mouse users (screen reader users will not notice this) **/
+        &:has(
+            [data-state="completed"]:not(:nth-child(1)):not(
+                :nth-last-child(2)
+              ):focus-within
+              ~ [data-is-current="true"]
+          ),
+        &:has([data-slot="form-step"][data-prev-steps-expanded="true"]) {
+          /** Target all the completed steps, except step 1 and the second last, before the current step. **/
+          [data-state="completed"]:not(:first-child):not(
+              :nth-last-child(2)
+            ):has(~ [data-is-current="true"]) {
+            /** They need to be absolutely positioned, with an offset that makes them stack vertically. **/
+            /** For the step 2, the ::before element is now acting as the popover trigger. So we need to use the ::after element as a visual step number indicator instead **/
+            &:nth-child(2) {
+              &::after,
+              [data-slot="link"],
+              [data-slot="toggle-prev-check-icon"] {
+                @apply max-sm:absolute;
+              }
+              &::after {
+                @apply max-sm:-left-14 max-sm:top-15 max-sm:z-1;
+                /** Makes this pseudo element visible, while also reflecting the order in the list, while hiding it for screen reader users. This is because the list item counter is reflected in the ::before element for screen readers  */
+                @apply max-sm:content-[counter(form-step-counter)_/_''];
+              }
+              /** Place the focus styles on the ::after element instead of the link, to match the rest of the list items */
+              &:has([data-slot="link"]:focus-visible) {
+                &::after {
+                  @apply max-sm:outline-focus-offset;
+                }
+              }
+              &::before {
+                /** Hide the focus outline on the element acting as the "popover" trigger **/
+                @apply max-sm:outline-none;
+              }
+
+              [data-slot="link"] {
+                @apply max-sm:-left-3 max-sm:top-16 max-sm:z-2;
+              }
+              [data-slot="toggle-prev-check-icon"] {
+                @apply max-sm:-left-10 max-sm:z-2 max-sm:top-12.5 max-sm:block;
+              }
+            }
+
+            &:not(:nth-child(2)) {
+              @apply max-sm:absolute max-sm:left-4 max-sm:w-full;
+              /** Use stacked pseudo elements to create the illusion of a popover container **/
+              @apply max-sm:after:absolute max-sm:after:-left-4 max-sm:after:right-4;
+              @apply max-sm:after:-top-[calc(200%+var(--spacing)*4)] max-sm:after:-bottom-4;
+              /** Paints the "popover container" **/
+              @apply max-sm:after:bg-white max-sm:after:border-black max-sm:after:border-x max-sm:after:border-b max-sm:after:rounded-b-lg;
+
+              & > *:is([data-slot="text"], [data-slot="link"]) {
+                @apply max-sm:relative;
+              }
+              & > *:is([data-slot="text"], [data-slot="link"], svg),
+              &::before {
+                @apply max-sm:z-1;
+              }
+              [data-slot="progress-bar"] {
+                @apply max-sm:sr-only;
+              }
+            }
+            [data-slot="link"] {
+              /** Make the link appear visually and position the link pseudo element acting as click area for the step number **/
+              @apply max-sm:opacity-100 max-sm:static max-sm:after:-left-11;
+              /** Truncate texts that does not fit the width of the popover (the inline-flex of the link must be overridden as block) **/
+              /** We need to do this because we can't wrap over multiple lines, due to the absolute positioning of each step in the popover **/
+              @apply max-sm:max-w-53.5 max-sm:text-ellipsis max-sm:overflow-hidden max-sm:whitespace-nowrap max-sm:block!;
+            }
+
+            /** Position each step correctly inside the "popover" (with an even spacing) **/
+            &:nth-child(3) {
+              @apply max-sm:top-30;
+              /** Paints the top part of the "popover container" **/
+              @apply max-sm:after:border-t max-sm:after:rounded-t-lg;
+            }
+            &:nth-child(4) {
+              @apply max-sm:top-45;
+            }
+            &:nth-child(5) {
+              @apply max-sm:top-60;
+            }
+            &:nth-child(6) {
+              @apply max-sm:top-75;
+            }
+          }
+        }
+      }
+
+      /** Has two or more completed steps after the current step: hide them in a "popover" **/
+      &:has(
+          [data-is-current="true"]
+            + [data-state="completed"]
+            + [data-state="completed"]
+        ) {
+        /** Styles the "popover" trigger used for touch/mouse interactions to display the popover **/
+        [data-slot="form-step"] {
+          &:is([data-is-current="true"] + [data-state="completed"]) {
+            &::before {
+              /** Announce as counter for screen readers but display as '...' visually **/
+              @apply max-sm:content-['...'_/_counter(form-step-counter)];
+            }
+          }
+        }
+
+        /** Hides all the completed steps after the current **/
+        /** For both keyboard users and touch/mouse users (screen reader users will not notice this) **/
+        &:not(
+            :has(
+                [data-is-current="true"] ~ [data-state="completed"]:focus-within
+              ),
+            :has([data-slot="form-step"][data-next-steps-expanded="true"])
+          ) {
+          [data-slot="form-step"]:not([data-is-current="true"]):not(
+              :is(* ~ [data-is-current="true"])
+            ):not(:is([data-is-current="true"] + *)) {
+            &:is([data-is-current="true"] ~ [data-state="completed"]) {
+              &[data-state="completed"] {
+                @apply max-sm:sr-only;
+              }
+            }
+          }
+        }
+
+        &:has([data-is-current="true"] ~ [data-state="completed"]:focus-within),
+        &:has([data-slot="form-step"][data-next-steps-expanded="true"]) {
+          [data-slot="form-step"] {
+            &:is([data-is-current="true"] ~ [data-state="completed"]) {
+              [data-slot="link"] {
+                /** Make the link appear visually and position the link pseudo element acting as click area for the step number **/
+                @apply max-sm:opacity-100 max-sm:static max-sm:after:-left-11;
+                /** Truncate texts that does not fit the width of the popover (the inline-flex of the link must be overridden as block) **/
+                /** We need to do this because we can't wrap over multiple lines, due to the absolute positioning of each step in the popover **/
+                @apply max-sm:w-53.5 max-sm:text-ellipsis max-sm:overflow-hidden max-sm:whitespace-nowrap max-sm:block!;
+              }
+            }
+
+            &:is([data-is-current="true"] + [data-state="completed"]) {
+              &::after,
+              [data-slot="link"],
+              [data-slot="toggle-next-check-icon"] {
+                @apply max-sm:absolute;
+              }
+              &::after {
+                @apply max-sm:right-39 max-sm:top-15 max-sm:z-1;
+                /** Makes this pseudo element visible, while also reflecting the order in the list, while hiding it for screen reader users. This is because the list item counter is reflected in the ::before element for screen readers  */
+                @apply max-sm:content-[counter(form-step-counter)_/_''];
+              }
+              /** Place the focus styles on the ::after element instead of the link, to match the rest of the list items */
+              &:has([data-slot="link"]:focus-visible) {
+                &::after {
+                  @apply max-sm:outline-focus-offset;
+                }
+              }
+              &::before {
+                /** Hide the focus outline on the element acting as the "popover" trigger **/
+                @apply max-sm:outline-none;
+              }
+
+              [data-slot="link"] {
+                @apply max-sm:-right-6.5 max-sm:top-16 max-sm:z-2;
+              }
+              [data-slot="toggle-next-check-icon"] {
+                @apply max-sm:right-37 max-sm:left-auto max-sm:z-2 max-sm:top-12.5 max-sm:block;
+              }
+            }
+
+            &:is([data-is-current="true"] + * ~ [data-state="completed"]) {
+              @apply max-sm:absolute max-sm:left-4 max-sm:w-full;
+              /** Use stacked pseudo elements to create the illusion of a popover container **/
+              @apply max-sm:after:absolute max-sm:after:-left-4 max-sm:after:right-4;
+              @apply max-sm:after:-top-[calc(200%+var(--spacing)*4)] max-sm:after:-bottom-4;
+              /** Paints the "popover container" **/
+              @apply max-sm:after:bg-white max-sm:after:border-black max-sm:after:border-x max-sm:after:border-b max-sm:after:rounded-b-lg;
+
+              & > *:is([data-slot="text"], [data-slot="link"]) {
+                @apply max-sm:relative;
+              }
+              & > *:is([data-slot="text"], [data-slot="link"], svg),
+              &::before {
+                @apply max-sm:z-1;
+              }
+              [data-slot="progress-bar"] {
+                @apply max-sm:sr-only;
+              }
+
+              /** Position each step correctly inside the "popover" (with an even spacing) **/
+              &:is([data-is-current="true"] + * + [data-state="completed"]) {
+                @apply max-sm:top-30;
+                /** Paints the top part of the "popover container" **/
+                @apply max-sm:after:border-t max-sm:after:rounded-t-lg;
+              }
+              &:is(
+                  [data-is-current="true"]
+                    + *
+                    + [data-state="completed"]
+                    + [data-state="completed"]
+                ) {
+                @apply max-sm:top-45;
+              }
+              &:is(
+                  [data-is-current="true"]
+                    + *
+                    + [data-state="completed"]
+                    + [data-state="completed"]
+                    + [data-state="completed"]
+                ) {
+                @apply max-sm:top-60;
+              }
+              &:is(
+                  [data-is-current="true"]
+                    + *
+                    + [data-state="completed"]
+                    + [data-state="completed"]
+                    + [data-state="completed"]
+                    + [data-state="completed"]
+                ) {
+                @apply max-sm:top-75;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
