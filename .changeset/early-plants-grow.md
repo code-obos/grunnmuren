@@ -1,5 +1,5 @@
 ---
-"@obosbbl/grunnmuren-react": minor
+"@obosbbl/grunnmuren-react": patch
 ---
 
 BREAKING CHANGE: Rewrote the carousel component from the ground up. It is now uses [Embla carousel library](https://www.embla-carousel.com/) under the hood.
