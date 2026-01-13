@@ -1,4 +1,4 @@
-import { cx } from 'cva';
+import { cva } from 'cva';
 import { createContext } from 'react';
 import {
   Link as _Link,
@@ -18,6 +18,10 @@ type LinkProps = _LinkProps &
 const _LinkContext = createContext<
   ContextValue<Partial<LinkProps>, HTMLAnchorElement>
 >({});
+
+const linkVariants = cva({
+  base: 'inline-flex cursor-pointer items-center gap-1 font-medium hover:no-underline focus-visible:outline-current focus-visible:outline-focus-offset [&>svg]:shrink-0 [&>svg]:transition-transform',
+});
 
 const Link = ({ ref: _ref, ..._props }: LinkProps) => {
   const [props, ref] = useContextProps(_props, _ref, _LinkContext);
@@ -50,10 +54,7 @@ const Link = ({ ref: _ref, ..._props }: LinkProps) => {
       {...restProps}
       ref={ref}
       data-slot="link"
-      className={cx(
-        className,
-        'inline-flex cursor-pointer items-center gap-1 font-medium hover:no-underline focus-visible:outline-current focus-visible:outline-focus-offset [&>svg]:shrink-0 [&>svg]:transition-transform',
-      )}
+      className={linkVariants({ className })}
     >
       {children}
     </_Link>
