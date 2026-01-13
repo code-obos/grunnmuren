@@ -167,7 +167,9 @@ const Carousel = ({
   }, [emblaApi, prefersReducedMotion, loop]);
 
   const handlePrevPress = useCallback(() => {
-    if (!emblaApi) return;
+    if (!emblaApi) {
+      return;
+    }
 
     emblaApi.scrollPrev(prefersReducedMotion);
 
