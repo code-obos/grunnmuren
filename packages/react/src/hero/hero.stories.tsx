@@ -5,8 +5,11 @@ import { Badge } from '../badge';
 import { Button } from '../button';
 import {
   UNSAFE_Carousel as Carousel,
+  UNSAFE_CarouselButton as CarouselButton,
+  UNSAFE_CarouselControls as CarouselControls,
   UNSAFE_CarouselItem as CarouselItem,
   UNSAFE_CarouselItems as CarouselItems,
+  UNSAFE_CarouselItemsContainer as CarouselItemsContainer,
 } from '../carousel';
 import { Content, Heading, Media } from '../content';
 import { Description } from '../label';
@@ -33,24 +36,31 @@ const meta: Meta<typeof Hero> = {
           </p>
         </Content>
         <Carousel>
-          <CarouselItems>
-            <CarouselItem>
-              <Media>
-                <img
-                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
-                  alt=""
-                />
-              </Media>
-            </CarouselItem>
-            <CarouselItem>
-              <Media>
-                <img
-                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
-                  alt=""
-                />
-              </Media>
-            </CarouselItem>
-          </CarouselItems>
+          <CarouselItemsContainer>
+            <CarouselItems>
+              <CarouselItem>
+                <Media>
+                  <img
+                    src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
+                    alt=""
+                  />
+                </Media>
+              </CarouselItem>
+              <CarouselItem>
+                <Media>
+                  <img
+                    src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
+                    alt=""
+                    loading="lazy"
+                  />
+                </Media>
+              </CarouselItem>
+            </CarouselItems>
+          </CarouselItemsContainer>
+          <CarouselControls>
+            <CarouselButton slot="prev" />
+            <CarouselButton slot="next" />
+          </CarouselControls>
         </Carousel>
       </Hero>
     </main>
@@ -61,7 +71,7 @@ export default meta;
 
 type Story = StoryObj<typeof Hero>;
 
-export const StandardWithLeadAndImage: Story = {
+export const StandardWithLeadAndImageAndCarousel: Story = {
   args: {},
 };
 
@@ -129,33 +139,40 @@ export const StandardWithCarousel = () => (
         <Description>– din lokale OBOS-butikk i Oslo sentrum</Description>
       </Content>
       <Carousel>
-        <CarouselItems>
-          <CarouselItem>
-            <Media>
-              <VideoLoop
-                src="https://res.cloudinary.com/obosit-prd-ch-clry/video/upload/v1732199756/Mellom%20husene/Frysja_Loop2.mp4"
-                format="mp4"
-                alt="En postbil kjører rundt i det moderne nabolaget på Frysja. Her finnes det fine uteområder, med husker og kafeer."
-              />
-            </Media>
-          </CarouselItem>
-          <CarouselItem>
-            <Media fit="contain">
-              <img
-                src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/9a29374fde57a12bedf17149525c325a8c3254ae-850x180.svg?auto=format"
-                alt=""
-              />
-            </Media>
-          </CarouselItem>
-          <CarouselItem>
-            <Media>
-              <img
-                src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
-                alt=""
-              />
-            </Media>
-          </CarouselItem>
-        </CarouselItems>
+        <CarouselItemsContainer>
+          <CarouselItems>
+            <CarouselItem>
+              <Media>
+                <VideoLoop
+                  src="https://res.cloudinary.com/obosit-prd-ch-clry/video/upload/v1732199756/Mellom%20husene/Frysja_Loop2.mp4"
+                  format="mp4"
+                  alt="En postbil kjører rundt i det moderne nabolaget på Frysja. Her finnes det fine uteområder, med husker og kafeer."
+                />
+              </Media>
+            </CarouselItem>
+            <CarouselItem>
+              <Media fit="contain">
+                <img
+                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/9a29374fde57a12bedf17149525c325a8c3254ae-850x180.svg?auto=format"
+                  alt=""
+                  loading="lazy"
+                />
+              </Media>
+            </CarouselItem>
+            <CarouselItem>
+              <Media>
+                <img
+                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
+                  alt=""
+                />
+              </Media>
+            </CarouselItem>
+          </CarouselItems>
+        </CarouselItemsContainer>
+        <CarouselControls>
+          <CarouselButton slot="prev" />
+          <CarouselButton slot="next" />
+        </CarouselControls>
       </Carousel>
     </Hero>
   </main>
@@ -219,40 +236,49 @@ export const FullBleedWithCarousel = () => (
         <Description>– et nytt nabolag i Oslo</Description>
       </Content>
       <Carousel>
-        <CarouselItems>
-          <CarouselItem>
-            <Media>
-              <img
-                src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
-                alt=""
-              />
-            </Media>
-          </CarouselItem>
-          <CarouselItem>
-            <Media>
-              <img
-                src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/7d2285ccee9b9545e018115b8e0ecc8b06aa0729-1620x1080.jpg?auto=format"
-                alt=""
-              />
-            </Media>
-          </CarouselItem>
-          <CarouselItem>
-            <Media fit="contain">
-              <img
-                src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/32a53eec782e6cbe15d75961f82ecca48dbe30ed-1920x1080.png?auto=format"
-                alt=""
-              />
-            </Media>
-          </CarouselItem>
-          <CarouselItem>
-            <Media>
-              <img
-                src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/a3c4b263f72128f5c6259333a224054ed3b539fe-1440x788.heif?auto=format"
-                alt=""
-              />
-            </Media>
-          </CarouselItem>
-        </CarouselItems>
+        <CarouselItemsContainer>
+          <CarouselItems>
+            <CarouselItem>
+              <Media>
+                <img
+                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
+                  alt=""
+                />
+              </Media>
+            </CarouselItem>
+            <CarouselItem>
+              <Media>
+                <img
+                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/7d2285ccee9b9545e018115b8e0ecc8b06aa0729-1620x1080.jpg?auto=format"
+                  alt=""
+                  loading="lazy"
+                />
+              </Media>
+            </CarouselItem>
+            <CarouselItem>
+              <Media fit="contain">
+                <img
+                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/32a53eec782e6cbe15d75961f82ecca48dbe30ed-1920x1080.png?auto=format"
+                  alt=""
+                  loading="lazy"
+                />
+              </Media>
+            </CarouselItem>
+            <CarouselItem>
+              <Media>
+                <img
+                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/a3c4b263f72128f5c6259333a224054ed3b539fe-1440x788.heif?auto=format"
+                  alt=""
+                  loading="lazy"
+                />
+              </Media>
+            </CarouselItem>
+          </CarouselItems>
+        </CarouselItemsContainer>
+        <CarouselControls>
+          <CarouselButton slot="prev" />
+          <CarouselButton slot="next" />
+        </CarouselControls>
       </Carousel>
     </Hero>
     <h2>Tittel</h2>
