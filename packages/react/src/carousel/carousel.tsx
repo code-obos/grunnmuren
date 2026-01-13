@@ -111,7 +111,9 @@ const Carousel = ({
   const previousSettledScrollIndex = useRef(initialIndex);
 
   useEffect(() => {
-    if (!emblaApi) return;
+    if (!emblaApi) {
+      return;
+    }
 
     const emblaHandler: EmblaEventHandler = (_, type) => {
       const scrollSnapIndex = emblaApi.selectedScrollSnap();
