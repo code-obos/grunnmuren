@@ -27,7 +27,10 @@ import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 import { usePrefersReducedMotion } from '../use-prefers-reduced-motion';
 
-type CarouselProps = Omit<HTMLProps<HTMLDivElement>, 'onChange'> & {
+type CarouselProps = Omit<
+  HTMLProps<HTMLDivElement>,
+  'onChange' | 'onSelect'
+> & {
   children?: React.ReactNode;
   /**
    * Alignment of the items relative to the carousel viewport.
