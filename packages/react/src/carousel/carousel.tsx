@@ -157,6 +157,8 @@ const Carousel = ({
       return;
     }
 
+    emblaApi.plugins().autoplay?.stop();
+
     emblaApi.scrollNext(prefersReducedMotion);
 
     // we need to move focus if  we are about to disable this button due to start/end of carousel
@@ -177,6 +179,8 @@ const Carousel = ({
     if (!emblaApi) {
       return;
     }
+
+    emblaApi.plugins().autoplay?.stop();
 
     emblaApi.scrollPrev(prefersReducedMotion);
 
