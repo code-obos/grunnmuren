@@ -23,6 +23,7 @@ const meta = {
     align: 'center',
     loop: false,
     orientation: 'horizontal',
+    wheelGestures: false,
   },
   render: ({ ...props }) => {
     const itemsVariants = cva({
@@ -126,6 +127,12 @@ export const AutoPlayLooping: Story = {
   args: {
     autoPlayDelay: 3000,
     loop: true,
+  },
+};
+
+export const WheelGestures: Story = {
+  args: {
+    wheelGestures: true,
   },
 };
 

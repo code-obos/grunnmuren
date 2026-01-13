@@ -50,6 +50,11 @@ type CarouselProps = Omit<
    */
   loop?: boolean;
   /**
+   * Whether the carousel should scroll with mouse/trackpad scroll gesturs.
+   * @default false
+   */
+  wheelGestures?: boolean;
+  /**
    * Orientation of the carousel.
    * @default 'horizontal'
    */
@@ -77,6 +82,7 @@ const Carousel = ({
   onSelect,
   onSettled,
   loop = false,
+  wheelGestures = false,
   ref,
   ...rest
 }: CarouselProps) => {
@@ -85,7 +91,11 @@ const Carousel = ({
   const prefersReducedMotion = usePrefersReducedMotion() ?? false;
 
   const emblaPlugins = useMemo(() => {
-    const plugins = [WheelGesturesPlugin()];
+    const plugins = [];
+
+    if (wheelGestures) {
+      plugins.push(WheelGesturesPlugin());
+    }
 
     if (autoPlayDelay) {
       plugins.push(
@@ -97,7 +107,7 @@ const Carousel = ({
       );
     }
     return plugins;
-  }, [autoPlayDelay, loop, prefersReducedMotion]);
+  }, [autoPlayDelay, wheelGestures, loop, prefersReducedMotion]);
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
