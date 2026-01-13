@@ -2,7 +2,7 @@
 "@obosbbl/grunnmuren-react": patch
 ---
 
-BREAKING CHANGE: Rewrote the carousel component from the ground up. It is now uses [Embla carousel library](https://www.embla-carousel.com/) under the hood.
+BREAKING CHANGE: Rewrote the carousel component from the ground up. It is now using [Embla carousel library](https://www.embla-carousel.com/) under the hood.
 This unlocks the component to be used as a more "traditional carousel", for instance, for an image gallery. The previous implementation was primarily designed for use in the hero.
 
 To migrate, do the following:
