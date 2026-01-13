@@ -40,7 +40,6 @@ const variants = cva({
     '*:data-[slot="content"]:gap-y-3',
     // Make sure <Media> content fills any available vertical and horizontal space
     '*:data-[slot="media"]:*:object-cover',
-    // TODO: Target all media instead? Ask Oscar
     '*:data-[slot="carousel"]:overflow-hidden *:data-[slot="carousel"]:rounded-3xl',
     // Make the carousel items full width, so we scroll one at a time
     '**:data-[slot="carousel-item"]:basis-full',
