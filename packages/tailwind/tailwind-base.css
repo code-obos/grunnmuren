@@ -223,6 +223,10 @@
   @apply text-[0.875rem]/[1.375rem] lg:text-[0.875rem]/[1.4375rem];
 }
 
+@utility footnote {
+  @apply text-[0.75rem]/[1.3125rem];
+}
+
 /* Focus styles */
 @utility outline-focus {
   @apply outline-2 outline-black;

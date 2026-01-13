@@ -248,7 +248,7 @@ function Tab(props: TabProps) {
       className={cx(
         className,
         'data-focus-visible:-outline-offset-10 data-focus-visible:outline-2 data-focus-visible:outline-black',
-        'h-11 cursor-pointer border-transparent px-4 py-[0.71875rem] font-light text-sm',
+        'description h-11 cursor-pointer border-transparent px-4 py-[0.71875rem] font-light',
         // Transition
         'transition-colors duration-150 ease-out',
         // TODO: Should disabled tabs just be hidden?

@@ -20,13 +20,15 @@ const iconMap = {
 
 const alertVariants = cva({
   base: [
-    'grid grid-cols-[auto_1fr_auto] items-center gap-2 rounded-md border-2 px-3 py-2',
+    'grid grid-cols-[auto_1fr_auto] gap-2 rounded-md border-2 px-3 py-2',
+    // Icon styles:
+    '[&:has([data-slot="heading"])>svg]:mt-0.5',
     // Heading styles:
-    '[&_[data-slot="heading"]]:font-medium [&_[data-slot="heading"]]:text-base [&_[data-slot="heading"]]:leading-7',
+    '**:data-[slot="heading"]:font-medium **:data-[slot="heading"]:text-base **:data-[slot="heading"]:leading-7',
     // Content styles:
-    '[&:has([data-slot="heading"])_[data-slot="content"]]:col-span-full [&_[data-slot="content"]]:text-sm [&_[data-slot="content"]]:leading-6',
+    '**:data-[slot="content"]:text-sm **:data-[slot="content"]:leading-6 [&:has([data-slot="heading"])_[data-slot="content"]]:col-span-full',
     // Footer styles:
-    '[&_[data-slot="footer"]]:col-span-full [&_[data-slot="footer"]]:font-light [&_[data-slot="footer"]]:text-xs [&_[data-slot="footer"]]:leading-6',
+    '**:data-[slot="footer"]:col-span-full **:data-[slot="footer"]:font-light **:data-[slot="footer"]:text-xs **:data-[slot="footer"]:leading-6',
   ],
   variants: {
     /**
@@ -154,7 +156,7 @@ const Alertbox = ({
             '-my-3 relative col-span-full row-start-2 inline-flex max-w-fit cursor-pointer items-center gap-1 py-3 text-sm leading-6',
             // Focus styles:
             'outline-none after:absolute after:right-0 after:bottom-3 after:left-0 after:h-0',
-            'focus-visible:after:h-[2px] focus-visible:after:bg-black',
+            'focus-visible:after:h-0.5 focus-visible:after:bg-black',
           )}
           onClick={() => setIsExpanded((prevState) => !prevState)}
           aria-expanded={isExpanded}

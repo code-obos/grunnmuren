@@ -63,14 +63,15 @@ const TableRow = ({ children, className }: TableRowProps) => {
 };
 
 type TableCellProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
+  dangerouslySetInnerHTML?: { __html: string };
 };
 
-const TableCell = ({ children, className }: TableCellProps) => {
+const TableCell = (props: TableCellProps) => {
   const section = useContext(TableSectionContext);
   const Cell = section === 'head' ? 'th' : 'td';
-  return <Cell className={className}>{children}</Cell>;
+  return <Cell {...props} />;
 };
 
 export {

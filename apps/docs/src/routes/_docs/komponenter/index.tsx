@@ -30,7 +30,12 @@ function Page() {
         {components.map((component) => (
           <Card key={component._id} variant="outlined">
             <Heading level={2}>
-              <CardLink href={`/komponenter/${component.slug}`}>
+              <CardLink
+                href={{
+                  to: `/komponenter/$slug`,
+                  params: { slug: component.slug },
+                }}
+              >
                 {component.name}
               </CardLink>
               <ComponentStateBadge

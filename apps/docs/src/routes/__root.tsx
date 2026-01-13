@@ -26,6 +26,8 @@ function RootDocument() {
     <html lang="no">
       <head>
         <HeadContent />
+        <link rel="icon" href="/favicon.ico" sizes="32x32" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         {process.env.NODE_ENV === 'production' && (
           <>
             <script

@@ -1,5 +1,5 @@
 import { cx } from 'cva';
-import { Children, type HTMLProps } from 'react';
+import { Children, type HTMLProps, useId } from 'react';
 import { Provider } from 'react-aria-components';
 import { ContentContext, HeadingContext } from '../content';
 import {
@@ -67,6 +67,8 @@ function AccordionItem(props: AccordionItemProps) {
   const _isExpanded = controlledIsOpen ?? isExpanded;
   const _onExpandedChange = onOpenChange ?? onExpandedChange;
 
+  const buttonId = useId();
+
   return (
     <Disclosure
       {...restProps}
@@ -90,6 +92,7 @@ function AccordionItem(props: AccordionItemProps) {
                   className="flex min-h-11 w-full gap-1.5 rounded-lg px-2 py-3.5 text-left focus-visible:outline-focus-inset!"
                   type="button"
                   withChevron
+                  id={buttonId}
                 >
                   {children}
                 </DisclosureButton>
@@ -102,9 +105,10 @@ function AccordionItem(props: AccordionItemProps) {
               className:
                 // Uses pseudo elements for vertical padding, since that doesn't affect the height when the accordion is closed
                 'text-sm font-light leading-6 px-3.5 data-[expanded]:after:h-3.5 relative overflow-hidden border-sky border-l-[3px] before:relative before:block before:h-1.5 after:relative after:block after:h-1.5',
-              role: 'region',
               _outerWrapper: (children) => (
-                <DisclosurePanel>{children}</DisclosurePanel>
+                <DisclosurePanel aria-labelledby={buttonId} role="region">
+                  {children}
+                </DisclosurePanel>
               ),
             },
           ],

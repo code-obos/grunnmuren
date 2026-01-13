@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight } from '@obosbbl/grunnmuren-icons-react';
-import { useUpdateEffect } from '@react-aria/utils';
+import { useLayoutEffect } from '@react-aria/utils';
 import { cx } from 'cva';
 import {
   Children,
@@ -7,259 +7,199 @@ import {
   createContext,
   type HTMLProps,
   isValidElement,
-  type JSX,
+  type RefObject,
+  useCallback,
   useContext,
   useEffect,
   useRef,
   useState,
 } from 'react';
-import { DEFAULT_SLOT, Provider } from 'react-aria-components';
-import { useDebouncedCallback } from 'use-debounce';
+import { DEFAULT_SLOT, type PressEvent, Provider } from 'react-aria-components';
 import { Button, ButtonContext } from '../button';
 import { MediaContext } from '../content';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
-
-type CarouselItem = Pick<CarouselItemProps, 'id'> & {
-  /** The index of the item that is currently in view */
-  index: number;
-  /** The index of the previous item that was in view */
-  prevIndex: number;
-  /** The id of the previous item that was in view */
-  prevId?: CarouselItemProps['id'];
-};
+import { usePrefersReducedMotion } from '../use-prefers-reduced-motion';
 
 type CarouselProps = Omit<HTMLProps<HTMLDivElement>, 'onChange'> & {
-  /** The <CarouselItem/> components to be displayed within the carousel. */
-  children: React.ReactNode;
+  children?: React.ReactNode;
   /**
-   * Callback that is triggered when a user navigates to new item in the Carousel.
-   * The argument to the callback is an object containing `index` of the new item scrolled into view and the `id` of that item (if set on the `<CarouselItem>`)
-   * It also provides `prevIndex` which is the index of the previous item that was in view
-   * And `prevId`, which is the id of the previous item that was in view (if set on the `<CarouselItem>`)
-   * @param item { index: number; id?: string; prevIndex: number; prevId?: string }
+   * The initial slide to display when the carousel is mounted.
+   * @default 0
    */
-  onChange?: (item: CarouselItem) => void;
+  defaultInitialSlide?: number;
+  /**
+   * Callback invoked when the slide changes.
+   */
+  onSlideChange?: (index: number) => void;
 };
+
+function getCarouselItems(ref: RefObject<HTMLDivElement | null>) {
+  const items = ref.current?.querySelectorAll<HTMLElement>(
+    '[data-slot="carousel-item"]',
+  );
+
+  return items;
+}
 
 const Carousel = ({
   className,
   children,
-  onChange,
+  defaultInitialSlide = 0,
+  onSlideChange = () => {},
   ...rest
 }: CarouselProps) => {
   const carouselRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const firstIntersectionCallImminent = useRef(true);
+  const isScrollingProgrammaticallyToSlide = useRef<number>(null);
 
   const carouselItemsRef = useRef<HTMLDivElement>(null);
   const locale = useLocale();
-  const { previous, next } = translations;
 
-  const [scrollTargetIndex, setScrollTargetIndex] = useState(0);
-  const isScrollingProgrammatically = useRef(false);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const scrollQueue = useRef<number[]>([]);
+  const [activeSlide, setActiveSlide] = useState(defaultInitialSlide);
+  const [slideCount, setSlideCount] = useState(0);
 
-  const [hasReachedScrollStart, setHasReachedScrollStart] = useState(
-    scrollTargetIndex === 0,
-  );
+  // Get the number of carousel items and set the slide count.
+  useLayoutEffect(() => {
+    const items = getCarouselItems(carouselItemsRef)?.length;
+    setSlideCount(items ?? 0);
 
-  const [hasReachedScrollEnd, setHasReachedScrollEnd] = useState(
-    !carouselItemsRef.current ||
-      carouselItemsRef.current.children.length - 1 === scrollTargetIndex,
-  );
-
-  useEffect(() => {
-    setHasReachedScrollStart(scrollTargetIndex === 0);
-    setHasReachedScrollEnd(
-      !carouselItemsRef.current ||
-        carouselItemsRef.current.children.length - 1 === scrollTargetIndex,
-    );
-  }, [scrollTargetIndex]);
-
-  // Keep track of the previous index to determine if the user is scrolling forward or backward
-  // This is used to determine which callback to call (onPrev or onNext)
-  const prevIndex = useRef(0);
-
-  // Processes the next scroll action in the queue, if any
-  // All clicks on the prev/next buttons are queued while a programmatic scroll is in progress
-  // This is to ensure that rapid clicks on the buttons do not cause janky scrolling behavior
-  // while still a snappy response to user clicks
-  const processQueue = () => {
-    if (
-      scrollQueue.current.length > 0 &&
-      !isScrollingProgrammatically.current
-    ) {
-      const nextIndex = scrollQueue.current?.shift();
-      if (nextIndex !== undefined) {
-        setScrollTargetIndex(nextIndex);
-      }
+    // If initial slide is something other than the first, scroll to it (without smooth scroll).
+    if (activeSlide > 0) {
+      scrollTo(activeSlide, true);
     }
-  };
-
-  // Handle scrolling when user clicks the arrow icons
-  useUpdateEffect(() => {
-    if (!carouselItemsRef.current) {
-      return;
-    }
-
-    if (scrollTimeoutRef.current) {
-      clearTimeout(scrollTimeoutRef.current);
-    }
-
-    isScrollingProgrammatically.current = true;
-
-    const elementWithFocusVisible =
-      carouselRef.current?.querySelector(':focus-visible');
-
-    const prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)',
-    ).matches;
-
-    carouselItemsRef.current.children[scrollTargetIndex]?.scrollIntoView({
-      behavior: prefersReducedMotion ? 'instant' : 'smooth',
-      inline: 'start',
-      block: 'nearest',
-    });
-
-    if (prevIndex.current !== scrollTargetIndex && onChange) {
-      onChange({
-        index: scrollTargetIndex,
-        id: carouselItemsRef.current.children[scrollTargetIndex]?.id,
-        prevIndex: prevIndex.current,
-        prevId: carouselItemsRef.current.children[prevIndex.current]?.id,
-      });
-    }
-
-    prevIndex.current = scrollTargetIndex;
-
-    scrollTimeoutRef.current = setTimeout(() => {
-      isScrollingProgrammatically.current = false;
-      scrollTimeoutRef.current = null;
-      if (
-        elementWithFocusVisible &&
-        !carouselRef.current?.contains(document.activeElement)
-      ) {
-        // Restore focus to the appropriate element after scrolling
-        // First check if the prev or next buttons just got hidden due to reaching the start/end of the carousel
-        // If so, move focus to the other button. This is to avoid a scroll jank that occurs if instead focus is restored to the carousel container
-        // This jank happens because of the delays used for scrolling with these buttons (debounce, queuing etc.).
-        switch (elementWithFocusVisible.slot) {
-          case 'prev': {
-            // Focus was lost when the prev button turned invisible, set it to the next button
-            const nextButton = carouselRef.current?.querySelector(
-              '[slot="next"]',
-            ) as HTMLElement | null;
-            nextButton?.focus();
-            break;
-          }
-          case 'next': {
-            // Focus was lost when the next button turned invisible, set it to the prev button
-            const prevButton = carouselRef.current?.querySelector(
-              '[slot="prev"]',
-            ) as HTMLElement | null;
-            prevButton?.focus();
-            break;
-          }
-          default: {
-            // Focus was lost during while scrolling with left/right arrows, restore it to the carousel container
-            carouselItemsRef.current?.focus();
-            break;
-          }
-        }
-      }
-      processQueue(); // Process any queued scrolls
-    }, 500);
-  }, [scrollTargetIndex]);
-
-  // Clean up timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
-    };
   }, []);
 
-  const onScroll = useDebouncedCallback(
-    (event: React.UIEvent<HTMLDivElement>) => {
-      // Ignore scroll events when we're programmatically scrolling
-      if (isScrollingProgrammatically.current) {
-        return;
-      }
+  const scrollTo = useCallback(
+    (slideIndex: number, jumpWithoutCallbacks = false) => {
+      const items = getCarouselItems(carouselItemsRef);
+      const target = items?.[slideIndex];
 
-      const target = event.target as HTMLDivElement;
-      const containerRect = target.getBoundingClientRect();
-
-      // Calculate the index of the item that is currently in view
-      const newScrollTargetIndex = Array.from(target.children).findIndex(
-        (child) => {
-          const rect = child.getBoundingClientRect();
-          // Check if the item is more than 50% visible within the container
-          const visibleWidth =
-            Math.min(rect.right, containerRect.right) -
-            Math.max(rect.left, containerRect.left);
-          const itemWidth = rect.width;
-          return visibleWidth / itemWidth > 0.5;
-        },
-      );
-
-      if (
-        newScrollTargetIndex !== -1 &&
-        newScrollTargetIndex !== scrollTargetIndex
-      ) {
-        if (onChange) {
-          onChange({
-            index: newScrollTargetIndex,
-            id: target.children[newScrollTargetIndex]?.id,
-            prevIndex: prevIndex.current,
-            prevId: target.children[prevIndex.current]?.id,
-          });
+      if (target) {
+        isScrollingProgrammaticallyToSlide.current = slideIndex;
+        if (!jumpWithoutCallbacks) {
+          setActiveSlide(slideIndex);
+          setSlideCount(items.length);
+          onSlideChange(slideIndex);
         }
 
-        // Update the index and prevIndex
-        setScrollTargetIndex(newScrollTargetIndex);
-        prevIndex.current = newScrollTargetIndex;
+        carouselItemsRef.current?.scrollTo({
+          behavior:
+            jumpWithoutCallbacks || prefersReducedMotion ? 'instant' : 'smooth',
+          left: target.offsetLeft,
+        });
       }
     },
-    150, // Debounce scroll events by 150ms
+    [onSlideChange, prefersReducedMotion],
   );
 
-  const handlePrevious = () => {
-    setScrollTargetIndex((currentTargetIndex) => {
-      const targetIndex = currentTargetIndex - 1;
+  useEffect(() => {
+    function getSlideIndex(
+      element: Element,
+    ): [index: number, slideCount: number] {
+      const items = getCarouselItems(carouselItemsRef) ?? [];
 
-      if (targetIndex < 0) {
-        return currentTargetIndex;
-      }
+      return [Array.from(items).indexOf(element as HTMLElement), items.length];
+    }
 
-      if (isScrollingProgrammatically.current) {
-        // If we're already scrolling, queue this action
-        scrollQueue.current = [targetIndex];
-        return currentTargetIndex;
-      }
+    if ('onscrollsnapchanging' in window) {
+      const scrollSnapChange = (event: Event) => {
+        if (isScrollingProgrammaticallyToSlide.current != null) {
+          isScrollingProgrammaticallyToSlide.current = null;
+          return;
+        }
 
-      return targetIndex;
-    });
+        const [newIndex, slideCount] = getSlideIndex(
+          (event as Event & { snapTargetInline: Element }).snapTargetInline,
+        );
+        setActiveSlide(newIndex);
+        setSlideCount(slideCount);
+        onSlideChange(newIndex);
+      };
+
+      carouselItemsRef.current?.addEventListener(
+        'scrollsnapchanging',
+        scrollSnapChange,
+      );
+
+      return () =>
+        carouselItemsRef.current?.removeEventListener(
+          'scrollsnapchanging',
+          scrollSnapChange,
+        );
+    } else {
+      // For browers (non chromium) that don't support scroll snap events we fall back to using intersection observer
+      const instersectionCallback = (entries: IntersectionObserverEntry[]) => {
+        if (firstIntersectionCallImminent.current) {
+          firstIntersectionCallImminent.current = false;
+          isScrollingProgrammaticallyToSlide.current = null;
+          return;
+        }
+
+        // use a for iteration here so we can break out of the loop early. Of the observered elements we only care about the first one that is intersecting.
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const [newIndex, slideCount] = getSlideIndex(entry.target);
+
+            if (isScrollingProgrammaticallyToSlide.current == null) {
+              setActiveSlide(newIndex);
+              setSlideCount(slideCount);
+              onSlideChange(newIndex);
+            } else if (
+              newIndex === isScrollingProgrammaticallyToSlide.current
+            ) {
+              isScrollingProgrammaticallyToSlide.current = null;
+            }
+            break;
+          }
+        }
+      };
+
+      const observer = new IntersectionObserver(instersectionCallback, {
+        root: carouselRef.current,
+        rootMargin: '0px',
+        threshold: 0.8,
+      });
+
+      const items = getCarouselItems(carouselItemsRef);
+
+      items?.forEach((slide) => {
+        observer.observe(slide);
+      });
+
+      return () => {
+        observer.disconnect();
+        firstIntersectionCallImminent.current = true;
+      };
+    }
+  }, [onSlideChange]);
+
+  const handlePrevious = (evt?: PressEvent) => {
+    const nextSlide = activeSlide - 1;
+
+    scrollTo(nextSlide);
+
+    // This method is used both when clicking the button and scrolling the carousel with keys
+    // if this is a button press, we need to move focus if  we are about to disable this button due to start/end of carousel
+    if (evt && nextSlide <= 0) {
+      carouselRef.current
+        ?.querySelector<HTMLButtonElement>('button[slot="next"]')
+        ?.focus();
+    }
   };
 
-  const handleNext = () => {
-    setScrollTargetIndex((currentTargetIndex) => {
-      const targetIndex = currentTargetIndex + 1;
-      if (
-        !carouselItemsRef.current ||
-        targetIndex >= carouselItemsRef.current.children.length
-      ) {
-        return currentTargetIndex;
-      }
+  const handleNext = (evt?: PressEvent) => {
+    const nextSlide = activeSlide + 1;
+    scrollTo(nextSlide);
 
-      if (isScrollingProgrammatically.current) {
-        // If we're already scrolling, queue this action
-        scrollQueue.current = [targetIndex];
-        return currentTargetIndex;
-      }
-
-      return targetIndex;
-    });
+    // This method is used both when clicking the button and scrolling the carousel with keys
+    // if this is a button press, we need to move focus if  we are about to disable this button due to start/end of carousel
+    if (evt && nextSlide >= slideCount - 1) {
+      carouselRef.current
+        ?.querySelector<HTMLButtonElement>('button[slot="prev"]')
+        ?.focus();
+    }
   };
 
   return (
@@ -270,8 +210,7 @@ const Carousel = ({
             CarouselItemsContext,
             {
               carouselItemsRef,
-              onScroll,
-              activeIndex: scrollTargetIndex,
+              activeSlide: activeSlide,
               handlePrevious,
               handleNext,
             },
@@ -282,13 +221,15 @@ const Carousel = ({
               slots: {
                 [DEFAULT_SLOT]: {}, // this is required in RAC (for non-trigger buttons)
                 prev: {
-                  'aria-label': previous[locale],
+                  'aria-label': translations.previous[locale],
                   onPress: handlePrevious,
+                  isDisabled: activeSlide === 0,
                 },
                 next: {
                   isIconOnly: true,
-                  'aria-label': next[locale],
+                  'aria-label': translations.next[locale],
                   onPress: handleNext,
+                  isDisabled: slideCount - 1 <= activeSlide,
                 },
               },
             },
@@ -314,10 +255,7 @@ const Carousel = ({
               slot="prev"
               variant="primary"
               color="white"
-              className={cx(
-                'group/carousel-previous',
-                hasReachedScrollStart && 'invisible',
-              )}
+              className="group/carousel-previous data-disabled:invisible"
             >
               <ChevronLeft className="group-hover/carousel-previous:motion-safe:-translate-x-1 transition-transform" />
             </Button>
@@ -326,10 +264,7 @@ const Carousel = ({
               slot="next"
               variant="primary"
               color="white"
-              className={cx(
-                'group/carousel-next',
-                hasReachedScrollEnd && 'invisible',
-              )}
+              className="group/carousel-next data-disabled:invisible"
             >
               <ChevronRight className="transition-transform group-hover/carousel-next:motion-safe:translate-x-1" />
             </Button>
@@ -370,39 +305,21 @@ type CarouselItemsProps = HTMLProps<HTMLDivElement> & {
 
 type CarouselItemsContextValue = {
   carouselItemsRef: React.Ref<HTMLDivElement>;
-  onScroll?: (event: React.UIEvent<HTMLDivElement>) => void;
-  activeIndex: number;
-  handlePrevious?: () => void;
-  handleNext?: () => void;
+  activeSlide: number;
+  handlePrevious?: (evt?: PressEvent) => void;
+  handleNext?: (evt?: PressEvent) => void;
 };
 
-const CarouselItemsContext = createContext({
+const CarouselItemsContext = createContext<CarouselItemsContextValue>({
   carouselItemsRef: null,
-  activeIndex: 0,
-} as CarouselItemsContextValue);
+  activeSlide: 0,
+});
 
 const CarouselItems = ({ className, children }: CarouselItemsProps) => {
-  const {
-    carouselItemsRef,
-    onScroll,
-    activeIndex,
-    handlePrevious,
-    handleNext,
-  } = useContext(CarouselItemsContext);
+  const { carouselItemsRef, activeSlide, handleNext, handlePrevious } =
+    useContext(CarouselItemsContext);
 
-  const prefersReducedMotion = useRef(
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches,
-  );
-
-  // Update the ref when the media query changes
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const handleChange = (e: MediaQueryListEvent) => {
-      prefersReducedMotion.current = e.matches;
-    };
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
+  const locale = useLocale();
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     // Prevent default behavior when holding down arrow keys (when repeat is true)
@@ -415,21 +332,21 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => {
       return;
     }
 
-    // For users with prefers-reduced-motion, trigger button click behavior instead of native scroll
-    if (prefersReducedMotion.current) {
-      if (event.key === 'ArrowLeft' && handlePrevious) {
-        event.preventDefault();
-        handlePrevious();
-      } else if (event.key === 'ArrowRight' && handleNext) {
-        event.preventDefault();
-        handleNext();
-      }
+    // Trigger next/prev ourselves instead of native scroll snapping keyboard behavior.
+    // This fixes the "halfway" scroll effect when hitting the keys multiple times in quick succession.
+    if (event.key === 'ArrowLeft' && handlePrevious) {
+      event.preventDefault();
+      handlePrevious();
+    } else if (event.key === 'ArrowRight' && handleNext) {
+      event.preventDefault();
+      handleNext();
     }
   };
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: The keydown handler is only to prevent undesired scrolling behavior when using the arrow keys
+    // biome-ignore lint/a11y/useSemanticElements: we prefer div over fieldset
     <div
+      aria-label={translations.carousel[locale]}
       data-slot="carousel-items"
       className={cx(className, [
         'scrollbar-hidden',
@@ -440,14 +357,16 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => {
         'outline-none',
         'rounded-[inherit]',
       ])}
-      ref={carouselItemsRef}
-      onScroll={onScroll}
+      // biome-ignore lint/a11y/noNoninteractiveTabindex: If this is not set, left/right keyboard events won't trigger correctly when first clicking on the carousel with the cursor
+      tabIndex={0}
+      role="group"
       onKeyDown={handleKeyDown}
+      ref={carouselItemsRef}
     >
       {Children.map(children, (child, index) => {
         if (isValidElement(child)) {
-          return cloneElement(child as JSX.Element, {
-            inert: activeIndex === index ? undefined : true,
+          return cloneElement(child as React.ReactElement<CarouselItemProps>, {
+            inert: activeSlide === index ? undefined : true,
           });
         }
       })}
@@ -457,7 +376,7 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => {
 
 type CarouselItemProps = HTMLProps<HTMLDivElement> & {
   /** The component/components to display as the <CarouselItem/>. */
-  children: JSX.Element | JSX.Element[];
+  children: React.ReactNode;
 };
 
 const CarouselItem = ({ className, children, ...rest }: CarouselItemProps) => {
