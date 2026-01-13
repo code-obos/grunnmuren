@@ -150,7 +150,9 @@ const Carousel = ({
   }, [emblaApi, onSelect, onSettled]);
 
   const handleNextPress = useCallback(() => {
-    if (!emblaApi) return;
+    if (!emblaApi) {
+      return;
+    }
 
     emblaApi.scrollNext(prefersReducedMotion);
 
