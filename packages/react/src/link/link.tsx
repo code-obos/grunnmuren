@@ -1,5 +1,5 @@
 import { cx } from 'cva';
-import { createContext } from 'react';
+import { createContext, type HTMLProps } from 'react';
 import {
   Link as _Link,
   type LinkProps as _LinkProps,
@@ -16,7 +16,10 @@ type LinkProps = _LinkProps &
   };
 
 const _LinkContext = createContext<
-  ContextValue<Partial<LinkProps>, HTMLAnchorElement>
+  ContextValue<
+    Partial<LinkProps & HTMLProps<HTMLAnchorElement>>,
+    HTMLAnchorElement
+  >
 >({});
 
 const Link = ({ ref: _ref, ..._props }: LinkProps) => {
