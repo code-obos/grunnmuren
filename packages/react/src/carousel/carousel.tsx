@@ -121,6 +121,10 @@ const Carousel = ({
   );
 
   const [slidesInView, setSlidesInView] = useState<number[]>([initialIndex]);
+  // We need some default values here. The proper initial values will be set by the embla init handler later
+  // for the default values, assume that we can scroll next, but for prev only if looping is enabled
+  const [canScrollNext, setCanScrollNext] = useState(true);
+  const [canScrollPrev, setCanScrollPrev] = useState(loop);
   const previousSettledScrollIndex = useRef(initialIndex);
 
   useEffect(() => {
@@ -134,6 +138,8 @@ const Carousel = ({
       switch (type) {
         case 'select':
           onSelect?.(scrollSnapIndex);
+          setCanScrollNext(emblaApi.canScrollNext());
+          setCanScrollPrev(emblaApi.canScrollPrev());
           break;
         case 'settle': {
           // We only invoke the callback if the scroll index actually changed from the previous settled index
@@ -148,17 +154,24 @@ const Carousel = ({
           setSlidesInView(emblaApi.slidesInView());
           break;
         }
+        case 'init': {
+          setCanScrollNext(emblaApi.canScrollNext());
+          setCanScrollPrev(emblaApi.canScrollPrev());
+          break;
+        }
       }
     };
 
     emblaApi.on('select', emblaHandler);
     emblaApi.on('slidesInView', emblaHandler);
     emblaApi.on('settle', emblaHandler);
+    emblaApi.on('init', emblaHandler);
 
     return () => {
       emblaApi.off('select', emblaHandler);
       emblaApi.off('settle', emblaHandler);
       emblaApi.off('slidesInView', emblaHandler);
+      emblaApi.off('init', emblaHandler);
     };
   }, [emblaApi, onSelect, onSettled]);
 
@@ -249,12 +262,12 @@ const Carousel = ({
                 [DEFAULT_SLOT]: {},
                 prev: {
                   'aria-label': translations.previous[locale],
-                  isDisabled: !emblaApi?.canScrollPrev(),
+                  isDisabled: !canScrollPrev,
                   onPress: handlePrevPress,
                 },
                 next: {
                   'aria-label': translations.next[locale],
-                  isDisabled: !emblaApi?.canScrollNext(),
+                  isDisabled: !canScrollNext,
                   onPress: handleNextPress,
                 },
               },
