@@ -23,12 +23,13 @@ const meta = {
     align: 'center',
     loop: false,
     orientation: 'horizontal',
+    scrollGestures: false,
   },
   render: ({ ...props }) => {
     const itemsVariants = cva({
       base: 'gap-4 *:basis-1/2',
       variants: {
-        orientation: { vertical: 'h-[336px] max-w-xs', horizontal: null },
+        orientation: { vertical: 'h-84 max-w-xs', horizontal: null },
         loop: { false: null, true: null },
       },
       // Add the correct padding to the container based on the orientation if we're looping
@@ -47,53 +48,51 @@ const meta = {
     });
 
     return (
-      <main className="container flex">
-        <Carousel {...props}>
-          <CarouselItemsContainer>
-            <CarouselItems className={itemsVariants(props)}>
-              <CarouselItem>
-                <Media>
-                  <img
-                    src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
-                    alt=""
-                  />
-                </Media>
-              </CarouselItem>
-              <CarouselItem>
-                <Media>
-                  <img
-                    src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/7d2285ccee9b9545e018115b8e0ecc8b06aa0729-1620x1080.jpg?auto=format"
-                    alt=""
-                    loading="lazy"
-                  />
-                </Media>
-              </CarouselItem>
-              <CarouselItem>
-                <Media fit="contain">
-                  <img
-                    src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/32a53eec782e6cbe15d75961f82ecca48dbe30ed-1920x1080.png?auto=format"
-                    alt=""
-                    loading="lazy"
-                  />
-                </Media>
-              </CarouselItem>
-              <CarouselItem>
-                <Media>
-                  <img
-                    src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/a3c4b263f72128f5c6259333a224054ed3b539fe-1440x788.heif?auto=format"
-                    alt=""
-                    loading="lazy"
-                  />
-                </Media>
-              </CarouselItem>
-            </CarouselItems>
-          </CarouselItemsContainer>
-          <CarouselControls className="pt-4">
-            <CarouselButton slot="prev" />
-            <CarouselButton slot="next" />
-          </CarouselControls>
-        </Carousel>
-      </main>
+      <Carousel {...props}>
+        <CarouselItemsContainer>
+          <CarouselItems className={itemsVariants(props)}>
+            <CarouselItem>
+              <Media>
+                <img
+                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
+                  alt=""
+                />
+              </Media>
+            </CarouselItem>
+            <CarouselItem>
+              <Media>
+                <img
+                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/7d2285ccee9b9545e018115b8e0ecc8b06aa0729-1620x1080.jpg?auto=format"
+                  alt=""
+                  loading="lazy"
+                />
+              </Media>
+            </CarouselItem>
+            <CarouselItem>
+              <Media fit="contain">
+                <img
+                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/32a53eec782e6cbe15d75961f82ecca48dbe30ed-1920x1080.png?auto=format"
+                  alt=""
+                  loading="lazy"
+                />
+              </Media>
+            </CarouselItem>
+            <CarouselItem>
+              <Media>
+                <img
+                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/a3c4b263f72128f5c6259333a224054ed3b539fe-1440x788.heif?auto=format"
+                  alt=""
+                  loading="lazy"
+                />
+              </Media>
+            </CarouselItem>
+          </CarouselItems>
+        </CarouselItemsContainer>
+        <CarouselControls className="pt-4">
+          <CarouselButton slot="prev" />
+          <CarouselButton slot="next" />
+        </CarouselControls>
+      </Carousel>
     );
   },
 } satisfies Meta<typeof Carousel>;
@@ -126,6 +125,12 @@ export const AutoPlayLooping: Story = {
   args: {
     autoPlayDelay: 3000,
     loop: true,
+  },
+};
+
+export const ScrollGestures: Story = {
+  args: {
+    scrollGestures: true,
   },
 };
 

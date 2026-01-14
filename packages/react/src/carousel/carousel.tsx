@@ -62,6 +62,11 @@ type CarouselProps = Omit<
    * Callback invoked after the carousel scrolling "settles". Think of this as the debounced version of `onSelect`.
    */
   onSettled?: (index: number) => void;
+  /**
+   * Whether the carousel should scroll with regular mouse/trackpad scroll gestures, in addition to swipe gestures.
+   * @default false
+   */
+  scrollGestures?: boolean;
 };
 
 type EmblaEventHandler = Parameters<
@@ -77,6 +82,7 @@ const Carousel = ({
   onSelect,
   onSettled,
   loop = false,
+  scrollGestures = false,
   ref,
   ...rest
 }: CarouselProps) => {
@@ -85,7 +91,11 @@ const Carousel = ({
   const prefersReducedMotion = usePrefersReducedMotion() ?? false;
 
   const emblaPlugins = useMemo(() => {
-    const plugins = [WheelGesturesPlugin()];
+    const plugins = [];
+
+    if (scrollGestures) {
+      plugins.push(WheelGesturesPlugin());
+    }
 
     if (autoPlayDelay) {
       plugins.push(
@@ -97,7 +107,7 @@ const Carousel = ({
       );
     }
     return plugins;
-  }, [autoPlayDelay, loop, prefersReducedMotion]);
+  }, [autoPlayDelay, scrollGestures, loop, prefersReducedMotion]);
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
