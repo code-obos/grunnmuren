@@ -10,36 +10,19 @@ const meta = {
     href: '#bolig',
     onPress: fn(),
     animateIcon: undefined,
-    children: 'Bolig',
   },
   argTypes: {
     animateIcon: {
-      control: { type: 'radio' },
+      control: { type: 'select' },
     },
   },
+  render: (args) => <Link {...args}>Bolig</Link>,
 } satisfies Meta<typeof Link>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
-
-export const WithLongerText = () => (
-  <p>
-    Dette er et avsnitt med en <Link href="/innebygd">lenke</Link> inni.
-  </p>
-);
-
-export const WithBgColor: Story = {
-  args: {
-    className: 'text-mint',
-  },
-  globals: {
-    backgrounds: {
-      value: 'blue-dark',
-    },
-  },
-};
 
 export const ExternalLink: Story = {
   args: {
@@ -68,6 +51,26 @@ export const DownloadLink: Story = {
       <Download />
     </Link>
   ),
+};
+
+export const Inline: Story = {
+  render: (args) => (
+    <p>
+      This is a paragraph with an <Link {...args}>inline link</Link> inside of
+      it.
+    </p>
+  ),
+};
+
+export const OverridenTextColor: Story = {
+  args: {
+    className: 'text-mint',
+  },
+  globals: {
+    backgrounds: {
+      value: 'blue-dark',
+    },
+  },
 };
 
 export const IsDisabled: Story = {
