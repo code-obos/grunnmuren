@@ -14,7 +14,7 @@ const _LinkContext = createContext<
 >({});
 
 const linkVariants = cva({
-  base: 'inline-flex cursor-pointer items-center gap-1 font-medium hover:no-underline focus-visible:outline-current focus-visible:outline-focus-offset *:[svg]:shrink-0',
+  base: 'inline-flex cursor-pointer items-center gap-1 font-medium hover:no-underline focus-visible:outline-current focus-visible:outline-focus-offset data-disabled:cursor-default *:[svg]:shrink-0',
   variants: {
     animateIcon: {
       right: 'hover:*:[svg]:motion-safe:translate-x-1',
