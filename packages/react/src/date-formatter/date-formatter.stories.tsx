@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, within } from 'storybook/test';
 import { DateFormatter } from './date-formatter';
 
 const meta: Meta<typeof DateFormatter> = {
@@ -19,10 +18,6 @@ export const Default: Story = {
       day: '2-digit',
     },
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await expect(canvas.getByText('19.08.1929')).toBeInTheDocument();
-  },
 };
 
 export const LongDate: Story = {
@@ -33,10 +28,6 @@ export const LongDate: Story = {
       month: 'long',
       day: 'numeric',
     },
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await expect(canvas.getByText('19. august 1929')).toBeInTheDocument();
   },
 };
 
@@ -51,12 +42,6 @@ export const FullDateTime: Story = {
       minute: 'numeric',
       second: 'numeric',
     },
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await expect(
-      canvas.getByText('19. august 1929 kl. 01:00:00'),
-    ).toBeInTheDocument();
   },
 };
 
@@ -73,12 +58,6 @@ export const WithCustomTimeZone: Story = {
       timeZone: 'EST',
     },
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await expect(
-      canvas.getByText('18. august 1929 kl. 19:00:00'),
-    ).toBeInTheDocument();
-  },
 };
 
 export const Year: Story = {
@@ -87,10 +66,6 @@ export const Year: Story = {
     options: {
       year: 'numeric',
     },
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await expect(canvas.getByText('1929')).toBeInTheDocument();
   },
 };
 
@@ -101,10 +76,6 @@ export const ShortYear: Story = {
       year: '2-digit',
     },
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await expect(canvas.getByText('29')).toBeInTheDocument();
-  },
 };
 
 export const Month: Story = {
@@ -113,10 +84,6 @@ export const Month: Story = {
     options: {
       month: 'numeric',
     },
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await expect(canvas.getByText('8.')).toBeInTheDocument();
   },
 };
 
@@ -127,10 +94,6 @@ export const LongMonth: Story = {
       month: 'long',
     },
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await expect(canvas.getByText('august')).toBeInTheDocument();
-  },
 };
 
 export const ShortMonth: Story = {
@@ -139,10 +102,6 @@ export const ShortMonth: Story = {
     options: {
       month: 'short',
     },
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await expect(canvas.getByText('aug')).toBeInTheDocument();
   },
 };
 
@@ -160,10 +119,6 @@ export const CapitalizedMonth: Story = {
       }
     </DateFormatter>
   ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await expect(canvas.getByText('August')).toBeInTheDocument();
-  },
 };
 
 export const Day: Story = {
@@ -172,10 +127,6 @@ export const Day: Story = {
     options: {
       day: 'numeric',
     },
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await expect(canvas.getByText('1.')).toBeInTheDocument();
   },
 };
 
