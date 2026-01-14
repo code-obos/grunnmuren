@@ -51,14 +51,3 @@ jobs:
       # It makes sense to do this on PRs to ensure the change didn't break the Storybook
       - name: Build storybook
         run: pnpm build:storybook
-
-      # Commented out as part of getting storybook deployed with docs
-      # Make this work again later
-      # - name: Install Playwright
-      #   run: pnpm exec playwright install --with-deps
-
-      # - name: Serve Storybook and run tests
-      #   run: |
-      #     pnpm dlx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
-      #       "pnpm serve-storybook" \
-      #       "pnpm dlx wait-on tcp:127.0.0.1:6006 && pnpm test"
