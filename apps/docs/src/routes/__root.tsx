@@ -46,6 +46,11 @@ function RootDocument() {
               data-enable-session-replay="true"
               crossOrigin=""
             />
+            <script
+              src="https://core.sanity-cdn.com/bridge.js"
+              async
+              type="module"
+            />
           </>
         )}
       </head>

@@ -6,7 +6,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "pnpm build:props && pnpm build:colors && pnpm build:tsc && pnpm build:assets && pnpm build:app",
+    "build": "pnpm build:props && pnpm build:colors && pnpm build:tsc && pnpm build:assets && pnpm build:app && pnpm sanity:extract",
     "build:app": "vite build",
     "build:assets": "mkdir -p public/resources/icons && cp -r node_modules/@obosbbl/grunnmuren-icons-svg/src/* public/resources/icons/",
     "build:props": "node extract-component-props.ts && biome lint --write component-props.ts --files-max-size=8000000",
@@ -14,6 +14,8 @@
     "build:tsc": "tsc",
     "dev": "vite dev --port 3003",
     "start": "node .output/server/index.mjs",
+    "sanity:schema:deploy": "sanity schema deploy",
+    "sanity:extract": "sanity manifest extract --path .output/public/studio/static",
     "sanity:typegen": "pnpm sanity:typegen:extract && pnpm sanity:typegen:generate",
     "sanity:typegen:extract": "sanity schema extract",
     "sanity:typegen:generate": "sanity typegen generate"
