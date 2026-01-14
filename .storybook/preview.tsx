@@ -20,7 +20,6 @@ const preview: Preview = {
     },
     backgrounds: {
       options: {
-        // 👇 Default options
         'blue-dark': { name: 'Blue dark', value: '#002169' },
         white: { name: 'White', value: '#fff' },
       },
