@@ -8,7 +8,11 @@ type HeroProps = HTMLProps<HTMLDivElement> &
     children: React.ReactNode;
   };
 
-const roundedMediaCorners = '*:data-[slot="media"]:*:rounded-3xl';
+type HeroContextValue = {
+  variant: HeroProps['variant'];
+};
+
+const HeroContext = createContext<HeroContextValue | null>(null);
 
 // Common variant for "standard" and "full-bleed" Hero variants
 const oneColumnLayout = [
@@ -141,7 +145,7 @@ const Hero = ({ variant, className, children, ...rest }: HeroProps) => {
 
 export {
   Hero as UNSAFE_Hero,
-  type HeroContext as UNSAFE_HeroContext,
+  HeroContext as UNSAFE_HeroContext,
   type HeroProps as UNSAFE_HeroProps,
   type HeroContextValue as UNSAFE_HeroContextValue,
 };
