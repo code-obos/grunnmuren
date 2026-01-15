@@ -476,15 +476,17 @@ const CarouselItem = ({ className, children, ...rest }: CarouselItemProps) => {
 
 export {
   Carousel as UNSAFE_Carousel,
+  CarouselButton as UNSAFE_CarouselButton,
+  CarouselContext as UNSAFE_CarouselContext,
+  CarouselControls as UNSAFE_CarouselControls,
   CarouselItem as UNSAFE_CarouselItem,
   CarouselItems as UNSAFE_CarouselItems,
-  CarouselButton as UNSAFE_CarouselButton,
-  CarouselControls as UNSAFE_CarouselControls,
   CarouselItemsContainer as UNSAFE_CarouselItemsContainer,
-  type CarouselControlsProps as UNSAFE_CarouselControlsProps,
   type CarouselButtonProps as UNSAFE_CarouselButtonProps,
+  type CarouselContextValue as UNSAFE_CarouselContextValue,
+  type CarouselControlsProps as UNSAFE_CarouselControlsProps,
   type CarouselItemProps as UNSAFE_CarouselItemProps,
+  type CarouselItemsContainer as UNSAFE_CarouselItemsContainerProps,
   type CarouselItemsProps as UNSAFE_CarouselItemsProps,
   type CarouselProps as UNSAFE_CarouselProps,
-  type CarouselItemsContainer as UNSAFE_CarouselItemsContainerProps,
 };
