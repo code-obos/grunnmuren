@@ -16,7 +16,7 @@ import { Description } from '../label';
 import { VideoLoop } from '../video-loop';
 import { UNSAFE_Hero as Hero } from './hero';
 
-const meta: Meta<typeof Hero> = {
+const meta = {
   title: 'Hero',
   component: Hero,
   parameters: {
@@ -65,15 +65,17 @@ const meta: Meta<typeof Hero> = {
       </Hero>
     </main>
   ),
-};
+} satisfies Meta<typeof Hero>;
 
 export default meta;
 
-type Story = StoryObj<typeof Hero>;
+type Story = StoryObj<typeof meta>;
 
-export const StandardWithLeadAndImageAndCarousel: Story = {
-  args: {},
-};
+export const StandardWithLeadAndImageAndCarousel = {
+  args: {
+    children: undefined,
+  },
+} satisfies Story;
 
 export const TwoColumn = () => (
   <main className="container grid gap-y-8">

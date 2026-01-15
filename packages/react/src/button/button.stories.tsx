@@ -4,7 +4,7 @@ import { cx } from 'cva';
 
 import { Button } from './button';
 
-const meta: Meta<typeof Button> = {
+const meta = {
   title: 'Button',
   component: Button,
   parameters: {
@@ -29,11 +29,11 @@ const meta: Meta<typeof Button> = {
       </div>
     );
   },
-};
+} satisfies Meta<typeof Button>;
 
 export default meta;
 
-type Story = StoryObj<typeof Button>;
+type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {

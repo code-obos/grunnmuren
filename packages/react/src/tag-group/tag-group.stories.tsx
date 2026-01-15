@@ -6,17 +6,17 @@ import type { Selection } from 'react-aria-components';
 import { Description, Label } from '../label';
 import { Tag, TagGroup, TagList } from './tag-group';
 
-const meta: Meta<typeof TagGroup> = {
+const meta = {
   title: 'TagGroup',
   component: TagGroup,
   parameters: {
     layout: 'fullscreen',
   },
-};
+} satisfies Meta<typeof TagGroup>;
 
 export default meta;
 
-type Story = StoryObj<typeof TagGroup>;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
