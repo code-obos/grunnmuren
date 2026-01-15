@@ -1,5 +1,4 @@
 import { Github, Mail } from '@obosbbl/grunnmuren-icons-react';
-import { UNSAFE_Link } from '@obosbbl/grunnmuren-react';
 import { Link } from '@tanstack/react-router';
 import logoUrl from '@/assets/OBOS_Svart_Liggende.svg?url';
 
@@ -33,18 +32,18 @@ export function Footer() {
                 grunnmuren@obos.no
               </a>
             </li>
-            <li>
-              <button
-                className="cursor-pointer underline"
-                type="button"
-                /* @ts-expect-error OneTrust is only in production so think this is fine */
-                onClick={() => window.OneTrust?.ToggleInfoDisplay()}
-              >
-                Administrer cookies
-              </button>
-            </li>
           </ul>
         </div>
+      </div>
+      <div className="pb-8">
+        <button
+          className="cursor-pointer underline"
+          type="button"
+          /* @ts-expect-error OneTrust is only in production so think this is fine */
+          onClick={() => window.OneTrust?.ToggleInfoDisplay()}
+        >
+          Administrer cookies
+        </button>
       </div>
     </footer>
   );
