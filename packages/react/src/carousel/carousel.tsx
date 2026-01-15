@@ -396,7 +396,7 @@ const carouselButtonIconSlotVariants = cva({
     {
       slot: 'prev',
       orientation: 'horizontal',
-      className: 'group-hover:motion-safe:-translate-x-1 rotate-180',
+      className: 'rotate-180 group-hover:motion-safe:-translate-x-1',
     },
     // vertical controls
     {
@@ -407,7 +407,7 @@ const carouselButtonIconSlotVariants = cva({
     {
       slot: 'prev',
       orientation: 'vertical',
-      className: 'group-hover:motion-safe:-translate-y-1 -rotate-90',
+      className: '-rotate-90 group-hover:motion-safe:-translate-y-1',
     },
   ],
 });

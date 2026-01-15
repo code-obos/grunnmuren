@@ -4,63 +4,65 @@
  */
 
 @custom-variant prose-headings (&
-:is(h1, h2, h3, h4, h5, th):not(
-  :where([class~="not-prose"], [class~="not-prose"] *)
-));
+  :is(h1, h2, h3, h4, h5, th):not(
+    :where([class~="not-prose"], [class~="not-prose"] *)
+  ));
 @custom-variant prose-lead (&
-:is([class~="lead"]):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is([class~="lead"]):not(
+    :where([class~="not-prose"], [class~="not-prose"] *)
+  ));
 @custom-variant prose-h1 (&
-:is(h1):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(h1):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-h2 (&
-:is(h2):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(h2):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-h3 (&
-:is(h3):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(h3):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-h4 (&
-:is(h4):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(h4):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-h5 (&
-:is(h5):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(h5):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-p (&
-:is(p):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(p):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-a (&
-:is(a):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(a):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-blockquote (&
-:is(blockquote):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(blockquote):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-figure (&
-:is(figure):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(figure):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-figcaption (&
-:is(figcaption):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(figcaption):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-strong (&
-:is(strong):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(strong):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-em (&
-:is(em):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(em):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-kbd (&
-:is(kbd):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(kbd):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-code (&
-:is(code):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(code):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-pre (&
-:is(pre):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(pre):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-ol (&
-:is(ol):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(ol):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-ul (&
-:is(ul):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(ul):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-li (&
-:is(li):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(li):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-table (&
-:is(table):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(table):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-thead (&
-:is(thead):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(thead):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-tr (&
-:is(tr):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(tr):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-th (&
-:is(th):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(th):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-td (&
-:is(td):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(td):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-img (&
-:is(img):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(img):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-video (&
-:is(video):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(video):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-hr (&
-:is(hr):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+  :is(hr):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 
 @utility prose {
   --tw-prose-body: --theme(--color-black, initial);

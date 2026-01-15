@@ -20,7 +20,7 @@ export const External = () => (
     className="group"
   >
     Ekstern lenke
-    <LinkExternal className="group-hover:motion-safe:-translate-y-0.5 shrink-0 transition-transform group-hover:motion-safe:translate-x-0.5" />
+    <LinkExternal className="shrink-0 transition-transform group-hover:motion-safe:translate-x-0.5 group-hover:motion-safe:-translate-y-0.5" />
   </Link>
 );
 

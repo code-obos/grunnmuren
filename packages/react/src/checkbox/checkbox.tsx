@@ -11,7 +11,7 @@ import {
 import { ErrorMessage } from '../label/error-message';
 
 const defaultClasses = cx([
-  'group -mx-2.5 relative left-0 inline-flex max-w-fit cursor-pointer items-start gap-4 p-2.5 leading-7',
+  'group relative left-0 -mx-2.5 inline-flex max-w-fit cursor-pointer items-start gap-4 p-2.5 leading-7',
 ]);
 
 // Pulling this out into it's own component. Will probably export it in the future

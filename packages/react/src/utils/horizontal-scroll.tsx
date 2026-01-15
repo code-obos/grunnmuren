@@ -48,7 +48,7 @@ export function ScrollButton({
 
         // Hide/show animation
         direction === 'left'
-          ? !isVisible && '-translate-x-full pointer-events-none'
+          ? !isVisible && 'pointer-events-none -translate-x-full'
           : !isVisible && 'pointer-events-none translate-x-full',
 
         direction === 'left' ? '-left-3' : '-right-3',

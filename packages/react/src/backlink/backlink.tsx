@@ -41,7 +41,7 @@ function Backlink(props: BacklinkProps) {
   const content = (
     <>
       <ChevronLeft
-        className={cx('-ml-[0.5em] group-hover:-translate-x-1 duration-300')}
+        className={cx('-ml-[0.5em] duration-300 group-hover:-translate-x-1')}
       />
       {/* This wrapper is required in order to support the custom underline created with border-bottom when the text spans over multiple lines */}
       <span>

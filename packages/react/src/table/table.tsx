@@ -122,7 +122,7 @@ function Table(props: TableProps) {
           onClick={() => handleScroll('left')}
           isVisible={canScrollLeft}
           hasScrollingOccurred={hasScrollingOccurred}
-          className="-translate-y-1/2 absolute top-5 z-10 h-11 w-11"
+          className="absolute top-5 z-10 h-11 w-11 -translate-y-1/2"
           iconClassName="h-5 w-5"
         />
 
@@ -131,7 +131,7 @@ function Table(props: TableProps) {
           onClick={() => handleScroll('right')}
           isVisible={canScrollRight}
           hasScrollingOccurred={hasScrollingOccurred}
-          className="-translate-y-1/2 absolute top-5 z-10 h-11 w-11"
+          className="absolute top-5 z-10 h-11 w-11 -translate-y-1/2"
           iconClassName="h-5 w-5"
         />
 

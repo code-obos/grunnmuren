@@ -251,7 +251,7 @@ function Tab(props: TabProps) {
       {...restProps}
       className={cx(
         className,
-        'data-focus-visible:-outline-offset-10 data-focus-visible:outline-2 data-focus-visible:outline-black',
+        'data-focus-visible:outline-2 data-focus-visible:outline-black data-focus-visible:-outline-offset-10',
         'description cursor-pointer border-transparent px-4 py-2 font-light',
         // Transition
         'transition-colors duration-150 ease-out',
