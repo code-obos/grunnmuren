@@ -5,17 +5,17 @@ import { Button } from '../button/button';
 import { Radio } from './radio';
 import { RadioGroup, type RadioGroupProps } from './radio-group';
 
-const meta: Meta<typeof RadioGroup> = {
+const meta = {
   title: 'RadioGroup',
   component: RadioGroup,
   argTypes: {
     onChange: { action: 'changed' },
   },
-};
+} satisfies Meta<typeof RadioGroup>;
 
 export default meta;
 
-type Story = StoryObj<typeof RadioGroup>;
+type Story = StoryObj<typeof meta>;
 
 const RadioItems = ({ description }: { description?: boolean }) => {
   return (
@@ -93,6 +93,7 @@ const defaultProps = {
   defaultValue: undefined,
   name: undefined,
   value: undefined,
+  children: undefined,
 };
 
 export const Default: Story = {

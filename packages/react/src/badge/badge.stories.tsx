@@ -5,7 +5,7 @@ import { Fragment } from 'react';
 
 import { Badge } from './badge';
 
-const meta: Meta<typeof Badge> = {
+const meta = {
   title: 'Badge',
   component: Badge,
   render: (props) => {
@@ -23,11 +23,11 @@ const meta: Meta<typeof Badge> = {
       </div>
     );
   },
-};
+} satisfies Meta<typeof Badge>;
 
 export default meta;
 
-type Story = StoryObj<typeof Badge>;
+type Story = StoryObj<typeof meta>;
 
 export const Sandbox = () => {
   const colors = [
