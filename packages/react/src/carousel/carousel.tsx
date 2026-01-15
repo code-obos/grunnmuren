@@ -20,6 +20,7 @@ import {
 import { DEFAULT_SLOT, Provider } from 'react-aria-components';
 import { Button, ButtonContext, type ButtonProps } from '../button';
 import { MediaContext } from '../content';
+import { UNSAFE_HeroContext as HeroContext } from '../hero';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 import { usePrefersReducedMotion } from '../use-prefers-reduced-motion';
@@ -353,17 +354,34 @@ const CarouselControls = ({
   children,
   className,
   ...rest
-}: CarouselControlsProps) => (
-  <div
-    className={cx(className, 'flex justify-end gap-x-2')}
-    data-slot="carousel-controls"
-    {...rest}
-    // All items of the carousel are accessible to the screen reader at all times, so these controls will only confuse screen reader users
-    aria-hidden="true"
-  >
-    {children}
-  </div>
-);
+}: CarouselControlsProps) => {
+  const hasHeroContext = !!useContext(HeroContext);
+  console.log(hasHeroContext);
+  return (
+    <div
+      className={cx(className, 'flex justify-end gap-x-2')}
+      data-slot="carousel-controls"
+      {...rest}
+      // All items of the carousel are accessible to the screen reader at all times, so these controls will only confuse screen reader users
+      aria-hidden="true"
+    >
+      <Provider
+        values={[
+          [
+            ButtonContext,
+            hasHeroContext
+              ? { color: 'white', variant: 'primary' }
+              : {
+                  variant: 'tertiary',
+                },
+          ],
+        ]}
+      >
+        {children}
+      </Provider>
+    </div>
+  );
+};
 
 const carouselButtonVariants = cva({
   base: 'group data-disabled:invisible',
@@ -414,8 +432,7 @@ type CarouselButtonProps = ButtonProps & {
 const CarouselButton = ({
   className,
   isIconOnly = true,
-  color = 'white',
-  variant = 'primary',
+
   slot,
   ...rest
 }: CarouselButtonProps) => {
@@ -425,8 +442,6 @@ const CarouselButton = ({
       className={carouselButtonVariants({ className })}
       isIconOnly={isIconOnly}
       slot={slot}
-      variant={variant}
-      color={color}
       {...rest}
     >
       <ChevronRight

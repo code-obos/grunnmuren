@@ -153,6 +153,8 @@ function Button({ ref = null, ...props }: ButtonProps) {
     ...restProps
   } = props;
 
+  console.log('color: ', color);
+
   const className = buttonVariants({
     // Don't animate the icon when we're pending, as it affects the loading spinner
     animateIcon: isPending ? undefined : animateIcon,
