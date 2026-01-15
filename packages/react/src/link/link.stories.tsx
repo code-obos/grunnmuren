@@ -33,7 +33,7 @@ export const ExternalLink: Story = {
   },
   render: (args) => (
     <Link {...args}>
-      Last ned dokument
+      obos.no
       <LinkExternal />
     </Link>
   ),
