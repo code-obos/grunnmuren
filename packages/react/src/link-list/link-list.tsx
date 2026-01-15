@@ -54,9 +54,7 @@ const LinkListContainer = ({
 }: LinkListContainerProps) => (
   // Dual providers makes for easier typing and more readable code
   <Provider values={[[HeadingContext, { size: 'm' }]]}>
-    <_LinkProvider>
-      <div className={cx(className, 'link-list-container')} {...restProps} />
-    </_LinkProvider>
+    <div className={cx(className, 'link-list-container')} {...restProps} />
   </Provider>
 );
 

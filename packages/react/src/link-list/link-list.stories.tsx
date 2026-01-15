@@ -6,8 +6,11 @@ import { LinkList, LinkListContainer, LinkListItem } from './link-list';
 const meta = {
   title: 'LinkList',
   component: LinkList,
-
-  tags: ['autodocs'],
+  decorators: [
+    (Story) => {
+      return <div className="grid gap-y-8">{Story()}</div>;
+    },
+  ],
 } satisfies Meta<typeof LinkList>;
 
 export default meta;
@@ -41,10 +44,6 @@ export const Download = () => (
   </LinkList>
 );
 
-const LayoutWrapper = ({ children }: { children: React.ReactNode }) => (
-  <div className="grid gap-y-8">{children}</div>
-);
-
 export const ExternalLinkListItems = () => (
   <LinkList>
     <LinkListItem>
@@ -65,7 +64,7 @@ export const ExternalLinkListItems = () => (
 );
 
 export const WithHeadings = () => (
-  <LayoutWrapper>
+  <>
     <LinkListContainer>
       <Heading level={2}>
         <Link href="/om">OBOS</Link>
@@ -133,11 +132,11 @@ export const WithHeadings = () => (
         </LinkListItem>
       </LinkList>
     </LinkListContainer>
-  </LayoutWrapper>
+  </>
 );
 
 export const AutoResponsive = () => (
-  <LayoutWrapper>
+  <>
     <LinkListContainer>
       <Heading level={2}>2 items</Heading>
       <LinkList>
@@ -369,5 +368,5 @@ export const AutoResponsive = () => (
         </LinkListItem>
       </LinkList>
     </LinkListContainer>
-  </LayoutWrapper>
+  </>
 );
