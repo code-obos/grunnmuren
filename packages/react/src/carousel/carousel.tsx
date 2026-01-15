@@ -356,7 +356,6 @@ const CarouselControls = ({
   ...rest
 }: CarouselControlsProps) => {
   const hasHeroContext = !!useContext(HeroContext);
-  console.log(hasHeroContext);
   return (
     <div
       className={cx(className, 'flex justify-end gap-x-2')}
