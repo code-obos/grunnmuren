@@ -85,12 +85,7 @@ type StepperProps = HTMLAttributes<HTMLDivElement> & {
   currentStep: number;
 };
 
-const Stepper = ({
-  children,
-  currentStep,
-  className,
-  ...restProps
-}: StepperProps) => {
+const Stepper = ({ children, currentStep, ...restProps }: StepperProps) => {
   const locale = useLocale();
   const childCount = Children.count(children);
 
