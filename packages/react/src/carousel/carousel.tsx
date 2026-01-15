@@ -101,6 +101,7 @@ const Carousel = ({
           delay: autoPlayDelay,
           stopOnLastSnap: !loop,
           jump: prefersReducedMotion,
+          stopOnFocusIn: true,
         }),
       );
     }
@@ -222,12 +223,6 @@ const Carousel = ({
   const locale = useLocale();
 
   const { focusWithinProps } = useFocusWithin({
-    onFocusWithin: () => {
-      // Stop autoplay when any focusable element inside the carousel receives focus
-      if (autoPlayDelay !== undefined) {
-        emblaApi?.plugins().autoplay?.stop();
-      }
-    },
     onBlurWithin: (e) => {
       // Only restart autoplay if focus is moving outside the carousel
       // relatedTarget is the element receiving focus (null if focus is leaving the document)
