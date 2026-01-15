@@ -236,6 +236,11 @@ const Carousel = ({
     [handleNextPress, handlePrevPress, autoPlayDelay, emblaApi],
   );
 
+  const hasHeroContext = !!useContext(HeroContext);
+  const nextPrevStyles = hasHeroContext
+    ? { color: 'white' as const, variant: 'primary' as const }
+    : { variant: 'tertiary' as const };
+
   return (
     // biome-ignore lint/a11y/noStaticElementInteractions: This is just to enhance keyboard navigation, this is not a replacement for proper focusable elements inside the carousel
     <div
@@ -264,11 +269,13 @@ const Carousel = ({
                   'aria-label': translations.previous[locale],
                   isDisabled: !canScrollPrev,
                   onPress: handlePrevPress,
+                  ...nextPrevStyles,
                 },
                 next: {
                   'aria-label': translations.next[locale],
                   isDisabled: !canScrollNext,
                   onPress: handleNextPress,
+                  ...nextPrevStyles,
                 },
               },
             },
@@ -354,33 +361,17 @@ const CarouselControls = ({
   children,
   className,
   ...rest
-}: CarouselControlsProps) => {
-  const hasHeroContext = !!useContext(HeroContext);
-  return (
-    <div
-      className={cx(className, 'flex justify-end gap-x-2')}
-      data-slot="carousel-controls"
-      {...rest}
-      // All items of the carousel are accessible to the screen reader at all times, so these controls will only confuse screen reader users
-      aria-hidden="true"
-    >
-      <Provider
-        values={[
-          [
-            ButtonContext,
-            hasHeroContext
-              ? { color: 'white', variant: 'primary' }
-              : {
-                  variant: 'tertiary',
-                },
-          ],
-        ]}
-      >
-        {children}
-      </Provider>
-    </div>
-  );
-};
+}: CarouselControlsProps) => (
+  <div
+    className={cx(className, 'flex justify-end gap-x-2')}
+    data-slot="carousel-controls"
+    {...rest}
+    // All items of the carousel are accessible to the screen reader at all times, so these controls will only confuse screen reader users
+    aria-hidden="true"
+  >
+    {children}
+  </div>
+);
 
 const carouselButtonVariants = cva({
   base: 'group data-disabled:invisible',
@@ -431,7 +422,6 @@ type CarouselButtonProps = ButtonProps & {
 const CarouselButton = ({
   className,
   isIconOnly = true,
-
   slot,
   ...rest
 }: CarouselButtonProps) => {
