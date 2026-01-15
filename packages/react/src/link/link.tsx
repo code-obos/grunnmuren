@@ -1,4 +1,4 @@
-import { cva, type VariantProps } from 'cva';
+import { compose, cva, type VariantProps } from 'cva';
 import { createContext } from 'react';
 import {
   Link as _Link,
@@ -6,6 +6,7 @@ import {
   type ContextValue,
   useContextProps,
 } from 'react-aria-components';
+import { animateIconVariants } from '../classes';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 
@@ -13,25 +14,12 @@ const _LinkContext = createContext<
   ContextValue<Partial<LinkProps>, HTMLAnchorElement>
 >({});
 
-const linkVariants = cva({
-  base: 'inline-flex cursor-pointer items-center gap-1 font-medium hover:no-underline focus-visible:outline-current focus-visible:outline-focus-offset data-disabled:cursor-default *:[svg]:shrink-0',
-  variants: {
-    animateIcon: {
-      right: 'hover:*:[svg]:motion-safe:translate-x-1',
-      left: 'hover:*:[svg]:motion-safe:-translate-x-1',
-      down: 'hover:*:[svg]:motion-safe:translate-y-1',
-      up: 'hover:*:[svg]:motion-safe:-translate-y-1',
-      'up-right':
-        'hover:*:[svg]:motion-safe:-translate-y-0.5 hover:*:[svg]:motion-safe:translate-x-0.5',
-    },
-  },
-  compoundVariants: [
-    {
-      animateIcon: ['right', 'down', 'left', 'up', 'up-right'],
-      className: '*:[svg]:transition-transform',
-    },
-  ],
-});
+const linkVariants = compose(
+  animateIconVariants,
+  cva({
+    base: 'inline-flex cursor-pointer items-center gap-1 font-medium hover:no-underline focus-visible:outline-current focus-visible:outline-focus-offset data-disabled:cursor-default',
+  }),
+);
 
 type LinkProps = VariantProps<typeof linkVariants> &
   _LinkProps &
