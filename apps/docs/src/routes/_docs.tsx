@@ -46,6 +46,30 @@ export const Route = createFileRoute('/_docs')({
       },
     ],
   }),
+  scripts: () =>
+    process.env.NODE_ENV === 'production'
+      ? [
+          {
+            src: 'https://cdn.cookielaw.org/scripttemplates/otSDKStub.js',
+            'data-language': 'no',
+            type: 'text/javascript',
+            'data-domain-script': 'ea448f9e-5a74-4f6e-9260-c61b81f67013',
+          },
+          {
+            type: 'text/javascript',
+            children: 'function OptanonWrapper() {}',
+          },
+          {
+            src: 'https://www.obos.no/collector.js',
+            type: 'module',
+            id: 'collector-script',
+            'data-api-key': 'b85ae7f346517c8070821d6b66e9d69e',
+            'data-app-name': 'grunnmuren',
+            'data-enable-session-replay': 'true',
+            crossOrigin: '',
+          },
+        ]
+      : [],
   loader: () => sanityFetch({ query: NAVIGATION_QUERY }),
 });
 
