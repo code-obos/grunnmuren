@@ -2,11 +2,11 @@ import { Download, LinkExternal } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta } from '@storybook/react-vite';
 import { UNSAFE_Link as Link } from './link';
 
-const meta: Meta<typeof Link> = {
+const meta = {
   title: 'Link',
   component: Link,
   tags: ['autodocs'],
-};
+} satisfies Meta<typeof Link>;
 
 export default meta;
 
