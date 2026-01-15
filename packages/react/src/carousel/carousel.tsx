@@ -1,5 +1,4 @@
 import { ChevronRight } from '@obosbbl/grunnmuren-icons-react';
-import { useFocusWithin } from '@react-aria/interactions';
 import { mergeRefs } from '@react-aria/utils';
 import { cva, cx } from 'cva';
 import Autoplay from 'embla-carousel-autoplay';
@@ -101,7 +100,6 @@ const Carousel = ({
           delay: autoPlayDelay,
           stopOnLastSnap: !loop,
           jump: prefersReducedMotion,
-          stopOnFocusIn: true,
         }),
       );
     }
@@ -222,22 +220,6 @@ const Carousel = ({
 
   const locale = useLocale();
 
-  const { focusWithinProps } = useFocusWithin({
-    onBlurWithin: (e) => {
-      // Only restart autoplay if focus is moving outside the carousel
-      // relatedTarget is the element receiving focus (null if focus is leaving the document)
-      if (
-        // Either focus is leaving the document
-        e.relatedTarget === null ||
-        // Or focus is moving to an element outside the carousel
-        (autoPlayDelay !== undefined &&
-          !carouselRef.current?.contains(e.relatedTarget as Node))
-      ) {
-        emblaApi?.plugins().autoplay?.play();
-      }
-    },
-  });
-
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLDivElement>) => {
       if (e.key === 'ArrowRight' && !e.repeat) {
@@ -257,7 +239,6 @@ const Carousel = ({
     // biome-ignore lint/a11y/noStaticElementInteractions: This is just to enhance keyboard navigation, this is not a replacement for proper focusable elements inside the carousel
     <div
       {...rest}
-      {...focusWithinProps}
       data-orientation={orientation}
       data-slot="carousel"
       ref={mergeRefs(ref, carouselRef)}
