@@ -9,7 +9,8 @@
   "scripts": {
     "build": "pnpm --filter './packages/**' build",
     "build:docs": "pnpm --filter @obosbbl/grunnmuren-docs build",
-    "build:storybook": "storybook build -o ./apps/docs/public/storybook",
+    "build:storybook": "pnpm typecheck:storybook && storybook build -o ./apps/docs/public/storybook",
+    "typecheck:storybook": "tsc --noEmit -p packages/react/tsconfig.storybook.json",
     "ci:publish": "pnpm build && changeset publish",
     "ci:version": "changeset version",
     "dev": "storybook dev -p 6006 --ci --initial-path=/story/home--page",
