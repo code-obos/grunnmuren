@@ -1,4 +1,5 @@
 import { ChevronRight } from '@obosbbl/grunnmuren-icons-react';
+import { useFocusWithin } from '@react-aria/interactions';
 import { mergeRefs } from '@react-aria/utils';
 import { cva, cx } from 'cva';
 import Autoplay from 'embla-carousel-autoplay';
@@ -8,11 +9,8 @@ import useEmblaCarousel, {
 } from 'embla-carousel-react';
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 import {
-  Children,
-  cloneElement,
   createContext,
   type HTMLProps,
-  isValidElement,
   useCallback,
   useContext,
   useEffect,
@@ -223,6 +221,28 @@ const Carousel = ({
 
   const locale = useLocale();
 
+  const { focusWithinProps } = useFocusWithin({
+    onFocusWithin: () => {
+      // Stop autoplay when any focusable element inside the carousel receives focus
+      if (autoPlayDelay !== undefined) {
+        emblaApi?.plugins().autoplay?.stop();
+      }
+    },
+    onBlurWithin: (e) => {
+      // Only restart autoplay if focus is moving outside the carousel
+      // relatedTarget is the element receiving focus (null if focus is leaving the document)
+      if (
+        // Either focus is leaving the document
+        e.relatedTarget === null ||
+        // Or focus is moving to an element outside the carousel
+        (autoPlayDelay !== undefined &&
+          !carouselRef.current?.contains(e.relatedTarget as Node))
+      ) {
+        emblaApi?.plugins().autoplay?.play();
+      }
+    },
+  });
+
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLDivElement>) => {
       if (e.key === 'ArrowRight' && !e.repeat) {
@@ -230,20 +250,23 @@ const Carousel = ({
       } else if (e.key === 'ArrowLeft' && !e.repeat) {
         handlePrevPress();
       }
+      if (autoPlayDelay !== undefined) {
+        // Stops autoplay on any key interaction, this is they keyboard equivalent to clicking the carousel
+        emblaApi?.plugins().autoplay?.stop();
+      }
     },
-    [handleNextPress, handlePrevPress],
+    [handleNextPress, handlePrevPress, autoPlayDelay, emblaApi],
   );
 
   return (
-    // biome-ignore lint/a11y/useSemanticElements: we want to use a div
+    // biome-ignore lint/a11y/noStaticElementInteractions: This is just to enhance keyboard navigation, this is not a replacement for proper focusable elements inside the carousel
     <div
       {...rest}
+      {...focusWithinProps}
       data-orientation={orientation}
       data-slot="carousel"
       ref={mergeRefs(ref, carouselRef)}
       onKeyDown={handleKeyDown}
-      role="region"
-      aria-label={translations.carousel[locale]}
     >
       <Provider
         values={[
@@ -325,7 +348,7 @@ type CarouselItemsProps = HTMLProps<HTMLDivElement> & {
 };
 
 const CarouselItems = ({ className, children }: CarouselItemsProps) => {
-  const { slidesInView, orientation } = useContext(CarouselContext);
+  const { orientation } = useContext(CarouselContext);
 
   return (
     <div
@@ -336,13 +359,7 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => {
       )}
       data-slot="carousel-items"
     >
-      {Children.map(children, (child, index) => {
-        if (isValidElement(child)) {
-          return cloneElement(child as React.ReactElement<CarouselItemProps>, {
-            inert: slidesInView.includes(index) ? undefined : true,
-          });
-        }
-      })}
+      {children}
     </div>
   );
 };
@@ -365,6 +382,8 @@ const CarouselControls = ({
     className={cx(className, 'flex justify-end gap-x-2')}
     data-slot="carousel-controls"
     {...rest}
+    // All items of the carousel are accessible to the screen reader at all times, so these controls will only confuse screen reader users
+    aria-hidden="true"
   >
     {children}
   </div>
