@@ -1,5 +1,6 @@
 import optimizeLocales from '@react-aria/optimize-locales-plugin';
 import type { StorybookConfig } from '@storybook/react-vite';
+import tailwindcss from '@tailwindcss/vite';
 import { mergeConfig } from 'vite';
 
 const config: StorybookConfig = {
@@ -15,6 +16,9 @@ const config: StorybookConfig = {
     builder: '@storybook/builder-vite',
     disableTelemetry: true,
   },
+  typescript: {
+    reactDocgen: 'react-docgen-typescript',
+  },
 
   async viteFinal(config) {
     // Merge custom configuration into the default config
@@ -29,9 +33,7 @@ const config: StorybookConfig = {
           }),
           enforce: 'pre',
         },
-        // temp fix for Storybook using CJS
-        // see https://github.com/tailwindlabs/tailwindcss/discussions/16687#discussioncomment-12374574
-        (await import('@tailwindcss/vite')).default(),
+        tailwindcss(),
       ],
     });
   },

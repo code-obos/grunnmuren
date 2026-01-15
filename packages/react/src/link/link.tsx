@@ -1,4 +1,4 @@
-import { cx } from 'cva';
+import { compose, cva, type VariantProps } from 'cva';
 import { createContext } from 'react';
 import {
   Link as _Link,
@@ -6,20 +6,29 @@ import {
   type ContextValue,
   useContextProps,
 } from 'react-aria-components';
+import { animateIconVariants } from '../classes';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
-
-type LinkProps = _LinkProps &
-  React.RefAttributes<HTMLAnchorElement> & {
-    /** @private Used internally for slotted components */
-    _innerWrapper?: (props: _LinkProps) => LinkProps['children'];
-  };
 
 const _LinkContext = createContext<
   ContextValue<Partial<LinkProps>, HTMLAnchorElement>
 >({});
 
-const Link = ({ ref: _ref, ..._props }: LinkProps) => {
+const linkVariants = compose(
+  animateIconVariants,
+  cva({
+    base: 'inline-flex cursor-pointer items-center gap-1 font-medium hover:no-underline focus-visible:outline-current focus-visible:outline-focus-offset data-disabled:cursor-default',
+  }),
+);
+
+type LinkProps = VariantProps<typeof linkVariants> &
+  _LinkProps &
+  React.RefAttributes<HTMLAnchorElement> & {
+    /** @private Used internally for slotted components */
+    _innerWrapper?: (props: _LinkProps) => LinkProps['children'];
+  };
+
+const Link = ({ ref: _ref, animateIcon, ..._props }: LinkProps) => {
   const [props, ref] = useContextProps(_props, _ref, _LinkContext);
   const { className, _innerWrapper, children: _children, ...restProps } = props;
 
@@ -50,10 +59,7 @@ const Link = ({ ref: _ref, ..._props }: LinkProps) => {
       {...restProps}
       ref={ref}
       data-slot="link"
-      className={cx(
-        className,
-        'inline-flex cursor-pointer items-center gap-1 font-medium hover:no-underline focus-visible:outline-current focus-visible:outline-focus-offset [&>svg]:shrink-0 [&>svg]:transition-transform',
-      )}
+      className={linkVariants({ className, animateIcon })}
     >
       {children}
     </_Link>

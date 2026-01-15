@@ -3,12 +3,12 @@ import { Heading } from '../content';
 import { UNSAFE_Link as Link } from '../link';
 import { LinkList, LinkListContainer, LinkListItem } from './link-list';
 
-const meta: Meta<typeof LinkList> = {
+const meta = {
   title: 'LinkList',
   component: LinkList,
 
   tags: ['autodocs'],
-};
+} satisfies Meta<typeof LinkList>;
 
 export default meta;
 

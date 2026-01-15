@@ -11,14 +11,14 @@ import {
   SelectSection,
 } from './select';
 
-const meta: Meta<typeof Select> = {
+const meta = {
   title: 'Select',
   component: Select,
-};
+} satisfies Meta<typeof Select>;
 
 export default meta;
 
-type Story = StoryObj<typeof Select>;
+type Story = StoryObj<typeof meta>;
 
 const Template = <T extends object>(args: SelectProps<T>) => {
   const select = (
@@ -78,12 +78,15 @@ const defaultProps = {
   defaultSelectedKey: undefined,
   selectedKey: undefined,
   placeholder: 'Velg område',
+  children: undefined,
 };
 
-export const Default: Story = {
+export const Default = {
   render: Template,
-  args: { ...defaultProps },
-};
+  args: {
+    ...defaultProps,
+  },
+} satisfies Story;
 
 export const Required: Story = {
   render: Template,

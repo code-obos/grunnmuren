@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta } from '@storybook/react-vite';
 import { useState } from 'react';
 import { Button } from '../button';
 import { Description, Label } from '../label';
 import { UNSAFE_FileUpload as FileUpload } from './file-upload';
 
-const meta: Meta<typeof FileUpload> = {
+const meta = {
   title: 'FileUpload',
   component: FileUpload,
   parameters: {
@@ -22,17 +22,13 @@ const meta: Meta<typeof FileUpload> = {
       </div>
     );
   },
-};
+} satisfies Meta<typeof FileUpload>;
 
 export default meta;
 
-type Story = StoryObj<typeof FileUpload>;
+export const FileUploadStory = {};
 
-export const FileUploadStory: Story = {
-  args: {},
-};
-
-export const AllowsMultiple: Story = {
+export const AllowsMultiple = {
   render: () => {
     return (
       <div className="container p-4">
@@ -48,7 +44,7 @@ export const AllowsMultiple: Story = {
   },
 };
 
-export const LimitFileTypes: Story = {
+export const LimitFileTypes = {
   render: () => {
     return (
       <div className="w-72 max-w-full p-4">
@@ -62,7 +58,7 @@ export const LimitFileTypes: Story = {
   },
 };
 
-export const AcceptDirectory: Story = {
+export const AcceptDirectory = {
   render: () => {
     return (
       <div className="w-72 max-w-full p-4">
@@ -76,7 +72,7 @@ export const AcceptDirectory: Story = {
   },
 };
 
-export const Controlled: Story = {
+export const Controlled = {
   render: () => {
     const [files, setFiles] = useState<File[]>([]);
     return (
@@ -92,7 +88,7 @@ export const Controlled: Story = {
   },
 };
 
-export const Required: Story = {
+export const Required = {
   render: () => {
     return (
       <form
@@ -123,7 +119,7 @@ export const Required: Story = {
   },
 };
 
-export const Validation: Story = {
+export const Validation = {
   render: () => {
     return (
       <div className="w-72 max-w-full p-4">

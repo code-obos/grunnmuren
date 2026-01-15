@@ -19,13 +19,19 @@ function Home() {
       <div className="grid grid-cols-2 gap-4">
         <Card variant="outlined">
           <Heading level={2}>
-            <CardLink href="/komponenter">Komponenter</CardLink>
+            <CardLink
+              href={{
+                to: '/komponenter',
+              }}
+            >
+              Komponenter
+            </CardLink>
           </Heading>
           Se alle byggeklossene våre
         </Card>
         <Card variant="outlined">
           <Heading level={2}>
-            <CardLink href="/profil">Profil</CardLink>
+            <CardLink href={{ to: '/profil' }}>Profil</CardLink>
           </Heading>
           Utforsk profilen vår
         </Card>

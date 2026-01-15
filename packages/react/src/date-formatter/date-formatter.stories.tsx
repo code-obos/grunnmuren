@@ -2,11 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { DateFormatter } from './date-formatter';
 
-const meta: Meta<typeof DateFormatter> = {
+const meta = {
   title: 'DateFormatter',
   component: DateFormatter,
   render: (props) => <DateFormatter {...props} />,
-};
+} satisfies Meta<typeof DateFormatter>;
 
 type Story = StoryObj<typeof meta>;
 

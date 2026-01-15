@@ -1,281 +1,353 @@
-import { ChevronLeft, ChevronRight } from '@obosbbl/grunnmuren-icons-react';
-import { useLayoutEffect } from '@react-aria/utils';
-import { cx } from 'cva';
+import { ChevronRight } from '@obosbbl/grunnmuren-icons-react';
+import { mergeRefs } from '@react-aria/utils';
+import { cva, cx } from 'cva';
+import Autoplay from 'embla-carousel-autoplay';
+import useEmblaCarousel, {
+  type EmblaViewportRefType,
+  type UseEmblaCarouselType,
+} from 'embla-carousel-react';
+import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 import {
   Children,
   cloneElement,
   createContext,
   type HTMLProps,
   isValidElement,
-  type RefObject,
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
-import { DEFAULT_SLOT, type PressEvent, Provider } from 'react-aria-components';
-import { Button, ButtonContext } from '../button';
+import { DEFAULT_SLOT, Provider } from 'react-aria-components';
+import { Button, ButtonContext, type ButtonProps } from '../button';
 import { MediaContext } from '../content';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 import { usePrefersReducedMotion } from '../use-prefers-reduced-motion';
 
-type CarouselProps = Omit<HTMLProps<HTMLDivElement>, 'onChange'> & {
+type CarouselProps = Omit<
+  HTMLProps<HTMLDivElement>,
+  'onChange' | 'onSelect'
+> & {
   children?: React.ReactNode;
   /**
-   * The initial slide to display when the carousel is mounted.
+   * Alignment of the items relative to the carousel viewport.
+   * @default 'center'
+   */
+  align?: 'start' | 'center' | 'end';
+  /** Delay in milliseconds between each automatic transition of the carousel. Any interaction with the carousel will immediately stop the autoplay. */
+  autoPlayDelay?: number;
+  /**
+   * The initial snapped index of the carousel.
    * @default 0
    */
-  defaultInitialSlide?: number;
+  initialIndex?: number;
   /**
-   * Callback invoked when the slide changes.
+   * Whether the carousel infinitely loops.
+   * @default false
    */
-  onSlideChange?: (index: number) => void;
+  loop?: boolean;
+  /**
+   * Orientation of the carousel.
+   * @default 'horizontal'
+   */
+  orientation?: 'horizontal' | 'vertical';
+  /**
+   * Callback invoked when the snapped index changes.
+   */
+  onSelect?: (index: number) => void;
+  /**
+   * Callback invoked after the carousel scrolling "settles". Think of this as the debounced version of `onSelect`.
+   */
+  onSettled?: (index: number) => void;
+  /**
+   * Whether the carousel should scroll with regular mouse/trackpad scroll gestures, in addition to swipe gestures.
+   * @default false
+   */
+  scrollGestures?: boolean;
 };
 
-function getCarouselItems(ref: RefObject<HTMLDivElement | null>) {
-  const items = ref.current?.querySelectorAll<HTMLElement>(
-    '[data-slot="carousel-item"]',
-  );
-
-  return items;
-}
+type EmblaEventHandler = Parameters<
+  NonNullable<UseEmblaCarouselType[1]>['on']
+>[1];
 
 const Carousel = ({
-  className,
+  autoPlayDelay,
+  align = 'center',
   children,
-  defaultInitialSlide = 0,
-  onSlideChange = () => {},
+  initialIndex = 0,
+  orientation = 'horizontal',
+  onSelect,
+  onSettled,
+  loop = false,
+  scrollGestures = false,
+  ref,
   ...rest
 }: CarouselProps) => {
   const carouselRef = useRef<HTMLDivElement>(null);
-  const prefersReducedMotion = usePrefersReducedMotion();
-  const firstIntersectionCallImminent = useRef(true);
-  const isScrollingProgrammaticallyToSlide = useRef<number>(null);
 
-  const carouselItemsRef = useRef<HTMLDivElement>(null);
-  const locale = useLocale();
+  const prefersReducedMotion = usePrefersReducedMotion() ?? false;
 
-  const [activeSlide, setActiveSlide] = useState(defaultInitialSlide);
-  const [slideCount, setSlideCount] = useState(0);
+  const emblaPlugins = useMemo(() => {
+    const plugins = [];
 
-  // Get the number of carousel items and set the slide count.
-  useLayoutEffect(() => {
-    const items = getCarouselItems(carouselItemsRef)?.length;
-    setSlideCount(items ?? 0);
-
-    // If initial slide is something other than the first, scroll to it (without smooth scroll).
-    if (activeSlide > 0) {
-      scrollTo(activeSlide, true);
+    if (scrollGestures) {
+      plugins.push(WheelGesturesPlugin());
     }
-  }, []);
 
-  const scrollTo = useCallback(
-    (slideIndex: number, jumpWithoutCallbacks = false) => {
-      const items = getCarouselItems(carouselItemsRef);
-      const target = items?.[slideIndex];
+    if (autoPlayDelay) {
+      plugins.push(
+        Autoplay({
+          delay: autoPlayDelay,
+          stopOnLastSnap: !loop,
+          jump: prefersReducedMotion,
+        }),
+      );
+    }
+    return plugins;
+  }, [autoPlayDelay, scrollGestures, loop, prefersReducedMotion]);
 
-      if (target) {
-        isScrollingProgrammaticallyToSlide.current = slideIndex;
-        if (!jumpWithoutCallbacks) {
-          setActiveSlide(slideIndex);
-          setSlideCount(items.length);
-          onSlideChange(slideIndex);
-        }
-
-        carouselItemsRef.current?.scrollTo({
-          behavior:
-            jumpWithoutCallbacks || prefersReducedMotion ? 'instant' : 'smooth',
-          left: target.offsetLeft,
-        });
-      }
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      align,
+      loop,
+      startIndex: initialIndex,
+      axis: orientation === 'horizontal' ? 'x' : 'y',
+      inViewThreshold: 0.2,
     },
-    [onSlideChange, prefersReducedMotion],
+    emblaPlugins,
   );
 
+  const [slidesInView, setSlidesInView] = useState<number[]>([initialIndex]);
+  // We need some default values here. The proper initial values will be set by the embla init handler later
+  // for the default values, assume that we can scroll next, but for prev only if looping is enabled
+  const [canScrollNext, setCanScrollNext] = useState(true);
+  const [canScrollPrev, setCanScrollPrev] = useState(loop);
+  const previousSettledScrollIndex = useRef(initialIndex);
+
   useEffect(() => {
-    function getSlideIndex(
-      element: Element,
-    ): [index: number, slideCount: number] {
-      const items = getCarouselItems(carouselItemsRef) ?? [];
-
-      return [Array.from(items).indexOf(element as HTMLElement), items.length];
+    if (!emblaApi) {
+      return;
     }
 
-    if ('onscrollsnapchanging' in window) {
-      const scrollSnapChange = (event: Event) => {
-        if (isScrollingProgrammaticallyToSlide.current != null) {
-          isScrollingProgrammaticallyToSlide.current = null;
-          return;
-        }
+    const emblaHandler: EmblaEventHandler = (_, type) => {
+      const scrollSnapIndex = emblaApi.selectedScrollSnap();
 
-        const [newIndex, slideCount] = getSlideIndex(
-          (event as Event & { snapTargetInline: Element }).snapTargetInline,
-        );
-        setActiveSlide(newIndex);
-        setSlideCount(slideCount);
-        onSlideChange(newIndex);
-      };
-
-      carouselItemsRef.current?.addEventListener(
-        'scrollsnapchanging',
-        scrollSnapChange,
-      );
-
-      return () =>
-        carouselItemsRef.current?.removeEventListener(
-          'scrollsnapchanging',
-          scrollSnapChange,
-        );
-    } else {
-      // For browers (non chromium) that don't support scroll snap events we fall back to using intersection observer
-      const instersectionCallback = (entries: IntersectionObserverEntry[]) => {
-        if (firstIntersectionCallImminent.current) {
-          firstIntersectionCallImminent.current = false;
-          isScrollingProgrammaticallyToSlide.current = null;
-          return;
-        }
-
-        // use a for iteration here so we can break out of the loop early. Of the observered elements we only care about the first one that is intersecting.
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            const [newIndex, slideCount] = getSlideIndex(entry.target);
-
-            if (isScrollingProgrammaticallyToSlide.current == null) {
-              setActiveSlide(newIndex);
-              setSlideCount(slideCount);
-              onSlideChange(newIndex);
-            } else if (
-              newIndex === isScrollingProgrammaticallyToSlide.current
-            ) {
-              isScrollingProgrammaticallyToSlide.current = null;
-            }
-            break;
+      switch (type) {
+        case 'select':
+          onSelect?.(scrollSnapIndex);
+          setCanScrollNext(emblaApi.canScrollNext());
+          setCanScrollPrev(emblaApi.canScrollPrev());
+          break;
+        case 'settle': {
+          // We only invoke the callback if the scroll index actually changed from the previous settled index
+          // Otherwise this gets triggered if the user does the tiniest bit of scrolling in the carousel, but doesn't transition to the next slide
+          if (scrollSnapIndex !== previousSettledScrollIndex.current) {
+            previousSettledScrollIndex.current = scrollSnapIndex;
+            onSettled?.(scrollSnapIndex);
           }
+          break;
         }
-      };
+        case 'slidesInView': {
+          setSlidesInView(emblaApi.slidesInView());
+          break;
+        }
+        case 'init': {
+          setCanScrollNext(emblaApi.canScrollNext());
+          setCanScrollPrev(emblaApi.canScrollPrev());
+          break;
+        }
+      }
+    };
 
-      const observer = new IntersectionObserver(instersectionCallback, {
-        root: carouselRef.current,
-        rootMargin: '0px',
-        threshold: 0.8,
-      });
+    emblaApi.on('select', emblaHandler);
+    emblaApi.on('slidesInView', emblaHandler);
+    emblaApi.on('settle', emblaHandler);
+    emblaApi.on('init', emblaHandler);
 
-      const items = getCarouselItems(carouselItemsRef);
+    return () => {
+      emblaApi.off('select', emblaHandler);
+      emblaApi.off('settle', emblaHandler);
+      emblaApi.off('slidesInView', emblaHandler);
+      emblaApi.off('init', emblaHandler);
+    };
+  }, [emblaApi, onSelect, onSettled]);
 
-      items?.forEach((slide) => {
-        observer.observe(slide);
-      });
-
-      return () => {
-        observer.disconnect();
-        firstIntersectionCallImminent.current = true;
-      };
+  const handleNextPress = useCallback(() => {
+    if (!emblaApi) {
+      return;
     }
-  }, [onSlideChange]);
 
-  const handlePrevious = (evt?: PressEvent) => {
-    const nextSlide = activeSlide - 1;
+    emblaApi.plugins().autoplay?.stop();
 
-    scrollTo(nextSlide);
+    emblaApi.scrollNext(prefersReducedMotion);
 
-    // This method is used both when clicking the button and scrolling the carousel with keys
-    // if this is a button press, we need to move focus if  we are about to disable this button due to start/end of carousel
-    if (evt && nextSlide <= 0) {
+    // we need to move focus if  we are about to disable this button due to start/end of carousel
+    if (
+      !loop &&
+      !emblaApi.canScrollNext() &&
       carouselRef.current
         ?.querySelector<HTMLButtonElement>('button[slot="next"]')
-        ?.focus();
-    }
-  };
-
-  const handleNext = (evt?: PressEvent) => {
-    const nextSlide = activeSlide + 1;
-    scrollTo(nextSlide);
-
-    // This method is used both when clicking the button and scrolling the carousel with keys
-    // if this is a button press, we need to move focus if  we are about to disable this button due to start/end of carousel
-    if (evt && nextSlide >= slideCount - 1) {
+        ?.matches(':focus-visible')
+    ) {
       carouselRef.current
         ?.querySelector<HTMLButtonElement>('button[slot="prev"]')
         ?.focus();
     }
-  };
+  }, [emblaApi, prefersReducedMotion, loop]);
+
+  const handlePrevPress = useCallback(() => {
+    if (!emblaApi) {
+      return;
+    }
+
+    emblaApi.plugins().autoplay?.stop();
+
+    emblaApi.scrollPrev(prefersReducedMotion);
+
+    // we need to move focus if  we are about to disable this button due to start/end of carousel
+    if (
+      !loop &&
+      !emblaApi.canScrollPrev() &&
+      carouselRef.current
+        ?.querySelector<HTMLButtonElement>('button[slot="prev"]')
+        ?.matches(':focus-visible')
+    ) {
+      carouselRef.current
+        ?.querySelector<HTMLButtonElement>('button[slot="next"]')
+        ?.focus();
+    }
+  }, [emblaApi, prefersReducedMotion, loop]);
+
+  const locale = useLocale();
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (e.key === 'ArrowRight' && !e.repeat) {
+        handleNextPress();
+      } else if (e.key === 'ArrowLeft' && !e.repeat) {
+        handlePrevPress();
+      }
+    },
+    [handleNextPress, handlePrevPress],
+  );
 
   return (
-    <div data-slot="carousel" ref={carouselRef}>
+    // biome-ignore lint/a11y/useSemanticElements: we want to use a div
+    <div
+      {...rest}
+      data-orientation={orientation}
+      data-slot="carousel"
+      ref={mergeRefs(ref, carouselRef)}
+      onKeyDown={handleKeyDown}
+      role="region"
+      aria-label={translations.carousel[locale]}
+    >
       <Provider
         values={[
           [
-            CarouselItemsContext,
+            CarouselContext,
             {
-              carouselItemsRef,
-              activeSlide: activeSlide,
-              handlePrevious,
-              handleNext,
+              slidesInView,
+              '~emblaRef': emblaRef,
+              orientation,
             },
           ],
           [
             ButtonContext,
             {
               slots: {
-                [DEFAULT_SLOT]: {}, // this is required in RAC (for non-trigger buttons)
+                [DEFAULT_SLOT]: {},
                 prev: {
                   'aria-label': translations.previous[locale],
-                  onPress: handlePrevious,
-                  isDisabled: activeSlide === 0,
+                  isDisabled: !canScrollPrev,
+                  onPress: handlePrevPress,
                 },
                 next: {
-                  isIconOnly: true,
                   'aria-label': translations.next[locale],
-                  onPress: handleNext,
-                  isDisabled: slideCount - 1 <= activeSlide,
+                  isDisabled: !canScrollNext,
+                  onPress: handleNextPress,
                 },
               },
             },
           ],
         ]}
       >
-        <div
-          {...rest}
-          className={cx(
-            className,
-            'relative rounded-3xl',
-            // If any <CarouselItems/> (the scroll-snap container) or <VideoLoop/> component is focused, apply custom focus styles around the carousel, this makes ensures that the focus outline is visible around the carousel in all cases
-            '[&:has([data-slot="carousel-items"]:focus-visible,[data-slot="video-loop-button"]:focus-visible)]:outline-focus',
-            '[&:has([data-slot="carousel-items"]:focus-visible,[data-slot="video-loop-button"]:focus-visible)]:outline-focus-offset',
-            // Unset the default focus outline for potential video loop buttons, as it interferes with the custom focus styles for the carousel
-            '**:data-[slot="video-loop-button"]:focus-visible:outline-none',
-          )}
-        >
-          {children}
-          <_CarouselControls>
-            <Button
-              isIconOnly
-              slot="prev"
-              variant="primary"
-              color="white"
-              className="group/carousel-previous data-disabled:invisible"
-            >
-              <ChevronLeft className="group-hover/carousel-previous:motion-safe:-translate-x-1 transition-transform" />
-            </Button>
-            <Button
-              isIconOnly
-              slot="next"
-              variant="primary"
-              color="white"
-              className="group/carousel-next data-disabled:invisible"
-            >
-              <ChevronRight className="transition-transform group-hover/carousel-next:motion-safe:translate-x-1" />
-            </Button>
-          </_CarouselControls>
-        </div>
+        {children}
       </Provider>
     </div>
   );
 };
 
-type _CarouselControlsProps = HTMLProps<HTMLDivElement> & {
+type CarouselContextValue = {
+  slidesInView: number[];
+  orientation: 'horizontal' | 'vertical';
+  /**
+   * @private
+   */
+  '~emblaRef': EmblaViewportRefType | null;
+};
+
+const CarouselContext = createContext<CarouselContextValue>({
+  '~emblaRef': null,
+  orientation: 'horizontal',
+  slidesInView: [],
+});
+
+type CarouselItemsContainer = HTMLProps<HTMLDivElement> & {
+  children: React.ReactNode;
+};
+
+const CarouselItemsContainer = ({
+  children,
+  className,
+  ...rest
+}: CarouselItemsContainer) => {
+  const { '~emblaRef': emblaRef } = useContext(CarouselContext);
+
+  return (
+    <div
+      className={cx(className, 'overflow-hidden')}
+      ref={emblaRef}
+      data-slot="carousel-items-container"
+      {...rest}
+    >
+      {children}
+    </div>
+  );
+};
+
+type CarouselItemsProps = HTMLProps<HTMLDivElement> & {
+  /** The <CarouselItem/> components to be displayed within the carousel. */
+  children: React.ReactNode;
+};
+
+const CarouselItems = ({ className, children }: CarouselItemsProps) => {
+  const { slidesInView, orientation } = useContext(CarouselContext);
+
+  return (
+    <div
+      className={cx(
+        className,
+        'flex',
+        orientation === 'vertical' && 'flex-col',
+      )}
+      data-slot="carousel-items"
+    >
+      {Children.map(children, (child, index) => {
+        if (isValidElement(child)) {
+          return cloneElement(child as React.ReactElement<CarouselItemProps>, {
+            inert: slidesInView.includes(index) ? undefined : true,
+          });
+        }
+      })}
+    </div>
+  );
+};
+
+type CarouselControlsProps = HTMLProps<HTMLDivElement> & {
   /** The <CarouselItem/> components to be displayed within the carousel. */
   children: React.ReactNode;
 };
@@ -284,93 +356,88 @@ type _CarouselControlsProps = HTMLProps<HTMLDivElement> & {
  * This is internal for now, but we will expose it in the future when we support more flexible positioning of prev/next and other actions.
  * It is used to render the prev/next buttons in the carousel for now.
  */
-const _CarouselControls = ({ children, className }: _CarouselControlsProps) => (
+const CarouselControls = ({
+  children,
+  className,
+  ...rest
+}: CarouselControlsProps) => (
   <div
-    className={cx(
-      className,
-      'absolute right-6 bottom-6 flex gap-x-2',
-      // Make it easier to position in full-bleed hero variants (these style have no other side effects)
-      'items-end *:h-fit',
-    )}
+    className={cx(className, 'flex justify-end gap-x-2')}
     data-slot="carousel-controls"
+    {...rest}
   >
     {children}
   </div>
 );
 
-type CarouselItemsProps = HTMLProps<HTMLDivElement> & {
-  /** The <CarouselItem/> components to be displayed within the carousel. */
-  children: React.ReactNode;
-};
-
-type CarouselItemsContextValue = {
-  carouselItemsRef: React.Ref<HTMLDivElement>;
-  activeSlide: number;
-  handlePrevious?: (evt?: PressEvent) => void;
-  handleNext?: (evt?: PressEvent) => void;
-};
-
-const CarouselItemsContext = createContext<CarouselItemsContextValue>({
-  carouselItemsRef: null,
-  activeSlide: 0,
+const carouselButtonVariants = cva({
+  base: 'group data-disabled:invisible',
 });
 
-const CarouselItems = ({ className, children }: CarouselItemsProps) => {
-  const { carouselItemsRef, activeSlide, handleNext, handlePrevious } =
-    useContext(CarouselItemsContext);
+const carouselButtonIconSlotVariants = cva({
+  base: 'transition-transform',
+  variants: {
+    slot: {
+      next: null,
+      prev: null,
+    },
+    orientation: {
+      horizontal: null,
+      vertical: null,
+    },
+  },
+  compoundVariants: [
+    // horizontal controls
+    {
+      slot: 'next',
+      orientation: 'horizontal',
+      className: 'group-hover:motion-safe:translate-x-1',
+    },
+    {
+      slot: 'prev',
+      orientation: 'horizontal',
+      className: 'group-hover:motion-safe:-translate-x-1 rotate-180',
+    },
+    // vertical controls
+    {
+      slot: 'next',
+      orientation: 'vertical',
+      className: 'rotate-90 group-hover:motion-safe:translate-y-1',
+    },
+    {
+      slot: 'prev',
+      orientation: 'vertical',
+      className: 'group-hover:motion-safe:-translate-y-1 -rotate-90',
+    },
+  ],
+});
 
-  const locale = useLocale();
+type CarouselButtonProps = ButtonProps & {
+  slot: 'next' | 'prev';
+};
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    // Prevent default behavior when holding down arrow keys (when repeat is true)
-    // The default behavior in scroll snapping causes a staggering scroll effect that feels janky
-    if (
-      event.repeat &&
-      (event.key === 'ArrowLeft' || event.key === 'ArrowRight')
-    ) {
-      event.preventDefault();
-      return;
-    }
-
-    // Trigger next/prev ourselves instead of native scroll snapping keyboard behavior.
-    // This fixes the "halfway" scroll effect when hitting the keys multiple times in quick succession.
-    if (event.key === 'ArrowLeft' && handlePrevious) {
-      event.preventDefault();
-      handlePrevious();
-    } else if (event.key === 'ArrowRight' && handleNext) {
-      event.preventDefault();
-      handleNext();
-    }
-  };
-
+const CarouselButton = ({
+  className,
+  isIconOnly = true,
+  color = 'white',
+  variant = 'primary',
+  slot,
+  ...rest
+}: CarouselButtonProps) => {
+  const { orientation } = useContext(CarouselContext);
   return (
-    // biome-ignore lint/a11y/useSemanticElements: we prefer div over fieldset
-    <div
-      aria-label={translations.carousel[locale]}
-      data-slot="carousel-items"
-      className={cx(className, [
-        'scrollbar-hidden',
-        'flex',
-        'snap-x',
-        'snap-mandatory',
-        'overflow-x-auto',
-        'outline-none',
-        'rounded-[inherit]',
-      ])}
-      // biome-ignore lint/a11y/noNoninteractiveTabindex: If this is not set, left/right keyboard events won't trigger correctly when first clicking on the carousel with the cursor
-      tabIndex={0}
-      role="group"
-      onKeyDown={handleKeyDown}
-      ref={carouselItemsRef}
+    <Button
+      className={carouselButtonVariants({ className })}
+      isIconOnly={isIconOnly}
+      slot={slot}
+      variant={variant}
+      color={color}
+      {...rest}
     >
-      {Children.map(children, (child, index) => {
-        if (isValidElement(child)) {
-          return cloneElement(child as React.ReactElement<CarouselItemProps>, {
-            inert: activeSlide === index ? undefined : true,
-          });
-        }
-      })}
-    </div>
+      <ChevronRight
+        className={carouselButtonIconSlotVariants({ orientation, slot })}
+      />
+    </Button>
   );
 };
 
@@ -382,7 +449,7 @@ type CarouselItemProps = HTMLProps<HTMLDivElement> & {
 const CarouselItem = ({ className, children, ...rest }: CarouselItemProps) => {
   return (
     <div
-      className={cx(className, 'shrink-0 basis-full snap-start')}
+      className={cx(className, 'min-w-0 shrink-0 grow-0')}
       data-slot="carousel-item"
       {...rest}
     >
@@ -409,9 +476,17 @@ const CarouselItem = ({ className, children, ...rest }: CarouselItemProps) => {
 
 export {
   Carousel as UNSAFE_Carousel,
+  CarouselButton as UNSAFE_CarouselButton,
+  CarouselContext as UNSAFE_CarouselContext,
+  CarouselControls as UNSAFE_CarouselControls,
   CarouselItem as UNSAFE_CarouselItem,
   CarouselItems as UNSAFE_CarouselItems,
+  CarouselItemsContainer as UNSAFE_CarouselItemsContainer,
+  type CarouselButtonProps as UNSAFE_CarouselButtonProps,
+  type CarouselContextValue as UNSAFE_CarouselContextValue,
+  type CarouselControlsProps as UNSAFE_CarouselControlsProps,
   type CarouselItemProps as UNSAFE_CarouselItemProps,
+  type CarouselItemsContainer as UNSAFE_CarouselItemsContainerProps,
   type CarouselItemsProps as UNSAFE_CarouselItemsProps,
   type CarouselProps as UNSAFE_CarouselProps,
 };
