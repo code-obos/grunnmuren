@@ -45,7 +45,7 @@ const Step = ({ isCompleted = false, children, ...restProps }: StepProps) => {
       {...restProps}
       data-slot="step"
       data-state={state}
-      data-is-current={isCurrent}
+      data-current={isCurrent ? true : undefined}
       id={id}
     >
       <Provider
