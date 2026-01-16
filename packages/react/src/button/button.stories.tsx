@@ -4,7 +4,9 @@ import { cx } from 'cva';
 
 import { Button } from './button';
 
-const meta = {
+// Note: we cannot use the `satisfie` CSF here, because the resulting union type is too wide for TS to typecheck
+// This is because of the complexity of the union type of the button (both a link and a button)
+const meta: Meta<typeof Button> = {
   title: 'Button',
   component: Button,
   parameters: {
@@ -44,11 +46,11 @@ const meta = {
       </>
     );
   },
-} satisfies Meta<typeof Button>;
+};
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Button>;
 
 export const Primary: Story = {
   args: {

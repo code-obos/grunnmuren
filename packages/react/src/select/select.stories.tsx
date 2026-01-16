@@ -51,7 +51,12 @@ const ControlledTemplate = <T extends object>(args: SelectProps<T>) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <Template {...args} selectedKey={value} onSelectionChange={setValue} />
+      <Template
+        {...args}
+        selectedKey={value}
+        // @ts-expect-error not quite sure what to do here
+        onSelectionChange={setValue}
+      />
       <pre className="font-sans">{value}</pre>
     </div>
   );
