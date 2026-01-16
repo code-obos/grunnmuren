@@ -82,6 +82,32 @@ const getCarouselButton = (
   slot: 'prev' | 'next',
 ) => ref.current?.querySelector<HTMLButtonElement>(`button[slot="${slot}"]`);
 
+/**
+ * Focus the first focusable element in the currently snapped slide
+ * @param emblaApi The embla carousel API instance
+ */
+const focusElementInSnappedSlide = (
+  emblaApi: UseEmblaCarouselType[1] | undefined,
+) => {
+  if (!emblaApi) {
+    return;
+  }
+
+  const index = emblaApi.selectedScrollSnap();
+  const targetSlide = emblaApi.slideNodes()[index];
+  if (!targetSlide) {
+    return;
+  }
+
+  // Find first focusable element in the slide
+  const focusableElement = targetSlide.querySelector<HTMLElement>(
+    'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+  );
+  // Use preventScroll to avoid the browser's default scroll-into-view behavior
+  // which would conflict with embla's scroll animation
+  focusableElement?.focus({ preventScroll: true });
+};
+
 const Carousel = ({
   autoPlayDelay,
   align = 'center',
@@ -224,23 +250,6 @@ const Carousel = ({
 
   const locale = useLocale();
 
-  // Focus the first focusable element in the slide at the given index
-  const focusFirstFocusableInSlide = useCallback((slideIndex: number) => {
-    const slides = carouselRef.current?.querySelectorAll(
-      '[data-slot="carousel-item"]',
-    );
-    const targetSlide = slides?.[slideIndex];
-    if (!targetSlide) return;
-
-    // Find first focusable element in the slide
-    const focusableElement = targetSlide.querySelector<HTMLElement>(
-      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
-    );
-    // Use preventScroll to avoid the browser's default scroll-into-view behavior
-    // which would conflict with embla's scroll animation
-    focusableElement?.focus({ preventScroll: true });
-  }, []);
-
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLDivElement>) => {
       // Check if either prev or next button has focus - if so, don't override their focus management
@@ -252,23 +261,17 @@ const Carousel = ({
         handleNextPress();
         // Focus first focusable element in the next slide, unless a carousel button has focus
         if (!carouselButtonHasFocus) {
-          const nextIndex = emblaApi?.selectedScrollSnap();
-          if (nextIndex !== undefined) {
-            focusFirstFocusableInSlide(nextIndex);
-          }
+          focusElementInSnappedSlide(emblaApi);
         }
       } else if (e.key === 'ArrowLeft' && !e.repeat) {
         handlePrevPress();
         // Focus first focusable element in the previous slide, unless a carousel button has focus
         if (!carouselButtonHasFocus) {
-          const prevIndex = emblaApi?.selectedScrollSnap();
-          if (prevIndex !== undefined) {
-            focusFirstFocusableInSlide(prevIndex);
-          }
+          focusElementInSnappedSlide(emblaApi);
         }
       }
     },
-    [handleNextPress, handlePrevPress, emblaApi, focusFirstFocusableInSlide],
+    [handleNextPress, handlePrevPress, emblaApi],
   );
 
   const hasHeroContext = !!useContext(HeroContext);
