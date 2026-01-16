@@ -1,5 +1,5 @@
 import { cva, cx, type VariantProps } from 'cva';
-import type { HTMLProps } from 'react';
+import { createContext, type HTMLProps } from 'react';
 import { GroupContext, Provider } from 'react-aria-components';
 import { HeadingContext } from '../content';
 
@@ -7,6 +7,12 @@ type HeroProps = HTMLProps<HTMLDivElement> &
   VariantProps<typeof variants> & {
     children: React.ReactNode;
   };
+
+type HeroContextValue = {
+  variant: HeroProps['variant'];
+};
+
+const HeroContext = createContext<HeroContextValue | null>(null);
 
 // Common variant for "standard" and "full-bleed" Hero variants
 const oneColumnLayout = [
@@ -108,6 +114,7 @@ const Hero = ({ variant, className, children, ...rest }: HeroProps) => {
   return (
     <Provider
       values={[
+        [HeroContext, { variant }],
         [
           HeadingContext,
           {
@@ -136,4 +143,9 @@ const Hero = ({ variant, className, children, ...rest }: HeroProps) => {
   );
 };
 
-export { Hero as UNSAFE_Hero, type HeroProps as UNSAFE_HeroProps };
+export {
+  Hero as UNSAFE_Hero,
+  HeroContext as UNSAFE_HeroContext,
+  type HeroProps as UNSAFE_HeroProps,
+  type HeroContextValue as UNSAFE_HeroContextValue,
+};

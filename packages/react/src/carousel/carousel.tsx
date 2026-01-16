@@ -8,11 +8,8 @@ import useEmblaCarousel, {
 } from 'embla-carousel-react';
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 import {
-  Children,
-  cloneElement,
   createContext,
   type HTMLProps,
-  isValidElement,
   useCallback,
   useContext,
   useEffect,
@@ -23,6 +20,7 @@ import {
 import { DEFAULT_SLOT, Provider } from 'react-aria-components';
 import { Button, ButtonContext, type ButtonProps } from '../button';
 import { MediaContext } from '../content';
+import { UNSAFE_HeroContext as HeroContext } from '../hero';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 import { usePrefersReducedMotion } from '../use-prefers-reduced-motion';
@@ -234,16 +232,19 @@ const Carousel = ({
     [handleNextPress, handlePrevPress],
   );
 
+  const hasHeroContext = !!useContext(HeroContext);
+  const nextPrevStyles = hasHeroContext
+    ? { color: 'white' as const, variant: 'primary' as const }
+    : { variant: 'tertiary' as const };
+
   return (
-    // biome-ignore lint/a11y/useSemanticElements: we want to use a div
+    // biome-ignore lint/a11y/noStaticElementInteractions: This is just to enhance keyboard navigation, this is not a replacement for proper focusable elements inside the carousel
     <div
       {...rest}
       data-orientation={orientation}
       data-slot="carousel"
       ref={mergeRefs(ref, carouselRef)}
       onKeyDown={handleKeyDown}
-      role="region"
-      aria-label={translations.carousel[locale]}
     >
       <Provider
         values={[
@@ -264,11 +265,13 @@ const Carousel = ({
                   'aria-label': translations.previous[locale],
                   isDisabled: !canScrollPrev,
                   onPress: handlePrevPress,
+                  ...nextPrevStyles,
                 },
                 next: {
                   'aria-label': translations.next[locale],
                   isDisabled: !canScrollNext,
                   onPress: handleNextPress,
+                  ...nextPrevStyles,
                 },
               },
             },
@@ -325,7 +328,7 @@ type CarouselItemsProps = HTMLProps<HTMLDivElement> & {
 };
 
 const CarouselItems = ({ className, children }: CarouselItemsProps) => {
-  const { slidesInView, orientation } = useContext(CarouselContext);
+  const { orientation } = useContext(CarouselContext);
 
   return (
     <div
@@ -336,13 +339,7 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => {
       )}
       data-slot="carousel-items"
     >
-      {Children.map(children, (child, index) => {
-        if (isValidElement(child)) {
-          return cloneElement(child as React.ReactElement<CarouselItemProps>, {
-            inert: slidesInView.includes(index) ? undefined : true,
-          });
-        }
-      })}
+      {children}
     </div>
   );
 };
@@ -365,6 +362,8 @@ const CarouselControls = ({
     className={cx(className, 'flex justify-end gap-x-2')}
     data-slot="carousel-controls"
     {...rest}
+    // All items of the carousel are accessible to the screen reader at all times, so these controls will only confuse screen reader users
+    aria-hidden="true"
   >
     {children}
   </div>
@@ -419,8 +418,6 @@ type CarouselButtonProps = ButtonProps & {
 const CarouselButton = ({
   className,
   isIconOnly = true,
-  color = 'white',
-  variant = 'primary',
   slot,
   ...rest
 }: CarouselButtonProps) => {
@@ -430,8 +427,6 @@ const CarouselButton = ({
       className={carouselButtonVariants({ className })}
       isIconOnly={isIconOnly}
       slot={slot}
-      variant={variant}
-      color={color}
       {...rest}
     >
       <ChevronRight
