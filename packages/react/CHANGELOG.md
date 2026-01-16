@@ -1,5 +1,32 @@
 # @obosbbl/grunnmuren-react
 
+## 3.4.0
+
+### Minor Changes
+
+- 344da40: feat: add `animateIcon` prop to `<Button>` and `<Link>` components
+
+  This enables a hover animation in the direction specified by the prop.
+
+  ```tsx
+  <Button animateIcon="right">
+    Se alle medlemsfordeler <ArrowRight />
+  </Button>
+  ```
+
+### Patch Changes
+
+- d83a901: Ensure focus is always visible when scrolling the `<Carousel>` using arrow keys
+- 29454aa: fix: carousel controls didn't always disable at the start/end of the carousel
+- e1e1055: Fixes a11y issues on `<Carousel>` components with auto play.
+- 912b5f3: Exposing `UNSAFE_CarouselContext`, usage:
+
+  ```tsx
+  const { slidesInView, orientation } = useContext(UNSAFE_CarouselContext);
+  ```
+
+  The `slidesInView` is an array of the indexes of the the CarouselItems that are currently in view. While `orientation` is `'horizontal'` or `'vertical'`
+
 ## 3.3.5
 
 ### Patch Changes
