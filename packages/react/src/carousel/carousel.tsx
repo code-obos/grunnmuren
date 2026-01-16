@@ -71,6 +71,17 @@ type EmblaEventHandler = Parameters<
   NonNullable<UseEmblaCarouselType[1]>['on']
 >[1];
 
+/**
+ * A helper to get the prev/next button from the carousel DOM
+ * @param ref The carousel ref
+ * @param slot The slot of the button to get ('prev' or 'next')
+ * @returns The button element, or undefined if not found
+ */
+const getCarouselButton = (
+  ref: React.RefObject<HTMLDivElement | null>,
+  slot: 'prev' | 'next',
+) => ref.current?.querySelector<HTMLButtonElement>(`button[slot="${slot}"]`);
+
 const Carousel = ({
   autoPlayDelay,
   align = 'center',
@@ -173,15 +184,6 @@ const Carousel = ({
     };
   }, [emblaApi, onSelect, onSettled]);
 
-  // Helper to get carousel navigation buttons
-  const getCarouselButton = useCallback(
-    (slot: 'prev' | 'next') =>
-      carouselRef.current?.querySelector<HTMLButtonElement>(
-        `button[slot="${slot}"]`,
-      ),
-    [],
-  );
-
   const handleNextPress = useCallback(() => {
     if (!emblaApi) {
       return;
@@ -195,11 +197,11 @@ const Carousel = ({
     if (
       !loop &&
       !emblaApi.canScrollNext() &&
-      getCarouselButton('next')?.matches(':focus-visible')
+      getCarouselButton(carouselRef, 'next')?.matches(':focus-visible')
     ) {
-      getCarouselButton('prev')?.focus();
+      getCarouselButton(carouselRef, 'prev')?.focus();
     }
-  }, [emblaApi, prefersReducedMotion, loop, getCarouselButton]);
+  }, [emblaApi, prefersReducedMotion, loop]);
 
   const handlePrevPress = useCallback(() => {
     if (!emblaApi) {
@@ -214,11 +216,11 @@ const Carousel = ({
     if (
       !loop &&
       !emblaApi.canScrollPrev() &&
-      getCarouselButton('prev')?.matches(':focus-visible')
+      getCarouselButton(carouselRef, 'prev')?.matches(':focus-visible')
     ) {
-      getCarouselButton('next')?.focus();
+      getCarouselButton(carouselRef, 'next')?.focus();
     }
-  }, [emblaApi, prefersReducedMotion, loop, getCarouselButton]);
+  }, [emblaApi, prefersReducedMotion, loop]);
 
   const locale = useLocale();
 
@@ -243,8 +245,8 @@ const Carousel = ({
     (e: React.KeyboardEvent<HTMLDivElement>) => {
       // Check if either prev or next button has focus - if so, don't override their focus management
       const carouselButtonHasFocus =
-        getCarouselButton('prev')?.matches(':focus-visible') ||
-        getCarouselButton('next')?.matches(':focus-visible');
+        getCarouselButton(carouselRef, 'prev')?.matches(':focus-visible') ||
+        getCarouselButton(carouselRef, 'next')?.matches(':focus-visible');
 
       if (e.key === 'ArrowRight' && !e.repeat) {
         handleNextPress();
@@ -266,13 +268,7 @@ const Carousel = ({
         }
       }
     },
-    [
-      handleNextPress,
-      handlePrevPress,
-      emblaApi,
-      focusFirstFocusableInSlide,
-      getCarouselButton,
-    ],
+    [handleNextPress, handlePrevPress, emblaApi, focusFirstFocusableInSlide],
   );
 
   const hasHeroContext = !!useContext(HeroContext);
