@@ -228,12 +228,8 @@ const Carousel = ({
       } else if (e.key === 'ArrowLeft' && !e.repeat) {
         handlePrevPress();
       }
-      if (autoPlayDelay !== undefined) {
-        // Stops autoplay on any key interaction, this is they keyboard equivalent to clicking the carousel
-        emblaApi?.plugins().autoplay?.stop();
-      }
     },
-    [handleNextPress, handlePrevPress, autoPlayDelay, emblaApi],
+    [handleNextPress, handlePrevPress],
   );
 
   const hasHeroContext = !!useContext(HeroContext);
