@@ -13,6 +13,8 @@ const preview: Preview = {
   ],
   tags: ['autodocs'],
   parameters: {
+    docs: { codePanel: true },
+
     options: {
       storySort: {
         order: ['Home', '*'],
