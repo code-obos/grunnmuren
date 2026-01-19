@@ -24,8 +24,8 @@ RUN pnpm build
 # so the storybook assets are copied correctly to build output
 RUN pnpm build:storybook
 RUN pnpm build:docs
-RUN --mount=type=secret,id=SANITY_AUTH_TOKEN \
-  SANITY_AUTH_TOKEN=$(cat /run/secrets/SANITY_AUTH_TOKEN) \
+RUN --mount=type=secret,id=SANITY_STUDIO_DEPLOY_TOKEN \
+  SANITY_AUTH_TOKEN=$(cat /run/secrets/SANITY_STUDIO_DEPLOY_TOKEN) \
   pnpm sanity:schema:deploy
 
 FROM base
