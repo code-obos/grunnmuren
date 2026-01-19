@@ -22,25 +22,25 @@
   },
   "dependencies": {
     "@obosbbl/grunnmuren-icons-react": "workspace:^2.1.0",
-    "@react-aria/form": "^3.0.18",
-    "@react-aria/interactions": "^3.25.3",
-    "@react-aria/utils": "^3.29.1",
-    "@react-stately/form": "^3.1.5",
-    "@react-stately/utils": "^3.10.7",
     "cva": "^1.0.0-0",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
     "embla-carousel-wheel-gestures": "^8.1.0",
-    "react-aria": "^3.41.1",
     "react-aria-components": "^1.10.1",
-    "react-stately": "^3.39.0",
     "use-debounce": "^10.0.4"
   },
   "peerDependencies": {
     "react": "^19"
   },
   "devDependencies": {
+    "@react-aria/form": "^3.0.18",
+    "@react-aria/interactions": "^3.25.3",
+    "@react-aria/utils": "^3.29.1",
+    "@react-stately/form": "^3.1.5",
+    "@react-stately/utils": "^3.10.7",
     "@types/node": "^24.0.0",
+    "react-aria": "^3.41.1",
+    "react-stately": "^3.39.0",
     "tailwindcss": "4.1.18"
   }
 }
