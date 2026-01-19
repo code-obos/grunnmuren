@@ -3,7 +3,6 @@ import { createFileRoute } from '@tanstack/react-router';
 import { defineQuery } from 'groq';
 import { sanityFetch } from '@/lib/sanity';
 import { ComponentStateBadge } from '@/ui/component-state-badge';
-import { StoryEmbed } from '@/ui/story-embed';
 
 const COMPONENTS_INDEX_QUERY = defineQuery(
   // make sure the slug is always a string so we don't have add fallback value in code just to make TypeScript happy
@@ -47,7 +46,6 @@ function Page() {
           </Card>
         ))}
       </div>
-      <StoryEmbed storyId="carousel--basic" />
     </>
   );
 }

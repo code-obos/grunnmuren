@@ -45,6 +45,7 @@
     "react-dom": "19.2.3",
     "react-element-to-jsx-string": "17.0.1",
     "react-live": "4.1.8",
+    "react-shiki": "0.9.1",
     "sanity": "5.3.0",
     "styled-components": "6.2.0",
     "use-debounce": "10.0.6"
