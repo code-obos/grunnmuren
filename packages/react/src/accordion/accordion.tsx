@@ -13,7 +13,7 @@ type AccordionProps = HTMLProps<HTMLDivElement> & {
   children: React.ReactNode;
 };
 
-type AccordionItemProps = DisclosureProps & {
+type AccordionItemProps = Omit<DisclosureProps, 'isDisabled'> & {
   children?: React.ReactNode;
 
   /** @deprecated use isExpanded instead */
