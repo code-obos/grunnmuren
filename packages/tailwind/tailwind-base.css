@@ -327,17 +327,4 @@
       @apply flex w-full cursor-pointer justify-between gap-x-2 py-3.5 font-medium no-underline focus-visible:outline-focus;
     }
   }
-
-  .link-list-container [data-slot="link"],
-  [data-slot="link-list-item"] [data-slot="link"] {
-    &:hover:not([download]):not([rel~="external"]) svg {
-      @apply motion-safe:translate-x-1;
-    }
-    &[download]:hover svg {
-      @apply motion-safe:translate-y-1;
-    }
-    &[rel~="external"]:hover svg {
-      @apply motion-safe:-translate-y-0.5 motion-safe:translate-x-0.5;
-    }
-  }
 }

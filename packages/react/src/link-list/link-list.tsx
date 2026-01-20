@@ -4,49 +4,14 @@ import {
   LinkExternal,
 } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
-import type { JSX, ReactNode } from 'react';
-import { type LinkRenderProps, Provider } from 'react-aria-components';
+import { Children, cloneElement, type JSX, type ReactNode } from 'react';
+import { Provider } from 'react-aria-components';
 import { HeadingContext } from '../content';
 import { _LinkContext, type UNSAFE_LinkProps as LinkProps } from '../link';
 
 type LinkListContainerProps = React.HTMLProps<HTMLDivElement> & {
   children: JSX.Element | JSX.Element[];
 };
-
-// Sets the correct icons for each link in the link list
-const _LinkProvider = ({ children }: { children: ReactNode }) => (
-  <Provider
-    values={[
-      [
-        _LinkContext,
-        {
-          _innerWrapper:
-            ({ children, download, rel }: LinkProps) =>
-            (values: LinkRenderProps) => {
-              let Icon = ArrowRight;
-
-              if (download) {
-                Icon = Download;
-              } else if (rel?.includes('external')) {
-                Icon = LinkExternal;
-              }
-
-              return (
-                <>
-                  {typeof children === 'function'
-                    ? children({ ...values, defaultChildren: null })
-                    : children}
-                  <Icon />
-                </>
-              );
-            },
-        },
-      ],
-    ]}
-  >
-    {children}
-  </Provider>
-);
 
 const LinkListContainer = ({
   className,
@@ -63,18 +28,35 @@ type LinkListProps = React.HTMLProps<HTMLUListElement> & {
 };
 
 const LinkList = (props: LinkListProps) => (
-  <_LinkProvider>
-    <ul {...props} data-slot="link-list" />
-  </_LinkProvider>
+  <ul {...props} data-slot="link-list" />
 );
 
 type LinkListItemProps = React.HTMLProps<HTMLLIElement> & {
   children: ReactNode;
 };
 
-const LinkListItem = (props: LinkListItemProps) => (
-  <li {...props} data-slot="link-list-item" />
-);
+const LinkListItem = ({ children, ...props }: LinkListItemProps) => {
+  const child = Children.only(children);
+
+  return (
+    <li {...props} data-slot="link-list-item">
+      {cloneElement(child, {
+        animateIcon: child.props.download
+          ? 'down'
+          : child.props.rel?.includes('external')
+            ? 'up-right'
+            : 'right',
+        '~iconRight': child.props.download ? (
+          <Download />
+        ) : child.props.rel?.includes('external') ? (
+          <LinkExternal />
+        ) : (
+          <ArrowRight />
+        ),
+      })}
+    </li>
+  );
+};
 
 export {
   LinkList,

@@ -71,7 +71,9 @@ export const WithHeadings = () => (
       </Heading>
       <LinkList>
         <LinkListItem>
-          <Link href="/bolig">Bolig</Link>
+          <Link download href="/bolig">
+            Bolig
+          </Link>
         </LinkListItem>
         <LinkListItem>
           <Link href="/bank">Bank</Link>
