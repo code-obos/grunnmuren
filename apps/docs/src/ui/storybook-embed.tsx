@@ -1,12 +1,5 @@
 import { Button } from '@obosbbl/grunnmuren-react';
-import {
-  Activity,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { Activity, useEffect, useMemo, useRef, useState } from 'react';
 import { Group } from 'react-aria-components';
 import ShikiHighlighter from 'react-shiki/web';
 
@@ -14,12 +7,19 @@ type Props = {
   storyId: string;
 };
 
+// only allow postmessages from these origins
+const ALLOWED_MESSAGE_ORIGINS = new Set([
+  'https://grunnmuren.obos.no',
+  'http://localhost:6006',
+]);
+
 export function StorybookEmbed({ storyId }: Props) {
-  const url = useMemo(
-    () =>
-      `http://localhost:3003/storybook/iframe.html?id=${storyId}&viewMode=story`,
+  const storyUrl = useMemo(
+    () => `http://localhost:6006/iframe.html?id=${storyId}&viewMode=story`,
     [storyId],
   );
+
+  const [sourceCode, setSourceCode] = useState('');
 
   const [viewMode, setViewMode] = useState<'preview' | 'code'>('preview');
 
@@ -34,64 +34,49 @@ export function StorybookEmbed({ storyId }: Props) {
             Kode
           </Button>
         </Group>
-        <a href={url} target="_blank" rel="external">
-          Åpne eksempelet i egen fane
+        <a href={storyUrl} target="_blank" rel="external">
+          Åpne i SB
         </a>
       </div>
       <div className="overflow-hidden rounded-lg border">
-        {viewMode === 'preview' ? (
-          <Activity mode={viewMode === 'preview' ? 'visible' : 'hidden'}>
-            <StoryRenderer storyId={storyId} />
-          </Activity>
-        ) : (
-          <div />
-          // <StorySource storyId={storyId} />
-        )}
+        <Activity mode={viewMode === 'preview' ? 'visible' : 'hidden'}>
+          <StoryRenderer storyUrl={storyUrl} setSourceCode={setSourceCode} />
+        </Activity>
+        {viewMode === 'code' && <Code source={sourceCode} />}
       </div>
     </div>
   );
 }
 
-const StoryRenderer = ({ storyId }: Props) => {
-  const url = useMemo(
-    () =>
-      `http://localhost:6006/storybook/iframe.html?id=${storyId}&viewMode=story`,
-    [storyId],
-  );
-
+const StoryRenderer = ({
+  storyUrl,
+  setSourceCode,
+}: {
+  storyUrl: string;
+  setSourceCode: (sourceCode: string) => void;
+}) => {
   const [contentHeight, setContentHeight] = useState<string>();
-  const [iframeHasLoaded, setIframeHasLoaded] = useState(false);
+  const [hasRegisteredListener, setHasRegisteredListener] = useState(false);
   const ref = useRef<HTMLIFrameElement>(null);
 
-  useLayoutEffect(() => {
-    if (!ref.current && !iframeHasLoaded) return;
-
-    const scrollHeight = ref.current?.contentDocument?.body.scrollHeight;
-    if (scrollHeight) {
-      setContentHeight(`${scrollHeight}px`);
-    }
-  }, [iframeHasLoaded]);
-
   useEffect(() => {
-    ref.current?.contentWindow?.postMessage('handshake', '*');
+    setHasRegisteredListener(true);
 
     const messageHandler = (event: MessageEvent) => {
-      if (event.origin !== 'http://localhost:6006') return;
+      if (!ALLOWED_MESSAGE_ORIGINS.has(event.origin)) return;
+
       console.log(event.data);
 
-      const data = JSON.parse(event.data);
+      const data = event.data;
 
-      if (
-        data.key === 'storybook-channel' &&
-        data.event.type === 'storybook/docs/snippet-rendered'
-      ) {
-        console.log(data.event);
-      }
-
-      // console.log(event.data);
-
-      if (event.data.type === 'storybook-height') {
-        setContentHeight(`${event.data.height}px`);
+      if (typeof data === 'object' && 'type' in data) {
+        if (data.type === 'SOURCE_SNIPPET_RENDERED') {
+          setSourceCode(data.source);
+        } else if (data.type === 'STORY_RENDERED') {
+          setContentHeight(
+            `${ref.current?.contentWindow?.document.body.scrollHeight}px`,
+          );
+        }
       }
     };
     window.addEventListener('message', messageHandler);
@@ -99,25 +84,29 @@ const StoryRenderer = ({ storyId }: Props) => {
     return () => {
       window.removeEventListener('message', messageHandler);
     };
-  }, []);
+  }, [setSourceCode]);
 
   return (
     <iframe
       className="focus:outline-none"
-      src={url}
+      src={hasRegisteredListener ? storyUrl : undefined}
       width="100%"
       height={contentHeight}
       title="Storybook embed"
-      onLoad={() => setIframeHasLoaded(true)}
       ref={ref}
       loading="lazy"
     />
   );
 };
 
-const StorySource = ({ source }: { source: string }) => {
+const Code = ({ source }: { source: string }) => {
   return (
-    <ShikiHighlighter theme="ayu-dark" language="tsx" showLanguage={false}>
+    <ShikiHighlighter
+      theme="dracula"
+      language="tsx"
+      showLanguage={false}
+      className="text-sm"
+    >
       {source}
     </ShikiHighlighter>
   );

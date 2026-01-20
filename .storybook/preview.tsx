@@ -1,8 +1,6 @@
 import type { Preview } from '@storybook/react-vite';
-import {
-  SNIPPET_RENDERED,
-  STORY_RENDERED,
-} from 'storybook/internal/docs-tools';
+import { STORY_RENDERED } from 'storybook/internal/core-events';
+import { SNIPPET_RENDERED } from 'storybook/internal/docs-tools';
 import { useChannel } from 'storybook/preview-api';
 import { GrunnmurenProvider } from '../packages/react/src';
 
@@ -17,12 +15,13 @@ const preview: Preview = {
           if (context.viewMode === 'docs') return;
           console.log(source, format);
           window.parent.postMessage(
-            { type: 'SOURCE_CODE_RENDERED', source, format },
+            { type: 'SOURCE_SNIPPET_RENDERED', source, format },
             '*',
           );
         },
         [STORY_RENDERED]: (ctx) => {
           if (context.viewMode === 'docs') return;
+          console.log('is there context?');
           console.log(ctx);
 
           window.parent.postMessage(
