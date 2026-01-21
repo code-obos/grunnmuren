@@ -4,9 +4,16 @@ import {
   LinkExternal,
 } from '@obosbbl/grunnmuren-icons-react';
 import { cva, type VariantProps } from 'cva';
-import { Children, cloneElement, type JSX, type ReactNode } from 'react';
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  type JSX,
+  type ReactNode,
+} from 'react';
 import { Provider } from 'react-aria-components';
 import { HeadingContext } from '../content';
+import type { UNSAFE_LinkProps } from '../link/link';
 
 const linkListContainerVariants = cva({
   base: null,
@@ -54,23 +61,27 @@ type LinkListItemProps = React.HTMLProps<HTMLLIElement> & {
 
 const LinkListItem = ({ children, ...props }: LinkListItemProps) => {
   const child = Children.only(children);
+  const childProps = (
+    isValidElement(child) ? child.props : {}
+  ) as UNSAFE_LinkProps;
 
   return (
     <li {...props} data-slot="link-list-item">
-      {cloneElement(child, {
-        animateIcon: child.props.download
-          ? 'down'
-          : child.props.rel?.includes('external')
-            ? 'up-right'
-            : 'right',
-        '~iconRight': child.props.download ? (
-          <Download />
-        ) : child.props.rel?.includes('external') ? (
-          <LinkExternal />
-        ) : (
-          <ArrowRight />
-        ),
-      })}
+      {isValidElement(child) &&
+        cloneElement(child, {
+          animateIcon: childProps.download
+            ? 'down'
+            : childProps.rel?.includes('external')
+              ? 'up-right'
+              : 'right',
+          '~iconRight': childProps.download ? (
+            <Download />
+          ) : childProps.rel?.includes('external') ? (
+            <LinkExternal />
+          ) : (
+            <ArrowRight />
+          ),
+        } as UNSAFE_LinkProps)}
     </li>
   );
 };
