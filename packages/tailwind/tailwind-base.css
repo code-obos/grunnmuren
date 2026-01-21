@@ -383,7 +383,7 @@
         @apply py-2.5 lg:pl-11 lg:-ml-11 -my-2.5;
       }
 
-      &[data-is-current="true"] {
+      &[data-current="true"] {
         &::before {
           @apply bg-sky-light border-4 text-blue-dark;
         }

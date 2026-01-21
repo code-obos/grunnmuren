@@ -45,7 +45,7 @@ const Step = ({ isCompleted = false, children, ...restProps }: StepProps) => {
       {...restProps}
       data-slot="step"
       data-state={state}
-      data-is-current={isCurrent}
+      data-current={isCurrent ? true : undefined}
       id={id}
     >
       <Provider
@@ -85,12 +85,7 @@ type StepperProps = HTMLAttributes<HTMLDivElement> & {
   currentStep: number;
 };
 
-const Stepper = ({
-  children,
-  currentStep,
-  className,
-  ...restProps
-}: StepperProps) => {
+const Stepper = ({ children, currentStep, ...restProps }: StepperProps) => {
   const locale = useLocale();
   const childCount = Children.count(children);
 
