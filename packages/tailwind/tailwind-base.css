@@ -263,8 +263,6 @@
 @layer components {
   /*** Link List component styles ***/
   .link-list-container {
-    @apply @container;
-
     &:has([data-slot="heading"]) {
       .link-list,
       [data-slot="link-list"] {

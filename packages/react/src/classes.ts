@@ -64,7 +64,7 @@ const animateIconVariants = cva({
       down: 'hover:*:[svg]:motion-safe:translate-y-1',
       up: 'hover:*:[svg]:motion-safe:-translate-y-1',
       'up-right':
-        'hover:*:[svg]:motion-safe:translate-x-0.5 hover:*:[svg]:motion-safe:-translate-y-0.5',
+        'hover:*:[svg]:motion-safe:-translate-y-0.5 hover:*:[svg]:motion-safe:translate-x-0.5',
     },
   },
 });

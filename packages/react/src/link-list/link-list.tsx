@@ -3,23 +3,40 @@ import {
   Download,
   LinkExternal,
 } from '@obosbbl/grunnmuren-icons-react';
-import { cx } from 'cva';
+import { cva, type VariantProps } from 'cva';
 import { Children, cloneElement, type JSX, type ReactNode } from 'react';
 import { Provider } from 'react-aria-components';
 import { HeadingContext } from '../content';
-import { _LinkContext, type UNSAFE_LinkProps as LinkProps } from '../link';
 
-type LinkListContainerProps = React.HTMLProps<HTMLDivElement> & {
-  children: JSX.Element | JSX.Element[];
-};
+const linkListContainerVariants = cva({
+  base: null,
+  variants: {
+    layout: {
+      stack: null,
+      grid: '@container',
+    },
+  },
+  defaultVariants: {
+    layout: 'stack',
+  },
+});
+
+type LinkListContainerProps = VariantProps<typeof linkListContainerVariants> &
+  React.HTMLProps<HTMLDivElement> & {
+    children: JSX.Element | JSX.Element[];
+  };
 
 const LinkListContainer = ({
   className,
-  ...restProps
+  layout = 'stack',
+  ...props
 }: LinkListContainerProps) => (
-  // Dual providers makes for easier typing and more readable code
   <Provider values={[[HeadingContext, { size: 'm' }]]}>
-    <div className={cx(className, 'link-list-container')} {...restProps} />
+    <div
+      {...props}
+      className={linkListContainerVariants({ className, layout })}
+      data-layout={layout}
+    />
   </Provider>
 );
 
