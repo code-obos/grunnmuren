@@ -396,7 +396,7 @@
       }
 
       svg {
-        @apply text-white absolute scale-60 border-2 border-white bg-blue-dark rounded-full left-4 -top-2;
+        @apply text-white absolute border-2 border-white bg-blue-dark rounded-full left-4.5 -top-1.5 size-5;
       }
 
       &[data-state="pending"] {
