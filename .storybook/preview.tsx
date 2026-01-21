@@ -1,5 +1,5 @@
 import type { Preview } from '@storybook/react-vite';
-import { STORY_RENDERED } from 'storybook/internal/core-events';
+import { STORY_FINISHED } from 'storybook/internal/core-events';
 import { SNIPPET_RENDERED } from 'storybook/internal/docs-tools';
 import { useChannel } from 'storybook/preview-api';
 import { GrunnmurenProvider } from '../packages/react/src';
@@ -11,24 +11,22 @@ const preview: Preview = {
     (StoryFn, context) => {
       // Communicate with the parent window
       useChannel({
-        [SNIPPET_RENDERED]: ({ source, format }) => {
+        [STORY_FINISHED]: () => {
           if (context.viewMode === 'docs') return;
-          console.log(source, format);
-          window.parent.postMessage(
-            { type: 'SOURCE_SNIPPET_RENDERED', source, format },
-            '*',
-          );
-        },
-        [STORY_RENDERED]: (ctx) => {
-          if (context.viewMode === 'docs') return;
-          console.log('is there context?');
-          console.log(ctx);
 
           window.parent.postMessage(
             {
-              type: 'STORY_RENDERED',
+              type: 'STORY_FINISHED',
               scrollHeight: document.body.scrollHeight,
             },
+            '*',
+          );
+        },
+        [SNIPPET_RENDERED]: ({ source, format }) => {
+          if (context.viewMode === 'docs') return;
+
+          window.parent.postMessage(
+            { type: 'SOURCE_SNIPPET_RENDERED', source, format },
             '*',
           );
         },

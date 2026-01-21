@@ -65,17 +65,13 @@ const StoryRenderer = ({
     const messageHandler = (event: MessageEvent) => {
       if (!ALLOWED_MESSAGE_ORIGINS.has(event.origin)) return;
 
-      console.log(event.data);
-
       const data = event.data;
 
       if (typeof data === 'object' && 'type' in data) {
         if (data.type === 'SOURCE_SNIPPET_RENDERED') {
           setSourceCode(data.source);
-        } else if (data.type === 'STORY_RENDERED') {
-          setContentHeight(
-            `${ref.current?.contentWindow?.document.body.scrollHeight}px`,
-          );
+        } else if (data.type === 'STORY_FINISHED') {
+          setContentHeight(data.scrollHeight);
         }
       }
     };
