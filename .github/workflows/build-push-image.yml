@@ -40,6 +40,8 @@ jobs:
           tags: ${{ env.container-registry }}/grunnmuren/docs:${{ github.sha }}
           build-args: |
             app_name=grunnmuren
+          secrets: |
+            "SANITY_STUDIO_DEPLOY_TOKEN=${{ secrets.SANITY_STUDIO_DEPLOY_TOKEN }}"
           file: Dockerfile
           secret-files: |
             npmrc=.npmrc

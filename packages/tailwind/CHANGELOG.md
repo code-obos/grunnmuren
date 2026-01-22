@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.4.3
+
+### Patch Changes
+
+- 349307f: Export a footnote-utility for 12px font size
+
 ## 2.4.2
 
 ### Patch Changes

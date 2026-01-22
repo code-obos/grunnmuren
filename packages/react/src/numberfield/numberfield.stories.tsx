@@ -5,14 +5,14 @@ import { useState } from 'react';
 import { Button } from '../button/button';
 import { NumberField, type NumberFieldProps } from './numberfield';
 
-const meta: Meta<typeof NumberField> = {
+const meta = {
   title: 'NumberField',
   component: NumberField,
-};
+} satisfies Meta<typeof NumberField>;
 
 export default meta;
 
-type Story = StoryObj<typeof NumberField>;
+type Story = StoryObj<typeof meta>;
 
 const Template = (args: NumberFieldProps) => {
   return args.isRequired ? (

@@ -18,6 +18,15 @@ const preview: Preview = {
         order: ['Home', '*'],
       },
     },
+    backgrounds: {
+      options: {
+        'blue-dark': { name: 'Blue dark', value: '#002169' },
+        white: { name: 'White', value: '#fff' },
+      },
+    },
+  },
+  initialGlobals: {
+    backgrounds: { value: 'white' },
   },
 };
 

@@ -27,6 +27,8 @@ const options: ParserOptions = {
       case prop.name === 'ref':
       // Ignore RAC unstable props in doc
       case prop.name.startsWith('UNSTABLE_'):
+      // these are private
+      case prop.name.startsWith('~'):
       // key isn't a regular prop, but a special react prop
       case prop.name === 'key':
         return false;
@@ -55,6 +57,32 @@ for (const componentToFix of Object.values(propFixes)) {
 
   if (toUpdate) {
     toUpdate.props = componentToFix.props;
+  }
+}
+
+// Fix props that have been incorrectly attributed to the wrong parent.
+// This seems to happen for components with same prop attributes but different types.
+// Where docgen attributes the props to the first matching Props type that it finds.
+for (const component of components) {
+  const componentBaseName = component.displayName.replace(/^UNSAFE_/, '');
+
+  for (const prop of Object.values(component.props)) {
+    if (!prop.parent) continue;
+
+    const parentName = prop.parent.name;
+
+    // Check if this is a component-specific Props type that doesn't match
+    if (parentName.endsWith('Props')) {
+      const parentBaseName = parentName.replace('Props', '');
+      const isMatchingParent =
+        parentName.includes(componentBaseName) ||
+        componentBaseName.includes(parentBaseName);
+
+      // If the parent doesn't match, use the description from the lookup
+      if (!isMatchingParent) {
+        prop.description = '';
+      }
+    }
   }
 }
 

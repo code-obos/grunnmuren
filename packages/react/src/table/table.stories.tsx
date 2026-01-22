@@ -13,14 +13,14 @@ import {
   UNSAFE_TableRow as TableRow,
 } from './table';
 
-const meta: Meta<typeof Table> = {
+const meta = {
   title: 'Table',
   component: Table,
   parameters: {
     layout: 'padded',
   },
   tags: ['autodocs'],
-};
+} satisfies Meta<typeof Table>;
 
 export default meta;
 

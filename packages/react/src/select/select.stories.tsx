@@ -11,14 +11,14 @@ import {
   SelectSection,
 } from './select';
 
-const meta: Meta<typeof Select> = {
+const meta = {
   title: 'Select',
   component: Select,
-};
+} satisfies Meta<typeof Select>;
 
 export default meta;
 
-type Story = StoryObj<typeof Select>;
+type Story = StoryObj<typeof meta>;
 
 const Template = <T extends object>(args: SelectProps<T>) => {
   const select = (
@@ -51,7 +51,12 @@ const ControlledTemplate = <T extends object>(args: SelectProps<T>) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <Template {...args} selectedKey={value} onSelectionChange={setValue} />
+      <Template
+        {...args}
+        selectedKey={value}
+        // @ts-expect-error not quite sure what to do here
+        onSelectionChange={setValue}
+      />
       <pre className="font-sans">{value}</pre>
     </div>
   );
@@ -78,12 +83,15 @@ const defaultProps = {
   defaultSelectedKey: undefined,
   selectedKey: undefined,
   placeholder: 'Velg område',
+  children: undefined,
 };
 
-export const Default: Story = {
+export const Default = {
   render: Template,
-  args: { ...defaultProps },
-};
+  args: {
+    ...defaultProps,
+  },
+} satisfies Story;
 
 export const Required: Story = {
   render: Template,

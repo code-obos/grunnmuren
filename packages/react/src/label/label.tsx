@@ -5,10 +5,7 @@ function Label(props: LabelProps) {
   const { children, className, ...restProps } = props;
 
   return (
-    <RACLabel
-      className={cx(className, 'font-semibold leading-7')}
-      {...restProps}
-    >
+    <RACLabel className={cx(className, 'font-medium leading-7')} {...restProps}>
       {children}
     </RACLabel>
   );

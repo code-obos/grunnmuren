@@ -2,4 +2,4 @@
 "@obosbbl/grunnmuren-react": patch
 ---
 
-Updated FileUpload design
+Fix font on label components

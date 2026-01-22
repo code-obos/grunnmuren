@@ -12,7 +12,7 @@ export default defineConfig({
   projectId: 'tq6w17ny',
   dataset,
   basePath: '/studio',
-  title: 'Grunnmuren - Sanity Studio',
+  title: 'Grunnmuren',
   auth: obosAuthStore({ dataset }),
   plugins: [
     structureTool({
