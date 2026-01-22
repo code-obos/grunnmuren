@@ -4,7 +4,7 @@ import storybookData from '../../public/storybook/index.json' with {
   type: 'json',
 };
 
-const options: Array<{ title: string; value: string; name: string }> = [];
+const options: Array<{ title: string; value: string }> = [];
 
 for (const entry of Object.values(storybookData.entries)) {
   // We only want the stories themselves, not the docs
