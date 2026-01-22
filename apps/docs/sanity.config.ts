@@ -1,5 +1,6 @@
 import { obosAuthStore } from '@code-obos/sanity-auth';
 import { codeInput } from '@sanity/code-input';
+import { asyncList } from '@sanity/sanity-plugin-async-list';
 import { table } from '@sanity/table';
 import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
@@ -70,6 +71,57 @@ export default defineConfig({
     visionTool(),
     codeInput(),
     table(),
+    asyncList({
+      schemaType: 'storybookId',
+      loader: async () => {
+        const response = await fetch('http://localhost:6006/index.json');
+        const data: {
+          entries: {
+            [key: string]: {
+              id: string;
+              title: string;
+              name: string;
+              type: 'docs' | 'story';
+            };
+          };
+        } = await response.json();
+
+        const options: Array<{ title: string; value: string; name: string }> =
+          [];
+
+        for (const entry of Object.values(data.entries)) {
+          // We only want the stories themselves, not the docs
+          if (entry.type === 'story') {
+            options.push({
+              title: entry.title,
+              value: entry.id,
+              name: entry.name,
+            });
+          }
+        }
+
+        return options;
+      },
+      autocompleteProps: {
+        placeholder: 'Search for Storybook stories',
+        // renderOption: (option) => {
+        //   console.log(option);
+        //   return option.title;
+        //   // return (
+        //   //     {option.title}
+        //   //   </div>
+        //   // );
+        //   // return option.value;
+        // },
+        // custom value render function
+        renderValue: (value, option) => {
+          console.log(value, option);
+          return option ? `${option.title}: ${option.name}` : value;
+
+          // option?.payload.name || value;
+        },
+      },
+    }),
   ],
   schema: {
     types: schemaTypes,
