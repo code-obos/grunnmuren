@@ -1,3 +1,4 @@
+import { ArrowRight } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta } from '@storybook/react-vite';
 import { Heading } from '../content';
 import { UNSAFE_Link as Link } from '../link';
@@ -6,8 +7,11 @@ import { LinkList, LinkListContainer, LinkListItem } from './link-list';
 const meta = {
   title: 'LinkList',
   component: LinkList,
-
-  tags: ['autodocs'],
+  decorators: [
+    (Story) => {
+      return <div className="grid gap-y-8">{Story()}</div>;
+    },
+  ],
 } satisfies Meta<typeof LinkList>;
 
 export default meta;
@@ -41,10 +45,6 @@ export const Download = () => (
   </LinkList>
 );
 
-const LayoutWrapper = ({ children }: { children: React.ReactNode }) => (
-  <div className="grid gap-y-8">{children}</div>
-);
-
 export const ExternalLinkListItems = () => (
   <LinkList>
     <LinkListItem>
@@ -65,80 +65,29 @@ export const ExternalLinkListItems = () => (
 );
 
 export const WithHeadings = () => (
-  <LayoutWrapper>
-    <LinkListContainer>
-      <Heading level={2}>
-        <Link href="/om">OBOS</Link>
-      </Heading>
-      <LinkList>
-        <LinkListItem>
-          <Link href="/bolig">Bolig</Link>
-        </LinkListItem>
-        <LinkListItem>
-          <Link href="/bank">Bank</Link>
-        </LinkListItem>
-        <LinkListItem>
-          <Link href="/medlem">Medlem</Link>
-        </LinkListItem>
-      </LinkList>
-    </LinkListContainer>
-    <LinkListContainer>
-      <Heading level={2}>
-        <Link href="/om" rel="external">
-          OBOS EXTERN
-        </Link>
-      </Heading>
-      <LinkList>
-        <LinkListItem>
-          <Link href="https://minside.obosnett.no/login" rel="external">
-            OBOS Nett - Min side
-          </Link>
-        </LinkListItem>
-        <LinkListItem>
-          <Link
-            href="https://www.tryg.no/forsikringer/fordeler-hos-tryg/bruk-medlemsfordelene-dine/obos/index.html?cmpid=obos_tryggjennomlivet"
-            rel="external noopener noreferrer"
-            target="_blank"
-          >
-            Les mer om trygg forsikring
-          </Link>
-        </LinkListItem>
-      </LinkList>
-    </LinkListContainer>
-    <LinkListContainer>
-      <Heading level={2}>
-        <Link
-          download
-          href="https://cdn.sanity.io/files/tq6w17ny/prod/f39b489e6ba82e03036e735be0a99320e12214d0.pdf"
-        >
-          Årsrapport
-        </Link>
-      </Heading>
-      <LinkList>
-        <LinkListItem>
-          <Link
-            download
-            href="https://cdn.sanity.io/files/tq6w17ny/prod/4982d7ca3f4cef8f8bd7de42ea58a0d2c9fa3760.pdf"
-          >
-            Klimarisikorapport
-          </Link>
-        </LinkListItem>
-        <LinkListItem>
-          <Link
-            download
-            href="https://cdn.sanity.io/files/tq6w17ny/prod/74ee591acb8e2f4abe7e19fe6a753abe51a48c68.pdf"
-          >
-            Klimagassberegning
-          </Link>
-        </LinkListItem>
-      </LinkList>
-    </LinkListContainer>
-  </LayoutWrapper>
+  <LinkListContainer>
+    <Heading level={2}>
+      <Link href="/om" animateIcon="right">
+        OBOS <ArrowRight />
+      </Link>
+    </Heading>
+    <LinkList>
+      <LinkListItem>
+        <Link href="/bolig">Bolig</Link>
+      </LinkListItem>
+      <LinkListItem>
+        <Link href="/bank">Bank</Link>
+      </LinkListItem>
+      <LinkListItem>
+        <Link href="/medlem">Medlem</Link>
+      </LinkListItem>
+    </LinkList>
+  </LinkListContainer>
 );
 
-export const AutoResponsive = () => (
-  <LayoutWrapper>
-    <LinkListContainer>
+export const GridLayout = () => (
+  <>
+    <LinkListContainer layout="grid">
       <Heading level={2}>2 items</Heading>
       <LinkList>
         <LinkListItem>
@@ -153,7 +102,7 @@ export const AutoResponsive = () => (
         </LinkListItem>
       </LinkList>
     </LinkListContainer>
-    <LinkListContainer>
+    <LinkListContainer layout="grid">
       <Heading level={2}>3 items</Heading>
       <LinkList>
         <LinkListItem>
@@ -167,7 +116,7 @@ export const AutoResponsive = () => (
         </LinkListItem>
       </LinkList>
     </LinkListContainer>
-    <LinkListContainer>
+    <LinkListContainer layout="grid">
       <Heading level={2}>5 items</Heading>
       <LinkList>
         <LinkListItem>
@@ -189,7 +138,7 @@ export const AutoResponsive = () => (
         </LinkListItem>
       </LinkList>
     </LinkListContainer>
-    <LinkListContainer>
+    <LinkListContainer layout="grid">
       <Heading level={2}>6 items</Heading>
       <LinkList>
         <LinkListItem>
@@ -214,7 +163,7 @@ export const AutoResponsive = () => (
         </LinkListItem>
       </LinkList>
     </LinkListContainer>
-    <LinkListContainer>
+    <LinkListContainer layout="grid">
       <Heading level={2}>7 items</Heading>
       <LinkList>
         <LinkListItem>
@@ -242,7 +191,7 @@ export const AutoResponsive = () => (
         </LinkListItem>
       </LinkList>
     </LinkListContainer>
-    <LinkListContainer>
+    <LinkListContainer layout="grid">
       <Heading level={2}>9 items</Heading>
       <LinkList>
         <LinkListItem>
@@ -276,7 +225,7 @@ export const AutoResponsive = () => (
         </LinkListItem>
       </LinkList>
     </LinkListContainer>
-    <LinkListContainer>
+    <LinkListContainer layout="grid">
       <Heading level={2}>10 items</Heading>
       <LinkList>
         <LinkListItem>
@@ -313,7 +262,7 @@ export const AutoResponsive = () => (
         </LinkListItem>
       </LinkList>
     </LinkListContainer>
-    <LinkListContainer>
+    <LinkListContainer layout="grid">
       <Heading level={2}>15 items</Heading>
       <LinkList>
         <LinkListItem>
@@ -369,5 +318,5 @@ export const AutoResponsive = () => (
         </LinkListItem>
       </LinkList>
     </LinkListContainer>
-  </LayoutWrapper>
+  </>
 );

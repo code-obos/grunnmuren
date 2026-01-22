@@ -3,60 +3,67 @@ import {
   Download,
   LinkExternal,
 } from '@obosbbl/grunnmuren-icons-react';
-import { cx } from 'cva';
-import type { JSX, ReactNode } from 'react';
-import { type LinkRenderProps, Provider } from 'react-aria-components';
+import { cva, cx, type VariantProps } from 'cva';
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  type JSX,
+  type ReactNode,
+} from 'react';
+import { Provider } from 'react-aria-components';
 import { HeadingContext } from '../content';
-import { _LinkContext, type UNSAFE_LinkProps as LinkProps } from '../link';
+import type { UNSAFE_LinkProps } from '../link/link';
 
-type LinkListContainerProps = React.HTMLProps<HTMLDivElement> & {
-  children: JSX.Element | JSX.Element[];
-};
+const linkStyles = [
+  '*:data-[slot=link]:flex',
+  '*:data-[slot=link]:w-full',
+  '*:data-[slot=link]:justify-between',
+  '*:data-[slot=link]:gap-x-2',
+  '*:data-[slot=link]:py-3.5',
+  '*:data-[slot=link]:no-underline',
+  '*:data-[slot=link]:focus-visible:outline-focus',
+];
 
-// Sets the correct icons for each link in the link list
-const _LinkProvider = ({ children }: { children: ReactNode }) => (
-  <Provider
-    values={[
-      [
-        _LinkContext,
-        {
-          _innerWrapper:
-            ({ children, download, rel }: LinkProps) =>
-            (values: LinkRenderProps) => {
-              let Icon = ArrowRight;
+const linkListContainerVariants = cva({
+  base: [
+    '*:data-[slot=link-list]:overflow-visible',
+    '*:data-[slot=heading]:p-1.25',
+    '*:data-[slot=heading]:*:data-[slot=link]:py-2.25',
+    '**:[svg]:text-base',
+    'has-data-[slot=heading]:*:data-[slot=link-list]:overflow-visible',
+    '*:data-[slot=heading]:has-not:*:data-[slot=link]:my-2.25',
+  ],
+  variants: {
+    layout: {
+      stack: null,
+      grid: '@container',
+    },
+  },
+  defaultVariants: {
+    layout: 'stack',
+  },
+});
 
-              if (download) {
-                Icon = Download;
-              } else if (rel?.includes('external')) {
-                Icon = LinkExternal;
-              }
-
-              return (
-                <>
-                  {typeof children === 'function'
-                    ? children({ ...values, defaultChildren: null })
-                    : children}
-                  <Icon />
-                </>
-              );
-            },
-        },
-      ],
-    ]}
-  >
-    {children}
-  </Provider>
-);
+type LinkListContainerProps = VariantProps<typeof linkListContainerVariants> &
+  React.HTMLProps<HTMLDivElement> & {
+    children: JSX.Element | JSX.Element[];
+  };
 
 const LinkListContainer = ({
   className,
-  ...restProps
+  layout = 'stack',
+  ...props
 }: LinkListContainerProps) => (
-  // Dual providers makes for easier typing and more readable code
-  <Provider values={[[HeadingContext, { size: 'm' }]]}>
-    <_LinkProvider>
-      <div className={cx(className, 'link-list-container')} {...restProps} />
-    </_LinkProvider>
+  <Provider
+    values={[[HeadingContext, { size: 'm', className: cx(linkStyles) }]]}
+  >
+    <div
+      {...props}
+      className={linkListContainerVariants({ className, layout })}
+      data-layout={layout}
+      data-slot="link-list-container"
+    />
   </Provider>
 );
 
@@ -64,19 +71,67 @@ type LinkListProps = React.HTMLProps<HTMLUListElement> & {
   children: JSX.Element | JSX.Element[];
 };
 
-const LinkList = (props: LinkListProps) => (
-  <_LinkProvider>
-    <ul {...props} data-slot="link-list" />
-  </_LinkProvider>
+const LinkList = ({ className, ...restProps }: LinkListProps) => (
+  <ul
+    {...restProps}
+    data-slot="link-list"
+    className={cx(
+      /**
+       * Hides dividers at the top of the list (overflow-y)
+       * while preventing arrow icons from overflowing container when animated to the right (overflow-x)
+       */
+      'grid min-w-fit auto-rows-max gap-y-px overflow-hidden',
+      className,
+    )}
+  />
 );
 
 type LinkListItemProps = React.HTMLProps<HTMLLIElement> & {
   children: ReactNode;
 };
 
-const LinkListItem = (props: LinkListItemProps) => (
-  <li {...props} data-slot="link-list-item" />
-);
+const LinkListItem = ({ children, className, ...props }: LinkListItemProps) => {
+  const child = Children.only(children);
+
+  const childProps = (
+    isValidElement(child) ? child.props : {}
+  ) as UNSAFE_LinkProps;
+
+  const animateIcon =
+    childProps.animateIcon || childProps.download
+      ? 'down'
+      : childProps.rel?.includes('external')
+        ? 'up-right'
+        : 'right';
+
+  const iconRight =
+    childProps['~iconRight'] || childProps.download ? (
+      <Download />
+    ) : childProps.rel?.includes('external') ? (
+      <LinkExternal />
+    ) : (
+      <ArrowRight />
+    );
+
+  return (
+    <li
+      {...props}
+      className={cx(
+        className,
+        'after:-top-px relative p-1.25 after:absolute after:right-0 after:left-0 after:h-px after:w-full after:bg-gray-light',
+        '*:data-[slot=link]:paragraph',
+        ...linkStyles,
+      )}
+      data-slot="link-list-item"
+    >
+      {isValidElement(child) &&
+        cloneElement(child, {
+          animateIcon,
+          '~iconRight': iconRight,
+        } as UNSAFE_LinkProps)}
+    </li>
+  );
+};
 
 export {
   LinkList,

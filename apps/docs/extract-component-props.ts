@@ -27,6 +27,8 @@ const options: ParserOptions = {
       case prop.name === 'ref':
       // Ignore RAC unstable props in doc
       case prop.name.startsWith('UNSTABLE_'):
+      // these are private
+      case prop.name.startsWith('~'):
       // key isn't a regular prop, but a special react prop
       case prop.name === 'key':
         return false;
