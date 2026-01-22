@@ -10,6 +10,7 @@ type Props = {
 // only allow postmessages from these origins
 const ALLOWED_MESSAGE_ORIGINS = new Set([
   'https://grunnmuren.obos.no',
+  // storybook running locally
   'http://localhost:6006',
 ]);
 
@@ -56,11 +57,16 @@ const StoryRenderer = ({
   setSourceCode: (sourceCode: string) => void;
 }) => {
   const [contentHeight, setContentHeight] = useState<string>();
-  const [hasRegisteredListener, setHasRegisteredListener] = useState(false);
   const ref = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
-    setHasRegisteredListener(true);
+    console.log(ref.current?.contentWindow?.postMessage);
+    if (!contentHeight) {
+      ref.current?.contentWindow?.postMessage(
+        { type: 'FRAME_PARENT_MOUNTED' },
+        '*',
+      );
+    }
 
     const messageHandler = (event: MessageEvent) => {
       if (!ALLOWED_MESSAGE_ORIGINS.has(event.origin)) return;
@@ -68,6 +74,7 @@ const StoryRenderer = ({
       const data = event.data;
 
       if (typeof data === 'object' && 'type' in data) {
+        console.log('from storyt');
         if (data.type === 'SOURCE_SNIPPET_RENDERED') {
           setSourceCode(data.source);
         } else if (data.type === 'STORY_FINISHED') {
@@ -85,12 +92,11 @@ const StoryRenderer = ({
   return (
     <iframe
       className="focus:outline-none"
-      src={hasRegisteredListener ? storyUrl : undefined}
+      src={storyUrl}
       width="100%"
       height={contentHeight}
       title="Storybook embed"
       ref={ref}
-      loading="lazy"
     />
   );
 };
