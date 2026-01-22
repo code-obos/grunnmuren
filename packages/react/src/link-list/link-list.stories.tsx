@@ -1,3 +1,4 @@
+import { ArrowRight } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta } from '@storybook/react-vite';
 import { Heading } from '../content';
 import { UNSAFE_Link as Link } from '../link';
@@ -66,7 +67,9 @@ export const ExternalLinkListItems = () => (
 export const WithHeadings = () => (
   <LinkListContainer>
     <Heading level={2}>
-      <Link href="/om">OBOS</Link>
+      <Link href="/om" animateIcon="right">
+        OBOS <ArrowRight />
+      </Link>
     </Heading>
     <LinkList>
       <LinkListItem>

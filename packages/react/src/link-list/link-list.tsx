@@ -28,10 +28,9 @@ const linkStyles = [
 const linkListContainerVariants = cva({
   base: [
     '*:data-[slot=link-list]:overflow-visible',
-
     '*:data-[slot=heading]:p-1.25',
     '*:data-[slot=heading]:*:data-[slot=link]:py-2.25',
-    '*:data-[slot=heading]:*:data-[slot=link]:[svg]:text-base', // THIS WORK?
+    '**:[svg]:text-base',
     'has-data-[slot=heading]:*:data-[slot=link-list]:overflow-visible',
     '*:data-[slot=heading]:has-not:*:data-[slot=link]:my-2.25',
   ],
@@ -93,9 +92,26 @@ type LinkListItemProps = React.HTMLProps<HTMLLIElement> & {
 
 const LinkListItem = ({ children, className, ...props }: LinkListItemProps) => {
   const child = Children.only(children);
+
   const childProps = (
     isValidElement(child) ? child.props : {}
   ) as UNSAFE_LinkProps;
+
+  const animateIcon =
+    childProps.animateIcon || childProps.download
+      ? 'down'
+      : childProps.rel?.includes('external')
+        ? 'up-right'
+        : 'right';
+
+  const iconRight =
+    childProps['~iconRight'] || childProps.download ? (
+      <Download />
+    ) : childProps.rel?.includes('external') ? (
+      <LinkExternal />
+    ) : (
+      <ArrowRight />
+    );
 
   return (
     <li
@@ -110,18 +126,8 @@ const LinkListItem = ({ children, className, ...props }: LinkListItemProps) => {
     >
       {isValidElement(child) &&
         cloneElement(child, {
-          animateIcon: childProps.download
-            ? 'down'
-            : childProps.rel?.includes('external')
-              ? 'up-right'
-              : 'right',
-          '~iconRight': childProps.download ? (
-            <Download />
-          ) : childProps.rel?.includes('external') ? (
-            <LinkExternal />
-          ) : (
-            <ArrowRight />
-          ),
+          animateIcon,
+          '~iconRight': iconRight,
         } as UNSAFE_LinkProps)}
     </li>
   );

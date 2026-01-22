@@ -17,6 +17,7 @@ const linkVariants = compose(
 type LinkProps = VariantProps<typeof linkVariants> &
   _LinkProps &
   React.RefAttributes<HTMLAnchorElement> & {
+    children?: React.ReactNode;
     /** @private Internal use */
     '~iconRight'?: React.ReactNode;
   };
