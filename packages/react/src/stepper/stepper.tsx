@@ -260,11 +260,17 @@ type StepProps = HTMLProps<HTMLLIElement> & {
    * @default false
    */
   isCompleted?: boolean;
+  /**
+   * Whether the step is disabled.
+   * @default false
+   */
+  isDisabled?: boolean;
   /** @private */
   '~stepNumber'?: number;
 };
 
 const Step = ({
+  isDisabled = false,
   isCompleted = false,
   children,
   '~stepNumber': stepNumber,
@@ -284,6 +290,7 @@ const Step = ({
       data-slot="step"
       data-state={state}
       data-current={isCurrent ? true : undefined}
+      data-disabled={isDisabled ? true : undefined}
       id={id}
     >
       <Provider
@@ -291,7 +298,9 @@ const Step = ({
           [
             LinkContext,
             {
+              // @ts-expect-error this works even though it's a type error
               'aria-current': isCurrent ? 'step' : undefined,
+              isDisabled,
               role: state === 'pending' ? 'none' : undefined,
               className: 'underline',
               onPress: () => onAction?.(id),

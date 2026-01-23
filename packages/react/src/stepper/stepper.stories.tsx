@@ -31,14 +31,80 @@ export const Example: Story = {
         <ProgressBar value={40} />
       </Step>
       <Step isCompleted={true}>
-        <Link href="#skjema-steg-2">Kontaktinformasjon</Link>
+        <Link>Kontaktinformasjon</Link>
         <ProgressBar value={50} />
       </Step>
       <Step>
-        <Link href="#skjema-steg-3">Kontaktinformasjon</Link>
+        <Link>Kontaktinformasjon</Link>
         <ProgressBar value={0} />
       </Step>
       <Step isCompleted>
+        <Text>Oppsummering</Text>
+      </Step>
+    </Stepper>
+  ),
+};
+
+export const WithLinks: Story = {
+  render: (args) => (
+    <Stepper {...args} currentStep={1}>
+      <Step>
+        <Link href="#step-1">Personalia</Link>
+        <ProgressBar />
+      </Step>
+      <Step>
+        <Link href="#step-2">Kontaktinformasjon</Link>
+        <ProgressBar />
+      </Step>
+      <Step>
+        <Link href="step-3">Kontaktinformasjon</Link>
+        <ProgressBar />
+      </Step>
+      <Step>
+        <Link href="step-4">Oppsummering</Link>
+      </Step>
+    </Stepper>
+  ),
+};
+
+export const DisabledSteps: Story = {
+  render: (args) => (
+    <Stepper {...args} currentStep={1}>
+      <Step>
+        <Link>Personalia</Link>
+        <ProgressBar />
+      </Step>
+      <Step isDisabled>
+        <Link>Kontaktinformasjon</Link>
+        <ProgressBar />
+      </Step>
+      <Step isDisabled>
+        <Link>Kontaktinformasjon</Link>
+        <ProgressBar />
+      </Step>
+      <Step isDisabled>
+        <Link>Oppsummering</Link>
+      </Step>
+    </Stepper>
+  ),
+};
+
+export const StaticSteps: Story = {
+  render: (args) => (
+    <Stepper {...args} currentStep={1}>
+      <Step>
+        <Text>Personalia</Text>
+        <ProgressBar />
+      </Step>
+      <Step>
+        <Text>Kontaktinformasjon</Text>
+        <ProgressBar />
+      </Step>
+      <Step>
+        <Text>Kontaktinformasjon</Text>
+        <ProgressBar />
+      </Step>
+      <Step>
         <Text>Oppsummering</Text>
       </Step>
     </Stepper>
