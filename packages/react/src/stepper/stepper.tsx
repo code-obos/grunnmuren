@@ -1,6 +1,7 @@
 import { Check, Edit } from '@obosbbl/grunnmuren-icons-react';
 import {
   Children,
+  cloneElement,
   createContext,
   type HTMLAttributes,
   type HTMLProps,
@@ -30,6 +31,7 @@ type StepperProps = HTMLAttributes<HTMLDivElement> & {
 const StepperContext = createContext<{
   /** Handler that is called when a step is clicked. */
   onAction?: (key: Key) => void;
+  currentStep: number;
 }>(null);
 
 const Stepper = ({
@@ -228,20 +230,12 @@ const Stepper = ({
         aria-label={translations.stepper[locale]}
         data-slot="stepper"
       >
-        <StepperContext.Provider value={{ onAction }}>
-          {Children.map(children, (child, index) => {
-            const isCurrent = index + 1 === currentStep;
-
-            return (
-              <_StepProvider
-                value={{
-                  isCurrent,
-                }}
-              >
-                {child}
-              </_StepProvider>
-            );
-          })}
+        <StepperContext.Provider value={{ onAction, currentStep }}>
+          {Children.map(children, (child, index) =>
+            cloneElement(child, {
+              '~stepNumber': index + 1,
+            }),
+          )}
         </StepperContext.Provider>
       </ol>
       <ScrollButton
@@ -266,23 +260,23 @@ type StepProps = HTMLProps<HTMLLIElement> & {
    * @default false
    */
   isCompleted?: boolean;
+  /** @private */
+  '~stepNumber'?: number;
 };
 
-const _StepContext = createContext<{
-  isCurrent: boolean;
-}>({
-  isCurrent: false,
-});
-
-const _StepProvider = _StepContext.Provider;
-
-const Step = ({ isCompleted = false, children, ...restProps }: StepProps) => {
+const Step = ({
+  isCompleted = false,
+  children,
+  '~stepNumber': stepNumber,
+  ...restProps
+}: StepProps) => {
   const locale = useLocale();
   const id = useId();
-  const { isCurrent } = use(_StepContext);
-  const { onAction } = use(StepperContext);
+  const { onAction, currentStep } = use(StepperContext);
 
   const state = isCompleted ? 'completed' : 'pending';
+
+  const isCurrent = stepNumber === currentStep;
 
   return (
     <li
