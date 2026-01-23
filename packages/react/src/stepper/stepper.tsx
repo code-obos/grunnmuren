@@ -11,81 +11,33 @@ import {
   useId,
   useState,
 } from 'react';
-import { ProgressBarContext, Provider } from 'react-aria-components';
-import { _LinkContext } from '../link';
+import {
+  LinkContext,
+  ProgressBarContext,
+  Provider,
+} from 'react-aria-components';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 import { ScrollButton, useHorizontalScroll } from '../utils';
 
-type StepProps = HTMLProps<HTMLLIElement> & {
-  /**
-   * Indicates whether the step is completed or not.
-   * @default false
-   */
-  isCompleted?: boolean;
-};
-
-const _StepContext = createContext<{
-  isCurrent: boolean;
-}>({
-  isCurrent: false,
-});
-
-const _StepProvider = _StepContext.Provider;
-
-const Step = ({ isCompleted = false, children, ...restProps }: StepProps) => {
-  const locale = useLocale();
-  const id = useId();
-  const { isCurrent } = use(_StepContext);
-
-  const state = isCompleted ? 'completed' : 'pending';
-
-  return (
-    <li
-      {...restProps}
-      data-slot="step"
-      data-state={state}
-      data-current={isCurrent ? true : undefined}
-      id={id}
-    >
-      <Provider
-        values={[
-          [
-            _LinkContext,
-            {
-              'aria-current': isCurrent ? 'step' : undefined,
-              role: state === 'pending' ? 'none' : undefined,
-              className: 'underline',
-            },
-          ],
-          [
-            ProgressBarContext,
-            {
-              'aria-labelledby': id,
-            },
-          ],
-        ]}
-      >
-        {isCompleted ? (
-          <Check aria-label={translations.completed[locale]} />
-        ) : (
-          <Edit
-            data-slot="in-progress-icon"
-            aria-label={translations.inProgress[locale]}
-          />
-        )}
-        {children}
-      </Provider>
-    </li>
-  );
-};
-
 type StepperProps = HTMLAttributes<HTMLDivElement> & {
   children: JSX.Element[];
   currentStep: number;
+  /** Handler that is called when a step is clicked. */
+  onAction?: (key: Key) => void;
 };
 
-const Stepper = ({ children, currentStep, ...restProps }: StepperProps) => {
+const StepperContext = createContext<{
+  /** Handler that is called when a step is clicked. */
+  onAction?: (key: Key) => void;
+}>(null);
+
+const Stepper = ({
+  children,
+  currentStep,
+  onAction,
+  ...restProps
+}: StepperProps) => {
   const locale = useLocale();
   const childCount = Children.count(children);
 
@@ -276,19 +228,21 @@ const Stepper = ({ children, currentStep, ...restProps }: StepperProps) => {
         aria-label={translations.stepper[locale]}
         data-slot="stepper"
       >
-        {Children.map(children, (child, index) => {
-          const isCurrent = index + 1 === currentStep;
+        <StepperContext.Provider value={{ onAction }}>
+          {Children.map(children, (child, index) => {
+            const isCurrent = index + 1 === currentStep;
 
-          return (
-            <_StepProvider
-              value={{
-                isCurrent,
-              }}
-            >
-              {child}
-            </_StepProvider>
-          );
-        })}
+            return (
+              <_StepProvider
+                value={{
+                  isCurrent,
+                }}
+              >
+                {child}
+              </_StepProvider>
+            );
+          })}
+        </StepperContext.Provider>
       </ol>
       <ScrollButton
         direction="left"
@@ -303,6 +257,71 @@ const Stepper = ({ children, currentStep, ...restProps }: StepperProps) => {
         hasScrollingOccurred={hasScrollingOccurred}
       />
     </div>
+  );
+};
+
+type StepProps = HTMLProps<HTMLLIElement> & {
+  /**
+   * Indicates whether the step is completed or not.
+   * @default false
+   */
+  isCompleted?: boolean;
+};
+
+const _StepContext = createContext<{
+  isCurrent: boolean;
+}>({
+  isCurrent: false,
+});
+
+const _StepProvider = _StepContext.Provider;
+
+const Step = ({ isCompleted = false, children, ...restProps }: StepProps) => {
+  const locale = useLocale();
+  const id = useId();
+  const { isCurrent } = use(_StepContext);
+  const { onAction } = use(StepperContext);
+
+  const state = isCompleted ? 'completed' : 'pending';
+
+  return (
+    <li
+      {...restProps}
+      data-slot="step"
+      data-state={state}
+      data-current={isCurrent ? true : undefined}
+      id={id}
+    >
+      <Provider
+        values={[
+          [
+            LinkContext,
+            {
+              'aria-current': isCurrent ? 'step' : undefined,
+              role: state === 'pending' ? 'none' : undefined,
+              className: 'underline',
+              onPress: () => onAction?.(id),
+            },
+          ],
+          [
+            ProgressBarContext,
+            {
+              'aria-labelledby': id,
+            },
+          ],
+        ]}
+      >
+        {isCompleted ? (
+          <Check aria-label={translations.completed[locale]} />
+        ) : (
+          <Edit
+            data-slot="in-progress-icon"
+            aria-label={translations.inProgress[locale]}
+          />
+        )}
+        {children}
+      </Provider>
+    </li>
   );
 };
 

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
+import { fn } from 'storybook/test';
 import { Button } from '../button';
 import { Heading, Text } from '../content';
 import { UNSAFE_Link as Link } from '../link';
@@ -14,13 +15,37 @@ const meta: Meta<typeof Stepper> = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
+  args: {
+    onAction: fn(),
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Example: Story = {
+  render: (args) => (
+    <Stepper {...args} currentStep={1}>
+      <Step>
+        <Link>Personalia</Link>
+        <ProgressBar value={40} />
+      </Step>
+      <Step isCompleted={true}>
+        <Link href="#skjema-steg-2">Kontaktinformasjon</Link>
+        <ProgressBar value={50} />
+      </Step>
+      <Step>
+        <Link href="#skjema-steg-3">Kontaktinformasjon</Link>
+        <ProgressBar value={0} />
+      </Step>
+      <Step isCompleted>
+        <Text>Oppsummering</Text>
+      </Step>
+    </Stepper>
+  ),
+};
+
+export const Complex: Story = {
   render: () => (
     <Stepper currentStep={1}>
       <Step>
@@ -29,7 +54,7 @@ export const Default: Story = {
       </Step>
       <Step>
         <Link href="#skjema-steg-2">Kontaktinformasjon</Link>
-        <ProgressBar value={50} />
+        <ProgressBar value={0} />
       </Step>
       <Step>
         <Text>Fakturainformasjon</Text>
