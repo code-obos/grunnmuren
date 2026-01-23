@@ -29,6 +29,7 @@ const options: ParserOptions = {
       case prop.name.startsWith('UNSTABLE_'):
       // these are private
       case prop.name.startsWith('~'):
+      case prop.name.startsWith('_'):
       // key isn't a regular prop, but a special react prop
       case prop.name === 'key':
         return false;
