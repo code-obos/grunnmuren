@@ -47,7 +47,7 @@
     "react-live": "4.1.8",
     "sanity": "5.3.0",
     "styled-components": "6.2.0",
-    "use-debounce": "10.0.6"
+    "use-debounce": "10.1.0"
   },
   "devDependencies": {
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
