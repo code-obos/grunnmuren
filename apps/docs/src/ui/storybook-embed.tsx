@@ -57,27 +57,28 @@ const StoryRenderer = ({
   setSourceCode: (sourceCode: string) => void;
 }) => {
   const [contentHeight, setContentHeight] = useState<string>();
-  const ref = useRef<HTMLIFrameElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const wip = useRef(false);
 
   useEffect(() => {
-    console.log(ref.current?.contentWindow?.postMessage);
     if (!contentHeight) {
-      ref.current?.contentWindow?.postMessage(
-        { type: 'FRAME_PARENT_MOUNTED' },
+      iframeRef.current?.contentWindow?.postMessage(
+        { type: 'REQUEST_STORY_DATA' },
         '*',
       );
     }
+  }, []);
 
+  useEffect(() => {
     const messageHandler = (event: MessageEvent) => {
       if (!ALLOWED_MESSAGE_ORIGINS.has(event.origin)) return;
 
       const data = event.data;
 
       if (typeof data === 'object' && 'type' in data) {
-        console.log('from storyt');
-        if (data.type === 'SOURCE_SNIPPET_RENDERED') {
+        if (data.type === 'STORY_SOURCE') {
           setSourceCode(data.source);
-        } else if (data.type === 'STORY_FINISHED') {
+        } else if (data.type === 'STORY_HEIGHT') {
           setContentHeight(data.scrollHeight);
         }
       }
@@ -96,7 +97,8 @@ const StoryRenderer = ({
       width="100%"
       height={contentHeight}
       title="Storybook embed"
-      ref={ref}
+      ref={iframeRef}
+      loading="lazy"
     />
   );
 };

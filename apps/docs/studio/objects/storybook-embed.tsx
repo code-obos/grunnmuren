@@ -1,21 +1,5 @@
 import { defineField, defineType } from 'sanity';
 
-import storybookData from '../../public/storybook/index.json' with {
-  type: 'json',
-};
-
-const options: Array<{ title: string; value: string }> = [];
-
-for (const entry of Object.values(storybookData.entries)) {
-  // We only want the stories themselves, not the docs
-  if (entry.type === 'story') {
-    options.push({
-      title: `${entry.title}: ${entry.name}`,
-      value: entry.id,
-    });
-  }
-}
-
 const storybookEmbed = defineType({
   name: 'storybook-embed',
   title: 'Storybook Embed',
@@ -39,11 +23,8 @@ const storybookEmbed = defineType({
           .
         </>
       ),
-      type: 'storybookId',
+      type: 'string',
       validation: (rule) => rule.required(),
-      // options: {
-      //   list: options,
-      // },
     }),
   ],
   preview: {

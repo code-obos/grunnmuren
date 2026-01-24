@@ -5,6 +5,7 @@ import { useChannel, useEffect } from 'storybook/preview-api';
 import { GrunnmurenProvider } from '../packages/react/src';
 
 import './storybook.css';
+import { useRef } from 'react';
 
 // only allow postmessages from these origins
 const ALLOWED_MESSAGE_ORIGINS = new Set([
@@ -15,7 +16,12 @@ const ALLOWED_MESSAGE_ORIGINS = new Set([
 
 const preview: Preview = {
   decorators: [
-    (StoryFn, context) => {
+    // decorator that communicates with the Grunnmuren docs site for embedded stories
+    (Story, context) => {
+      const sourceRef = useRef<string>(null);
+      // if the storybook iframe loads before the parent window has finished loading,
+      // this is how we pass data to the parent window. The parent sends a data request
+      // that we respond to
       useEffect(() => {
         if (context.viewMode === 'docs') return;
 
@@ -28,61 +34,57 @@ const preview: Preview = {
           if (
             typeof data === 'object' &&
             'type' in data &&
-            data.type === 'FRAME_PARENT_MOUNTED'
+            data.type === 'REQUEST_STORY_DATA'
           ) {
-            console.log('parent requesting data');
+            window.parent.postMessage(
+              {
+                type: 'STORY_HEIGHT',
+                scrollHeight: document.body.scrollHeight,
+              },
+              '*',
+            );
+            if (sourceRef.current) {
+              window.parent.postMessage(
+                {
+                  type: 'STORY_SOURCE',
+                  source: sourceRef.current,
+                },
+                '*',
+              );
+            }
           }
-
-          window.parent.postMessage(
-            {
-              type: 'STORY_FINISHED',
-              scrollHeight: document.body.scrollHeight,
-            },
-            '*',
-          );
-
-          // const data = event.data;
-
-          // if (typeof data === 'object' && 'type' in data) {
-          //   if (data.type === 'SOURCE_SNIPPET_RENDERED') {
-          //     setSourceCode(data.source);
-          //   } else if (data.type === 'STORY_FINISHED') {
-          //     setContentHeight(data.scrollHeight);
-          //   }
-          // }
         };
         window.addEventListener('message', messageHandler);
 
         return () => {
           window.removeEventListener('message', messageHandler);
         };
-        // Your effect logic here
       }, []);
 
-      // Communicate with the parent window
+      // If the frame parent loads before the iframe story, this is
+      // how we pass the data to the parent window
       useChannel({
         [STORY_FINISHED]: () => {
           if (context.viewMode === 'docs') return;
 
           window.parent.postMessage(
             {
-              type: 'STORY_FINISHED',
+              type: 'STORY_HEIGHT',
               scrollHeight: document.body.scrollHeight,
             },
             '*',
           );
         },
-        [SNIPPET_RENDERED]: ({ source, format }) => {
+        [SNIPPET_RENDERED]: ({ source }) => {
           if (context.viewMode === 'docs') return;
 
-          window.parent.postMessage(
-            { type: 'SOURCE_SNIPPET_RENDERED', source, format },
-            '*',
-          );
+          sourceRef.current = source;
+
+          window.parent.postMessage({ type: 'STORY_SOURCE', source }, '*');
         },
       });
 
-      return StoryFn();
+      return Story();
     },
     (Story) => (
       <GrunnmurenProvider locale="nb">
