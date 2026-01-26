@@ -1,4 +1,5 @@
 import { Button } from '@obosbbl/grunnmuren-react';
+import { cx } from 'cva';
 import { Activity, useEffect, useMemo, useRef, useState } from 'react';
 import { Group } from 'react-aria-components';
 import ShikiHighlighter from 'react-shiki/web';
@@ -6,19 +7,17 @@ import ShikiHighlighter from 'react-shiki/web';
 type Props = {
   storyId: string;
 };
-
-// only allow postmessages from these origins
-const ALLOWED_MESSAGE_ORIGINS = new Set([
-  'https://grunnmuren.obos.no',
-  // storybook running locally
-  'http://localhost:6006',
-]);
+// only allow postmessages from this origin
+const ALLOWED_POST_MESSAGE_ORIGIN = new URL(
+  import.meta.env.VITE_STORYBOOK_BASE_URL,
+).origin;
 
 export function StorybookEmbed({ storyId }: Props) {
-  const storyUrl = useMemo(
-    () => `http://localhost:6006/iframe.html?id=${storyId}&viewMode=story`,
-    [storyId],
-  );
+  const storyUrl = useMemo(() => {
+    const baseUrl = import.meta.env.VITE_STORYBOOK_BASE_URL;
+
+    return `${baseUrl}/iframe.html?id=${storyId}&viewMode=story`;
+  }, [storyId]);
 
   const [sourceCode, setSourceCode] = useState('');
 
@@ -29,7 +28,7 @@ export function StorybookEmbed({ storyId }: Props) {
       <div className="flex justify-between">
         <Group>
           <Button variant="tertiary" onPress={() => setViewMode('preview')}>
-            Visning
+            Forhåndsvisning
           </Button>
           <Button variant="tertiary" onPress={() => setViewMode('code')}>
             Kode
@@ -39,7 +38,14 @@ export function StorybookEmbed({ storyId }: Props) {
           Åpne i SB
         </a>
       </div>
-      <div className="overflow-hidden rounded-lg border">
+      <div
+        className={cx(
+          'overflow-hidden rounded-lg',
+          // Only add the border if the view mode is preview
+          // prevents rendering artifacts for the corners of the code snippet
+          viewMode === 'preview' && 'border',
+        )}
+      >
         <Activity mode={viewMode === 'preview' ? 'visible' : 'hidden'}>
           <StoryRenderer storyUrl={storyUrl} setSourceCode={setSourceCode} />
         </Activity>
@@ -56,22 +62,24 @@ const StoryRenderer = ({
   storyUrl: string;
   setSourceCode: (sourceCode: string) => void;
 }) => {
-  const [contentHeight, setContentHeight] = useState<string>();
+  const [contentHeight, setContentHeight] = useState<number>();
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const wip = useRef(false);
 
+  // If the storybook iframe finished loading before the
+  // react component, we need to pass a message to send the
+  // data again
   useEffect(() => {
-    if (!contentHeight) {
+    if (contentHeight == null) {
       iframeRef.current?.contentWindow?.postMessage(
         { type: 'REQUEST_STORY_DATA' },
         '*',
       );
     }
-  }, []);
+  }, [contentHeight]);
 
   useEffect(() => {
     const messageHandler = (event: MessageEvent) => {
-      if (!ALLOWED_MESSAGE_ORIGINS.has(event.origin)) return;
+      if (event.origin !== ALLOWED_POST_MESSAGE_ORIGIN) return;
 
       const data = event.data;
 
@@ -106,7 +114,7 @@ const StoryRenderer = ({
 const Code = ({ source }: { source: string }) => {
   return (
     <ShikiHighlighter
-      theme="dracula"
+      theme="ayu-dark"
       language="tsx"
       showLanguage={false}
       className="text-sm"

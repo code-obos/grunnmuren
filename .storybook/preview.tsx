@@ -27,7 +27,6 @@ const preview: Preview = {
 
         const messageHandler = (event: MessageEvent) => {
           if (!ALLOWED_MESSAGE_ORIGINS.has(event.origin)) return;
-          console.log(event);
 
           const data = event.data;
 

@@ -13,6 +13,7 @@
     "build:colors": "node extract-colors.ts && biome format --write colors.ts",
     "build:tsc": "tsc",
     "dev": "vite dev --port 3003",
+    "dev:local-storybook": "VITE_STORYBOOK_BASE_URL=http://localhost:6006 pnpm dev",
     "start": "node .output/server/index.mjs",
     "sanity:schema:deploy": "sanity schema deploy",
     "sanity:extract": "sanity manifest extract --path public/studio/static",
