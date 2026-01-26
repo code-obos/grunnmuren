@@ -298,11 +298,6 @@
 
       &::before {
         content: counter(step-counter);
-      }
-
-      &::before,
-      &[data-prev-steps-expanded]::after,
-      &[data-next-steps-expanded]::after {
         @apply shrink-0 font-semibold size-8 border-2 rounded-full border-blue-dark grid place-content-center;
       }
 
@@ -333,16 +328,6 @@
 
       svg {
         @apply text-white absolute border-2 border-white bg-blue-dark rounded-full left-4.5 -top-1.5 size-5;
-      }
-
-      &[data-state="pending"] {
-        &:not(:has([data-slot="link"])),
-        &:not(:has([data-slot="progress-bar"])) {
-          /** Hide in-progress icon when there is no link or a step without progress bar **/
-          [data-slot="in-progress-icon"] {
-            @apply hidden;
-          }
-        }
       }
 
       &[data-state="pending"]:not([data-is-current="true"])::before {

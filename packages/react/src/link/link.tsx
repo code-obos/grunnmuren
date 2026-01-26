@@ -10,7 +10,7 @@ import { useLocale } from '../use-locale';
 const linkVariants = compose(
   animateIconVariants,
   cva({
-    base: 'inline-flex cursor-pointer items-center gap-1 font-medium hover:no-underline focus-visible:outline-current focus-visible:outline-focus-offset data-disabled:cursor-default',
+    base: 'inline-flex cursor-pointer items-center gap-1 font-medium hover:no-underline focus-visible:outline-current focus-visible:outline-focus-offset data-disabled:cursor-default data-disabled:font-normal data-disabled:no-underline',
   }),
 );
 
