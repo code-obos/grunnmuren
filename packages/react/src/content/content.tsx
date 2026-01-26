@@ -155,10 +155,6 @@ const Caption = ({ className, ...restProps }: CaptionProps) => (
 
 const Footer = (props: FooterProps) => <div {...props} data-slot="footer" />;
 
-type TextProps = RACTextProps;
-
-const Text = (props: TextProps) => <RACText {...props} data-slot="text" />;
-
 export {
   Caption,
   Content,
@@ -168,11 +164,9 @@ export {
   HeadingContext,
   Media,
   MediaContext,
-  Text,
   type CaptionProps,
   type ContentProps,
   type FooterProps,
   type HeadingProps,
   type MediaProps,
-  type TextProps,
 };

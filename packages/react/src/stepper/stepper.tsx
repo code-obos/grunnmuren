@@ -255,13 +255,11 @@ const Stepper = ({
 };
 
 type StepProps = HTMLProps<HTMLLIElement> & {
-  state?: 'completed';
-
   /**
    * Indicates whether the step is completed or not.
-   * @default false
    */
-  isCompleted?: boolean;
+  state?: 'completed';
+
   /**
    * Whether the step is disabled.
    * @default false
@@ -284,6 +282,15 @@ const Step = ({
 
   const isCurrent = stepNumber === currentStep;
 
+  const iconText =
+    state === 'completed' ? translations.completed[locale] : undefined;
+
+  const icon = isCurrent ? (
+    <Edit aria-label={iconText} />
+  ) : (
+    state === 'completed' && <Check aria-label={iconText} />
+  );
+
   return (
     <li
       {...restProps}
@@ -301,7 +308,8 @@ const Step = ({
               // @ts-expect-error this works even though it's a type error
               'aria-current': isCurrent ? 'step' : undefined,
               isDisabled,
-              onPress: () => onAction?.(id),
+              className: 'underline',
+              onPress: () => onAction?.(stepNumber),
             },
           ],
           [
@@ -312,9 +320,8 @@ const Step = ({
           ],
         ]}
       >
-        {state === 'completed' && (
-          <Check aria-label={translations.completed[locale]} />
-        )}
+        {icon}
+
         {children}
       </Provider>
     </li>

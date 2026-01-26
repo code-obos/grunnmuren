@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
+import { useArgs } from 'storybook/preview-api';
 import { fn } from 'storybook/test';
 import { Button } from '../button';
-import { Heading, Text } from '../content';
+import { Heading } from '../content';
 import { UNSAFE_Link as Link } from '../link';
 import { UNSAFE_ProgressBar as ProgressBar } from '../progress-bar';
 import { TextArea } from '../textarea';
@@ -17,37 +18,88 @@ const meta: Meta<typeof Stepper> = {
   },
   args: {
     onAction: fn(),
+    currentStep: 1,
   },
+  // decorators: [
+  //   (Story, ctx) => {
+  //     console.log(ctx);
+  //     const [currentStep, setCurrentStep] = useState(ctx.args.currentStep);
+  //     ctx.args.currentStep = 2;
+
+  //     return (
+  //       <div style={{ margin: '3em' }}>
+  //         {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
+  //         <Story />
+  //       </div>
+  //     );
+  //   },
+  // ],
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+function useStatefulStepperArgs() {
+  const [{ onAction: originalOnAction, ...args }, updateArgs] = useArgs();
+
+  function onAction(stepNumber: string) {
+    originalOnAction(stepNumber);
+    updateArgs({ currentStep: stepNumber });
+  }
+
+  return { ...args, onAction };
+}
+
 export const Example: Story = {
+  render: (_args) => {
+    const args = useStatefulStepperArgs();
+    return (
+      <Stepper {...args}>
+        <Step>
+          <Link>Personalia</Link>
+          <ProgressBar value={40} />
+        </Step>
+        <Step>
+          <Link>Kontaktinformasjon</Link>
+          <ProgressBar value={50} />
+        </Step>
+        <Step>
+          <Link>Kontaktinformasjon</Link>
+          <ProgressBar value={0} />
+        </Step>
+        <Step>
+          <Link>Oppsummering</Link>
+        </Step>
+      </Stepper>
+    );
+  },
+};
+
+export const CompletedSteps: Story = {
   render: (args) => (
-    <Stepper {...args} currentStep={1}>
-      <Step>
+    <Stepper {...args}>
+      <Step state="completed">
         <Link>Personalia</Link>
-        <ProgressBar value={40} />
+        <ProgressBar value={100} />
       </Step>
-      <Step isCompleted={true}>
+      <Step state="completed">
         <Link>Kontaktinformasjon</Link>
-        <ProgressBar value={50} />
+        <ProgressBar value={100} />
       </Step>
-      <Step>
+      <Step state="completed">
         <Link>Kontaktinformasjon</Link>
-        <ProgressBar value={0} />
+        <ProgressBar value={100} />
       </Step>
-      <Step isCompleted>
-        <Text>Oppsummering</Text>
+      <Step state="completed">
+        <Link>Oppsummering</Link>
       </Step>
     </Stepper>
   ),
 };
 
-export const WithLinks: Story = {
+export const WithHrefLinks: Story = {
   render: (args) => (
-    <Stepper {...args} currentStep={1}>
+    <Stepper {...args}>
       <Step>
         <Link href="#step-1">Personalia</Link>
         <ProgressBar />
@@ -57,11 +109,11 @@ export const WithLinks: Story = {
         <ProgressBar />
       </Step>
       <Step>
-        <Link href="step-3">Kontaktinformasjon</Link>
+        <Link href="#step-3">Kontaktinformasjon</Link>
         <ProgressBar />
       </Step>
       <Step>
-        <Link href="step-4">Oppsummering</Link>
+        <Link href="#step-4">Oppsummering</Link>
       </Step>
     </Stepper>
   ),
@@ -69,7 +121,7 @@ export const WithLinks: Story = {
 
 export const DisabledSteps: Story = {
   render: (args) => (
-    <Stepper {...args} currentStep={1}>
+    <Stepper {...args}>
       <Step>
         <Link>Personalia</Link>
         <ProgressBar />
@@ -89,78 +141,10 @@ export const DisabledSteps: Story = {
   ),
 };
 
-export const StaticSteps: Story = {
-  render: (args) => (
-    <Stepper {...args} currentStep={1}>
-      <Step>
-        <Text>Personalia</Text>
-        <ProgressBar />
-      </Step>
-      <Step>
-        <Text>Kontaktinformasjon</Text>
-        <ProgressBar />
-      </Step>
-      <Step>
-        <Text>Kontaktinformasjon</Text>
-        <ProgressBar />
-      </Step>
-      <Step>
-        <Text>Oppsummering</Text>
-      </Step>
-    </Stepper>
-  ),
-};
-
-export const Complex: Story = {
-  render: () => (
-    <Stepper currentStep={1}>
-      <Step>
-        <Link href="#skjema-steg-1">Personalia</Link>
-        <ProgressBar value={100} />
-      </Step>
-      <Step>
-        <Link href="#skjema-steg-2">Kontaktinformasjon</Link>
-        <ProgressBar value={0} />
-      </Step>
-      <Step>
-        <Text>Fakturainformasjon</Text>
-        <ProgressBar value={0} />
-      </Step>
-      <Step>
-        <Text>Samtykke</Text>
-        <ProgressBar value={0} />
-      </Step>
-      <Step>
-        <Text>Betalingsinformasjon</Text>
-        <ProgressBar value={0} />
-      </Step>
-      <Step>
-        <Text>Leveringsadresse</Text>
-        <ProgressBar value={0} />
-      </Step>
-      <Step>
-        <Text>Bekrefelse</Text>
-        <ProgressBar value={0} />
-      </Step>
-      <Step>
-        <Text>Oppsummering</Text>
-      </Step>
-    </Stepper>
-  ),
-};
-
 type FormData = {
   step1: { fornavn: string; etternavn: string; fodselsdato: string };
   step2: { epost: string; telefon: string };
   step3: { adresse: string; postnummer: string; poststed: string };
-  step4: { samtykke: string };
-  step5: { kontonummer: string; banknavn: string };
-  step6: {
-    leveringsadresse: string;
-    leveringspostnummer: string;
-    leveringspoststed: string;
-  };
-  step7: { kommentar: string };
 };
 
 const stepper = {
@@ -193,59 +177,6 @@ const stepper = {
         inputType: 'string',
       },
       poststed: { label: 'Poststed', initialValue: '', inputType: 'string' },
-    },
-  },
-  step4: {
-    title: 'Samtykke',
-    fields: {
-      samtykke: {
-        label: 'Samtykke',
-        initialValue: '',
-        inputType: 'text',
-        description: 'Beskriv hva du samtykker til',
-      },
-    },
-  },
-  step5: {
-    title: 'Betalingsinformasjon',
-    fields: {
-      kontonummer: {
-        label: 'Kontonummer',
-        initialValue: '',
-        inputType: 'string',
-      },
-      banknavn: { label: 'Banknavn', initialValue: '', inputType: 'string' },
-    },
-  },
-  step6: {
-    title: 'Leveringsadresse',
-    fields: {
-      leveringsadresse: {
-        label: 'Leveringsadresse',
-        initialValue: '',
-        inputType: 'string',
-      },
-      leveringspostnummer: {
-        label: 'Postnummer',
-        initialValue: '',
-        inputType: 'string',
-      },
-      leveringspoststed: {
-        label: 'Poststed',
-        initialValue: '',
-        inputType: 'string',
-      },
-    },
-  },
-  step7: {
-    title: 'Bekrefelse',
-    fields: {
-      kommentar: {
-        label: 'Kommentar',
-        initialValue: '',
-        inputType: 'text',
-        description: 'Legg til eventuelle kommentarer',
-      },
     },
   },
   summary: {
