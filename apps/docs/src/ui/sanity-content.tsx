@@ -2,7 +2,7 @@ import { PortableText } from '@portabletext/react';
 import { cx } from 'cva';
 import type { COMPONENT_QUERY_RESULT } from 'sanity.types';
 import { AnchorHeading } from './anchor-heading';
-import { Code } from './code';
+import { Code } from './code-legacy';
 import { ComponentPreview } from './component-preview';
 import { ImageWithCaption } from './image-with-caption';
 import { StorybookEmbed } from './storybook-embed';

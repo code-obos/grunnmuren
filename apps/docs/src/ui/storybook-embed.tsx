@@ -2,7 +2,7 @@ import { Button } from '@obosbbl/grunnmuren-react';
 import { cx } from 'cva';
 import { Activity, useEffect, useMemo, useRef, useState } from 'react';
 import { Group } from 'react-aria-components';
-import ShikiHighlighter from 'react-shiki/web';
+import { Code } from './code';
 
 type Props = {
   storyId: string;
@@ -108,18 +108,5 @@ const StoryRenderer = ({
       ref={iframeRef}
       loading="lazy"
     />
-  );
-};
-
-const Code = ({ source }: { source: string }) => {
-  return (
-    <ShikiHighlighter
-      theme="ayu-dark"
-      language="tsx"
-      showLanguage={false}
-      className="text-sm"
-    >
-      {source}
-    </ShikiHighlighter>
   );
 };
