@@ -1,7 +1,10 @@
-import { Button } from '@obosbbl/grunnmuren-react';
-import { cx } from 'cva';
-import { Activity, useEffect, useMemo, useRef, useState } from 'react';
-import { Group } from 'react-aria-components';
+import {
+  UNSAFE_Tab as Tab,
+  UNSAFE_TabList as TabList,
+  UNSAFE_TabPanel as TabPanel,
+  UNSAFE_Tabs as Tabs,
+} from '@obosbbl/grunnmuren-react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Code } from './code';
 
 type Props = {
@@ -21,36 +24,20 @@ export function StorybookEmbed({ storyId }: Props) {
 
   const [sourceCode, setSourceCode] = useState('');
 
-  const [viewMode, setViewMode] = useState<'preview' | 'code'>('preview');
-
   return (
     <div className="my-6">
-      <div className="flex justify-between">
-        <Group>
-          <Button variant="tertiary" onPress={() => setViewMode('preview')}>
-            Forhåndsvisning
-          </Button>
-          <Button variant="tertiary" onPress={() => setViewMode('code')}>
-            Kode
-          </Button>
-        </Group>
-        {/*<a href={storyUrl} target="_blank" rel="external">
-          Åpne i SB
-        </a>*/}
-      </div>
-      <div
-        className={cx(
-          'overflow-hidden rounded-lg',
-          // Only add the border if the view mode is preview
-          // prevents rendering artifacts for the corners of the code snippet
-          viewMode === 'preview' && 'border',
-        )}
-      >
-        <Activity mode={viewMode === 'preview' ? 'visible' : 'hidden'}>
+      <Tabs>
+        <TabList>
+          <Tab id="preview">Forhåndsvisning</Tab>
+          <Tab id="code">Kode</Tab>
+        </TabList>
+        <TabPanel id="preview" className="overflow-hidden rounded-lg border">
           <StoryRenderer storyUrl={storyUrl} setSourceCode={setSourceCode} />
-        </Activity>
-        {viewMode === 'code' && <Code source={sourceCode} />}
-      </div>
+        </TabPanel>
+        <TabPanel id="code" className="overflow-hidden">
+          <Code source={sourceCode} />
+        </TabPanel>
+      </Tabs>
     </div>
   );
 }

@@ -1,5 +1,4 @@
 import { Check, Documents } from '@obosbbl/grunnmuren-icons-react';
-import { cx } from 'cva';
 import { useState } from 'react';
 import ShikiHighlighter from 'react-shiki/web';
 
