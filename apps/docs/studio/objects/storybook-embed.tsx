@@ -3,8 +3,7 @@ import { defineField, defineType } from 'sanity';
 const storybookEmbed = defineType({
   name: 'storybook-embed',
   title: 'Storybook Embed',
-  description:
-    "For editable code snippets that also can control rendering. Use 'Static Code Block' for static, non editable code snippets.",
+  description: 'For embedding Storybook stories as component previews.',
   type: 'object',
   fields: [
     defineField({
