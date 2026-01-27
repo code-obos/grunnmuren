@@ -26,7 +26,9 @@ const preview: Preview = {
         if (context.viewMode === 'docs') return;
 
         const messageHandler = (event: MessageEvent) => {
-          if (!ALLOWED_MESSAGE_ORIGINS.has(event.origin)) return;
+          if (!ALLOWED_MESSAGE_ORIGINS.has(event.origin)) {
+            return;
+          }
 
           const data = event.data;
 
@@ -64,7 +66,9 @@ const preview: Preview = {
       // how we pass the data to the parent window
       useChannel({
         [STORY_FINISHED]: () => {
-          if (context.viewMode === 'docs') return;
+          if (context.viewMode === 'docs') {
+            return;
+          }
 
           window.parent.postMessage(
             {
@@ -75,7 +79,9 @@ const preview: Preview = {
           );
         },
         [SNIPPET_RENDERED]: ({ source }) => {
-          if (context.viewMode === 'docs') return;
+          if (context.viewMode === 'docs') {
+            return;
+          }
 
           sourceRef.current = source;
 

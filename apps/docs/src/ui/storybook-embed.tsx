@@ -68,7 +68,9 @@ const StoryRenderer = ({
 
   useEffect(() => {
     const messageHandler = (event: MessageEvent) => {
-      if (event.origin !== ALLOWED_POST_MESSAGE_ORIGIN) return;
+      if (event.origin !== ALLOWED_POST_MESSAGE_ORIGIN) {
+        return;
+      }
 
       const data = event.data;
 
