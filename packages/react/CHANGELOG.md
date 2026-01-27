@@ -1,5 +1,16 @@
 # @obosbbl/grunnmuren-react
 
+## 3.4.1
+
+### Patch Changes
+
+- ff64fb1: small changes to LinkList:
+  - refactor: use Tailwind utility classes
+  - feat: add prop `layout` to `<LinkListContainer>` to select between `grid` and `stack`, defaults to `stack`.
+  - refactor: use cloneElement instead of React Context
+  - fix: don't overwrite `animateIcon` prop on `<Link>` if specified
+- 17a8712: Fix font on label components
+
 ## 3.4.0
 
 ### Minor Changes
