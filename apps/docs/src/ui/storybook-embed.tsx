@@ -10,8 +10,10 @@ import { Code } from './code';
 type Props = {
   storyId: string;
 };
+
 // only allow postmessages from this origin
 const ALLOWED_POST_MESSAGE_ORIGIN = new URL(
+  // @ts-expect-error this doesn't seem to work? https://tanstack.com/start/latest/docs/framework/react/guide/environment-variables#typescript-declarations
   import.meta.env.VITE_STORYBOOK_BASE_URL,
 ).origin;
 
