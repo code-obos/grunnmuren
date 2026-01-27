@@ -34,9 +34,9 @@ export function StorybookEmbed({ storyId }: Props) {
             Kode
           </Button>
         </Group>
-        <a href={storyUrl} target="_blank" rel="external">
+        {/*<a href={storyUrl} target="_blank" rel="external">
           Åpne i SB
-        </a>
+        </a>*/}
       </div>
       <div
         className={cx(
