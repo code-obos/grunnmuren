@@ -2,9 +2,10 @@ import { PortableText } from '@portabletext/react';
 import { cx } from 'cva';
 import type { COMPONENT_QUERY_RESULT } from 'sanity.types';
 import { AnchorHeading } from './anchor-heading';
-import { Code } from './code';
+import { Code } from './code-legacy';
 import { ComponentPreview } from './component-preview';
 import { ImageWithCaption } from './image-with-caption';
+import { StorybookEmbed } from './storybook-embed';
 import { Table, TableBody, TableCell, TableHead, TableRow } from './table';
 
 export type SanityContentProps = Pick<
@@ -26,6 +27,9 @@ export function SanityContent({ content, className }: SanityContentProps) {
                 caption={value.caption}
                 code={value.code.code}
               />
+            ),
+            'storybook-embed': ({ value }) => (
+              <StorybookEmbed storyId={value.storyId} />
             ),
             'static-code-block': ({ value }) => (
               <Code value={value.code.code as string} />
