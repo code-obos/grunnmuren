@@ -2,7 +2,7 @@ import { PortableText } from '@portabletext/react';
 import { cx } from 'cva';
 import type { COMPONENT_QUERY_RESULT } from 'sanity.types';
 import { AnchorHeading } from './anchor-heading';
-import { Code } from './code-legacy';
+import { Code } from './code';
 import { ComponentPreview } from './component-preview';
 import { ImageWithCaption } from './image-with-caption';
 import { StorybookEmbed } from './storybook-embed';
@@ -32,7 +32,11 @@ export function SanityContent({ content, className }: SanityContentProps) {
               <StorybookEmbed storyId={value.storyId} />
             ),
             'static-code-block': ({ value }) => (
-              <Code value={value.code.code as string} />
+              <Code
+                code={value.code.code}
+                language={value.code.language}
+                caption={value.caption}
+              />
             ),
             'image-with-caption': ({ value }) => (
               <ImageWithCaption asset={value} />

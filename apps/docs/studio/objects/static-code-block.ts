@@ -2,9 +2,8 @@ import { defineField, defineType } from 'sanity';
 
 const codeBlock = defineType({
   name: 'static-code-block',
-  title: 'Static Code Block',
-  description:
-    "Great for simple code snippets that doesn't vary based on the language selected",
+  title: 'Code Block',
+  description: 'Code snippets',
   type: 'object',
   fields: [
     defineField({
@@ -24,12 +23,18 @@ const codeBlock = defineType({
       name: 'caption',
       title: 'Caption',
       description: 'A description or summary of the code',
-      type: 'string',
+      type: 'text',
     }),
   ],
   preview: {
     select: {
-      title: 'caption',
+      caption: 'caption',
+    },
+    prepare({ caption }) {
+      return {
+        title: 'Code block',
+        subtitle: caption,
+      };
     },
   },
 });
