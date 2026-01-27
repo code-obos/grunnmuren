@@ -37,7 +37,7 @@ export function StorybookEmbed({ storyId }: Props) {
           <StoryRenderer storyUrl={storyUrl} setSourceCode={setSourceCode} />
         </TabPanel>
         <TabPanel id="code" className="overflow-hidden">
-          <Code source={sourceCode} />
+          <Code code={sourceCode} language="tsx" />
         </TabPanel>
       </Tabs>
     </div>
