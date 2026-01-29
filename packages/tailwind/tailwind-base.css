@@ -309,20 +309,26 @@
       }
 
       [data-slot="link"] {
+        @apply max-lg:absolute max-lg:opacity-0 max-lg:max-w-11 max-lg:overflow-x-hidden;
         @apply focus-visible:outline-none;
         /** Create a 44x44 px clickable area, where the step number next to each link will also be covered **/
         @apply py-2.5 lg:pl-11 lg:-ml-11 -my-2.5;
       }
 
-      &[data-current="true"] {
+      &::before {
+        @apply bg-white text-blue-dark;
+      }
+
+      &[data-state="completed"] {
         &::before {
-          @apply bg-sky-light border-4 text-blue-dark;
+          @apply bg-blue-dark text-white;
         }
       }
 
-      &[data-state="completed"]:not([data-is-current="true"]) {
+      /* order matters here, as data-current selector needs to come after completed state selector */
+      &[data-current="true"] {
         &::before {
-          @apply bg-blue-dark text-white;
+          @apply bg-sky-light border-4 text-blue-dark;
         }
       }
 
@@ -330,16 +336,8 @@
         @apply text-white absolute border-2 border-white bg-blue-dark rounded-full left-4.5 -top-1.5 size-5;
       }
 
-      &[data-state="pending"]:not([data-is-current="true"])::before {
-        @apply bg-white text-blue-dark;
-      }
-
       [data-slot="progress-bar"] {
         @apply w-4 max-lg:grow lg:w-14 lg:rotate-90 lg:absolute lg:-left-3 lg:px-1.5 lg:-bottom-[calc(100%-2px)];
-      }
-
-      & > *:is([data-slot="text"], [data-slot="link"]) {
-        @apply max-lg:absolute max-lg:opacity-0 max-lg:max-w-11 max-lg:overflow-x-hidden;
       }
     }
   }
