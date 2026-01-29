@@ -13,7 +13,7 @@ const meta: Meta<typeof Stepper> = {
   },
   args: {
     onStepChange: fn(),
-    activeStep: 1,
+    activeStep: 0,
   },
 };
 

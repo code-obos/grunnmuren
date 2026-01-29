@@ -20,12 +20,13 @@ import { ScrollButton, useHorizontalScroll } from '../utils';
 
 type StepperProps = HTMLAttributes<HTMLDivElement> & {
   children: React.ReactNode;
+  /** The active step, zero indexed.  */
   activeStep: number;
+  /** Handler that is called when the step changes. */
   onStepChange?: (step: number) => void;
 };
 
 const StepperContext = createContext<{
-  /** Handler that is called when the step chages.. */
   onStepChange?: (step: number) => void;
   activeStep: number;
   stepsCount: number;
@@ -59,7 +60,7 @@ const Stepper = ({
       }
 
       const targetStepElement = scrollContainer.children[
-        targetStep - 1
+        targetStep
       ] as HTMLElement;
       if (!targetStepElement) {
         return;
@@ -92,7 +93,7 @@ const Stepper = ({
     }
 
     const targetStepElement = scrollContainer.children[
-      activeStep - 1
+      activeStep
     ] as HTMLElement;
     if (!targetStepElement) {
       return;
@@ -228,7 +229,7 @@ const Stepper = ({
             return (
               isValidElement<StepProps>(child) &&
               cloneElement(child, {
-                '~stepNumber': index + 1,
+                '~stepIndex': index,
               })
             );
           })}
@@ -265,14 +266,14 @@ type StepProps = HTMLProps<HTMLLIElement> & {
   progress?: number;
 
   /** @private */
-  '~stepNumber'?: number;
+  '~stepIndex'?: number;
 };
 
 const Step = ({
   isDisabled = false,
   state,
   children,
-  '~stepNumber': stepNumber,
+  '~stepIndex': stepIndex,
   progress,
   ...restProps
 }: StepProps) => {
@@ -280,8 +281,8 @@ const Step = ({
   const id = useId();
   const { onStepChange, activeStep, stepsCount } = use(StepperContext);
 
-  const isLastStep = stepNumber === stepsCount;
-  const isCurrent = stepNumber === activeStep;
+  const isLastStep = stepIndex === stepsCount - 1;
+  const isCurrent = stepIndex === activeStep;
 
   const iconText =
     state === 'completed' ? translations.completed[locale] : undefined;
@@ -310,7 +311,7 @@ const Step = ({
               'aria-current': isCurrent ? 'step' : undefined,
               isDisabled,
               className: 'underline',
-              onPress: () => onStepChange?.(stepNumber as number),
+              onPress: () => onStepChange?.(stepIndex as number),
             },
           ],
         ]}
