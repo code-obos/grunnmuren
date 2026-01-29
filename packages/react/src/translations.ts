@@ -59,11 +59,6 @@ const translations: Translations = {
     sv: 'Slutförd',
     en: 'Completed',
   },
-  inProgress: {
-    nb: 'Påbegynt',
-    sv: 'Påbörjad',
-    en: 'In progress',
-  },
 };
 
 export { translations, type Translation, type Translations };
