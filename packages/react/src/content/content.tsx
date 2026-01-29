@@ -1,11 +1,6 @@
 import { cva, cx, type VariantProps } from 'cva';
 import { createContext, type HTMLProps, type Ref } from 'react';
-import {
-  type ContextValue,
-  Text as RACText,
-  type TextProps as RACTextProps,
-  useContextProps,
-} from 'react-aria-components';
+import { type ContextValue, useContextProps } from 'react-aria-components';
 
 type HeadingProps = Omit<HTMLProps<HTMLHeadingElement>, 'size'> &
   VariantProps<typeof headingVariants> & {

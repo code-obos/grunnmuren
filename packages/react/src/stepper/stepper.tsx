@@ -5,49 +5,40 @@ import {
   createContext,
   type HTMLAttributes,
   type HTMLProps,
-  type JSX,
+  isValidElement,
   use,
   useCallback,
   useEffect,
   useId,
   useState,
 } from 'react';
-import {
-  LinkContext,
-  ProgressBarContext,
-  Provider,
-} from 'react-aria-components';
+import { LinkContext, Provider } from 'react-aria-components';
+import { UNSAFE_ProgressBar as ProgressBar } from '../progress-bar';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 import { ScrollButton, useHorizontalScroll } from '../utils';
 
 type StepperProps = HTMLAttributes<HTMLDivElement> & {
-  children: JSX.Element[];
-  currentStep: number;
-  /** Handler that is called when a step is clicked. */
-  onAction?: (key: Key) => void;
+  children: React.ReactNode;
+  activeStep: number;
+  onStepChange?: (step: number) => void;
 };
 
 const StepperContext = createContext<{
-  /** Handler that is called when a step is clicked. */
-  onAction?: (key: Key) => void;
-  currentStep: number;
-}>(null);
+  /** Handler that is called when the step chages.. */
+  onStepChange?: (step: number) => void;
+  activeStep: number;
+  stepsCount: number;
+}>({ activeStep: 0, stepsCount: 0 });
 
 const Stepper = ({
   children,
-  currentStep,
-  onAction,
+  activeStep,
+  onStepChange,
   ...restProps
 }: StepperProps) => {
   const locale = useLocale();
-  const childCount = Children.count(children);
-
-  if (currentStep > childCount) {
-    console.error(
-      `Stepper: currentStep (${currentStep}) is greater than the number of children (${childCount})`,
-    );
-  }
+  const stepsCount = Children.count(children);
 
   const {
     scrollContainerRef,
@@ -101,14 +92,14 @@ const Stepper = ({
     }
 
     const targetStepElement = scrollContainer.children[
-      currentStep - 1
+      activeStep - 1
     ] as HTMLElement;
     if (!targetStepElement) {
       return;
     }
 
-    performScroll(currentStep);
-  }, [currentStep, scrollContainerRef, performScroll]);
+    performScroll(activeStep);
+  }, [activeStep, scrollContainerRef, performScroll]);
 
   // Scroll focused links into view when they receive focus-visible
   useEffect(() => {
@@ -216,7 +207,7 @@ const Stepper = ({
       const stepElement = scrollContainer.children[i] as HTMLElement;
       const stepRect = stepElement.getBoundingClientRect();
       if (stepRect.right <= containerRect.right) {
-        const targetStep = Math.min(childCount, i + 2); // i is 0-indexed, steps are 1-indexed, +2 to go one after
+        const targetStep = Math.min(stepsCount, i + 2); // i is 0-indexed, steps are 1-indexed, +2 to go one after
         setScrollToStep(targetStep);
         break;
       }
@@ -230,12 +221,17 @@ const Stepper = ({
         aria-label={translations.stepper[locale]}
         data-slot="stepper"
       >
-        <StepperContext.Provider value={{ onAction, currentStep }}>
-          {Children.map(children, (child, index) =>
-            cloneElement(child, {
-              '~stepNumber': index + 1,
-            }),
-          )}
+        <StepperContext.Provider
+          value={{ onStepChange, activeStep, stepsCount }}
+        >
+          {Children.map(children, (child, index) => {
+            return (
+              isValidElement<StepProps>(child) &&
+              cloneElement(child, {
+                '~stepNumber': index + 1,
+              })
+            );
+          })}
         </StepperContext.Provider>
       </ol>
       <ScrollButton
@@ -256,7 +252,7 @@ const Stepper = ({
 
 type StepProps = HTMLProps<HTMLLIElement> & {
   /**
-   * Indicates whether the step is completed or not.
+   * The state fo the step, whether the step is completed or not.
    */
   state?: 'completed';
 
@@ -265,6 +261,9 @@ type StepProps = HTMLProps<HTMLLIElement> & {
    * @default false
    */
   isDisabled?: boolean;
+  /** The current progress of the step, between 0 and 100. */
+  progress?: number;
+
   /** @private */
   '~stepNumber'?: number;
 };
@@ -274,13 +273,15 @@ const Step = ({
   state,
   children,
   '~stepNumber': stepNumber,
+  progress,
   ...restProps
 }: StepProps) => {
   const locale = useLocale();
   const id = useId();
-  const { onAction, currentStep } = use(StepperContext);
+  const { onStepChange, activeStep, stepsCount } = use(StepperContext);
 
-  const isCurrent = stepNumber === currentStep;
+  const isLastStep = stepNumber === stepsCount;
+  const isCurrent = stepNumber === activeStep;
 
   const iconText =
     state === 'completed' ? translations.completed[locale] : undefined;
@@ -309,13 +310,7 @@ const Step = ({
               'aria-current': isCurrent ? 'step' : undefined,
               isDisabled,
               className: 'underline',
-              onPress: () => onAction?.(stepNumber),
-            },
-          ],
-          [
-            ProgressBarContext,
-            {
-              'aria-labelledby': id,
+              onPress: () => onStepChange?.(stepNumber as number),
             },
           ],
         ]}
@@ -323,6 +318,14 @@ const Step = ({
         {icon}
 
         {children}
+
+        {!isLastStep && (
+          <ProgressBar
+            aria-labelledby={id}
+            // Make sure that if the step is completed, the progress value is 100%
+            value={state === 'completed' ? 100 : progress}
+          />
+        )}
       </Provider>
     </li>
   );

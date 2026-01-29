@@ -1,13 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useState } from 'react';
+import type { ComponentProps } from 'react';
 import { useArgs } from 'storybook/preview-api';
 import { fn } from 'storybook/test';
-import { Button } from '../button';
-import { Heading } from '../content';
 import { UNSAFE_Link as Link } from '../link';
-import { UNSAFE_ProgressBar as ProgressBar } from '../progress-bar';
-import { TextArea } from '../textarea';
-import { TextField } from '../textfield';
 import { UNSAFE_Step as Step, UNSAFE_Stepper as Stepper } from './stepper';
 
 const meta: Meta<typeof Stepper> = {
@@ -17,55 +12,44 @@ const meta: Meta<typeof Stepper> = {
     layout: 'centered',
   },
   args: {
-    onAction: fn(),
-    currentStep: 1,
+    onStepChange: fn(),
+    activeStep: 1,
   },
-  // decorators: [
-  //   (Story, ctx) => {
-  //     console.log(ctx);
-  //     const [currentStep, setCurrentStep] = useState(ctx.args.currentStep);
-  //     ctx.args.currentStep = 2;
-
-  //     return (
-  //       <div style={{ margin: '3em' }}>
-  //         {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
-  //         <Story />
-  //       </div>
-  //     );
-  //   },
-  // ],
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-function useStatefulStepperArgs() {
-  const [{ onAction: originalOnAction, ...args }, updateArgs] = useArgs();
+// This allows us to update the args from within the story
+// so the args shown in storybook reflects the changes in the component
+// See https://storybook.js.org/docs/writing-stories/args#setting-args-from-within-a-story
+function useStepperArgs(): ComponentProps<typeof Stepper> {
+  const [{ onStepChange: originalStepChange, ...args }, updateArgs] =
+    useArgs<ComponentProps<typeof Stepper>>();
 
-  function onAction(stepNumber: string) {
-    originalOnAction(stepNumber);
-    updateArgs({ currentStep: stepNumber });
+  function onStepChange(step: number) {
+    originalStepChange?.(step);
+    updateArgs({ activeStep: step });
   }
 
-  return { ...args, onAction };
+  return { ...args, onStepChange };
 }
 
 export const Example: Story = {
+  // For some reason we need to define the parameter _args even though it is unused,
+  // otherwise Storybook won't render the story controls correctly
   render: (_args) => {
-    const args = useStatefulStepperArgs();
+    const args = useStepperArgs();
     return (
       <Stepper {...args}>
         <Step>
           <Link>Personalia</Link>
-          <ProgressBar value={40} />
         </Step>
         <Step>
           <Link>Kontaktinformasjon</Link>
-          <ProgressBar value={50} />
         </Step>
         <Step>
           <Link>Kontaktinformasjon</Link>
-          <ProgressBar value={0} />
         </Step>
         <Step>
           <Link>Oppsummering</Link>
@@ -75,483 +59,119 @@ export const Example: Story = {
   },
 };
 
+export const OnMobile: Story = {
+  // Note that this only works in single story mode, not docs or isolation mode
+  globals: {
+    viewport: { value: 'mobile2' },
+  },
+
+  // For some reason we need to define the parameter _args even though it is unused,
+  // otherwise Storybook won't render the story controls correctly
+  render: (_args) => {
+    const args = useStepperArgs();
+    return (
+      <Stepper {...args}>
+        <Step>
+          <Link>Personalia</Link>
+        </Step>
+        <Step>
+          <Link>Kontaktinformasjon</Link>
+        </Step>
+        <Step>
+          <Link>Kontaktinformasjon</Link>
+        </Step>
+        <Step>
+          <Link>Oppsummering</Link>
+        </Step>
+      </Stepper>
+    );
+  },
+};
+
+export const WithProgress: Story = {
+  render: (_args) => {
+    const args = useStepperArgs();
+    return (
+      <Stepper {...args}>
+        <Step state="completed" progress={100}>
+          <Link>Personalia</Link>
+        </Step>
+        <Step progress={50}>
+          <Link>Kontaktinformasjon</Link>
+        </Step>
+        <Step progress={25}>
+          <Link>Kontaktinformasjon</Link>
+        </Step>
+        <Step progress={0}>
+          <Link>Oppsummering</Link>
+        </Step>
+      </Stepper>
+    );
+  },
+};
+
 export const CompletedSteps: Story = {
-  render: (args) => (
-    <Stepper {...args}>
-      <Step state="completed">
-        <Link>Personalia</Link>
-        <ProgressBar value={100} />
-      </Step>
-      <Step state="completed">
-        <Link>Kontaktinformasjon</Link>
-        <ProgressBar value={100} />
-      </Step>
-      <Step state="completed">
-        <Link>Kontaktinformasjon</Link>
-        <ProgressBar value={100} />
-      </Step>
-      <Step state="completed">
-        <Link>Oppsummering</Link>
-      </Step>
-    </Stepper>
-  ),
+  render: (_args) => {
+    const args = useStepperArgs();
+    return (
+      <Stepper {...args}>
+        <Step state="completed">
+          <Link>Personalia</Link>
+        </Step>
+        <Step state="completed">
+          <Link>Kontaktinformasjon</Link>
+        </Step>
+        <Step state="completed">
+          <Link>Kontaktinformasjon</Link>
+        </Step>
+        <Step state="completed">
+          <Link>Oppsummering</Link>
+        </Step>
+      </Stepper>
+    );
+  },
 };
 
 export const WithHrefLinks: Story = {
-  render: (args) => (
-    <Stepper {...args}>
-      <Step>
-        <Link href="#step-1">Personalia</Link>
-        <ProgressBar />
-      </Step>
-      <Step>
-        <Link href="#step-2">Kontaktinformasjon</Link>
-        <ProgressBar />
-      </Step>
-      <Step>
-        <Link href="#step-3">Kontaktinformasjon</Link>
-        <ProgressBar />
-      </Step>
-      <Step>
-        <Link href="#step-4">Oppsummering</Link>
-      </Step>
-    </Stepper>
-  ),
+  render: (_args) => {
+    const args = useStepperArgs();
+    return (
+      <Stepper {...args}>
+        <Step>
+          <Link href="#step-1">Personalia</Link>
+        </Step>
+        <Step>
+          <Link href="#step-2">Kontaktinformasjon</Link>
+        </Step>
+        <Step>
+          <Link href="#step-3">Kontaktinformasjon</Link>
+        </Step>
+        <Step>
+          <Link href="#step-4">Oppsummering</Link>
+        </Step>
+      </Stepper>
+    );
+  },
 };
 
 export const DisabledSteps: Story = {
-  render: (args) => (
-    <Stepper {...args}>
-      <Step>
-        <Link>Personalia</Link>
-        <ProgressBar />
-      </Step>
-      <Step isDisabled>
-        <Link>Kontaktinformasjon</Link>
-        <ProgressBar />
-      </Step>
-      <Step isDisabled>
-        <Link>Kontaktinformasjon</Link>
-        <ProgressBar />
-      </Step>
-      <Step isDisabled>
-        <Link>Oppsummering</Link>
-      </Step>
-    </Stepper>
-  ),
-};
-
-type FormData = {
-  step1: { fornavn: string; etternavn: string; fodselsdato: string };
-  step2: { epost: string; telefon: string };
-  step3: { adresse: string; postnummer: string; poststed: string };
-};
-
-const stepper = {
-  step1: {
-    title: 'Personalia',
-    fields: {
-      fornavn: { label: 'Fornavn', initialValue: '', inputType: 'string' },
-      etternavn: { label: 'Etternavn', initialValue: '', inputType: 'string' },
-      fodselsdato: {
-        label: 'Fødselsdato',
-        initialValue: '',
-        inputType: 'string',
-      },
-    },
-  },
-  step2: {
-    title: 'Kontaktinformasjon',
-    fields: {
-      epost: { label: 'E-post', initialValue: '', inputType: 'string' },
-      telefon: { label: 'Telefon', initialValue: '', inputType: 'string' },
-    },
-  },
-  step3: {
-    title: 'Fakturainformasjon',
-    fields: {
-      adresse: { label: 'Adresse', initialValue: '', inputType: 'string' },
-      postnummer: {
-        label: 'Postnummer',
-        initialValue: '',
-        inputType: 'string',
-      },
-      poststed: { label: 'Poststed', initialValue: '', inputType: 'string' },
-    },
-  },
-  summary: {
-    title: 'Oppsummering',
-  },
-} as const;
-
-// Step components
-type StepComponentProps = {
-  formData: FormData;
-  updateFormData: <K extends keyof FormData>(
-    step: K,
-    field: keyof FormData[K],
-    value: string,
-  ) => void;
-  handleNext: () => void;
-  isStepComplete: boolean;
-};
-
-type FormStepProps = StepComponentProps & {
-  stepKey: keyof FormData;
-};
-
-// Generic component that renders any form step based on stepper configuration
-const FormStep = ({
-  stepKey,
-  formData,
-  updateFormData,
-  handleNext,
-  isStepComplete,
-}: FormStepProps) => {
-  const stepConfig = stepper[stepKey as keyof typeof stepper];
-
-  if (!stepConfig || !('fields' in stepConfig)) return null;
-
-  const stepData = formData[stepKey];
-  const { fields } = stepConfig;
-
-  return (
-    <div className="flex flex-col gap-4">
-      {Object.entries(fields).map(([fieldKey, fieldConfig]) => {
-        const value = stepData[fieldKey as keyof typeof stepData] as string;
-
-        if (fieldConfig.inputType === 'text') {
-          return (
-            <TextArea
-              key={fieldKey}
-              label={fieldConfig.label}
-              description={fieldConfig.description}
-              value={value}
-              onChange={(newValue) =>
-                updateFormData(
-                  stepKey,
-                  fieldKey as keyof typeof stepData,
-                  newValue,
-                )
-              }
-            />
-          );
-        }
-
-        return (
-          <TextField
-            key={fieldKey}
-            label={fieldConfig.label}
-            value={value}
-            onChange={(newValue) =>
-              updateFormData(
-                stepKey,
-                fieldKey as keyof typeof stepData,
-                newValue,
-              )
-            }
-          />
-        );
-      })}
-      <Button onPress={handleNext} isDisabled={!isStepComplete}>
-        Neste
-      </Button>
-    </div>
-  );
-};
-
-type SummaryStepProps = StepComponentProps & { maxStep: number };
-
-const SummaryStep = ({ formData, maxStep }: SummaryStepProps) => {
-  // Dynamically render tables for each step up to maxStep (excluding the summary step itself)
-  const stepSections = [];
-
-  for (let stepNum = 1; stepNum < maxStep; stepNum++) {
-    const stepKey = `step${stepNum}` as keyof FormData;
-    const stepData = formData[stepKey];
-    const stepConfig = stepper[stepKey as keyof typeof stepper];
-
-    // Skip if step data is empty or doesn't exist
-    if (!stepData || Object.keys(stepData).length === 0 || !stepConfig)
-      continue;
-    if (!('fields' in stepConfig)) continue;
-
-    const stepTitle = stepConfig.title;
-    const fieldLabels = stepConfig.fields;
-
-    stepSections.push(
-      <table
-        key={stepKey}
-        className="grid w-full border-collapse gap-y-6 not-last-of-type:border-b pb-8"
-      >
-        <caption className="text-left font-semibold text-lg">
-          {stepTitle}
-        </caption>
-        <tbody className="grid gap-y-4">
-          {Object.entries(stepData).map(([fieldKey, fieldValue]) => {
-            const fieldConfig = (
-              fieldLabels as Record<
-                string,
-                { label: string; initialValue: string }
-              >
-            )[fieldKey];
-            const label = fieldConfig?.label || fieldKey;
-            return (
-              <tr key={fieldKey} className="grid">
-                <th className="py-0.5 text-left font-bold">{label}</th>
-                <td className="py-0.5">{fieldValue as string}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>,
-    );
-  }
-
-  return <div className="mt-8 flex flex-col gap-8">{stepSections}</div>;
-};
-
-// Map step numbers to components
-const stepComponents: Record<
-  number,
-  React.ComponentType<StepComponentProps>
-> = {
-  1: (props) => <FormStep {...props} stepKey="step1" />,
-  2: (props) => <FormStep {...props} stepKey="step2" />,
-  3: (props) => <FormStep {...props} stepKey="step3" />,
-  4: (props) => <FormStep {...props} stepKey="step4" />,
-  5: (props) => <FormStep {...props} stepKey="step5" />,
-  6: (props) => <FormStep {...props} stepKey="step6" />,
-  7: (props) => <FormStep {...props} stepKey="step7" />,
-};
-
-// Template component for form demos
-const FormDemoTemplate = ({ totalSteps }: { totalSteps: number }) => {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState<FormData>({
-    step1: {
-      fornavn: stepper.step1.fields.fornavn.initialValue,
-      etternavn: stepper.step1.fields.etternavn.initialValue,
-      fodselsdato: stepper.step1.fields.fodselsdato.initialValue,
-    },
-    step2: {
-      epost: stepper.step2.fields.epost.initialValue,
-      telefon: stepper.step2.fields.telefon.initialValue,
-    },
-    step3: {
-      adresse: stepper.step3.fields.adresse.initialValue,
-      postnummer: stepper.step3.fields.postnummer.initialValue,
-      poststed: stepper.step3.fields.poststed.initialValue,
-    },
-    step4: {
-      samtykke: stepper.step4.fields.samtykke.initialValue,
-    },
-    step5: {
-      kontonummer: stepper.step5.fields.kontonummer.initialValue,
-      banknavn: stepper.step5.fields.banknavn.initialValue,
-    },
-    step6: {
-      leveringsadresse: stepper.step6.fields.leveringsadresse.initialValue,
-      leveringspostnummer:
-        stepper.step6.fields.leveringspostnummer.initialValue,
-      leveringspoststed: stepper.step6.fields.leveringspoststed.initialValue,
-    },
-    step7: {
-      kommentar: stepper.step7.fields.kommentar.initialValue,
-    },
-  });
-  const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set());
-
-  const updateFormData = <K extends keyof FormData>(
-    step: K,
-    field: keyof FormData[K],
-    value: string,
-  ) => {
-    setFormData((prev) => ({
-      ...prev,
-      [step]: {
-        ...prev[step],
-        [field]: value,
-      },
-    }));
-  };
-
-  const isStepComplete = (step: number): boolean => {
-    switch (step) {
-      case 1:
-        return !!(
-          formData.step1.fornavn &&
-          formData.step1.etternavn &&
-          formData.step1.fodselsdato
-        );
-      case 2:
-        return !!(formData.step2.epost && formData.step2.telefon);
-      case 3:
-        return !!(
-          formData.step3.adresse &&
-          formData.step3.postnummer &&
-          formData.step3.poststed
-        );
-      case 4:
-        return !!formData.step4.samtykke;
-      case 5:
-        return !!(formData.step5.kontonummer && formData.step5.banknavn);
-      case 6:
-        return !!(
-          formData.step6.leveringsadresse &&
-          formData.step6.leveringspostnummer &&
-          formData.step6.leveringspoststed
-        );
-      case 7:
-        return !!formData.step7.kommentar;
-      default:
-        return false;
-    }
-  };
-
-  const getProgressValue = (step: number): number => {
-    const fields = formData[`step${step}` as keyof FormData];
-    const values = Object.values(fields);
-    const filledCount = values.filter((v) => v.length > 0).length;
-    return Math.round((filledCount / values.length) * 100);
-  };
-
-  const handleNext = () => {
-    if (currentStep < totalSteps && isStepComplete(currentStep)) {
-      setCompletedSteps((prev) => new Set(prev).add(currentStep));
-      setCurrentStep((prev) => prev + 1);
-    }
-  };
-
-  const handleGoToStep = (step: number) => () => {
-    if (
-      step <= currentStep ||
-      completedSteps.has(step) ||
-      canNavigateToStep(step)
-    ) {
-      setCurrentStep(step);
-      // Update URL without navigation (only for 8 steps demo)
-      if (totalSteps === 8) {
-        const url = new URL(window.location.href);
-        url.searchParams.set('currentStep', String(step));
-        window.history.pushState({}, '', url.toString());
-      }
-    }
-  };
-
-  const canNavigateToStep = (step: number): boolean => {
-    for (let i = 1; i < step; i++) {
-      if (!completedSteps.has(i)) {
-        return false;
-      }
-    }
-    return true;
-  };
-
-  const isStepNavigable = (step: number): boolean => {
-    if (step === currentStep) return false;
-    if (completedSteps.has(step)) return true;
-    return canNavigateToStep(step);
-  };
-
-  // Get the appropriate component for the current step
-  const getStepComponent = (
-    step: number,
-  ): React.ComponentType<StepComponentProps> => {
-    // If it's the last step, always return SummaryStep with maxStep
-    if (step === totalSteps) {
-      return (props: StepComponentProps) => (
-        <SummaryStep {...props} maxStep={totalSteps} />
-      );
-    }
-    // Otherwise return the regular step component
-    return stepComponents[step];
-  };
-
-  const CurrentStepComponent = getStepComponent(currentStep);
-
-  const steps = Array.from({ length: totalSteps }, (_, i) => i + 1);
-
-  return (
-    <div className="flex w-full max-w-2xl gap-8 px-4 max-lg:flex-col lg:gap-x-20">
-      <Stepper currentStep={currentStep} className="max-lg:mx-auto">
-        {steps.map((stepNumber) => {
-          const stepTitle =
-            stepNumber === totalSteps
-              ? stepper.summary.title
-              : stepper[`step${stepNumber}` as keyof typeof stepper].title;
-          const isLastStep = stepNumber === totalSteps;
-
-          return (
-            <Step key={stepNumber} isCompleted={completedSteps.has(stepNumber)}>
-              {isStepNavigable(stepNumber) ? (
-                <Link onPress={handleGoToStep(stepNumber)}>{stepTitle}</Link>
-              ) : (
-                <Text>{stepTitle}</Text>
-              )}
-              {!isLastStep && (
-                <ProgressBar value={getProgressValue(stepNumber)} />
-              )}
-            </Step>
-          );
-        })}
+  render: (_args) => {
+    const args = useStepperArgs();
+    return (
+      <Stepper {...args}>
+        <Step>
+          <Link>Personalia</Link>
+        </Step>
+        <Step isDisabled>
+          <Link>Kontaktinformasjon</Link>
+        </Step>
+        <Step isDisabled>
+          <Link>Kontaktinformasjon</Link>
+        </Step>
+        <Step isDisabled>
+          <Link>Oppsummering</Link>
+        </Step>
       </Stepper>
-      <div className="pt-8">
-        <Heading level={2} size="m" className="mb-4">
-          {currentStep}.{' '}
-          {currentStep === totalSteps
-            ? stepper.summary.title
-            : stepper[`step${currentStep}` as keyof typeof stepper].title}
-        </Heading>
-        <CurrentStepComponent
-          formData={formData}
-          updateFormData={updateFormData}
-          handleNext={handleNext}
-          isStepComplete={isStepComplete(currentStep)}
-        />
-      </div>
-    </div>
-  );
-};
-
-export const FormWith8Steps: Story = {
-  render: () => <FormDemoTemplate totalSteps={8} />,
-  parameters: {
-    layout: 'padded',
-  },
-};
-
-export const FormWith7Steps: Story = {
-  render: () => <FormDemoTemplate totalSteps={7} />,
-  parameters: {
-    layout: 'padded',
-  },
-};
-
-export const FormWith6Steps: Story = {
-  render: () => <FormDemoTemplate totalSteps={6} />,
-  parameters: {
-    layout: 'padded',
-  },
-};
-
-export const FormWith5Steps: Story = {
-  render: () => <FormDemoTemplate totalSteps={5} />,
-  parameters: {
-    layout: 'padded',
-  },
-};
-
-export const FormWith4Steps: Story = {
-  render: () => <FormDemoTemplate totalSteps={4} />,
-  parameters: {
-    layout: 'padded',
-  },
-};
-
-export const FormWith3Steps: Story = {
-  render: () => <FormDemoTemplate totalSteps={3} />,
-  parameters: {
-    layout: 'padded',
+    );
   },
 };
