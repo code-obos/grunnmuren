@@ -78,7 +78,7 @@ export const OnMobile: Story = {
           <Link>Kontaktinformasjon</Link>
         </Step>
         <Step>
-          <Link>Kontaktinformasjon</Link>
+          <Link>Betalingsinformasjon</Link>
         </Step>
         <Step>
           <Link>Oppsummering</Link>
@@ -100,7 +100,7 @@ export const WithProgress: Story = {
           <Link>Kontaktinformasjon</Link>
         </Step>
         <Step progress={25}>
-          <Link>Kontaktinformasjon</Link>
+          <Link>Betalingsinformasjon</Link>
         </Step>
         <Step progress={0}>
           <Link>Oppsummering</Link>
@@ -122,7 +122,7 @@ export const CompletedSteps: Story = {
           <Link>Kontaktinformasjon</Link>
         </Step>
         <Step state="completed">
-          <Link>Kontaktinformasjon</Link>
+          <Link>Betalingsinformasjon</Link>
         </Step>
         <Step state="completed">
           <Link>Oppsummering</Link>
@@ -144,7 +144,7 @@ export const WithHrefLinks: Story = {
           <Link href="#step-2">Kontaktinformasjon</Link>
         </Step>
         <Step>
-          <Link href="#step-3">Kontaktinformasjon</Link>
+          <Link href="#step-3">Betalingsinformasjon</Link>
         </Step>
         <Step>
           <Link href="#step-4">Oppsummering</Link>
@@ -166,7 +166,7 @@ export const DisabledSteps: Story = {
           <Link>Kontaktinformasjon</Link>
         </Step>
         <Step isDisabled>
-          <Link>Kontaktinformasjon</Link>
+          <Link>Betalingsinformasjon</Link>
         </Step>
         <Step isDisabled>
           <Link>Oppsummering</Link>
