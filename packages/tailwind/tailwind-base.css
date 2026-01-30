@@ -280,17 +280,15 @@
   /*** Stepper component styles ***/
   .stepper-container,
   [data-slot="stepper-container"] {
-    @apply relative overflow-hidden;
+    @apply relative max-lg:overflow-hidden;
+    /** Make room for the focus outline */
+    @apply max-lg:px-1;
   }
 
   .stepper,
   [data-slot="stepper"] {
     counter-reset: step-counter;
     @apply flex gap-x-2 lg:flex-col lg:gap-y-14;
-    /** Make room for focus outline and icon for the first item */
-    @apply lg:py-1;
-    /** Make room for the focus outline */
-    @apply px-1;
 
     [data-slot="step"] {
       counter-increment: step-counter;

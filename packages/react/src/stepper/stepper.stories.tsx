@@ -78,7 +78,16 @@ export const OnMobile: Story = {
           <Link>Kontaktinformasjon</Link>
         </Step>
         <Step>
+          <Link>Leveringsinformasjon</Link>
+        </Step>
+        <Step>
           <Link>Betalingsinformasjon</Link>
+        </Step>
+        <Step>
+          <Link>Samtykke</Link>
+        </Step>
+        <Step>
+          <Link>Oppsummering</Link>
         </Step>
         <Step>
           <Link>Oppsummering</Link>
