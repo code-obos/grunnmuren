@@ -276,4 +276,67 @@
       }
     }
   }
+
+  /*** Stepper component styles ***/
+  .stepper-container,
+  [data-slot="stepper-container"] {
+    @apply relative max-lg:overflow-hidden;
+    /** Make room for the focus outline */
+    @apply max-lg:px-1;
+  }
+
+  .stepper,
+  [data-slot="stepper"] {
+    counter-reset: step-counter;
+    @apply flex gap-x-2 lg:flex-col lg:gap-y-14;
+
+    [data-slot="step"] {
+      counter-increment: step-counter;
+      @apply flex items-center gap-x-2 relative max-lg:my-1.5;
+
+      &::before {
+        content: counter(step-counter);
+        @apply shrink-0 font-semibold size-8 border-2 rounded-full border-blue-dark grid place-content-center;
+      }
+
+      /** Place the focus styles on the ::before element instead of the link, since the link text is not visible on smaller screens */
+      &:has([data-slot="link"]:focus-visible) {
+        &::before {
+          @apply outline-focus-offset;
+        }
+      }
+
+      [data-slot="link"] {
+        @apply max-lg:absolute max-lg:opacity-0 max-lg:max-w-11 max-lg:overflow-x-hidden;
+        @apply focus-visible:outline-none;
+        /** Create a 44x44 px clickable area, where the step number next to each link will also be covered **/
+        @apply py-2.5 lg:pl-11 lg:-ml-11 -my-2.5;
+      }
+
+      &::before {
+        @apply bg-white text-blue-dark;
+      }
+
+      &[data-state="completed"] {
+        &::before {
+          @apply bg-blue-dark text-white;
+        }
+      }
+
+      /* order matters here, as data-current selector needs to come after completed state selector */
+      &[data-current="true"] {
+        &::before {
+          @apply bg-sky-light border-4 text-blue-dark;
+        }
+      }
+
+      svg {
+        @apply text-white absolute border-2 border-white bg-blue-dark rounded-full left-4.5 -top-1.5 size-5;
+      }
+
+      [data-slot="progress-bar"] {
+        @apply w-4 max-lg:grow lg:w-14 lg:rotate-90 lg:absolute lg:-left-3 lg:px-1.5 lg:-bottom-[calc(100%-2px)];
+      }
+    }
+  }
 }
