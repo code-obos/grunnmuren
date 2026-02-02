@@ -15,7 +15,7 @@ const storybookEmbed = defineType({
           <a
             href="https://grunnmuren.obos.no/storybook/"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
           >
             Grunnmuren's storybook
           </a>
@@ -24,6 +24,12 @@ const storybookEmbed = defineType({
       ),
       type: 'string',
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'caption',
+      title: 'Caption',
+      description: 'A description or summary of the story embed.',
+      type: 'text',
     }),
   ],
   preview: {
