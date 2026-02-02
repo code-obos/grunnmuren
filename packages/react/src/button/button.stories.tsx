@@ -1,32 +1,49 @@
-import { Edit, Search } from '@obosbbl/grunnmuren-icons-react';
+import { ArrowRight, Edit, Search } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { cx } from 'cva';
 
 import { Button } from './button';
 
+// Note: we cannot use the `satisfie` CSF here, because the resulting union type is too wide for TS to typecheck
+// This is because of the complexity of the union type of the button (both a link and a button)
 const meta: Meta<typeof Button> = {
   title: 'Button',
   component: Button,
   parameters: {
-    // disable built in padding in story, because we provide our own
     layout: 'fullscreen',
   },
+  args: {
+    isPending: false,
+    isIconOnly: false,
+    animateIcon: undefined,
+    variant: 'primary',
+    color: 'blue',
+  },
+  argTypes: {
+    animateIcon: {
+      control: { type: 'select' },
+    },
+  },
+  decorators: [
+    (Story, context) => {
+      let bgColor = '';
+      if (context.args.color === 'mint') {
+        bgColor = 'bg-blue-dark';
+      } else if (context.args.color === 'white') {
+        bgColor = 'bg-blue';
+      }
+
+      return <div className={cx(bgColor, 'flex gap-4 p-6')}>{Story()}</div>;
+    },
+  ],
   render: (props) => {
-    let bgColor = '';
-
-    if (props.color === 'mint') {
-      bgColor = 'bg-blue-dark';
-    } else if (props.color === 'white') {
-      bgColor = 'bg-blue';
-    }
-
     return (
-      <div className={cx(bgColor, 'flex gap-4 p-6')}>
+      <>
         <Button {...props}>Button</Button>
         <Button href="#" {...props}>
           Link
         </Button>
-      </div>
+      </>
     );
   },
 };
@@ -37,62 +54,68 @@ type Story = StoryObj<typeof Button>;
 
 export const Primary: Story = {
   args: {
-    variant: 'primary',
     isPending: false,
   },
 };
 
 export const Secondary: Story = {
   args: {
-    ...Primary.args,
     variant: 'secondary',
   },
 };
 
 export const Tertiary: Story = {
   args: {
-    ...Primary.args,
     variant: 'tertiary',
   },
 };
 
-export const WithIconAndText = () => {
-  return (
-    <>
-      <div className="flex gap-8 p-8">
-        <Button>
-          <Edit /> Rediger
-        </Button>
-        <Button>
-          <Edit /> Rediger mer
-        </Button>
-        <Button>
-          <Edit /> Rediger med enda mer tekst
-        </Button>
-      </div>
-      <div className="flex gap-8 p-8">
-        <Button>
-          Rediger <Edit />
-        </Button>
-        <Button>
-          Rediger mer <Edit />
-        </Button>
-        <Button>
-          Rediger med enda mer tekst <Edit />
-        </Button>
-      </div>
-    </>
-  );
+export const IsPending: Story = {
+  args: {
+    isPending: true,
+  },
 };
 
-export const IconOnly = () => {
-  return (
-    <div className="p-8">
-      <Button isIconOnly aria-label="Søk">
+export const WithIcons: Story = {
+  render: (args) => (
+    <>
+      <Button {...args}>
+        <Edit /> Rediger
+      </Button>
+      <Button {...args}>
+        Rediger <Edit />
+      </Button>
+    </>
+  ),
+};
+
+export const WithAnimatedIcons: Story = {
+  args: {
+    animateIcon: 'right',
+  },
+  render: (args) => (
+    <>
+      <Button {...args}>
+        Bli kjent med OBOS <ArrowRight />
+      </Button>
+      <Button href="#" {...args}>
+        Bli kjent med OBOS <ArrowRight />
+      </Button>
+    </>
+  ),
+};
+
+export const IsIconOnly: Story = {
+  args: {
+    isIconOnly: true,
+  },
+  render: (args) => {
+    return (
+      <Button aria-label="Søk" {...args}>
         <Search />
       </Button>
-    </div>
-  );
+    );
+  },
 };
 
 export const ButtonSandbox = () => {

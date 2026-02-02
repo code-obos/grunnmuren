@@ -55,4 +55,25 @@ const dropdown = {
   ),
 };
 
-export { dropdown, formField, formFieldError, input, inputGroup };
+const animateIconVariants = cva({
+  base: '*:[svg]:shrink-0 *:[svg]:transition-transform',
+  variants: {
+    animateIcon: {
+      right: 'hover:*:[svg]:motion-safe:translate-x-1',
+      left: 'hover:*:[svg]:motion-safe:-translate-x-1',
+      down: 'hover:*:[svg]:motion-safe:translate-y-1',
+      up: 'hover:*:[svg]:motion-safe:-translate-y-1',
+      'up-right':
+        'hover:*:[svg]:motion-safe:-translate-y-0.5 hover:*:[svg]:motion-safe:translate-x-0.5',
+    },
+  },
+});
+
+export {
+  dropdown,
+  formField,
+  formFieldError,
+  input,
+  inputGroup,
+  animateIconVariants,
+};

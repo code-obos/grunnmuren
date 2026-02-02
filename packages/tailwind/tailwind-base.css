@@ -262,34 +262,9 @@
 
 @layer components {
   /*** Link List component styles ***/
-  .link-list-container {
-    @apply @container;
-
-    &:has([data-slot="heading"]) {
-      .link-list,
-      [data-slot="link-list"] {
-        @apply overflow-visible;
-      }
-    }
-
-    [data-slot="heading"] {
-      @apply p-1.25;
-
-      [data-slot="link"] {
-        @apply py-2.25;
-        & > svg {
-          @apply text-base;
-        }
-      }
-
-      &:not(:has([data-slot="link"])) {
-        @apply my-2.25;
-      }
-    }
-
+  [data-layout="grid"] {
     [data-slot="link-list"] {
       @apply @sm:gap-x-4 @md:gap-x-9 @lg:gap-x-12 @xl:gap-x-16;
-
       &:has([data-slot="link-list-item"]:nth-child(6)):not(
           :has([data-slot="link-list-item"]:nth-child(9):last-child)
         ):not(:has([data-slot="link-list-item"]:nth-child(11))) {
@@ -302,42 +277,66 @@
     }
   }
 
-  .link-list,
-  [data-slot="link-list"] {
-    /**
-     * Hides dividers at the top of the list (overflow-y)
-     * while preventing arrow icons from overflowing container when animated to the right (overflow-x)
-     */
-    @apply min-w-fit overflow-hidden grid auto-rows-max gap-y-px;
+  /*** Stepper component styles ***/
+  .stepper-container,
+  [data-slot="stepper-container"] {
+    @apply relative max-lg:overflow-hidden;
+    /** Make room for the focus outline */
+    @apply max-lg:px-1;
   }
 
-  .link-list-item,
-  [data-slot="link-list-item"] {
-    /** Creates divider lines that works in any grid layout and with the focus ring */
-    @apply after:-top-px relative p-1.25 after:absolute after:right-0 after:left-0 after:h-px after:w-full after:bg-gray-light;
-    [data-slot="link"] {
-      @apply paragraph;
-    }
-  }
+  .stepper,
+  [data-slot="stepper"] {
+    counter-reset: step-counter;
+    @apply flex gap-x-2 lg:flex-col lg:gap-y-14;
 
-  .link-list-container,
-  .link-list-item,
-  [data-slot="link-list-item"] {
-    [data-slot="link"] {
-      @apply flex w-full cursor-pointer justify-between gap-x-2 py-3.5 font-medium no-underline focus-visible:outline-focus;
-    }
-  }
+    [data-slot="step"] {
+      counter-increment: step-counter;
+      @apply flex items-center gap-x-2 relative max-lg:my-1.5;
 
-  .link-list-container [data-slot="link"],
-  [data-slot="link-list-item"] [data-slot="link"] {
-    &:hover:not([download]):not([rel~="external"]) svg {
-      @apply motion-safe:translate-x-1;
-    }
-    &[download]:hover svg {
-      @apply motion-safe:translate-y-1;
-    }
-    &[rel~="external"]:hover svg {
-      @apply motion-safe:-translate-y-0.5 motion-safe:translate-x-0.5;
+      &::before {
+        content: counter(step-counter);
+        @apply shrink-0 font-semibold size-8 border-2 rounded-full border-blue-dark grid place-content-center;
+      }
+
+      /** Place the focus styles on the ::before element instead of the link, since the link text is not visible on smaller screens */
+      &:has([data-slot="link"]:focus-visible) {
+        &::before {
+          @apply outline-focus-offset;
+        }
+      }
+
+      [data-slot="link"] {
+        @apply max-lg:absolute max-lg:opacity-0 max-lg:max-w-11 max-lg:overflow-x-hidden;
+        @apply focus-visible:outline-none;
+        /** Create a 44x44 px clickable area, where the step number next to each link will also be covered **/
+        @apply py-2.5 lg:pl-11 lg:-ml-11 -my-2.5;
+      }
+
+      &::before {
+        @apply bg-white text-blue-dark;
+      }
+
+      &[data-state="completed"] {
+        &::before {
+          @apply bg-blue-dark text-white;
+        }
+      }
+
+      /* order matters here, as data-current selector needs to come after completed state selector */
+      &[data-current="true"] {
+        &::before {
+          @apply bg-sky-light border-4 text-blue-dark;
+        }
+      }
+
+      svg {
+        @apply text-white absolute border-2 border-white bg-blue-dark rounded-full left-4.5 -top-1.5 size-5;
+      }
+
+      [data-slot="progress-bar"] {
+        @apply w-4 max-lg:grow lg:w-14 lg:rotate-90 lg:absolute lg:-left-3 lg:px-1.5 lg:-bottom-[calc(100%-2px)];
+      }
     }
   }
 }

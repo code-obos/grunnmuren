@@ -9,7 +9,8 @@
   "scripts": {
     "build": "pnpm --filter './packages/**' build",
     "build:docs": "pnpm --filter @obosbbl/grunnmuren-docs build",
-    "build:storybook": "storybook build -o ./apps/docs/public/storybook",
+    "build:storybook": "pnpm typecheck:storybook && storybook build -o ./apps/docs/public/storybook",
+    "typecheck:storybook": "tsc --noEmit -p packages/react/tsconfig.storybook.json",
     "ci:publish": "pnpm build && changeset publish",
     "ci:version": "changeset version",
     "dev": "storybook dev -p 6006 --ci --initial-path=/story/home--page",
@@ -17,7 +18,8 @@
     "lint": "pnpm biome check .",
     "lint:ci": "pnpm biome ci .",
     "serve-storybook": "http-server ./apps/docs/public/storybook -p 6006 --silent",
-    "test": "test-storybook"
+    "test": "test-storybook",
+    "sanity:schema:deploy": "pnpm --filter @obosbbl/grunnmuren-docs sanity:schema:deploy"
   },
   "dependencies": {
     "@biomejs/biome": "2.3.4",
@@ -41,9 +43,9 @@
     "storybook": "10.1.11",
     "tailwindcss": "4.1.18",
     "typescript": "5.9.3",
-    "vite": "7.3.0"
+    "vite": "7.3.1"
   },
-  "packageManager": "pnpm@10.27.0",
+  "packageManager": "pnpm@10.28.0",
   "engines": {
     "node": ">=22.11 <25"
   }

@@ -15,7 +15,7 @@ import { Content, Footer, Heading, Media } from '../content';
 import { Description } from '../label';
 import { Card, CardLink } from './card';
 
-const meta: Meta<typeof Card> = {
+const meta = {
   title: 'Card',
   component: Card,
   render: () => (
@@ -29,7 +29,7 @@ const meta: Meta<typeof Card> = {
       </Content>
     </Card>
   ),
-};
+} satisfies Meta<typeof Card>;
 
 export default meta;
 

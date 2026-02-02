@@ -5,6 +5,7 @@ import { AnchorHeading } from './anchor-heading';
 import { Code } from './code';
 import { ComponentPreview } from './component-preview';
 import { ImageWithCaption } from './image-with-caption';
+import { StorybookEmbed } from './storybook-embed';
 import { Table, TableBody, TableCell, TableHead, TableRow } from './table';
 
 export type SanityContentProps = Pick<
@@ -27,8 +28,15 @@ export function SanityContent({ content, className }: SanityContentProps) {
                 code={value.code.code}
               />
             ),
+            'storybook-embed': ({ value }) => (
+              <StorybookEmbed storyId={value.storyId} caption={value.caption} />
+            ),
             'static-code-block': ({ value }) => (
-              <Code value={value.code.code as string} />
+              <Code
+                code={value.code.code}
+                language={value.code.language}
+                caption={value.caption}
+              />
             ),
             'image-with-caption': ({ value }) => (
               <ImageWithCaption asset={value} />

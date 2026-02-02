@@ -5,14 +5,14 @@ import { useState } from 'react';
 import { Button } from '../button/button';
 import { TextField, type TextFieldProps } from './textfield';
 
-const meta: Meta<typeof TextField> = {
+const meta = {
   title: 'TextField',
   component: TextField,
-};
+} satisfies Meta<typeof TextField>;
 
 export default meta;
 
-type Story = StoryObj<typeof TextField>;
+type Story = StoryObj<typeof meta>;
 
 const Template = (args: TextFieldProps) => {
   return args.isRequired ? (

@@ -6,7 +6,7 @@ import {
   UNSAFE_Tabs as Tabs,
 } from './tabs';
 
-const meta: Meta<typeof Tabs> = {
+const meta = {
   title: 'Tabs',
   component: Tabs,
   parameters: {
@@ -26,11 +26,11 @@ const meta: Meta<typeof Tabs> = {
       description: 'Callback fired when selection changes',
     },
   },
-};
+} satisfies Meta<typeof Tabs>;
 
 export default meta;
 
-type Story = StoryObj<typeof Tabs>;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: (args) => (

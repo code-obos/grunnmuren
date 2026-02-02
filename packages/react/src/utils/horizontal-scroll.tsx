@@ -25,7 +25,6 @@ export function ScrollButton({
   isVisible,
   hasScrollingOccurred,
   className,
-  iconClassName,
 }: ScrollButtonProps) {
   const Icon = direction === 'left' ? ChevronLeft : ChevronRight;
 
@@ -37,7 +36,8 @@ export function ScrollButton({
       className={cx(
         // Base scroll button styling
         'flex cursor-pointer items-center justify-center',
-        'text-black hover:bg-white',
+        'absolute top-0 size-11',
+        'group/scroll-button text-black',
         direction === 'left'
           ? 'bg-[linear-gradient(90deg,white,white_calc(100%-10px),transparent)]'
           : 'bg-[linear-gradient(90deg,transparent,white_calc(10px),white)]',
@@ -55,7 +55,14 @@ export function ScrollButton({
         className,
       )}
     >
-      <Icon className={iconClassName} />
+      <Icon
+        className={cx(
+          'motion-safe:transition-all',
+          direction === 'left'
+            ? 'group-hover/scroll-button:-translate-x-1'
+            : 'group-hover/scroll-button:translate-x-1',
+        )}
+      />
     </div>
   );
 }
@@ -70,8 +77,10 @@ interface ScrollState {
  * Simple hook for detecting horizontal scroll capabilities
  * Returns scroll state and a ref to attach to your scrollable container
  */
-export function useHorizontalScroll(scrollStateDeps: unknown[] = []) {
-  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+export function useHorizontalScroll<E extends HTMLElement>(
+  scrollStateDeps: unknown[] = [],
+) {
+  const scrollContainerRef = useRef<E | null>(null);
   const [scrollState, setScrollState] = useState<ScrollState>({
     canScrollLeft: false,
     canScrollRight: false,

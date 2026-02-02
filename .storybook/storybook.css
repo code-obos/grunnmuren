@@ -1,1 +1,5 @@
 @import "@obosbbl/grunnmuren-tailwind";
+
+#storybook-root {
+  max-width: 100%;
+}

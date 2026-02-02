@@ -83,7 +83,7 @@ const _TableScrollContainer = ({ children }: _TableScrollContainerProps) => {
     canScrollLeft,
     canScrollRight,
     hasScrollingOccurred,
-  } = useHorizontalScroll([isResizing]);
+  } = useHorizontalScroll<HTMLDivElement>([isResizing]);
 
   // This has to be moved into a useEffect since we are stepping outside of React
   const handleScroll = useCallback(
