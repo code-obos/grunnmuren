@@ -29,7 +29,7 @@ export function SanityContent({ content, className }: SanityContentProps) {
               />
             ),
             'storybook-embed': ({ value }) => (
-              <StorybookEmbed storyId={value.storyId} caption={value.caption} />
+              <StorybookEmbed id={value._key} storyId={value.storyId} caption={value.caption} />
             ),
             'static-code-block': ({ value }) => (
               <Code

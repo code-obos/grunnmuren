@@ -1,13 +1,17 @@
 import {
+  Button,
   UNSAFE_Tab as Tab,
   UNSAFE_TabList as TabList,
   UNSAFE_TabPanel as TabPanel,
   UNSAFE_Tabs as Tabs,
 } from '@obosbbl/grunnmuren-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { Menu, MenuItem, MenuTrigger, Popover } from 'react-aria-components';
 import { Code } from './code';
+import { MenuItemProps } from 'react-aria-components';
 
 type Props = {
+  id: string,
   caption?: string;
   storyId: string;
 };
@@ -18,7 +22,7 @@ const ALLOWED_POST_MESSAGE_ORIGIN = new URL(
   import.meta.env.VITE_STORYBOOK_BASE_URL,
 ).origin;
 
-export function StorybookEmbed({ storyId, caption }: Props) {
+export function StorybookEmbed({ id, storyId, caption }: Props) {
   const storyUrl = useMemo(() => {
     const baseUrl = import.meta.env.VITE_STORYBOOK_BASE_URL;
 
@@ -28,7 +32,8 @@ export function StorybookEmbed({ storyId, caption }: Props) {
   const [sourceCode, setSourceCode] = useState('');
 
   return (
-    <div className="my-6">
+    <div className="relative my-6" id={id}>
+      <StoryMenu id={id} storyUrl={storyUrl} />
       <Tabs className="gap-2!">
         <TabList>
           <Tab id="preview">Forhåndsvisning</Tab>
@@ -41,10 +46,12 @@ export function StorybookEmbed({ storyId, caption }: Props) {
           <Code code={sourceCode} language="tsx" />
         </TabPanel>
       </Tabs>
+
       {caption && <p className="description">{caption}</p>}
     </div>
   );
 }
+
 
 const StoryRenderer = ({
   storyUrl,
@@ -103,3 +110,42 @@ const StoryRenderer = ({
     />
   );
 };
+
+const StoryMenu = ({ id, storyUrl }: { id: string; storyUrl: string }) => {
+  return (
+    <MenuTrigger>
+      <Button aria-label="Meny" className="absolute right-0 z-10" color="white" isIconOnly>
+        <span className="h-7 w-7">...</span>
+      </Button>
+      <Popover
+        className="z-10 min-w-37.5 rounded-lg border bg-white shadow-lg"
+        placement="right top"
+      >
+        <Menu className="max-h-[inherit] overflow-auto p-1 outline-0">
+          <StoryMenuItem
+            href={storyUrl}
+          >
+            Åpne isolert visning
+          </StoryMenuItem>
+          <StoryMenuItem
+            onPress={() => {
+              const url = new URL(window.location.href);
+              url.hash = `#${id}`;
+              navigator.clipboard.writeText(url.toString());
+            }}
+          >
+            Kopier lenke
+          </StoryMenuItem>
+        </Menu>
+      </Popover>
+    </MenuTrigger>
+  );
+};
+
+const StoryMenuItem = (props: MenuItemProps) => {
+  return (
+    <MenuItem
+      className="flex items-center rounded px-3 py-2 text-xs no-underline outline-0 data-focused:bg-blue data-focused:text-white"
+      {...props} />
+  );
+}
