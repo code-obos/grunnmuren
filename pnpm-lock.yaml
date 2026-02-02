@@ -159,8 +159,8 @@ importers:
         specifier: 6.2.0
         version: 6.2.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       use-debounce:
-        specifier: 10.0.6
-        version: 10.0.6(react@19.2.3)
+        specifier: 10.1.0
+        version: 10.1.0(react@19.2.3)
     devDependencies:
       '@obosbbl/grunnmuren-tailwind':
         specifier: workspace:*
@@ -9408,6 +9408,12 @@ packages:
 
   use-debounce@10.0.6:
     resolution: {integrity: sha512-C5OtPyhAZgVoteO9heXMTdW7v/IbFI+8bSVKYCJrSmiWWCLsbUxiBSp4t9v0hNBTGY97bT72ydDIDyGSFWfwXg==}
+    engines: {node: '>= 16.0.0'}
+    peerDependencies:
+      react: '*'
+
+  use-debounce@10.1.0:
+    resolution: {integrity: sha512-lu87Za35V3n/MyMoEpD5zJv0k7hCn0p+V/fK2kWD+3k2u3kOCwO593UArbczg1fhfs2rqPEnHpULJ3KmGdDzvg==}
     engines: {node: '>= 16.0.0'}
     peerDependencies:
       react: '*'
@@ -20914,6 +20920,10 @@ snapshots:
       '@types/react': 19.2.7
 
   use-debounce@10.0.6(react@19.2.3):
+    dependencies:
+      react: 19.2.3
+
+  use-debounce@10.1.0(react@19.2.3):
     dependencies:
       react: 19.2.3
 
