@@ -8,6 +8,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Code } from './code';
 
 type Props = {
+  caption?: string;
   storyId: string;
 };
 
@@ -17,7 +18,7 @@ const ALLOWED_POST_MESSAGE_ORIGIN = new URL(
   import.meta.env.VITE_STORYBOOK_BASE_URL,
 ).origin;
 
-export function StorybookEmbed({ storyId }: Props) {
+export function StorybookEmbed({ storyId, caption }: Props) {
   const storyUrl = useMemo(() => {
     const baseUrl = import.meta.env.VITE_STORYBOOK_BASE_URL;
 
@@ -28,7 +29,7 @@ export function StorybookEmbed({ storyId }: Props) {
 
   return (
     <div className="my-6">
-      <Tabs>
+      <Tabs className="gap-2!">
         <TabList>
           <Tab id="preview">Forhåndsvisning</Tab>
           <Tab id="code">Kode</Tab>
@@ -40,6 +41,7 @@ export function StorybookEmbed({ storyId }: Props) {
           <Code code={sourceCode} language="tsx" />
         </TabPanel>
       </Tabs>
+      {caption && <p className="description">{caption}</p>}
     </div>
   );
 }
