@@ -100,7 +100,13 @@ function RootLayout() {
           ...options,
         })
       }
-      useHref={(href) => router.buildLocation({ ...href }).href}
+      useHref={(href) => {
+        // If it's an absolute URL, return it as it is instead of building a tanstack link
+        if (typeof href === 'string' && URL.canParse(href)) {
+          return href;
+        }
+        return router.buildLocation({ ...href }).href;
+      }}
     >
       <Disclosure
         isExpanded={isMobileNavExpanded}
