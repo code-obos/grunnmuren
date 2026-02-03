@@ -6,12 +6,12 @@ import {
   UNSAFE_Tabs as Tabs,
 } from '@obosbbl/grunnmuren-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import type { MenuItemProps } from 'react-aria-components';
 import { Menu, MenuItem, MenuTrigger, Popover } from 'react-aria-components';
 import { Code } from './code';
-import { MenuItemProps } from 'react-aria-components';
 
 type Props = {
-  id: string,
+  id: string;
   caption?: string;
   storyId: string;
 };
@@ -51,7 +51,6 @@ export function StorybookEmbed({ id, storyId, caption }: Props) {
     </div>
   );
 }
-
 
 const StoryRenderer = ({
   storyUrl,
@@ -114,7 +113,12 @@ const StoryRenderer = ({
 const StoryMenu = ({ id, storyUrl }: { id: string; storyUrl: string }) => {
   return (
     <MenuTrigger>
-      <Button aria-label="Meny" className="absolute right-0 z-10" color="white" isIconOnly>
+      <Button
+        aria-label="Meny"
+        className="absolute right-0 z-10"
+        color="white"
+        isIconOnly
+      >
         <span className="h-7 w-7">...</span>
       </Button>
       <Popover
@@ -122,11 +126,7 @@ const StoryMenu = ({ id, storyUrl }: { id: string; storyUrl: string }) => {
         placement="right top"
       >
         <Menu className="max-h-[inherit] overflow-auto p-1 outline-0">
-          <StoryMenuItem
-            href={storyUrl}
-          >
-            Åpne isolert visning
-          </StoryMenuItem>
+          <StoryMenuItem href={storyUrl}>Åpne isolert visning</StoryMenuItem>
           <StoryMenuItem
             onPress={() => {
               const url = new URL(window.location.href);
@@ -146,6 +146,7 @@ const StoryMenuItem = (props: MenuItemProps) => {
   return (
     <MenuItem
       className="flex items-center rounded px-3 py-2 text-xs no-underline outline-0 data-focused:bg-blue data-focused:text-white"
-      {...props} />
+      {...props}
+    />
   );
-}
+};
