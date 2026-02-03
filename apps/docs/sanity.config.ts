@@ -1,4 +1,5 @@
 import { obosAuthStore } from '@code-obos/sanity-auth';
+import { assist } from '@sanity/assist';
 import { codeInput } from '@sanity/code-input';
 import { table } from '@sanity/table';
 import { visionTool } from '@sanity/vision';
@@ -70,6 +71,7 @@ export default defineConfig({
     visionTool(),
     codeInput(),
     table(),
+    assist(),
   ],
   schema: {
     types: schemaTypes,
