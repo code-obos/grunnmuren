@@ -84,16 +84,16 @@ const DocsKomponenterSlugRoute = DocsKomponenterSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/studio': typeof StudioRouteRouteWithChildren
+  '/': typeof DocsIndexRoute
   '/$slug': typeof DocsSlugRoute
   '/api/health': typeof ApiHealthRoute
   '/studio/$': typeof StudioSplatRoute
-  '/': typeof DocsIndexRoute
   '/studio/': typeof StudioIndexRoute
   '/komponenter/$slug': typeof DocsKomponenterSlugRoute
   '/profil/farger': typeof DocsProfilFargerRoute
   '/profil/ikoner': typeof DocsProfilIkonerRoute
-  '/komponenter': typeof DocsKomponenterIndexRoute
-  '/profil': typeof DocsProfilIndexRoute
+  '/komponenter/': typeof DocsKomponenterIndexRoute
+  '/profil/': typeof DocsProfilIndexRoute
 }
 export interface FileRoutesByTo {
   '/$slug': typeof DocsSlugRoute
@@ -126,16 +126,16 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/studio'
+    | '/'
     | '/$slug'
     | '/api/health'
     | '/studio/$'
-    | '/'
     | '/studio/'
     | '/komponenter/$slug'
     | '/profil/farger'
     | '/profil/ikoner'
-    | '/komponenter'
-    | '/profil'
+    | '/komponenter/'
+    | '/profil/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/$slug'
@@ -175,7 +175,7 @@ declare module '@tanstack/react-router' {
     '/_docs': {
       id: '/_docs'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof DocsRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -224,14 +224,14 @@ declare module '@tanstack/react-router' {
     '/_docs/profil/': {
       id: '/_docs/profil/'
       path: '/profil'
-      fullPath: '/profil'
+      fullPath: '/profil/'
       preLoaderRoute: typeof DocsProfilIndexRouteImport
       parentRoute: typeof DocsRoute
     }
     '/_docs/komponenter/': {
       id: '/_docs/komponenter/'
       path: '/komponenter'
-      fullPath: '/komponenter'
+      fullPath: '/komponenter/'
       preLoaderRoute: typeof DocsKomponenterIndexRouteImport
       parentRoute: typeof DocsRoute
     }
