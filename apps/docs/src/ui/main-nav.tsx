@@ -65,6 +65,10 @@ const mainNavItems = [
         to: '/profil/ikoner',
         title: 'Ikoner',
       },
+      {
+        to: '/profil/layout',
+        title: 'Layout',
+      },
     ],
   },
 ];
