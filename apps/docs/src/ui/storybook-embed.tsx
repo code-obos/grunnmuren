@@ -126,7 +126,13 @@ const StoryMenu = ({ id, storyUrl }: { id: string; storyUrl: string }) => {
         placement="right top"
       >
         <Menu className="max-h-[inherit] overflow-auto p-1 outline-0">
-          <StoryMenuItem href={storyUrl}>Åpne isolert visning</StoryMenuItem>
+          <StoryMenuItem
+            href={storyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Åpne isolert visning
+          </StoryMenuItem>
           <StoryMenuItem
             onPress={() => {
               const url = new URL(window.location.href);
