@@ -13,6 +13,7 @@ import {
   type ToOptions,
   useRouter,
 } from '@tanstack/react-router';
+import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { defineQuery } from 'groq';
 import { useEffect, useState } from 'react';
 import logoUrl from '@/assets/OBOS_Hvit_Liggende.svg?url';
@@ -89,63 +90,66 @@ function RootLayout() {
   }, [router]);
 
   return (
-    <GrunnmurenProvider
-      locale="nb"
-      // This integrates RAC/Grunnmuren with TanStack router
-      // Giving us typesafe routes
-      // See https://react-spectrum.adobe.com/react-aria/routing.html#tanstack-router
-      navigate={(href, options) =>
-        router.navigate({
-          ...href,
-          ...options,
-        })
-      }
-      useHref={(href) => {
-        // If it's an absolute URL, return it as it is instead of building a tanstack link
-        if (typeof href === 'string' && URL.canParse(href)) {
-          return href;
+    <>
+      <GrunnmurenProvider
+        locale="nb"
+        // This integrates RAC/Grunnmuren with TanStack router
+        // Giving us typesafe routes
+        // See https://react-spectrum.adobe.com/react-aria/routing.html#tanstack-router
+        navigate={(href, options) =>
+          router.navigate({
+            ...href,
+            ...options,
+          })
         }
-        return router.buildLocation({ ...href }).href;
-      }}
-    >
-      <Disclosure
-        isExpanded={isMobileNavExpanded}
-        onExpandedChange={setIsMobileNavExpanded}
+        useHref={(href) => {
+          // If it's an absolute URL, return it as it is instead of building a tanstack link
+          if (typeof href === 'string' && URL.canParse(href)) {
+            return href;
+          }
+          return router.buildLocation({ ...href }).href;
+        }}
       >
-        <header className="relative z-3 flex items-center justify-between bg-blue-dark px-8 py-2 text-white">
-          <Link to="/" aria-label="Gå til forsiden" className="py-2.5">
-            <img src={logoUrl} alt="" className="h-6" />
-          </Link>
-          <DisclosureButton className="lg:hidden" aria-label="Meny">
-            {isMobileNavExpanded ? (
-              <Close className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
-          </DisclosureButton>
-        </header>
-        <div className="relative lg:hidden">
-          <div className="absolute top-0 left-0 z-3 w-full">
-            <DisclosurePanel>
-              <MainNav className="min-h-svh" />
-            </DisclosurePanel>
+        <Disclosure
+          isExpanded={isMobileNavExpanded}
+          onExpandedChange={setIsMobileNavExpanded}
+        >
+          <header className="relative z-3 flex items-center justify-between bg-blue-dark px-8 py-2 text-white">
+            <Link to="/" aria-label="Gå til forsiden" className="py-2.5">
+              <img src={logoUrl} alt="" className="h-6" />
+            </Link>
+            <DisclosureButton className="lg:hidden" aria-label="Meny">
+              {isMobileNavExpanded ? (
+                <Close className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
+            </DisclosureButton>
+          </header>
+          <div className="relative lg:hidden">
+            <div className="absolute top-0 left-0 z-3 w-full">
+              <DisclosurePanel>
+                <MainNav className="min-h-svh" />
+              </DisclosurePanel>
+            </div>
+          </div>
+          {isMobileNavExpanded && (
+            <div className="absolute inset-0 z-2 bg-black opacity-70 lg:hidden" />
+          )}
+        </Disclosure>
+
+        <div className="min-h-screen lg:flex">
+          <MainNav className="hidden lg:block" />
+          <div className="flex grow flex-col px-6">
+            <main className="grow">
+              <Outlet />
+            </main>
+            <Footer />
           </div>
         </div>
-        {isMobileNavExpanded && (
-          <div className="absolute inset-0 z-2 bg-black opacity-70 lg:hidden" />
-        )}
-      </Disclosure>
-
-      <div className="min-h-screen lg:flex">
-        <MainNav className="hidden lg:block" />
-        <div className="flex grow flex-col px-6">
-          <main className="grow">
-            <Outlet />
-          </main>
-          <Footer />
-        </div>
-      </div>
-    </GrunnmurenProvider>
+      </GrunnmurenProvider>
+      <TanStackRouterDevtools position="bottom-right" />
+    </>
   );
 }
 
