@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.4.5
+
+### Patch Changes
+
+- 906311f: Fixes the width of `<UNSAFE_Stepper>` in horizontal orientation (mobile), so that it grows to the full width of it's container.
+
 ## 2.4.4
 
 ### Patch Changes
