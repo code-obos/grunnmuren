@@ -280,7 +280,7 @@
   /*** Stepper component styles ***/
   .stepper-container,
   [data-slot="stepper-container"] {
-    @apply relative max-lg:overflow-hidden;
+    @apply relative max-lg:overflow-hidden max-lg:min-w-full;
     /** Make room for the focus outline */
     @apply max-lg:px-1;
   }
@@ -292,7 +292,7 @@
 
     [data-slot="step"] {
       counter-increment: step-counter;
-      @apply flex items-center gap-x-2 relative max-lg:my-1.5;
+      @apply flex items-center gap-x-2 relative max-lg:my-1.5 not-last:grow;
 
       &::before {
         content: counter(step-counter);
