@@ -486,9 +486,20 @@ type CarouselItemProps = HTMLProps<HTMLDivElement> & {
 const CarouselItem = ({ className, children, ...rest }: CarouselItemProps) => {
   return (
     <div
-      className={cx(className, 'min-w-0 shrink-0 grow-0')}
-      data-slot="carousel-item"
       {...rest}
+      className={cx(
+        className,
+        'min-w-0 shrink-0 grow-0',
+        '*:data-[slot=media]:aspect-square',
+        '*:data-[slot=media]:max-sm:data-[fit="contain"]:*:object-cover',
+        '*:data-[slot=media]:sm:aspect-4/3',
+        '*:data-[slot=media]:md:aspect-3/2',
+        '*:data-[slot=media]:lg:aspect-2/1',
+        '*:data-[slot=media]:*:h-full',
+        '*:data-[slot=media]:*:w-full',
+        '*:data-[slot=media]:data-[fit="contain"]:bg-blue-dark',
+      )}
+      data-slot="carousel-item"
     >
       <Provider
         values={[
@@ -496,11 +507,6 @@ const CarouselItem = ({ className, children, ...rest }: CarouselItemProps) => {
             MediaContext,
             {
               fit: 'cover',
-              className: cx(
-                'data-[fit="contain"]:bg-blue-dark',
-                '*:h-full *:w-full',
-                'aspect-square max-sm:data-[fit="contain"]:*:object-cover sm:aspect-4/3 md:aspect-3/2 lg:aspect-2/1',
-              ),
             },
           ],
         ]}
