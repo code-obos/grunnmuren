@@ -17,7 +17,8 @@
   ],
   "scripts": {
     "build": "pnpm run build:make-react && pnpm run build:bundle",
-    "build:bundle": "bunchee",
+    "build:bundle": "tsdown",
+    "build:bunchee": "bunchee",
     "build:make-react": "node ./scripts/make-react-icons.mjs"
   },
   "devDependencies": {
