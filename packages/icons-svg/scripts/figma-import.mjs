@@ -175,7 +175,7 @@ function writeTokenToDisk(token) {
 }
 
 /**
- * @returns {String} token
+ * @returns {Promise<String>} token
  */
 async function readTokenFromDisk() {
   try {

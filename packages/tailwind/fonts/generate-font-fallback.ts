@@ -27,7 +27,7 @@ const fontFilesByFamily = Object.groupBy(
 const fontFallbacks: Record<string, unknown> = {};
 
 for (const [fontFamilyName, fontFiles] of Object.entries(fontFilesByFamily)) {
-  for await (const fontFile of fontFiles ?? []) {
+  for (const fontFile of fontFiles ?? []) {
     const fontMetrics = await readMetrics(Bun.pathToFileURL(fontFile));
 
     if (fontMetrics == null) {
