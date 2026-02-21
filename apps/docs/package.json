@@ -49,7 +49,7 @@
     "react-live": "4.1.8",
     "react-shiki": "0.9.1",
     "sanity": "5.7.0",
-    "styled-components": "6.2.0",
+    "styled-components": "6.3.11",
     "use-debounce": "10.0.6"
   },
   "devDependencies": {
