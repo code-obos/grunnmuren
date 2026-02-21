@@ -38,7 +38,7 @@
     "@tanstack/nitro-v2-vite-plugin": "1.154.7",
     "@tanstack/react-router": "1.157.18",
     "@tanstack/react-start": "1.157.18",
-    "@vitejs/plugin-react": "5.1.2",
+    "@vitejs/plugin-react": "5.1.4",
     "cva": "1.0.0-beta.4",
     "groq": "5.7.0",
     "prism-react-renderer": "2.4.1",
