@@ -13,12 +13,12 @@
     "promise",
     "node"
   ],
+  "ignorePatterns": ["sanity.types.ts", "routeTree.gen.ts"],
   "rules": {
     "unicorn/filename-case": [
       "error",
       {
-        "case": "kebabCase",
-        "ignore": "routeTree.gen.ts"
+        "case": "kebabCase"
       }
     ]
   },
