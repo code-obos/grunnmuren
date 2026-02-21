@@ -91,6 +91,19 @@ type LinkListItemProps = React.HTMLProps<HTMLLIElement> & {
 };
 
 const LinkListItem = ({ children, className, ...props }: LinkListItemProps) => {
+  if (!isValidElement(children)) {
+    console.error('<LinkListItem> received invalid children:', children);
+    return null;
+  }
+
+  if (Children.count(children) > 1) {
+    console.error(
+      '<LinkListItem> expects only one child element, but received:',
+      children,
+    );
+    return null;
+  }
+
   const child = Children.only(children);
 
   const childProps = (
