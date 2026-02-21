@@ -10,7 +10,6 @@
     "react-perf",
     "eslint",
     "jsx-a11y",
-    "nextjs",
     "promise",
     "node"
   ],
@@ -19,13 +18,16 @@
       "error",
       {
         "case": "kebabCase",
-        "ignore": ["routeTree.gen.ts"]
+        "ignore": "routeTree.gen.ts"
       }
     ]
   },
-  "settings": {
-    "next": {
-      "rootDir": "./form-demo/"
+  "overrides": [
+    {
+      "files": ["**/*.stories.tsx"],
+      "rules": {
+        "jsx-a11y/anchor-is-valid": "off"
+      }
     }
-  }
+  ]
 }
