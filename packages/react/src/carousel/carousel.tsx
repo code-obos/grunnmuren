@@ -280,7 +280,7 @@ const Carousel = ({
     : { variant: 'tertiary' as const };
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: This is just to enhance keyboard navigation, this is not a replacement for proper focusable elements inside the carousel
+    // oxlint-disable-next-line jsx-a11y/no-static-element-interactions This is just to enhance keyboard navigation, this is not a replacement for proper focusable elements inside the carousel
     <div
       {...rest}
       data-orientation={orientation}

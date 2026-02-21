@@ -83,7 +83,7 @@ const AsyncTemplate = <T extends object>(args: ComboboxProps<T>) => {
         setIsPending(false);
       }
     }
-    fetchData();
+    void fetchData();
   }, [filterText]);
 
   return (

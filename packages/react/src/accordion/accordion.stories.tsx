@@ -67,7 +67,6 @@ const Template = (args: AccordionItemProps) => {
           <p>
             Ønsker du å overføre penger fra Boligspar Ung til en av dine andre
             kontoer, er det en enkel sak.{' '}
-            {/* biome-ignore lint/a11y/useValidAnchor: storybook example */}
             <a href="#">Logg inn i nettbanken</a> og velg &quot;Uttak
             Boligspar&quot; Ung i menyen. Slik som BSU, kan du ta ut det du har
             spart inneværende år. Om du vil ta ut mer vil kontoen avsluttes.
@@ -96,7 +95,6 @@ const ControlledTemplate = () => {
         return (
           <AccordionItem
             isOpen={isOpen}
-            // biome-ignore lint/suspicious/noArrayIndexKey: storybook example
             key={index}
             onExpandedChange={() => dispatch(index)}
           >
@@ -141,7 +139,6 @@ const ColoredTemplate = (args: AccordionItemProps) => {
             <p>
               Ønsker du å overføre penger fra Boligspar Ung til en av dine andre
               kontoer, er det en enkel sak.{' '}
-              {/* biome-ignore lint/a11y/useValidAnchor: storybook example */}
               <a href="#">Logg inn i nettbanken</a> og velg &quot;Uttak
               Boligspar&quot; Ung i menyen. Slik som BSU, kan du ta ut det du
               har spart inneværende år. Om du vil ta ut mer vil kontoen

@@ -5,8 +5,7 @@ import { themes } from 'prism-react-renderer';
 import { useState } from 'react';
 import { LiveEditor, LivePreview, LiveProvider } from 'react-live';
 
-const { Disclosure, DisclosureButton, DisclosurePanel, Button } =
-  GrunnmurenScope;
+const { Disclosure, DisclosurePanel, Button } = GrunnmurenScope;
 
 export type CodeProps = CodeSnippetProps & {
   caption?: string;
