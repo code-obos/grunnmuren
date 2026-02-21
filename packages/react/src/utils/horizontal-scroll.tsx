@@ -27,9 +27,10 @@ export function ScrollButton({
   className,
 }: ScrollButtonProps) {
   const Icon = direction === 'left' ? ChevronLeft : ChevronRight;
+  // oxlint-disable-next-line jsx-a11y/click-events-have-keys-events, jsx-a11y/no-static-element-interactions
 
   return (
-    // oxlint-disable-next-line jsx-a11y/click-events-have-keys-events jsx-a11y/no-static-element-interactions
+    // oxlint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
       onClick={onClick}
       className={cx(
@@ -109,6 +110,7 @@ export function useHorizontalScroll<E extends HTMLElement>(
   );
 
   // Initial check and react to dependency changes
+  // oxlint-ignore-next-line react-hooks/exhaustive-deps
   useEffect(updateScrollState, [...scrollStateDeps]);
 
   useEffect(() => {
