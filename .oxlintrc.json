@@ -1,0 +1,31 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "unicorn",
+    "typescript",
+    "oxc",
+    "import",
+    "vitest",
+    "react",
+    "react-perf",
+    "eslint",
+    "jsx-a11y",
+    "nextjs",
+    "promise",
+    "node"
+  ],
+  "rules": {
+    "unicorn/filename-case": [
+      "error",
+      {
+        "case": "kebabCase",
+        "ignore": ["routeTree.gen.ts"]
+      }
+    ]
+  },
+  "settings": {
+    "next": {
+      "rootDir": "./form-demo/"
+    }
+  }
+}
