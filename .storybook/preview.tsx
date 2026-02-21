@@ -60,7 +60,7 @@ const preview: Preview = {
         return () => {
           window.removeEventListener('message', messageHandler);
         };
-      }, []);
+      }, [context.viewMode]);
 
       // If the frame parent loads before the iframe story, this is
       // how we pass the data to the parent window
