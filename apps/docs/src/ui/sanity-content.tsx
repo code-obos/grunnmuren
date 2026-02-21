@@ -1,6 +1,6 @@
 import { PortableText } from '@portabletext/react';
 import { cx } from 'cva';
-import type { COMPONENT_QUERY_RESULT } from 'sanity.types';
+import type { COMPONENT_QUERY_RESULT } from '@/sanity.types';
 import { AnchorHeading } from './anchor-heading';
 import { Code } from './code';
 import { ComponentPreview } from './component-preview';
