@@ -16,6 +16,6 @@
   },
   "devDependencies": {
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
-    "tailwindcss": "4.1.18"
+    "tailwindcss": "4.2.0"
   }
 }
