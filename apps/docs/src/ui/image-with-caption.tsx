@@ -1,6 +1,6 @@
 import { getImageDimensions } from '@sanity/asset-utils';
-import type { COMPONENT_QUERY_RESULT } from 'sanity.types';
 import { urlForImage } from '@/lib/image-url';
+import type { COMPONENT_QUERY_RESULT } from '@/sanity.types';
 
 type TSanityImage = Extract<
   NonNullable<NonNullable<COMPONENT_QUERY_RESULT>['content']>[number],

@@ -6,10 +6,12 @@
     "target": "ES2024",
     "skipLibCheck": true,
     "strictNullChecks": true,
-    "baseUrl": "./",
     "noEmit": true,
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"],
+      "@/sanity.types": ["./sanity.types"],
+      "@/sanity.config": ["./sanity.config"],
+      "@/component-props": ["./component-props"]
     }
   }
 }

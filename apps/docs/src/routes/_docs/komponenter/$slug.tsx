@@ -1,8 +1,8 @@
 import { Child, CircusTent } from '@obosbbl/grunnmuren-icons-react';
 import { Alertbox, Content } from '@obosbbl/grunnmuren-react';
 import { createFileRoute, notFound } from '@tanstack/react-router';
-import type * as props from 'component-props';
 import { defineQuery } from 'groq';
+import type * as props from '@/component-props';
 import { sanityFetch } from '@/lib/sanity';
 import { AnchorHeading } from '@/ui/anchor-heading';
 import { PropsTable } from '@/ui/props-table';
