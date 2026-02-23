@@ -1,5 +1,13 @@
 # @obosbbl/grunnmuren-react
 
+## 3.4.3
+
+### Patch Changes
+
+- f7a4326: Revert: switch back from tsdown to bunchee for bundling because of tailwindcss problems
+- Updated dependencies [f7a4326]
+  - @obosbbl/grunnmuren-icons-react@2.1.2
+
 ## 3.4.2
 
 ### Patch Changes
