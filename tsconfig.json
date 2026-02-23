@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "noEmit": true,
     "target": "esnext",
     "module": "esnext",
     "skipLibCheck": true,
@@ -8,9 +7,7 @@
     "jsx": "react-jsx",
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "Bundler",
-    "resolveJsonModule": true,
-    "allowImportingTsExtensions": true,
-    "isolatedModules": true
+    "resolveJsonModule": true
   },
   "exclude": ["node_modules", "dist"]
 }
