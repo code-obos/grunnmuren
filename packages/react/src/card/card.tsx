@@ -202,8 +202,6 @@ type CardLinkWrapperProps = {
   [K in keyof Omit<RACLinkProps, 'className' | 'children'>]?: never;
 };
 
-type _S = Pick<RACLinkProps, 'href'>;
-
 type CardLinkProps =
   | (Omit<RACLinkProps, 'href'> & Required<Pick<RACLinkProps, 'href'>>)
   | CardLinkWrapperProps;

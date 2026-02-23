@@ -137,7 +137,7 @@ const StoryMenu = ({ id, storyUrl }: { id: string; storyUrl: string }) => {
             onPress={() => {
               const url = new URL(window.location.href);
               url.hash = `#${id}`;
-              navigator.clipboard.writeText(url.toString());
+              void navigator.clipboard.writeText(url.toString());
             }}
           >
             Kopier lenke

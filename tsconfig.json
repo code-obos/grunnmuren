@@ -7,7 +7,10 @@
     "jsx": "react-jsx",
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "Bundler",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "noUnusedLocals": true
   },
   "exclude": ["node_modules", "dist"]
 }
