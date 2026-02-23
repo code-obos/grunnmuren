@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-icons-react
 
+## 2.1.1
+
+### Patch Changes
+
+- f387774: bundle packages using tsdown
+
 ## 2.1.0
 
 ### Minor Changes
