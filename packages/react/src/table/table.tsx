@@ -31,16 +31,6 @@ import {
   useHorizontalScroll,
 } from '../utils';
 
-const tableVariants = cva({
-  base: ['relative'],
-  variants: {
-    variant: {
-      default: '',
-      'zebra-striped': '',
-    },
-  },
-});
-
 const tableRowVariants = cva({
   base: [
     'data-focus-visible:outline-focus-inset',
@@ -79,20 +69,14 @@ type TableCellProps = RACCellProps &
     children: React.ReactNode;
   };
 
-// Used to deal with showing or hiding scroll indicators during column resizing
-const TableScrollContainerContext = createContext<{
-  isResizing: boolean;
-}>({
-  isResizing: false,
-});
+type _TableScrollContainerProps = {
+  children: React.ReactNode;
+};
 
-/**
- * A container component for displaying tabular data with horizontal scrolling support.
- */
-function Table(props: TableProps) {
-  const { className, children, variant = 'default', ...restProps } = props;
+const _TableScrollContainer = ({ children }: _TableScrollContainerProps) => {
+  const containerContext = useContext(TableContainerContext);
 
-  const { isResizing } = useContext(TableScrollContainerContext);
+  const isResizing = containerContext?.isResizing ?? false;
 
   const {
     scrollContainerRef,
@@ -101,6 +85,7 @@ function Table(props: TableProps) {
     hasScrollingOccurred,
   } = useHorizontalScroll<HTMLDivElement>([isResizing]);
 
+  // This has to be moved into a useEffect since we are stepping outside of React
   const handleScroll = useCallback(
     (direction: ScrollDirection) => {
       const container = scrollContainerRef.current;
@@ -114,30 +99,21 @@ function Table(props: TableProps) {
     },
     [scrollContainerRef],
   );
-  return (
-    <div className={tableVariants({ className, variant })}>
-      <div className="relative overflow-hidden">
-        <div
-          ref={scrollContainerRef}
-          className="scrollbar-hidden overflow-x-auto"
-          style={{ WebkitOverflowScrolling: 'touch' }}
-        >
-          <RACTable
-            {...restProps}
-            className="group w-full min-w-fit"
-            data-variant={variant}
-          >
-            {children}
-          </RACTable>
-        </div>
 
+  return (
+    <div className="relative overflow-hidden">
+      <div
+        ref={scrollContainerRef}
+        className="scrollbar-hidden overflow-x-auto"
+        style={{ WebkitOverflowScrolling: 'touch' }}
+      >
+        {children}
         <ScrollButton
           direction="left"
           onClick={() => handleScroll('left')}
           isVisible={canScrollLeft}
           hasScrollingOccurred={hasScrollingOccurred}
         />
-
         <ScrollButton
           direction="right"
           onClick={() => handleScroll('right')}
@@ -146,6 +122,36 @@ function Table(props: TableProps) {
         />
       </div>
     </div>
+  );
+};
+
+// Used to deal with showing or hiding scroll indicators during column resizing
+const TableContainerContext = createContext<{
+  isResizing: boolean;
+} | null>(null);
+
+/**
+ * A container component for displaying tabular data with horizontal scrolling support.
+ */
+function Table(props: TableProps) {
+  const { className, children, variant = 'default', ...restProps } = props;
+
+  const containerContext = useContext(TableContainerContext);
+
+  const table = (
+    <RACTable
+      {...restProps}
+      className={cx('group w-full min-w-fit', className)}
+      data-variant={variant}
+    >
+      {children}
+    </RACTable>
+  );
+
+  return containerContext ? (
+    table
+  ) : (
+    <_TableScrollContainer>{table}</_TableScrollContainer>
   );
 }
 
@@ -251,17 +257,19 @@ const TableContainer = ({
 }: ResizableTableContainerProps) => {
   const [isResizing, setIsResizing] = useState(false);
   return (
-    <Provider values={[[TableScrollContainerContext, { isResizing }]]}>
-      <ResizableTableContainer
-        {...restProps}
-        className={cx(
-          className,
-          '**:data-[slot=table-column]:overflow-hidden **:data-[slot=table-column]:text-ellipsis',
-          '**:data-[slot=table-cell]:overflow-hidden **:data-[slot=table-cell]:text-ellipsis',
-        )}
-        onResizeStart={() => setIsResizing(true)}
-        onResizeEnd={() => setIsResizing(false)}
-      />
+    <Provider values={[[TableContainerContext, { isResizing }]]}>
+      <_TableScrollContainer>
+        <ResizableTableContainer
+          {...restProps}
+          className={cx(
+            className,
+            '**:data-[slot=table-column]:overflow-hidden **:data-[slot=table-column]:text-ellipsis',
+            '**:data-[slot=table-cell]:overflow-hidden **:data-[slot=table-cell]:text-ellipsis',
+          )}
+          onResizeStart={() => setIsResizing(true)}
+          onResizeEnd={() => setIsResizing(false)}
+        />
+      </_TableScrollContainer>
     </Provider>
   );
 };
