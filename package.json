@@ -17,6 +17,7 @@
     "dev:docs": "pnpm --filter @obosbbl/grunnmuren-docs dev",
     "lint": "pnpm biome check .",
     "lint:ci": "pnpm biome ci .",
+    "lint:fix": "pnpm biome check . --fix",
     "serve-storybook": "http-server ./apps/docs/public/storybook -p 6006 --silent",
     "test": "test-storybook",
     "sanity:schema:deploy": "pnpm --filter @obosbbl/grunnmuren-docs sanity:schema:deploy"
@@ -30,7 +31,7 @@
     "@storybook/builder-vite": "10.1.11",
     "@storybook/react-vite": "10.1.11",
     "@storybook/test-runner": "0.24.2",
-    "@tailwindcss/vite": "4.1.18",
+    "@tailwindcss/vite": "catalog:",
     "@types/bun": "1.3.2",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
@@ -41,12 +42,12 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "storybook": "10.1.11",
-    "tailwindcss": "4.1.18",
+    "tailwindcss": "catalog:",
     "typescript": "5.9.3",
     "vite": "7.3.1"
   },
-  "packageManager": "pnpm@10.28.0",
   "engines": {
     "node": ">=22.11 <25"
-  }
+  },
+  "packageManager": "pnpm@10.28.0"
 }
