@@ -1,6 +1,7 @@
 import { Card, CardLink, Heading } from '@obosbbl/grunnmuren-react';
 import { createFileRoute } from '@tanstack/react-router';
 import { defineQuery } from 'groq';
+
 import { sanityFetch } from '@/lib/sanity';
 import { ComponentStateBadge } from '@/ui/component-state-badge';
 
@@ -38,10 +39,7 @@ function Page() {
               >
                 {component.name}
               </CardLink>
-              <ComponentStateBadge
-                className="ml-4"
-                componentState={component.componentState}
-              />
+              <ComponentStateBadge className="ml-4" componentState={component.componentState} />
             </Heading>
           </Card>
         ))}

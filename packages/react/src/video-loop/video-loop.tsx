@@ -1,6 +1,7 @@
 import { PlayerPause, PlayerPlay } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
 import { useEffect, useRef, useState } from 'react';
+
 import { usePrefersReducedMotion } from '../use-prefers-reduced-motion';
 
 type VideoLoopProps = {
@@ -52,13 +53,7 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
   }, [shouldPlay]);
 
   return (
-    <div
-      className={cx(
-        className,
-        'relative',
-        prefersReducedMotion === null && 'opacity-0',
-      )}
-    >
+    <div className={cx(className, 'relative', prefersReducedMotion === null && 'opacity-0')}>
       <video
         aria-hidden
         ref={videoRef}

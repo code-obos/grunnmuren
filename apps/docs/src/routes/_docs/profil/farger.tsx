@@ -2,6 +2,7 @@ import { Check } from '@obosbbl/grunnmuren-icons-react';
 import { createFileRoute } from '@tanstack/react-router';
 import { cx } from 'cva';
 import { useState } from 'react';
+
 import colors from '../../../../colors';
 
 export const Route = createFileRoute('/_docs/profil/farger')({
@@ -92,7 +93,7 @@ const CopyButton = ({
     type="button"
     onClick={onClick}
     aria-label={label}
-    className="relative cursor-copy px-2 py-1 text-left text-sm hover:underline focus-visible:outline-current focus-visible:outline-focus-inset"
+    className="focus-visible:outline-focus-inset relative cursor-copy px-2 py-1 text-left text-sm hover:underline focus-visible:outline-current"
   >
     <span className={cx(copied && 'invisible')}>{children}</span>
     <span

@@ -12,6 +12,7 @@ import {
   ModalOverlay as RACModalOverlay,
   type ModalOverlayProps as RACModalOverlayProps,
 } from 'react-aria-components';
+
 import { Button } from '../button';
 import { HeadingContext } from '../content';
 import { translations } from '../translations';
@@ -19,14 +20,9 @@ import { useLocale } from '../use-locale';
 
 type DialogTriggerProps = RACDialogTriggerProps;
 
-const DialogTrigger = (props: DialogTriggerProps) => (
-  <RACDialogTrigger {...props} />
-);
+const DialogTrigger = (props: DialogTriggerProps) => <RACDialogTrigger {...props} />;
 
-type ModalOverlayProps = Omit<
-  RACModalOverlayProps,
-  'isDismissable' | 'style'
-> & {
+type ModalOverlayProps = Omit<RACModalOverlayProps, 'isDismissable' | 'style'> & {
   /** Additional style properties for the element. */
   style?: React.CSSProperties;
   /** @default 10 Controls the z-index of the modal overlay */
@@ -35,11 +31,7 @@ type ModalOverlayProps = Omit<
   isDismissable?: boolean;
 };
 
-const _ModalOverlay = ({
-  style = {},
-  zIndex = 10,
-  ...restProps
-}: ModalOverlayProps) => (
+const _ModalOverlay = ({ style = {}, zIndex = 10, ...restProps }: ModalOverlayProps) => (
   <RACModalOverlay
     {...restProps}
     className={({ isEntering, isExiting }) =>
@@ -84,7 +76,7 @@ const Modal = ({
                       <Button
                         slot="close" // RAC Dialog supports one close button out of the box, so we utilize that here. For other close buttons we use ButtonContext
                         variant="tertiary"
-                        className="px-2.5! data-focus-visible:outline-focus-inset"
+                        className="data-focus-visible:outline-focus-inset px-2.5!"
                         aria-label={translations.close[locale]}
                         onPress={() => onOpenChange?.(false)}
                       >

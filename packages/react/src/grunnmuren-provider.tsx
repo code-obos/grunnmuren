@@ -1,4 +1,5 @@
 import { I18nProvider, RouterProvider } from 'react-aria-components';
+
 import type { Locale } from './use-locale';
 
 type RouterProviderProps = React.ComponentProps<typeof RouterProvider>;

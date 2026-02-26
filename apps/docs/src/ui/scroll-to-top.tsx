@@ -44,11 +44,7 @@ interface ScrollToTopButtonProps {
  * Scroll to top button component
  * Displays a floating button with "Til toppen" text that scrolls to the top of the page
  */
-export function ScrollToTopButton({
-  show,
-  onClick,
-  className,
-}: ScrollToTopButtonProps) {
+export function ScrollToTopButton({ show, onClick, className }: ScrollToTopButtonProps) {
   if (!show) return null;
 
   return (
@@ -57,7 +53,7 @@ export function ScrollToTopButton({
     >
       <button
         onClick={onClick}
-        className="hover:-translate-y-1 flex h-12 w-12 items-center justify-center rounded-full bg-blue-dark transition-all duration-300 focus-visible:outline-focus"
+        className="bg-blue-dark focus-visible:outline-focus flex h-12 w-12 items-center justify-center rounded-full transition-all duration-300 hover:-translate-y-1"
         aria-label="Scroll to top"
         type="button"
       >
@@ -81,11 +77,5 @@ export function ScrollToTop({
 }) {
   const { showButton, scrollToTop } = useScrollToTop(threshold);
 
-  return (
-    <ScrollToTopButton
-      show={showButton}
-      onClick={scrollToTop}
-      className={className}
-    />
-  );
+  return <ScrollToTopButton show={showButton} onClick={scrollToTop} className={className} />;
 }

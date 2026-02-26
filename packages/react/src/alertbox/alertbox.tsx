@@ -8,6 +8,7 @@ import {
 } from '@obosbbl/grunnmuren-icons-react';
 import { cva, cx, type VariantProps } from 'cva';
 import { Children, useId, useState } from 'react';
+
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 
@@ -24,11 +25,11 @@ const alertVariants = cva({
     // Icon styles:
     '[&:has([data-slot="heading"])>svg]:mt-0.5',
     // Heading styles:
-    '**:data-[slot="heading"]:font-medium **:data-[slot="heading"]:text-base **:data-[slot="heading"]:leading-7',
+    '**:data-[slot="heading"]:text-base **:data-[slot="heading"]:leading-7 **:data-[slot="heading"]:font-medium',
     // Content styles:
     '**:data-[slot="content"]:text-sm **:data-[slot="content"]:leading-6 [&:has([data-slot="heading"])_[data-slot="content"]]:col-span-full',
     // Footer styles:
-    '**:data-[slot="footer"]:col-span-full **:data-[slot="footer"]:font-light **:data-[slot="footer"]:text-xs **:data-[slot="footer"]:leading-6',
+    '**:data-[slot="footer"]:col-span-full **:data-[slot="footer"]:text-xs **:data-[slot="footer"]:leading-6 **:data-[slot="footer"]:font-light',
   ],
   variants: {
     /**
@@ -36,10 +37,10 @@ const alertVariants = cva({
      * @default info
      */
     variant: {
-      info: 'border-[#1A7FA7] bg-sky-light',
-      success: 'border-[#0F9B6E] bg-mint-light',
+      info: 'bg-sky-light border-[#1A7FA7]',
+      success: 'bg-mint-light border-[#0F9B6E]',
       warning: 'border-[#C57C13] bg-[#FFF2DE]',
-      danger: 'border-[#C0385D] bg-red-light',
+      danger: 'bg-red-light border-[#C0385D]',
     },
   },
   defaultVariants: {
@@ -100,8 +101,7 @@ const Alertbox = ({
   const isCollapsed = isExpandable && !isExpanded;
 
   const [isUncontrolledVisible, setIsUncontrolledVisible] = useState(true);
-  const isVisible =
-    isDismissed !== undefined ? !isDismissed : isUncontrolledVisible;
+  const isVisible = isDismissed !== undefined ? !isDismissed : isUncontrolledVisible;
 
   if (!isVisible) return;
 
@@ -141,7 +141,7 @@ const Alertbox = ({
         <button
           className={cx(
             '-m-2 grid h-11 w-11 place-items-center rounded-xl',
-            'focus-visible:-outline-offset-8 cursor-pointer focus-visible:outline-focus',
+            'focus-visible:outline-focus cursor-pointer focus-visible:-outline-offset-8',
           )}
           onClick={close}
           aria-label={translations.close[locale]}
@@ -153,7 +153,7 @@ const Alertbox = ({
       {isExpandable && (
         <button
           className={cx(
-            '-my-3 relative col-span-full row-start-2 inline-flex max-w-fit cursor-pointer items-center gap-1 py-3 text-sm leading-6',
+            'relative col-span-full row-start-2 -my-3 inline-flex max-w-fit cursor-pointer items-center gap-1 py-3 text-sm leading-6',
             // Focus styles:
             'outline-none after:absolute after:right-0 after:bottom-3 after:left-0 after:h-0',
             'focus-visible:after:h-0.5 focus-visible:after:bg-black',
@@ -163,9 +163,7 @@ const Alertbox = ({
           aria-controls={id}
           type="button"
         >
-          {isExpanded
-            ? translations.showLess[locale]
-            : translations.showMore[locale]}
+          {isExpanded ? translations.showLess[locale] : translations.showMore[locale]}
           <ChevronDown
             className={cx(
               'transition-transform duration-150 motion-reduce:transition-none',

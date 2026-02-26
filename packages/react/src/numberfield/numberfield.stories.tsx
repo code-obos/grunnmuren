@@ -43,21 +43,11 @@ const ControlledTemplate = (args: NumberFieldProps) => {
 };
 
 const LeftAddonTemplate = (args: NumberFieldProps) => {
-  return (
-    <NumberField
-      {...args}
-      leftAddon={<PiggyBank className="pointer-events-none" />}
-    />
-  );
+  return <NumberField {...args} leftAddon={<PiggyBank className="pointer-events-none" />} />;
 };
 
 const RightAddonTemplate = (args: NumberFieldProps) => {
-  return (
-    <NumberField
-      {...args}
-      rightAddon={<PiggyBank className="pointer-events-none" />}
-    />
-  );
+  return <NumberField {...args} rightAddon={<PiggyBank className="pointer-events-none" />} />;
 };
 
 const defaultProps = {

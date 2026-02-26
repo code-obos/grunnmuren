@@ -51,10 +51,7 @@ export const SelectionModes = () => {
       </div>
 
       <div>
-        <TagGroup
-          selectionMode="multiple"
-          defaultSelectedKeys={['tag1', 'tag3']}
-        >
+        <TagGroup selectionMode="multiple" defaultSelectedKeys={['tag1', 'tag3']}>
           <Label>Multiple Selection</Label>
 
           <TagList className="my-2">
@@ -105,9 +102,7 @@ export const CalendarTags = () => {
             <Calendar /> 16:00 - 17:00
           </Tag>
         </TagList>
-        <Description>
-          Velg en tid som passer for deg. Du kan kun velge én tid.
-        </Description>
+        <Description>Velg en tid som passer for deg. Du kan kun velge én tid.</Description>
       </TagGroup>
     </div>
   );
@@ -121,9 +116,7 @@ export const RemovableTags = () => {
     const keysArray = keys instanceof Set ? Array.from(keys) : [keys];
 
     // Filter out removed tags
-    setTags((currentTagState) =>
-      currentTagState.filter((tag) => !keysArray.includes(tag)),
-    );
+    setTags((currentTagState) => currentTagState.filter((tag) => !keysArray.includes(tag)));
   };
 
   return (
@@ -138,17 +131,13 @@ export const RemovableTags = () => {
           ))}
         </TagList>
       </TagGroup>
-      {tags.length === 0 && (
-        <p className="mt-4">All tags removed! Refresh to try again.</p>
-      )}
+      {tags.length === 0 && <p className="mt-4">All tags removed! Refresh to try again.</p>}
     </div>
   );
 };
 
 export const ControlledSelection = () => {
-  const [selectedKeys, setSelectedKeys] = useState<Selection>(
-    new Set(['tag1']),
-  );
+  const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set(['tag1']));
 
   return (
     <div className="p-6">
@@ -164,9 +153,7 @@ export const ControlledSelection = () => {
           <Tag id="tag3">Tag 3</Tag>
         </TagList>
       </TagGroup>
-      <div className="mt-4">
-        Selected: {Array.from(selectedKeys).join(', ')}
-      </div>
+      <div className="mt-4">Selected: {Array.from(selectedKeys).join(', ')}</div>
     </div>
   );
 };

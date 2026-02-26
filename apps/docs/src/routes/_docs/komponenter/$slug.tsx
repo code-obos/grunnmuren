@@ -2,15 +2,12 @@ import { Child, CircusTent } from '@obosbbl/grunnmuren-icons-react';
 import { Alertbox, Content } from '@obosbbl/grunnmuren-react';
 import { createFileRoute, notFound } from '@tanstack/react-router';
 import { defineQuery } from 'groq';
+
 import type * as props from '@/component-props';
 import { sanityFetch } from '@/lib/sanity';
 import { AnchorHeading } from '@/ui/anchor-heading';
 import { PropsTable } from '@/ui/props-table';
-import {
-  ResourceLink,
-  type ResourceLinkProps,
-  ResourceLinks,
-} from '@/ui/resource-links';
+import { ResourceLink, type ResourceLinkProps, ResourceLinks } from '@/ui/resource-links';
 import { SanityContent } from '@/ui/sanity-content';
 import { ScrollToTop } from '@/ui/scroll-to-top';
 import { TableOfContentsNav } from '@/ui/table-of-contents-nav';
@@ -76,52 +73,29 @@ function Page() {
             ),
         )}
       </ResourceLinks>
-      <TableOfContentsNav
-        content={data.content}
-        propsTables={data.propsComponents}
-      />
+      <TableOfContentsNav content={data.content} propsTables={data.propsComponents} />
       <div className="lg:relative lg:flex lg:gap-4">
         <div>
           {data.componentState === 'new' && (
-            <Alertbox
-              variant="success"
-              className="mb-12 w-fit"
-              icon={Child}
-              role="none"
-            >
+            <Alertbox variant="success" className="mb-12 w-fit" icon={Child} role="none">
               <Content>
-                <p>
-                  Denne komponenten er ny eller har nylig fått større endringer.
-                </p>
+                <p>Denne komponenten er ny eller har nylig fått større endringer.</p>
                 <p>
                   Ta den i bruk og kom gjerne med innspill til oss på{' '}
-                  <a href="https://obos.slack.com/archives/C03FR05FJ9F">
-                    Slack
-                  </a>{' '}
-                  hvordan du synes den fungerer.
+                  <a href="https://obos.slack.com/archives/C03FR05FJ9F">Slack</a> hvordan du synes
+                  den fungerer.
                 </p>
               </Content>
             </Alertbox>
           )}
 
           {data.componentState === 'beta' && (
-            <Alertbox
-              variant="warning"
-              className="mb-12 w-fit"
-              icon={CircusTent}
-              role="none"
-            >
+            <Alertbox variant="warning" className="mb-12 w-fit" icon={CircusTent} role="none">
               <Content>
-                <p>
-                  Denne komponenten er under aktiv utvikling, og vi trenger din
-                  feedback!
-                </p>
+                <p>Denne komponenten er under aktiv utvikling, og vi trenger din feedback!</p>
                 <p>
                   Er du eventyrlysten, test den og kom med innspill til oss på{' '}
-                  <a href="https://obos.slack.com/archives/C03FR05FJ9F">
-                    Slack
-                  </a>
-                  .
+                  <a href="https://obos.slack.com/archives/C03FR05FJ9F">Slack</a>.
                 </p>
               </Content>
             </Alertbox>
@@ -135,10 +109,7 @@ function Page() {
             </AnchorHeading>
           )}
           {data.propsComponents?.map((componentName) => (
-            <PropsTable
-              key={componentName}
-              componentName={componentName as keyof typeof props}
-            />
+            <PropsTable key={componentName} componentName={componentName as keyof typeof props} />
           ))}
         </div>
       </div>

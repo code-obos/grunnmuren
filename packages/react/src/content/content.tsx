@@ -15,9 +15,7 @@ type HeadingProps = Omit<HTMLProps<HTMLHeadingElement>, 'size'> &
     ref?: Ref<HTMLHeadingElement>;
   };
 
-const HeadingContext = createContext<
-  ContextValue<Partial<HeadingProps>, HTMLHeadingElement>
->({});
+const HeadingContext = createContext<ContextValue<Partial<HeadingProps>, HTMLHeadingElement>>({});
 
 const headingVariants = cva({
   variants: {
@@ -52,11 +50,7 @@ const Heading = ({ ref = null, ...props }: HeadingProps) => {
   const Element = `h${level}` as const;
 
   const content = (
-    <Element
-      {...restProps}
-      className={cx(className, _className)}
-      data-slot="heading"
-    >
+    <Element {...restProps} className={cx(className, _className)} data-slot="heading">
       {innerWrapper ? innerWrapper(children) : children}
     </Element>
   );
@@ -64,9 +58,7 @@ const Heading = ({ ref = null, ...props }: HeadingProps) => {
   return outerWrapper ? outerWrapper(content) : content;
 };
 
-const ContentContext = createContext<
-  ContextValue<Partial<ContentProps>, HTMLDivElement>
->({});
+const ContentContext = createContext<ContextValue<Partial<ContentProps>, HTMLDivElement>>({});
 
 type ContentProps = HTMLProps<HTMLDivElement> & {
   children: React.ReactNode;
@@ -106,9 +98,7 @@ const mediaVariant = cva({
   },
 });
 
-const MediaContext = createContext<
-  ContextValue<Partial<MediaProps>, HTMLDivElement>
->({});
+const MediaContext = createContext<ContextValue<Partial<MediaProps>, HTMLDivElement>>({});
 
 const Media = ({ ref = null, ...props }: MediaProps) => {
   [props, ref] = useContextProps(props, ref, MediaContext);
@@ -141,11 +131,7 @@ type CaptionProps = HTMLProps<HTMLDivElement> & {
 };
 
 const Caption = ({ className, ...restProps }: CaptionProps) => (
-  <div
-    {...restProps}
-    className={cx('description', className)}
-    data-slot="caption"
-  />
+  <div {...restProps} className={cx('description', className)} data-slot="caption" />
 );
 
 const Footer = (props: FooterProps) => <div {...props} data-slot="footer" />;

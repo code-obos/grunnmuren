@@ -7,9 +7,10 @@ A balanced approach with two simple utilities: `useHorizontalScroll` for scroll 
 A lightweight hook that tracks scroll capabilities without imposing any UI decisions.
 
 **What it provides:**
+
 - `scrollContainerRef` - Ref to attach to your scrollable element
 - `canScrollLeft` - Boolean indicating if there's content to scroll left
-- `canScrollRight` - Boolean indicating if there's content to scroll right  
+- `canScrollRight` - Boolean indicating if there's content to scroll right
 - `hasScrollingOccurred` - Boolean for managing animations (prevents animation on mount)
 
 ## Component: ScrollButton
@@ -17,12 +18,14 @@ A lightweight hook that tracks scroll capabilities without imposing any UI decis
 A simple scroll button component that captures the common visual patterns without over-engineering.
 
 **What it handles:**
+
 - Chevron icons (left/right)
 - Standard gradient backgrounds
 - Show/hide animations
 - Consistent hover states
 
 **Props:**
+
 - `direction` - 'left' | 'right'
 - `onClick` - Click handler function
 - `isVisible` - Whether button should be visible
@@ -33,21 +36,18 @@ A simple scroll button component that captures the common visual patterns withou
 ## Usage Examples
 
 ### Basic Implementation
+
 ```tsx
 import { useHorizontalScroll, ScrollButton } from '@obosbbl/grunnmuren-react';
 
 function MyScrollableComponent() {
-  const {
-    scrollContainerRef,
-    canScrollLeft,
-    canScrollRight,
-    hasScrollingOccurred,
-  } = useHorizontalScroll();
+  const { scrollContainerRef, canScrollLeft, canScrollRight, hasScrollingOccurred } =
+    useHorizontalScroll();
 
   const handleScroll = (direction: 'left' | 'right') => {
     const container = scrollContainerRef.current;
     if (!container) return;
-    
+
     const scrollAmount = container.clientWidth * 0.8;
     container.scrollBy({
       left: direction === 'left' ? -scrollAmount : scrollAmount,
@@ -65,14 +65,11 @@ function MyScrollableComponent() {
         className="absolute left-0 top-1/2 -translate-y-1/2 h-10 w-10"
         iconClassName="h-5 w-5"
       />
-      
-      <div
-        ref={scrollContainerRef}
-        className="overflow-x-auto scrollbar-hidden"
-      >
+
+      <div ref={scrollContainerRef} className="overflow-x-auto scrollbar-hidden">
         {/* Your content */}
       </div>
-      
+
       <ScrollButton
         direction="right"
         onClick={() => handleScroll('right')}
@@ -87,6 +84,7 @@ function MyScrollableComponent() {
 ```
 
 ### Table-style Positioning
+
 ```tsx
 <ScrollButton
   direction="left"
@@ -99,6 +97,7 @@ function MyScrollableComponent() {
 ```
 
 ### Tab-style Positioning
+
 ```tsx
 <ScrollButton
   direction="left"

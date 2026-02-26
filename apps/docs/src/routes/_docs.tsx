@@ -16,11 +16,13 @@ import {
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { defineQuery } from 'groq';
 import { useEffect, useState } from 'react';
+
 import logoUrl from '@/assets/OBOS_Hvit_Liggende.svg?url';
 import { sanityFetch } from '@/lib/sanity';
-import appCss from '@/styles/app.css?url';
 import { Footer } from '@/ui/footer';
 import { MainNav } from '@/ui/main-nav';
+
+import appCss from '@/styles/app.css?url';
 
 const NAVIGATION_QUERY = defineQuery(`{
   "components": *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc),
@@ -110,20 +112,13 @@ function RootLayout() {
           return router.buildLocation({ ...href }).href;
         }}
       >
-        <Disclosure
-          isExpanded={isMobileNavExpanded}
-          onExpandedChange={setIsMobileNavExpanded}
-        >
-          <header className="relative z-3 flex items-center justify-between bg-blue-dark px-8 py-2 text-white">
+        <Disclosure isExpanded={isMobileNavExpanded} onExpandedChange={setIsMobileNavExpanded}>
+          <header className="bg-blue-dark relative z-3 flex items-center justify-between px-8 py-2 text-white">
             <Link to="/" aria-label="Gå til forsiden" className="py-2.5">
               <img src={logoUrl} alt="" className="h-6" />
             </Link>
             <DisclosureButton className="lg:hidden" aria-label="Meny">
-              {isMobileNavExpanded ? (
-                <Close className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
+              {isMobileNavExpanded ? <Close className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </DisclosureButton>
           </header>
           <div className="relative lg:hidden">

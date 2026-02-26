@@ -21,7 +21,7 @@ Configure Tailwind to use the preset
 ```css
 /* globals.css */
 
-@import "@obosbbl/grunnmuren-tailwind";
+@import '@obosbbl/grunnmuren-tailwind';
 
 /** Add any auto excluded sources (typically residing in node_modules) */
 @source "../../node_modules/@obosbbl/grunnmuren-react/dist";
@@ -51,9 +51,7 @@ To do that you need to configure the preset with `legacyV1Compatibility` option.
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  presets: [
-    require('@obosbbl/grunnmuren-tailwind')({ includeFontFallback: false }),
-  ],
+  presets: [require('@obosbbl/grunnmuren-tailwind')({ includeFontFallback: false })],
   // content: [ ... ]
 };
 ```
@@ -66,6 +64,7 @@ The preset supports the following options:
 | legacyV1Compatibility | `false`       | Configures partial compatibility with Grunnmuren v1 |
 
 ## Migrating from v2?
+
 Tailwind is upgraded to v4. The `grunnmuren-tailwind` package is now CSS-first configured. And the previously exposed JS config file is now replaced by a CSS config file.
 
 The `legacyV1Compatibility` option is removed, so your project has to be fully upgraded to Grunnmuren v2.
@@ -73,15 +72,16 @@ The `legacyV1Compatibility` option is removed, so your project has to be fully u
 The `includeFontFallback` option is also removed, and a font fallback will automatically be applied to the OBOS fonts by defaullt.
 
 ## Migration
+
 1. Upgrade your project to Tailwind 4. You can try the [migration guide](https://tailwindcss.com/docs/upgrade-guide)
- from tailwind.
+   from tailwind.
 2. Add `@import "@obosbbl/grunnmuren-tailwind";` to the top of the main CSS file of your project. This is the new CSS configuration file for Grunnmuren.
 3. If you have a JS/TS `tailwind.config` in your project and would like to keep it. You can include it in the main CSS file (mentioned in step 2), by using the `@config` directive, e.g: `@config '../tailwind.config.ts';`. Read more [here](https://tailwindcss.com/docs/functions-and-directives#compatibility).
 4. Finally, if you would like to get rid of the old `tailwind.config`. You can move all your configuration to the main CSS file of your project. Tailwind 4 has automatic content detection, but if you need to include some excluded source you can use the `@source` directive, e.g: `@source "./node_modules/@obosbbl/grunnmuren-react/dist";`. You can also extend the `@obosbbl/grunnmuren-tailwind` config by using various directives such as `@base` or `@theme`.
 
-Here is an example of what your main CSS file __might__ look like after migration:
+Here is an example of what your main CSS file **might** look like after migration:
 
-``` CSS
+```CSS
 @import "@obosbbl/grunnmuren-tailwind";
 
 @source "../../node_modules/@obosbbl/grunnmuren-react/dist";

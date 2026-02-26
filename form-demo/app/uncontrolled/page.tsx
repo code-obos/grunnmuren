@@ -20,14 +20,10 @@ export default function () {
   };
 
   return (
-    <Form
-      onSubmit={handleSubmit}
-      validationErrors={errors}
-      className="space-y-4"
-    >
+    <Form onSubmit={handleSubmit} validationErrors={errors} className="space-y-4">
       <p>
-        This is an uncontrolled form that uses zod to validate the form data on
-        the server side in a React server action.
+        This is an uncontrolled form that uses zod to validate the form data on the server side in a
+        React server action.
       </p>
       <TextField name="name" label="Name" isRequired />
       <TextField

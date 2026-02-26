@@ -3,8 +3,7 @@ import { defineField } from 'sanity';
 export const resourceLinks = defineField({
   name: 'resourceLinks',
   title: 'Resource links',
-  description:
-    'Add links to GitHub or Figma here (only GitHub and Figma is supported)',
+  description: 'Add links to GitHub or Figma here (only GitHub and Figma is supported)',
   type: 'array',
   of: [
     {

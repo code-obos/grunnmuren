@@ -6,14 +6,7 @@ type AvatarProps = ComponentProps<'img'>;
 
 const baseClassName = 'h-20 w-20 shrink-0 rounded-full';
 
-const Avatar = ({
-  src,
-  alt = '',
-  className,
-  onError,
-  loading = 'lazy',
-  ...rest
-}: AvatarProps) => {
+const Avatar = ({ src, alt = '', className, onError, loading = 'lazy', ...rest }: AvatarProps) => {
   const [hasError, setHasError] = useState(false);
   const hasValidImage = !hasError && src;
 
@@ -34,7 +27,7 @@ const Avatar = ({
       className={cx(
         className,
         baseClassName,
-        'grid place-items-center bg-gray-light text-gray-dark',
+        'bg-gray-light text-gray-dark grid place-items-center',
       )}
     >
       <User className="scale-[2.25]" />

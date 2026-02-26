@@ -2,6 +2,7 @@ import * as icons from '@obosbbl/grunnmuren-icons-react';
 import { Download } from '@obosbbl/grunnmuren-icons-react';
 import { Button, Card } from '@obosbbl/grunnmuren-react';
 import { createFileRoute } from '@tanstack/react-router';
+
 import { ResourceLink, ResourceLinks } from '@/ui/resource-links';
 import { ScrollToTop } from '@/ui/scroll-to-top';
 
@@ -21,12 +22,10 @@ function Page() {
       <h1 className="heading-l my-12">Ikoner</h1>
       <div className="prose">
         <p>
-          Grunnmuren sitt ikonsett består av {Object.keys(icons).length}{' '}
-          forskjellige ikoner. Settet er publisert som npm pakker både i{' '}
-          <a href="https://www.npmjs.com/package/@obosbbl/grunnmuren-icons-svg">
-            svg-format
-          </a>{' '}
-          og som{' '}
+          Grunnmuren sitt ikonsett består av {Object.keys(icons).length} forskjellige ikoner. Settet
+          er publisert som npm pakker både i{' '}
+          <a href="https://www.npmjs.com/package/@obosbbl/grunnmuren-icons-svg">svg-format</a> og
+          som{' '}
           <a href="https://www.npmjs.com/package/@obosbbl/grunnmuren-icons-react">
             React-komponenter
           </a>
@@ -81,12 +80,7 @@ function IconCard({ iconName, Icon }) {
     <Card className="bg-gray-lightest" key={iconName}>
       <Icon className="mx-auto" />
       <span className="block text-center text-sm">{iconName}</span>
-      <Button
-        variant="tertiary"
-        href={downloadSvgLink}
-        download
-        className="ml-auto w-11"
-      >
+      <Button variant="tertiary" href={downloadSvgLink} download className="ml-auto w-11">
         <Download className="flex-none" />
       </Button>
     </Card>

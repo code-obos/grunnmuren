@@ -10,9 +10,7 @@ type BadgeProps = VariantProps<typeof badgeVariants> & {
 };
 
 const badgeVariants = cva({
-  base: [
-    'inline-flex w-fit items-center justify-center gap-1.5 rounded-lg [&_svg]:shrink-0',
-  ],
+  base: ['inline-flex w-fit items-center justify-center gap-1.5 rounded-lg [&_svg]:shrink-0'],
   variants: {
     color: {
       'gray-dark': 'bg-gray-dark text-white',

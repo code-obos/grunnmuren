@@ -1,5 +1,6 @@
 import type { Meta } from '@storybook/react-vite';
 import { Fragment, useState } from 'react';
+
 import { Content } from '../content';
 import { DisclosureButton } from '../disclosure';
 import {
@@ -75,11 +76,7 @@ const sampleData = [
     product: 'Pensjonskonto',
     subtitle: 'For OBOS-medlemmer',
     rate: '4,90 % per år',
-    conditions: [
-      'Ingen gebyrer for uttak',
-      'Skattefordeler ved innskudd',
-      'Maksimalt 1 konto',
-    ],
+    conditions: ['Ingen gebyrer for uttak', 'Skattefordeler ved innskudd', 'Maksimalt 1 konto'],
   },
   {
     id: '6',
@@ -157,10 +154,7 @@ export const Simple = () => (
 );
 
 export const ZebraVariant = () => (
-  <Table
-    aria-label="Eiendomsforvaltere med zebra-stripete rader"
-    variant="zebra-striped"
-  >
+  <Table aria-label="Eiendomsforvaltere med zebra-stripete rader" variant="zebra-striped">
     <TableHeader>
       <TableColumn>Navn</TableColumn>
       <TableColumn>E-post</TableColumn>
@@ -358,9 +352,7 @@ export const ExpandableRows = () => {
                 <TableCell>
                   <DisclosureButton
                     withChevron
-                    aria-controls={months
-                      .map((month) => `${year}-${month}`)
-                      .join(' ')}
+                    aria-controls={months.map((month) => `${year}-${month}`).join(' ')}
                     aria-expanded={expandedYears[year]}
                     aria-label={`Månedlige kostnader for ${year}`}
                     onPress={() =>

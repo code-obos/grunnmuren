@@ -25,12 +25,7 @@ type RadioGroupProps = {
   ref?: Ref<HTMLDivElement>;
 } & Omit<
   RACRadioGroupProps,
-  | 'className'
-  | 'isReadOnly'
-  | 'isDisabled'
-  | 'children'
-  | 'style'
-  | 'orientation'
+  'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style' | 'orientation'
 >;
 
 function RadioGroup(props: RadioGroupProps) {

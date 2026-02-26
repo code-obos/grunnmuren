@@ -1,8 +1,6 @@
 import { compose, cva, type VariantProps } from 'cva';
-import {
-  Link as _Link,
-  type LinkProps as _LinkProps,
-} from 'react-aria-components';
+import { Link as _Link, type LinkProps as _LinkProps } from 'react-aria-components';
+
 import { animateIconVariants } from '../classes';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
@@ -10,7 +8,7 @@ import { useLocale } from '../use-locale';
 const linkVariants = compose(
   animateIconVariants,
   cva({
-    base: 'inline-flex cursor-pointer items-center gap-1 font-medium hover:no-underline focus-visible:outline-current focus-visible:outline-focus-offset data-disabled:cursor-default data-disabled:font-normal data-disabled:no-underline',
+    base: 'focus-visible:outline-focus-offset inline-flex cursor-pointer items-center gap-1 font-medium hover:no-underline focus-visible:outline-current data-disabled:cursor-default data-disabled:font-normal data-disabled:no-underline',
   }),
 );
 
@@ -33,15 +31,9 @@ const Link = ({
   const externalLinkText = translations.externalLink[locale];
 
   return (
-    <_Link
-      {...props}
-      data-slot="link"
-      className={linkVariants({ className, animateIcon })}
-    >
+    <_Link {...props} data-slot="link" className={linkVariants({ className, animateIcon })}>
       {children}
-      {props.rel?.includes('external') && (
-        <span className="sr-only">{externalLinkText}</span>
-      )}
+      {props.rel?.includes('external') && <span className="sr-only">{externalLinkText}</span>}
       {iconRight}
     </_Link>
   );

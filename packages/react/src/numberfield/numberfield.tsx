@@ -48,12 +48,7 @@ type NumberFieldProps = {
   ref?: Ref<HTMLInputElement>;
 } & Omit<
   RACNumberFieldProps,
-  | 'className'
-  | 'isReadOnly'
-  | 'isDisabled'
-  | 'children'
-  | 'style'
-  | 'hideStepper'
+  'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style' | 'hideStepper'
 >;
 
 const inputVariants = compose(
@@ -94,11 +89,7 @@ function NumberField(props: NumberFieldProps) {
   const isInvalid = !!errorMessage || _isInvalid;
 
   return (
-    <RACNumberField
-      {...restProps}
-      className={cx(className, formField)}
-      isInvalid={isInvalid}
-    >
+    <RACNumberField {...restProps} className={cx(className, formField)} isInvalid={isInvalid}>
       {label && <Label>{label}</Label>}
       {description && <Description>{description}</Description>}
 
@@ -119,11 +110,7 @@ function NumberField(props: NumberFieldProps) {
           {rightAddon}
         </Group>
       ) : (
-        <Input
-          className={inputVariants({ textAlign, autoWidth: !!size })}
-          ref={ref}
-          size={size}
-        />
+        <Input className={inputVariants({ textAlign, autoWidth: !!size })} ref={ref} size={size} />
       )}
 
       <ErrorMessageOrFieldError errorMessage={errorMessage} />

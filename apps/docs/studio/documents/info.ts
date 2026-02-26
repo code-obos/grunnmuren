@@ -1,4 +1,5 @@
 import { defineType } from 'sanity';
+
 import { content, name, resourceLinks, slug } from '../fields';
 
 export default defineType({
