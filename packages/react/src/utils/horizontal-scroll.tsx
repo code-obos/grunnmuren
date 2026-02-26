@@ -29,8 +29,7 @@ export function ScrollButton({
   const Icon = direction === 'left' ? ChevronLeft : ChevronRight;
 
   return (
-    // biome-ignore lint/a11y/useKeyWithClickEvents: This button is only for mouse interaction to help users scroll. Keyboard and screen reader users can navigate the content directly without needing these scroll helpers.
-    // biome-ignore lint/a11y/noStaticElementInteractions: This button is only for mouse interaction to help users scroll. Keyboard and screen reader users can navigate the content directly without needing these scroll helpers.
+    // oxlint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
       onClick={onClick}
       className={cx(
@@ -109,8 +108,13 @@ export function useHorizontalScroll<E extends HTMLElement>(
     100,
   );
 
+  // The linter struggles here, so need to enable and disable to get it to pass...
+  // useEffect with a usecallback.....
+  // this feels wrong, but not touching this right now since we're just changing the lint setup
+  /* oxlint-disable react-hooks/exhaustive-deps */
   // Initial check and react to dependency changes
   useEffect(updateScrollState, [...scrollStateDeps]);
+  /* oxlint-enable react-hooks/exhaustive-deps */
 
   useEffect(() => {
     const container = scrollContainerRef.current;

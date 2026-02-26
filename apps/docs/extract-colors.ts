@@ -30,7 +30,10 @@ try {
   );
   console.log('\x1b[32m%s\x1b[0m', 'Successfully wrote colors to file!');
 } catch (error) {
-  console.error('\x1b[31m%s\x1b[0m', `\nSomething went wrong: ${error}`);
+  console.error(
+    '\x1b[31m%s\x1b[0m',
+    `\nSomething went wrong: ${error as Error}`,
+  );
 }
 
 console.log(`Done writing to "${outputPath}"...\n`);

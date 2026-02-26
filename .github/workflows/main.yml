@@ -42,8 +42,8 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: biome
-        run: pnpm lint:ci
+      - name: lint
+        run: pnpm lint && pnpm fmt:check
 
       - name: Build packages
         run: pnpm run build

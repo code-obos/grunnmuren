@@ -42,7 +42,7 @@ files.forEach(async (filePath) => {
 
   const prevFileSize = Buffer.byteLength(rawData, 'utf8');
 
-  const { data: optimizedData } = await optimize(rawData, {
+  const { data: optimizedData } = optimize(rawData, {
     path: filePath,
     multipass: true,
     ...config,

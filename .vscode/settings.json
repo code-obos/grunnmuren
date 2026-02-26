@@ -10,6 +10,8 @@
     "source.organizeImports.biome": "explicit"
   },
   "editor.formatOnSave": true,
+  "oxc.enable.oxfmt": false,
+  "oxc.unusedDisableDirectives": "deny",
   "[typescriptreact]": {
     "editor.defaultFormatter": "biomejs.biome"
   },

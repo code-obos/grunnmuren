@@ -82,6 +82,7 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
       {prefersReducedMotion !== null && (
         <button
           data-slot="video-loop-button"
+          // oxlint-disable-next-line jsx-a11y/no-aria-hidden-on-focusable
           aria-hidden
           type="button"
           onClick={() => setShouldPlay((prevState) => !prevState)}

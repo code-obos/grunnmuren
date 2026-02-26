@@ -59,13 +59,6 @@ export const Route = createFileRoute('/_docs/komponenter/$slug')({
 function Page() {
   const data = Route.useLoaderData();
 
-  const _ghLink = data.resourceLinks?.find(
-    (link) => link.linkType === 'github',
-  )?.url;
-  const _figmaLink = data.resourceLinks?.find(
-    (link) => link.linkType === 'figma',
-  )?.url;
-
   return (
     <>
       <h1 className="heading-l my-12">{data.name}</h1>

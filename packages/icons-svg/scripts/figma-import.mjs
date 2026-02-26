@@ -16,7 +16,7 @@ const NODE_ID = '30:2099';
 // Where we store the Figma token
 const FIGMA_TOKEN_PATH = path.join(__dirname, '../', '.FIGMA_TOKEN');
 
-(async function main() {
+void (async function main() {
   const spinner = ora(
     `Reading Figma access token from ${FIGMA_TOKEN_PATH}`,
   ).start();
@@ -175,7 +175,7 @@ function writeTokenToDisk(token) {
 }
 
 /**
- * @returns {String} token
+ * @returns {Promise<String>} token
  */
 async function readTokenFromDisk() {
   try {

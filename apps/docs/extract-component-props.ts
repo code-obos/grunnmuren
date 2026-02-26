@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+
 import { marked } from 'marked';
 import {
   type ParserOptions,
@@ -123,7 +124,10 @@ try {
   );
 } catch (error) {
   withoutError = false;
-  console.error('\x1b[31m%s\x1b[0m', `\nSomething went wrong: ${error}`);
+  console.error(
+    '\x1b[31m%s\x1b[0m',
+    `\nSomething went wrong: ${error as Error}`,
+  );
 }
 
 if (withoutError) {

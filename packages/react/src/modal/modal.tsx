@@ -23,7 +23,12 @@ const DialogTrigger = (props: DialogTriggerProps) => (
   <RACDialogTrigger {...props} />
 );
 
-type ModalOverlayProps = Omit<RACModalOverlayProps, 'isDismissable'> & {
+type ModalOverlayProps = Omit<
+  RACModalOverlayProps,
+  'isDismissable' | 'style'
+> & {
+  /** Additional style properties for the element. */
+  style?: React.CSSProperties;
   /** @default 10 Controls the z-index of the modal overlay */
   zIndex?: number;
   /** @default true Makes the modal dismissable */

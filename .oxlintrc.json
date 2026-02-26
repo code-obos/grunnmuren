@@ -1,0 +1,33 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "unicorn",
+    "typescript",
+    "oxc",
+    "import",
+    "vitest",
+    "react",
+    "react-perf",
+    "eslint",
+    "jsx-a11y",
+    "promise",
+    "node"
+  ],
+  "ignorePatterns": ["sanity.types.ts", "routeTree.gen.ts"],
+  "rules": {
+    "unicorn/filename-case": [
+      "error",
+      {
+        "case": "kebabCase"
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["**/*.stories.tsx"],
+      "rules": {
+        "jsx-a11y/anchor-is-valid": "off"
+      }
+    }
+  ]
+}
