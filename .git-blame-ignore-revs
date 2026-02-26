@@ -1,0 +1,4 @@
+# This file is used to ignore certain commits (e.g. formatting) in git blame
+
+# biome -> oxlint
+1d65aebf5b04443e1c2f936923693f4d1ba55c8b
