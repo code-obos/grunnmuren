@@ -66,10 +66,10 @@ const Template = (args: AccordionItemProps) => {
         <Content className="prose">
           <p>
             Ønsker du å overføre penger fra Boligspar Ung til en av dine andre
-            kontoer, er det en enkel sak.{' '}
-            <a href="#">Logg inn i nettbanken</a> og velg &quot;Uttak
-            Boligspar&quot; Ung i menyen. Slik som BSU, kan du ta ut det du har
-            spart inneværende år. Om du vil ta ut mer vil kontoen avsluttes.
+            kontoer, er det en enkel sak. <a href="#">Logg inn i nettbanken</a>{' '}
+            og velg &quot;Uttak Boligspar&quot; Ung i menyen. Slik som BSU, kan
+            du ta ut det du har spart inneværende år. Om du vil ta ut mer vil
+            kontoen avsluttes.
           </p>
         </Content>
       </AccordionItem>

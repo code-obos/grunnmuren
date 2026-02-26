@@ -19,30 +19,7 @@
     ]
   },
   "linter": {
-    "enabled": false,
-    "rules": {
-      "recommended": true,
-      "style": {
-        "useFilenamingConvention": {
-          "level": "error",
-          "options": {
-            "filenameCases": ["kebab-case"]
-          }
-        }
-      },
-      "nursery": {
-        "useSortedClasses": {
-          "level": "error",
-          "fix": "safe",
-          "options": {
-            "functions": ["cx", "cva"]
-          }
-        }
-      },
-      "correctness": {
-        "noUnusedImports": "error"
-      }
-    }
+    "enabled": false
   },
   "formatter": {
     "enabled": true,

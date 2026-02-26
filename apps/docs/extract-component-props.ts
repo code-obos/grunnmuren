@@ -1,7 +1,11 @@
 import fs from 'node:fs';
 
 import { marked } from 'marked';
-import { type ParserOptions, type PropItem, withDefaultConfig } from 'react-docgen-typescript';
+import {
+  type ParserOptions,
+  type PropItem,
+  withDefaultConfig,
+} from 'react-docgen-typescript';
 
 const ignoreParents = [
   'DOMProps',
@@ -49,7 +53,9 @@ const propFixes = withDefaultConfig({
 }).parse(['./re-exports-props.ts']);
 
 for (const componentToFix of Object.values(propFixes)) {
-  const toUpdate = components.find((c) => c.displayName === componentToFix.displayName);
+  const toUpdate = components.find(
+    (c) => c.displayName === componentToFix.displayName,
+  );
 
   if (toUpdate) {
     toUpdate.props = componentToFix.props;
@@ -71,7 +77,8 @@ for (const component of components) {
     if (parentName.endsWith('Props')) {
       const parentBaseName = parentName.replace('Props', '');
       const isMatchingParent =
-        parentName.includes(componentBaseName) || componentBaseName.includes(parentBaseName);
+        parentName.includes(componentBaseName) ||
+        componentBaseName.includes(parentBaseName);
 
       // If the parent doesn't match, use the description from the lookup
       if (!isMatchingParent) {
@@ -116,8 +123,11 @@ try {
       .join('\n'),
   );
 } catch (error) {
-    withoutError = false;
-    console.error('\x1b[31m%s\x1b[0m', `\nSomething went wrong: ${error as Error}`);
+  withoutError = false;
+  console.error(
+    '\x1b[31m%s\x1b[0m',
+    `\nSomething went wrong: ${error as Error}`,
+  );
 }
 
 if (withoutError) {
