@@ -15,8 +15,8 @@
     "ci:version": "changeset version",
     "dev": "storybook dev -p 6006 --ci --initial-path=/story/home--page",
     "dev:docs": "pnpm --filter @obosbbl/grunnmuren-docs dev",
-    "fmt": "pnpm biome format . --write",
-    "fmt:check": "pnpm biome format .",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
     "lint": "oxlint --deny-warnings",
     "lint:fix": "oxlint --fix",
     "serve-storybook": "http-server ./apps/docs/public/storybook -p 6006 --silent",
@@ -24,7 +24,6 @@
     "sanity:schema:deploy": "pnpm --filter @obosbbl/grunnmuren-docs sanity:schema:deploy"
   },
   "dependencies": {
-    "@biomejs/biome": "2.3.4",
     "@changesets/cli": "2.29.8",
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
     "@react-aria/optimize-locales-plugin": "1.1.5",

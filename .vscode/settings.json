@@ -3,35 +3,14 @@
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
     ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
   ],
-  "tailwindCSS.classFunctions": ["tw", "clsx", "cx", "cva"],
-  "editor.defaultFormatter": "biomejs.biome",
+  "tailwindCSS.classFunctions": ["cx", "cva"],
+  "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.codeActionsOnSave": {
-    "source.fixAll.biome": "explicit",
-    "source.organizeImports.biome": "explicit"
+    "source.organizeImports": "never", // let oxfmt handle import organization
+    "source.fixAll.oxc": "always"
   },
   "editor.formatOnSave": true,
-  "oxc.enable.oxfmt": false,
+  "editor.formatOnSaveMode": "file", // oxfmt can only format whole files
   "oxc.unusedDisableDirectives": "deny",
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[markdown]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
   "typescript.tsdk": "node_modules/typescript/lib"
 }
