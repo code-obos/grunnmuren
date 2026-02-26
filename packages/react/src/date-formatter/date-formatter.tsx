@@ -14,11 +14,7 @@ type DateFormatterProps = {
  * By default it sets the timeZone to `Europe/Berlin` to prevent the server's timezone from affecting
  * the localized format
  */
-const DateFormatter = ({
-  options: _options,
-  value,
-  children: render,
-}: DateFormatterProps) => {
+const DateFormatter = ({ options: _options, value, children: render }: DateFormatterProps) => {
   const options = {
     timeZone: 'Europe/Berlin',
     ..._options,

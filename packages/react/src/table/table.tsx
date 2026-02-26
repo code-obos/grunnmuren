@@ -1,11 +1,5 @@
 import { cva, cx } from 'cva';
-import {
-  createContext,
-  type RefAttributes,
-  useCallback,
-  useContext,
-  useState,
-} from 'react';
+import { createContext, type RefAttributes, useCallback, useContext, useState } from 'react';
 import {
   Provider,
   Cell as RACCell,
@@ -25,11 +19,8 @@ import {
   ResizableTableContainer,
   type ResizableTableContainerProps,
 } from 'react-aria-components';
-import {
-  ScrollButton,
-  type ScrollDirection,
-  useHorizontalScroll,
-} from '../utils';
+
+import { ScrollButton, type ScrollDirection, useHorizontalScroll } from '../utils';
 
 const tableVariants = cva({
   base: ['relative'],
@@ -61,16 +52,14 @@ type TableProps = Omit<RACTableProps, 'aria-label' | 'aria-labelledby'> &
     | { 'aria-label'?: never; 'aria-labelledby': string }
   );
 
-type TableHeaderProps = RACTableHeaderProps<object> &
-  RefAttributes<HTMLTableSectionElement>;
+type TableHeaderProps = RACTableHeaderProps<object> & RefAttributes<HTMLTableSectionElement>;
 
 type TableColumnProps = RACColumnProps &
   RefAttributes<HTMLTableCellElement> & {
     children: React.ReactNode;
   };
 
-type TableBodyProps = RACTableBodyProps<object> &
-  RefAttributes<HTMLTableSectionElement>;
+type TableBodyProps = RACTableBodyProps<object> & RefAttributes<HTMLTableSectionElement>;
 
 type TableRowProps = RACRowProps<object> & RefAttributes<HTMLTableRowElement>;
 
@@ -94,12 +83,8 @@ function Table(props: TableProps) {
 
   const { isResizing } = useContext(TableScrollContainerContext);
 
-  const {
-    scrollContainerRef,
-    canScrollLeft,
-    canScrollRight,
-    hasScrollingOccurred,
-  } = useHorizontalScroll<HTMLDivElement>([isResizing]);
+  const { scrollContainerRef, canScrollLeft, canScrollRight, hasScrollingOccurred } =
+    useHorizontalScroll<HTMLDivElement>([isResizing]);
 
   const handleScroll = useCallback(
     (direction: ScrollDirection) => {
@@ -122,11 +107,7 @@ function Table(props: TableProps) {
           className="scrollbar-hidden overflow-x-auto"
           style={{ WebkitOverflowScrolling: 'touch' }}
         >
-          <RACTable
-            {...restProps}
-            className="group w-full min-w-fit"
-            data-variant={variant}
-          >
+          <RACTable {...restProps} className="group w-full min-w-fit" data-variant={variant}>
             {children}
           </RACTable>
         </div>
@@ -154,10 +135,7 @@ function Table(props: TableProps) {
  */
 function TableHeader({ className, children, ...restProps }: TableHeaderProps) {
   return (
-    <RACTableHeader
-      {...restProps}
-      className={cx(className, 'border-black border-b')}
-    >
+    <RACTableHeader {...restProps} className={cx(className, 'border-b border-black')}>
       {children}
     </RACTableHeader>
   );
@@ -170,7 +148,7 @@ function TableColumn(props: TableColumnProps) {
       {...restProps}
       className={cx(
         className,
-        'px-4 py-3 text-left font-medium text-black text-sm',
+        'px-4 py-3 text-left text-sm font-medium text-black',
         'data-focus-visible:outline-focus-inset',
         '[&_:not([data-slot="table-column-resizer"]):focus-visible]:outline-focus-offset',
         'min-w-fit whitespace-nowrap',
@@ -185,10 +163,7 @@ function TableColumn(props: TableColumnProps) {
 
 type TableColumnResizerProps = RACColumnResizerProps;
 
-const TableColumnResizer = ({
-  className,
-  ...restProps
-}: TableColumnResizerProps) => (
+const TableColumnResizer = ({ className, ...restProps }: TableColumnResizerProps) => (
   <RACColumnResizer
     {...restProps}
     className={cx(
@@ -231,7 +206,7 @@ function TableCell(props: TableCellProps) {
       {...restProps}
       className={cx(
         className,
-        'px-4 py-3 text-black text-sm leading-relaxed',
+        'px-4 py-3 text-sm leading-relaxed text-black',
         'min-w-fit whitespace-nowrap',
         'align-top',
         'data-focus-visible:outline-focus-inset',
@@ -245,10 +220,7 @@ function TableCell(props: TableCellProps) {
 
 type TableContainerProps = ResizableTableContainerProps;
 
-const TableContainer = ({
-  className,
-  ...restProps
-}: ResizableTableContainerProps) => {
+const TableContainer = ({ className, ...restProps }: ResizableTableContainerProps) => {
   const [isResizing, setIsResizing] = useState(false);
   return (
     <Provider values={[[TableScrollContainerContext, { isResizing }]]}>

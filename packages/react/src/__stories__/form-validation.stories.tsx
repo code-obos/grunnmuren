@@ -1,6 +1,7 @@
 import type { Meta } from '@storybook/react-vite';
 import { type FormEvent, useState } from 'react';
 import { Form as RACForm } from 'react-aria-components';
+
 import { Button } from '../button/button';
 import { TextField } from '../textfield';
 
@@ -12,10 +13,7 @@ export default meta;
 
 const emailErrorMessage = 'Vennligst bruk en .no e-postadresse';
 
-const Form = (props: {
-  children: React.ReactNode;
-  serverValidate?: boolean;
-}) => {
+const Form = (props: { children: React.ReactNode; serverValidate?: boolean }) => {
   const [errors, setErrors] = useState({});
   const [isPending, setIsPending] = useState(false);
 
@@ -83,9 +81,8 @@ export const NativeValidation = () => {
   return (
     <Form>
       <p>
-        Dette eksemplet bruker kun browserens native validering av skjemaet. Det
-        er dermed mulig å sende inn skjemaet uten at e-postadressen slutter på
-        .no
+        Dette eksemplet bruker kun browserens native validering av skjemaet. Det er dermed mulig å
+        sende inn skjemaet uten at e-postadressen slutter på .no
       </p>
       <TextField {...nameProps} />
       <TextField {...emailProps} />
@@ -97,10 +94,9 @@ export const RealtimeValidation = () => {
   return (
     <Form>
       <p>
-        Dette eksemplet bruker <code>validate</code> prop-en på skjemaelementene
-        for å implementere realtime validering av skjemaet på klienten. Dette er
-        nyttig for å legge til ekstra validering, selv om skjemaet er{' '}
-        <em>uncontrolled</em>.
+        Dette eksemplet bruker <code>validate</code> prop-en på skjemaelementene for å implementere
+        realtime validering av skjemaet på klienten. Dette er nyttig for å legge til ekstra
+        validering, selv om skjemaet er <em>uncontrolled</em>.
       </p>
       <TextField {...nameProps} />
       <TextField
@@ -115,12 +111,11 @@ export const ServerSideValidation = () => {
   return (
     <Form serverValidate>
       <p>
-        Dette eksemplet bruker <code>validationErrors</code> prop-en på selve
-        skjemaet for å gjøre serverside validering av skjemadatene.
-        Skjemainnsendinger burde alltid valideres på serveren, og det lar oss
-        flytte mye av kompleksiteten til serveren i stedet for klienten, for
-        eksempel dersom vi ønsker å bruke zod for å validere skjemadataene. Kan
-        for eksempel integereres med React server actions.
+        Dette eksemplet bruker <code>validationErrors</code> prop-en på selve skjemaet for å gjøre
+        serverside validering av skjemadatene. Skjemainnsendinger burde alltid valideres på
+        serveren, og det lar oss flytte mye av kompleksiteten til serveren i stedet for klienten,
+        for eksempel dersom vi ønsker å bruke zod for å validere skjemadataene. Kan for eksempel
+        integereres med React server actions.
       </p>
       <TextField {...nameProps} />
       <TextField {...emailProps} />
@@ -145,9 +140,8 @@ export const ControlledValidation = () => {
   return (
     <Form>
       <p>
-        Dette eksemplet bruker <code>errorMesssage</code> prop-en på
-        skjemaelementene for å vise feilmeldinger og er nyttig for skjemaer som
-        er såkalt <em>controlled</em>.
+        Dette eksemplet bruker <code>errorMesssage</code> prop-en på skjemaelementene for å vise
+        feilmeldinger og er nyttig for skjemaer som er såkalt <em>controlled</em>.
       </p>
       <TextField
         {...nameProps}

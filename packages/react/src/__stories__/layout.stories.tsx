@@ -1,5 +1,6 @@
 import { ArrowRight } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta } from '@storybook/react-vite';
+
 import { Card, CardLink } from '../card';
 import { Content, Heading, Media } from '../content';
 import { UNSAFE_Hero as Hero } from '../hero';
@@ -18,8 +19,8 @@ export const GridContainer = () => (
           Jobb i OBOS
         </Heading>
         <p className="lead">
-          Bli med å oppfylle boligdrømmer! Vi søker engasjerte og dyktige
-          personer som vil ta OBOS videre. Søk på våre ledige stillinger!
+          Bli med å oppfylle boligdrømmer! Vi søker engasjerte og dyktige personer som vil ta OBOS
+          videre. Søk på våre ledige stillinger!
         </p>
       </Content>
       <Media>
@@ -59,9 +60,7 @@ export const GridContainerWithSubGrids = () => (
           <Heading level={2}>
             <CardLink href="/bli-bankkunde">Bank</CardLink>
           </Heading>
-          <p>
-            OBOS Bank tilbyr konkurransedyktige rente på boliglån og sparekonto!
-          </p>
+          <p>OBOS Bank tilbyr konkurransedyktige rente på boliglån og sparekonto!</p>
         </Content>
         <ArrowRight className="transition-transform group-hover/card:motion-safe:translate-x-1" />
       </Card>
@@ -70,10 +69,7 @@ export const GridContainerWithSubGrids = () => (
           <Heading level={2}>
             <CardLink href="/medlem-i-obos">Forkjøp</CardLink>
           </Heading>
-          <p>
-            Som medlem i OBOS har du forkjøpsrett på tusenvis av boliger hvert
-            år!
-          </p>
+          <p>Som medlem i OBOS har du forkjøpsrett på tusenvis av boliger hvert år!</p>
         </Content>
         <ArrowRight className="transition-transform group-hover/card:motion-safe:translate-x-1" />
       </Card>

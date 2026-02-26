@@ -30,14 +30,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Sandbox = () => {
-  const colors = [
-    'mint',
-    'sky',
-    'blue-dark',
-    'green-dark',
-    'gray-dark',
-    'white',
-  ] as const;
+  const colors = ['mint', 'sky', 'blue-dark', 'green-dark', 'gray-dark', 'white'] as const;
 
   return colors.map((color) => (
     <Fragment key={color}>
@@ -58,14 +51,7 @@ export const Sandbox = () => {
 };
 
 export const WithIcon = () => {
-  const colors = [
-    'mint',
-    'sky',
-    'blue-dark',
-    'green-dark',
-    'gray-dark',
-    'white',
-  ] as const;
+  const colors = ['mint', 'sky', 'blue-dark', 'green-dark', 'gray-dark', 'white'] as const;
 
   return colors.map((color) => (
     <Fragment key={color}>

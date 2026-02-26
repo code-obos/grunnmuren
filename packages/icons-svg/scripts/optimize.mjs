@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
 import path from 'node:path';
+
 import fs from 'fs-extra';
 import pc from 'picocolors';
 import { optimize } from 'svgo';
+
 import { __dirname, listSvgs } from './utils.mjs';
 
 const DIST_DIR = path.join(__dirname, '../src');

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+
 import {
   UNSAFE_Tab as Tab,
   UNSAFE_TabList as TabList,
@@ -43,41 +44,38 @@ export const Default: Story = {
         <Tab id="hytte">Hytte</Tab>
       </TabList>
       <TabPanel id="leilighet">
-        <h3 className="mb-4 font-semibold text-lg">Leilighet</h3>
+        <h3 className="mb-4 text-lg font-semibold">Leilighet</h3>
         <p>
-          Leiligheter er den mest populære boligtypen blant våre medlemmer. Vi
-          tilbyr alt fra små 1-roms til store familieboligter i attraktive
-          områder rundt om i landet.
+          Leiligheter er den mest populære boligtypen blant våre medlemmer. Vi tilbyr alt fra små
+          1-roms til store familieboligter i attraktive områder rundt om i landet.
         </p>
       </TabPanel>
       <TabPanel id="rekkehus">
-        <h3 className="mb-4 font-semibold text-lg">Rekkehus</h3>
+        <h3 className="mb-4 text-lg font-semibold">Rekkehus</h3>
         <p>
-          Rekkehus gir deg det beste fra to verdener - egen uteplass og hage,
-          samtidig som du slipper alt vedlikeholdet som følger med en enebolig.
-          Perfekt for barnefamilier.
+          Rekkehus gir deg det beste fra to verdener - egen uteplass og hage, samtidig som du
+          slipper alt vedlikeholdet som følger med en enebolig. Perfekt for barnefamilier.
         </p>
       </TabPanel>
       <TabPanel id="enebolig">
-        <h3 className="mb-4 font-semibold text-lg">Enebolig</h3>
+        <h3 className="mb-4 text-lg font-semibold">Enebolig</h3>
         <p>
-          Drømmer du om egen enebolig med stor hage? Vi har flotte eneboliger i
-          rolige strøk, både nybygg og etablerte hus i gode bomiljø.
+          Drømmer du om egen enebolig med stor hage? Vi har flotte eneboliger i rolige strøk, både
+          nybygg og etablerte hus i gode bomiljø.
         </p>
       </TabPanel>
       <TabPanel id="villa">
-        <h3 className="mb-4 font-semibold text-lg">Villa</h3>
+        <h3 className="mb-4 text-lg font-semibold">Villa</h3>
         <p>
-          Våre villaer kombinerer stil og komfort med moderne løsninger. Her får
-          du romslige boliger med høy standard og gode kvaliteter.
+          Våre villaer kombinerer stil og komfort med moderne løsninger. Her får du romslige boliger
+          med høy standard og gode kvaliteter.
         </p>
       </TabPanel>
       <TabPanel id="hytte">
-        <h3 className="mb-4 font-semibold text-lg">Hytte</h3>
+        <h3 className="mb-4 text-lg font-semibold">Hytte</h3>
         <p>
-          Våre hytter ligger i naturskjønne omgivelser og tilbyr en perfekt
-          tilflukt fra hverdagens stress. Her kan du nyte roen og stillheten i
-          vakre omgivelser.
+          Våre hytter ligger i naturskjønne omgivelser og tilbyr en perfekt tilflukt fra hverdagens
+          stress. Her kan du nyte roen og stillheten i vakre omgivelser.
         </p>
       </TabPanel>
     </Tabs>
@@ -97,24 +95,24 @@ export const WithDefaultSelection: Story = {
         <Tab id="finansiering">Finansiering</Tab>
       </TabList>
       <TabPanel id="grunnpris">
-        <h3 className="mb-4 font-semibold text-lg">Grunnpris</h3>
+        <h3 className="mb-4 text-lg font-semibold">Grunnpris</h3>
         <p>
-          Grunnprisen inkluderer alle standardspesifikasjoner som er definert
-          for boligen. Dette omfatter kjøkken, bad, gulv og andre grunnutstyr.
+          Grunnprisen inkluderer alle standardspesifikasjoner som er definert for boligen. Dette
+          omfatter kjøkken, bad, gulv og andre grunnutstyr.
         </p>
       </TabPanel>
       <TabPanel id="tilvalg">
-        <h3 className="mb-4 font-semibold text-lg">Tilvalg</h3>
+        <h3 className="mb-4 text-lg font-semibold">Tilvalg</h3>
         <p>
-          Her kan du velge oppgraderinger som hvitevarer, gulvtyper, fliser og
-          andre tilpasningsmuligheter for å skape ditt drømmehjem.
+          Her kan du velge oppgraderinger som hvitevarer, gulvtyper, fliser og andre
+          tilpasningsmuligheter for å skape ditt drømmehjem.
         </p>
       </TabPanel>
       <TabPanel id="finansiering">
-        <h3 className="mb-4 font-semibold text-lg">Finansiering</h3>
+        <h3 className="mb-4 text-lg font-semibold">Finansiering</h3>
         <p>
-          OBOS Bank tilbyr konkurransedyktige boliglån med gunstige vilkår for
-          våre medlemmer. Få hjelp til å finansiere ditt boligkjøp.
+          OBOS Bank tilbyr konkurransedyktige boliglån med gunstige vilkår for våre medlemmer. Få
+          hjelp til å finansiere ditt boligkjøp.
         </p>
       </TabPanel>
     </Tabs>
@@ -132,44 +130,42 @@ export const WithVerticalOrientation: Story = {
         <Tab id="tromsø">Tromsø</Tab>
       </TabList>
       <TabPanel id="oslo">
-        <h3 className="mb-4 font-semibold text-lg">Oslo</h3>
+        <h3 className="mb-4 text-lg font-semibold">Oslo</h3>
         <p>
-          Opplev hovedstadens pulserende byliv med moderne leiligheter i
-          sentrale strøk. Fra trendy Grünerløkka til elegante Frogner - finn
-          ditt urbane hjem midt i kulturens og næringslivets hjerte.
+          Opplev hovedstadens pulserende byliv med moderne leiligheter i sentrale strøk. Fra trendy
+          Grünerløkka til elegante Frogner - finn ditt urbane hjem midt i kulturens og næringslivets
+          hjerte.
         </p>
       </TabPanel>
       <TabPanel id="bergen">
-        <h3 className="mb-4 font-semibold text-lg">Bergen</h3>
+        <h3 className="mb-4 text-lg font-semibold">Bergen</h3>
         <p>
-          Mellom de syv fjell finner du sjarmerende boliger med unik karakter.
-          Våre bergenske hjem kombinerer historisk sjel med moderne komfort,
-          omgitt av spektakulær natur og vestlandsk hygge.
+          Mellom de syv fjell finner du sjarmerende boliger med unik karakter. Våre bergenske hjem
+          kombinerer historisk sjel med moderne komfort, omgitt av spektakulær natur og vestlandsk
+          hygge.
         </p>
       </TabPanel>
       <TabPanel id="trondheim">
-        <h3 className="mb-4 font-semibold text-lg">Trondheim</h3>
+        <h3 className="mb-4 text-lg font-semibold">Trondheim</h3>
         <p>
-          Studentbyen ved Nidelva byr på rike tradisjoner og innovativ
-          arkitektur. Våre boliger ligger perfekt plassert for å nyte både byens
-          akademiske atmosfære og den vakre trondheimsfjorden.
+          Studentbyen ved Nidelva byr på rike tradisjoner og innovativ arkitektur. Våre boliger
+          ligger perfekt plassert for å nyte både byens akademiske atmosfære og den vakre
+          trondheimsfjorden.
         </p>
       </TabPanel>
       <TabPanel id="stavanger">
-        <h3 className="mb-4 font-semibold text-lg">Stavanger</h3>
+        <h3 className="mb-4 text-lg font-semibold">Stavanger</h3>
         <p>
-          Energihovedstaden kombinerer internasjonalt miljø med norsk
-          kystkultur. Utforsk våre boliger fra den pittoreske gamlebyen til
-          moderne boligområder med kort vei til både jobb og fantastiske
-          strender.
+          Energihovedstaden kombinerer internasjonalt miljø med norsk kystkultur. Utforsk våre
+          boliger fra den pittoreske gamlebyen til moderne boligområder med kort vei til både jobb
+          og fantastiske strender.
         </p>
       </TabPanel>
       <TabPanel id="tromsø">
-        <h3 className="mb-4 font-semibold text-lg">Tromsø</h3>
+        <h3 className="mb-4 text-lg font-semibold">Tromsø</h3>
         <p>
-          Under nordlyset og midnattssola ligger vår nordligste storby. Her
-          tilbyr vi unike boliger med arktisk sjarm, hvor du kan nyte
-          spektakulær natur og en livlig kulturscene året rundt.
+          Under nordlyset og midnattssola ligger vår nordligste storby. Her tilbyr vi unike boliger
+          med arktisk sjarm, hvor du kan nyte spektakulær natur og en livlig kulturscene året rundt.
         </p>
       </TabPanel>
     </Tabs>

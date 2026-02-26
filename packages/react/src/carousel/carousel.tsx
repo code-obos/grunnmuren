@@ -18,6 +18,7 @@ import {
   useState,
 } from 'react';
 import { DEFAULT_SLOT, Provider } from 'react-aria-components';
+
 import { Button, ButtonContext, type ButtonProps } from '../button';
 import { MediaContext } from '../content';
 import { UNSAFE_HeroContext as HeroContext } from '../hero';
@@ -25,10 +26,7 @@ import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 import { usePrefersReducedMotion } from '../use-prefers-reduced-motion';
 
-type CarouselProps = Omit<
-  HTMLProps<HTMLDivElement>,
-  'onChange' | 'onSelect'
-> & {
+type CarouselProps = Omit<HTMLProps<HTMLDivElement>, 'onChange' | 'onSelect'> & {
   children?: React.ReactNode;
   /**
    * Alignment of the items relative to the carousel viewport.
@@ -67,9 +65,7 @@ type CarouselProps = Omit<
   scrollGestures?: boolean;
 };
 
-type EmblaEventHandler = Parameters<
-  NonNullable<UseEmblaCarouselType[1]>['on']
->[1];
+type EmblaEventHandler = Parameters<NonNullable<UseEmblaCarouselType[1]>['on']>[1];
 
 /**
  * A helper to get the prev/next button from the carousel DOM
@@ -77,18 +73,14 @@ type EmblaEventHandler = Parameters<
  * @param slot The slot of the button to get ('prev' or 'next')
  * @returns The button element, or undefined if not found
  */
-const getCarouselButton = (
-  ref: React.RefObject<HTMLDivElement | null>,
-  slot: 'prev' | 'next',
-) => ref.current?.querySelector<HTMLButtonElement>(`button[slot="${slot}"]`);
+const getCarouselButton = (ref: React.RefObject<HTMLDivElement | null>, slot: 'prev' | 'next') =>
+  ref.current?.querySelector<HTMLButtonElement>(`button[slot="${slot}"]`);
 
 /**
  * Focus the first focusable element in the currently snapped slide
  * @param emblaApi The embla carousel API instance
  */
-const focusElementInSnappedSlide = (
-  emblaApi: UseEmblaCarouselType[1] | undefined,
-) => {
+const focusElementInSnappedSlide = (emblaApi: UseEmblaCarouselType[1] | undefined) => {
   if (!emblaApi) {
     return;
   }
@@ -345,11 +337,7 @@ type CarouselItemsContainer = HTMLProps<HTMLDivElement> & {
   children: React.ReactNode;
 };
 
-const CarouselItemsContainer = ({
-  children,
-  className,
-  ...rest
-}: CarouselItemsContainer) => {
+const CarouselItemsContainer = ({ children, className, ...rest }: CarouselItemsContainer) => {
   const { '~emblaRef': emblaRef } = useContext(CarouselContext);
 
   return (
@@ -374,11 +362,7 @@ const CarouselItems = ({ className, children }: CarouselItemsProps) => {
 
   return (
     <div
-      className={cx(
-        className,
-        'flex',
-        orientation === 'vertical' && 'flex-col',
-      )}
+      className={cx(className, 'flex', orientation === 'vertical' && 'flex-col')}
       data-slot="carousel-items"
     >
       {children}
@@ -395,11 +379,7 @@ type CarouselControlsProps = HTMLProps<HTMLDivElement> & {
  * This is internal for now, but we will expose it in the future when we support more flexible positioning of prev/next and other actions.
  * It is used to render the prev/next buttons in the carousel for now.
  */
-const CarouselControls = ({
-  children,
-  className,
-  ...rest
-}: CarouselControlsProps) => (
+const CarouselControls = ({ children, className, ...rest }: CarouselControlsProps) => (
   <div
     className={cx(className, 'flex justify-end gap-x-2')}
     data-slot="carousel-controls"
@@ -437,7 +417,7 @@ const carouselButtonIconSlotVariants = cva({
     {
       slot: 'prev',
       orientation: 'horizontal',
-      className: 'group-hover:motion-safe:-translate-x-1 rotate-180',
+      className: 'rotate-180 group-hover:motion-safe:-translate-x-1',
     },
     // vertical controls
     {
@@ -448,7 +428,7 @@ const carouselButtonIconSlotVariants = cva({
     {
       slot: 'prev',
       orientation: 'vertical',
-      className: 'group-hover:motion-safe:-translate-y-1 -rotate-90',
+      className: '-rotate-90 group-hover:motion-safe:-translate-y-1',
     },
   ],
 });
@@ -457,12 +437,7 @@ type CarouselButtonProps = ButtonProps & {
   slot: 'next' | 'prev';
 };
 
-const CarouselButton = ({
-  className,
-  isIconOnly = true,
-  slot,
-  ...rest
-}: CarouselButtonProps) => {
+const CarouselButton = ({ className, isIconOnly = true, slot, ...rest }: CarouselButtonProps) => {
   const { orientation } = useContext(CarouselContext);
   return (
     <Button
@@ -471,9 +446,7 @@ const CarouselButton = ({
       slot={slot}
       {...rest}
     >
-      <ChevronRight
-        className={carouselButtonIconSlotVariants({ orientation, slot })}
-      />
+      <ChevronRight className={carouselButtonIconSlotVariants({ orientation, slot })} />
     </Button>
   );
 };

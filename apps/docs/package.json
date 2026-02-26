@@ -14,12 +14,12 @@
     "build:tsc": "tsc",
     "dev": "vite dev --port 3003",
     "dev:local-storybook": "VITE_STORYBOOK_BASE_URL=http://localhost:6006 pnpm dev",
-    "start": "node .output/server/index.mjs",
-    "sanity:schema:deploy": "sanity schema deploy",
     "sanity:extract": "sanity manifest extract --path public/studio/static",
+    "sanity:schema:deploy": "sanity schema deploy",
     "sanity:typegen": "pnpm sanity:typegen:extract && pnpm sanity:typegen:generate",
     "sanity:typegen:extract": "sanity schema extract",
-    "sanity:typegen:generate": "sanity typegen generate"
+    "sanity:typegen:generate": "sanity typegen generate",
+    "start": "node .output/server/index.mjs"
   },
   "dependencies": {
     "@code-obos/sanity-auth": "1.4.4",

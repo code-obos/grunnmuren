@@ -43,10 +43,7 @@ type ComboboxProps<T extends object> = {
   style?: React.CSSProperties;
   /** Ref for the input element. */
   ref?: Ref<HTMLInputElement>;
-} & Omit<
-  RACComboboxProps<T>,
-  'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style'
->;
+} & Omit<RACComboboxProps<T>, 'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style'>;
 
 function Combobox<T extends object>(props: ComboboxProps<T>) {
   const {
@@ -66,11 +63,7 @@ function Combobox<T extends object>(props: ComboboxProps<T>) {
   const isInvalid = !!errorMessage || _isInvalid;
 
   return (
-    <RACCombobox
-      {...restProps}
-      className={cx(className, formField)}
-      isInvalid={isInvalid}
-    >
+    <RACCombobox {...restProps} className={cx(className, formField)} isInvalid={isInvalid}>
       {label && <Label>{label}</Label>}
       {description && <Description>{description}</Description>}
 
@@ -92,10 +85,7 @@ function Combobox<T extends object>(props: ComboboxProps<T>) {
         // Also... the combobox border gets a pixel wider when focused, so we account for that as well when calculating the width
         // and the offset.
         // The input gutter should probably be moved to a theme variable instead of using the hardcoded value as here.
-        className={cx(
-          dropdown.popover,
-          'min-w-[calc(var(--trigger-width)+26px)]',
-        )}
+        className={cx(dropdown.popover, 'min-w-[calc(var(--trigger-width)+26px)]')}
         crossOffset={-13}
       >
         <ListBox className={dropdown.listbox}>{children}</ListBox>

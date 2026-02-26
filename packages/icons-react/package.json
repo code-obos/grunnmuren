@@ -2,19 +2,19 @@
   "name": "@obosbbl/grunnmuren-icons-react",
   "version": "2.1.2",
   "description": "Grunnmuren's icon set as React components",
+  "license": "MIT",
   "repository": {
     "url": "https://github.com/code-obos/grunnmuren"
-  },
-  "license": "MIT",
-  "sideEffects": false,
-  "type": "module",
-  "exports": {
-    "types": "./dist/index.d.mts",
-    "default": "./dist/index.mjs"
   },
   "files": [
     "dist"
   ],
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    "types": "./dist/index.d.mts",
+    "default": "./dist/index.mjs"
+  },
   "scripts": {
     "build": "pnpm run build:make-react && pnpm run build:bundle",
     "build:bundle": "bunchee",

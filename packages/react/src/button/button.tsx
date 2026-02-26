@@ -10,6 +10,7 @@ import {
   type LinkProps as RACLinkProps,
   useContextProps,
 } from 'react-aria-components';
+
 import { animateIconVariants } from '../classes';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
@@ -22,7 +23,7 @@ const buttonVariants = compose(
   animateIconVariants,
   cva({
     base: [
-      'inline-flex min-h-[44px] cursor-pointer items-center justify-center whitespace-nowrap rounded-lg font-medium transition-colors duration-200 focus-visible:outline-focus-offset',
+      'focus-visible:outline-focus-offset inline-flex min-h-[44px] cursor-pointer items-center justify-center rounded-lg font-medium whitespace-nowrap transition-colors duration-200',
     ],
     variants: {
       /**
@@ -32,8 +33,7 @@ const buttonVariants = compose(
       variant: {
         primary: 'no-underline',
         // by using an inset box-shadow to emulate a border instead of an actual border, the button size will be equal regardless of the variant
-        secondary:
-          'border-2 border-current no-underline hover:border-transparent',
+        secondary: 'border-2 border-current no-underline hover:border-transparent',
         tertiary: 'underline hover:no-underline',
       },
       /**
@@ -62,13 +62,13 @@ const buttonVariants = compose(
         variant: 'primary',
         // Darken bg by 20% on hover. The color is manually crafted
         className:
-          'bg-blue-dark text-white hover:bg-blue active:bg-[#0536A0] active:text-white [&_[role="progressbar"]]:text-white',
+          'bg-blue-dark hover:bg-blue text-white active:bg-[#0536A0] active:text-white [&_[role="progressbar"]]:text-white',
       },
       {
         color: 'blue',
         variant: 'secondary',
         className:
-          'text-blue-dark hover:border-transparent hover:bg-blue hover:text-blue-dark hover:text-white active:bg-[#0536A0] [&:hover_[role="progressbar"]]:text-white [&_[role="progressbar"]]:text-blue-dark',
+          'text-blue-dark hover:bg-blue hover:text-blue-dark [&_[role="progressbar"]]:text-blue-dark hover:border-transparent hover:text-white active:bg-[#0536A0] [&:hover_[role="progressbar"]]:text-white',
       },
       {
         color: 'blue',
@@ -80,13 +80,13 @@ const buttonVariants = compose(
         variant: 'primary',
         // Darken bg by 20% on hover. The color is manually crafted
         className:
-          'bg-mint text-black hover:bg-[#8dd4bd] active:[#9ddac6] [&_[role="progressbar"]]:text-black',
+          'bg-mint active:[#9ddac6] text-black hover:bg-[#8dd4bd] [&_[role="progressbar"]]:text-black',
       },
       {
         color: 'mint',
         variant: 'secondary',
         className:
-          'text-mint hover:bg-mint hover:text-black [&:hover_[role="progressbar"]]:text-black [&_[role="progressbar"]]:text-mint',
+          'text-mint hover:bg-mint [&_[role="progressbar"]]:text-mint hover:text-black [&:hover_[role="progressbar"]]:text-black',
       },
       {
         color: 'mint',
@@ -97,13 +97,13 @@ const buttonVariants = compose(
         color: 'white',
         variant: 'primary',
         className:
-          'bg-white text-black hover:bg-sky active:bg-sky-light [&_[role="progressbar"]]:text-black',
+          'hover:bg-sky active:bg-sky-light bg-white text-black [&_[role="progressbar"]]:text-black',
       },
       {
         color: 'white',
         variant: 'secondary',
         className:
-          'text-white hover:bg-white hover:text-black [&:hover_[role="progressbar"]]:text-black [&_[role="progressbar"]]:text-white',
+          'text-white hover:bg-white hover:text-black [&_[role="progressbar"]]:text-white [&:hover_[role="progressbar"]]:text-black',
       },
       {
         color: 'white',
@@ -135,9 +135,7 @@ const ButtonContext = createContext<
   ContextValue<ButtonProps, HTMLButtonElement | HTMLAnchorElement>
 >({});
 
-function isLinkProps(
-  props: ButtonProps,
-): props is ButtonOrLinkProps & RACLinkProps {
+function isLinkProps(props: ButtonProps): props is ButtonOrLinkProps & RACLinkProps {
   return !!props.href;
 }
 
@@ -173,10 +171,7 @@ function Button({ ref = null, ...props }: ButtonProps) {
   const children = isPending ? (
     <>
       {_children}
-      <LoadingSpinner
-        className="absolute m-auto motion-safe:animate-spin"
-        {...progressBarProps}
-      />
+      <LoadingSpinner className="absolute m-auto motion-safe:animate-spin" {...progressBarProps} />
     </>
   ) : (
     _children

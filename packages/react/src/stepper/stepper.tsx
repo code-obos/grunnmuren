@@ -1,7 +1,5 @@
 import { Check, Edit } from '@obosbbl/grunnmuren-icons-react';
-import useEmblaCarousel, {
-  type UseEmblaCarouselType,
-} from 'embla-carousel-react';
+import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react';
 import {
   Children,
   cloneElement,
@@ -15,6 +13,7 @@ import {
   useState,
 } from 'react';
 import { LinkContext, Provider } from 'react-aria-components';
+
 import { UNSAFE_ProgressBar as ProgressBar } from '../progress-bar';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
@@ -34,12 +33,7 @@ const StepperContext = createContext<{
   stepsCount: number;
 }>({ activeStep: 0, stepsCount: 0 });
 
-const Stepper = ({
-  children,
-  activeStep,
-  onStepChange,
-  ...restProps
-}: StepperProps) => {
+const Stepper = ({ children, activeStep, onStepChange, ...restProps }: StepperProps) => {
   const locale = useLocale();
   const stepsCount = Children.count(children);
 
@@ -55,9 +49,7 @@ const Stepper = ({
   return (
     <div {...restProps} data-slot="stepper-container" ref={emblaRef}>
       <ol aria-label={translations.stepper[locale]} data-slot="stepper">
-        <StepperContext.Provider
-          value={{ onStepChange, activeStep, stepsCount }}
-        >
+        <StepperContext.Provider value={{ onStepChange, activeStep, stepsCount }}>
           {Children.map(children, (child, index) => {
             return (
               isValidElement<StepProps>(child) &&
@@ -73,11 +65,7 @@ const Stepper = ({
   );
 };
 
-const MobileScrollButtons = ({
-  emblaApi,
-}: {
-  emblaApi: UseEmblaCarouselType[1];
-}) => {
+const MobileScrollButtons = ({ emblaApi }: { emblaApi: UseEmblaCarouselType[1] }) => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
 
@@ -151,8 +139,7 @@ const Step = ({
   const isLastStep = stepIndex === stepsCount - 1;
   const isCurrent = stepIndex === activeStep;
 
-  const iconText =
-    state === 'completed' ? translations.completed[locale] : undefined;
+  const iconText = state === 'completed' ? translations.completed[locale] : undefined;
 
   const icon = isCurrent ? (
     <Edit aria-label={iconText} />

@@ -1,6 +1,7 @@
 import type { Meta } from '@storybook/react-vite';
 import { cx } from 'cva';
 import { useState } from 'react';
+
 import { Button } from '../button';
 import { Label } from '../label';
 import {
@@ -72,10 +73,7 @@ export const WithValueText = (args: ProgressBarProps) => {
   );
 };
 
-export const WithValueTextRight = ({
-  className,
-  ...args
-}: ProgressBarProps) => {
+export const WithValueTextRight = ({ className, ...args }: ProgressBarProps) => {
   return (
     <ProgressBar value={50} {...args} className={cx(className, 'text-right')}>
       <Label>Laster:</Label>
@@ -94,9 +92,7 @@ export const Interactive = () => {
       </ProgressBar>
       <div className="flex gap-2">
         <Button onPress={() => setValue(Math.max(0, value - 10))}>- 10%</Button>
-        <Button onPress={() => setValue(Math.min(100, value + 10))}>
-          + 10%
-        </Button>
+        <Button onPress={() => setValue(Math.min(100, value + 10))}>+ 10%</Button>
         <Button onPress={() => setValue(0)} variant="secondary">
           Nullstill
         </Button>

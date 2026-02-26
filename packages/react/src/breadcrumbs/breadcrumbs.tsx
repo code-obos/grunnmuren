@@ -4,6 +4,7 @@ import {
   Breadcrumbs as RACBreadcrumbs,
   type BreadcrumbsProps as RACBreadcrumbsProps,
 } from 'react-aria-components';
+
 import type { BreadcrumbProps } from './breadcrumb';
 
 type BreadcrumbsProps = {
@@ -20,10 +21,7 @@ function Breadcrumbs(props: BreadcrumbsProps) {
   const { className, children, ...restProps } = props;
 
   return (
-    <RACBreadcrumbs
-      {...restProps}
-      className={cx(className, 'flex flex-wrap text-sm leading-6')}
-    >
+    <RACBreadcrumbs {...restProps} className={cx(className, 'flex flex-wrap text-sm leading-6')}>
       {children}
     </RACBreadcrumbs>
   );

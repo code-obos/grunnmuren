@@ -43,18 +43,11 @@ const ControlledTemplate = (args: TextFieldProps) => {
 };
 
 const LeftAddonTemplate = (args: TextFieldProps) => {
-  return (
-    <TextField {...args} leftAddon={<Mail className="pointer-events-none" />} />
-  );
+  return <TextField {...args} leftAddon={<Mail className="pointer-events-none" />} />;
 };
 
 const RightAddonTemplate = (args: TextFieldProps) => {
-  return (
-    <TextField
-      {...args}
-      rightAddon={<Mail className="pointer-events-none" />}
-    />
-  );
+  return <TextField {...args} rightAddon={<Mail className="pointer-events-none" />} />;
 };
 
 const InputTypesTemplate = (args: TextFieldProps) => {

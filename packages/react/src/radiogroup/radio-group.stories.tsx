@@ -125,8 +125,7 @@ export const WithDescription: Story = {
 
   args: {
     ...defaultProps,
-    description:
-      'Kontakt oss for mer utfyllende informasjon om de forskjellige alternativene',
+    description: 'Kontakt oss for mer utfyllende informasjon om de forskjellige alternativene',
   },
 };
 

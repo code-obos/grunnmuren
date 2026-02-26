@@ -85,14 +85,14 @@
   color: var(--tw-prose-body);
   max-width: 696px;
 
-  :not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  :not(:where([class~='not-prose'], [class~='not-prose'] *)) {
     &:where(p) {
       @apply text-[1rem]/[1.625rem];
       margin-top: 1.25em;
       margin-bottom: 1.25em;
     }
 
-    &:where([class~="lead"]) {
+    &:where([class~='lead']) {
       @apply font-medium text-[1.4375rem]/[2.25rem] lg:text-[1.625rem]/[2.5625rem];
       margin-top: 1.2em;
       margin-bottom: 1.2em;
@@ -129,39 +129,39 @@
       padding-left: 1.625em;
     }
 
-    &:where(ol[type="A"]) {
+    &:where(ol[type='A']) {
       list-style-type: upper-alpha;
     }
 
-    &:where(ol[type="a"]) {
+    &:where(ol[type='a']) {
       list-style-type: lower-alpha;
     }
 
-    &:where(ol[type="A" s]) {
+    &:where(ol[type='A' s]) {
       list-style-type: upper-alpha;
     }
 
-    &:where(ol[type="a" s]) {
+    &:where(ol[type='a' s]) {
       list-style-type: lower-alpha;
     }
 
-    &:where(ol[type="I"]) {
+    &:where(ol[type='I']) {
       list-style-type: upper-roman;
     }
 
-    &:where(ol[type="i"]) {
+    &:where(ol[type='i']) {
       list-style-type: lower-roman;
     }
 
-    &:where(ol[type="I" s]) {
+    &:where(ol[type='I' s]) {
       list-style-type: upper-roman;
     }
 
-    &:where(ol[type="i" s]) {
+    &:where(ol[type='i' s]) {
       list-style-type: lower-roman;
     }
 
-    &:where(ol[type="1"]) {
+    &:where(ol[type='1']) {
       list-style-type: decimal;
     }
 

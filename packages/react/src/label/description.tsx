@@ -6,12 +6,6 @@ type DescriptionProps = TextProps;
 function Description(props: DescriptionProps) {
   const { className, ...restProps } = props;
 
-  return (
-    <Text
-      {...restProps}
-      className={cx(className, 'description')}
-      slot="description"
-    />
-  );
+  return <Text {...restProps} className={cx(className, 'description')} slot="description" />;
 }
 export { Description, type DescriptionProps };

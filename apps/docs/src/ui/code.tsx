@@ -34,7 +34,7 @@ const CopyButton = ({ code }: { code: string }) => {
   return (
     <>
       <button
-        className="absolute top-0 right-0 z-10 grid size-11 cursor-pointer place-content-center text-mint-lightest hover:text-mint"
+        className="text-mint-lightest hover:text-mint absolute top-0 right-0 z-10 grid size-11 cursor-pointer place-content-center"
         onClick={() =>
           navigator.clipboard.writeText(code).then(() => {
             setHasCopied(true);

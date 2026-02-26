@@ -2,17 +2,17 @@
   "name": "@obosbbl/grunnmuren-icons-svg",
   "version": "2.1.0",
   "description": "Grunnmuren's icon set as raw SVG files",
+  "license": "MIT",
   "repository": {
     "url": "https://github.com/code-obos/grunnmuren"
-  },
-  "license": "MIT",
-  "type": "module",
-  "exports": {
-    ".": "./src"
   },
   "files": [
     "src"
   ],
+  "type": "module",
+  "exports": {
+    ".": "./src"
+  },
   "scripts": {
     "update": "pnpm run update:download && pnpm run update:optimize",
     "update:download": "node ./scripts/figma-import.mjs",

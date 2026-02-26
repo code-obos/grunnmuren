@@ -10,7 +10,6 @@
     "build": "pnpm --filter './packages/**' build",
     "build:docs": "pnpm --filter @obosbbl/grunnmuren-docs build",
     "build:storybook": "pnpm typecheck:storybook && storybook build -o ./apps/docs/public/storybook",
-    "typecheck:storybook": "tsc --noEmit -p packages/react/tsconfig.storybook.json",
     "ci:publish": "pnpm build && changeset publish",
     "ci:version": "changeset version",
     "dev": "storybook dev -p 6006 --ci --initial-path=/story/home--page",
@@ -19,9 +18,10 @@
     "fmt:check": "oxfmt --check",
     "lint": "oxlint --deny-warnings",
     "lint:fix": "oxlint --fix",
+    "sanity:schema:deploy": "pnpm --filter @obosbbl/grunnmuren-docs sanity:schema:deploy",
     "serve-storybook": "http-server ./apps/docs/public/storybook -p 6006 --silent",
     "test": "test-storybook",
-    "sanity:schema:deploy": "pnpm --filter @obosbbl/grunnmuren-docs sanity:schema:deploy"
+    "typecheck:storybook": "tsc --noEmit -p packages/react/tsconfig.storybook.json"
   },
   "dependencies": {
     "@changesets/cli": "2.29.8",

@@ -1,5 +1,6 @@
 import { ArrowRight } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta } from '@storybook/react-vite';
+
 import { Heading } from '../content';
 import { UNSAFE_Link as Link } from '../link';
 import { LinkList, LinkListContainer, LinkListItem } from './link-list';
@@ -129,9 +130,7 @@ export const GridLayout = () => (
           <Link href="/representantskapet">Representantskapet</Link>
         </LinkListItem>
         <LinkListItem>
-          <Link href="/boligpriser-og-statistikk">
-            Boligpriser og statistikk
-          </Link>
+          <Link href="/boligpriser-og-statistikk">Boligpriser og statistikk</Link>
         </LinkListItem>
         <LinkListItem>
           <Link href="/investor-relations">Investor Relations</Link>
@@ -151,9 +150,7 @@ export const GridLayout = () => (
           <Link href="/representantskapet">Representantskapet</Link>
         </LinkListItem>
         <LinkListItem>
-          <Link href="/boligpriser-og-statistikk">
-            Boligpriser og statistikk
-          </Link>
+          <Link href="/boligpriser-og-statistikk">Boligpriser og statistikk</Link>
         </LinkListItem>
         <LinkListItem>
           <Link href="/investor-relations">Investor Relations</Link>
@@ -176,9 +173,7 @@ export const GridLayout = () => (
           <Link href="/representantskapet">Representantskapet</Link>
         </LinkListItem>
         <LinkListItem>
-          <Link href="/boligpriser-og-statistikk">
-            Boligpriser og statistikk
-          </Link>
+          <Link href="/boligpriser-og-statistikk">Boligpriser og statistikk</Link>
         </LinkListItem>
         <LinkListItem>
           <Link href="/investor-relations">Investor Relations</Link>
@@ -204,9 +199,7 @@ export const GridLayout = () => (
           <Link href="/representantskapet">Representantskapet</Link>
         </LinkListItem>
         <LinkListItem>
-          <Link href="/boligpriser-og-statistikk">
-            Boligpriser og statistikk
-          </Link>
+          <Link href="/boligpriser-og-statistikk">Boligpriser og statistikk</Link>
         </LinkListItem>
         <LinkListItem>
           <Link href="/investor-relations">Investor Relations</Link>
@@ -238,9 +231,7 @@ export const GridLayout = () => (
           <Link href="/representantskapet">Representantskapet</Link>
         </LinkListItem>
         <LinkListItem>
-          <Link href="/boligpriser-og-statistikk">
-            Boligpriser og statistikk
-          </Link>
+          <Link href="/boligpriser-og-statistikk">Boligpriser og statistikk</Link>
         </LinkListItem>
         <LinkListItem>
           <Link href="/investor-relations">Investor Relations</Link>
@@ -275,9 +266,7 @@ export const GridLayout = () => (
           <Link href="/representantskapet">Representantskapet</Link>
         </LinkListItem>
         <LinkListItem>
-          <Link href="/boligpriser-og-statistikk">
-            Boligpriser og statistikk
-          </Link>
+          <Link href="/boligpriser-og-statistikk">Boligpriser og statistikk</Link>
         </LinkListItem>
         <LinkListItem>
           <Link href="/investor-relations">Investor Relations</Link>
@@ -307,14 +296,10 @@ export const GridLayout = () => (
           <Link href="/vedtekter">Vedtekter</Link>
         </LinkListItem>
         <LinkListItem>
-          <Link href="/generalforsamlingen-i-obos">
-            Generalforsamlingen i OBOS
-          </Link>
+          <Link href="/generalforsamlingen-i-obos">Generalforsamlingen i OBOS</Link>
         </LinkListItem>
         <LinkListItem>
-          <Link href="/strategi-og-styrende-dokumenter">
-            Strategi og styrende dokumenter
-          </Link>
+          <Link href="/strategi-og-styrende-dokumenter">Strategi og styrende dokumenter</Link>
         </LinkListItem>
       </LinkList>
     </LinkListContainer>

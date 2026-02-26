@@ -1,12 +1,13 @@
 import { Github, Mail } from '@obosbbl/grunnmuren-icons-react';
 import { Link } from '@tanstack/react-router';
+
 import logoUrl from '@/assets/OBOS_Svart_Liggende.svg?url';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-8 border-t border-t-gray-light">
+    <footer className="border-t-gray-light mt-8 border-t">
       <div className="grid grid-flow-col py-8">
         <div className="flex flex-col justify-between">
           <Link to="/" aria-label="Gå til forsiden">
@@ -19,10 +20,7 @@ export function Footer() {
           <h2 className="heading-s">Her finner du oss</h2>
           <ul className="flex flex-col gap-4">
             <li>
-              <a
-                className="flex gap-2"
-                href="https://github.com/code-obos/grunnmuren"
-              >
+              <a className="flex gap-2" href="https://github.com/code-obos/grunnmuren">
                 <Github /> GitHub
               </a>
             </li>

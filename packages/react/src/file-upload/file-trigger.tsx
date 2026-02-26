@@ -7,17 +7,11 @@ import { PressResponder } from '@react-aria/interactions';
 import { useObjectRef } from '@react-aria/utils';
 import type { FormValidationProps } from '@react-stately/form';
 import type { HTMLAttributes, RefObject } from 'react';
-import {
-  Input,
-  type FileTriggerProps as RACFileTriggerProps,
-} from 'react-aria-components';
+import { Input, type FileTriggerProps as RACFileTriggerProps } from 'react-aria-components';
 
 export type FileTriggerProps = Partial<FormValidationProps<File>> &
   RACFileTriggerProps &
-  Omit<
-    HTMLAttributes<HTMLInputElement>,
-    'onSelect' | 'onChange' | 'required' | 'className'
-  > & {
+  Omit<HTMLAttributes<HTMLInputElement>, 'onSelect' | 'onChange' | 'required' | 'className'> & {
     ref?: RefObject<HTMLInputElement | null>;
     isInvalid?: boolean;
     isRequired?: boolean;

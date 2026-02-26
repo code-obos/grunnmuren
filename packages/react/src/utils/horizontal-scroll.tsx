@@ -42,12 +42,11 @@ export function ScrollButton({
           : 'bg-[linear-gradient(90deg,transparent,white_calc(10px),white)]',
 
         // Animation
-        hasScrollingOccurred &&
-          'duration-100 ease-in motion-safe:transition-transform',
+        hasScrollingOccurred && 'duration-100 ease-in motion-safe:transition-transform',
 
         // Hide/show animation
         direction === 'left'
-          ? !isVisible && '-translate-x-full pointer-events-none'
+          ? !isVisible && 'pointer-events-none -translate-x-full'
           : !isVisible && 'pointer-events-none translate-x-full',
 
         direction === 'left' ? '-left-3' : '-right-3',
@@ -76,9 +75,7 @@ interface ScrollState {
  * Simple hook for detecting horizontal scroll capabilities
  * Returns scroll state and a ref to attach to your scrollable container
  */
-export function useHorizontalScroll<E extends HTMLElement>(
-  scrollStateDeps: unknown[] = [],
-) {
+export function useHorizontalScroll<E extends HTMLElement>(scrollStateDeps: unknown[] = []) {
   const scrollContainerRef = useRef<E | null>(null);
   const [scrollState, setScrollState] = useState<ScrollState>({
     canScrollLeft: false,
@@ -103,10 +100,7 @@ export function useHorizontalScroll<E extends HTMLElement>(
     }));
   }, []);
 
-  const debouncedUpdateScrollState = useDebouncedCallback(
-    updateScrollState,
-    100,
-  );
+  const debouncedUpdateScrollState = useDebouncedCallback(updateScrollState, 100);
 
   // The linter struggles here, so need to enable and disable to get it to pass...
   // useEffect with a usecallback.....

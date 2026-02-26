@@ -11,7 +11,7 @@ import {
 import { ErrorMessage } from '../label/error-message';
 
 const defaultClasses = cx([
-  'group -mx-2.5 relative left-0 inline-flex max-w-fit cursor-pointer items-start gap-4 p-2.5 leading-7',
+  'group relative left-0 -mx-2.5 inline-flex max-w-fit cursor-pointer items-start gap-4 p-2.5 leading-7',
 ]);
 
 // Pulling this out into it's own component. Will probably export it in the future
@@ -39,10 +39,10 @@ function CheckmarkBox() {
         'group-data-hovered:group-data-selected:group-not-data-invalid:bg-blue-dark',
         // invalid - The border is 1 px thicker when invalid. We don't actually want to change the border width, as that causes the element's size to change
         // so we use an inner shadow of 1 px instead to pad the actual border
-        'group-data-invalid:border-red group-data-invalid:shadow-[inset_0_0_0_1px] group-data-invalid:shadow-red',
+        'group-data-invalid:border-red group-data-invalid:shadow-red group-data-invalid:shadow-[inset_0_0_0_1px]',
       ])}
     >
-      <CheckIcon className="h-full w-full opacity-0 group-data-invalid:group-data-hovered:group-data-selected:text-red group-data-selected:opacity-100" />
+      <CheckIcon className="group-data-invalid:group-data-hovered:group-data-selected:text-red h-full w-full opacity-0 group-data-selected:opacity-100" />
     </span>
   );
 }
@@ -59,10 +59,7 @@ type CheckboxProps = {
   style?: React.CSSProperties;
   /** Ref for the element. */
   ref?: Ref<HTMLLabelElement>;
-} & Omit<
-  RACCheckboxProps,
-  'isDisabled' | 'style' | 'children' | 'isIndeterminate' | 'isReadOnly'
->;
+} & Omit<RACCheckboxProps, 'isDisabled' | 'style' | 'children' | 'isIndeterminate' | 'isReadOnly'>;
 
 function Checkbox(props: CheckboxProps) {
   const {
@@ -89,22 +86,14 @@ function Checkbox(props: CheckboxProps) {
           'aria-errormessage': errorMessage ? errorMessageId : undefined,
         }}
       >
-        <RACCheckbox
-          {...restProps}
-          className={cx(className, defaultClasses)}
-          isInvalid={isInvalid}
-        >
+        <RACCheckbox {...restProps} className={cx(className, defaultClasses)} isInvalid={isInvalid}>
           <CheckmarkBox />
           {children}
         </RACCheckbox>
 
         {description && (
           // {/* Use a div instead of the Description component to avoid infinite re-render loops in React until this bug in RAC is fixed: https://github.com/adobe/react-spectrum/issues/6229 */}
-          <div
-            id={descriptionId}
-            slot="description"
-            className="description block"
-          >
+          <div id={descriptionId} slot="description" className="description block">
             {description}
           </div>
         )}

@@ -1,4 +1,5 @@
 import { cx } from 'cva';
+
 import type { COMPONENT_QUERY_RESULT } from '@/sanity.types';
 
 type TableOfContentsNavProps = {
@@ -7,11 +8,7 @@ type TableOfContentsNavProps = {
   propsTables?: string[] | null;
 };
 
-const TableOfContentsNav = ({
-  className,
-  content,
-  propsTables,
-}: TableOfContentsNavProps) => {
+const TableOfContentsNav = ({ className, content, propsTables }: TableOfContentsNavProps) => {
   const sections: Array<{
     href: string;
     text: string;
@@ -39,16 +36,13 @@ const TableOfContentsNav = ({
   return (
     <nav
       aria-label="Innholdsfortegnelse"
-      className={cx(
-        className,
-        'prose mb-12 grid gap-x-8 gap-y-3 sm:grid-cols-2 md:mb-6',
-      )}
+      className={cx(className, 'prose mb-12 grid gap-x-8 gap-y-3 sm:grid-cols-2 md:mb-6')}
     >
       {sections?.map(({ href, text }) => (
         <div key={href} className="w-fit">
           <a
             href={href}
-            className="flex w-fit items-center gap-2 font-medium no-underline focus:outline-2 focus:outline-blue-600 focus:outline-offset-2"
+            className="flex w-fit items-center gap-2 font-medium no-underline focus:outline-2 focus:outline-offset-2 focus:outline-blue-600"
           >
             <span aria-hidden="true" className="shrink-0">
               ↳

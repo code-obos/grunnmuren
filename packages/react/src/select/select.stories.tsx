@@ -3,13 +3,7 @@ import { useState } from 'react';
 
 import { Button } from '../button/button';
 import { counties } from '../mocks';
-import {
-  Select,
-  SelectHeader,
-  SelectItem,
-  type SelectProps,
-  SelectSection,
-} from './select';
+import { Select, SelectHeader, SelectItem, type SelectProps, SelectSection } from './select';
 
 const meta = {
   title: 'Select',

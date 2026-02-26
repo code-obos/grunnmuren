@@ -13,7 +13,7 @@ import {
 
 const tagVariants = cva({
   base: [
-    'relative flex cursor-pointer items-center gap-1 rounded-lg px-2 py-1 font-medium text-sm transition-colors duration-200',
+    'relative flex cursor-pointer items-center gap-1 rounded-lg px-2 py-1 text-sm font-medium transition-colors duration-200',
     // Resting
     'border-2 border-black bg-white text-black',
     //Focus
@@ -76,13 +76,7 @@ type TagProps = Omit<RACTagProps, 'className'> &
  * A group component for Tag components that enables selection and organization of options.
  */
 function TagGroup(props: TagGroupProps) {
-  const {
-    onRemove,
-    selectionMode = 'single',
-    className,
-    children,
-    ...restProps
-  } = props;
+  const { onRemove, selectionMode = 'single', className, children, ...restProps } = props;
 
   return (
     <RACTagGroup
@@ -103,10 +97,7 @@ function TagList(props: TagListProps) {
   const { className, children, ...restProps } = props;
 
   return (
-    <RACTagList
-      {...restProps}
-      className={cx('flex flex-wrap gap-2', className)}
-    >
+    <RACTagList {...restProps} className={cx('flex flex-wrap gap-2', className)}>
       {children}
     </RACTagList>
   );
@@ -147,11 +138,4 @@ function Tag(props: TagProps) {
   );
 }
 
-export {
-  TagGroup,
-  TagList,
-  Tag,
-  type TagGroupProps,
-  type TagListProps,
-  type TagProps,
-};
+export { TagGroup, TagList, Tag, type TagGroupProps, type TagListProps, type TagProps };

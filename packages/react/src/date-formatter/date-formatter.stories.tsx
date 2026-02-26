@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
+
 import { DateFormatter } from './date-formatter';
 
 const meta = {
@@ -54,9 +55,7 @@ export const FullDateTime: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(
-      canvas.getByText('19. august 1929 kl. 01:00:00'),
-    ).toBeInTheDocument();
+    await expect(canvas.getByText('19. august 1929 kl. 01:00:00')).toBeInTheDocument();
   },
 };
 
@@ -75,9 +74,7 @@ export const WithCustomTimeZone: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(
-      canvas.getByText('18. august 1929 kl. 19:00:00'),
-    ).toBeInTheDocument();
+    await expect(canvas.getByText('18. august 1929 kl. 19:00:00')).toBeInTheDocument();
   },
 };
 
@@ -155,9 +152,7 @@ export const CapitalizedMonth: Story = {
   },
   render: (props) => (
     <DateFormatter {...props}>
-      {(formattedDate: string) =>
-        formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)
-      }
+      {(formattedDate: string) => formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)}
     </DateFormatter>
   ),
   play: async ({ canvasElement }) => {

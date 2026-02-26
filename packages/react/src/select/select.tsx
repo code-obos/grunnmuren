@@ -37,10 +37,7 @@ type SelectProps<T extends object> = {
   style?: React.CSSProperties;
   /** Ref for the button element. */
   ref?: Ref<HTMLButtonElement>;
-} & Omit<
-  RACSelectProps<T>,
-  'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style'
->;
+} & Omit<RACSelectProps<T>, 'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style'>;
 
 function Select<T extends object>(props: SelectProps<T>) {
   const {
@@ -59,11 +56,7 @@ function Select<T extends object>(props: SelectProps<T>) {
   const isInvalid = !!errorMessage || _isInvalid;
 
   return (
-    <RACSelect
-      {...restProps}
-      className={cx(className, formField)}
-      isInvalid={isInvalid}
-    >
+    <RACSelect {...restProps} className={cx(className, formField)} isInvalid={isInvalid}>
       {label && <Label>{label}</Label>}
       {description && <Description>{description}</Description>}
 

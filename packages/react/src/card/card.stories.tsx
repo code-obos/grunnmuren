@@ -8,6 +8,7 @@ import {
 } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta } from '@storybook/react-vite';
 import { cx } from 'cva';
+
 import { Avatar } from '../avatar';
 import { Badge } from '../badge';
 import { Button } from '../button';
@@ -23,8 +24,8 @@ const meta = {
       <Content>
         <Heading level={3}>Min bolig</Heading>
         <p>
-          Her finner du alt om din nye bolig og hva som venter deg fremover. Du
-          finner dine dokumenter, salgsoppgave og mye mer.
+          Her finner du alt om din nye bolig og hva som venter deg fremover. Du finner dine
+          dokumenter, salgsoppgave og mye mer.
         </p>
       </Content>
     </Card>
@@ -38,19 +39,11 @@ const Cards = ({ children }: { children: React.ReactNode }) => (
 );
 
 export const WithBackground = () => {
-  const bgColors = [
-    'bg-mint-lightest',
-    'bg-sky-light',
-    'bg-blue-dark',
-    'bg-green-dark',
-  ] as const;
+  const bgColors = ['bg-mint-lightest', 'bg-sky-light', 'bg-blue-dark', 'bg-green-dark'] as const;
   return (
     <Cards>
       {bgColors.map((bgColor) => (
-        <Card
-          className={cx(bgColor, bgColor.includes('dark') && 'text-white')}
-          key={bgColor}
-        >
+        <Card className={cx(bgColor, bgColor.includes('dark') && 'text-white')} key={bgColor}>
           <Content>
             <Heading level={3}>Bakgrunn {bgColor}</Heading>
             <p>Dette kortet har {bgColor} som bakgrunnsfarge</p>
@@ -71,10 +64,7 @@ export const WithImage = () => (
     </Media>
     <Content>
       <Heading level={3}>Kort med bilde</Heading>
-      <p>
-        Dette kortet har et bilde og er uten border. Derfor er alle hjørner på
-        bildet avrundet.
-      </p>
+      <p>Dette kortet har et bilde og er uten border. Derfor er alle hjørner på bildet avrundet.</p>
     </Content>
   </Card>
 );
@@ -89,10 +79,7 @@ export const OutlinedWithImageAnd = () => (
     </Media>
     <Content>
       <Heading level={3}>Kort med bilde og border</Heading>
-      <p>
-        Dette kortet har et bilde og border. Derfor er kun hjørnene i toppen
-        avrundet.
-      </p>
+      <p>Dette kortet har et bilde og border. Derfor er kun hjørnene i toppen avrundet.</p>
     </Content>
   </Card>
 );
@@ -164,8 +151,8 @@ export const CardWithInlineTopIllustration = () => (
     <Content>
       <Heading level={3}>Utemiljø og grøntanlegg</Heading>
       <p>
-        Et godt utemiljø er viktig for trivselen. Vi har en egen utenhusavdeling
-        med flinke folk som kan hjelpe med realisering av nye prosjekter.
+        Et godt utemiljø er viktig for trivselen. Vi har en egen utenhusavdeling med flinke folk som
+        kan hjelpe med realisering av nye prosjekter.
       </p>
     </Content>
   </Card>
@@ -181,9 +168,7 @@ export const CardWithCoveringIllustration = () => (
         <Heading level={3}>Rødbergvn 88C</Heading>
         <small className="description">Bjerke - Oslo</small>
       </div>
-      <small className="description -order-1">
-        Forhåndsvarsling - Saksnr. F0347565
-      </small>
+      <small className="description -order-1">Forhåndsvarsling - Saksnr. F0347565</small>
       <p className="font-semibold">100 m² | Prisantydning 9 600 000 kr</p>
       <p className="flex gap-x-1">
         <House /> Rekkehus/småhus
@@ -226,8 +211,8 @@ export const ClickableWithImage = () => (
         <CardLink href="#card">Klikkbar med bilde</CardLink>
       </Heading>
       <p>
-        Dette kortet er klikkbart. Det har et bilde og er uten border. Derfor er
-        alle hjørner på bildet avrundet.
+        Dette kortet er klikkbart. Det har et bilde og er uten border. Derfor er alle hjørner på
+        bildet avrundet.
       </p>
     </Content>
   </Card>
@@ -297,9 +282,7 @@ export const ClickableWithOtherClickableElements = () => (
           </Heading>
           <small className="description">Bjerke - Oslo</small>
         </div>
-        <small className="description -order-1">
-          Forhåndsvarsling - Saksnr. F0347565
-        </small>
+        <small className="description -order-1">Forhåndsvarsling - Saksnr. F0347565</small>
         <p className="font-semibold">100 m² | Prisantydning 9 600 000 kr</p>
         <p className="flex gap-x-1">
           <House /> Rekkehus/småhus
@@ -326,7 +309,7 @@ export const ClickableWithOtherClickableElements = () => (
 );
 
 export const ClickableWithOtherClickableElementsAndBackgroundColor = () => (
-  <Card variant="outlined" className="w-72 bg-blue-dark text-mint">
+  <Card variant="outlined" className="bg-blue-dark text-mint w-72">
     <Media>
       <img
         alt=""
@@ -340,9 +323,7 @@ export const ClickableWithOtherClickableElementsAndBackgroundColor = () => (
         </Heading>
         <small className="description">Bjerke - Oslo</small>
       </div>
-      <small className="description -order-1">
-        Forhåndsvarsling - Saksnr. F0347565
-      </small>
+      <small className="description -order-1">Forhåndsvarsling - Saksnr. F0347565</small>
       <p className="font-semibold">100 m² | Prisantydning 9 600 000 kr</p>
       <p className="flex gap-x-1">
         <House /> Rekkehus/småhus
@@ -359,11 +340,7 @@ export const ClickableWithOtherClickableElementsAndBackgroundColor = () => (
     </Content>
     <Footer className="relative grid gap-y-2">
       <hr className="border-t border-t-current" />
-      <Button
-        href="#other-link"
-        variant="tertiary"
-        className="data-focus-visible:outline-current"
-      >
+      <Button href="#other-link" variant="tertiary" className="data-focus-visible:outline-current">
         Se prospekt
         <Documents />
       </Button>
@@ -372,7 +349,7 @@ export const ClickableWithOtherClickableElementsAndBackgroundColor = () => (
 );
 
 export const ClickableWithBadge = () => (
-  <Card variant="outlined" className="w-72 bg-blue-dark text-mint">
+  <Card variant="outlined" className="bg-blue-dark text-mint w-72">
     <Media>
       <Badge color="blue-dark">
         <InfoCircle />
@@ -390,9 +367,7 @@ export const ClickableWithBadge = () => (
         </Heading>
         <small className="description">Bjerke - Oslo</small>
       </div>
-      <small className="description -order-1">
-        Forhåndsvarsling - Saksnr. F0347565
-      </small>
+      <small className="description -order-1">Forhåndsvarsling - Saksnr. F0347565</small>
       <p className="font-semibold">100 m² | Prisantydning 9 600 000 kr</p>
       <p className="flex gap-x-1">
         <House /> Rekkehus/småhus
@@ -409,11 +384,7 @@ export const ClickableWithBadge = () => (
     </Content>
     <Footer className="relative grid gap-y-2">
       <hr className="border-t border-t-current" />
-      <Button
-        href="#other-link"
-        variant="tertiary"
-        className="focus-visible:outline-current"
-      >
+      <Button href="#other-link" variant="tertiary" className="focus-visible:outline-current">
         Se prospekt
         <Documents />
       </Button>
@@ -422,7 +393,7 @@ export const ClickableWithBadge = () => (
 );
 
 export const ClickableWithBadgeRight = () => (
-  <Card variant="outlined" className="w-72 bg-blue-dark text-mint">
+  <Card variant="outlined" className="bg-blue-dark text-mint w-72">
     <Media>
       <img
         alt=""
@@ -440,9 +411,7 @@ export const ClickableWithBadgeRight = () => (
         </Heading>
         <small className="description">Bjerke - Oslo</small>
       </div>
-      <small className="description -order-1">
-        Forhåndsvarsling - Saksnr. F0347565
-      </small>
+      <small className="description -order-1">Forhåndsvarsling - Saksnr. F0347565</small>
       <p className="font-semibold">100 m² | Prisantydning 9 600 000 kr</p>
       <p className="flex gap-x-1">
         <House /> Rekkehus/småhus
@@ -459,11 +428,7 @@ export const ClickableWithBadgeRight = () => (
     </Content>
     <Footer className="relative grid gap-y-2">
       <hr className="border-t border-t-current" />
-      <Button
-        href="#other-link"
-        variant="tertiary"
-        className="focus-visible:outline-current"
-      >
+      <Button href="#other-link" variant="tertiary" className="focus-visible:outline-current">
         Se prospekt
         <Documents />
       </Button>
@@ -481,10 +446,7 @@ export const HorizontalLeft = () => (
     </Media>
     <Content>
       <Heading level={3}>Med bilde til venstre</Heading>
-      <p>
-        Dette kortet har bilde til venstre på større skjermer og er klikkbart
-        mot en CTA-lenke
-      </p>
+      <p>Dette kortet har bilde til venstre på større skjermer og er klikkbart mot en CTA-lenke</p>
       <CardLink className="group/cta">
         <Button href="#cta" variant="tertiary">
           Les mer
@@ -499,10 +461,7 @@ export const HorizontalRight = () => (
   <Card layout="horizontal">
     <Content>
       <Heading level={3}>Med bilde til høyre</Heading>
-      <p>
-        Dette kortet har bilde til høyre på større skjermer og er klikkbart mot
-        en CTA-lenke
-      </p>
+      <p>Dette kortet har bilde til høyre på større skjermer og er klikkbart mot en CTA-lenke</p>
       <CardLink className="group/cta">
         <Button href="#cta" variant="tertiary">
           Les mer
@@ -524,10 +483,7 @@ export const HorizontalWithIconLeft = () => (
     <PiggyBank />
     <Content>
       <Heading level={3}>Med ikon til venstre</Heading>
-      <p>
-        Dette kortet er liggende, har et ikon til venstre og er klikkbart mot en
-        CTA-lenke
-      </p>
+      <p>Dette kortet er liggende, har et ikon til venstre og er klikkbart mot en CTA-lenke</p>
       <CardLink className="group/cta">
         <Button href="#cta" variant="tertiary">
           Les mer
@@ -544,10 +500,7 @@ export const HorizontalWithIconRight = () => (
       <Heading level={3}>
         <CardLink href="#cta">Med ikon til høyre</CardLink>
       </Heading>
-      <p>
-        Dette kortet er liggende, har et ikon til høyre og er klikkbart mot en
-        CTA-lenke
-      </p>
+      <p>Dette kortet er liggende, har et ikon til høyre og er klikkbart mot en CTA-lenke</p>
     </Content>
     <ArrowRight className="transition-transform group-hover/cta:motion-safe:translate-x-1" />
   </Card>

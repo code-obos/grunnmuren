@@ -73,7 +73,6 @@ Runs the docs app for local development, at http://localhost:3000.
 pnpm dev:docs
 ```
 
-
 ### Releases and changelogs
 
 We use an automated release process based on [changesets](https://github.com/changesets/changesets) and Github actions to version, release and publish the packages.

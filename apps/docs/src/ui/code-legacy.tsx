@@ -25,12 +25,8 @@ const CodeSnippet = ({ value, setValue }: CodeSnippetProps) => {
   // Use the same black color as the background on the editor (#1e1e1e)
   return (
     <div className="grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] bg-[#1e1e1e]">
-      <LiveEditor
-        tabMode="focus"
-        className="row-span-2 font-mono"
-        onChange={setValue}
-      />
-      <div className="relative text-mint">
+      <LiveEditor tabMode="focus" className="row-span-2 font-mono" onChange={setValue} />
+      <div className="text-mint relative">
         <button
           className="size-[44px]"
           onClick={() =>
@@ -58,12 +54,7 @@ const CodeSnippet = ({ value, setValue }: CodeSnippetProps) => {
   );
 };
 
-export const Code = ({
-  value,
-  setValue,
-  withLivePreview,
-  isEditable,
-}: CodeProps) => {
+export const Code = ({ value, setValue, withLivePreview, isEditable }: CodeProps) => {
   const scope = withLivePreview
     ? // Scope is only needed when rendering the live preview
       { ...GrunnmurenIconsScope, ...GrunnmurenScope }
@@ -73,12 +64,7 @@ export const Code = ({
 
   return (
     <div className="overflow-hidden rounded-lg border">
-      <LiveProvider
-        code={value}
-        scope={scope}
-        theme={themes.vsDark}
-        disabled={!isEditable}
-      >
+      <LiveProvider code={value} scope={scope} theme={themes.vsDark} disabled={!isEditable}>
         {withLivePreview ? (
           <>
             <LivePreview className="not-prose grid place-items-center gap-y-2 p-18" />
@@ -87,11 +73,7 @@ export const Code = ({
               onExpandedChange={setIsCodeExpanded}
               className="grid grid-cols-1"
             >
-              <Button
-                className="justify-self-end"
-                variant="tertiary"
-                slot="trigger"
-              >
+              <Button className="justify-self-end" variant="tertiary" slot="trigger">
                 {isCodeExpanded ? 'Skjul' : 'Vis'} kode
               </Button>
               <DisclosurePanel>

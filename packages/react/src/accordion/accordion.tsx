@@ -1,13 +1,9 @@
 import { cx } from 'cva';
 import { Children, type HTMLProps, useId } from 'react';
 import { Provider } from 'react-aria-components';
+
 import { ContentContext, HeadingContext } from '../content';
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  type DisclosureProps,
-} from '../disclosure';
+import { Disclosure, DisclosureButton, DisclosurePanel, type DisclosureProps } from '../disclosure';
 
 type AccordionProps = HTMLProps<HTMLDivElement> & {
   children: React.ReactNode;
@@ -32,17 +28,13 @@ function Accordion(props: AccordionProps) {
   const childCount = Children.count(children);
 
   return (
-    <div
-      {...restProps}
-      data-accordion
-      className={cx('rounded-lg bg-white', className)}
-    >
+    <div {...restProps} data-accordion className={cx('rounded-lg bg-white', className)}>
       {Children.map(children, (child, index) => (
         <>
           {child}
           {index < childCount - 1 && (
             // Margin is added to enable support for containers with a background color
-            <hr className="mx-2 border-gray-light" aria-hidden />
+            <hr className="border-gray-light mx-2" aria-hidden />
           )}
         </>
       ))}
@@ -89,7 +81,7 @@ function AccordionItem(props: AccordionItemProps) {
               _innerWrapper: (children) => (
                 <DisclosureButton
                   // Use outline with offset as focus indicator, this does not cover the left sky border on the expanded content and works with or without a background color on the accordion container
-                  className="flex min-h-11 w-full gap-1.5 rounded-lg px-2 py-3.5 text-left focus-visible:outline-focus-inset!"
+                  className="focus-visible:outline-focus-inset! flex min-h-11 w-full gap-1.5 rounded-lg px-2 py-3.5 text-left"
                   type="button"
                   withChevron
                   id={buttonId}
@@ -120,9 +112,4 @@ function AccordionItem(props: AccordionItemProps) {
   );
 }
 
-export {
-  Accordion,
-  AccordionItem,
-  type AccordionItemProps,
-  type AccordionProps,
-};
+export { Accordion, AccordionItem, type AccordionItemProps, type AccordionProps };

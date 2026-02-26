@@ -1,4 +1,5 @@
 import { getImageDimensions } from '@sanity/asset-utils';
+
 import { urlForImage } from '@/lib/image-url';
 import type { COMPONENT_QUERY_RESULT } from '@/sanity.types';
 

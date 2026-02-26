@@ -7,23 +7,15 @@ import {
 
 type ProgressBarProps = RACProgressBarProps;
 
-type ProgressBarValueTextProps = Omit<
-  HTMLProps<HTMLSpanElement>,
-  'children'
-> & {
+type ProgressBarValueTextProps = Omit<HTMLProps<HTMLSpanElement>, 'children'> & {
   className?: string;
 };
 
-export const _ProgressBarValueTextContext = createContext<string | undefined>(
-  undefined,
-);
+export const _ProgressBarValueTextContext = createContext<string | undefined>(undefined);
 
 const _ProgressBarValueTextProvider = _ProgressBarValueTextContext.Provider;
 
-const ProgressBarValueText = ({
-  className,
-  ...restProps
-}: ProgressBarValueTextProps) => {
+const ProgressBarValueText = ({ className, ...restProps }: ProgressBarValueTextProps) => {
   const value = useContext(_ProgressBarValueTextContext);
   return (
     <span
@@ -36,25 +28,17 @@ const ProgressBarValueText = ({
   );
 };
 
-const ProgressBar = ({
-  children,
-  className,
-  ...restProps
-}: ProgressBarProps) => {
+const ProgressBar = ({ children, className, ...restProps }: ProgressBarProps) => {
   return (
-    <RACProgressBar
-      data-slot="progress-bar"
-      {...restProps}
-      className={cx(className, 'max-w-full')}
-    >
+    <RACProgressBar data-slot="progress-bar" {...restProps} className={cx(className, 'max-w-full')}>
       {({ percentage, valueText, ...restArgs }) => (
         <_ProgressBarValueTextProvider value={valueText}>
           {typeof children === 'function'
             ? children({ percentage, valueText, ...restArgs })
             : children}
-          <div className="relative rounded border border-blue-dark bg-gray-light">
+          <div className="border-blue-dark bg-gray-light relative rounded border">
             <div
-              className="h-1 rounded bg-blue-dark transition-all duration-300 ease-in-out"
+              className="bg-blue-dark h-1 rounded transition-all duration-300 ease-in-out"
               style={{ width: `${percentage}%` }}
             />
           </div>

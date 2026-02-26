@@ -1,17 +1,8 @@
-import {
-  ArrowRight,
-  Download,
-  LinkExternal,
-} from '@obosbbl/grunnmuren-icons-react';
+import { ArrowRight, Download, LinkExternal } from '@obosbbl/grunnmuren-icons-react';
 import { cva, cx, type VariantProps } from 'cva';
-import {
-  Children,
-  cloneElement,
-  isValidElement,
-  type JSX,
-  type ReactNode,
-} from 'react';
+import { Children, cloneElement, isValidElement, type JSX, type ReactNode } from 'react';
 import { Provider } from 'react-aria-components';
+
 import { HeadingContext } from '../content';
 import type { UNSAFE_LinkProps } from '../link/link';
 
@@ -50,14 +41,8 @@ type LinkListContainerProps = VariantProps<typeof linkListContainerVariants> &
     children: JSX.Element | JSX.Element[];
   };
 
-const LinkListContainer = ({
-  className,
-  layout = 'stack',
-  ...props
-}: LinkListContainerProps) => (
-  <Provider
-    values={[[HeadingContext, { size: 'm', className: cx(linkStyles) }]]}
-  >
+const LinkListContainer = ({ className, layout = 'stack', ...props }: LinkListContainerProps) => (
+  <Provider values={[[HeadingContext, { size: 'm', className: cx(linkStyles) }]]}>
     <div
       {...props}
       className={linkListContainerVariants({ className, layout })}
@@ -93,9 +78,7 @@ type LinkListItemProps = React.HTMLProps<HTMLLIElement> & {
 const LinkListItem = ({ children, className, ...props }: LinkListItemProps) => {
   const child = Children.only(children);
 
-  const childProps = (
-    isValidElement(child) ? child.props : {}
-  ) as UNSAFE_LinkProps;
+  const childProps = (isValidElement(child) ? child.props : {}) as UNSAFE_LinkProps;
 
   const animateIcon =
     childProps.animateIcon || childProps.download
@@ -118,7 +101,7 @@ const LinkListItem = ({ children, className, ...props }: LinkListItemProps) => {
       {...props}
       className={cx(
         className,
-        'after:-top-px relative p-1.25 after:absolute after:right-0 after:left-0 after:h-px after:w-full after:bg-gray-light',
+        'after:bg-gray-light relative p-1.25 after:absolute after:-top-px after:right-0 after:left-0 after:h-px after:w-full',
         '*:data-[slot=link]:paragraph',
         ...linkStyles,
       )}

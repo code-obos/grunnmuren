@@ -10,12 +10,10 @@ import {
   ListBoxItem as RACListBoxItem,
   ListBoxSection as RACListBoxSection,
 } from 'react-aria-components';
+
 import { dropdown } from '../classes';
 
-const ListBox = <T extends object>({
-  className,
-  ...restProps
-}: ListBoxProps<T>) => (
+const ListBox = <T extends object>({ className, ...restProps }: ListBoxProps<T>) => (
   <RACListBox {...restProps} className={cx(dropdown.listbox, className)} />
 );
 
@@ -34,7 +32,7 @@ const ListBoxItem = (props: ListBoxItemProps) => {
       {...props}
       className={cx(
         props.className,
-        'flex cursor-pointer px-6 py-3 leading-6 outline-none data-focused:bg-sky-lightest',
+        'data-focused:bg-sky-lightest flex cursor-pointer px-6 py-3 leading-6 outline-none',
       )}
       textValue={textValue}
     >
@@ -51,10 +49,7 @@ const ListBoxItem = (props: ListBoxItemProps) => {
 /**
  * This component can be used to group items in a listbox
  */
-const ListBoxSection = <T extends object>({
-  className,
-  ...restProps
-}: ListBoxSectionProps<T>) => (
+const ListBoxSection = <T extends object>({ className, ...restProps }: ListBoxSectionProps<T>) => (
   <RACListBoxSection
     {...restProps}
     // The :not(:first-child) selector adds extra spacing to all the options, but not the section (group) headings
@@ -69,10 +64,7 @@ const ListBoxSection = <T extends object>({
 const ListBoxHeader = (props: ListBoxHeadingProps) => (
   <Header
     {...props}
-    className={cx(
-      props.className,
-      'mx-6 cursor-default py-2 font-medium text-blue-dark leading-6',
-    )}
+    className={cx(props.className, 'text-blue-dark mx-6 cursor-default py-2 leading-6 font-medium')}
   />
 );
 
