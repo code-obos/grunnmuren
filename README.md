@@ -43,7 +43,7 @@ pnpm install
 
 #### Linting
 
-The following command runs Biome.
+The following command runs oxlint.
 
 ```bash
 pnpm lint
