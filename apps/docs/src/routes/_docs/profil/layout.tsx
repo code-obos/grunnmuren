@@ -96,7 +96,7 @@ function RouteComponent() {
         </strong>
         <h4 className="heading-xs">Eksempel på overstyring:</h4>
         <Code
-          value={`<main className="layout-grid-container">
+          code={`<main className="layout-grid-container">
   <h1 className="heading-xl sm:col-end-9">Dette er OBOS</h1>
   <p className="sm:col-start-6 sm:col-end-12">
     Som er ett nettsted for alt om OBOS.
@@ -167,7 +167,7 @@ function RouteComponent() {
         </p>
         <h4 className="heading-xs">Eksempel på bruk:</h4>
         <Code
-          value={`<main className="layout-grid-container layout-gap-y">
+          code={`<main className="layout-grid-container layout-gap-y">
   <ul className="md:layout-subgrid-12 *:md:col-span-6 *:lg:col-span-3">
     <Card>...</Card>
     <Card>...</Card>
@@ -244,7 +244,7 @@ function RouteComponent() {
 
         <h3 className="heading-s">Eksempel på bruk:</h3>
         <Code
-          value={`<main className="layout-grid-container layout-gap-y">
+          code={`<main className="layout-grid-container layout-gap-y">
   <section className="sm:col-span-6">Venstre kolonne</section>
   <section className="sm:col-span-6">Høyre kolonne</section>
   <section className="sm:col-span-12">Full bredde seksjon</section>
