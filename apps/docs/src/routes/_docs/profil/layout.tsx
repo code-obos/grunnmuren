@@ -1,5 +1,6 @@
 import { UNSAFE_Link as Link } from '@obosbbl/grunnmuren-react';
 import { createFileRoute } from '@tanstack/react-router';
+
 import { AnchorHeading } from '@/ui/anchor-heading';
 import { Code } from '@/ui/code';
 
@@ -42,21 +43,19 @@ function RouteComponent() {
           Container
         </AnchorHeading>
         <p>
-          Klassen <code>container</code> brukes for å gi innholdet padding på
-          sidene, sette en maksimal bredde på innholdet, samt sentrere innholdet
-          horisontalt.
+          Klassen <code>container</code> brukes for å gi innholdet padding på sidene, sette en
+          maksimal bredde på innholdet, samt sentrere innholdet horisontalt.
         </p>
 
         <p>
-          I de aller fleste tilfeller vil vi unngå å plassere innhold helt ut i
-          kanten på denne containeren. Hovedinnholdet skal som regel plasseres
-          sentrert i denne containeren, med en "gutter" på hver side.
+          I de aller fleste tilfeller vil vi unngå å plassere innhold helt ut i kanten på denne
+          containeren. Hovedinnholdet skal som regel plasseres sentrert i denne containeren, med en
+          "gutter" på hver side.
         </p>
         <p>
-          Den enkleste måten å få dette riktig er å bruke{' '}
-          <code>layout-grid-container</code>, som kombinerer{' '}
-          <code>container</code> med et grid-oppsett på 14 kolonner. Innholdet
-          plasseres da i kolonne 2-13 for å få "gutter" på hver side.
+          Den enkleste måten å få dette riktig er å bruke <code>layout-grid-container</code>, som
+          kombinerer <code>container</code> med et grid-oppsett på 14 kolonner. Innholdet plasseres
+          da i kolonne 2-13 for å få "gutter" på hver side.
         </p>
       </section>
       <section className="prose mb-12">
@@ -65,10 +64,9 @@ function RouteComponent() {
         </AnchorHeading>
         <h3 className="heading-s">.layout-grid</h3>
         <p>
-          Grunnmuren sitt grid defineres av klassen <code>layout-grid</code>, og
-          består av 14 kolonner med responsiv spacing mellom kolonnene. Det
-          betyr at størrelsen på kolonnene varierer avhengig av bredden på
-          containeren. For at dette skal fungere optimalt, bør{' '}
+          Grunnmuren sitt grid defineres av klassen <code>layout-grid</code>, og består av 14
+          kolonner med responsiv spacing mellom kolonnene. Det betyr at størrelsen på kolonnene
+          varierer avhengig av bredden på containeren. For at dette skal fungere optimalt, bør{' '}
           <code>layout-grid</code> enten:
         </p>
         <ul>
@@ -80,24 +78,21 @@ function RouteComponent() {
           </li>
         </ul>
         <p>
-          De 14 kolonnene gjelder fra og med små skjermer <code>sm:</code> og
-          oppover.
+          De 14 kolonnene gjelder fra og med små skjermer <code>sm:</code> og oppover.
         </p>
         <h3 className="heading-s">.layout-grid-container</h3>
         <p>
-          Klassen <code>layout-grid-container</code> kombinerer{' '}
-          <code>container</code> og <code>layout-grid</code> for å gi en enkel
-          måte å sette opp et grid med gutters på hver side. Her plasseres også
-          alt innhold mellom kolonne 2 og 13 som default.
+          Klassen <code>layout-grid-container</code> kombinerer <code>container</code> og{' '}
+          <code>layout-grid</code> for å gi en enkel måte å sette opp et grid med gutters på hver
+          side. Her plasseres også alt innhold mellom kolonne 2 og 13 som default.
         </p>
         <p>
-          Dette kan overstyres ved å sette andre <code>col-start</code>,{' '}
-          <code>col-end</code> eller <code>col-span</code> verdier.
+          Dette kan overstyres ved å sette andre <code>col-start</code>, <code>col-end</code> eller{' '}
+          <code>col-span</code> verdier.
         </p>
         <strong>
-          Det er viktig å huske på at du må bruke <code>sm:</code> prefixet for
-          kolonneverdier, siden kolonne systemet kun begynner å gjelde fra små
-          skjermer og oppover.
+          Det er viktig å huske på at du må bruke <code>sm:</code> prefixet for kolonneverdier,
+          siden kolonne systemet kun begynner å gjelde fra små skjermer og oppover.
         </strong>
         <h4 className="heading-xs">Eksempel på overstyring:</h4>
         <Code
@@ -115,11 +110,10 @@ function RouteComponent() {
         />
         <h3 className="heading-s">.layout-subgrid-*</h3>
         <p>
-          Dersom du ønsker å lage et subgrid inne i et eksisterende grid, kan du
-          bruke klassene <code>layout-subgrid-*</code>. Disse klassene oppretter
-          et subgrid som "arver" kolonneoppsettet fra parent-gridet. Dette er en
-          midlertidig løsning frem til det er bedre støtte for{' '}
-          <code>subgrid</code> blant nettlesere.
+          Dersom du ønsker å lage et subgrid inne i et eksisterende grid, kan du bruke klassene{' '}
+          <code>layout-subgrid-*</code>. Disse klassene oppretter et subgrid som "arver"
+          kolonneoppsettet fra parent-gridet. Dette er en midlertidig løsning frem til det er bedre
+          støtte for <code>subgrid</code> blant nettlesere.
         </p>
         <h4 className="heading-xs">Du kan velge mellom:</h4>
         <ul>
@@ -163,15 +157,13 @@ function RouteComponent() {
             <code>layout-subgrid-13</code>
           </li>
           <li>
-            <code>layout-subgrid-14</code> eller{' '}
-            <code>layout-subgrid-full</code>
+            <code>layout-subgrid-14</code> eller <code>layout-subgrid-full</code>
           </li>
         </ul>
         <p>
-          I subgrid må du selv passe på hvilke breakpoints som skal gjelde ,
-          siden det kan være forskjellig fra parent gridet. Disse klassene
-          setter altså ikke breakpoints for deg på samme måte som{' '}
-          <code>layout-grid</code> <code>layout-grid-container</code> gjør.
+          I subgrid må du selv passe på hvilke breakpoints som skal gjelde , siden det kan være
+          forskjellig fra parent gridet. Disse klassene setter altså ikke breakpoints for deg på
+          samme måte som <code>layout-grid</code> <code>layout-grid-container</code> gjør.
         </p>
         <h4 className="heading-xs">Eksempel på bruk:</h4>
         <Code
@@ -190,17 +182,15 @@ function RouteComponent() {
           Spacing
         </AnchorHeading>
         <p>
-          Grunnmuren tilbyr utility-klasser for konsistent og responsiv spacing
-          som kan brukes i blant annet grid-layouts. Disse klassene sørger for
-          at avstanden mellom elementer skalerer riktig på tvers av
-          skjermstørrelser.
+          Grunnmuren tilbyr utility-klasser for konsistent og responsiv spacing som kan brukes i
+          blant annet grid-layouts. Disse klassene sørger for at avstanden mellom elementer skalerer
+          riktig på tvers av skjermstørrelser.
         </p>
 
         <h3 className="heading-s">.layout-gap-x</h3>
         <p>
-          Klassen <code>layout-gap-x</code> setter horisontal avstand mellom
-          elementer i et grid. Den kombinerer en base-spacing med responsiv
-          grid-spacing:
+          Klassen <code>layout-gap-x</code> setter horisontal avstand mellom elementer i et grid.
+          Den kombinerer en base-spacing med responsiv grid-spacing:
         </p>
         <ul>
           <li>
@@ -222,9 +212,8 @@ function RouteComponent() {
 
         <h3 className="heading-s">.layout-gap-y</h3>
         <p>
-          Klassen <code>layout-gap-y</code> setter vertikal avstand mellom
-          elementer i et grid. Den er responsiv og øker avstanden på større
-          skjermer:
+          Klassen <code>layout-gap-y</code> setter vertikal avstand mellom elementer i et grid. Den
+          er responsiv og øker avstanden på større skjermer:
         </p>
         <ul>
           <li>
@@ -246,13 +235,11 @@ function RouteComponent() {
 
         <h3 className="heading-s">.layout-grid-gap-x</h3>
         <p>
-          Klassen <code>layout-grid-gap-x</code> brukes internt av{' '}
-          <code>layout-grid</code> og <code>layout-subgrid-*</code> for å sette
-          riktig kolonneavstand. Den kan også brukes direkte dersom du kun
-          ønsker den responsive horisontale grid-spacingen uten base-spacingen
+          Klassen <code>layout-grid-gap-x</code> brukes internt av <code>layout-grid</code> og{' '}
+          <code>layout-subgrid-*</code> for å sette riktig kolonneavstand. Den kan også brukes
+          direkte dersom du kun ønsker den responsive horisontale grid-spacingen uten base-spacingen
           fra <code>layout-gap-x</code>. Den har samme responsive verdier som{' '}
-          <code>layout-gap-x</code>, men kun fra og med <code>sm:</code> og
-          oppover.
+          <code>layout-gap-x</code>, men kun fra og med <code>sm:</code> og oppover.
         </p>
 
         <h3 className="heading-s">Eksempel på bruk:</h3>
@@ -264,10 +251,9 @@ function RouteComponent() {
 </main>`}
         />
         <p>
-          I eksempelet over vil <code>layout-grid-container</code> automatisk
-          sette horisontal spacing mellom kolonnene, mens{' '}
-          <code>layout-gap-y</code> sørger for responsiv vertikal avstand mellom
-          radene.
+          I eksempelet over vil <code>layout-grid-container</code> automatisk sette horisontal
+          spacing mellom kolonnene, mens <code>layout-gap-y</code> sørger for responsiv vertikal
+          avstand mellom radene.
         </p>
       </section>
     </>

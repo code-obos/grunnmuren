@@ -85,22 +85,19 @@ export const OverridedColSpans = () => (
       src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
       alt=""
     />
-    <p className="sm:col-start-6 sm:col-end-12">
-      Som er ett nettsted for alt om OBOS.
-    </p>
+    <p className="sm:col-start-6 sm:col-end-12">Som er ett nettsted for alt om OBOS.</p>
     <img
       className="sm:col-span-6 sm:col-start-6"
       src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
       alt=""
     />
     <p className="sm:col-end-15">
-      Masse tekst for å teste grid container med sub grids. Lorem ipsum dolor
-      sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
-      labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-      exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-      aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-      fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-      sunt in culpa qui officia deserunt mollit anim id est laborum.
+      Masse tekst for å teste grid container med sub grids. Lorem ipsum dolor sit amet, consectetur
+      adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+      fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+      officia deserunt mollit anim id est laborum.
     </p>
     <img
       className="sm:col-span-full"
