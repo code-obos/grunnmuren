@@ -1,11 +1,13 @@
 import { ChevronLeft } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
-import type { CSSProperties, Ref } from 'react';
-import { Button, type ButtonProps } from 'react-aria-components';
+import type { Ref } from 'react';
 import {
-  UNSAFE_Link as Link,
-  type UNSAFE_LinkProps as LinkProps,
-} from '../link';
+  Button,
+  type ButtonProps,
+  Link,
+  type LinkProps,
+} from 'react-aria-components';
+import { animateIconVariants } from '../classes';
 
 type ButtonOrLinkProps = {
   children?: React.ReactNode;
@@ -30,19 +32,17 @@ function isLinkProps(
 }
 
 function Backlink(props: BacklinkProps) {
-  const { className, style, children, withUnderline, ref, ...restProps } =
-    props;
+  const { className, children, withUnderline, ref, ...restProps } = props;
 
   const _className = cx(
     className,
+    animateIconVariants({ animateIcon: 'left' }),
     'group flex max-w-fit cursor-pointer items-center gap-3 rounded-md p-2.5 font-normal no-underline focus-visible:outline-focus',
   );
 
   const content = (
     <>
-      <ChevronLeft
-        className={cx('-ml-[0.5em] group-hover:-translate-x-1 duration-300')}
-      />
+      <ChevronLeft className={cx('-ml-[0.5em] duration-300')} />
       {/* This wrapper is required in order to support the custom underline created with border-bottom when the text spans over multiple lines */}
       <span>
         <span
@@ -62,7 +62,6 @@ function Backlink(props: BacklinkProps) {
       <Link
         {...(restProps as LinkProps)}
         className={_className}
-        style={style as CSSProperties}
         ref={ref as Ref<HTMLAnchorElement>}
       >
         {content}
@@ -74,7 +73,6 @@ function Backlink(props: BacklinkProps) {
     <Button
       {...(restProps as ButtonProps)}
       className={_className}
-      style={style as CSSProperties}
       ref={ref as Ref<HTMLButtonElement>}
     >
       {content}

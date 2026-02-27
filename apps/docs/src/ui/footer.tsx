@@ -35,6 +35,14 @@ export function Footer() {
           </ul>
         </div>
       </div>
+      <button
+        className="mb-8 cursor-pointer underline"
+        type="button"
+        /* @ts-expect-error OneTrust is only in production so think this is fine */
+        onClick={() => window.OneTrust?.ToggleInfoDisplay()}
+      >
+        Administrer cookies
+      </button>
     </footer>
   );
 }

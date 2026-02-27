@@ -5,17 +5,17 @@ import { Button } from '../button/button';
 import { Checkbox } from './checkbox';
 import { CheckboxGroup, type CheckboxGroupProps } from './checkbox-group';
 
-const meta: Meta<typeof CheckboxGroup> = {
+const meta = {
   title: 'CheckboxGroup',
   component: CheckboxGroup,
   argTypes: {
     onChange: { action: 'changed' },
   },
-};
+} satisfies Meta<typeof CheckboxGroup>;
 
 export default meta;
 
-type Story = StoryObj<typeof CheckboxGroup>;
+type Story = StoryObj<typeof meta>;
 
 const CheckboxItems = ({ description }: { description?: boolean }) => {
   return (
@@ -87,6 +87,7 @@ const defaultProps = {
   defaultValue: undefined,
   name: undefined,
   value: undefined,
+  children: undefined,
 };
 
 export const Default: Story = {

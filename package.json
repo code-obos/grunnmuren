@@ -9,7 +9,8 @@
   "scripts": {
     "build": "pnpm --filter './packages/**' build",
     "build:docs": "pnpm --filter @obosbbl/grunnmuren-docs build",
-    "build:storybook": "storybook build -o ./apps/docs/public/storybook",
+    "build:storybook": "pnpm typecheck:storybook && storybook build -o ./apps/docs/public/storybook",
+    "typecheck:storybook": "tsc --noEmit -p packages/react/tsconfig.storybook.json",
     "ci:publish": "pnpm build && changeset publish",
     "ci:version": "changeset version",
     "dev": "storybook dev -p 6006 --ci --initial-path=/story/home--page",
@@ -17,18 +18,19 @@
     "lint": "pnpm biome check .",
     "lint:ci": "pnpm biome ci .",
     "serve-storybook": "http-server ./apps/docs/public/storybook -p 6006 --silent",
-    "test": "test-storybook"
+    "test": "test-storybook",
+    "sanity:schema:deploy": "pnpm --filter @obosbbl/grunnmuren-docs sanity:schema:deploy"
   },
   "dependencies": {
     "@biomejs/biome": "2.3.4",
     "@changesets/cli": "2.29.8",
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
     "@react-aria/optimize-locales-plugin": "1.1.5",
-    "@storybook/addon-docs": "10.1.9",
-    "@storybook/builder-vite": "10.1.9",
-    "@storybook/react-vite": "10.1.9",
+    "@storybook/addon-docs": "10.1.11",
+    "@storybook/builder-vite": "10.1.11",
+    "@storybook/react-vite": "10.1.11",
     "@storybook/test-runner": "0.24.2",
-    "@tailwindcss/vite": "4.1.17",
+    "@tailwindcss/vite": "4.1.18",
     "@types/bun": "1.3.2",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
@@ -38,12 +40,12 @@
     "playwright": "1.57.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "storybook": "10.1.9",
-    "tailwindcss": "4.1.17",
+    "storybook": "10.1.11",
+    "tailwindcss": "4.1.18",
     "typescript": "5.9.3",
-    "vite": "7.3.0"
+    "vite": "7.3.1"
   },
-  "packageManager": "pnpm@10.26.0",
+  "packageManager": "pnpm@10.28.0",
   "engines": {
     "node": ">=22.11 <25"
   }

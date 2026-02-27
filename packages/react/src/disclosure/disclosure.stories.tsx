@@ -4,7 +4,7 @@ import { useId, useState } from 'react';
 import { Checkbox, CheckboxGroup } from '../checkbox';
 import { Disclosure, DisclosureButton, DisclosurePanel } from './disclosure';
 
-const meta: Meta<typeof Disclosure> = {
+const meta = {
   title: 'Disclosure',
   component: Disclosure,
   parameters: {
@@ -25,15 +25,13 @@ const meta: Meta<typeof Disclosure> = {
       </div>
     );
   },
-};
+} satisfies Meta<typeof Disclosure>;
 
 export default meta;
 
-type Story = StoryObj<typeof Disclosure>;
+type Story = StoryObj<typeof meta>;
 
-export const DisclosureStory: Story = {
-  args: {},
-};
+export const DisclosureStory: Story = {};
 
 export const Hamburger: Story = {
   render: (props) => {

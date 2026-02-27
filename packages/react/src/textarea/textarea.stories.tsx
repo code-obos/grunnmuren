@@ -4,14 +4,14 @@ import { useState } from 'react';
 import { Button } from '../button/button';
 import { TextArea, type TextAreaProps } from './textarea';
 
-const meta: Meta<typeof TextArea> = {
+const meta = {
   title: 'TextArea',
   component: TextArea,
-};
+} satisfies Meta<typeof TextArea>;
 
 export default meta;
 
-type Story = StoryObj<typeof TextArea>;
+type Story = StoryObj<typeof meta>;
 
 const Template = (args: TextAreaProps) => {
   return args.isRequired ? (

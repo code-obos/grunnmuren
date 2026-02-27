@@ -8,7 +8,7 @@ import {
   UNSAFE_Modal as Modal,
 } from './modal';
 
-const meta: Meta<typeof Modal> = {
+const meta = {
   title: 'Modal',
   component: Modal,
   parameters: {
@@ -51,15 +51,13 @@ const meta: Meta<typeof Modal> = {
       </div>
     );
   },
-};
+} satisfies Meta<typeof Modal>;
 
 export default meta;
 
-type Story = StoryObj<typeof Modal>;
+type Story = StoryObj<typeof meta>;
 
-export const ModalStory: Story = {
-  args: {},
-};
+export const ModalStory: Story = {};
 
 export const MultipleActions: Story = {
   render: () => (

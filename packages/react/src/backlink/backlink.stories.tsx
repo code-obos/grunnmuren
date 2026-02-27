@@ -20,14 +20,14 @@ const Template = (args: BacklinkProps) => {
   );
 };
 
-const meta: Meta<typeof Backlink> = {
+const meta = {
   title: 'Backlink',
   component: Backlink,
-};
+} satisfies Meta<typeof Backlink>;
 
 export default meta;
 
-type Story = StoryObj<typeof Backlink>;
+type Story = StoryObj<typeof meta>;
 
 const defaultProps = {
   href: '#',

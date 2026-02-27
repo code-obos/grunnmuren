@@ -5,14 +5,14 @@ import { Button } from '..';
 import { Content, Footer, Heading } from '../content';
 import { Alertbox, type AlertboxProps } from '.';
 
-const meta: Meta<typeof Alertbox> = {
+const meta = {
   title: 'Alertbox',
   component: Alertbox,
-};
+} satisfies Meta<typeof Alertbox>;
 
 export default meta;
 
-type Story = StoryObj<typeof Alertbox>;
+type Story = StoryObj<typeof meta>;
 
 const Template = (args: AlertboxProps) => (
   <Alertbox {...args}>
@@ -63,6 +63,7 @@ const defaultProps = {
   variant: 'info',
   isDismissable: false,
   isExpandable: false,
+  children: undefined,
 } as const;
 
 export const DefaultAlert: Story = {

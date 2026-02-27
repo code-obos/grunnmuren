@@ -182,17 +182,17 @@ const ColoredStandaloneTemplate = (args: AccordionItemProps) => {
   );
 };
 
-const meta: Meta<typeof AccordionItem> = {
+const meta = {
   title: 'Accordion',
   component: AccordionItem,
   argTypes: {
     onExpandedChange: { action: 'expanded change' },
   },
-};
+} satisfies Meta<typeof AccordionItem>;
 
 export default meta;
 
-type Story = StoryObj<typeof AccordionItem>;
+type Story = StoryObj<typeof meta>;
 
 const defaultProps: AccordionItemProps = {
   defaultExpanded: false,

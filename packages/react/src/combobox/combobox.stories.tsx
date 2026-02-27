@@ -11,14 +11,14 @@ import {
   ComboboxSection,
 } from './combobox';
 
-const meta: Meta<typeof Combobox> = {
+const meta = {
   title: 'Combobox',
   component: Combobox,
-};
+} satisfies Meta<typeof Combobox>;
 
 export default meta;
 
-type Story = StoryObj<typeof Combobox>;
+type Story = StoryObj<typeof meta>;
 
 const Template = <T extends object>(args: ComboboxProps<T>) => {
   const select = (
@@ -128,6 +128,7 @@ const defaultProps = {
   selectedKey: undefined,
   placeholder: 'Velg boligprosjekt',
   isPending: false,
+  children: undefined,
 };
 
 export const Default: Story = {

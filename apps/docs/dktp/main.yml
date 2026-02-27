@@ -33,8 +33,8 @@ properties:
             initialDelaySeconds: 10
             periodSeconds: 3
         volumeMounts:
-          - mountPath: /var/log/console-logs
-            volumeName: logs
+          - mountPath: /var/log/application
+            volumeName: application-logs
 
       - image: dktprodacr.azurecr.io/dktp/log-forwarder:latest
         name: logs
@@ -47,8 +47,9 @@ properties:
           cpu: 0.25
           memory: 0.5Gi
         volumeMounts:
-          - mountPath: /var/log/console-logs
-            volumeName: logs
+          - mountPath: /var/log/application
+            volumeName: application-logs
+
     volumes:
-      - name: logs
+      - name: application-logs
         storageType: EmptyDir

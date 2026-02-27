@@ -1,14 +1,15 @@
 import { PortableText } from '@portabletext/react';
 import { cx } from 'cva';
-import type { COMPONENT_QUERYResult } from 'sanity.types';
+import type { COMPONENT_QUERY_RESULT } from 'sanity.types';
 import { AnchorHeading } from './anchor-heading';
 import { Code } from './code';
 import { ComponentPreview } from './component-preview';
 import { ImageWithCaption } from './image-with-caption';
+import { StorybookEmbed } from './storybook-embed';
 import { Table, TableBody, TableCell, TableHead, TableRow } from './table';
 
 export type SanityContentProps = Pick<
-  NonNullable<COMPONENT_QUERYResult>,
+  NonNullable<COMPONENT_QUERY_RESULT>,
   'content'
 > & {
   className?: string;
@@ -27,8 +28,19 @@ export function SanityContent({ content, className }: SanityContentProps) {
                 code={value.code.code}
               />
             ),
+            'storybook-embed': ({ value }) => (
+              <StorybookEmbed
+                id={value._key}
+                caption={value.caption}
+                storyId={value.storyId}
+              />
+            ),
             'static-code-block': ({ value }) => (
-              <Code value={value.code.code as string} />
+              <Code
+                code={value.code.code}
+                language={value.code.language}
+                caption={value.caption}
+              />
             ),
             'image-with-caption': ({ value }) => (
               <ImageWithCaption asset={value} />

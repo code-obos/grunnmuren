@@ -4,17 +4,17 @@ import { useState } from 'react';
 import { Button } from '../button/button';
 import { Checkbox, type CheckboxProps } from './checkbox';
 
-const meta: Meta<typeof Checkbox> = {
+const meta = {
   title: 'Checkbox',
   component: Checkbox,
   argTypes: {
     onChange: { action: 'changed' },
   },
-};
+} satisfies Meta<typeof Checkbox>;
 
 export default meta;
 
-type Story = StoryObj<typeof Checkbox>;
+type Story = StoryObj<typeof meta>;
 
 const Template = (args: CheckboxProps) => {
   return args.isRequired ? (

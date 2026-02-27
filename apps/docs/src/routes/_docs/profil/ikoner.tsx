@@ -85,7 +85,7 @@ function IconCard({ iconName, Icon }) {
         variant="tertiary"
         href={downloadSvgLink}
         download
-        className="ml-auto w-[44px]"
+        className="ml-auto w-11"
       >
         <Download className="flex-none" />
       </Button>

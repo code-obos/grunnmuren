@@ -48,6 +48,9 @@ jobs:
       - name: Build packages
         run: pnpm run build
 
+      - name: Typecheck storybook
+        run: pnpm typecheck:storybook
+
       # It makes sense to do this on PRs to ensure the change didn't break the Storybook
       - name: Build storybook
         run: pnpm build:storybook

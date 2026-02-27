@@ -99,7 +99,7 @@ function Table(props: TableProps) {
     canScrollLeft,
     canScrollRight,
     hasScrollingOccurred,
-  } = useHorizontalScroll([isResizing]);
+  } = useHorizontalScroll<HTMLDivElement>([isResizing]);
 
   const handleScroll = useCallback(
     (direction: ScrollDirection) => {
@@ -117,24 +117,6 @@ function Table(props: TableProps) {
   return (
     <div className={tableVariants({ className, variant })}>
       <div className="relative overflow-hidden">
-        <ScrollButton
-          direction="left"
-          onClick={() => handleScroll('left')}
-          isVisible={canScrollLeft}
-          hasScrollingOccurred={hasScrollingOccurred}
-          className="-translate-y-1/2 absolute top-5 z-10 h-11 w-11"
-          iconClassName="h-5 w-5"
-        />
-
-        <ScrollButton
-          direction="right"
-          onClick={() => handleScroll('right')}
-          isVisible={canScrollRight}
-          hasScrollingOccurred={hasScrollingOccurred}
-          className="-translate-y-1/2 absolute top-5 z-10 h-11 w-11"
-          iconClassName="h-5 w-5"
-        />
-
         <div
           ref={scrollContainerRef}
           className="scrollbar-hidden overflow-x-auto"
@@ -148,6 +130,20 @@ function Table(props: TableProps) {
             {children}
           </RACTable>
         </div>
+
+        <ScrollButton
+          direction="left"
+          onClick={() => handleScroll('left')}
+          isVisible={canScrollLeft}
+          hasScrollingOccurred={hasScrollingOccurred}
+        />
+
+        <ScrollButton
+          direction="right"
+          onClick={() => handleScroll('right')}
+          isVisible={canScrollRight}
+          hasScrollingOccurred={hasScrollingOccurred}
+        />
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Breadcrumb, Breadcrumbs } from '.';
 
-const meta: Meta<typeof Breadcrumbs> = {
+const meta = {
   title: 'Breadcrumbs',
   component: Breadcrumbs,
 
@@ -15,11 +15,11 @@ const meta: Meta<typeof Breadcrumbs> = {
       </Breadcrumbs>
     );
   },
-};
+} satisfies Meta<typeof Breadcrumbs>;
 
 export default meta;
 
-type Story = StoryObj<typeof Breadcrumbs>;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {

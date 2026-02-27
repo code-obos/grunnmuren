@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Avatar } from './avatar';
 
-const meta: Meta<typeof Avatar> = {
+const meta = {
   title: 'Avatar',
   component: Avatar,
   parameters: {
@@ -15,11 +15,11 @@ const meta: Meta<typeof Avatar> = {
       </div>
     );
   },
-};
+} satisfies Meta<typeof Avatar>;
 
 export default meta;
 
-type Story = StoryObj<typeof Avatar>;
+type Story = StoryObj<typeof meta>;
 
 export const DisclosureStory: Story = {
   args: {

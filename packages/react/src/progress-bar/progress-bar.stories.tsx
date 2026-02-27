@@ -9,7 +9,7 @@ import {
   UNSAFE_ProgressBarValueText as ProgressBarValueText,
 } from './';
 
-const meta: Meta<typeof ProgressBar> = {
+const meta = {
   title: 'ProgressBar',
   component: ProgressBar,
   parameters: {
@@ -19,7 +19,7 @@ const meta: Meta<typeof ProgressBar> = {
   args: {
     className: 'w-96',
   },
-};
+} satisfies Meta<typeof ProgressBar>;
 
 export default meta;
 

@@ -1,4 +1,5 @@
 import { obosAuthStore } from '@code-obos/sanity-auth';
+import { assist } from '@sanity/assist';
 import { codeInput } from '@sanity/code-input';
 import { table } from '@sanity/table';
 import { visionTool } from '@sanity/vision';
@@ -12,7 +13,7 @@ export default defineConfig({
   projectId: 'tq6w17ny',
   dataset,
   basePath: '/studio',
-  title: 'Grunnmuren - Sanity Studio',
+  title: 'Grunnmuren',
   auth: obosAuthStore({ dataset }),
   plugins: [
     structureTool({
@@ -70,6 +71,7 @@ export default defineConfig({
     visionTool(),
     codeInput(),
     table(),
+    assist(),
   ],
   schema: {
     types: schemaTypes,

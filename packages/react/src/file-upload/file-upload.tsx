@@ -56,6 +56,49 @@ const translations: Translations = {
 };
 
 /**
+ * Extracts a simple file extension from a file name or converts MIME type to extension
+ * @param file The file object
+ * @returns A simple file extension (e.g., "pdf", "jpg", "svg")
+ */
+function getFileExtension(file: File): string {
+  const match = file.name.match(/\.([^.]+)$/);
+  if (match) {
+    return match[1].toUpperCase();
+  }
+
+  const mimeType = file.type;
+  if (!mimeType) {
+    return '';
+  }
+
+  const parts = mimeType.split('/');
+  if (parts.length === 2) {
+    const subtype = parts[1].split('+')[0]; // Handle cases like "svg+xml"
+    return subtype.toUpperCase();
+  }
+
+  return '';
+}
+
+/**
+ * Formats a file size in bytes to a human-readable string (B, KB, MB, GB, etc.)
+ * @param bytes The file size in bytes
+ * @returns A formatted string with the appropriate unit
+ */
+function formatFileSize(bytes: number): string {
+  if (bytes === 0) {
+    return '0 B';
+  }
+
+  const units = ['B', 'KB', 'MB', 'GB', 'TB'];
+  const base = 1024;
+  const unitIndex = Math.floor(Math.log(bytes) / Math.log(base));
+  const size = bytes / base ** unitIndex;
+
+  return `${size.toFixed(2).replace(/\.?0+$/, '')} ${units[unitIndex]}`;
+}
+
+/**
  * Converts an array of files to a DataTransfer object which can be used as a FileList.
  * This is necessary for setting the files on a native file input.
  * @param files An array of files
@@ -88,6 +131,7 @@ function uniqueFileNames(files: File[]) {
       // Extract any number from the file name (if any, otherwise default to 0)
       const baseNameCount = Number.parseInt(
         fileName.match(/\((\d+)\)/)?.[1] ?? '0',
+        10,
       );
       fileNameCounts[baseName] = baseNameCount;
     }
@@ -290,16 +334,27 @@ const FileUpload = ({
                 <li key={fileName}>
                   <div
                     className={cx(
-                      'flex items-center justify-between gap-2 rounded-lg border-2 px-4 py-2',
-                      hasError
-                        ? 'border-red bg-red-light'
-                        : 'border-gray bg-gray-lightest',
+                      'flex items-center justify-between gap-3 rounded-lg border p-1.5',
+                      hasError ? 'border-red bg-red-light' : 'border-gray',
                     )}
                   >
-                    {fileName}
+                    <div className="flex items-center gap-3">
+                      <div className="footnote rounded-md border border-gray-light bg-gray-lightest px-2.5 py-2">
+                        {getFileExtension(file)}
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="description truncate font-medium">
+                          {fileName}
+                        </span>
+                        <span className="footnote text-gray-dark">
+                          {formatFileSize(file.size)}
+                        </span>
+                      </div>
+                    </div>
                     <button
+                      type="button"
+                      aria-label={translations.remove[locale]}
                       className={cx(
-                        'self-start',
                         '-m-2 grid h-11 w-11 shrink-0 cursor-pointer place-items-center rounded-xl',
                         // Focus styles
                         'focus-visible:-outline-offset-8 focus-visible:outline-focus',
@@ -319,8 +374,6 @@ const FileUpload = ({
                         // (without this, the focus will be set to the top of the page for screen readers)
                         buttonRef.current?.focus();
                       }}
-                      aria-label={translations.remove[locale]}
-                      type="button"
                     >
                       <Trash />
                     </button>
