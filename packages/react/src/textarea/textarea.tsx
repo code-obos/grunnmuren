@@ -31,10 +31,7 @@ type TextAreaProps = {
   rows?: number;
   /** Ref for the textarea element. */
   ref?: Ref<HTMLTextAreaElement>;
-} & Omit<
-  RACTextFieldProps,
-  'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style'
->;
+} & Omit<RACTextFieldProps, 'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style'>;
 
 function TextArea(props: TextAreaProps) {
   const {
@@ -51,11 +48,7 @@ function TextArea(props: TextAreaProps) {
   const isInvalid = !!errorMessage || _isInvalid;
 
   return (
-    <RACTextField
-      {...restProps}
-      className={cx(className, formField)}
-      isInvalid={isInvalid}
-    >
+    <RACTextField {...restProps} className={cx(className, formField)} isInvalid={isInvalid}>
       {label && <Label>{label}</Label>}
       {description && <Description>{description}</Description>}
       <RACTextArea className={input()} rows={rows} ref={ref} />

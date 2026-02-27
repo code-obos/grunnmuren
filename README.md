@@ -43,7 +43,7 @@ pnpm install
 
 #### Linting
 
-The following command runs Biome.
+The following command runs oxlint.
 
 ```bash
 pnpm lint
@@ -72,7 +72,6 @@ Runs the docs app for local development, at http://localhost:3000.
 ```bash
 pnpm dev:docs
 ```
-
 
 ### Releases and changelogs
 

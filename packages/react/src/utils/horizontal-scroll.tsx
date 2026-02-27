@@ -29,8 +29,7 @@ export function ScrollButton({
   const Icon = direction === 'left' ? ChevronLeft : ChevronRight;
 
   return (
-    // biome-ignore lint/a11y/useKeyWithClickEvents: This button is only for mouse interaction to help users scroll. Keyboard and screen reader users can navigate the content directly without needing these scroll helpers.
-    // biome-ignore lint/a11y/noStaticElementInteractions: This button is only for mouse interaction to help users scroll. Keyboard and screen reader users can navigate the content directly without needing these scroll helpers.
+    // oxlint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
       onClick={onClick}
       className={cx(
@@ -43,12 +42,11 @@ export function ScrollButton({
           : 'bg-[linear-gradient(90deg,transparent,white_calc(10px),white)]',
 
         // Animation
-        hasScrollingOccurred &&
-          'duration-100 ease-in motion-safe:transition-transform',
+        hasScrollingOccurred && 'duration-100 ease-in motion-safe:transition-transform',
 
         // Hide/show animation
         direction === 'left'
-          ? !isVisible && '-translate-x-full pointer-events-none'
+          ? !isVisible && 'pointer-events-none -translate-x-full'
           : !isVisible && 'pointer-events-none translate-x-full',
 
         direction === 'left' ? '-left-3' : '-right-3',
@@ -77,9 +75,7 @@ interface ScrollState {
  * Simple hook for detecting horizontal scroll capabilities
  * Returns scroll state and a ref to attach to your scrollable container
  */
-export function useHorizontalScroll<E extends HTMLElement>(
-  scrollStateDeps: unknown[] = [],
-) {
+export function useHorizontalScroll<E extends HTMLElement>(scrollStateDeps: unknown[] = []) {
   const scrollContainerRef = useRef<E | null>(null);
   const [scrollState, setScrollState] = useState<ScrollState>({
     canScrollLeft: false,
@@ -104,13 +100,15 @@ export function useHorizontalScroll<E extends HTMLElement>(
     }));
   }, []);
 
-  const debouncedUpdateScrollState = useDebouncedCallback(
-    updateScrollState,
-    100,
-  );
+  const debouncedUpdateScrollState = useDebouncedCallback(updateScrollState, 100);
 
+  // The linter struggles here, so need to enable and disable to get it to pass...
+  // useEffect with a usecallback.....
+  // this feels wrong, but not touching this right now since we're just changing the lint setup
+  /* oxlint-disable react-hooks/exhaustive-deps */
   // Initial check and react to dependency changes
   useEffect(updateScrollState, [...scrollStateDeps]);
+  /* oxlint-enable react-hooks/exhaustive-deps */
 
   useEffect(() => {
     const container = scrollContainerRef.current;

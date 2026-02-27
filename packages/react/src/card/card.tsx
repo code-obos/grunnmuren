@@ -1,10 +1,7 @@
 import { cva, cx, type VariantProps } from 'cva';
 import type { HTMLAttributes } from 'react';
-import {
-  Link,
-  Provider,
-  type LinkProps as RACLinkProps,
-} from 'react-aria-components';
+import { Link, Provider, type LinkProps as RACLinkProps } from 'react-aria-components';
+
 import { HeadingContext } from '../content';
 
 type CardProps = VariantProps<typeof cardVariants> &
@@ -44,7 +41,7 @@ const cardVariants = cva({
     // **** Fail-safe for interactive elements ****
     // Make interactive elements clickable by themselves, while the rest of the card is clickable as a whole
     // The card is made clickable by a pseudo-element on the heading that covers the entire card
-    '[&:not(:has([data-slot="card-link"]_a))_a:not([data-slot="card-link"])]:relative [&_button]:relative [&_input]:relative',
+    '[&_button]:relative [&_input]:relative [&:not(:has([data-slot="card-link"]_a))_a:not([data-slot="card-link"])]:relative',
     // Our Button component has position: relative by default, so we need to override that if it is used in a CardLink (to make the entire card clickable)
     '[&_[data-slot="card-link"]_a]:static',
     // Place other interactive on top of the pseudo-element that makes the entire card clickable
@@ -142,13 +139,7 @@ const cardVariants = cva({
   ],
 });
 
-const Card = ({
-  children,
-  className,
-  variant,
-  layout,
-  ...restProps
-}: CardProps) => {
+const Card = ({ children, className, variant, layout, ...restProps }: CardProps) => {
   const cardClassName = cardVariants({
     variant,
     layout,
@@ -202,8 +193,6 @@ type CardLinkWrapperProps = {
   [K in keyof Omit<RACLinkProps, 'className' | 'children'>]?: never;
 };
 
-type _S = Pick<RACLinkProps, 'href'>;
-
 type CardLinkProps =
   | (Omit<RACLinkProps, 'href'> & Required<Pick<RACLinkProps, 'href'>>)
   | CardLinkWrapperProps;
@@ -251,11 +240,7 @@ const cardLinkVariants = cva({
  * A component that creates a clickable area on a card.
  * It can be used either as a wrapper around a link or as a standalone link.
  */
-const CardLink = ({
-  className: _className,
-  href,
-  ...restProps
-}: CardLinkProps) => {
+const CardLink = ({ className: _className, href, ...restProps }: CardLinkProps) => {
   const className = cardLinkVariants({
     className: _className,
     withHref: !!href,
@@ -272,11 +257,7 @@ const CardLink = ({
     // We can't utilize that the `Link` component from react-aria-components renders as a span if it doesn't have an href,
     // because it still renders with role="link" and tabindex="0" which makes it focusable.
     // So we need to render a div instead.
-    <div
-      {...(restProps as CardLinkWrapperProps)}
-      data-slot="card-link"
-      className={className}
-    />
+    <div {...(restProps as CardLinkWrapperProps)} data-slot="card-link" className={className} />
   );
 };
 

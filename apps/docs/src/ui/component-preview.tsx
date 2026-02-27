@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import reactElementToJSXString from 'react-element-to-jsx-string';
+
 import { Code } from './code-legacy';
 
 type ComponentPreviewProps = {

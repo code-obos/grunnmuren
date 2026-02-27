@@ -12,11 +12,7 @@ const storybookEmbed = defineType({
       description: (
         <>
           The story to embed. See{' '}
-          <a
-            href="https://grunnmuren.obos.no/storybook/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href="https://grunnmuren.obos.no/storybook/" target="_blank" rel="noopener noreferrer">
             Grunnmuren's storybook
           </a>
           .

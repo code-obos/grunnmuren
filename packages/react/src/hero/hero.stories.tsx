@@ -1,6 +1,7 @@
 import { ArrowRight, InfoCircle } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Group } from 'react-aria-components';
+
 import { Badge } from '../badge';
 import { Button } from '../button';
 import {
@@ -31,8 +32,8 @@ const meta = {
             Jobb i OBOS
           </Heading>
           <p className="lead">
-            Bli med å oppfylle boligdrømmer! Vi søker engasjerte og dyktige
-            personer som vil ta OBOS videre. Søk på våre ledige stillinger!
+            Bli med å oppfylle boligdrømmer! Vi søker engasjerte og dyktige personer som vil ta OBOS
+            videre. Søk på våre ledige stillinger!
           </p>
         </Content>
         <Carousel>
@@ -83,14 +84,12 @@ export const TwoColumn = () => (
       <Content>
         <Heading level={1}>Bank på OBOS-måten</Heading>
         <p>
-          Vi har satt ned renta på flere av boliglånene våre fra 2. april – og
-          spanderer både etablerings- og tinglysingsgebyret på alle medlemmer
-          som flytter lånet til oss før 31. mai. Det er bank på OBOS-måten.
+          Vi har satt ned renta på flere av boliglånene våre fra 2. april – og spanderer både
+          etablerings- og tinglysingsgebyret på alle medlemmer som flytter lånet til oss før 31.
+          mai. Det er bank på OBOS-måten.
         </p>
         <Group>
-          <Button href="https://www.obos.no/bank/registrer-deg">
-            Bli bankkunde
-          </Button>
+          <Button href="https://www.obos.no/bank/registrer-deg">Bli bankkunde</Button>
           <Button
             variant="secondary"
             href="https://www.obos.no/bank/registrer-deg/derfor-bor-du-velge-obos-banken"
@@ -115,11 +114,7 @@ export const StandardPageWithCTA = () => (
       <Content>
         <Heading level={1}>Dette er OBOS</Heading>
       </Content>
-      <Button
-        className="group"
-        variant="tertiary"
-        href="https://www.obos.no/dette-er-obos/nyheter"
-      >
+      <Button className="group" variant="tertiary" href="https://www.obos.no/dette-er-obos/nyheter">
         Nyheter og pressemeldinger
         <ArrowRight className="transition-transform group-hover:motion-safe:translate-x-1" />
       </Button>
@@ -194,8 +189,7 @@ export const FullBleedWithVideoLoop = () => (
       <Content>
         <Heading level={1}>Frysjaparken</Heading>
         <Description>
-          – det gamle industriområdet på Frysja har blitt et ettertraktet
-          nabolag
+          – det gamle industriområdet på Frysja har blitt et ettertraktet nabolag
         </Description>
       </Content>
       <Logo />
@@ -285,13 +279,11 @@ export const FullBleedWithCarousel = () => (
     </Hero>
     <h2>Tittel</h2>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+      labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+      laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+      voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+      non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </p>
   </main>
 );

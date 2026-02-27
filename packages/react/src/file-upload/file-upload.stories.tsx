@@ -1,5 +1,6 @@
 import type { Meta } from '@storybook/react-vite';
 import { useState } from 'react';
+
 import { Button } from '../button';
 import { Description, Label } from '../label';
 import { UNSAFE_FileUpload as FileUpload } from './file-upload';
@@ -34,9 +35,7 @@ export const AllowsMultiple = {
       <div className="container p-4">
         <FileUpload allowsMultiple>
           <Label>Last opp filer</Label>
-          <Description>
-            Du kan laste opp flere filer. Du kan laste de opp samtidig.
-          </Description>
+          <Description>Du kan laste opp flere filer. Du kan laste de opp samtidig.</Description>
           <Button>Velg filer</Button>
         </FileUpload>
       </div>
@@ -99,13 +98,9 @@ export const Required = {
           const formData = new FormData(e.target as HTMLFormElement);
           const files = formData
             .getAll('files')
-            .filter(
-              (file) => file instanceof File && file.size > 0 && file.name,
-            );
+            .filter((file) => file instanceof File && file.size > 0 && file.name);
 
-          alert(
-            `Lastet opp ${files.map((file) => (file as File).name).join(', ')}`,
-          );
+          alert(`Lastet opp ${files.map((file) => (file as File).name).join(', ')}`);
         }}
       >
         <FileUpload isRequired name="file">
@@ -123,9 +118,7 @@ export const Validation = {
   render: () => {
     return (
       <div className="w-72 max-w-full p-4">
-        <FileUpload
-          validate={(file) => file.size < 1000000 || 'Filen er for stor'}
-        >
+        <FileUpload validate={(file) => file.size < 1000000 || 'Filen er for stor'}>
           <Label>Last opp fil</Label>
           <Description>Du kan laste opp en fil på maksimalt 1 MB.</Description>
           <Button>Velg fil</Button>
@@ -146,9 +139,7 @@ export const InForm = () => (
         .getAll('files')
         .filter((file) => file instanceof File && file.size > 0 && file.name);
 
-      alert(
-        `Lastet opp ${files.map((file) => (file as File).name).join(', ')}`,
-      );
+      alert(`Lastet opp ${files.map((file) => (file as File).name).join(', ')}`);
     }}
   >
     <FileUpload
@@ -158,8 +149,7 @@ export const InForm = () => (
     >
       <Label>Last opp filer</Label>
       <Description>
-        Du må laste opp minst én fil, du kan laste opp flere. Filene kan ikke
-        være større enn 1 MB.
+        Du må laste opp minst én fil, du kan laste opp flere. Filene kan ikke være større enn 1 MB.
       </Description>
       <Button variant="secondary">Velg fil</Button>
     </FileUpload>

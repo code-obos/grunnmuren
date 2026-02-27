@@ -1,5 +1,22 @@
 # @obosbbl/grunnmuren-react
 
+## 3.4.3
+
+### Patch Changes
+
+- f7a4326: Revert: switch back from tsdown to bunchee for bundling because of tailwindcss problems
+- Updated dependencies [f7a4326]
+  - @obosbbl/grunnmuren-icons-react@2.1.2
+
+## 3.4.2
+
+### Patch Changes
+
+- f387774: bundle packages using tsdown
+- dd9d1fe: Fixes `<Media>` styles set by the `<Carousel>` so that they only target immediate `<Media>`-children, not any nested `<Media>`. This solves issues with incorrect aspect ratios when putting components such as `<Card>` as a `<CarouselItem>`.
+- Updated dependencies [f387774]
+  - @obosbbl/grunnmuren-icons-react@2.1.1
+
 ## 3.4.1
 
 ### Patch Changes

@@ -19,15 +19,12 @@ const fontGlob = new Glob('*.woff2');
 
 // Get all font files in the folder and group them by their family name
 const fontFiles = await Array.fromAsync(fontGlob.scan());
-const fontFilesByFamily = Object.groupBy(
-  fontFiles,
-  (file) => file.split('-')[0],
-);
+const fontFilesByFamily = Object.groupBy(fontFiles, (file) => file.split('-')[0]);
 
 const fontFallbacks: Record<string, unknown> = {};
 
 for (const [fontFamilyName, fontFiles] of Object.entries(fontFilesByFamily)) {
-  for await (const fontFile of fontFiles ?? []) {
+  for (const fontFile of fontFiles ?? []) {
     const fontMetrics = await readMetrics(Bun.pathToFileURL(fontFile));
 
     if (fontMetrics == null) {
@@ -59,9 +56,7 @@ for (const [fontFamilyName, fontFiles] of Object.entries(fontFilesByFamily)) {
     const fontFallbackDeclaration: Record<string, string> = {};
 
     for (const rule of rules) {
-      const [cssProperty, cssValue] = rule
-        .split(':')
-        .map((v) => v.trim().replace(';', ''));
+      const [cssProperty, cssValue] = rule.split(':').map((v) => v.trim().replace(';', ''));
       fontFallbackDeclaration[cssProperty] = cssValue;
     }
 
@@ -77,9 +72,7 @@ for (const [_, fallback] of Object.entries(fontFallbacks)) {
   cssContent += '  @font-face {\n';
 
   // Add all CSS properties
-  for (const [property, value] of Object.entries(
-    fallback as Record<string, string>,
-  )) {
+  for (const [property, value] of Object.entries(fallback as Record<string, string>)) {
     cssContent += `    ${property}: ${value};\n`;
   }
 

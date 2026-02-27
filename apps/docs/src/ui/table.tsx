@@ -9,10 +9,7 @@ type TableProps = {
 };
 
 const Table = ({ children, className, ...restProps }: TableProps) => (
-  <table
-    className={cx(className, 'not-prose mb-8 w-full text-sm')}
-    {...restProps}
-  >
+  <table className={cx(className, 'not-prose mb-8 w-full text-sm')} {...restProps}>
     {children}
   </table>
 );
@@ -54,7 +51,7 @@ const TableRow = ({ children, className }: TableRowProps) => {
         className,
         section === 'head'
           ? 'bg-sky-lightest text-left align-baseline *:px-3 *:py-2'
-          : 'not-first:border-t-[1px] not-first:border-t-gray-light align-baseline *:px-3 *:py-2',
+          : 'not-first:border-t-gray-light align-baseline *:px-3 *:py-2 not-first:border-t-[1px]',
       )}
     >
       {children}

@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 import path from 'node:path';
+
 import fs from 'fs-extra';
 import ora from 'ora';
 import prompts from 'prompts';
+
 import { __dirname } from './utils.mjs';
 
 // The Figma project where we can find our icons
@@ -16,10 +18,8 @@ const NODE_ID = '30:2099';
 // Where we store the Figma token
 const FIGMA_TOKEN_PATH = path.join(__dirname, '../', '.FIGMA_TOKEN');
 
-(async function main() {
-  const spinner = ora(
-    `Reading Figma access token from ${FIGMA_TOKEN_PATH}`,
-  ).start();
+void (async function main() {
+  const spinner = ora(`Reading Figma access token from ${FIGMA_TOKEN_PATH}`).start();
 
   let figmaToken = await readTokenFromDisk();
 
@@ -31,8 +31,7 @@ const FIGMA_TOKEN_PATH = path.join(__dirname, '../', '.FIGMA_TOKEN');
     const tokenPrompt = await prompts({
       type: 'text',
       name: 'figmaToken',
-      message:
-        'Enter your Figma access token (https://www.figma.com/developers/api#access-tokens)',
+      message: 'Enter your Figma access token (https://www.figma.com/developers/api#access-tokens)',
     });
 
     figmaToken = tokenPrompt.figmaToken;
@@ -175,7 +174,7 @@ function writeTokenToDisk(token) {
 }
 
 /**
- * @returns {String} token
+ * @returns {Promise<String>} token
  */
 async function readTokenFromDisk() {
   try {

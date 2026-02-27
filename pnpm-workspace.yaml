@@ -2,3 +2,7 @@ packages:
   - 'packages/**'
   - 'apps/**'
   - 'form-demo'
+
+catalog:
+  '@tailwindcss/vite': 4.2.1
+  tailwindcss: 4.2.1

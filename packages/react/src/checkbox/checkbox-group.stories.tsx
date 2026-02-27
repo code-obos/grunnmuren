@@ -23,16 +23,11 @@ const CheckboxItems = ({ description }: { description?: boolean }) => {
       <Checkbox value="bolig">Bolig</Checkbox>
       <Checkbox
         value="bank"
-        description={
-          description ? 'Markedets beste rentebetingelser' : undefined
-        }
+        description={description ? 'Markedets beste rentebetingelser' : undefined}
       >
         Bank
       </Checkbox>
-      <Checkbox
-        value="fordeler"
-        description={description ? 'Mer enn 100 fordeler' : undefined}
-      >
+      <Checkbox value="fordeler" description={description ? 'Mer enn 100 fordeler' : undefined}>
         Medlemsfordeler
       </Checkbox>
     </>

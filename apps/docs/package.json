@@ -9,17 +9,17 @@
     "build": "pnpm build:props && pnpm build:colors && pnpm build:tsc && pnpm build:assets && pnpm sanity:extract && pnpm build:app",
     "build:app": "vite build",
     "build:assets": "mkdir -p public/resources/icons && cp -r node_modules/@obosbbl/grunnmuren-icons-svg/src/* public/resources/icons/",
-    "build:props": "node extract-component-props.ts && biome lint --write component-props.ts --files-max-size=8000000",
-    "build:colors": "node extract-colors.ts && biome format --write colors.ts",
+    "build:colors": "node extract-colors.ts && oxfmt colors.ts",
+    "build:props": "node extract-component-props.ts && oxfmt component-props.ts",
     "build:tsc": "tsc",
     "dev": "vite dev --port 3003",
     "dev:local-storybook": "VITE_STORYBOOK_BASE_URL=http://localhost:6006 pnpm dev",
-    "start": "node .output/server/index.mjs",
-    "sanity:schema:deploy": "sanity schema deploy",
     "sanity:extract": "sanity manifest extract --path public/studio/static",
+    "sanity:schema:deploy": "sanity schema deploy",
     "sanity:typegen": "pnpm sanity:typegen:extract && pnpm sanity:typegen:generate",
     "sanity:typegen:extract": "sanity schema extract",
-    "sanity:typegen:generate": "sanity typegen generate"
+    "sanity:typegen:generate": "sanity typegen generate",
+    "start": "node .output/server/index.mjs"
   },
   "dependencies": {
     "@code-obos/sanity-auth": "1.4.4",
@@ -55,11 +55,11 @@
   "devDependencies": {
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
     "@react-aria/optimize-locales-plugin": "1.1.5",
-    "@tailwindcss/vite": "4.1.18",
+    "@tailwindcss/vite": "catalog:",
     "@tanstack/react-router-devtools": "1.157.18",
     "marked": "17.0.1",
     "react-docgen-typescript": "2.4.0",
-    "tailwindcss": "4.1.18",
+    "tailwindcss": "catalog:",
     "vite": "7.3.1",
     "vite-tsconfig-paths": "5.1.4"
   }

@@ -30,7 +30,7 @@ import { type DisclosureState, useDisclosureState } from 'react-stately';
 
 const disclosureButtonVariants = cva({
   base: [
-    'inline-flex cursor-pointer items-center justify-between rounded-lg focus-visible:outline-current focus-visible:outline-focus',
+    'focus-visible:outline-focus inline-flex cursor-pointer items-center justify-between rounded-lg focus-visible:outline-current',
     // Ensure a minimum click area of 44x44px, while making it look like it only has the size of the content
     'p-2.5 focus-visible:outline-offset-[-0.625rem]',
     'data-accordion:-m-2.5',
@@ -100,9 +100,7 @@ type DisclosureProps = RACDisclosureProps &
     className?: string;
   };
 
-export const DisclosureStateContext = createContext<DisclosureState | null>(
-  null,
-);
+export const DisclosureStateContext = createContext<DisclosureState | null>(null);
 
 const Disclosure = ({ ref: _ref, ..._props }: DisclosureProps) => {
   const [props, ref] = useContextProps(
@@ -116,9 +114,7 @@ const Disclosure = ({ ref: _ref, ..._props }: DisclosureProps) => {
   let { id, children, ...otherProps } = props;
   const defaultId = useId();
   id ||= defaultId;
-  const isExpanded = groupState
-    ? groupState.expandedKeys.has(id)
-    : props.isExpanded;
+  const isExpanded = groupState ? groupState.expandedKeys.has(id) : props.isExpanded;
 
   const state = useDisclosureState({
     ...props,
@@ -205,19 +201,17 @@ interface DisclosurePanelContextValue {
 const DisclosurePanelContext = createContext<DisclosurePanelContextValue>({});
 
 const DisclosurePanel = ({ ref, children, ...props }: DisclosurePanelProps) => {
-  const disclosureContext = useContext(
-    DisclosureContext,
-  ) as DisclosureProps | null;
+  const disclosureContext = useContext(DisclosureContext) as DisclosureProps | null;
 
   const { panelProps, panelRef } = useContext(DisclosurePanelContext);
   const { role: _role = 'group', className, ...restProps } = props;
-  const ariaLabelledby =
-    props['aria-labelledby'] ?? restProps['aria-labelledby'];
+  const ariaLabelledby = props['aria-labelledby'] ?? restProps['aria-labelledby'];
   const isWithoutRole = _role === 'none';
   const role = isWithoutRole ? undefined : _role;
 
-  const { isFocusVisible: isFocusVisibleWithin, focusProps: focusWithinProps } =
-    useFocusRing({ within: true });
+  const { isFocusVisible: isFocusVisibleWithin, focusProps: focusWithinProps } = useFocusRing({
+    within: true,
+  });
 
   const domProps = filterDOMProps(props);
 
@@ -225,9 +219,7 @@ const DisclosurePanel = ({ ref, children, ...props }: DisclosurePanelProps) => {
     <div
       className={cx(
         'grid transition-all duration-300 motion-reduce:transition-none',
-        disclosureContext?.isExpanded
-          ? 'grid-rows-[1fr] after:h-3.5'
-          : 'grid-rows-[0fr]',
+        disclosureContext?.isExpanded ? 'grid-rows-[1fr] after:h-3.5' : 'grid-rows-[0fr]',
       )}
       data-expanded={disclosureContext?.isExpanded || undefined}
     >

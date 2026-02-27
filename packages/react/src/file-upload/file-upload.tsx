@@ -24,6 +24,7 @@ import {
   Provider,
   useSlottedContext,
 } from 'react-aria-components';
+
 import { ErrorMessage } from '../label';
 import { ErrorMessageOrFieldError } from '../label/error-messsage-or-field-error';
 import { type Locale, useLocale } from '../use-locale';
@@ -129,10 +130,7 @@ function uniqueFileNames(files: File[]) {
 
     if (!fileNameCounts[baseName]) {
       // Extract any number from the file name (if any, otherwise default to 0)
-      const baseNameCount = Number.parseInt(
-        fileName.match(/\((\d+)\)/)?.[1] ?? '0',
-        10,
-      );
+      const baseNameCount = Number.parseInt(fileName.match(/\((\d+)\)/)?.[1] ?? '0', 10);
       fileNameCounts[baseName] = baseNameCount;
     }
 
@@ -177,9 +175,7 @@ const FileUpload = ({
 
   const slottedContext = useSlottedContext(FormContext) || {};
   const validationBehavior =
-    fileTriggerProps.validationBehavior ??
-    slottedContext.validationBehavior ??
-    'native';
+    fileTriggerProps.validationBehavior ?? slottedContext.validationBehavior ?? 'native';
 
   const validateFiles = useCallback(
     (files: File[]) => {
@@ -213,9 +209,7 @@ const FileUpload = ({
   useEffect(() => {
     // Keep the native file input in sync with the internal file state
     if (inputRef.current) {
-      inputRef.current.files = filesToDataTransfer(
-        controlledOrUncontrolledFiles,
-      );
+      inputRef.current.files = filesToDataTransfer(controlledOrUncontrolledFiles);
     }
   }, [controlledOrUncontrolledFiles, inputRef]);
 
@@ -259,11 +253,7 @@ const FileUpload = ({
 
   return (
     <Provider values={[[FieldErrorContext, displayValidation]]}>
-      <div
-        data-slot="file-upload"
-        className="group grid gap-2"
-        data-required={isRequired}
-      >
+      <div data-slot="file-upload" className="group grid gap-2" data-required={isRequired}>
         <Provider
           values={[
             [
@@ -296,16 +286,12 @@ const FileUpload = ({
 
               // For controlled component
               onChange?.((prevFiles) =>
-                allowsMultiple
-                  ? uniqueFileNames(prevFiles.concat(newFiles))
-                  : newFiles,
+                allowsMultiple ? uniqueFileNames(prevFiles.concat(newFiles)) : newFiles,
               );
 
               // For internal file state
               setFiles((prevFiles) =>
-                allowsMultiple
-                  ? uniqueFileNames(prevFiles.concat(newFiles))
-                  : newFiles,
+                allowsMultiple ? uniqueFileNames(prevFiles.concat(newFiles)) : newFiles,
               );
             }}
             isInvalid={isInvalid || validationState.displayValidation.isInvalid}
@@ -320,10 +306,7 @@ const FileUpload = ({
           <ul className="mt-4 grid max-w-fit gap-y-2">
             {controlledOrUncontrolledFiles.map((file, fileIndex) => {
               let fileName = file.name;
-              if (
-                fileTriggerProps.acceptDirectory &&
-                file.webkitRelativePath !== ''
-              ) {
+              if (fileTriggerProps.acceptDirectory && file.webkitRelativePath !== '') {
                 fileName = file.webkitRelativePath;
               }
 
@@ -339,16 +322,12 @@ const FileUpload = ({
                     )}
                   >
                     <div className="flex items-center gap-3">
-                      <div className="footnote rounded-md border border-gray-light bg-gray-lightest px-2.5 py-2">
+                      <div className="footnote border-gray-light bg-gray-lightest rounded-md border px-2.5 py-2">
                         {getFileExtension(file)}
                       </div>
                       <div className="flex flex-col">
-                        <span className="description truncate font-medium">
-                          {fileName}
-                        </span>
-                        <span className="footnote text-gray-dark">
-                          {formatFileSize(file.size)}
-                        </span>
+                        <span className="description truncate font-medium">{fileName}</span>
+                        <span className="footnote text-gray-dark">{formatFileSize(file.size)}</span>
                       </div>
                     </div>
                     <button
@@ -357,7 +336,7 @@ const FileUpload = ({
                       className={cx(
                         '-m-2 grid h-11 w-11 shrink-0 cursor-pointer place-items-center rounded-xl',
                         // Focus styles
-                        'focus-visible:-outline-offset-8 focus-visible:outline-focus',
+                        'focus-visible:outline-focus focus-visible:-outline-offset-8',
                       )}
                       onClick={() => {
                         // For controlled component
@@ -379,9 +358,7 @@ const FileUpload = ({
                     </button>
                   </div>
                   {hasError && (
-                    <ErrorMessage className="mt-1 block w-full">
-                      {validation}
-                    </ErrorMessage>
+                    <ErrorMessage className="mt-1 block w-full">{validation}</ErrorMessage>
                   )}
                 </li>
               );
@@ -402,7 +379,4 @@ const FileUpload = ({
   );
 };
 
-export {
-  FileUpload as UNSAFE_FileUpload,
-  type FileUploadProps as UNSAFE_FileUploadProps,
-};
+export { FileUpload as UNSAFE_FileUpload, type FileUploadProps as UNSAFE_FileUploadProps };

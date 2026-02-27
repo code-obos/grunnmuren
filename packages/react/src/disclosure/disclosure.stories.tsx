@@ -1,6 +1,7 @@
 import { Menu } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useId, useState } from 'react';
+
 import { Checkbox, CheckboxGroup } from '../checkbox';
 import { Disclosure, DisclosureButton, DisclosurePanel } from './disclosure';
 
@@ -38,11 +39,7 @@ export const Hamburger: Story = {
     return (
       <div className="p-4">
         <Disclosure {...props}>
-          <DisclosureButton
-            aria-label="Meny"
-            className="grid place-items-center"
-            isIconOnly
-          >
+          <DisclosureButton aria-label="Meny" className="grid place-items-center" isIconOnly>
             <Menu />
           </DisclosureButton>
           <DisclosurePanel className="pt-2">
@@ -61,16 +58,8 @@ export const WithCheckboxGroup: Story = {
     const [isExpanded, setIsExpanded] = useState(false);
     return (
       <div className="p-12">
-        <Disclosure
-          {...props}
-          isExpanded={isExpanded}
-          onExpandedChange={setIsExpanded}
-        >
-          <DisclosureButton
-            className="flex w-full gap-6 border-gray-light"
-            withChevron
-            id={id}
-          >
+        <Disclosure {...props} isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
+          <DisclosureButton className="border-gray-light flex w-full gap-6" withChevron id={id}>
             Kjøpsalternativer
           </DisclosureButton>
           {!isExpanded && (
@@ -81,11 +70,7 @@ export const WithCheckboxGroup: Story = {
             </ul>
           )}
           <DisclosurePanel className="p-4" role="none">
-            <CheckboxGroup
-              value={selectedOptions}
-              onChange={setSelectedItems}
-              aria-labelledby={id}
-            >
+            <CheckboxGroup value={selectedOptions} onChange={setSelectedItems} aria-labelledby={id}>
               <Checkbox value="deleie">Deleie</Checkbox>
               <Checkbox value="bostart">Bostart</Checkbox>
               <Checkbox value="boligbytte">Boligbytte</Checkbox>

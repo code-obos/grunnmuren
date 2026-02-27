@@ -2,7 +2,7 @@ import { cva, cx } from 'cva';
 
 const formField = cx('group flex flex-col gap-2');
 const formFieldError = cx(
-  'w-fit bg-red-light px-2 py-1 text-red text-sm leading-6',
+  'bg-red-light text-red w-fit px-2 py-1 text-sm leading-6',
   'group-data-[slot=file-upload]:rounded-lg',
 );
 
@@ -14,7 +14,7 @@ const input = cva({
     // Setting min-height to prevent the input from collapsing in Safari
     // Combining these with a padding-y as base classes makes it easier to standardize the height (44px) of all inputs
     'box-content min-h-6 py-2.5',
-    'rounded-md font-normal text-base leading-6 placeholder-[#727070] outline-hidden ring-1 ring-black',
+    'rounded-md text-base leading-6 font-normal placeholder-[#727070] ring-1 ring-black outline-hidden',
     // invalid styles
     'group-data-invalid:ring-focus group-data-invalid:ring-red',
     // Fix invisible ring on safari: https://github.com/tailwindlabs/tailwindcss.com/issues/1135
@@ -23,14 +23,13 @@ const input = cva({
   variants: {
     // Focus rings. Can either be :focus or :focus-visible based on the needs of the particular component.
     focusModifier: {
-      focus:
-        'focus:ring-focus group-data-invalid:focus:ring-3 group-data-invalid:focus:ring-red',
+      focus: 'focus:ring-focus group-data-invalid:focus:ring-red group-data-invalid:focus:ring-3',
       visible:
-        'data-focus-visible:ring-focus group-data-invalid:data-focus-visible:ring-3 group-data-invalid:data-focus-visible:ring-red',
+        'data-focus-visible:ring-focus group-data-invalid:data-focus-visible:ring-red group-data-invalid:data-focus-visible:ring-3',
     },
     isGrouped: {
       false: 'px-3',
-      true: '!ring-0 flex-1',
+      true: 'flex-1 !ring-0',
     },
   },
   defaultVariants: {
@@ -40,13 +39,13 @@ const input = cva({
 });
 
 const inputGroup = cx([
-  'inline-flex items-center gap-3 overflow-hidden rounded-md bg-white px-3 text-base ring-1 ring-black focus-within:ring-focus',
-  'group-data-invalid:ring-focus group-data-invalid:ring-red group-data-invalid:focus-within:ring-3 group-data-invalid:focus-within:ring-red',
+  'focus-within:ring-focus inline-flex items-center gap-3 overflow-hidden rounded-md bg-white px-3 text-base ring-1 ring-black',
+  'group-data-invalid:ring-focus group-data-invalid:ring-red group-data-invalid:focus-within:ring-red group-data-invalid:focus-within:ring-3',
 ]);
 
 const dropdown = {
   popover: cx(
-    'data-entering:fade-in data-exiting:fade-out min-w-(--trigger-width) overflow-y-auto rounded-md border border-black bg-white shadow-sm data-entering:animate-in data-exiting:animate-out',
+    'data-entering:fade-in data-exiting:fade-out data-entering:animate-in data-exiting:animate-out min-w-(--trigger-width) overflow-y-auto rounded-md border border-black bg-white shadow-sm',
   ),
   // overflow-x-hidden is needed to prevent visible vertical scrollbars from overflowing the border radius of the popover
   listbox: cx('max-h-100 overflow-x-hidden text-sm outline-hidden'),
@@ -64,16 +63,9 @@ const animateIconVariants = cva({
       down: 'hover:*:[svg]:motion-safe:translate-y-1',
       up: 'hover:*:[svg]:motion-safe:-translate-y-1',
       'up-right':
-        'hover:*:[svg]:motion-safe:-translate-y-0.5 hover:*:[svg]:motion-safe:translate-x-0.5',
+        'hover:*:[svg]:motion-safe:translate-x-0.5 hover:*:[svg]:motion-safe:-translate-y-0.5',
     },
   },
 });
 
-export {
-  dropdown,
-  formField,
-  formFieldError,
-  input,
-  inputGroup,
-  animateIconVariants,
-};
+export { dropdown, formField, formFieldError, input, inputGroup, animateIconVariants };

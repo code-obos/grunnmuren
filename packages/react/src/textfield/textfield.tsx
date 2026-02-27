@@ -41,10 +41,7 @@ type TextFieldProps = {
   size?: number;
   /** Ref for the input element. */
   ref?: Ref<HTMLInputElement>;
-} & Omit<
-  RACTextFieldProps,
-  'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style'
->;
+} & Omit<RACTextFieldProps, 'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style'>;
 
 const inputVariants = compose(
   input,
@@ -84,11 +81,7 @@ function TextField(props: TextFieldProps) {
   const isInvalid = !!errorMessage || _isInvalid;
 
   return (
-    <RACTextField
-      {...restProps}
-      className={cx(className, formField)}
-      isInvalid={isInvalid}
-    >
+    <RACTextField {...restProps} className={cx(className, formField)} isInvalid={isInvalid}>
       {label && <Label>{label}</Label>}
       {description && <Description>{description}</Description>}
 
@@ -109,11 +102,7 @@ function TextField(props: TextFieldProps) {
           {rightAddon}
         </Group>
       ) : (
-        <Input
-          className={inputVariants({ textAlign, autoWidth: !!size })}
-          ref={ref}
-          size={size}
-        />
+        <Input className={inputVariants({ textAlign, autoWidth: !!size })} ref={ref} size={size} />
       )}
 
       <ErrorMessageOrFieldError errorMessage={errorMessage} />

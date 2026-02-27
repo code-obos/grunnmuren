@@ -1,5 +1,7 @@
-import * as props from 'component-props';
 import type { PropItem } from 'react-docgen-typescript';
+
+import * as props from '@/component-props';
+
 import { AnchorHeading } from './anchor-heading';
 import { Table, TableBody, TableCell, TableHead, TableRow } from './table';
 
@@ -49,23 +51,14 @@ export const PropsTable = ({ componentName }: PropsTableProps) => {
           <PropRows props={groupedProps.Events} heading="Events" />
           <PropRows props={groupedProps.Links} heading="Links" />
           <PropRows props={groupedProps.Styles} heading="Styles" />
-          <PropRows
-            props={groupedProps.Accessibility}
-            heading="Accessibility"
-          />
+          <PropRows props={groupedProps.Accessibility} heading="Accessibility" />
         </TableBody>
       </Table>
     </div>
   );
 };
 
-const PropRows = ({
-  props,
-  heading,
-}: {
-  props?: Array<PropItem>;
-  heading?: string;
-}) => {
+const PropRows = ({ props, heading }: { props?: Array<PropItem>; heading?: string }) => {
   if (!props) return null;
 
   return (

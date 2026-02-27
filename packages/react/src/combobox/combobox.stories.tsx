@@ -75,15 +75,13 @@ const AsyncTemplate = <T extends object>(args: ComboboxProps<T>) => {
     async function fetchData() {
       if (filterText.length >= 2) {
         setIsPending(true);
-        const result = await fetch(
-          `https://swapi.dev/api/people?search=${filterText}`,
-        );
+        const result = await fetch(`https://swapi.dev/api/people?search=${filterText}`);
         const data = await result.json();
         setItems(data.results);
         setIsPending(false);
       }
     }
-    fetchData();
+    void fetchData();
   }, [filterText]);
 
   return (
@@ -110,9 +108,7 @@ const GroupedTemplate = <T extends object>(args: ComboboxProps<T>) => (
       <ComboboxSection key={county.name}>
         <ComboboxHeader>{county.name}</ComboboxHeader>
         {county.municipalities.map((municipality) => (
-          <ComboboxItem key={municipality.name}>
-            {municipality.name}
-          </ComboboxItem>
+          <ComboboxItem key={municipality.name}>{municipality.name}</ComboboxItem>
         ))}
       </ComboboxSection>
     ))}

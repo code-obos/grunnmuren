@@ -11,6 +11,7 @@ import {
   type TabsProps as RACTabsProps,
   TabListStateContext,
 } from 'react-aria-components';
+
 import { ScrollButton, useHorizontalScroll } from '../utils';
 
 const tabsVariants = cva({
@@ -63,12 +64,7 @@ type TabPanelProps = Omit<RACTabPanelProps, 'className'> &
  * and allows users to navigate between them.
  */
 function Tabs(props: TabsProps) {
-  const {
-    className,
-    children,
-    orientation = 'horizontal',
-    ...restProps
-  } = props;
+  const { className, children, orientation = 'horizontal', ...restProps } = props;
 
   return (
     <RACTabs
@@ -101,23 +97,15 @@ type _TabListStateContextType = {
 function TabList({ className, children, ...restProps }: TabListProps) {
   const state = useContext(TabListStateContext) as _TabListStateContextType;
 
-  const {
-    scrollContainerRef,
-    canScrollLeft,
-    canScrollRight,
-    hasScrollingOccurred,
-  } = useHorizontalScroll<HTMLDivElement>();
+  const { scrollContainerRef, canScrollLeft, canScrollRight, hasScrollingOccurred } =
+    useHorizontalScroll<HTMLDivElement>();
 
   // Tab-specific navigation logic
-  const prevKey =
-    state?.selectedKey && state?.collection.getKeyBefore(state.selectedKey);
+  const prevKey = state?.selectedKey && state?.collection.getKeyBefore(state.selectedKey);
   const onPrev = prevKey
     ? () => state?.setSelectedKey(prevKey)
     : () => {
-        if (
-          canScrollLeft &&
-          state?.selectedKey === state?.collection.firstKey
-        ) {
+        if (canScrollLeft && state?.selectedKey === state?.collection.firstKey) {
           // Scroll to the start of the tab list if we are at the first tab but it is scrolled out of view
           scrollContainerRef.current?.scrollTo({
             left: 0,
@@ -126,15 +114,11 @@ function TabList({ className, children, ...restProps }: TabListProps) {
         }
       };
 
-  const nextKey =
-    state?.selectedKey && state?.collection.getKeyAfter(state.selectedKey);
+  const nextKey = state?.selectedKey && state?.collection.getKeyAfter(state.selectedKey);
   const onNext = nextKey
     ? () => state?.setSelectedKey(nextKey)
     : () => {
-        if (
-          canScrollRight &&
-          state?.selectedKey === state?.collection.lastKey
-        ) {
+        if (canScrollRight && state?.selectedKey === state?.collection.lastKey) {
           // Scroll to the end of the tab list if we are at the last tab but it is scrolled out of view
           scrollContainerRef.current?.scrollTo({
             left: scrollContainerRef.current.scrollWidth,
@@ -163,8 +147,7 @@ function TabList({ className, children, ...restProps }: TabListProps) {
     const offsetLeft = selectedTab.offsetLeft;
     const containerWidth = container.clientWidth;
     // Set the scroll position to try and ish center the selected tab
-    const scrollLeft =
-      offsetLeft - (containerWidth - selectedTab.clientWidth) / 2;
+    const scrollLeft = offsetLeft - (containerWidth - selectedTab.clientWidth) / 2;
 
     // When the scroll is initiated by the user we want a smooth scroll
     if (hasScrollingOccurred) {
@@ -247,19 +230,19 @@ function Tab(props: TabProps) {
       {...restProps}
       className={cx(
         className,
-        'data-focus-visible:-outline-offset-10 data-focus-visible:outline-2 data-focus-visible:outline-black',
+        'data-focus-visible:outline-2 data-focus-visible:-outline-offset-10 data-focus-visible:outline-black',
         'description h-11 cursor-pointer border-transparent px-4 py-[0.71875rem] font-light',
         // Transition
         'transition-colors duration-150 ease-out',
         // TODO: Should disabled tabs just be hidden?
         'data-disabled:cursor-not-allowed data-disabled:opacity-50',
         // Selection
-        'data-selected:font-medium data-selected:text-blue-dark',
+        'data-selected:text-blue-dark data-selected:font-medium',
         // Hover with layout shift prevention using pseudo-element
         'after:invisible after:block after:h-0 after:overflow-hidden after:font-medium after:content-[attr(data-text)]',
         'data-hovered:font-medium',
         // Pressed
-        'data-pressed:font-medium data-pressed:text-blue-dark',
+        'data-pressed:text-blue-dark data-pressed:font-medium',
       )}
       data-text={typeof children === 'string' ? children : ''}
     >
@@ -278,10 +261,7 @@ function TabPanel(props: TabPanelProps) {
     <RACTabPanel
       {...restProps}
       shouldForceMount
-      className={cx(
-        className,
-        'flex-1 data-inert:hidden data-focus-visible:outline-focus-offset',
-      )}
+      className={cx(className, 'data-focus-visible:outline-focus-offset flex-1 data-inert:hidden')}
     >
       {children}
     </RACTabPanel>

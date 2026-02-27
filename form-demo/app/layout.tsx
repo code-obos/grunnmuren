@@ -1,15 +1,12 @@
 import { GrunnmurenProvider } from '@obosbbl/grunnmuren-react';
+
 import './globals.css';
 
 export const metadata = {
   title: 'Grunnmuren form examples',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   const locale = 'nb';
 
   return (

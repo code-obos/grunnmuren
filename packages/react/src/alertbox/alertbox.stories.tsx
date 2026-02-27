@@ -1,9 +1,10 @@
 import { Subscription } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
+
+import { Alertbox, type AlertboxProps } from '.';
 import { Button } from '..';
 import { Content, Footer, Heading } from '../content';
-import { Alertbox, type AlertboxProps } from '.';
 
 const meta = {
   title: 'Alertbox',
@@ -19,9 +20,8 @@ const Template = (args: AlertboxProps) => (
     <Heading level={2}>Informativ tittel</Heading>
     <Content>
       <p>
-        Bruk dette tekstfeltet til å beskrive hva varslingen handler om. Du kan
-        bruke så mange linjer du har behov for, men prøv likevel å være kort og
-        konsis.
+        Bruk dette tekstfeltet til å beskrive hva varslingen handler om. Du kan bruke så mange
+        linjer du har behov for, men prøv likevel å være kort og konsis.
       </p>
     </Content>
     <Footer>
@@ -43,17 +43,10 @@ const ControlledTemplate = (args: AlertboxProps) => {
 
   return (
     <>
-      <Button
-        onPress={() => setIsDismissed((prevState) => !prevState)}
-        className="mb-4"
-      >
+      <Button onPress={() => setIsDismissed((prevState) => !prevState)} className="mb-4">
         {`${isDismissed ? 'Vis' : 'Skjul'} alert`}
       </Button>
-      <Template
-        {...args}
-        isDismissed={isDismissed}
-        onDismiss={() => setIsDismissed(true)}
-      />
+      <Template {...args} isDismissed={isDismissed} onDismiss={() => setIsDismissed(true)} />
     </>
   );
 };

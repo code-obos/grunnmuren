@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
 import path from 'node:path';
+
 import fs from 'fs-extra';
 import pc from 'picocolors';
 import { optimize } from 'svgo';
+
 import { __dirname, listSvgs } from './utils.mjs';
 
 const DIST_DIR = path.join(__dirname, '../src');
@@ -42,7 +44,7 @@ files.forEach(async (filePath) => {
 
   const prevFileSize = Buffer.byteLength(rawData, 'utf8');
 
-  const { data: optimizedData } = await optimize(rawData, {
+  const { data: optimizedData } = optimize(rawData, {
     path: filePath,
     multipass: true,
     ...config,

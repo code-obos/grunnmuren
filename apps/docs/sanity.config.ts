@@ -5,6 +5,7 @@ import { table } from '@sanity/table';
 import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
+
 import { schemaTypes } from './studio/schema-types';
 
 const dataset = 'grunnmuren';
@@ -33,32 +34,23 @@ export default defineConfig({
                   .title('Menu and categories')
                   .items([
                     // Our singleton type has a list item with a custom child
-                    S.listItem()
-                      .title('Menu')
-                      .id('menu')
-                      .child(
+                    S.listItem().title('Menu').id('menu').child(
+                      // Instead of rendering a list of documents, we render a single
+                      // document, specifying the `documentId` manually to ensure
+                      // that we're editing the single instance of the document
+                      S.document().title('Menu').schemaType('menu').documentId('menu'),
+                    ),
+                    S.divider(),
+                    ...CATEGORIES.map((category) => {
+                      return S.listItem().title(category.title).id(category._id).child(
                         // Instead of rendering a list of documents, we render a single
                         // document, specifying the `documentId` manually to ensure
                         // that we're editing the single instance of the document
                         S.document()
-                          .title('Menu')
-                          .schemaType('menu')
-                          .documentId('menu'),
-                      ),
-                    S.divider(),
-                    ...CATEGORIES.map((category) => {
-                      return S.listItem()
-                        .title(category.title)
-                        .id(category._id)
-                        .child(
-                          // Instead of rendering a list of documents, we render a single
-                          // document, specifying the `documentId` manually to ensure
-                          // that we're editing the single instance of the document
-                          S.document()
-                            .title(category.title)
-                            .schemaType(category._type)
-                            .documentId(category._id),
-                        );
+                          .title(category.title)
+                          .schemaType(category._type)
+                          .documentId(category._id),
+                      );
                     }),
                   ]),
               ),
@@ -85,13 +77,11 @@ export default defineConfig({
   form: {
     // Disable the default for image assets
     image: {
-      assetSources: (sources) =>
-        sources.filter((source) => source.name !== 'sanity-default'),
+      assetSources: (sources) => sources.filter((source) => source.name !== 'sanity-default'),
     },
     // Disable the default for file assets
     file: {
-      assetSources: (sources) =>
-        sources.filter((source) => source.name !== 'sanity-default'),
+      assetSources: (sources) => sources.filter((source) => source.name !== 'sanity-default'),
     },
   },
   document: {

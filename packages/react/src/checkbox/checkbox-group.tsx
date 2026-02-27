@@ -25,12 +25,7 @@ type CheckboxGroupProps = {
   ref?: Ref<HTMLDivElement>;
 } & Omit<
   RACCheckboxGroupProps,
-  | 'className'
-  | 'isReadOnly'
-  | 'isDisabled'
-  | 'children'
-  | 'style'
-  | 'orientation'
+  'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style' | 'orientation'
 >;
 
 function CheckboxGroup(props: CheckboxGroupProps) {

@@ -8,6 +8,7 @@ import {
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { MenuItemProps } from 'react-aria-components';
 import { Menu, MenuItem, MenuTrigger, Popover } from 'react-aria-components';
+
 import { Code } from './code';
 
 type Props = {
@@ -67,10 +68,7 @@ const StoryRenderer = ({
   // data again
   useEffect(() => {
     if (contentHeight == null) {
-      iframeRef.current?.contentWindow?.postMessage(
-        { type: 'REQUEST_STORY_DATA' },
-        '*',
-      );
+      iframeRef.current?.contentWindow?.postMessage({ type: 'REQUEST_STORY_DATA' }, '*');
     }
   }, [contentHeight]);
 
@@ -113,12 +111,7 @@ const StoryRenderer = ({
 const StoryMenu = ({ id, storyUrl }: { id: string; storyUrl: string }) => {
   return (
     <MenuTrigger>
-      <Button
-        aria-label="Meny"
-        className="absolute right-0 z-10"
-        color="white"
-        isIconOnly
-      >
+      <Button aria-label="Meny" className="absolute right-0 z-10" color="white" isIconOnly>
         <span className="h-7 w-7">...</span>
       </Button>
       <Popover
@@ -126,18 +119,14 @@ const StoryMenu = ({ id, storyUrl }: { id: string; storyUrl: string }) => {
         placement="right top"
       >
         <Menu className="max-h-[inherit] overflow-auto p-1 outline-0">
-          <StoryMenuItem
-            href={storyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <StoryMenuItem href={storyUrl} target="_blank" rel="noopener noreferrer">
             Åpne isolert visning
           </StoryMenuItem>
           <StoryMenuItem
             onPress={() => {
               const url = new URL(window.location.href);
               url.hash = `#${id}`;
-              navigator.clipboard.writeText(url.toString());
+              void navigator.clipboard.writeText(url.toString());
             }}
           >
             Kopier lenke
@@ -151,7 +140,7 @@ const StoryMenu = ({ id, storyUrl }: { id: string; storyUrl: string }) => {
 const StoryMenuItem = (props: MenuItemProps) => {
   return (
     <MenuItem
-      className="flex items-center rounded px-3 py-2 text-xs no-underline outline-0 data-focused:bg-blue data-focused:text-white"
+      className="data-focused:bg-blue flex items-center rounded px-3 py-2 text-xs no-underline outline-0 data-focused:text-white"
       {...props}
     />
   );

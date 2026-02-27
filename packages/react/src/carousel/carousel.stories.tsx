@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { cva } from 'cva';
 import { fn } from 'storybook/test';
+
 import {
   UNSAFE_Carousel as Carousel,
   UNSAFE_CarouselButton as CarouselButton,

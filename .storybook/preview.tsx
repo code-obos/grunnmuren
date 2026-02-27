@@ -1,11 +1,11 @@
 import type { Preview } from '@storybook/react-vite';
+import { useRef } from 'react';
 import { STORY_FINISHED } from 'storybook/internal/core-events';
 import { SNIPPET_RENDERED } from 'storybook/internal/docs-tools';
 import { useChannel, useEffect } from 'storybook/preview-api';
-import { GrunnmurenProvider } from '../packages/react/src';
 
 import './storybook.css';
-import { useRef } from 'react';
+import { GrunnmurenProvider } from '../packages/react/src';
 
 // only allow postmessages from these origins
 const ALLOWED_MESSAGE_ORIGINS = new Set([
@@ -32,11 +32,7 @@ const preview: Preview = {
 
           const data = event.data;
 
-          if (
-            typeof data === 'object' &&
-            'type' in data &&
-            data.type === 'REQUEST_STORY_DATA'
-          ) {
+          if (typeof data === 'object' && 'type' in data && data.type === 'REQUEST_STORY_DATA') {
             window.parent.postMessage(
               {
                 type: 'STORY_HEIGHT',
@@ -60,7 +56,7 @@ const preview: Preview = {
         return () => {
           window.removeEventListener('message', messageHandler);
         };
-      }, []);
+      }, [context.viewMode]);
 
       // If the frame parent loads before the iframe story, this is
       // how we pass the data to the parent window

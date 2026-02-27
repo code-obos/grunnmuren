@@ -7,9 +7,7 @@ type ResourceLinksProps = {
 };
 
 export function ResourceLinks(props: ResourceLinksProps) {
-  return (
-    <div className={cx(props.className, 'flex gap-4')}>{props.children}</div>
-  );
+  return <div className={cx(props.className, 'flex gap-4')}>{props.children}</div>;
 }
 
 export type ResourceLinkProps = {

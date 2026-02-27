@@ -1,12 +1,8 @@
 import { ChevronLeft } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
 import type { Ref } from 'react';
-import {
-  Button,
-  type ButtonProps,
-  Link,
-  type LinkProps,
-} from 'react-aria-components';
+import { Button, type ButtonProps, Link, type LinkProps } from 'react-aria-components';
+
 import { animateIconVariants } from '../classes';
 
 type ButtonOrLinkProps = {
@@ -25,9 +21,7 @@ type ButtonOrLinkProps = {
 
 type BacklinkProps = (ButtonProps | LinkProps) & ButtonOrLinkProps;
 
-function isLinkProps(
-  props: BacklinkProps,
-): props is ButtonOrLinkProps & LinkProps {
+function isLinkProps(props: BacklinkProps): props is ButtonOrLinkProps & LinkProps {
   return !!props.href;
 }
 
@@ -37,7 +31,7 @@ function Backlink(props: BacklinkProps) {
   const _className = cx(
     className,
     animateIconVariants({ animateIcon: 'left' }),
-    'group flex max-w-fit cursor-pointer items-center gap-3 rounded-md p-2.5 font-normal no-underline focus-visible:outline-focus',
+    'group focus-visible:outline-focus flex max-w-fit cursor-pointer items-center gap-3 rounded-md p-2.5 font-normal no-underline',
   );
 
   const content = (
@@ -47,7 +41,7 @@ function Backlink(props: BacklinkProps) {
       <span>
         <span
           className={cx(
-            'border-transparent border-y transition-colors duration-300',
+            'border-y border-transparent transition-colors duration-300',
             withUnderline ? 'border-b-black' : 'group-hover:border-b-black',
           )}
         >

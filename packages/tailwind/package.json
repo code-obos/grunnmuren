@@ -2,29 +2,29 @@
   "name": "@obosbbl/grunnmuren-tailwind",
   "version": "2.4.5",
   "description": "Grunnmuren Tailwind preset",
+  "license": "MIT",
   "repository": {
     "url": "https://github.com/code-obos/grunnmuren"
-  },
-  "license": "MIT",
-  "type": "commonjs",
-  "exports": {
-    ".": "./tailwind-base.css"
   },
   "files": [
     "tailwind-base.css",
     "tailwind-typography.css",
     "font.css"
   ],
+  "type": "commonjs",
+  "exports": {
+    ".": "./tailwind-base.css"
+  },
   "scripts": {
     "font-fallback": "bun --cwd=./fonts ./generate-font-fallback.ts"
   },
+  "dependencies": {
+    "tw-animate-css": "^1.2.5"
+  },
   "devDependencies": {
-    "tailwindcss": "4.1.18"
+    "tailwindcss": "catalog:"
   },
   "peerDependencies": {
     "tailwindcss": "^4.0.0"
-  },
-  "dependencies": {
-    "tw-animate-css": "^1.2.5"
   }
 }
