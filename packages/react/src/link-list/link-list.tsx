@@ -101,7 +101,7 @@ const LinkListItem = ({ children, className, ...props }: LinkListItemProps) => {
       {...props}
       className={cx(
         className,
-        'after:bg-gray-light relative p-1.25 after:absolute after:-top-px after:right-0 after:left-0 after:h-px after:w-full',
+        'after:bg-gray-light relative p-1.25 after:absolute after:inset-x-0 after:-top-px after:h-px after:w-full',
         '*:data-[slot=link]:paragraph',
         ...linkStyles,
       )}

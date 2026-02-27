@@ -69,7 +69,7 @@ function Select<T extends object>(props: SelectProps<T>) {
         // See https://github.com/adobe/react-spectrum/discussions/4792#discussioncomment-6492305
         ref={ref}
       >
-        <SelectValue className="flex-1 truncate text-left data-[placeholder]:text-[#727070]" />
+        <SelectValue className="flex-1 truncate text-left data-placeholder:text-[#727070]" />
         <ChevronDown className={dropdown.chevronIcon} />
       </Button>
 

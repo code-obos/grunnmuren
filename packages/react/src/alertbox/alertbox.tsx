@@ -140,7 +140,7 @@ const Alertbox = ({
       {isDismissable && (
         <button
           className={cx(
-            '-m-2 grid h-11 w-11 place-items-center rounded-xl',
+            '-m-2 grid size-11 place-items-center rounded-xl',
             'focus-visible:outline-focus cursor-pointer focus-visible:-outline-offset-8',
           )}
           onClick={close}
@@ -153,9 +153,9 @@ const Alertbox = ({
       {isExpandable && (
         <button
           className={cx(
-            'relative col-span-full row-start-2 -my-3 inline-flex max-w-fit cursor-pointer items-center gap-1 py-3 text-sm leading-6',
+            'relative col-span-full row-start-2 -my-3 inline-flex max-w-fit cursor-pointer items-center gap-1 py-3 text-sm/6',
             // Focus styles:
-            'outline-none after:absolute after:right-0 after:bottom-3 after:left-0 after:h-0',
+            'outline-none after:absolute after:inset-x-0 after:bottom-3 after:h-0',
             'focus-visible:after:h-0.5 focus-visible:after:bg-black',
           )}
           onClick={() => setIsExpanded((prevState) => !prevState)}

@@ -170,7 +170,7 @@ const TableColumnResizer = ({ className, ...restProps }: TableColumnResizerProps
       className,
       '-my-3 -mr-4.5 size-11 flex-none',
       'cursor-ew-resize',
-      'relative after:absolute after:top-2 after:right-5 after:bottom-2 after:w-px after:bg-black',
+      'relative after:absolute after:inset-y-2 after:right-5 after:w-px after:bg-black',
       'data-focused:after:outline-focus-offset',
     )}
     data-slot="table-column-resizer"
@@ -206,7 +206,7 @@ function TableCell(props: TableCellProps) {
       {...restProps}
       className={cx(
         className,
-        'px-4 py-3 text-sm leading-relaxed text-black',
+        'px-4 py-3 text-sm/relaxed text-black',
         'min-w-fit whitespace-nowrap',
         'align-top',
         'data-focus-visible:outline-focus-inset',

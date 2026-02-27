@@ -182,7 +182,7 @@ function TabList({ className, children, ...restProps }: TabListProps) {
           'scrollbar-hidden overflow-x-auto',
           'flex w-fit max-w-full',
           // Ensure tabs don't shrink and maintain min-width
-          '[&>*]:min-w-fit [&>*]:flex-shrink-0',
+          '*:min-w-fit *:shrink-0',
           // Divider line
           'border-gray-light',
           'data-[orientation=horizontal]:border-b',
@@ -230,7 +230,7 @@ function Tab(props: TabProps) {
       {...restProps}
       className={cx(
         className,
-        'data-focus-visible:outline-2 data-focus-visible:-outline-offset-10 data-focus-visible:outline-black',
+        'data-focus-visible:outline-focus data-focus-visible:-outline-offset-10',
         'description h-11 cursor-pointer border-transparent px-4 py-[0.71875rem] font-light',
         // Transition
         'transition-colors duration-150 ease-out',

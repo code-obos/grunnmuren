@@ -112,7 +112,7 @@ const StoryMenu = ({ id, storyUrl }: { id: string; storyUrl: string }) => {
   return (
     <MenuTrigger>
       <Button aria-label="Meny" className="absolute right-0 z-10" color="white" isIconOnly>
-        <span className="h-7 w-7">...</span>
+        <span className="size-7">...</span>
       </Button>
       <Popover
         className="z-10 min-w-37.5 rounded-lg border bg-white shadow-lg"

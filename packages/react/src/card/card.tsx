@@ -74,7 +74,7 @@ const cardVariants = cva({
       subtle: [
         'border-transparent',
         // **** Media styles ****
-        '[&_[data-slot="media"]]:rounded-2xl', // All corners are rounded
+        '**:data-[slot="media"]:rounded-2xl', // All corners are rounded
       ],
       outlined: 'border border-black',
     },
@@ -86,7 +86,7 @@ const cardVariants = cva({
       vertical: [
         'flex-col',
         // **** Media ****
-        '[&_[data-slot="media"]]:rounded-t-2xl', // Both Top corners are rounded
+        '**:data-[slot="media"]:rounded-t-2xl', // Both Top corners are rounded
       ],
       horizontal: [
         // Use more gap for horizontal cards that have media
@@ -94,7 +94,7 @@ const cardVariants = cva({
         'has-data-[slot=media]:layout-gap-x not-has-data-[slot=media]:gap-x-4',
         // **** With Media ****
         '[&:has(>[data-slot="media"]:last-child)]:flex-col-reverse', // Always display the media at the top of the card
-        'has-data-[slot=media]:@2xl:!flex-row', // We need !important to override the specificity (first-/last-child) of the flex-col-reverse and flex-col classes
+        'has-data-[slot=media]:@2xl:flex-row!', // We need !important to override the specificity (first-/last-child) of the flex-col-reverse and flex-col classes
 
         '*:data-[slot=media]:@2xl:h-fit', // Fail-safe for rounded corners on media content
         'has-data-[slot=media]:*:@2xl:basis-1/2', // Ensures a 50/50 split of the media and content on medium screens
@@ -105,7 +105,7 @@ const cardVariants = cva({
 
         // Make sure the card link is clickable when the media is on the right side
         // This is necessary because the media content is positioned after the card link in the DOM
-        '[&:has(>[data-slot="media"]:last-child)_[data-slot="card-link"]]:z-[1]',
+        '[&:has(>[data-slot="media"]:last-child)_[data-slot="card-link"]]:z-1',
 
         // **** Without Media ****
         'not-has-data-[slot=media]:@md:flex-row',
@@ -127,7 +127,7 @@ const cardVariants = cva({
       className: [
         // **** Media ****
         // Some rounded corners are removed when the card is outlined
-        '[&_[data-slot="media"]]:rounded-t-2xl', // On small screens, the top corners are rounded
+        '**:data-[slot="media"]:rounded-t-2xl', // On small screens, the top corners are rounded
         '*:data-[slot=media]:first:@2xl:rounded-tr-none *:data-[slot=media]:first:@2xl:rounded-bl-2xl', // Both left corners are rounded when media is on the left side
         '*:data-[slot=media]:last:@2xl:rounded-tl-none *:data-[slot=media]:last:@2xl:rounded-br-2xl', // Both right corners are rounded when media is on the right side
         // **** Badge ****
@@ -205,8 +205,8 @@ const cardLinkVariants = cva({
         // **** Clickarea ****
         'cursor-pointer',
         'after:absolute',
-        'after:inset-[calc(theme(borderWidth.DEFAULT)*-1)]',
-        'after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
+        'after:-inset-px',
+        'after:rounded-[calc(var(--radius-2xl)-theme(borderWidth.DEFAULT))]',
         // **** Focus ****
         'focus-visible:outline-none',
         'data-focus-visible:after:outline-focus',
@@ -220,8 +220,8 @@ const cardLinkVariants = cva({
         // **** Clickarea ****
         '[&_a]:after:cursor-pointer',
         '[&_a]:after:absolute',
-        '[&_a]:after:inset-[calc(theme(borderWidth.DEFAULT)*-1)]',
-        '[&_a]:after:rounded-[calc(theme(borderRadius.2xl)-theme(borderWidth.DEFAULT))]',
+        '[&_a]:after:-inset-px',
+        '[&_a]:after:rounded-[calc(var(--radius-2xl)-theme(borderWidth.DEFAULT))]',
         // **** Focus ****
         '[&_a[data-focus-visible]]:outline-none',
         '[&_a[data-focus-visible]]:after:outline-focus',

@@ -58,7 +58,7 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
         aria-hidden
         ref={videoRef}
         // cursor-pointer is not working on the button below, so we add it here for the same effect
-        className="h-full max-h-[inherit] w-full cursor-pointer rounded-[inherit] object-cover"
+        className="size-full max-h-[inherit] cursor-pointer rounded-[inherit] object-cover"
         playsInline
         loop={prefersReducedMotion === false}
         autoPlay={prefersReducedMotion === false}
@@ -82,7 +82,7 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
           type="button"
           onClick={() => setShouldPlay((prevState) => !prevState)}
           className={cx(
-            'absolute top-0 right-0 bottom-0 left-0 m-auto grid place-items-center',
+            'absolute inset-0 m-auto grid place-items-center',
             'focus-visible:outline-focus focus-visible:outline-focus-offset',
             'rounded-[inherit]',
             // Setting the opacity to 0 before applying the transition below will ensure the button only fades in after the video has started playing
@@ -95,7 +95,7 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
             ],
           )}
         >
-          <span className="grid h-12 w-12 place-items-center rounded-full bg-white outline-hidden">
+          <span className="grid size-12 place-items-center rounded-full bg-white outline-hidden">
             {isPlaying ? <PlayerPause /> : <PlayerPlay />}
           </span>
         </button>

@@ -118,7 +118,7 @@ function RootLayout() {
               <img src={logoUrl} alt="" className="h-6" />
             </Link>
             <DisclosureButton className="lg:hidden" aria-label="Meny">
-              {isMobileNavExpanded ? <Close className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMobileNavExpanded ? <Close className="size-6" /> : <Menu className="size-6" />}
             </DisclosureButton>
           </header>
           <div className="relative lg:hidden">
