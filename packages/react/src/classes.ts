@@ -2,7 +2,7 @@ import { cva, cx } from 'cva';
 
 const formField = cx('group flex flex-col gap-2');
 const formFieldError = cx(
-  'bg-red-light text-red w-fit px-2 py-1 text-sm leading-6',
+  'bg-red-light text-red w-fit px-2 py-1 text-sm/6',
   'group-data-[slot=file-upload]:rounded-lg',
 );
 
@@ -29,7 +29,7 @@ const input = cva({
     },
     isGrouped: {
       false: 'px-3',
-      true: 'flex-1 !ring-0',
+      true: 'flex-1 ring-0!',
     },
   },
   defaultVariants: {

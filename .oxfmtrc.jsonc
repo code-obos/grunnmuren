@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
-  "ignorePatterns": ["sanity.types.ts", "routeTree.gen.ts", "CHANGELOG.md"],
+  "ignorePatterns": ["sanity.types.ts", "routeTree.gen.ts", "CHANGELOG.md", ".changeset/*.md"],
   "singleQuote": true,
   "sortPackageJson": {
     "sortScripts": true,

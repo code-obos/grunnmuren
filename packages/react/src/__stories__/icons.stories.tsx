@@ -9,7 +9,7 @@ export default meta;
 
 export const Icons = () => {
   return (
-    <div className="grid grid-cols-[repeat(auto-fill,_100px)] content-center justify-center gap-6">
+    <div className="grid grid-cols-[repeat(auto-fill,100px)] content-center justify-center gap-6">
       {Object.entries(icons).map(([iconName, Icon]) => (
         <div key={iconName}>
           <Icon className="mx-auto mb-2" />

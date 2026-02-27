@@ -51,7 +51,7 @@ const TableRow = ({ children, className }: TableRowProps) => {
         className,
         section === 'head'
           ? 'bg-sky-lightest text-left align-baseline *:px-3 *:py-2'
-          : 'not-first:border-t-gray-light align-baseline *:px-3 *:py-2 not-first:border-t-[1px]',
+          : 'not-first:border-t-gray-light align-baseline *:px-3 *:py-2 not-first:border-t',
       )}
     >
       {children}

@@ -124,7 +124,7 @@ function Tag(props: TagProps) {
           <>
             {children}
             <Button
-              className="cursor-pointer outline-none after:absolute after:top-0 after:right-0 after:bottom-0 after:left-0"
+              className="cursor-pointer outline-none after:absolute after:inset-0"
               slot="remove"
             >
               <Close className="ml-1" />

@@ -45,7 +45,7 @@ const disclosureButtonVariants = cva({
      * @default false
      */
     isIconOnly: {
-      true: '[&>svg]:h-7 [&>svg]:w-7',
+      true: '[&>svg]:size-7',
       false: 'gap-2.5',
     },
   },

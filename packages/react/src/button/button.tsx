@@ -50,7 +50,7 @@ const buttonVariants = compose(
        * @default false
        */
       isIconOnly: {
-        true: 'p-2 [&>svg]:h-7 [&>svg]:w-7',
+        true: 'p-2 [&>svg]:size-7',
         false: 'gap-2.5 px-4 py-2',
       },
       // Make the content of the button transparent to hide it's content, but keep the button width
@@ -62,53 +62,53 @@ const buttonVariants = compose(
         variant: 'primary',
         // Darken bg by 20% on hover. The color is manually crafted
         className:
-          'bg-blue-dark hover:bg-blue text-white active:bg-[#0536A0] active:text-white [&_[role="progressbar"]]:text-white',
+          'bg-blue-dark hover:bg-blue text-white active:bg-[#0536A0] active:text-white **:[[role="progressbar"]]:text-white',
       },
       {
         color: 'blue',
         variant: 'secondary',
         className:
-          'text-blue-dark hover:bg-blue hover:text-blue-dark [&_[role="progressbar"]]:text-blue-dark hover:border-transparent hover:text-white active:bg-[#0536A0] [&:hover_[role="progressbar"]]:text-white',
+          'text-blue-dark hover:bg-blue hover:text-blue-dark **:[[role="progressbar"]]:text-blue-dark hover:border-transparent hover:text-white active:bg-[#0536A0] [&:hover_[role="progressbar"]]:text-white',
       },
       {
         color: 'blue',
         variant: 'tertiary',
-        className: '[&_[role="progressbar"]]:text-black',
+        className: '**:[[role="progressbar"]]:text-black',
       },
       {
         color: 'mint',
         variant: 'primary',
         // Darken bg by 20% on hover. The color is manually crafted
         className:
-          'bg-mint active:[#9ddac6] text-black hover:bg-[#8dd4bd] [&_[role="progressbar"]]:text-black',
+          'bg-mint active:[#9ddac6] text-black hover:bg-[#8dd4bd] **:[[role="progressbar"]]:text-black',
       },
       {
         color: 'mint',
         variant: 'secondary',
         className:
-          'text-mint hover:bg-mint [&_[role="progressbar"]]:text-mint hover:text-black [&:hover_[role="progressbar"]]:text-black',
+          'text-mint hover:bg-mint **:[[role="progressbar"]]:text-mint hover:text-black [&:hover_[role="progressbar"]]:text-black',
       },
       {
         color: 'mint',
         variant: 'tertiary',
-        className: 'text-mint [&_[role="progressbar"]]:text-mint',
+        className: 'text-mint **:[[role="progressbar"]]:text-mint',
       },
       {
         color: 'white',
         variant: 'primary',
         className:
-          'hover:bg-sky active:bg-sky-light bg-white text-black [&_[role="progressbar"]]:text-black',
+          'hover:bg-sky active:bg-sky-light bg-white text-black **:[[role="progressbar"]]:text-black',
       },
       {
         color: 'white',
         variant: 'secondary',
         className:
-          'text-white hover:bg-white hover:text-black [&_[role="progressbar"]]:text-white [&:hover_[role="progressbar"]]:text-black',
+          'text-white hover:bg-white hover:text-black [&:hover_[role="progressbar"]]:text-black **:[[role="progressbar"]]:text-white',
       },
       {
         color: 'white',
         variant: 'tertiary',
-        className: 'text-white [&_[role="progressbar"]]:text-white',
+        className: 'text-white **:[[role="progressbar"]]:text-white',
       },
     ],
     defaultVariants: {

@@ -25,7 +25,7 @@ function CheckmarkBox() {
         // For the ::before psuedo element the line height of the label is always 1em.
         // When we know the height of the label we use the height of the radio to push it down to align with the label's first line
         // TODO: 1.75 here is the unit less lineheight, altough we use 1.75rem as the line height, so there is a mismatch here. Revisit this when we've worked on typography in v2. Should this be a CSS custom property instead?
-        'mt-[calc((1em_*_1.75_-_24px)_/_2)] h-[24px] w-[24px]',
+        'mt-[calc((1em*1.75-24px)/2)] h-[24px] w-[24px]',
         // selected
         'group-data-selected:group-not-data-hovered:group-not-data-invalid:border-blue group-data-selected:group-not-data-hovered:group-not-data-invalid:bg-blue',
         'group-data-selected:group-not-data-hovered:group-data-invalid:border-red group-data-selected:group-not-data-hovered:group-data-invalid:bg-red',
@@ -42,7 +42,7 @@ function CheckmarkBox() {
         'group-data-invalid:border-red group-data-invalid:shadow-red group-data-invalid:shadow-[inset_0_0_0_1px]',
       ])}
     >
-      <CheckIcon className="group-data-invalid:group-data-hovered:group-data-selected:text-red h-full w-full opacity-0 group-data-selected:opacity-100" />
+      <CheckIcon className="group-data-invalid:group-data-hovered:group-data-selected:text-red size-full opacity-0 group-data-selected:opacity-100" />
     </span>
   );
 }

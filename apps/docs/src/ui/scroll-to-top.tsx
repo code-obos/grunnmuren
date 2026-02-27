@@ -53,11 +53,11 @@ export function ScrollToTopButton({ show, onClick, className }: ScrollToTopButto
     >
       <button
         onClick={onClick}
-        className="bg-blue-dark focus-visible:outline-focus flex h-12 w-12 items-center justify-center rounded-full transition-all duration-300 hover:-translate-y-1"
+        className="bg-blue-dark focus-visible:outline-focus flex size-12 items-center justify-center rounded-full transition-all duration-300 hover:-translate-y-1"
         aria-label="Scroll to top"
         type="button"
       >
-        <ArrowUp className="h-6 w-6 text-white" />
+        <ArrowUp className="size-6 text-white" />
       </button>
       <span className="mt-2 font-medium">Til toppen</span>
     </div>

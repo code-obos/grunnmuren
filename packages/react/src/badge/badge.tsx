@@ -21,9 +21,9 @@ const badgeVariants = cva({
       'green-dark': 'bg-green-dark text-white',
     },
     size: {
-      small: 'description px-2 py-0.5 [&_svg]:h-4 [&_svg]:w-4',
-      medium: 'description px-2.5 py-1.5 [&_svg]:h-4 [&_svg]:w-4',
-      large: 'paragraph px-3 py-2 [&_svg]:h-5 [&_svg]:w-5',
+      small: 'description px-2 py-0.5 [&_svg]:size-4',
+      medium: 'description px-2.5 py-1.5 [&_svg]:size-4',
+      large: 'paragraph px-3 py-2 [&_svg]:size-5',
     },
   },
   defaultVariants: {
