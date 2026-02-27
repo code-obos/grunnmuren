@@ -13,6 +13,7 @@
     "promise",
     "node"
   ],
+  "jsPlugins": ["eslint-plugin-better-tailwindcss"],
   "ignorePatterns": ["sanity.types.ts", "routeTree.gen.ts"],
   "rules": {
     "unicorn/filename-case": [
@@ -20,7 +21,13 @@
       {
         "case": "kebabCase"
       }
-    ]
+    ],
+    "better-tailwindcss/enforce-canonical-classes": "error"
+  },
+  "settings": {
+    "better-tailwindcss": {
+      "entryPoint": "apps/docs/src/styles/app.css"
+    }
   },
   "overrides": [
     {

@@ -4,6 +4,9 @@
     ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
   ],
   "tailwindCSS.classFunctions": ["cx", "cva"],
+  // we're using better-tailwindcss/enforce-canonical-classes
+  // see https://github.com/schoero/eslint-plugin-better-tailwindcss/blob/main/docs/rules/enforce-canonical-classes.md
+  "tailwindCSS.lint.suggestCanonicalClasses": "ignore",
   "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.codeActionsOnSave": {
     "source.organizeImports": "never", // let oxfmt handle import organization
