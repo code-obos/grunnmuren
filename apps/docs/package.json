@@ -42,9 +42,9 @@
     "cva": "1.0.0-beta.4",
     "groq": "5.7.0",
     "prism-react-renderer": "2.4.1",
-    "react": "19.2.3",
+    "react": "catalog:",
     "react-aria-components": "1.14.0",
-    "react-dom": "19.2.3",
+    "react-dom": "catalog:",
     "react-element-to-jsx-string": "17.0.1",
     "react-live": "4.1.8",
     "react-shiki": "0.9.1",
@@ -54,13 +54,13 @@
   },
   "devDependencies": {
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
-    "@react-aria/optimize-locales-plugin": "1.1.5",
+    "@react-aria/optimize-locales-plugin": "catalog:",
     "@tailwindcss/vite": "catalog:",
     "@tanstack/react-router-devtools": "1.157.18",
     "marked": "17.0.1",
     "react-docgen-typescript": "2.4.0",
     "tailwindcss": "catalog:",
-    "vite": "7.3.1",
+    "vite": "catalog:",
     "vite-tsconfig-paths": "5.1.4"
   }
 }

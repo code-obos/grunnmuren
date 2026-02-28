@@ -26,7 +26,7 @@
   "dependencies": {
     "@changesets/cli": "2.29.8",
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
-    "@react-aria/optimize-locales-plugin": "1.1.5",
+    "@react-aria/optimize-locales-plugin": "catalog:",
     "@storybook/addon-docs": "10.1.11",
     "@storybook/builder-vite": "10.1.11",
     "@storybook/react-vite": "10.1.11",
@@ -43,12 +43,12 @@
     "oxlint": "1.50.0",
     "oxlint-tsgolint": "0.15.0",
     "playwright": "1.57.0",
-    "react": "19.2.3",
-    "react-dom": "19.2.3",
+    "react": "catalog:",
+    "react-dom": "catalog:",
     "storybook": "10.1.11",
     "tailwindcss": "catalog:",
     "typescript": "5.9.3",
-    "vite": "7.3.1"
+    "vite": "catalog:"
   },
   "engines": {
     "node": ">=22.11 <25"
