@@ -33,7 +33,7 @@ const oneColumnLayout = [
 ];
 
 const nonFullBleedAspectRatiosForSmallScreens =
-  '*:data-[slot="media"]:*:aspect-[1/1] sm:*:data-[slot="media"]:*:aspect-4/3 md:*:data-[slot="media"]:*:aspect-3/2';
+  '*:data-[slot="media"]:not-has-data-[slot=video]:*:aspect-[1/1] sm:*:data-[slot="media"]:not-has-data-[slot=video]:*:aspect-4/3 md:*:data-[slot="media"]:not-has-data-[slot=video]:*:aspect-3/2';
 
 const variants = cva({
   base: [
@@ -60,7 +60,7 @@ const variants = cva({
       standard: [
         oneColumnLayout,
         nonFullBleedAspectRatiosForSmallScreens,
-        'lg:*:data-[slot="media"]:*:aspect-2/1',
+        'lg:*:data-[slot="media"]:not-has-data-[slot=video]:*:aspect-2/1',
       ],
       'full-bleed': [
         oneColumnLayout,
@@ -89,7 +89,7 @@ const variants = cva({
         'lg:*:data-[slot="content"]:gap-y-7',
         nonFullBleedAspectRatiosForSmallScreens,
         // Set media aspect ratio to 1:1 (square)
-        'lg:*:data-[slot="media"]:*:aspect-square',
+        'lg:*:data-[slot="media"]:not-has-data-[slot=video]:*:aspect-square',
       ],
     },
   },

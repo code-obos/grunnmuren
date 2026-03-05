@@ -53,7 +53,10 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
   }, [shouldPlay]);
 
   return (
-    <div className={cx(className, 'relative', prefersReducedMotion === null && 'opacity-0')}>
+    <div
+      className={cx(className, 'relative', prefersReducedMotion === null && 'opacity-0')}
+      data-slot="video-loop"
+    >
       <video
         aria-hidden
         ref={videoRef}
@@ -71,6 +74,7 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
             setIsPlaying(false);
           }
         }}
+        data-slot="video"
       >
         <source src={src} type={`video/${format}`} />
       </video>

@@ -23,7 +23,7 @@ import {
 import { ScrollButton, type ScrollDirection, useHorizontalScroll } from '../utils';
 
 const tableVariants = cva({
-  base: ['relative'],
+  base: ['relative', 'overflow-hidden'],
   variants: {
     variant: {
       default: '',
@@ -107,7 +107,11 @@ function Table(props: TableProps) {
           className="scrollbar-hidden overflow-x-auto"
           style={{ WebkitOverflowScrolling: 'touch' }}
         >
-          <RACTable {...restProps} className="group w-full min-w-fit" data-variant={variant}>
+          <RACTable
+            {...restProps}
+            className="group w-full min-w-fit"
+            data-variant={variant}
+          >
             {children}
           </RACTable>
         </div>
@@ -228,6 +232,7 @@ const TableContainer = ({ className, ...restProps }: ResizableTableContainerProp
         {...restProps}
         className={cx(
           className,
+          'scrollbar-hidden w-full overflow-auto',
           '**:data-[slot=table-column]:overflow-hidden **:data-[slot=table-column]:text-ellipsis',
           '**:data-[slot=table-cell]:overflow-hidden **:data-[slot=table-cell]:text-ellipsis',
         )}
