@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-react
 
+## 3.4.4
+
+### Patch Changes
+
+- 1c4bcec: Exclude videos from the responsive `<Media>` aspects in the `<Hero>` component, as standard video only works with the 16/9 aspect.
+- dea5038: chore: use canonical Tailwind classes
+
 ## 3.4.3
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.4.6
+
+### Patch Changes
+
+- 7081a43: Make it easier to override col-span for `layout-grid` items
+
 ## 2.4.5
 
 ### Patch Changes
