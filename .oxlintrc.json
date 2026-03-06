@@ -15,6 +15,9 @@
   ],
   "jsPlugins": ["eslint-plugin-better-tailwindcss"],
   "ignorePatterns": ["sanity.types.ts", "routeTree.gen.ts"],
+  "options": {
+    "typeAware": true
+  },
   "rules": {
     "unicorn/filename-case": [
       "error",

@@ -93,7 +93,7 @@
     }
 
     &:where([class~='lead']) {
-      @apply font-medium text-[1.4375rem]/[2.25rem] lg:text-[1.625rem]/[2.5625rem];
+      @apply text-[1.4375rem]/[2.25rem] font-medium lg:text-[1.625rem]/[2.5625rem];
       margin-top: 1.2em;
       margin-bottom: 1.2em;
     }
@@ -102,7 +102,7 @@
       color: var(--tw-prose-links);
       text-decoration: underline;
       /** Copied from the Link component:  **/
-      @apply inline-flex cursor-pointer items-center gap-1 font-medium hover:no-underline focus-visible:outline-current focus-visible:outline-focus-offset [&>svg]:shrink-0;
+      @apply focus-visible:outline-focus-offset inline-flex cursor-pointer items-center gap-1 font-medium hover:no-underline focus-visible:outline-current [&>svg]:shrink-0;
     }
 
     &:where(strong) {
@@ -195,7 +195,7 @@
     }
 
     &:where(blockquote) {
-      @apply font-medium italic grid grid-cols-[3rem_1fr] gap-x-[0.4375rem] pt-4 text-[1.4375rem]/[2.25rem] lg:text-[1.625rem]/[2.5625rem] before:text-[4.6875rem]/[1.6875rem] before:font-display before:not-italic before:content-["“"];
+      @apply before:font-display grid grid-cols-[3rem_1fr] gap-x-[0.4375rem] pt-4 text-[1.4375rem]/[2.25rem] font-medium italic before:text-[4.6875rem]/[1.6875rem] before:not-italic before:content-["“"] lg:text-[1.625rem]/[2.5625rem];
       margin-top: 1.6em;
       margin-bottom: 1.6em;
     }
@@ -285,7 +285,7 @@
     }
 
     &:where(code) {
-      @apply text-(--tw-prose-code) py-0.5 px-2 rounded-sm border border-gray bg-gray-lightest whitespace-nowrap font-semibold text-sm;
+      @apply border-gray bg-gray-lightest rounded-sm border px-2 py-0.5 text-sm font-semibold whitespace-nowrap text-(--tw-prose-code);
     }
 
     &:where(a code) {
