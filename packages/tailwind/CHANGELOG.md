@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.4.7
+
+### Patch Changes
+
+- e4144d7: Fixes issues with the default `.layout-grid` `col-*` styles.
+
 ## 2.4.6
 
 ### Patch Changes
