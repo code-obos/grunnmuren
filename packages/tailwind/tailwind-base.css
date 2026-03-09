@@ -78,7 +78,7 @@
   }
 
   html {
-    @apply text-black antialiased font-normal font-text;
+    @apply font-text font-normal text-black antialiased;
   }
 
   b {
@@ -100,11 +100,11 @@
 
 /*** Layout ***/
 @utility page-layout {
-  @apply flex flex-col min-h-screen;
+  @apply flex min-h-screen flex-col;
 }
 
 @utility page-layout-main {
-  @apply bg-white grow;
+  @apply grow bg-white;
 }
 
 /** Grid column spacing */
@@ -114,7 +114,7 @@
 
 /** Grid base, defines the grid columns and their spacing */
 @utility layout-grid {
-  @apply layout-grid-gap-x sm:grid-cols-14 grid;
+  @apply layout-grid-gap-x grid sm:grid-cols-14;
 }
 
 /** Grid container that applies the grid columns, grid spacing and the container component class */
@@ -226,33 +226,33 @@
 }
 
 @utility container {
-  @apply w-full px-(--container-gutter-width) mx-auto max-w-(--container-width);
+  @apply mx-auto w-full max-w-(--container-width) px-(--container-gutter-width);
 }
 
 @utility container-prose {
-  @apply w-full px-(--container-gutter-width) mx-auto;
+  @apply mx-auto w-full px-(--container-gutter-width);
   max-width: 45.5rem;
 }
 
 /*** Typography styles ***/
 @utility heading-xl {
-  @apply font-display font-semibold text-[2.8125rem]/[3.625rem] lg:text-[3.9375rem]/[5.125rem];
+  @apply font-display text-[2.8125rem]/[3.625rem] font-semibold lg:text-[3.9375rem]/[5.125rem];
 }
 
 @utility heading-l {
-  @apply font-display font-semibold text-[1.8125rem]/[2.75rem] lg:text-[2.25rem]/[3.5rem];
+  @apply font-display text-[1.8125rem]/[2.75rem] font-semibold lg:text-[2.25rem]/[3.5rem];
 }
 
 @utility heading-m {
-  @apply font-text font-medium text-[1.4375rem]/[2.25rem] lg:text-[1.625rem]/[2.5625rem];
+  @apply font-text text-[1.4375rem]/[2.25rem] font-medium lg:text-[1.625rem]/[2.5625rem];
 }
 
 @utility heading-s {
-  @apply font-text font-medium text-[1.1875rem]/[1.875rem] lg:text-[1.3125rem]/[2.125rem];
+  @apply font-text text-[1.1875rem]/[1.875rem] font-medium lg:text-[1.3125rem]/[2.125rem];
 }
 
 @utility heading-xs {
-  @apply font-text font-medium text-[1.125rem]/[1.75rem] lg:text-[1.1875rem]/[1.9375rem];
+  @apply font-text text-[1.125rem]/[1.75rem] font-medium lg:text-[1.1875rem]/[1.9375rem];
 }
 
 @utility paragraph {
@@ -260,11 +260,11 @@
 }
 
 @utility lead {
-  @apply font-medium text-[1.4375rem]/[2.25rem] lg:text-[1.625rem]/[2.5625rem];
+  @apply text-[1.4375rem]/[2.25rem] font-medium lg:text-[1.625rem]/[2.5625rem];
 }
 
 @utility blockquote {
-  @apply font-medium italic grid grid-cols-[3rem_1fr] gap-x-[0.4375rem] pt-4 text-[1.625rem]/[2.5625rem] lg:text-[1.4375rem]/[2.25rem] before:text-[4.6875rem]/[1.6875rem] before:font-display before:not-italic before:content-["“"];
+  @apply before:font-display grid grid-cols-[3rem_1fr] gap-x-[0.4375rem] pt-4 text-[1.625rem]/[2.5625rem] font-medium italic before:text-[4.6875rem]/[1.6875rem] before:not-italic before:content-["“"] lg:text-[1.4375rem]/[2.25rem];
 }
 
 @utility description {
@@ -328,7 +328,7 @@
   /*** Stepper component styles ***/
   .stepper-container,
   [data-slot='stepper-container'] {
-    @apply relative max-lg:overflow-hidden max-lg:min-w-full;
+    @apply relative max-lg:min-w-full max-lg:overflow-hidden;
     /** Make room for the focus outline */
     @apply max-lg:px-1;
   }
@@ -340,11 +340,11 @@
 
     [data-slot='step'] {
       counter-increment: step-counter;
-      @apply flex items-center gap-x-2 relative max-lg:my-1.5 not-last:grow;
+      @apply relative flex items-center gap-x-2 not-last:grow max-lg:my-1.5;
 
       &::before {
         content: counter(step-counter);
-        @apply shrink-0 font-semibold size-8 border-2 rounded-full border-blue-dark grid place-content-center;
+        @apply border-blue-dark grid size-8 shrink-0 place-content-center rounded-full border-2 font-semibold;
       }
 
       /** Place the focus styles on the ::before element instead of the link, since the link text is not visible on smaller screens */
@@ -355,14 +355,14 @@
       }
 
       [data-slot='link'] {
-        @apply max-lg:absolute max-lg:opacity-0 max-lg:max-w-11 max-lg:overflow-x-hidden;
+        @apply max-lg:absolute max-lg:max-w-11 max-lg:overflow-x-hidden max-lg:opacity-0;
         @apply focus-visible:outline-none;
         /** Create a 44x44 px clickable area, where the step number next to each link will also be covered **/
-        @apply py-2.5 lg:pl-11 lg:-ml-11 -my-2.5;
+        @apply -my-2.5 py-2.5 lg:-ml-11 lg:pl-11;
       }
 
       &::before {
-        @apply bg-white text-blue-dark;
+        @apply text-blue-dark bg-white;
       }
 
       &[data-state='completed'] {
@@ -374,16 +374,16 @@
       /* order matters here, as data-current selector needs to come after completed state selector */
       &[data-current='true'] {
         &::before {
-          @apply bg-sky-light border-4 text-blue-dark;
+          @apply bg-sky-light text-blue-dark border-4;
         }
       }
 
       svg {
-        @apply text-white absolute border-2 border-white bg-blue-dark rounded-full left-4.5 -top-1.5 size-5;
+        @apply bg-blue-dark absolute -top-1.5 left-4.5 size-5 rounded-full border-2 border-white text-white;
       }
 
       [data-slot='progress-bar'] {
-        @apply w-4 max-lg:grow lg:w-14 lg:rotate-90 lg:absolute lg:-left-3 lg:px-1.5 lg:-bottom-[calc(100%-2px)];
+        @apply w-4 max-lg:grow lg:absolute lg:-bottom-[calc(100%-2px)] lg:-left-3 lg:w-14 lg:rotate-90 lg:px-1.5;
       }
     }
   }

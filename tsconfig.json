@@ -10,7 +10,8 @@
     "resolveJsonModule": true,
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "noEmit": true
   },
   "exclude": ["node_modules", "dist"]
 }
