@@ -25,11 +25,11 @@ const alertVariants = cva({
     // Icon styles:
     '[&:has([data-slot="heading"])>svg]:mt-0.5',
     // Heading styles:
-    '**:data-[slot="heading"]:text-base **:data-[slot="heading"]:leading-7 **:data-[slot="heading"]:font-medium',
+    '**:data-[slot=heading]:text-base **:data-[slot=heading]:leading-7 **:data-[slot=heading]:font-medium',
     // Content styles:
-    '**:data-[slot="content"]:text-sm **:data-[slot="content"]:leading-6 [&:has([data-slot="heading"])_[data-slot="content"]]:col-span-full',
+    '**:data-[slot=content]:text-sm **:data-[slot=content]:leading-6 [&:has([data-slot="heading"])_[data-slot="content"]]:col-span-full',
     // Footer styles:
-    '**:data-[slot="footer"]:col-span-full **:data-[slot="footer"]:text-xs **:data-[slot="footer"]:leading-6 **:data-[slot="footer"]:font-light',
+    '**:data-[slot=footer]:col-span-full **:data-[slot=footer]:text-xs **:data-[slot=footer]:leading-6 **:data-[slot=footer]:font-light',
   ],
   variants: {
     /**

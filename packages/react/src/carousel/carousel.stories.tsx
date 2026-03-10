@@ -137,21 +137,21 @@ export const ScrollGestures: Story = {
 
 export const OneSlidePerView: Story = {
   args: {
-    className: '**:data-[slot="carousel-item"]:basis-full',
+    className: '**:data-[slot=carousel-item]:basis-full',
   },
 };
 
 export const RoundedCorners: Story = {
   args: {
     className:
-      '**:data-[slot="carousel-item"]:rounded-3xl **:data-[slot="carousel-item"]:overflow-hidden',
+      '**:data-[slot=carousel-item]:rounded-3xl **:data-[slot=carousel-item]:overflow-hidden',
   },
 };
 
 export const VariableWidth: Story = {
   args: {
     className:
-      '**:data-[slot="carousel-item"]:nth-2:basis-1/3 **:data-[slot="carousel-item"]:nth-4:basis-1/5',
+      '**:data-[slot=carousel-item]:nth-2:basis-1/3 **:data-[slot=carousel-item]:nth-4:basis-1/5',
   },
 };
 

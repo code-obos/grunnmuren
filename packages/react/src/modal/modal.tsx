@@ -127,7 +127,7 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
       className,
       'relative grid gap-y-5 outline-none',
       // Footer
-      '**:data-[slot="footer"]:flex **:data-[slot="footer"]:gap-x-2',
+      '**:data-[slot=footer]:flex **:data-[slot=footer]:gap-x-2',
     )}
   >
     {({ close }) => (

@@ -74,7 +74,7 @@ const cardVariants = cva({
       subtle: [
         'border-transparent',
         // **** Media styles ****
-        '**:data-[slot="media"]:rounded-2xl', // All corners are rounded
+        '**:data-[slot=media]:rounded-2xl', // All corners are rounded
       ],
       outlined: 'border border-black',
     },
@@ -86,7 +86,7 @@ const cardVariants = cva({
       vertical: [
         'flex-col',
         // **** Media ****
-        '**:data-[slot="media"]:rounded-t-2xl', // Both Top corners are rounded
+        '**:data-[slot=media]:rounded-t-2xl', // Both Top corners are rounded
       ],
       horizontal: [
         // Use more gap for horizontal cards that have media
@@ -127,7 +127,7 @@ const cardVariants = cva({
       className: [
         // **** Media ****
         // Some rounded corners are removed when the card is outlined
-        '**:data-[slot="media"]:rounded-t-2xl', // On small screens, the top corners are rounded
+        '**:data-[slot=media]:rounded-t-2xl', // On small screens, the top corners are rounded
         '*:data-[slot=media]:first:@2xl:rounded-tr-none *:data-[slot=media]:first:@2xl:rounded-bl-2xl', // Both left corners are rounded when media is on the left side
         '*:data-[slot=media]:last:@2xl:rounded-tl-none *:data-[slot=media]:last:@2xl:rounded-br-2xl', // Both right corners are rounded when media is on the right side
         // **** Badge ****
@@ -164,16 +164,16 @@ const Card = ({ children, className, variant, layout, ...restProps }: CardProps)
                   // **** Card link in Heading ****
                   // Border (bottom/top) is set to transparent to make sure the bottom underline is not visible when the card is hovered
                   // Border top is set to even out the border bottom used for the underline
-                  '*:data-[slot="card-link"]:no-underline',
-                  '*:data-[slot="card-link"]:border-y-2',
-                  '*:data-[slot="card-link"]:border-y-transparent',
-                  '*:data-[slot="card-link"]:transition-colors',
-                  '*:data-[slot="card-link"]:hover:border-b-current',
+                  '*:data-[slot=card-link]:no-underline',
+                  '*:data-[slot=card-link]:border-y-2',
+                  '*:data-[slot=card-link]:border-y-transparent',
+                  '*:data-[slot=card-link]:transition-colors',
+                  '*:data-[slot=card-link]:hover:border-b-current',
                   // Mimic heading styles for the card link if placed in the heading slot. This is necessary to make the custom underline align with the link text
-                  '*:data-[slot="card-link"]:font-inherit',
-                  '*:data-[slot="card-link"]:text-pretty',
-                  '*:data-[slot="card-link"]:hyphens-auto',
-                  '*:data-[slot="card-link"]:[word-break:break-word]', // necessary to make hyphens work in grid containers in Safari
+                  '*:data-[slot=card-link]:font-inherit',
+                  '*:data-[slot=card-link]:text-pretty',
+                  '*:data-[slot=card-link]:hyphens-auto',
+                  '*:data-[slot=card-link]:[word-break:break-word]', // necessary to make hyphens work in grid containers in Safari
                 ]),
               },
             ],
