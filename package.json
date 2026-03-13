@@ -24,7 +24,7 @@
     "typecheck:storybook": "tsc --noEmit -p packages/react/tsconfig.storybook.json"
   },
   "dependencies": {
-    "@changesets/cli": "2.29.8",
+    "@changesets/cli": "2.30.0",
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
     "@react-aria/optimize-locales-plugin": "1.1.5",
     "@storybook/addon-docs": "10.1.11",
