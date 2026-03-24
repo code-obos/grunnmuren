@@ -1,0 +1,21 @@
+{
+  "servers": {
+    "Sanity": {
+      "type": "http",
+      "url": "https://mcp.sanity.io"
+    },
+    "devops": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@azure-devops/mcp",
+        "obosbbl",
+        "-a",
+        "azcli",
+        "-t",
+        "b4377ef1-c046-4443-9d44-349c6e4902fa"
+      ]
+    }
+  }
+}
