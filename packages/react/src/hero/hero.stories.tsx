@@ -231,6 +231,9 @@ export const FullBleedWithCarousel = () => (
         <Heading level={1}>Ulven</Heading>
         <Description>– et nytt nabolag i Oslo</Description>
       </Content>
+      <Badge color="sky">
+        <InfoCircle />I salg
+      </Badge>
       <Carousel>
         <CarouselItemsContainer>
           <CarouselItems>
