@@ -303,7 +303,7 @@ export function Gallery({
       <img
         src={images[selectedIndex]?.src}
         alt=""
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-70 blur-lg lg:hidden"
+        className="pointer-events-none absolute inset-0 size-full  object-cover opacity-70 blur-lg lg:hidden"
       />
       <Carousel
         {...carouselProps}
