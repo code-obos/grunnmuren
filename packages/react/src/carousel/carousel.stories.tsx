@@ -303,7 +303,7 @@ export function Gallery({
       <img
         src={images[selectedIndex]?.src}
         alt=""
-        className="pointer-events-none absolute inset-0 size-full  object-cover opacity-70 blur-lg lg:hidden"
+        className="pointer-events-none absolute inset-0 size-full object-cover opacity-70 blur-lg lg:hidden"
       />
       <Carousel
         {...carouselProps}
@@ -353,7 +353,11 @@ export function Gallery({
   );
 }
 
-export function TabbedImageGallery({ carouselProps = {} }: { carouselProps?: Record<string, unknown> }) {
+export function TabbedImageGallery({
+  carouselProps = {},
+}: {
+  carouselProps?: Record<string, unknown>;
+}) {
   return (
     <Tabs>
       <TabList aria-label="Velg galleri" className="mx-2">
