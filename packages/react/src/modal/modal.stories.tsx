@@ -217,7 +217,7 @@ export const ImageGalleryModal: Story = {
       <DialogTrigger>
         <Button>Åpne bildegalleri</Button>
         <Modal fullscreen>
-          <Dialog className="h-full p-4">
+          <Dialog className="container h-full p-4">
             <Heading slot="title" level={2}>
               Bildegalleri - Eksempel
             </Heading>
