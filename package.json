@@ -48,7 +48,7 @@
     "storybook": "10.3.5",
     "tailwindcss": "catalog:",
     "typescript": "5.9.3",
-    "vite": "7.3.1"
+    "vite": "8.0.8"
   },
   "engines": {
     "node": ">=22.11 <25"
