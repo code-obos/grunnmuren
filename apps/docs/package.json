@@ -50,7 +50,7 @@
     "react-shiki": "0.9.1",
     "sanity": "5.13.0",
     "styled-components": "6.4.0",
-    "use-debounce": "10.0.6"
+    "use-debounce": "10.1.1"
   },
   "devDependencies": {
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
