@@ -8,6 +8,7 @@
     "incremental": true,
     "esModuleInterop": true,
     "module": "ESNext",
+    "strictNullChecks": true,
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,

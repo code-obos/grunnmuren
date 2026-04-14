@@ -8,6 +8,7 @@
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
+    "strictNullChecks": true,
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "noUnusedLocals": true,
