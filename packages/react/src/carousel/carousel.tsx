@@ -1,5 +1,4 @@
 import { ChevronRight } from '@obosbbl/grunnmuren-icons-react';
-import { mergeRefs } from '@react-aria/utils';
 import { cva, cx } from 'cva';
 import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel, {
@@ -8,11 +7,14 @@ import useEmblaCarousel, {
 } from 'embla-carousel-react';
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 import {
+  Children,
   createContext,
   type HTMLProps,
+  isValidElement,
   useCallback,
   useContext,
   useEffect,
+  useImperativeHandle,
   useMemo,
   useRef,
   useState,
@@ -26,8 +28,18 @@ import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 import { usePrefersReducedMotion } from '../use-prefers-reduced-motion';
 
-type CarouselProps = Omit<HTMLProps<HTMLDivElement>, 'onChange' | 'onSelect'> & {
+type CarouselRef = {
+  /** Navigate to a specific slide by index. */
+  goToSlide: (index: number) => void;
+  /** Navigate to the next slide. */
+  goToNextSlide: () => void;
+  /** Navigate to the previous slide. */
+  goToPrevSlide: () => void;
+};
+
+type CarouselProps = Omit<HTMLProps<HTMLDivElement>, 'onChange' | 'onSelect' | 'ref'> & {
   children?: React.ReactNode;
+  ref?: React.Ref<CarouselRef>;
   /**
    * Alignment of the items relative to the carousel viewport.
    * @default 'center'
@@ -136,18 +148,21 @@ const Carousel = ({
     return plugins;
   }, [autoPlayDelay, scrollGestures, loop, prefersReducedMotion]);
 
-  const [emblaRef, emblaApi] = useEmblaCarousel(
-    {
+  const emblaOptions = useMemo(
+    () => ({
       align,
       loop,
       startIndex: initialIndex,
-      axis: orientation === 'horizontal' ? 'x' : 'y',
+      axis: orientation === 'horizontal' ? ('x' as const) : ('y' as const),
       inViewThreshold: 0.2,
-    },
-    emblaPlugins,
+    }),
+    [align, loop, initialIndex, orientation],
   );
 
+  const [emblaRef, emblaApi] = useEmblaCarousel(emblaOptions, emblaPlugins);
+
   const [slidesInView, setSlidesInView] = useState<number[]>([initialIndex]);
+  const [selectedIndex, setSelectedIndex] = useState(initialIndex);
   // We need some default values here. The proper initial values will be set by the embla init handler later
   // for the default values, assume that we can scroll next, but for prev only if looping is enabled
   const [canScrollNext, setCanScrollNext] = useState(true);
@@ -165,6 +180,7 @@ const Carousel = ({
       switch (type) {
         case 'select':
           onSelect?.(scrollSnapIndex);
+          setSelectedIndex(scrollSnapIndex);
           setCanScrollNext(emblaApi.canScrollNext());
           setCanScrollPrev(emblaApi.canScrollPrev());
           break;
@@ -182,6 +198,7 @@ const Carousel = ({
           break;
         }
         case 'init': {
+          setSelectedIndex(emblaApi.selectedScrollSnap());
           setCanScrollNext(emblaApi.canScrollNext());
           setCanScrollPrev(emblaApi.canScrollPrev());
           break;
@@ -266,18 +283,47 @@ const Carousel = ({
     [handleNextPress, handlePrevPress, emblaApi],
   );
 
+  const goToSlide = useCallback(
+    (index: number) => {
+      emblaApi?.scrollTo(index, prefersReducedMotion);
+    },
+    [emblaApi, prefersReducedMotion],
+  );
+
+  const goToNextSlide = useCallback(() => {
+    emblaApi?.scrollNext(prefersReducedMotion);
+  }, [emblaApi, prefersReducedMotion]);
+
+  const goToPrevSlide = useCallback(() => {
+    emblaApi?.scrollPrev(prefersReducedMotion);
+  }, [emblaApi, prefersReducedMotion]);
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      goToSlide,
+      goToNextSlide,
+      goToPrevSlide,
+    }),
+    [goToSlide, goToNextSlide, goToPrevSlide],
+  );
+
   const hasHeroContext = !!useContext(HeroContext);
   const nextPrevStyles = hasHeroContext
     ? { color: 'white' as const, variant: 'primary' as const }
     : { variant: 'tertiary' as const };
 
+  const shouldUseAriaCarouselPattern = !autoPlayDelay;
+
   return (
-    // oxlint-disable-next-line jsx-a11y/no-static-element-interactions
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
       {...rest}
+      role={shouldUseAriaCarouselPattern ? 'region' : undefined}
+      aria-roledescription={shouldUseAriaCarouselPattern ? 'carousel' : undefined}
       data-orientation={orientation}
       data-slot="carousel"
-      ref={mergeRefs(ref, carouselRef)}
+      ref={carouselRef}
       onKeyDown={handleKeyDown}
     >
       <Provider
@@ -288,6 +334,8 @@ const Carousel = ({
               slidesInView,
               '~emblaRef': emblaRef,
               orientation,
+              selectedIndex,
+              '~shouldUseAriaCarouselPattern': shouldUseAriaCarouselPattern,
             },
           ],
           [
@@ -321,16 +369,22 @@ const Carousel = ({
 type CarouselContextValue = {
   slidesInView: number[];
   orientation: 'horizontal' | 'vertical';
+  selectedIndex: number;
+  '~shouldUseAriaCarouselPattern': boolean;
   /**
    * @private
    */
   '~emblaRef': EmblaViewportRefType | null;
 };
 
+const CarouselItemIndexContext = createContext<number>(0);
+
 const CarouselContext = createContext<CarouselContextValue>({
   '~emblaRef': null,
   orientation: 'horizontal',
   slidesInView: [],
+  selectedIndex: 0,
+  '~shouldUseAriaCarouselPattern': true,
 });
 
 type CarouselItemsContainer = HTMLProps<HTMLDivElement> & {
@@ -338,7 +392,8 @@ type CarouselItemsContainer = HTMLProps<HTMLDivElement> & {
 };
 
 const CarouselItemsContainer = ({ children, className, ...rest }: CarouselItemsContainer) => {
-  const { '~emblaRef': emblaRef } = useContext(CarouselContext);
+  const { '~emblaRef': emblaRef, '~shouldUseAriaCarouselPattern': shouldUseAriaCarouselPattern } =
+    useContext(CarouselContext);
 
   return (
     <div
@@ -346,6 +401,8 @@ const CarouselItemsContainer = ({ children, className, ...rest }: CarouselItemsC
       ref={emblaRef}
       data-slot="carousel-items-container"
       {...rest}
+      aria-live={shouldUseAriaCarouselPattern ? 'polite' : undefined}
+      aria-atomic={shouldUseAriaCarouselPattern ? false : undefined}
     >
       {children}
     </div>
@@ -357,15 +414,27 @@ type CarouselItemsProps = HTMLProps<HTMLDivElement> & {
   children: React.ReactNode;
 };
 
-const CarouselItems = ({ className, children }: CarouselItemsProps) => {
+const CarouselItems = ({ className, children, ...restProps }: CarouselItemsProps) => {
   const { orientation } = useContext(CarouselContext);
+  let itemIndex = 0;
 
   return (
     <div
       className={cx(className, 'flex', orientation === 'vertical' && 'flex-col')}
       data-slot="carousel-items"
+      {...restProps}
     >
-      {children}
+      {Children.map(children, (child) => {
+        if (isValidElement(child)) {
+          const currentIndex = itemIndex++;
+          return (
+            <CarouselItemIndexContext.Provider value={currentIndex}>
+              {child}
+            </CarouselItemIndexContext.Provider>
+          );
+        }
+        return child;
+      })}
     </div>
   );
 };
@@ -379,17 +448,23 @@ type CarouselControlsProps = HTMLProps<HTMLDivElement> & {
  * This is internal for now, but we will expose it in the future when we support more flexible positioning of prev/next and other actions.
  * It is used to render the prev/next buttons in the carousel for now.
  */
-const CarouselControls = ({ children, className, ...rest }: CarouselControlsProps) => (
-  <div
-    className={cx(className, 'flex justify-end gap-x-2')}
-    data-slot="carousel-controls"
-    {...rest}
-    // All items of the carousel are accessible to the screen reader at all times, so these controls will only confuse screen reader users
-    aria-hidden="true"
-  >
-    {children}
-  </div>
-);
+const CarouselControls = ({ children, className, ...rest }: CarouselControlsProps) => {
+  const { '~shouldUseAriaCarouselPattern': shouldUseAriaCarouselPattern } =
+    useContext(CarouselContext);
+
+  return (
+    <div
+      className={cx(className, 'flex justify-end gap-x-2')}
+      data-slot="carousel-controls"
+      {...rest}
+      // When not using the aria carousel pattern, all items are accessible to the screen reader at all times,
+      // so these controls will only confuse screen reader users
+      aria-hidden={!shouldUseAriaCarouselPattern}
+    >
+      {children}
+    </div>
+  );
+};
 
 const carouselButtonVariants = cva({
   base: 'group data-disabled:invisible',
@@ -457,9 +532,14 @@ type CarouselItemProps = HTMLProps<HTMLDivElement> & {
 };
 
 const CarouselItem = ({ className, children, ...rest }: CarouselItemProps) => {
+  const itemIndex = useContext(CarouselItemIndexContext);
+  const { selectedIndex, '~shouldUseAriaCarouselPattern': shouldUseAriaCarouselPattern } =
+    useContext(CarouselContext);
+
   return (
     <div
       {...rest}
+      inert={shouldUseAriaCarouselPattern && selectedIndex !== itemIndex ? true : undefined}
       className={cx(
         className,
         'min-w-0 shrink-0 grow-0',
@@ -473,6 +553,8 @@ const CarouselItem = ({ className, children, ...rest }: CarouselItemProps) => {
         '*:data-[slot=media]:data-[fit="contain"]:bg-blue-dark',
       )}
       data-slot="carousel-item"
+      role={shouldUseAriaCarouselPattern ? 'group' : undefined}
+      aria-roledescription={shouldUseAriaCarouselPattern ? 'slide' : undefined}
     >
       <Provider
         values={[
@@ -505,4 +587,5 @@ export {
   type CarouselItemsContainer as UNSAFE_CarouselItemsContainerProps,
   type CarouselItemsProps as UNSAFE_CarouselItemsProps,
   type CarouselProps as UNSAFE_CarouselProps,
+  type CarouselRef as UNSAFE_CarouselRef,
 };

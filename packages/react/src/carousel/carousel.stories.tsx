@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { cx, cva } from 'cva';
+import { cva } from 'cva';
 import { useEffect, useRef, useState } from 'react';
 import { fn } from 'storybook/test';
 
@@ -11,6 +11,7 @@ import {
   UNSAFE_CarouselItem as CarouselItem,
   UNSAFE_CarouselItems as CarouselItems,
   UNSAFE_CarouselItemsContainer as CarouselItemsContainer,
+  type UNSAFE_CarouselRef as CarouselRef,
 } from '../carousel';
 import { Media } from '../content';
 import {
@@ -235,12 +236,12 @@ function Thumbnails({
   onSelect: (index: number) => void;
   selectedIndex?: number;
 }) {
-  const listRef = useRef<HTMLUListElement>(null);
-  const refs = useRef<(HTMLLIElement | null)[]>([]);
+  const tablistRef = useRef<HTMLDivElement>(null);
+  const refs = useRef<(HTMLButtonElement | null)[]>([]);
 
   useEffect(() => {
     const item = refs.current[selectedIndex];
-    const list = listRef.current;
+    const list = tablistRef.current;
     if (!item || !list) return;
 
     list.scrollTo({
@@ -250,31 +251,29 @@ function Thumbnails({
   }, [selectedIndex]);
 
   return (
-    <ul
-      ref={listRef}
+    <div
+      ref={tablistRef}
       className="scrollbar-hidden flex shrink-0 basis-1/5 flex-col gap-1 overflow-y-auto max-lg:hidden"
-      aria-label="Alle bilder"
+      role="tablist"
+      aria-label="Slides"
     >
       {images.map((image, index) => (
-        <li
+        <button
+          type="button"
+          role="tab"
+          className="focus-visible:outline-focus-offset m-2 cursor-pointer"
+          onClick={() => onSelect(index)}
+          aria-label={`Slide ${index + 1}`}
+          aria-selected={selectedIndex === index}
           key={index}
-          className="p-2"
           ref={(el) => {
             refs.current[index] = el;
           }}
         >
-          <button
-            type="button"
-            className={cx('focus-visible:outline-focus-offset cursor-pointer')}
-            onClick={() => onSelect(index)}
-            aria-label={`Velg bilde ${index + 1}`}
-            aria-disabled={selectedIndex === index}
-          >
-            <img src={image.src} alt="" className="aspect-3/2 w-full object-cover" loading="lazy" />
-          </button>
-        </li>
+          <img src={image.src} alt="" className="aspect-3/2 w-full object-cover" loading="lazy" />
+        </button>
       ))}
-    </ul>
+    </div>
   );
 }
 
@@ -289,15 +288,20 @@ export function Gallery({
   carouselProps: Record<string, unknown>;
 }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const carouselRef = useRef<CarouselRef>(null);
 
   return (
-    <div
+    <section
       className="flex gap-x-8 max-lg:relative max-lg:h-svh max-lg:max-h-full max-lg:items-center max-lg:overflow-hidden lg:aspect-3/2"
-      role="region"
-      aria-roledescription="carousel"
       aria-label="Bildegalleri"
     >
-      <Thumbnails images={images} onSelect={setSelectedIndex} selectedIndex={selectedIndex} />
+      <Thumbnails
+        images={images}
+        onSelect={(index: number) => {
+          carouselRef.current?.goToSlide(index);
+        }}
+        selectedIndex={selectedIndex}
+      />
 
       {/* Blurred backdrop of current image on small screens */}
       <img
@@ -307,20 +311,20 @@ export function Gallery({
       />
       <Carousel
         {...carouselProps}
-        initialIndex={selectedIndex}
+        ref={carouselRef}
         onSelect={setSelectedIndex}
         className="lg:grow lg:p-2"
         loop
       >
-        <CarouselItemsContainer aria-live="polite" aria-atomic={false} className="relative">
+        <CarouselItemsContainer className="relative">
           <CarouselItems>
             {images.map((image, index) => (
-              <CarouselItem key={index} className="basis-full" inert={selectedIndex !== index}>
+              <CarouselItem key={index} className="basis-full">
                 <figure className="relative">
                   <img
                     className="aspect-3/2 w-full object-cover"
                     src={image.src}
-                    alt={`Bilde ${index + 1}: ${image.alt}`}
+                    alt={image.alt}
                     loading={index > 0 ? 'lazy' : undefined}
                   />
                   <figcaption
@@ -349,7 +353,7 @@ export function Gallery({
           </CarouselControls>
         </div>
       </Carousel>
-    </div>
+    </section>
   );
 }
 
