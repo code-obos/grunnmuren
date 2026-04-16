@@ -1,6 +1,5 @@
 import {
   Button,
-  type ButtonProps,
   UNSAFE_Table as Table,
   UNSAFE_TableHeader as TableHead,
   UNSAFE_TableRow as TableRow,
