@@ -261,7 +261,7 @@ function Thumbnails({
         <button
           type="button"
           role="tab"
-          className="focus-visible:outline-focus-offset m-2 cursor-pointer"
+          className="focus-visible:outline-focus-offset m-2 cursor-pointer aria-selected:scale-90"
           onClick={() => onSelect(index)}
           aria-label={`Slide ${index + 1}`}
           aria-selected={selectedIndex === index}
