@@ -28,41 +28,29 @@ const SubNavItem = ({ to, title, componentState }: SubNavItemProps) => {
 
 type MainNavItemProps = {
   title: string;
-  to?: string;
-  subNavItems?: SubNavItemProps[];
+  subNavItems: SubNavItemProps[];
 };
 
-const MainNavItem = ({ to, title, subNavItems }: MainNavItemProps) => (
+const MainNavItem = ({ title, subNavItems }: MainNavItemProps) => (
   <li>
-    {subNavItems ? (
-      <Disclosure>
-        <Heading level={2}>
-          <Button
-            slot="trigger"
-            className="group focus-visible:outline-focus focus-visible:outline-focus-inset flex w-full cursor-pointer place-items-center justify-between rounded-md p-3 font-semibold"
-          >
-            {title}
-            <ChevronDown className="flex-none transition-transform duration-300 group-aria-expanded:rotate-180 motion-reduce:transition-none" />
-          </Button>
-        </Heading>
-        <DisclosurePanel>
-          <ul className="grid gap-y-3.5 px-3">
-            {subNavItems.map((subNavItem) => (
-              <SubNavItem key={subNavItem.to} {...subNavItem} />
-            ))}
-          </ul>
-        </DisclosurePanel>
-      </Disclosure>
-    ) : (
-      <ul>
-        <Link
-          to={to}
-          className="group focus-visible:outline-focus focus-visible:outline-focus-inset flex w-full cursor-pointer place-items-center justify-between rounded-md p-3 font-semibold data-[status=active]:font-bold data-[status=active]:no-underline"
+    <Disclosure>
+      <Heading level={2}>
+        <Button
+          slot="trigger"
+          className="group focus-visible:outline-focus focus-visible:outline-focus-inset flex w-full cursor-pointer place-items-center justify-between rounded-md p-3 font-semibold"
         >
           {title}
-        </Link>
-      </ul>
-    )}
+          <ChevronDown className="flex-none transition-transform duration-300 group-aria-expanded:rotate-180 motion-reduce:transition-none" />
+        </Button>
+      </Heading>
+      <DisclosurePanel>
+        <ul className="grid gap-y-3.5 px-3">
+          {subNavItems.map((subNavItem) => (
+            <SubNavItem key={subNavItem.to} {...subNavItem} />
+          ))}
+        </ul>
+      </DisclosurePanel>
+    </Disclosure>
   </li>
 );
 
@@ -104,16 +92,25 @@ export const MainNav = ({ className }: MainNavProps) => {
     componentState: component.componentState,
   }));
 
-  // Transform categories into nav items
+  const hardcodedCategoryItems: Record<string, SubNavItemProps[]> = {
+    patterns: [{ to: '/referanseskjema', title: 'Referanseskjema' }],
+  };
+
   const categoryNavItems =
-    menuData.categories?.map((category) => ({
-      title: category.title ?? '',
-      subNavItems:
+    menuData.categories?.map((category) => {
+      const sanityItems =
         category.categoryItems?.map((item) => ({
           to: `/${item.slug}`,
           title: item.name ?? '',
-        })) ?? [],
-    })) ?? [];
+        })) ?? [];
+
+      const extra = hardcodedCategoryItems[category.title?.toLocaleLowerCase() ?? ''] ?? [];
+
+      return {
+        title: category.title ?? '',
+        subNavItems: [...sanityItems, ...extra],
+      };
+    }) ?? [];
 
   return (
     <nav
@@ -131,8 +128,6 @@ export const MainNav = ({ className }: MainNavProps) => {
         ))}
 
         <MainNavItem title="Komponenter" subNavItems={componentsNavLinks} />
-
-        <MainNavItem title="Referanseskjema" to="/referanseskjema" />
       </ul>
     </nav>
   );
