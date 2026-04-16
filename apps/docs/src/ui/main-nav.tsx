@@ -28,29 +28,41 @@ const SubNavItem = ({ to, title, componentState }: SubNavItemProps) => {
 
 type MainNavItemProps = {
   title: string;
-  subNavItems: SubNavItemProps[];
+  to?: string;
+  subNavItems?: SubNavItemProps[];
 };
 
-const MainNavItem = ({ title, subNavItems }: MainNavItemProps) => (
+const MainNavItem = ({ to, title, subNavItems }: MainNavItemProps) => (
   <li>
-    <Disclosure>
-      <Heading level={2}>
-        <Button
-          slot="trigger"
-          className="group focus-visible:outline-focus focus-visible:outline-focus-inset flex w-full cursor-pointer place-items-center justify-between rounded-md p-3 font-semibold"
+    {subNavItems ? (
+      <Disclosure>
+        <Heading level={2}>
+          <Button
+            slot="trigger"
+            className="group focus-visible:outline-focus focus-visible:outline-focus-inset flex w-full cursor-pointer place-items-center justify-between rounded-md p-3 font-semibold"
+          >
+            {title}
+            <ChevronDown className="flex-none transition-transform duration-300 group-aria-expanded:rotate-180 motion-reduce:transition-none" />
+          </Button>
+        </Heading>
+        <DisclosurePanel>
+          <ul className="grid gap-y-3.5 px-3">
+            {subNavItems.map((subNavItem) => (
+              <SubNavItem key={subNavItem.to} {...subNavItem} />
+            ))}
+          </ul>
+        </DisclosurePanel>
+      </Disclosure>
+    ) : (
+      <ul>
+        <Link
+          to={to}
+          className="group focus-visible:outline-focus focus-visible:outline-focus-inset flex w-full cursor-pointer place-items-center justify-between rounded-md p-3 font-semibold data-[status=active]:font-bold data-[status=active]:no-underline"
         >
           {title}
-          <ChevronDown className="flex-none transition-transform duration-300 group-aria-expanded:rotate-180 motion-reduce:transition-none" />
-        </Button>
-      </Heading>
-      <DisclosurePanel>
-        <ul className="grid gap-y-3.5 px-3">
-          {subNavItems.map((subNavItem) => (
-            <SubNavItem key={subNavItem.to} {...subNavItem} />
-          ))}
-        </ul>
-      </DisclosurePanel>
-    </Disclosure>
+        </Link>
+      </ul>
+    )}
   </li>
 );
 
@@ -119,6 +131,8 @@ export const MainNav = ({ className }: MainNavProps) => {
         ))}
 
         <MainNavItem title="Komponenter" subNavItems={componentsNavLinks} />
+
+        <MainNavItem title="Referanseskjema" to="/referanseskjema" />
       </ul>
     </nav>
   );
