@@ -38,23 +38,6 @@ const EDITABLE_CARD_PROPS = [
   },
 ];
 
-function DisplayList({ children }: { children: React.ReactNode }) {
-  return <dl className="grid gap-2">{children}</dl>;
-}
-
-function DisplayItem({ label, value }: { label: string; value?: string }) {
-  if (!value) {
-    return null;
-  }
-
-  return (
-    <div className="grid gap-0.5 md:grid-cols-[10rem_1fr] md:gap-2">
-      <dt className="font-medium">{label}</dt>
-      <dd>{value}</dd>
-    </div>
-  );
-}
-
 interface EditableCardProps {
   title?: string;
   children: React.ReactNode;
