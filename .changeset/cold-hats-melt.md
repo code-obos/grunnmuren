@@ -11,3 +11,5 @@ There are two deprecation from react-aria-components:
 - Select
   - `selectedKey` is deprecated, use `value` instead
   - `onSelectionChange` is deprecated, use `onChange` instead
+
+Small correction in what we export from ListBox. We exported ListBoxHeadingProps which was an re-export from HeadingProps, but ListBox uses Header and not Heading so we correctly export ListBoxHeaderProps now. This may be a breaking change for some.

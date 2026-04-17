@@ -1,7 +1,6 @@
 import { Check } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
-import { Header } from 'react-aria-components/Header';
-import { type HeadingProps as ListBoxHeadingProps } from 'react-aria-components/Heading';
+import { Header, HeaderProps as ListBoxHeaderProps } from 'react-aria-components/Header';
 import {
   type ListBoxItemProps,
   type ListBoxProps,
@@ -61,7 +60,7 @@ const ListBoxSection = <T extends object>({ className, ...restProps }: ListBoxSe
 /**
  * This component can be used to label grouped items in a `ListBoxSection` with a heading
  */
-const ListBoxHeader = (props: ListBoxHeadingProps) => (
+const ListBoxHeader = (props: ListBoxHeaderProps) => (
   <Header
     {...props}
     className={cx(props.className, 'text-blue-dark mx-6 cursor-default py-2 leading-6 font-medium')}
@@ -71,7 +70,7 @@ const ListBoxHeader = (props: ListBoxHeadingProps) => (
 export {
   ListBox,
   ListBoxHeader,
-  type ListBoxHeadingProps,
+  type ListBoxHeaderProps,
   ListBoxItem,
   type ListBoxItemProps,
   ListBoxSection,
