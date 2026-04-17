@@ -157,7 +157,6 @@ const Carousel = ({
       loop,
       startIndex: initialIndex,
       axis: orientation === 'horizontal' ? ('x' as const) : ('y' as const),
-      inViewThreshold: 0.2,
     }),
     [align, loop, initialIndex, orientation],
   );
@@ -165,7 +164,6 @@ const Carousel = ({
   const [emblaRef, emblaApi] = useEmblaCarousel(emblaOptions, emblaPlugins);
 
   const [slidesInView, setSlidesInView] = useState<number[]>([initialIndex]);
-  const [selectedIndex, setSelectedIndex] = useState(initialIndex);
   // We need some default values here. The proper initial values will be set by the embla init handler later
   // for the default values, assume that we can scroll next, but for prev only if looping is enabled
   const [canScrollNext, setCanScrollNext] = useState(true);
@@ -183,7 +181,7 @@ const Carousel = ({
       switch (type) {
         case 'select':
           onSelect?.(scrollSnapIndex);
-          setSelectedIndex(scrollSnapIndex);
+          setSlidesInView(emblaApi.slidesInView());
           setCanScrollNext(emblaApi.canScrollNext());
           setCanScrollPrev(emblaApi.canScrollPrev());
           break;
@@ -201,7 +199,7 @@ const Carousel = ({
           break;
         }
         case 'init': {
-          setSelectedIndex(emblaApi.selectedScrollSnap());
+          setSlidesInView(emblaApi.slidesInView());
           setCanScrollNext(emblaApi.canScrollNext());
           setCanScrollPrev(emblaApi.canScrollPrev());
           break;
@@ -327,7 +325,6 @@ const Carousel = ({
                 slidesInView,
                 '~emblaRef': emblaRef,
                 orientation,
-                selectedIndex,
                 '~shouldUseAriaCarouselPattern': shouldUseAriaCarouselPattern,
               },
             ],
@@ -363,7 +360,6 @@ const Carousel = ({
 type CarouselContextValue = {
   slidesInView: number[];
   orientation: 'horizontal' | 'vertical';
-  selectedIndex: number;
   '~shouldUseAriaCarouselPattern': boolean;
   /**
    * @private
@@ -377,7 +373,6 @@ const CarouselContext = createContext<CarouselContextValue>({
   '~emblaRef': null,
   orientation: 'horizontal',
   slidesInView: [],
-  selectedIndex: 0,
   '~shouldUseAriaCarouselPattern': true,
 });
 
@@ -527,13 +522,13 @@ type CarouselItemProps = HTMLProps<HTMLDivElement> & {
 
 const CarouselItem = ({ className, children, ...rest }: CarouselItemProps) => {
   const itemIndex = useContext(CarouselItemIndexContext);
-  const { selectedIndex, '~shouldUseAriaCarouselPattern': shouldUseAriaCarouselPattern } =
+  const { slidesInView, '~shouldUseAriaCarouselPattern': shouldUseAriaCarouselPattern } =
     useContext(CarouselContext);
 
   return (
     <div
       {...rest}
-      inert={shouldUseAriaCarouselPattern && selectedIndex !== itemIndex ? true : undefined}
+      inert={shouldUseAriaCarouselPattern && !slidesInView.includes(itemIndex) ? true : undefined}
       className={cx(
         className,
         'min-w-0 shrink-0 grow-0',
