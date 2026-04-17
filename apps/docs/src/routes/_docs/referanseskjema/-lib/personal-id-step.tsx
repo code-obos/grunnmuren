@@ -61,8 +61,8 @@ export function PersonalIdStep({ onNext, onPrevious, sampleData }: StepProps) {
   return (
     <div className="flex flex-col gap-9">
       <ComponentInfo
-        name="Fødselsdato"
-        description="Datofelt for fødselsdato. Bruker TextField med size=12/13 og inputMode for å tilpasse for NO/SE."
+        name="Fødsels- og personnummer"
+        description="Felt for fødsels- og personnummer. Bruker TextField med size=12/13 og inputMode for å tilpasse for NO/SE."
         props={PROPS}
       >
         <Code
@@ -79,7 +79,7 @@ export function PersonalIdStep({ onNext, onPrevious, sampleData }: StepProps) {
       </ComponentInfo>
 
       <CountryDiffBox>
-        <ul className="flex flex-col gap-1">
+        <ul className="flex list-disc flex-col gap-1 pl-4">
           <li>
             <strong>Label:</strong> "Fødsels- og personnummer" (NO) / "Personnummer" (SE)
           </li>
@@ -101,7 +101,7 @@ export function PersonalIdStep({ onNext, onPrevious, sampleData }: StepProps) {
         </ul>
       </CountryDiffBox>
 
-      <div className="flex flex-col gap-2">
+      <div className="prose flex flex-col gap-2">
         <h3 className="heading-s">Validering</h3>
         <p>
           Bruk våre valideringsfunksjoner fra @obosbbl/validation/no og @obosbbl/validation/se for å

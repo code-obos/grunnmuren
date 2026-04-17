@@ -59,7 +59,7 @@ export function BirthDateStep({ onNext, onPrevious, sampleData }: StepProps) {
       </ComponentInfo>
 
       <CountryDiffBox>
-        <ul className="flex flex-col gap-1">
+        <ul className="flex list-disc flex-col gap-1 pl-4">
           <li>
             <strong>Label:</strong> "Fødselsdato" (NO) / "Födelsedatum" (SE)
           </li>
@@ -75,9 +75,9 @@ export function BirthDateStep({ onNext, onPrevious, sampleData }: StepProps) {
         </ul>
       </div>
 
-      <div className="flex flex-col gap-2">
+      <div className="prose flex flex-col gap-2">
         <h3 className="heading-s">Når bør du overstyre props?</h3>
-        <ul className="text-gray-dark flex flex-col gap-2">
+        <ul className="text-gray-dark flex list-disc flex-col gap-2 pl-4">
           <li>
             <strong>label:</strong> Overstyr når feltet gjelder en annen person enn brukeren selv
             (f.eks. vitne, mottaker).

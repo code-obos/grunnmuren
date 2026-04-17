@@ -77,7 +77,7 @@ export function NameFieldsStep({ onNext, sampleData }: StepProps) {
       </ComponentInfo>
 
       <CountryDiffBox>
-        <ul className="flex flex-col gap-1">
+        <ul className="flex list-disc flex-col gap-1 pl-4">
           <li>
             <strong>Fornavn-label:</strong> &quot;Fornavn og mellomnavn&quot; (NO) /
             &quot;Förnamn&quot; (SE)
@@ -94,7 +94,7 @@ export function NameFieldsStep({ onNext, sampleData }: StepProps) {
 
       <div className="prose flex flex-col gap-2">
         <h3 className="heading-s">Når bør du overstyre props?</h3>
-        <ul className="text-gray-dark flex flex-col gap-2">
+        <ul className="text-gray-dark flex list-disc flex-col gap-2 pl-4">
           <li>
             <strong>label:</strong> Overstyr når feltene gjelder en annen person enn brukeren selv
             (f.eks. mottaker, giver, foresatt, vitne). Standard-labels ("Fornavn og mellomnavn" /

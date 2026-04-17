@@ -80,7 +80,7 @@ export function AddressStep({ onNext, onPrevious, sampleData }: StepProps) {
       </ComponentInfo>
 
       <CountryDiffBox>
-        <ul className="flex flex-col gap-1">
+        <ul className="flex list-disc flex-col gap-1 pl-4">
           <li>
             <strong>Label:</strong> "Adresse" (NO) / "Adress" (SE)
           </li>
@@ -97,7 +97,7 @@ export function AddressStep({ onNext, onPrevious, sampleData }: StepProps) {
         </ul>
       </CountryDiffBox>
 
-      <div className="flex flex-col gap-2">
+      <div className="prose flex flex-col gap-2">
         <h3 className="heading-s">Skjulte felt</h3>
         <p>
           Komponenten lagrer valgt adresse i skjulte input-felt med prefiks fra
@@ -113,7 +113,7 @@ export function AddressStep({ onNext, onPrevious, sampleData }: StepProps) {
         </ul>
       </div>
 
-      <div className="flex flex-col gap-2">
+      <div className="prose flex flex-col gap-2">
         <h3 className="heading-s">Validering (Zod)</h3>
         <ul className="text-gray-dark flex list-disc flex-col gap-1 pl-4">
           <li>
@@ -126,7 +126,7 @@ export function AddressStep({ onNext, onPrevious, sampleData }: StepProps) {
 
       <div className="prose flex flex-col gap-2">
         <h3 className="heading-s">Når bør du overstyre props?</h3>
-        <ul className="text-gray-dark flex flex-col gap-2">
+        <ul className="text-gray-dark flex list-disc flex-col gap-2 pl-4">
           <li>
             <strong>label:</strong> Overstyr når adressen gjelder en annen person (f.eks. "Mottakers
             adresse").

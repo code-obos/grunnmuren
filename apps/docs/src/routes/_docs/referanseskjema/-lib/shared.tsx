@@ -33,7 +33,7 @@ export function ComponentInfo({ name, description, props, children }: ComponentI
             Props
           </DisclosureButton>
           <DisclosurePanel>
-            <Table aria-describedby={name} aria-labelledby="fdfdfd">
+            <Table aria-label={`Props for ${name}`}>
               <TableHead>
                 <TableColumn isRowHeader>Navn</TableColumn>
                 <TableColumn>Type</TableColumn>
@@ -75,7 +75,7 @@ type ExampleBlockProps = {
 
 export function ExampleBlock({ label, description, children }: ExampleBlockProps) {
   return (
-    <section className="flex flex-col gap-3">
+    <section className="flex max-w-prose flex-col gap-3">
       <div>
         <h4 className="heading-xs">{label}</h4>
         {description ? <p className="text-gray-dark">{description}</p> : null}

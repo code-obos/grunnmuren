@@ -74,7 +74,7 @@ export function PhoneStep({ onNext, onPrevious, sampleData }: StepProps) {
       </ComponentInfo>
 
       <CountryDiffBox>
-        <ul className="flex flex-col gap-1">
+        <ul className="flex list-disc flex-col gap-1 pl-4">
           <li>
             <strong>leftAddon:</strong> NO viser "+47" med skillelinje. SE har ingen leftAddon.
           </li>
@@ -88,12 +88,12 @@ export function PhoneStep({ onNext, onPrevious, sampleData }: StepProps) {
         </ul>
       </CountryDiffBox>
 
-      <div className="flex flex-col gap-2">
+      <div className="prose flex flex-col gap-2">
         <h3 className="heading-s">Validering</h3>
         <p>Bruk @obosbbl/validation for validering av telefonnummer.</p>
       </div>
 
-      <div className="flex flex-col gap-2">
+      <div className="prose flex flex-col gap-2">
         <h3 className="heading-s">Når bør du overstyre props?</h3>
         <ul className="text-gray-dark flex flex-col gap-2">
           <li>

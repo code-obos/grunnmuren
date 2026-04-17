@@ -40,7 +40,7 @@ export function EmailStep({ onNext, onPrevious, sampleData }: StepProps) {
     <div className="flex flex-col gap-9">
       <ComponentInfo
         name="E-post"
-        description="Datofelt for e-post. Bruker TextField med type='email'."
+        description="Felt for e-postadresse. Bruker TextField med type='email'."
         props={PROPS}
       >
         <Code
@@ -72,12 +72,9 @@ export function EmailStep({ onNext, onPrevious, sampleData }: StepProps) {
         </ul>
       </div>
 
-      <div className="flex flex-col gap-2">
+      <div className="prose flex flex-col gap-2">
         <h3 className="heading-s">Når bør du overstyre props?</h3>
-        <ul className="text-gray-dark flex flex-col gap-2">
-          <li>
-            <strong>label:</strong> Sjelden nodvendig - "E-post" passer i de fleste tilfeller.
-          </li>
+        <ul className="text-gray-dark flex list-disc flex-col gap-2 pl-4">
           <li>
             <strong>description:</strong> Legg til hjelpetekst når det trengs kontekst om hva
             e-posten brukes til.

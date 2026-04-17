@@ -1,4 +1,4 @@
-const SAMPLE_DATA_NO = {
+export const SAMPLE_DATA = {
   firstName: 'Ola',
   lastName: 'Nordmann',
   birthdate: '1990-01-15',
@@ -23,6 +23,4 @@ const SAMPLE_DATA_NO = {
   greeting: 'Gratulerer med dagen! Hilsen fra oss alle.',
 };
 
-export const SAMPLE_DATA = SAMPLE_DATA_NO;
-
-export type SampleData = typeof SAMPLE_DATA_NO;
+export type SampleData = typeof SAMPLE_DATA;

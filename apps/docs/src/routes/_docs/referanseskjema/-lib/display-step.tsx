@@ -7,7 +7,7 @@ import {
   Heading,
   Footer,
 } from '@obosbbl/grunnmuren-react';
-import { clsx } from 'clsx';
+import { cx } from 'cva';
 
 import { Code } from '@/ui/code';
 
@@ -72,9 +72,9 @@ function EditableCard({ title, children, editAction, variant = 'default' }: Edit
       {title && <h3 className="heading-s">{title}</h3>}
       <Card variant="outlined" className="max-w-md [&>div]:p-6">
         <div
-          className={clsx(
+          className={cx(
             'flex flex-col gap-1',
-            variant === 'muted' && 'rounded-lg bg-gray-lightest p-4',
+            variant === 'muted' && 'bg-gray-lightest rounded-lg p-4',
           )}
         >
           {children}
@@ -87,6 +87,31 @@ function EditableCard({ title, children, editAction, variant = 'default' }: Edit
 }
 
 export function DisplayStep({ onPrevious, sampleData }: StepProps) {
+  const recipientCardContent = (
+    <>
+      <p className="heading-xs">
+        {sampleData.firstName} {sampleData.lastName}
+      </p>
+      <p>
+        <span className="block font-semibold sm:inline">Født:</span> {sampleData.birthdate}
+      </p>
+      <p>
+        <span className="block font-semibold sm:inline">Mobil:</span> {sampleData.phone}
+      </p>
+      <p>
+        <span className="block font-semibold sm:inline">E-post:</span> {sampleData.email}
+      </p>
+      <p>
+        <span className="block font-semibold sm:inline">Adresse:</span>{' '}
+        {sampleData.address.streetAddress} {sampleData.address.houseNumber},{' '}
+        {sampleData.address.postalCode}{' '}
+      </p>
+      <p>
+        <span className="block font-semibold sm:inline">c/o:</span> {sampleData.careOfName}
+      </p>
+    </>
+  );
+
   return (
     <div className="flex flex-col gap-9">
       <section className="flex flex-col gap-2">
@@ -104,7 +129,7 @@ export function DisplayStep({ onPrevious, sampleData }: StepProps) {
   {title && <h3 className="heading-s">{title}</h3>}
   <Card variant="outlined" className="max-w-md [&>div]:p-6">
     <div
-      className={clsx(
+      className={cx(
         'flex flex-col gap-1',
         variant === 'muted' && 'rounded-lg bg-gray-lightest p-4',
       )}
@@ -145,26 +170,7 @@ export function DisplayStep({ onPrevious, sampleData }: StepProps) {
               </Button>
             }
           >
-            <p className="heading-xs">
-              {sampleData.firstName} {sampleData.lastName}
-            </p>
-            <p>
-              <span className="block font-semibold sm:inline">Født:</span> {sampleData.birthdate}
-            </p>
-            <p>
-              <span className="block font-semibold sm:inline">Mobil:</span> {sampleData.phone}
-            </p>
-            <p>
-              <span className="block font-semibold sm:inline">E-post:</span> {sampleData.email}
-            </p>
-            <p>
-              <span className="block font-semibold sm:inline">Adresse:</span>{' '}
-              {sampleData.address.streetAddress} {sampleData.address.houseNumber},{' '}
-              {sampleData.address.postalCode}{' '}
-            </p>
-            <p>
-              <span className="block font-semibold sm:inline">c/o:</span> {sampleData.careOfName}
-            </p>
+            {recipientCardContent}
           </EditableCard>
         </ExampleBlock>
 
@@ -181,26 +187,7 @@ export function DisplayStep({ onPrevious, sampleData }: StepProps) {
               </Link>
             }
           >
-            <p className="heading-xs">
-              {sampleData.firstName} {sampleData.lastName}
-            </p>
-            <p>
-              <span className="block font-semibold sm:inline">Født:</span> {sampleData.birthdate}
-            </p>
-            <p>
-              <span className="block font-semibold sm:inline">Mobil:</span> {sampleData.phone}
-            </p>
-            <p>
-              <span className="block font-semibold sm:inline">E-post:</span> {sampleData.email}
-            </p>
-            <p>
-              <span className="block font-semibold sm:inline">Adresse:</span>{' '}
-              {sampleData.address.streetAddress} {sampleData.address.houseNumber},{' '}
-              {sampleData.address.postalCode}{' '}
-            </p>
-            <p>
-              <span className="block font-semibold sm:inline">c/o:</span> {sampleData.careOfName}
-            </p>
+            {recipientCardContent}
           </EditableCard>
         </ExampleBlock>
 
@@ -277,18 +264,20 @@ export function DisplayStep({ onPrevious, sampleData }: StepProps) {
           label="PersonalInfoDisplay - med overskrift"
           description="Brukes i innmeldingsskjemaet for a vise data fra BankID"
         >
-          <DisplayList>
-            <h3 className="heading-s mb-3">Fra BankID:</h3>
-            <DisplayItem label="Navn" value="Ola Nordmann" />
-            <DisplayItem label="Fødselsnummer" value={sampleData.nationalId} />
-            <DisplayItem label="Fødselsdato" value="15.01.1990" />
-            <DisplayItem label="Mobil" value="+47 123 45 678" />
-            <DisplayItem label="E-post" value={sampleData.email} />
-            <DisplayItem
-              label="Adresse"
-              value={`${sampleData.address.streetAddress} ${sampleData.address.houseNumber}, ${sampleData.address.postalCode} ${sampleData.address.postalDistrict}`}
-            />
-          </DisplayList>
+          <div className="flex flex-col gap-2">
+            <h3 className="heading-s">Fra BankID:</h3>
+            <DisplayList>
+              <DisplayItem label="Navn" value="Ola Nordmann" />
+              <DisplayItem label="Fødselsnummer" value={sampleData.nationalId} />
+              <DisplayItem label="Fødselsdato" value="15.01.1990" />
+              <DisplayItem label="Mobil" value="+47 123 45 678" />
+              <DisplayItem label="E-post" value={sampleData.email} />
+              <DisplayItem
+                label="Adresse"
+                value={`${sampleData.address.streetAddress} ${sampleData.address.houseNumber}, ${sampleData.address.postalCode} ${sampleData.address.postalDistrict}`}
+              />
+            </DisplayList>
+          </div>
         </ExampleBlock>
       </div>
 
@@ -321,16 +310,14 @@ export function DisplayStep({ onPrevious, sampleData }: StepProps) {
             </Heading>
 
             <Content>
-              <>
-                <Link href="/medlem/medlemsservice/kontaktskjema?topic=Annet">
-                  <span className="font-medium">Her kan du melde inn feilen.</span>
-                </Link>{' '}
-                <p className="mb-6">Feilkoden under vil brukes i henvendelsen din.</p>
-                <p>
-                  <span className="font-semibold">Feilkode:</span>
-                  <code>101</code>
-                </p>
-              </>
+              <Link href="/medlem/medlemsservice/kontaktskjema?topic=Annet">
+                <span className="font-medium">Her kan du melde inn feilen.</span>
+              </Link>{' '}
+              <p className="mb-6">Feilkoden under vil brukes i henvendelsen din.</p>
+              <p>
+                <span className="font-semibold">Feilkode:</span>
+                <code>101</code>
+              </p>
               <Footer>{new Date().toISOString()}</Footer>
             </Content>
           </Alertbox>
