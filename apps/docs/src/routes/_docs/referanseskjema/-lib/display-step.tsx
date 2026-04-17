@@ -161,7 +161,7 @@ export function DisplayStep({ onPrevious, sampleData }: StepProps) {
           <EditableCard
             title="Mottaker"
             editAction={
-              <Button variant="secondary" className="w-fit">
+              <Button href="<url>?step-<number>" variant="secondary" className="w-fit">
                 Endre
               </Button>
             }
@@ -194,7 +194,7 @@ export function DisplayStep({ onPrevious, sampleData }: StepProps) {
           <EditableCard
             title="Til"
             editAction={
-              <Button variant="secondary" className="w-fit">
+              <Button href="<url>?step-<number>" variant="secondary" className="w-fit">
                 Endre
               </Button>
             }
