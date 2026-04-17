@@ -9,10 +9,17 @@ import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
+  Card,
+  Heading,
+  Content,
+  Alertbox,
 } from '@obosbbl/grunnmuren-react';
 import { ReactNode } from 'react';
 
 import type { ComponentProp } from './types';
+
+const VALIDATION_SOURCE_URL =
+  'https://github.com/code-obos/public-frontend-modules/tree/main/packages/validation';
 
 type ComponentInfoProps = {
   name: string;
@@ -60,10 +67,12 @@ export function ComponentInfo({ name, description, props, children }: ComponentI
 
 export function CountryDiffBox({ children }: { children: React.ReactNode }) {
   return (
-    <section className="bg-sky-light prose border-sky rounded-md border px-4 py-3">
-      <h3 className="heading-s mb-2">Norge vs Sverige</h3>
-      <div>{children}</div>
-    </section>
+    <Alertbox variant="info" role="status">
+      <Heading level={3} className="not-prose">
+        Norge vs Sverige
+      </Heading>
+      <Content>{children}</Content>
+    </Alertbox>
   );
 }
 
@@ -75,15 +84,15 @@ type ExampleBlockProps = {
 
 export function ExampleBlock({ label, description, children }: ExampleBlockProps) {
   return (
-    <section className="flex max-w-prose flex-col gap-3">
-      <div>
-        <h4 className="heading-xs">{label}</h4>
-        {description ? <p className="text-gray-dark">{description}</p> : null}
-      </div>
-      <div className="border-gray-light rounded-md border p-4">
-        <div className="flex flex-col gap-4">{children}</div>
-      </div>
-    </section>
+    <Card variant="outlined" className="flex max-w-prose flex-col gap-3">
+      <Content>
+        <Heading level={4}>{label}</Heading>
+        {description && <p className="text-gray-dark">{description}</p>}
+        <div className="border-gray-light rounded-md border p-4">
+          <div className="flex flex-col gap-4">{children}</div>
+        </div>
+      </Content>
+    </Card>
   );
 }
 
@@ -102,5 +111,19 @@ export function StepNavigation({ onNext, onPrevious }: StepNavigationProps) {
       ) : null}
       {onNext && <Button onPress={onNext}>Neste steg</Button>}
     </div>
+  );
+}
+
+type ValidationSourceLinkProps = {
+  children?: ReactNode;
+};
+
+export function ValidationSourceLink({
+  children = '@obosbbl/validation',
+}: ValidationSourceLinkProps) {
+  return (
+    <a href={VALIDATION_SOURCE_URL} target="_blank" rel="noopener noreferrer">
+      {children}
+    </a>
   );
 }

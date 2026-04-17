@@ -76,23 +76,22 @@ export function NameFieldsStep({ onNext, sampleData }: StepProps) {
         />
       </ComponentInfo>
 
-      <CountryDiffBox>
-        <ul className="flex list-disc flex-col gap-1 pl-4">
-          <li>
-            <strong>Fornavn-label:</strong> &quot;Fornavn og mellomnavn&quot; (NO) /
-            &quot;Förnamn&quot; (SE)
-          </li>
-          <li>
-            <strong>Etternavn-label:</strong> &quot;Etternavn&quot; (NO) / &quot;Efternamn&quot;
-            (SE)
-          </li>
-          <li>
-            <strong>Validering:</strong> Identisk — maks 50 tegn for begge land
-          </li>
-        </ul>
-      </CountryDiffBox>
-
       <div className="prose">
+        <CountryDiffBox>
+          <ul className="flex list-disc flex-col gap-1 pl-4">
+            <li>
+              <strong>Fornavn-label:</strong> &quot;Fornavn og mellomnavn&quot; (NO) /
+              &quot;Förnamn&quot; (SE)
+            </li>
+            <li>
+              <strong>Etternavn-label:</strong> &quot;Etternavn&quot; (NO) / &quot;Efternamn&quot;
+              (SE)
+            </li>
+            <li>
+              <strong>Validering:</strong> Identisk — maks 50 tegn for begge land
+            </li>
+          </ul>
+        </CountryDiffBox>
         <h3 className="heading-s">Når bør du overstyre props?</h3>
         <ul className="text-gray-dark flex list-disc flex-col gap-2 pl-4">
           <li>

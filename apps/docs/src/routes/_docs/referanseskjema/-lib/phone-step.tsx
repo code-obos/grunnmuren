@@ -2,7 +2,13 @@ import { TextField } from '@obosbbl/grunnmuren-react';
 
 import { Code } from '@/ui/code';
 
-import { ComponentInfo, CountryDiffBox, ExampleBlock, StepNavigation } from './shared';
+import {
+  ComponentInfo,
+  CountryDiffBox,
+  ExampleBlock,
+  StepNavigation,
+  ValidationSourceLink,
+} from './shared';
 import type { StepProps } from './types';
 
 const PROPS = [
@@ -90,7 +96,9 @@ export function PhoneStep({ onNext, onPrevious, sampleData }: StepProps) {
 
       <div className="prose">
         <h3 className="heading-s">Validering</h3>
-        <p>Bruk @obosbbl/validation for validering av telefonnummer.</p>
+        <p>
+          Bruk <ValidationSourceLink /> for validering av telefonnummer.
+        </p>
       </div>
 
       <div className="prose">

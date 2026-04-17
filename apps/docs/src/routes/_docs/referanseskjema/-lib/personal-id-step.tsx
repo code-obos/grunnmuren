@@ -2,7 +2,13 @@ import { TextField } from '@obosbbl/grunnmuren-react';
 
 import { Code } from '@/ui/code';
 
-import { ComponentInfo, CountryDiffBox, ExampleBlock, StepNavigation } from './shared';
+import {
+  ComponentInfo,
+  CountryDiffBox,
+  ExampleBlock,
+  StepNavigation,
+  ValidationSourceLink,
+} from './shared';
 import type { StepProps } from './types';
 
 const PROPS = [
@@ -93,10 +99,10 @@ export function PersonalIdStep({ onNext, onPrevious, sampleData }: StepProps) {
             <strong>InputMode:</strong> "numeric" (NO) / "text" (SE)
           </li>
           <li>
-            <strong>NO-validering:</strong> @obosbbl/validation/no
+            <strong>NO-validering:</strong> <ValidationSourceLink />
           </li>
           <li>
-            <strong>SE-validering:</strong> @obosbbl/validation/se
+            <strong>SE-validering:</strong> <ValidationSourceLink />
           </li>
         </ul>
       </CountryDiffBox>
@@ -104,8 +110,7 @@ export function PersonalIdStep({ onNext, onPrevious, sampleData }: StepProps) {
       <div className="prose">
         <h3 className="heading-s">Validering</h3>
         <p>
-          Bruk våre valideringsfunksjoner fra @obosbbl/validation/no og @obosbbl/validation/se for å
-          sikre korrekt format.
+          Bruk våre valideringsfunksjoner fra <ValidationSourceLink /> for å sikre korrekt format.
         </p>
       </div>
 
