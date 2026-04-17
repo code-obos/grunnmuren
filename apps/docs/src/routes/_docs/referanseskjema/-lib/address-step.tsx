@@ -168,7 +168,7 @@ export function AddressStep({ onNext, onPrevious, sampleData }: StepProps) {
         </ExampleBlock>
 
         <ExampleBlock label="Uten c/o" description="c/o-avkrysning er skjult">
-          <Combobox label="Adresse" placeholder="Sok etter adresse">
+          <Combobox label="Adresse" placeholder="Søk etter adresse">
             {SUGGESTIONS.map((suggestion) => (
               <ComboboxItem key={suggestion}>{suggestion}</ComboboxItem>
             ))}
