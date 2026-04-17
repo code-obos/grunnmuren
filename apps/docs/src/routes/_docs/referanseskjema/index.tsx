@@ -54,33 +54,32 @@ function RouteComponent() {
     <>
       <h1 className="heading-l mt-12 mb-10 lg:mb-12">Referanseskjema</h1>
       <p className="lead mb-12 max-w-prose">
-        Dette skjemaet dokumenterer alle delte skjemakomponenter som brukes på tvers av alle
-        skjemaer. Hver komponent viser props, eksempler, forskjeller mellom Norge og Sverige, og
-        hvilke skjemaer som bruker den.
+        Denne siden dokumenterer alle typiske skjemakomponenter som brukes i våre skjemaer, med
+        eksempler på props, validering og forskjeller mellom Norge og Sverige. Det er ikke ment som
+        en komplett guide til alle mulige props og variasjoner, men heller en praktisk referanse for
+        de vanligste felttypene.
       </p>
 
-      <div className="relative mt-15">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-start">
-          <aside className="sticky top-0 z-10 shrink-0 bg-white py-4">
-            <nav aria-label="Progressindikator">
-              <Stepper activeStep={activeIndex} onStepChange={goToStep}>
-                {STEPS.map((step, index) => (
-                  <Step key={step.id} state={index < activeIndex ? 'completed' : undefined}>
-                    <Link>{step.label}</Link>
-                  </Step>
-                ))}
-              </Stepper>
-            </nav>
-          </aside>
+      <div className="relative mt-15 flex flex-col gap-4 lg:flex-row">
+        <aside className="sticky top-0 z-10 h-fit shrink-0 bg-white py-4">
+          <nav aria-label="Progressindikator">
+            <Stepper activeStep={activeIndex} onStepChange={goToStep}>
+              {STEPS.map((step, index) => (
+                <Step key={step.id} state={index < activeIndex ? 'completed' : undefined}>
+                  <Link>{step.label}</Link>
+                </Step>
+              ))}
+            </Stepper>
+          </nav>
+        </aside>
 
-          {ActiveStepComponent && (
-            <ActiveStepComponent
-              onNext={goToNext}
-              onPrevious={goToPrevious}
-              sampleData={SAMPLE_DATA}
-            />
-          )}
-        </div>
+        {ActiveStepComponent && (
+          <ActiveStepComponent
+            onNext={goToNext}
+            onPrevious={goToPrevious}
+            sampleData={SAMPLE_DATA}
+          />
+        )}
       </div>
     </>
   );

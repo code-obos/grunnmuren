@@ -92,7 +92,7 @@ export function NameFieldsStep({ onNext, sampleData }: StepProps) {
         </ul>
       </CountryDiffBox>
 
-      <div className="prose flex flex-col gap-2">
+      <div className="prose">
         <h3 className="heading-s">Når bør du overstyre props?</h3>
         <ul className="text-gray-dark flex list-disc flex-col gap-2 pl-4">
           <li>

@@ -62,7 +62,7 @@ export function EmailStep({ onNext, onPrevious, sampleData }: StepProps) {
         <p>Ingen forskjeller - label, validering og oppforsel er identisk i begge land.</p>
       </CountryDiffBox>
 
-      <div className="prose flex flex-col gap-2">
+      <div className="prose">
         <h3 className="heading-s">Validering</h3>
         <ul className="text-gray-dark flex list-disc flex-col gap-1 pl-4">
           <li>Automatisk trimmet og gjort til lowercase</li>
@@ -72,7 +72,7 @@ export function EmailStep({ onNext, onPrevious, sampleData }: StepProps) {
         </ul>
       </div>
 
-      <div className="prose flex flex-col gap-2">
+      <div className="prose">
         <h3 className="heading-s">Når bør du overstyre props?</h3>
         <ul className="text-gray-dark flex list-disc flex-col gap-2 pl-4">
           <li>

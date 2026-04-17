@@ -101,7 +101,7 @@ export function PersonalIdStep({ onNext, onPrevious, sampleData }: StepProps) {
         </ul>
       </CountryDiffBox>
 
-      <div className="prose flex flex-col gap-2">
+      <div className="prose">
         <h3 className="heading-s">Validering</h3>
         <p>
           Bruk våre valideringsfunksjoner fra @obosbbl/validation/no og @obosbbl/validation/se for å

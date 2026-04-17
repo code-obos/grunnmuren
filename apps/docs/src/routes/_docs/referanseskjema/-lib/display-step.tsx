@@ -39,11 +39,7 @@ const EDITABLE_CARD_PROPS = [
 ];
 
 function DisplayList({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="bg-gray-light rounded-md p-4">
-      <dl className="grid gap-2">{children}</dl>
-    </div>
-  );
+  return <dl className="grid gap-2">{children}</dl>;
 }
 
 function DisplayItem({ label, value }: { label: string; value?: string }) {
@@ -120,7 +116,7 @@ export function DisplayStep({ onPrevious, sampleData }: StepProps) {
       </section>
 
       <ComponentInfo
-        name="EditableCard"
+        name="Oppsummeringskort"
         description="Kort med endre-handling. Brukes i oppsummeringssteg for a vise utfylt informasjon med mulighet til a ga tilbake og endre."
         props={EDITABLE_CARD_PROPS}
       >
@@ -143,7 +139,7 @@ export function DisplayStep({ onPrevious, sampleData }: StepProps) {
         />
       </ComponentInfo>
 
-      <div className="prose flex flex-col gap-2">
+      <div className="prose">
         <h3 className="heading-s">Når bør du overstyre props?</h3>
         <ul className="text-gray-dark flex flex-col gap-2">
           <li>
@@ -227,10 +223,7 @@ export function DisplayStep({ onPrevious, sampleData }: StepProps) {
         </ExampleBlock>
       </div>
 
-      <ComponentInfo
-        name="Display personal information"
-        description="Grå boks for visning av personinfo."
-      >
+      <ComponentInfo name="Visning av personinfo" description="Grå boks for visning av personinfo.">
         <Code
           code={`<div className="bg-gray-light rounded-md p-4">
   <dl className="grid gap-2">
@@ -245,7 +238,7 @@ export function DisplayStep({ onPrevious, sampleData }: StepProps) {
 
       <div className="flex flex-col gap-6">
         <ExampleBlock
-          label="PersonalInfoDisplay - alle felter"
+          label="Visning av personinfo - alle felter"
           description="Viser personinfo i en grå boks"
         >
           <DisplayList>
@@ -261,32 +254,34 @@ export function DisplayStep({ onPrevious, sampleData }: StepProps) {
         </ExampleBlock>
 
         <ExampleBlock
-          label="PersonalInfoDisplay - med overskrift"
+          label="Visning av personinfo - med overskrift"
           description="Brukes i innmeldingsskjemaet for a vise data fra BankID"
         >
           <div className="flex flex-col gap-2">
-            <h3 className="heading-s">Fra BankID:</h3>
-            <DisplayList>
-              <DisplayItem label="Navn" value="Ola Nordmann" />
-              <DisplayItem label="Fødselsnummer" value={sampleData.nationalId} />
-              <DisplayItem label="Fødselsdato" value="15.01.1990" />
-              <DisplayItem label="Mobil" value="+47 123 45 678" />
-              <DisplayItem label="E-post" value={sampleData.email} />
-              <DisplayItem
-                label="Adresse"
-                value={`${sampleData.address.streetAddress} ${sampleData.address.houseNumber}, ${sampleData.address.postalCode} ${sampleData.address.postalDistrict}`}
-              />
-            </DisplayList>
+            <div className="bg-gray-light rounded-md p-4">
+              <h3 className="heading-s">Fra BankID:</h3>
+              <DisplayList>
+                <DisplayItem label="Navn" value="Ola Nordmann" />
+                <DisplayItem label="Fødselsnummer" value={sampleData.nationalId} />
+                <DisplayItem label="Fødselsdato" value="15.01.1990" />
+                <DisplayItem label="Mobil" value="+47 123 45 678" />
+                <DisplayItem label="E-post" value={sampleData.email} />
+                <DisplayItem
+                  label="Adresse"
+                  value={`${sampleData.address.streetAddress} ${sampleData.address.houseNumber}, ${sampleData.address.postalCode} ${sampleData.address.postalDistrict}`}
+                />
+              </DisplayList>
+            </div>
           </div>
         </ExampleBlock>
       </div>
 
       <ComponentInfo
-        name="FormError"
+        name="Visning av feilmelding"
         description="Feilmelding ved innsending. Viser generell feilmelding og detaljer for feilen. Brukes i Alertbox med variant 'danger'."
       >
         <Code
-          code={`<Alertbox role="alert" variant="danger" className="not-prose">
+          code={`<Alertbox role="alert" variant="danger">
   <Heading level={3}>
     Vi kunne dessverre ikke behandle din forespørsel. Vennligst prøv igjen senere.
   </Heading>
@@ -304,7 +299,7 @@ export function DisplayStep({ onPrevious, sampleData }: StepProps) {
           label="FormError - standard"
           description="Generell feilmelding med tidsstempel"
         >
-          <Alertbox role="alert" variant="danger" className="not-prose">
+          <Alertbox role="alert" variant="danger">
             <Heading level={3}>
               Vi kunne dessverre ikke behandle din forespørsel. Vennligst prøv igjen senere.
             </Heading>

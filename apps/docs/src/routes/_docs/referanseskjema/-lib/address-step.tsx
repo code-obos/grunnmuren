@@ -42,7 +42,7 @@ export function AddressStep({ onNext, onPrevious, sampleData }: StepProps) {
   const [useCareOfAddress, setUseCareOfAddress] = useState(false);
 
   return (
-    <div className="flex flex-col gap-9">
+    <div className="flex flex-col gap-8">
       <ComponentInfo
         name="Adressefelt"
         description="Adressefelt med autofullforing og valgfri c/o-adresse. Valgt adresse lagres i skjulte felt med prefiks fra hiddenFieldsNamePrefix."
@@ -84,7 +84,7 @@ export function AddressStep({ onNext, onPrevious, sampleData }: StepProps) {
           <li>
             <strong>Label:</strong> "Adresse" (NO) / "Adress" (SE)
           </li>
-          <li>
+          <li className="wrap-break-word">
             <strong>Autofullforing:</strong> Bruker obos.no/api/nettsted/suggest/address med
             country_code param for NO/SE
           </li>
@@ -97,7 +97,7 @@ export function AddressStep({ onNext, onPrevious, sampleData }: StepProps) {
         </ul>
       </CountryDiffBox>
 
-      <div className="prose flex flex-col gap-2">
+      <div className="prose">
         <h3 className="heading-s">Skjulte felt</h3>
         <p>
           Komponenten lagrer valgt adresse i skjulte input-felt med prefiks fra
@@ -113,7 +113,7 @@ export function AddressStep({ onNext, onPrevious, sampleData }: StepProps) {
         </ul>
       </div>
 
-      <div className="prose flex flex-col gap-2">
+      <div className="prose">
         <h3 className="heading-s">Validering (Zod)</h3>
         <ul className="text-gray-dark flex list-disc flex-col gap-1 pl-4">
           <li>
@@ -124,7 +124,7 @@ export function AddressStep({ onNext, onPrevious, sampleData }: StepProps) {
         </ul>
       </div>
 
-      <div className="prose flex flex-col gap-2">
+      <div className="prose">
         <h3 className="heading-s">Når bør du overstyre props?</h3>
         <ul className="text-gray-dark flex list-disc flex-col gap-2 pl-4">
           <li>
