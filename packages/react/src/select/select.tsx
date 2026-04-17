@@ -3,7 +3,11 @@ import { cx } from 'cva';
 import type { Ref } from 'react';
 import { Button } from 'react-aria-components/Button';
 import { Popover } from 'react-aria-components/Popover';
-import { Select as RACSelect, type SelectProps as RACSelectProps, SelectValue } from 'react-aria-components/Select';
+import {
+  Select as RACSelect,
+  type SelectProps as RACSelectProps,
+  SelectValue,
+} from 'react-aria-components/Select';
 
 import { dropdown, formField, input } from '../classes';
 import {

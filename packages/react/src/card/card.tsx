@@ -258,7 +258,7 @@ const CardLink = ({ className: _className, href, ...restProps }: CardLinkProps) 
     // We can't utilize that the `Link` component from react-aria-components renders as a span if it doesn't have an href,
     // because it still renders with role="link" and tabindex="0" which makes it focusable.
     // So we need to render a div instead.
-    (<div {...(restProps as CardLinkWrapperProps)} data-slot="card-link" className={className} />)
+    <div {...(restProps as CardLinkWrapperProps)} data-slot="card-link" className={className} />
   );
 };
 

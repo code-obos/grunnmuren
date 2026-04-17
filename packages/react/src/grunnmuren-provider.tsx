@@ -1,5 +1,4 @@
 import { RouterProvider } from 'react-aria-components';
-
 import { I18nProvider } from 'react-aria-components/I18nProvider';
 
 import type { Locale } from './use-locale';

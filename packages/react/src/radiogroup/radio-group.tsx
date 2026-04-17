@@ -1,6 +1,9 @@
 import { cx } from 'cva';
 import type { Ref } from 'react';
-import { RadioGroup as RACRadioGroup, type RadioGroupProps as RACRadioGroupProps } from 'react-aria-components/RadioGroup';
+import {
+  RadioGroup as RACRadioGroup,
+  type RadioGroupProps as RACRadioGroupProps,
+} from 'react-aria-components/RadioGroup';
 
 import { Description } from '../label/description';
 import { ErrorMessageOrFieldError } from '../label/error-messsage-or-field-error';

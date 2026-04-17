@@ -1,10 +1,13 @@
 import { LoadingSpinner } from '@obosbbl/grunnmuren-icons-react';
 import { compose, cva, type VariantProps } from 'cva';
 import { createContext, type Ref } from 'react';
-import { useProgressBar } from 'react-aria/useProgressBar';
-import { type ContextValue, useContextProps } from 'react-aria-components/slots';
-import { Button as RACButton, type ButtonProps as RACButtonProps } from 'react-aria-components/Button';
+import {
+  Button as RACButton,
+  type ButtonProps as RACButtonProps,
+} from 'react-aria-components/Button';
 import { Link as RACLink, type LinkProps as RACLinkProps } from 'react-aria-components/Link';
+import { type ContextValue, useContextProps } from 'react-aria-components/slots';
+import { useProgressBar } from 'react-aria/useProgressBar';
 
 import { animateIconVariants } from '../classes';
 import { translations } from '../translations';

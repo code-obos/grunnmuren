@@ -1,7 +1,6 @@
 import { cva, cx } from 'cva';
 import { createContext, type RefAttributes, useCallback, useContext, useState } from 'react';
 import { Provider } from 'react-aria-components/slots';
-
 import {
   Cell as RACCell,
   type CellProps as RACCellProps,

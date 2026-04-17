@@ -34,7 +34,7 @@ function Accordion(props: AccordionProps) {
           {child}
           {index < childCount - 1 && (
             // Margin is added to enable support for containers with a background color
-            (<hr className="border-gray-light mx-2" aria-hidden />)
+            <hr className="border-gray-light mx-2" aria-hidden />
           )}
         </>
       ))}

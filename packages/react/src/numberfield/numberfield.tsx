@@ -3,7 +3,6 @@ import { compose, cva, cx } from 'cva';
 import type { Ref } from 'react';
 import { Group } from 'react-aria-components/Group';
 import { Input } from 'react-aria-components/Input';
-
 import {
   NumberField as RACNumberField,
   type NumberFieldProps as RACNumberFieldProps,

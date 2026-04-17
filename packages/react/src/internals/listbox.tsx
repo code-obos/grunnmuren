@@ -2,7 +2,6 @@ import { Check } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
 import { Header } from 'react-aria-components/Header';
 import { type HeadingProps as ListBoxHeadingProps } from 'react-aria-components/Heading';
-
 import {
   type ListBoxItemProps,
   type ListBoxProps,

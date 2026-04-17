@@ -2,7 +2,6 @@ import { Close } from '@obosbbl/grunnmuren-icons-react';
 import { cva, cx } from 'cva';
 import type { RefAttributes } from 'react';
 import { Button } from 'react-aria-components/Button';
-
 import {
   Tag as RACTag,
   TagGroup as RACTagGroup,
