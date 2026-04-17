@@ -1,5 +1,5 @@
 import type { HTMLAttributes, RefObject } from 'react';
-import { type FileTriggerProps as RACFileTriggerProps } from 'react-aria-components/FileTrigger';
+import type { FileTriggerProps as RACFileTriggerProps } from 'react-aria-components/FileTrigger';
 import { Input } from 'react-aria-components/Input';
 /**
  * This is a modified version of the original file-trigger from react-aria-components.
@@ -10,9 +10,9 @@ import { PressResponder } from 'react-aria/private/interactions/PressResponder';
 import { useObjectRef } from 'react-aria/useObjectRef';
 import type { useFormValidationState } from 'react-stately/private/form/useFormValidationState';
 
-type FormValidationProps = Parameters<typeof useFormValidationState>[0];
+type FormValidationProps<T> = Parameters<typeof useFormValidationState<T>>[0];
 
-export type FileTriggerProps = Partial<Omit<FormValidationProps, 'value'>> &
+export type FileTriggerProps = Partial<Omit<FormValidationProps<File>, 'value'>> &
   RACFileTriggerProps &
   Omit<HTMLAttributes<HTMLInputElement>, 'onSelect' | 'onChange' | 'required' | 'className'> & {
     ref?: RefObject<HTMLInputElement | null>;
