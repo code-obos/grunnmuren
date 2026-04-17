@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useEffect, useState } from 'react';
-import { ButtonContext, Provider } from 'react-aria-components';
 
 import { Button } from '../button';
 import { TabbedImageGallery } from '../carousel/carousel.stories';
@@ -221,12 +220,7 @@ export const ImageGalleryModal: Story = {
             <Heading slot="title" level={2}>
               Bildegalleri - Eksempel
             </Heading>
-            {/* Reset the ButtonContext from react-aria-components that Dialog
-                provides (only allows "close" slot) so the Carousel inside
-                Gallery can set up its own "prev" / "next" button slots. */}
-            <Provider values={[[ButtonContext, null]]}>
-              <TabbedImageGallery />
-            </Provider>
+            <TabbedImageGallery />
           </Dialog>
         </Modal>
       </DialogTrigger>

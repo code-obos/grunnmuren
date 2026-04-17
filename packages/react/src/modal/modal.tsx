@@ -1,8 +1,10 @@
 import { Close } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
+import { useContext } from 'react';
 import {
   ButtonContext,
   DEFAULT_SLOT,
+  OverlayTriggerStateContext,
   Provider,
   Dialog as RACDialog,
   type DialogProps as RACDialogProps,
@@ -167,6 +169,20 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
     )}
   </RACDialog>
 );
+
+/**
+ * Reset the ButtonContext from react-aria-components that Dialog provides
+ * (only allows "close" slot) so nested components can set up their own
+ * button slots (e.g. Carousel's "prev" / "next").
+ */
+export const _ModalButtonContextReset = ({ children }: { children: React.ReactNode }) => {
+  const isInsideOverlay = !!useContext(OverlayTriggerStateContext);
+  return isInsideOverlay ? (
+    <Provider values={[[ButtonContext, null]]}>{children}</Provider>
+  ) : (
+    children
+  );
+};
 
 export {
   Dialog as UNSAFE_Dialog,

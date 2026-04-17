@@ -24,6 +24,7 @@ import { DEFAULT_SLOT, Provider } from 'react-aria-components';
 import { Button, ButtonContext, type ButtonProps } from '../button';
 import { MediaContext } from '../content';
 import { UNSAFE_HeroContext as HeroContext } from '../hero';
+import { _ModalButtonContextReset } from '../modal/modal';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 import { usePrefersReducedMotion } from '../use-prefers-reduced-motion';
@@ -326,42 +327,47 @@ const Carousel = ({
       ref={carouselRef}
       onKeyDown={handleKeyDown}
     >
-      <Provider
-        values={[
-          [
-            CarouselContext,
-            {
-              slidesInView,
-              '~emblaRef': emblaRef,
-              orientation,
-              selectedIndex,
-              '~shouldUseAriaCarouselPattern': shouldUseAriaCarouselPattern,
-            },
-          ],
-          [
-            ButtonContext,
-            {
-              slots: {
-                [DEFAULT_SLOT]: {},
-                prev: {
-                  'aria-label': translations.previous[locale],
-                  isDisabled: !canScrollPrev,
-                  onPress: handlePrevPress,
-                  ...nextPrevStyles,
-                },
-                next: {
-                  'aria-label': translations.next[locale],
-                  isDisabled: !canScrollNext,
-                  onPress: handleNextPress,
-                  ...nextPrevStyles,
+      {/* Reset the ButtonContext from react-aria-components that Dialog
+          provides (only allows "close" slot) so the Carousel can set up
+          its own "prev" / "next" button slots. */}
+      <_ModalButtonContextReset>
+        <Provider
+          values={[
+            [
+              CarouselContext,
+              {
+                slidesInView,
+                '~emblaRef': emblaRef,
+                orientation,
+                selectedIndex,
+                '~shouldUseAriaCarouselPattern': shouldUseAriaCarouselPattern,
+              },
+            ],
+            [
+              ButtonContext,
+              {
+                slots: {
+                  [DEFAULT_SLOT]: {},
+                  prev: {
+                    'aria-label': translations.previous[locale],
+                    isDisabled: !canScrollPrev,
+                    onPress: handlePrevPress,
+                    ...nextPrevStyles,
+                  },
+                  next: {
+                    'aria-label': translations.next[locale],
+                    isDisabled: !canScrollNext,
+                    onPress: handleNextPress,
+                    ...nextPrevStyles,
+                  },
                 },
               },
-            },
-          ],
-        ]}
-      >
-        {children}
-      </Provider>
+            ],
+          ]}
+        >
+          {children}
+        </Provider>
+      </_ModalButtonContextReset>
     </div>
   );
 };
