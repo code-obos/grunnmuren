@@ -1,14 +1,14 @@
 import { ChevronDown, LoadingSpinner } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
 import type { Ref } from 'react';
+import { Button } from 'react-aria-components/Button';
 import {
-  Button,
-  Group,
-  Input,
-  Popover,
   ComboBox as RACCombobox,
   type ComboBoxProps as RACComboboxProps,
-} from 'react-aria-components';
+} from 'react-aria-components/ComboBox';
+import { Group } from 'react-aria-components/Group';
+import { Input } from 'react-aria-components/Input';
+import { Popover } from 'react-aria-components/Popover';
 
 import { dropdown, formField, input, inputGroup } from '../classes';
 import {

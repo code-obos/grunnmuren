@@ -1,6 +1,6 @@
 import { cx } from 'cva';
 import { Children, type HTMLProps, useId } from 'react';
-import { Provider } from 'react-aria-components';
+import { Provider } from 'react-aria-components/slots';
 
 import { ContentContext, HeadingContext } from '../content';
 import { Disclosure, DisclosureButton, DisclosurePanel, type DisclosureProps } from '../disclosure';

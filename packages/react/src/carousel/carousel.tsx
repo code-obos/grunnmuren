@@ -1,5 +1,4 @@
 import { ChevronRight } from '@obosbbl/grunnmuren-icons-react';
-import { mergeRefs } from '@react-aria/utils';
 import { cva, cx } from 'cva';
 import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel, {
@@ -17,7 +16,8 @@ import {
   useRef,
   useState,
 } from 'react';
-import { DEFAULT_SLOT, Provider } from 'react-aria-components';
+import { DEFAULT_SLOT, Provider } from 'react-aria-components/slots';
+import { mergeRefs } from 'react-aria/mergeRefs';
 
 import { Button, ButtonContext, type ButtonProps } from '../button';
 import { MediaContext } from '../content';

@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react-vite';
 import { type FormEvent, useState } from 'react';
-import { Form as RACForm } from 'react-aria-components';
+import { Form as RACForm } from 'react-aria-components/Form';
 
 import { Button } from '../button/button';
 import { TextField } from '../textfield';

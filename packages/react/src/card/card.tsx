@@ -1,6 +1,7 @@
 import { cva, cx, type VariantProps } from 'cva';
 import type { HTMLAttributes } from 'react';
-import { Link, Provider, type LinkProps as RACLinkProps } from 'react-aria-components';
+import { Link, type LinkProps as RACLinkProps } from 'react-aria-components/Link';
+import { Provider } from 'react-aria-components/slots';
 
 import { HeadingContext } from '../content';
 

@@ -1,4 +1,4 @@
-import { FieldError } from 'react-aria-components';
+import { FieldError } from 'react-aria-components/FieldError';
 
 import { formFieldError } from '../classes';
 import { ErrorMessage } from '../label/error-message';

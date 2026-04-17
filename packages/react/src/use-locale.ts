@@ -1,4 +1,4 @@
-import { useLocale } from 'react-aria-components';
+import { useLocale } from 'react-aria-components/I18nProvider';
 
 type Locale = 'nb' | 'sv' | 'en';
 

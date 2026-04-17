@@ -1,8 +1,4 @@
 import { Trash } from '@obosbbl/grunnmuren-icons-react';
-import { useFormValidation } from '@react-aria/form';
-import { useFormReset, useUpdateEffect } from '@react-aria/utils';
-import { useFormValidationState } from '@react-stately/form';
-import { useControlledState } from '@react-stately/utils';
 import { cx } from 'cva';
 import {
   type Dispatch,
@@ -14,16 +10,18 @@ import {
   useRef,
   useState,
 } from 'react';
-import { useField } from 'react-aria';
-import {
-  ButtonContext,
-  FieldErrorContext,
-  FormContext,
-  InputContext,
-  LabelContext,
-  Provider,
-  useSlottedContext,
-} from 'react-aria-components';
+import { ButtonContext } from 'react-aria-components/Button';
+import { FieldErrorContext } from 'react-aria-components/FieldError';
+import { FormContext } from 'react-aria-components/Form';
+import { InputContext } from 'react-aria-components/Input';
+import { LabelContext } from 'react-aria-components/Label';
+import { Provider, useSlottedContext } from 'react-aria-components/slots';
+import { useFormValidation } from 'react-aria/private/form/useFormValidation';
+import { useFormReset } from 'react-aria/private/utils/useFormReset';
+import { useUpdateEffect } from 'react-aria/private/utils/useUpdateEffect';
+import { useField } from 'react-aria/useField';
+import { useFormValidationState } from 'react-stately/private/form/useFormValidationState';
+import { useControlledState } from 'react-stately/useControlledState';
 
 import { ErrorMessage } from '../label';
 import { ErrorMessageOrFieldError } from '../label/error-messsage-or-field-error';

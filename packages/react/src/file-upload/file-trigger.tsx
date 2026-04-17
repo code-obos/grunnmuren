@@ -1,15 +1,18 @@
+import type { HTMLAttributes, RefObject } from 'react';
+import type { FileTriggerProps as RACFileTriggerProps } from 'react-aria-components/FileTrigger';
+import { Input } from 'react-aria-components/Input';
 /**
  * This is a modified version of the original file-trigger from react-aria-components.
  * We need to modify it to support it in forms (e.g. adding a name prop).
  * We also modify the hiding of it, so that it works with the built in auto focusing of RAC.
  */
-import { PressResponder } from '@react-aria/interactions';
-import { useObjectRef } from '@react-aria/utils';
-import type { FormValidationProps } from '@react-stately/form';
-import type { HTMLAttributes, RefObject } from 'react';
-import { Input, type FileTriggerProps as RACFileTriggerProps } from 'react-aria-components';
+import { PressResponder } from 'react-aria/private/interactions/PressResponder';
+import { useObjectRef } from 'react-aria/useObjectRef';
+import type { useFormValidationState } from 'react-stately/private/form/useFormValidationState';
 
-export type FileTriggerProps = Partial<FormValidationProps<File>> &
+type FormValidationProps<T> = Parameters<typeof useFormValidationState<T>>[0];
+
+export type FileTriggerProps = Partial<Omit<FormValidationProps<File>, 'value'>> &
   RACFileTriggerProps &
   Omit<HTMLAttributes<HTMLInputElement>, 'onSelect' | 'onChange' | 'required' | 'className'> & {
     ref?: RefObject<HTMLInputElement | null>;
@@ -34,7 +37,7 @@ export const FileTrigger = (props: FileTriggerProps) => {
     name,
     ...rest
   } = props;
-  const inputRef = useObjectRef(ref);
+  const inputRef = useObjectRef<HTMLInputElement>(ref);
 
   return (
     <>
@@ -61,8 +64,7 @@ export const FileTrigger = (props: FileTriggerProps) => {
         onChange={(e) => onSelect?.(e.target.files)}
         capture={defaultCamera}
         multiple={allowsMultiple}
-        // @ts-expect-error
-        webkitdirectory={acceptDirectory ? '' : undefined}
+        {...(acceptDirectory ? ({ webkitdirectory: '' } as Record<string, string>) : {})}
         // This is a work around to prevent error in the console when attempting to submit a form with a required and empty file input
         // RAC uses display: none, which prevents the file input from being focused.
         // What we do instead is to hide it visually using custom CSS, so that the native HTML validation messages are still hidden. Which is why

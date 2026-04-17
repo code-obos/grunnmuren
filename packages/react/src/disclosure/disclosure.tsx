@@ -1,5 +1,4 @@
 import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
-import { filterDOMProps, mergeProps, mergeRefs } from '@react-aria/utils';
 import { cva, cx, type VariantProps } from 'cva';
 import {
   createContext,
@@ -12,21 +11,21 @@ import {
   useId,
   useRef,
 } from 'react';
-import { useDisclosure, useFocusRing } from 'react-aria';
+import { Button, ButtonContext, type ButtonProps } from 'react-aria-components/Button';
 import {
-  Button,
-  ButtonContext,
-  type ButtonProps,
-  DEFAULT_SLOT,
   DisclosureContext,
   DisclosureGroup,
   type DisclosureGroupProps,
   DisclosureGroupStateContext,
-  Provider,
   type DisclosureProps as RACDisclosureProps,
-  useContextProps,
-} from 'react-aria-components';
-import { type DisclosureState, useDisclosureState } from 'react-stately';
+} from 'react-aria-components/DisclosureGroup';
+import { DEFAULT_SLOT, Provider, useContextProps } from 'react-aria-components/slots';
+import { filterDOMProps } from 'react-aria/filterDOMProps';
+import { mergeProps } from 'react-aria/mergeProps';
+import { mergeRefs } from 'react-aria/mergeRefs';
+import { useDisclosure } from 'react-aria/useDisclosure';
+import { useFocusRing } from 'react-aria/useFocusRing';
+import { type DisclosureState, useDisclosureState } from 'react-stately/useDisclosureState';
 
 const disclosureButtonVariants = cva({
   base: [

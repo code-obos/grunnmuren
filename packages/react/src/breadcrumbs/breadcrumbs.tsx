@@ -3,7 +3,7 @@ import type { Ref } from 'react';
 import {
   Breadcrumbs as RACBreadcrumbs,
   type BreadcrumbsProps as RACBreadcrumbsProps,
-} from 'react-aria-components';
+} from 'react-aria-components/Breadcrumbs';
 
 import type { BreadcrumbProps } from './breadcrumb';
 

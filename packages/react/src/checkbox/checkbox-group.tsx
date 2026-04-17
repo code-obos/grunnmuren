@@ -3,7 +3,7 @@ import type { Ref } from 'react';
 import {
   CheckboxGroup as RACCheckboxGroup,
   type CheckboxGroupProps as RACCheckboxGroupProps,
-} from 'react-aria-components';
+} from 'react-aria-components/CheckboxGroup';
 
 import { Description } from '../label/description';
 import { ErrorMessageOrFieldError } from '../label/error-messsage-or-field-error';

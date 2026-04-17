@@ -1,6 +1,6 @@
 'use client';
 import type { ReactNode } from 'react';
-import { type DateFormatterOptions, useDateFormatter } from 'react-aria';
+import { type DateFormatterOptions, useDateFormatter } from 'react-aria/useDateFormatter';
 
 type DateFormatterProps = {
   value: Date | string;
