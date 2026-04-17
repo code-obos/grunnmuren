@@ -1,7 +1,8 @@
 import { ChevronLeft } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
 import type { Ref } from 'react';
-import { Button, type ButtonProps, Link, type LinkProps } from 'react-aria-components';
+import { Button, type ButtonProps } from 'react-aria-components/Button';
+import { Link, type LinkProps } from 'react-aria-components/Link';
 
 import { animateIconVariants } from '../classes';
 

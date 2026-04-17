@@ -1,11 +1,11 @@
 import { compose, cva, cx } from 'cva';
 import type { Ref } from 'react';
+import { Group } from 'react-aria-components/Group';
+import { Input } from 'react-aria-components/Input';
 import {
-  Group,
-  Input,
   TextField as RACTextField,
   type TextFieldProps as RACTextFieldProps,
-} from 'react-aria-components';
+} from 'react-aria-components/TextField';
 
 import { formField, input, inputGroup } from '../classes';
 import { InputAddonDivider } from '../internals';

@@ -12,7 +12,8 @@ import {
   useId,
   useState,
 } from 'react';
-import { LinkContext, Provider } from 'react-aria-components';
+import { LinkContext } from 'react-aria-components/Link';
+import { Provider } from 'react-aria-components/slots';
 
 import { UNSAFE_ProgressBar as ProgressBar } from '../progress-bar';
 import { translations } from '../translations';

@@ -6,7 +6,7 @@ import {
   CheckboxContext,
   Checkbox as RACCheckbox,
   type CheckboxProps as RACCheckboxProps,
-} from 'react-aria-components';
+} from 'react-aria-components/Checkbox';
 
 import { ErrorMessage } from '../label/error-message';
 

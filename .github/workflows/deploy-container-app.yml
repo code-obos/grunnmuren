@@ -38,33 +38,33 @@ jobs:
       id-token: write
     steps:
       - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Prepare config
-        uses: falti/dotenv-action@f4656c46de6bc223dda660f6724d52537bc0642a # v1.1.5
+        uses: falti/dotenv-action@73fafca04177425fd3e0a0849257015ae9d42034 # v1.2.0
         with:
           path: ${{ env.DKTP_ENV_FILE }}
           export-variables: true
           keys-case: bypass
 
       - name: Validate yaml
-        uses: mikefarah/yq@065b200af9851db0d5132f50bc10b1406ea5c0a8 # v4.50.1
+        uses: mikefarah/yq@0f4fb8d35ec1a939d78dd6862f494d19ec589f19 # v4.52.5
         with:
           # https://mikefarah.gitbook.io/yq/usage/tips-and-tricks#validating-yaml-files
           cmd: yq --exit-status 'tag == "!!map" or tag== "!!seq"' ${{ env.DKTP_CONFIG_FILE }} > /dev/null
       - name: Create config
-        uses: mikefarah/yq@065b200af9851db0d5132f50bc10b1406ea5c0a8 # v4.50.1
+        uses: mikefarah/yq@0f4fb8d35ec1a939d78dd6862f494d19ec589f19 # v4.52.5
         with:
           # https://mikefarah.gitbook.io/yq/operators/env-variable-operators#tip
           cmd: yq '(.. | select(tag == "!!str")) |= envsubst' ${{ env.DKTP_CONFIG_FILE }} > ${{ env.CONFIG_FILE_OUTPUT }}
       - name: Validate updated yaml
-        uses: mikefarah/yq@065b200af9851db0d5132f50bc10b1406ea5c0a8 # v4.50.1
+        uses: mikefarah/yq@0f4fb8d35ec1a939d78dd6862f494d19ec589f19 # v4.52.5
         with:
           # https://mikefarah.gitbook.io/yq/usage/tips-and-tricks#validating-yaml-files
           cmd: yq --exit-status 'tag == "!!map" or tag== "!!seq"' ${{ env.CONFIG_FILE_OUTPUT }} > /dev/null
 
       - name: Log in to Azure
-        uses: azure/login@a457da9ea143d694b1b9c7c869ebb04ebe844ef5 # v2.3.0
+        uses: azure/login@532459ea530d8321f2fb9bb10d1e0bcf23869a43 # v3.0.0
         with:
           client-id: ${{ vars.ACA_CLIENT_ID }}
           tenant-id: ${{ vars.TENANT_ID }}
