@@ -223,59 +223,6 @@ export function DisplayStep({ onPrevious, sampleData }: StepProps) {
         </ExampleBlock>
       </div>
 
-      <ComponentInfo name="Visning av personinfo" description="Grå boks for visning av personinfo.">
-        <Code
-          code={`<div className="bg-gray-light rounded-md p-4">
-  <dl className="grid gap-2">
-    <div className="grid gap-0.5 md:grid-cols-[10rem_1fr] md:gap-2">
-      <dt className="font-medium">{label}</dt>
-      <dd>{value}</dd>
-    </div>
-  </dl>
-</div>`}
-        />
-      </ComponentInfo>
-
-      <div className="flex flex-col gap-6">
-        <ExampleBlock
-          label="Visning av personinfo - alle felter"
-          description="Viser personinfo i en grå boks"
-        >
-          <DisplayList>
-            <DisplayItem label="Navn" value="Ola Nordmann" />
-            <DisplayItem label="Fødselsdato" value="15.01.1990" />
-            <DisplayItem label="Mobil" value="+47 123 45 678" />
-            <DisplayItem label="E-post" value={sampleData.email} />
-            <DisplayItem
-              label="Adresse"
-              value={`${sampleData.address.streetAddress} ${sampleData.address.houseNumber}, ${sampleData.address.postalCode} ${sampleData.address.postalDistrict}`}
-            />
-          </DisplayList>
-        </ExampleBlock>
-
-        <ExampleBlock
-          label="Visning av personinfo - med overskrift"
-          description="Brukes i innmeldingsskjemaet for a vise data fra BankID"
-        >
-          <div className="flex flex-col gap-2">
-            <div className="bg-gray-light rounded-md p-4">
-              <h3 className="heading-s">Fra BankID:</h3>
-              <DisplayList>
-                <DisplayItem label="Navn" value="Ola Nordmann" />
-                <DisplayItem label="Fødselsnummer" value={sampleData.nationalId} />
-                <DisplayItem label="Fødselsdato" value="15.01.1990" />
-                <DisplayItem label="Mobil" value="+47 123 45 678" />
-                <DisplayItem label="E-post" value={sampleData.email} />
-                <DisplayItem
-                  label="Adresse"
-                  value={`${sampleData.address.streetAddress} ${sampleData.address.houseNumber}, ${sampleData.address.postalCode} ${sampleData.address.postalDistrict}`}
-                />
-              </DisplayList>
-            </div>
-          </div>
-        </ExampleBlock>
-      </div>
-
       <ComponentInfo
         name="Visning av feilmelding"
         description="Feilmelding ved innsending. Viser generell feilmelding og detaljer for feilen. Brukes i Alertbox med variant 'danger'."

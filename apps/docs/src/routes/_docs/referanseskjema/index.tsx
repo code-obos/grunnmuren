@@ -60,8 +60,8 @@ function RouteComponent() {
         de vanligste felttypene.
       </p>
 
-      <div className="relative mt-15 flex flex-col gap-4 lg:flex-row">
-        <aside className="sticky top-0 z-10 h-fit shrink-0 bg-white py-4">
+      <div className="relative mt-15 flex flex-col gap-8 lg:flex-row">
+        <aside className="sticky top-0 z-10 h-fit shrink-0 bg-white p-4">
           <nav aria-label="Progressindikator">
             <Stepper activeStep={activeIndex} onStepChange={goToStep}>
               {STEPS.map((step, index) => (
