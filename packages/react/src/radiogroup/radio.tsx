@@ -21,7 +21,7 @@ const defaultClasses = cx([
   'data-focus-visible:before:ring-focus-offset',
   // invalid - The border is 1 px thicker when invalid. We don't actually want to change the border width, as that causes the element's size to change
   // so we use an inner outline to artifically pad the border
-  'data-invalid:data-selected:before:bg-red! data-invalid:before:border-red data-invalid:before:outline-red data-invalid:before:outline data-invalid:before:outline-[3px] data-invalid:before:outline-offset-[-3px] data-invalid:before:outline-solid',
+  'data-invalid:data-selected:before:bg-red! data-invalid:before:border-red data-invalid:before:outline-red data-invalid:before:outline-3  data-invalid:before:outline-offset-[-3px] data-invalid:before:outline-solid',
 ]);
 
 type RadioProps = {

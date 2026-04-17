@@ -51,7 +51,7 @@ const Color = ({ name, value }: { name: string; value: string }) => {
         color: `lch(from ${value} calc((54 - l) * infinity) 0 0)`,
         border: name === 'white' ? '1px solid var(--color-blue-dark)' : '',
       }}
-      className="grid h-37 w-37 shrink-0 content-end font-medium"
+      className="grid size-37 shrink-0 content-end font-medium"
     >
       <CopyButton
         onClick={() => copyToClipboard(value, 'hex')}
