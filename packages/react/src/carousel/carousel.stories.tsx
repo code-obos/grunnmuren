@@ -11,7 +11,7 @@ import {
   UNSAFE_CarouselItem as CarouselItem,
   UNSAFE_CarouselItems as CarouselItems,
   UNSAFE_CarouselItemsContainer as CarouselItemsContainer,
-  type UNSAFE_CarouselRef as CarouselRef,
+  type UNSAFE_CarouselRef as CarouselElement,
 } from '../carousel';
 import { Media } from '../content';
 import {
@@ -288,7 +288,7 @@ export function Gallery({
   carouselProps: Record<string, unknown>;
 }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const carouselRef = useRef<CarouselRef>(null);
+  const carouselRef = useRef<CarouselElement>(null);
 
   return (
     <section

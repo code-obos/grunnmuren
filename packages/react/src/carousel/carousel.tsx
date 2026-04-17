@@ -29,7 +29,7 @@ import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 import { usePrefersReducedMotion } from '../use-prefers-reduced-motion';
 
-type CarouselRef = {
+type CarouselMethods = {
   /** Navigate to a specific slide by index. */
   goToSlide: (index: number) => void;
   /** Navigate to the next slide. */
@@ -38,9 +38,11 @@ type CarouselRef = {
   goToPrevSlide: () => void;
 };
 
+type CarouselElement = HTMLDivElement & CarouselMethods;
+
 type CarouselProps = Omit<HTMLProps<HTMLDivElement>, 'onChange' | 'onSelect' | 'ref'> & {
   children?: React.ReactNode;
-  ref?: React.Ref<CarouselRef>;
+  ref?: React.Ref<CarouselElement>;
   /**
    * Alignment of the items relative to the carousel viewport.
    * @default 'center'
@@ -126,7 +128,7 @@ const Carousel = ({
   ref,
   ...rest
 }: CarouselProps) => {
-  const carouselRef = useRef<HTMLDivElement>(null);
+  const carouselRef = useRef<CarouselElement | null>(null);
 
   const prefersReducedMotion = usePrefersReducedMotion() ?? false;
 
@@ -284,30 +286,16 @@ const Carousel = ({
     [handleNextPress, handlePrevPress, emblaApi],
   );
 
-  const goToSlide = useCallback(
-    (index: number) => {
-      emblaApi?.scrollTo(index, prefersReducedMotion);
-    },
-    [emblaApi, prefersReducedMotion],
-  );
-
-  const goToNextSlide = useCallback(() => {
-    emblaApi?.scrollNext(prefersReducedMotion);
+  useImperativeHandle(ref, () => {
+    const el = carouselRef.current;
+    if (!el) {
+      return el as unknown as CarouselElement; // Just to satisfy the return type, this case should never actually happen
+    }
+    el.goToSlide = (index: number) => emblaApi?.scrollTo(index, prefersReducedMotion);
+    el.goToNextSlide = () => emblaApi?.scrollNext(prefersReducedMotion);
+    el.goToPrevSlide = () => emblaApi?.scrollPrev(prefersReducedMotion);
+    return el;
   }, [emblaApi, prefersReducedMotion]);
-
-  const goToPrevSlide = useCallback(() => {
-    emblaApi?.scrollPrev(prefersReducedMotion);
-  }, [emblaApi, prefersReducedMotion]);
-
-  useImperativeHandle(
-    ref,
-    () => ({
-      goToSlide,
-      goToNextSlide,
-      goToPrevSlide,
-    }),
-    [goToSlide, goToNextSlide, goToPrevSlide],
-  );
 
   const hasHeroContext = !!useContext(HeroContext);
   const nextPrevStyles = hasHeroContext
@@ -593,5 +581,5 @@ export {
   type CarouselItemsContainer as UNSAFE_CarouselItemsContainerProps,
   type CarouselItemsProps as UNSAFE_CarouselItemsProps,
   type CarouselProps as UNSAFE_CarouselProps,
-  type CarouselRef as UNSAFE_CarouselRef,
+  type CarouselElement as UNSAFE_CarouselRef,
 };
