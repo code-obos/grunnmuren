@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useEffect, useState } from 'react';
 
 import { Button } from '../button/button';
-import { DefaultValue } from '../checkbox/checkbox-group.stories';
 import { counties } from '../mocks';
 import {
   Combobox,
