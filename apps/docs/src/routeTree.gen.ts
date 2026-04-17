@@ -15,6 +15,7 @@ import { Route as DocsIndexRouteImport } from './routes/_docs/index'
 import { Route as StudioSplatRouteImport } from './routes/studio/$'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
 import { Route as DocsSlugRouteImport } from './routes/_docs/$slug'
+import { Route as DocsReferanseskjemaIndexRouteImport } from './routes/_docs/referanseskjema/index'
 import { Route as DocsProfilIndexRouteImport } from './routes/_docs/profil/index'
 import { Route as DocsKomponenterIndexRouteImport } from './routes/_docs/komponenter/index'
 import { Route as DocsProfilLayoutRouteImport } from './routes/_docs/profil/layout'
@@ -51,6 +52,12 @@ const DocsSlugRoute = DocsSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => DocsRoute,
 } as any)
+const DocsReferanseskjemaIndexRoute =
+  DocsReferanseskjemaIndexRouteImport.update({
+    id: '/referanseskjema/',
+    path: '/referanseskjema/',
+    getParentRoute: () => DocsRoute,
+  } as any)
 const DocsProfilIndexRoute = DocsProfilIndexRouteImport.update({
   id: '/profil/',
   path: '/profil/',
@@ -94,6 +101,7 @@ export interface FileRoutesByFullPath {
   '/profil/layout': typeof DocsProfilLayoutRoute
   '/komponenter/': typeof DocsKomponenterIndexRoute
   '/profil/': typeof DocsProfilIndexRoute
+  '/referanseskjema/': typeof DocsReferanseskjemaIndexRoute
 }
 export interface FileRoutesByTo {
   '/studio': typeof StudioRouteRouteWithChildren
@@ -107,6 +115,7 @@ export interface FileRoutesByTo {
   '/profil/layout': typeof DocsProfilLayoutRoute
   '/komponenter': typeof DocsKomponenterIndexRoute
   '/profil': typeof DocsProfilIndexRoute
+  '/referanseskjema': typeof DocsReferanseskjemaIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -122,6 +131,7 @@ export interface FileRoutesById {
   '/_docs/profil/layout': typeof DocsProfilLayoutRoute
   '/_docs/komponenter/': typeof DocsKomponenterIndexRoute
   '/_docs/profil/': typeof DocsProfilIndexRoute
+  '/_docs/referanseskjema/': typeof DocsReferanseskjemaIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -137,6 +147,7 @@ export interface FileRouteTypes {
     | '/profil/layout'
     | '/komponenter/'
     | '/profil/'
+    | '/referanseskjema/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/studio'
@@ -150,6 +161,7 @@ export interface FileRouteTypes {
     | '/profil/layout'
     | '/komponenter'
     | '/profil'
+    | '/referanseskjema'
   id:
     | '__root__'
     | '/studio'
@@ -164,6 +176,7 @@ export interface FileRouteTypes {
     | '/_docs/profil/layout'
     | '/_docs/komponenter/'
     | '/_docs/profil/'
+    | '/_docs/referanseskjema/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -214,6 +227,13 @@ declare module '@tanstack/react-router' {
       path: '/$slug'
       fullPath: '/$slug'
       preLoaderRoute: typeof DocsSlugRouteImport
+      parentRoute: typeof DocsRoute
+    }
+    '/_docs/referanseskjema/': {
+      id: '/_docs/referanseskjema/'
+      path: '/referanseskjema'
+      fullPath: '/referanseskjema/'
+      preLoaderRoute: typeof DocsReferanseskjemaIndexRouteImport
       parentRoute: typeof DocsRoute
     }
     '/_docs/profil/': {
@@ -282,6 +302,7 @@ interface DocsRouteChildren {
   DocsProfilLayoutRoute: typeof DocsProfilLayoutRoute
   DocsKomponenterIndexRoute: typeof DocsKomponenterIndexRoute
   DocsProfilIndexRoute: typeof DocsProfilIndexRoute
+  DocsReferanseskjemaIndexRoute: typeof DocsReferanseskjemaIndexRoute
 }
 
 const DocsRouteChildren: DocsRouteChildren = {
@@ -293,6 +314,7 @@ const DocsRouteChildren: DocsRouteChildren = {
   DocsProfilLayoutRoute: DocsProfilLayoutRoute,
   DocsKomponenterIndexRoute: DocsKomponenterIndexRoute,
   DocsProfilIndexRoute: DocsProfilIndexRoute,
+  DocsReferanseskjemaIndexRoute: DocsReferanseskjemaIndexRoute,
 }
 
 const DocsRouteWithChildren = DocsRoute._addFileChildren(DocsRouteChildren)

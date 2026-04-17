@@ -92,16 +92,25 @@ export const MainNav = ({ className }: MainNavProps) => {
     componentState: component.componentState,
   }));
 
-  // Transform categories into nav items
+  const hardcodedCategoryItems: Record<string, SubNavItemProps[]> = {
+    patterns: [{ to: '/referanseskjema', title: 'Referanseskjema' }],
+  };
+
   const categoryNavItems =
-    menuData.categories?.map((category) => ({
-      title: category.title ?? '',
-      subNavItems:
+    menuData.categories?.map((category) => {
+      const sanityItems =
         category.categoryItems?.map((item) => ({
           to: `/${item.slug}`,
           title: item.name ?? '',
-        })) ?? [],
-    })) ?? [];
+        })) ?? [];
+
+      const extra = hardcodedCategoryItems[category.title?.toLocaleLowerCase() ?? ''] ?? [];
+
+      return {
+        title: category.title ?? '',
+        subNavItems: [...sanityItems, ...extra],
+      };
+    }) ?? [];
 
   return (
     <nav
