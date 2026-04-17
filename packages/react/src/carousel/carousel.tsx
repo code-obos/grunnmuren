@@ -303,7 +303,7 @@ const Carousel = ({
   const shouldUseAriaCarouselPattern = !autoPlayDelay;
 
   return (
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+    // oxlint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
       {...rest}
       role={shouldUseAriaCarouselPattern ? 'region' : undefined}
