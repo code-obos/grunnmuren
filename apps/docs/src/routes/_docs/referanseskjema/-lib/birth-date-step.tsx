@@ -31,7 +31,7 @@ const PROPS = [
     name: 'isRequired',
     type: 'boolean',
     default: 'true',
-    description: 'Om feltet er pakrevd',
+    description: 'Om feltet er påkrevd',
   },
 ];
 

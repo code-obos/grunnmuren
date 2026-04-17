@@ -114,13 +114,13 @@ export function AddressStep({ onNext, onPrevious, sampleData }: StepProps) {
       </div>
 
       <div className="prose">
-        <h3 className="heading-s">Validering (Zod)</h3>
+        <h3 className="heading-s">Validering</h3>
         <ul className="text-gray-dark flex list-disc flex-col gap-1 pl-4">
           <li>
-            addressSchema - objekt med streetAddress (pakrevd), houseNumber, entranceNumber,
-            postalCode, postalDistrict
+            Objekt med streetAddress (påkrevd), houseNumber, entranceNumber, postalCode,
+            postalDistrict
           </li>
-          <li>careOfAddressSchema - maks 150 tegn. Brukes som optional når c/o er aktivert.</li>
+          <li>careOfAddress - maks 150 tegn. Brukes som optional når c/o er aktivert.</li>
         </ul>
       </div>
 
