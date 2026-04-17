@@ -33,7 +33,7 @@ export function ComponentInfo({ name, description, props, children }: ComponentI
     <section className="flex flex-col gap-4">
       <h2 className="heading-m">{name}</h2>
       <p>{description}</p>
-      {children}
+      <div className="w-fit">{children}</div>
       {props && (
         <Disclosure>
           <DisclosureButton className="font-medium" withChevron>
@@ -84,7 +84,7 @@ type ExampleBlockProps = {
 
 export function ExampleBlock({ label, description, children }: ExampleBlockProps) {
   return (
-    <Card variant="outlined" className="flex max-w-prose flex-col gap-3">
+    <Card>
       <Content>
         <Heading level={4}>{label}</Heading>
         {description && <p className="text-gray-dark">{description}</p>}
