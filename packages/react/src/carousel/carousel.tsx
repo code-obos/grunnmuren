@@ -20,7 +20,6 @@ import {
   useState,
 } from 'react';
 import { DEFAULT_SLOT, Provider } from 'react-aria-components/slots';
-import { mergeRefs } from 'react-aria/mergeRefs';
 
 import { Button, ButtonContext, type ButtonProps } from '../button';
 import { MediaContext } from '../content';
