@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
+import { Key } from 'react-aria-components/Breadcrumbs';
 
 import { Button } from '../button/button';
 import { counties } from '../mocks';
@@ -41,16 +42,11 @@ const Template = <T extends object>(args: SelectProps<T>) => {
 };
 
 const ControlledTemplate = <T extends object>(args: SelectProps<T>) => {
-  const [value, setValue] = useState<string | number>('oslo');
+  const [value, setValue] = useState<Key | null>('oslo');
 
   return (
     <div className="flex flex-col gap-2">
-      <Template
-        {...args}
-        selectedKey={value}
-        // @ts-expect-error not quite sure what to do here
-        onSelectionChange={setValue}
-      />
+      <Template {...args} value={value} onChange={setValue} />
       <pre className="font-sans">{value}</pre>
     </div>
   );
@@ -74,8 +70,8 @@ const defaultProps = {
   isRequired: false,
   isInvalid: undefined,
   name: undefined,
-  defaultSelectedKey: undefined,
-  selectedKey: undefined,
+  defaultValue: undefined,
+  value: undefined,
   placeholder: 'Velg område',
   children: undefined,
 };

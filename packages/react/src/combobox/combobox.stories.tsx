@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useEffect, useState } from 'react';
 
 import { Button } from '../button/button';
+import { DefaultValue } from '../checkbox/checkbox-group.stories';
 import { counties } from '../mocks';
 import {
   Combobox,
@@ -59,7 +60,7 @@ const ControlledTemplate = <T extends object>(args: ComboboxProps<T>) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <Template {...args} selectedKey={value} onSelectionChange={setValue} />
+      <Template {...args} value={value} onChange={setValue} />
       <pre className="font-sans">{value}</pre>
     </div>
   );
@@ -120,8 +121,8 @@ const defaultProps = {
   isRequired: false,
   isInvalid: undefined,
   name: undefined,
-  defaultSelectedKey: undefined,
-  selectedKey: undefined,
+  defaultValue: undefined,
+  value: undefined,
   placeholder: 'Velg boligprosjekt',
   isPending: false,
   children: undefined,

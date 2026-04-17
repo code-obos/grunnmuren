@@ -1,15 +1,16 @@
 import { Check } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
+import { Header } from 'react-aria-components/Header';
+import { type HeadingProps as ListBoxHeadingProps } from 'react-aria-components/Heading';
+
 import {
-  Header,
-  type HeadingProps as ListBoxHeadingProps,
   type ListBoxItemProps,
   type ListBoxProps,
   type ListBoxSectionProps,
   ListBox as RACListBox,
   ListBoxItem as RACListBoxItem,
   ListBoxSection as RACListBoxSection,
-} from 'react-aria-components';
+} from 'react-aria-components/ListBox';
 
 import { dropdown } from '../classes';
 

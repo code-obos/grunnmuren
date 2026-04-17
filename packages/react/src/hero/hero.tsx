@@ -1,6 +1,7 @@
 import { cva, cx, type VariantProps } from 'cva';
 import { createContext, type HTMLProps } from 'react';
-import { GroupContext, Provider } from 'react-aria-components';
+import { GroupContext } from 'react-aria-components/Group';
+import { Provider } from 'react-aria-components/slots';
 
 import { HeadingContext } from '../content';
 

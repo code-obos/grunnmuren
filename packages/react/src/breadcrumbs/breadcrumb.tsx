@@ -1,10 +1,7 @@
 import { ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
 import type { Ref } from 'react';
-import {
-  Breadcrumb as RACBreadcrumb,
-  type BreadcrumbProps as RACBreadcrumbProps,
-} from 'react-aria-components';
+import { Breadcrumb as RACBreadcrumb, type BreadcrumbProps as RACBreadcrumbProps } from 'react-aria-components/Breadcrumbs';
 
 import { UNSAFE_Link as Link, type UNSAFE_LinkProps as LinkProps } from '../link';
 

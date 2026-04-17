@@ -1,6 +1,6 @@
 import { cx } from 'cva';
 import type { Ref } from 'react';
-import { type RadioProps as RACRAdioProps, Radio as RACRadio } from 'react-aria-components';
+import { type RadioProps as RACRAdioProps, Radio as RACRadio } from 'react-aria-components/RadioGroup';
 
 import { Description } from '../label';
 

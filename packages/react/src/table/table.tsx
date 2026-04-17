@@ -1,7 +1,8 @@
 import { cva, cx } from 'cva';
 import { createContext, type RefAttributes, useCallback, useContext, useState } from 'react';
+import { Provider } from 'react-aria-components/slots';
+
 import {
-  Provider,
   Cell as RACCell,
   type CellProps as RACCellProps,
   Column as RACColumn,
@@ -18,7 +19,7 @@ import {
   type TableProps as RACTableProps,
   ResizableTableContainer,
   type ResizableTableContainerProps,
-} from 'react-aria-components';
+} from 'react-aria-components/Table';
 
 import { ScrollButton, type ScrollDirection, useHorizontalScroll } from '../utils';
 

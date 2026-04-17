@@ -1,12 +1,13 @@
 // This component is based on a copy of ../textfield/TextField, refactoring is TBD: https://github.com/code-obos/grunnmuren/pull/722#issuecomment-1931478786
 import { compose, cva, cx } from 'cva';
 import type { Ref } from 'react';
+import { Group } from 'react-aria-components/Group';
+import { Input } from 'react-aria-components/Input';
+
 import {
-  Group,
-  Input,
   NumberField as RACNumberField,
   type NumberFieldProps as RACNumberFieldProps,
-} from 'react-aria-components';
+} from 'react-aria-components/NumberField';
 
 import { formField, input, inputGroup } from '../classes';
 import { InputAddonDivider } from '../internals';

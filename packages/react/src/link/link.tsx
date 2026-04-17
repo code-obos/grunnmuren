@@ -1,5 +1,5 @@
 import { compose, cva, type VariantProps } from 'cva';
-import { Link as _Link, type LinkProps as _LinkProps } from 'react-aria-components';
+import { Link as _Link, type LinkProps as _LinkProps } from 'react-aria-components/Link';
 
 import { animateIconVariants } from '../classes';
 import { translations } from '../translations';

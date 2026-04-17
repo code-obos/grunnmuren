@@ -10,7 +10,7 @@ import {
   Tabs as RACTabs,
   type TabsProps as RACTabsProps,
   TabListStateContext,
-} from 'react-aria-components';
+} from 'react-aria-components/Tabs';
 
 import { ScrollButton, useHorizontalScroll } from '../utils';
 

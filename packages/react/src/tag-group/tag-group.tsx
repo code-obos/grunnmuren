@@ -1,15 +1,16 @@
 import { Close } from '@obosbbl/grunnmuren-icons-react';
 import { cva, cx } from 'cva';
 import type { RefAttributes } from 'react';
+import { Button } from 'react-aria-components/Button';
+
 import {
-  Button,
   Tag as RACTag,
   TagGroup as RACTagGroup,
   type TagGroupProps as RACTagGroupProps,
   TagList as RACTagList,
   type TagListProps as RACTagListProps,
   type TagProps as RACTagProps,
-} from 'react-aria-components';
+} from 'react-aria-components/TagGroup';
 
 const tagVariants = cva({
   base: [

@@ -1,10 +1,7 @@
 import { cx } from 'cva';
 import type { Ref } from 'react';
-import {
-  TextArea as RACTextArea,
-  TextField as RACTextField,
-  type TextFieldProps as RACTextFieldProps,
-} from 'react-aria-components';
+import { TextArea as RACTextArea } from 'react-aria-components/TextArea';
+import { TextField as RACTextField, type TextFieldProps as RACTextFieldProps } from 'react-aria-components/TextField';
 
 import { formField, input } from '../classes';
 import { Description } from '../label/description';

@@ -6,7 +6,7 @@ import {
   CheckboxContext,
   Checkbox as RACCheckbox,
   type CheckboxProps as RACCheckboxProps,
-} from 'react-aria-components';
+} from 'react-aria-components/Checkbox';
 
 import { ErrorMessage } from '../label/error-message';
 
@@ -93,9 +93,9 @@ function Checkbox(props: CheckboxProps) {
 
         {description && (
           // {/* Use a div instead of the Description component to avoid infinite re-render loops in React until this bug in RAC is fixed: https://github.com/adobe/react-spectrum/issues/6229 */}
-          <div id={descriptionId} slot="description" className="description block">
+          (<div id={descriptionId} slot="description" className="description block">
             {description}
-          </div>
+          </div>)
         )}
         {errorMessage && (
           <ErrorMessage className="mt-2 block" id={errorMessageId}>
