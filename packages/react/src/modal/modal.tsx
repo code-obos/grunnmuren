@@ -3,10 +3,7 @@ import { cx } from 'cva';
 import { useContext } from 'react';
 import { ButtonContext } from 'react-aria-components/Button';
 import {
-  ButtonContext,
-  DEFAULT_SLOT,
   OverlayTriggerStateContext,
-  Provider,
   Dialog as RACDialog,
   type DialogProps as RACDialogProps,
   DialogTrigger as RACDialogTrigger,
