@@ -35,7 +35,7 @@ pnpm run update
 
 ### Figma access token
 
-If you are running the import script for the first time, it will prompt your for a [Figma access token](https://www.figma.com/developers/api#access-tokens). The token is is required to access Figma's API. It can be generated on your Figma account settings page.
+If you are running the import script for the first time, it will prompt your for a [Figma access token](https://developers.figma.com/docs/rest-api/authentication/#access-tokens). The token is is required to access Figma's API. It can be generated on your Figma account settings page. The token needs the scope `file_content:read`.
 
 The import script may store the token to a local file, so you won't have to supply the token again on subsequent runs.
 
