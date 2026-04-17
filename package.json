@@ -26,7 +26,7 @@
   "dependencies": {
     "@changesets/cli": "2.30.0",
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
-    "@react-aria/optimize-locales-plugin": "1.1.5",
+    "@react-aria/optimize-locales-plugin": "1.2.0",
     "@storybook/addon-docs": "10.3.5",
     "@storybook/builder-vite": "10.3.5",
     "@storybook/react-vite": "10.3.5",

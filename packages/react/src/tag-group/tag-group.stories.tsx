@@ -1,7 +1,7 @@
 import { Calendar, House } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import type { Selection } from 'react-aria-components';
+import type { Selection } from 'react-aria-components/GridList';
 
 import { Description, Label } from '../label';
 import { Tag, TagGroup, TagList } from './tag-group';

@@ -1,7 +1,7 @@
 import { ArrowRight, Download, LinkExternal } from '@obosbbl/grunnmuren-icons-react';
 import { cva, cx, type VariantProps } from 'cva';
 import { Children, cloneElement, isValidElement, type JSX, type ReactNode } from 'react';
-import { Provider } from 'react-aria-components';
+import { Provider } from 'react-aria-components/slots';
 
 import { HeadingContext } from '../content';
 import type { UNSAFE_LinkProps } from '../link/link';

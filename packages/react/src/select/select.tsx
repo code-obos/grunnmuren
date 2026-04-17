@@ -1,13 +1,13 @@
 import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
 import type { Ref } from 'react';
+import { Button } from 'react-aria-components/Button';
+import { Popover } from 'react-aria-components/Popover';
 import {
-  Button,
-  Popover,
   Select as RACSelect,
   type SelectProps as RACSelectProps,
   SelectValue,
-} from 'react-aria-components';
+} from 'react-aria-components/Select';
 
 import { dropdown, formField, input } from '../classes';
 import {

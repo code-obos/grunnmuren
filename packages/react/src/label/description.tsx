@@ -1,5 +1,5 @@
 import { cx } from 'cva';
-import { Text, type TextProps } from 'react-aria-components';
+import { Text, type TextProps } from 'react-aria-components/Text';
 
 type DescriptionProps = TextProps;
 

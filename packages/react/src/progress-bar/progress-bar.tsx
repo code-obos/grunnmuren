@@ -3,7 +3,7 @@ import { createContext, type HTMLProps, useContext } from 'react';
 import {
   ProgressBar as RACProgressBar,
   type ProgressBarProps as RACProgressBarProps,
-} from 'react-aria-components';
+} from 'react-aria-components/ProgressBar';
 
 type ProgressBarProps = RACProgressBarProps;
 
