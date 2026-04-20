@@ -14,9 +14,9 @@ const badgeVariants = cva({
   variants: {
     color: {
       'gray-dark': 'bg-gray-dark text-white',
-      mint: 'bg-mint',
-      sky: 'bg-sky',
-      white: 'bg-white',
+      mint: 'bg-mint text-black',
+      sky: 'bg-sky text-black',
+      white: 'bg-white text-black',
       'blue-dark': 'bg-blue-dark text-white',
       'green-dark': 'bg-green-dark text-white',
     },
