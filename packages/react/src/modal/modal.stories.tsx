@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useEffect, useState } from 'react';
 
 import { Button } from '../button';
+import { TabbedImageGallery } from '../carousel/carousel.stories';
 import { Footer, Heading } from '../content';
 import {
   UNSAFE_Dialog as Dialog,
@@ -183,6 +184,43 @@ export const CustomZIndex: Story = {
               sammenligne priser på lignende varer i butikk.
             </p>
             <Button slot="close">Lukk</Button>
+          </Dialog>
+        </Modal>
+      </DialogTrigger>
+    </div>
+  ),
+};
+
+export const Fullscreen: Story = {
+  render: () => (
+    <div className="p-4">
+      <DialogTrigger>
+        <Button>Åpne fullskjerm</Button>
+        <Modal fullscreen>
+          <Dialog className="p-4">
+            <Heading slot="title" level={2}>
+              Fullskjerm modal
+            </Heading>
+            <p>Denne modalen dekker hele skjermen.</p>
+            <Button slot="close">Lukk</Button>
+          </Dialog>
+        </Modal>
+      </DialogTrigger>
+    </div>
+  ),
+};
+
+export const ImageGalleryModal: Story = {
+  render: () => (
+    <div className="p-4">
+      <DialogTrigger>
+        <Button>Åpne bildegalleri</Button>
+        <Modal fullscreen>
+          <Dialog className="container h-full p-4">
+            <Heading slot="title" level={2}>
+              Bildegalleri - Eksempel
+            </Heading>
+            <TabbedImageGallery />
           </Dialog>
         </Modal>
       </DialogTrigger>

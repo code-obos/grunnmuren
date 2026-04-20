@@ -1,7 +1,9 @@
 import { Close } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
+import { useContext } from 'react';
 import { ButtonContext } from 'react-aria-components/Button';
 import {
+  OverlayTriggerStateContext,
   Dialog as RACDialog,
   type DialogProps as RACDialogProps,
   DialogTrigger as RACDialogTrigger,
@@ -30,14 +32,22 @@ type ModalOverlayProps = Omit<RACModalOverlayProps, 'isDismissable' | 'style'> &
   zIndex?: number;
   /** @default true Makes the modal dismissable */
   isDismissable?: boolean;
+  /** @default false When true, the modal takes up the full screen */
+  fullscreen?: boolean;
 };
 
-const _ModalOverlay = ({ style = {}, zIndex = 10, ...restProps }: ModalOverlayProps) => (
+const _ModalOverlay = ({
+  style = {},
+  zIndex = 10,
+  fullscreen,
+  ...restProps
+}: ModalOverlayProps) => (
   <RACModalOverlay
     {...restProps}
     className={({ isEntering, isExiting }) =>
       cx(
-        'fixed inset-0 flex min-h-full items-center justify-center overflow-y-auto bg-black/25 p-4 text-center backdrop-blur-sm',
+        'fixed inset-0 flex min-h-full items-center justify-center overflow-y-auto bg-black/25 text-center backdrop-blur-sm',
+        !fullscreen && 'p-4',
         isEntering && 'fade-in animate-in duration-300 ease-out',
         isExiting && 'fade-out animate-out duration-200 ease-in',
         // Using the motion-safe class does not work, so we use motion-reduce to overwrite instead
@@ -57,6 +67,7 @@ const Modal = ({
   defaultOpen,
   className,
   zIndex,
+  fullscreen = false,
   ...restProps
 }: ModalProps) => {
   const locale = useLocale();
@@ -98,13 +109,15 @@ const Modal = ({
         defaultOpen={defaultOpen}
         isDismissable={isDismissable}
         zIndex={zIndex}
+        fullscreen={fullscreen}
       >
         <RACModal
           {...restProps}
           className={({ isEntering, isExiting }) =>
             cx(
               className,
-              'w-full max-w-md overflow-hidden rounded-2xl bg-white p-4 text-left align-middle shadow-xl',
+              'overflow-auto bg-white text-left shadow-xl',
+              fullscreen ? 'fixed inset-0' : 'w-full max-w-md rounded-2xl p-4 align-middle',
               isEntering && 'zoom-in-95 animate-in duration-300 ease-out',
               isExiting && 'zoom-out-95 animate-out duration-200 ease-in',
               // Using the motion-safe class does not work, so we use motion-reduce to overwrite instead
@@ -126,7 +139,7 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
     {...restProps}
     className={cx(
       className,
-      'relative grid gap-y-5 outline-none',
+      'relative flex flex-col gap-y-5 outline-none',
       // Footer
       '**:data-[slot="footer"]:flex **:data-[slot="footer"]:gap-x-2',
     )}
@@ -157,6 +170,20 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
     )}
   </RACDialog>
 );
+
+/**
+ * Reset the ButtonContext from react-aria-components that Dialog provides
+ * (only allows "close" slot) so nested components can set up their own
+ * button slots (e.g. Carousel's "prev" / "next").
+ */
+export const _ModalButtonContextReset = ({ children }: { children: React.ReactNode }) => {
+  const isInsideOverlay = !!useContext(OverlayTriggerStateContext);
+  return isInsideOverlay ? (
+    <Provider values={[[ButtonContext, null]]}>{children}</Provider>
+  ) : (
+    children
+  );
+};
 
 export {
   Dialog as UNSAFE_Dialog,
