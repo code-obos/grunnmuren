@@ -351,10 +351,6 @@ export const ClickableWithOtherClickableElementsAndBackgroundColor = () => (
 export const ClickableWithBadge = () => (
   <Card variant="outlined" className="bg-blue-dark text-mint w-72">
     <Media>
-      <Badge color="blue-dark">
-        <InfoCircle />
-        Meldefrist
-      </Badge>
       <img
         alt=""
         src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
@@ -365,6 +361,10 @@ export const ClickableWithBadge = () => (
         <Heading level={3}>
           <CardLink href="#card">Rødbergvn 88C</CardLink>
         </Heading>
+        <Badge color="blue-dark" size="small" className="absolute top-3.5 left-3.5">
+          <InfoCircle />
+          Frist for forkjøp 21. apr., 09:00
+        </Badge>
         <small className="description">Bjerke - Oslo</small>
       </div>
       <small className="description -order-1">Forhåndsvarsling - Saksnr. F0347565</small>
@@ -399,16 +399,16 @@ export const ClickableWithBadgeRight = () => (
         alt=""
         src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
       />
-      <Badge color="blue-dark">
-        <InfoCircle />
-        Meldefrist
-      </Badge>
     </Media>
     <Content>
       <div className="grid gap-1">
         <Heading level={3}>
           <CardLink href="#card">Rødbergvn 88C</CardLink>
         </Heading>
+        <Badge color="blue-dark" size="small" className="absolute top-3.5 right-3.5">
+          <InfoCircle />
+          Meldefrist
+        </Badge>
         <small className="description">Bjerke - Oslo</small>
       </div>
       <small className="description -order-1">Forhåndsvarsling - Saksnr. F0347565</small>

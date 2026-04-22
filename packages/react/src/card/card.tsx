@@ -50,21 +50,11 @@ const cardVariants = cva({
     '[&_a:not([data-slot="card-link"])]:z-[1] [&_button]:z-[1] [&_input]:z-[1]',
 
     // **** Badge ****
-    '[&_[data-slot="media"]_[data-slot="badge"]]:absolute [&_[data-slot="media"]_[data-slot="badge"]]:top-0',
+    '*:data-[slot=media]:*:data-[slot=badge]:absolute',
+    '*:data-[slot=media]:*:data-[slot=badge]:first:top-3.5 *:data-[slot=media]:*:data-[slot=badge]:first:left-3.5',
     // Increasing z-index Preserves badge position when media content is hovered (the transform scale effect might otherwise move the badge behind the other media content)
-    '[&_[data-slot="media"]_[data-slot="badge"]]:z-[1]',
-    // Left aligned - override default corner radius of the badge
-    '[&_[data-slot="media"]_[data-slot="badge"]:first-child]:rounded-tl-2xl',
-    '[&_[data-slot="media"]_[data-slot="badge"]:first-child]:rounded-br-2xl',
-    '[&_[data-slot="media"]_[data-slot="badge"]:first-child]:rounded-tr-none',
-    '[&_[data-slot="media"]_[data-slot="badge"]:first-child]:rounded-bl-none',
-    // Right aligned - override default corner radius of the badge
-    '[&_[data-slot="media"]_[data-slot="badge"]:last-child]:rounded-tl-none',
-    '[&_[data-slot="media"]_[data-slot="badge"]:last-child]:rounded-br-none',
-    '[&_[data-slot="media"]_[data-slot="badge"]:last-child]:rounded-tr-2xl',
-    '[&_[data-slot="media"]_[data-slot="badge"]:last-child]:rounded-bl-2xl',
-    // ... and position the badge at the right edge of the media content
-    '[&_[data-slot="media"]_[data-slot="badge"]:last-child]:right-0',
+    '*:data-[slot=media]:*:data-[slot=badge]:z-[1]',
+    '*:data-[slot=media]:*:data-[slot=badge]:last:top-3.5 *:data-[slot=media]:*:data-[slot=badge]:last:right-3.5',
   ],
   variants: {
     /**
