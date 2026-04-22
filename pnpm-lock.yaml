@@ -251,7 +251,7 @@ importers:
   packages/react:
     dependencies:
       '@obosbbl/grunnmuren-icons-react':
-        specifier: workspace:^2.1.2
+        specifier: workspace:^
         version: link:../icons-react
       cva:
         specifier: ^1.0.0-0
