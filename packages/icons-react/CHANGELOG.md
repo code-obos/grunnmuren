@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-icons-react
 
+## 2.2.0
+
+### Minor Changes
+
+- 6beecbf: add Sparkles icon
+
 ## 2.1.2
 
 ### Patch Changes
