@@ -38,3 +38,17 @@ Even though the auto-overlay will persist for now for backward compatibility, we
   </Content>
 </Card>
 ```
+
+It might still make sense to render the `<Badge>` in the `<Media>` tag sometimes, for instance if the `<Badge>` is strictly related to the image inside it, and the image itself is hidden from screen readers (`alt=""` or `aria-hidden="true"`), but then also make sure to hide the badge from screen readers:
+
+``` tsx
+<Card>
+  <Media>
+    <img alt="" src="..." />
+    <Badge aria-hidden color="blue-dark">KI-generert</Badge>
+  </Media>
+  <Content>
+    <Heading level={3}>...</Heading>
+  </Content>
+</Card>
+```
