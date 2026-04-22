@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-icons-svg
 
+## 2.2.0
+
+### Minor Changes
+
+- 6beecbf: add Sparkles icon
+
 ## 2.1.0
 
 ### Minor Changes
@@ -16,7 +22,6 @@
 - 58704e7: BREAKING CHANGE: updated look and feel of entire icon set. The icons are now outlined instead of filled.
 
   The following icons are renamed:
-
   - Expand -> ArrowsMaximize
   - BriefcaseMedical -> FirstAidKit
   - Columns -> LayoutGrid
@@ -24,7 +29,6 @@
   - Twitter -> X
 
   The following icons are removed:
-
   - BikeExercise (use Bike or Excerise instead)
   - BuildingAlt
   - CookingPot (use ChefHat instead)
@@ -35,7 +39,6 @@
   - StairsFloor
 
   Added new icons:
-
   - ArrowDownLeft
   - BuildingBank
   - Buildings
@@ -108,7 +111,6 @@
 - 58704e7: BREAKING CHANGE: updated look and feel of entire icon set. The icons are now outlined instead of filled.
 
   The following icons are renamed:
-
   - Expand -> ArrowsMaximize
   - BriefcaseMedical -> FirstAidKit
   - Columns -> LayoutGrid
@@ -116,7 +118,6 @@
   - Twitter -> X
 
   The following icons are removed:
-
   - BikeExercise (use Bike or Excerise instead)
   - BuildingAlt
   - CookingPot (use ChefHat instead)
@@ -127,7 +128,6 @@
   - StairsFloor
 
   Added new icons:
-
   - ArrowDownLeft
   - BuildingBank
   - Buildings
