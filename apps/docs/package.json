@@ -22,6 +22,7 @@
     "start": "node .output/server/index.mjs"
   },
   "dependencies": {
+    "@code-obos/logger": "4.0.0-20260421111144",
     "@code-obos/sanity-auth": "1.4.4",
     "@obosbbl/grunnmuren-icons-react": "workspace:*",
     "@obosbbl/grunnmuren-icons-svg": "workspace:*",
@@ -41,6 +42,7 @@
     "@vitejs/plugin-react": "6.0.1",
     "cva": "1.0.0-beta.4",
     "groq": "5.13.0",
+    "pino-opentelemetry-transport": "3.0.0",
     "prism-react-renderer": "2.4.1",
     "react": "19.2.3",
     "react-aria-components": "1.17.0",

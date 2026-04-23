@@ -1,0 +1,76 @@
+properties:
+  configuration:
+    activeRevisionsMode: Single
+    ingress:
+      external: true
+      allowInsecure: false
+      targetPort: 3000
+    secrets:
+      - name: splunk-token
+        keyVaultUrl: https://dkt-nettsted-prod-kv.vault.azure.net/secrets/Splunk-Token
+        identity: System
+      - name: otel-api-key-header
+        keyVaultUrl: https://${OTEL_KEY_VAULT_NAME}.vault.azure.net/secrets/api-key-header
+        identity: ${APP_IDENTITY_ID}
+  template:
+    scale:
+      minReplicas: 1
+      maxReplicas: 3
+    containers:
+      - image: blokkregistry.azurecr.io/${IMAGE_NAME}:${IMAGE_TAG}
+        name: docs
+        env: # Environment variables made available to the container
+          - name: OTEL_EXPORTER_OTLP_ENDPOINT # Environment specific variable, defined in {prod, stg, dev}.env
+            value: ${OTEL_GATEWAY}
+          - name: OTEL_EXPORTER_OTLP_HEADERS # Secret variable, defined above
+            secretRef: otel-api-key-header
+          - name: OTEL_SERVICE_NAME
+            value: ${APPLICATION_NAME}-${CONTAINER_APP_KEY}
+        resources:
+          cpu: 0.25
+          memory: 0.5Gi
+        probes:
+          - type: liveness
+            httpGet:
+              path: '/api/health'
+              port: 3000
+            initialDelaySeconds: 7
+            periodSeconds: 3
+          - type: readiness
+            httpGet:
+              path: '/api/health'
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 3
+
+
+
+properties:
+  configuration:
+    replicaTimeout: 1800 # Allowed runtime in seconds (30 min)
+    replicaRetryLimit: 1
+    secrets: # List all required secrets from Azure Key Vault
+      - name: otel-api-key-header
+        keyVaultUrl: https://${OTEL_KEY_VAULT_NAME}.vault.azure.net/secrets/api-key-header
+        identity: ${APP_IDENTITY_ID}
+      - name: sanity-token
+        keyVaultUrl: https://${SHARED_KEY_VAULT_NAME}.vault.azure.net/secrets/sanity-token
+        identity: ${APP_IDENTITY_ID}
+  template:
+    containers:
+      - image: blokkregistry.azurecr.io/${IMAGE_NAME}:${IMAGE_TAG}
+        name: main
+        env: # Environment variables made available to the container
+          - name: OTEL_EXPORTER_OTLP_ENDPOINT # Environment specific variable, defined in {prod, stg, dev}.env
+            value: ${OTEL_GATEWAY}
+          - name: OTEL_EXPORTER_OTLP_HEADERS # Secret variable, defined above
+            secretRef: otel-api-key-header
+          - name: OTEL_SERVICE_NAME
+            value: ${APPLICATION_NAME}-${CONTAINER_APP_KEY}
+          - name: SANITY_DATASET
+            value: ${SANITY_DATASET}
+          - name: SANITY_TOKEN
+            secretRef: sanity-token
+        resources:
+          cpu: 0.5
+          memory: 1Gi
