@@ -1,15 +1,14 @@
 import type { Meta } from '@storybook/react-vite';
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 
 import { Content } from '../content';
-import { DisclosureButton } from '../disclosure';
 import {
   UNSAFE_Table as Table,
   UNSAFE_TableBody as TableBody,
   UNSAFE_TableCell as TableCell,
   UNSAFE_TableColumn as TableColumn,
   UNSAFE_TableColumnResizer as TableColumnResizer,
-  UNSAFE_TableContainer as TableContainer,
+  UNSAFE_ResizableTableContainer as ResizableTableContainer,
   UNSAFE_TableHeader as TableHeader,
   UNSAFE_TableRow as TableRow,
 } from './table';
@@ -246,12 +245,12 @@ export const WithScrolling = () => (
 );
 
 export const FixedColumns = () => (
-  <TableContainer>
+  <ResizableTableContainer>
     <Table aria-label="Eiendomsforvaltere">
       <TableHeader>
-        <TableColumn maxWidth={144}>Navn</TableColumn>
-        <TableColumn maxWidth={144}>E-post</TableColumn>
-        <TableColumn maxWidth={144}>Område</TableColumn>
+        <TableColumn minWidth={144}>Navn</TableColumn>
+        <TableColumn minWidth={144}>E-post</TableColumn>
+        <TableColumn minWidth={144}>Område</TableColumn>
       </TableHeader>
       <TableBody>
         <TableRow>
@@ -271,11 +270,11 @@ export const FixedColumns = () => (
         </TableRow>
       </TableBody>
     </Table>
-  </TableContainer>
+  </ResizableTableContainer>
 );
 
 export const ResizeableColumns = () => (
-  <TableContainer>
+  <ResizableTableContainer>
     <Table aria-label="Table with resizable columns">
       <TableHeader>
         <TableColumn id="file" isRowHeader>
@@ -309,74 +308,70 @@ export const ResizeableColumns = () => (
         </TableRow>
       </TableBody>
     </Table>
-  </TableContainer>
+  </ResizableTableContainer>
 );
 
+const months = [
+  'januar',
+  'februar',
+  'mars',
+  'april',
+  'mai',
+  'juni',
+  'juli',
+  'august',
+  'september',
+  'oktober',
+  'november',
+  'desember',
+];
+
+/**
+ * Uses the native react-aria-components expand/collapse API available
+ * from v1.17. Declare a `treeColumn` on the Table (the column that shows
+ * the hierarchy), render nested <TableRow>s inside a parent <TableRow>,
+ * and use <TableExpandButton> in the parent's tree-column cell. React
+ * Aria wires up aria-expanded, keyboard toggling (arrow-left/right) and
+ * the indentation attributes automatically.
+ */
 export const ExpandableRows = () => {
   const years = [2025, 2026, 2027];
-  const [expandedYears, setExpandedYears] = useState(
-    Object.fromEntries(years.map((year) => [year, false])),
-  );
-
-  const months = [
-    'januar',
-    'februar',
-    'mars',
-    'april',
-    'mai',
-    'juni',
-    'juli',
-    'august',
-    'september',
-    'oktober',
-    'november',
-    'desember',
-  ];
+  const [expandedKeys, setExpandedKeys] = useState<Set<string | number>>(new Set());
 
   return (
-    <TableContainer className="container">
-      <Table aria-label="Lånekostnader" variant="zebra-striped">
-        <TableHeader>
-          <TableColumn maxWidth={200}>Termin</TableColumn>
-          <TableColumn maxWidth={200}>Renter</TableColumn>
-          <TableColumn maxWidth={200}>Avdrag</TableColumn>
-          <TableColumn maxWidth={200}>Månedskostnader</TableColumn>
-        </TableHeader>
-        <TableBody>
-          {years.map((year) => (
-            <Fragment key={year}>
-              <TableRow className="*:align-middle">
-                <TableCell>{year}</TableCell>
-                <TableCell>1 200 kr</TableCell>
-                <TableCell>18 000 kr</TableCell>
-                <TableCell>
-                  <DisclosureButton
-                    withChevron
-                    aria-controls={months.map((month) => `${year}-${month}`).join(' ')}
-                    aria-expanded={expandedYears[year]}
-                    aria-label={`Månedlige kostnader for ${year}`}
-                    onPress={() =>
-                      setExpandedYears((prevState) => ({
-                        ...prevState,
-                        [year]: !expandedYears[year],
-                      }))
-                    }
-                    isIconOnly
-                  />
-                </TableCell>
+    <Table
+      aria-label="Lånekostnader"
+      variant="zebra-striped"
+      treeColumn="term"
+      expandedKeys={expandedKeys}
+      onExpandedChange={setExpandedKeys}
+    >
+      <TableHeader>
+        <TableColumn id="term" isRowHeader>
+          Termin
+        </TableColumn>
+        <TableColumn id="interest">Renter</TableColumn>
+        <TableColumn id="installment">Avdrag</TableColumn>
+        <TableColumn id="total">Månedskostnader</TableColumn>
+      </TableHeader>
+      <TableBody>
+        {years.map((year) => (
+          <TableRow key={year} id={year}>
+            <TableCell>{year}</TableCell>
+            <TableCell>1 200 kr</TableCell>
+            <TableCell>18 000 kr</TableCell>
+            <TableCell>19 200 kr</TableCell>
+            {months.map((month) => (
+              <TableRow key={`${year}-${month}`} id={`${year}-${month}`}>
+                <TableCell className="capitalize">{month}</TableCell>
+                <TableCell>120 kr</TableCell>
+                <TableCell>1 500 kr</TableCell>
+                <TableCell>1 620 kr</TableCell>
               </TableRow>
-              {expandedYears[year] &&
-                months.map((month) => (
-                  <TableRow key={`${year}-${month}`} id={`${year}-${month}`}>
-                    <TableCell className="capitalize">{month}</TableCell>
-                    <TableCell>120 kr</TableCell>
-                    <TableCell colSpan={2}>1 500 kr</TableCell>
-                  </TableRow>
-                ))}
-            </Fragment>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+            ))}
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
   );
 };
