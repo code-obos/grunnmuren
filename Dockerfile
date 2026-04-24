@@ -39,4 +39,5 @@ COPY --from=prod-deps /app/apps/docs/node_modules node_modules
 ENV PORT=3000
 EXPOSE 3000
 USER node
+ENV NODE_OPTIONS="--import amaro/strip"
 CMD [ "node", ".output/server/index.mjs" ]
