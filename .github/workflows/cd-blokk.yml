@@ -5,12 +5,6 @@ name: Grunnmuren CD
 
 on: # Define which events trigger this workflow
   workflow_dispatch: # Allow manual triggering from GitHub UI
-    inputs:
-      deploy_prod:
-        description: Deploy to PROD on manual run
-        required: false
-        default: false
-        type: boolean
   push:
     branches:
       - main
@@ -38,7 +32,7 @@ jobs:
 
   deploy:
     name: Deploy to PROD
-    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.deploy_prod)
+    if: github.event_name == 'push'
     needs: [build-and-push] # Wait for build-and-push job to complete
     uses: ./.github/workflows/deploy-container-app-blokk.yml
     with:
