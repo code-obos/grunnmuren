@@ -7,16 +7,15 @@ FROM base AS prod-deps
 COPY . /app
 WORKDIR /app
 
-RUN \
-    --mount=type=secret,id=npmrc,target=/root/.npmrc,required=false\
-    --mount=type=cache,id=pnpm,target=/pnpm/store 
+RUN --mount=type=secret,id=npmrc,target=/root/.npmrc,required=false \
+    --mount=type=secret,id=github_token,required=false \
+    --mount=type=cache,id=pnpm,target=/pnpm/store \
     sh -c ' \
       if [ -f /run/secrets/github_token ]; then \
         echo "//npm.pkg.github.com/:_authToken=$(cat /run/secrets/github_token)" >> .npmrc; \
       fi && \
-      pnpm install --prod --frozen-lockfile \
+      pnpm --filter news-sync deploy --prod /out \
     '
-    pnpm install --prod --frozen-lockfile
 
 FROM base AS builder
 COPY . /app
