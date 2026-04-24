@@ -1,4 +1,4 @@
-import { ChevronDown } from '@obosbbl/grunnmuren-icons-react';
+import { ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 import { cva, cx } from 'cva';
 import { createContext, type RefAttributes, useCallback, useContext, useState } from 'react';
 import {
@@ -40,6 +40,10 @@ const tableRowVariants = cva({
     'data-focus-visible:outline-focus-inset',
     'group-data-[variant=zebra-striped]/table:odd:bg-white',
     'group-data-[variant=zebra-striped]/table:even:bg-sky-lightest',
+    // When the row has expandable children, the chevron button makes the
+    // row taller than a plain text row. Center-align the cells' content so
+    // the chevron icon lines up with text in sibling cells.
+    'data-has-child-items:*:align-middle',
   ],
 });
 
@@ -291,9 +295,9 @@ function TableCell(props: TableCellProps) {
               slot="chevron"
               variant="tertiary"
               isIconOnly
-              className="-my-1 group-data-expanded/row:[&_svg]:rotate-180"
+              className="-my-1 group-data-expanded/row:[&_svg]:rotate-90"
             >
-              <ChevronDown className="transition-transform duration-300 motion-reduce:transition-none" />
+              <ChevronRight className="transition-transform duration-300 motion-reduce:transition-none" />
             </Button>
           )}
           {resolved}
