@@ -24,7 +24,7 @@ jobs:
     uses: ./.github/workflows/build-push-image.yml
     secrets:
       sanity-studio-deploy-token: ${{ secrets.SANITY_STUDIO_DEPLOY_TOKEN }}
-      github-token: ${{ secrets.GITHUB_TOKEN }} # Available to Dockerfile if using dependencies from private registries (code-obos packages)
+      github-token: ${{ secrets.GITHUB_TOKEN }}
     with:
       dockerfile: ./Dockerfile
       application-name: grunnmuren

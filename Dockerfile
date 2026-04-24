@@ -9,7 +9,13 @@ WORKDIR /app
 
 RUN \
     --mount=type=secret,id=npmrc,target=/root/.npmrc\
-    --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
+    --mount=type=cache,id=pnpm,target=/pnpm/store 
+    sh -c ' \
+      if [ -f /run/secrets/github_token ]; then \
+        echo "//npm.pkg.github.com/:_authToken=$(cat /run/secrets/github_token)" >> .npmrc; \
+      fi && \
+      pnpm install --prod --frozen-lockfile \
+    '
 
 FROM base AS builder
 COPY . /app
