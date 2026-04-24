@@ -1,6 +1,7 @@
 import { ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 import { cva, cx } from 'cva';
 import { createContext, type RefAttributes, useCallback, useContext, useState } from 'react';
+import { composeRenderProps } from 'react-aria-components/composeRenderProps';
 import {
   Cell as RACCell,
   type CellProps as RACCellProps,
@@ -19,7 +20,6 @@ import {
   ResizableTableContainer as RACResizableTableContainer,
   type ResizableTableContainerProps as RACResizableTableContainerProps,
 } from 'react-aria-components/Table';
-import { composeRenderProps } from 'react-aria-components/composeRenderProps';
 
 import { Button } from '../button';
 import { ScrollButton, type ScrollDirection, useHorizontalScroll } from '../utils';
