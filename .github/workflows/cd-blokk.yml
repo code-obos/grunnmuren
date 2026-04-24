@@ -27,7 +27,7 @@ permissions:
 jobs:
   build-and-push:
     name: Build and push image
-    uses: code-obos/github-workflows/.github/workflows/build-push-image.yaml@5b879855f947a461953ebc3834c3dbb3ad5ef5ea # v2.3.0
+    uses: ./.github/workflows/build-push-image-blokk.yml
     secrets:
       github-token: ${{ secrets.GITHUB_TOKEN }} # Available to Dockerfile if using dependencies from private registries (code-obos packages)
     with:
@@ -39,7 +39,7 @@ jobs:
     name: Deploy to PROD
     if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.deploy_prod)
     needs: [build-and-push] # Wait for build-and-push job to complete
-    uses: code-obos/github-workflows/.github/workflows/deploy-container-app.yaml@5b879855f947a461953ebc3834c3dbb3ad5ef5ea
+    uses: ./.github/workflows/deploy-container-app-blokk.yml
     with:
       is-job: true
       environment: prod

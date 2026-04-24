@@ -1,0 +1,90 @@
+name: Build and Push Image to Container Registry
+#  This workflow builds a Docker image and pushes it to blokkregistry, an Azure Container Registry.
+
+on:
+  workflow_call:
+    inputs:
+      dockerfile:
+        description: The path to the Dockerfile
+        required: true
+        type: string
+      application-name:
+        description: Name of the application
+        required: true
+        type: string
+      container-app-key:
+        description: The unique identifier for the container app (e.g., "app", "db"), as defined in the IaC configuration.
+        required: true
+        type: string
+    outputs:
+      image-name:
+        description: Name of the built image
+        value: ${{ jobs.build-and-push.outputs.image-name }}
+      image-tag:
+        description: The tag of the built image
+        value: ${{ jobs.build-and-push.outputs.image-tag }}
+      application-name:
+        description: Same as the input value. Useful when chaining jobs
+        value: ${{ inputs.application-name }}
+      container-app-key:
+        description: Same as the input value. Useful when chaining jobs
+        value: ${{ inputs.container-app-key }}
+
+    secrets:
+      github-token:
+        required: true
+
+permissions:
+  id-token: write
+  contents: read
+  packages: read
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    environment: blokkregistry
+    outputs:
+      application-name: ${{ inputs.application-name }}
+      container-app-key: ${{ inputs.container-app-key }}
+      image-name: ${{ steps.tags.outputs.image-name }}
+      image-tag: ${{ steps.tags.outputs.image-tag }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+
+      - name: Set containter image name and tag
+        id: tags
+        run: |
+          git_hash=$(git rev-parse --short "$GITHUB_SHA")
+          echo "image-name=${{ inputs.application-name }}/${{ inputs.container-app-key }}" >> $GITHUB_OUTPUT
+          if [[ "${{ github.ref_name }}" == "main" || "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo "image-tag=$(date +'%Y%m%d')-${{ github.run_number }}-${git_hash}" >> $GITHUB_OUTPUT
+          else
+            echo "image-tag=$(date +'%Y%m%d')-${{ github.run_number }}-${git_hash}-preview" >> $GITHUB_OUTPUT
+          fi
+        shell: bash
+
+      - name: Log in to Azure
+        uses: azure/login@a457da9ea143d694b1b9c7c869ebb04ebe844ef5 # v2.3.0
+        with:
+          client-id: ${{ vars.BLOKKREGISTRY_CLIENT_ID }}
+          tenant-id: ${{ vars.TENANT_ID }}
+          subscription-id: ${{ vars.BLOKKREGISTRY_SUBSCRIPTION_ID }}
+
+      - name: Login to Azure Container Registry
+        id: acr_login
+        run: az acr login --name blokkregistry
+        shell: bash
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3.12.0
+
+      - name: Build and push
+        uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6.18.0
+        with:
+          push: true
+          secrets: |
+            github_token=${{ secrets.github-token }}
+            SANITY_STUDIO_DEPLOY_TOKEN=${{ secrets.SANITY_STUDIO_DEPLOY_TOKEN }}
+          file: ${{ inputs.dockerfile }}
+          tags: blokkregistry.azurecr.io/${{ steps.tags.outputs.image-name }}:${{ steps.tags.outputs.image-tag }}

@@ -1,0 +1,206 @@
+name: Deploy Azure Container App
+#  This workflow deploys a container app (or container app job) to Azure Container Apps using a pre-built image from OBOS blokkregistry.
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: Deployment environment (e.g., dev for development, stg for staging, prod for production)
+        required: true
+        type: string
+      application-name:
+        description: Name of the application
+        required: true
+        type: string
+      container-app-key:
+        description: The unique identifier for the container app or job (e.g., "app", "db", "sync"), as defined in the IaC configuration.
+        type: string
+        required: true
+      image-name:
+        description: The name of the built image
+        required: true
+        type: string
+      image-tag:
+        description: The tag for the built image
+        required: true
+        type: string
+      config-directory:
+        description: The path to the directory containing the configuration files
+        required: false
+        default: ./blokk
+        type: string
+      config-file:
+        description: Name of the configuration file. Defaults to ca-config.yaml for apps and caj-config.yaml for jobs.
+        required: false
+        type: string
+      is-job:
+        description: Set to true when deploying a Container App Job instead of a Container App
+        required: false
+        type: boolean
+        default: false
+
+env:
+  CONFIG_FILE: ${{ inputs.config-directory }}/${{ inputs.config-file || (inputs.is-job && 'caj-config.yaml' || 'ca-config.yaml') }}
+  ENV_FILE: ${{ inputs.config-directory }}/${{ inputs.environment }}.env
+  IMAGE_NAME: ${{ inputs.image-name }}
+  IMAGE_TAG: ${{ inputs.image-tag }}
+  APPLICATION_NAME: ${{ inputs.application-name }}
+  CONTAINER_APP_KEY: ${{ inputs.container-app-key }}
+  RESOURCE_GROUP_NAME: ${{ vars.RESOURCE_GROUP_NAME || format('{0}-{1}-rg', inputs.application-name, inputs.environment) }}
+  CONTAINER_APP_ENV: ${{ inputs.application-name }}-${{ inputs.environment }}-cae
+  CONTAINER_APP_NAME: ${{ inputs.application-name }}-${{ inputs.container-app-key }}-${{ inputs.environment }}-${{ inputs.is-job && 'caj' || 'ca' }}
+  IDENTITY_NAME: ${{ inputs.application-name }}-${{ inputs.container-app-key }}-${{ inputs.environment }}-id
+  ENVIRONMENT: ${{ inputs.environment }}
+
+jobs:
+  deploy-azure-container-app:
+    runs-on: ubuntu-latest
+    environment: ${{ format('blokk-{0}', inputs.environment) }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+
+      - name: Substitute variables in environment file
+        if: ${{ env.ENV_FILE != '' && hashFiles(env.ENV_FILE) != hashFiles('') }}
+        run: envsubst < ${{ env.ENV_FILE }} > env.env
+        env:
+          SUBSCRIPTION_ID: ${{ vars.SUBSCRIPTION_ID }}
+
+      - name: Load variables to environment
+        if: ${{ env.ENV_FILE != '' && hashFiles(env.ENV_FILE) != hashFiles('') }}
+        uses: falti/dotenv-action@f4656c46de6bc223dda660f6724d52537bc0642a # v1.1.5
+        with:
+          path: env.env
+          export-variables: true
+          keys-case: bypass
+          ensure-exists: false
+
+      - name: Substitute environment variables in config file
+        uses: mikefarah/yq@065b200af9851db0d5132f50bc10b1406ea5c0a8 # v4.50.1
+        with:
+          # https://mikefarah.gitbook.io/yq/operators/env-variable-operators#tip
+          cmd: yq '(.. | select(tag == "!!str")) |= envsubst' ${{ env.CONFIG_FILE }} > config.yaml
+        env:
+          SUBSCRIPTION_ID: ${{ vars.SUBSCRIPTION_ID }}
+
+      - name: Log in to Azure
+        uses: azure/login@a457da9ea143d694b1b9c7c869ebb04ebe844ef5 # v2.3.0
+        with:
+          client-id: ${{ vars.ACA_CLIENT_ID }}
+          tenant-id: ${{ vars.TENANT_ID }}
+          subscription-id: ${{ vars.SUBSCRIPTION_ID }}
+
+      - name: Deploy Container App
+        if: ${{ !inputs.is-job }}
+        id: deploy-azure-container-app
+        uses: azure/container-apps-deploy-action@8dff69dac3367c32ceb2690d8f13adbeab462703 # v2
+        continue-on-error: true
+        with:
+          yamlConfigPath: config.yaml
+          containerAppName: ${{ env.CONTAINER_APP_NAME }}
+          resourceGroup: ${{ env.RESOURCE_GROUP_NAME }}
+
+      - name: Deploy Container App Job
+        if: ${{ inputs.is-job }}
+        id: deploy-azure-container-app-job
+        run: |
+          echo "Deploying Container App Job: $CONTAINER_APP_NAME"
+          az containerapp job update \
+            --name $CONTAINER_APP_NAME \
+            --resource-group $RESOURCE_GROUP_NAME \
+            --yaml config.yaml
+        continue-on-error: true
+
+      - name: Deployment failed
+        if: ${{ steps.deploy-azure-container-app.outcome == 'failure' || steps.deploy-azure-container-app-job.outcome == 'failure' }}
+        run: |
+          # Deploy failed. Please review the detailed error message in the previous step
+          echo Configuration file:
+          cat config.yaml
+          exit 1
+
+      - name: Wait for provisioning to complete
+        env:
+          IS_JOB: ${{ inputs.is-job }}
+        run: |
+          start_seconds=$SECONDS
+          timeout_seconds=300 # Five minutes
+
+          if [[ "$IS_JOB" != "true" ]]; then
+            revision_name=$(
+              az containerapp show \
+                -g $RESOURCE_GROUP_NAME \
+                -n $CONTAINER_APP_NAME \
+                --query 'properties.latestRevisionName' \
+                -o tsv
+            )
+            echo "Container app updated. New revision name: '$revision_name'. Checking provisioning state..."
+
+            # https://learn.microsoft.com/en-us/rest/api/containerapps/container-apps-revisions/get-revision?view=rest-containerapps-2023-05-01&tabs=HTTP
+            while
+              data=$(
+                az containerapp revision show \
+                  -g $RESOURCE_GROUP_NAME \
+                  -n $CONTAINER_APP_NAME \
+                  --revision $revision_name
+              )
+              state=$(echo $data | jq -r '.properties.provisioningState')
+              error=$(echo $data | jq -r '.properties.provisioningError')
+              running_state=$(echo $data | jq -r '.properties.runningState')
+              elapsed_seconds=$((SECONDS - start_seconds))
+
+              if [[ $elapsed_seconds -gt $timeout_seconds ]]; then
+                timeout=1
+                break
+              elif [[ $state == "Provisioning" ]]; then
+                echo "Still provisioning. Retrying in 500ms..."
+                sleep 0.5
+              elif [[ $running_state == "Processing" || $running_state == "Activating" || $running_state == "Unknown" ]]; then
+                echo "Running state is '$running_state'. Retrying in 500ms..."
+                sleep 0.5
+              else
+                break
+              fi
+            do true; done
+
+            if [[ $state != 'Provisioned' ]] || [[ $running_state != 'Running' && $running_state != 'RunningAtMaxScale' ]]; then
+              echo "> [!CAUTION]" >> $GITHUB_STEP_SUMMARY
+              [[ $timeout ]] && echo "> Timed out after $elapsed_seconds seconds." >> $GITHUB_STEP_SUMMARY
+              echo "> Provisioning state: \`$state\`." >> $GITHUB_STEP_SUMMARY
+              echo "> Running state: \`$running_state\`." >> $GITHUB_STEP_SUMMARY
+              echo "> Error message:" >> $GITHUB_STEP_SUMMARY
+              echo "> \`\`\`" >> $GITHUB_STEP_SUMMARY
+              echo "> $error" >> $GITHUB_STEP_SUMMARY
+              echo "> \`\`\`" >> $GITHUB_STEP_SUMMARY
+              exit 1
+            fi
+
+            echo "Provisioning succeeded! Revision name: \`$revision_name\`" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "Checking provisioning state for Container App Job: $CONTAINER_APP_NAME"
+
+            while
+              data=$(az containerapp job show -g $RESOURCE_GROUP_NAME -n $CONTAINER_APP_NAME)
+              state=$(echo $data | jq -r '.properties.provisioningState')
+              elapsed_seconds=$((SECONDS - start_seconds))
+
+              if [[ $elapsed_seconds -gt $timeout_seconds ]]; then
+                timeout=1
+                break
+              elif [[ $state == "InProgress" || $state == "Updating" ]]; then
+                echo "Provisioning state is '$state'. Retrying in 500ms..."
+                sleep 0.5
+              else
+                break
+              fi
+            do true; done
+
+            if [[ $state != 'Succeeded' ]]; then
+              echo "> [!CAUTION]" >> $GITHUB_STEP_SUMMARY
+              [[ $timeout ]] && echo "> Timed out after $elapsed_seconds seconds." >> $GITHUB_STEP_SUMMARY
+              echo "> Provisioning state: \`$state\`." >> $GITHUB_STEP_SUMMARY
+              exit 1
+            fi
+
+            echo "Provisioning succeeded! Container App Job \`$CONTAINER_APP_NAME\` is ready." >> $GITHUB_STEP_SUMMARY
+          fi
