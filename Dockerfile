@@ -22,9 +22,15 @@ FROM base AS builder
 COPY . /app
 WORKDIR /app
 
-RUN \
-    --mount=type=secret,id=npmrc,target=/root/.npmrc\
-    --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN --mount=type=secret,id=npmrc,target=/root/.npmrc,required=false \
+    --mount=type=secret,id=github_token,required=false \
+    --mount=type=cache,id=pnpm,target=/pnpm/store \
+    sh -c ' \
+      if [ -f /run/secrets/github_token ]; then \
+        echo "//npm.pkg.github.com/:_authToken=$(cat /run/secrets/github_token)" >> .npmrc; \
+      fi && \
+      pnpm install --frozen-lockfile \
+    '
 
 RUN pnpm build
 # important to build storybook before docs app
