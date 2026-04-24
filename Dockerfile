@@ -14,8 +14,9 @@ RUN --mount=type=secret,id=npmrc,target=/root/.npmrc,required=false \
       if [ -f /run/secrets/github_token ]; then \
         echo "//npm.pkg.github.com/:_authToken=$(cat /run/secrets/github_token)" >> .npmrc; \
       fi && \
-      pnpm --filter news-sync deploy --prod /out \
+      pnpm install --prod --frozen-lockfile \
     '
+    
 
 FROM base AS builder
 COPY . /app
