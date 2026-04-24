@@ -28,7 +28,7 @@ jobs:
     with:
       dockerfile: ./Dockerfile
       application-name: grunnmuren
-      container-app-key: docs
+      container-app-key: fe
 
   deploy:
     name: Deploy to PROD
