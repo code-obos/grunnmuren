@@ -5,12 +5,6 @@ name: Grunnmuren CD
 
 on: # Define which events trigger this workflow
   workflow_dispatch: # Allow manual triggering from GitHub UI
-    inputs:
-      deploy_prod:
-        description: Deploy to PROD on manual run
-        required: false
-        default: false
-        type: boolean
   push:
     branches:
       - main
@@ -27,24 +21,23 @@ permissions:
 jobs:
   build-and-push:
     name: Build and push image
-    uses: code-obos/github-workflows/.github/workflows/build-push-image.yaml@5b879855f947a461953ebc3834c3dbb3ad5ef5ea # v2.3.0
+    uses: ./.github/workflows/build-push-image-blokk.yml
     secrets:
+      sanity-studio-deploy-token: ${{ secrets.SANITY_STUDIO_DEPLOY_TOKEN }}
       github-token: ${{ secrets.GITHUB_TOKEN }} # Available to Dockerfile if using dependencies from private registries (code-obos packages)
     with:
       dockerfile: ./Dockerfile
       application-name: grunnmuren
-      container-app-key: docs
+      container-app-key: fe
 
   deploy:
     name: Deploy to PROD
-    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.deploy_prod)
     needs: [build-and-push] # Wait for build-and-push job to complete
-    uses: code-obos/github-workflows/.github/workflows/deploy-container-app.yaml@5b879855f947a461953ebc3834c3dbb3ad5ef5ea
+    uses: ./.github/workflows/deploy-container-app-blokk.yml
     with:
-      is-job: true
       environment: prod
       application-name: ${{ needs.build-and-push.outputs.application-name }}
       container-app-key: ${{ needs.build-and-push.outputs.container-app-key }}
       image-name: ${{ needs.build-and-push.outputs.image-name }}
       image-tag: ${{ needs.build-and-push.outputs.image-tag }}
-      config-file: main.yaml
+      config-file: ca-config.yaml
