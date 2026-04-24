@@ -6,9 +6,6 @@ properties:
       allowInsecure: false
       targetPort: 3000
     secrets:
-      - name: splunk-token
-        keyVaultUrl: https://dkt-nettsted-prod-kv.vault.azure.net/secrets/Splunk-Token
-        identity: System
       - name: otel-api-key-header
         keyVaultUrl: https://${OTEL_KEY_VAULT_NAME}.vault.azure.net/secrets/api-key-header
         identity: ${APP_IDENTITY_ID}

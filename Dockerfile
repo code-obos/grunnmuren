@@ -1,4 +1,4 @@
-FROM dktprodacr.azurecr.io/dktp/node24:1.0.6 AS base
+FROM node:24.15.0-alpine AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
@@ -24,8 +24,8 @@ RUN pnpm build
 # so the storybook assets are copied correctly to build output
 RUN pnpm build:storybook
 RUN pnpm build:docs
-RUN --mount=type=secret,id=SANITY_STUDIO_DEPLOY_TOKEN \
-  SANITY_AUTH_TOKEN=$(cat /run/secrets/SANITY_STUDIO_DEPLOY_TOKEN) \
+RUN --mount=type=secret,id=sanity_studio_deploy_token \
+  SANITY_AUTH_TOKEN=$(cat /run/secrets/sanity_studio_deploy_token) \
   pnpm sanity:schema:deploy
 
 FROM base
@@ -39,5 +39,4 @@ COPY --from=prod-deps /app/apps/docs/node_modules node_modules
 ENV PORT=3000
 EXPOSE 3000
 USER node
-ENV NODE_OPTIONS="--import amaro/strip"
 CMD [ "node", ".output/server/index.mjs" ]
