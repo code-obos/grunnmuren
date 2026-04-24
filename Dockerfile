@@ -17,7 +17,6 @@ RUN --mount=type=secret,id=npmrc,target=/root/.npmrc,required=false \
       pnpm install --prod --frozen-lockfile \
     '
     
-
 FROM base AS builder
 COPY . /app
 WORKDIR /app
