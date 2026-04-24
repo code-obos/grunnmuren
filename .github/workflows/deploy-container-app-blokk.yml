@@ -48,7 +48,7 @@ env:
   CONTAINER_APP_KEY: ${{ inputs.container-app-key }}
   RESOURCE_GROUP_NAME: ${{ vars.RESOURCE_GROUP_NAME || format('{0}-{1}-rg', inputs.application-name, inputs.environment) }}
   CONTAINER_APP_ENV: ${{ inputs.application-name }}-${{ inputs.environment }}-cae
-  CONTAINER_APP_NAME: ${{ inputs.application-name }}-${{ inputs.container-app-key }}-${{ inputs.environment }}-${{ inputs.is-job && 'caj' || 'ca' }}
+  CONTAINER_APP_NAME: ${{ inputs.application-name }}-${{ inputs.container-app-key }}-${{ inputs.environment }}-ca
   IDENTITY_NAME: ${{ inputs.application-name }}-${{ inputs.container-app-key }}-${{ inputs.environment }}-id
   ENVIRONMENT: ${{ inputs.environment }}
 
@@ -91,7 +91,6 @@ jobs:
           subscription-id: ${{ vars.SUBSCRIPTION_ID }}
 
       - name: Deploy Container App
-        if: ${{ !inputs.is-job }}
         id: deploy-azure-container-app
         uses: azure/container-apps-deploy-action@8dff69dac3367c32ceb2690d8f13adbeab462703 # v2
         continue-on-error: true
@@ -100,19 +99,8 @@ jobs:
           containerAppName: ${{ env.CONTAINER_APP_NAME }}
           resourceGroup: ${{ env.RESOURCE_GROUP_NAME }}
 
-      - name: Deploy Container App Job
-        if: ${{ inputs.is-job }}
-        id: deploy-azure-container-app-job
-        run: |
-          echo "Deploying Container App Job: $CONTAINER_APP_NAME"
-          az containerapp job update \
-            --name $CONTAINER_APP_NAME \
-            --resource-group $RESOURCE_GROUP_NAME \
-            --yaml config.yaml
-        continue-on-error: true
-
       - name: Deployment failed
-        if: ${{ steps.deploy-azure-container-app.outcome == 'failure' || steps.deploy-azure-container-app-job.outcome == 'failure' }}
+        if: ${{ steps.deploy-azure-container-app.outcome == 'failure' }}
         run: |
           # Deploy failed. Please review the detailed error message in the previous step
           echo Configuration file:

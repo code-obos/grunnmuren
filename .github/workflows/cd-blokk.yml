@@ -40,4 +40,4 @@ jobs:
       container-app-key: ${{ needs.build-and-push.outputs.container-app-key }}
       image-name: ${{ needs.build-and-push.outputs.image-name }}
       image-tag: ${{ needs.build-and-push.outputs.image-tag }}
-      config-file: main.yaml
+      config-file: ca-config.yaml
