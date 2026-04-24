@@ -85,6 +85,8 @@ jobs:
           push: true
           secrets: |
             github_token=${{ secrets.github-token }}
-            SANITY_STUDIO_DEPLOY_TOKEN=${{ secrets.SANITY_STUDIO_DEPLOY_TOKEN }}
+            "SANITY_STUDIO_DEPLOY_TOKEN=${{ secrets.SANITY_STUDIO_DEPLOY_TOKEN }}"
           file: ${{ inputs.dockerfile }}
           tags: blokkregistry.azurecr.io/${{ steps.tags.outputs.image-name }}:${{ steps.tags.outputs.image-tag }}
+          secret-files: |
+            npmrc=.npmrc
