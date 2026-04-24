@@ -24,9 +24,15 @@ import { composeRenderProps } from 'react-aria-components/composeRenderProps';
 import { Button } from '../button';
 import { ScrollButton, type ScrollDirection, useHorizontalScroll } from '../utils';
 
-// When true, a <Table> is rendered inside a <TableContainer> which already
-// provides the horizontal scroll wrapper. Bare <Table> creates its own wrapper.
-const TableContainerContext = createContext(false);
+// Set by <ResizableTableContainer> to forward its props to the RAC container
+// rendered inside <ScrollWrapper>. When <Table> is used without a
+// <ResizableTableContainer>, this is null and <ScrollWrapper> falls back to
+// a plain overflow div.
+type _ResizableTableContainerContextValue = {
+  resizableProps: Omit<RACResizableTableContainerProps, 'ref' | 'children'>;
+} | null;
+
+const _ResizableTableContainerContext = createContext<_ResizableTableContainerContextValue>(null);
 
 const tableRowVariants = cva({
   base: [
@@ -73,21 +79,13 @@ type ResizableTableContainerProps = RACResizableTableContainerProps;
 
 /**
  * Shared scroll wrapper that renders an overflow container with left/right
- * scroll indicators. Used by both standalone <Table> and <ResizableTableContainer>.
- *
- * When `asResizableContainer` is set, the overflow element is RAC's
+ * scroll indicators around the table. If it is rendered inside a
+ * <ResizableTableContainer>, the overflow element is RAC's
  * <ResizableTableContainer> (required for column resizing to measure column
- * widths against the correct scroll viewport).
+ * widths against the correct scroll viewport); otherwise it is a plain div.
  */
-type ScrollWrapperProps = {
-  children: React.ReactNode;
-  asResizableContainer?: {
-    containerProps: Omit<RACResizableTableContainerProps, 'className' | 'children'>;
-    className?: string;
-  };
-};
-
-function ScrollWrapper({ children, asResizableContainer }: ScrollWrapperProps) {
+function ScrollWrapper({ children }: { children: React.ReactNode }) {
+  const containerCtx = useContext(_ResizableTableContainerContext);
   const [isResizing, setIsResizing] = useState(false);
 
   const { scrollContainerRef, canScrollLeft, canScrollRight, hasScrollingOccurred } =
@@ -112,19 +110,19 @@ function ScrollWrapper({ children, asResizableContainer }: ScrollWrapperProps) {
 
   return (
     <div className="relative overflow-hidden">
-      {asResizableContainer ? (
+      {containerCtx ? (
         <RACResizableTableContainer
-          {...asResizableContainer.containerProps}
+          {...containerCtx.resizableProps}
           ref={scrollContainerRef}
-          className={cx(scrollClasses, asResizableContainer.className)}
+          className={cx(scrollClasses, containerCtx.resizableProps.className)}
           style={touchStyle}
           onResizeStart={(widths) => {
             setIsResizing(true);
-            asResizableContainer.containerProps.onResizeStart?.(widths);
+            containerCtx.resizableProps.onResizeStart?.(widths);
           }}
           onResizeEnd={(widths) => {
             setIsResizing(false);
-            asResizableContainer.containerProps.onResizeEnd?.(widths);
+            containerCtx.resizableProps.onResizeEnd?.(widths);
           }}
         >
           {children}
@@ -158,29 +156,23 @@ function ScrollWrapper({ children, asResizableContainer }: ScrollWrapperProps) {
 function Table(props: TableProps) {
   const { className, children, variant = 'default', ...restProps } = props;
 
-  const isInContainer = useContext(TableContainerContext);
-
-  const table = (
-    <RACTable
-      {...restProps}
-      className={cx(className, 'group/table w-full min-w-fit')}
-      data-variant={variant}
-    >
-      {children}
-    </RACTable>
+  return (
+    <ScrollWrapper>
+      <RACTable
+        {...restProps}
+        className={cx(className, 'group/table w-full min-w-fit')}
+        data-variant={variant}
+      >
+        {children}
+      </RACTable>
+    </ScrollWrapper>
   );
-
-  if (isInContainer) {
-    return table;
-  }
-
-  return <ScrollWrapper>{table}</ScrollWrapper>;
 }
 
 /**
- * Container that enables column resizing and handles horizontal scrolling
- * for the nested <Table>. Use when you want resizable columns or want to
- * apply `maxWidth`/`minWidth` truncation on columns.
+ * Container that enables column resizing and horizontal scrolling for the
+ * nested <Table>. Use when you want resizable columns or want to apply
+ * `maxWidth`/`minWidth` truncation on columns.
  */
 function ResizableTableContainer({
   className,
@@ -188,20 +180,20 @@ function ResizableTableContainer({
   ...restProps
 }: ResizableTableContainerProps) {
   return (
-    <TableContainerContext.Provider value={true}>
-      <ScrollWrapper
-        asResizableContainer={{
-          containerProps: restProps,
+    <_ResizableTableContainerContext.Provider
+      value={{
+        resizableProps: {
+          ...restProps,
           className: cx(
             className,
             '**:data-[slot=table-column]:overflow-hidden **:data-[slot=table-column]:text-ellipsis',
             '**:data-[slot=table-cell]:overflow-hidden **:data-[slot=table-cell]:text-ellipsis',
           ),
-        }}
-      >
-        {children}
-      </ScrollWrapper>
-    </TableContainerContext.Provider>
+        },
+      }}
+    >
+      {children}
+    </_ResizableTableContainerContext.Provider>
   );
 }
 
