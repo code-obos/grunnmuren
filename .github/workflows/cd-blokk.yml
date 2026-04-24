@@ -35,7 +35,6 @@ jobs:
     needs: [build-and-push] # Wait for build-and-push job to complete
     uses: ./.github/workflows/deploy-container-app-blokk.yml
     with:
-      is-job: true
       environment: prod
       application-name: ${{ needs.build-and-push.outputs.application-name }}
       container-app-key: ${{ needs.build-and-push.outputs.container-app-key }}
