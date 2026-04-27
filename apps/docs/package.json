@@ -34,7 +34,6 @@
     "@sanity/client": "7.22.0",
     "@sanity/code-input": "7.1.0",
     "@sanity/image-url": "2.1.1",
-    "@sanity/presentation": "2.0.0",
     "@sanity/preview-url-secret": "4.0.5",
     "@sanity/table": "2.0.1",
     "@sanity/vision": "5.22.0",

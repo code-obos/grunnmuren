@@ -128,9 +128,6 @@ importers:
       '@sanity/image-url':
         specifier: 2.1.1
         version: 2.1.1
-      '@sanity/presentation':
-        specifier: 2.0.0
-        version: 2.0.0
       '@sanity/preview-url-secret':
         specifier: 4.0.5
         version: 4.0.5(@sanity/client@7.22.0)
@@ -3645,10 +3642,6 @@ packages:
   '@sanity/presentation-comlink@2.0.1':
     resolution: {integrity: sha512-D0S2CfVyda99cd/8SnXxQ2tsVlVuRq4CAOjxRuF53evYmBhpWezSEpWKqAa0e1lunGBKK1EroxmOzb5ofNRwMg==}
     engines: {node: '>=20.19 <22 || >=22.12'}
-
-  '@sanity/presentation@2.0.0':
-    resolution: {integrity: sha512-JZuWjOWTz1L7u4pl5ut5pPg+hMA9DPA8K6sQoNN9Z1qlvQYURQGBxaGkqtCa35iaj3zOkmgoOAhp5jIowlsmWA==}
-    engines: {node: '>=16.14'}
 
   '@sanity/preview-url-secret@4.0.5':
     resolution: {integrity: sha512-49MozhFS8U5RxnNL3+WtCgX2v554dtmoR79amzT4dYu1beV+6BQGcro1VeC+bgW9XeZCg6o2rCKbvnu7ukQbKg==}
@@ -13777,8 +13770,6 @@ snapshots:
     transitivePeerDependencies:
       - '@sanity/client'
       - '@sanity/types'
-
-  '@sanity/presentation@2.0.0': {}
 
   '@sanity/preview-url-secret@4.0.5(@sanity/client@7.22.0)':
     dependencies:
