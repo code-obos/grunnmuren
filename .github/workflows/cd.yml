@@ -8,6 +8,16 @@ on: # Define which events trigger this workflow
   push:
     branches:
       - main
+    paths:
+      - Dockerfile
+      - apps/**
+      - packages/**
+      - .github/workflows/build-push-image.yml
+      - .github/workflows/cd.yml
+      - pnpm-lock.yaml
+      - package.json
+      - tsconfig.json
+      - .storybook
 
 concurrency:
   group: ${{ github.ref }}

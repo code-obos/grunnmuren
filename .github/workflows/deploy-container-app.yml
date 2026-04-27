@@ -107,81 +107,29 @@ jobs:
           start_seconds=$SECONDS
           timeout_seconds=300 # Five minutes
 
-          if [[ "$IS_JOB" != "true" ]]; then
-            revision_name=$(
-              az containerapp show \
-                -g $RESOURCE_GROUP_NAME \
-                -n $CONTAINER_APP_NAME \
-                --query 'properties.latestRevisionName' \
-                -o tsv
-            )
-            echo "Container app updated. New revision name: '$revision_name'. Checking provisioning state..."
+          echo "Checking provisioning state for Container App Job: $CONTAINER_APP_NAME"
 
-            # https://learn.microsoft.com/en-us/rest/api/containerapps/container-apps-revisions/get-revision?view=rest-containerapps-2023-05-01&tabs=HTTP
-            while
-              data=$(
-                az containerapp revision show \
-                  -g $RESOURCE_GROUP_NAME \
-                  -n $CONTAINER_APP_NAME \
-                  --revision $revision_name
-              )
-              state=$(echo $data | jq -r '.properties.provisioningState')
-              error=$(echo $data | jq -r '.properties.provisioningError')
-              running_state=$(echo $data | jq -r '.properties.runningState')
-              elapsed_seconds=$((SECONDS - start_seconds))
+          while
+            data=$(az containerapp job show -g $RESOURCE_GROUP_NAME -n $CONTAINER_APP_NAME)
+            state=$(echo $data | jq -r '.properties.provisioningState')
+            elapsed_seconds=$((SECONDS - start_seconds))
 
-              if [[ $elapsed_seconds -gt $timeout_seconds ]]; then
-                timeout=1
-                break
-              elif [[ $state == "Provisioning" ]]; then
-                echo "Still provisioning. Retrying in 500ms..."
-                sleep 0.5
-              elif [[ $running_state == "Processing" || $running_state == "Activating" || $running_state == "Unknown" ]]; then
-                echo "Running state is '$running_state'. Retrying in 500ms..."
-                sleep 0.5
-              else
-                break
-              fi
-            do true; done
-
-            if [[ $state != 'Provisioned' ]] || [[ $running_state != 'Running' && $running_state != 'RunningAtMaxScale' ]]; then
-              echo "> [!CAUTION]" >> $GITHUB_STEP_SUMMARY
-              [[ $timeout ]] && echo "> Timed out after $elapsed_seconds seconds." >> $GITHUB_STEP_SUMMARY
-              echo "> Provisioning state: \`$state\`." >> $GITHUB_STEP_SUMMARY
-              echo "> Running state: \`$running_state\`." >> $GITHUB_STEP_SUMMARY
-              echo "> Error message:" >> $GITHUB_STEP_SUMMARY
-              echo "> \`\`\`" >> $GITHUB_STEP_SUMMARY
-              echo "> $error" >> $GITHUB_STEP_SUMMARY
-              echo "> \`\`\`" >> $GITHUB_STEP_SUMMARY
-              exit 1
+            if [[ $elapsed_seconds -gt $timeout_seconds ]]; then
+              timeout=1
+              break
+            elif [[ $state == "InProgress" || $state == "Updating" ]]; then
+              echo "Provisioning state is '$state'. Retrying in 500ms..."
+              sleep 0.5
+            else
+              break
             fi
+          do true; done
 
-            echo "Provisioning succeeded! Revision name: \`$revision_name\`" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "Checking provisioning state for Container App Job: $CONTAINER_APP_NAME"
-
-            while
-              data=$(az containerapp job show -g $RESOURCE_GROUP_NAME -n $CONTAINER_APP_NAME)
-              state=$(echo $data | jq -r '.properties.provisioningState')
-              elapsed_seconds=$((SECONDS - start_seconds))
-
-              if [[ $elapsed_seconds -gt $timeout_seconds ]]; then
-                timeout=1
-                break
-              elif [[ $state == "InProgress" || $state == "Updating" ]]; then
-                echo "Provisioning state is '$state'. Retrying in 500ms..."
-                sleep 0.5
-              else
-                break
-              fi
-            do true; done
-
-            if [[ $state != 'Succeeded' ]]; then
-              echo "> [!CAUTION]" >> $GITHUB_STEP_SUMMARY
-              [[ $timeout ]] && echo "> Timed out after $elapsed_seconds seconds." >> $GITHUB_STEP_SUMMARY
-              echo "> Provisioning state: \`$state\`." >> $GITHUB_STEP_SUMMARY
-              exit 1
-            fi
-
-            echo "Provisioning succeeded! Container App Job \`$CONTAINER_APP_NAME\` is ready." >> $GITHUB_STEP_SUMMARY
+          if [[ $state != 'Succeeded' ]]; then
+            echo "> [!CAUTION]" >> $GITHUB_STEP_SUMMARY
+            [[ $timeout ]] && echo "> Timed out after $elapsed_seconds seconds." >> $GITHUB_STEP_SUMMARY
+            echo "> Provisioning state: \`$state\`." >> $GITHUB_STEP_SUMMARY
+            exit 1
           fi
+
+          echo "Provisioning succeeded! Container App Job \`$CONTAINER_APP_NAME\` is ready." >> $GITHUB_STEP_SUMMARY
