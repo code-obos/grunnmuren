@@ -1,8 +1,0 @@
-name: Azure Container Registry logout
-description: Log out of Azure and Azure Container Registry
-runs:
-  using: 'composite'
-  steps:
-    - name: Logout of Azure
-      run: az logout
-      shell: bash

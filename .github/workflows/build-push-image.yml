@@ -1,53 +1,94 @@
-name: Build and push image
-
-env:
-  container-registry: dktprodacr.azurecr.io
-  branch-name: ${{ github.head_ref || github.ref_name }}
+name: Build and Push Image to Container Registry
+#  This workflow builds a Docker image and pushes it to blokkregistry, an Azure Container Registry.
 
 on:
   workflow_call:
+    inputs:
+      dockerfile:
+        description: The path to the Dockerfile
+        required: true
+        type: string
+      application-name:
+        description: Name of the application
+        required: true
+        type: string
+      container-app-key:
+        description: The unique identifier for the container app (e.g., "app", "db"), as defined in the IaC configuration.
+        required: true
+        type: string
+    outputs:
+      image-name:
+        description: Name of the built image
+        value: ${{ jobs.build-and-push.outputs.image-name }}
+      image-tag:
+        description: The tag of the built image
+        value: ${{ jobs.build-and-push.outputs.image-tag }}
+      application-name:
+        description: Same as the input value. Useful when chaining jobs
+        value: ${{ inputs.application-name }}
+      container-app-key:
+        description: Same as the input value. Useful when chaining jobs
+        value: ${{ inputs.container-app-key }}
+
+    secrets:
+      github-token:
+        required: true
+      sanity-studio-deploy-token:
+        required: true
+
+permissions:
+  id-token: write
+  contents: read
+  packages: read
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    environment: acr
-    permissions:
-      contents: read
-      id-token: write
-      packages: read
+    environment: blokkregistry
+    outputs:
+      application-name: ${{ inputs.application-name }}
+      container-app-key: ${{ inputs.container-app-key }}
+      image-name: ${{ steps.tags.outputs.image-name }}
+      image-tag: ${{ steps.tags.outputs.image-tag }}
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Set containter image name and tag
+        id: tags
+        run: |
+          git_hash=$(git rev-parse --short "$GITHUB_SHA")
+          echo "image-name=${{ inputs.application-name }}/${{ inputs.container-app-key }}" >> $GITHUB_OUTPUT
+          if [[ "${{ github.ref_name }}" == "main" || "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo "image-tag=$(date +'%Y%m%d')-${{ github.run_number }}-${git_hash}" >> $GITHUB_OUTPUT
+          else
+            echo "image-tag=$(date +'%Y%m%d')-${{ github.run_number }}-${git_hash}-preview" >> $GITHUB_OUTPUT
+          fi
+        shell: bash
+
+      - name: Log in to Azure
+        uses: azure/login@532459ea530d8321f2fb9bb10d1e0bcf23869a43 # v3.0.0
+        with:
+          client-id: ${{ vars.BLOKKREGISTRY_CLIENT_ID }}
+          tenant-id: ${{ vars.TENANT_ID }}
+          subscription-id: ${{ vars.BLOKKREGISTRY_SUBSCRIPTION_ID }}
+
+      - name: Login to Azure Container Registry
+        id: acr_login
+        run: az acr login --name blokkregistry
+        shell: bash
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd # v4.0.0
 
-      - name: Login to Azure Container Registry
-        uses: ./apps/docs/dktp/acr-login
-        with:
-          acr-client-id: ${{ vars.ACR_CLIENT_ID }}
-          tenant-id: ${{ vars.TENANT_ID }}
-          subscription-id: ${{ vars.SUBSCRIPTION_ID }}
-
-      - name: Setup npm credentials
-        run: |
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
-
       - name: Build and push
         uses: docker/build-push-action@bcafcacb16a39f128d818304e6c9c0c18556b85f # v7.1.0
         with:
-          push: ${{env.branch-name == 'main'}}
-          tags: ${{ env.container-registry }}/grunnmuren/docs:${{ github.sha }}
-          build-args: |
-            app_name=grunnmuren
+          push: true
           secrets: |
-            "sanity_studio_deploy_token=${{ secrets.SANITY_STUDIO_DEPLOY_TOKEN }}"
-          file: Dockerfile
+            github_token=${{ secrets.github-token }}
+            sanity_studio_deploy_token=${{ secrets.sanity-studio-deploy-token }}
+          file: ${{ inputs.dockerfile }}
+          tags: blokkregistry.azurecr.io/${{ steps.tags.outputs.image-name }}:${{ steps.tags.outputs.image-tag }}
           secret-files: |
             npmrc=.npmrc
-
-      - name: Clean up npm credentials
-        run: rm .npmrc
-
-      - name: Azure logout
-        uses: ./apps/docs/dktp/acr-logout

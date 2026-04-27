@@ -1,8 +1,13 @@
-name: App CD
+# See https://blueprint.obos.dev/catalog/default/component/github-workflows/docs
+# for more information about the build and deploy workflows from the OBOS Blokk platform
 
-on:
-  workflow_dispatch:
+name: Grunnmuren CD
+
+on: # Define which events trigger this workflow
+  workflow_dispatch: # Allow manual triggering from GitHub UI
   push:
+    branches:
+      - main
     paths:
       - Dockerfile
       - apps/**
@@ -14,24 +19,35 @@ on:
       - tsconfig.json
       - .storybook
 
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
-  contents: read
-  id-token: write
-  packages: read
+  contents: read # Read repository files and checkout code
+  id-token: write # Generate OIDC tokens for Azure authentication
+  packages: read # Access private packages from GitHub registry
 
 jobs:
-  docker:
+  build-and-push:
     name: Build and push image
     uses: ./.github/workflows/build-push-image.yml
-    secrets: inherit
-
-  deploy_prod:
-    if: contains(github.head_ref, 'main') || contains(github.ref_name, 'main')
-    name: Deploy to PROD
-    uses: ./.github/workflows/deploy-container-app.yml
-    needs: docker
+    secrets:
+      sanity-studio-deploy-token: ${{ secrets.SANITY_STUDIO_DEPLOY_TOKEN }}
+      github-token: ${{ secrets.GITHUB_TOKEN }}
     with:
-      environment: prod-grunnmuren
-      app_environment: prod
-      dktp-config-directory: ./apps/docs/dktp
-      image-tag: ${{ github.sha }}
+      dockerfile: ./Dockerfile
+      application-name: grunnmuren
+      container-app-key: fe
+
+  deploy:
+    name: Deploy to PROD
+    needs: [build-and-push] # Wait for build-and-push job to complete
+    uses: ./.github/workflows/deploy-container-app.yml
+    with:
+      environment: prod
+      application-name: ${{ needs.build-and-push.outputs.application-name }}
+      container-app-key: ${{ needs.build-and-push.outputs.container-app-key }}
+      image-name: ${{ needs.build-and-push.outputs.image-name }}
+      image-tag: ${{ needs.build-and-push.outputs.image-tag }}
+      config-file: ca-config.yaml
