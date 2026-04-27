@@ -1,5 +1,5 @@
-import type { PropItem } from 'react-docgen-typescript';
 import { stegaClean } from '@sanity/client/stega';
+import type { PropItem } from 'react-docgen-typescript';
 
 import * as props from '@/component-props';
 
@@ -43,9 +43,9 @@ export const PropsTable = ({ componentName }: PropsTableProps) => {
 
   return (
     <div className="overflow-x-auto">
-        <AnchorHeading className="heading-s my-2" level={2} id={headingId}>
-          {cleanedComponentName}
-        </AnchorHeading>
+      <AnchorHeading className="heading-s my-2" level={2} id={headingId}>
+        {cleanedComponentName}
+      </AnchorHeading>
       <Table className="mb-8 w-full text-sm" aria-describedby={headingId}>
         <TableHead>
           <TableRow>

@@ -1,9 +1,6 @@
 import { createServerFn } from '@tanstack/react-start';
 
-import {
-  getPreviewSessionCookieName,
-  verifyPreviewSessionToken,
-} from './sanity-preview-session';
+import { getPreviewSessionCookieName, verifyPreviewSessionToken } from './sanity-preview-session';
 
 const projectId = 'tq6w17ny';
 const dataset = 'grunnmuren';

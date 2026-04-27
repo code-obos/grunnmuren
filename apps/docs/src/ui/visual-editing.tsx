@@ -7,7 +7,7 @@ import {
 import { useRouter } from '@tanstack/react-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
-function VisualEditingInner({ client }: { client: SanityClient }) {
+function VisualEditingInner({ client: _client }: { client: SanityClient }) {
   const router = useRouter();
   const routerRef = useRef(router);
   const navigateRef = useRef<HistoryAdapterNavigate | undefined>(undefined);

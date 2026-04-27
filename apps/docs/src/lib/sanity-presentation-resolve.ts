@@ -156,11 +156,16 @@ export const presentationResolve: PresentationPluginOptions['resolve'] = {
 
                         return {
                           title:
-                            typeof item?.name === 'string' && item.name.length > 0 ? item.name : href,
+                            typeof item?.name === 'string' && item.name.length > 0
+                              ? item.name
+                              : href,
                           href,
                         };
                       })
-                      .filter((location): location is { title: string; href: string } => location !== null)
+                      .filter(
+                        (location): location is { title: string; href: string } =>
+                          location !== null,
+                      )
                   : [];
 
                 return [

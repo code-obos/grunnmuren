@@ -1,5 +1,5 @@
-import { cx } from 'cva';
 import { stegaClean } from '@sanity/client/stega';
+import { cx } from 'cva';
 
 import type { COMPONENT_QUERY_RESULT } from '@/sanity.types';
 
