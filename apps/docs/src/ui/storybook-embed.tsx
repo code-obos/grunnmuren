@@ -1,10 +1,4 @@
-import {
-  Button,
-  UNSAFE_Tab as Tab,
-  UNSAFE_TabList as TabList,
-  UNSAFE_TabPanel as TabPanel,
-  UNSAFE_Tabs as Tabs,
-} from '@obosbbl/grunnmuren-react';
+import { Button, Tab, TabList, TabPanel, Tabs } from '@obosbbl/grunnmuren-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { MenuItemProps } from 'react-aria-components';
 import { Menu, MenuItem, MenuTrigger, Popover } from 'react-aria-components';

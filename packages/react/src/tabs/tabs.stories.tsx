@@ -1,11 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import {
-  UNSAFE_Tab as Tab,
-  UNSAFE_TabList as TabList,
-  UNSAFE_TabPanel as TabPanel,
-  UNSAFE_Tabs as Tabs,
-} from './tabs';
+import { Tab, TabList, TabPanel, Tabs } from './tabs';
 
 const meta = {
   title: 'Tabs',

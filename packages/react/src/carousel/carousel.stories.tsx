@@ -14,12 +14,7 @@ import {
   type UNSAFE_CarouselRef as CarouselElement,
 } from '../carousel';
 import { Media } from '../content';
-import {
-  UNSAFE_Tabs as Tabs,
-  UNSAFE_TabList as TabList,
-  UNSAFE_Tab as Tab,
-  UNSAFE_TabPanel as TabPanel,
-} from '../tabs';
+import { Tab, TabList, TabPanel, Tabs } from '../tabs';
 
 const meta = {
   title: 'Carousel',
