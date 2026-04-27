@@ -1,11 +1,12 @@
 import type { QueryParams } from '@sanity/client';
-import { createServerFn } from '@tanstack/start';
+import { createServerFn } from '@tanstack/react-start';
+
 import { previewMiddleware } from './preview-middleware';
 import { sanityFetch as _sanityFetch, client } from './sanity';
 
 export const sanityFetch = createServerFn({ method: 'GET' })
   .middleware([previewMiddleware])
-  .validator((data: { query: string; params: QueryParams }) => data)
+  .inputValidator((data: { query: string; params: QueryParams }) => data)
   .handler(async ({ data, context }) => {
     const { query, params } = data;
 
