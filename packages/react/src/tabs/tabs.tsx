@@ -234,8 +234,8 @@ function Tab(props: TabProps) {
         'description h-11 cursor-pointer border-transparent px-4 py-[0.71875rem] font-light',
         // Transition
         'transition-colors duration-150 ease-out',
-        // TODO: Should disabled tabs just be hidden?
-        'data-disabled:cursor-not-allowed data-disabled:opacity-50',
+        // Hide disabled tabs entirely — the design system avoids disabled states (see https://grunnmuren.obos.no/disabled-state)
+        'data-disabled:hidden',
         // Selection
         'data-selected:text-blue-dark data-selected:font-medium',
         // Hover with layout shift prevention using pseudo-element
