@@ -1,6 +1,7 @@
+import { ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 import { cva, cx } from 'cva';
 import { createContext, type RefAttributes, useCallback, useContext, useState } from 'react';
-import { Provider } from 'react-aria-components/slots';
+import { composeRenderProps } from 'react-aria-components/composeRenderProps';
 import {
   Cell as RACCell,
   type CellProps as RACCellProps,
@@ -16,29 +17,37 @@ import {
   TableHeader as RACTableHeader,
   type TableHeaderProps as RACTableHeaderProps,
   type TableProps as RACTableProps,
-  ResizableTableContainer,
-  type ResizableTableContainerProps,
+  ResizableTableContainer as RACResizableTableContainer,
+  type ResizableTableContainerProps as RACResizableTableContainerProps,
 } from 'react-aria-components/Table';
 
+import { Button } from '../button';
 import { ScrollButton, type ScrollDirection, useHorizontalScroll } from '../utils';
 
-const tableVariants = cva({
-  base: ['relative'],
-  variants: {
-    variant: {
-      default: '',
-      'zebra-striped': '',
-    },
-  },
-});
+// Set by <ResizableTableContainer> to forward its props to the RAC container
+// rendered inside <ScrollWrapper>. When <Table> is used without a
+// <ResizableTableContainer>, this is null and <ScrollWrapper> falls back to
+// a plain overflow div.
+type _ResizableTableContainerContextValue = {
+  resizableProps: Omit<RACResizableTableContainerProps, 'ref' | 'children'>;
+} | null;
+
+const _ResizableTableContainerContext = createContext<_ResizableTableContainerContextValue>(null);
 
 const tableRowVariants = cva({
   base: [
+    'group/row',
     'data-focus-visible:outline-focus-inset',
-    'group-data-[variant=zebra-striped]:odd:bg-white',
-    'group-data-[variant=zebra-striped]:even:bg-sky-lightest',
+    'group-data-[variant=zebra-striped]/table:odd:bg-white',
+    'group-data-[variant=zebra-striped]/table:even:bg-sky-lightest',
+    // When the row has expandable children, the chevron button makes the
+    // row taller than a plain text row. Center-align the cells' content so
+    // the chevron icon lines up with text in sibling cells.
+    'data-has-child-items:*:align-middle',
   ],
 });
+
+type TableVariant = 'default' | 'zebra-striped';
 
 type TableProps = Omit<RACTableProps, 'aria-label' | 'aria-labelledby'> &
   RefAttributes<HTMLTableElement> & {
@@ -46,7 +55,7 @@ type TableProps = Omit<RACTableProps, 'aria-label' | 'aria-labelledby'> &
      * Visual variant of the table
      * @default 'default'
      */
-    variant?: 'default' | 'zebra-striped';
+    variant?: TableVariant;
   } & (
     | { 'aria-label': string; 'aria-labelledby'?: never }
     | { 'aria-label'?: never; 'aria-labelledby': string }
@@ -68,20 +77,20 @@ type TableCellProps = RACCellProps &
     children: React.ReactNode;
   };
 
-// Used to deal with showing or hiding scroll indicators during column resizing
-const TableScrollContainerContext = createContext<{
-  isResizing: boolean;
-}>({
-  isResizing: false,
-});
+type TableColumnResizerProps = RACColumnResizerProps;
+
+type ResizableTableContainerProps = RACResizableTableContainerProps;
 
 /**
- * A container component for displaying tabular data with horizontal scrolling support.
+ * Shared scroll wrapper that renders an overflow container with left/right
+ * scroll indicators around the table. If it is rendered inside a
+ * <ResizableTableContainer>, the overflow element is RAC's
+ * <ResizableTableContainer> (required for column resizing to measure column
+ * widths against the correct scroll viewport); otherwise it is a plain div.
  */
-function Table(props: TableProps) {
-  const { className, children, variant = 'default', ...restProps } = props;
-
-  const { isResizing } = useContext(TableScrollContainerContext);
+function ScrollWrapper({ children }: { children: React.ReactNode }) {
+  const containerCtx = useContext(_ResizableTableContainerContext);
+  const [isResizing, setIsResizing] = useState(false);
 
   const { scrollContainerRef, canScrollLeft, canScrollRight, hasScrollingOccurred } =
     useHorizontalScroll<HTMLDivElement>([isResizing]);
@@ -99,34 +108,96 @@ function Table(props: TableProps) {
     },
     [scrollContainerRef],
   );
+
+  const scrollClasses = 'scrollbar-hidden overflow-x-auto';
+  const touchStyle = { WebkitOverflowScrolling: 'touch' as const };
+
   return (
-    <div className={tableVariants({ className, variant })}>
-      <div className="relative overflow-hidden">
-        <div
+    <div className="relative overflow-hidden">
+      {containerCtx ? (
+        <RACResizableTableContainer
+          {...containerCtx.resizableProps}
           ref={scrollContainerRef}
-          className="scrollbar-hidden overflow-x-auto"
-          style={{ WebkitOverflowScrolling: 'touch' }}
+          className={cx(scrollClasses, containerCtx.resizableProps.className)}
+          style={touchStyle}
+          onResizeStart={(widths) => {
+            setIsResizing(true);
+            containerCtx.resizableProps.onResizeStart?.(widths);
+          }}
+          onResizeEnd={(widths) => {
+            setIsResizing(false);
+            containerCtx.resizableProps.onResizeEnd?.(widths);
+          }}
         >
-          <RACTable {...restProps} className="group w-full min-w-fit" data-variant={variant}>
-            {children}
-          </RACTable>
+          {children}
+        </RACResizableTableContainer>
+      ) : (
+        <div ref={scrollContainerRef} className={scrollClasses} style={touchStyle}>
+          {children}
         </div>
+      )}
 
-        <ScrollButton
-          direction="left"
-          onClick={() => handleScroll('left')}
-          isVisible={canScrollLeft}
-          hasScrollingOccurred={hasScrollingOccurred}
-        />
+      <ScrollButton
+        direction="left"
+        onClick={() => handleScroll('left')}
+        isVisible={canScrollLeft}
+        hasScrollingOccurred={hasScrollingOccurred}
+      />
 
-        <ScrollButton
-          direction="right"
-          onClick={() => handleScroll('right')}
-          isVisible={canScrollRight}
-          hasScrollingOccurred={hasScrollingOccurred}
-        />
-      </div>
+      <ScrollButton
+        direction="right"
+        onClick={() => handleScroll('right')}
+        isVisible={canScrollRight}
+        hasScrollingOccurred={hasScrollingOccurred}
+      />
     </div>
+  );
+}
+
+/**
+ * A container component for displaying tabular data with horizontal scrolling support.
+ */
+function Table(props: TableProps) {
+  const { className, children, variant = 'default', ...restProps } = props;
+
+  return (
+    <ScrollWrapper>
+      <RACTable
+        {...restProps}
+        className={cx(className, 'group/table w-full min-w-fit')}
+        data-variant={variant}
+      >
+        {children}
+      </RACTable>
+    </ScrollWrapper>
+  );
+}
+
+/**
+ * Container that enables column resizing and horizontal scrolling for the
+ * nested <Table>. Use when you want resizable columns or want to apply
+ * `maxWidth`/`minWidth` truncation on columns.
+ */
+function ResizableTableContainer({
+  className,
+  children,
+  ...restProps
+}: ResizableTableContainerProps) {
+  return (
+    <_ResizableTableContainerContext.Provider
+      value={{
+        resizableProps: {
+          ...restProps,
+          className: cx(
+            className,
+            '**:data-[slot=table-column]:overflow-hidden **:data-[slot=table-column]:text-ellipsis',
+            '**:data-[slot=table-cell]:overflow-hidden **:data-[slot=table-cell]:text-ellipsis',
+          ),
+        },
+      }}
+    >
+      {children}
+    </_ResizableTableContainerContext.Provider>
   );
 }
 
@@ -140,6 +211,7 @@ function TableHeader({ className, children, ...restProps }: TableHeaderProps) {
     </RACTableHeader>
   );
 }
+
 function TableColumn(props: TableColumnProps) {
   const { className, children, ...restProps } = props;
 
@@ -160,8 +232,6 @@ function TableColumn(props: TableColumnProps) {
     </RACColumn>
   );
 }
-
-type TableColumnResizerProps = RACColumnResizerProps;
 
 const TableColumnResizer = ({ className, ...restProps }: TableColumnResizerProps) => (
   <RACColumnResizer
@@ -210,33 +280,40 @@ function TableCell(props: TableCellProps) {
         'min-w-fit whitespace-nowrap',
         'align-top',
         'data-focus-visible:outline-focus-inset',
+        // When this cell is in the column designated by `treeColumn` and
+        // its row has nested child rows, we render an expand/collapse button
+        // (see composeRenderProps below). Use flex so the button lines up
+        // nicely next to the cell content.
+        'data-tree-column:flex data-tree-column:items-center data-tree-column:gap-2',
       )}
       data-slot="table-cell"
     >
-      {children}
+      {composeRenderProps(children, (resolved, { isTreeColumn, hasChildItems }) => (
+        <>
+          {isTreeColumn && hasChildItems && (
+            <Button
+              slot="chevron"
+              variant="tertiary"
+              isIconOnly
+              className="-my-1 group-data-expanded/row:[&_svg]:rotate-90"
+            >
+              <ChevronRight className="transition-transform duration-300 motion-reduce:transition-none" />
+            </Button>
+          )}
+          {resolved}
+        </>
+      ))}
     </RACCell>
   );
 }
 
-type TableContainerProps = ResizableTableContainerProps;
-
-const TableContainer = ({ className, ...restProps }: ResizableTableContainerProps) => {
-  const [isResizing, setIsResizing] = useState(false);
-  return (
-    <Provider values={[[TableScrollContainerContext, { isResizing }]]}>
-      <ResizableTableContainer
-        {...restProps}
-        className={cx(
-          className,
-          '**:data-[slot=table-column]:overflow-hidden **:data-[slot=table-column]:text-ellipsis',
-          '**:data-[slot=table-cell]:overflow-hidden **:data-[slot=table-cell]:text-ellipsis',
-        )}
-        onResizeStart={() => setIsResizing(true)}
-        onResizeEnd={() => setIsResizing(false)}
-      />
-    </Provider>
-  );
-};
+// Deprecated aliases kept for backwards compatibility during the UNSAFE_ phase.
+// Remove these once the Table component is stabilized and the UNSAFE_ prefix
+// is dropped.
+/** @deprecated Use `UNSAFE_ResizableTableContainer` instead. */
+const UNSAFE_TableContainer = ResizableTableContainer;
+/** @deprecated Use `UNSAFE_ResizableTableContainerProps` instead. */
+type UNSAFE_TableContainerProps = ResizableTableContainerProps;
 
 export {
   TableColumnResizer as UNSAFE_TableColumnResizer,
@@ -244,14 +321,16 @@ export {
   TableBody as UNSAFE_TableBody,
   TableCell as UNSAFE_TableCell,
   TableColumn as UNSAFE_TableColumn,
-  TableContainer as UNSAFE_TableContainer,
+  ResizableTableContainer as UNSAFE_ResizableTableContainer,
+  UNSAFE_TableContainer,
   TableHeader as UNSAFE_TableHeader,
   TableRow as UNSAFE_TableRow,
   type TableColumnResizerProps as UNSAFE_TableColumnResizerProps,
   type TableBodyProps as UNSAFE_TableBodyProps,
   type TableCellProps as UNSAFE_TableCellProps,
   type TableColumnProps as UNSAFE_TableColumnProps,
-  type TableContainerProps as UNSAFE_TableContainerProps,
+  type ResizableTableContainerProps as UNSAFE_ResizableTableContainerProps,
+  type UNSAFE_TableContainerProps,
   type TableHeaderProps as UNSAFE_TableHeaderProps,
   type TableProps as UNSAFE_TableProps,
   type TableRowProps as UNSAFE_TableRowProps,
