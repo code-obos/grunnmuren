@@ -269,12 +269,12 @@ function TabPanel(props: TabPanelProps) {
 }
 
 export {
-  Tab as UNSAFE_Tab,
-  TabList as UNSAFE_TabList,
-  TabPanel as UNSAFE_TabPanel,
-  Tabs as UNSAFE_Tabs,
-  type TabListProps as UNSAFE_TabListProps,
-  type TabPanelProps as UNSAFE_TabPanelProps,
-  type TabProps as UNSAFE_TabProps,
-  type TabsProps as UNSAFE_TabsProps,
+  Tab,
+  TabList,
+  TabPanel,
+  Tabs,
+  type TabListProps,
+  type TabPanelProps,
+  type TabProps,
+  type TabsProps,
 };
