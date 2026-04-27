@@ -19,6 +19,7 @@ import { useEffect, useState } from 'react';
 
 import logoUrl from '@/assets/OBOS_Hvit_Liggende.svg?url';
 import { sanityFetch } from '@/lib/sanity';
+import { getSanityPreviewAuth } from '@/lib/sanity-preview-auth';
 import { Footer } from '@/ui/footer';
 import { MainNav } from '@/ui/main-nav';
 
@@ -26,7 +27,7 @@ import appCss from '@/styles/app.css?url';
 
 const NAVIGATION_QUERY = defineQuery(`{
   "components": *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc),
-  "menu": *[_type == "menu"][0]{
+  "menu": *[_type == "menu" && _id == "menu"][0]{
     categories[]->{
       title,
       "slug": slug.current,
@@ -74,6 +75,13 @@ export const Route = createFileRoute('/_docs')({
         ]
       : [],
   loader: () => sanityFetch({ query: NAVIGATION_QUERY }),
+  beforeLoad: async () => {
+    const previewAuth = await getSanityPreviewAuth();
+
+    return {
+      isPreview: previewAuth.enabled,
+    };
+  },
 });
 
 function RootLayout() {

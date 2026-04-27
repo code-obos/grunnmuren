@@ -4,11 +4,17 @@ import { codeInput } from '@sanity/code-input';
 import { table } from '@sanity/table';
 import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
+import { presentationTool } from 'sanity/presentation';
 import { structureTool } from 'sanity/structure';
 
+import { presentationResolve } from './src/lib/sanity-presentation-resolve';
 import { schemaTypes } from './studio/schema-types';
 
 const dataset = 'grunnmuren';
+const previewBaseUrl =
+  typeof process !== 'undefined'
+    ? (process.env.SANITY_PREVIEW_URL ?? 'http://localhost:3003')
+    : 'http://localhost:3003';
 
 export default defineConfig({
   projectId: 'tq6w17ny',
@@ -61,6 +67,16 @@ export default defineConfig({
       },
     }),
     visionTool(),
+    presentationTool({
+      resolve: presentationResolve,
+      previewUrl: {
+        initial: previewBaseUrl,
+        previewMode: {
+          enable: `${previewBaseUrl}/api/preview`,
+        },
+      },
+      allowOrigins: ['http://localhost:*', 'https://grunnmuren.obos.no'],
+    }),
     codeInput(),
     table(),
     assist(),

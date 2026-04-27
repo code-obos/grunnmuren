@@ -1,5 +1,7 @@
 import { createClient, type QueryParams } from '@sanity/client';
 
+import { getSanityPreviewAuth } from './sanity-preview-auth';
+
 export const client = createClient({
   projectId: 'tq6w17ny',
   dataset: 'grunnmuren',
@@ -14,8 +16,23 @@ export async function sanityFetch<const QueryString extends string>({
   query: QueryString;
   params?: QueryParams;
 }) {
-  // Not sure what's happening here, but I need to set filterReponse to false to get the data as an array?
-  const { result } = await client.fetch(query, params, {
+  const previewAuth = await getSanityPreviewAuth();
+  const token = process.env.SANITY_READ_TOKEN;
+
+  const fetchClient =
+    previewAuth.enabled && token
+      ? client.withConfig({
+          useCdn: false,
+          perspective: 'drafts',
+          token,
+          stega: {
+            enabled: true,
+            studioUrl: previewAuth.studioUrl,
+          },
+        })
+      : client;
+
+  const { result } = await fetchClient.fetch(query, params, {
     filterResponse: false,
   });
 

@@ -1,4 +1,7 @@
 import { createRootRoute, HeadContent, Outlet, Scripts } from '@tanstack/react-router';
+import { useEffect, useState } from 'react';
+
+import { VisualEditing } from '@/ui/visual-editing';
 
 export const Route = createRootRoute({
   head: () => ({
@@ -16,6 +19,14 @@ export const Route = createRootRoute({
 });
 
 function RootDocument() {
+  const studioUrl =
+    typeof process !== 'undefined' ? (process.env.SANITY_STUDIO_URL ?? '/studio') : '/studio';
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <html lang="no">
       <head>
@@ -27,6 +38,8 @@ function RootDocument() {
       <body className="relative">
         <Outlet />
         <Scripts />
+        <script>{`window.__SANITY_STUDIO_URL__=${JSON.stringify(studioUrl)};`}</script>
+        {isClient ? <VisualEditing /> : null}
       </body>
     </html>
   );
