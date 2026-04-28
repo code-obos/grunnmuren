@@ -26,7 +26,7 @@ export const Route = createFileRoute('/api/draft-token')({
           });
         }
 
-        const token = process.env.SANITY_READ_TOKEN;
+        const token = process.env.SANITY_VIEWER_TOKEN;
 
         if (!token) {
           return new Response(JSON.stringify({ error: 'Token not configured' }), {

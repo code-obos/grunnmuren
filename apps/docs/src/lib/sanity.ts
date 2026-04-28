@@ -20,11 +20,11 @@ export async function sanityFetch<const QueryString extends string>({
   perspective?: ClientPerspective;
 }) {
   const previewAuth = await getSanityPreviewAuth();
-  const token = process.env.SANITY_READ_TOKEN;
+  const token = process.env.SANITY_VIEWER_TOKEN;
   const resolvedPerspective = perspective ?? (previewAuth.enabled ? 'drafts' : 'published');
 
   if (resolvedPerspective === 'drafts' && !token) {
-    throw new Error('Cannot fetch draft content without SANITY_READ_TOKEN');
+    throw new Error('Cannot fetch draft content without SANITY_VIEWER_TOKEN');
   }
 
   const fetchClient =

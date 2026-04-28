@@ -22,7 +22,7 @@ declare global {
     interface ProcessEnv {
       SANITY_PREVIEW_JWT_SECRET?: string;
       SANITY_PREVIEW_URL?: string;
-      SANITY_READ_TOKEN?: string;
+      SANITY_VIEWER_TOKEN?: string;
       SANITY_STUDIO_URL?: string;
       SANITY_PROJECT_ID: string;
       SANITY_DATASET: string;

@@ -14,10 +14,10 @@ export const Route = createFileRoute('/api/preview')({
   server: {
     handlers: {
       GET: async ({ request }) => {
-        const token = process.env.SANITY_READ_TOKEN;
+        const token = process.env.SANITY_VIEWER_TOKEN;
 
         if (!token) {
-          return new Response('Missing SANITY_READ_TOKEN environment variable', { status: 500 });
+          return new Response('Missing SANITY_VIEWER_TOKEN environment variable', { status: 500 });
         }
 
         const clientWithToken = client.withConfig({
