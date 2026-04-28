@@ -7,17 +7,30 @@ import {
 import { useRouter } from '@tanstack/react-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
-import { DATASET, PROJECT_ID } from '../../util/env';
+import { API_VERSION, DATASET, PROJECT_ID } from '../../util/env';
 
-function VisualEditingInner({ client }: { client: SanityClient }) {
+/**
+ * The Studio URL is injected into `window` by the root document so that we
+ * can read it from the client without baking it into the bundle.
+ * See `__root.tsx`.
+ */
+function getStudioUrl(): string {
+  return (window as Window & { __SANITY_STUDIO_URL__?: string }).__SANITY_STUDIO_URL__ ?? '/studio';
+}
+
+/**
+ * Once we have a Sanity client with a viewer token, this component:
+ *   1. Wires up `enableVisualEditing` so the Studio overlays work.
+ *   2. Bridges TanStack Router's history to Studio's expected `HistoryAdapter`,
+ *      so navigation is kept in sync between the app and the Studio iframe.
+ *   3. Invalidates router data on Sanity mutations to refetch live content.
+ */
+function VisualEditingInner({ client: _client }: { client: SanityClient }) {
   const router = useRouter();
   const routerRef = useRef(router);
-  const navigateRef = useRef<HistoryAdapterNavigate | undefined>(undefined);
-
   routerRef.current = router;
 
-  const studioUrl =
-    (window as Window & { __SANITY_STUDIO_URL__?: string }).__SANITY_STUDIO_URL__ ?? '/studio';
+  const navigateRef = useRef<HistoryAdapterNavigate | undefined>(undefined);
 
   const history = useMemo<HistoryAdapter>(
     () => ({
@@ -45,6 +58,7 @@ function VisualEditingInner({ client }: { client: SanityClient }) {
     [],
   );
 
+  // Enable Studio overlays + live mutation refresh.
   useEffect(() => {
     const cleanup = enableVisualEditing({
       history,
@@ -59,73 +73,60 @@ function VisualEditingInner({ client }: { client: SanityClient }) {
     return () => cleanup();
   }, [history, router]);
 
+  // Push app navigation back up to Studio so the iframe URL stays in sync.
   useEffect(() => {
     const currentUrl = window.location.pathname + window.location.search + window.location.hash;
-
-    if (navigateRef.current) {
-      navigateRef.current({
-        type: 'push',
-        url: currentUrl,
-      });
-    }
+    navigateRef.current?.({ type: 'push', url: currentUrl });
   }, [router.state.location.pathname, router.state.location.search, router.state.location.hash]);
 
   return null;
 }
 
+/**
+ * Top-level Visual Editing entrypoint.
+ *
+ * Renders nothing until it has fetched the viewer token from `/api/draft-token`.
+ * Without the token, drafts are unreachable and stega/visual editing is useless,
+ * so we'd rather render nothing than a half-broken overlay.
+ */
 export function VisualEditing() {
   const [liveClient, setLiveClient] = useState<SanityClient | null>(null);
 
   useEffect(() => {
     let cancelled = false;
 
-    const fetchTokenAndSetupClient = async () => {
+    void (async () => {
       try {
         const response = await fetch('/api/draft-token');
+        if (!response.ok) return;
 
-        if (!response.ok) {
-          return;
-        }
+        const { token } = (await response.json()) as { token?: string };
+        if (!token || cancelled) return;
 
-        const body = (await response.json()) as { token?: string };
-
-        if (!body.token || cancelled) {
-          return;
-        }
-
-        const studioUrl =
-          (window as Window & { __SANITY_STUDIO_URL__?: string }).__SANITY_STUDIO_URL__ ??
-          '/studio';
-
-        const client = createClient({
-          projectId: PROJECT_ID,
-          dataset: DATASET,
-          apiVersion: '2026-04-27',
-          useCdn: false,
-          perspective: 'drafts',
-          token: body.token,
-          stega: {
-            enabled: true,
-            studioUrl,
-          },
-        });
-
-        setLiveClient(client);
+        setLiveClient(
+          createClient({
+            projectId: PROJECT_ID,
+            dataset: DATASET,
+            apiVersion: API_VERSION,
+            useCdn: false,
+            perspective: 'drafts',
+            token,
+            stega: { enabled: true, studioUrl: getStudioUrl() },
+          }),
+        );
       } catch {
-        // no-op when preview session is absent
+        // No active preview session — silently no-op.
       }
-    };
-
-    void fetchTokenAndSetupClient();
+    })();
 
     return () => {
       cancelled = true;
     };
   }, []);
 
-  if (!liveClient) {
-    return null;
-  }
-
+  if (!liveClient) return null;
   return <VisualEditingInner client={liveClient} />;
 }
+
+// Default export so it can be used with React.lazy().
+export default VisualEditing;

@@ -14,12 +14,14 @@ import {
   useRouter,
 } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
+import { useStore } from '@tanstack/react-store';
 import { defineQuery } from 'groq';
 import { useEffect, useState } from 'react';
 
 import logoUrl from '@/assets/OBOS_Hvit_Liggende.svg?url';
-import { getSanityPerspective, getSanityPreviewAuth } from '@/lib/sanity-preview-auth';
 import { sanityFetch } from '@/lib/sanity';
+import { loadSanityQueryOptions } from '@/lib/sanity-query-options';
+import { previewStore, setPreviewMode } from '@/stores/preview-store';
 import { Footer } from '@/ui/footer';
 import { MainNav } from '@/ui/main-nav';
 
@@ -75,25 +77,29 @@ export const Route = createFileRoute('/_docs')({
         ]
       : [],
   loader: async () => {
-    const perspective = await getSanityPerspective();
-
-    return sanityFetch({
-      query: NAVIGATION_QUERY,
-      perspective,
-    });
+    return sanityFetch({ query: NAVIGATION_QUERY });
   },
   beforeLoad: async () => {
-    const previewAuth = await getSanityPreviewAuth();
-
-    return {
-      isPreview: previewAuth.enabled,
-    };
+    // Resolve preview state once at the layout root and pass it down via
+    // route context. Individual leaf routes don't need to re-check.
+    const { isPreview } = await loadSanityQueryOptions();
+    return { isPreview };
   },
 });
 
 function RootLayout() {
   const router = useRouter();
   const { isPreview } = Route.useRouteContext();
+
+  // Sync the SSR-resolved preview state into the global client store so
+  // any component (header badge, root document, etc.) can react to it.
+  useEffect(() => {
+    setPreviewMode(isPreview);
+  }, [isPreview]);
+
+  // Read back from the store so this component re-renders if preview mode
+  // is toggled on the client (e.g. via the exit button).
+  const isPreviewActive = useStore(previewStore, (s) => s.isPreview);
 
   const [isMobileNavExpanded, setIsMobileNavExpanded] = useState(false);
 
@@ -134,9 +140,9 @@ function RootLayout() {
               <img src={logoUrl} alt="" className="h-6" />
             </Link>
             <div className="flex items-center gap-3">
-              {isPreview ? (
+              {isPreviewActive ? (
                 <>
-                  <span className="rounded bg-white/15 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-white/90">
+                  <span className="rounded bg-white/15 px-2 py-1 text-xs font-semibold tracking-wide text-white/90 uppercase">
                     Preview aktiv
                   </span>
                   <form method="post" action="/api/preview">

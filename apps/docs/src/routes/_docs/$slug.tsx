@@ -1,7 +1,6 @@
 import { createFileRoute, notFound } from '@tanstack/react-router';
 import { defineQuery } from 'groq';
 
-import { getSanityPerspective } from '@/lib/sanity-preview-auth';
 import { sanityFetch } from '@/lib/sanity';
 import { ResourceLink, type ResourceLinkProps, ResourceLinks } from '@/ui/resource-links';
 import { SanityContent } from '@/ui/sanity-content';
@@ -25,12 +24,9 @@ const INFO_QUERY = defineQuery(
 export const Route = createFileRoute('/_docs/$slug')({
   component: Page,
   loader: async ({ params }) => {
-    const perspective = await getSanityPerspective();
-
     const res = await sanityFetch({
       query: INFO_QUERY,
       params: { slug: params.slug },
-      perspective,
     });
 
     if (res.data == null) {

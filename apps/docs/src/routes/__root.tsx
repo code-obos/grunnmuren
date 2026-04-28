@@ -1,31 +1,30 @@
-import { createRootRoute, HeadContent, Outlet, Scripts } from '@tanstack/react-router';
-import { useEffect, useState } from 'react';
+import { ClientOnly, createRootRoute, HeadContent, Outlet, Scripts } from '@tanstack/react-router';
+import { useStore } from '@tanstack/react-store';
+import { lazy, Suspense } from 'react';
 
-import { VisualEditing } from '@/ui/visual-editing';
+import { previewStore } from '@/stores/preview-store';
+import { ExitPreviewButton } from '@/ui/exit-preview-button';
+
+// Lazy-loaded so the visual editing bundle is only shipped when actually needed.
+const VisualEditing = lazy(() => import('@/ui/visual-editing'));
 
 export const Route = createRootRoute({
   head: () => ({
     meta: [
-      {
-        charSet: 'utf-8',
-      },
-      {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1',
-      },
+      { charSet: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     ],
   }),
   component: RootDocument,
 });
 
 function RootDocument() {
+  // The Studio URL is read from process.env on the server during SSR and
+  // exposed to the client via a script tag below.
   const studioUrl =
     typeof process !== 'undefined' ? (process.env.SANITY_STUDIO_URL ?? '/studio') : '/studio';
-  const [isClient, setIsClient] = useState(false);
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const isPreview = useStore(previewStore, (s) => s.isPreview);
 
   return (
     <html lang="no">
@@ -39,7 +38,15 @@ function RootDocument() {
         <Outlet />
         <Scripts />
         <script>{`window.__SANITY_STUDIO_URL__=${JSON.stringify(studioUrl)};`}</script>
-        {isClient ? <VisualEditing /> : null}
+        {/* Visual editing + exit-preview UI are client-only and only mounted in preview mode. */}
+        <ClientOnly>
+          {isPreview ? (
+            <Suspense fallback={null}>
+              <VisualEditing />
+            </Suspense>
+          ) : null}
+          <ExitPreviewButton />
+        </ClientOnly>
       </body>
     </html>
   );

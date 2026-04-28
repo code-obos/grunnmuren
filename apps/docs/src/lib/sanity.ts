@@ -1,71 +1,36 @@
-import { createClient, type ClientPerspective, type QueryParams } from '@sanity/client';
+import { createClient, type QueryParams } from '@sanity/client';
 
-import { DATASET, PROJECT_ID } from '../../util/env';
-import { getSanityPreviewAuth } from './sanity-preview-auth';
+import { API_VERSION, DATASET, PROJECT_ID } from '../../util/env';
+import { loadSanityQueryOptions } from './sanity-query-options';
 
-let browserDraftTokenPromise: Promise<string | null> | null = null;
-
-async function getBrowserDraftToken() {
-  if (typeof window === 'undefined') {
-    return null;
-  }
-
-  if (!browserDraftTokenPromise) {
-    browserDraftTokenPromise = fetch('/api/draft-token')
-      .then(async (response) => {
-        if (!response.ok) {
-          return null;
-        }
-
-        const body = (await response.json()) as { token?: string };
-        return body.token ?? null;
-      })
-      .catch(() => null);
-  }
-
-  return browserDraftTokenPromise;
-}
-
+/**
+ * Default published-content client. Uses the CDN and never has access to
+ * draft content. Suitable for any non-preview, public read.
+ */
 export const client = createClient({
   projectId: PROJECT_ID,
   dataset: DATASET,
-  apiVersion: '2026-04-27',
+  apiVersion: API_VERSION,
   useCdn: true,
 });
 
+/**
+ * Fetch a Sanity document, automatically swapping in the preview client
+ * (drafts perspective + viewer token + stega) when the request has an
+ * active preview session.
+ *
+ * Loaders simply call `sanityFetch({ query, params })` — no need to care
+ * about whether we're in preview mode.
+ */
 export async function sanityFetch<const QueryString extends string>({
   query,
   params = {},
-  perspective,
 }: {
   query: QueryString;
   params?: QueryParams;
-  perspective?: ClientPerspective;
 }) {
-  const previewAuth = await getSanityPreviewAuth();
-  const resolvedPerspective = perspective ?? (previewAuth.enabled ? 'drafts' : 'published');
-  let token: string | null | undefined = process.env.SANITY_VIEWER_TOKEN;
-
-  if (resolvedPerspective === 'drafts' && !token) {
-    token = await getBrowserDraftToken();
-  }
-
-  const canUseDrafts = resolvedPerspective === 'drafts' && Boolean(token);
-  const effectivePerspective = canUseDrafts ? 'drafts' : 'published';
-
-  const fetchClient = canUseDrafts
-    ? client.withConfig({
-        useCdn: false,
-        perspective: effectivePerspective,
-        token: token ?? undefined,
-        stega: {
-          enabled: true,
-          studioUrl: previewAuth.studioUrl,
-        },
-      })
-    : client.withConfig({
-        perspective: effectivePerspective,
-      });
+  const { options } = await loadSanityQueryOptions();
+  const fetchClient = client.withConfig(options);
 
   const { result } = await fetchClient.fetch(query, params, {
     filterResponse: false,

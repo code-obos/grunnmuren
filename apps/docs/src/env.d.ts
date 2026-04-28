@@ -20,7 +20,7 @@ declare global {
 
   namespace NodeJS {
     interface ProcessEnv {
-      SANITY_PREVIEW_JWT_SECRET?: string;
+      SANITY_PREVIEW_SESSION_SECRET?: string;
       SANITY_PREVIEW_URL?: string;
       SANITY_VIEWER_TOKEN?: string;
       SANITY_STUDIO_URL?: string;
