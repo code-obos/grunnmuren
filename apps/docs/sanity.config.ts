@@ -11,13 +11,6 @@ import { presentationResolve } from './studio/lib/resolve';
 import { schemaTypes } from './studio/schema-types';
 import { API_VERSION, DATASET, PROJECT_ID } from './util/env';
 
-const previewBaseUrl =
-  typeof process !== 'undefined'
-    ? process.env.NODE_ENV === 'production'
-      ? 'https://grunnmuren.obos.no'
-      : 'http://localhost:3003'
-    : 'http://localhost:3003';
-
 export default defineConfig({
   projectId: PROJECT_ID,
   dataset: DATASET,
@@ -72,9 +65,8 @@ export default defineConfig({
     presentationTool({
       resolve: presentationResolve,
       previewUrl: {
-        initial: previewBaseUrl,
         previewMode: {
-          enable: `${previewBaseUrl}/api/preview`,
+          enable: `/api/preview`,
         },
       },
       allowOrigins: ['http://localhost:*', 'https://grunnmuren.obos.no'],
