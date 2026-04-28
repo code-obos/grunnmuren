@@ -9,12 +9,15 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { DATASET, PROJECT_ID } from '../../util/env';
 
-function VisualEditingInner({ client: _client }: { client: SanityClient }) {
+function VisualEditingInner({ client }: { client: SanityClient }) {
   const router = useRouter();
   const routerRef = useRef(router);
   const navigateRef = useRef<HistoryAdapterNavigate | undefined>(undefined);
 
   routerRef.current = router;
+
+  const studioUrl =
+    (window as Window & { __SANITY_STUDIO_URL__?: string }).__SANITY_STUDIO_URL__ ?? '/studio';
 
   const history = useMemo<HistoryAdapter>(
     () => ({
@@ -76,7 +79,7 @@ export function VisualEditing() {
   useEffect(() => {
     let cancelled = false;
 
-    const setup = async () => {
+    const fetchTokenAndSetupClient = async () => {
       try {
         const response = await fetch('/api/draft-token');
 
@@ -113,7 +116,7 @@ export function VisualEditing() {
       }
     };
 
-    void setup();
+    void fetchTokenAndSetupClient();
 
     return () => {
       cancelled = true;

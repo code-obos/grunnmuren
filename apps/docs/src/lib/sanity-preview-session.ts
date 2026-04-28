@@ -1,6 +1,6 @@
 import { jwtVerify, SignJWT } from 'jose';
 
-type PreviewSessionPayload = {
+type PreviewSession = {
   mode: 'preview';
   projectId: string;
   dataset: string;
@@ -41,7 +41,7 @@ export function getPreviewSessionCookieName() {
   return COOKIE_NAME;
 }
 
-export async function createPreviewSessionToken(payload: PreviewSessionPayload) {
+export async function createPreviewSessionToken(payload: PreviewSession) {
   const secret = getJwtSecret();
 
   return await new SignJWT(payload)
@@ -68,7 +68,7 @@ export async function verifyPreviewSessionToken(token: string) {
       mode: payload.mode,
       projectId: payload.projectId,
       dataset: payload.dataset,
-    } satisfies PreviewSessionPayload;
+    } satisfies PreviewSession;
   } catch {
     return null;
   }

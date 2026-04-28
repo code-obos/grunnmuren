@@ -3,6 +3,29 @@ import { createClient, type ClientPerspective, type QueryParams } from '@sanity/
 import { DATASET, PROJECT_ID } from '../../util/env';
 import { getSanityPreviewAuth } from './sanity-preview-auth';
 
+let browserDraftTokenPromise: Promise<string | null> | null = null;
+
+async function getBrowserDraftToken() {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
+  if (!browserDraftTokenPromise) {
+    browserDraftTokenPromise = fetch('/api/draft-token')
+      .then(async (response) => {
+        if (!response.ok) {
+          return null;
+        }
+
+        const body = (await response.json()) as { token?: string };
+        return body.token ?? null;
+      })
+      .catch(() => null);
+  }
+
+  return browserDraftTokenPromise;
+}
+
 export const client = createClient({
   projectId: PROJECT_ID,
   dataset: DATASET,
@@ -20,27 +43,29 @@ export async function sanityFetch<const QueryString extends string>({
   perspective?: ClientPerspective;
 }) {
   const previewAuth = await getSanityPreviewAuth();
-  const token = process.env.SANITY_VIEWER_TOKEN;
   const resolvedPerspective = perspective ?? (previewAuth.enabled ? 'drafts' : 'published');
+  let token: string | null | undefined = process.env.SANITY_VIEWER_TOKEN;
 
   if (resolvedPerspective === 'drafts' && !token) {
-    throw new Error('Cannot fetch draft content without SANITY_VIEWER_TOKEN');
+    token = await getBrowserDraftToken();
   }
 
-  const fetchClient =
-    resolvedPerspective === 'drafts' && token
-      ? client.withConfig({
-          useCdn: false,
-          perspective: resolvedPerspective,
-          token,
-          stega: {
-            enabled: true,
-            studioUrl: previewAuth.studioUrl,
-          },
-        })
-      : client.withConfig({
-          perspective: resolvedPerspective,
-        });
+  const canUseDrafts = resolvedPerspective === 'drafts' && Boolean(token);
+  const effectivePerspective = canUseDrafts ? 'drafts' : 'published';
+
+  const fetchClient = canUseDrafts
+    ? client.withConfig({
+        useCdn: false,
+        perspective: effectivePerspective,
+        token: token ?? undefined,
+        stega: {
+          enabled: true,
+          studioUrl: previewAuth.studioUrl,
+        },
+      })
+    : client.withConfig({
+        perspective: effectivePerspective,
+      });
 
   const { result } = await fetchClient.fetch(query, params, {
     filterResponse: false,

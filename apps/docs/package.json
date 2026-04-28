@@ -12,7 +12,7 @@
     "build:colors": "node extract-colors.ts && oxfmt colors.ts",
     "build:props": "node extract-component-props.ts && oxfmt component-props.ts",
     "build:tsc": "tsc",
-    "dev": "vite dev --port 3003",
+    "dev": "azure-env --env-filename=.env vite dev --port 3003",
     "dev:local-storybook": "VITE_STORYBOOK_BASE_URL=http://localhost:6006 pnpm dev",
     "sanity:extract": "sanity manifest extract --path public/studio/static",
     "sanity:schema:deploy": "sanity schema deploy",
@@ -58,6 +58,7 @@
     "use-debounce": "10.1.1"
   },
   "devDependencies": {
+    "@code-obos/azure-env": "1.0.2",
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
     "@react-aria/optimize-locales-plugin": "1.2.0",
     "@tailwindcss/vite": "catalog:",

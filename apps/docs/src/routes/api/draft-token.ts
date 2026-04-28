@@ -10,35 +10,23 @@ export const Route = createFileRoute('/api/draft-token')({
         const session = await getPreviewSessionFromRequest(request);
 
         if (!session) {
-          return new Response(JSON.stringify({ error: 'Not in preview mode' }), {
-            status: 401,
-            headers: { 'Content-Type': 'application/json' },
-          });
+          return Response.json({ error: 'Not in preview mode' }, { status: 401 });
         }
 
         if (
           session.projectId !== client.config().projectId ||
           session.dataset !== client.config().dataset
         ) {
-          return new Response(JSON.stringify({ error: 'Invalid preview session' }), {
-            status: 401,
-            headers: { 'Content-Type': 'application/json' },
-          });
+          return Response.json({ error: 'Invalid preview session' }, { status: 401 });
         }
 
         const token = process.env.SANITY_VIEWER_TOKEN;
 
         if (!token) {
-          return new Response(JSON.stringify({ error: 'Token not configured' }), {
-            status: 500,
-            headers: { 'Content-Type': 'application/json' },
-          });
+          return Response.json({ error: 'Token not configured' }, { status: 500 });
         }
 
-        return new Response(JSON.stringify({ token }), {
-          status: 200,
-          headers: { 'Content-Type': 'application/json' },
-        });
+        return Response.json({ token });
       },
     },
   },
