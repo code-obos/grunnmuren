@@ -32,17 +32,23 @@ function getSessionOptions() {
 /** Read and decrypt the preview session from a Request. Returns `{}` if no session. */
 export async function getPreviewSession(request: Request): Promise<PreviewSessionData> {
   const cookieHeader = request.headers.get('cookie');
-  if (!cookieHeader) return {};
+  if (!cookieHeader) {
+    return {};
+  }
 
   const match = cookieHeader
     .split(';')
     .map((c) => c.trim())
     .find((c) => c.startsWith(`${PREVIEW_SESSION_COOKIE}=`));
 
-  if (!match) return {};
+  if (!match) {
+    return {};
+  }
 
   const value = decodeURIComponent(match.slice(PREVIEW_SESSION_COOKIE.length + 1));
-  if (!value) return {};
+  if (!value) {
+    return {};
+  }
 
   try {
     return await unsealData<PreviewSessionData>(value, getSessionOptions());

@@ -16,14 +16,18 @@ export function ExitPreviewButton() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined') {
+      return;
+    }
 
     const hasCookie = document.cookie.includes(`${PREVIEW_SESSION_COOKIE}=`);
     const isInIframe = window.self !== window.top;
     setShow(hasCookie && !isInIframe);
   }, []);
 
-  if (!show) return null;
+  if (!show) {
+    return null;
+  }
 
   const handleExit = async () => {
     await fetch('/api/preview', { method: 'POST' });
