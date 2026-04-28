@@ -1,11 +1,12 @@
 import { createClient, type ClientPerspective, type QueryParams } from '@sanity/client';
 
+import { DATASET, PROJECT_ID } from '../../util/env';
 import { getSanityPreviewAuth } from './sanity-preview-auth';
 
 export const client = createClient({
-  projectId: 'tq6w17ny',
-  dataset: 'grunnmuren',
-  apiVersion: '2024-09-18',
+  projectId: PROJECT_ID,
+  dataset: DATASET,
+  apiVersion: '2026-04-27',
   useCdn: true,
 });
 

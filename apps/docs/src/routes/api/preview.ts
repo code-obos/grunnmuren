@@ -8,6 +8,8 @@ import {
   serializePreviewSessionCookie,
 } from '@/lib/sanity-preview-session';
 
+import { DATASET, PROJECT_ID } from '../../../util/env';
+
 export const Route = createFileRoute('/api/preview')({
   server: {
     handlers: {
@@ -37,8 +39,8 @@ export const Route = createFileRoute('/api/preview')({
 
         const previewToken = await createPreviewSessionToken({
           mode: 'preview',
-          projectId: client.config().projectId ?? 'tq6w17ny',
-          dataset: client.config().dataset ?? 'grunnmuren',
+          projectId: client.config().projectId ?? PROJECT_ID,
+          dataset: client.config().dataset ?? DATASET,
         });
 
         const redirectTo =

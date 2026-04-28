@@ -3,6 +3,9 @@
 interface ImportMetaEnv {
   // Client-side environment variables
   readonly VITE_STORYBOOK_BASE_URL: string;
+  readonly SANITY_PROJECT_ID: string;
+  readonly SANITY_DATASET: string;
+  readonly SANITY_API_VERSION: string;
 }
 
 interface ImportMeta {
@@ -21,6 +24,9 @@ declare global {
       SANITY_PREVIEW_URL?: string;
       SANITY_READ_TOKEN?: string;
       SANITY_STUDIO_URL?: string;
+      SANITY_PROJECT_ID: string;
+      SANITY_DATASET: string;
+      SANITY_API_VERSION: string;
     }
   }
 }

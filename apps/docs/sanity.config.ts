@@ -7,26 +7,28 @@ import { defineConfig } from 'sanity';
 import { presentationTool } from 'sanity/presentation';
 import { structureTool } from 'sanity/structure';
 
-import { presentationResolve } from './src/lib/sanity-presentation-resolve';
+import { presentationResolve } from './studio/lib/resolve';
 import { schemaTypes } from './studio/schema-types';
+import { API_VERSION, DATASET, PROJECT_ID } from './util/env';
 
-const dataset = 'grunnmuren';
 const previewBaseUrl =
   typeof process !== 'undefined'
-    ? (process.env.SANITY_PREVIEW_URL ?? 'http://localhost:3003')
+    ? process.env.NODE_ENV === 'production'
+      ? 'https://grunnmuren.obos.no'
+      : 'http://localhost:3003'
     : 'http://localhost:3003';
 
 export default defineConfig({
-  projectId: 'tq6w17ny',
-  dataset,
+  projectId: PROJECT_ID,
+  dataset: DATASET,
   basePath: '/studio',
   title: 'Grunnmuren',
-  auth: obosAuthStore({ dataset }),
+  auth: obosAuthStore({ dataset: DATASET }),
   plugins: [
     structureTool({
       structure: async (S, context) => {
         const CATEGORIES = await context
-          .getClient({ apiVersion: '2025-03-21' })
+          .getClient({ apiVersion: API_VERSION })
           .fetch(`(*[_type == "category"])`);
 
         return S.list()

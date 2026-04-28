@@ -7,6 +7,8 @@ import {
 import { useRouter } from '@tanstack/react-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
+import { DATASET, PROJECT_ID } from '../../util/env';
+
 function VisualEditingInner({ client: _client }: { client: SanityClient }) {
   const router = useRouter();
   const routerRef = useRef(router);
@@ -93,8 +95,8 @@ export function VisualEditing() {
           '/studio';
 
         const client = createClient({
-          projectId: 'tq6w17ny',
-          dataset: 'grunnmuren',
+          projectId: PROJECT_ID,
+          dataset: DATASET,
           apiVersion: '2026-04-27',
           useCdn: false,
           perspective: 'drafts',

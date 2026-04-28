@@ -52,14 +52,12 @@ export const presentationResolve: PresentationPluginOptions['resolve'] = {
         const slug = typeof doc?.slug === 'string' && doc.slug.length > 0 ? doc.slug : '';
 
         return {
-          locations: slug
-            ? [
-                {
-                  title: doc?.title || 'Info',
-                  href: `/${slug}`,
-                },
-              ]
-            : [],
+          locations: [
+            {
+              title: doc?.title || 'Info',
+              href: `/${slug}`,
+            },
+          ],
         };
       },
     }),
@@ -72,18 +70,16 @@ export const presentationResolve: PresentationPluginOptions['resolve'] = {
         const slug = typeof doc?.slug === 'string' && doc.slug.length > 0 ? doc.slug : '';
 
         return {
-          locations: slug
-            ? [
-                {
-                  title: 'Komponenter',
-                  href: '/komponenter/',
-                },
-                {
-                  title: doc?.title || 'Component',
-                  href: `/komponenter/${slug}`,
-                },
-              ]
-            : [],
+          locations: [
+            {
+              title: 'Komponenter',
+              href: '/komponenter/',
+            },
+            {
+              title: doc?.title || 'Component',
+              href: `/komponenter/${slug}`,
+            },
+          ],
         };
       },
     }),

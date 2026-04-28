@@ -1,8 +1,10 @@
 import { defineCliConfig } from 'sanity/cli';
 
+import { DATASET, PROJECT_ID } from './util/env';
+
 export default defineCliConfig({
   api: {
-    projectId: 'tq6w17ny',
-    dataset: 'grunnmuren',
+    projectId: PROJECT_ID,
+    dataset: DATASET,
   },
 });
