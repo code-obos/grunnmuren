@@ -3,6 +3,7 @@ import { stegaClean } from '@sanity/client/stega';
 import { createFileRoute } from '@tanstack/react-router';
 import { defineQuery } from 'groq';
 
+import { getSanityPerspective } from '@/lib/sanity-preview-auth';
 import { sanityFetch } from '@/lib/sanity';
 import { ComponentStateBadge } from '@/ui/component-state-badge';
 
@@ -19,7 +20,14 @@ export const Route = createFileRoute('/_docs/komponenter/')({
       { name: 'description', content: 'Grunnmuren sine komponenter' },
     ],
   }),
-  loader: async () => await sanityFetch({ query: COMPONENTS_INDEX_QUERY }),
+  loader: async () => {
+    const perspective = await getSanityPerspective();
+
+    return sanityFetch({
+      query: COMPONENTS_INDEX_QUERY,
+      perspective,
+    });
+  },
 });
 
 function Page() {

@@ -11,7 +11,7 @@ interface PropsTableProps {
 }
 
 export const PropsTable = ({ componentName }: PropsTableProps) => {
-  const cleanedComponentName = stegaClean(componentName) as keyof typeof props;
+  const cleanedComponentName = stegaClean(componentName);
   const componentEntry = props[cleanedComponentName];
 
   if (!componentEntry) {

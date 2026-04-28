@@ -5,6 +5,7 @@ import { createFileRoute, notFound } from '@tanstack/react-router';
 import { defineQuery } from 'groq';
 
 import type * as props from '@/component-props';
+import { getSanityPerspective } from '@/lib/sanity-preview-auth';
 import { sanityFetch } from '@/lib/sanity';
 import { AnchorHeading } from '@/ui/anchor-heading';
 import { PropsTable } from '@/ui/props-table';
@@ -32,9 +33,12 @@ const COMPONENT_QUERY = defineQuery(
 export const Route = createFileRoute('/_docs/komponenter/$slug')({
   component: Page,
   loader: async ({ params }) => {
+    const perspective = await getSanityPerspective();
+
     const res = await sanityFetch({
       query: COMPONENT_QUERY,
       params: { slug: params.slug },
+      perspective,
     });
 
     if (res.data === null) {

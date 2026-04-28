@@ -18,8 +18,8 @@ import { defineQuery } from 'groq';
 import { useEffect, useState } from 'react';
 
 import logoUrl from '@/assets/OBOS_Hvit_Liggende.svg?url';
+import { getSanityPerspective, getSanityPreviewAuth } from '@/lib/sanity-preview-auth';
 import { sanityFetch } from '@/lib/sanity';
-import { getSanityPreviewAuth } from '@/lib/sanity-preview-auth';
 import { Footer } from '@/ui/footer';
 import { MainNav } from '@/ui/main-nav';
 
@@ -74,7 +74,14 @@ export const Route = createFileRoute('/_docs')({
           },
         ]
       : [],
-  loader: () => sanityFetch({ query: NAVIGATION_QUERY }),
+  loader: async () => {
+    const perspective = await getSanityPerspective();
+
+    return sanityFetch({
+      query: NAVIGATION_QUERY,
+      perspective,
+    });
+  },
   beforeLoad: async () => {
     const previewAuth = await getSanityPreviewAuth();
 
@@ -86,6 +93,7 @@ export const Route = createFileRoute('/_docs')({
 
 function RootLayout() {
   const router = useRouter();
+  const { isPreview } = Route.useRouteContext();
 
   const [isMobileNavExpanded, setIsMobileNavExpanded] = useState(false);
 
@@ -125,9 +133,26 @@ function RootLayout() {
             <Link to="/" aria-label="Gå til forsiden" className="py-2.5">
               <img src={logoUrl} alt="" className="h-6" />
             </Link>
-            <DisclosureButton className="lg:hidden" aria-label="Meny">
-              {isMobileNavExpanded ? <Close className="size-6" /> : <Menu className="size-6" />}
-            </DisclosureButton>
+            <div className="flex items-center gap-3">
+              {isPreview ? (
+                <>
+                  <span className="rounded bg-white/15 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-white/90">
+                    Preview aktiv
+                  </span>
+                  <form method="post" action="/api/preview">
+                    <button
+                      type="submit"
+                      className="focus-visible:outline-focus-inset rounded border border-white/50 px-3 py-1.5 text-sm font-medium hover:bg-white/15"
+                    >
+                      Avslutt preview
+                    </button>
+                  </form>
+                </>
+              ) : null}
+              <DisclosureButton className="lg:hidden" aria-label="Meny">
+                {isMobileNavExpanded ? <Close className="size-6" /> : <Menu className="size-6" />}
+              </DisclosureButton>
+            </div>
           </header>
           <div className="relative lg:hidden">
             <div className="absolute top-0 left-0 z-3 w-full">

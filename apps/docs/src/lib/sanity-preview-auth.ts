@@ -23,3 +23,9 @@ export const getSanityPreviewAuth = createServerFn({ method: 'GET' }).handler(as
     studioUrl: process.env.SANITY_STUDIO_URL ?? '/studio',
   } as const;
 });
+
+export async function getSanityPerspective() {
+  const previewAuth = await getSanityPreviewAuth();
+
+  return previewAuth.enabled ? 'drafts' : 'published';
+}
