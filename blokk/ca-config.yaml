@@ -29,6 +29,10 @@ properties:
             secretRef: otel-api-key-header
           - name: OTEL_SERVICE_NAME
             value: ${APPLICATION_NAME}-${CONTAINER_APP_KEY}
+          - name: SANITY_VIEWER_TOKEN
+            secretRef: sanity-viewer-token
+          - name: SANITY_PREVIEW_SESSION_SECRET
+            secretRef: sanity-preview-secret
         resources:
           cpu: 0.25
           memory: 0.5Gi
