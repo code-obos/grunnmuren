@@ -98,10 +98,14 @@ export function VisualEditing() {
     void (async () => {
       try {
         const response = await fetch('/api/draft-token');
-        if (!response.ok) return;
+        if (!response.ok) {
+          return;
+        }
 
         const { token } = (await response.json()) as { token?: string };
-        if (!token || cancelled) return;
+        if (!token || cancelled) {
+          return;
+        }
 
         setLiveClient(
           createClient({
@@ -124,7 +128,9 @@ export function VisualEditing() {
     };
   }, []);
 
-  if (!liveClient) return null;
+  if (!liveClient) {
+    return null;
+  }
   return <VisualEditingInner client={liveClient} />;
 }
 
