@@ -28,7 +28,3 @@ export function setPreviewMode(isPreview: boolean) {
     isDraftsPerspective: isPreview ? true : false,
   }));
 }
-
-export function setPreviewPerspective(isDrafts: boolean) {
-  previewStore.setState((state) => ({ ...state, isDraftsPerspective: isDrafts }));
-}

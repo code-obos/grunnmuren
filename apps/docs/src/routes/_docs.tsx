@@ -14,7 +14,7 @@ import {
   useRouter,
 } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
-import { useStore } from '@tanstack/react-store';
+import { useSelector } from '@tanstack/react-store';
 import { defineQuery } from 'groq';
 import { useEffect, useState } from 'react';
 
@@ -99,7 +99,7 @@ function RootLayout() {
 
   // Read back from the store so this component re-renders if preview mode
   // is toggled on the client (e.g. via the exit button).
-  const isPreviewActive = useStore(previewStore, (s) => s.isPreview);
+  const isPreviewActive = useSelector(previewStore, (s) => s.isPreview);
 
   const [isMobileNavExpanded, setIsMobileNavExpanded] = useState(false);
 
