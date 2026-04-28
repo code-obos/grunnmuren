@@ -30,7 +30,7 @@ export const loadSanityQueryOptions = createServerFn({ method: 'GET' }).handler(
     );
   }
 
-  const studioUrl = process.env.SANITY_STUDIO_URL ?? '/studio';
+  const studioUrl = '/studio';
 
   return {
     isPreview,

@@ -1,5 +1,5 @@
 import { ClientOnly, createRootRoute, HeadContent, Outlet, Scripts } from '@tanstack/react-router';
-import { useStore } from '@tanstack/react-store';
+import { useSelector } from '@tanstack/react-store';
 import { lazy, Suspense } from 'react';
 
 import { previewStore } from '@/stores/preview-store';
@@ -21,10 +21,9 @@ export const Route = createRootRoute({
 function RootDocument() {
   // The Studio URL is read from process.env on the server during SSR and
   // exposed to the client via a script tag below.
-  const studioUrl =
-    typeof process !== 'undefined' ? (process.env.SANITY_STUDIO_URL ?? '/studio') : '/studio';
+  const studioUrl = '/studio';
 
-  const isPreview = useStore(previewStore, (s) => s.isPreview);
+  const isPreview = useSelector(previewStore, (s) => s.isPreview);
 
   return (
     <html lang="no">
