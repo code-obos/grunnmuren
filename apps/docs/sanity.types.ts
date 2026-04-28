@@ -534,7 +534,7 @@ export type AllSanitySchemaTypes =
 
 // Source: src/routes/_docs.tsx
 // Variable: NAVIGATION_QUERY
-// Query: {  "components": *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc),  "menu": *[_type == "menu"][0]{    categories[]->{      title,      "slug": slug.current,      categoryItems[]->{        name,        "slug": slug.current      }    }  }}
+// Query: {  "components": *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc),  "menu": *[_type == "menu" && _id == "menu"][0]{    categories[]->{      title,      "slug": slug.current,      categoryItems[]->{        name,        "slug": slug.current      }    }  }}
 export type NAVIGATION_QUERY_RESULT = {
   components: Array<{
     _id: string;
@@ -712,7 +712,7 @@ export type COMPONENTS_INDEX_QUERY_RESULT = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '{\n  "components": *[_type == "component"]{ _id, name, \'slug\': coalesce(slug.current, \'\'), componentState} | order(name asc),\n  "menu": *[_type == "menu"][0]{\n    categories[]->{\n      title,\n      "slug": slug.current,\n      categoryItems[]->{\n        name,\n        "slug": slug.current\n      }\n    }\n  }\n}': NAVIGATION_QUERY_RESULT;
+    '{\n  "components": *[_type == "component"]{ _id, name, \'slug\': coalesce(slug.current, \'\'), componentState} | order(name asc),\n  "menu": *[_type == "menu" && _id == "menu"][0]{\n    categories[]->{\n      title,\n      "slug": slug.current,\n      categoryItems[]->{\n        name,\n        "slug": slug.current\n      }\n    }\n  }\n}': NAVIGATION_QUERY_RESULT;
     '*[_type == "info"\n  && slug.current == $slug][0]{\n    "content": content[] {\n      ...,\n      _type == "image-with-caption" => {\n        ...,\n      }\n    },\n    "name": coalesce(name, \'\'),\n    resourceLinks,\n  }': INFO_QUERY_RESULT;
     '*[_type == "component"\n  && slug.current == $slug][0]{\n    "content": content[] {\n      ...,\n      _type == "image-with-caption" => {\n        ...,\n      }\n    },\n    "name": coalesce(name, \'\'),\n    propsComponents,\n    resourceLinks,\n    componentState,\n  }': COMPONENT_QUERY_RESULT;
     "*[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc)": COMPONENTS_INDEX_QUERY_RESULT;
