@@ -1,8 +1,4 @@
-import {
-  clearSession,
-  updateSession,
-  useSession,
-} from '@tanstack/react-start/server';
+import { clearSession, updateSession, useSession } from '@tanstack/react-start/server';
 
 export const PREVIEW_SESSION_COOKIE = 'sanity-preview-session';
 

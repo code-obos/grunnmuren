@@ -6,6 +6,7 @@ import {
   GrunnmurenProvider,
 } from '@obosbbl/grunnmuren-react';
 import {
+  ClientOnly,
   createFileRoute,
   Link,
   type NavigateOptions,
@@ -14,18 +15,18 @@ import {
   useRouter,
 } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
-import { useSelector } from '@tanstack/react-store';
 import { defineQuery } from 'groq';
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 
 import logoUrl from '@/assets/OBOS_Hvit_Liggende.svg?url';
 import { sanityFetch } from '@/lib/sanity';
 import { loadSanityQueryOptions } from '@/lib/sanity-query-options';
-import { previewStore, setPreviewMode } from '@/stores/preview-store';
 import { Footer } from '@/ui/footer';
 import { MainNav } from '@/ui/main-nav';
 
 import appCss from '@/styles/app.css?url';
+
+const VisualEditing = lazy(() => import('@/ui/visual-editing'));
 
 const NAVIGATION_QUERY = defineQuery(`{
   "components": *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc),
@@ -91,16 +92,6 @@ function RootLayout() {
   const router = useRouter();
   const { isPreview } = Route.useRouteContext();
 
-  // Sync the SSR-resolved preview state into the global client store so
-  // any component (header badge, root document, etc.) can react to it.
-  useEffect(() => {
-    setPreviewMode(isPreview);
-  }, [isPreview]);
-
-  // Read back from the store so this component re-renders if preview mode
-  // is toggled on the client (e.g. via the exit button).
-  const isPreviewActive = useSelector(previewStore, (s) => s.isPreview);
-
   const [isMobileNavExpanded, setIsMobileNavExpanded] = useState(false);
 
   useEffect(() => {
@@ -134,13 +125,21 @@ function RootLayout() {
           return router.buildLocation({ ...href }).href;
         }}
       >
+        {/* Visual editing + exit-preview UI are client-only and only mounted in preview mode. */}
+        <ClientOnly>
+          {isPreview ? (
+            <Suspense fallback={null}>
+              <VisualEditing />
+            </Suspense>
+          ) : null}
+        </ClientOnly>
         <Disclosure isExpanded={isMobileNavExpanded} onExpandedChange={setIsMobileNavExpanded}>
           <header className="bg-blue-dark relative z-3 flex items-center justify-between px-8 py-2 text-white">
             <Link to="/" aria-label="Gå til forsiden" className="py-2.5">
               <img src={logoUrl} alt="" className="h-6" />
             </Link>
             <div className="flex items-center gap-3">
-              {isPreviewActive ? (
+              {isPreview ? (
                 <>
                   <span className="rounded bg-white/15 px-2 py-1 text-xs font-semibold tracking-wide text-white/90 uppercase">
                     Preview aktiv

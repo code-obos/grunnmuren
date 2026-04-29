@@ -41,8 +41,6 @@
     "@tanstack/nitro-v2-vite-plugin": "1.154.9",
     "@tanstack/react-router": "1.168.25",
     "@tanstack/react-start": "1.167.50",
-    "@tanstack/react-store": "0.11.0",
-    "@tanstack/store": "0.11.0",
     "@vitejs/plugin-react": "6.0.1",
     "cva": "1.0.0-beta.4",
     "groq": "5.22.0",

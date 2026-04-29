@@ -1,12 +1,6 @@
-import { ClientOnly, createRootRoute, HeadContent, Outlet, Scripts } from '@tanstack/react-router';
-import { useSelector } from '@tanstack/react-store';
-import { lazy, Suspense } from 'react';
-
-import { previewStore } from '@/stores/preview-store';
-import { ExitPreviewButton } from '@/ui/exit-preview-button';
+import { createRootRoute, HeadContent, Outlet, Scripts } from '@tanstack/react-router';
 
 // Lazy-loaded so the visual editing bundle is only shipped when actually needed.
-const VisualEditing = lazy(() => import('@/ui/visual-editing'));
 
 export const Route = createRootRoute({
   head: () => ({
@@ -19,11 +13,7 @@ export const Route = createRootRoute({
 });
 
 function RootDocument() {
-  // The Studio URL is read from process.env on the server during SSR and
-  // exposed to the client via a script tag below.
   const studioUrl = '/studio';
-
-  const isPreview = useSelector(previewStore, (s) => s.isPreview);
 
   return (
     <html lang="no">
@@ -37,15 +27,6 @@ function RootDocument() {
         <Outlet />
         <Scripts />
         <script>{`window.__SANITY_STUDIO_URL__=${JSON.stringify(studioUrl)};`}</script>
-        {/* Visual editing + exit-preview UI are client-only and only mounted in preview mode. */}
-        <ClientOnly>
-          {isPreview ? (
-            <Suspense fallback={null}>
-              <VisualEditing />
-            </Suspense>
-          ) : null}
-          <ExitPreviewButton />
-        </ClientOnly>
       </body>
     </html>
   );
