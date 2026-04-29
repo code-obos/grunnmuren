@@ -1,8 +1,4 @@
 import { Close } from '@obosbbl/grunnmuren-icons-react';
-import { useEffect, useState } from 'react';
-
-import { PREVIEW_SESSION_COOKIE } from '@/lib/sanity-preview-session';
-
 /**
  * Floating "Exit preview" button.
  *
@@ -12,20 +8,8 @@ import { PREVIEW_SESSION_COOKIE } from '@/lib/sanity-preview-session';
  *
  * Clicking it POSTs to `/api/preview` to clear the cookie and reloads.
  */
-export function ExitPreviewButton() {
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') {
-      return;
-    }
-
-    const hasCookie = document.cookie.includes(`${PREVIEW_SESSION_COOKIE}=`);
-    const isInIframe = window.self !== window.top;
-    setShow(hasCookie && !isInIframe);
-  }, []);
-
-  if (!show) {
+export function ExitPreviewButton({isPreview}: {isPreview: boolean}) {
+  if (!isPreview) {
     return null;
   }
 

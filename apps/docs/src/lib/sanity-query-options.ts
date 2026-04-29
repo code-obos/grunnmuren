@@ -16,9 +16,7 @@ import { getPreviewSession } from './sanity-preview-session';
  * to surface configuration mistakes early.
  */
 export const loadSanityQueryOptions = createServerFn({ method: 'GET' }).handler(async () => {
-  const { getRequest } = await import('@tanstack/react-start/server');
-  const request = getRequest();
-  const session = await getPreviewSession(request);
+  const session = await getPreviewSession();
 
   const isPreview = session.projectId === PROJECT_ID;
 

@@ -14,8 +14,8 @@ import { PROJECT_ID } from '../../../util/env';
 export const Route = createFileRoute('/api/draft-token')({
   server: {
     handlers: {
-      GET: async ({ request }) => {
-        const session = await getPreviewSession(request);
+      GET: async () => {
+        const session = await getPreviewSession();
 
         if (session.projectId !== PROJECT_ID) {
           return Response.json({ error: 'Not in preview mode' }, { status: 401 });

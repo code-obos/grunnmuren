@@ -43,20 +43,21 @@ export const Route = createFileRoute('/api/preview')({
           return new Response('Invalid preview URL', { status: 401 });
         }
 
-        const cookie = await commitPreviewSession({ projectId: PROJECT_ID });
+        await commitPreviewSession({ projectId: PROJECT_ID });
         const redirectTo =
           result.redirectTo && result.redirectTo.length > 0 ? result.redirectTo : '/';
 
         return new Response(null, {
           status: 302,
-          headers: { Location: redirectTo, 'Set-Cookie': cookie },
+          headers: { Location: redirectTo },
         });
       },
 
-      POST: () => {
+      POST: async () => {
+        await destroyPreviewSession();
         return new Response(null, {
           status: 302,
-          headers: { Location: '/', 'Set-Cookie': destroyPreviewSession() },
+          headers: { Location: '/' },
         });
       },
     },

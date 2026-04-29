@@ -1,4 +1,10 @@
-import { sealData, unsealData } from 'iron-session';
+import {
+  clearSession,
+  updateSession,
+  useSession,
+} from '@tanstack/react-start/server';
+
+export const PREVIEW_SESSION_COOKIE = 'sanity-preview-session';
 
 /**
  * Encrypted cookie that marks a request as being in Sanity preview mode.
@@ -7,11 +13,9 @@ import { sealData, unsealData } from 'iron-session';
  *   - verify the session belongs to the current Sanity project
  *   - know whether to fetch drafts in loaders / API routes
  *
- * `iron-session` seals the value with `SANITY_PREVIEW_SESSION_SECRET`,
- * so it cannot be forged client-side.
+ * TanStack Start's session utilities seal the value with
+ * `SANITY_PREVIEW_SESSION_SECRET`, so it cannot be forged client-side.
  */
-
-export const PREVIEW_SESSION_COOKIE = 'sanity-preview-session';
 
 const ONE_WEEK_SECONDS = 60 * 60 * 24 * 7;
 
@@ -19,55 +23,41 @@ type PreviewSessionData = {
   projectId?: string;
 };
 
-function getSessionOptions() {
+function getSessionConfig() {
   const password = process.env.SANITY_PREVIEW_SESSION_SECRET;
 
   if (!password) {
     throw new Error('Missing SANITY_PREVIEW_SESSION_SECRET environment variable');
   }
 
-  return { password, ttl: ONE_WEEK_SECONDS };
+  return {
+    password,
+    name: PREVIEW_SESSION_COOKIE,
+    maxAge: ONE_WEEK_SECONDS,
+    cookie: {
+      path: '/',
+      // SameSite=None + Secure is required so the cookie works inside the
+      // Sanity Studio iframe (cross-origin). HttpOnly is intentionally
+      // disabled so client code can detect preview mode via document.cookie.
+      sameSite: 'none' as const,
+      secure: true,
+      httpOnly: false,
+    },
+  };
 }
 
-/** Read and decrypt the preview session from a Request. Returns `{}` if no session. */
-export async function getPreviewSession(request: Request): Promise<PreviewSessionData> {
-  const cookieHeader = request.headers.get('cookie');
-  if (!cookieHeader) {
-    return {};
-  }
-
-  const match = cookieHeader
-    .split(';')
-    .map((c) => c.trim())
-    .find((c) => c.startsWith(`${PREVIEW_SESSION_COOKIE}=`));
-
-  if (!match) {
-    return {};
-  }
-
-  const value = decodeURIComponent(match.slice(PREVIEW_SESSION_COOKIE.length + 1));
-  if (!value) {
-    return {};
-  }
-
-  try {
-    return await unsealData<PreviewSessionData>(value, getSessionOptions());
-  } catch (error) {
-    console.warn('[preview-session] Failed to unseal cookie:', error);
-    return {};
-  }
+/** Read and decrypt the preview session. Returns `{}` if no session. */
+export async function getPreviewSession(): Promise<PreviewSessionData> {
+  const session = await useSession<PreviewSessionData>(getSessionConfig());
+  return session.data;
 }
 
-/** Build a Set-Cookie header value that activates preview mode. */
-export async function commitPreviewSession(data: PreviewSessionData): Promise<string> {
-  const sealed = await sealData(data, getSessionOptions());
-  // SameSite=None + Secure is required so the cookie works inside the
-  // Sanity Studio iframe (cross-origin). HttpOnly is intentionally omitted
-  // so client code can detect preview mode by checking document.cookie.
-  return `${PREVIEW_SESSION_COOKIE}=${encodeURIComponent(sealed)}; Path=/; Max-Age=${ONE_WEEK_SECONDS}; SameSite=None; Secure`;
+/** Activate preview mode by sealing the given data into the session cookie. */
+export async function commitPreviewSession(data: PreviewSessionData): Promise<void> {
+  await updateSession(getSessionConfig(), data);
 }
 
-/** Build a Set-Cookie header value that clears the preview cookie. */
-export function destroyPreviewSession(): string {
-  return `${PREVIEW_SESSION_COOKIE}=; Path=/; Max-Age=0; SameSite=None; Secure`;
+/** Clear the preview session cookie. */
+export async function destroyPreviewSession(): Promise<void> {
+  await clearSession(getSessionConfig());
 }
