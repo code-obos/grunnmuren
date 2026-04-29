@@ -13,7 +13,9 @@ import { Route as DocsRouteImport } from './routes/_docs'
 import { Route as StudioRouteRouteImport } from './routes/studio/route'
 import { Route as DocsIndexRouteImport } from './routes/_docs/index'
 import { Route as StudioSplatRouteImport } from './routes/studio/$'
+import { Route as ApiPreviewRouteImport } from './routes/api/preview'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
+import { Route as ApiDraftTokenRouteImport } from './routes/api/draft-token'
 import { Route as DocsSlugRouteImport } from './routes/_docs/$slug'
 import { Route as DocsReferanseskjemaIndexRouteImport } from './routes/_docs/referanseskjema/index'
 import { Route as DocsProfilIndexRouteImport } from './routes/_docs/profil/index'
@@ -42,9 +44,19 @@ const StudioSplatRoute = StudioSplatRouteImport.update({
   path: '/$',
   getParentRoute: () => StudioRouteRoute,
 } as any)
+const ApiPreviewRoute = ApiPreviewRouteImport.update({
+  id: '/api/preview',
+  path: '/api/preview',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiHealthRoute = ApiHealthRouteImport.update({
   id: '/api/health',
   path: '/api/health',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiDraftTokenRoute = ApiDraftTokenRouteImport.update({
+  id: '/api/draft-token',
+  path: '/api/draft-token',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DocsSlugRoute = DocsSlugRouteImport.update({
@@ -93,7 +105,9 @@ export interface FileRoutesByFullPath {
   '/studio': typeof StudioRouteRouteWithChildren
   '/': typeof DocsIndexRoute
   '/$slug': typeof DocsSlugRoute
+  '/api/draft-token': typeof ApiDraftTokenRoute
   '/api/health': typeof ApiHealthRoute
+  '/api/preview': typeof ApiPreviewRoute
   '/studio/$': typeof StudioSplatRoute
   '/komponenter/$slug': typeof DocsKomponenterSlugRoute
   '/profil/farger': typeof DocsProfilFargerRoute
@@ -106,7 +120,9 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/studio': typeof StudioRouteRouteWithChildren
   '/$slug': typeof DocsSlugRoute
+  '/api/draft-token': typeof ApiDraftTokenRoute
   '/api/health': typeof ApiHealthRoute
+  '/api/preview': typeof ApiPreviewRoute
   '/studio/$': typeof StudioSplatRoute
   '/': typeof DocsIndexRoute
   '/komponenter/$slug': typeof DocsKomponenterSlugRoute
@@ -122,7 +138,9 @@ export interface FileRoutesById {
   '/studio': typeof StudioRouteRouteWithChildren
   '/_docs': typeof DocsRouteWithChildren
   '/_docs/$slug': typeof DocsSlugRoute
+  '/api/draft-token': typeof ApiDraftTokenRoute
   '/api/health': typeof ApiHealthRoute
+  '/api/preview': typeof ApiPreviewRoute
   '/studio/$': typeof StudioSplatRoute
   '/_docs/': typeof DocsIndexRoute
   '/_docs/komponenter/$slug': typeof DocsKomponenterSlugRoute
@@ -139,7 +157,9 @@ export interface FileRouteTypes {
     | '/studio'
     | '/'
     | '/$slug'
+    | '/api/draft-token'
     | '/api/health'
+    | '/api/preview'
     | '/studio/$'
     | '/komponenter/$slug'
     | '/profil/farger'
@@ -152,7 +172,9 @@ export interface FileRouteTypes {
   to:
     | '/studio'
     | '/$slug'
+    | '/api/draft-token'
     | '/api/health'
+    | '/api/preview'
     | '/studio/$'
     | '/'
     | '/komponenter/$slug'
@@ -167,7 +189,9 @@ export interface FileRouteTypes {
     | '/studio'
     | '/_docs'
     | '/_docs/$slug'
+    | '/api/draft-token'
     | '/api/health'
+    | '/api/preview'
     | '/studio/$'
     | '/_docs/'
     | '/_docs/komponenter/$slug'
@@ -182,7 +206,9 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   StudioRouteRoute: typeof StudioRouteRouteWithChildren
   DocsRoute: typeof DocsRouteWithChildren
+  ApiDraftTokenRoute: typeof ApiDraftTokenRoute
   ApiHealthRoute: typeof ApiHealthRoute
+  ApiPreviewRoute: typeof ApiPreviewRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -215,11 +241,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudioSplatRouteImport
       parentRoute: typeof StudioRouteRoute
     }
+    '/api/preview': {
+      id: '/api/preview'
+      path: '/api/preview'
+      fullPath: '/api/preview'
+      preLoaderRoute: typeof ApiPreviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/health': {
       id: '/api/health'
       path: '/api/health'
       fullPath: '/api/health'
       preLoaderRoute: typeof ApiHealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/draft-token': {
+      id: '/api/draft-token'
+      path: '/api/draft-token'
+      fullPath: '/api/draft-token'
+      preLoaderRoute: typeof ApiDraftTokenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_docs/$slug': {
@@ -322,7 +362,9 @@ const DocsRouteWithChildren = DocsRoute._addFileChildren(DocsRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   StudioRouteRoute: StudioRouteRouteWithChildren,
   DocsRoute: DocsRouteWithChildren,
+  ApiDraftTokenRoute: ApiDraftTokenRoute,
   ApiHealthRoute: ApiHealthRoute,
+  ApiPreviewRoute: ApiPreviewRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

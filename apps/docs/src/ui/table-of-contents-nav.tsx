@@ -1,3 +1,4 @@
+import { stegaClean } from '@sanity/client/stega';
 import { cx } from 'cva';
 
 import type { COMPONENT_QUERY_RESULT } from '@/sanity.types';
@@ -9,6 +10,7 @@ type TableOfContentsNavProps = {
 };
 
 const TableOfContentsNav = ({ className, content, propsTables }: TableOfContentsNavProps) => {
+  const cleanedPropsTables = stegaClean(propsTables);
   const sections: Array<{
     href: string;
     text: string;
@@ -26,7 +28,7 @@ const TableOfContentsNav = ({ className, content, propsTables }: TableOfContents
     }
   }
 
-  if (propsTables && propsTables.length > 0) {
+  if (cleanedPropsTables && cleanedPropsTables.length > 0) {
     sections.push({
       href: '#props',
       text: 'Props',

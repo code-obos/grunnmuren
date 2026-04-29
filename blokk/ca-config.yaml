@@ -9,6 +9,12 @@ properties:
       - name: otel-api-key-header
         keyVaultUrl: https://${OTEL_KEY_VAULT_NAME}.vault.azure.net/secrets/api-key-header
         identity: ${APP_IDENTITY_ID}
+      - name: sanity-viewer-token
+        keyVaultUrl: https://${APP_KEY_VAULT_NAME}.vault.azure.net/secrets/sanity-viewer-token
+        identity: ${APP_IDENTITY_ID}
+      - name: sanity-preview-secret
+        keyVaultUrl: https://${APP_KEY_VAULT_NAME}.vault.azure.net/secrets/sanity-preview-secret
+        identity: ${APP_IDENTITY_ID}
   template:
     scale:
       minReplicas: 1
@@ -23,6 +29,10 @@ properties:
             secretRef: otel-api-key-header
           - name: OTEL_SERVICE_NAME
             value: ${APPLICATION_NAME}-${CONTAINER_APP_KEY}
+          - name: SANITY_VIEWER_TOKEN
+            secretRef: sanity-viewer-token
+          - name: SANITY_PREVIEW_SESSION_SECRET
+            secretRef: sanity-preview-secret
         resources:
           cpu: 0.25
           memory: 0.5Gi

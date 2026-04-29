@@ -1,4 +1,5 @@
 import { Card, CardLink, Heading } from '@obosbbl/grunnmuren-react';
+import { stegaClean } from '@sanity/client/stega';
 import { createFileRoute } from '@tanstack/react-router';
 import { defineQuery } from 'groq';
 
@@ -18,17 +19,20 @@ export const Route = createFileRoute('/_docs/komponenter/')({
       { name: 'description', content: 'Grunnmuren sine komponenter' },
     ],
   }),
-  loader: async () => await sanityFetch({ query: COMPONENTS_INDEX_QUERY }),
+  loader: async () => {
+    return sanityFetch({ query: COMPONENTS_INDEX_QUERY });
+  },
 });
 
 function Page() {
   const { data: components } = Route.useLoaderData();
+  const cleanedComponents = stegaClean(components);
 
   return (
     <>
       <h1 className="heading-l my-12">Komponenter</h1>
       <div className="grid grid-cols-2 gap-4">
-        {components.map((component) => (
+        {cleanedComponents.map((component) => (
           <Card key={component._id} variant="outlined">
             <Heading level={2}>
               <CardLink

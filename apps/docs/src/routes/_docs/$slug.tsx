@@ -33,7 +33,7 @@ export const Route = createFileRoute('/_docs/$slug')({
       throw notFound();
     }
 
-    return res as any;
+    return res;
   },
   head: (ctx) => ({
     meta: [
@@ -51,8 +51,8 @@ function Page() {
 
   return (
     <>
-      <h1 className="heading-l my-12">{data.name}</h1>
-      {data.resourceLinks && (
+      <h1 className="heading-l my-12">{data?.name}</h1>
+      {data?.resourceLinks && (
         <ResourceLinks className="mb-12">
           {data.resourceLinks?.map(
             ({ url, linkType = 'other', text, _key }) =>
@@ -67,9 +67,9 @@ function Page() {
           )}
         </ResourceLinks>
       )}
-      <TableOfContentsNav content={data.content} />
+      {data?.content && <TableOfContentsNav content={data?.content} />}
       <div className="lg:relative lg:flex lg:gap-4 lg:pt-9">
-        <SanityContent className="mb-12 grow" content={data.content ?? []} />
+        <SanityContent className="mb-12 grow" content={data?.content ?? []} />
         <ScrollToTop />
       </div>
     </>
