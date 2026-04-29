@@ -16,7 +16,7 @@ The docs app supports Sanity Presentation Mode with a signed preview session coo
 
 Set these environment variables in `apps/docs/.env` (or your deployment env):
 
-- `SANITY_PREVIEW_JWT_SECRET` - Required. A strong random string used to sign preview session JWTs.
+- `SANITY_PREVIEW_SECRET` - Required. A strong random string used to sign preview session JWTs.
 - `SANITY_VIEWER_TOKEN` - Required for draft preview. Use a Sanity token with read access to drafts.
 
-The Studio Presentation Tool uses `SANITY_PREVIEW_URL/api/preview` to enable preview mode and stores an 8-hour HttpOnly cookie.
+The Studio Presentation Tool uses `/api/preview` to enable preview mode and stores an 8-hour HttpOnly cookie.
