@@ -15,7 +15,7 @@ import { API_VERSION, DATASET, PROJECT_ID } from '../../util/env';
  * See `__root.tsx`.
  */
 function getStudioUrl(): string {
-  const extendedWindow = (window as Window & { __SANITY_STUDIO_URL__?: string });
+  const extendedWindow = window as Window & { __SANITY_STUDIO_URL__?: string };
   return extendedWindow.__SANITY_STUDIO_URL__ ?? '/studio';
 }
 
