@@ -1,5 +1,5 @@
 import { validatePreviewUrl } from '@sanity/preview-url-secret';
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, redirect } from '@tanstack/react-router';
 
 import { client } from '@/lib/sanity';
 import { commitPreviewSession, destroyPreviewSession } from '@/lib/sanity-preview-session';
@@ -47,18 +47,13 @@ export const Route = createFileRoute('/api/preview')({
         const redirectTo =
           result.redirectTo && result.redirectTo.length > 0 ? result.redirectTo : '/';
 
-        return new Response(null, {
-          status: 302,
-          headers: { Location: redirectTo },
-        });
+        throw redirect({ to: redirectTo });
       },
 
       POST: async () => {
         await destroyPreviewSession();
-        return new Response(null, {
-          status: 302,
-          headers: { Location: '/' },
-        });
+
+        throw redirect({ to: '/' });
       },
     },
   },
