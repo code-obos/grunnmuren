@@ -4,7 +4,6 @@ import { nitroV2Plugin } from '@tanstack/nitro-v2-vite-plugin';
 import { tanstackStart } from '@tanstack/react-start/plugin/vite';
 import viteReact from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
-import tsConfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
   plugins: [
@@ -16,9 +15,6 @@ export default defineConfig({
       }),
       enforce: 'pre',
     },
-    tsConfigPaths({
-      projects: ['./tsconfig.json'],
-    }),
     tailwindcss(),
     nitroV2Plugin({
       compatibilityDate: '2024-04-03',
@@ -28,6 +24,9 @@ export default defineConfig({
     }),
     viteReact(),
   ],
+  resolve: {
+    tsconfigPaths: true,
+  },
   esbuild: {
     // We need to disable minification of identifiers to preserve React component names in auto generated code snippets (see `reactElementToJSXString` in file:///./app/ui/component-preview.tsx).
     minifyIdentifiers: false,

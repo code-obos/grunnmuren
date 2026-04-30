@@ -3,6 +3,9 @@
 interface ImportMetaEnv {
   // Client-side environment variables
   readonly VITE_STORYBOOK_BASE_URL: string;
+  readonly SANITY_PROJECT_ID: string;
+  readonly SANITY_DATASET: string;
+  readonly SANITY_API_VERSION: string;
 }
 
 interface ImportMeta {
@@ -12,7 +15,13 @@ interface ImportMeta {
 // Server-side environment variables
 declare global {
   namespace NodeJS {
-    interface ProcessEnv {}
+    interface ProcessEnv {
+      SANITY_PREVIEW_SESSION_SECRET?: string;
+      SANITY_VIEWER_TOKEN?: string;
+      SANITY_PROJECT_ID: string;
+      SANITY_DATASET: string;
+      SANITY_API_VERSION: string;
+    }
   }
 }
 

@@ -1,21 +1,20 @@
 import { createRootRoute, HeadContent, Outlet, Scripts } from '@tanstack/react-router';
 
+// Lazy-loaded so the visual editing bundle is only shipped when actually needed.
+
 export const Route = createRootRoute({
   head: () => ({
     meta: [
-      {
-        charSet: 'utf-8',
-      },
-      {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1',
-      },
+      { charSet: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     ],
   }),
   component: RootDocument,
 });
 
 function RootDocument() {
+  const studioUrl = '/studio';
+
   return (
     <html lang="no">
       <head>
@@ -27,6 +26,7 @@ function RootDocument() {
       <body className="relative">
         <Outlet />
         <Scripts />
+        <script>{`window.__SANITY_STUDIO_URL__=${JSON.stringify(studioUrl)};`}</script>
       </body>
     </html>
   );

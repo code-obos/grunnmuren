@@ -6,6 +6,7 @@ import {
   GrunnmurenProvider,
 } from '@obosbbl/grunnmuren-react';
 import {
+  ClientOnly,
   createFileRoute,
   Link,
   type NavigateOptions,
@@ -15,18 +16,21 @@ import {
 } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { defineQuery } from 'groq';
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 
 import logoUrl from '@/assets/OBOS_Hvit_Liggende.svg?url';
 import { sanityFetch } from '@/lib/sanity';
+import { loadSanityQueryOptions } from '@/lib/sanity-query-options';
 import { Footer } from '@/ui/footer';
 import { MainNav } from '@/ui/main-nav';
 
 import appCss from '@/styles/app.css?url';
 
+const VisualEditing = lazy(() => import('@/ui/visual-editing'));
+
 const NAVIGATION_QUERY = defineQuery(`{
   "components": *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc),
-  "menu": *[_type == "menu"][0]{
+  "menu": *[_type == "menu" && _id == "menu"][0]{
     categories[]->{
       title,
       "slug": slug.current,
@@ -73,11 +77,20 @@ export const Route = createFileRoute('/_docs')({
           },
         ]
       : [],
-  loader: () => sanityFetch({ query: NAVIGATION_QUERY }),
+  loader: async () => {
+    return sanityFetch({ query: NAVIGATION_QUERY });
+  },
+  beforeLoad: async () => {
+    // Resolve preview state once at the layout root and pass it down via
+    // route context. Individual leaf routes don't need to re-check.
+    const { isPreview } = await loadSanityQueryOptions();
+    return { isPreview };
+  },
 });
 
 function RootLayout() {
   const router = useRouter();
+  const { isPreview } = Route.useRouteContext();
 
   const [isMobileNavExpanded, setIsMobileNavExpanded] = useState(false);
 
@@ -112,14 +125,39 @@ function RootLayout() {
           return router.buildLocation({ ...href }).href;
         }}
       >
+        {/* Visual editing + exit-preview UI are client-only and only mounted in preview mode. */}
+        <ClientOnly>
+          {isPreview ? (
+            <Suspense fallback={null}>
+              <VisualEditing />
+            </Suspense>
+          ) : null}
+        </ClientOnly>
         <Disclosure isExpanded={isMobileNavExpanded} onExpandedChange={setIsMobileNavExpanded}>
           <header className="bg-blue-dark relative z-3 flex items-center justify-between px-8 py-2 text-white">
             <Link to="/" aria-label="Gå til forsiden" className="py-2.5">
               <img src={logoUrl} alt="" className="h-6" />
             </Link>
-            <DisclosureButton className="lg:hidden" aria-label="Meny">
-              {isMobileNavExpanded ? <Close className="size-6" /> : <Menu className="size-6" />}
-            </DisclosureButton>
+            <div className="flex items-center gap-3">
+              {isPreview ? (
+                <>
+                  <span className="rounded bg-white/15 px-2 py-1 text-xs font-semibold tracking-wide text-white/90 uppercase">
+                    Preview aktiv
+                  </span>
+                  <form method="post" action="/api/preview">
+                    <button
+                      type="submit"
+                      className="focus-visible:outline-focus-inset rounded border border-white/50 px-3 py-1.5 text-sm font-medium hover:bg-white/15"
+                    >
+                      Avslutt preview
+                    </button>
+                  </form>
+                </>
+              ) : null}
+              <DisclosureButton className="lg:hidden" aria-label="Meny">
+                {isMobileNavExpanded ? <Close className="size-6" /> : <Menu className="size-6" />}
+              </DisclosureButton>
+            </div>
           </header>
           <div className="relative lg:hidden">
             <div className="absolute top-0 left-0 z-3 w-full">

@@ -12,7 +12,15 @@
  * ---------------------------------------------------------------------------------
  */
 
+export declare const internalGroqTypeReferenceTo: unique symbol;
+
 // Source: schema.json
+export type StorybookEmbed = {
+  _type: "storybook-embed";
+  storyId?: string;
+  caption?: string;
+};
+
 export type SanityImageAssetReference = {
   _ref: string;
   _type: "reference";
@@ -70,6 +78,9 @@ export type Content = Array<
   | ({
       _key: string;
     } & ImageWithCaption)
+  | ({
+      _key: string;
+    } & StorybookEmbed)
   | ({
       _key: string;
     } & Table)
@@ -228,6 +239,143 @@ export type SanityVideo = {
   media?: unknown;
 };
 
+export type SanityAssistInstructionTask = {
+  _type: "sanity.assist.instructionTask";
+  path?: string;
+  instructionKey?: string;
+  started?: string;
+  updated?: string;
+  info?: string;
+};
+
+export type SanityAssistTaskStatus = {
+  _type: "sanity.assist.task.status";
+  tasks?: Array<
+    {
+      _key: string;
+    } & SanityAssistInstructionTask
+  >;
+};
+
+export type SanityAssistSchemaTypeAnnotations = {
+  _type: "sanity.assist.schemaType.annotations";
+  title?: string;
+  fields?: Array<
+    {
+      _key: string;
+    } & SanityAssistSchemaTypeField
+  >;
+};
+
+export type SanityAssistOutputType = {
+  _type: "sanity.assist.output.type";
+  type?: string;
+};
+
+export type SanityAssistOutputField = {
+  _type: "sanity.assist.output.field";
+  path?: string;
+};
+
+export type AssistInstructionContextReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "assist.instruction.context";
+};
+
+export type SanityAssistInstructionContext = {
+  _type: "sanity.assist.instruction.context";
+  reference?: AssistInstructionContextReference;
+};
+
+export type AssistInstructionContext = {
+  _id: string;
+  _type: "assist.instruction.context";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  context?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: null;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+};
+
+export type SanityAssistInstructionUserInput = {
+  _type: "sanity.assist.instruction.userInput";
+  message?: string;
+  description?: string;
+};
+
+export type SanityAssistInstructionPrompt = Array<{
+  children?: Array<
+    | {
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }
+    | ({
+        _key: string;
+      } & SanityAssistInstructionFieldRef)
+    | ({
+        _key: string;
+      } & SanityAssistInstructionContext)
+    | ({
+        _key: string;
+      } & SanityAssistInstructionUserInput)
+  >;
+  style?: "normal";
+  listItem?: never;
+  markDefs?: null;
+  level?: number;
+  _type: "block";
+  _key: string;
+}>;
+
+export type SanityAssistInstructionFieldRef = {
+  _type: "sanity.assist.instruction.fieldRef";
+  path?: string;
+};
+
+export type SanityAssistInstruction = {
+  _type: "sanity.assist.instruction";
+  prompt?: SanityAssistInstructionPrompt;
+  icon?: string;
+  title?: string;
+  userId?: string;
+  createdById?: string;
+  output?: Array<
+    | ({
+        _key: string;
+      } & SanityAssistOutputField)
+    | ({
+        _key: string;
+      } & SanityAssistOutputType)
+  >;
+};
+
+export type SanityAssistSchemaTypeField = {
+  _type: "sanity.assist.schemaType.field";
+  path?: string;
+  instructions?: Array<
+    {
+      _key: string;
+    } & SanityAssistInstruction
+  >;
+};
+
 export type Table = {
   _type: "table";
   rows?: Array<
@@ -275,6 +423,7 @@ export type SanityImageMetadata = {
   palette?: SanityImagePalette;
   lqip?: string;
   blurHash?: string;
+  thumbHash?: string;
   hasAlpha?: boolean;
   isOpaque?: boolean;
 };
@@ -339,6 +488,7 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
+  | StorybookEmbed
   | SanityImageAssetReference
   | ImageWithCaption
   | LiveCodeBlock
@@ -358,6 +508,19 @@ export type AllSanitySchemaTypes =
   | SanityVideoMetadata
   | SanityVideoAsset
   | SanityVideo
+  | SanityAssistInstructionTask
+  | SanityAssistTaskStatus
+  | SanityAssistSchemaTypeAnnotations
+  | SanityAssistOutputType
+  | SanityAssistOutputField
+  | AssistInstructionContextReference
+  | SanityAssistInstructionContext
+  | AssistInstructionContext
+  | SanityAssistInstructionUserInput
+  | SanityAssistInstructionPrompt
+  | SanityAssistInstructionFieldRef
+  | SanityAssistInstruction
+  | SanityAssistSchemaTypeField
   | Table
   | TableRow
   | SanityImagePaletteSwatch
@@ -369,11 +532,9 @@ export type AllSanitySchemaTypes =
   | SanityImageAsset
   | Geopoint;
 
-export declare const internalGroqTypeReferenceTo: unique symbol;
-
 // Source: src/routes/_docs.tsx
 // Variable: NAVIGATION_QUERY
-// Query: {  "components": *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc),  "menu": *[_type == "menu"][0]{    categories[]->{      title,      "slug": slug.current,      categoryItems[]->{        name,        "slug": slug.current      }    }  }}
+// Query: {  "components": *[_type == "component"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc),  "menu": *[_type == "menu" && _id == "menu"][0]{    categories[]->{      title,      "slug": slug.current,      categoryItems[]->{        name,        "slug": slug.current      }    }  }}
 export type NAVIGATION_QUERY_RESULT = {
   components: Array<{
     _id: string;
@@ -436,6 +597,12 @@ export type INFO_QUERY_RESULT = {
         _key: string;
         _type: "static-code-block";
         code?: Code;
+        caption?: string;
+      }
+    | {
+        _key: string;
+        _type: "storybook-embed";
+        storyId?: string;
         caption?: string;
       }
     | {
@@ -505,6 +672,12 @@ export type COMPONENT_QUERY_RESULT = {
       }
     | {
         _key: string;
+        _type: "storybook-embed";
+        storyId?: string;
+        caption?: string;
+      }
+    | {
+        _key: string;
         _type: "table";
         rows?: Array<
           {
@@ -539,7 +712,7 @@ export type COMPONENTS_INDEX_QUERY_RESULT = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '{\n  "components": *[_type == "component"]{ _id, name, \'slug\': coalesce(slug.current, \'\'), componentState} | order(name asc),\n  "menu": *[_type == "menu"][0]{\n    categories[]->{\n      title,\n      "slug": slug.current,\n      categoryItems[]->{\n        name,\n        "slug": slug.current\n      }\n    }\n  }\n}': NAVIGATION_QUERY_RESULT;
+    '{\n  "components": *[_type == "component"]{ _id, name, \'slug\': coalesce(slug.current, \'\'), componentState} | order(name asc),\n  "menu": *[_type == "menu" && _id == "menu"][0]{\n    categories[]->{\n      title,\n      "slug": slug.current,\n      categoryItems[]->{\n        name,\n        "slug": slug.current\n      }\n    }\n  }\n}': NAVIGATION_QUERY_RESULT;
     '*[_type == "info"\n  && slug.current == $slug][0]{\n    "content": content[] {\n      ...,\n      _type == "image-with-caption" => {\n        ...,\n      }\n    },\n    "name": coalesce(name, \'\'),\n    resourceLinks,\n  }': INFO_QUERY_RESULT;
     '*[_type == "component"\n  && slug.current == $slug][0]{\n    "content": content[] {\n      ...,\n      _type == "image-with-caption" => {\n        ...,\n      }\n    },\n    "name": coalesce(name, \'\'),\n    propsComponents,\n    resourceLinks,\n    componentState,\n  }': COMPONENT_QUERY_RESULT;
     "*[_type == \"component\"]{ _id, name, 'slug': coalesce(slug.current, ''), componentState} | order(name asc)": COMPONENTS_INDEX_QUERY_RESULT;

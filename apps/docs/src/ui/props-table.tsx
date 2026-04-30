@@ -1,3 +1,4 @@
+import { stegaClean } from '@sanity/client/stega';
 import type { PropItem } from 'react-docgen-typescript';
 
 import * as props from '@/component-props';
@@ -10,9 +11,16 @@ interface PropsTableProps {
 }
 
 export const PropsTable = ({ componentName }: PropsTableProps) => {
-  const headingId = `${componentName.toLowerCase()}-props`;
+  const cleanedComponentName = stegaClean(componentName);
+  const componentEntry = props[cleanedComponentName];
 
-  const componentProps = Object.values(props[componentName].props);
+  if (!componentEntry) {
+    return null;
+  }
+
+  const headingId = `${String(cleanedComponentName).toLowerCase()}-props`;
+
+  const componentProps = Object.values(componentEntry.props);
 
   const groupedProps = Object.groupBy(componentProps, (prop: PropItem) => {
     switch (true) {
@@ -36,7 +44,7 @@ export const PropsTable = ({ componentName }: PropsTableProps) => {
   return (
     <div className="overflow-x-auto">
       <AnchorHeading className="heading-s my-2" level={2} id={headingId}>
-        {componentName}
+        {cleanedComponentName}
       </AnchorHeading>
       <Table className="mb-8 w-full text-sm" aria-describedby={headingId}>
         <TableHead>

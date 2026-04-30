@@ -4,23 +4,24 @@ import { codeInput } from '@sanity/code-input';
 import { table } from '@sanity/table';
 import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
+import { presentationTool } from 'sanity/presentation';
 import { structureTool } from 'sanity/structure';
 
+import { presentationResolve } from './studio/lib/resolve';
 import { schemaTypes } from './studio/schema-types';
-
-const dataset = 'grunnmuren';
+import { API_VERSION, DATASET, PROJECT_ID } from './util/env';
 
 export default defineConfig({
-  projectId: 'tq6w17ny',
-  dataset,
+  projectId: PROJECT_ID,
+  dataset: DATASET,
   basePath: '/studio',
   title: 'Grunnmuren',
-  auth: obosAuthStore({ dataset }),
+  auth: obosAuthStore({ dataset: DATASET }),
   plugins: [
     structureTool({
       structure: async (S, context) => {
         const CATEGORIES = await context
-          .getClient({ apiVersion: '2025-03-21' })
+          .getClient({ apiVersion: API_VERSION })
           .fetch(`(*[_type == "category"])`);
 
         return S.list()
@@ -61,6 +62,15 @@ export default defineConfig({
       },
     }),
     visionTool(),
+    presentationTool({
+      resolve: presentationResolve,
+      previewUrl: {
+        previewMode: {
+          enable: `/api/preview`,
+        },
+      },
+      allowOrigins: ['http://localhost:*', 'https://grunnmuren.obos.no'],
+    }),
     codeInput(),
     table(),
     assist(),

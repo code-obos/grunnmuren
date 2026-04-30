@@ -1,5 +1,6 @@
 import { Child, CircusTent } from '@obosbbl/grunnmuren-icons-react';
 import { Alertbox, Content } from '@obosbbl/grunnmuren-react';
+import { stegaClean } from '@sanity/client/stega';
 import { createFileRoute, notFound } from '@tanstack/react-router';
 import { defineQuery } from 'groq';
 
@@ -40,7 +41,7 @@ export const Route = createFileRoute('/_docs/komponenter/$slug')({
       throw notFound();
     }
 
-    return res.data as any;
+    return res.data;
   },
   head: (ctx) => ({
     meta: [
@@ -55,6 +56,7 @@ export const Route = createFileRoute('/_docs/komponenter/$slug')({
 
 function Page() {
   const data = Route.useLoaderData();
+  const cleanedPropsComponents = stegaClean(data.propsComponents);
 
   return (
     <>
@@ -73,7 +75,7 @@ function Page() {
             ),
         )}
       </ResourceLinks>
-      <TableOfContentsNav content={data.content} propsTables={data.propsComponents} />
+      <TableOfContentsNav content={data.content} propsTables={cleanedPropsComponents} />
       <div className="lg:relative lg:flex lg:gap-4">
         <div>
           {data.componentState === 'new' && (
@@ -103,12 +105,12 @@ function Page() {
 
           <SanityContent className="mb-12" content={data.content ?? []} />
 
-          {data.propsComponents?.length && (
+          {cleanedPropsComponents?.length && (
             <AnchorHeading className="heading-m" level={2} id="props">
               Props
             </AnchorHeading>
           )}
-          {data.propsComponents?.map((componentName) => (
+          {cleanedPropsComponents?.map((componentName) => (
             <PropsTable key={componentName} componentName={componentName as keyof typeof props} />
           ))}
         </div>
