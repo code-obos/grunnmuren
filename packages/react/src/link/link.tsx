@@ -1,7 +1,10 @@
+import { ArrowRight, Download, LinkExternal } from '@obosbbl/grunnmuren-icons-react';
 import { compose, cva, type VariantProps } from 'cva';
+import { useContext } from 'react';
 import { Link as _Link, type LinkProps as _LinkProps } from 'react-aria-components/Link';
 
 import { animateIconVariants } from '../classes';
+import { LinkListContext } from '../link-list/link-list';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 
@@ -16,25 +19,42 @@ type LinkProps = VariantProps<typeof linkVariants> &
   _LinkProps &
   React.RefAttributes<HTMLAnchorElement> & {
     children?: React.ReactNode;
-    /** @private Internal use */
-    '~iconRight'?: React.ReactNode;
   };
 
-const Link = ({
-  animateIcon,
-  children,
-  className,
-  '~iconRight': iconRight,
-  ...props
-}: LinkProps) => {
+const Link = ({ animateIcon, children, className, ...props }: LinkProps) => {
   const locale = useLocale();
   const externalLinkText = translations.externalLink[locale];
+  const shouldRenderAutoIcons = useContext(LinkListContext)?.shouldRenderAutoIcons ?? false;
+
+  let resolvedAnimateIcon = animateIcon;
+  let autoIcon: React.ReactNode = null;
+
+  if (shouldRenderAutoIcons) {
+    if (resolvedAnimateIcon === undefined) {
+      resolvedAnimateIcon = props.download
+        ? 'down'
+        : props.rel?.includes('external')
+          ? 'up-right'
+          : 'right';
+    }
+    autoIcon = props.download ? (
+      <Download />
+    ) : props.rel?.includes('external') ? (
+      <LinkExternal />
+    ) : (
+      <ArrowRight />
+    );
+  }
 
   return (
-    <_Link {...props} data-slot="link" className={linkVariants({ className, animateIcon })}>
+    <_Link
+      {...props}
+      data-slot="link"
+      className={linkVariants({ className, animateIcon: resolvedAnimateIcon })}
+    >
       {children}
       {props.rel?.includes('external') && <span className="sr-only">{externalLinkText}</span>}
-      {iconRight}
+      {autoIcon}
     </_Link>
   );
 };
