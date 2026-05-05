@@ -1,8 +1,4 @@
-import {
-  Link,
-  UNSAFE_Step as Step,
-  UNSAFE_Stepper as Stepper,
-} from '@obosbbl/grunnmuren-react';
+import { Link, UNSAFE_Step as Step, UNSAFE_Stepper as Stepper } from '@obosbbl/grunnmuren-react';
 import { createFileRoute } from '@tanstack/react-router';
 import type { ComponentType } from 'react';
 import { useState } from 'react';
