@@ -1,5 +1,5 @@
 import {
-  UNSAFE_Link as Link,
+  Link,
   UNSAFE_Step as Step,
   UNSAFE_Stepper as Stepper,
 } from '@obosbbl/grunnmuren-react';

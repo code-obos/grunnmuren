@@ -6,7 +6,7 @@ import {
   type BreadcrumbProps as RACBreadcrumbProps,
 } from 'react-aria-components/Breadcrumbs';
 
-import { UNSAFE_Link as Link, type UNSAFE_LinkProps as LinkProps } from '../link';
+import { Link, type LinkProps } from '../link';
 
 type BreadcrumbProps = {
   /** Additional CSS className for the element. */

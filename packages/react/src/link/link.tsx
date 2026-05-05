@@ -59,4 +59,4 @@ const Link = ({ animateIcon, children, className, ...props }: LinkProps) => {
   );
 };
 
-export { Link as UNSAFE_Link, type LinkProps as UNSAFE_LinkProps };
+export { Link, type LinkProps };

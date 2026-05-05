@@ -2,7 +2,7 @@ import { Download, LinkExternal } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn } from 'storybook/test';
 
-import { UNSAFE_Link as Link } from './link';
+import { Link } from './link';
 
 const meta = {
   title: 'Link',

@@ -2,7 +2,7 @@ import {
   Alertbox,
   Button,
   Card,
-  UNSAFE_Link as Link,
+  Link,
   Content,
   Heading,
   Footer,
