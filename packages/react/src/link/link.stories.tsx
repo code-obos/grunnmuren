@@ -1,4 +1,4 @@
-import { Download, LinkExternal } from '@obosbbl/grunnmuren-icons-react';
+import { ArrowRight, Download, LinkExternal } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn } from 'storybook/test';
 
@@ -24,6 +24,19 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
+
+export const LinkWithIcon: Story = {
+  args: {
+    href: '/my-href',
+    animateIcon: 'right',
+  },
+  render: (args) => (
+    <Link {...args}>
+      Les mer
+      <ArrowRight />
+    </Link>
+  ),
+};
 
 export const ExternalLink: Story = {
   args: {
