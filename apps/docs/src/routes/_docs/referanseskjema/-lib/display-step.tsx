@@ -1,12 +1,4 @@
-import {
-  Alertbox,
-  Button,
-  Card,
-  UNSAFE_Link as Link,
-  Content,
-  Heading,
-  Footer,
-} from '@obosbbl/grunnmuren-react';
+import { Alertbox, Button, Card, Link, Content, Heading, Footer } from '@obosbbl/grunnmuren-react';
 import { cx } from 'cva';
 
 import { Code } from '@/ui/code';

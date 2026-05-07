@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react';
 import { useArgs } from 'storybook/preview-api';
 import { fn } from 'storybook/test';
 
-import { UNSAFE_Link as Link } from '../link';
+import { Link } from '../link';
 import { UNSAFE_Step as Step, UNSAFE_Stepper as Stepper } from './stepper';
 
 const meta: Meta<typeof Stepper> = {

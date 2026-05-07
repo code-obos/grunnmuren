@@ -1,7 +1,7 @@
 import type { Meta } from '@storybook/react-vite';
 
 import { Heading } from '../content';
-import { UNSAFE_Link as Link } from '../link';
+import { Link } from '../link';
 import { LinkList, LinkListContainer, LinkListItem } from './link-list';
 
 const meta = {

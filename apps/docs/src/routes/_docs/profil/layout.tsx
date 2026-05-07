@@ -1,4 +1,4 @@
-import { UNSAFE_Link as Link } from '@obosbbl/grunnmuren-react';
+import { Link } from '@obosbbl/grunnmuren-react';
 import { createFileRoute } from '@tanstack/react-router';
 
 import { AnchorHeading } from '@/ui/anchor-heading';
