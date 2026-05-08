@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.4.8
+
+### Patch Changes
+
+- 8609e6a: Blockquote: adjust font-size, line-height and quote mark proportions
+
 ## 2.4.7
 
 ### Patch Changes
