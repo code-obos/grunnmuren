@@ -1,5 +1,25 @@
 # @obosbbl/grunnmuren-react
 
+## 3.6.0
+
+### Minor Changes
+
+- 38b1fc5: Link: out of BETA 🚀
+
+  The `UNSAFE_` prefix has been removed from `Link` (and its props type). Update your imports:
+
+  ### Before
+
+  ```tsx
+  import { UNSAFE_Link as Link } from "@obosbbl/grunnmuren-react";
+  ```
+
+  ### Now
+
+  ```tsx
+  import { Link } from "@obosbbl/grunnmuren-react";
+  ```
+
 ## 3.5.0
 
 ### Minor Changes
