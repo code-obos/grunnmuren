@@ -42,10 +42,14 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Build packages before lint so that type-aware linting can resolve
-      # workspace package types from their `dist` outputs.
+      # Build packages and generate docs artifacts before lint so that
+      # type-aware linting can resolve workspace package types and the
+      # generated `@/component-props` / `@/colors` modules used by docs.
       - name: Build packages
         run: pnpm run build
+
+      - name: Generate docs artifacts
+        run: pnpm --filter @obosbbl/grunnmuren-docs run build:props && pnpm --filter @obosbbl/grunnmuren-docs run build:colors
 
       - name: lint
         run: pnpm lint && pnpm fmt:check
