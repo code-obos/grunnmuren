@@ -1,4 +1,5 @@
 import { PortableText } from '@portabletext/react';
+import type { TableRow as SanityTableRow } from '@sanity/table';
 import { cx } from 'cva';
 
 import type { COMPONENT_QUERY_RESULT } from '@/sanity.types';
@@ -31,8 +32,8 @@ export function SanityContent({ content, className }: SanityContentProps) {
               <Code code={value.code.code} language={value.code.language} caption={value.caption} />
             ),
             'image-with-caption': ({ value }) => <ImageWithCaption asset={value} />,
-            table: ({ value: { rows } }) => {
-              const [firstRow, ...restRows] = rows;
+            table: ({ value }: { value: { rows: SanityTableRow[] } }) => {
+              const [firstRow, ...restRows] = value.rows;
               return (
                 <Table>
                   <TableHead>

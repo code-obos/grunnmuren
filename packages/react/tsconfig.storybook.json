@@ -1,4 +1,0 @@
-{
-  "extends": "./tsconfig.json",
-  "include": ["src/**/*.stories.*", "src/**/*.mdx", "src/**/__stories__/**/*"]
-}

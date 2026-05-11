@@ -42,14 +42,17 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: lint
-        run: pnpm lint && pnpm fmt:check
-
+      # Build packages and generate docs artifacts before lint so that
+      # type-aware linting can resolve workspace package types and the
+      # generated `@/component-props` / `@/colors` modules used by docs.
       - name: Build packages
         run: pnpm run build
 
-      - name: Typecheck storybook
-        run: pnpm typecheck:storybook
+      - name: Generate docs artifacts
+        run: pnpm --filter @obosbbl/grunnmuren-docs run build:props && pnpm --filter @obosbbl/grunnmuren-docs run build:colors
+
+      - name: lint
+        run: pnpm lint && pnpm fmt:check
 
       # It makes sense to do this on PRs to ensure the change didn't break the Storybook
       - name: Build storybook

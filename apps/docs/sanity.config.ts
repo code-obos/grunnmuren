@@ -7,6 +7,8 @@ import { defineConfig } from 'sanity';
 import { presentationTool } from 'sanity/presentation';
 import { structureTool } from 'sanity/structure';
 
+import type { Category } from '@/sanity.types';
+
 import { presentationResolve } from './studio/lib/resolve';
 import { schemaTypes } from './studio/schema-types';
 import { API_VERSION, DATASET, PROJECT_ID } from './util/env';
@@ -22,7 +24,7 @@ export default defineConfig({
       structure: async (S, context) => {
         const CATEGORIES = await context
           .getClient({ apiVersion: API_VERSION })
-          .fetch(`(*[_type == "category"])`);
+          .fetch<Category[]>(`(*[_type == "category"])`);
 
         return S.list()
           .title('Content')
@@ -43,12 +45,13 @@ export default defineConfig({
                     ),
                     S.divider(),
                     ...CATEGORIES.map((category) => {
-                      return S.listItem().title(category.title).id(category._id).child(
+                      const title = category.title ?? category._id;
+                      return S.listItem().title(title).id(category._id).child(
                         // Instead of rendering a list of documents, we render a single
                         // document, specifying the `documentId` manually to ensure
                         // that we're editing the single instance of the document
                         S.document()
-                          .title(category.title)
+                          .title(title)
                           .schemaType(category._type)
                           .documentId(category._id),
                       );
