@@ -42,11 +42,13 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: lint
-        run: pnpm lint && pnpm fmt:check
-
+      # Build packages before lint so that type-aware linting can resolve
+      # workspace package types from their `dist` outputs.
       - name: Build packages
         run: pnpm run build
+
+      - name: lint
+        run: pnpm lint && pnpm fmt:check
 
       # It makes sense to do this on PRs to ensure the change didn't break the Storybook
       - name: Build storybook
