@@ -70,6 +70,14 @@
   }
 
   @font-face {
+    font-family: OBOSText;
+    font-weight: 500;
+    font-style: italic;
+    src: url('https://www.obos.no/fonts/OBOSText-MediumItalic.woff2') format('woff2');
+    font-display: swap;
+  }
+
+  @font-face {
     font-family: OBOSDisplay;
     font-weight: 600; /* SemiBold */
     font-style: normal;
