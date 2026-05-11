@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.4.9
+
+### Patch Changes
+
+- 7cda9fc: Add OBOSText-MediumItalic font face for italic + font-weight 500 combination
+
 ## 2.4.8
 
 ### Patch Changes
