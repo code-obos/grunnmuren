@@ -1,5 +1,16 @@
 import { defineLocations, type PresentationPluginOptions } from 'sanity/presentation';
 
+type ResolvedCategoryItem = {
+  _type?: string;
+  slug?: string;
+  name?: string;
+};
+
+type ResolvedCategory = {
+  title?: string;
+  categoryItems?: ResolvedCategoryItem[];
+};
+
 function getCategoryHref(title: string) {
   const normalized = title.trim().toLowerCase();
 
@@ -94,7 +105,7 @@ export const presentationResolve: PresentationPluginOptions['resolve'] = {
 
         const itemLocations = Array.isArray(doc?.categoryItems)
           ? doc.categoryItems
-              .map((item) => {
+              .map((item: ResolvedCategoryItem) => {
                 const href = getCategoryItemHref(title, {
                   slug: typeof item?.slug === 'string' ? item.slug : null,
                   type: typeof item?._type === 'string' ? item._type : null,
@@ -109,7 +120,11 @@ export const presentationResolve: PresentationPluginOptions['resolve'] = {
                   href,
                 };
               })
-              .filter((location): location is { title: string; href: string } => location !== null)
+              .filter(
+                (
+                  location: { title: string; href: string } | null,
+                ): location is { title: string; href: string } => location !== null,
+              )
           : [];
 
         return {
@@ -134,13 +149,13 @@ export const presentationResolve: PresentationPluginOptions['resolve'] = {
       resolve: (doc) => {
         const categoryLocations = Array.isArray(doc?.categories)
           ? doc.categories
-              .flatMap((category) => {
+              .flatMap((category: ResolvedCategory) => {
                 const categoryTitle = typeof category?.title === 'string' ? category.title : '';
                 const categoryIndexHref = categoryTitle ? getCategoryHref(categoryTitle) : null;
 
                 const items = Array.isArray(category?.categoryItems)
                   ? category.categoryItems
-                      .map((item) => {
+                      .map((item: ResolvedCategoryItem) => {
                         const href = getCategoryItemHref(categoryTitle, {
                           slug: typeof item?.slug === 'string' ? item.slug : null,
                           type: typeof item?._type === 'string' ? item._type : null,
@@ -159,8 +174,9 @@ export const presentationResolve: PresentationPluginOptions['resolve'] = {
                         };
                       })
                       .filter(
-                        (location): location is { title: string; href: string } =>
-                          location !== null,
+                        (
+                          location: { title: string; href: string } | null,
+                        ): location is { title: string; href: string } => location !== null,
                       )
                   : [];
 

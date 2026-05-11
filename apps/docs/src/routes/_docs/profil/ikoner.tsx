@@ -73,7 +73,13 @@ function IconsGrid() {
   );
 }
 
-function IconCard({ iconName, Icon }) {
+function IconCard({
+  iconName,
+  Icon,
+}: {
+  iconName: string;
+  Icon: (typeof icons)[keyof typeof icons];
+}) {
   const downloadSvgLink = `/resources/icons/${iconName}.svg`;
 
   return (
