@@ -174,54 +174,50 @@
   }
 }
 
-@utility layout-subgrid-* {
-  @apply layout-grid-gap-x grid;
-}
-
 @utility layout-subgrid-1 {
-  @apply grid-cols-1;
+  @apply layout-grid-gap-x grid grid-cols-1;
 }
 @utility layout-subgrid-2 {
-  @apply grid-cols-2;
+  @apply layout-grid-gap-x grid grid-cols-2;
 }
 @utility layout-subgrid-3 {
-  @apply grid-cols-3;
+  @apply layout-grid-gap-x grid grid-cols-3;
 }
 @utility layout-subgrid-4 {
-  @apply grid-cols-4;
+  @apply layout-grid-gap-x grid grid-cols-4;
 }
 @utility layout-subgrid-5 {
-  @apply grid-cols-5;
+  @apply layout-grid-gap-x grid grid-cols-5;
 }
 @utility layout-subgrid-6 {
-  @apply grid-cols-6;
+  @apply layout-grid-gap-x grid grid-cols-6;
 }
 @utility layout-subgrid-7 {
-  @apply grid-cols-7;
+  @apply layout-grid-gap-x grid grid-cols-7;
 }
 @utility layout-subgrid-8 {
-  @apply grid-cols-8;
+  @apply layout-grid-gap-x grid grid-cols-8;
 }
 @utility layout-subgrid-9 {
-  @apply grid-cols-9;
+  @apply layout-grid-gap-x grid grid-cols-9;
 }
 @utility layout-subgrid-10 {
-  @apply grid-cols-10;
+  @apply layout-grid-gap-x grid grid-cols-10;
 }
 @utility layout-subgrid-11 {
-  @apply grid-cols-11;
+  @apply layout-grid-gap-x grid grid-cols-11;
 }
 @utility layout-subgrid-12 {
-  @apply grid-cols-12;
+  @apply layout-grid-gap-x grid grid-cols-12;
 }
 @utility layout-subgrid-13 {
-  @apply grid-cols-13;
+  @apply layout-grid-gap-x grid grid-cols-13;
 }
 @utility layout-subgrid-14 {
-  @apply grid-cols-14;
+  @apply layout-grid-gap-x grid grid-cols-14;
 }
 @utility layout-subgrid-full {
-  @apply layout-subgrid-14;
+  @apply layout-grid-gap-x layout-subgrid-14 grid;
 }
 
 @utility layout-gap-x {
