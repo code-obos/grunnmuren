@@ -170,13 +170,13 @@ export const CardWithCoveringIllustration = () => (
       </div>
       <small className="description -order-1">Forhåndsvarsling - Saksnr. F0347565</small>
       <p className="font-semibold">100 m² | Prisantydning 9 600 000 kr</p>
-      <p className="flex gap-x-1">
+      <p className="flex gap-x-1.5">
         <House /> Rekkehus/småhus
       </p>
-      <p className="flex gap-x-1">
+      <p className="flex gap-x-1.5">
         <Bed /> 3 soverom
       </p>
-      <p className="flex gap-x-1">
+      <p className="flex gap-x-1.5">
         <PiggyBank /> Totalpris 9 989 838
       </p>
       <Badge size="small" color="mint">
@@ -284,13 +284,13 @@ export const ClickableWithOtherClickableElements = () => (
         </div>
         <small className="description -order-1">Forhåndsvarsling - Saksnr. F0347565</small>
         <p className="font-semibold">100 m² | Prisantydning 9 600 000 kr</p>
-        <p className="flex gap-x-1">
+        <p className="flex gap-x-1.5">
           <House /> Rekkehus/småhus
         </p>
-        <p className="flex gap-x-1">
+        <p className="flex gap-x-1.5">
           <Bed /> 3 soverom
         </p>
-        <p className="flex gap-x-1">
+        <p className="flex gap-x-1.5">
           <PiggyBank /> Totalpris 9 989 838
         </p>
         <Badge size="small" color="mint">
@@ -325,13 +325,13 @@ export const ClickableWithOtherClickableElementsAndBackgroundColor = () => (
       </div>
       <small className="description -order-1">Forhåndsvarsling - Saksnr. F0347565</small>
       <p className="font-semibold">100 m² | Prisantydning 9 600 000 kr</p>
-      <p className="flex gap-x-1">
+      <p className="flex gap-x-1.5">
         <House /> Rekkehus/småhus
       </p>
-      <p className="flex gap-x-1">
+      <p className="flex gap-x-1.5">
         <Bed /> 3 soverom
       </p>
-      <p className="flex gap-x-1">
+      <p className="flex gap-x-1.5">
         <PiggyBank /> Totalpris 9 989 838
       </p>
       <Badge size="small" color="mint" className="text-black">
@@ -369,13 +369,13 @@ export const ClickableWithBadge = () => (
       </div>
       <small className="description -order-1">Forhåndsvarsling - Saksnr. F0347565</small>
       <p className="font-semibold">100 m² | Prisantydning 9 600 000 kr</p>
-      <p className="flex gap-x-1">
+      <p className="flex gap-x-1.5">
         <House /> Rekkehus/småhus
       </p>
-      <p className="flex gap-x-1">
+      <p className="flex gap-x-1.5">
         <Bed /> 3 soverom
       </p>
-      <p className="flex gap-x-1">
+      <p className="flex gap-x-1.5">
         <PiggyBank /> Totalpris 9 989 838
       </p>
       <Badge size="small" color="mint" className="text-black">
@@ -413,13 +413,13 @@ export const ClickableWithBadgeRight = () => (
       </div>
       <small className="description -order-1">Forhåndsvarsling - Saksnr. F0347565</small>
       <p className="font-semibold">100 m² | Prisantydning 9 600 000 kr</p>
-      <p className="flex gap-x-1">
+      <p className="flex gap-x-1.5">
         <House /> Rekkehus/småhus
       </p>
-      <p className="flex gap-x-1">
+      <p className="flex gap-x-1.5">
         <Bed /> 3 soverom
       </p>
-      <p className="flex gap-x-1">
+      <p className="flex gap-x-1.5">
         <PiggyBank /> Totalpris 9 989 838
       </p>
       <Badge size="small" color="mint" className="text-black">
