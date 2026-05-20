@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.4.10
+
+### Patch Changes
+
+- ad72164: Fix `layout-subgrid-*` shared styles being dropped in some consumer production builds by inlining `layout-grid-gap-x` and `grid` into each `layout-subgrid-N` utility
+- 85e2f69: Prose: reuse `blockquote` utility for `<blockquote>` inside `prose` so both share the same typography
+
 ## 2.4.9
 
 ### Patch Changes
