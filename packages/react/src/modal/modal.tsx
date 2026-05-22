@@ -108,6 +108,7 @@ const Modal = ({
         onOpenChange={onOpenChange}
         defaultOpen={defaultOpen}
         isDismissable={isDismissable}
+        isKeyboardDismissDisabled={!isDismissable}
         zIndex={zIndex}
         fullscreen={fullscreen}
       >
