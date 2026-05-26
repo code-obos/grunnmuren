@@ -183,37 +183,6 @@ export const NotDismissable: Story = {
   },
 };
 
-/**
- * TODO – diskuteres i teamet:
- *
- * `bg-X!`-override fungerer, men er litt klønete. En mer elegant løsning er en
- * dedikert `color`-prop på `UNSAFE_Drawer`, med default `'white'` og en
- * hvitliste over støttede bakgrunner. Da kan vi bake inn riktig kombinasjon
- * av bakgrunn og tekstfarge per variant, og utvide listen ved behov.
- * Konsumenter kan fortsatt overstyre med `!`-prefiks for helt spesielle
- * tilfeller.
- *
- * Skisse av API-et:
- *
- * ```tsx
- * // Inside drawer.tsx:
- * const drawerVariants = cva({
- *   variants: {
- *     color: {
- *       white: 'bg-white text-black',
- *       'blue-dark': 'bg-blue-dark text-mint-light',
- *     },
- *   },
- *   defaultVariants: { color: 'white' },
- * });
- *
- * // Usage:
- * <UNSAFE_Drawer color="blue-dark">…</UNSAFE_Drawer>
- *
- * // Escape hatch fortsatt mulig:
- * <UNSAFE_Drawer className="bg-yellow! text-black">…</UNSAFE_Drawer>
- * ```
- */
 export const CustomBackground: Story = {
   render: () => (
     <div className="p-4">
