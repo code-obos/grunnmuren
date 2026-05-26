@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-icons-svg
 
+## 2.2.1
+
+### Patch Changes
+
+- db0e9ce: add new icon `ArrowsRightLeft`
+
 ## 2.2.0
 
 ### Minor Changes
