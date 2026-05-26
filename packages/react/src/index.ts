@@ -14,6 +14,7 @@ export * from './combobox';
 export * from './content';
 export * from './date-formatter';
 export * from './disclosure';
+export * from './drawer';
 export * from './file-upload';
 export * from './grunnmuren-provider';
 export * from './hero';
