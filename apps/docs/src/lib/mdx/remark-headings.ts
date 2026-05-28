@@ -1,5 +1,4 @@
 import { valueToEstree } from 'estree-util-value-to-estree';
-import GithubSlugger from 'github-slugger';
 import { toString } from 'mdast-util-to-string';
 import type { Node } from 'unist';
 import { visit } from 'unist-util-visit';
@@ -15,6 +14,23 @@ export type TocEntry = {
   depth: number;
 };
 
+/** Produces stable, URL-safe ids from heading text. */
+function createSlugger() {
+  const seen = new Map<string, number>();
+  return (text: string): string => {
+    const base = text
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, '-')
+      .replace(/[^\p{Letter}\p{Number}_-]/gu, '')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '');
+    const count = seen.get(base) ?? 0;
+    seen.set(base, count + 1);
+    return count === 0 ? base : `${base}-${count}`;
+  };
+}
+
 /**
  * Assigns stable slug ids to headings (matching the anchor links the docs
  * render) and exports a `toc` array of the h2 sections, mirroring the
@@ -25,13 +41,13 @@ export type TocEntry = {
  */
 export function remarkHeadings() {
   return (tree: Node) => {
-    const slugger = new GithubSlugger();
+    const slugify = createSlugger();
     const toc: TocEntry[] = [];
 
     visit(tree, 'heading', (node) => {
       const heading = node as unknown as HeadingNode;
       const text = toString(node);
-      const id = slugger.slug(text);
+      const id = slugify(text);
 
       heading.data ??= {};
       heading.data.hProperties ??= {};
