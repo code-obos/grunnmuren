@@ -14,15 +14,20 @@ export type TocEntry = {
   depth: number;
 };
 
-/** Produces stable, URL-safe ids from heading text. */
+/** Produces stable, URL-safe ASCII ids from heading text. */
 function createSlugger() {
   const seen = new Map<string, number>();
   return (text: string): string => {
     const base = text
       .toLowerCase()
+      .replaceAll('æ', 'a')
+      .replaceAll('ø', 'o')
+      .replaceAll('å', 'a')
+      .normalize('NFD') // splits accented chars into base + combining mark, e.g. `é` → `e` + `́`
+      .replace(/\p{Mark}/gu, '') // strips the combining marks left behind by NFD
       .trim()
       .replace(/\s+/g, '-')
-      .replace(/[^\p{Letter}\p{Number}_-]/gu, '')
+      .replace(/[^a-z0-9_-]/g, '')
       .replace(/-+/g, '-')
       .replace(/^-|-$/g, '');
     const count = seen.get(base) ?? 0;
