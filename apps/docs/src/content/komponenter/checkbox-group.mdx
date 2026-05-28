@@ -1,0 +1,204 @@
+---
+name: 'CheckboxGroup'
+slug: 'checkbox-group'
+componentState: stable
+propsComponents:
+  - 'CheckboxGroup'
+resourceLinks:
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/checkbox'
+  - linkType: 'figma'
+    url: 'https://www.figma.com/design/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=311-1629&t=FV4FudOBI4z22wPz-4'
+---
+
+import img0 from './images/checkbox-group/0.webp';
+import img1 from './images/checkbox-group/1.webp';
+import img2 from './images/checkbox-group/2.webp';
+import img3 from './images/checkbox-group/3.webp';
+import img4 from './images/checkbox-group/4.webp';
+import img5 from './images/checkbox-group/5.webp';
+import img6 from './images/checkbox-group/6.webp';
+import img7 from './images/checkbox-group/7.webp';
+import img8 from './images/checkbox-group/8.webp';
+
+## Om komponenten
+
+CheckboxGroup lar brukeren mulighet til å krysse av for flere alternativer i en gruppe med valg.
+
+**Egnet til:**
+
+- Når brukeren skal kunne velge flere alternativ
+- Ved valg man kan skru av og på. For eksempel gi og trekke samtykke
+- I filtrering på en side, for eksempel i boligsøket.
+
+**Uegnet til:**
+
+- Lister der bruker bare kan velge ett alternativ. Da brukes [RadioButton](https://grunnmuren.obos.no/komponenter/radiogroup) isteden
+
+**Relaterte komponenter**
+
+- [Checkbox](https://grunnmuren.obos.no/komponenter/checkbox)
+
+<Image src={img0} alt="Divider" width={2000} height={143} />
+
+## Varianter
+
+Vi anbefaler at det alltid brukes checkbox sammen med label og beskrivelse, men om dere skal lage en komponent med to eller flere valg. Om dere skal ha en enkeltstående checkbox,[ les om checkbox](https://grunnmuren.obos.no/komponenter/checkbox).
+
+### CheckboxGroup med label og beskrivelse
+
+```tsx live caption="CheckboxGroup med label, beskrivelse og 2 valg"
+<CheckboxGroup label="Label" description="Beskrivelse">
+  <Checkbox value="value-1">Valg 1</Checkbox>
+  <Checkbox value="value-2">Valg 2</Checkbox>
+</CheckboxGroup>
+```
+
+### CheckboxGroup med label
+
+```tsx live caption="Checkbox-gruppe med default-valg"
+<CheckboxGroup label="Label" defaultValue={['Label']}>
+  <Checkbox value="Valg 1">Valg1</Checkbox>
+  <Checkbox value="Valg 2">Valg2</Checkbox>
+  <Checkbox value="Valg 3">Valg3</Checkbox>
+</CheckboxGroup>
+```
+
+### Enkeltstående CheckboxGroup
+
+```tsx live caption="Checkbox-gruppe med description"
+<CheckboxGroup>
+  <Checkbox value="Valg 1">Valg1</Checkbox>
+  <Checkbox value="Valg 2">Valg2</Checkbox>
+  <Checkbox value="Valg 3">Valg3</Checkbox>
+</CheckboxGroup>
+```
+
+#### Validering
+
+En CheckboxGroup med én obligatorisk checkbox.
+
+```tsx live caption="En obligatorisk checkbox-gruppe"
+<form onSubmit={(e) => e.preventDefault()} className="grid gap-6">
+  <CheckboxGroup label="Jeg er interessert i" isRequired>
+    <Checkbox value="bolig">Bolig</Checkbox>
+    <Checkbox value="bank" description="Markedets beste rentebetingelser">
+      Bank
+    </Checkbox>
+    <Checkbox value="fordeler" description="Mer enn 100 fordeler">
+      Medlemsfordeler
+    </Checkbox>
+  </CheckboxGroup>
+  <Button type="submit" className="w-fit">
+    Send inn
+  </Button>
+</form>
+```
+
+En CheckBox som må hukes av for å gå videre.
+
+```tsx live caption="Invalid CheckboxGroup"
+<CheckboxGroup label="Jeg er interessert i" isInvalid>
+  <Checkbox value="bolig">Bolig</Checkbox>
+  <Checkbox value="bank">Bank</Checkbox>
+  <Checkbox value="fordeler">Medlemsfordeler</Checkbox>
+</CheckboxGroup>
+```
+
+#### Controlled
+
+```tsx caption="Controlled CheckboxGroup"
+const [value, setValue] = useState(['bank']);
+
+<CheckboxGroup
+  label="Jeg er interessert i"
+  value={value}
+  onChange={(newValue) => setValue(newValue)}
+>
+  <Checkbox value="bolig">Bolig</Checkbox>
+  <Checkbox value="bank">Bank</Checkbox>
+  <Checkbox value="fordeler">Medlemsfordeler</Checkbox>
+</CheckboxGroup>;
+```
+
+<Image src={img1} alt="Divider" width={2000} height={143} />
+
+## Retningslinjer
+
+### Radiobutton vs Checkbox
+
+<Image src={img2} alt="Radio vs checkbox" width={2000} height={863} />
+
+### Checkbox alignment
+
+<Image src={img3} alt="Midtstilt checkbox atom" width={2000} height={929} />
+
+### Vertikal opplistning som standard
+
+<Image src={img4} alt="vertikalt vs horisontalt" width={2000} height={798} />
+
+### Hjelpetekst
+
+Du kan velge om du vil ha hjelpetekst ved checkbox. Når du skriver en hjelpetekst, er det viktig at du:
+
+- Bruker store bokstaver i setningsstil og skriver teksten i de fleste tilfeller som hele setninger.
+- Dersom du har veldig lang hjelpetekst bruk den [disclosure komponenten](https://grunnmuren.obos.no/komponenter/disclosure) i checkbox.
+
+\<Insert bildeeksempel for checkboxGroup>
+
+<Image src={img5} alt="Divider" width={2000} height={143} />
+
+## Formatering
+
+### Anatomi
+
+En CheckboxGroup komponent er sammensatt av label, to eller flere Checkbox-atom og verdien tilknyttet Checkbox-input.
+
+<Image src={img6} alt="Checkbox - Anatomi" width={2000} height={845} />
+
+1. **Label **Kommuniserer hva som må velges nedenfor.
+1. **Beskrivelse (Valgfri)** Hjelpetekst som kan gi ekstra hjelp eller kontekst til brukeren.
+1. **Disclosure (Valgfri)** Ekspanderende felt som skal supplere hjelpeteksten med mer informasjon. Viktig informasjon skal ikke legges i det ekspanderende element
+1. **Avmerkningsboks** En avkrysningsboks som indikerer riktig tilstand. Som standard er det ikke valgt.
+
+<Image src={img7} alt="Divider" width={2000} height={143} />
+
+## Universell utforming
+
+### Husk på
+
+- Alle checkbokser krever en klar, kortfattet og unik label: For checkbokser uten label, for eksempel de som brukes i en tabell, kreves det fortsatt en skjult label for assisterende hjelpemidler. WCAG: 1.3.1 Info and Relationships, 2.4.6 Heading and labels
+- Unngå valgt tilstand: Forhåndsvalgte valg anses som en villedende praksis for alle brukere. Implementer en standard uvalg tilstand. (Ved samtykke må det være uvalgt)
+- Alle tastaturinteraksjoner og ARIA-labels må oppfylle tilgjengelighetskriterier: WAI-ARIA Checkbox Authoring Practices)
+- Bruk Fieldset og legend ved gruppering av checkboxer
+
+### Sjekkliste
+
+✓ Alle checkbokser har en klar, kortfattet og unik label
+
+✓ Ingen av checkboksene har en valgt tilstand
+
+✓ Brukeren kan tabbe seg gjennom avmerkningsboksene, og velge dem ved hjelp av mellomromstasen.
+
+### Les mer
+
+[WAI-ARIA Checkbox Authoring Practices](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/)
+
+[WCAG 2.4.6 Heading and Labels (AA)](https://www.wcag.com/authors/2-4-6-headings-and-labels/)
+
+[WCAG 1.3.1 Info and Relationships (A)](https://www.wcag.com/developers/1-3-1-info-and-relationships/)
+
+[WCAG 3.2.2 On Input (A)](https://www.wcag.com/developers/3-2-2-on-input/)
+
+[WCAG 3.2.1 On Focus (A)](https://www.wcag.com/designers/3-2-1-on-focus/)
+
+<Image src={img8} alt="Divider" width={2000} height={143} />
+
+## Interaksjon
+
+### Tastatur
+
+| Key   | Interaksjon                                  |
+| ----- | -------------------------------------------- |
+| Space | Bytter mellom uvalgt og valgt tilstand       |
+| Tab   | Bytter mellom mulige checkbox i grupperingen |

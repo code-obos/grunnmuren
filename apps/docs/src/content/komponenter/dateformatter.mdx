@@ -1,0 +1,105 @@
+---
+name: 'DateFormatter'
+slug: 'dateformatter'
+componentState: stable
+propsComponents:
+  - 'DateFormatter'
+resourceLinks:
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/date-formatter'
+---
+
+import img0 from './images/dateformatter/0.webp';
+
+## Om komponenten
+
+DateFormatter er et skjemaelement som gir brukeren mulighet til å fylle inn dato.
+
+<Image src={img0} alt="Divider" width={2000} height={143} />
+
+## Varianter
+
+```tsx live caption="En dato på formatet dd.mm.yyyy"
+<DateFormatter
+  options={{
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  }}
+  value={new Date('1929-08-19T00:00:00.000Z')}
+/>
+```
+
+```tsx live caption="En dato på formatet dd. måned yyyy"
+<DateFormatter
+  options={{
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  }}
+  value={new Date('1929-08-19T00:00:00.000Z')}
+/>
+```
+
+```tsx live caption="Full dato med klokkeslett"
+<DateFormatter
+  options={{
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    month: 'long',
+    second: 'numeric',
+    year: 'numeric',
+  }}
+  value={new Date('1929-08-19T00:00:00.000Z')}
+/>
+```
+
+```tsx live caption="År"
+<DateFormatter
+  options={{
+    year: 'numeric',
+  }}
+  value={new Date('1929-08-19T00:00:00.000Z')}
+/>
+```
+
+```tsx live caption="Måned - kort"
+<DateFormatter
+  options={{
+    month: 'short',
+  }}
+  value={new Date('1929-08-19T00:00:00.000Z')}
+/>
+```
+
+```tsx live caption="Måned med stor forbokstav"
+<DateFormatter
+  options={{
+    month: 'long',
+  }}
+  value={new Date('1929-08-19T00:00:00.000Z')}
+>
+  {(formattedDate: string) => formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)}
+</DateFormatter>
+```
+
+```tsx live caption="Måned med stor forbokstav"
+<DateFormatter
+  options={{
+    month: 'long',
+  }}
+  value={new Date('1929-08-19T00:00:00.000Z')}
+>
+  {(formattedDate: string) => formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)}
+</DateFormatter>
+```
+
+```tsx live caption="Dag"
+<DateFormatter
+  options={{
+    day: 'numeric',
+  }}
+  value={new Date('2001-01-01T00:00:00.000Z')}
+/>
+```

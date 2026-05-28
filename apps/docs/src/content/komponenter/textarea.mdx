@@ -1,0 +1,95 @@
+---
+name: 'TextArea'
+slug: 'textarea'
+componentState: stable
+propsComponents:
+  - 'TextArea'
+resourceLinks:
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/textarea'
+---
+
+import img0 from './images/textarea/0.webp';
+
+## Om komponenten
+
+TextArea, eller fritekstfelt, er et skjemaelement som gir brukeren mulighet til å skrive tekst over flere linjer.
+
+**Egnet til:**
+
+- Når bruker skal kunne skrive lengre tekster, som å gi en beskrivelse.
+
+**Uegnet til:**
+
+- Korte tekster, slik som navn eller medlemsnummer. Bruk da heller [TextField.](https://grunnmuren.obos.no/komponenter/textfield)
+
+<Image src={img0} alt="Divider" width={2000} height={143} />
+
+## Varianter
+
+### Uncontrolled
+
+#### Uncontrolled TextArea med label
+
+```tsx live caption="Uncontrolled TextArea med label"
+<TextArea label="Beskrivelse" />
+```
+
+#### Uncontrolled TextArea med label og description
+
+```tsx live caption="Uncontrolled TextArea med label og description"
+<TextArea label="Beskrivelse" description="Maks 250 tegn" />
+```
+
+#### Uncontrolled TextArea med label og placeholder
+
+```tsx live caption="Uncontrolled TextArea med label og placholder"
+<TextArea placeholder="Gi en kort beskrivelse" label="Beskrivelse" />
+```
+
+#### Uncontrolled TextArea med usynlig label
+
+```tsx live caption="Uncontrolled med usynlig label"
+<TextArea aria-label="Beskrivelse" />
+```
+
+### Validering
+
+#### Uncontrolled TextArea med feilmelding
+
+```tsx live caption="Uncontrolled TextArea med feilmelding"
+<TextArea label="Beskrivelse" errorMessage="Her er det noe feil!" />
+```
+
+#### Uncontrolled, påkrevd TextArea
+
+```tsx live caption="Uncontrolled, påkrevd TextArea"
+<form onSubmit={(e) => e.preventDefault()} className="grid gap-6">
+  <TextArea label="Beskrivelse" isRequired />
+  <Button type="submit" className="w-fit">
+    Send inn
+  </Button>
+</form>
+```
+
+#### Uncontrolled TextArea med maks tre linjer
+
+```tsx live caption="Uncontrolled TextArea med max 3 linjer"
+<TextArea label="Beskrivelse" rows={3} />
+```
+
+### Controlled
+
+#### Controlled TextArea
+
+```tsx live caption="Controlled TextArea"
+function(){
+  const [text, setText] = React.useState("");
+
+  return <TextArea
+  label="Beløp"
+  value={text}
+  onChange={setText}
+/>
+}
+```

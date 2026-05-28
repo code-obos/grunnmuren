@@ -1,0 +1,43 @@
+---
+name: 'Link'
+slug: 'link'
+componentState: stable
+resourceLinks:
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/link'
+---
+
+### Om komponenten
+
+Link brukes for å lede brukeren til en annen side, seksjon eller ressurs. Den gir en tydelig visuell indikasjon på at elementet er klikkbart, og kan brukes med eller uten ikon.
+
+**Egnet til:**
+
+- Navigere til andre sider eller seksjoner
+- Lenke til dokumenter, filer eller eksterne ressurser
+- Kryssreferanser i tekstinnhold (f.eks. «Les mer»)
+- Som lenke i [Card](/komponenter/card)
+
+**Uegnet til:**
+
+- Handlinger som endrer innhold på siden uten navigasjon (bruk heller [Button](/komponenter/button))
+- Brødsmulesti (bruk heller [Breadcrumbs](/komponenter/breadcrumbs))
+- Lenker for gå tilbake (bruk heller [Backlink](/komponenter/backlink))
+
+Komponenten er liten wrapper rundt [Link](https://react-spectrum.adobe.com/react-aria/Link.html) fra react-aria-components, og funker med client-side ruting.
+
+#### Eksempler
+
+Standard lenke, brukes typisk i løpende tekst:
+
+<StorybookEmbed storyId="link--default" />
+
+Lenke med animert ikon:
+
+<StorybookEmbed storyId="link--default" />
+
+Lenker med spesielle egenskaper kan skilles ut ved bruk av ikoner:
+
+<StorybookEmbed storyId="link--external-link" />
+
+<StorybookEmbed storyId="link--download-link" />

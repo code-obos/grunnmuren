@@ -1,0 +1,574 @@
+---
+name: '3.4 Mønstre 4: Hjelpe brukere med å unngå feil og vite hvordan de kan rette dem'
+slug: '3-4-pattern-4-hjelpe-brukere-med-a-unnga-feil-og-vite-hvordan-de-kan-rette-dem'
+---
+
+Brukere bør kunne unngå feil og enkelt rette dem hvis det oppstår feil.
+
+Det er vanskelig for mange brukere å fylle ut skjemaer, spesielt personer med kognitive og lærevansker. Et godt design gjør feil mindre sannsynlige.
+
+Brukere med kognitive og lærevansker har større sannsynlighet for å gjøre feil. Dette kan inkludere å legge inn informasjon feil eller å berøre feil kontroll ved et uhell. Hjelp brukeren med å legge merke til skjemafeil og gjør det enkelt å rette dem. La alltid brukere gå tilbake og gjenopprette hvis de ved et uhell berører en kontroll.
+
+Å fylle ut skjemaer og lignende oppgaver er ofte overveldende for personer med kognitive og lærevansker. Mange brukere med kognitive og lærevansker kan ikke huske numre, for eksempel postnummer eller personnummer. Mange brukere må til og med sjekke telefonnumrene sine. Dette gjør det tregt å legge inn informasjon, og de må kanskje forlate skrivebordene sine eller ta pauser. Hjelp dem ved å tilby et design som reduserer feil. Gi dem tiden de trenger uten irriterende tidsavbrudd og datatap.
+
+## Sørg for at kontroller og innhold ikke beveger seg uventet
+
+Jeg må vite hvor ting er. Kontroller og innhold beveger seg ikke uventet mens jeg bruker dem.
+
+Relatert krav [3.4.1 Assistanse og støtte](https://grunnmuren.obos.no/3-4-mal-4#c78b1a608d1b)
+
+**Dette kan du gjøre:**
+
+Sørg for at kontroller og innhold forblir på plass og ikke beveger seg, med mindre brukeren starter bevegelsen.
+
+En bruker kan starte en bevegelse ved å utløse en handling eller ved å endre en egenskap ved enheten, for eksempel vindusstørrelse.
+
+Dette kan vanligvis oppnås ved å:
+
+- Sikre at kontroller og innhold ikke beveger seg når siden lastes inn eller oppdateres,
+- Vise en tydelig "laste"-indikator hvis innhold flyttes eller endres under en sideinnlasting,
+- Ikke oppdatere eller flytte innhold, for eksempel et elements plassering i en liste, med mindre brukeren forårsaker det.
+
+**Hvorfor gjør dette en forskjell?**
+
+Hvis en kontroll beveger seg, kan brukere med langsom hånd-øye-koordinasjon eller svekket kognitiv prosesseringshastighet trykke på feil kontroll. Dette forårsaker uønskede handlinger og feil. Brukeren kan oppleve desorientering, forvirring eller til og med feil forståelse av innholdet.
+
+For eksempel beveger en bruker seg for å trykke på en knapp i en video. Brukeren dytter ved et uhell på enheten. Retningen endres til liggende, og kontrollen beveger seg. Fordi brukeren har langsom øyesporing eller hånd-øye-koordinasjon, ender de opp med å trykke på en lenke til en ny video.
+
+Å flytte kontroller og innhold kan også forårsake kognitiv overbelastning og øke mental tretthet. For eksempel, når en bruker med traumatisk hjerneskade leser innhold, oppdateres innholdet, og en ekstra artikkel vises over det gjeldende innholdet. Artikkelen brukeren leser flyttes nedover. Brukeren blir desorientert, og applikasjonen blir svært vanskelig å bruke eller forstå.
+
+**Flere detaljer**
+
+Uventet flytting av kontroller inkluderer:
+
+- Lenker i en liste som flytter posisjoner.
+- Retningsendringer / orienteringsendringer.
+- Langsom lasting av en side som brukeren tror er fullført.
+
+**Løsningsforslag**
+
+Bruk:
+
+1. Kontroller og innhold som ikke beveger seg når siden lastes inn eller oppdateres.
+1. Et lasteikon som er tydelig synlig mens siden lastes inn. Etter at innholdet er lastet inn og det ikke er noen ytterligere bevegelse, fjernes ikonet.
+1. Kontroller og innhold som bare beveger seg når brukeren starter en endring.
+
+Unngå:
+
+1. Kontroller og innhold som beveger seg uten brukerens forespørsel. For eksempel: Brukeren er i ferd med å velge et telefonnummer å ringe. Når brukeren er i ferd med å berøre telefonnummeret, flyttes det ned. Brukeren trykker på feil telefonnummer og ringer feil person.
+1. Lenker i en liste som endrer posisjon.
+1. Retningsendringer som ikke enkelt kan slås av.
+1. Sider som laster sakte og som brukeren tror er komplette.
+
+## La brukerne gå tilbake
+
+Jeg trenger forutsigbare tilbake- eller angrefunksjoner, slik at jeg vet nøyaktig hvor jeg var tidligere, før jeg gjorde en feil.
+
+Relatert krav [3.4.2 Angre](https://grunnmuren.obos.no/3-4-mal-4#5481fad322a2)
+
+**Dette kan du gjøre:**
+
+La alltid brukeren gå tilbake til et tidligere punkt.
+
+Standard tilbake-knappen er den beste måten å gjøre dette på, da den er kjent for brukeren. Mange brukere vil prøve tilbake-knappen først.
+
+Brukeren skal aldri miste arbeidet sitt hvis de trykker på tilbake.
+
+**Hvorfor gjør dette en forskjell?**
+
+Å la brukere gå tilbake til et tidligere punkt bidrar til å forhindre feil og gjør det enkelt å rette opp feil når de skjer.
+
+Eksempler på feil inkluderer:
+
+- Å berøre en kontroll ved et uhell,
+- Åpne en ny lenke ved et uhell.
+- Lukke et vindu brukeren hadde tenkt å holde åpent.
+
+Hvis en person lett gjør feil eller gjør dem ofte, er det viktig at de kan gå tilbake og gjøre endringer uten at arbeidet eller tidligere valg slettes.
+
+For eksempel ser en bruker på en video. De prøver å øke volumet, men trykker på en annen lenke i stedet. En ny video lastes nå inn. Brukeren kan trykke på tilbakeknappen og gå tilbake til videoen de så på før. De vet nå at de kan prøve å øke volumet, og hvis de gjør en feil, kan de enkelt gå tilbake og prøve igjen.
+
+I et annet eksempel fungerte ikke tilbake-knappen som forventet, men tok dem et annet sted (for eksempel hjemmesiden). Når de prøver å endre volumet eller legge til en kommentar, mister de ofte videoen de så på og finner ikke veien tilbake til den. Brukeren føler nå at de ikke kan bruke noen av nettstedets funksjoner i tilfelle de mister hovedinnholdet igjen. De utvider ikke skjermen, endrer ikke volumet eller legger igjen kommentarer.
+
+I skjemaer gir hver gang brukeren må legge inn data på nytt en ny sjanse for at det kan oppstå feil. Å legge inn og legge inn data på nytt kan være stressende og slitsomt for noen personer med kognitive og lærevansker. Dette øker sannsynligheten for feil og kan gjøre det umulig å sende inn riktige data og fullføre den tiltenkte oppgaven.
+
+For de med angst, hukommelsesutfordringer og problemer med å følge instruksjoner, er muligheten til å gå tilbake og gjennomgå informasjon de har lagt inn svært viktig. For eksempel, for noen fungerer oppgaven med å følge instruksjoner og gjennomgå svarene sine best som to separate oppgaver. Det å kunne legge inn informasjon med fokus på å følge instruksjonene, og senere gå tilbake for å gjennomgå svarene sine, hjelper dem å bli mer effektive.
+
+**Fremgangsmåte**
+
+Når brukeren har mulighet til å gå tilbake og se gjennom dataene de skrev inn, selv om de ble sendt inn ved en feiltakelse. Tilbakeknappen fungerer alltid som forventet.
+
+**Flere detaljer**
+
+Alternativer for å støtte brukere som går tilbake inkluderer:
+
+- Å gå tilbake trinn i en brukerreise via en tydelig merket handling.
+- Å bruke klikkbare brødsmuler med klikkbare tidligere trinn og uten tap av data.
+- Å bruke tilbake- og angrefunksjoner uten uønsket datatap.
+- Når det er modent, kan du også bruke personaliseringssemantikk til å logge trinnene og gå tilbake til et trinn i prosessen. Se [[personalization-semantics-1.0](https://www.w3.org/TR/adapt/)].
+- Åpne et lukket vindu eller alternativ på nytt.
+
+**Løsningsforslag**
+
+Bruk:
+
+1. Design som gjør det enkelt å gå tilbake. For eksempel:
+1. Brukeren ser på en video. De berører en kontroll ved et uhell. Å trykke tilbake kan ta dem tilbake til videoen på samme posisjon.
+1. En bruker fyller ut et nettskjema når de søker på en jobb. Brukeren trykker ved et uhell på hjem-ikonet og navigerer bort fra skjemaet. Tilbake-knappen tar dem tilbake dit de var uten tap av data.
+1. Brukeren kan også gå tilbake gjennom alle skjermbildene for å være sikker på at de ikke misforsto en del eller hoppet over et svar. Brukeren kan redigere eventuelle data de skrev feil.
+
+Unngå:
+
+1. Design som gjør det vanskelig å gå tilbake. For eksempel:
+1. Brukeren ser på en video. De berører en kontroll ved et uhell og går til en ny video. Å trykke tilbake gjør den nye videoen mindre og tar dem ikke tilbake til den opprinnelige videoen.
+1. Fylle ut et nettskjema når de søker på en jobb. Brukeren går tilbake til en skjerm for å sjekke om de har glemt å svare på et spørsmål. Når de bruker tilbake-knappen, er alle data som tidligere er lagt inn, slettet/nøytralisert.
+
+## Varsle brukere om gebyrer og kostnader ved starten av en oppgave
+
+Jeg trenger støtte til å håndtere oppgaven, for eksempel å gi meg beskjed om hvilken informasjon jeg trenger (kredittkort, fullstendig adresse osv.) før jeg starter.
+
+Relatert krav [3.4.1 Assistanse og støtte](https://grunnmuren.obos.no/3-4-mal-4#c78b1a608d1b)
+
+**Dette kan du gjøre:**
+
+Fortell brukeren om alle gebyrer ved starten av en transaksjon, inkludert typiske verdier. Eventuelle betingelser og vilkår bør også være tilgjengelige ved starten av transaksjonen på et enkelt språk.
+
+**Hvorfor gjør dette en forskjell?**
+
+Brukere med kognitive og lærevansker som har problemer med hukommelse, detaljfokus eller leseforståelse, er kanskje ikke klar over gebyrer med mindre de er eksplisitt nevnt i starten av en transaksjon. Vilkår og betingelser kan være under en lenke, men gebyrer må vises tydelig og være tilgjengelige på et lettforståelig språk.
+
+Tydelig identifisering av gebyrer i starten av et salg er til fordel for alle brukere. De med kognitive og lærevansker vil ha særlig nytte av dette fordi noen grupper har mindre sannsynlighet for å ha antatt eller gjettet at gebyrene ville være inkludert. De vet kanskje ikke at de skal se andre steder i brukerflyten, for eksempel på hjemmesiden eller på en angitt prisside.
+
+Personer med nedsatt eksekutiv funksjon eller hukommelse må ha alle konsekvensene presentert på en ordnet måte for å kunne ta en informert beslutning. Når gebyrer ikke er tydelige, er samtykket til transaksjonen uklart.
+
+It also can take much longer for users with disabilities to go through the process of making a purchase. If a person has spent hours making an online purchase, it is much more difficult and upsetting to find out that they cannot afford it. They will often blame themselves for not understanding the price and may experience a loss of confidence. They may stop trusting themselves with online, day-to-day activities.
+
+For example, a person who has challenges with [executive function](https://www.w3.org/TR/coga-usable/#dfn-executive-function) may be trying to order a plane ticket, and not realize that there are extra fees not quoted in the original price, such as taxes, international fees, baggage fees, etc. They may spend hours booking a holiday only to find that they cannot afford it. Alternatively, sometimes they end up purchasing something they cannot afford. Also, even if they have completed this process in the past, they may not be not able to use their experience to anticipate the final price. The result is the user loses confidence in their ability to independently purchase a holiday online. They may have a debt they are unable to pay, may not attempt again, or only with the help of a hired professional (e.g. travel agent or assistant).
+
+**Løsningsforslag**
+
+Bruk:
+
+1. Tydelig angitte gebyrer. Brukere er klar over alle gebyrer og kan ta en informert beslutning når de bestemmer seg for å kjøpe en vare og legge den i en handlekurv.
+1. Tydelig angitte områder for mulige gebyrer. For varer med varierende fraktkostnader, oppgi området for fraktkostnader og problemene som endrer prisen, sammen med en lenke til hvor du finner mer informasjon. For eksempel kan vekt og frakthastighet påvirke fraktkostnadene dine, som kan være mellom 4 og 400 dollar, avhengig av sted.
+1. Det er ingen overraskelsessituasjoner.
+
+Unngå:
+
+1. Siste transaksjoner som inkluderer nye gebyrer eller skjulte gebyrer, som resulterer i høyere totale gebyrer enn forventet.
+1. Siste transaksjoner som inkluderer kjøpsbetingelser som ikke er klare for brukerne fra begynnelsen av oppgaven.
+1. Transaksjoner som inneholder gebyrer eller betingelser som brukeren ikke visste om før de hadde investert mye innsats i salget.
+1. Fullførte transaksjoner som overrasker brukeren med den totale kostnaden.
+
+## Design skjemaer for å forhindre feil
+
+Jeg trenger et grensesnitt som hjelper meg å unngå feil.
+
+Relatert krav [3.4.1 Assistanse og støtte](https://grunnmuren.obos.no/3-4-mal-4#c78b1a608d1b)
+
+**Dette kan du gjøre:**
+
+Velg et skjemadesign som reduserer sjansen for at brukeren gjør en feil. Dette inkluderer:
+
+- Krave at brukeren skriver inn så lite informasjon som mulig.
+- Tydelig angivelse av obligatoriske felt.
+- Akseptere så mange formater som mulig i et tekstfelt. For eksempel akseptere forskjellige formater for telefonnumre.
+- Dele lange tall inn i deler (støtte for autofullføring på tvers av felt).
+- Bruke et grensesnitt der bare gyldig inndata kan velges.
+- Bruke autofullføring og personalisering av skjemakontroller.
+- Akseptere talemeldinger når det støttes av operativsystemet.
+- Automatisk korrigering av inndatafeil når det er mulig og pålitelig.
+- Gi brukeren kjente forslag og rettelser.
+
+**Hvorfor gjør dette en forskjell?**
+
+Etter å ha gjort mange feil, forlater ofte personer med kognitive og lærevansker og brukere med aldersrelatert glemsomhet oppgavene sine og tror at de ikke kan fullføre dem. Feilmeldinger kan være forvirrende. Å rette feil er ofte vanskelig og frustrerende for brukere og øker kognitiv tretthet. Mange brukere må stoppe når de får gjentatte feil.
+
+For eksempel, når du registrerer en nettbankkonto, krever et skjema at brukerens fødselsdato legges inn. Det nødvendige formatet er xx/xx/xxxx med en ledende null for enkeltsifrede. Hvis et enkelt inndatafelt uten inndatrekorrigering vises, kan en bruker med en kognitiv funksjonshemming skrive inn 1/3/1996, noe som utløser et feilvarsel. Det er kanskje ikke klart for brukeren at det nødvendige formatet er 01/03/1996 (selv om formatet vises under inndatafelten eller i feilvarselet).
+
+Et godt utformet skjema gjør det enklere å fylle ut informasjonen og forhindrer at brukeren gjør feil ved å automatisk korrigere eller foreslå riktig datoformat.
+
+Minimering av brukergenererte feil ved å automatisk korrigere dem vil også minimere feilvarsler. Feilvarsler kan være slitsomme og distraherende, og ta fokus bort fra oppgaver og fullføring av oppgaver.
+
+**Flere detaljer**
+
+- Merk tydelig nødvendig innhold. Rett kun feil hvis rettelsen er pålitelig. Hvis forslag til rettelser er kjent, gi forslagene til brukeren.
+  - For eksempel: «Mente du første februar (01/02) eller andre januar (02/01)?»
+- Kalendere og datoer.
+  - Kalendere bør som standard bruke den første relevante dagen. Arbeidskalendere bør som standard bruke den første virkedagen på brukerens sted.
+  - Kalenderbaserte bestillingssystemer må forhindre at brukeren bestiller returdatoen før avreisedatoen.
+- Temperatur.
+  - Bruk standard temperaturformat for brukerens sted.
+
+**Løsningsforslag**
+
+Bruk:
+
+Design som gjør feil mindre sannsynlige. For eksempel:
+
+- Rette feil i postnummeret som skrives i tekstfeltet med informasjon om by eller stat.
+- Forhindre at brukeren velger upassende datoer og gi en enkel forklaring hvis brukeren prøver å gjøre det.
+
+Unngå:
+
+Design som gjør feil mer sannsynlige. For eksempel:
+
+- Bestillingsskjemaet gir to kalendere uten tydelige etiketter og instruksjoner. Skjemaet lar brukeren velge datoer uten forvarsel om de er mulige, f.eks. flyreise 1. juni - flyreise 30. mai.
+- Systemet lar brukeren velge upassende datoer uten forvarsel. Kalenderen gråtoner bare upassende datoer som kanskje ikke blir lagt merke til. Ingen advarsler gis.
+
+## Gjør det enkelt å angre skjemafeil
+
+Jeg må sjekke arbeidet mitt og gå tilbake uten å miste arbeidet jeg nettopp har gjort.
+
+Relatert krav [3.4.2 Angre](https://grunnmuren.obos.no/3-4-mal-4#5481fad322a2)
+
+**Dette kan du gjøre:**
+
+La alltid brukeren sjekke arbeidet sitt og rette eventuelle feil. Når brukeren har rettet feilen sin, skal det være enkelt å komme tilbake til stedet de var uten å måtte gjøre flere trinn på nytt.
+
+For økonomiske transaksjoner og viktig informasjon, la brukeren enkelt avbryte transaksjonene. Gi tydelig informasjon og enkle instruksjoner for viktig informasjon, for eksempel hvor lang tid brukeren har på seg til å avbryte en transaksjon.
+
+**Hvorfor gjør dette en forskjell?**
+
+Personer med kognitive og lærevansker gjør mange flere feil når de fyller ut skjemaer enn den generelle befolkningen. Når feil ikke lett kan rettes, kan de ikke fullføre oppgaven.
+
+Muligheten til å angre feil hjelper personer med kognitive og lærevansker med å bruke skjemaer på en trygg måte og reduserer konsekvensene som følge av en feil.
+
+For eksempel kan en bruker med hukommelsessvekkelse ikke huske at de allerede har lagt til en vare i handlekurven og kan legge til varen en gang til. De kan forveksle datoene når de bestiller en reise eller gjøre andre feil.
+
+Det er viktig at personer med kognitive og lærevansker har muligheten til å sjekke arbeidet sitt og rette feilene sine enkelt.
+
+For personer med kognitive og lærevansker er det ikke nok at feil kan reverseres i teorien. Ofte er prosessen med å reversere en transaksjon for kompleks til at de kan håndtere den uten hjelp. De har kanskje ikke tilgang til den hjelpen, noe som betyr at de må leve med alle feilene de har gjort. I tillegg, hvis prosessen med å rette feil er for vanskelig, kan brukerne stoppe, enten miste transaksjonen eller kjøpe uønskede varer.
+
+Effekten av at dette skjer flere ganger er ødeleggende. Som et resultat kan mange brukere med funksjonsnedsettelser slutte å bruke internett til mange oppgaver.
+
+Å la brukeren endre antall varer i handlekurven når som helst kan redusere feil betydelig.
+
+Et sammendrag av bestillingen, inkludert produktmengder og andre kostnader før den endelige innsendingen, gir brukeren muligheten til å identifisere eventuelle feil og gjøre endringer i bestillingen. I dette eksemplet hjelper et sammendrag av kjøpet brukeren med å se feilen i mengden samt en høyere ordresum enn forventet.
+
+I noen tilfeller kan en bruker innse at det har blitt gjort en feil etter den endelige innsendingen av data. Gi enkle instruksjoner om hvordan man kansellerer transaksjoner og hjelp brukeren med å forstå hvor lang tid det tar å kansellere en transaksjon. Dette gjør dem mindre utsatt for svindel.
+
+For eksempel kan en bruker med ADHD som kjøper en reisebillett på et nettsted slite med detaljer og kan ha et svekket oppmerksomhetsspenn. En vellykket fullføring av bestillingen er avhengig av informasjonen som gis i flere trinn i prosessen. En feil, for eksempel feil gatenummer eller postnummer i faktureringsadressen, vil føre til at bestillingen ikke går gjennom. Hvis et sammendrag ikke gis før den endelige bestillingen sendes inn, kan det hende at brukeren ikke forstår årsaken til den avviste betalingen og gir opp bestillingen. Brukeren kan også stoppe hvis det ikke finnes en klar og oppnåelig måte å gjøre en korrigering på.
+
+**Flere detaljer**
+
+Dette inkluderer vanligvis:
+
+- Endring: Det er enkelt for brukeren å gjennomgå alle dataene og rette feil, inkludert feil som kanskje ikke identifiseres automatisk. Brukeren kan endre informasjon via tydelig merkede handlinger og komme tilbake til stedet de var på, i én tydelig merket handling uten uønsket tap av data. (Noen data må kanskje legges inn hvis det er avhengig av elementet som ble endret.)
+- Bekreftet: Et sammendrag gis før viktig informasjon sendes inn, og brukeren får beskjed om når de er i ferd med å sende inn den endelige informasjonen.
+- Tidsrammer og instruksjoner for å kansellere transaksjoner er tydelige og enkle å følge.
+
+**Fremgangsmåte**
+
+Start med skjemaer der en feil kan få alvorlige konsekvenser, som økonomisk tap eller sårbarhet.
+
+**Løsningsforslag**
+
+Bruk:
+
+- Et sammendrag som gis før viktig informasjon sendes inn. Det lar brukeren korrigere informasjon og gå tilbake til sammendraget med et enkelt klikk.
+- Klikkbare brødsmuler som lar brukeren se de forrige trinnene, gå tilbake og endre dem.
+
+Unngå:
+
+- Et sammendrag som gis før viktig informasjon sendes inn, men brukeren kan ikke gjøre rettelser uten å miste andre data som er lagt inn.
+
+## Bruk tydelige, synlige etiketter
+
+Jeg trenger tydelige etiketter, trinnvise instruksjoner og tydelige feilmeldinger.
+
+Relatert krav [3.4.1 Assistanse og støtte](https://grunnmuren.obos.no/3-4-mal-4#c78b1a608d1b)
+
+**Dette kan du gjøre:**
+
+Bruk tydelige etiketter. Etikettene bør:
+
+- Bruke vanlige ord og et lettforståelig språk.
+- Være synlige og ved siden av den relevante kontrollen.
+- Være lesbare av hjelpeteknologier, inkludert de som brukes av personer med kognitive og lærevansker.
+
+**Hvorfor gjør dette en forskjell?**
+
+Når etiketter mangler eller er uklare, vet brukerne ofte ikke at funksjonen er tilgjengelig eller hva kontrollen er. Selv om mange brukere kan gjette hva en kontroll er, er det mindre sannsynlig at brukere med kognitive og lærevansker med svekket hukommelse eller eksekutive funksjoner klarer å huske designmønsteret eller finne ut hva det er. En tydelig etikett som bruker kjente termer og er plassert ved siden av kontrollen, hjelper personer med kognitive og lærevansker.
+
+På samme måte, hvis en etikett ikke er ved siden av en kontroll, er det forvirrende for noen brukere. Når en etikett ikke kan være ved siden av en kontroll, bør det være tydelige visuelle indikatorer som synlig og utvetydig forbinder etiketten med kontrollen. Dette vil kreve brukertesting med brukere som har lærevansker, kognitive og lærevansker for å sikre at den er brukbar.
+
+For eksempel bruker en bruker med tidlig stadium av demens en applikasjon. Noen kontroller har ikke visuelle etiketter. En omsorgsperson viser dem hva kontrollen er til for, og de kan bruke applikasjonen. Dagen etter prøver de å bruke den igjen, men kan ikke huske hva kontrollen er til. Denne applikasjonen er ikke brukbar for dem.
+
+I et annet eksempel forsvinner etiketten når fokuset fjernes. Brukeren kan ikke huske hva kontrollen er og vet ikke hvordan den skal vises igjen.
+
+Etiketter må være synlige, lesbare med hjelpeteknologi og være i nærheten av det merkede innholdet.
+
+**Flere detaljer**
+
+Mange personer med kognitive og lærevansker bruker nettutvidelser og enkel tekst-til-tale. Disse hjelpeteknologiene leser ofte ikke WAI-ARIA [[wai-aria-1.2](https://www.w3.org/TR/wai-aria-1.2/)] eller titler. Inntil dette endrer seg, eller en utvidelse viser dem, bør ikke etiketter stole på disse attributtene for personer med kognitive og lærevansker.
+
+**Løsningsforslag**
+
+- Synlige etiketter som bruker enkle, vanlige ord og er ved siden av kontrollen. For eksempel:
+  - Fornavn **\*\*\*\***\_\_\_\_**\*\*\*\***
+
+Unngå:
+
+- Skjulte etiketter eller etiketter som bruker uvanlige ord som ikke er lette å forstå. Det er uklart hvilken handling som kreves. For eksempel:
+  - Personnavn **\*\*\*\***\_\_\_**\*\*\*\***
+
+## Bruk tydelige trinnvise instruksjoner
+
+Jeg trenger tydelige etiketter, trinnvise instruksjoner og tydelige feilmeldinger, slik at jeg vet nøyaktig hva jeg skal gjøre.
+
+Relatert krav [3.4.1 Assistanse og støtte](https://grunnmuren.obos.no/3-4-mal-4#c78b1a608d1b)
+
+**Dette kan du gjøre:**
+
+Skriv tydelige instruksjoner som er:
+
+- Plassert før eller ved siden av feltet eller aktiviteten.
+- Oppdelt i trinn (sørg for at trinn ikke utelates).
+- Klare, konsise og tilgjengelige.
+- Tilgjengelige med eksempler eller illustrasjoner som gjør det enkelt å forstå hva man skal gjøre.
+
+**Hvorfor gjør dette en forskjell?**
+
+Tydelige instruksjoner bidrar til å forhindre brukerfeil. Dette reduserer frustrasjon og forbedrer brukernes autonomi og uavhengighet fordi de kan unngå å be om hjelp. Dette hjelper mange mennesker med kognitive og lærevansker, så vel som mennesker fra forskjellige kulturer, fremvoksende markeder og nye brukere som kanskje ikke er kjent med nettskjemaer eller som kan gå glipp av kulturell kontekst.
+
+For eksempel prøver en person med aldersrelatert glemsomhet å fylle ut et skjema. De skriver hele adressen og postnummeret på én linje (slik man ville gjort når man skriver et brev). De får en feilmelding. Etter noen få feilmeldinger er de utslitte og kan ikke fullføre skjemaet.
+
+**Flere detaljer**
+
+Gi instruksjoner i starten av prosessen, ikke bare i en feilmelding.
+
+Gi instruksjoner som er nødvendige for at brukeren skal kunne fullføre oppgaven. Når flere formater aksepteres eller feil korrigeres automatisk, trengs det færre instruksjoner for at brukeren skal fullføre oppgaven.
+
+Merk at instruksjoner kan være skjult bak et kjent ikon.
+
+**Fremgangsmåte**
+
+I et system med vanlige feil, ta tak i de mest innvirkningsfulle feilene først og legg til veiledning etter behov.
+
+**Løsningsforslag**
+
+Bruk:
+
+1. Tydelige og lettforståelige instruksjoner. For eksempel:
+1. Gi et bilde av et pass med nummeret uthevet for å indikere nummeret brukeren skal skrive inn.
+1. Angi eksplisitt hvilken ukedag som starter (f.eks. søndag eller mandag) i kalenderkontrollene.
+
+Unngå:
+
+1. Ingen klare instruksjoner for komplekse oppgaver. For eksempel:
+1. Be om et passnummer, men angi ikke hvilket av flere tall i passet som trengs.
+1. Et nettsted tydeliggjør ikke den første dagen i uken og antar at arbeidsuken starter på mandag. En bruker fra en annen kultur antar at arbeidsuken starter på søndag, og gjør en feil.
+
+## Godta forskjellige inndataformater
+
+Jeg trenger inndata som godtar forskjellige formater og ikke markerer dem som feil.
+
+Relatert krav [3.4.1 Assistanse og støtte](https://grunnmuren.obos.no/3-4-mal-4#c78b1a608d1b)
+
+**Dette kan du gjøre:**
+
+Godta alle formatvariasjoner i tekstinndata for verdier som valuta, tidssone, sted, adresse eller kredittkortnummer.
+
+**Hvorfor gjør dette en forskjell?**
+
+Tilgivende skjemadesign hjelper brukeren med å fylle ut skjemaer uten en overveldende mengde feil. De kan unngå å be om hjelp når feil forårsaker problemer. Dette reduserer frustrasjon samtidig som det forbedrer brukerens autonomi og uavhengighet.
+
+Dette er til fordel for alle med lære- og kognitive funksjonshemminger eller aldersrelatert glemsomhet. Det vil også hjelpe alle som er vant til et annet format.
+
+For eksempel, en bruker med aldersrelatert glemsomhet skriver inn telefonnummeret sitt med bindestreker. De får en feilmelding fordi systemet ikke godtar det formatet. De lurer på om de har glemt telefonnummeret sitt eller gjort en annen feil. De slutter å prøve å bruke skjemaet.
+
+**Løsningsforslag**
+
+Bruk:
+
+1. Plattformfasiliteter for fleksible inndatatyper og validering.
+1. Forskning og støtte for ulike formater som kan legges inn, inkludert internasjonale variasjoner.
+1. Minimalt antall obligatoriske felt.
+1. Fleksible inndatafelt som godtar ulike formater. For eksempel et inndatafelt som godtar:
+1. Forskjellige valutasymboler.
+1. Kredittkortnummer med eller uten mellomrom.
+1. Telefonnumre slik de er skrevet i mange regioner, inkludert landskode, regionkode og nummer ved bruk av valgfrie parenteser.
+1. Internasjonale tegn som de med aksenter.
+
+Unngå:
+
+1. Å begrense oppføringer til vilkårlige lengder.
+1. Å insistere på spesifikke skilletegn hvis de ikke er nødvendige og kan ignoreres.
+1. Inndatafelt som ikke godtar formatet som brukeren kan bruke. For eksempel:
+1. Å tvinge brukere til å bruke en bestemt valutaverdi som de kanskje ikke er deres valuta.
+1. Et kredittnummerfelt som ikke krever mellomrom selv om kort har tall trykt med mellomrom.
+1. Telefonnummerfeltet godtar ikke +-koder eller parenteser.
+
+## Unngå datatap og «tidsavbrudd»
+
+Jeg trenger tid til å fullføre arbeidet mitt. Jeg vil ikke at en økt skal få tidsavbrudd mens jeg prøver å finne informasjonen jeg trenger, for eksempel postnummer eller personnummer.
+
+Relatert krav [3.4.1 Assistanse og støtte](https://grunnmuren.obos.no/3-4-mal-4#c78b1a608d1b)
+
+**Dette kan du gjøre:**
+
+Unngå tidsavbrudd og la brukeren lagre arbeidet sitt underveis.
+
+Når dette ikke er mulig, informer brukeren når de starter prosessen:
+
+- Hvor mye tid som er tilgjengelig for å fullføre prosessen.
+- Hvis brukeren vil miste inntastede data hvis det oppstår et tidsavbrudd.
+
+**Hvorfor gjør dette en forskjell?**
+
+Tidsbestemte hendelser kan utgjøre betydelige barrierer for brukere med kognitive og lærevansker. Disse brukerne kan trenge mer tid til å lese innhold eller utføre funksjoner, for eksempel å fylle ut et nettskjema. De kan trenge å lese hjelp eller se på notater.
+
+Brukere med kognitive og lærevansker kan trenge ekstra tid til å slå opp informasjonen som kreves for å fullføre en transaksjon. De kan trenge en pause uten å miste sin plass i prosessen og uten å miste data som allerede er lagt inn.
+
+For eksempel, når en bruker foretar et kjøp på et netthandelsnettsted, husker han ikke nødvendig informasjon. Dette kan være en dato, et telefonnummer eller et postnummer som kan virke lett å huske for brukere uten kognitive eller lærevansker. De må slå opp denne informasjonen, noe som tar dem tid borte fra skjermen. Deretter må de kopiere den forsiktig inn i skjemaet.
+
+I et annet eksempel fullfører en bruker en nettbasert prosess for å reservere et hotellrom og kjøpe en flybillett. De blir overveldet av mengden instruksjoner og datainndata som kreves for å fullføre prosessen. Brukeren kan ikke fullføre prosessen i én omgang og tar en pause.
+
+Brukernes kognitive ferdigheter kan avta etter hvert som de blir slitne. De må da stoppe oppgaven for den dagen. Når brukerne vet at dataene deres ikke vil gå tapt, kan de komme seg etter mental utmattelse og gå tilbake for å fullføre oppgaven.
+
+Det er viktig å merke seg at mange trenger tid til å lese «timeout»-varselet. Ofte avsluttes økten før brukeren er ferdig med å lese om hvordan man forlenger tiden. Hvis brukeren slår opp informasjon, vil de ikke se timeout-varselet.
+
+**Flere detaljer**
+
+Når et nettsted må få tidsavbrudd fordi sensitiv informasjon (som kredittkortinformasjon) legges inn eller vises, bør nettstedet be om den sensitive informasjonen i siste trinn.
+
+Nettstedet bør også advare brukeren om at når de har oppgitt kredittkortinformasjonen, bør de fullføre prosessen raskt, da økten kan få tidsavbrudd.
+
+**Løsningsforslag**
+
+Bruk:
+
+1. Ubegrenset tid, når det er mulig.
+1. Tidsavbrudd som brukere med lære- og kognitive funksjonsnedsettelser synes det er lett å unngå. For eksempel: Ved starten av oppgaven får brukeren beskjed om at de har en dag på seg til å fullføre oppgaven. De har et alternativ for å sette den til lenger.
+1. Når tidsavbruddet er nødvendig:
+1. **Tidsavbruddsvarsler ved starten av oppgaven**. For eksempel: I en auksjon er det en tidsbegrensning på hvor mye tid en bruker har til å legge inn et bud. Ved starten av oppgaven blir brukeren advart om tidsfristen og hvor lang tid de har til tiden er over.
+1. **Når det er mulig og trygt, går ikke brukerens arbeid tapt.** For eksempel: Et nettsted med sensitiv informasjon bruker en tidsbegrensning på klientsiden for å beskytte brukere som kan forlate datamaskinene sine. Når brukeren logger seg inn igjen, er alt arbeidet fortsatt på plass. Brukeren blir advart på forhånd om hvor lang tid de har til inaktive økter og får beskjed om at dataene deres ikke vil gå tapt.
+
+Unngå:
+
+1. Systemtidsavbrudd som ikke er nødvendige av sikkerhetshensyn.
+1. Systemtidsavbrudd uten å varsle brukeren ved starten av prosessen.
+1. Systemtidsavbrudd der brukeren mister arbeidet sitt, uten at det er en sikkerhets- eller personvernrisiko.
+
+## Gi tilbakemelding
+
+Jeg trenger rask tilbakemelding eller visuelle signaler for å indikere at en hendelse ble utløst. For eksempel må jeg vite når en e-post er sendt, ellers ser det ut som om den bare har forsvunnet.
+
+Relatert krav [3.4.1 Assistanse og støtte](https://grunnmuren.obos.no/3-4-mal-4#c78b1a608d1b)
+
+**Dette kan du gjøre:**
+
+For hvert trinn i en prosess, gi brukeren beskjed om statusen og om det ble fullført.
+
+**Hvorfor gjør dette en forskjell?**
+
+Å tydeliggjøre resultatet av hver brukerhandling hjelper personer med en rekke kognitive og lærevansker. Dette inkluderer:
+
+- Å forstå at handlingene deres ble behandlet (f.eks. klikket gjorde noe).
+- Å forhindre usikkerhet eller tvil om resultatet.
+- Å huske hva de nettopp gjorde.
+
+For eksempel kan en bruker med aldersrelatert glemsomhet ha problemer med å huske hvordan grensesnittet fungerte. Så når de trykker på send-knappen, kan det hende at de ikke føler seg trygge på at skjemaet ble sendt. Tilbakemeldinger, for eksempel en takkemelding, vil fortelle dem at innsendingen skjedde og få dem til å føle seg trygge på prosessen.
+
+Under en flertrinnsoppgave kan denne tilbakemeldingen (tilbakemelding om brukerhandling) også hjelpe personer med oppmerksomhetsvansker eller kortsiktige kognitive og lærevansker med å huske hva de gjør. For eksempel kan en bruker med tidlig demens bli distrahert og deretter glemme nøyaktig hvor de var i oppgaven. Denne tilbakemeldingen om brukerhandling hjelper dem med å omorientere seg. Den hjelper dem også med å unngå å forlate en oppgave ved å minne dem på at de er i en prosess, og hvor i prosessen de for øyeblikket er.
+
+Gi lett gjenkjennelig tilbakemelding om suksess eller fiasko for hver brukerhandling. Når det er mulig, bør tilbakemeldingen bruke konsistente og kjente designmønstre. For eksempel:
+
+- Etter at et trinn i en flertrinnsoppgave er fullført, viser brødsmuler et hakemerke eller et merke ved siden av trinnets navn; og hvis aktuelt, er tittelen eller navnet på neste trinn lett synlig.
+- Etter at en knapp er klikket, skal den se nedtrykt ut. (Merk at hvis det er en veksleknapp, skal statusen også kunne bestemmes programmatisk).
+- Etter at et skjema er sendt inn eller en e-postmelding er sendt, gis det tilbakemelding som kommuniserer hva som nettopp skjedde, for eksempel «Søknaden din ble sendt, takk» eller «E-postmeldingen din ble sendt».
+
+**Flere detaljer**
+
+Suksess eller fiasko for hver brukerinitierte handling indikeres tydelig for brukeren gjennom visuell, programmatisk bestembar, rask tilbakemelding i innholdets primære modaliteter. Lydtilbakemelding støttes.
+
+**Løsningsforslag**
+
+Bruk:
+
+1. Visuell tilbakemelding på tilstand. Bruk CSS og WAI-ARIA [[wai-aria-1.2](https://www.w3.org/TR/wai-aria-1.2/)] tilstander som aria-pressed og aria-selected, for å gi en visuell endring som viser endringen i tilstand. For eksempel: Knapper og faner med en visuelt tydelig tilstand når de er valgt.
+1. Meldinger som lar brukeren vite om en oppgave er fullført. For eksempel:
+1. Bekreftelsesmeldinger når en e-postmelding er sendt, eller et skjema er sendt.
+1. Synlig og programmatisk bestembar informasjon som viser at et nytt passord er angitt.
+
+Unngå:
+
+1. Tilstandsendringer uten visuell tilbakemelding.
+1. Oppgaven lykkes eller mislykkes uten tilbakemelding.
+
+## Hjelp brukeren med å holde seg trygg
+
+Jeg må vite at jeg er trygg og sikker når jeg bruker et nettsted, spesielt hvis jeg gir informasjon eller kommuniserer med andre.
+
+Relatert krav [3.4.1 Assistanse og støtte](https://grunnmuren.obos.no/3-4-mal-4#c78b1a608d1b)
+
+**Dette kan du gjøre:**
+
+Hold brukeren trygg. Dette inkluderer:
+
+- Forstå risikoer for personer med lære- og kognitive funksjonsnedsettelser når de oppgir personlig informasjon eller kommuniserer med andre.
+- Kontroller hvordan sikkerhetsteknikker fungerer med et bredt spekter av tilpassede profiler, inkludert eldre brukere og brukere med lære- og kognitive funksjonsnedsettelser.
+- Bruke kjente teknikker for å holde sensitiv brukerinformasjon trygg.
+- Hjelpe alle brukere med å forstå relevante kjente risikoer. Forklare kjente risikoer på et lettforståelig og vennlig språk.
+- Dette hjelper dem å ta informerte beslutninger og beholde kontrollen.
+
+**Hvorfor gjør dette en forskjell?**
+
+Brukere må vite at de er trygge og sikre når de bruker et nettsted, spesielt når de gir informasjon eller kommuniserer med andre.
+
+Brukere med nedsatt eksekutiv funksjon har mindre sannsynlighet for å identifisere risikoer riktig, så det å tydelig identifisere potensielle risikoer hjelper brukeren å holde seg trygg og ha kontroll. Legg til nyttige tips for å holde seg trygg mens de bruker innholdet ditt, og gi hjelp ved problemer.
+
+For å hjelpe med å identifisere risikoer foreslår vi at man holder forsknings- og fokusgrupper med personer med kognitive og lærevansker, og at man samarbeider med personer med kognitive og lærevansker for å løse potensielle og eksisterende problemer. Grupper bør ha personer med lære- og kognitive funksjonshemminger i tankene når de jobber med sikkerhet og risikoredusering.
+
+For eksempel ber mange som ikke kan kopiere og lime inn passord eller bruke totrinns autorisasjonskoder, en omsorgsperson om å hjelpe dem. Siden omsorgspersoner (BPA) ofte bare er midlertidig ansatte, blir brukeren utsatt. Å gjøre passord lengre eller kreve at brukere endrer dem regelmessig øker disse usikre praksisene og kan faktisk gjøre applikasjonen mindre sikker. Denne typen designfeil er vanlig når personer med kognitive og lærevansker utelates fra brukerforskning og -analyse.
+
+**Løsningsforslag**
+
+Bruk:
+
+1. Alternative innloggingsalternativer som er testet med personer med lære- eller kognitive funksjonsnedsettelser, og som er godkjente sikkerhetsteknikker i din jurisdiksjon for sensitive data.
+1. Snakke med et bredt spekter av personer med lære- og kognitive funksjonsnedsettelser for å forstå risikoene og hvordan de kan relateres til personopplysninger.
+1. COGA-persona og brukstilfelle i forsknings-, utviklings- og kravfasene.
+1. Beste praksis i bransjen for lagring og sikring av brukerinformasjon.
+1. Samtykkeskjemaer på et lettforståelig språk som er testet med personer med lære- og kognitive funksjonsnedsettelser for å sikre at de forstår risikoene.
+1. Advarsler til brukere hver gang personopplysninger kan gis, på et lettforståelig språk.
+
+Unngå:
+
+- Brukere som deler informasjon uten å forstå alle risikoene.
+- Skjult og forvirrende informasjon om risikoer.
+- Brukere som gir samtykke én gang og glemmer risikoene de står overfor.
+- Samtykkeskjemaer som brukere kanskje ikke forstår.
+
+## Bruk kjente målinger og enheter
+
+Jeg trenger grensesnitt som bruker målinger jeg kjenner til, og som er vanlige der jeg bor (som fot eller meter), ellers blir jeg forvirret. Jeg vet ikke alltid hvilken måleenhet de snakker om, eller legger merke til at tallet ser feil ut.
+
+Relatert krav [3.4.1 Assistanse og støtte](https://grunnmuren.obos.no/3-4-mal-4#c78b1a608d1b)
+
+**Dette kan du gjøre:**
+
+Oppgi målinger i enheter som brukerne vil være kjent med.
+
+**Hvorfor gjør dette en forskjell?**
+
+De fleste er kjent med et enkelt sett med enheter som ofte brukes for målinger på deres sted eller kultur. Når målingene er i andre enheter, må de utføre en konvertering for å forstå dem. Selv verktøy som en kalkulator kan være vanskelige å administrere. Gi et alternativ for å endre enheter og standardinnstille enhetene til brukerens sted. Vanlige eksempler er enhetene som brukes for avstand, vekt, areal, valuta og temperatur.
+
+For eksempel kan en bruker vite temperaturen i Celsius. Når den er gitt i Fahrenheit, tror de at det kommer til å bli veldig varmt.
+
+**Flere detaljer**
+
+Noen ganger oppgis ofte målinger i en bestemt enhet, selv når lokaliserte alternativer er tilgjengelige. For eksempel oppgis TV- eller skjermstørrelser vanligvis i tommer, selv når centimeter er den vanlige enheten. Men selv i disse tilfellene er det fortsatt nyttig å oppgi alternativer, ettersom brukerne kanskje ikke er kjent med de oppgitte målingene.
+
+**Fremgangsmåte**
+
+Tilby en mekanisme for å velge et annet sett med målinger som er mer meningsfulle for brukeren, eller gi vanlige alternativer i teksten.
+
+**Løsningsforslag**
+
+Bruk:
+
+Metrikk i forskjellige enheter som forskjellige brukere forstår. For eksempel: Eiffeltårnet er 324 meter (1 063 fot) høyt, inkludert antennen på toppen. Unngå:
+
+Bare én enhet for metrikk. For eksempel: Eiffeltårnet er 1 063 fot høyt.

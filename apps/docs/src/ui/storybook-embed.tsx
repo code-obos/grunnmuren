@@ -6,7 +6,8 @@ import { Menu, MenuItem, MenuTrigger, Popover } from 'react-aria-components';
 import { Code } from './code';
 
 type Props = {
-  id: string;
+  /** Anchor id for the embed. Defaults to the story id when omitted. */
+  id?: string;
   caption?: string;
   storyId: string;
 };
@@ -17,7 +18,9 @@ const ALLOWED_POST_MESSAGE_ORIGIN = new URL(
   import.meta.env.VITE_STORYBOOK_BASE_URL,
 ).origin;
 
-export function StorybookEmbed({ id, storyId, caption }: Props) {
+export function StorybookEmbed({ id: idProp, storyId, caption }: Props) {
+  const id = idProp ?? storyId;
+
   const storyUrl = useMemo(() => {
     const baseUrl = import.meta.env.VITE_STORYBOOK_BASE_URL;
 

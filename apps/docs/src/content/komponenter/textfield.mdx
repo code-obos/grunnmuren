@@ -1,0 +1,258 @@
+---
+name: 'TextField'
+slug: 'textfield'
+componentState: stable
+propsComponents:
+  - 'TextField'
+resourceLinks:
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/numberfield'
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/textfield'
+  - linkType: 'figma'
+    url: 'https://www.figma.com/design/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=154-1458&t=cYO4nBgjYRYasAKe-4'
+---
+
+import img0 from './images/textfield/0.webp';
+import img1 from './images/textfield/1.webp';
+import img2 from './images/textfield/2.webp';
+import img3 from './images/textfield/3.webp';
+import img4 from './images/textfield/4.webp';
+import img5 from './images/textfield/5.webp';
+import img6 from './images/textfield/6.webp';
+import img7 from './images/textfield/7.webp';
+import img8 from './images/textfield/8.webp';
+import img9 from './images/textfield/9.webp';
+import img10 from './images/textfield/10.webp';
+import img11 from './images/textfield/11.webp';
+import img12 from './images/textfield/12.webp';
+import img13 from './images/textfield/13.webp';
+import img14 from './images/textfield/14.webp';
+import img15 from './images/textfield/15.webp';
+import img16 from './images/textfield/16.webp';
+import img17 from './images/textfield/17.webp';
+import img18 from './images/textfield/18.webp';
+import img19 from './images/textfield/19.webp';
+import img20 from './images/textfield/20.webp';
+import img21 from './images/textfield/21.webp';
+import img22 from './images/textfield/22.webp';
+
+## Om komponenten
+
+TextField (også kalt Input og Input field) er et skjemaelement som gir brukeren mulighet til å skrive inn korte tekster.
+
+**Egnet til:**
+
+- Når bruker skal fylle inn for eksempel navn, bruksenhetsnummer, adresse og annen informasjon som får plass på én linje
+
+**Uegnet til:**
+
+- Når brukeren bare kan skrive inn ett alternativ fra en forhåndsdefinert liste. Se [Select](https://grunnmuren.obos.no/komponenter/select), [RadioButton](https://grunnmuren.obos.no/komponenter/radiogroup) eller [Checkbox-group](https://grunnmuren.obos.no/komponenter/checkbox-group) i stedet.
+- Når bruker blir bedt om å for eksempel beskrive noe. Bruk da heller [TextArea](https://grunnmuren.obos.no/komponenter/textarea)
+
+<Image src={img0} alt="Divider" width={2000} height={143} />
+
+## Varianter
+
+Vi har fire varianter av TextField.
+
+<Image src={img1} alt="8px spacer" width={672} height={8} />
+
+### Standard
+
+Standard input-felt
+
+```tsx live caption="Standard textfield"
+<TextField label="Navn" description="Fornavn, mellomnavn og etternavn" />
+```
+
+<Image src={img2} alt="8px spacer" width={672} height={8} />
+
+### Prefiks
+
+Brukes til telefonnummer
+
+```tsx live caption="Prefiks telefonnummer eksempel"
+<TextField label="Telefonnummer" leftAddon="+47" textAlign="left" withAddonDivider />
+```
+
+<Image src={img3} alt="8px spacer" width={672} height={8} />
+
+### Suffiks
+
+Brukes til input som er relatert til suffix, som for eksempel kroner, kilo, liter osv.
+
+```tsx live caption="Suffiks textfield eksempel"
+<TextField label="Egenkapital" rightAddon="kr" textAlign="right" withAddonDivider />
+```
+
+<Image src={img4} alt="8px spacer" width={672} height={8} />
+
+### Ikon - høyre
+
+Input-felt med støtte for ikoner, som hjelper bruker med å forstå formålet. For eksempel til passord eller dato.
+
+```tsx live caption="Ikon textfield eksempel"
+<TextField
+  label="Velg passende visningsdato"
+  placeholder="dd/mm/åååå"
+  rightAddon={<Calendar className="pointer-events-none" />}
+/>
+```
+
+<Image src={img5} alt="Divider" width={2000} height={143} />
+
+## Retningslinjer
+
+### Påkrevd vs valgfritt
+
+I Obos bruker vi ikke påkrevd eller asterisk (\*). Vi merkerer label med “Valgfritt”. Det er viktig å tenke på [datatilsynets dataminimeringspunkt](https://www.datatilsynet.no/rettigheter-og-plikter/personvernprinsippene/grunnleggende-personvernprinsipper/dataminimering/) - “Er dette feltet helt nødvendig for å iverksette prosesser?”
+
+<Image src={img6} alt="Input - Optional - Retningslinje" width={2000} height={667} />
+
+<Image src={img7} alt="8px spacer" width={672} height={8} />
+
+### Label
+
+Label er påkrevd. Skriv den kort og konsis.
+
+<Image src={img8} alt="Input - Label - Retningslinje" width={2000} height={732} />
+
+<Image src={img9} alt="8px spacer" width={672} height={8} />
+
+### Placeholder
+
+Ikke bruk placeholder som hjelpetekst.
+
+<Image src={img10} alt="Input - Placeholder - Retningslinje" width={2000} height={863} />
+
+<Image src={img11} alt="8px spacer" width={672} height={8} />
+
+### Feltets lengde
+
+For gitte inputs som for eksempel telefonnummer hvor vi vet at det er 8-siffer, så skal feltet ha antall tegns lengde. Inputfelt kan kun ha en maks lengde på **500px**
+
+<Image src={img12} alt="Input - Lengde - Retningslinje" width={2000} height={798} />
+
+<Image src={img13} alt="8px spacer" width={672} height={8} />
+
+### Ikke bruk kolon
+
+<Image src={img14} alt="Input - Kolon - Retningslinje" width={2000} height={640} />
+
+<Image src={img15} alt="Divider" width={2000} height={143} />
+
+## Formatering
+
+Text-input har en fast høyde og brukes til å legge inn enklet innput i fritt format med en hvilken som helst kombinasjon av bokstaver, tall eller symboler.
+
+### Anatomi
+
+<Image src={img16} alt="" width={2000} height={845} />
+
+1. **Label** Tekst som informerer brukeren om innholdet de må skrive inn i feltet. Det er påkrevd med mindre det foreligger et unntakstilfelle.
+1. **Beskrivelse** Hjelpetekst som kan gi ekstra hjelp eller kontekst til brukeren. Brukes ofte for å forklare riktig dataformat.
+1. **Verdi** Innholdet brukeren har skrevet inn i feltet.
+1. **Field** Kontaineren der en bruker legger inn data. Må oppfylle 3:1 ikke-tekstkontrastkrav. (non-text contrast)
+
+<Image src={img17} alt="8px spacer" width={672} height={8} />
+
+### Format
+
+Det er mulig å sette max- og min-lengde, samt å justere bredden på feltene:
+
+```tsx live caption="Uncontrolled TextField med custom width og lengde"
+<TextField
+  description="Bruksenhetsnummeret, som tidligere ble kalt bolignummer, består av en bokstav og fire tall. F.eks. H0101"
+  label="Bruksenhetsnummer"
+  maxLength={5}
+  minLength={5}
+  size={5}
+/>
+```
+
+<Image src={img18} alt="8px spacer" width={672} height={8} />
+
+### Validering
+
+Det er innebygget støtte for påkrevde felter:
+
+```tsx live caption="Uncontrolled, påkrevd TextField"
+<form onSubmit={(e) => e.preventDefault()} className="grid gap-6">
+  <TextField isRequired label="Navn" />
+  <Button type="submit" className="w-fit">
+    Send inn
+  </Button>
+</form>
+```
+
+<Image src={img19} alt="8px spacer" width={672} height={8} />
+
+Det er også mulig å vise en vilkårlig feilmelding:
+
+```tsx live caption="Uncontrolled TextField med feilmelding"
+<TextField label="Navn" errorMessage="Her er det noe feil!" />
+```
+
+<Image src={img20} alt="8px spacer" width={672} height={8} />
+
+### Controlled
+
+```tsx live caption="Controlled TextField"
+function(){
+  const [value, setValue] = React.useState("");
+
+return <TextField
+  label="Beløp"
+  value={value}
+  onChange={setValue}
+/>
+}
+```
+
+<Image src={img21} alt="Divider" width={2000} height={143} />
+
+## Universell utforming
+
+### Husk på
+
+- Skjemaelementer burde ha en en-kolonnes layout, og hvert element skal ha sin egen label for å beskrive bruk. Om label av en eller annen grunn ikke skal vises skal den fortsatt finnes, men bruke klassen pkt-sr-only slik at skjemaet fortsatt er brukervennlig.
+- Alle tekstfelt bør ha et tilknyttet label (ledetekst) eller instruksjon som viser hvordan skjemaet skal fylles ut, inkludert informasjon om obligatoriske felt.
+- Label (ledeteksten) bør være koblet til tekstfeltet i koden slik at skjermlesere kan lese opp riktig informasjon. Komplekse skjema kan kreve mer hjelp enn bare enn labels.
+- Bruker du symboler i tekstfeltet bør symbolene enten være logiske og kjente, eller så må de forklares før de brukes for å unngå forvirring.
+- Feilmeldinger bør være kodet som tekst og identifisere det spesifikke skjemaelementet hvor feilen oppstod. Feilmeldingen må beskrive feilen og være synlig uten at brukeren gjør noen ekstra handlinger.
+- Prefiks og suffiks er et ekstra visuelt hjelpemiddel, som blir ignorert av skjermlesere. Vi må alltid ha en beskrivende ledetekst. Prefiks og suffiks er plassert utenfor inndatafeltene de tilhører. Da unngår vi at de ikke skaper trøbbel i noen nettlesere, som kan sette inn et ikon i inndatafeltet
+
+### Sjekkliste
+
+✓ Alle skjemaelementene har tilknyttet label eller instruksjon
+
+✓ Det er tydelig merket hvilke felter som er valgfrie
+
+✓ Feilmeldinger er kodet som tekst og er i nærheten av det spesifikke tekstfeltet der feilen oppstod
+
+✓ Feilmeldinger er tilgjengelig for skjermleser og keyboard-navigering
+
+### Les mer
+
+[WCAG 2.4.6 Heading and Labels (AA)](https://www.wcag.com/authors/2-4-6-headings-and-labels/)
+
+[WCAG 1.3.1 Info and Relationships (A)](https://www.wcag.com/developers/1-3-1-info-and-relationships/)
+
+[WCAG 3.2.2 On Input (A)](https://www.wcag.com/developers/3-2-2-on-input/)
+
+[WCAG 3.2.1 On Focus (A)](https://www.wcag.com/designers/3-2-1-on-focus/)
+
+<Image src={img22} alt="Divider" width={2000} height={143} />
+
+## Interaksjon
+
+### Tastatur
+
+| Key                                    | Interaksjon                                                                        |
+| -------------------------------------- | ---------------------------------------------------------------------------------- |
+| Tab                                    | Fører fokus til inputfield                                                         |
+| Enter eller space                      | Åpner tilleggsfunksjoner som datepicker ved å aktivere kalender-ikonet             |
+| Esc                                    | Lukker tilleggsfunksjoner                                                          |
+| ctrl eller opt + venstre/høyre piltast | Beveger brukeren ord for ord i inputfeltet                                         |
+| ctrl eller opt + opp/ned piltast       | Flytter brukeren til starten eller slutten av det som er skrevet inn i inputfeltet |

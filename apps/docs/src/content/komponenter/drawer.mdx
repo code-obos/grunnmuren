@@ -1,0 +1,53 @@
+---
+name: 'Drawer'
+slug: 'drawer'
+componentState: beta
+propsComponents:
+  - 'Drawer'
+resourceLinks:
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/drawer'
+---
+
+## Om komponenten
+
+En drawer er et forankret overlay som glir inn fra en side av skjermen (topp, bunn, høyre eller venstre). Den brukes for sekundære handlinger, navigasjon eller detaljvisninger der man ikke ønsker å blokkere hele hovedinnholdet slik en modal gjør.
+
+Drawer bygger på samme prinsipper som Modal og gjenbruker `DialogTrigger` og `Dialog`. Hvilken kant den glir inn fra styres med `placement`-propen (`right`, `left`, `top`, `bottom`).
+
+**Egnet til:**
+
+- Filter eller navigasjon som åpnes fra siden uten at brukeren forlater hovedflyten.
+- Sekundære handlinger eller skjemafelter som ikke krever full modal-blokkering.
+- Detaljvisninger som drar inn fra bunnen på mobil eller fra siden på desktop.
+
+**Uegnet til:**
+
+- Kritiske bekreftelser av destruktive eller irreversible handlinger — bruk Modal i stedet.
+- Viktig innhold på siden, og som brukeren forventer å finne direkte.
+
+**Relaterte komponenter**
+
+- [Modal](/komponenter/modal)
+- [Button](/komponenter/button)
+
+### Eksempler
+
+Drawer skal alltid ha en tittel, som defineres ved å sette `slot="title"` på den øverste headingen i drawer. Det aktiverer også den automatiske close-knappen i headeren.
+
+<StorybookEmbed storyId="drawer--drawer-story" caption="Drawer fra høyre (default)" />
+
+<StorybookEmbed storyId="drawer--left" caption="Drawer fra venstre" />
+
+<StorybookEmbed storyId="drawer--top" caption="Drawer fra toppen" />
+
+<StorybookEmbed storyId="drawer--bottom" caption="Drawer fra bunnen" />
+
+<StorybookEmbed storyId="drawer--multiple-actions" caption="Med flere knapper samlet i en Footer" />
+
+<StorybookEmbed storyId="drawer--controlled" caption="Kontrollert via isOpen / onOpenChange" />
+
+<StorybookEmbed
+  storyId="drawer--not-dismissable"
+  caption="Uten lukke-mulighet — ingen close-knapp, og Escape / klikk utenfor deaktivert"
+/>

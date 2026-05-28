@@ -1,0 +1,45 @@
+---
+name: 'Avatar'
+slug: 'avatar'
+componentState: stable
+propsComponents:
+  - 'Avatar'
+resourceLinks:
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/avatar'
+  - linkType: 'figma'
+    url: 'https://www.figma.com/design/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=4500-3625&t=gl4brJryApuqUHnv-4'
+---
+
+import img0 from './images/avatar/0.webp';
+
+## Om komponenten
+
+Avatar kan brukes til å representere profilen til en person eller et objekt. På samme måte som f.eks. et profilbilde.
+
+**Egnet til:**
+
+- [Contact Card](/komponenter/card#8e9c82a54b39) og andre komponenter med profilbilder
+
+**Uegnet til:**
+
+- Andre type Cards enn Contact Card.
+- Andre type bilder enn profilbilder.
+
+**Relaterte komponenter**
+
+- [Card](/komponenter/card)
+
+<Image src={img0} alt="Divider" width={2000} height={143} />
+
+## Varianter
+
+```tsx live
+<Avatar src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/v1578474487/Boligkonferansen/obosbk%202017/Daniel_Kj%C3%B8rberg_Siraj_1x1.jpg" />
+```
+
+Komponenten har en fallback for om `src` ikke er satt, eller om henting av bildet feiler:
+
+```tsx live
+<Avatar />
+```

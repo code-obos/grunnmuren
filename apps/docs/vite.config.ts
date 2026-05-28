@@ -1,9 +1,16 @@
+import mdx from '@mdx-js/rollup';
 import optimizeLocales from '@react-aria/optimize-locales-plugin';
 import tailwindcss from '@tailwindcss/vite';
 import { nitroV2Plugin } from '@tanstack/nitro-v2-vite-plugin';
 import { tanstackStart } from '@tanstack/react-start/plugin/vite';
 import viteReact from '@vitejs/plugin-react';
+import remarkFrontmatter from 'remark-frontmatter';
+import remarkGfm from 'remark-gfm';
+import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
 import { defineConfig } from 'vite';
+
+import { remarkCodeBlocks } from './src/lib/mdx/remark-code-blocks';
+import { remarkHeadings } from './src/lib/mdx/remark-headings';
 
 export default defineConfig({
   plugins: [
@@ -22,6 +29,19 @@ export default defineConfig({
     tanstackStart({
       srcDirectory: 'src',
     }),
+    {
+      // MDX must transform `.mdx` → JSX before the React plugin runs.
+      enforce: 'pre',
+      ...mdx({
+        remarkPlugins: [
+          remarkFrontmatter,
+          [remarkMdxFrontmatter, { name: 'frontmatter' }],
+          remarkGfm,
+          remarkCodeBlocks,
+          remarkHeadings,
+        ],
+      }),
+    },
     viteReact(),
   ],
   resolve: {

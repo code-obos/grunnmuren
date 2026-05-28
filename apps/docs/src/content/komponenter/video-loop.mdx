@@ -1,0 +1,73 @@
+---
+name: 'VideoLoop'
+slug: 'video-loop'
+componentState: stable
+propsComponents:
+  - 'VideoLoop'
+resourceLinks:
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/video-loop'
+---
+
+Om komponenten
+
+VideoLoop viser en video i loop uten lyd, som en "GIF". Videoen spilles av automatisk og brukeren kan pause og spille av videoen ved å trykke på den.
+
+Dersom brukeren har aktivert [reduced motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion) vil ikke videoen spilles av automatisk.
+
+**Egnet til:**
+
+- For å få frem et budskap uten å bruke for mye tekst og bilder
+- For å bryte opp teksttungt innhold med et visuelt grep
+
+**Uegnet til:**
+
+- Videoer med lyd
+
+---
+
+Retningslinjer
+
+En VideoLoop må alltid ha en tekstlig beskrivelse, enten en synlig eller en visuelt skjult tekst ("alt").
+
+## Eksempler
+
+```tsx live caption="Videoloop med alt-tekst"
+<VideoLoop
+  className="aspect-w-16 aspect-h-9"
+  src="https://res.cloudinary.com/obosit-prd-ch-clry/video/upload/v1732199756/Mellom%20husene/Frysja_Loop2.mp4"
+  format="mp4"
+  alt="En postbil kjører rundt i det moderne nabolaget på Frysja. Her finnes det fine uteområder, med husker og kafeer."
+/>
+```
+
+```tsx live caption="Videoloop med beskrivelse"
+<>
+  <VideoLoop
+    className="aspect-w-16 aspect-h-9"
+    src="https://res.cloudinary.com/obosit-prd-ch-clry/video/upload/v1732199756/Mellom%20husene/Frysja_Loop2.mp4"
+    format="mp4"
+  />
+  <p>
+    <Description>
+      I det moderne nabolaget på Frysja finnes det fine uteområder, med husker og kafeer.
+    </Description>
+  </p>
+</>
+```
+
+```tsx live caption="Videoloop med alt og beskrivelse"
+<>
+  <VideoLoop
+    className="aspect-w-16 aspect-h-9"
+    src="https://res.cloudinary.com/obosit-prd-ch-clry/video/upload/v1732199756/Mellom%20husene/Frysja_Loop2.mp4"
+    format="mp4"
+    alt="En postbil kjører rundt i nabolaget på Frysja"
+  />
+  <p>
+    <Description>
+      I det moderne nabolaget finnes det fine uteområder, med husker og kafeer.
+    </Description>
+  </p>
+</>
+```

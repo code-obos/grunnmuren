@@ -1,0 +1,101 @@
+---
+name: 'Disclosure'
+slug: 'disclosure'
+componentState: stable
+propsComponents:
+  - 'Disclosure'
+  - 'DisclosureButton'
+  - 'DisclosurePanel'
+  - 'DisclosureGroup'
+resourceLinks:
+  - linkType: 'figma'
+    url: 'https://www.figma.com/design/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=4845-4783&t=FV4FudOBI4z22wPz-4'
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/blob/main/packages/react/src/disclosure/disclosure.tsx'
+---
+
+import img0 from './images/disclosure/0.webp';
+
+## Om komponenten
+
+En Disclosure kan ekspandere og kollapse relatert innhold. Den består i hovedsak av en knapp og et panel. Knappen styrer om innholdet i panelet vises eller skjules.
+
+Den fungerer på lik måte som [\<details> og \<summary>](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details) i HTML, men de elementene kan ofte være litt vanskelig å tilpasse utseendet på.
+
+**Egnet til:**
+
+- Når det er behov for å vise tilleggsvalg på en strukturert måte, som for eksempel i et filter.
+- Disclosure brukes ofte til "Les mer" i komponenter
+
+**Den skiller seg fra **[**Accordion**](/komponenter/accordion)** ved at:**
+
+- Disclosure er som regel frittstående, og må ikke være en del av en gruppe.
+- Teksten på knappen er ikke implisitt en heading.
+- Innholdet i panelet er ikke nødvendigvis en egen section/group. Det er som regel en kortere tekst, eller noe interaktivt.
+
+<Image src={img0} alt="Divider" width={2000} height={143} />
+
+## Varianter
+
+Et vanlig bruksområde for Disclosure er "Les mer"
+
+```tsx live
+<Disclosure defaultExpanded>
+  <DisclosureButton className="description" withChevron>
+    Les mer
+  </DisclosureButton>
+  <DisclosurePanel>
+    <p>
+      For å komme raskere i gang med å ta i bruk Obos-banken så kan du nå på forhånd velge hvilke
+      type kontoer du ønsker å starte med..
+    </p>
+  </DisclosurePanel>
+</Disclosure>
+```
+
+### Bruk med "fieldsets"
+
+For å være tilgjengelig har `DisclosurePanel` automatisk satt en [aria rolle](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles). Dersom `Disclosure` skal benyttes sammen med for eksempel [CheckboxGroup](/komponenter/checkboxgroup), [RadioGroup](/komponenter/radiogroup) eller andre fieldsets, er det viktig å overstyre denne rollen og knytte fieldsettet til `DisclosureButton` ved hjelp av `aria-labelledby`.
+
+```tsx live caption="Boligfilter"
+<Disclosure>
+  <DisclosureButton id="my-id" withChevron>
+    Kjøpsalternativer
+  </DisclosureButton>
+
+  <DisclosurePanel role="none">
+    <CheckboxGroup aria-labelledby="my-id">
+      <Checkbox value="deleie">Deleie</Checkbox>
+      <Checkbox value="bostart">Bostart</Checkbox>
+      <Checkbox value="boligbytte">Boligbytte</Checkbox>
+    </CheckboxGroup>
+  </DisclosurePanel>
+</Disclosure>
+```
+
+### DisclosureGroup
+
+En `DisclosureGroup` kan benyttes til å gruppere sammen relaterte disclosures. Den støtter at det kun kan være en utvidet Disclosure av gangen, eller opp til flere.
+
+Grunnmuren re-eksporterer [React Aria sin DisclosureGroup](https://react-spectrum.adobe.com/react-aria/DisclosureGroup.html), så se mer utfyllende dokumentasjon og eksempler på bruk av komponenten der.
+
+```tsx live
+<DisclosureGroup
+  onExpandedChange={(event) => {
+    console.log(event.values());
+  }}
+>
+  <Disclosure>
+    <DisclosureButton withChevron>Personlig informasjon</DisclosureButton>
+    <DisclosurePanel>Personlig informasjon her</DisclosurePanel>
+  </Disclosure>
+  <Disclosure>
+    <DisclosureButton withChevron>Adresse</DisclosureButton>
+    <DisclosurePanel>Adresse her</DisclosurePanel>
+  </Disclosure>
+</DisclosureGroup>
+```
+
+### Frittstående DisclosureButton
+
+Du kan også bruke knappen \`\<DisclosureButton>\` frittstående, se f.eks. [Ekspanderbar tabell](/komponenter/table#d282dc9e7248)

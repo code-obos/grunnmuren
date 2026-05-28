@@ -1,0 +1,86 @@
+---
+name: 'Modal'
+slug: 'modal'
+componentState: beta
+propsComponents:
+  - 'DialogTrigger'
+  - 'Modal'
+  - 'Dialog'
+resourceLinks:
+  - linkType: 'figma'
+    url: 'https://www.figma.com/design/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=5374-3443&t=6CeOACCpcSRHXPTW-4'
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/blob/main/packages/react/src/modal/modal.tsx'
+---
+
+import img0 from './images/modal/0.webp';
+
+## Om komponenten
+
+En modal er en dialogtype, som avbryter en brukerflyt for å be om brukerens input som er nødvendig for å fullføre en oppgave, eller for å gi brukeren viktig informasjon. Modaler brukes ofte til å formidle en konsekvens av en brukers handling.
+
+Når modalen er åpen, blokkeres brukeren fra innholdet på siden og kan ikke gå tilbake til sin forrige arbeidsflyt før modaloppgaven er fullført, eller brukeren lukker modalen.
+
+**Egnet til:**
+
+- For å varsle brukeren om relevant informasjon knyttet til hovedoppgaven.
+- For å bekrefte en brukers avgjørelse. Beskriv tydelig handlingen som bekreftes og forklar eventuelle konsekvenser den kan forårsake. Både tittelen og knappen skal gjenspeile handlingen som vil skje - i hvert fall hvis handlingen er destruktiv eller irreversibel.
+
+**Uegnet til:**
+
+- Selv om en modal er effektiv når den brukes riktig, bør den likevel brukes sparsomt for å begrense forstyrrelse for brukeren. Hvis brukeren må utføre en oppgave gjentatte ganger, bør du ikke bruke modal.
+- Det skal ikke plasseres et helt skjema i en modal. Ett skjemaelement er greit.
+
+**Relaterte komponenter**
+
+- [Button](/komponenter/button)
+
+<Image src={img0} alt="Divider" width={2000} height={143} />
+
+## Eksempel
+
+En modal skal alltid ha en tittel, denne defineres ved å sette `slot="title"` på øverste headingen i modalen.
+
+```tsx live caption="Modal dialog med tittel"
+<UNSAFE_DialogTrigger>
+  <Button>Åpne</Button>
+  <UNSAFE_Modal>
+    <UNSAFE_Dialog>
+      <Heading slot="title" level={2}>
+        Hvitevarer
+      </Heading>
+      <p>
+        Denne boligen har tilvalg om hvitevarer fra HTH. Mulighet for vaskemaskin, tørketrommel,
+        oppvaskmaskin eller å avstå dette tilbudet.
+      </p>
+    </UNSAFE_Dialog>
+  </UNSAFE_Modal>
+</UNSAFE_DialogTrigger>
+```
+
+Modal kan rendres med en eller flere knapper som gjør at modalen lukker seg. For å få denne oppførseln må man sette `slot="close"` på knappen
+
+```tsx live caption="Modal dialog med flere valg"
+<UNSAFE_DialogTrigger>
+  <Button>Åpne</Button>
+  <UNSAFE_Modal>
+    <UNSAFE_Dialog>
+      <Heading slot="title" level={2}>
+        Hvitevarer
+      </Heading>
+      <p>
+        Denne boligen har tilvalg om hvitevarer fra HTH. Mulighet for vaskemaskin, tørketrommel,
+        oppvaskmaskin eller å avstå dette tilbudet.
+      </p>
+      <Footer>
+        <Button onPress={() => console.log('SAVED!')} slot="close">
+          Lagre
+        </Button>
+        <Button variant="tertiary" slot="close">
+          Avbryt
+        </Button>
+      </Footer>
+    </UNSAFE_Dialog>
+  </UNSAFE_Modal>
+</UNSAFE_DialogTrigger>
+```

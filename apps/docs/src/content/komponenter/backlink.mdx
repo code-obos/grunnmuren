@@ -1,0 +1,107 @@
+---
+name: 'Backlink'
+slug: 'backlink'
+componentState: stable
+propsComponents:
+  - 'Backlink'
+resourceLinks:
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/backlink'
+  - linkType: 'figma'
+    url: 'https://www.figma.com/design/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=1200-629&t=PyieE0Dhc9zsQa4A-4'
+---
+
+import img0 from './images/backlink/0.webp';
+import img1 from './images/backlink/1.webp';
+import img2 from './images/backlink/2.webp';
+import img3 from './images/backlink/3.webp';
+import img4 from './images/backlink/4.webp';
+import img5 from './images/backlink/5.webp';
+
+## Om komponenten
+
+Backlink lar brukeren navigere tilbake til forrige sted i en løsning eller et nettsted.
+
+**Egnet til:**
+
+- Produkter eller sider med kun to nivåer
+- Bruk på mindre flater, som på mobil
+
+**Uegnet til:**
+
+- Produkter eller sider med flere nivåer i navigeringen.
+- Ved flere nivåer i navigasjonshierarkiet bør du bruke [Breadcrumbs](/komponenter/breadcrumbs)
+
+**Relaterte komponenter**
+
+- [Breadcrumbs](/komponenter/breadcrumbs)
+
+<Image src={img0} alt="Divider" width={2000} height={143} />
+
+## Varianter
+
+```tsx live caption="Backlink som lenke og som knapp"
+<>
+  <Backlink href="#back">Tilbake</Backlink>
+
+  <Backlink>Tilbake</Backlink>
+</>
+```
+
+<Image src={img1} alt="Divider" width={2000} height={143} />
+
+## Retningslinjer
+
+### Plassering
+
+Backlink plasseres øverst til venstre på siden, under overskriften og navigasjonen, men over sidetittelen. Den skal benytte samme posisjon som [Breadcrumbs](/komponenter/breadcrumbs).
+
+### Innhold
+
+Du kan selv velge om backlinken skal innholde navnet på den forrige siden, eller at det står "Tilbake".
+
+<Image src={img2} alt="Divider" width={2000} height={143} />
+
+## Formatering
+
+### Anatomi
+
+<Image
+  src={img3}
+  alt="Backlink-komponentens anaotmi med sidekobling, ikon og landingsside."
+  width={2000}
+  height={845}
+/>
+
+1. **Sidekobling:** Enten ha "tilbake" eller forrige sides navn
+1. **Ikon:** Skal alltid være en pil til venstre for å indikere tilbake til forrige side
+
+<Image src={img4} alt="Divider" width={2000} height={143} />
+
+## Universell utforming
+
+### Husk på
+
+- Backlinken må alltid være tilgjengelig med skjermleser og tastaturnavigering
+- Lenketeksten skal være tydelig og formidler målet for lenken
+
+### Sjekkliste
+
+✓ Vi har testet at lenketeksten tydelig formidler målet for lenken.
+
+✓ Vi har testet at backlink er tilgjengelig med skjermleser og tastaturnavigering.
+
+### Les mer
+
+[uu tilsynet lenker](https://www.uutilsynet.no/veiledning/lenker/214)
+
+<Image src={img5} alt="Divider" width={2000} height={143} />
+
+## Interaksjon
+
+### Tastatur
+
+| Key   | Interaksjon                |
+| ----- | -------------------------- |
+| Tab   | Kunne fokusere komponenten |
+| Enter | Kunne trykke på lenken     |

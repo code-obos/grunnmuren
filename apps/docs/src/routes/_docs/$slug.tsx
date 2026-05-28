@@ -1,7 +1,9 @@
 import { createFileRoute, notFound } from '@tanstack/react-router';
 import { defineQuery } from 'groq';
 
+import { infoDocs } from '@/lib/content';
 import { sanityFetch } from '@/lib/sanity';
+import { MdxInfoPage } from '@/ui/mdx-doc';
 import { ResourceLink, type ResourceLinkProps, ResourceLinks } from '@/ui/resource-links';
 import { SanityContent } from '@/ui/sanity-content';
 import { ScrollToTop } from '@/ui/scroll-to-top';
@@ -24,6 +26,12 @@ const INFO_QUERY = defineQuery(
 export const Route = createFileRoute('/_docs/$slug')({
   component: Page,
   loader: async ({ params }) => {
+    // Prefer migrated MDX; fall back to Sanity for not-yet-migrated info pages.
+    const mdxDoc = infoDocs[params.slug];
+    if (mdxDoc) {
+      return { source: 'mdx' as const, frontmatter: mdxDoc.frontmatter, toc: mdxDoc.toc };
+    }
+
     const res = await sanityFetch({
       query: INFO_QUERY,
       params: { slug: params.slug },
@@ -33,21 +41,35 @@ export const Route = createFileRoute('/_docs/$slug')({
       throw notFound();
     }
 
-    return res;
+    return { source: 'sanity' as const, data: res.data };
   },
-  head: (ctx) => ({
-    meta: [
-      { title: `${ctx.loaderData?.data?.name} | Grunnmuren` },
-      {
-        name: 'description',
-        content: `Grunnmuren dokumentasjon - ${ctx.loaderData?.data?.name}`,
-      },
-    ],
-  }),
+  head: (ctx) => {
+    const name =
+      ctx.loaderData?.source === 'mdx'
+        ? ctx.loaderData.frontmatter.name
+        : ctx.loaderData?.data?.name;
+    return {
+      meta: [
+        { title: `${name} | Grunnmuren` },
+        {
+          name: 'description',
+          content: `Grunnmuren dokumentasjon - ${name}`,
+        },
+      ],
+    };
+  },
 });
 
 function Page() {
-  const { data } = Route.useLoaderData();
+  const loaderData = Route.useLoaderData();
+  const { slug } = Route.useParams();
+
+  if (loaderData.source === 'mdx') {
+    const doc = infoDocs[slug];
+    return <MdxInfoPage doc={doc} toc={loaderData.toc} frontmatter={loaderData.frontmatter} />;
+  }
+
+  const { data } = loaderData;
 
   return (
     <>

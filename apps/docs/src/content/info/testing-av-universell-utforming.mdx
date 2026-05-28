@@ -1,0 +1,298 @@
+---
+name: 'Testing av Universell utforming'
+slug: 'testing-av-universell-utforming'
+---
+
+Her finner du testveiledning for de lovpålagte uukravene
+
+## Introduksjon
+
+Det er viktig å kvalitetssikre implementeringen av Designsystemets komponenter i kontekst av siden. Dette betyr at selv om komponentene er grunnleggende utviklet for å imøtekomme WCAG-standarden, vil det være nødvendig å sjekke at alt fungerer som det skal når de ulike komponentene benyttes. På denne siden finner du en oversikt og gjennomgang av relevante WCAG testkriteria. Ikke-relevante kriterier vil foreløpig ikke være inkludert på denne siden.
+
+Hver enkelt komponent vil lenke direkte til testkriterie de må testes for.
+
+## Prinsipp 1: Mulig å oppfatte
+
+### Ikke-tekstlig innhold (1.1.1)
+
+- Inspiser koden.
+- Hvis det ikke-tekstlige innholdet vil gi nyttig informasjon med kompenserende teknologi som for eksempel skjermlesere, sjekk at det har tekstalternativ eller navn spesifisert i koden (alt-tekst, aria-label, aria-labelledby, title, label, ...). Standard HTML-punktlister trenger for eksempel ikke tekstalternativ for at kulepunktene skal presenteres riktig med kompenserende teknologi. Se bare at standard ul- og li-elementer er brukt.
+- Hvis det ikke-testlige innholdet er pynt eller ikke vil gi nyttig informasjon med kompenserende teknologi, sjekk at det er tilstrekkelig skjult for kompenserende teknologi i koden (alt-tekst som står tom, aria-hidden true, ...).
+- Aktiver skjermleser.
+- For ikke-tekstlig innhold som skal fanges opp av kompenserende teknologi, test at tekstalternativet eller navnet leses opp av skjermleseren. For standard HTML-punktlister, sjekk at kulepunktene leses opp (typisk sier skjermleser for eksempel punkttegn).
+- For innhold som skal være skjult, test at dette ikke leses opp.
+
+### Informasjon og relasjoner (1.3.1)
+
+#### Heading
+
+- Inspiser koden.
+- Sjekk om overskriften er kodet med enten standard HTML, spesifikt `h1` til og med `h6`.
+- Kontrollér at overskriftsnivået i koden er det samme som det visuelle nivået til overskriften i grensesnittet.
+- Sjekk at tittelen til tabellen aka tabelloverskriften ligger rett før tabellen uten tekst mellom tittel og tabell.
+- Sjekk at tabeltittelen er kodet med `caption`-elementet for å knytte den til tabellen kodemessig.
+- Kontrollér at tabelltittelen beskriver innholdet i tabellen på en god måte.
+
+#### Tabeller
+
+- Inspiser koden.
+- Kontrollér at tabellen er kodet med `table`-elementet og at overskriftscellene er kodet med `th`.
+- For komplekse tabeller kodet med med scope:
+  - `scope="col"` når overskriftscellen er overskrift for en kolonne.
+  - `scope="colgroup"` når overskriftscellen er overskrift for flere kolonner.
+  - scope="row" når overskriftscellen er overskrift for en rad.
+  - scope="rowgroup" når overskriftscellen er overskrift for flere rader.
+
+#### Lister
+
+- Inspiser koden.
+- Se at komponenten er kodet som liste, med riktig listetype. Se også at de indre elementene (`li`/`dt`/`dd`) ligger inne i de ytre elementene (`ul`/`ol`/`dl`).
+- Aktiver skjermleser.
+- Sjekk at det leses opp at komponenten er en liste og at alle liste-elementene leses opp som en del av listen.
+
+### Meningsfylt rekkefølge (1.3.2)
+
+Sikre at leserekkefølgen på innhold gir mening både med og uten CSS. Dette betyr at den semantiske og visuelle rekkefølgen må være logisk og at rekkefølgen presenterer samme mening/funksjon.
+
+- Kontrollér rekkefølgen av innholdet på nettsiden.
+- Skru av CSS/stilark i nettleseren.
+- Se om rekkefølgen eller formålet med innholdet er det samme som med CSS/stilark skrudd på.
+
+### Bruk av farge (1.4.1)
+
+Observer komponenten i ulike tilstander. Hvis farge brukes som en måte til å formidle informasjon til brukeren må du sjekke at informasjonen også gis på andre måter.
+
+- Hvis informasjonen bare formidles med farger, sjekk at fargene skiller seg fra hverandre med en kontrast på minimum 3:1.
+- Hvis brukerne må kunne identifisere en spesifikk farge for å forstå informasjonen, for eksempel om rammen på et inputfelt er grønn for gyldig eller rød for ugyldig, er det ikke nok med bare fargekontrasten. Da kreves det at vi har andre visuelle indikatorer i tillegg.
+
+### Kontrast (1.4.3)
+
+Test fargen på teksten i komponenten mot bakgrunnsfargen til komponenten (hex-kodene).
+
+- Bruk en kontrastsjekker som f.eks. Color Contrast Analyser (TPGi).
+- Hvis fargene endrer seg i ulike tilstander av komponenten, for eksempel ved hover, husk å teste disse også.
+- Tekststørrelsen i komponentene kan variere fordi den settes basert på brukerens nettleserinnstillinger.
+- For å sikre at kravet er ivaretatt på alle ulike tekststørrelser baserer vi testene på det høyeste kontrastkravet (4.5:1).
+
+### Endring av tekststørrelse (1.4.4)
+
+Tekst kan bli endret til 200 % størrelse uten tap av innhold eller funksjon.
+
+- Inspiser koden.
+- Sjekk at all tekst i komponenten er spesifisert i et skalerbart format, for eksempel rem. Dette gjelder også komponenten om du definerer høyde.
+- Øk tekststørrelsen til 200% i nettleser-innstillingene. Metode avhenger av nettleser. Hvis du bruker Chrome, øk tekststørrelsen på html-taggen til 200%. Det er viktig at endringen skjer på HTML-taggen, om du zoomer i body kan du potensielt få feil resultat.
+- Se at teksten i komponenten endrer størrelse.
+- Se at alt innhold og all funksjonalitet i komponenten fortsatt er tilgjengelig og forståelig (innhold overlapper ikke annet innhold, innhold blir ikke kuttet så det ikke er synlig).
+- Sjekk i både desktop og mobilvisning. Bredde 320px kan brukes for å teste mobilvisning.
+
+Ved bruk av ord med litt lengde, i mobilvisning, kan innhold flyte ut over containeren til komponenten samt skjermen og intodusere horisontal skroll. Dette er et tolkningsspørsmål og skal ikke være brudd på krav 1.4.4. siden innholdet fortsatt er tilgjengelig og forståelig. Det anbefales likevel å forsøke å unngå dette så langt det er mulig.
+
+### Bilde av tekst (1.4.5)
+
+Unngå bilde av tekst med mindre dette kan direkte tilpasses av brukeren til deres behov.
+
+Logoer eller lignende med tilfredsstillende alt-tekst er akseptabelt.
+
+## Prinsipp 2: Mulig å betjene
+
+### Tastatur (2.1.1)
+
+Alt innhold skal være tilgjengelig med tastaturnavigasjon.
+
+Bruk tab-tasten til å navigere deg gjennom nettsiden og sørg for at interaktive elementer kan brukes med enter eller mellomromstasten.
+
+### Ingen tastaturfelle (2.1.2)
+
+Det skal være mulig å navigere seg ut av interaktive elementer når man benytter tastaturnavigasjon.
+
+- Bruk tastaturet og naviger til komponenten med tab-tasten.
+- Naviger deg videre til neste element på siden for å sjekke at fokuset ikke er «fanget» i komponenten.
+
+### Hoppe over blokker (2.4.1)
+
+Brukeren skal ha mulighet til å hoppe over gjentagende informasjon (typ header meny) med "hopp til hovedinnhold" og "hopp til navigasjon" lenker.
+
+### Sidetitler (2.4.2)
+
+Nettsider skal ha sidetitler som beskriver den aktuelle sidens emne eller formål.
+
+- Inspiser koden.
+- Sjekk at `title` elementet inneholder en tittel som korrekt beskriver hovedinnholdet eller hovedformålet til siden.
+- Dette gjelder også for digitale dokumenter.
+
+### Fokusrekkefølge (2.4.3)
+
+Interaktive elementer skal ha en logisk tastaturrekkefølge på samme måte som den visuelle rekkefølgen.
+
+- Naviger deg gjennom nettsiden med tab-tasten på tastaturet.
+- Sjekk at de interaktive elementene er tilgjengelige med tastatur.
+- Sjekk at rekkefølgen på de interaktive elementene henger sammen med den visuelle rekkefølgen i grensesnittet.
+
+### Formål med lenke i kontekst (2.4.4)
+
+Alle lenkers mål (der brukeren ender opp) og funksjon fremgår tydelig av lenketeksten.
+
+Lenker som inneholder tekst oppfyller kravet dersom en av følgende er oppfylt:
+
+- Lenketeksten alene beskriver formålet med lenken.
+- Lenketeksten sammen med programmeringsmessig bestemt lenkekontekst beskriver formålet med lenken.
+- For programmatisk bestemt lenkekontekst vurderes tekst som står i samme avsnitt, liste eller celle i en tabell som lenken gjør eller tilsvarende, eller en tabelloverskrift som er knyttet til tabellcellen som lenken står i eller tilsvarende.
+
+Krav til samsvar er lik for apper og dokumenter.
+
+### Flere måter (2.4.5)
+
+Nettsider som består av mer enn én side i strukturen, må ha flere måter å finne informasjon og undersider på.
+
+Eksempler for ulike metoder er Søk, Meny eller nettstedskart.
+
+### Overskrifter og ledetekster (2.4.6)
+
+Sørg for at overskrifter og ledetekster (labels) beskriver tema eller formål på en god måte for sluttbrukeren.
+
+### Synlig fokus (2.4.7)
+
+Naviger deg gjennom nettsiden, kontrollér at alle interaktive elementer har synlig fokus ved tastaturnavigasjon.
+
+## Prinsipp 3: Forståelig
+
+### Språk på siden (3.1.1)
+
+Riktig språk for nettsiden defineres i koden.
+
+Inspiser koden.
+
+- Sjekk at `lang` attributet i `html` taggen gir riktig språk-klassifisering for innholdet på siden.
+
+### Språk på deler av innhold (3.1.2)
+
+Om enkelte deler av det tekstlige innholdet på siden er på et annet språk enn hovedinnholdet må dette klassifiseres i koden.
+
+Inspiser koden.
+
+- Sjekk at `lang` attributet blir brukt i `p`taggen for å giriktig språk-klassifisering spesifikt for innholdet som er på et annet språk enn hovedinnholdet
+
+### Fokus (3.2.1)
+
+Et element som får tastaturfokus skal ikke automatisk aktivere kontekstuell endring.
+
+Gå gjennom nettsiden med tastaturet. Sjekk at store endringer i grensesnittet ikke aktiveres ved fokus på elementer.
+
+"Store endringer" kan være:
+
+- Åpning av nytt vindu eller fane.
+- Fokus flyttes til en annen komponent.
+- Ny side lastes inn eller brukeren tas til ny side.
+- Innhold blir omorganisert og får ny rekkefølge.
+
+UU-Tilsynet har klassifisert "fokus" til å bety tastaturfokus for minstekravet.
+
+### Inndata (3.2.2)
+
+Sørg for at skjema-input ikke aktiverer større endringer på siden.
+
+Om større endringer vil aktiveres ved input må brukeren vasles på forhånd.
+
+Dette kravet gjelder for inputfelt eller interaksjon med avkrysningsboks, radioknapp og lignende.
+
+Om kontekstendringen skjer ved klikk på innsendingsknapp, lenke eller annen "ferdigstill" eller "avbryt" funksjon, er dette innenfor.
+
+### Konsekvent navigering (3.2.3)
+
+Navigasjonselementer som gjentar seg på flere sider (typ header og footer) må ha samme rekkefølge gjennom hele nettstedet eller tjenesten.
+
+### Konsekvent identifikasjon (3.2.4)
+
+Komponenter som har samme funksjonalitet eller inneholder samme type informasjon gjennom nettstedet eller tjenesten må utformes likt.
+
+Dette kan for eksempel være "legg til" funksjon, "utvid" funksjon osv. Disse komponentene må bruke samme ikon og alternativ tekst og labeling.
+
+### Identifikasjon av feil (3.3.1)
+
+Feil som oppdages automatisk, i for eksempel skjemafelt eller lignende, må gi en tydelig markering av hvor feilen er og hvordan brukeren kan fikse feilen.
+
+Testing:
+
+- Gå gjennom skjema på nettsiden.
+- Fyll ut skjemafelt feil, eller la obligatoriske felt stå tomme.
+- Sjekk at feltene får tydelig feilmelding som viser hvor feilen er.
+- Sjekk om tidligere innfylt informasjon beholdes i skjemafeltet, med mindre det er sensitiv informasjon.
+- Sjekk at disse feltene får klar beskrivelse av hva feilen er slik at brukeren kan rette feilen.
+- Sjekk at feilmeldingen er kodet som tekst slik at skjermlesere kan lese feilen.
+
+### Ledetekster eller instruksjoner (3.3.2)
+
+Skjemafelter har ledetekst og instruksjoner for korrekt utfylling av skjemafeltene. Dette betyr at:
+
+- Obligatoriske felter er markert som obligatoriske, enten med symbol (hvis symbolet er forklart på starten av skjemaet) eller med "obligatorisk" eller lignende som en del av label/ledetekst.
+- Skjemafelt har tydelig navngivning/instruksjon for hvordan skjemafeltet skal fylles ut.
+
+### Forslag ved feil (3.3.3)
+
+Gi brukeren løsningsforslag for hvordan skjemafelt skal fylles inn når brukeren har gitt feil inputverdi i et skjemafelt.
+
+- Husk at forslaget skal kodes som tekst.
+- Sørg for at tidligere innfylt informasjon blir lagret i skjemaet, med mindre informasjonen faller innenfor personvern eller andre sikkerhetshensyn.
+
+### Forhindring av feil (3.3.4)
+
+I løsninger der brukeren utfører økonomiske transaksjoner eller inngår juridisk bindende avtaler må vi gi brukeren minst ett (helst flere) av følgende verktøy:
+
+- Innsending må kunne angres en siste gang før fullstending innsending utføres.
+- Skjemaet må kontrolleres for inndatafeil og brukeren må ha mulighet til å korrigere eventuelle feil de kan ha gjort.
+- Det skal finnes en mekanisme som lar brukeren gjennomgå, korrigere og bekrefte informasjonen før den sendes.
+
+## Prinsipp 4: Robust
+
+### Parsing/oppdeling (4.1.1)
+
+HTML-koden må opprettholde standardisert kvalitet for å unngå utilsiktede feil eller vanskeligheter for hjelpemidler.
+
+Test dette ved å inspisere koden for nettstedet, kopier `html` elementet og lim koden inn i [W3C HTML validator](https://validator.w3.org/#validate_by_input) under "validate by input".
+
+Sørg deretter for at følgende feil ikke oppstår på nettsiden:
+
+- Element (name) not allowed
+- Unclosed element (name)
+- End tag for (name) omitted
+- End tag for (name) which is not finished
+- Duplicate attribute (name)
+- Duplicate specification of attribute (name)
+- Duplicate ID (name)
+- ID (name) already defined
+- Fatal Error
+
+### Navn, rolle, verdi (4.1.2)
+
+HTML-elementer må være korrekt definert i koden med korrekt klassifikasjon i HTML eller skript som for eksempel WAI-ARIA tagging. Standarden for dette kan grovt deles inn i Skjema, knapper og iFrames.
+
+Det er essensielt at ledetekst og instruksjon til skjemaelementer beskriver formålet med skjemafelt og kobles korrekt i koden.
+
+#### Skjema
+
+- Sørg for at skjemaelementer er kodet som `input`, `select` eller `textarea`.
+- Sørg for at skjemaet har en definert `title`i koden.
+- Sørg for at skjemaelementer er knyttet sammen med ledetekst med korrekt bruk av label="" og for="".
+  - Om nødvendig kan man benytte aria-label og aria-labelledby.
+- For skjemafeltgrupper, typ personinformasjon, kontaktinformasjon eller lignende, er det best practice å bruke `fieldset`og `legend`for å klassifisere gruppe programmatisk.
+  - Alternativt kan man bruke role=group, aria-label og aria-labelledby.
+
+#### Knapper
+
+Knapper skal ideelt kodes som standard HTML med `button` eller `input`. Der dette ikke er mulig må man bruke role=button.
+
+- Sørg for at knappen er koblet til ledetekst med `label`og `for`
+
+#### iFrame
+
+Der iFrame benyttes for å presentere innhold er det viktig at ledetekst og `title` beskriver innholdet i iFrame. Om det ikke er mulig å bruke `title`må man bruke aria-label og aria-labelledby.
+
+### Statusbeskjeder (4.1.3)
+
+Statusbeskjeder, typ suksessmeldinger, feilmeldinger eller nedetid av tjenester må kodes slik at hjelpemidler kan motta meldingen uten at brukeren mister eller får endret kontekst.
+
+Løsningsforslag:
+
+- Statusbeskjeder om at en handling er vellykket, typ slutten på en skjemainnfylling, må kodes med role="status".
+- Om statusbeskjeden kommuniserer ventetilstand eller framdrift må man bruke role="log", role="progressbar" eller role="status".
+- Feilmeldinger må kodes med role="alert".

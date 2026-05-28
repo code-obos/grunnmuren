@@ -1,0 +1,146 @@
+---
+name: 'Badge'
+slug: 'badge'
+componentState: stable
+propsComponents:
+  - 'Badge'
+resourceLinks:
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/badge'
+  - linkType: 'figma'
+    url: 'https://www.figma.com/design/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=3702-2875&t=FV4FudOBI4z22wPz-4'
+---
+
+import img0 from './images/badge/0.webp';
+import img1 from './images/badge/1.webp';
+import img2 from './images/badge/2.webp';
+import img3 from './images/badge/3.webp';
+import img4 from './images/badge/4.webp';
+import img5 from './images/badge/5.webp';
+import img6 from './images/badge/6.webp';
+
+## Om komponenten
+
+Badge brukes for å kategorisere, merke eller organisere innhold ved hjelp av nøkkelord som beskriver dem.
+
+**Egnet til:**
+
+- Når man skal kategorisere innhold
+- Når man skal skille ut viktig informasjon, for eksempel "Frist for forkjøp"
+
+**Uegnet til:**
+
+- Når noe skal være interaktivt. Bruk heller [TagGroup](/komponenter/tag-group) når det skal være mulig å filtrere
+
+**Relaterte komponenter**
+
+- [Card](/komponenter/card)
+
+<Image src={img0} alt="Divider" width={2000} height={143} />
+
+## Varianter
+
+Badge kan brukes i forskjellige farger og størrelser, og med eller uten ikon.
+
+```tsx live caption="Badges i forskjellige farger"
+<>
+  <Badge color="mint">mint</Badge>
+  <Badge color="sky">sky</Badge>
+  <Badge color="blue-dark">blue-dark</Badge>
+  <Badge color="green-dark">green-dark</Badge>
+  <Badge color="gray-dark">gray-dark</Badge>
+  <Badge color="white">white</Badge>
+</>
+```
+
+### Størrelse
+
+Badge kan brukes i tre ulike størrelser: Small, Medium, Large.
+
+```tsx live caption="Badges i forskjellige størrelser"
+<>
+  <Badge size="small" color="mint">
+    mint
+  </Badge>
+  <Badge size="medium" color="mint">
+    mint
+  </Badge>
+  <Badge size="large" color="mint">
+    mint
+  </Badge>
+</>
+```
+
+### Kontekst
+
+Badge kan se litt forskjellig ut avhengig av kontekst. I [Card](/komponenter/card#87ceffe23a55) ser komponenten forskjellig ut avhengig av hvor den plasseres.
+
+```tsx live
+<Card variant="outlined">
+  <Media>
+    <Badge color="mint" size="large">
+      Bostart
+    </Badge>
+    <img
+      alt=""
+      src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+    />
+  </Media>
+  <Content>
+    <Heading level={3}>
+      <CardLink href="#card">Bolig</CardLink>
+    </Heading>
+    <Badge color="mint" size="small">
+      Visning
+    </Badge>
+  </Content>
+</Card>
+```
+
+<Image src={img1} alt="Divider" width={2000} height={143} />
+
+## Retningslinjer
+
+### Hold deg til en kort og konsis tekst
+
+<Image src={img2} alt="Kort og konsis tekst" width={2000} height={732} />
+
+### Ikke bruk kun ikon i en badge
+
+<Image src={img3} alt="Ikke kun ikon i en badge" width={2000} height={732} />
+
+<Image src={img4} alt="Divider" width={2000} height={143} />
+
+## Formatering
+
+### Anatomi
+
+<Image
+  src={img5}
+  alt="Anatomien til en badge, med label, ikon og container."
+  width={2000}
+  height={845}
+/>
+
+1. **Label **Hold denne kort og konsis, og ha helst ett beskrivende ord.
+1. **Ikon **Velg et ikon som er relevant for label-teksten.
+1. **Container**
+
+<Image src={img6} alt="Divider" width={2000} height={143} />
+
+## Universell utforming
+
+### Husk på
+
+- Teksten bør inneholde kontekst, slik at det gir mening når det blir lest opp av skjermlesere
+- Fargen på badge er ikke nok for å gi betydning for en badge, den vil ikke bli opplest av skjermlesere, og det er ikke tilstrekkelig med kun farge som indikasjon for de med svakt eller dårlig syn. Sørg for at informasjonen som er betegnet fargen også kommer tydelig frem i innholdet (via tekst og ikon). Du kan også legge til alternative hjelpemidler, som ekstra skjult tekst som kun leses av skjermleser.
+
+Sjekkliste
+
+✓ Badge har tydelig og konsis tekst (max 2 ord)
+
+✓ Jeg bruker mer enn farge for å skille mellom badges
+
+✓ Hvis jeg bruker ikon i en badge, så inneholder den også en beskrivende tekst
+
+✓ Badge har tekst som refererer til konteksten den opptrer i

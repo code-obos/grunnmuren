@@ -1,0 +1,155 @@
+---
+name: 'Accordion'
+slug: 'accordion'
+componentState: stable
+propsComponents:
+  - 'Accordion'
+  - 'AccordionItem'
+resourceLinks:
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/accordion'
+  - linkType: 'figma'
+    url: 'https://www.figma.com/design/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=1565-7250&t=FV4FudOBI4z22wPz-4'
+---
+
+import img0 from './images/accordion/0.webp';
+import img1 from './images/accordion/1.webp';
+import img2 from './images/accordion/2.webp';
+import img3 from './images/accordion/3.webp';
+import img4 from './images/accordion/4.webp';
+import img5 from './images/accordion/5.webp';
+import img6 from './images/accordion/6.webp';
+
+## Om komponenten
+
+Accordion lar brukeren vise og skjule innhold i ulike seksjoner ved å klikke på overskriftene.
+
+**Egnet til:**
+
+- Å strukturere store mengder informasjon, som for eksempel i en FAQ.
+- Å forkorte sider og redusere unødvendig scrolling når innholdet ikke må leses i i sin helhet, eller når plassen er begrenset, som på et mobilgrensesnitt.
+
+**Uegnet til: **
+
+- Annen vilkårlig funksjonalitet der innhold skal kunne skjules og vises. Bruk heller [Disclosure](/komponenter/disclosure) til dette
+- Viktig informasjon som bruker enkelt må finne.
+- Små mengder informasjon.
+
+<Image src={img0} alt="Divider" width={2000} height={143} />
+
+## Varianter
+
+```tsx live
+<Accordion>
+  <AccordionItem>
+    <Heading level={2}>Hvordan betaler jeg ned på rammelånet?</Heading>
+    <Content className="prose">
+      Den største forskjellen mellom et vanlig boliglån og et rammelån er fleksibiliteten. Med et
+      rammelån kan du velge å betale mindre ned på lånet i trangere tider, hvis du for eksempel i en
+      periode opplever å få andre uforutsette utgifter. Med et rammelån kan det friste å bruke mer
+      penger enn det du egentlig har behov for. Derfor er det viktig at du har god økonomisk
+      disiplin, og vi anbefaler alltid å sette opp et fast månedlig trekk som minimum dekker dekker
+      rentene. Du kan når som helst betale ned på rammelånet ditt. Det gjør du enkelt i mobilbanken
+      eller nettbanken ved å overføre beløpet du ønsker fra en konto og inn til rammelånet.
+    </Content>
+  </AccordionItem>
+  <AccordionItem>
+    <Heading level={2}>Bør jeg velge rammelån eller boliglån?</Heading>
+    <Content className="prose">
+      <p>
+        Om du bør velge rammelån eller boliglån avhenger av den økonomiske situasjonen din,
+        preferansene dine og hvor mye fleksibilitet du ønsker knyttet til nedbetaling av lånet.
+      </p>
+      <p>
+        De viktigste forskjellene på rammelån og boliglån som du bør være klar over før du tar et
+        valg:
+      </p>
+      <ul>
+        <li>
+          Fleksibilitet: Rammelån gir deg større fleksibilitet til å låne og betale tilbake penger
+          etter behov, mens et vanlig boliglån har en fast nedbetalingsplan.
+        </li>
+        <li>
+          Nedbetaling av lånet: Et vanlig boliglån har en fastsatt nedbetalingsplan, mens rammelånet
+          gir deg mer frihet til å velge når og hvor mye du ønsker å betale tilbake.
+        </li>
+        <li>
+          Beregning av renter: Med et rammelån betaler du renter bare på det beløpet du faktisk har
+          brukt, mens med et vanlig boliglån baserer renter seg på hele lånebeløpet.
+        </li>
+      </ul>
+    </Content>
+  </AccordionItem>
+  <AccordionItem>
+    <Heading level={2}>Overfør penger fra Boligspar Ung?</Heading>
+    <Content className="prose">
+      <p>
+        Ønsker du å overføre penger fra Boligspar Ung til en av dine andre kontoer, er det en enkel
+        sak. <a href="#">Logg inn i nettbanken</a> og velg "Uttak Boligspar" Ung i menyen. Slik som
+        BSU, kan du ta ut det du har spart inneværende år. Om du vil ta ut mer vil kontoen
+        avsluttes.
+      </p>
+    </Content>
+  </AccordionItem>
+</Accordion>
+```
+
+<Image src={img1} alt="Divider" width={2000} height={143} />
+
+## Retningslinjer
+
+Innholdet i en Accordion bør ha en relasjon til hverandre. Det gjør det lettere for bruker å finne fram til relevant informasjon, og enklere for redaktør å skille innhold fra hverandre.
+
+Dersom det er flere temaer, så bryt opp med flere seksjoner for å sikre at man ikke får for lange tekster, eller at innholdet ikke oppleves som relevant for overskriften.
+
+Innhold liggende i en Accordion har lett for å bli oversett. Pass derfor på at innhold avgjørende for bruker ikke ligger gjemt.
+
+Dersom det er mye informasjon som skal fortelles, så vurder å heller lage en egen side fremfor å gjemme det i en Accordion.
+
+### Unngå å kun bruke én accordion
+
+<Image src={img2} alt="Unngå én accordion" width={2000} height={1071} />
+
+### Unngå lange overskrifter med flere temaer
+
+<Image src={img3} alt="Unngå lange overskrifter med flere temaer" width={2000} height={836} />
+
+<Image src={img4} alt="Divider" width={2000} height={143} />
+
+## Formatering
+
+### Anatomi
+
+<Image
+  src={img5}
+  alt="Accordion-komponentens anatomi med header, ikon og panel"
+  width={2000}
+  height={845}
+/>
+
+1. **Header **Overskriften i accordion, hold denne kort og konsis
+1. **Ikon **Viser om Accordion er åpen eller lukket
+1. **Panel **Der innholdet knyttet til headeren ligger
+
+<Image src={img6} alt="Divider" width={2000} height={143} />
+
+## Universell utforming
+
+### Husk på
+
+- Ved tastaturnavgiering, skal man kunne bruke `Tab` og `Shift + Tab` for å navigere mellom accordionradene.
+- Ved tastaturnavigering, skal man kunne åpne og lukke en accordionrad ved å trykke `Enter` eller `Space`.
+- Ved tastaturnavigering, skal fokus flyttes og markeres med god kontrast og passende stilendringer.
+- Ved valgt/åpnet accordionrad, skal raden markeres tydelig.
+
+### Sjekkliste
+
+✓ Kort og konsis overskrift i Accordion ✓ Overordnet overskrift har samme `id` som i `ariaLabelledBy`-prop i Accordion
+
+### Les mer
+
+[WAI-ARIA Accordion pattern](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/)
+
+[WCAG 1.3.1 Info and Relationships (A)](https://www.w3.org/WAI/WCAG21/Understanding/info-and-relationships.html)
+
+[WCAG 3.2.4 Consistant Identification (AA)](https://www.w3.org/WAI/WCAG21/Understanding/info-and-relationships.html)

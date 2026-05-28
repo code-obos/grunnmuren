@@ -1,0 +1,229 @@
+---
+name: 'RadioGroup'
+slug: 'radiogroup'
+componentState: stable
+propsComponents:
+  - 'RadioGroup'
+  - 'Radio'
+resourceLinks:
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/radiogroup'
+  - linkType: 'figma'
+    url: 'https://www.figma.com/design/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=397-5411&t=FV4FudOBI4z22wPz-4'
+---
+
+import img0 from './images/radiogroup/0.webp';
+import img1 from './images/radiogroup/1.webp';
+import img2 from './images/radiogroup/2.webp';
+import img3 from './images/radiogroup/3.webp';
+import img4 from './images/radiogroup/4.webp';
+import img5 from './images/radiogroup/5.webp';
+import img6 from './images/radiogroup/6.webp';
+
+## Om komponenten
+
+RadioGroup lar brukeren enkelt skanne og sammenligne alternativer for å ta ett valg.
+
+**Egnet til:**
+
+- Handlinger der brukeren skal velge kun ett alternativ fra en liste på fem eller færre.
+
+**Uegnet til:**
+
+- Der bruker kan krysse av og på for ett alternativ, eller der flere valg i listen er tillatt. Se [Checkbox](https://grunnmuren.obos.no/komponenter/checkbox) eller [Select. ](https://grunnmuren.obos.no/komponenter/select)
+
+<Image src={img0} alt="Divider" width={2000} height={143} />
+
+## Varianter
+
+### Uncontrolled
+
+#### En uncontrolled RadioGroup med tre valg.
+
+```tsx live caption="Uncontrolled RadioGroup med 3 valg"
+<RadioGroup>
+  <Radio value="ordinary">Ordinær pris</Radio>
+  <Radio
+    value="bostart"
+    description="OBOS Bostart gjør at du kan kjøpe en helt ny bolig til en lavere pris enn ordinær markedspris."
+  >
+    OBOS Bostart
+  </Radio>
+  <Radio
+    value="deleie"
+    description="Med OBOS Deleie kan du kjøpe halve boligen, eller mer, og bo i hele."
+  >
+    OBOS Deleie
+  </Radio>
+</RadioGroup>
+```
+
+#### En uncontrolled RadioGroup med default valg.
+
+```tsx live caption="Uncontrolled RadioGroup med default valg"
+<RadioGroup defaultValue="deleie">
+  <Radio value="ordinary">Ordinær pris</Radio>
+  <Radio
+    value="bostart"
+    description="OBOS Bostart gjør at du kan kjøpe en helt ny bolig til en lavere pris enn ordinær markedspris."
+  >
+    OBOS Bostart
+  </Radio>
+  <Radio
+    value="deleie"
+    description="Med OBOS Deleie kan du kjøpe halve boligen, eller mer, og bo i hele."
+  >
+    OBOS Deleie
+  </Radio>
+</RadioGroup>
+```
+
+#### En uncontrolled RadioGroup med beskrivelse.
+
+```tsx live caption="Uncontrolled RadioGroup med description"
+<RadioGroup description="Kontakt oss for mer utfyllende informasjon om de forskjellige alternativene">
+  <Radio value="ordinary">Ordinær pris</Radio>
+  <Radio
+    value="bostart"
+    description="OBOS Bostart gjør at du kan kjøpe en helt ny bolig til en lavere pris enn ordinær markedspris."
+  >
+    OBOS Bostart
+  </Radio>
+  <Radio
+    value="deleie"
+    description="Med OBOS Deleie kan du kjøpe halve boligen, eller mer, og bo i hele."
+  >
+    OBOS Deleie
+  </Radio>
+</RadioGroup>
+```
+
+### Validering
+
+#### En påkrevd RadioGroup.
+
+```tsx live caption="Påkrevd RadioGroup "
+<form onSubmit={(e) => e.preventDefault()} className="grid gap-6">
+  <RadioGroup isRequired>
+    <Radio value="ordinary">Ordinær pris</Radio>
+    <Radio
+      value="bostart"
+      description="OBOS Bostart gjør at du kan kjøpe en helt ny bolig til en lavere pris enn ordinær markedspris."
+    >
+      OBOS Bostart
+    </Radio>
+    <Radio
+      value="deleie"
+      description="Med OBOS Deleie kan du kjøpe halve boligen, eller mer, og bo i hele."
+    >
+      OBOS Deleie
+    </Radio>
+  </RadioGroup>
+  <Button type="submit" className="w-fit">
+    Send inn
+  </Button>
+</form>
+```
+
+#### En invalid RadioGroup.
+
+```tsx live caption="Invalid RadioGroup"
+<RadioGroup isInvalid>
+  <Radio value="ordinary">Ordinær pris</Radio>
+  <Radio
+    value="bostart"
+    description="OBOS Bostart gjør at du kan kjøpe en helt ny bolig til en lavere pris enn ordinær markedspris."
+  >
+    OBOS Bostart
+  </Radio>
+  <Radio
+    value="deleie"
+    description="Med OBOS Deleie kan du kjøpe halve boligen, eller mer, og bo i hele."
+  >
+    OBOS Deleie
+  </Radio>
+</RadioGroup>
+```
+
+### Controlled
+
+#### En controlled CheckboxGroup
+
+```tsx live caption="Controlled CheckboxGroup"
+function(){
+  const [value, setValue] = React.useState('deleie');
+
+return <RadioGroup
+  label="Jeg er interessert i"
+  value={value}
+  onChange={(newValue) => setValue(newValue)}
+>
+  <Radio value="ordinary">Ordinær pris</Radio>
+  <Radio
+    value="bostart"
+    description="OBOS Bostart gjør at du kan kjøpe en helt ny bolig til en lavere pris enn ordinær markedspris."
+  >
+    OBOS Bostart
+  </Radio>
+  <Radio
+    value="deleie"
+    description="Med OBOS Deleie kan du kjøpe halve boligen, eller mer, og bo i hele."
+  >
+    OBOS Deleie
+  </Radio>
+</CheckboxGroup>}
+```
+
+<Image src={img1} alt="Divider" width={2000} height={143} />
+
+## Retningslinjer
+
+### Ikke bruk radioknapper om brukeren skal kunne velge flere valg
+
+<Image src={img2} alt="Ved flere valg, bruk checkbox" width={2000} height={1110} />
+
+### Ikke bruk RadioButton dersom du har mange valg
+
+<Image src={img3} alt="Ved for mange alternativer" width={2000} height={1113} />
+
+<Image src={img4} alt="Divider" width={2000} height={143} />
+
+## Formatering
+
+### Anatomi
+
+<Image src={img5} alt="radio button anatomi" width={2000} height={845} />
+
+**1. Label **Forteller brukeren hva som skal velges
+
+**2. Beskrivelse (valgfri) **Hjelpetekst med mer informasjon eller gir kontekst til brukeren.
+
+**3. Dropdown (valgfri) **Ekspanderende felt som skal supplere hjelpeteksten med mer informasjon. Viktig informasjon skal ikke legges her.
+
+**4. RadioButton **En radioknapp som indikerer riktig tilstand. Som standard er det ikke valgt.
+
+<Image src={img6} alt="Divider" width={2000} height={143} />
+
+## Universell utforming
+
+### Husk på
+
+- Alle radioknappene må ha klare, konsise og unike labels. WCAG 1.3.1 og 2.4.6
+- Unngå standardvalg: Forhåndsvalgte valg anses som en villedende praksis for alle brukere. Gå for at brukeren selv skal kunne ta et aktivt valg når du bruker radioknapper.
+- Alle tastaturinteraksjoner og ARIA-etiketter må oppfylle tilgjengelighetskriterier ([WAI-ARIA Checkbox Authoring Practices](https://www.w3.org/TR/wai-aria-practices-1.1/#checkbox) - Gjelder også for Radiobuttons)
+
+### Sjekkliste
+
+✓ Alle radioknappene har en klar, kortfattet og unik label
+
+✓ Ingen av radioknappene har et satt standardvalg
+
+✓ Brukeren kan tabbe seg gjennom radioknappene, og velge en av dem ved å trykke space
+
+### Les mer
+
+[WCAG 1.3.1 Info and Relationships (A)](https://www.w3.org/WAI/WCAG21/Understanding/info-and-relationships)
+
+[WCAG 2.4.6 Headings and Labels (AA)](https://www.w3.org/WAI/WCAG21/Understanding/headings-and-labels.html)
+
+[uutilsynet Ledetekster (Labels)](https://www.uutilsynet.no/veiledning/skjema/38#ledetekster_og_instruksjoner)

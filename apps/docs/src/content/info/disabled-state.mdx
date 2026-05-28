@@ -1,0 +1,36 @@
+---
+name: 'Disabled state'
+slug: 'disabled-state'
+---
+
+## Deaktivert state
+
+Hvorfor en deaktivert state er utfordrende, dårlig og andre alternativer. Deaktiverte states kan være vanskelig for brukere å forstå, og vi anbefaler at du ikke bruker dem i tjenestene du lager. Se helst på alternative måter å løse det på under, men om du absolutt må ha deaktiverte tilstander, så håper vi at du bruker en av de skadereduserende tiltakene, selv om de alternative måtene er bedre for alle brukerne våre.
+
+### Hvorfor er deaktivert state problematiske?
+
+Deaktiverte states er som ofte vanskelig for våre brukere å oppfatte, det er ofte lav kontrast og med dårlig fargeendring som gjør at det er vanskelig å være synlig for personer med svakt syn, samt at det ikke ofte foreligger informasjon på knappen på hvorfor den ikke er klikkbar. Samt i tillegg til permanente nedsettelser, så er også situasjonsbetinget nedsettelser som det å sitte i en rom med vinduer og sol ute, eller hvor brukeren har en dårlig skjerm. Selv om vi lager en komponent som møter konstrastkravene på 4,5:1 i ratio, så er det ikke alle brukere som forstår at komponenten er deaktivert, og vil fortsatt tro den er aktivert – og dermed ikke skjønne hvorfor den ikke fungerer. Et annet problem er grunnen til designere bruker deaktivert tilstand er at de mener det er implisitt- men de forklarer ikke hvorfor komponenten er dekativert. Brukeren må gjette og hvor de ofte gjetter feil. Deaktiverte states kan heller ikke navigeres til med tastaturfokus og stemmestyring, som gjør at de ikke blir oppfattet av skjermlesere og andre assistive verktøy.
+
+### Vanlige bruksområder
+
+Designere bruker oftes deaktiverte states i tre forskjellige situasjoner: 1. For å vise at et valg ikke er relevant per daværende tidspunkt, men kan bli relevant i fremtiden. 2. Vise at et skjema ikke er utfylt riktig eller ikke er ferdig utfylt enda. 3. For å vise at elementet ikke kan endres `«Read only»`
+
+.
+
+### Alternative løsninger
+
+#### Skjermvalidering
+
+Trenger dere å bruke en deaktivert «bekreft-knapp» som en form for skjemavalidering? Da bør dere heller validere inline som vanlig, la knappen forbli aktiv og vise en feilmelding når brukeren prøver å sende inn skjemaet. Da vil brukeren få all den informasjonen de trenger, og personer med skjermleser vil få feilmeldingen opplest og som oftes tatt til området hvor feltet som må fylles ut ligger.
+
+#### Ikke-aktuelle valg
+
+Hvis et valg ikke er relevant, bør du helt fjerne valget fremfor å deaktivere det. Tilby gjerne brukeren informasjon om hvorfor valget ikke er tilgjengelig, eller mulig.
+
+#### Skrivebeskyttet innhold
+
+Bruk vanlig tekst fremfor å deaktivere skrivebeskyttende inputfelter, eventuelt med tilleggsinformasjon som forteller hvorfor informasjonen ikke kan endres. (Eksempel: Obos-medlemmer som ikke kan endre bostedsadresse – der vil det bare stå adresse i vanlig text, med en alertbox hvorfor de ikke kan endre adressen sin eller read-only)
+
+#### HTML-attributene readonly og aria-readonly
+
+HMTL har en readonly-attributt, men denne er bare relevant for inputtyper som har en value som kan endres av brukeren, det vil si en `textareq` og tekstfelter som text, search, emal osv. Felter med readonly-attributtet kommer i tabrekkefølgen og brukeren kan kopiere innholdet med ikke endre det. Informasjon i readonly-felter kommer når skjemaet sendes inn. Inputfelter med readonly-attributet får ingen default styling som skisser dem ut fra det vanlige, redigerbarefelter. Dette kan være forvirrende for folk hvor de ikke skjønner hvorfor innholdet ikke kan endres. Hvis dere velger å bruke readonly-attributet, sørg for at du styrler feltet annerledes fra et vanlig tekstfelt, og forklarer folk hvorfor innholdet ikke kan endres. Hvis du trenger å kommunisere til hjelpemidler at andre skjemaelementer enn tekstfelter og textarea er skrivebeskyttet, kan du bruke `aria-readonly=true`. Ta i betraktning med at all bruk av ARIA, er det bare semantikken som blir endret av `aria-readonly`, ikke funksjonaliteten. Det vil si at du selv må sørge for at brukeren ikke kan endre verdien til elementene med aria-readonly brukes på.

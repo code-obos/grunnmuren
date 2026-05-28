@@ -4,7 +4,22 @@ import { getRouteApi, Link } from '@tanstack/react-router';
 import { cx } from 'cva';
 import { Button, Disclosure, DisclosurePanel } from 'react-aria-components';
 
+import { componentDocs } from '@/lib/content';
+
 import { ComponentStateBadge } from './component-state-badge';
+
+/**
+ * A component documented in `main` (alongside its code) doesn't appear in the
+ * left nav until it ships on npm — `componentState: unreleased` is rewritten
+ * to `new` by the release script in `ci:version`. The page itself is still
+ * reachable by URL while unreleased.
+ */
+function isComponentUnreleased(slug: string | null | undefined) {
+  if (!slug) {
+    return false;
+  }
+  return componentDocs[slug]?.frontmatter?.componentState === 'unreleased';
+}
 
 type SubNavItemProps = {
   to: string;
@@ -86,11 +101,13 @@ export const MainNav = ({ className }: MainNavProps) => {
   const components = data.components ?? [];
   const menuData = data.menu ?? { categories: [] };
 
-  const componentsNavLinks = components.map((component) => ({
-    to: `/komponenter/${component.slug}`,
-    title: component.name as string,
-    componentState: component.componentState,
-  }));
+  const componentsNavLinks = components
+    .filter((component) => !isComponentUnreleased(component.slug))
+    .map((component) => ({
+      to: `/komponenter/${component.slug}`,
+      title: component.name as string,
+      componentState: component.componentState,
+    }));
 
   const hardcodedCategoryItems: Record<string, SubNavItemProps[]> = {
     patterns: [{ to: '/referanseskjema', title: 'Referanseskjema' }],

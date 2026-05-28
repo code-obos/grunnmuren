@@ -1,0 +1,198 @@
+---
+name: 'FileUpload'
+slug: 'file-upload'
+componentState: beta
+propsComponents:
+  - 'FileUpload'
+resourceLinks:
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/blob/main/packages/react/src/file-upload/file-upload.tsx'
+  - linkType: 'figma'
+    url: 'https://www.figma.com/design/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=5446-331&p=f&m=dev'
+---
+
+import img0 from './images/file-upload/0.webp';
+import img1 from './images/file-upload/1.webp';
+import img2 from './images/file-upload/2.webp';
+import img3 from './images/file-upload/3.webp';
+
+## Om komponenten
+
+FileUpload lar brukere laste opp egne filer. En filopplasting finnes vanligvis i skjemaer, men kan også brukes som et frittstående element.
+
+**Egnet til:**
+
+- Laste opp én eller flere filer
+
+**Uegnet til:**
+
+- Ikke bruk FileUploader i en modal, da de opplastede filene stables vertikalt
+
+**Relaterte komponenter**
+
+- [Button](/komponenter/button)
+
+<Image src={img0} alt="Divider" width={2000} height={143} />
+
+## Varianter
+
+### Standard Fileuploader
+
+Som default tillater FileUpload kun én fil
+
+```tsx live caption="Last opp én fil"
+<UNSAFE_FileUpload>
+  <Label>Last opp fil</Label>
+  <Description>Du kan laste opp én fil.</Description>
+  <Button>Velg fil</Button>
+</UNSAFE_FileUpload>
+```
+
+#### Fileuploader med mulighet for flere filer
+
+Men dette kan kontrolleres ved å sette `allowsMultiple` på komponenten.
+
+```tsx live caption="Last opp flere filer"
+<UNSAFE_FileUpload allowsMultiple>
+  <Label>Last opp filer</Label>
+  <Description>Du kan laste opp flere filer. Du kan laste de opp samtidig.</Description>
+  <Button>Velg filer</Button>
+</UNSAFE_FileUpload>
+```
+
+#### FileUploader med begrensninger
+
+Det er også mulig å sette begrensninger på filtype og andre egenskaper som f.eks. størrelse.
+
+```tsx live caption="PDF på maks 1 MB"
+<UNSAFE_FileUpload
+  acceptedFileTypes={['.pdf']}
+  validate={(file) => file.size < 1000000 || 'Filen kan ikke være større enn 1MB'}
+>
+  <Label>Last opp PDF</Label>
+  <Description>Maks filstørrelse er 1MB. Støttet filtyper er: .pdf.</Description>
+  <Button>Velg PDF</Button>
+</UNSAFE_FileUpload>
+```
+
+#### FileUploader i forms
+
+FileUploader kan brukes i forms, på samme måte som andre input-komponenter. Siden den er bygget på en native HTML `<input type="file"/>`.
+
+På samme måte som en native HTML file-input persisterer browseren `formData` som en [FileList](https://developer.mozilla.org/en-US/docs/Web/API/FileList).
+
+Når en file-input er tom vil [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) for feltet være et array med et [File](https://developer.mozilla.org/en-US/docs/Web/API/File) objekt uten `name` og `size` 0, f.eks:
+
+```tsx caption="FormData for tom FileUpload"
+[
+  File {
+    size: 0,
+    type: 'application/octet-stream',
+    name: '',
+    lastModified: 1747292502560
+  }
+]
+```
+
+Det kan derfor være hensiktsmessig å sikre at dette "dummy" objektet blir filtrert vekk i en submit handler, f.eks:
+
+```tsx live caption="FileUpload i form"
+<form
+  className="flex flex-col items-start gap-4 p-4"
+  encType="multipart/form-data"
+  onSubmit={(e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const files = formData
+      .getAll('files')
+      // Filter out any "dummy" File object if FileUpload is empty
+      .filter((file) => file instanceof File && file.size > 0 && file.name);
+
+    alert(`Lastet opp ${files.map((file) => (file as File).name).join(', ')}`);
+  }}
+>
+  <UNSAFE_FileUpload
+    validate={(file) => file.size < 1000000 || 'Filen er for stor'}
+    allowsMultiple
+    name="files"
+  >
+    <Label>Last opp filer</Label>
+    <Description>
+      Du må laste opp minst én fil, du kan laste opp flere. Filene kan ikke være større enn 1 MB.
+    </Description>
+    <Button variant="secondary">Velg fil</Button>
+  </UNSAFE_FileUpload>
+  <Button type="submit">Send inn</Button>
+</form>
+```
+
+Eller så er det mulig å bruke FileUpload som en controlled component, å holde på filene i en egen state.
+
+```tsx live caption="Controlled FileUpload"
+function () {
+  const [files, setFiles] = React.useState<File[]>([]);
+  return (
+    <div className="p-4">
+      <UNSAFE_FileUpload files={files} onChange={setFiles} allowsMultiple>
+        <Label>Last opp filer</Label>
+        <Description>Du kan laste opp flere filer.</Description>
+        <Button>Velg filer</Button>
+      </UNSAFE_FileUpload>
+      Filer: {files?.map((file) => file.name).join(', ')}
+    </div>
+  );
+}
+```
+
+---
+
+## Retningslinjer
+
+(Kommer)
+
+<Image src={img1} alt="Divider" width={2000} height={143} />
+
+## Formatering
+
+### Anatomi
+
+<Image src={img2} alt="Fileupload - Anatomi" width={2000} height={845} />
+
+1. **Label** Label bør reflektere handlingen, som standard står det “Last opp filer”
+1. **Beskrivelse** Her skal det kun stå relevant informasjon som begresninger og muligheter
+1. **CTA** Teksten i button bør reflektere beskrivelsen og label, som standard står det “Last opp filer”
+
+<Image src={img3} alt="Divider" width={2000} height={143} />
+
+## Universell utforming
+
+### Husk på
+
+- Hold deg til korte, konsise tekster i knappen. Det skal være enkelt for brukeren å forstå hva som skjer om de trykker på knappen.
+- Husk å bruke en `<Label>` eller `aria-label`
+
+### Sjekkliste
+
+✓ Sikret at Label, beskrivelse og knapp har kort og konsis tekst og er forklarende.
+
+✓ Jeg har sjekket kontrasten med bakgrunnen på knappen at den ikke er under 3.1.1 i kontrast.
+
+✓ Sikret at komponenten er navigerbar med tastatur
+
+✓ Sikret at komponenten er fokuserbar med focus
+
+✓ Bruker riktige ARIA roller og live regions til å kommunisere fil til brukere av skjermlesere.
+
+### Les mer
+
+[Les mer informasjon om tekster i knapper](https://www.ks.no/fagomrader/digitalisering/klart-sprak-i-digitale-selvbetjeningslosninger/tekst-pa-interaksjonselementer/knapper/)
+
+[WCAG 1.1.1 Non-text Content (A)](https://www.w3.org/WAI/WCAG21/Understanding/non-text-content)
+
+[WCAG 2.1.1 Keyboard (A)](https://www.w3.org/WAI/WCAG21/Understanding/keyboard)
+
+[WCAG 2.5.5 Target Size (AAA)](https://www.w3.org/WAI/WCAG21/Understanding/target-size.html)
+
+[WCAG 3.3.1 Error identification (A)](https://www.w3.org/WAI/WCAG21/Understanding/error-identification)
+
+[WCAG 3.3.2 Labels or Instructions (A)](https://www.w3.org/WAI/WCAG21/Understanding/labels-or-instructions)

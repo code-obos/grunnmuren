@@ -1,0 +1,232 @@
+---
+name: 'Button'
+slug: 'button'
+componentState: stable
+propsComponents:
+  - 'Button'
+resourceLinks:
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/button'
+  - linkType: 'figma'
+    url: 'https://www.figma.com/design/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=923-2504&t=UW59bvnZZKQbhnje-4'
+---
+
+import img0 from './images/button/0.webp';
+import img1 from './images/button/1.webp';
+import img2 from './images/button/2.webp';
+import img3 from './images/button/3.webp';
+import img4 from './images/button/4.webp';
+import img5 from './images/button/5.webp';
+import img6 from './images/button/6.webp';
+import img7 from './images/button/7.webp';
+import img8 from './images/button/8.webp';
+import img9 from './images/button/9.webp';
+import img10 from './images/button/10.webp';
+import img11 from './images/button/11.webp';
+import img12 from './images/button/12.webp';
+import img13 from './images/button/13.webp';
+import img14 from './images/button/14.webp';
+import img15 from './images/button/15.webp';
+import img16 from './images/button/16.webp';
+import img17 from './images/button/17.webp';
+
+## Om komponenten
+
+Button lar brukeren utføre en handling ved å klikke på en knapp.
+
+[Les om plassering av knappehirerarkiet og plassering.](https://grunnmuren.obos.no/knappehierarki)
+
+**Egnet til:**
+
+- Handlinger som å logge inn, bli medlem, laste ned skjema, avbryte etc.
+- Linker
+
+**Uegnet til: **
+
+- Viktig statisk informasjon
+
+<Image src={img0} alt="Divider" width={2000} height={143} />
+
+## Varianter
+
+Vi har tre ulike varianter av Button, og en enkeltstående ikon-knapp. Alle knapper kan brukes med et ikon, på høyre eller venstre side.
+
+<Image src={img1} alt="16px spacer" width={672} height={16} />
+
+### Primærknapp
+
+Brukes til den handlingen som skal gis mest oppmerksomhet. En side kan iblant ha mer enn én hovedhandling, men bør ikke ha mange.
+
+```tsx live caption="Primærknapp eksempel"
+<>
+  <Button variant="primary">Primærknapp</Button>
+  <Button variant="primary">
+    Primærknapp
+    <ArrowRight />
+  </Button>
+  <Button variant="primary" href="#primary-cta">
+    Primærlink
+  </Button>
+</>
+```
+
+<Image src={img2} alt="8px spacer" width={672} height={8} />
+
+### Sekundærknapp
+
+Brukes til handlinger som ikke er like viktige som hovedhandlingen, og kommer ofte i tillegg til primærknappen.
+
+```tsx live caption="Sekundærknapp eksempel"
+<>
+  <Button variant="secondary">Sekundærknapp</Button>
+  <Button variant="secondary">
+    Sekundærknapp
+    <ArrowRight />
+  </Button>
+  <Button variant="secondary" href="#secondary-cta">
+    Sekundærlink
+  </Button>
+</>
+```
+
+<Image src={img3} alt="8px spacer" width={672} height={8} />
+
+### Tertiærknapp
+
+Brukes for valg som ikke prioriteres, som “avbryt”. Den kan også brukes som navigasjonselement, som for eksempel inngangen på et kort eller en artikkel.
+
+```tsx live caption="Tertiærknapp eksempel"
+<>
+  <Button variant="tertiary">Tertiærknapp</Button>
+  <Button variant="tertiary">
+    Tertiærknapp
+    <ArrowRight />
+  </Button>
+  <Button variant="tertiary" href="#tertiary-cta">
+    Tertiærlink
+  </Button>
+</>
+```
+
+<Image src={img4} alt="8px spacer" width={672} height={8} />
+
+### Knapp med ikon
+
+Kan brukes som navigasjon eller enkeltstående handling, som å lukke en fane. Det bør helst også være en tekst som forklarer handlingen, slik som “Lukk”. Sørg for at knappen er forståelig for skjermleserbrukere ved å bruke aria-labels.
+
+```tsx live caption="Knapp med ikon"
+<Button isIconOnly aria-label="Lukk">
+  <Close />
+</Button>
+```
+
+<Image src={img5} alt="Divider" width={2000} height={143} />
+
+## Retningslinjer
+
+Husk på også å lese om knappehirerarkiet i OBOS. Den er flyttet over på ny side ettersom den gjelder for flere komponenter hvor button er nested. [Les om plassering av knappehirerarkiet og plassering.](https://grunnmuren.obos.no/knappehierarki)
+
+<Image src={img6} alt="8px spacer" width={672} height={8} />
+
+### Knappegruppering av samme nivå
+
+<Image src={img7} alt="Knappegruppering" width={2000} height={1036} />
+
+<Image src={img8} alt="8px spacing" width={672} height={8} />
+
+### Knappegruppering av alle nivåene
+
+<Image src={img9} alt="Knappegruppering_2" width={2000} height={1101} />
+
+<Image src={img10} alt="8px spacer" width={672} height={8} />
+
+### Tertiærknapp innrykk
+
+Tertiærknappen har en innebygget indentering. Den kan forklares med å kunne støtte to måter. Den ene er at teksten faller på samme vertikale linje som de andre knappene. Den andre er grunnet fokusmarkeringen rundt tertiærknappen, det må være nok luft mellom teksten og fokusmarkeringen.
+
+<Image src={img11} alt="Knapp inntrykk eksempel" width={2000} height={917} />
+
+### Tertiærknapp vs. inline-lenke
+
+Tertiærknapp kalles gjerne _knappelenke_ i våre CMSer. Når vi publiserer artikler skiller vi mellom bruken av inline-lenke og knappelenke slik:
+
+Knappelenke brukes når brukeren tas til en oppgave, for eksempel "Opprett bufferkonto".
+
+Inline-lenker bruker vi når leseren skal tas videre til annet relevant innhold i løpende tekst. For eksempel "Les mer: [Slik fylte Nina opp bufferkontoen sin](https://www.obos.no/bank/sparing/sparekonto)."
+
+<Image src={img12} alt="Divider" width={2000} height={143} />
+
+## Formatering
+
+<Image src={img13} alt="8px spacer" width={672} height={8} />
+
+### Anatomi
+
+Teksten i knappen er det viktigeste elementet og er meningsbærende, siden teksten ofte formidler handlingen til brukeren.
+
+<Image src={img14} alt="Button Anatomi" width={2000} height={839} />
+
+1. **Ikon **Et ikon som gir mening i konteksten den brukes i.
+1. **Tekst **Knappeteksten er det viktigste elementet, og vi bruker stor forbokstav. Knappeteksten er venstrejustert (se justering for unntak).
+1. **Kontainer **Corner-radius for knapp er satt til 8px og skal ikke endres. Bruk kun farger tillatt for varianten av knapp du bruker.
+
+<Image src={img15} alt="8px spacer" width={672} height={8} />
+
+### Farger
+
+Knapper kan brukes med forskjellige farger. Obos mørk blå er primærfargen som brukes på knapper. I noen situasjoner brukes andre farger for å skille mellom mellom bakgrunn og hvilket område en opererer i.
+
+| Farge           | Formål                                                                                                                  |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Obos Dark Blue  | Primærfargen til Obos. Skal brukes på hvite flater primært                                                              |
+| Obos Dark Green | Forbeholdt farge til brukt hos Obos næringseiendom                                                                      |
+| Obos Mint       | Brukes primært som topnavigasjon i header eller footer. Kan også brukes på mørke flater som "Dark Green" og "Dark Blue" |
+| Obos hvit       | Kan brukes på mørke flater                                                                                              |
+
+<Image src={img16} alt="8px spacer" width={672} height={8} />
+
+### Justering
+
+| Justering      | Formål                                                                                                                                                                                                                                |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Venstrejustert | Knapper skal i nesten alle tilfeller være venstrejustert. Bruk full bredde kun hvis knappeteksten er for lang og dekker flere linjer - men da bør knappeteksten heller skrives om.                                                    |
+| Høyrejustert   | Når en knapp er satt i en tabell eller i et progressivt skjema, skal den høyrejusteres.                                                                                                                                               |
+| Midtjustert    | På små skjermer kan knappen midtjusteres, og skal da ta hele bredden. På små flater skal knappen også være fullbredde og midtjustert hvis den skiller seg fra andre elementer, eller hvis innholdet i knappegrupperingen tilsier det. |
+
+<Image src={img17} alt="Divider" width={2000} height={143} />
+
+## Universell utforming
+
+### Husk på
+
+- Hold deg til korte, konsise tekster i knappene. Det skal være enkelt for brukeren å forstå hva som skjer om de trykker på knappen.
+- Dersom du bruker andre farger i knappene: dobbeltsjekk at du har god nok kontrast, minst 4.5:1 (Du kan bruke Stark plugin i Figma eller CCA - Color Contrast Analyser)
+- Ikke glem visuell feedback - bruk riktig hover, active og focus-states! Sørg for at knappen er forståelig for de som bruker skjermleser, dette er spesielt viktig om du bruker knapp med bare ikon. I tilfeller hvor ikonet er meningsbærende, for eksempel en knapp med et e-post ikon og teksten “send”, så kan skjermleseren bare lese “button,send” I disse tilfellene bør du bruke aria-label for å skjule beskrivelsen av knappen visuelt, men den leses opp av skjermleseren.
+- Hvis du bruker animasjon for å gi tilbakemelding på knappens tilstand, bør du sørge for at det er mulig å slå av animasjonen.
+- Husk om du har to eller flere interaktive elementer som en knapp ved siden av hverandre at det skal være minst 8px mellom disse.
+
+### Sjekkliste
+
+✓ Jeg har kun én primærknapp per side
+
+✓ Knappene mine har korte og konsise tekster
+
+✓ Jeg har dobbelsjekket kontrasten på fargene (Dersom du har endret på disse)
+
+✓ Jeg har sjekket kontrasten med bakgrunnen på knappen at den ikke er under 3.1.1 i kontrast.
+
+✓ Vi har tatt i bruk og testet ulike states
+
+✓ Knappen er tydelig og ikke for mye visuelt støy rundt
+
+✓ Vi har lagt til aria-label om nødvendig
+
+✓ Vi har nok luft mellom knappene - 8px eller 16px
+
+✓ Vi har sjekket at knappen er 44x44px.
+
+### Les mer
+
+[Les mer informasjon om tekster i knapper](https://www.ks.no/fagomrader/digitalisering/klart-sprak-i-digitale-selvbetjeningslosninger/tekst-pa-interaksjonselementer/knapper/)
+
+[WCAG 2.5.5 Target Size (AAA)](https://www.w3.org/WAI/WCAG21/Understanding/target-size.html)
