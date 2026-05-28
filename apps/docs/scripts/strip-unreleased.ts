@@ -31,10 +31,7 @@ const UNSAFE_ITEM_RE = /^\s+-\s+["']?UNSAFE_/m;
 /** A component is still beta-grade if any of its documented exports is `UNSAFE_`-prefixed. */
 function nextState(frontmatter: string): 'beta' | 'new' {
   const propsBlock = frontmatter.match(PROPS_BLOCK_RE);
-  if (!propsBlock) {
-    return 'new';
-  }
-  if (UNSAFE_ITEM_RE.test(propsBlock[1])) {
+  if (propsBlock && UNSAFE_ITEM_RE.test(propsBlock[1])) {
     return 'beta';
   }
   return 'new';
