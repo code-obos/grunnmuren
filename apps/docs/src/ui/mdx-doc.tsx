@@ -1,6 +1,5 @@
 import { Child, CircusTent, Wrench } from '@obosbbl/grunnmuren-icons-react';
 import { Alertbox, Content } from '@obosbbl/grunnmuren-react';
-import { cx } from 'cva';
 
 import type * as props from '@/component-props';
 import type { DocFrontmatter, DocModule } from '@/lib/content';
@@ -10,47 +9,17 @@ import { mdxComponents } from '@/ui/mdx-components';
 import { PropsTable } from '@/ui/props-table';
 import { ResourceLink, type ResourceLinkProps, ResourceLinks } from '@/ui/resource-links';
 import { ScrollToTop } from '@/ui/scroll-to-top';
+import { TableOfContentsNav, type TableOfContentsSection } from '@/ui/table-of-contents-nav';
 
-type Section = { href: string; text: string };
-
-function MdxToc({
-  toc,
-  propsComponents,
-  className,
-}: {
-  toc: TocEntry[];
-  propsComponents?: string[];
-  className?: string;
-}) {
-  const sections: Section[] = toc.map((entry) => ({ href: `#${entry.id}`, text: entry.text }));
+function tocSections(toc: TocEntry[], propsComponents?: string[]): TableOfContentsSection[] {
+  const sections: TableOfContentsSection[] = toc.map((entry) => ({
+    href: `#${entry.id}`,
+    text: entry.text,
+  }));
   if (propsComponents && propsComponents.length > 0) {
     sections.push({ href: '#props', text: 'Props' });
   }
-
-  if (sections.length === 0) {
-    return null;
-  }
-
-  return (
-    <nav
-      aria-label="Innholdsfortegnelse"
-      className={cx(className, 'prose mb-12 grid gap-x-8 gap-y-3 sm:grid-cols-2 md:mb-6')}
-    >
-      {sections.map(({ href, text }) => (
-        <div key={href} className="w-fit">
-          <a
-            href={href}
-            className="flex w-fit items-center gap-2 font-medium no-underline focus:outline-2 focus:outline-offset-2 focus:outline-blue-600"
-          >
-            <span aria-hidden="true" className="shrink-0">
-              ↳
-            </span>
-            {text}
-          </a>
-        </div>
-      ))}
-    </nav>
-  );
+  return sections;
 }
 
 function DocResourceLinks({ links }: { links?: DocFrontmatter['resourceLinks'] }) {
@@ -84,7 +53,7 @@ export function MdxComponentPage({
       <h1 className="heading-l my-12">{frontmatter.name}</h1>
 
       <DocResourceLinks links={frontmatter.resourceLinks} />
-      <MdxToc toc={toc} propsComponents={propsComponents} />
+      <TableOfContentsNav sections={tocSections(toc, propsComponents)} />
 
       <div className="lg:relative lg:flex lg:gap-4">
         <div>
@@ -159,7 +128,7 @@ export function MdxInfoPage({
     <>
       <h1 className="heading-l my-12">{frontmatter.name}</h1>
       <DocResourceLinks links={frontmatter.resourceLinks} />
-      <MdxToc toc={toc} />
+      <TableOfContentsNav sections={tocSections(toc)} />
       <div className="lg:relative lg:flex lg:gap-4 lg:pt-9">
         <div className="prose mb-12 grow">
           <MDXContent components={mdxComponents} />

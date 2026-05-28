@@ -13,7 +13,7 @@ import { PropsTable } from '@/ui/props-table';
 import { ResourceLink, type ResourceLinkProps, ResourceLinks } from '@/ui/resource-links';
 import { SanityContent } from '@/ui/sanity-content';
 import { ScrollToTop } from '@/ui/scroll-to-top';
-import { TableOfContentsNav } from '@/ui/table-of-contents-nav';
+import { TableOfContentsNav, type TableOfContentsSection } from '@/ui/table-of-contents-nav';
 
 const COMPONENT_QUERY = defineQuery(
   `*[_type == "component"
@@ -80,6 +80,15 @@ function Page() {
   const data = loaderData.data;
   const cleanedPropsComponents = stegaClean(data.propsComponents);
 
+  const tocSections: TableOfContentsSection[] = (data.content ?? []).flatMap((block) =>
+    block._type === 'block' && block.style === 'h2'
+      ? [{ href: `#${block._key}`, text: block.children?.[0].text ?? '' }]
+      : [],
+  );
+  if (cleanedPropsComponents && cleanedPropsComponents.length > 0) {
+    tocSections.push({ href: '#props', text: 'Props' });
+  }
+
   return (
     <>
       <h1 className="heading-l my-12">{data.name}</h1>
@@ -97,7 +106,7 @@ function Page() {
             ),
         )}
       </ResourceLinks>
-      <TableOfContentsNav content={data.content} propsTables={cleanedPropsComponents} />
+      <TableOfContentsNav sections={tocSections} />
       <div className="lg:relative lg:flex lg:gap-4">
         <div>
           {data.componentState === 'new' && (

@@ -7,7 +7,7 @@ import { MdxInfoPage } from '@/ui/mdx-doc';
 import { ResourceLink, type ResourceLinkProps, ResourceLinks } from '@/ui/resource-links';
 import { SanityContent } from '@/ui/sanity-content';
 import { ScrollToTop } from '@/ui/scroll-to-top';
-import { TableOfContentsNav } from '@/ui/table-of-contents-nav';
+import { TableOfContentsNav, type TableOfContentsSection } from '@/ui/table-of-contents-nav';
 
 const INFO_QUERY = defineQuery(
   `*[_type == "info"
@@ -71,6 +71,12 @@ function Page() {
 
   const { data } = loaderData;
 
+  const tocSections: TableOfContentsSection[] = (data?.content ?? []).flatMap((block) =>
+    block._type === 'block' && block.style === 'h2'
+      ? [{ href: `#${block._key}`, text: block.children?.[0].text ?? '' }]
+      : [],
+  );
+
   return (
     <>
       <h1 className="heading-l my-12">{data?.name}</h1>
@@ -89,7 +95,7 @@ function Page() {
           )}
         </ResourceLinks>
       )}
-      {data?.content && <TableOfContentsNav content={data?.content} />}
+      <TableOfContentsNav sections={tocSections} />
       <div className="lg:relative lg:flex lg:gap-4 lg:pt-9">
         <SanityContent className="mb-12 grow" content={data?.content ?? []} />
         <ScrollToTop />
