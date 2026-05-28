@@ -61,10 +61,7 @@ async function collectGrunnmurenUnsafeExports(): Promise<Set<string>> {
 
 function nextState(frontmatter: string, unsafeExports: Set<string>): 'beta' | 'new' {
   const propsBlock = frontmatter.match(PROPS_BLOCK_RE);
-  if (!propsBlock) {
-    return 'new';
-  }
-  const names = [...propsBlock[1].matchAll(PROPS_ITEM_RE)].map((m) => m[1]);
+  const names = propsBlock ? [...propsBlock[1].matchAll(PROPS_ITEM_RE)].map((m) => m[1]) : [];
   if (names.some((name) => unsafeExports.has(name))) {
     return 'beta';
   }
