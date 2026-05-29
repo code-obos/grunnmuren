@@ -3,6 +3,7 @@ import { stegaClean } from '@sanity/client/stega';
 import { createFileRoute } from '@tanstack/react-router';
 import { defineQuery } from 'groq';
 
+import { componentDocs } from '@/lib/content';
 import { sanityFetch } from '@/lib/sanity';
 import { ComponentStateBadge } from '@/ui/component-state-badge';
 
@@ -26,7 +27,12 @@ export const Route = createFileRoute('/_docs/komponenter/')({
 
 function Page() {
   const { data: components } = Route.useLoaderData();
-  const cleanedComponents = stegaClean(components);
+  // Hide unreleased components (those whose MDX frontmatter sets
+  // `componentState: unreleased`) from the overview, mirroring the nav filter.
+  const cleanedComponents = stegaClean(components).filter(
+    (component) =>
+      componentDocs[component.slug ?? '']?.frontmatter?.componentState !== 'unreleased',
+  );
 
   return (
     <>

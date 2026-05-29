@@ -1,0 +1,193 @@
+---
+name: 'Checkbox'
+slug: 'checkbox'
+componentState: stable
+propsComponents:
+  - 'Checkbox'
+resourceLinks:
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/checkbox'
+  - linkType: 'figma'
+    url: 'https://www.figma.com/design/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=311-1629&t=FV4FudOBI4z22wPz-4'
+---
+
+import img0 from './images/checkbox/0.webp';
+import img1 from './images/checkbox/1.webp';
+import img2 from './images/checkbox/2.webp';
+import img3 from './images/checkbox/3.webp';
+import img4 from './images/checkbox/4.webp';
+import img5 from './images/checkbox/5.webp';
+import img6 from './images/checkbox/6.webp';
+import img7 from './images/checkbox/7.webp';
+import img8 from './images/checkbox/8.webp';
+import img9 from './images/checkbox/9.webp';
+import img10 from './images/checkbox/10.webp';
+import img11 from './images/checkbox/11.webp';
+
+## Om komponenten
+
+Checkbox gir brukeren mulighet til å krysse av og på for ett alternativ.
+
+**Egnet til:**
+
+- Ved valg man kan skru av og på. For eksempel gi og trekke samtykke.
+- I filtrering på en side, for eksempel i boligsøket.
+
+**Uegnet til: **
+
+- Lister der bruker bare kan velge alternativer som er gjensidig utelukkende. Da bruker du [RadioButton](https://grunnmuren.obos.no/komponenter/radiogroup) isteden.
+
+**Relaterte komponenter**
+
+- [CheckboxGroup](https://grunnmuren.obos.no/komponenter/checkbox-group)
+
+<Image src={img0} alt="Divider" width={2000} height={143} />
+
+## Varianter
+
+Vi anbefaler at det alltid brukes checkbox sammen med label og beskrivelse, men om dere skal lage en komponent med en checkbox så kan dere bruke enkeltstående checkbox. Om dere skal ha flere checkbox, [les om checkbox group](https://grunnmuren.obos.no/komponenter/checkbox-group).
+
+### Checkbox med label og beskrivelse
+
+Den mest brukte av enkeltstående checkbox komponenten
+
+```tsx live caption="En enkel checkbox med label og beskrivelse"
+<CheckboxGroup
+  label="Samtykke til bruk av din adferd på obos.no og i OBOS-appen for markedsføring"
+  description="OBOS knytter din adferdsdata fra disse til din OBOS-profil og bruker dette for å tilpasse markedsføring, slik at den er mest mulig relevant for deg og ditt kundeforhold."
+>
+  <Checkbox value="Samtykke adferdsdata">
+    Jeg samtykker til at OBOS kan bruke adferdsdata fra sine nettsider og OBOS-appen for
+    markedsføring.
+  </Checkbox>
+</CheckboxGroup>
+```
+
+### Enkeltstående checkbox
+
+Brukes til teamspesifikke komponenter
+
+```tsx live caption="En enkel, uncontrolled checkbox"
+<Checkbox>Jeg godtar medlemsvilkårene.</Checkbox>
+```
+
+#### Feilmelding og validering
+
+En Checkbox som må hukes av for å gå videre.
+
+```tsx live caption="En uncontrolled checkbox som er invalid"
+<Checkbox isInvalid>Jeg godtar medlemsvilkårene.</Checkbox>
+```
+
+En Checkbox som må hukes av, med feilmelding.
+
+```tsx live caption="En uncontrolled checkbox med feilmelding"
+<Checkbox errorMessage="Du må godta medlemsvilkårene">Jeg godtar medlemsvilkårene.</Checkbox>
+```
+
+En Checkbox som må hukes av, med knapp.
+
+```tsx live caption="En uncontrolled checkbox som er påkrevd"
+<form className="flex flex-col items-start gap-4" onChange={(e) => e.preventDefault()}>
+  <Checkbox isRequired>Jeg godtar medlemsvilkårene.</Checkbox>
+  <Button type="submit">Send inn</Button>
+</form>
+```
+
+<Image src={img1} alt="Divider" width={2000} height={143} />
+
+## Retningslinjer
+
+Regler og begresninger som gjelder for Checkbox
+
+### Radiobutton vs Checkbox
+
+<Image src={img2} alt="Radio vs checkbox" width={2000} height={863} />
+
+### Checkbox alignment
+
+<Image src={img3} alt="Midtstilt checkbox atom" width={2000} height={929} />
+
+### Vertikal opplistning som standard
+
+<Image src={img4} alt="vertikalt vs horisontalt" width={2000} height={798} />
+
+### Hjelpetekst
+
+Du kan velge om du vil ha hjelpetekst ved checkbox. Unntaket er på samtykker hvor er det påbudt med hjelpetekst. Når du skriver en hjelpetekst, er det viktig at du:
+
+- Bruker store bokstaver i setningsstil og skriver teksten i de fleste tilfeller som hele setninger.
+- Dersom du har veldig lang hjelpetekst bruk den disclosure komponenten i checkbox.
+
+<Image src={img5} alt="Hjelpetekst" width={2000} height={1080} />
+
+### Samtykkeform
+
+Samtykker i OBOS skal følge formen som anvist nedenfor. Det er viktig at vi holder samtykker konsekvent på tvers, og en må tenke på utformelsen når det både skal være i kontekst for brukeren og mulighet til å trekke det på **Min side**. Det er viktig at informasjonen rundt hva samtykke innebærer er i beskrivelsen og ikke i selve checkbox handlingen, da denne skal være handlingsdrevet og kort knyttet til **label **og **beskrivelsen** av checkbox komponenten.
+
+<Image
+  src={img6}
+  alt="Oppsett for samtykker, med obligatoriske og valgfrie felt."
+  width={2000}
+  height={804}
+/>
+
+Ifølge GDPR kan vi ikke lenger forhåndsvelge at brukerne skal motta nyhetsbrev, reklame eller annen relevant informasjon. De må aktivt gi samtykke **_opt-in_** for å motta slike ting, og det er ikke lenger tillatt å ha _opt-out_ som standardvalg.
+
+<Image src={img7} alt="Opt-in" width={2000} height={1027} />
+
+<Image src={img8} alt="Divider" width={2000} height={143} />
+
+## Formatering
+
+### Anatomi
+
+En Checkbox komponent er sammensatt av label, Checkbox-atom og verdien tilknyttet Checkbox-input. Checkbox kan bestå av ett enkeltvalg eller flere i en checkbox-gruppering.
+
+<Image src={img9} alt="Checkbox - Anatomi" width={2000} height={845} />
+
+1. **Label **Kommuniserer hva som må velges nedenfor.
+1. **Beskrivelse (Valgfri)** Hjelpetekst som kan gi ekstra hjelp eller kontekst til brukeren.
+1. **Disclosure (Valgfri)** Ekspanderende felt som skal supplere hjelpeteksten med mer informasjon. Viktig informasjon skal ikke legges i det ekspanderende elementet.
+1. **Avmerkningsboks** En avkrysningsboks som indikerer riktig tilstand. Som standard er det ikke valgt.
+
+<Image src={img10} alt="Divider" width={2000} height={143} />
+
+## Universell utforming
+
+### Husk på
+
+- Alle checkbokser krever en klar, kortfattet og unik label: For checkbokser uten label, for eksempel de som brukes i en tabell, kreves det fortsatt en skjult label for assisterende hjelpemidler. WCAG: 1.3.1 Info and Relationships, 2.4.6 Heading and labels
+- Unngå valgt tilstand: Forhåndsvalgte valg anses som en villedende praksis for alle brukere. Implementer en standard uvalg tilstand. (Ved samtykke må det være uvalgt)
+- Alle tastaturinteraksjoner og ARIA-labels må oppfylle tilgjengelighetskriterier: WAI-ARIA Checkbox Authoring Practices)
+- Bruk Fieldset og legend ved gruppering av checkboxer
+
+### Sjekkliste
+
+✓ Alle checkbokser har en klar, kortfattet og unik label
+
+✓ Ingen av checkboksene har en valgt tilstand
+
+✓ Brukeren kan tabbe seg gjennom avmerkningsboksene, og velge dem ved hjelp av mellomromstasen.
+
+### Les mer
+
+[WAI-ARIA Checkbox Authoring Practices](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/)
+
+[WCAG 2.4.6 Heading and Labels (AA)](https://www.wcag.com/authors/2-4-6-headings-and-labels/)
+
+[WCAG 1.3.1 Info and Relationships (A)](https://www.wcag.com/developers/1-3-1-info-and-relationships/)
+
+[WCAG 3.2.2 On Input (A)](https://www.wcag.com/developers/3-2-2-on-input/)
+
+[WCAG 3.2.1 On Focus (A)](https://www.wcag.com/designers/3-2-1-on-focus/)
+
+<Image src={img11} alt="Divider" width={2000} height={143} />
+
+## Interaksjon
+
+### Tastatur
+
+| Key   | Interaksjon                            |
+| ----- | -------------------------------------- |
+| Space | Bytter mellom uvalgt og valgt tilstand |

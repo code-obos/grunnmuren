@@ -1,0 +1,282 @@
+---
+name: 'Select'
+slug: 'select'
+componentState: stable
+propsComponents:
+  - 'Select'
+  - 'SelectItem'
+  - 'SelectSection'
+  - 'SelectHeader'
+resourceLinks:
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/select'
+  - linkType: 'figma'
+    url: 'https://www.figma.com/design/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=923-1059&t=FV4FudOBI4z22wPz-4'
+---
+
+import img0 from './images/select/0.webp';
+import img1 from './images/select/1.webp';
+import img2 from './images/select/2.webp';
+import img3 from './images/select/3.webp';
+import img4 from './images/select/4.webp';
+import img5 from './images/select/5.webp';
+import img6 from './images/select/6.webp';
+
+## Om komponenten
+
+Select viser brukeren en nedtrekksliste der ett alternativ kan velges.
+
+**Egnet til:**
+
+- Skjemaer hvor bruker skal velge ett alternativ fra en liste
+- Når siden for det meste er skjemabasert.
+
+**Uegnet til: **
+
+- Når bruker har få alternativer å velge mellom. Bruk da heller [RadioGroup](https://grunnmuren.obos.no/komponenter/radiogroup)
+- Når bruker kan velge flere alternativer i listen. Da bruker du heller [CheckBox](https://grunnmuren.obos.no/komponenter/checkbox)
+
+**Relaterte komponenter**
+
+- [ComboBox](https://grunnmuren.obos.no/komponenter/combobox)
+
+<Image src={img0} alt="Divider" width={2000} height={143} />
+
+## Eksempler
+
+#### En uncontrolled Select
+
+```tsx live caption="En uncontrolled Select"
+<Select label="Velg boligprosjekt" placeholder="Velg boligprosjekt">
+  <SelectItem className="flex gap-2">
+    Oslo
+    <small className="text-gray">Oslo</small>
+  </SelectItem>
+  <SelectItem className="flex gap-2">
+    Frogn
+    <small className="text-gray">Akershus</small>
+  </SelectItem>
+  <SelectItem className="flex gap-2">
+    Tønsberg
+    <small className="text-gray">Vestfold og Telemark</small>
+  </SelectItem>
+</Select>
+```
+
+#### En påkrevd Select
+
+```tsx live caption="Påkrevd Select"
+<form onSubmit={(e) => e.preventDefault()} className="grid gap-6">
+  <Select label="Velg boligprosjekt" placeholder="Velg boligprosjekt" isRequired>
+    <SelectItem className="flex gap-2">
+      Oslo
+      <small className="text-gray">Oslo</small>
+    </SelectItem>
+    <SelectItem className="flex gap-2">
+      Frogn
+      <small className="text-gray">Akershus</small>
+    </SelectItem>
+    <SelectItem className="flex gap-2">
+      Tønsberg
+      <small className="text-gray">Vestfold og Telemark</small>
+    </SelectItem>
+  </Select>
+  <Button type="submit" className="w-fit">
+    Send inn
+  </Button>
+</form>
+```
+
+#### En uncontrolled Select med beskrivelse
+
+```tsx live caption="En uncontrolled Select med beskrivelse"
+<Select
+  label="Velg boligprosjekt"
+  placeholder="Velg boligprosjekt"
+  description="OBOS bygger nye boliger over store deler av landet."
+>
+  <SelectItem className="flex gap-2">
+    Oslo
+    <small className="text-gray">Oslo</small>
+  </SelectItem>
+  <SelectItem className="flex gap-2">
+    Frogn
+    <small className="text-gray">Akershus</small>
+  </SelectItem>
+  <SelectItem className="flex gap-2">
+    Tønsberg
+    <small className="text-gray">Vestfold og Telemark</small>
+  </SelectItem>
+</Select>
+```
+
+#### En uncontrolled Select med usynlig label
+
+```tsx live caption="En uncontrolled Select med usynlig label"
+<Select aria-label="Velg boligprosjekt" placeholder="Velg boligprosjekt">
+  <SelectItem className="flex gap-2">
+    Oslo
+    <small className="text-gray">Oslo</small>
+  </SelectItem>
+  <SelectItem className="flex gap-2">
+    Frogn
+    <small className="text-gray">Akershus</small>
+  </SelectItem>
+  <SelectItem className="flex gap-2">
+    Tønsberg
+    <small className="text-gray">Vestfold og Telemark</small>
+  </SelectItem>
+</Select>
+```
+
+### Validering
+
+#### En invalid uncontrolled Select
+
+```tsx live caption="En invalid uncontrolled Select"
+<Select label="Velg boligprosjekt" placeholder="Velg boligprosjekt" isInvalid>
+  <SelectItem className="flex gap-2">
+    Oslo
+    <small className="text-gray">Oslo</small>
+  </SelectItem>
+  <SelectItem className="flex gap-2">
+    Frogn
+    <small className="text-gray">Akershus</small>
+  </SelectItem>
+  <SelectItem className="flex gap-2">
+    Tønsberg
+    <small className="text-gray">Vestfold og Telemark</small>
+  </SelectItem>
+</Select>
+```
+
+#### En uncontrolled Select med feilmelding
+
+```tsx live caption="En uncontrolled Select med feilmelding"
+<Select
+  label="Velg boligprosjekt"
+  placeholder="Velg boligprosjekt"
+  errorMessage="Feltet er påkrevd"
+>
+  <SelectItem className="flex gap-2">
+    Oslo
+    <small className="text-gray">Oslo</small>
+  </SelectItem>
+  <SelectItem className="flex gap-2">
+    Frogn
+    <small className="text-gray">Akershus</small>
+  </SelectItem>
+  <SelectItem className="flex gap-2">
+    Tønsberg
+    <small className="text-gray">Vestfold og Telemark</small>
+  </SelectItem>
+</Select>
+```
+
+### Gruppering
+
+#### En uncontrolled, gruppert Select
+
+```tsx live caption="En uncontrolled, gruppert Select"
+<Select label="Velg boligprosjekt" placeholder="Velg boligprosjekt">
+  <SelectSection>
+    <SelectHeader>Oslo</SelectHeader>
+    <SelectItem className="flex gap-2">Oslo</SelectItem>
+  </SelectSection>
+  <SelectSection>
+    <SelectHeader>Akershus</SelectHeader>
+    <SelectItem className="flex gap-2">Enebakk</SelectItem>
+    <SelectItem className="flex gap-2">Frogn</SelectItem>
+  </SelectSection>
+  <SelectSection>
+    <SelectHeader>Vestfold og Telemark</SelectHeader>
+    <SelectItem className="flex gap-2">Horten</SelectItem>
+    <SelectItem className="flex gap-2">Tønsberg</SelectItem>
+  </SelectSection>
+</Select>
+```
+
+### Controlled
+
+```tsx live caption="En controlled combobox"
+function(){
+const [selectedKey, setSelectedKey] = React.useState("");
+
+return <Select
+  label="Velg boligprosjekt"
+  placeholder="Velg boligprosjekt"
+  selectedKey={selectedKey}
+  onSelectionChange={setSelectedKey}
+>
+  <SelectItem className="flex gap-2">
+    Oslo
+    <small className="text-gray">
+      Oslo
+    </small>
+  </SelectItem>
+  <SelectItem className="flex gap-2">
+    Frogn
+    <small className="text-gray">
+      Akershus
+    </small>
+  </SelectItem>
+  <SelectItem className="flex gap-2">
+    Tønsberg
+    <small className="text-gray">
+      Vestfold og Telemark
+    </small>
+  </SelectItem>
+</Select>}
+```
+
+<Image src={img1} alt="Divider" width={2000} height={143} />
+
+## Retningslinjer
+
+### Bruk med kun placeholdertekst
+
+<Image src={img2} alt="Ikke ha kun placeholdertekst" width={2000} height={1039} />
+
+### Ikke bruk den dersom du har få valg
+
+<Image src={img3} alt="Ikke bruk select ved få valg" width={2000} height={1104} />
+
+<Image src={img4} alt="Divider" width={2000} height={143} />
+
+## Formatering
+
+### Anatomi
+
+<Image src={img5} alt="Select-komponentens anatomi" width={2000} height={845} />
+
+**1. Label **Tekst som informerer bruker om hva de kan forvente å finne i nedtrekksmenyen
+
+**2. Beskrivelse **Hjelpetekst som gir bruker kontekst for å ta riktig valg i nedtrekksmenyen
+
+**3. Dropdown **Ekspanderende felt som supplerer hjelpeteksten. Viktig informasjon skal ikke legges her
+
+**4. Verdi **Viser valget brukeren har tatt i select-komponenten
+
+**5. Field **Der brukeren legger inn data.
+
+<Image src={img6} alt="Divider" width={2000} height={143} />
+
+## Universell utforming
+
+### Husk på
+
+- Alle tekstfelt bør ha et tilknyttet label eller instruksjon som viser hvordan skjemaet skal fylles ut.
+- Label (ledeteksten) bør være koblet til tekstfeltet i koden slik at skjermlesere kan lese opp riktig informasjon. Komplekse skjema kan kreve mer hjelp enn bare enn labels.
+- Feilmeldinger bør være kodet som tekst og identifisere det spesifikke skjemaelementet hvor feilen oppstod. Feilmeldingen må beskrive feilen og være synlig uten at brukeren gjør noen ekstra handlinger.
+
+### Sjekkliste
+
+✓ Alle nedtrekksmenyene har tilknyttet label eller instruksjon.
+
+✓ Tydelig, kort og konsis label
+
+### Les mer
+
+[Ledetekster](https://www.uutilsynet.no/veiledning/skjema/38#ledetekster_og_instruksjoner)
+
+[WAI-ARIA Select Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/)

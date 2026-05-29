@@ -1,0 +1,226 @@
+---
+name: 'Combobox'
+slug: 'combobox'
+componentState: stable
+propsComponents:
+  - 'Combobox'
+  - 'ComboboxItem'
+  - 'ComboboxSection'
+  - 'ComboboxHeader'
+resourceLinks:
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/combobox'
+---
+
+import img0 from './images/combobox/0.webp';
+
+## Om komponenten
+
+Combobox er en kombinasjon av tekstfelt og nedtrekksliste. Brukeren kan skrive direkte i tekstfeltet, eller ta ett valg i en liste med alternativer.
+
+**Egnet til:**
+
+- Skjemaer hvor bruker skal velge ett alternativ fra en liste
+
+**Uegnet til:**
+
+- Når bruker har få alternativer å velge mellom. Bruk da heller [RadioGroup](https://grunnmuren.obos.no/komponenter/radiogroup)
+- Når bruker kan velge flere alternativer i listen. Da bruker du heller [CheckBox](https://grunnmuren.obos.no/komponenter/checkbox)
+
+**Relaterte komponenter**
+
+- [Select](https://grunnmuren.obos.no/komponenter/select)
+
+<Image src={img0} alt="Divider" width={2000} height={143} />
+
+## Varianter
+
+### Controlled
+
+En uncontrolled Combobox.
+
+```tsx live caption="En uncontrolled combobox"
+<Combobox label="Velg boligprosjekt" placeholder="Velg boligprosjekt">
+  <ComboboxItem className="flex gap-2">
+    Oslo
+    <small className="text-gray">Oslo</small>
+  </ComboboxItem>
+  <ComboboxItem className="flex gap-2">
+    Frogn
+    <small className="text-gray">Akershus</small>
+  </ComboboxItem>
+  <ComboboxItem className="flex gap-2">
+    Tønsberg
+    <small className="text-gray">Vestfold og Telemark</small>
+  </ComboboxItem>
+</Combobox>
+```
+
+En påkrevd Combobox.
+
+```tsx live caption="Påkrevd combobox"
+<form onSubmit={(e) => e.preventDefault()} className="grid gap-6">
+  <Combobox label="Velg boligprosjekt" placeholder="Velg boligprosjekt" isRequired>
+    <ComboboxItem className="flex gap-2">
+      Oslo
+      <small className="text-gray">Oslo</small>
+    </ComboboxItem>
+    <ComboboxItem className="flex gap-2">
+      Frogn
+      <small className="text-gray">Akershus</small>
+    </ComboboxItem>
+    <ComboboxItem className="flex gap-2">
+      Tønsberg
+      <small className="text-gray">Vestfold og Telemark</small>
+    </ComboboxItem>
+  </Combobox>
+  <Button type="submit" className="w-fit">
+    Send inn
+  </Button>
+</form>
+```
+
+En Combobox med beskrivelse.
+
+```tsx live caption="En uncontrolled combobox med beskrivelse"
+<Combobox
+  label="Velg boligprosjekt"
+  placeholder="Velg boligprosjekt"
+  description="OBOS bygger nye boliger over store deler av landet."
+>
+  <ComboboxItem className="flex gap-2">
+    Oslo
+    <small className="text-gray">Oslo</small>
+  </ComboboxItem>
+  <ComboboxItem className="flex gap-2">
+    Frogn
+    <small className="text-gray">Akershus</small>
+  </ComboboxItem>
+  <ComboboxItem className="flex gap-2">
+    Tønsberg
+    <small className="text-gray">Vestfold og Telemark</small>
+  </ComboboxItem>
+</Combobox>
+```
+
+En Combobox med usynlig label.
+
+```tsx live caption="En uncontrolled combobox med usynlig label"
+<Combobox aria-label="Velg boligprosjekt" placeholder="Velg boligprosjekt">
+  <ComboboxItem className="flex gap-2">
+    Oslo
+    <small className="text-gray">Oslo</small>
+  </ComboboxItem>
+  <ComboboxItem className="flex gap-2">
+    Frogn
+    <small className="text-gray">Akershus</small>
+  </ComboboxItem>
+  <ComboboxItem className="flex gap-2">
+    Tønsberg
+    <small className="text-gray">Vestfold og Telemark</small>
+  </ComboboxItem>
+</Combobox>
+```
+
+### Validering
+
+En Combobox der man må velge fra listen for å gå videre.
+
+```tsx live caption="En invalid uncontrolled combobox"
+<Combobox label="Velg boligprosjekt" placeholder="Velg boligprosjekt" isInvalid>
+  <ComboboxItem className="flex gap-2">
+    Oslo
+    <small className="text-gray">Oslo</small>
+  </ComboboxItem>
+  <ComboboxItem className="flex gap-2">
+    Frogn
+    <small className="text-gray">Akershus</small>
+  </ComboboxItem>
+  <ComboboxItem className="flex gap-2">
+    Tønsberg
+    <small className="text-gray">Vestfold og Telemark</small>
+  </ComboboxItem>
+</Combobox>
+```
+
+En Combobox der man må velge fra listen for å gå videre, med feilmelding.
+
+```tsx live caption="En uncontrolled combobox med feilmelding"
+<Combobox
+  label="Velg boligprosjekt"
+  placeholder="Velg boligprosjekt"
+  errorMessage="Feltet er påkrevd"
+>
+  <ComboboxItem className="flex gap-2">
+    Oslo
+    <small className="text-gray">Oslo</small>
+  </ComboboxItem>
+  <ComboboxItem className="flex gap-2">
+    Frogn
+    <small className="text-gray">Akershus</small>
+  </ComboboxItem>
+  <ComboboxItem className="flex gap-2">
+    Tønsberg
+    <small className="text-gray">Vestfold og Telemark</small>
+  </ComboboxItem>
+</Combobox>
+```
+
+### Gruppering
+
+En uncontrolled, gruppert Combobox.
+
+```tsx live caption="En uncontrolled, gruppert combobox"
+<Combobox label="Velg boligprosjekt" placeholder="Velg boligprosjekt">
+  <ComboboxSection>
+    <ComboboxHeader>Oslo</ComboboxHeader>
+    <ComboboxItem className="flex gap-2">Oslo</ComboboxItem>
+  </ComboboxSection>
+  <ComboboxSection>
+    <ComboboxHeader>Akershus</ComboboxHeader>
+    <ComboboxItem className="flex gap-2">Enebakk</ComboboxItem>
+    <ComboboxItem className="flex gap-2">Frogn</ComboboxItem>
+  </ComboboxSection>
+  <ComboboxSection>
+    <ComboboxHeader>Vestfold og Telemark</ComboboxHeader>
+    <ComboboxItem className="flex gap-2">Horten</ComboboxItem>
+    <ComboboxItem className="flex gap-2">Tønsberg</ComboboxItem>
+  </ComboboxSection>
+</Combobox>
+```
+
+### Controlled
+
+En controlled Combobox.
+
+```tsx live caption="En controlled combobox"
+function() {
+  const [selectedKey, setSelectedKey] = React.useState("");
+
+return <Combobox
+  label="Velg boligprosjekt"
+  placeholder="Velg boligprosjekt"
+  selectedKey={selectedKey}
+  onSelectionChange={setSelectedKey}
+>
+  <ComboboxItem className="flex gap-2">
+    Oslo
+    <small className="text-gray">
+      Oslo
+    </small>
+  </ComboboxItem>
+  <ComboboxItem className="flex gap-2">
+    Frogner
+    <small className="text-gray">
+      Akershus
+    </small>
+  </ComboboxItem>
+  <ComboboxItem className="flex gap-2">
+    Tønsberg
+    <small className="text-gray">
+      Vestfold og Telemark
+    </small>
+  </ComboboxItem>
+</Combobox>
+}
+```

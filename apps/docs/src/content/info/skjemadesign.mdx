@@ -1,0 +1,124 @@
+---
+name: 'Skjemadesign'
+slug: 'skjemadesign'
+---
+
+import img0 from './images/skjemadesign/0.webp';
+
+Skjemaer er en av de mest brukte komponentene hos OBOS. De skal være konsekvente, ryddige og enkle å forstå – uansett hvilken flate eller tjeneste de står på. Denne guiden samler prinsippene vi bygger skjemaer etter i Grunnmuren.
+
+## Vurder om du faktisk trenger et skjema
+
+Det første spørsmålet er ikke _hvordan_ skjemaet skal se ut, men om det skal eksistere. Sett av tid med teamet til å forstå hva dere faktisk trenger å vite – og hva dere skal gjøre med svarene. Et skjema som ikke gir verdi, er et skjema som ikke bør lages.
+
+---
+
+## Ett felt per linje
+
+Plasser skjemafeltene under hverandre i én kolonne, med venstrestilt tekst. Hold skjemaområdet til maks 500 px bredt – det gir bedre lesbarhet og gjør skjemaet enklere å skanne. **Unntak**: felter som logisk hører sammen og er korte, kan stå på samme linje. Typiske eksempler er postnummer + poststed, eller landskode + telefonnummer.
+
+<Image src={img0} alt="" width={1870} height={788} />
+
+---
+
+## Bruk alltid label – og plasser den over feltet
+
+Label skal alltid stå over tekstfeltet, sammen med eventuell hjelpetekst. Label til siden gjør skjemaet vanskeligere å skanne og bryter rytmen i en vertikal kolonne. En god label:
+
+- er konsis og konsistent slik at brukeren forstår hva som forventes
+- er helst 1–3 ord og under 20 tegn inkludert mellomrom
+- bruker normal store/små bokstaver – ikke versaler eller bare små bokstaver
+- inneholder ikke kolon
+
+---
+
+## Ikke bruk plassholdertekst som label eller hjelpetekst
+
+Plassholdertekst er ikke tilgjengelig for skjermlesere, og brukere oppfatter ofte feltet som allerede utfylt – så de hopper over det. Bruk label og hjelpetekst i stedet. Som hovedregel: unngå plassholdertekst helt. Trenger du å antyde format, ta det inn i label eller hjelpetekst.
+
+---
+
+## Bruk hjelpetekst når det faktisk hjelper
+
+Hjelpetekst supplerer label, men erstatter den aldri. Den skal være kort, konkret og forklare hva brukeren skal gjøre. Spør deg selv først: kan label forbedres slik at hjelpetekst blir overflødig? I Grunnmuren har vi to varianter:
+
+- Statisk hjelpetekst – skrives rett under label. Brukes når informasjonen er kort og alltid relevant.
+- Ekspanderende hjelpetekst – brukeren klikker for å åpne. Brukes når forklaringen er lengre eller mer detaljert.
+
+Når du skriver hjelpetekst:
+
+- hold den kort
+- bruk enkle ord alle forstår
+- unngå faguttrykk. Må du bruke fagspråk, skal det alltid være tilgjengelig forklaring
+- format og forventet antall tegn kan ofte legges direkte i label
+
+---
+
+## Grupper det som hører sammen
+
+Felter som hører til samme tema, skal stå sammen. Én eller flere skjemakomponenter utgjør en skjemaseksjon, og et skjema kan bestå av flere seksjoner. Du kan gruppere visuelt med overskrifter og luft, eller dele skjemaet i flere steg.
+
+---
+
+## Merk det som er valgfritt
+
+Tradisjonen med asterisk (\*) på obligatoriske felt skaper visuell støy. Som hovedregel anbefaler vi å merke valgfrie felt med "(valgfri)" i stedet – det blir tydeligere hva som faktisk må fylles ut. Vær oppmerksom på at Tilsynet for universell utforming og ikt anbefaler å merke obligatoriske felt for skjermlesere. Diskuter i teamet hva som fungerer best i deres løsning – det viktigste er at det er tydelig for alle brukere.
+
+---
+
+## ...men trenger du i det hele tatt å spørre?
+
+Hvis et felt er valgfritt – trenger dere det egentlig? Ikke legg inn "standard"-felt fordi det er nice to have. All informasjon vi samler inn må lagres og behandles forsvarlig, og bør tjene et tydelig formål. Les om dataminimeringsprinsippet hos Datatilsynet. Tenk spesielt grundig på sensitive felt. Trenger dere egentlig å spørre om kjønn? Bruk inkluderende og nøytralt språk – KS har en god oversikt over prinsipper for inkluderende språk.
+
+---
+
+## La feltbredden følge innholdet
+
+Bredden på tekstfeltet gir brukeren et hint om forventet input. Et felt for telefonnummer (8 tegn) skal være mye smalere enn et felt for adresse. CVC-kode (3 tegn) og postnummer (4 tegn) er korte felt – la dem se sånn ut.
+
+---
+
+## Dropdown er ikke alltid svaret
+
+Dropdown fungerer godt når du har mange alternativer. Har du mellom 2 og 6 valg, bør du som regel liste dem ut som radioknapper eller checkboxes i stedet – det er raskere å skanne og krever færre klikk.
+
+---
+
+## Hold skjemaet kort
+
+Jo kortere skjema, jo flere fullfører. Hvert felt du fjerner øker sjansen for at brukeren faktisk kommer i mål.
+
+---
+
+## Hva kan vi få "gratis"?
+
+Ikke be folk fylle ut det vi allerede vet eller kan utlede. Postnummer gir poststed. Fødselsnummer kan gi folkeregistrert kjønn. Har brukeren registrert seg hos oss tidligere, har vi sannsynligvis allerede mye informasjon. Vurder også å koble på offentlige registre – Folkeregisteret, Altinn (inntekt), osv.
+
+---
+
+## Opt-in, ikke opt-out
+
+Etter GDPR kan vi ikke forhåndsvelge samtykke. Brukeren må aktivt huke av for å motta nyhetsbrev, markedsføring eller annet – opt-out som standard er ikke lov.
+
+---
+
+## Marker feil tydelig – der feilen oppstår
+
+Når brukeren gjør feil, må de få god hjelp til å rette opp. Selve feltet markeres med feilfarge, og feilmeldingen skal stå rett ved feltet og forklare hva som er galt og hvordan det fikses. Husk:
+
+- Skjemaet valideres når brukeren sender inn skjemaet eller fullfører gjeldende steg.
+- Hvert felt som er feil eller mangelfullt får statusfarge for feil og en beskrivende feilmelding. Styling ligger i Grunnmuren.
+- Når feilen rettes, skjules feilmeldingen umiddelbart og feltet går tilbake til standardfarge.
+- Skriv gode, konkrete feilmeldinger. "Ugyldig" hjelper ingen – "E-postadressen mangler @" gjør det.
+
+---
+
+## Tydelig call-to-action
+
+Knappen skal fortelle brukeren hva som faktisk skjer. Bruk verb og konkret handling: "Send inn skjema", "Avbryt bestilling", "Se oppsummering og betal", "Slett konto". Unngå "OK", "Klikk her" eller "Ferdig". Har skjemaet flere steg, bruk "Forrige" og "Neste" mellom stegene – og en tydelig, handlingsorientert knapp på siste steg.
+
+---
+
+## Utviklerne må på banen
+
+Et godt skjema er like mye kode som design. Når feltene er semantisk kodet med riktig `type` og `autocomplete`, får brukeren rett tastatur på mobil (nummertastatur for tall, e-post-tastatur for e-post), og skjermlesere klarer å navigere riktig. Sett alltid opp skjemaet semantisk korrekt – det er en forutsetning for at det fungerer for alle. Les mer hos [Tilsynet for universell utforming og ikt](https://www.uutilsynet.no/veiledning/skjema/38).

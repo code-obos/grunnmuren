@@ -1,0 +1,158 @@
+---
+name: 'Alertbox'
+slug: 'alertbox'
+componentState: stable
+propsComponents:
+  - 'Alertbox'
+resourceLinks:
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/alertbox'
+  - linkType: 'figma'
+    url: 'https://www.figma.com/design/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=1575-8141&t=FV4FudOBI4z22wPz-4'
+---
+
+import img0 from './images/alertbox/0.webp';
+import img1 from './images/alertbox/1.webp';
+import img2 from './images/alertbox/2.webp';
+import img3 from './images/alertbox/3.webp';
+import img4 from './images/alertbox/4.webp';
+
+## Om komponenten
+
+Alertbox brukes for å vise en statusbeskjed som det er viktig for brukeren å få med seg. Alertbox kan enten brukes globalt på hele nettstedet, eller kun på en spesifikk side/løsning.
+
+Statusbeskjeder bør være korte og konkrete, og skrives slik at det er enkelt for brukeren å forstå hvordan beskjeden påvirker dem.
+
+**Egnet til:**
+
+- Å informere om en viktig hendelse, endring eller en konsekvens av en handling
+
+**Uegnet til:**
+
+- Store mengder informasjon
+- Beskjeder som ikke har noen betydning for brukeren
+
+<Image src={img0} alt="Divider" width={2000} height={143} />
+
+## Varianter
+
+### Informasjon - Information
+
+Brukes for å gi brukeren informasjon relevant til den siden eller handlingen de skal utføre. For eksempel at brukeren trenger å ha fødselsnummer klart før de fyller ut skjemaet.
+
+```tsx live
+<Alertbox role="none" variant="info">
+  <Heading level={4}>Ha fødselsnummeret ditt klart</Heading>
+  <Content>
+    <p>
+      For å sende inn skjemaet trenger vi fødselsnummeret ditt. Dette vil kun bli brukt for
+      innsendingen av skjemaet, og lagres ikke hos oss i OBOS.
+    </p>
+  </Content>
+  <Footer>
+    <p>
+      Sist oppdatert: <time dateTime="2024-01-20">20. februar kl. 13.37</time>
+    </p>
+  </Footer>
+</Alertbox>
+```
+
+```tsx live
+<Alertbox role="none" variant="info">
+  <Content>Bruk dette tekstfeltet til å skrive en kort varsling</Content>
+</Alertbox>
+```
+
+### Suksess - Success
+
+Brukes til å gi brukeren en beskjed om at noe er fullført eller at noe er lagret. For eksempel “Søknaden din er sendt inn”
+
+```tsx live
+<Alertbox role="none" variant="success">
+  <Heading level={4}>Suksess!</Heading>
+  <Content>
+    <p>Søknaden din er sendt inn. Vi tar kontakt så fort vi kan.</p>
+  </Content>
+  <Footer>
+    <p>
+      Sist oppdatert: <time dateTime="2024-01-20">20. februar kl. 13.37</time>
+    </p>
+  </Footer>
+</Alertbox>
+```
+
+### Varsel - Warning
+
+Brukes for å gi brukeren en advarsel om en feil i en tjeneste eller på siden.
+
+```tsx live
+<Alertbox role="status" variant="warning">
+  <Heading level={4}>Problemer med å melde forkjøp</Heading>
+  <Content>Akkurat nå er det mange som opplever problemer med å melde forkjøp</Content>
+</Alertbox>
+```
+
+### Kritisk feil - Error
+
+Brukes for å gi brukeren informasjon om at noe gikk galt, ikke fungerer, eller en handling som mislyktes. For eksempel "Skjema ble ikke sendt inn."
+
+```tsx live
+<Alertbox role="alert" variant="danger">
+  <Heading level={4}>Noe gikk galt!</Heading>
+  <Content>
+    Endringene ble ikke lagret, prøv igjen eller kontakt kundeservice hvis problemet vedvarer.
+  </Content>
+</Alertbox>
+```
+
+### Alertbox som kan lukkes
+
+```tsx live
+<Alertbox isDismissable role="alert" variant="danger">
+  <Heading level={3}>Noe gikk galt!</Heading>
+  <Content>
+    <p>
+      Endringene ble ikke lagret, prøv igjen eller kontakt kundeservice hvis problemet vedvarer. Du
+      kan lukke dette varselet.
+    </p>
+  </Content>
+  <Footer>
+    <p>
+      Sist oppdatert: <time dateTime="2024-01-20">20. februar kl. 13.37</time>
+    </p>
+  </Footer>
+</Alertbox>
+```
+
+<Image src={img1} alt="Divider" width={2000} height={143} />
+
+## Retningslinjer
+
+### Kun på hvit bakgrunn
+
+Ikke bruk Alertbox på andre bakgrunnsfarger enn hvit.
+
+<Image
+  src={img2}
+  alt="Feilaktig bruk av alertbox hvor det vises på en annen farge enn hvit."
+  width={2000}
+  height={804}
+/>
+
+<Image src={img3} alt="Divider" width={2000} height={143} />
+
+## Formatering
+
+### Anatomi
+
+<Image
+  src={img4}
+  alt="Alertbox-komponentens anatomi med label, ikon, lukkeknapp, beskrivelse og dato oppdatert"
+  width={2000}
+  height={845}
+/>
+
+1. **Label **Kort og informativ tittel som raskt forklarer hva innholdet i typen alertbox handler om.
+1. **Ikon **Ikonet avhenger av hvilken variant du bruker. For suksessvarianten er det mulig å endre ikonet.
+1. **Beskrivelse **En kort og informativ beskrivelse av hva som skal gjøres/er feil. Det er også mulig å skjule beskrivelse, om den er kun ment som støtteinformasjon.
+1. **Dato oppdatert **Fint å bruke på Error og Warning, for å fortelle om når OBOS ble oppmerksomme på feilen og gir et bilde av status i saken.

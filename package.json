@@ -11,7 +11,7 @@
     "build:docs": "pnpm --filter @obosbbl/grunnmuren-docs build",
     "build:storybook": "storybook build -o ./apps/docs/public/storybook",
     "ci:publish": "pnpm build && changeset publish",
-    "ci:version": "changeset version",
+    "ci:version": "changeset version && node apps/docs/scripts/strip-unreleased.ts",
     "dev": "storybook dev -p 6006 --ci --initial-path=/story/home--page",
     "dev:docs": "pnpm --filter @obosbbl/grunnmuren-docs dev",
     "fmt": "oxfmt",

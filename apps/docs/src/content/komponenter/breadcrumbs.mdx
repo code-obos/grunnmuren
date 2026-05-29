@@ -1,0 +1,120 @@
+---
+name: 'Breadcrumbs'
+slug: 'breadcrumbs'
+componentState: stable
+propsComponents:
+  - 'Breadcrumb'
+  - 'Breadcrumbs'
+resourceLinks:
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/breadcrumbs'
+  - linkType: 'figma'
+    url: 'https://www.figma.com/design/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=1200-651&t=FV4FudOBI4z22wPz-4'
+---
+
+import img0 from './images/breadcrumbs/0.webp';
+import img1 from './images/breadcrumbs/1.webp';
+import img2 from './images/breadcrumbs/2.webp';
+import img3 from './images/breadcrumbs/3.webp';
+import img4 from './images/breadcrumbs/4.webp';
+import img5 from './images/breadcrumbs/5.webp';
+import img6 from './images/breadcrumbs/6.webp';
+
+## Om komponenten
+
+Breadcrumbs/brødsmulesti er et navigasjonselement, som viser brukerens plassering og lar dem raskt navigere tilbake til tidligere nivåer i en applikasjon eller på et nettsted. Den gir brukerkontekst uten å ta opp mye plass.
+
+**Egnet til:**
+
+- Produkter og brukergrensesnitt med mye hierarkisk innhold
+
+**Uegnet til:**
+
+- Primærnavigasjon, som menyen
+- Navigasjon med kun ett nivå. Da bør du bruke [BackLink](https://grunnmuren.obos.no/komponenter/backlink)
+- På små skjermer skal alltid [BackLink](https://grunnmuren.obos.no/komponenter/backlink) brukes, da Breadcrumbs tar for stor plass på mobil
+
+**Relaterte komponenter**
+
+- [Backlink](https://grunnmuren.obos.no/komponenter/backlink)
+
+<Image src={img0} alt="Divider" width={2000} height={143} />
+
+## Varianter
+
+```tsx live caption="Brødsmulesti med 3 elementer"
+<Breadcrumbs>
+  <Breadcrumb href="#">Min side</Breadcrumb>
+  <Breadcrumb href="#">Instillinger</Breadcrumb>
+  <Breadcrumb href="#">Kontaktinformasjon</Breadcrumb>
+</Breadcrumbs>
+```
+
+<Image src={img1} alt="Divider" width={2000} height={143} />
+
+## Retningslinjer
+
+### Plassering
+
+Breadcrumb plasseres øverst til venstre på siden. Den ligger under overskriften og navigasjonen, og over sidetittelen.
+
+<Image src={img2} alt="Eksempel på breadcrumb fra obos.no" width={1097} height={448} />
+
+### Innhold
+
+Hver lenke (sidetittel) bør være kort, tydelig og gjenspeile plasseringen eller siden den lenker til.
+
+### På mobil skal backlink brukes
+
+(Legg til bilde)
+
+<Image src={img3} alt="Divider" width={2000} height={143} />
+
+## Formatering
+
+### Anatomi
+
+<Image src={img4} alt="Breadcrumbs" width={1107} height={470} />
+
+1. **Sidekobling **Leder brukere til siden på "Parent level"
+1. **Skilletegn **Skiller tydelig mellom hver side
+1. **Nåværende side **Viser brukeren hvilken underside de er på
+
+<Image src={img5} alt="Divider" width={2000} height={143} />
+
+## Universell utforming
+
+### Husk på
+
+- Brødsmulestien må alltid være tilgjengelig med skjermleser og tastaturnavigering.
+- På obos.no er alltid **forsiden** den første lenken i leddet.
+- Alle sidene i brødsmulestien skal være interaktive (unntatt den gjeldende siden) og lenke til sine respektive sider.
+- Lenketeksten skal være tydelig og formidler målet for lenken.
+- Det er brukt Backlink på mobile flater (Da breadcrumbs tar for mye plass).
+
+### Sjekkliste
+
+✓ Vi har sjekket at når løsningen er på mobile flater så blir breadcrumbs om til backlink.
+
+✓ Vi har testet at brødsmulestien er tilgjengelig med skjermleser og tastaturnavigering.
+
+✓ Vi har testet at lenketeksten tydelig formidler målet for lenken.
+
+### Les mer
+
+[uu tilsynet lenker](https://www.uutilsynet.no/veiledning/lenker/214)
+
+<Image src={img6} alt="Divider" width={2000} height={143} />
+
+## Interaksjon
+
+Alle sidene i Breadcrumbs-komponenten skal være interaktive – unntatt nåværende side.
+
+_Skilletegnene mellom sidelenker er ikke interaktive._
+
+### Tastatur
+
+| Key   | Interaksjon                                           |
+| ----- | ----------------------------------------------------- |
+| Tab   | Kunne fokusere komponenten og navigere mellom lenkene |
+| Enter | Kunne trykke på lenken                                |

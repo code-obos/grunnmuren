@@ -1,0 +1,461 @@
+---
+name: 'Card'
+slug: 'card'
+componentState: stable
+propsComponents:
+  - 'Card'
+  - 'CardLink'
+  - 'Media'
+resourceLinks:
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/card'
+  - linkType: 'figma'
+    url: 'https://www.figma.com/design/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=4191-2504&t=FV4FudOBI4z22wPz-4'
+---
+
+import img0 from './images/card/0.webp';
+import img1 from './images/card/1.webp';
+import img2 from './images/card/2.webp';
+import img3 from './images/card/3.webp';
+import img4 from './images/card/4.webp';
+import img5 from './images/card/5.webp';
+import img6 from './images/card/6.webp';
+import img7 from './images/card/7.webp';
+import img8 from './images/card/8.webp';
+import img9 from './images/card/9.webp';
+import img10 from './images/card/10.webp';
+import img11 from './images/card/11.webp';
+import img12 from './images/card/12.webp';
+import img13 from './images/card/13.webp';
+import img14 from './images/card/14.webp';
+import img15 from './images/card/15.webp';
+import img16 from './images/card/16.webp';
+import img17 from './images/card/17.webp';
+import img18 from './images/card/18.webp';
+import img19 from './images/card/19.webp';
+import img20 from './images/card/20.webp';
+import img21 from './images/card/21.webp';
+import img22 from './images/card/22.webp';
+import img23 from './images/card/23.webp';
+import img24 from './images/card/24.webp';
+import img25 from './images/card/25.webp';
+import img26 from './images/card/26.webp';
+import img27 from './images/card/27.webp';
+import img28 from './images/card/28.webp';
+import img29 from './images/card/29.webp';
+import img30 from './images/card/30.webp';
+import img31 from './images/card/31.webp';
+import img32 from './images/card/32.webp';
+import img33 from './images/card/33.webp';
+import img34 from './images/card/34.webp';
+import img35 from './images/card/35.webp';
+
+## Om komponenten
+
+Card er en kortkomponent som har mange bruksområder i OBOS. Kortet inneholder et kort sammendrag og kan gi brukeren mulighet til å navigere til en ny side ved hjelp av enten en knapp eller lenke.
+
+**Egnet til:**
+
+- Som et navigasjonselement
+- Inngang til en artikkel
+- Boligkort
+- Statisk informativt kort
+- Contact Card
+
+**Relaterte komponenter**
+
+- [Badge](/komponenter/badge)
+- [Button](/komponenter/button)
+- [Avatar](/komponenter/avatar)
+
+<Image src={img0} alt="Divider" width={2000} height={143} />
+
+## Formatering
+
+<Image src={img1} alt="8px spacer" width={672} height={8} />
+
+### Anatomi
+
+Cards kan settes sammen på cirka 52 måter. Vi kommer ikke til å vise dem alle her. Her er derfor et eksempel på et standard Card:
+
+<Image src={img2} alt="Card anatomi" width={2000} height={845} />
+
+1. **Label** Cards bør alltid ha en kortfattet tittel
+1. **Ikon** Ikonet er relatert til titttelen. Om du ikke finner et passende ikon, ta kontakt med oss.
+1. **Beskrivelse** Tekst som utfyller tittelen på kortet, men som også er koblet til CTA.
+1. **CTA** Tydelig og kort CTA-tekst. Dette er det eneste elementet på kortet som er interaktivt.
+1. **Container** Surface på card i dette tilfelle er dekorativt, og dermed kun button som har kontrastkrav.
+
+<Image src={img3} alt="8px spacer" width={672} height={8} />
+
+### Corner-radius
+
+Cards har en corner-radius på 16px, denne skal aldri endres på. Om det skal plasseres inn en knapp i kortet så bruk formelen: ytre radius = indre radius + padding x2.
+
+<Image src={img4} alt="Corner-radius eksempel" width={2000} height={369} />
+
+<Image src={img5} alt="8px spacer" width={672} height={8} />
+
+### Surface
+
+Vi har 5 surface-varianter av Card. Cards skal kun inneholde én surface-farge. Velg kun én av fargene under.
+
+| Variant   | Formål                                                                                                             |
+| --------- | ------------------------------------------------------------------------------------------------------------------ |
+| None      | Ingen farge på surface eller border                                                                                |
+| Border    | Svart 2px border som standard, kan endres om den har tydelig CTA eller utformet riktig iht wcag. (se uu for cards) |
+| Dark blue | Brukes på lys flate - har svært god kontrast, brukes til blikkfang                                                 |
+| Sky       | Brukes på mørk flate for riktig kontrast, eller som dekorativ farge                                                |
+| Mint      | Brukes på mørk flate for riktig kontrast, eller som dekorativ farge                                                |
+
+<Image src={img6} alt="8px spacer" width={672} height={8} />
+
+### Justering
+
+Regler rundt justering innad i et card.
+
+| Justering      | Formål                                                                                                                                                                                             |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Venstrejustert | Alt innholdet i cards skal være venstrejustert. Unntaket vil være ikon som er satt i høyre hjørne som bakt inn i navigasjonskortene.                                                               |
+| Høyrejustert   | Unntaket for cards er når en har tertiærbuttons som skiller seg fra navigasjonen som et helt interaktivt kort har, da skal denne ligge under en divider med tydelig og 8px gap mellom clickbounds. |
+
+<Image src={img7} alt="Divider" width={2000} height={143} />
+
+## Varianter
+
+Vi har 3 varianter av Card
+
+| Variant                           | Formål                                                                                                                                                                                                                                                                                                                  |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Statisk kort                      | Statisk kort er et kort som ikke normalt har interaktive elementer, det kan brukes som en informasjonsboks for eksempel.   Unntaket på interaktive elementer her, er at en kan legge til inline lenker i teksten.                                                                                                       |
+| Interaktivt kort                  | Hele kortet er klikkbart. Kan for eksempel brukes som kategorier å velge mellom, eller til navigasjon.  Om kortet brukes med buttons, skal ikke kortet i seg selv være interaktivt.                                                                                                                                     |
+| Kort med bilde eller illustrasjon | Standard kort for artikler, boligprosjekter eller boliger. Selv om innholdet i kortene er annerledes er bunnstrukturen lik på tvers. Et kort med enten bilde eller illustrasjon.   Om en ønsker å kategorisere kortene i en liste, så kan det brukes badge, enten normalt i top venstre hjørne eller i selve innholdet. |
+
+<Image src={img8} alt="16px spacer" width={672} height={16} />
+
+### Statisk kort
+
+Et kort som normalt ikke har interaktive elementer. Dette kortet brukes til å gruppere informasjon og separere innhold visuelt.
+
+```tsx live caption="Statisk kort eksempel"
+<>
+  <Card layout="horizontal" className="bg-mint w-full">
+    <Content>
+      <Heading level={4}>Stovnerparken</Heading>
+      <p>5 min gange</p>
+    </Content>
+    <Park />
+  </Card>
+</>
+```
+
+<Image src={img9} alt="8px spacer" width={672} height={8} />
+
+#### Inline lenker
+
+Det eneste som er lov av interaktive elementer i et statisk kort er inline lenker. Slik at kortet primært brukes til informasjon, men det kan også brukes til innholdsfortegnelse og anklerlenker.
+
+<Image src={img10} alt="Statisk kort med inline lenker - eksempel" width={2000} height={804} />
+
+<Image src={img11} alt="8px spacer" width={672} height={8} />
+
+#### Ikon
+
+På statiske kort kan du bruke ikoner. Bruk et vanlig ikon, og ikke et illustrativt ikon, da illustrasjoner ofte kan oppleves forstyrrende for innholdet. [Se ikonsettet vårt her.](https://grunnmuren.obos.no/profil/ikoner)
+
+<Image src={img12} alt="Feilaktig bruk - Kort med illustrativt ikon" width={2000} height={872} />
+
+<Image src={img13} alt="Divider" width={2000} height={143} />
+
+### Interaktive kort
+
+Interaktive kort har to former for interaktivitet; enten der hele kortet er klikkbart, eller kun deler av det. For å få hele kortet klikkbart benyttes `<CardLink>`.
+
+```tsx live caption="Vaktmestertjenester eksempel - interaktivt kort"
+<Card className="bg-blue-dark text-white w-full">
+  <Park />
+  <Content>
+    <Heading level={5}>Vaktmestertjenester</Heading>
+    <p>
+      Vi har en voksende liste med dyktige vaktmestertjenster som OBOS har gode avtaler med. Finn en
+      som passer ditt borettslag
+    </p>
+    <CardLink className="group/cta mt-1">
+      <Button href="#cta" variant="tertiary">
+        Finn vaktmester
+        <ArrowRight className="transition-transform group-hover/cta:motion-safe:translate-x-1" />
+      </Button>
+    </CardLink>
+  </Content>
+</Card>
+```
+
+<Image src={img14} alt="8px spacer" width={672} height={8} />
+
+#### To måter med interaksjon
+
+Interaktiv cards har to primærformer for interaktivitet, enten om hele kortet er klikkbart eller kun deler av det. Hver måte har sine krav knyttet til seg. Nedenfor ser du to måter de ulike interaksjonene kan løses på.
+
+<Image
+  src={img15}
+  alt="To måter med interaksjon - Eksempel interaktive kort"
+  width={2000}
+  height={1158}
+/>
+
+<Image src={img16} alt="8px spacer" width={672} height={8} />
+
+<Image
+  src={img17}
+  alt="To varianter av regler iht wcag - Eksempel interaktive kort"
+  width={2000}
+  height={1092}
+/>
+
+<Image src={img18} alt="Divider" width={2000} height={143} />
+
+### Card m/ bilde eller illustrasjon
+
+Dette er standardkortet for artikler, boligprosjekter eller boliger. Selv om innholdet i kortene er ulike på tvers av obos.no, er bunnstrukturen lik.
+
+Hvis du vil kategorisere kortene i en liste, kan det brukes [badge](https://grunnmuren.obos.no/komponenter/badge#edb1bfc0738b).
+
+```tsx live caption="Artikkel kort - Eksempel"
+<Card className="w-full">
+  <Media>
+    <img
+      alt=""
+      src="https://obos.brandmaster.com/fr/gallery/14069/images/lowres/0a4467bc-7f8d-40ff-93cd-827d005a51d6.png?cacheVersion=1715682090"
+    />
+  </Media>
+  <Content>
+    <Heading level={3}>Bli kjent med Rødsberget</Heading>
+    <p>Nytt nabolag står klart i Fredrikstad, se de nye boligene i et fredelig område.</p>
+    <CardLink className="group/cta">
+      <Button href="#cta" variant="tertiary">
+        Se boligene
+        <ArrowRight className="transition-transform group-hover/cta:motion-safe:translate-x-1" />
+      </Button>
+    </CardLink>
+  </Content>
+</Card>
+```
+
+<Image src={img19} alt="8px spacer" width={672} height={8} />
+
+#### Badge
+
+Kort med bilde og illustrasjon kan brukes med Badge, dvs at det kan legges en badge over bilde ved øvre venstre hjørne hvor 2 av sidene i corner radius er satt til 0 slik som anvist i eksempelet.
+
+<Image src={img20} alt="Badge eksempel kort m/img" width={2000} height={928} />
+
+<Image src={img21} alt="8px spacer" width={672} height={8} />
+
+#### Sekundærknapp adskilt fra hoved "clickarea".
+
+Når hele kortet er klikkbart, så skal sekundære innganger seperat fra hoved-clickarea legges under en divider med minst 8px luft mellom clickareas. Det er slik på grunnlag av å ha luft mellom clickareas for at det skal bli enklere å trykke på de respektive inngangene.
+
+<Image
+  src={img22}
+  alt="Eksempel på hvordan ha et sekundært nivå i et helt interaktivt kort"
+  width={2000}
+  height={2104}
+/>
+
+<Image src={img23} alt="8px spacer" width={672} height={8} />
+
+#### Kort med horisontal layout
+
+Card har vertikal layout som default, men dette kan endres til horisontal. Siden komponenten må være responsiv vil layouten brekke over til vertikal når det ikke lenger er plass for horisontal layout av innholdet. For `<Card layout="horizontal">` med `<Media>` som i eksemplet under vil bildet ta opp halvparten av bredden, og `<Content>` den andre halvparten.
+
+```tsx live caption="Horisontalt kort"
+<Card layout="horizontal" className="w-full">
+  <Media>
+    <img
+      alt=""
+      src="https://obos.brandmaster.com/fr/gallery/14069/images/lowres/0a4467bc-7f8d-40ff-93cd-827d005a51d6.png?cacheVersion=1715682090"
+    />
+  </Media>
+  <Content>
+    <Heading level={3}>Bli kjent med Rødsberget</Heading>
+    <p>Nytt nabolag står klart i Fredrikstad, se de nye boligene i et fredelig område.</p>
+    <CardLink className="group/cta">
+      <Button href="#cta" variant="tertiary">
+        Se boligene
+        <ArrowRight className="transition-transform group-hover/cta:motion-safe:translate-x-1" />
+      </Button>
+    </CardLink>
+  </Content>
+</Card>
+```
+
+<Image src={img24} alt="8px spacer" width={672} height={8} />
+
+##### Contact card
+
+Card med horisontal layout kan brukes til kontaktkort i kombinasjon med komponenten [Avatar](/komponenter/avatar).
+
+```tsx live caption="Kontaktkort"
+<Card layout="horizontal" variant="outlined" className="w-full">
+  <Avatar src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/v1578474487/Boligkonferansen/obosbk%202017/Daniel_Kj%C3%B8rberg_Siraj_1x1.jpg" />
+  <Content>
+    <div className="flex flex-col-reverse gap-2">
+      <Heading level={3}>Daniel Kjørberg Siraj</Heading>
+      <small>Konsernsjef (CEO)</small>
+    </div>
+    <p>Dette er et kontaktkort med konsernsjef Daniel Kjørberg Siraj</p>
+  </Content>
+</Card>
+```
+
+<Image src={img25} alt="Divider" width={2000} height={143} />
+
+## Retningslinjer
+
+Disse reglene og begrensningene gjelder for alle variantene av Card.
+
+<Image src={img26} alt="8px spacer" width={672} height={8} />
+
+### Test alltid innholdet med skjermleser
+
+Grunnmuren har ikke kontroll over egendefinert innhold, så dette må testes med skjermleser av teamet selv. Helst test på en person som ikke har sett / ser designet. _Mer informasjon om uu for hver komponent kommer. _
+
+<Image src={img27} alt="8px spacer" width={672} height={8} />
+
+### Kontrast
+
+Sørg for at kontrasten er riktig i henhold til bruken av komponenten. [Last ned CCA](https://www.tpgi.com/color-contrast-checker/) for å teste selv.
+
+<Image src={img28} alt="8px spacer" width={672} height={8} />
+
+### Ikke bland farger
+
+Kortene skal holdes rene, og skal ikke blandes med andre surface-farger på samme surface.
+
+<Image src={img29} alt="Ikke bland andre farger i et kort" width={2000} height={804} />
+
+<Image src={img30} alt="8px spacer" width={672} height={8} />
+
+### Minstestørrelse
+
+Når en bruker et card, så må minstestørrelsen på 288px designes for å se om innholdet fungerer på den minste størrelsen vi må støtte.
+
+<Image src={img31} alt="Minstestørrelse - feilaktig bruk" width={2000} height={1063} />
+
+<Image src={img32} alt="Divider" width={2000} height={143} />
+
+## Eksempler
+
+### Kort hvor hele kortet er interaktivt:
+
+```tsx live caption="Interaktivt kort med bilde og CTA"
+<Card className="w-full">
+  <Media>
+    <img
+      alt=""
+      src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/obos-logo-socialmeta.jpg"
+    />
+  </Media>
+  <Content>
+    <Heading level={5}>Med bilde og CTA</Heading>
+    <p>Dette kortet har bilde og er klikkbart mot en CTA-lenke</p>
+    <CardLink className="group/cta">
+      <Button href="#cta" variant="tertiary">
+        Les mer
+        <ArrowRight className="transition-transform group-hover/cta:motion-safe:translate-x-1" />
+      </Button>
+    </CardLink>
+  </Content>
+</Card>
+```
+
+<Image src={img33} alt="8px spacer" width={672} height={8} />
+
+### Card med klikkbare elementer inne i seg:
+
+```tsx live caption="Interaktivt kort med en klikkbar CTA"
+<Card className="bg-blue-dark text-white w-full">
+  <Content>
+    <Heading level={5}>Interaktivt kort med CTA</Heading>
+    <p>Dette kortet har en klikkbar CTA-lenke.</p>
+    <CardLink className="group/cta mt-1">
+      <Button href="#cta" variant="tertiary">
+        Les mer
+        <ArrowRight className="transition-transform group-hover/cta:motion-safe:translate-x-1" />
+      </Button>
+    </CardLink>
+  </Content>
+</Card>
+```
+
+<Image src={img34} alt="8px spacer" width={672} height={8} />
+
+### Avansert eksempel med flere klikkflater i et kort
+
+Det er mulige å lage relativt komplekse kort, med flere klikkbare flater. Til dette kan `<CardLink>` og [Button](/komponenter/button) benyttes. Ved å bruke komponenten [Badge](/komponenter/badge) i forskjellige deler av kortet er det mulig å fremheve spesielt viktig informasjon på forskjellige måter.
+
+```tsx live
+<Card variant="outlined" className="w-full">
+  <Media>
+    <Badge color="blue-dark" size="large">
+      <InfoCircle />
+      Meldefrist
+    </Badge>
+    <img
+      alt=""
+      src="https://res.cloudinary.com/obosit-prd-ch-clry/image/upload/f_auto,c_limit,w_2048,q_auto/v1582122753/Boligprosjekter/Oslo/Ulven/Ulven-N%C3%A6romr%C3%A5de-Oslo-OBOS-Construction-city.jpg"
+    />
+  </Media>
+  <Content className="flex-grow">
+    <div className="grid gap-1">
+      <Heading level={3}>
+        <CardLink href="#card">Rødbergvn 88C</CardLink>
+      </Heading>
+      <small className="description">Bjerke - Oslo</small>
+    </div>
+    <small className="description -order-1">Forhåndsvarsling - Saksnr. F0347565</small>
+    <p className="font-semibold">100 m² | Prisantydning 9 600 000 kr</p>
+    <p className="flex gap-x-1">
+      <House /> Rekkehus/småhus
+    </p>
+    <p className="flex gap-x-1">
+      <Bed /> 3 soverom
+    </p>
+    <p className="flex gap-x-1">
+      <PiggyBank /> Totalpris 9 989 838
+    </p>
+    <Badge size="small" color="mint">
+      Visning 13. oktober
+    </Badge>
+    <Footer className="relative grid gap-y-2">
+      <hr className="border-t border-t-current" />
+      <Button href="#other-link" variant="tertiary">
+        Se prospekt
+        <Documents />
+      </Button>
+    </Footer>
+  </Content>
+</Card>
+```
+
+<Image src={img35} alt="8px spacer" width={672} height={8} />
+
+### Horisontalt kort med ikon i stedet for bilde
+
+Hvis man bruker et ikon istedenfor `<Media>` vil ikonet kun ta opp standardstørrelsen til ikonet, og `<Content>` fyller resten av bredden
+
+```tsx live
+<Card layout="horizontal" variant="outlined" className="w-full">
+  <Content>
+    <Heading level={3}>Med ikon til høyre</Heading>
+    <p>Dette kortet er liggende, har et ikon til høyre og er klikkbart mot en CTA-lenke</p>
+    <CardLink className="group/cta">
+      <Button href="#cta" variant="tertiary">
+        Les mer
+        <ArrowRight className="transition-transform group-hover/cta:motion-safe:translate-x-1" />
+      </Button>
+    </CardLink>
+  </Content>
+  <PiggyBank />
+</Card>
+```

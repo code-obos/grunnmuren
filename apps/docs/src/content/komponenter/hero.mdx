@@ -1,0 +1,53 @@
+---
+name: 'Hero'
+slug: 'hero'
+componentState: beta
+propsComponents:
+  - 'Hero'
+  - 'Heading'
+  - 'Media'
+  - 'Carousel'
+resourceLinks:
+  - linkType: 'figma'
+    url: 'https://www.figma.com/design/DjMFx7pV2YUy8dffHmSp8H/Designspr%C3%A5k?node-id=768-15874&m=dev'
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/hero'
+---
+
+## Om komponenten
+
+Hero-elementer brukes i toppen av en side, plassert under [Breadcrumbs](https://grunnmuren.obos.no/komponenter/breadcrumbs). Formålet er å gi en kort beskrivelse av sidens rolle, og har ofte en tydelig og konkret handlingsknapp.
+
+Hero har tre varianter: `standard`, `two-column` og `full-bleed`. `Two-column` skal kun brukes til landingssider, `standard` kan brukes til både landingssider og undersider. Mens `full-bleed` kun kan brukes til undersider for bolig/eiendomsenheter.
+
+**Egnet til:**
+
+- Innhold på toppnivå med overskrift, undertekst, media (bilde eller video) og ofte knapp.
+
+**Relaterte komponenter**
+
+- [VideoLoop](https://grunnmuren.obos.no/komponenter/video-loop)
+
+### Varianter
+
+#### Standard
+
+<StorybookEmbed storyId="hero--standard-with-lead-and-image-and-carousel" />
+
+#### Standard (landingsside)
+
+<StorybookEmbed storyId="hero--two-column" />
+
+#### Standard (underside)
+
+<StorybookEmbed storyId="hero--standard-with-carousel" />
+
+#### Full-bleed (underside)
+
+<StorybookEmbed storyId="hero--full-bleed-with-video-loop" />
+
+<StorybookEmbed storyId="hero--full-bleed-with-image-and-badge" />
+
+##### Kontekst
+
+I kode må denne komponenten (i fullbleed) ikke plasseres i en relativ container som ikke tar hele skjermbredden. Det er fordi bildet plasseres med absolute position for å ta opp hele skjermbredden.

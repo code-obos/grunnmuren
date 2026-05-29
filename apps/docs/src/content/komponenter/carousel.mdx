@@ -1,0 +1,58 @@
+---
+name: 'Carousel'
+slug: 'carousel'
+componentState: beta
+propsComponents:
+  - 'Carousel'
+  - 'CarouselItemsContainer'
+  - 'CarouselItems'
+  - 'CarouselItem'
+  - 'CarouselControls'
+  - 'CarouselButton'
+  - 'Media'
+resourceLinks:
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/carousel'
+---
+
+## Om komponenten
+
+Carousel er en komponent som brukes for fremvisning av innhold som tar mye oppmerksomhet til brukeren og der brukeren kan se flere seksjoner av slikt innhold ved å scrolle eller navigere med piler til høyre eller venstre.
+
+**Egnet til:**
+
+- Vise en samling av bilder eller videolooper som kan "blas" gjennom.
+- I en enhetshero, kan Carousel ta hele skjermen
+
+**Uegnet til:**
+
+- Carousel som ikke er i en enhetshero, skal ikke ta opp hele skjermen men ligge innenfor layout container.
+
+**Relaterte komponenter**
+
+- [Hero](/komponenter/hero)
+- [VideoLoop](/komponenter/video-loop)
+- [Carousel](/komponenter/carousel)
+
+### Eksempler
+
+<StorybookEmbed storyId="carousel--basic" />
+
+```tsx caption="Carousel API eksempel"
+<Carousel>
+  <CarouselItemsContainer>
+    <CarouselItems>
+      <CarouselItem>
+        <img />
+      </CarouselItem>
+      <CarouselItem>
+        <img />
+      </CarouselItem>
+    </CarouselItems>
+  </CarouselItemsContainer>
+</Carousel>
+```
+
+#### Bildegalleri satt sammen med Carousel og Tabs
+
+<StorybookEmbed storyId="carousel--image-gallery" caption="Eksempel på bildegalleri med Carousel" />

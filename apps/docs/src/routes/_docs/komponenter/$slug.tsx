@@ -5,13 +5,15 @@ import { createFileRoute, notFound } from '@tanstack/react-router';
 import { defineQuery } from 'groq';
 
 import type * as props from '@/component-props';
+import { componentDocs } from '@/lib/content';
 import { sanityFetch } from '@/lib/sanity';
 import { AnchorHeading } from '@/ui/anchor-heading';
+import { MdxComponentPage } from '@/ui/mdx-doc';
 import { PropsTable } from '@/ui/props-table';
 import { ResourceLink, type ResourceLinkProps, ResourceLinks } from '@/ui/resource-links';
 import { SanityContent } from '@/ui/sanity-content';
 import { ScrollToTop } from '@/ui/scroll-to-top';
-import { TableOfContentsNav } from '@/ui/table-of-contents-nav';
+import { TableOfContentsNav, type TableOfContentsSection } from '@/ui/table-of-contents-nav';
 
 const COMPONENT_QUERY = defineQuery(
   `*[_type == "component"
@@ -32,6 +34,12 @@ const COMPONENT_QUERY = defineQuery(
 export const Route = createFileRoute('/_docs/komponenter/$slug')({
   component: Page,
   loader: async ({ params }) => {
+    // Prefer migrated MDX; fall back to Sanity for not-yet-migrated components.
+    const mdxDoc = componentDocs[params.slug];
+    if (mdxDoc) {
+      return { source: 'mdx' as const, frontmatter: mdxDoc.frontmatter, toc: mdxDoc.toc };
+    }
+
     const res = await sanityFetch({
       query: COMPONENT_QUERY,
       params: { slug: params.slug },
@@ -41,22 +49,45 @@ export const Route = createFileRoute('/_docs/komponenter/$slug')({
       throw notFound();
     }
 
-    return res.data;
+    return { source: 'sanity' as const, data: res.data };
   },
-  head: (ctx) => ({
-    meta: [
-      { title: `${ctx.loaderData?.name} | Komponenter | Grunnmuren` },
-      {
-        name: 'description',
-        content: `Grunnmuren sine komponenter - ${ctx.loaderData?.name}`,
-      },
-    ],
-  }),
+  head: (ctx) => {
+    const name =
+      ctx.loaderData?.source === 'mdx'
+        ? ctx.loaderData.frontmatter.name
+        : ctx.loaderData?.data.name;
+    return {
+      meta: [
+        { title: `${name} | Komponenter | Grunnmuren` },
+        {
+          name: 'description',
+          content: `Grunnmuren sine komponenter - ${name}`,
+        },
+      ],
+    };
+  },
 });
 
 function Page() {
-  const data = Route.useLoaderData();
+  const loaderData = Route.useLoaderData();
+  const { slug } = Route.useParams();
+
+  if (loaderData.source === 'mdx') {
+    const doc = componentDocs[slug];
+    return <MdxComponentPage doc={doc} toc={loaderData.toc} frontmatter={loaderData.frontmatter} />;
+  }
+
+  const data = loaderData.data;
   const cleanedPropsComponents = stegaClean(data.propsComponents);
+
+  const tocSections: TableOfContentsSection[] = (data.content ?? []).flatMap((block) =>
+    block._type === 'block' && block.style === 'h2'
+      ? [{ href: `#${block._key}`, text: block.children?.[0].text ?? '' }]
+      : [],
+  );
+  if (cleanedPropsComponents && cleanedPropsComponents.length > 0) {
+    tocSections.push({ href: '#props', text: 'Props' });
+  }
 
   return (
     <>
@@ -75,7 +106,7 @@ function Page() {
             ),
         )}
       </ResourceLinks>
-      <TableOfContentsNav content={data.content} propsTables={cleanedPropsComponents} />
+      <TableOfContentsNav sections={tocSections} />
       <div className="lg:relative lg:flex lg:gap-4">
         <div>
           {data.componentState === 'new' && (

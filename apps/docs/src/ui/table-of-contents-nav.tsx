@@ -1,38 +1,18 @@
-import { stegaClean } from '@sanity/client/stega';
 import { cx } from 'cva';
 
-import type { COMPONENT_QUERY_RESULT } from '@/sanity.types';
+export type TableOfContentsSection = {
+  href: string;
+  text: string;
+};
 
 type TableOfContentsNavProps = {
   className?: string;
-  content: NonNullable<COMPONENT_QUERY_RESULT>['content'];
-  propsTables?: string[] | null;
+  sections: TableOfContentsSection[];
 };
 
-const TableOfContentsNav = ({ className, content, propsTables }: TableOfContentsNavProps) => {
-  const cleanedPropsTables = stegaClean(propsTables);
-  const sections: Array<{
-    href: string;
-    text: string;
-  }> = [];
-
-  for (const block of content ?? []) {
-    // a h2 marks the start of a new section
-    if (block._type === 'block' && block.style === 'h2') {
-      const section = {
-        href: `#${block._key}`,
-        text: block.children?.[0].text ?? '',
-      };
-
-      sections.push(section);
-    }
-  }
-
-  if (cleanedPropsTables && cleanedPropsTables.length > 0) {
-    sections.push({
-      href: '#props',
-      text: 'Props',
-    });
+const TableOfContentsNav = ({ className, sections }: TableOfContentsNavProps) => {
+  if (sections.length === 0) {
+    return null;
   }
 
   return (
@@ -40,7 +20,7 @@ const TableOfContentsNav = ({ className, content, propsTables }: TableOfContents
       aria-label="Innholdsfortegnelse"
       className={cx(className, 'prose mb-12 grid gap-x-8 gap-y-3 sm:grid-cols-2 md:mb-6')}
     >
-      {sections?.map(({ href, text }) => (
+      {sections.map(({ href, text }) => (
         <div key={href} className="w-fit">
           <a
             href={href}

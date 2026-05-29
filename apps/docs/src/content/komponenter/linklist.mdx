@@ -1,0 +1,262 @@
+---
+name: 'LinkList'
+slug: 'linklist'
+componentState: stable
+propsComponents:
+  - 'LinkList'
+  - 'LinkListItem'
+  - 'Link'
+  - 'Heading'
+resourceLinks:
+  - linkType: 'figma'
+    url: 'https://www.figma.com/design/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=1122-330&p=f&m=dev'
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/link-list'
+---
+
+## Om komponenten
+
+LinkList lister ut et sett med linker for brukeren. Den brukes primært til navigasjon, men kan også brukes for nedlasting av filer.
+
+**Egnet til:**
+
+- Gruppering av linker for videre navigasjon
+- Gruppering av filer for nedlasting
+- Gruppering av eksterne linker
+- Eller en kombinasjon av de tre over
+
+**Uegnet til:**
+
+- Trigge en handling, bruk knapper det til dette
+- Linker med mye tekst - bruk heller [Cards](/komponenter/cards) eller [Link](/komponenter/link) til dette
+
+**Relaterte komponenter**
+
+- [Link](/komponenter/link)
+
+## Varianter
+
+### Link
+
+Brukes primært for å lenke til undersider i navigasjonshierarkiet (se breadcrumb). Lenker med pil slik som denne varianten brukes kun til internlenking under obos domenet.
+
+```tsx live
+<LinkList className="w-full">
+  <LinkListItem>
+    <UNSAFE_Link href="/bolig">Bolig</UNSAFE_Link>
+  </LinkListItem>
+  <LinkListItem>
+    <UNSAFE_Link href="/bank">Bank</UNSAFE_Link>
+  </LinkListItem>
+  <LinkListItem>
+    <UNSAFE_Link href="/medlem">Medlem</UNSAFE_Link>
+  </LinkListItem>
+</LinkList>
+```
+
+### Download
+
+Brukes til en liste med nedlasting, om denne skal brukes sammen med andre varianter av LinkList, pass på at en gjør det tydelig for brukeren
+
+```tsx live caption="Download links"
+<LinkList className="w-full">
+  <LinkListItem>
+    <UNSAFE_Link download href="/">
+      Medlemsvilkår
+    </UNSAFE_Link>
+  </LinkListItem>
+  <LinkListItem>
+    <UNSAFE_Link download href="/about">
+      Samtykke
+    </UNSAFE_Link>
+  </LinkListItem>
+</LinkList>
+```
+
+### External
+
+Brukes til eksterne lenker til domener utenfor obos.
+
+```tsx live caption="External"
+<LinkList className="w-full">
+  <LinkListItem>
+    <UNSAFE_Link href="https://minside.obosnett.no/login" rel="external">
+      OBOS Nett - Min side
+    </UNSAFE_Link>
+  </LinkListItem>
+  <LinkListItem>
+    <UNSAFE_Link
+      href="https://www.tryg.no/forsikringer/fordeler-hos-tryg/bruk-medlemsfordelene-dine/obos/index.html?cmpid=obos_tryggjennomlivet"
+      rel="external noopener noreferrer"
+      target="_blank"
+    >
+      Les mer om trygg forsikring
+    </UNSAFE_Link>
+  </LinkListItem>
+</LinkList>
+```
+
+## Komposisjon
+
+Det er mulig å sette inn overskrifter på en LinkList ved å bruke komponenten `<Heading>`. Disse kan være lenker av alle varianter listet over, men trenger ikke å være en lenke.
+
+```tsx live caption="With Heading"
+<div className="grid gap-y-8 w-full">
+  <LinkListContainer>
+    <Heading level={2}>
+      <UNSAFE_Link href="/om">OBOS</UNSAFE_Link>
+    </Heading>
+    <LinkList>
+      <LinkListItem>
+        <UNSAFE_Link href="/bolig">Bolig</UNSAFE_Link>
+      </LinkListItem>
+      <LinkListItem>
+        <UNSAFE_Link href="/bank">Bank</UNSAFE_Link>
+      </LinkListItem>
+      <LinkListItem>
+        <UNSAFE_Link href="/medlem">Medlem</UNSAFE_Link>
+      </LinkListItem>
+    </LinkList>
+  </LinkListContainer>
+  <LinkListContainer>
+    <Heading level={2}>
+      <UNSAFE_Link href="/om" rel="external">
+        OBOS EXTERN
+      </UNSAFE_Link>
+    </Heading>
+    <LinkList>
+      <LinkListItem>
+        <UNSAFE_Link href="https://minside.obosnett.no/login" rel="external">
+          OBOS Nett - Min side
+        </UNSAFE_Link>
+      </LinkListItem>
+      <LinkListItem>
+        <UNSAFE_Link
+          href="https://www.tryg.no/forsikringer/fordeler-hos-tryg/bruk-medlemsfordelene-dine/obos/index.html?cmpid=obos_tryggjennomlivet"
+          rel="external noopener noreferrer"
+          target="_blank"
+        >
+          Les mer om trygg forsikring
+        </UNSAFE_Link>
+      </LinkListItem>
+    </LinkList>
+  </LinkListContainer>
+  <LinkListContainer>
+    <Heading level={2}>
+      <UNSAFE_Link
+        download
+        href="https://cdn.sanity.io/files/tq6w17ny/prod/f39b489e6ba82e03036e735be0a99320e12214d0.pdf"
+      >
+        Årsrapport
+      </UNSAFE_Link>
+    </Heading>
+    <LinkList>
+      <LinkListItem>
+        <UNSAFE_Link
+          download
+          href="https://cdn.sanity.io/files/tq6w17ny/prod/4982d7ca3f4cef8f8bd7de42ea58a0d2c9fa3760.pdf"
+        >
+          Klimarisikorapport
+        </UNSAFE_Link>
+      </LinkListItem>
+      <LinkListItem>
+        <UNSAFE_Link
+          download
+          href="https://cdn.sanity.io/files/tq6w17ny/prod/74ee591acb8e2f4abe7e19fe6a753abe51a48c68.pdf"
+        >
+          Klimagassberegning
+        </UNSAFE_Link>
+      </LinkListItem>
+    </LinkList>
+  </LinkListContainer>
+  <LinkListContainer>
+    <Heading level={2}>2 items</Heading>
+    <LinkList>
+      <LinkListItem>
+        <UNSAFE_Link download href="/">
+          Medlemsvilkår
+        </UNSAFE_Link>
+      </LinkListItem>
+      <LinkListItem>
+        <UNSAFE_Link download href="/about">
+          Samtykke
+        </UNSAFE_Link>
+      </LinkListItem>
+    </LinkList>
+  </LinkListContainer>
+</div>
+```
+
+Ved å wrappe LinkList i en `<LinkListContainer>` får du også automatisk inndeling i kolonner basert på hvor mange `<LinkListItem>` LinkList har:
+
+```tsx live caption="Responsive grid layout"
+<div className="grid gap-y-8 w-full">
+  <LinkListContainer>
+    <Heading level={2}>2 items</Heading>
+    <LinkList>
+      <LinkListItem>
+        <UNSAFE_Link download href="/">
+          Medlemsvilkår
+        </UNSAFE_Link>
+      </LinkListItem>
+      <LinkListItem>
+        <UNSAFE_Link download href="/about">
+          Samtykke
+        </UNSAFE_Link>
+      </LinkListItem>
+    </LinkList>
+  </LinkListContainer>
+  <LinkListContainer>
+    <Heading level={2}>15 items</Heading>
+    <LinkList>
+      <LinkListItem>
+        <UNSAFE_Link href="/konsernledelsen">Konsernledelsen</UNSAFE_Link>
+      </LinkListItem>
+      <LinkListItem>
+        <UNSAFE_Link href="/styret">Styret</UNSAFE_Link>
+      </LinkListItem>
+      <LinkListItem>
+        <UNSAFE_Link href="/representantskapet">Representantskapet</UNSAFE_Link>
+      </LinkListItem>
+      <LinkListItem>
+        <UNSAFE_Link href="/boligpriser-og-statistikk">Boligpriser og statistikk</UNSAFE_Link>
+      </LinkListItem>
+      <LinkListItem>
+        <UNSAFE_Link href="/investor-relations">Investor Relations</UNSAFE_Link>
+      </LinkListItem>
+      <LinkListItem>
+        <UNSAFE_Link href="/digital-arsrapport">Digital årsrapport</UNSAFE_Link>
+      </LinkListItem>
+      <LinkListItem>
+        <UNSAFE_Link href="/jobb-i-obos">Jobb i OBOS</UNSAFE_Link>
+      </LinkListItem>
+      <LinkListItem>
+        <UNSAFE_Link href="/presse">Presse</UNSAFE_Link>
+      </LinkListItem>
+      <LinkListItem>
+        <UNSAFE_Link href="/logoer">Logoer</UNSAFE_Link>
+      </LinkListItem>
+      <LinkListItem>
+        <UNSAFE_Link href="/obos-boligkonferanse">OBOS Boligkonferanse</UNSAFE_Link>
+      </LinkListItem>
+      <LinkListItem>
+        <UNSAFE_Link href="/obos-ligaen">OBOS-ligaen</UNSAFE_Link>
+      </LinkListItem>
+      <LinkListItem>
+        <UNSAFE_Link href="/datterselskaper">Datterselskaper</UNSAFE_Link>
+      </LinkListItem>
+      <LinkListItem>
+        <UNSAFE_Link href="/vedtekter">Vedtekter</UNSAFE_Link>
+      </LinkListItem>
+      <LinkListItem>
+        <UNSAFE_Link href="/generalforsamlingen-i-obos">Generalforsamlingen i OBOS</UNSAFE_Link>
+      </LinkListItem>
+      <LinkListItem>
+        <UNSAFE_Link href="/strategi-og-styrende-dokumenter">
+          Strategi og styrende dokumenter
+        </UNSAFE_Link>
+      </LinkListItem>
+    </LinkList>
+  </LinkListContainer>
+</div>
+```

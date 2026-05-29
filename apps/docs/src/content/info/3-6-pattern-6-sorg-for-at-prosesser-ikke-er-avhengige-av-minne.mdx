@@ -1,0 +1,272 @@
+---
+name: '3.6 Mønstre 6: Sørg for at prosesser ikke er avhengige av minne'
+slug: '3-6-pattern-6-sorg-for-at-prosesser-ikke-er-avhengige-av-minne'
+---
+
+Minnebarrierer hindrer mange brukere i å bruke produkter eller få tilgang til hjelp eller innhold.
+
+Personer med funksjonsnedsettelser som påvirker hukommelse eller språk kan synes det er vanskelig eller umulig å overvinne hukommelsesbarrierer.
+
+For eksempel har mange brukere svekket korttidshukommelse. I gjennomsnitt kan folk huske 7 bokstaver eller elementer samtidig. En person med svekket arbeidshukommelse kan være i stand til å huske én til fire informasjonsbiter samtidig (avhengig av omfanget av funksjonsnedsettelsen). Hvis de trenger å huske andre oppgaver, for eksempel å spore hva de har gjort, vil de sannsynligvis gjøre feil.
+
+Unngå barrierer som:
+
+navigering i talemenyer som innebærer å huske et bestemt tall eller begrep, huske tall mens man behandler ord på en talemeny, transkribere tekst eller huske passord. Gi brukere tilgang til innhold, tjenester eller hjelp, uten å bruke prosesser som er avhengige av minne. Sørg for at det finnes et enklere alternativ for folk som trenger det.
+
+## Gi en pålogging som ikke er avhengig av hukommelse eller andre kognitive ferdigheter
+
+Jeg trenger å kunne bruke et nettsted uten å huske eller transkribere passord og brukernavn.
+
+Relatert krav [3.6.2 Tilgjengelig autentisering](https://grunnmuren.obos.no/3-6-mal-6#befbaf437650)
+
+**Dette kan du gjøre:**
+
+Brukere kan logge inn, registrere seg og tilbakestille påloggingsinformasjon uten å ha flere kognitive evner enn de trenger for å bruke en enkel nettside. De trenger ikke å:
+
+- Lære tegnstrenger.
+- Utføre beregninger.
+- Kopiere innhold.
+- Svare på oppgaver.
+- Gjengi bevegelser pålitelig.
+- Gjenkjenne tegn som presenteres på skjermen, og deretter skrive dem inn i et inndatafelt.
+
+**Hvorfor gjør dette en forskjell?**
+
+Personer med hukommelsessvekkelser glemmer ofte passordene sine og klarer ikke å logge inn. Løsningene deres er ofte bare noen ganger nyttige og har sikkerhetsrisikoer:
+
+- De må kanskje se på eller lytte til tekst flere ganger for å kopiere eller skrive den inn i et skjemafelt.
+- De kan bruke ett enkelt passord på nytt eller bruke et passord som er lett å huske, som de kan huske.
+- Hvis de trenger å endre passordet sitt eller bruke et komplisert passord, kan de lagre passord usikkert, for eksempel skrevet på papirlapper som andre kan se.
+
+De kan også slite med andre trinn under innlogging, for eksempel:
+
+- Skrive inn tegn i riktig rekkefølge.
+- Skrive inn tegn riktig med et begrenset antall forsøk (noe som resulterer i at de blir utestengt).
+- Finne en PIN-kode.
+- Løse gåter eller forvrengte bokstaver.
+- Kopiere tegn riktig fra en annen enhet.
+
+Brukere kan slutte etter å ha blitt frustrerte over tidsbegrensede prosedyrer eller presentasjoner av digitale sikkerhetstokener. Eller de kan bli utestengt fra viktige tjenester på grunn av funksjonshemmingen sin.
+
+Uten dette designkravet kan mange ikke bruke en applikasjon eller et innhold i det hele tatt. Se [problemstillingen om sikkerhets- og personvernteknologier](https://w3c.github.io/coga/issue-papers/privacy-security.html) for en fullstendig beskrivelse av dette problemet, og hvordan det hindrer folk i å bruke nettjenester som ofte er kritiske. For eksempel kan mange ikke bestille legetimer osv. på egenhånd. Dette kan delvis være ansvarlig for den reduserte forventede levealderen til personer med lære- og kognitive funksjonsnedsettelser.
+
+**Flere detaljer:**
+
+Det finnes mange måter å oppfylle dette designmønsteret på:
+
+- Bruk webautentisering: Et API for tilgang til offentlige nøkkellegitimasjoner [[webauthn-2](https://www.w3.org/TR/webauthn-2/)] for å støtte inkluderende alternativer som ikke er avhengige av typiske kognitive evner. For eksempel maskinvareautentiseringsenheter, smartkort eller FIDO.
+- Gi automatisk brukerautentisering basert på bruk av en klarert enhet (som brukeren allerede har logget inn på med sin egen identitet). Brukeren trenger ikke å transkribere tegn, men må kanskje trykke på en lenke for å identifisere at de har enheten.
+- Tillat et biometrisk alternativ. Bruk et system som brukeren allerede er logget inn på via tredjeparts autentiseringstjenester (f.eks. OAuth osv.).
+
+Metoder for å oppfylle krav til alternativ brukerautentisering vil inkludere:
+
+- Klikke på en lenke sendt til en e-postadresse eller et telefonnummer. (Merk at dette er enkelt å implementere og kan være nyttig for minimal sikkerhet, for eksempel å tillate kommentarer på en blogg.)
+- Logge inn ved å bruke informasjon som finnes i brukerens personlige dokumentasjon, for eksempel det totale beløpet på en brukskonto, med forklaring på hvordan du finner denne informasjonen.
+
+**Løsningsforslag:**
+
+Bruk:
+
+1. Web-autentisering: Et API for tilgang til offentlige nøkkellegitimasjoner [[webauthn-2](https://www.w3.org/TR/webauthn-2/)].
+1. Enkel pålogging (SSO) som lar brukere få tilgang til mange nettsteder med én enkelt pålogging (føderert pålogging / BankID).
+1. To-trinns autentisering med Bluetooth-koblinger (ingen kopiering).
+1. Hurtigresponskoder (QR-kode).
+
+Unngå:
+
+1. Bruk av totrinns autentisering som krever kopiering.
+1. Bruk av passord og ikke tillate liming i feltet.
+
+## Tillat brukeren en enkel, ett-trinns innlogging
+
+Jeg trenger at innloggingsprosessen skal være enkel, og ikke i flere trinn.
+
+Relatert krav [3.6.2 Tilgjengelig autentisering](https://grunnmuren.obos.no/3-6-mal-6#befbaf437650)
+
+**Dette kan du gjøre:**
+
+En enkel innlogging lar personer med svekket eksekutiv funksjon eller svekket hukommelse bruke applikasjoner. Dette er spesielt viktig for brukere som blir forvirret eller overveldet av flertrinnsprosesser. For eksempel ønsker en bruker med traumatisk hjerneskade å bruke et nettsted for nettbank. De kan ha satt fingeren på en fingeravtrykksskanner for å autentisere hvem de er. Andre eksempler inkluderer noen tredjepartspålogginger.
+
+**Løsningsforslag:**
+
+Bruk:
+
+1. Enkle tredjepartspålogginger som et alternativ.
+1. Nettautentiseringsprotokollen [[webauthn-2](https://www.w3.org/TR/webauthn-2/)] med en enkelttrinnsmetode som samsvarer med dine sikkerhetsbehov.
+
+Unngå:
+
+1. Alle påloggingsmetoder som involverer flere trinn.
+
+## Tilby et påloggingsalternativ med færre ord
+
+Jeg trenger en innloggingsprosess jeg kan bruke som ikke er avhengig av mange ord (som en med alvorlig språkforstyrrelse).
+
+Relatert krav [3.6.2 Tilgjengelig autentisering](https://grunnmuren.obos.no/3-6-mal-6#befbaf437650)
+
+**Dette kan du gjøre:**
+
+Oppgi minst ett innloggingsalternativ som ikke krever at du leser eller skriver mange ord.
+
+**Hvorfor gjør dette en forskjell?**
+
+Dette mønsteret lar personer med språk- og kommunikasjonsvansker logge inn uten å bli overveldet av tekstblokker.
+
+For eksempel, noen med alvorlig språkforstyrrelse som bruker en AAC-enhet (Alternative and Augmentative Communication System) ønsker å sende en melding til legen sin. De kan trykke på påloggingsikonet de kjenner og sende en melding uten å måtte lese teksten.
+
+**Løsningsforslag:**
+
+Bruk:
+
+1. Tredjepartspålogginger med kjente ikoner.
+1. Nettautentiseringsprotokollen [[webauthn-2](https://www.w3.org/TR/webauthn-2/)] sammen med et enkelt påloggingsalternativ.
+
+Unngå:
+
+1. Pålogginger som krever svar på sikkerhetsspørsmål.
+1. Pålogginger uten et enkelt, ordfritt påloggingsalternativ eller alternativ.
+
+## La brukere unngå å navigere i talemenyer
+
+Jeg trenger menneskelig hjelp, uten å måtte gå gjennom et komplekst menysystem.
+
+Relatert krav [3.6.4 Voice menues](https://grunnmuren.obos.no/3-6-mal-6#ee56bbb03fb0)
+
+**Dette kan du gjøre:**
+
+La folk enkelt nå et menneske som kan hjelpe. Ikke krev navigering i menysystemer for å nå et menneske.
+
+Design nyttige talemenyer ved å:
+
+- Tilby et kjent ord eller reservert siffer (som «0» eller «hjelp») som kan brukes når som helst for å hoppe over talemenyen og gå direkte til en person.
+- Unngå unødvendige trinn eller alternativer.
+- Unngå unødvendig eller distraherende informasjon som reklameinformasjon.
+- Bruke ord som vanligvis brukes av personer med et bredt spekter av kognitive og lærevansker.
+- Vente på at en langsom taler skal svare.
+- Tillate en stille taler, repetisjon og hakking.
+- Støtte glemsel og hukommelsessvekkelser.
+- Tillate enkel feilretting.
+- Følge beste praksis for brukervennlighet.
+
+**Hvorfor gjør dette en forskjell?**
+
+Mange kan ikke bruke stemmemenysystemer. Dette hindrer ofte folk i å fullføre kritiske oppgaver på egenhånd. Ofte kan dette inkludere å bestille legetimer, tegne helseforsikring, kontakte sosialtjenester, få vannet på igjen osv.
+
+Hvis folk ikke kan administrere stemmemenyer på egenhånd, må de be noen andre om hjelp. Dette betyr at tjenesten ikke er tilgjengelig for dem. Noen ganger blir ikke oppgaver utført. For eksempel kan de utsette å bestille legetime eller andre kritiske oppgaver for ikke å plage hjelperen sin. Folk får ofte ikke den hjelpen de trenger, eller de får den for sent. (Dette kan delvis være ansvarlig for den lavere forventede levealderen til personer med lære- og kognitive funksjonsnedsettelser.)
+
+Hvorfor kan ikke folk bruke komplekse menyer?
+
+- Godt korttids- og arbeidsminne (flere sekunder) er viktig slik at brukeren kan huske nummeret eller begrepet for menyen. Uten disse funksjonene er det sannsynlig at brukeren velger feil nummer.
+- Mange brukere har svekket arbeidsminne. Hvis du for eksempel kan huske 7 bokstaver eller elementer i hodet samtidig, kan de kanskje huske én eller to. Dette gjør det mindre sannsynlig at de håndterer et menysystem riktig.
+- For eksempel kan et telefonmenysystem (stemmemarkeringssystem) ha et alternativ: «Trykk 3 for interne tjenester». For å bruke dette alternativet må brukeren huske sifferet 3 mens de finner ut om de trenger en intern tjeneste. Mange kan ikke gjøre dette. Det krever også at de trykker riktig siffer.
+- Når mye irrelevant informasjon gis før riktig alternativ, kan brukeren få kognitiv overbelastning og stoppe. Dette gjelder spesielt hvis de ikke forsto alle de tidligere alternativene og informasjonen.
+- De forstår kanskje ikke begrepene som brukes. Etter å ha fokusert på menyen, kan de glemme hvorfor de ringer.
+- Alternative ruter, for eksempel nettmenyer, kan tilbys, men er også komplekse. De er derfor ikke til hjelp.
+
+Sifferet 0, ordet «hjelp» eller et annet kulturelt passende uttrykk, bør reserveres for å nå en person. Sett konsekvent det første alternativet for hver meny til: «å vente på en person som kan hjelpe deg, trykk 0». Dette kan hjelpe alle med å få den støtten de trenger.
+
+Test et hvilket som helst system med et bredt spekter av brukere med ulike lærings- og kognitive funksjonshemminger. Å involvere et bredt spekter av brukere har gjort mange talesystemer tilgjengelige i den grad at de blir et hjelpemiddel for personer med kognitive og læringsvansker.
+
+**Flere detaljer:**
+
+Følg beste praksis innen generell design av stemmebrukergrensesnitt (VUI-er). Standard beste praksis innen stemmebrukergrensesnitt gjelder for brukere med kognitive funksjonshemminger, og bør følges. Disse praksisene forbedres etter hvert som flere design fokuserer på samtalegrensesnitt. Noen eksempler på generelt akseptert beste praksis innen design av stemmebrukergrensesnitt:
+
+- Pauser er viktige mellom fraser for å gi behandlingstid for språk og alternativer.
+- Alternativer i teksten bør gis før sifferet som skal velges, eller instruksjonen om å velge det alternativet. Dette betyr at brukeren ikke trenger å huske sifferet eller instruksjonen mens de behandler begrepet. For eksempel: Ledeteksten «trykk 1 for sekretæren» krever at brukeren husker sifferet 1 mens de tolker begrepet «sekretær». En bedre ledetekst er «for sekretæren (pause): trykk 1» eller «for sekretæren (pause) eller for mer hjelp (pause): trykk 1».
+- Feilgjenoppretting bør være enkel og ta brukeren til en menneskelig operatør hvis feilen vedvarer. Feilsvar bør ikke avslutte samtalen eller sende brukeren til en mer kompleks meny.
+- Reklame og annen irrelevant informasjon bør ikke leses, da det kan forvirre brukeren og gjøre det vanskeligere å holde på oppmerksomheten.
+- Begrepene som brukes bør være så enkle og sjargongfrie som mulig.
+- Bruk beste praksis innen design av stemmegrensesnitt inkluderer å tilby flere forskjellige ledetekster for hvert punkt i samhandlingen. De forskjellige ledetekstene brukes basert på brukerens oppførsel. Hvis brukeren for eksempel bruker lang tid på å svare på en ledetekst, kan en enklere eller mer forklarende versjon av ledeteksten brukes i stedet for standardversjonen. De bør brukes til å øke detaljnivået i ledeteksten når brukeren ikke svarer som forventet.
+
+**Fremgangsmåte:**
+
+Sørg for at dette mønsteret inkluderes i viktige systemer som påvirker helse, finans, kommunikasjon, vann og offentlige tjenester.
+
+**Løsningsforslag:**
+
+Bruk:
+
+- Brukerinteraksjonsdialoger der det første alternativet tar deg direkte til et menneske. For eksempel: «For å nå en person som kan hjelpe deg, trykk 0 eller si hjelp».
+- Feilgjenoppretting fra hvert punkt, slik at brukeren enkelt kan rette feil.
+- Brukeren kan enkelt gå tilbake eller gjenta listen når som helst.
+- En brukerinteraksjonsdialog, for eksempel standard «0» fra et hvilket som helst punkt, der det er enkel tilgang til en menneskelig operatør som kan hjelpe brukerne med å nå sine mål.
+- Talen er tydelig, med pauser.
+- Vanlige ord brukes.
+- Angi alternativet før du gir dem tasten eller ordet de skal bruke.
+- Rådgivningsteknikk: Å be brukere om å spille inn noe som kan være nyttig på et senere tidspunkt, og gi dem tid til å gjøre det.
+
+Unngå:
+
+- Lange menysystemer som gjør det vanskelig å finne en person.
+- Uklar feilgjenoppretting.
+- Komplekst språk og uvanlige ord.
+- Unødvendig innhold, for eksempel reklame.
+- Rask tale, eller forventning om raske innspill fra brukeren.
+- Systemer som ikke ble testet med et bredt spekter av brukere med ulike kognitive og lærevansker.
+
+## Ikke stol på brukerens beregninger eller memorering av informasjon
+
+Jeg trenger navigasjon og prosesser som ikke er avhengige av minne.
+
+Relatert krav [3.6.1 Huske fra tidligere trinn](https://grunnmuren.obos.no/3-6-mal-6#cbcbd5f0f36b)
+
+**Dette kan du gjøre:**
+
+Lag en prosess som ikke krever:
+
+- Å huske sifre å velge i kort tid.
+- Å utføre beregninger.
+- Å kopiere.
+- Å tydelig tale eller raske svar.
+- Å memorere tegn, strenger eller PIN-koder.
+- Å bruke utøvende funksjoner til å finne ut hvilken kategori tjenesten de trenger.
+- Å hente frem informasjon over flere trinn. Når man går gjennom flere trinn, må hvert trinn i en prosess inneholde informasjonen som er nødvendig for at en bruker skal kunne fortsette. De må ikke stole på minne fra tidligere trinn.
+
+Instruksjoner og etiketter bør plasseres før en handlingsfremmende oppfordring eller aktiveringsmekanisme. Når det er aktuelt, gi et sammendrag av informasjon fra tidligere trinn, og en mekanisme for å gå gjennom prosessen.
+
+**Hvorfor gjør dette en forskjell?**
+
+Innhold har ofte barrierer som hindrer brukere med kognitive og lærevansker i å fullføre et trinn eller en prosess, og som et resultat hindrer det dem i å oppnå det de ønsker å oppnå.
+
+For å øke sikkerheten ved kjøp, kreves det noen ganger gåter eller beregninger. For eksempel: For å fullføre et kjøp blir en bruker bedt om å legge inn resultatet av å multiplisere posisjon 1 og 2 i et tall. Denne typen utsagn kan ikke forstås av noen personer med kognitive og lærevansker. Både sikkerhet og kognitiv tilgjengelighet bør garanteres.
+
+Mange brukere har svekket arbeidshukommelse. De kan ikke huske mange detaljer samtidig. Systemer, som dialogmenyer, er imidlertid avhengige av at alle brukere bruker arbeidshukommelsen for å ta valg. De forventer at brukeren husker flere valg og velger ett valg, enten ved å snakke eller ved å trykke på en tastetast. Brukeren må huske flere deler av forbigående informasjon.
+
+Brukere med svekket eksekutiv funksjon kan trenge mer tid til å fullføre en oppgave. Men det kan også oppstå problemer hvis systemresponsen er for treg. For eksempel kan noen trenge lengre tid til å sammenligne lignende alternativer som «fakturering», «kontoer» og «salg» og bestemme hvilken tjeneste de trenger. Å bruke tydelig språk vil også hjelpe.
+
+**Flere detaljer:**
+
+God praksis som reduserer avhengigheten av hukommelsesferdigheter inkluderer:
+
+- Hvert trinn i en prosess bør inneholde informasjonen som er nødvendig for at en bruker skal kunne fortsette. De må ikke stole på hukommelse fra tidligere trinn.
+- Gi en enkel måte å gå tilbake på uten å måtte starte på nytt. Informer brukerne om hvor de er i prosessen, for eksempel gjennom en trinnindikator.
+- Hvis brukere gjør en feil, gi hjelp til å rette den i stedet for å starte prosessen på nytt.
+- Når det er nyttig, gi et sammendrag av informasjon fra tidligere trinn, og en enkel mekanisme for å gå gjennom prosessen er tilgjengelig.
+
+For talegrensesnitt:
+
+- Pause mellom hvert alternativ.
+- Venter på at en treg taler skal svare.
+- Lytt etter en stille eller nølende taler.
+- Tillat enkle svar på ett ord.
+- Angi alternativet før nummeret som skal velges.
+- Støtt glemsel og hukommelsessvekkelser.
+
+Merk at dette er viktig for kritiske systemer som helse, finans, kommunikasjon, vann og offentlige tjenester.
+
+**Løsningsforslag:**
+
+Bruk:
+
+1. Prosesser som ikke er avhengige av minne. For eksempel:
+1. Bruk av brukerinteraksjonsdialoger der det første alternativet er «å vente på en person som kan hjelpe deg, trykk 0 eller si hjelp».
+1. Bruk av en brukerinteraksjonsdialog, for eksempel standard «hjelp» fra et hvilket som helst punkt, der det er enkel tilgang til en menneskelig operatør som kan hjelpe brukerne med å nå sine mål.
+1. God feilgjenoppretting slik at brukeren vet hvordan man går tilbake fra et hvilket som helst punkt.
+1. Rådgivningsteknikk: Få brukere til å skrive noe som kan være nyttig på et senere tidspunkt, og gi dem tid til å gjøre det.
+
+Unngå:
+
+1. Prosesser som er avhengige av minne. For eksempel:
+1. Krev at brukeren husker en kode eller en kategori fra et forrige trinn.
+1. Lange menysystemer som gjør det vanskelig å finne en person.
+1. Systemer som krever bruk av spesifikke ord som brukeren må huske.

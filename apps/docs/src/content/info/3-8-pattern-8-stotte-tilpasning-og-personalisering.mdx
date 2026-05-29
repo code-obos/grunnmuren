@@ -1,0 +1,254 @@
+---
+name: '3.8 Mønstre 8: Støtte tilpasning og personalisering'
+slug: '3-8-pattern-8-stotte-tilpasning-og-personalisering'
+---
+
+Mange brukere trenger produkter som støtter tilpasning og personalisering. Brukere bør kunne bruke tillegg og utvidelser som hjelpeteknologi. Dette inkluderer stavekontroll, passordstøtte, støtte for tekst-til-tale og synkronisert utheving av frasen som leses.
+
+Personalisering kan tillate brukeren å velge foretrukne, kjente alternativer fra et sett med alternativer.
+
+Støtt personalisering og forenkling når du kan. Ikke deaktiver tillegg og utvidelser.
+
+## La brukerne kontrollere når innholdet flyttes eller endres
+
+Jeg må vite hvor ting er. Kontroller og innhold beveger seg ikke uventet mens jeg bruker dem.
+
+Relatert krav [3.8.1 Tilpassninger](https://grunnmuren.obos.no/3-8-mal-8#916400ab67b6)
+
+**Dette kan du gjøre:**
+
+Sørg for at endringer av kontekst, funksjonalitet, innstillinger, rute og retning kun initieres på forespørsel fra brukeren, eller at det finnes en lett tilgjengelig mekanisme for å slå av slike endringer. Sørg også for en lett tilgjengelig mekanisme for å gå tilbake til forrige kontekst, funksjonalitet, innstillinger, rute og retning.
+
+**Hvorfor gjør dette en forskjell?**
+
+Alt innhold, innstillinger eller funksjonalitet som endres uventet, uten at brukeren selv starter, kan føre til betydelige problemer for brukere med kognitive og lærevansker. Uventede endringer i noen av disse områdene kan føre til tap av fokus, angst eller forvirring i forståelsen eller bruken av et brukergrensesnitt (som menyer, knapper og designkomponenter). Eksempler inkluderer, men er ikke begrenset til:
+
+- Automatisk åpning av nye vinduer eller popup-vinduer.
+- Innsending av skjemaer via andre mekanismer enn en knapp som er tydelig merket (ved bruk av enkelt språk for å sende inn skjemaet).
+- Åpning av nytt innhold eller en funksjon.
+- Uventede endringer når du velger et alternativ.
+- Automatisk omdirigering av et GPS-system (Global Positioning System).
+- Endring av retningen på et kart i en GPS.
+
+For eksempel kan en bruker ha manglende retningssans eller vite hvor de skal være. Før de bruker en GPS, kan de studere ruten slik at de vet omtrent hva de gjør og kan supplere GPS-ens retninger med sin egen kontekst, ved å bruke GPS-en som signaler. GPS-en omdirigerer dem automatisk på grunn av en liten trafikkforsinkelse. De blir fullstendig fortapt og desorienterte og kan ikke lenger bruke applikasjonen.
+
+I et annet eksempel ser en bruker på en video og vil trykke på «liker». Idet de skal til å trykke på knappen, endres kontrollene, og de laster inn en annen video i stedet for å trykke på «liker». De er nå mindre tilbøyelige til å trykke på «liker» fordi de ikke vil miste innholdet sitt. Som et resultat blir ikke preferansene deres tatt i betraktning.
+
+Å la brukerne kontrollere når innhold endres gir brukere med kognitive og lærevansker mer kontroll over hvordan nettsteder og applikasjoner oppfører seg. Dette gir dem muligheten til å ta valg som gjør det mulig for dem å bruke innholdet og fullføre oppgaven.
+
+**Flere detaljer:**
+
+Unntak: Endringene er en del av en aktivitet der det er essensielt (f.eks. et spill).
+
+Rute: Dette er retningene og flyten, for eksempel en GPS-rute.
+
+Orientering: perspektiv eller visning, for eksempel kartretning.
+
+Lett tilgjengelig (eller lett tilgjengelig modus eller innstilling) er når ett eller flere av følgende er sant:
+
+- Den kan angis én gang med et så bredt omfang som mulig (for eksempel ved å bruke standardene til operativsystemet (OS), fra [[ISO 9241-112](https://www.iso.org/standard/64840.html)] eller [[GPII](https://raisingthefloor.org/the-global-public-infrastructure/)] når tilgjengelig).
+- Den har muligheten til å lagre eller endre innstillingen for omfanget av settet med nettsider.
+- Den er tilgjengelig fra hver skjerm der den kan være nødvendig, og banen og kontrollen er i samsvar med hele dette dokumentet.
+
+**Løsningsforslag:**
+
+Bruk:
+
+1. Brukerkontroll når innhold endres. For eksempel:
+1. Brukeren kan angi at ruten skal endres hvis mer enn en bestemt tid spares. De kan legge til mer informasjon, for eksempel hvor mange ekstra svinger som er akseptable for å spare 5 minutter. Når GPS-en finner en ny rute som sparer tid, forteller GPS-en brukeren om endringen, inkludert hvor mange ekstra svinger som ble lagt til og hvor mye tid som vil bli spart. GPS-en spør brukeren om de vil endre ruten, eller om GPS-en endret den. Brukeren kan gå tilbake til den opprinnelige ruten med ett trykk eller en kommando.
+
+Unngå:
+
+1. Innhold som endres uten at brukeren har kontroll.
+
+## Aktiver API-er og utvidelser
+
+Jeg må bruke ytterligere støttefunksjoner fra widgeter eller utvidelser.
+
+Relatert krav [3.8.2 Extentions and API’s](https://grunnmuren.obos.no/3-8-mal-8#8ff2a8e12344)
+
+**Dette kan du gjøre:**
+
+API-er og utvidelser fungerer med innholdet ditt.
+
+**Hvorfor gjør dette en forskjell?**
+
+Personer med kognitive og lærevansker bruker ofte tilleggsprogrammer eller utvidelser som hjelpeteknologi. For eksempel:
+
+- Lesing av lange akronymer.
+- Støtte for tekst-til-tale med synkronisert utheving av frasen som leses.
+- Forenkling av innhold.
+- Laging av tankekart fra overskriftsstrukturen.
+- Støtte for å beholde innhold som allerede er skrevet inn.
+- Passordbehandling.
+- Stavekontroll.
+- Endring av symboler eller grensesnitt.
+- Endring av tall fra sifre til ord og ord til sifre.
+- Legge til mellomrom mellom linjer, setninger, fraser og tekststykker.
+- Alternative måter å legge inn innhold på, for eksempel talegjenkjenning.
+- Legge til bilder.
+
+Noen ganger kan imidlertid et nettsted hindre utvidelser og API-er i å fungere. Resultatet er at disse brukerne ikke kan bruke dette nettstedet.
+
+Hvis disse tilleggene og API-ene ikke støttes, bør forfatteren gi støtte for alle funksjonene til tilleggene som brukes som hjelpeteknologi.
+
+For eksempel har en bruker med traumatisk hjerneskade svekket eksekutiv funksjon og hukommelse som påvirker evnen til å huske detaljer som:
+
+- Ikonene eller symbolene på et Web of Things (WoT)-grensesnitt.
+- Brukernavn og passord.
+- Hva et akronym står for.
+- Et telefonnummer.
+- Betydningen av uvanlige ord.
+
+Støtte for bruk av et tillegg som forenkler innhold og gir støtte (som lange akronymer og en popup-ordbok) gjør det mulig for dem å forstå mesteparten av innholdet.
+
+Støtte for verktøy for passordadministrasjon gjør det mulig for brukere å logge inn og unngå å bli utestengt fra sikre nettsteder.
+
+Lagring av ikke-sensitiv informasjon og automatisk utfylling hjelper dem med å fylle ut et skjema. Dette antyder vanlig informasjon, som en persons telefonnummer eller adresse. Det hjelper dem også med å unngå å gjøre feil. Det eliminerer behovet for å huske denne informasjonen nøyaktig eller å måtte kopiere og lime den inn, noe som ofte hindrer dem i å bruke et skjema.
+
+Når de blir overveldet av tekstinnhold, har de en utvidelse som setter inn symboler de er kjent med, som hjelper dem med å finne innholdet de trenger.
+
+For mange alternativer kan gjøre det vanskeligere å samhandle med IoT-enheter. Ytterligere alternativer bør være enkle å ignorere og ikke kreve mye lesing for å forstå at de er tilleggsalternativer, samt hvordan man hopper over dem.
+
+Noen ganger kan grensesnittene for tingenes internett (IoT) forvirre brukeren, for eksempel at en standard "avlesning" på en måler er satt til "2" og ikke "1". Brukeren må da tilbakestille den til "1".
+
+Det er viktig i enhver foreslått løsning å gjøre driftsoppgaver, for eksempel samhandling med IoT, så transparente som mulig, slik at brukerne kan fokusere oppmerksomheten sin på de funksjonelle aspektene, for eksempel å forholde seg til innhold.
+
+**Flere detaljer:**
+
+Personer med kognitive og lærevansker bruker ofte tilleggsprogrammer som hjelpeteknologi. Det er viktig at tilleggsprogrammer og lignende verktøy fungerer som forventet, bortsett fra når:
+
+1. Et sikkerhetskrav krever at disse API-ene må deaktiveres. I dette tilfellet bør de bare deaktiveres for det/de relevante feltet/feltene.
+1. Tilleggsprogrammet ødelegger nettstedets hovedfunksjon, for eksempel evaluering og testing av applikasjoner.
+
+Når tilleggsprogrammer automatisk deaktiveres av koden, faller byrden med å støtte tilleggsprogrammenes ekstra funksjonalitet på forfatteren.
+
+**Fremgangsmåte:**
+
+Innhold kan brukes med API-er og utvidelser som støtter personer med kognitive og lærevansker.
+
+Testing bekreftet gjennom bruk av noen av API-ene som er passende for innholdet. For eksempel:
+
+- Testing med stavekontroll og apper eller utvidelser for passordlagring.
+- Test med en utvidelse som legger til menyelementer (høyreklikkalternativene for skrivebord).
+- Test med en verktøylinje som muliggjør forenkling eller personalisering og er designet for personer med kognitive og lærevansker.
+
+**Løsningsforslag:**
+
+Bruk:
+
+1. Støtte for nettleserutvidelser og -funksjoner, og verktøylinjer for personalisering. Brukere kan bruke innstillingene sine fra en verktøylinje for personalisering for å forbedre brukervennligheten til siden.
+1. Utvidelser som legger til alternativer i høyreklikk fungerer som forventet.
+1. Siden kan formateres og forenkles fra brukerens preferanser i operativsystemet eller brukeragenten.
+
+Unngå:
+
+1. Design og kode som hindrer nettleserutvidelser, innstillinger og funksjoner, og verktøylinjer for personalisering i å fungere. For eksempel:
+1. Applikasjoner for passordlagring fungerer ikke.
+1. Utvidelser som fjerner distraksjoner fungerer ikke.
+1. Stavekontrollutvidelser legger ikke til alternativer i høyreklikkmenyen, eller understreker ikke feil gjort av brukeren.
+1. De riktige symbolene kan ikke legges til av en forenklingsverktøylinje.
+1. Siden kan ikke formateres eller ekstra hvitt mellomrom legges til.
+1. Brukeren kan ikke bruke sin foretrukne skrifttype.
+
+## Støtte forenkling
+
+Jeg trenger mindre innhold uten ekstra alternativer og funksjoner, siden jeg ikke kan fungere i det hele tatt når det er for mye kognitiv overbelastning.
+
+Relatert krav [3.8.1 Tilpassninger](https://grunnmuren.obos.no/3-8-mal-8#916400ab67b6)
+
+**Dette kan du gjøre:**
+
+Støtt forenkling av innholdet ditt. Dette innebærer ofte å la brukeren:
+
+- Fjerne eller skjule funksjoner som de fleste brukere ikke bruker eller som ikke er essensielle.
+- Få mindre tekst eller mer enkel tekst.
+- Velge innholdsformatet eller -versjonen som er enklest for dem å forstå.
+- Finne ekstrafunksjonene når de ønsker det.
+
+**Hvorfor gjør dette en forskjell?**
+
+En bruker som har problemer med å lese eller bruke nettinnhold kan lett bli overveldet av for mye informasjon på en nettside. De må forenkle siden for å inkludere den kritiske informasjonen de trenger, og ikke bruke all energien sin på å lese og forstå annet innhold og andre funksjoner. Dette gjelder også for brukere som lett blir distrahert.
+
+For eksempel har et e-postprogram mange funksjoner og formateringsalternativer når man skriver en e-post. Dette gjør det for komplekst for mange. Med personalisering kan brukeren ha et enkelt alternativ med bare send- og avbryt-alternativer. Det er en «til»- og emnelinje, men ingen kopi- eller blindkopi-alternativer. I denne innstillingen er det en tydelig overskrift (skriv en e-post), og de har ikoner som brukeren forstår.
+
+**Flere detaljer:**
+
+Merk at:
+
+- Vanligvis har en enkel applikasjon 3 til 6 funksjoner.
+- Sørg for at det er enkelt å komme tilbake til fullversjonen.
+- Du kan oppfylle dette designmønsteret ved å:
+  - Støtte forenklede versjoner fra nettleseren.
+  - Bruke dataforenkling på regioner og kontroller.
+  - Bruke andre attributter i personaliseringssemantikk (se [[personalization-semantics-1.0](https://www.w3.org/TR/adapt/)]).
+  - Legge til en forenklingsverktøylinje.
+  - Tilby en alternativ versjon.
+
+**Fremgangsmåte:**
+
+Legg til `data-simplification="critical"` på innhold som er i kritiske brukertestbaner (User testing paths).
+
+**Løsningsforslag:**
+
+Bruk:
+
+1. En forenklet «lese»-visning som er tilgjengelig og enkel å lukke.
+1. Applikasjoner som har 3 store funksjoner. Andre funksjoner er i bunnteksten eller under et «mer»-alternativ.
+1. En forenklet versjon av applikasjonen er tilgjengelig.
+
+Unngå:
+
+1. Forenklede moduser har unødvendig ekstra innhold eller støttes ikke.
+1. Applikasjoner med mange funksjoner som ikke kan forenkles. For eksempel:
+1. Et travelt e-postprogram har mange kontrollfelt og funksjoner som tagging, gruppetagging, start av en ny tråd osv. Det finnes ingen enkel måte å forenkle siden på.
+
+## Støtt et personlig og kjent grensesnitt
+
+Jeg trenger (en versjon av) et kjent grensesnitt, som jeg kjenner igjen og vet hva som vil skje.
+
+Relatert krav [3.8.1 Tilpassninger](https://grunnmuren.obos.no/3-8-mal-8#916400ab67b6)
+
+**Dette kan du gjøre:**
+
+Gi brukerne en måte å tilpasse grensesnittet sitt på for å gjøre det kjent.
+
+Dette kan gjøres ved å:
+
+1. Tillate brukerpreferanser for presentasjon, for eksempel skriftstil, skriftstørrelse, linjehøyde, marginer og kontrast. (Merk: Standardversjonen skal fortsatt være lesbar og bruke tydelige skrifttyper.)
+1. Tillate en tilbakerulling til et tidligere grensesnitt som brukeren er kjent med og vet hvordan den skal bruke.
+1. Legge til semantikk på kontroller, lenker og symboler som lar brukeren kontrollere opplevelsen. For eksempel:
+1. HTML5 autofullføring på vanlige felt.
+1. Legge til en verktøylinje som legger til personlige bilder.
+1. Bruke attributter i [[personalization-semantics-1.0](https://www.w3.org/TR/adapt/)].
+
+**Hvorfor gjør dette en forskjell?**
+
+Personalisering endrer grensesnittet for å møte brukerens behov.
+
+Det å ha kjente termer og symboler er nøkkelen til at mange brukere skal kunne bruke nettet. Det som er kjent for én bruker, kan imidlertid være ukjent for en annen, noe som krever at de lærer nye symboler. Å legge til semantikk gjør at symboler og støtte kan legges til av en utvidelse eller nettleser som er kjent for den enkelte bruker.
+
+Et bedre eksempel er personer som bruker ACC (Alternative and Augmentative Communication System). Disse brukerne lærer vanligvis bare ett symbolsett. De kan ikke enkelt kommunisere med andre som bruker ACC i et skriftlig format, eller de kan ha problemer med å forstå forskjellige symboler som brukes i forskjellige applikasjoner. Når man bruker personalisering, for eksempel [[personalization-semantics-1.0],](https://www.w3.org/TR/adapt/) kan brukeragentene laste inn symbolene som er forståelige for den enkelte bruker. Brukeren kan også få tilgang til nettet og andre applikasjoner.
+
+Annen støtte inkluderer autofullføring og utvidelser som hjelper brukeren med å fylle ut skjemaer og forstå innholdet. Mange brukere med hukommelses- eller eksekutive funksjonsnedsettelser kan ikke fylle ut skjemaer uten å be noen om å hjelpe dem med å kopiere over informasjon eller sjekke arbeidet deres. Autofullføring lar mange flere brukere administrere skjemaer selv.
+
+**Fremgangsmåte:**
+
+- Bruk HTML autocomplete tags på alle vanlige felt.
+- Legg til en verktøylinje som legger til personlige bilder.
+- Legg til semantikken som kan fungere med en verktøylinje for personlige bilder.
+
+**Løsningsforslag:**
+
+Bruk:
+
+1. [[HTML5](https://html.spec.whatwg.org/multipage/)] autocomplete tags på alle vanlige felt.
+1. Sann tekst for å støtte nettleserpreferanser for stiler (styles).
+1. En verktøylinje som legger til personlige bilder.
+1. Semantikk som kan fungere med en verktøylinje for personlige bilder eller [[personalization-semantics-1.0](https://www.w3.org/TR/adapt/)].
+
+Unngå:
+
+1. Skjemaer som ikke støtter [[HTML5](https://html.spec.whatwg.org/multipage/)] autocomplete.
+1. Standardfonter som ikke er tydelige eller lesbare, for eksempel tegneseriefonter eller gotiske fonter.
+1. Sider som ikke enkelt kan tilpasses.

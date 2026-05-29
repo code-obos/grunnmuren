@@ -1,0 +1,68 @@
+---
+name: 'Spacing'
+slug: 'spacing'
+---
+
+import img0 from './images/spacing/0.webp';
+
+Avstandsstyring er super viktig, selv om det ofte blir oversett i produktdesign. Grunnmuren gir deg verktøy som fjerner gjettingen rundt avstandsstyring, så du kan lage tydelige og funksjonelle oppsett.
+
+Avstand eller luft handler om plassen mellom elementer og komponenter. Dette styres ofte i koden med `margin` og `padding`. Grunnmuren gir flere smarte metoder, som layoutkomponenter, for å gjøre det lettere og mer konsekvent å bruke avstand i produktene.
+
+## Avstand
+
+Grunnmuren bruker Tailwind sine variabler som base. Den tar med seg både små justeringer for å få til riktig luft i designet, og større justeringer for å styre tettheten i designet. Hver avstand på skalaen har sin egen syntax. Du kan bruke avstandene både inne i komponenter for bygging og mellom dem for layout.
+
+### Avstandsskalaen
+
+Bruk avstandsskalaen når du bygger individuelle komponenter. Den inkluderer små trinn som er nødvendige for å skape passende romlige forhold for design på detaljnivå. Denne skalaen brukes i alle Grunnmuren-komponenter.
+
+_Tabellen viser et utdrag av alle variablene i Grunnmuren_
+
+| Token     | Rem   | Px  |
+| --------- | ----- | --- |
+| gap-y-1   | 0.25  | 4   |
+| gap-y-1.5 | 0.375 | 6   |
+| gap-y-2   | 0.5   | 8   |
+| gap-y-2.5 | 0.625 | 10  |
+| gap-y-3   | 0.75  | 12  |
+| gap-y-3.5 | 0.875 | 14  |
+| gap-y-4   | 1     | 16  |
+| gap-y-5   | 1.25  | 20  |
+| gap-y-6   | 1.5   | 24  |
+| gap-y-7   | 1.75  | 28  |
+| gap-y-8   | 2     | 32  |
+
+### Hvordan bruke avstandsskalaen
+
+Avstandsskalaen kan brukes på `margin` eller `padding`, så vel som på både vertikale og horisontale kanter. Tokenet erstatter verdiene som vanligvis tilordnes `margin` og `padding`.
+
+<Image src={img0} alt="" width={2000} height={1540} />
+
+## Stabling (Stacking)
+
+Stabling er en form for avstand som skaper lik avstand mellom komponenter eller en gruppe elementer.
+
+(Bilde av et skjema med spacers - Kanskje lenke til pattern når det kommer)
+
+## Designe med luft
+
+Hver del av et brukergrensesnitt bør være bevisst, inkludert luft mellom elementene. Mengden luft mellom elementene skaper relasjoner og hierarki.
+
+### Skap relasjoner
+
+Elementer i et design som er nær hverandre, blir sett på som meningsfullt relaterte. Etter hvert som det legges til mer plass mellom elementene, svekkes den oppfattede relasjonen.
+
+Mønstre skapt gjennom avstand kan også skape relasjoner. Elementer arrangert i samme avstandsmønster blir sett på som relaterte deler som har lik vekt.
+
+Avstand kan også brukes til å betegne grupper av tilknyttet informasjon. Dette skaper innholdsseksjoner på en side uten å måtte bruke linjer eller andre grafiske elementer som skille.
+
+### Skap hierarki
+
+Elementer som har mer luft rundt seg, har en tendens til å bli oppfattet som viktigere enn elementer som har mindre luft rundt seg. Ta denne siden for eksempel. H1 har mer plass rundt seg, noe som gir dem fokus og fremtredende plass. Etter hvert som overskriftene synker i viktighet, får de mindre plass, noe som signaliserer at de er underordnet.
+
+Elementer som er plassert nær hverandre, kan lett overses. Brukere kan se grupperingen, men ikke klare å prosessere hvert enkelt element. Hvis du har et element eller innhold av høy betydning på siden, bør du derfor vurdere å gi det ekstra plass rundt seg for å hjelpe det med å tiltrekke seg fokus.
+
+### White space / Luft
+
+**Luft **også kjent som **white space** er viktig i design. Den kan brukes til å dele opp seksjoner på en side eller for å bidra til å skape fokus på bestemte elementer. Luft hjelper med informasjonsbehandling; for mye tett informasjon kan være desorienterende eller overveldende for en bruker. Deler av et brukergrensesnitt kan være tette, men hele siden bør ikke være overfylt; det bør være nok luft slik at brukerens øye kan hvile.

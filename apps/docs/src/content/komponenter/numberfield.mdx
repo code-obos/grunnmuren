@@ -1,0 +1,98 @@
+---
+name: 'NumberField'
+slug: 'numberfield'
+componentState: stable
+resourceLinks:
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/numberfield'
+---
+
+import img0 from './images/numberfield/0.webp';
+
+## Om komponenten
+
+NumberField er et skjemaelement som gir brukeren mulighet til å fylle inn tall.
+
+<Image src={img0} alt="Divider" width={2000} height={143} />
+
+## Varianter
+
+#### Uncontrolled
+
+```tsx live caption="Uncontrolled NumberField med label"
+<NumberField label="Beløp" />
+```
+
+```tsx live caption="Uncontrolled NumberField med label og description"
+<NumberField label="Beløp" description="Må fylles ut" />
+```
+
+```tsx live caption="Uncontrolled NumberField med label og placholder"
+<NumberField label="Beløp" placeholder="Skriv inn ønsket lånebeløp" />
+```
+
+```tsx live caption="NumberField med left addon"
+<NumberField leftAddon={<PiggyBank className="pointer-events-none" />} />
+```
+
+```tsx live caption="NumberField med right addon"
+<NumberField rightAddon={<PiggyBank className="pointer-events-none" />} />
+```
+
+```tsx live caption="NumberField med left addon and divider"
+<NumberField leftAddon={<PiggyBank className="pointer-events-none" />} withAddonDivider />
+```
+
+```tsx live caption="Uncontrolled med usynlig label"
+<NumberField aria-label="Beløp" placeholder="Fyll ut ønsket beløp" />
+```
+
+```tsx live caption="Uncontrolled høyrejustert tekst"
+<NumberField label="Beløp" rightAddon="kr" textAlign="right" withAddonDivider />
+```
+
+##### Validering
+
+```tsx live caption="Uncontrolled NumberField med feilmelding"
+<NumberField label="Beløp" errorMessage="Her er det noe feil!" />
+```
+
+```tsx live caption="Uncontrolled, påkrevd NumberField"
+<form onSubmit={(e) => e.preventDefault()} className="grid gap-6">
+  <NumberField isRequired label="Beløp" />
+  <Button type="submit" className="w-fit">
+    Send inn
+  </Button>
+</form>
+```
+
+```tsx live caption="Uncontrolled NumberField med max value"
+<NumberField label="Beløp" maxValue={1000} />
+```
+
+```tsx live caption="Uncontrolled NumberField med min value"
+<NumberField label="Beløp" minValue={0} />
+```
+
+```tsx live caption="Uncontrolled NumberField med custom width og max value"
+<NumberField
+  description="Samlet lån og gjeld inkluderer studielån, billån, forbrukslån og rammer på kredittkort."
+  label="Husstandends samlede lån og gjeld utenom boliglån"
+  maxValue={99999999}
+  size={10}
+/>
+```
+
+#### Controlled
+
+```tsx live caption="Controlled NumberField"
+function(){
+const [number, setNumber] = React.useState(0);
+
+return <NumberField
+  label="Beløp"
+  value={number}
+  onChange={setNumber}
+/>
+}
+```

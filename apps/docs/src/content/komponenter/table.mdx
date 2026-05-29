@@ -1,0 +1,99 @@
+---
+name: 'Table'
+slug: 'table'
+componentState: beta
+resourceLinks:
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/table'
+  - linkType: 'figma'
+    url: 'https://www.figma.com/design/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=1122-332&m=dev'
+---
+
+## Om komponenten
+
+Table gir brukerne en tydeligere oversikt over data og relasjoner ved å strukturere informasjonen i rader og kolonner.
+
+**Egnet til:**
+
+- Vise **strukturert data** i rader og kolonner
+- Lage **sammenligninger** (f.eks. produkter eller priser)
+- Presentere **statistikk** eller **rapporter**
+
+**Uegnet til:**
+
+- Sideoppsett og layout (bruk heller CSS Grid eller Flexbox)
+- Vanlig tekst- og bildeinnhold uten tabellstruktur
+- Interaktivt innhold som knapper, kort eller navigasjon
+- Opplisting av elementer
+
+## Varianter
+
+Table har to varianter: `default` og `zebra-stripet`. Ved å gi annenhver rad ulik bakgrunnsfarge blir det lettere å følge riktig linje på tvers av tabellen. Dette skaper et tydelig visuelt skille mellom radene, gjør tabellen mer oversiktlig og reduserer risikoen for å lese feil verdier.
+
+### Default
+
+```tsx live caption="Default Table"
+<UNSAFE_TableContainer className="w-full">
+  <UNSAFE_Table aria-label="Eiendomsforvaltere">
+    <UNSAFE_TableHeader>
+      <UNSAFE_TableColumn>Navn</UNSAFE_TableColumn>
+      <UNSAFE_TableColumn>E-post</UNSAFE_TableColumn>
+      <UNSAFE_TableColumn>Område</UNSAFE_TableColumn>
+    </UNSAFE_TableHeader>
+    <UNSAFE_TableBody>
+      <UNSAFE_TableRow>
+        <UNSAFE_TableCell>Kari Hansen</UNSAFE_TableCell>
+        <UNSAFE_TableCell>kari.hansen@obos.no</UNSAFE_TableCell>
+        <UNSAFE_TableCell>Grünerløkka</UNSAFE_TableCell>
+      </UNSAFE_TableRow>
+      <UNSAFE_TableRow>
+        <UNSAFE_TableCell>Lars Olsen</UNSAFE_TableCell>
+        <UNSAFE_TableCell>lars.olsen@obos.no</UNSAFE_TableCell>
+        <UNSAFE_TableCell>Frogner</UNSAFE_TableCell>
+      </UNSAFE_TableRow>
+      <UNSAFE_TableRow>
+        <UNSAFE_TableCell>Ingrid Svendsen</UNSAFE_TableCell>
+        <UNSAFE_TableCell>ingrid.svendsen@obos.no</UNSAFE_TableCell>
+        <UNSAFE_TableCell>Majorstuen</UNSAFE_TableCell>
+      </UNSAFE_TableRow>
+    </UNSAFE_TableBody>
+  </UNSAFE_Table>
+</UNSAFE_TableContainer>
+```
+
+### Zebra-striped
+
+```tsx live caption="Vertical tabs"
+<UNSAFE_TableContainer className="w-full">
+  <UNSAFE_Table aria-label="Eiendomsforvaltere" variant="zebra-striped">
+    <UNSAFE_TableHeader>
+      <UNSAFE_TableColumn>Navn</UNSAFE_TableColumn>
+      <UNSAFE_TableColumn>E-post</UNSAFE_TableColumn>
+      <UNSAFE_TableColumn>Område</UNSAFE_TableColumn>
+    </UNSAFE_TableHeader>
+    <UNSAFE_TableBody>
+      <UNSAFE_TableRow>
+        <UNSAFE_TableCell>Kari Hansen</UNSAFE_TableCell>
+        <UNSAFE_TableCell>kari.hansen@obos.no</UNSAFE_TableCell>
+        <UNSAFE_TableCell>Grünerløkka</UNSAFE_TableCell>
+      </UNSAFE_TableRow>
+      <UNSAFE_TableRow>
+        <UNSAFE_TableCell>Lars Olsen</UNSAFE_TableCell>
+        <UNSAFE_TableCell>lars.olsen@obos.no</UNSAFE_TableCell>
+        <UNSAFE_TableCell>Frogner</UNSAFE_TableCell>
+      </UNSAFE_TableRow>
+      <UNSAFE_TableRow>
+        <UNSAFE_TableCell>Ingrid Svendsen</UNSAFE_TableCell>
+        <UNSAFE_TableCell>ingrid.svendsen@obos.no</UNSAFE_TableCell>
+        <UNSAFE_TableCell>Majorstuen</UNSAFE_TableCell>
+      </UNSAFE_TableRow>
+    </UNSAFE_TableBody>
+  </UNSAFE_Table>
+</UNSAFE_TableContainer>
+```
+
+### Ekspanderbar tabell
+
+For år å lage en tabell med ekspanderbare rader, er det mulig å bruke en knapp for toggle radene som skal skjules/vises. Det enkleste er å bruke en controlled \`\<DisclosureButton>\`, her må du huske å sette \`aria-expanded\`, \`aria-controls\` og sende med en callback til enten \`onPress\` eller \`onClick\` for å toggle staten.
+
+<StorybookEmbed storyId="table--expandable-rows" />

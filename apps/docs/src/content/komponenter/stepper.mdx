@@ -1,0 +1,67 @@
+---
+name: 'Stepper'
+slug: 'stepper'
+componentState: beta
+propsComponents:
+  - 'Stepper'
+  - 'Step'
+resourceLinks:
+  - linkType: 'github'
+    url: 'https://github.com/code-obos/grunnmuren/tree/main/packages/react/src/stepper'
+---
+
+_Merk at innholdsbredden på dokumentasjonssiden gjør at visningen av komponenteksemplene er versjonen av komponenten for mindre skjemer. Vi ser på muligheten for å fikse dette._
+
+## Om komponenten
+
+Stepper er en navigasjonskomponent som lar brukeren navigere mellom ulike deler eller seksjoner av et skjema, også kjent som en _FormWizard_.
+
+Den gir oversikt over fremdrift, og lar brukeren hoppe mellom forskjellige deler av skjemaet.
+
+**Egnet til:**
+
+- Navigering mellom steg i et skjema.
+- Oversikt over fremdrift i et skjema.
+
+**Uegnet til:**
+
+- Navigasjon utenfor skjemaer.
+- Visning av fremdrift utenfor skjemaer.
+
+<StorybookEmbed storyId="stepper--example" />
+
+## Tilstand og fremdrift
+
+Tilstanden til hvert enkelt steg kan settes til `complete`. Dette indikerer steget som fullført. Dette gir brukeren oversikt over fremdriften for hele skjemaet.
+
+<StorybookEmbed
+  storyId="stepper--completed-steps"
+  caption="Eksempel med samtlige steg fullførte."
+/>
+
+I tillegg kan du indikere framdrift innad i et gitt steg ved hjelp av `progress` i prosent. Dette gjør at linjen mellom stegene viser brukeren hvor langt hen er kommet for et steg.
+
+<StorybookEmbed
+  storyId="stepper--with-progress"
+  caption="Eksempel med individuell framdrift per steg."
+/>
+
+## Lineære og sekvensielle skjemaer
+
+Dersom et steg ikke er tilgjengelig kan man benytte `isDisabled`. Steget vil dermed ikke være valgtbart. Dette er nyttig for skjemaflyter hvor man ikke kan gå videre til neste steg, før nåværende steg er fullført.
+
+Et eksempel kan være et oppsummeringssteg som ikke er tilgjengelig før alle foregående steg er fullførte.
+
+<StorybookEmbed storyId="stepper--disabled-steps" caption="Eksempel hvor ingen steg er valgbare." />
+
+## Komponentens oppbygning
+
+```tsx
+<Stepper>
+  <Step>
+    <Link />
+  </Step>
+</Stepper>
+```
+
+Selv om stegene i komponenten består av en `<Link>` trenger nødvendigvis ikke hvert steg i prosessen være en egen URL. Dersom det ikke spesfiseres en `href` på `<Link>` vil steget fungere som en knapp i stedet for en lenke.

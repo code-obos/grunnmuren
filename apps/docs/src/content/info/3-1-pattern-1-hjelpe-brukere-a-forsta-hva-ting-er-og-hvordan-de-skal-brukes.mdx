@@ -1,0 +1,365 @@
+---
+name: '3.1 Mønstre 1: Hjelpe brukere å forstå hva ting er og hvordan de skal brukes'
+slug: '3-1-pattern-1-hjelpe-brukere-a-forsta-hva-ting-er-og-hvordan-de-skal-brukes'
+---
+
+import img0 from './images/3-1-pattern-1-hjelpe-brukere-a-forsta-hva-ting-er-og-hvordan-de-skal-brukes/0.webp';
+import img1 from './images/3-1-pattern-1-hjelpe-brukere-a-forsta-hva-ting-er-og-hvordan-de-skal-brukes/1.webp';
+import img2 from './images/3-1-pattern-1-hjelpe-brukere-a-forsta-hva-ting-er-og-hvordan-de-skal-brukes/2.webp';
+import img3 from './images/3-1-pattern-1-hjelpe-brukere-a-forsta-hva-ting-er-og-hvordan-de-skal-brukes/3.webp';
+import img4 from './images/3-1-pattern-1-hjelpe-brukere-a-forsta-hva-ting-er-og-hvordan-de-skal-brukes/4.webp';
+import img5 from './images/3-1-pattern-1-hjelpe-brukere-a-forsta-hva-ting-er-og-hvordan-de-skal-brukes/5.webp';
+import img6 from './images/3-1-pattern-1-hjelpe-brukere-a-forsta-hva-ting-er-og-hvordan-de-skal-brukes/6.webp';
+import img7 from './images/3-1-pattern-1-hjelpe-brukere-a-forsta-hva-ting-er-og-hvordan-de-skal-brukes/7.webp';
+
+## Gjør formålet med siden din tydelig
+
+Jeg trenger å vite konteksten og formålet med siden.
+
+Relatert krav [3.1.1 Klart formål](https://grunnmuren.obos.no/3-1-maal-1#d7316ce6f3cc)
+
+** Dette kan du gjøre:**
+
+Hjelp brukeren å forstå formålet med innholdet. Bruk:
+
+- en tydelig tittel eller overskrift som oppsummerer formålet med en side, eller
+- andre tydelige veiskilt som er testet av brukere med kognitive og lærevansker.
+
+**Hvorfor gjør dette en forskjell?**
+
+En klar tittel og tydelige veiskilt vil hjelpe mange, inkludert de med svekket hukommelse og oppmerksomhet, samt alle som lett blir distrahert på grunn av aldersrelatert glemsomhet (+ demens) og ADHD. For eksempel bruker noen med mild demens netthandel. De blir distrahert, og når de ser på skjermen igjen, har de glemt hva de holdt på med. En tydelig overskrift øverst på hver side viser tydelig hva siden handler om og hva de gjør. I et annet eksempel leter en bruker med ADHD etter informasjon i en video. De kan se ut fra videotittelen at denne videoen har informasjonen de trenger.
+
+**Flere detaljer:**
+
+Overskrifter tydeliggjør formålet med denne spesifikke siden.
+
+Når det er mulig, gi informasjon som hjelper brukerne å forstå hvordan de kom til siden. For eksempel: tydelig angivelse av brødsmuler i hovednavigasjonen, utheving av gjeldende valgte fane osv.
+
+**Løsningsforslag:**
+
+Bruk:
+
+<Image
+  src={img0}
+  alt=""
+  caption="Sidetittel forklarer formålet med siden og hvor brukeren er. Den reflekterer brødsmulestien og navigasjonsmetodene."
+  width={1440}
+  height={1060}
+/>
+
+Unngå:
+
+<Image
+  src={img1}
+  alt=""
+  caption="Sidetittelen reflekterer ikke sidens formål eller brukerens plassering."
+  width={1440}
+  height={1060}
+/>
+
+`<hr>`
+
+## Bruk et kjent hierarki og design
+
+Jeg må forstå alternativene mine og oppgavene jeg kan utføre, og jeg kan identifisere kontrollene jeg kan samhandle med for å fullføre handlinger. (Jeg synes det er vanskelig å lære nye grensesnittdesignmønstre.)
+
+Relatert krav [3.1.2 Bruk et kjent hierarki og design](https://grunnmuren.obos.no/3-1-maal-1#c699b4c4bde7)
+
+**Dette kan du gjøre:**
+
+Bruk design som er kjent for de fleste brukere. Dette inkluderer:
+
+- Designelementer.
+- Affordances (visuelle hint om hvordan man bruker en kontroll).
+- Patterns.
+- Layout og visuelt hierarki (Rekkefølgen av ulike elementer for å vise rekkefølgen av viktighet).
+
+**Hvorfor gjør dette en forskjell?**
+
+Mange brukere har ikke lett for å lære og huske nye designmetaforer. Uten disse ferdighetene kan det være mye vanskeligere eller umulig å finne ønskede elementer å samhandle med, og å vite hva interaksjoner kan føre til. Brukere kan føle seg fortapt eller overveldet.
+
+Brukere har større sannsynlighet for å finne og gjenkjenne vanlige designelementer som gjentas ofte over en lang periode med bruk, på tvers av mange nettsteder.
+
+For eksempel går en bruker med mild kognitiv svikt eller demens til et nettsted for å kjøpe et produkt. De finner ikke hvor de kan betale for varen de ønsker. De tror kanskje at nettstedet ikke tillater shopping, og at nettstedet bare gir informasjon.
+
+**Flere detaljer:**
+
+Vanlige designelementer og mønstre inkluderer:
+
+- Standard layout og visuelt hierarki (arrangement av elementer for å vise viktighetsrekkefølgen). Plasser elementer der brukeren forventer dem. For eksempel:
+  - Søk øverst til høyre på et nettsted.
+  - Lenke til hjemmesiden øverst til venstre.
+  - Lenke til «kontakt oss» i det øverste navigasjonsområdet.
+  - Lenke til nettstedskartet i bunntekstområdet.
+  - Send-knappen nederst i et skjema.
+- Vanlige designmønstre (gjentatte design for kontroller og andre elementer), som for eksempel:
+  - WAI-ARIA authoring best practices [[wai-aria-practices-1.2](https://www.w3.org/WAI/ARIA/apg/)].
+  - Mønstre brukt på de mest populære nettstedene.
+  - Svært vanlige navigasjonsdesignmønstre og vanlige ikoner.
+  - Plattformspesifikk (operativsystem) brukergrensesnittdesign for navigasjonsmekanismer og ikoner.
+  - Adaptivt brukergrensesnittdesign som kan tilpasses.
+- Brukergrensesnitt (design) fra en tidligere versjon. Lar brukere gå tilbake til en tidligere versjon av applikasjonen som de er kjent med.
+- Lenker som ser ut som lenker og knapper som ser ut og fungerer som knapper. For eksempel:
+  - Understreker lenker med en standardstil gjennom hele en side.
+  - Lenker navigerer vanligvis til en ny side.
+  - Knapper utfører vanligvis en handling.
+
+**Løsningsforslag:**
+
+- En konsistent layout på tvers av alle sider
+- Titler har samme strukturelle nivå, samme font og visuell styling (Nivå 1 = `heading-xl`, nivå 2 + = `heading-l`)
+- _State_ og _fokus_ har samme styling over hele nettstedet
+- Layout i blokken er konsistent på tvers, det inkluderer interaktive elementer og navigasjonselementer.
+
+<Image
+  src={img2}
+  alt=""
+  caption="Tydelig struktur på hva som er på siden, med handlinger knyttet til formålet tydelig i starten. Og mindre supplerende informasjon knyttet til formålet av siden. "
+  width={1440}
+  height={3264}
+/>
+
+`<hr>`
+
+## Bruk en konsistent visuell design
+
+Jeg må forstå alternativene mine og oppgavene jeg kan utføre, og jeg kan identifisere kontrollene jeg kan samhandle med for å fullføre handlinger.
+
+Relatert krav [3.1.2 Bruk et kjent hierarki og design](https://grunnmuren.obos.no/3-1-maal-1#c699b4c4bde7)
+
+**Dette kan du gjøre:**
+
+Bruk en konsistent visuell design på tvers av sider.
+
+**Hvorfor gjør dette en forskjell?**
+
+Mange brukere bruker lang tid på å lære nye design og gjenkjenne elementer. Når de først har lært seg elementene, bør de brukes på hele nettstedet.
+
+For eksempel bruker en eldre bruker med aldersrelatert glemsomhet lang tid på å lære nye design. Når de kommer til et nettsted, tar det tid å forstå den første siden, men så vet de hva de skal gjøre på neste side. Hvis neste side er forskjellig fra den første og også vanskelig å lære, blir de slitne og gjør flere feil. Når de går videre til en tredje vanskelig side, blir den kognitive belastningen for stor, og de kan ikke fullføre oppgaven.
+
+**Flere detaljer:**
+
+Dette inkluderer:
+
+- Konsekvente designtemaer, inkludert overskriftsstiler, skriftvalg, ikoner, farger, visuelt utseende på kontroller, knapper og lenker.
+- Overskrifter med samme strukturelle nivå har samme skrift og visuelle stil.
+- Ikoner, kontroller og menyelementer som har samme funksjon og rolle har samme utseende og stil.
+- Tilstand og fokus for elementer med lignende funksjon og roller har samme stil på tvers av et nettsted. Layout er konsistent på tvers av innholdsblokker. Dette inkluderer plasseringen av interaktive elementer og navigasjonskontroller. Strukturen av innhold og stilen for presentasjon av informasjon er konsistent. Dette inkluderer organiseringen av tekstblokker, ikoner, bilder og punktlister.
+
+**Fremgangsmåte:**
+
+Planlegg designet for informasjonen din før du legger til innhold. Tenk på farger, skriftvalg og områder der tekst og bilder skal vises.
+
+**Løsningsforslag:**
+
+- Overskrifter på samme nivå ser like ut på tvers av nettstedet.
+- Et konsistent utseende på tvers av nettstedet for kontroller. For eksempel:
+  - To typer bekreft-knapper på et nettsted, begge ser ut og fungerer på samme måte.
+  - Alle valgte radiobuttons på nettstedet ser like ut.
+  - Når et element er tastaturnavigert til, har det fokus og kan aktiveres. Tastaturfokusindikatoren (borderen som viser hvilket element som har fokus) for alle lenker ser like ut.
+- En konsistent plassering for vanlige funksjoner. For eksempel: Søkeboksen er alltid på samme sted på hele nettstedet.
+
+<Image src={img3} alt="" width={663} height={440} />
+
+`<hr>`
+
+## Gjør hvert trinn tydelig for brukeren
+
+Jeg må gjenkjenne hvor jeg er i arkitekturen til nettstedet, applikasjonen eller flertrinnsprosessen, selv etter at jeg blir distrahert.
+
+Relatert krav [3.1.1 Klart formål](https://grunnmuren.obos.no/3-1-maal-1#d7316ce6f3cc)
+
+**Dette kan du gjøre:**
+
+Sørg for brødsmuler, en «hvordan jeg kom hit»-knapp eller en overskrift for å hjelpe brukeren med å orientere seg på et nettsted eller en oppgave.
+
+I et skjema med flere steg inkluderer dette å vise:
+
+- Trinnene som er fullført.
+- Gjeldende trinn.
+- Trinnene som venter.
+- Eventuelle viktige valg.
+
+**Hvorfor gjør dette en forskjell?**
+
+Det hjelper en bruker som mister fokus, glemmer hva de gjør eller blir distrahert med å orientere seg på sin nåværende oppgave. Tydelig visuell indikator av nåværende plassering og prosess hjelper brukeren med å fortsette etter at de har mistet fokus uten å lese mye innhold eller starte på nytt.
+
+Å gi informasjon om stegene som må til for å fullføre en oppgave, hjelper brukerne med å avgjøre om de kan fullføre oppgaven. Dette er spesielt viktig for brukere som ofte synes prosesser er vanskelige å fullføre.
+
+Eksempler:
+
+- Noen med tidlig stadium av demens blir avbrutt i oppgaven sin eller mister fokus og kan deretter ikke huske hva de gjorde. Ved å se brødsmulene kan de minne seg selv på hvor de er og fortsette oppgaven.
+- Noen med en oppmerksomhetshemming blir distrahert og må deretter fortsette der de slapp.
+- Noen med behandlingsvansker er ikke sikre på om denne applikasjonen har for mange trinn og om de vil klare det. Ved å se at de er halvveis, kan de vurdere om de kan takle hele prosessen.
+
+**Løsningsforslag:**
+
+- Brødsmuler som indikerer gjeldende trinn i prosessen, viktige valg, samt tidligere og fremtidige trinn.
+- Overskrifter som tydeliggjør nøyaktig hvor brukeren er i innholdet.
+- En «hvordan jeg kom hit»-knapp. Når brukeren klikker på knappen, får de orienteringsinformasjon om:
+  - Siden brukeren er på.
+  - Hvordan de kom hit.
+  - Hvor de er i innholdet.
+- Stegindikator i et skjema som viser brukeren hvor de er i prosessen og hvilke steg de har igjen av skjemaet.
+
+<Image
+  src={img4}
+  alt=""
+  caption="Tydelig med flere indikatorer på hvilket steg brukeren befinner seg i skjemaet. Siden bør også ha en html <title> som reflekterer h1 og steget brukeren befinner seg på. "
+  width={1440}
+  height={1173}
+/>
+
+`<hr>`
+
+## Identifiser kontrollene og bruken av dem tydelig
+
+Jeg må forstå alternativene mine og oppgavene jeg kan utføre, og jeg kan identifisere kontrollene jeg kan samhandle med for å fullføre handlinger.
+
+Relatert krav [3.1.2 Bruk et kjent hierarki og design](https://grunnmuren.obos.no/3-1-maal-1#c699b4c4bde7)
+
+**Dette kan du gjøre:**
+
+Bruk et tydelig og gjenkjennelig design for kontroller. Gjør det tydelig hvilke elementer som er kontroller og hvordan de skal brukes.
+
+Dette inkluderer:
+
+- Bruke en felles stil på kontroller (for eksempel at lenker er understreket).
+- Bruke felles designmønstre på lenker og kontroller (for eksempel at det å klikke på en lenke tar deg til siden).
+- Gjøre grensene for kontroller tydelige. Lenker i tekst trenger ikke grenser hvis de er riktig identifisert (for eksempel har et hjelpeikon en grense).
+- Gjøre kontroller store nok til at brukere kan klikke på dem og ikke elementet ved siden av dem.
+- Sørge for at elementer som ikke er klikkbare ikke ser ut som lenker eller kontroller.
+
+Når dette ikke er mulig, gi instruksjoner som forklarer hvordan du bruker kontrollen. Instruksjonene bør være på samme side eller ett klikk unna og skrevet på et lettforståelig språk.
+
+**Hvorfor gjør dette en forskjell?**
+
+Kontroller er deler av nettsider som gjør noe, f.eks. en lenke, knapp, avmerkingsboks. Vanlige stil- og designmønstre på kontroller er lettere å gjenkjenne og forstå hvordan de skal brukes.
+
+Målet med disse kontrollene er å la noen bruke dem. Så snart brukeren trenger å oppdage kontrollen eller finne ut hvordan den skal brukes, vil noen brukere mislykkes.
+
+For eksempel tar en eldre bruker med aldersrelatert glemsomhet (feks demens) lengre tid å lære nye design. De går til et netthandelsnettsted som har bokser rundt overskriftene, for eksempel «salg». Det har også enkel stor tekst for kontroller, for eksempel «legg til i handlekurv»-knappen. Brukeren klikker på overskriftene og ikke på «legg til i handlekurv»-knappen (som ser ut som tekst). Etter noen få feil antar de at de ikke kan administrere det og forlater nettstedet.
+
+Noen brukere har problemer når kontrollene har et annet utseende, en annen farge eller en annen form enn de har brukt før. For eksempel, når lenker ikke har understreking og blå eller lilla tekst, vil noen brukere ikke vite at det er en lenke (selv om denne vises med fokus).
+
+Hvis du har problemer med hukommelsen, kan det være vanskeligere å bruke unike kontroller. Det kan ta lengre tid å finne kontroller på siden. Selv om de fungerer litt annerledes enn lignende kontroller, kan det hende at noen brukere må lære seg å bruke dem på nytt hver gang.
+
+Å bruke typiske kontroller på siden vil hjelpe folk å vite hvordan de skal bruke dem. Når du bruker mer unike kontroller, inkluder instruksjoner som er enkle å følge og gjør dem enkle å finne. Det skal være enkelt å identifisere, forstå og bruke kontrollene, uavhengig av hvordan en bruker bruker siden (syn, auditiv, stemmeinndata).
+
+**Fremgangsmåte:**
+
+Bruk standardkontroller og design patterns.
+
+Hvis du designer en ny kontroll, må du gjøre dem enkle å:
+
+- Identifisere (jeg vet at de er der).
+- Forstå (jeg vet hva de gjør).
+- Bruke (jeg vet hvordan jeg bruker dem).
+
+Bruk en enkelt design eller ha lettforståelige instruksjoner som forklarer bruken av dem. Test med personer med ulike kognitive og lærevansker.
+
+**Løsningsforslag:**
+
+- Standard blå og lilla lenkefarger eller lenker med understreking og tydelig tekstfarge (lenketekstfargen som brukes er ikke den samme som for statisk tekst på nettstedet).
+- Knapper med standard knappedesign som støtter standard brukerhandlinger og gjør det tydelig når de trykkes.
+- Faner som ser ut som faner og gjør det tydelig når de er valgt.
+
+<Image
+  src={img5}
+  alt=""
+  caption="En lenke ser ut som en lenke. En last ned knapp er ikke like tydelig som feks meny, derfor burde denne ha tekst i tillegg. Rediger knapp er både og. Den generelle regelen er om du bruker ikon, burde den alltid ha knappetekst. "
+  width={966}
+  height={284}
+/>
+
+`<hr>`
+
+## Gjør forholdet mellom kontrollene og innholdet de påvirker tydelig
+
+Jeg må vite hvordan jeg bruker alle kontrollene og effektene av hver handling.
+
+Relatert krav [3.1.2 Bruk et kjent hierarki og design](https://grunnmuren.obos.no/3-1-maal-1#c699b4c4bde7)
+
+**Dette kan du gjøre:**
+
+Forholdet mellom kontroller og berørt innhold bør være helt klart og utvetydig.
+
+Dette kan oppnås gjennom:
+
+- Visuelt gruppere kontroller med innholdet de er relatert til.
+- Inkluder kontroller innenfor området de påvirker.
+- Bruke tydelige skillelinjer eller luft mellom områder på en side som kan ha separate kontroller eller et rullefelt.
+- Unngå flere eller nestede "scrolling-område".
+
+**Hvorfor gjør dette en forskjell?**
+
+Hvis en kontroll på en side bare fungerer på en del av siden, kan det være vanskelig å si hva den vil påvirke og hva den ikke vil. Brukere kan prøve feil kontroll. Mange brukere vil prøve igjen og oppdage riktig kontroll eller "scrolling-felt". Imidlertid kan mange med kognitive funksjonshemminger eller lærevansker kanskje ikke finne ut hva de skal gjøre. Andre vil føle kognitiv overbelastning og stoppe som et resultat. De kan anta at applikasjonen er ødelagt, eller at den er for komplisert for dem. For disse brukerne vil ikke applikasjonen være brukbar.
+
+Tydelige rammer og grupperinger på siden kan bidra til å indikere hvilket element kontrollen påvirker. Å ha en ramme eller annen visuell indikasjon rundt kontrollene og den relevante delen kan bidra til å gjøre det mer forståelig. Sjekk med brukertesting at brukere med kognitive funksjonshemminger og lærevansker synes alle sideforholdene er tydelige og raskt vet hvordan de skal bruke kontrollene. Testing er viktig når kontrollene ikke kan være i området de påvirker.
+
+Tenk deg for eksempel en bruker som lever med demens og prøver å finne ut hvilken rullefelt som skal brukes for innebygde rullbare områder. Når de prøver feil rullefelt, får de ikke den effekten de ønsker, og innholdet kan virke som om det forsvinner.
+
+**Flere detaljer:**
+
+- Separate interaktive elementer. For eksempel: Ikke ha to rullefelt tett sammen. Noen brukere kan synes det er vanskelig å bestemme hvilken de skal bruke med en bestemt innholdsdel. I stedet:
+  - Bruk tydelig visuell layout og plassering av rullefeltene.
+  - Del innholdet inn i to separate sider.
+  - Vurder å fjerne unødvendig informasjon fra siden.
+- Tilknytt elementer og deres kontroller. Plasser interaktive elementer som rullefelt og knapper nær innholdet de kan påvirke. Hold interaktive elementer lenger unna innhold de ikke gjelder for. Dette gjør det enklere å identifisere hvilke elementer som vil påvirke hver innholdsdel.
+- Bruk "dividers". Eksempler på tydelige dividers inkluderer høykontrastkanter eller makro-luft. En endring i bakgrunnsfargen kan være en tydelig skillevegg hvis kontrasten er sterk nok.
+- Hjelp brukeren med å se riktig kontroll. Bruk store, tydelige knapper og rullefelt.
+
+**Løsningsforslag:**
+
+Kontroller som er tydelig knyttet til seksjonen de kontrollerer. Plasser kontrollen inne i seksjonen, og ha tydelige rammer rundt seksjonen. Merk kontrollene slik at de samsvarer med seksjonsoverskriften.
+
+<Image src={img6} alt="" width={1292} height={940} />
+
+`<hr>`
+
+## Bruk ikoner som hjelper brukeren
+
+Jeg trenger å vite hvilke funksjoner og innhold som er på denne siden, eller om jeg bør gå videre.
+
+Relatert krav [3.1.3 Bruk ikoner som hjelper brukeren](https://grunnmuren.obos.no/3-1-maal-1#dfbe41d6483d)
+
+**Dette kan du gjøre:**
+
+Legg til kjente ikoner, bilder og symboler tilhørende viktig innhold, som kontroller og seksjonsoverskrifter. Hvert ikon eller symbol bør formidle én betydning og stå ved siden av innholdet det er relatert til.
+
+**Hvorfor gjør dette en forskjell?**
+
+Personer som har språkforståelses-, lærings- eller lesevansker kan være avhengige av symboler for å forstå innhold og navigere til innholdet de trenger. Symboler hjelper også personer som sliter med språk og oppmerksomhet med å navigere i innhold, inkludert medier.
+
+For eksempel har en person med afasi den intellektuelle evnen til å forstå konsepter, men sliter med språket. De kan være avhengige av bruk av symboler for å bla gjennom sider for å finne informasjon.
+
+Det kan også hjelpe den eldre befolkningen som kan synes rotete sider med tett tekst er vanskelige å lese på en skjerm. Tydelige symboler, ikoner og bilder som fungerer som veivisere til tekstinnholdet kan være svært nyttige.
+
+**Flere detaljer:**
+
+- Bruk klare og utvetydige ikoner eller symboler som er enkle å se og forstørre.
+- Vær oppmerksom på kulturelle forskjeller.
+- Plasser bildet til venstre for teksten når du legger til noen få ikoner eller symboler på en side.
+- Når du legger til flere symboler i et avsnitt eller en tekstdel, plasser symbolene over teksten.
+- Bruk personaliseringssemantikk som [[personalization-semantics-1.0](https://www.w3.org/TR/adapt/)] for å hjelpe brukeren med å laste inn kjente symboler.
+
+**Fremgangsmåte:**
+
+Bruk vanlige ikoner som brukeren sannsynligvis forstår.
+
+Oppgi vanlige ikoner ved siden av nøkkeltekster, overskrifter, medieseksjoner, «kontakt oss»-knapper og «hjelp»-knapper.
+
+**Løsningsforslag:**
+
+- Instruksjoner og viktige lister der hvert punkt starter med et ikon som er relatert til innholdet i det punktet.
+- Ikoner ved siden av hjelp, kontaktinformasjon og søk.
+- Ikoner i CTA-knapper.
+- Tilgjengeliggjøring av personaliseringssemantikk som [[personalization-semantics-1.0](https://www.w3.org/TR/adapt/)] i koden, slik at brukere kan velge selv ikoner og symboler.
+
+<Image
+  src={img7}
+  alt=""
+  caption="Eksempel på WEI-Adept i kombinasjon med tredjeparts verktøy som laster inn ikoner og symboler som har mening for brukerene. "
+  width={1530}
+  height={1576}
+/>
