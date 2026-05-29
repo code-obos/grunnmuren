@@ -195,9 +195,6 @@ importers:
       '@code-obos/azure-env':
         specifier: 1.0.2
         version: 1.0.2
-      '@mdx-js/mdx':
-        specifier: ^3.1.1
-        version: 3.1.1
       '@mdx-js/rollup':
         specifier: ^3.1.1
         version: 3.1.1(rollup@4.57.1)

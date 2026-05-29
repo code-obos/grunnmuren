@@ -13,7 +13,7 @@ The repo has no CDN image optimisation. Enforced by `pnpm lint:images` (CI):
 - Store under `src/content/<kind>/images/<slug>/`, import in the MDX, render with `<Image src={…} alt="…" caption="…" />`.
 - Convert e.g. with `cwebp -q 80 in.png -o out.webp`; lower `-q` if over budget.
 
-Run `pnpm lint:images` and `pnpm check:content` after editing content.
+Run `pnpm lint:images` and `pnpm --filter @obosbbl/grunnmuren-docs run build` after editing content.
 
 ## Content conventions
 

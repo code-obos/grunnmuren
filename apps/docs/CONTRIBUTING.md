@@ -82,7 +82,7 @@ To add an image:
 ## Checks
 
 - `pnpm lint:images` — image format/size/width budget.
-- `pnpm check:content` — compiles every MDX file (catches syntax errors).
+- `pnpm --filter @obosbbl/grunnmuren-docs run build` — full docs build (catches MDX syntax errors and any other build regressions).
 - `pnpm migrate:docs [component:<slug> …]` — (migration helper) regenerate
   MDX from Sanity; omit arguments to migrate everything. Removed once
   Sanity is gone.

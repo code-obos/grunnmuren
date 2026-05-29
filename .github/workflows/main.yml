@@ -67,10 +67,11 @@ jobs:
       - name: lint
         run: pnpm lint && pnpm fmt:check
 
-      # Verify all MDX content compiles. Fast and content-only — runs every time
-      # to catch regressions in remark plugins / route wiring.
-      - name: Check MDX content compiles
-        run: pnpm --filter @obosbbl/grunnmuren-docs run check:content
+      # Build the docs app on PR so MDX compile errors and any other docs
+      # build regressions are caught before merge (cd.yml builds at deploy
+      # time, which is too late).
+      - name: Build docs
+        run: pnpm --filter @obosbbl/grunnmuren-docs run build
 
       # Enforce the documentation image budget (no CDN optimisation in-repo).
       # Skipped when no content images or lint rules changed — the check is
