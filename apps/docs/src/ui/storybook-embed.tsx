@@ -8,7 +8,7 @@ import { Code } from './code';
 type Props = {
   id: string;
   caption?: string;
-  storyId: string;
+  storyId?: string;
 };
 
 // only allow postmessages from this origin
@@ -18,6 +18,10 @@ const ALLOWED_POST_MESSAGE_ORIGIN = new URL(
 ).origin;
 
 export function StorybookEmbed({ id, storyId, caption }: Props) {
+  if (!storyId) {
+    return null;
+  }
+
   const storyUrl = useMemo(() => {
     const baseUrl = import.meta.env.VITE_STORYBOOK_BASE_URL;
 
