@@ -23,17 +23,29 @@ export function SanityContent({ content, className }: SanityContentProps) {
         components={{
           types: {
             'live-code-block': ({ value }) => (
-              <ComponentPreview caption={value.caption} code={value.code.code} />
+              <>
+                {value.caption && value.code?.code && (
+                  <ComponentPreview caption={value.caption} code={value.code.code} />
+                )}
+              </>
             ),
             'storybook-embed': ({ value }) => (
               <StorybookEmbed id={value._key} caption={value.caption} storyId={value.storyId} />
             ),
             'static-code-block': ({ value }) => (
-              <Code code={value.code.code} language={value.code.language} caption={value.caption} />
+              <>
+                {value.code?.code && (
+                  <Code
+                    code={value.code?.code}
+                    language={value.code?.language as 'tsx' | 'bash' | undefined}
+                    caption={value.caption}
+                  />
+                )}
+              </>
             ),
             'image-with-caption': ({ value }) => <ImageWithCaption asset={value} />,
-            table: ({ value }: { value: { rows: SanityTableRow[] } }) => {
-              const [firstRow, ...restRows] = value.rows;
+            table: ({ value }) => {
+              const [firstRow, ...restRows] = value.rows as SanityTableRow[];
               return (
                 <Table>
                   <TableHead>
