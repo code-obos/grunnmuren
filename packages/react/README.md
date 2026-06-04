@@ -6,13 +6,27 @@ Grunnmuren React components.
 
 ## Install
 
+`@obosbbl/grunnmuren-react` declares `@obosbbl/grunnmuren-tailwind` as a peer dependency — the components rely on Tailwind tokens and utilities defined in that package. Install both:
+
 ```sh
 # npm
-npm install @obosbbl/grunnmuren-react@canary
+npm install @obosbbl/grunnmuren-react@canary @obosbbl/grunnmuren-tailwind@canary
 
 # pnpm
-pnpm add @obosbbl/grunnmuren-react@canary
+pnpm add @obosbbl/grunnmuren-react@canary @obosbbl/grunnmuren-tailwind@canary
 ```
+
+Then import the Tailwind preset in your global stylesheet:
+
+```css
+/* globals.css */
+@import '@obosbbl/grunnmuren-tailwind';
+
+/* Register the React package as a Tailwind source so the utilities used by the components are emitted. */
+@source "../../node_modules/@obosbbl/grunnmuren-react/dist";
+```
+
+See [`@obosbbl/grunnmuren-tailwind`](../tailwind/) for the full preset documentation.
 
 ## Setup
 
@@ -199,8 +213,6 @@ module.exports = {
 The plugin works with several different bundlers. See [React Aria's bundle size optimization docs](https://react-spectrum.adobe.com/react-aria/internationalization.html#optimizing-bundle-size) for more information.
 
 ## Usage
-
-Before you start using the components you need to configure the [Tailwind preset](../tailwind/). Remember to add this package to the content scan.
 
 ```js
 import { Button } from '@obosbbl/grunnmuren-react';

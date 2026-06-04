@@ -36,6 +36,7 @@
     "tailwindcss": "catalog:"
   },
   "peerDependencies": {
+    "@obosbbl/grunnmuren-tailwind": "workspace:^",
     "react": "^19"
   }
 }
