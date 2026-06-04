@@ -1,6 +1,6 @@
 # @obosbbl/grunnmuren-react
 
-[![npm canary version](https://img.shields.io/npm/v/@obosbbl%2Fgrunnmuren-react/canary.svg)](https://www.npmjs.com/package/@obosbbl/grunnmuren-react)
+[![npm version](https://img.shields.io/npm/v/@obosbbl%2Fgrunnmuren-react.svg)](https://www.npmjs.com/package/@obosbbl/grunnmuren-react)
 
 Grunnmuren React components.
 
@@ -10,10 +10,10 @@ Grunnmuren React components.
 
 ```sh
 # npm
-npm install @obosbbl/grunnmuren-react@canary @obosbbl/grunnmuren-tailwind@canary
+npm install @obosbbl/grunnmuren-react @obosbbl/grunnmuren-tailwind
 
 # pnpm
-pnpm add @obosbbl/grunnmuren-react@canary @obosbbl/grunnmuren-tailwind@canary
+pnpm add @obosbbl/grunnmuren-react @obosbbl/grunnmuren-tailwind
 ```
 
 Then import the Tailwind preset in your global stylesheet:
