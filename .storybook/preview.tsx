@@ -95,7 +95,14 @@ const preview: Preview = {
   ],
   tags: ['autodocs'],
   parameters: {
-    docs: { codePanel: true },
+    docs: {
+      codePanel: true,
+      // Storybook's default jsxDecorator skips source-code emission for
+      // stories that use `render: () => …` instead of args. Forcing the
+      // dynamic source type makes it render JSX from the virtual DOM for
+      // every story, so the Kode-tab in <StorybookEmbed> stays populated.
+      source: { type: 'dynamic' },
+    },
 
     options: {
       storySort: {
