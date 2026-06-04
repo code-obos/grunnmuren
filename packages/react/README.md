@@ -16,7 +16,7 @@ npm install @obosbbl/grunnmuren-react @obosbbl/grunnmuren-tailwind
 pnpm add @obosbbl/grunnmuren-react @obosbbl/grunnmuren-tailwind
 ```
 
-Then import the Tailwind preset in your global stylesheet:
+Then import the Tailwind preset in your global stylesheet. The preset already does `@import 'tailwindcss';` internally, so you should **not** import Tailwind separately:
 
 ```css
 /* globals.css */
