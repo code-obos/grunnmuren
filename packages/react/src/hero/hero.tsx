@@ -33,8 +33,12 @@ const oneColumnLayout = [
   'lg:items-end',
 ];
 
+// Use `not-has-[video]` (tag selector) so that aspect-ratio rules also skip for video players
+// that don't expose `data-slot="video"` (e.g., MuxPlayer).
+// Aspect-ratio is applied to the `<Media>` element itself (not the img inside) so that the
+// Media box fills the grid column and consumers don't need `!important` overrides when nesting.
 const nonFullBleedAspectRatiosForSmallScreens =
-  '*:data-[slot=media]:not-has-data-[slot=video]:*:aspect-[1/1] sm:*:data-[slot=media]:not-has-data-[slot=video]:*:aspect-4/3 md:*:data-[slot=media]:not-has-data-[slot=video]:*:aspect-3/2';
+  '*:data-[slot=media]:not-has-[video]:aspect-[1/1] sm:*:data-[slot=media]:not-has-[video]:aspect-4/3 md:*:data-[slot=media]:not-has-[video]:aspect-3/2';
 
 const variants = cva({
   base: [
@@ -61,7 +65,7 @@ const variants = cva({
       standard: [
         oneColumnLayout,
         nonFullBleedAspectRatiosForSmallScreens,
-        'lg:*:data-[slot=media]:not-has-data-[slot=video]:*:aspect-2/1',
+        'lg:*:data-[slot=media]:not-has-[video]:aspect-2/1',
       ],
       'full-bleed': [
         oneColumnLayout,
@@ -90,7 +94,7 @@ const variants = cva({
         'lg:*:data-[slot=content]:gap-y-7',
         nonFullBleedAspectRatiosForSmallScreens,
         // Set media aspect ratio to 1:1 (square)
-        'lg:*:data-[slot=media]:not-has-data-[slot=video]:*:aspect-square',
+        'lg:*:data-[slot=media]:not-has-[video]:aspect-square',
       ],
     },
   },
@@ -99,6 +103,8 @@ const variants = cva({
       variant: ['standard', 'two-column'],
       className: [
         '*:data-[slot=media]:*:rounded-3xl',
+        // Make non-video media (image/picture) fill the aspect-ratio-constrained Media box
+        '*:data-[slot=media]:not-has-[video]:*:size-full',
         '*:data-[slot=carousel]:relative **:data-[slot=carousel-container]:rounded-3xl **:data-[slot=carousel-controls]:absolute **:data-[slot=carousel-controls]:right-4 **:data-[slot=carousel-controls]:bottom-4',
       ],
     },
@@ -145,9 +151,4 @@ const Hero = ({ variant, className, children, ...rest }: HeroProps) => {
   );
 };
 
-export {
-  Hero as UNSAFE_Hero,
-  HeroContext as UNSAFE_HeroContext,
-  type HeroProps as UNSAFE_HeroProps,
-  type HeroContextValue as UNSAFE_HeroContextValue,
-};
+export { Hero, HeroContext, type HeroProps, type HeroContextValue };

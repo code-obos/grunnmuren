@@ -15,7 +15,7 @@ import {
 import { Content, Heading, Media } from '../content';
 import { Description } from '../label';
 import { VideoLoop } from '../video-loop';
-import { UNSAFE_Hero as Hero } from './hero';
+import { Hero } from './hero';
 
 const meta = {
   title: 'Hero',
