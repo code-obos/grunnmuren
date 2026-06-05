@@ -23,7 +23,7 @@ import { DEFAULT_SLOT, Provider } from 'react-aria-components/slots';
 
 import { Button, ButtonContext, type ButtonProps } from '../button';
 import { MediaContext } from '../content';
-import { UNSAFE_HeroContext as HeroContext } from '../hero';
+import { HeroContext } from '../hero';
 import { _ModalButtonContextReset } from '../modal/modal';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';

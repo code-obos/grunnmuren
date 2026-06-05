@@ -3,7 +3,7 @@ import type { Meta } from '@storybook/react-vite';
 
 import { Card, CardLink } from '../card';
 import { Content, Heading, Media } from '../content';
-import { UNSAFE_Hero as Hero } from '../hero';
+import { Hero } from '../hero';
 
 const meta: Meta = {
   title: 'Layout',
