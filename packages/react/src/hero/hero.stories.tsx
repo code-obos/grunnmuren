@@ -290,3 +290,66 @@ export const FullBleedWithCarousel = () => (
     </p>
   </main>
 );
+
+// Carousel-of-Heroes pattern: <Carousel> wraps <CarouselItem><Hero variant="two-column">.
+// Locks in that Hero's aspect-ratio rules win over CarouselItem's so consumers don't
+// need `!important` overrides on <Media>.
+export const CarouselOfTwoColumnHeroes = () => (
+  <main className="bg-blue-dark py-8 text-white">
+    <Carousel loop autoPlayDelay={6000}>
+      <CarouselItemsContainer>
+        <CarouselItems>
+          <CarouselItem>
+            <div className="layout-grid-container">
+              <Hero variant="two-column">
+                <Content>
+                  <Heading level={1}>Bank på OBOS-måten</Heading>
+                  <p className="lead">
+                    Vi har satt ned renta på flere av boliglånene våre fra 2. april – og spanderer
+                    både etablerings- og tinglysingsgebyret.
+                  </p>
+                </Content>
+                <Media>
+                  <img
+                    src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/da49bd3a8e2175a547da4c69c9dbce718c077fcb-1920x1280.jpg?auto=format"
+                    alt=""
+                    width={580}
+                    height={580}
+                  />
+                </Media>
+              </Hero>
+            </div>
+          </CarouselItem>
+          <CarouselItem>
+            <div className="layout-grid-container">
+              <Hero variant="two-column">
+                <Content>
+                  <Heading level={1}>Bli medlem</Heading>
+                  <p className="lead">
+                    Få tilgang til tusenvis av forkjøpsboliger, fordeler og rabatter hos partnerne
+                    våre.
+                  </p>
+                </Content>
+                <Media>
+                  <img
+                    src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
+                    alt=""
+                    width={580}
+                    height={580}
+                    loading="lazy"
+                  />
+                </Media>
+              </Hero>
+            </div>
+          </CarouselItem>
+        </CarouselItems>
+      </CarouselItemsContainer>
+      <div className="layout-grid-container">
+        <CarouselControls className="mt-4 justify-end">
+          <CarouselButton slot="prev" color="white" />
+          <CarouselButton slot="next" color="white" />
+        </CarouselControls>
+      </div>
+    </Carousel>
+  </main>
+);
