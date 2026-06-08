@@ -147,7 +147,9 @@ const Pagination = (props: PaginationProps) => {
       {showLeftEllipsis && (
         <li className="pagination-ellipsis">
           <span aria-hidden="true">…</span>
-          <span className="sr-only">{HIDDEN_PAGES_LABEL[locale](2, visiblePages[0] - 1)}</span>
+          <span className="pagination-ellipsis-label">
+            {HIDDEN_PAGES_LABEL[locale](2, visiblePages[0] - 1)}
+          </span>
         </li>
       )}
       {visiblePages.map((p, i) => (

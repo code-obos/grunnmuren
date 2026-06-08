@@ -355,6 +355,12 @@
   @apply flex size-11 shrink-0 items-center justify-center;
 }
 
+/* Visually-hidden label inside `.pagination-ellipsis` — describes the
+   skipped page range to screen readers (e.g. "Skjuler side 2 til 6"). */
+@utility pagination-ellipsis-label {
+  @apply sr-only;
+}
+
 /** Hides the scrollbar visually */
 @utility scrollbar-hidden {
   /* For IE, Edge and Firefox */
