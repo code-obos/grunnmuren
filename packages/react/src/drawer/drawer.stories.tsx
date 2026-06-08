@@ -1,3 +1,4 @@
+import { Close } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
@@ -219,6 +220,33 @@ export const CustomZIndex: Story = {
             </Heading>
             <p>Drawer med z-index 50.</p>
             <Button slot="close">Lukk</Button>
+          </Dialog>
+        </Drawer>
+      </DialogTrigger>
+    </div>
+  ),
+};
+
+export const StickyHeader: Story = {
+  render: () => (
+    <div className="p-4">
+      <DialogTrigger>
+        <Button>Åpne lang liste</Button>
+        <Drawer>
+          <Dialog>
+            <div className="sticky top-0 z-10 -mx-4 -mt-4 flex items-center justify-between gap-x-2 bg-white px-4 pt-4 pb-3 shadow-sm">
+              <Heading level={2} className="heading-s">
+                Tilvalg
+              </Heading>
+              <Button slot="close" variant="tertiary" className="px-2.5!" aria-label="Lukk">
+                <Close />
+              </Button>
+            </div>
+            {Array.from({ length: 30 }, (_, i) => (
+              <p key={i}>
+                Tilvalg {i + 1}: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </p>
+            ))}
           </Dialog>
         </Drawer>
       </DialogTrigger>

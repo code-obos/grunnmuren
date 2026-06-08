@@ -197,7 +197,7 @@ export const Fullscreen: Story = {
       <DialogTrigger>
         <Button>Åpne fullskjerm</Button>
         <Modal fullscreen>
-          <Dialog className="p-4">
+          <Dialog>
             <Heading slot="title" level={2}>
               Fullskjerm modal
             </Heading>
@@ -216,7 +216,7 @@ export const ImageGalleryModal: Story = {
       <DialogTrigger>
         <Button>Åpne bildegalleri</Button>
         <Modal fullscreen>
-          <Dialog className="container h-full p-4">
+          <Dialog className="container h-full">
             <Heading slot="title" level={2}>
               Bildegalleri - Eksempel
             </Heading>
