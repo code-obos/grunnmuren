@@ -333,21 +333,21 @@
      prevents the hover-colour transition from flickering when rapid clicks
      change which button is active. `:not(:has(svg))` distinguishes them
      from prev/next which contain a chevron icon. */
-  & button[data-slot='button']:not(:has(svg)) {
+  & [data-slot='button']:not(:has(svg)) {
     @apply size-11 transition-none;
   }
 
   /* color="white" sets outline-white for focus — invisible on white page
      backgrounds. Force black via this higher-specificity selector so we
      don't fight cva ordering inside Button. */
-  & button[data-slot='button']:focus-visible {
+  & [data-slot='button']:focus-visible {
     @apply outline-black;
   }
 
   /* At a boundary, prev/next is rendered as a `<button>` (no href in JSX),
      and our manual aria-disabled passes through (RACButton's useButton
      forwards it, unlike RACLink which strips it). */
-  & button[data-slot='button'][aria-disabled='true'] {
+  & [data-slot='button'][aria-disabled='true'] {
     @apply cursor-default opacity-30;
 
     &:hover {
