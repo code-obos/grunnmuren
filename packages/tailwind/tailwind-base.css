@@ -312,24 +312,42 @@
      outermost page slots — see `[data-outer]` below. */
   container-type: inline-size;
 
-  /* Nested under `&` so
-     the specificity beats Button's own. */
-  & .gm-pagination-button {
+  /* Every <li> slot is fixed 44px wide and doesn't shrink — keeps the layout
+     stable when an ellipsis is swapped in for a page number. */
+  & > li {
+    @apply w-11 shrink-0;
+  }
+
+  /* Ellipsis slot — flex-centered "…" with an sr-only label describing the
+     skipped range. The label is the second span (the first has aria-hidden). */
+  & > li[data-slot='ellipsis'] {
+    @apply flex size-11 items-center justify-center;
+
+    & > span:not([aria-hidden]) {
+      @apply sr-only;
+    }
+  }
+
+  /* Page-number buttons hold text, not an icon — force a square 44×44
+     (the Button `isIconOnly` variant is for icons). `transition-none`
+     prevents the hover-colour transition from flickering when rapid clicks
+     change which button is active. `:not(:has(svg))` distinguishes them
+     from prev/next which contain a chevron icon. */
+  & button[data-slot='button']:not(:has(svg)) {
     @apply size-11 transition-none;
   }
 
   /* color="white" sets outline-white for focus — invisible on white page
-     backgrounds. Force black via these higher-specificity selectors so we
+     backgrounds. Force black via this higher-specificity selector so we
      don't fight cva ordering inside Button. */
-  & .gm-pagination-button:focus-visible,
-  & .gm-pagination-arrow:focus-visible {
+  & button[data-slot='button']:focus-visible {
     @apply outline-black;
   }
 
   /* At a boundary, prev/next is rendered as a `<button>` (no href in JSX),
      and our manual aria-disabled passes through (RACButton's useButton
      forwards it, unlike RACLink which strips it). */
-  & .gm-pagination-arrow[aria-disabled='true'] {
+  & button[data-slot='button'][aria-disabled='true'] {
     @apply cursor-default opacity-30;
 
     &:hover {
@@ -345,20 +363,6 @@
       display: none;
     }
   }
-}
-
-@utility gm-pagination-item {
-  @apply w-11 shrink-0;
-}
-
-@utility gm-pagination-ellipsis {
-  @apply flex size-11 shrink-0 items-center justify-center;
-}
-
-/* Visually-hidden label inside `.gm-pagination-ellipsis` — describes the
-   skipped page range to screen readers (e.g. "Skjuler side 2 til 6"). */
-@utility gm-pagination-ellipsis-label {
-  @apply sr-only;
 }
 
 /** Hides the scrollbar visually */
