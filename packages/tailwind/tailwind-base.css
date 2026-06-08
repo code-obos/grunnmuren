@@ -319,10 +319,12 @@
   }
 
   /* Ellipsis slot — flex-centered "…" with an sr-only label describing the
-     skipped range. The label is the second span (the first has aria-hidden). */
+     skipped range. */
   & > li[data-slot='ellipsis'] {
     @apply flex size-11 items-center justify-center;
 
+    /* The label span is the one without `aria-hidden` (the visible "…" has
+       it). Selecting via the attribute absence avoids adding another marker. */
     & > span:not([aria-hidden]) {
       @apply sr-only;
     }
