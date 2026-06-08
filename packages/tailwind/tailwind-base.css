@@ -300,6 +300,73 @@
   @apply ring-focus ring-offset-2;
 }
 
+/*** Pagination component styles
+ *
+ * These have to sit in the utilities layer (not `@layer components`) because
+ * they override Button's cva-generated utility classes — `.transition-colors`
+ * and `.outline-white`. Rules in the components layer are emitted before
+ * utilities and always lose the cascade regardless of selector specificity. */
+@utility gm-pagination {
+  @apply flex items-center justify-center gap-2;
+  /* The list is the container that drives the responsive hide of the
+     outermost page slots — see `[data-outer]` below. */
+  container-type: inline-size;
+
+  /* Every <li> slot is fixed 44px wide and doesn't shrink — keeps the layout
+     stable when an ellipsis is swapped in for a page number. */
+  & > li {
+    @apply w-11 shrink-0;
+  }
+
+  /* Ellipsis slot — flex-centered "…" with an sr-only label describing the
+     skipped range. */
+  & > li[data-slot='ellipsis'] {
+    @apply flex size-11 items-center justify-center;
+
+    /* The label span is the one without `aria-hidden` (the visible "…" has
+       it). Selecting via the attribute absence avoids adding another marker. */
+    & > span:not([aria-hidden]) {
+      @apply sr-only;
+    }
+  }
+
+  /* Page-number buttons hold text, not an icon — force a square 44×44
+     (the Button `isIconOnly` variant is for icons). `transition-none`
+     prevents the hover-colour transition from flickering when rapid clicks
+     change which button is active. `:not(:has(svg))` distinguishes them
+     from prev/next which contain a chevron icon. */
+  & [data-slot='button']:not(:has(svg)) {
+    @apply size-11 transition-none;
+  }
+
+  /* color="white" sets outline-white for focus — invisible on white page
+     backgrounds. Force black via this higher-specificity selector so we
+     don't fight cva ordering inside Button. */
+  & [data-slot='button']:focus-visible {
+    @apply outline-black;
+  }
+
+  /* At a boundary, prev/next is rendered as a `<button>` (no href in JSX),
+     and our manual aria-disabled passes through (RACButton's useButton
+     forwards it, unlike RACLink which strips it). */
+  & [data-slot='button'][aria-disabled='true'] {
+    @apply cursor-default opacity-30;
+
+    &:hover {
+      @apply bg-white;
+    }
+  }
+
+  /* When the list is narrower than its full 8-slot width (~408px), hide the
+     two outermost page items — `data-outer` is set in JS on the visiblePages
+     entries farthest from the current page. */
+  @container (max-width: 27rem) {
+    & [data-outer] {
+      display: none;
+    }
+  }
+}
+
 /** Hides the scrollbar visually */
 @utility scrollbar-hidden {
   /* For IE, Edge and Firefox */
