@@ -1,6 +1,6 @@
 ---
-'@obosbbl/grunnmuren-react': minor
-'@obosbbl/grunnmuren-tailwind': minor
+'@obosbbl/grunnmuren-react': patch
+'@obosbbl/grunnmuren-tailwind': patch
 ---
 
 Add `UNSAFE_Pagination` component (beta) and supporting `pagination` and `pagination-ellipsis` utility classes.
