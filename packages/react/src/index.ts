@@ -23,6 +23,7 @@ export * from './link';
 export * from './link-list';
 export * from './modal';
 export * from './numberfield';
+export { UNSAFE_Pagination, type UNSAFE_PaginationProps } from './pagination';
 export * from './radiogroup';
 export * from './select';
 export * from './stepper';

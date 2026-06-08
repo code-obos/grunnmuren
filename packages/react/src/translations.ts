@@ -39,6 +39,21 @@ const translations: Translations = {
     sv: 'Nästa',
     en: 'Next',
   },
+  pagination: {
+    nb: 'Paginering',
+    sv: 'Paginering',
+    en: 'Pagination',
+  },
+  previousPage: {
+    nb: 'Forrige side',
+    sv: 'Föregående sida',
+    en: 'Previous page',
+  },
+  nextPage: {
+    nb: 'Neste side',
+    sv: 'Nästa sida',
+    en: 'Next page',
+  },
   carousel: {
     nb: 'Karusell',
     sv: 'Karusell',

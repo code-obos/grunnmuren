@@ -300,6 +300,61 @@
   @apply ring-focus ring-offset-2;
 }
 
+/*** Pagination component styles
+ *
+ * These have to sit in the utilities layer (not `@layer components`) because
+ * they override Button's cva-generated utility classes — `.transition-colors`
+ * and `.outline-white`. Rules in the components layer are emitted before
+ * utilities and always lose the cascade regardless of selector specificity. */
+@utility pagination {
+  @apply flex items-center justify-center gap-2;
+  /* The list is the container that drives the responsive hide of the
+     outermost page slots — see `[data-outer]` below. */
+  container-type: inline-size;
+
+  /* Nested under `&` so
+     the specificity beats Button's own. */
+  & .pagination-button {
+    @apply size-11 transition-none;
+  }
+
+  /* color="white" sets outline-white for focus — invisible on white page
+     backgrounds. Force black via these higher-specificity selectors so we
+     don't fight cva ordering inside Button. */
+  & .pagination-button:focus-visible,
+  & .pagination-arrow:focus-visible {
+    @apply outline-black;
+  }
+
+  /* At a boundary, prev/next is rendered as a `<button>` (no href in JSX),
+     and our manual aria-disabled passes through (RACButton's useButton
+     forwards it, unlike RACLink which strips it). */
+  & .pagination-arrow[aria-disabled='true'] {
+    @apply cursor-default opacity-30;
+
+    &:hover {
+      @apply bg-white;
+    }
+  }
+
+  /* When the list is narrower than its full 8-slot width (~408px), hide the
+     two outermost page items — `data-outer` is set in JS on the visiblePages
+     entries farthest from the current page. */
+  @container (max-width: 27rem) {
+    & [data-outer] {
+      display: none;
+    }
+  }
+}
+
+@utility pagination-item {
+  @apply w-11 shrink-0;
+}
+
+@utility pagination-ellipsis {
+  @apply flex size-11 shrink-0 items-center justify-center;
+}
+
 /** Hides the scrollbar visually */
 @utility scrollbar-hidden {
   /* For IE, Edge and Firefox */
