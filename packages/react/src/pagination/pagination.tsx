@@ -112,8 +112,8 @@ const Pagination = (props: PaginationProps) => {
   }, [currentPage]);
 
   return (
-    <ol aria-label={translations.pagination[locale]} className={cx('pagination', className)}>
-      <li className="pagination-item">
+    <ol aria-label={translations.pagination[locale]} className={cx('gm-pagination', className)}>
+      <li className="gm-pagination-item">
         {/* Active: <a href>. Boundary: <button aria-disabled>. We use manual
             aria-disabled (not RAC's isDisabled) so the boundary state keeps
             HTML focusability — isDisabled on a button sets the HTML disabled
@@ -121,7 +121,7 @@ const Pagination = (props: PaginationProps) => {
         <Button
           aria-disabled={!canGoPrev}
           aria-label={translations.previousPage[locale]}
-          className="pagination-arrow"
+          className="gm-pagination-arrow"
           color="white"
           href={canGoPrev ? getItemHref(currentPage - 1) : undefined}
           isIconOnly
@@ -145,9 +145,9 @@ const Pagination = (props: PaginationProps) => {
         page={1}
       />
       {showLeftEllipsis && (
-        <li className="pagination-ellipsis">
+        <li className="gm-pagination-ellipsis">
           <span aria-hidden="true">…</span>
-          <span className="pagination-ellipsis-label">
+          <span className="gm-pagination-ellipsis-label">
             {HIDDEN_PAGES_LABEL[locale](2, visiblePages[0] - 1)}
           </span>
         </li>
@@ -162,11 +162,11 @@ const Pagination = (props: PaginationProps) => {
           page={p}
         />
       ))}
-      <li className="pagination-item">
+      <li className="gm-pagination-item">
         <Button
           aria-disabled={!canGoNext}
           aria-label={translations.nextPage[locale]}
-          className="pagination-arrow"
+          className="gm-pagination-arrow"
           color="white"
           href={canGoNext ? getItemHref(currentPage + 1) : undefined}
           isIconOnly
@@ -197,10 +197,10 @@ type PageItemProps = {
 
 const PageItem = ({ page, isActive, isOuter, getItemHref, onChange }: PageItemProps) => {
   return (
-    <li className="pagination-item" data-outer={isOuter || undefined}>
+    <li className="gm-pagination-item" data-outer={isOuter || undefined}>
       <Button
         aria-current={isActive ? 'page' : undefined}
-        className="pagination-button"
+        className="gm-pagination-button"
         color={isActive ? 'blue' : 'white'}
         href={getItemHref(page)}
         onPress={() => onChange?.(page)}

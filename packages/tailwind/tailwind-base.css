@@ -306,7 +306,7 @@
  * they override Button's cva-generated utility classes — `.transition-colors`
  * and `.outline-white`. Rules in the components layer are emitted before
  * utilities and always lose the cascade regardless of selector specificity. */
-@utility pagination {
+@utility gm-pagination {
   @apply flex items-center justify-center gap-2;
   /* The list is the container that drives the responsive hide of the
      outermost page slots — see `[data-outer]` below. */
@@ -314,22 +314,22 @@
 
   /* Nested under `&` so
      the specificity beats Button's own. */
-  & .pagination-button {
+  & .gm-pagination-button {
     @apply size-11 transition-none;
   }
 
   /* color="white" sets outline-white for focus — invisible on white page
      backgrounds. Force black via these higher-specificity selectors so we
      don't fight cva ordering inside Button. */
-  & .pagination-button:focus-visible,
-  & .pagination-arrow:focus-visible {
+  & .gm-pagination-button:focus-visible,
+  & .gm-pagination-arrow:focus-visible {
     @apply outline-black;
   }
 
   /* At a boundary, prev/next is rendered as a `<button>` (no href in JSX),
      and our manual aria-disabled passes through (RACButton's useButton
      forwards it, unlike RACLink which strips it). */
-  & .pagination-arrow[aria-disabled='true'] {
+  & .gm-pagination-arrow[aria-disabled='true'] {
     @apply cursor-default opacity-30;
 
     &:hover {
@@ -347,17 +347,17 @@
   }
 }
 
-@utility pagination-item {
+@utility gm-pagination-item {
   @apply w-11 shrink-0;
 }
 
-@utility pagination-ellipsis {
+@utility gm-pagination-ellipsis {
   @apply flex size-11 shrink-0 items-center justify-center;
 }
 
-/* Visually-hidden label inside `.pagination-ellipsis` — describes the
+/* Visually-hidden label inside `.gm-pagination-ellipsis` — describes the
    skipped page range to screen readers (e.g. "Skjuler side 2 til 6"). */
-@utility pagination-ellipsis-label {
+@utility gm-pagination-ellipsis-label {
   @apply sr-only;
 }
 
