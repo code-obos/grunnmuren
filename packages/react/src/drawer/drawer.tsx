@@ -16,10 +16,10 @@ const drawerVariants = cva({
   base: ['fixed overflow-auto bg-white text-left shadow-xl', 'motion-reduce:animate-none'],
   variants: {
     placement: {
-      right: 'top-0 right-0 h-dvh w-full max-w-md rounded-l-2xl p-4',
-      left: 'top-0 left-0 h-dvh w-full max-w-md rounded-r-2xl p-4',
-      top: 'inset-x-0 top-0 max-h-[80dvh] w-full rounded-b-2xl p-4',
-      bottom: 'inset-x-0 bottom-0 max-h-[80dvh] w-full rounded-t-2xl p-4',
+      right: 'top-0 right-0 h-dvh w-full max-w-md rounded-l-2xl',
+      left: 'top-0 left-0 h-dvh w-full max-w-md rounded-r-2xl',
+      top: 'inset-x-0 top-0 max-h-[80dvh] w-full rounded-b-2xl',
+      bottom: 'inset-x-0 bottom-0 max-h-[80dvh] w-full rounded-t-2xl',
     },
     isEntering: {
       true: 'animate-in duration-300 ease-out',

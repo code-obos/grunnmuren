@@ -118,7 +118,7 @@ const Modal = ({
             cx(
               className,
               'overflow-auto bg-white text-left shadow-xl',
-              fullscreen ? 'fixed inset-0' : 'w-full max-w-md rounded-2xl p-4 align-middle',
+              fullscreen ? 'fixed inset-0' : 'w-full max-w-md rounded-2xl align-middle',
               isEntering && 'zoom-in-95 animate-in duration-300 ease-out',
               isExiting && 'zoom-out-95 animate-out duration-200 ease-in',
               // Using the motion-safe class does not work, so we use motion-reduce to overwrite instead
@@ -140,7 +140,7 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
     {...restProps}
     className={cx(
       className,
-      'relative flex flex-col gap-y-5 outline-none',
+      'relative flex flex-col gap-y-5 p-4 outline-none',
       // Footer
       '**:data-[slot="footer"]:flex **:data-[slot="footer"]:gap-x-2',
     )}
