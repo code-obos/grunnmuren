@@ -111,15 +111,27 @@ function RootLayout() {
         // This integrates RAC/Grunnmuren with TanStack router
         // Giving us typesafe routes
         // See https://react-spectrum.adobe.com/react-aria/routing.html#tanstack-router
-        navigate={(href, options) =>
-          router.navigate({
+        navigate={(href, options) => {
+          // String hrefs (absolute URLs or static asset paths like /resources/...) must
+          // bypass TanStack — spreading a string into navigate options silently falls back
+          // to the current location.
+          if (typeof href === 'string') {
+            if (URL.canParse(href)) {
+              window.location.href = href;
+              return;
+            }
+            void router.navigate({ to: href, ...options });
+            return;
+          }
+          void router.navigate({
             ...href,
             ...options,
-          })
-        }
+          });
+        }}
         useHref={(href) => {
-          // If it's an absolute URL, return it as it is instead of building a tanstack link
-          if (typeof href === 'string' && URL.canParse(href)) {
+          // String hrefs (absolute URLs, static asset paths) are passed through unchanged;
+          // only the ToOptions object form should be resolved via TanStack.
+          if (typeof href === 'string') {
             return href;
           }
           return router.buildLocation({ ...href }).href;
