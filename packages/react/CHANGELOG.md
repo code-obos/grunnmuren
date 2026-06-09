@@ -1,5 +1,35 @@
 # @obosbbl/grunnmuren-react
 
+## 3.8.0
+
+### Minor Changes
+
+- 5cec3c1: Declare `@obosbbl/grunnmuren-tailwind` as a peer dependency. Consumers must install both packages.
+- dcbac1f: Hero: out of BETA 🚀
+
+  The `UNSAFE_` prefix has been removed from `Hero` (and its context/props types). Update your imports:
+
+  ### Before
+
+  ```tsx
+  import { UNSAFE_Hero as Hero } from "@obosbbl/grunnmuren-react";
+  ```
+
+  ### Now
+
+  ```tsx
+  import { Hero } from "@obosbbl/grunnmuren-react";
+  ```
+
+  Also in this release:
+  - Aspect-ratio rules now skip media that contains any `<video>` element, not just `data-slot="video"` — so other video players (e.g., MuxPlayer) work out of the box.
+  - Aspect-ratio is now applied to the `<Media>` element itself (instead of the `<img>` inside), so consumers no longer need `!important` overrides when `<Media>` is deeply nested (e.g., inside a `<CarouselItem>`).
+
+### Patch Changes
+
+- b5cd440: `UNSAFE_Modal` / `UNSAFE_Drawer`: padding moved from the scroll container to `UNSAFE_Dialog`. Default appearance is unchanged, but consumers who used to override container padding can now drop that workaround. Fullscreen modals now get the same default padding as non-fullscreen.
+- 1742da7: Add `UNSAFE_Pagination` component (beta) and supporting `pagination` and `pagination-ellipsis` utility classes.
+
 ## 3.7.0
 
 ### Minor Changes

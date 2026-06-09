@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.4.11
+
+### Patch Changes
+
+- 1742da7: Add `UNSAFE_Pagination` component (beta) and supporting `pagination` and `pagination-ellipsis` utility classes.
+
 ## 2.4.10
 
 ### Patch Changes
