@@ -1,6 +1,6 @@
 import { Close } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
-import { useCallback, useContext, useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import {
   Button as RACButton,
   type ButtonProps as RACButtonProps,
@@ -50,43 +50,6 @@ const ToggletipTrigger = ({ variant, className, ...restProps }: ToggletipTrigger
   />
 );
 
-const TABBABLE_SELECTOR =
-  'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
-
-const useTabToClose = (close: () => void) => {
-  const dialogRef = useRef<HTMLElement>(null);
-
-  // RAC's Dialog focuses the dialog container; move focus to the close button.
-  useEffect(() => {
-    dialogRef.current?.querySelector<HTMLButtonElement>('button')?.focus();
-  }, []);
-
-  // Tab from the last element should close, not loop. RAC's FocusScope contains
-  // focus via a keydown listener on `document`; ours runs first (on the dialog)
-  // and stops propagation so it never reaches FocusScope.
-  useEffect(() => {
-    const dialog = dialogRef.current;
-    if (!dialog) {
-      return;
-    }
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key !== 'Tab' || event.shiftKey) {
-        return;
-      }
-      const tabbables = dialog.querySelectorAll<HTMLElement>(TABBABLE_SELECTOR);
-      if (document.activeElement === tabbables[tabbables.length - 1]) {
-        event.preventDefault();
-        event.stopPropagation();
-        close();
-      }
-    };
-    dialog.addEventListener('keydown', handleKeyDown);
-    return () => dialog.removeEventListener('keydown', handleKeyDown);
-  }, [close]);
-
-  return dialogRef;
-};
-
 type ToggletipContentProps = Omit<RACPopoverProps, 'children'> & {
   /** Accessible label for the dialog. Required, since the content has no heading. */
   'aria-label': string;
@@ -99,16 +62,21 @@ const ToggletipDialog = ({
 }: Pick<ToggletipContentProps, 'aria-label' | 'children'>) => {
   const locale = useLocale();
   const state = useContext(OverlayTriggerStateContext);
-  const close = useCallback(() => state?.close(), [state]);
-  const dialogRef = useTabToClose(close);
+  const closeButtonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
+
+  // RAC's Dialog focuses the dialog container; move focus to the close button.
+  useEffect(() => {
+    closeButtonRef.current?.focus();
+  }, []);
+
   return (
-    <RACDialog aria-label={ariaLabel} data-slot="toggletip-dialog" ref={dialogRef}>
-      {/* First in the DOM so useTabToClose focuses it on open. */}
+    <RACDialog aria-label={ariaLabel} data-slot="toggletip-dialog">
       <Button
         aria-label={translations.close[locale]}
         color="white"
         isIconOnly
-        onPress={close}
+        onPress={() => state?.close()}
+        ref={closeButtonRef}
         variant="tertiary"
       >
         <Close />
