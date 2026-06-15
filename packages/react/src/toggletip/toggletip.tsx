@@ -1,5 +1,5 @@
 import { Close } from '@obosbbl/grunnmuren-icons-react';
-import { cva, cx, type VariantProps } from 'cva';
+import { cx } from 'cva';
 import { useCallback, useContext, useEffect, useRef } from 'react';
 import {
   Button as RACButton,
@@ -31,39 +31,24 @@ type ToggletipProps = RACDialogTriggerProps;
  */
 const Toggletip = (props: ToggletipProps) => <RACDialogTrigger {...props} />;
 
-const triggerVariants = cva({
-  base: ['cursor-pointer', 'data-focus-visible:outline-focus-offset'],
-  variants: {
-    /**
-     * - `default`: a 44x44 icon button (pass the icon as children).
-     * - `definition`: an inline term with a dashed underline, highlighted
-     *   yellow while the toggletip is open.
-     * @default default
-     */
-    variant: {
-      default:
-        'text-blue-dark inline-grid size-11 place-content-center rounded-full [&>svg]:size-6',
-      definition:
-        'aria-expanded:bg-yellow rounded-xs underline decoration-dashed decoration-1 underline-offset-4',
-    },
-  },
-  defaultVariants: {
-    variant: 'default',
-  },
-});
-
-type ToggletipTriggerProps = Omit<RACButtonProps, 'children' | 'className'> &
-  VariantProps<typeof triggerVariants> & {
-    children: React.ReactNode;
-    /** Additional class name for the trigger button. */
-    className?: string;
-  };
+type ToggletipTriggerProps = Omit<RACButtonProps, 'children' | 'className'> & {
+  children: React.ReactNode;
+  /**
+   * Visual style of the trigger. `default` is a 44x44 icon button (pass the
+   * icon as children); `definition` is an inline term with a dashed underline.
+   * @default default
+   */
+  variant?: 'default' | 'definition';
+  /** Additional class name for the trigger button. */
+  className?: string;
+};
 
 /**
  * The button that toggles the toggletip. Always a `<button>` (toggling a dialog
  * is an action, not navigation). The `default` variant is an icon button and
  * needs an `aria-label`; the `definition` variant renders its children as an
- * inline, dashed-underlined term.
+ * inline, dashed-underlined term. The variant is exposed as `data-variant` for
+ * styling.
  */
 const ToggletipTrigger = ({
   variant = 'default',
@@ -72,7 +57,7 @@ const ToggletipTrigger = ({
 }: ToggletipTriggerProps) => (
   <RACButton
     {...restProps}
-    className={cx(triggerVariants({ variant }), className)}
+    className={cx('gm-toggletip-trigger', className)}
     data-variant={variant}
   />
 );
@@ -145,17 +130,10 @@ const ToggletipDialog = ({
   // Tab from the last focusable element closes instead of looping (see useTabToClose).
   const dialogRef = useTabToClose(close);
   return (
-    <RACDialog
-      aria-label={ariaLabel}
-      className="bg-blue-dark relative rounded-lg p-4 pr-12 text-white outline-none"
-      ref={dialogRef}
-    >
+    <RACDialog aria-label={ariaLabel} data-slot="toggletip-dialog" ref={dialogRef}>
       {/* Rendered first so it's the close button useTabToClose focuses on open. */}
       <Button
         aria-label={translations.close[locale]}
-        // Inset focus ring (white from color="white") so it sits inside the
-        // button, clear of the popover edge.
-        className="absolute top-1 right-1 focus-visible:-outline-offset-4!"
         color="white"
         isIconOnly
         onPress={close}
@@ -181,18 +159,11 @@ const ToggletipContent = ({
 }: ToggletipContentProps) => (
   <RACPopover
     {...restProps}
-    className={cx(
-      'max-w-72', // 288px
-      'data-entering:fade-in data-exiting:fade-out data-entering:animate-in data-exiting:animate-out motion-reduce:animate-none',
-      className as string | undefined,
-    )}
-    // 8px gap between the trigger and the popover.
+    className={cx('gm-toggletip', className as string | undefined)}
     offset={8}
   >
-    {/* The arrow points up by default (placement bottom); rotate it to point at
-        the trigger for the other placements. */}
-    <RACOverlayArrow className="data-[placement=left]:[&>svg]:rotate-90 data-[placement=right]:[&>svg]:-rotate-90 data-[placement=top]:[&>svg]:rotate-180">
-      <svg className="fill-blue-dark block" height={8} viewBox="0 0 16 8" width={16}>
+    <RACOverlayArrow data-slot="toggletip-arrow">
+      <svg height={8} viewBox="0 0 16 8" width={16}>
         <path d="M0 8 L8 0 L16 8 Z" />
       </svg>
     </RACOverlayArrow>

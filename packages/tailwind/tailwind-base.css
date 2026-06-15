@@ -367,6 +367,81 @@
   }
 }
 
+/*** Toggletip component styles
+ *
+ * Like Pagination, these sit in the utilities layer because the close button is
+ * a Button whose cva-generated focus utility (outline-offset) we override — and
+ * rules in the components layer always lose the cascade to utilities. */
+@utility gm-toggletip-trigger {
+  @apply cursor-pointer;
+
+  &[data-focus-visible] {
+    @apply outline-focus-offset;
+  }
+
+  /* Icon-button variant — 44×44 click area. */
+  &[data-variant='default'] {
+    @apply text-blue-dark inline-grid size-11 place-content-center rounded-full;
+
+    & > svg {
+      @apply size-6;
+    }
+  }
+
+  /* Definition variant — an inline term with a dashed underline, highlighted
+     yellow while the toggletip is open. */
+  &[data-variant='definition'] {
+    @apply rounded-xs underline decoration-dashed decoration-1 underline-offset-4;
+
+    &[aria-expanded='true'] {
+      @apply bg-yellow;
+    }
+  }
+}
+
+@utility gm-toggletip {
+  @apply max-w-72; /* 288px */
+  @apply motion-reduce:animate-none;
+
+  &[data-entering] {
+    @apply fade-in animate-in;
+  }
+
+  &[data-exiting] {
+    @apply fade-out animate-out;
+  }
+
+  /* The arrow points up by default (placement bottom); rotate it to point at
+     the trigger for the other placements. */
+  & [data-slot='toggletip-arrow'] > svg {
+    @apply fill-blue-dark block;
+  }
+  & [data-slot='toggletip-arrow'][data-placement='top'] > svg {
+    @apply rotate-180;
+  }
+  & [data-slot='toggletip-arrow'][data-placement='left'] > svg {
+    @apply rotate-90;
+  }
+  & [data-slot='toggletip-arrow'][data-placement='right'] > svg {
+    @apply -rotate-90;
+  }
+
+  /* Dialog body. */
+  & [data-slot='toggletip-dialog'] {
+    @apply bg-blue-dark relative rounded-lg p-4 pr-12 text-white outline-none;
+  }
+
+  /* Close button — positioned top-right with an inset white focus ring (white
+     from color="white") so it sits inside the button, clear of the popover edge. */
+  & [data-slot='toggletip-dialog'] > [data-slot='button'] {
+    @apply absolute top-1 right-1;
+
+    &:focus-visible {
+      @apply -outline-offset-4;
+    }
+  }
+}
+
 /** Hides the scrollbar visually */
 @utility scrollbar-hidden {
   /* For IE, Edge and Firefox */
