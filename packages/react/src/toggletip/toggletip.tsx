@@ -23,25 +23,15 @@ import { useLocale } from '../use-locale';
 
 type ToggletipProps = RACDialogTriggerProps;
 
-/**
- * Root of the toggletip. Wraps a `<ToggletipTrigger>` and a `<ToggletipContent>`,
- * and manages the open/close state. Only one toggletip can be open at a time:
- * opening another (or clicking anywhere outside) dismisses the current one,
- * which comes for free from the underlying popover's click-outside behaviour.
- */
+/** Root of the toggletip. Wraps a `<ToggletipTrigger>` and a `<ToggletipContent>`. */
 const Toggletip = (props: ToggletipProps) => <RACDialogTrigger {...props} />;
 
 type ToggletipTriggerProps = Omit<RACButtonProps, 'children' | 'className'> & {
   children: React.ReactNode;
   /**
-   * Optional visual preset for the trigger:
-   * - `definition` — an inline term with a dashed underline, highlighted yellow
-   *   while the toggletip is open.
-   * - `info` — a 44x44 icon button (pass the icon as children).
-   *
-   * When omitted, the trigger only carries the base button behaviour and focus
-   * ring — the appearance and children are entirely up to the consumer. The
-   * value is exposed as `data-variant` for styling.
+   * Visual preset: `definition` (an inline, dashed-underlined term) or `info`
+   * (a 44x44 icon button). Omit it to style the trigger yourself — children and
+   * appearance are then up to you.
    */
   variant?: 'definition' | 'info';
   /** Additional class name for the trigger button. */
@@ -49,8 +39,7 @@ type ToggletipTriggerProps = Omit<RACButtonProps, 'children' | 'className'> & {
 };
 
 /**
- * The button that toggles the toggletip. Always a `<button>` (toggling a dialog
- * is an action, not navigation), and needs an accessible name — `aria-label`
+ * The button that toggles the toggletip. Needs an accessible name — `aria-label`
  * for an icon, or the visible text for a definition term.
  */
 const ToggletipTrigger = ({ variant, className, ...restProps }: ToggletipTriggerProps) => (
@@ -61,30 +50,20 @@ const ToggletipTrigger = ({ variant, className, ...restProps }: ToggletipTrigger
   />
 );
 
-// Matches the elements RAC's FocusScope considers tabbable, so we can detect
-// when focus is on the last one.
 const TABBABLE_SELECTOR =
   'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-/**
- * RAC's `Dialog` wraps its content in a `FocusScope` that contains focus —
- * `Tab` from the last element loops back to the first. For a toggletip we want
- * the opposite: tabbing past the content dismisses it and returns focus to the
- * trigger. FocusScope handles `Tab` via a `keydown` listener on `document` in
- * the bubble phase. We attach our own listener on the dialog element (a
- * descendant of `document`, so it fires first) and `stopPropagation()` to keep
- * the event from reaching FocusScope — letting us close instead of looping.
- */
 const useTabToClose = (close: () => void) => {
   const dialogRef = useRef<HTMLElement>(null);
 
-  // RAC's Dialog moves initial focus to the dialog container. The spec wants
-  // the close button focused instead, so we move it there once on open. It's
-  // the first button in the dialog.
+  // RAC's Dialog focuses the dialog container; move focus to the close button.
   useEffect(() => {
     dialogRef.current?.querySelector<HTMLButtonElement>('button')?.focus();
   }, []);
 
+  // Tab from the last element should close, not loop. RAC's FocusScope contains
+  // focus via a keydown listener on `document`; ours runs first (on the dialog)
+  // and stops propagation so it never reaches FocusScope.
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) {
@@ -95,8 +74,7 @@ const useTabToClose = (close: () => void) => {
         return;
       }
       const tabbables = dialog.querySelectorAll<HTMLElement>(TABBABLE_SELECTOR);
-      const last = tabbables[tabbables.length - 1];
-      if (last && document.activeElement === last) {
+      if (document.activeElement === tabbables[tabbables.length - 1]) {
         event.preventDefault();
         event.stopPropagation();
         close();
@@ -105,20 +83,16 @@ const useTabToClose = (close: () => void) => {
     dialog.addEventListener('keydown', handleKeyDown);
     return () => dialog.removeEventListener('keydown', handleKeyDown);
   }, [close]);
+
   return dialogRef;
 };
 
 type ToggletipContentProps = Omit<RACPopoverProps, 'children'> & {
-  /** Accessible label for the dialog. Required, since the content is informational and has no heading. */
+  /** Accessible label for the dialog. Required, since the content has no heading. */
   'aria-label': string;
   children: React.ReactNode;
 };
 
-/**
- * The dialog inside the popover. Reads the overlay state from context to wire up
- * the close button and the tab-to-close handler. Split out from
- * `ToggletipContent` so it can consume the context the `Popover` provides.
- */
 const ToggletipDialog = ({
   'aria-label': ariaLabel,
   children,
@@ -126,11 +100,10 @@ const ToggletipDialog = ({
   const locale = useLocale();
   const state = useContext(OverlayTriggerStateContext);
   const close = useCallback(() => state?.close(), [state]);
-  // Tab from the last focusable element closes instead of looping (see useTabToClose).
   const dialogRef = useTabToClose(close);
   return (
     <RACDialog aria-label={ariaLabel} data-slot="toggletip-dialog" ref={dialogRef}>
-      {/* Rendered first so it's the close button useTabToClose focuses on open. */}
+      {/* First in the DOM so useTabToClose focuses it on open. */}
       <Button
         aria-label={translations.close[locale]}
         color="white"
@@ -145,11 +118,7 @@ const ToggletipDialog = ({
   );
 };
 
-/**
- * The popover content of the toggletip. Renders a `Dialog` (with `aria-label`)
- * inside a `Popover`, plus a close button that receives initial focus when the
- * toggletip opens.
- */
+/** The popover content of the toggletip: a `Dialog` (with `aria-label`) and a close button. */
 const ToggletipContent = ({
   'aria-label': ariaLabel,
   children,
