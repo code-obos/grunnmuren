@@ -100,3 +100,65 @@ export const WithLink = () => (
     på nettsidene våre.
   </p>
 );
+
+/**
+ * A `definition` toggletip placed roughly in the middle of a long running text
+ * (about 800px / 50rem tall), to check how the popover positions itself within a
+ * real document flow.
+ */
+export const InRunningText = () => (
+  <div className="max-w-prose text-base [&_p]:mb-4">
+    <p>
+      Å kjøpe sin første bolig er en av de største økonomiske beslutningene de fleste tar. Før du
+      legger inn bud, er det lurt å sette seg inn i hva slags eierform boligen har, hva
+      felleskostnadene dekker, og hvilke rettigheter og plikter som følger med. Eierformen påvirker
+      både prisen, finansieringen og hverdagen din som beboer.
+    </p>
+    <p>
+      I Norge er de to vanligste eierformene selveier og andel. En selveierbolig betyr at du eier
+      boligen din direkte, ofte som en seksjon i et eierseksjonssameie. Du står da fritt til å
+      selge, leie ut og pantsette boligen innenfor lovens rammer, og du betaler eiendomsskatt og
+      fellesutgifter til sameiet.
+    </p>
+    <p>
+      Boligen i dette eksempelet selges derimot som et{' '}
+      <Toggletip>
+        <ToggletipTrigger variant="definition">borettslag</ToggletipTrigger>
+        <ToggletipContent aria-label="Forklaring av borettslag">
+          Et borettslag er et selskap som eier en eller flere boligeiendommer, der du kjøper en
+          andel som gir deg borett til en bestemt bolig.
+        </ToggletipContent>
+      </Toggletip>
+      . Det betyr at du kjøper en andel i selskapet framfor selve boligen, og at andelen gir deg
+      rett til å bo i en bestemt leilighet. Denne forskjellen har betydning både for hvordan kjøpet
+      finansieres og for hvilke avgjørelser fellesskapet tar sammen.
+    </p>
+    <p>
+      Mange borettslag har det som kalles fellesgjeld. Det er lån som hele laget står ansvarlig for,
+      og din andel av denne gjelda betjenes gjennom de månedlige felleskostnadene. Prisen du ser i
+      en annonse, er gjerne innskuddet — det du faktisk betaler for andelen — mens den totale prisen
+      også inkluderer din andel av fellesgjelda. Det er derfor viktig å se på begge tallene når du
+      sammenligner boliger.
+    </p>
+    <p>
+      Felleskostnadene varierer mye fra lag til lag. De dekker som regel vedlikehold av
+      fellesarealer, forsikring av bygningene, renovasjon, og ofte oppvarming og vann. I noen lag
+      inngår også kabel-TV og internett. En lav felleskostnad er ikke nødvendigvis et godt tegn
+      dersom laget har et stort vedlikeholdsetterslep, for da kan kostnadene øke betydelig i årene
+      som kommer.
+    </p>
+    <p>
+      Før du kjøper, bør du lese gjennom årsregnskapet, vedtektene og eventuelle referater fra
+      generalforsamlingen. Disse dokumentene forteller mye om økonomien i laget, planlagte
+      prosjekter og hvordan fellesskapet fungerer. En godt drevet forening med en sunn økonomi gir
+      trygghet og forutsigbarhet, mens et lag med dårlig vedlikehold og høy gjeld kan gi ubehagelige
+      overraskelser.
+    </p>
+    <p>
+      Til slutt er det verdt å huske at du som andelseier også får et ansvar. Du deltar på
+      generalforsamlingen, er med på å bestemme hvordan laget skal driftes, og bidrar til
+      fellesskapet. For mange er nettopp dette en av fordelene med å bo i borettslag: du står ikke
+      alene om de store avgjørelsene, og vedlikeholdet av bygningene er et felles ansvar.
+    </p>
+  </div>
+);
