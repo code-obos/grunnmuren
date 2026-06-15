@@ -56,28 +56,6 @@ export const IconTrigger = () => (
 );
 
 /**
- * Without a `variant`, `ToggletipTrigger` only carries the button behaviour and
- * focus ring — the children and styling are entirely up to you. Here the trigger
- * is a small custom-styled button.
- */
-export const CustomTrigger = () => (
-  <span className="inline-flex items-center gap-2 text-base">
-    Leveringstid
-    <Toggletip>
-      <ToggletipTrigger
-        aria-label="Mer om leveringstid"
-        className="bg-blue-dark rounded-full px-2 py-0.5 text-sm text-white"
-      >
-        Hva betyr dette?
-      </ToggletipTrigger>
-      <ToggletipContent aria-label="Mer om leveringstid">
-        Leveringstid er antall virkedager fra bestilling til boligen er klar for innflytting.
-      </ToggletipContent>
-    </Toggletip>
-  </span>
-);
-
-/**
  * The popover positions itself relative to the trigger and flips automatically
  * when there isn't room. Use the `placement` prop to set a preferred side.
  */

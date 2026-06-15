@@ -379,9 +379,13 @@
     @apply outline-focus-offset;
   }
 
-  /* Info variant — a 44×44 icon button. */
+  /* Info variant — a 44×44 icon button with an inset focus ring. */
   &[data-variant='info'] {
     @apply text-blue-dark inline-grid size-11 place-content-center rounded-full;
+
+    &[data-focus-visible] {
+      @apply outline-focus-inset;
+    }
 
     & > svg {
       @apply size-6;
