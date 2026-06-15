@@ -32,7 +32,7 @@ type ToggletipProps = RACDialogTriggerProps;
 const Toggletip = (props: ToggletipProps) => <RACDialogTrigger {...props} />;
 
 const triggerVariants = cva({
-  base: ['cursor-pointer outline-none', 'data-focus-visible:outline-focus-offset'],
+  base: ['cursor-pointer', 'data-focus-visible:outline-focus-offset'],
   variants: {
     /**
      * - `default`: a 44x44 icon button (pass the icon as children).
@@ -153,7 +153,9 @@ const ToggletipDialog = ({
       {/* Rendered first so it's the close button useTabToClose focuses on open. */}
       <Button
         aria-label={translations.close[locale]}
-        className="absolute top-1 right-1"
+        // Inset focus ring (white from color="white") so it sits inside the
+        // button, clear of the popover edge.
+        className="absolute top-1 right-1 focus-visible:-outline-offset-4!"
         color="white"
         isIconOnly
         onPress={close}
