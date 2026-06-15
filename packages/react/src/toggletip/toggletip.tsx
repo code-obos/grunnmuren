@@ -1,6 +1,5 @@
 import { Close } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
-import { useContext, useEffect, useRef } from 'react';
 import {
   Button as RACButton,
   type ButtonProps as RACButtonProps,
@@ -9,7 +8,6 @@ import {
   Dialog as RACDialog,
   DialogTrigger as RACDialogTrigger,
   type DialogTriggerProps as RACDialogTriggerProps,
-  OverlayTriggerStateContext,
 } from 'react-aria-components/Dialog';
 import {
   OverlayArrow as RACOverlayArrow,
@@ -56,56 +54,44 @@ type ToggletipContentProps = Omit<RACPopoverProps, 'children'> & {
   children: React.ReactNode;
 };
 
-const ToggletipDialog = ({
-  'aria-label': ariaLabel,
-  children,
-}: Pick<ToggletipContentProps, 'aria-label' | 'children'>) => {
-  const locale = useLocale();
-  const state = useContext(OverlayTriggerStateContext);
-  const closeButtonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
-
-  // RAC's Dialog focuses the dialog container; move focus to the close button.
-  useEffect(() => {
-    closeButtonRef.current?.focus();
-  }, []);
-
-  return (
-    <RACDialog aria-label={ariaLabel} data-slot="toggletip-dialog">
-      <Button
-        aria-label={translations.close[locale]}
-        color="white"
-        isIconOnly
-        onPress={() => state?.close()}
-        ref={closeButtonRef}
-        variant="tertiary"
-      >
-        <Close />
-      </Button>
-      {children}
-    </RACDialog>
-  );
-};
-
 /** The popover content of the toggletip: a `Dialog` (with `aria-label`) and a close button. */
 const ToggletipContent = ({
   'aria-label': ariaLabel,
   children,
   className,
   ...restProps
-}: ToggletipContentProps) => (
-  <RACPopover
-    {...restProps}
-    className={cx('gm-toggletip', className as string | undefined)}
-    offset={8}
-  >
-    <RACOverlayArrow data-slot="toggletip-arrow">
-      <svg height={8} viewBox="0 0 16 8" width={16}>
-        <path d="M0 8 L8 0 L16 8 Z" />
-      </svg>
-    </RACOverlayArrow>
-    <ToggletipDialog aria-label={ariaLabel}>{children}</ToggletipDialog>
-  </RACPopover>
-);
+}: ToggletipContentProps) => {
+  const locale = useLocale();
+  return (
+    <RACPopover
+      {...restProps}
+      className={cx('gm-toggletip', className as string | undefined)}
+      offset={8}
+    >
+      <RACOverlayArrow data-slot="toggletip-arrow">
+        <svg height={8} viewBox="0 0 16 8" width={16}>
+          <path d="M0 8 L8 0 L16 8 Z" />
+        </svg>
+      </RACOverlayArrow>
+      <RACDialog aria-label={ariaLabel} data-slot="toggletip-dialog">
+        {({ close }) => (
+          <>
+            <Button
+              aria-label={translations.close[locale]}
+              color="white"
+              isIconOnly
+              onPress={close}
+              variant="tertiary"
+            >
+              <Close />
+            </Button>
+            {children}
+          </>
+        )}
+      </RACDialog>
+    </RACPopover>
+  );
+};
 
 export {
   Toggletip as UNSAFE_Toggletip,
