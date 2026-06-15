@@ -379,8 +379,8 @@
     @apply outline-focus-offset;
   }
 
-  /* Icon-button variant — 44×44 click area. */
-  &[data-variant='default'] {
+  /* Info variant — a 44×44 icon button. */
+  &[data-variant='info'] {
     @apply text-blue-dark inline-grid size-11 place-content-center rounded-full;
 
     & > svg {

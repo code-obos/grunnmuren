@@ -37,19 +37,41 @@ export const Definition = () => (
 );
 
 /**
- * The `default` variant is an icon button (44x44 click area). Pass the icon as
+ * The `info` variant is an icon button (44x44 click area). Pass the icon as
  * children and remember an `aria-label`, since the button has no visible text.
  */
 export const IconTrigger = () => (
   <span className="inline-flex items-center gap-1 text-base">
     Felleskostnader
     <Toggletip>
-      <ToggletipTrigger aria-label="Mer om felleskostnader">
+      <ToggletipTrigger aria-label="Mer om felleskostnader" variant="info">
         <InfoCircle />
       </ToggletipTrigger>
       <ToggletipContent aria-label="Mer om felleskostnader">
         Felleskostnader dekker borettslagets felles utgifter, som vedlikehold, forsikring,
         renovasjon og eventuell felles gjeld.
+      </ToggletipContent>
+    </Toggletip>
+  </span>
+);
+
+/**
+ * Without a `variant`, `ToggletipTrigger` only carries the button behaviour and
+ * focus ring — the children and styling are entirely up to you. Here the trigger
+ * is a small custom-styled button.
+ */
+export const CustomTrigger = () => (
+  <span className="inline-flex items-center gap-2 text-base">
+    Leveringstid
+    <Toggletip>
+      <ToggletipTrigger
+        aria-label="Mer om leveringstid"
+        className="bg-blue-dark rounded-full px-2 py-0.5 text-sm text-white"
+      >
+        Hva betyr dette?
+      </ToggletipTrigger>
+      <ToggletipContent aria-label="Mer om leveringstid">
+        Leveringstid er antall virkedager fra bestilling til boligen er klar for innflytting.
       </ToggletipContent>
     </Toggletip>
   </span>
@@ -62,7 +84,7 @@ export const IconTrigger = () => (
 export const Placement = () => (
   <div className="flex gap-8 text-base">
     <Toggletip>
-      <ToggletipTrigger aria-label="Vis over">
+      <ToggletipTrigger aria-label="Vis over" variant="info">
         <InfoCircle />
       </ToggletipTrigger>
       <ToggletipContent aria-label="Plassering over" placement="top">
@@ -70,7 +92,7 @@ export const Placement = () => (
       </ToggletipContent>
     </Toggletip>
     <Toggletip>
-      <ToggletipTrigger aria-label="Vis til høyre">
+      <ToggletipTrigger aria-label="Vis til høyre" variant="info">
         <InfoCircle />
       </ToggletipTrigger>
       <ToggletipContent aria-label="Plassering til høyre" placement="right">

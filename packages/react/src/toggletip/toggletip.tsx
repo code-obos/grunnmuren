@@ -34,27 +34,26 @@ const Toggletip = (props: ToggletipProps) => <RACDialogTrigger {...props} />;
 type ToggletipTriggerProps = Omit<RACButtonProps, 'children' | 'className'> & {
   children: React.ReactNode;
   /**
-   * Visual style of the trigger. `default` is a 44x44 icon button (pass the
-   * icon as children); `definition` is an inline term with a dashed underline.
-   * @default default
+   * Optional visual preset for the trigger:
+   * - `definition` — an inline term with a dashed underline, highlighted yellow
+   *   while the toggletip is open.
+   * - `info` — a 44x44 icon button (pass the icon as children).
+   *
+   * When omitted, the trigger only carries the base button behaviour and focus
+   * ring — the appearance and children are entirely up to the consumer. The
+   * value is exposed as `data-variant` for styling.
    */
-  variant?: 'default' | 'definition';
+  variant?: 'definition' | 'info';
   /** Additional class name for the trigger button. */
   className?: string;
 };
 
 /**
  * The button that toggles the toggletip. Always a `<button>` (toggling a dialog
- * is an action, not navigation). The `default` variant is an icon button and
- * needs an `aria-label`; the `definition` variant renders its children as an
- * inline, dashed-underlined term. The variant is exposed as `data-variant` for
- * styling.
+ * is an action, not navigation), and needs an accessible name — `aria-label`
+ * for an icon, or the visible text for a definition term.
  */
-const ToggletipTrigger = ({
-  variant = 'default',
-  className,
-  ...restProps
-}: ToggletipTriggerProps) => (
+const ToggletipTrigger = ({ variant, className, ...restProps }: ToggletipTriggerProps) => (
   <RACButton
     {...restProps}
     className={cx('gm-toggletip-trigger', className)}
