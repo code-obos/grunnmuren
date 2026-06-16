@@ -404,7 +404,10 @@
 }
 
 @utility gm-toggletip {
-  @apply max-w-72; /* 288px */
+  /* Cap at the 288px design max, but never wider than the viewport (minus
+     12px each side) on narrow screens — RAC keeps the popover on-screen but
+     doesn't shrink its width. */
+  max-width: min(18rem, 100vw - 1.5rem);
   @apply motion-reduce:animate-none;
 
   &[data-entering] {
