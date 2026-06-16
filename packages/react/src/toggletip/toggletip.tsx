@@ -48,10 +48,12 @@ const ToggletipTrigger = ({ variant, className, ...restProps }: ToggletipTrigger
   />
 );
 
-type ToggletipContentProps = Omit<RACPopoverProps, 'children'> & {
+type ToggletipContentProps = Omit<RACPopoverProps, 'children' | 'className'> & {
   /** Accessible label for the dialog. Required, since the content has no heading. */
   'aria-label': string;
   children: React.ReactNode;
+  /** Additional class name for the popover. */
+  className?: string;
 };
 
 /** The popover content of the toggletip: a `Dialog` (with `aria-label`) and a close button. */
@@ -63,11 +65,7 @@ const ToggletipContent = ({
 }: ToggletipContentProps) => {
   const locale = useLocale();
   return (
-    <RACPopover
-      {...restProps}
-      className={cx('gm-toggletip', className as string | undefined)}
-      offset={8}
-    >
+    <RACPopover {...restProps} className={cx('gm-toggletip', className)} offset={8}>
       <RACOverlayArrow data-slot="toggletip-arrow">
         <svg height={8} viewBox="0 0 16 8" width={16}>
           <path d="M0 8 L8 0 L16 8 Z" />
