@@ -418,26 +418,32 @@
     @apply fade-out animate-out;
   }
 
-  /* Arrow drawn in CSS (no inline SVG). A 16x8 triangle that points up by
-     default (placement bottom), rotated to point at the trigger for the other
-     placements. */
+  /* Arrow drawn in CSS (no inline SVG). The element is sized per orientation
+     and the ::before is clipped to a triangle pointing at the trigger. Default
+     is placement=bottom (popover below the trigger, arrow points up). */
   & [data-slot='toggletip-arrow'] {
     @apply h-2 w-4;
 
     &::before {
       content: '';
       @apply bg-blue-dark block size-full;
-      clip-path: polygon(0 100%, 50% 0, 100% 100%);
+      clip-path: polygon(0 100%, 50% 0, 100% 100%); /* points up */
     }
   }
   & [data-slot='toggletip-arrow'][data-placement='top']::before {
-    @apply rotate-180;
+    clip-path: polygon(0 0, 50% 100%, 100% 0); /* points down */
+  }
+  /* Side placements: swap the box to 8x16 so the triangle base sits flush
+     against the popover edge (no gap). */
+  & [data-slot='toggletip-arrow'][data-placement='left'],
+  & [data-slot='toggletip-arrow'][data-placement='right'] {
+    @apply h-4 w-2;
   }
   & [data-slot='toggletip-arrow'][data-placement='left']::before {
-    @apply rotate-90;
+    clip-path: polygon(0 0, 100% 50%, 0 100%); /* points right */
   }
   & [data-slot='toggletip-arrow'][data-placement='right']::before {
-    @apply -rotate-90;
+    clip-path: polygon(100% 0, 0 50%, 100% 100%); /* points left */
   }
 
   /* Dialog body. */
