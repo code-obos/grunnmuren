@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.4.12
+
+### Patch Changes
+
+- b24aa9a: Add `UNSAFE_Toggletip` component (beta) and supporting `gm-toggletip` and `gm-toggletip-trigger` utility classes.
+
 ## 2.4.11
 
 ### Patch Changes

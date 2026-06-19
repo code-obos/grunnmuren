@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 3.8.1
+
+### Patch Changes
+
+- b24aa9a: Add `UNSAFE_Toggletip` component (beta) and supporting `gm-toggletip` and `gm-toggletip-trigger` utility classes.
+
 ## 3.8.0
 
 ### Minor Changes
