@@ -418,18 +418,25 @@
     @apply fade-out animate-out;
   }
 
-  /* The arrow points up by default (placement bottom); rotate it to point at
-     the trigger for the other placements. */
-  & [data-slot='toggletip-arrow'] > svg {
-    @apply fill-blue-dark block;
+  /* Arrow drawn in CSS (no inline SVG). A 16x8 triangle that points up by
+     default (placement bottom), rotated to point at the trigger for the other
+     placements. */
+  & [data-slot='toggletip-arrow'] {
+    @apply h-2 w-4;
+
+    &::before {
+      content: '';
+      @apply bg-blue-dark block size-full;
+      clip-path: polygon(0 100%, 50% 0, 100% 100%);
+    }
   }
-  & [data-slot='toggletip-arrow'][data-placement='top'] > svg {
+  & [data-slot='toggletip-arrow'][data-placement='top']::before {
     @apply rotate-180;
   }
-  & [data-slot='toggletip-arrow'][data-placement='left'] > svg {
+  & [data-slot='toggletip-arrow'][data-placement='left']::before {
     @apply rotate-90;
   }
-  & [data-slot='toggletip-arrow'][data-placement='right'] > svg {
+  & [data-slot='toggletip-arrow'][data-placement='right']::before {
     @apply -rotate-90;
   }
 

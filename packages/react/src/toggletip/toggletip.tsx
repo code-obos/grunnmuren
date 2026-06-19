@@ -66,11 +66,7 @@ const ToggletipContent = ({
   const locale = useLocale();
   return (
     <RACPopover {...restProps} className={cx('gm-toggletip', className)} offset={8}>
-      <RACOverlayArrow data-slot="toggletip-arrow">
-        <svg height={8} viewBox="0 0 16 8" width={16}>
-          <path d="M0 8 L8 0 L16 8 Z" />
-        </svg>
-      </RACOverlayArrow>
+      <RACOverlayArrow data-slot="toggletip-arrow" />
       <RACDialog aria-label={ariaLabel} data-slot="toggletip-dialog">
         {({ close }) => (
           <>
