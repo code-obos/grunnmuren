@@ -367,6 +367,101 @@
   }
 }
 
+/*** Toggletip component styles
+ *
+ * Like Pagination, these sit in the utilities layer because the close button is
+ * a Button whose cva-generated focus utility (outline-offset) we override — and
+ * rules in the components layer always lose the cascade to utilities. */
+@utility gm-toggletip-trigger {
+  @apply cursor-pointer;
+
+  &[data-focus-visible] {
+    @apply outline-focus-offset;
+  }
+
+  /* Info variant — a 44×44 icon button with an inset focus ring. */
+  &[data-variant='info'] {
+    @apply text-blue-dark inline-grid size-11 place-content-center rounded-full;
+
+    &[data-focus-visible] {
+      @apply outline-focus-inset;
+    }
+
+    & > svg {
+      @apply size-6;
+    }
+  }
+
+  /* Definition variant — an inline term with a dashed underline, highlighted
+     yellow while the toggletip is open. */
+  &[data-variant='definition'] {
+    @apply rounded-xs underline decoration-dashed decoration-1 underline-offset-4;
+
+    &[aria-expanded='true'] {
+      @apply bg-yellow;
+    }
+  }
+}
+
+@utility gm-toggletip {
+  /* Cap at the 288px design max, but never wider than the viewport (minus
+     12px each side) on narrow screens — RAC keeps the popover on-screen but
+     doesn't shrink its width. */
+  max-width: min(18rem, 100vw - 1.5rem);
+  @apply motion-reduce:animate-none;
+
+  &[data-entering] {
+    @apply fade-in animate-in;
+  }
+
+  &[data-exiting] {
+    @apply fade-out animate-out;
+  }
+
+  /* Arrow drawn in CSS (no inline SVG). The element is sized per orientation
+     and the ::before is clipped to a triangle pointing at the trigger. Default
+     is placement=bottom (popover below the trigger, arrow points up). */
+  & [data-slot='toggletip-arrow'] {
+    @apply h-2 w-4;
+
+    &::before {
+      content: '';
+      @apply bg-blue-dark block size-full;
+      clip-path: polygon(0 100%, 50% 0, 100% 100%); /* points up */
+    }
+  }
+  & [data-slot='toggletip-arrow'][data-placement='top']::before {
+    clip-path: polygon(0 0, 50% 100%, 100% 0); /* points down */
+  }
+  /* Side placements: swap the box to 8x16 so the triangle base sits flush
+     against the popover edge (no gap). */
+  & [data-slot='toggletip-arrow'][data-placement='left'],
+  & [data-slot='toggletip-arrow'][data-placement='right'] {
+    @apply h-4 w-2;
+  }
+  & [data-slot='toggletip-arrow'][data-placement='left']::before {
+    clip-path: polygon(0 0, 100% 50%, 0 100%); /* points right */
+  }
+  & [data-slot='toggletip-arrow'][data-placement='right']::before {
+    clip-path: polygon(100% 0, 0 50%, 100% 100%); /* points left */
+  }
+
+  /* Dialog body. */
+  & [data-slot='toggletip-dialog'] {
+    @apply bg-blue-dark relative rounded-lg p-4 pr-12 text-white outline-none;
+  }
+
+  /* Close button — positioned top-right with an inset white focus ring (white
+     from color="white") so it sits inside the button, clear of the popover edge. */
+  & [data-slot='toggletip-dialog'] > [data-slot='button'] {
+    @apply absolute top-1 right-1;
+
+    &:focus-visible {
+      @apply -outline-offset-4;
+    }
+  }
+}
+
 /** Hides the scrollbar visually */
 @utility scrollbar-hidden {
   /* For IE, Edge and Firefox */
