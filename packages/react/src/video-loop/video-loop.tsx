@@ -63,8 +63,7 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
     <div
       className={cx(
         className,
-        // `group` lets the corner button reveal on hover anywhere over the video,
-        // `@container` lets us move the button to the corner only in larger containers.
+        // group: hover anywhere reveals the button. @container: corner placement only when large.
         'group @container relative',
         prefersReducedMotion === null && 'opacity-0',
       )}
@@ -73,7 +72,7 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
       <video
         aria-hidden
         ref={videoRef}
-        // Clicking anywhere on the video toggles playback (like YouTube/Mux), in addition to the button below
+        // Click anywhere on the video to toggle playback (in addition to the button)
         className="size-full max-h-[inherit] cursor-pointer rounded-[inherit] object-cover"
         playsInline
         loop={prefersReducedMotion === false}
@@ -92,13 +91,10 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
       >
         <source src={src} type={`video/${format}`} />
       </video>
-      {/* Rendered before the button so screen readers announce what the video shows before the playback control */}
+      {/* Before the button so the description is read before the control */}
       {alt && <p className="sr-only">{alt}</p>}
       {prefersReducedMotion !== null && (
         <Button
-          // The video itself is decorative (aria-hidden), but the playback control must stay
-          // exposed and labelled so keyboard/screen-reader users can pause the looping motion
-          // (WCAG 2.2.2). The label is state-driven and framed around the motion, since the video is muted.
           aria-label={
             isPlaying ? translations.pauseAnimation[locale] : translations.playAnimation[locale]
           }
@@ -110,12 +106,9 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
             // Centered in small containers; moved to the bottom-left corner in larger ones
             'absolute inset-0 m-auto size-fit',
             '@md:inset-auto @md:bottom-4 @md:left-4',
-            // Restrict the transition to opacity only. The Button base has `transition-colors`,
-            // which would otherwise animate `outline-color` from the button's currentColor to the
-            // white focus outline, making the focus ring flash black→white. Keeping this here
-            // (not gated on `isPlaying`) ensures it applies in the paused/visible state too.
+            // Opacity-only transition; overrides Button's `transition-colors` so the focus outline doesn't flash black→white
             'transition-opacity duration-200',
-            // Setting the opacity to 0 before applying the transition above will ensure the button only fades in after the video has started playing
+            // Start hidden so the button fades in once the video plays
             shouldPlay && 'opacity-0',
             isPlaying && [
               // Only show the pause button when the video is hovered or focused
