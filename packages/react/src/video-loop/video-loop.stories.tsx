@@ -22,13 +22,13 @@ type Story = StoryObj<typeof meta>;
 /** In a larger container the play/pause button sits in the bottom-left corner. */
 export const Default: Story = {
   args: {
-    className: 'aspect-video w-[640px] max-w-[90vw] rounded-2xl',
+    className: 'w-[640px] max-w-[90vw] rounded-2xl',
   },
 };
 
 /** In a small container the button stays centered. */
 export const SmallContainer: Story = {
   args: {
-    className: 'aspect-video w-72 rounded-2xl',
+    className: 'w-72 rounded-2xl',
   },
 };
