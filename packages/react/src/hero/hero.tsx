@@ -69,8 +69,17 @@ const variants = cva({
       ],
       'full-bleed': [
         oneColumnLayout,
-        // Position the media and carousel content to fill the entire viewport width
-        '*:data-[slot=media]:*:absolute *:data-[slot=media]:*:left-0',
+        // Position the media content to fill the entire viewport width.
+        // Skip the VideoLoop wrapper (`:has(video)`): instead of breaking out the whole wrapper
+        // (which would drag its play button to the viewport edge), we keep the wrapper at grid-container
+        // width and break out only the <video> below — so the button stays within the grid container,
+        // like the Carousel controls.
+        '*:data-[slot=media]:*:not-has-[video]:absolute *:data-[slot=media]:*:not-has-[video]:left-0',
+        // Break the VideoLoop's <video> out to full viewport width while its wrapper stays
+        // container-width. The wrapper keeps its own `relative`, so the play button anchors to the
+        // grid container. The Carousel uses its own break-out (carousel-items-container) and no
+        // full-bleed story nests a VideoLoop in a Carousel, so matching every <video> is safe here.
+        '**:data-[slot=video]:relative **:data-[slot=video]:left-1/2 **:data-[slot=video]:min-w-screen **:data-[slot=video]:-translate-x-1/2',
         // Special case for Carousel, where the Media is nested inside a CarouselItem
         '*:data-[slot=carousel]:**:data-[slot=media]:w-full',
         // Match the heights of the <Media> or <Carousel> wrapper for the Media content (e.g. image, VideoLoop, video etc.)

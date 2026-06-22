@@ -2,6 +2,7 @@ import { PlayerPause, PlayerPlay } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
 import { useEffect, useRef, useState } from 'react';
 
+import { Button } from '../button';
 import { usePrefersReducedMotion } from '../use-prefers-reduced-motion';
 
 type VideoLoopProps = {
@@ -52,20 +53,29 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
     }
   }, [shouldPlay]);
 
+  const togglePlayback = () => setShouldPlay((prevState) => !prevState);
+
   return (
     <div
-      className={cx(className, 'relative', prefersReducedMotion === null && 'opacity-0')}
+      className={cx(
+        className,
+        // `group` lets the corner button reveal on hover anywhere over the video,
+        // `@container` lets us move the button to the corner only in larger containers.
+        'group @container relative',
+        prefersReducedMotion === null && 'opacity-0',
+      )}
       data-slot="video-loop"
     >
       <video
         aria-hidden
         ref={videoRef}
-        // cursor-pointer is not working on the button below, so we add it here for the same effect
+        // Clicking anywhere on the video toggles playback (like YouTube/Mux), in addition to the button below
         className="size-full max-h-[inherit] cursor-pointer rounded-[inherit] object-cover"
         playsInline
         loop={prefersReducedMotion === false}
         autoPlay={prefersReducedMotion === false}
         muted
+        onClick={togglePlayback}
         onEnded={(event) => {
           if (prefersReducedMotion) {
             // Reset the video to the beginning if the user prefers reduced motion, since the video will not loop
@@ -79,30 +89,34 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
         <source src={src} type={`video/${format}`} />
       </video>
       {prefersReducedMotion !== null && (
-        <button
-          data-slot="video-loop-button"
+        <Button
+          // The video is decorative, so the playback control is hidden from screen readers
           // oxlint-disable-next-line jsx-a11y/no-aria-hidden-on-focusable
           aria-hidden
-          type="button"
-          onClick={() => setShouldPlay((prevState) => !prevState)}
+          isIconOnly
+          variant="primary"
+          color="white"
+          onPress={togglePlayback}
           className={cx(
-            'absolute inset-0 m-auto grid place-items-center',
-            'focus-visible:outline-focus focus-visible:outline-focus-offset',
-            'rounded-[inherit]',
-            // Setting the opacity to 0 before applying the transition below will ensure the button only fades in after the video has started playing
+            // Centered in small containers; moved to the bottom-left corner in larger ones
+            'absolute inset-0 m-auto size-fit',
+            '@md:inset-auto @md:bottom-4 @md:left-4',
+            // Restrict the transition to opacity only. The Button base has `transition-colors`,
+            // which would otherwise animate `outline-color` from the button's currentColor to the
+            // white focus outline, making the focus ring flash black→white. Keeping this here
+            // (not gated on `isPlaying`) ensures it applies in the paused/visible state too.
+            'transition-opacity duration-200',
+            // Setting the opacity to 0 before applying the transition above will ensure the button only fades in after the video has started playing
             shouldPlay && 'opacity-0',
             isPlaying && [
-              'transition-opacity duration-200',
               // Only show the pause button when the video is hovered or focused
               'focus-visible:opacity-100',
-              'hover:opacity-100',
+              'group-hover:opacity-100',
             ],
           )}
         >
-          <span className="grid size-12 place-items-center rounded-full bg-white outline-hidden">
-            {isPlaying ? <PlayerPause /> : <PlayerPlay />}
-          </span>
-        </button>
+          {isPlaying ? <PlayerPause /> : <PlayerPlay />}
+        </Button>
       )}
       {alt && <p className="sr-only">{alt}</p>}
     </div>
