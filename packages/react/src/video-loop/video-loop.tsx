@@ -92,6 +92,8 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
       >
         <source src={src} type={`video/${format}`} />
       </video>
+      {/* Rendered before the button so screen readers announce what the video shows before the playback control */}
+      {alt && <p className="sr-only">{alt}</p>}
       {prefersReducedMotion !== null && (
         <Button
           // The video itself is decorative (aria-hidden), but the playback control must stay
@@ -125,7 +127,6 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
           {isPlaying ? <PlayerPause /> : <PlayerPlay />}
         </Button>
       )}
-      {alt && <p className="sr-only">{alt}</p>}
     </div>
   );
 };
