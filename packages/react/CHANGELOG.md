@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-react
 
+## 3.8.2
+
+### Patch Changes
+
+- 32a4727: Expose the `VideoLoop` play/pause control to assistive technology with a state-driven label, so keyboard and screen-reader users can pause the looping animation (WCAG 2.2.2).
+- 32a4727: Move the `VideoLoop` play/pause button to the bottom-left corner in larger containers (centered in small ones) and render it with the grunnmuren `Button`.
+
 ## 3.8.1
 
 ### Patch Changes
