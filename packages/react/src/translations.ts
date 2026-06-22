@@ -74,6 +74,16 @@ const translations: Translations = {
     sv: 'Slutförd',
     en: 'Completed',
   },
+  playAnimation: {
+    nb: 'Spill av animasjon',
+    sv: 'Spela upp animation',
+    en: 'Play animation',
+  },
+  pauseAnimation: {
+    nb: 'Pause animasjon',
+    sv: 'Pausa animation',
+    en: 'Pause animation',
+  },
 };
 
 export { translations, type Translation, type Translations };

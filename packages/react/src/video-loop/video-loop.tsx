@@ -3,6 +3,8 @@ import { cx } from 'cva';
 import { useEffect, useRef, useState } from 'react';
 
 import { Button } from '../button';
+import { translations } from '../translations';
+import { useLocale } from '../use-locale';
 import { usePrefersReducedMotion } from '../use-prefers-reduced-motion';
 
 type VideoLoopProps = {
@@ -55,6 +57,8 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
 
   const togglePlayback = () => setShouldPlay((prevState) => !prevState);
 
+  const locale = useLocale();
+
   return (
     <div
       className={cx(
@@ -90,9 +94,12 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
       </video>
       {prefersReducedMotion !== null && (
         <Button
-          // The video is decorative, so the playback control is hidden from screen readers
-          // oxlint-disable-next-line jsx-a11y/no-aria-hidden-on-focusable
-          aria-hidden
+          // The video itself is decorative (aria-hidden), but the playback control must stay
+          // exposed and labelled so keyboard/screen-reader users can pause the looping motion
+          // (WCAG 2.2.2). The label is state-driven and framed around the motion, since the video is muted.
+          aria-label={
+            isPlaying ? translations.pauseAnimation[locale] : translations.playAnimation[locale]
+          }
           isIconOnly
           variant="primary"
           color="white"
