@@ -2,6 +2,9 @@ import { PlayerPause, PlayerPlay } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
 import { useEffect, useRef, useState } from 'react';
 
+import { Button } from '../button';
+import { translations } from '../translations';
+import { useLocale } from '../use-locale';
 import { usePrefersReducedMotion } from '../use-prefers-reduced-motion';
 
 type VideoLoopProps = {
@@ -52,20 +55,30 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
     }
   }, [shouldPlay]);
 
+  const togglePlayback = () => setShouldPlay((prevState) => !prevState);
+
+  const locale = useLocale();
+
   return (
     <div
-      className={cx(className, 'relative', prefersReducedMotion === null && 'opacity-0')}
+      className={cx(
+        className,
+        // group: hover anywhere reveals the button. @container: corner placement only when large.
+        'group @container relative',
+        prefersReducedMotion === null && 'opacity-0',
+      )}
       data-slot="video-loop"
     >
       <video
         aria-hidden
         ref={videoRef}
-        // cursor-pointer is not working on the button below, so we add it here for the same effect
+        // Click anywhere on the video to toggle playback (in addition to the button)
         className="size-full max-h-[inherit] cursor-pointer rounded-[inherit] object-cover"
         playsInline
         loop={prefersReducedMotion === false}
         autoPlay={prefersReducedMotion === false}
         muted
+        onClick={togglePlayback}
         onEnded={(event) => {
           if (prefersReducedMotion) {
             // Reset the video to the beginning if the user prefers reduced motion, since the video will not loop
@@ -78,33 +91,35 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
       >
         <source src={src} type={`video/${format}`} />
       </video>
+      {/* Before the button so the description is read before the control */}
+      {alt && <p className="sr-only">{alt}</p>}
       {prefersReducedMotion !== null && (
-        <button
-          data-slot="video-loop-button"
-          // oxlint-disable-next-line jsx-a11y/no-aria-hidden-on-focusable
-          aria-hidden
-          type="button"
-          onClick={() => setShouldPlay((prevState) => !prevState)}
+        <Button
+          aria-label={
+            isPlaying ? translations.pauseAnimation[locale] : translations.playAnimation[locale]
+          }
+          isIconOnly
+          variant="primary"
+          color="white"
+          onPress={togglePlayback}
           className={cx(
-            'absolute inset-0 m-auto grid place-items-center',
-            'focus-visible:outline-focus focus-visible:outline-focus-offset',
-            'rounded-[inherit]',
-            // Setting the opacity to 0 before applying the transition below will ensure the button only fades in after the video has started playing
+            // Centered in small containers; moved to the bottom-left corner in larger ones
+            'absolute inset-0 m-auto size-fit',
+            '@md:inset-auto @md:bottom-4 @md:left-4',
+            // Opacity-only transition; overrides Button's `transition-colors` so the focus outline doesn't flash black→white
+            'transition-opacity duration-200',
+            // Start hidden so the button fades in once the video plays
             shouldPlay && 'opacity-0',
             isPlaying && [
-              'transition-opacity duration-200',
               // Only show the pause button when the video is hovered or focused
               'focus-visible:opacity-100',
-              'hover:opacity-100',
+              'group-hover:opacity-100',
             ],
           )}
         >
-          <span className="grid size-12 place-items-center rounded-full bg-white outline-hidden">
-            {isPlaying ? <PlayerPause /> : <PlayerPlay />}
-          </span>
-        </button>
+          {isPlaying ? <PlayerPause /> : <PlayerPlay />}
+        </Button>
       )}
-      {alt && <p className="sr-only">{alt}</p>}
     </div>
   );
 };
