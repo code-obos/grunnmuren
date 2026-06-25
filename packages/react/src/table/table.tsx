@@ -9,6 +9,7 @@ import {
   type ColumnProps as RACColumnProps,
   ColumnResizer as RACColumnResizer,
   type ColumnResizerProps as RACColumnResizerProps,
+  type Key,
   Row as RACRow,
   type RowProps as RACRowProps,
   Table as RACTable,
@@ -56,6 +57,18 @@ type TableProps = Omit<RACTableProps, 'aria-label' | 'aria-labelledby'> &
      * @default 'default'
      */
     variant?: TableVariant;
+    /**
+     * The id of the column that displays hierarchical data. When set, the
+     * Table renders an expand/collapse control on that column for rows that
+     * have nested child rows.
+     *
+     * NOTE: `treeColumn` exists in react-aria-components / react-stately at
+     * runtime, but it is an inline member of react-stately's `TableProps` that
+     * gets dropped from our bundled declaration output. We re-declare it here so
+     * it stays part of the published type. Safe to remove if a future
+     * RAC/react-stately upgrade keeps it in the bundled `.d.mts`.
+     */
+    treeColumn?: Key;
   } & (
     | { 'aria-label': string; 'aria-labelledby'?: never }
     | { 'aria-label'?: never; 'aria-labelledby': string }
