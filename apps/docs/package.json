@@ -58,7 +58,7 @@
   "devDependencies": {
     "@code-obos/azure-env": "1.0.2",
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
-    "@react-aria/optimize-locales-plugin": "1.2.1",
+    "@react-aria/optimize-locales-plugin": "2.0.0",
     "@tailwindcss/vite": "catalog:",
     "@tanstack/react-router-devtools": "1.166.13",
     "marked": "18.0.2",
