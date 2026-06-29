@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-icons-svg
 
+## 2.3.0
+
+### Minor Changes
+
+- f9c3767: add new icon "Gift"
+
 ## 2.2.1
 
 ### Patch Changes
