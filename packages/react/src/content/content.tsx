@@ -1,3 +1,4 @@
+import { Close } from '@obosbbl/grunnmuren-icons-react';
 import { cva, cx, type VariantProps } from 'cva';
 import { createContext, type HTMLProps, type Ref } from 'react';
 import {
@@ -7,7 +8,9 @@ import {
   useContextProps,
 } from 'react-aria-components/slots';
 
-import { ButtonContext, type ButtonProps } from '../button';
+import { ButtonContext } from '../button';
+import { translations } from '../translations';
+import { useLocale } from '../use-locale';
 
 type HeadingProps = Omit<HTMLProps<HTMLHeadingElement>, 'size'> &
   VariantProps<typeof headingVariants> & {
@@ -147,8 +150,6 @@ type HeaderProps = HTMLProps<HTMLDivElement> & {
   children: React.ReactNode;
   /** @private Set by Modal/Drawer to the dialog's title id, wired onto the heading for `aria-labelledby` */
   _titleId?: string;
-  /** @private Set by Modal/Drawer with the appearance for a `<Button slot="close" />` placed inside */
-  _closeButton?: Partial<ButtonProps>;
   /** Ref for the element. */
   ref?: Ref<HTMLDivElement>;
 };
@@ -167,14 +168,30 @@ const HeaderContext = createContext<ContextValue<Partial<HeaderProps>, HTMLDivEl
  */
 const Header = ({ ref = null, ...props }: HeaderProps) => {
   [props, ref] = useContextProps(props, ref, HeaderContext);
-  const { children, className, _titleId: titleId, _closeButton: closeButton, ...restProps } = props;
+  const { children, className, _titleId: titleId, ...restProps } = props;
+  const locale = useLocale();
 
   return (
     <div ref={ref} {...restProps} className={className} data-slot="header">
       <Provider
         values={[
           [HeadingContext, { className: 'heading-s', id: titleId }],
-          [ButtonContext, { slots: { [DEFAULT_SLOT]: {}, close: closeButton ?? {} } }],
+          // Appearance for a bare `<Button slot="close" />` inside the header. The
+          // close behaviour (onPress) is provided by the Modal/Drawer's Dialog.
+          [
+            ButtonContext,
+            {
+              slots: {
+                [DEFAULT_SLOT]: {},
+                close: {
+                  variant: 'tertiary',
+                  'aria-label': translations.close[locale],
+                  className: 'data-focus-visible:outline-focus-inset px-2.5!',
+                  children: <Close />,
+                },
+              },
+            },
+          ],
         ]}
       >
         {children}

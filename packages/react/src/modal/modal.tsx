@@ -1,4 +1,3 @@
-import { Close } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
 import { useContext } from 'react';
 import { ButtonContext } from 'react-aria-components/Button';
@@ -18,8 +17,6 @@ import {
 import { DEFAULT_SLOT, Provider, useSlottedContext } from 'react-aria-components/slots';
 
 import { HeaderContext } from '../content';
-import { translations } from '../translations';
-import { useLocale } from '../use-locale';
 
 type DialogTriggerProps = RACDialogTriggerProps;
 
@@ -104,30 +101,7 @@ const Modal = ({
  */
 const HeaderTitle = ({ children }: { children: React.ReactNode }) => {
   const racTitle = useSlottedContext(RACHeadingContext, 'title');
-  const locale = useLocale();
-  return (
-    <Provider
-      values={[
-        [
-          HeaderContext,
-          {
-            _titleId: racTitle?.id,
-            // Defaults for a `<Button slot="close" />` placed inside the Header.
-            // The close behaviour (onPress) comes from the Dialog's ButtonContext;
-            // here we only inject the appearance and the accessible name.
-            _closeButton: {
-              variant: 'tertiary',
-              'aria-label': translations.close[locale],
-              className: 'data-focus-visible:outline-focus-inset px-2.5!',
-              children: <Close />,
-            },
-          },
-        ],
-      ]}
-    >
-      {children}
-    </Provider>
-  );
+  return <Provider values={[[HeaderContext, { _titleId: racTitle?.id }]]}>{children}</Provider>;
 };
 
 type DialogProps = RACDialogProps & {
