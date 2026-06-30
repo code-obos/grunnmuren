@@ -1,5 +1,5 @@
 import { cva, cx, type VariantProps } from 'cva';
-import { createContext, type HTMLProps, type Ref } from 'react';
+import { createContext, type HTMLProps, type Ref, useContext } from 'react';
 import { type ContextValue, useContextProps } from 'react-aria-components/slots';
 
 type HeadingProps = Omit<HTMLProps<HTMLHeadingElement>, 'size'> &
@@ -140,17 +140,29 @@ type HeaderProps = HTMLProps<HTMLDivElement> & {
   children: React.ReactNode;
 };
 
+const HeaderContext = createContext<{
+  /** @private Set by Modal/Drawer to wrap the header content in the contexts it needs */
+  _wrap?: (children: React.ReactNode) => React.ReactNode;
+}>({});
+
 /**
  * Wraps the title of a Modal/Drawer (and, optionally, a `<Button slot="close" />`).
  *
  * A `data-slot="header"` element the consumer can style freely, e.g.
- * `className="sticky top-0 bg-white"`. Inside a Modal/Drawer the dialog wires the
- * title's accessible name (`aria-labelledby`) and injects the close button's icon
- * and styling, so the consumer only writes a `Heading` and a bare
- * `<Button slot="close" />` — no `slot="title"` needed. `Header` must be a direct
- * child of the dialog content for that wiring to apply.
+ * `className="sticky top-0 bg-white"`. Inside a Modal/Drawer the dialog injects a
+ * wrapper (via `HeaderContext`) that wires the title's accessible name
+ * (`aria-labelledby`) and the close button's icon and styling, so the consumer
+ * only writes a `Heading` and a bare `<Button slot="close" />` — no `slot="title"`
+ * needed.
  */
-const Header = (props: HeaderProps) => <div {...props} data-slot="header" />;
+const Header = ({ children, ...props }: HeaderProps) => {
+  const { _wrap } = useContext(HeaderContext);
+  return (
+    <div {...props} data-slot="header">
+      {_wrap ? _wrap(children) : children}
+    </div>
+  );
+};
 
 export {
   Caption,
@@ -158,6 +170,7 @@ export {
   ContentContext,
   Footer,
   Header,
+  HeaderContext,
   Heading,
   HeadingContext,
   Media,

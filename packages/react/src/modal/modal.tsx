@@ -1,6 +1,6 @@
 import { Close } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
-import { Children, isValidElement, useContext } from 'react';
+import { useContext } from 'react';
 import { ButtonContext as RACButtonContext } from 'react-aria-components/Button';
 import {
   OverlayTriggerStateContext,
@@ -18,7 +18,7 @@ import {
 import { DEFAULT_SLOT, Provider, useSlottedContext } from 'react-aria-components/slots';
 
 import { ButtonContext } from '../button';
-import { Header, HeadingContext } from '../content';
+import { HeaderContext, HeadingContext } from '../content';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 
@@ -109,32 +109,45 @@ const Modal = ({
 const DialogHeader = ({ children }: { children: React.ReactNode }) => {
   const racTitle = useSlottedContext(RACHeadingContext, 'title');
   const locale = useLocale();
-  return Children.map(children, (child) =>
-    isValidElement(child) && child.type === Header ? (
-      <Provider
-        values={[
-          [HeadingContext, { className: 'heading-s', id: racTitle?.id }],
-          [
-            ButtonContext,
-            {
-              slots: {
-                [DEFAULT_SLOT]: {},
-                close: {
-                  variant: 'tertiary',
-                  'aria-label': translations.close[locale],
-                  className: 'data-focus-visible:outline-focus-inset px-2.5!',
-                  children: <Close />,
-                },
-              },
-            },
-          ],
-        ]}
-      >
-        {child}
-      </Provider>
-    ) : (
-      child
-    ),
+  return (
+    <Provider
+      values={[
+        [
+          HeaderContext,
+          {
+            // Header applies this around its own children, so the wiring is scoped
+            // to the header without matching on the Header element type. We inject
+            // the title id (for aria-labelledby) and the close button's appearance;
+            // the close behaviour (onPress) comes from the Dialog's ButtonContext.
+            _wrap: (headerChildren) => (
+              <Provider
+                values={[
+                  [HeadingContext, { className: 'heading-s', id: racTitle?.id }],
+                  [
+                    ButtonContext,
+                    {
+                      slots: {
+                        [DEFAULT_SLOT]: {},
+                        close: {
+                          variant: 'tertiary',
+                          'aria-label': translations.close[locale],
+                          className: 'data-focus-visible:outline-focus-inset px-2.5!',
+                          children: <Close />,
+                        },
+                      },
+                    },
+                  ],
+                ]}
+              >
+                {headerChildren}
+              </Provider>
+            ),
+          },
+        ],
+      ]}
+    >
+      {children}
+    </Provider>
   );
 };
 
