@@ -1,6 +1,13 @@
 import { cva, cx, type VariantProps } from 'cva';
-import { createContext, type HTMLProps, type ReactNode, type Ref } from 'react';
-import { type ContextValue, Provider, useContextProps } from 'react-aria-components/slots';
+import { createContext, type HTMLProps, type Ref } from 'react';
+import {
+  DEFAULT_SLOT,
+  type ContextValue,
+  Provider,
+  useContextProps,
+} from 'react-aria-components/slots';
+
+import { ButtonContext, type ButtonProps } from '../button';
 
 type HeadingProps = Omit<HTMLProps<HTMLHeadingElement>, 'size'> &
   VariantProps<typeof headingVariants> & {
@@ -138,10 +145,10 @@ const Footer = (props: FooterProps) => <div {...props} data-slot="footer" />;
 
 type HeaderProps = HTMLProps<HTMLDivElement> & {
   children: React.ReactNode;
-  /** @private Used by Modal/Drawer to inject the close button into the header */
-  _action?: ReactNode;
   /** @private Set by Modal/Drawer to the dialog's title id, wired onto the heading for `aria-labelledby` */
   _titleId?: string;
+  /** @private Set by Modal/Drawer with the appearance for a `<Button slot="close" />` placed inside */
+  _closeButton?: Partial<ButtonProps>;
   /** Ref for the element. */
   ref?: Ref<HTMLDivElement>;
 };
@@ -149,24 +156,29 @@ type HeaderProps = HTMLProps<HTMLDivElement> & {
 const HeaderContext = createContext<ContextValue<Partial<HeaderProps>, HTMLDivElement>>({});
 
 /**
- * Wraps the title (and optional close button) of a Modal/Drawer.
+ * Wraps the title of a Modal/Drawer (and, optionally, a `<Button slot="close" />`).
  *
  * Renders a `data-slot="header"` element that consumers can style freely,
  * e.g. `className="sticky top-0 bg-white"`. A `Heading` placed inside gets the
  * title styling, and — inside a Modal/Drawer — the dialog's accessible name is
  * wired up automatically (via the injected `_titleId`), so no `slot="title"` is
- * needed.
+ * needed. A `<Button slot="close" />` inside gets its icon and styling injected,
+ * so the consumer only writes the bare button.
  */
 const Header = ({ ref = null, ...props }: HeaderProps) => {
   [props, ref] = useContextProps(props, ref, HeaderContext);
-  const { children, className, _action: action, _titleId: titleId, ...restProps } = props;
+  const { children, className, _titleId: titleId, _closeButton: closeButton, ...restProps } = props;
 
   return (
     <div ref={ref} {...restProps} className={className} data-slot="header">
-      <Provider values={[[HeadingContext, { className: 'heading-s', id: titleId }]]}>
+      <Provider
+        values={[
+          [HeadingContext, { className: 'heading-s', id: titleId }],
+          [ButtonContext, { slots: { [DEFAULT_SLOT]: {}, close: closeButton ?? {} } }],
+        ]}
+      >
         {children}
       </Provider>
-      {action}
     </div>
   );
 };

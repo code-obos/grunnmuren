@@ -17,7 +17,6 @@ import {
 } from 'react-aria-components/Modal';
 import { DEFAULT_SLOT, Provider, useSlottedContext } from 'react-aria-components/slots';
 
-import { Button } from '../button';
 import { HeaderContext } from '../content';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
@@ -70,58 +69,32 @@ const Modal = ({
   zIndex,
   fullscreen = false,
   ...restProps
-}: ModalProps) => {
-  const locale = useLocale();
-  return (
-    <Provider
-      values={[
-        [
-          HeaderContext,
-          {
-            // The close button is injected into the Header. RAC Dialog supports
-            // one "close" slot out of the box, which we utilize here.
-            _action: isDismissable ? (
-              <Button
-                slot="close"
-                variant="tertiary"
-                className="data-focus-visible:outline-focus-inset px-2.5!"
-                aria-label={translations.close[locale]}
-                onPress={() => onOpenChange?.(false)}
-              >
-                <Close />
-              </Button>
-            ) : undefined,
-          },
-        ],
-      ]}
-    >
-      <_ModalOverlay
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        defaultOpen={defaultOpen}
-        isDismissable={isDismissable}
-        isKeyboardDismissDisabled={!isDismissable}
-        zIndex={zIndex}
-        fullscreen={fullscreen}
-      >
-        <RACModal
-          {...restProps}
-          className={({ isEntering, isExiting }) =>
-            cx(
-              className,
-              'overflow-auto bg-white text-left shadow-xl',
-              fullscreen ? 'fixed inset-0' : 'w-full max-w-md rounded-2xl align-middle',
-              isEntering && 'zoom-in-95 animate-in duration-300 ease-out',
-              isExiting && 'zoom-out-95 animate-out duration-200 ease-in',
-              // Using the motion-safe class does not work, so we use motion-reduce to overwrite instead
-              'motion-reduce:animate-none',
-            )
-          }
-        />
-      </_ModalOverlay>
-    </Provider>
-  );
-};
+}: ModalProps) => (
+  <_ModalOverlay
+    isOpen={isOpen}
+    onOpenChange={onOpenChange}
+    defaultOpen={defaultOpen}
+    isDismissable={isDismissable}
+    isKeyboardDismissDisabled={!isDismissable}
+    zIndex={zIndex}
+    fullscreen={fullscreen}
+  >
+    <RACModal
+      {...restProps}
+      className={({ isEntering, isExiting }) =>
+        cx(
+          className,
+          'overflow-auto bg-white text-left shadow-xl',
+          fullscreen ? 'fixed inset-0' : 'w-full max-w-md rounded-2xl align-middle',
+          isEntering && 'zoom-in-95 animate-in duration-300 ease-out',
+          isExiting && 'zoom-out-95 animate-out duration-200 ease-in',
+          // Using the motion-safe class does not work, so we use motion-reduce to overwrite instead
+          'motion-reduce:animate-none',
+        )
+      }
+    />
+  </_ModalOverlay>
+);
 
 /**
  * Rendered inside RACDialog, where React Aria exposes the generated title id
@@ -131,9 +104,27 @@ const Modal = ({
  */
 const HeaderTitle = ({ children }: { children: React.ReactNode }) => {
   const racTitle = useSlottedContext(RACHeadingContext, 'title');
-  const header = useContext(HeaderContext) as { _action?: React.ReactNode } | null;
+  const locale = useLocale();
   return (
-    <Provider values={[[HeaderContext, { ...header, _titleId: racTitle?.id }]]}>
+    <Provider
+      values={[
+        [
+          HeaderContext,
+          {
+            _titleId: racTitle?.id,
+            // Defaults for a `<Button slot="close" />` placed inside the Header.
+            // The close behaviour (onPress) comes from the Dialog's ButtonContext;
+            // here we only inject the appearance and the accessible name.
+            _closeButton: {
+              variant: 'tertiary',
+              'aria-label': translations.close[locale],
+              className: 'data-focus-visible:outline-focus-inset px-2.5!',
+              children: <Close />,
+            },
+          },
+        ],
+      ]}
+    >
       {children}
     </Provider>
   );

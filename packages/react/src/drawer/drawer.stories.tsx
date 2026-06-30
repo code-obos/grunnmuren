@@ -20,6 +20,7 @@ const meta = {
           <Dialog>
             <Header>
               <Heading level={2}>Hvitevarer</Heading>
+              <Button slot="close" />
             </Header>
             <p>
               Denne boligen har tilvalg om hvitevarer fra HTH. Mulighet for vaskemaskin,
@@ -56,6 +57,7 @@ export const Left: Story = {
           <Dialog>
             <Header>
               <Heading level={2}>Filter</Heading>
+              <Button slot="close" />
             </Header>
             <p>Drawer fra venstre side. Vanlig brukt for navigasjon eller filtre.</p>
             <Button slot="close">Lukk</Button>
@@ -75,6 +77,7 @@ export const Top: Story = {
           <Dialog>
             <Header>
               <Heading level={2}>Varsel</Heading>
+              <Button slot="close" />
             </Header>
             <p>Drawer fra toppen, for eksempel for varsler eller hurtigvalg.</p>
             <Button slot="close">Lukk</Button>
@@ -94,6 +97,7 @@ export const Bottom: Story = {
           <Dialog>
             <Header>
               <Heading level={2}>Detaljer</Heading>
+              <Button slot="close" />
             </Header>
             <p>Drawer fra bunnen — fungerer godt på mobil for sekundære handlinger.</p>
             <Footer>
@@ -118,6 +122,7 @@ export const MultipleActions: Story = {
           <Dialog>
             <Header>
               <Heading level={2}>Hvitevarer</Heading>
+              <Button slot="close" />
             </Header>
             <p>
               Denne boligen har tilvalg om hvitevarer fra HTH. Mulighet for vaskemaskin,
@@ -148,6 +153,7 @@ export const Controlled: Story = {
           <Dialog>
             <Header>
               <Heading level={2}>Tittel</Heading>
+              <Button slot="close" />
             </Header>
             <p>Denne drawer er controlled.</p>
             <Button onPress={() => setIsOpen(false)} slot="close">
@@ -172,8 +178,8 @@ export const NotDismissable: Story = {
               <Heading level={2}>Bekreft handlingen</Heading>
             </Header>
             <p>
-              Klikk utenfor og <kbd>Escape</kbd> lukker ikke denne drawer, og close-knappen vises
-              ikke automatisk i headeren.
+              Klikk utenfor og <kbd>Escape</kbd> lukker ikke denne drawer, og vi utelater
+              lukkeknappen i headeren.
             </p>
             <Button onPress={() => setIsOpen(false)}>Bekreft</Button>
           </Dialog>
@@ -194,6 +200,7 @@ export const CustomBackground: Story = {
               <Heading level={2} className="text-mint">
                 Mørk drawer
               </Heading>
+              <Button slot="close" color="mint" />
             </Header>
             <p>
               Bakgrunnsfargen kan inntil videre overstyres med `!`-prefiks, og innholdsfarger settes
@@ -218,6 +225,7 @@ export const CustomZIndex: Story = {
           <Dialog>
             <Header>
               <Heading level={2}>Custom z-index</Heading>
+              <Button slot="close" />
             </Header>
             <p>Drawer med z-index 50.</p>
             <Button slot="close">Lukk</Button>
@@ -231,7 +239,7 @@ export const CustomZIndex: Story = {
 /**
  * Sticky header og footer er konsumentens ansvar via `className` — komponenten
  * implementerer det ikke selv. Her er `Header` og `Footer` gjort `position: sticky`,
- * og de negative marginene (`-mx-4` m.m.) lar bakgrunnen dekke hele bredden til
+ * og de negative marginene (`-m-4` m.m.) lar bakgrunnen dekke hele bredden til
  * tross for paddingen på `Dialog`.
  */
 export const StickyHeaderFooter: Story = {
@@ -243,6 +251,7 @@ export const StickyHeaderFooter: Story = {
           <Dialog>
             <Header className="sticky top-0 z-10 -m-4 bg-white p-4">
               <Heading level={2}>Meld interesse</Heading>
+              <Button slot="close" />
             </Header>
             {Array.from({ length: 12 }).map((_, i) => (
               <p key={i}>

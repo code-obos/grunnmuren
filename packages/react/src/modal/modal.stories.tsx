@@ -25,6 +25,7 @@ const meta = {
             <Dialog>
               <Header>
                 <Heading level={2}>Hvitevarer</Heading>
+                <Button slot="close" />
               </Header>
               <p>
                 Denne boligen har tilvalg om hvitevarer fra HTH. Mulighet for vaskemaskin,
@@ -67,6 +68,7 @@ export const MultipleActions: Story = {
           <Dialog>
             <Header>
               <Heading level={2}>Hvitevarer</Heading>
+              <Button slot="close" />
             </Header>
             <p>
               Denne boligen har tilvalg om hvitevarer fra HTH. Mulighet for vaskemaskin,
@@ -98,6 +100,7 @@ export const Controlled: Story = {
             <Dialog>
               <Header>
                 <Heading level={2}>Tittel</Heading>
+                <Button slot="close" />
               </Header>
               <p>Denne modalen er controlled.</p>
               <Button onPress={() => setIsOpen(false)} slot="close">
@@ -165,6 +168,7 @@ export const CustomZIndex: Story = {
           <Dialog>
             <Header>
               <Heading level={2}>Hvitevarer</Heading>
+              <Button slot="close" />
             </Header>
             <p>
               Denne boligen har tilvalg om hvitevarer fra HTH. Mulighet for vaskemaskin,
@@ -200,6 +204,7 @@ export const Fullscreen: Story = {
           <Dialog>
             <Header>
               <Heading level={2}>Fullskjerm modal</Heading>
+              <Button slot="close" />
             </Header>
             <p>Denne modalen dekker hele skjermen.</p>
             <Button slot="close">Lukk</Button>
@@ -219,6 +224,7 @@ export const ImageGalleryModal: Story = {
           <Dialog className="container h-full">
             <Header>
               <Heading level={2}>Bildegalleri - Eksempel</Heading>
+              <Button slot="close" />
             </Header>
             <TabbedImageGallery />
           </Dialog>
