@@ -1,3 +1,4 @@
+import { Close } from '@obosbbl/grunnmuren-icons-react';
 import { cva, cx, type VariantProps } from 'cva';
 import {
   Modal as RACModal,
@@ -6,7 +7,10 @@ import {
 } from 'react-aria-components/Modal';
 import { Provider } from 'react-aria-components/slots';
 
+import { Button } from '../button';
 import { HeaderContext } from '../content';
+import { translations } from '../translations';
+import { useLocale } from '../use-locale';
 
 const drawerVariants = cva({
   base: ['fixed overflow-auto bg-white text-left shadow-xl', 'motion-reduce:animate-none'],
@@ -57,14 +61,26 @@ const Drawer = ({
   style = {},
   ...restProps
 }: DrawerProps) => {
+  const locale = useLocale();
   return (
     <Provider
       values={[
         [
           HeaderContext,
           {
-            // Header renders the dismiss button itself; we only pass the close handler.
-            _onClose: isDismissable ? () => onOpenChange?.(false) : undefined,
+            // The close button is injected into the Header. RAC Dialog supports
+            // one "close" slot out of the box, which we utilize here.
+            _action: isDismissable ? (
+              <Button
+                slot="close"
+                variant="tertiary"
+                className="data-focus-visible:outline-focus-inset px-2.5!"
+                aria-label={translations.close[locale]}
+                onPress={() => onOpenChange?.(false)}
+              >
+                <Close />
+              </Button>
+            ) : undefined,
           },
         ],
       ]}

@@ -1,6 +1,5 @@
-import { Close } from '@obosbbl/grunnmuren-icons-react';
 import { cva, cx, type VariantProps } from 'cva';
-import { createContext, type HTMLProps, type Ref } from 'react';
+import { createContext, type HTMLProps, type ReactNode, type Ref } from 'react';
 import { HeadingContext as RACHeadingContext } from 'react-aria-components/Heading';
 import {
   type ContextValue,
@@ -8,10 +7,6 @@ import {
   useContextProps,
   useSlottedContext,
 } from 'react-aria-components/slots';
-
-import { Button } from '../button';
-import { translations } from '../translations';
-import { useLocale } from '../use-locale';
 
 type HeadingProps = Omit<HTMLProps<HTMLHeadingElement>, 'size'> &
   VariantProps<typeof headingVariants> & {
@@ -149,8 +144,8 @@ const Footer = (props: FooterProps) => <div {...props} data-slot="footer" />;
 
 type HeaderProps = HTMLProps<HTMLDivElement> & {
   children: React.ReactNode;
-  /** @private Set by Modal/Drawer to render a dismiss button when the dialog is dismissable */
-  _onClose?: () => void;
+  /** @private Used by Modal/Drawer to inject the close button into the header */
+  _action?: ReactNode;
   /** Ref for the element. */
   ref?: Ref<HTMLDivElement>;
 };
@@ -167,8 +162,7 @@ const HeaderContext = createContext<ContextValue<Partial<HeaderProps>, HTMLDivEl
  */
 const Header = ({ ref = null, ...props }: HeaderProps) => {
   [props, ref] = useContextProps(props, ref, HeaderContext);
-  const { children, className, _onClose: onClose, ...restProps } = props;
-  const locale = useLocale();
+  const { children, className, _action: action, ...restProps } = props;
 
   // React Aria's Dialog exposes the generated title id through its own
   // HeadingContext. We forward it to our Heading so the dialog gets an
@@ -180,18 +174,7 @@ const Header = ({ ref = null, ...props }: HeaderProps) => {
       <Provider values={[[HeadingContext, { className: 'heading-s', id: racTitle?.id }]]}>
         {children}
       </Provider>
-      {onClose && (
-        <Button
-          // RAC Dialog supports one "close" slot out of the box, which we utilize here.
-          slot="close"
-          variant="tertiary"
-          className="data-focus-visible:outline-focus-inset px-2.5!"
-          aria-label={translations.close[locale]}
-          onPress={onClose}
-        >
-          <Close />
-        </Button>
-      )}
+      {action}
     </div>
   );
 };
