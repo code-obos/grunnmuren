@@ -1,13 +1,6 @@
 import { cva, cx, type VariantProps } from 'cva';
 import { createContext, type HTMLProps, type Ref } from 'react';
-import {
-  DEFAULT_SLOT,
-  type ContextValue,
-  Provider,
-  useContextProps,
-} from 'react-aria-components/slots';
-
-import { ButtonContext, type ButtonProps } from '../button';
+import { type ContextValue, useContextProps } from 'react-aria-components/slots';
 
 type HeadingProps = Omit<HTMLProps<HTMLHeadingElement>, 'size'> &
   VariantProps<typeof headingVariants> & {
@@ -145,43 +138,19 @@ const Footer = (props: FooterProps) => <div {...props} data-slot="footer" />;
 
 type HeaderProps = HTMLProps<HTMLDivElement> & {
   children: React.ReactNode;
-  /** @private Set by Modal/Drawer to the dialog's title id, wired onto the heading for `aria-labelledby` */
-  _titleId?: string;
-  /** @private Set by Modal/Drawer with the appearance for a `<Button slot="close" />` placed inside */
-  _closeButton?: Partial<ButtonProps>;
-  /** Ref for the element. */
-  ref?: Ref<HTMLDivElement>;
 };
-
-const HeaderContext = createContext<ContextValue<Partial<HeaderProps>, HTMLDivElement>>({});
 
 /**
  * Wraps the title of a Modal/Drawer (and, optionally, a `<Button slot="close" />`).
  *
- * Renders a `data-slot="header"` element that consumers can style freely,
- * e.g. `className="sticky top-0 bg-white"`. A `Heading` placed inside gets the
- * title styling, and — inside a Modal/Drawer — the dialog's accessible name is
- * wired up automatically (via the injected `_titleId`), so no `slot="title"` is
- * needed. A `<Button slot="close" />` inside gets its icon and styling injected,
- * so the consumer only writes the bare button.
+ * A `data-slot="header"` element the consumer can style freely, e.g.
+ * `className="sticky top-0 bg-white"`. Inside a Modal/Drawer the dialog wires the
+ * title's accessible name (`aria-labelledby`) and injects the close button's icon
+ * and styling, so the consumer only writes a `Heading` and a bare
+ * `<Button slot="close" />` — no `slot="title"` needed. `Header` must be a direct
+ * child of the dialog content for that wiring to apply.
  */
-const Header = ({ ref = null, ...props }: HeaderProps) => {
-  [props, ref] = useContextProps(props, ref, HeaderContext);
-  const { children, className, _titleId: titleId, _closeButton: closeButton, ...restProps } = props;
-
-  return (
-    <div ref={ref} {...restProps} className={className} data-slot="header">
-      <Provider
-        values={[
-          [HeadingContext, { className: 'heading-s', id: titleId }],
-          [ButtonContext, { slots: { [DEFAULT_SLOT]: {}, close: closeButton ?? {} } }],
-        ]}
-      >
-        {children}
-      </Provider>
-    </div>
-  );
-};
+const Header = (props: HeaderProps) => <div {...props} data-slot="header" />;
 
 export {
   Caption,
@@ -189,7 +158,6 @@ export {
   ContentContext,
   Footer,
   Header,
-  HeaderContext,
   Heading,
   HeadingContext,
   Media,
