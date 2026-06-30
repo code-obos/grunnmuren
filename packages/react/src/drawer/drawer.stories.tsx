@@ -241,7 +241,7 @@ export const StickyHeaderFooter: Story = {
         <Button>Åpne skjema</Button>
         <Drawer>
           <Dialog>
-            <Header className="sticky top-0 z-10 -mx-4 -mt-4 bg-white p-4">
+            <Header className="sticky top-0 z-10 -m-4 bg-white p-4">
               <Heading level={2}>Meld interesse</Heading>
             </Header>
             {Array.from({ length: 12 }).map((_, i) => (
