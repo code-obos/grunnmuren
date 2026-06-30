@@ -1,12 +1,6 @@
 import { cva, cx, type VariantProps } from 'cva';
 import { createContext, type HTMLProps, type ReactNode, type Ref } from 'react';
-import { HeadingContext as RACHeadingContext } from 'react-aria-components/Heading';
-import {
-  type ContextValue,
-  Provider,
-  useContextProps,
-  useSlottedContext,
-} from 'react-aria-components/slots';
+import { type ContextValue, Provider, useContextProps } from 'react-aria-components/slots';
 
 type HeadingProps = Omit<HTMLProps<HTMLHeadingElement>, 'size'> &
   VariantProps<typeof headingVariants> & {
@@ -146,6 +140,8 @@ type HeaderProps = HTMLProps<HTMLDivElement> & {
   children: React.ReactNode;
   /** @private Used by Modal/Drawer to inject the close button into the header */
   _action?: ReactNode;
+  /** @private Set by Modal/Drawer to the dialog's title id, wired onto the heading for `aria-labelledby` */
+  _titleId?: string;
   /** Ref for the element. */
   ref?: Ref<HTMLDivElement>;
 };
@@ -156,22 +152,18 @@ const HeaderContext = createContext<ContextValue<Partial<HeaderProps>, HTMLDivEl
  * Wraps the title (and optional close button) of a Modal/Drawer.
  *
  * Renders a `data-slot="header"` element that consumers can style freely,
- * e.g. `className="sticky top-0 bg-white"`. A `Heading` placed inside
- * automatically gets the title styling and is wired as the dialog's accessible
- * name, so no `slot="title"` is needed.
+ * e.g. `className="sticky top-0 bg-white"`. A `Heading` placed inside gets the
+ * title styling, and — inside a Modal/Drawer — the dialog's accessible name is
+ * wired up automatically (via the injected `_titleId`), so no `slot="title"` is
+ * needed.
  */
 const Header = ({ ref = null, ...props }: HeaderProps) => {
   [props, ref] = useContextProps(props, ref, HeaderContext);
-  const { children, className, _action: action, ...restProps } = props;
-
-  // React Aria's Dialog exposes the generated title id through its own
-  // HeadingContext. We forward it to our Heading so the dialog gets an
-  // accessible name via aria-labelledby.
-  const racTitle = useSlottedContext(RACHeadingContext, 'title');
+  const { children, className, _action: action, _titleId: titleId, ...restProps } = props;
 
   return (
     <div ref={ref} {...restProps} className={className} data-slot="header">
-      <Provider values={[[HeadingContext, { className: 'heading-s', id: racTitle?.id }]]}>
+      <Provider values={[[HeadingContext, { className: 'heading-s', id: titleId }]]}>
         {children}
       </Provider>
       {action}
