@@ -1,7 +1,7 @@
 import { Close } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
 import { useContext } from 'react';
-import { ButtonContext as RACButtonContext } from 'react-aria-components/Button';
+import { ButtonContext } from 'react-aria-components/Button';
 import {
   OverlayTriggerStateContext,
   Dialog as RACDialog,
@@ -17,8 +17,7 @@ import {
 } from 'react-aria-components/Modal';
 import { DEFAULT_SLOT, Provider, useSlottedContext } from 'react-aria-components/slots';
 
-import { ButtonContext } from '../button';
-import { HeaderContext, HeadingContext } from '../content';
+import { HeaderContext } from '../content';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 
@@ -98,15 +97,12 @@ const Modal = ({
 );
 
 /**
- * Wraps the `Header` element among the dialog's children in the contexts it needs:
- * the title id (from React Aria's Dialog, for `aria-labelledby`) and the close
- * button's appearance. Scoped to `Header` so body headings and footer buttons are
- * unaffected — which means `Header` must be a direct child of the dialog content.
- *
- * The close behaviour (`onPress`) still comes from the Dialog's RAC ButtonContext;
- * here we only inject the appearance (icon, variant) and the accessible name.
+ * Rendered inside RACDialog, where React Aria exposes the generated title id
+ * through its HeadingContext. We read it here and forward it to our Header via
+ * HeaderContext, so Header stays agnostic of React Aria's Dialog and only needs
+ * to wire the id onto its heading (for `aria-labelledby`).
  */
-const DialogHeader = ({ children }: { children: React.ReactNode }) => {
+const HeaderTitle = ({ children }: { children: React.ReactNode }) => {
   const racTitle = useSlottedContext(RACHeadingContext, 'title');
   const locale = useLocale();
   return (
@@ -115,33 +111,16 @@ const DialogHeader = ({ children }: { children: React.ReactNode }) => {
         [
           HeaderContext,
           {
-            // Header applies this around its own children, so the wiring is scoped
-            // to the header without matching on the Header element type. We inject
-            // the title id (for aria-labelledby) and the close button's appearance;
-            // the close behaviour (onPress) comes from the Dialog's ButtonContext.
-            _wrap: (headerChildren) => (
-              <Provider
-                values={[
-                  [HeadingContext, { className: 'heading-s', id: racTitle?.id }],
-                  [
-                    ButtonContext,
-                    {
-                      slots: {
-                        [DEFAULT_SLOT]: {},
-                        close: {
-                          variant: 'tertiary',
-                          'aria-label': translations.close[locale],
-                          className: 'data-focus-visible:outline-focus-inset px-2.5!',
-                          children: <Close />,
-                        },
-                      },
-                    },
-                  ],
-                ]}
-              >
-                {headerChildren}
-              </Provider>
-            ),
+            _titleId: racTitle?.id,
+            // Defaults for a `<Button slot="close" />` placed inside the Header.
+            // The close behaviour (onPress) comes from the Dialog's ButtonContext;
+            // here we only inject the appearance and the accessible name.
+            _closeButton: {
+              variant: 'tertiary',
+              'aria-label': translations.close[locale],
+              className: 'data-focus-visible:outline-focus-inset px-2.5!',
+              children: <Close />,
+            },
           },
         ],
       ]}
@@ -171,7 +150,7 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
       <Provider
         values={[
           [
-            RACButtonContext,
+            ButtonContext,
             {
               // This is necessary to support multiple close buttons
               slots: {
@@ -188,7 +167,7 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
           ],
         ]}
       >
-        <DialogHeader>{children}</DialogHeader>
+        <HeaderTitle>{children}</HeaderTitle>
       </Provider>
     )}
   </RACDialog>
@@ -202,7 +181,7 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
 export const _ModalButtonContextReset = ({ children }: { children: React.ReactNode }) => {
   const isInsideOverlay = !!useContext(OverlayTriggerStateContext);
   return isInsideOverlay ? (
-    <Provider values={[[RACButtonContext, null]]}>{children}</Provider>
+    <Provider values={[[ButtonContext, null]]}>{children}</Provider>
   ) : (
     children
   );
