@@ -8,15 +8,12 @@ import {
   DialogTrigger as RACDialogTrigger,
   type DialogTriggerProps as RACDialogTriggerProps,
 } from 'react-aria-components/Dialog';
-import { HeadingContext as RACHeadingContext } from 'react-aria-components/Heading';
 import {
   Modal as RACModal,
   ModalOverlay as RACModalOverlay,
   type ModalOverlayProps as RACModalOverlayProps,
 } from 'react-aria-components/Modal';
-import { DEFAULT_SLOT, Provider, useSlottedContext } from 'react-aria-components/slots';
-
-import { HeaderContext } from '../content';
+import { DEFAULT_SLOT, Provider } from 'react-aria-components/slots';
 
 type DialogTriggerProps = RACDialogTriggerProps;
 
@@ -93,17 +90,6 @@ const Modal = ({
   </_ModalOverlay>
 );
 
-/**
- * Rendered inside RACDialog, where React Aria exposes the generated title id
- * through its HeadingContext. We read it here and forward it to our Header via
- * HeaderContext, so Header stays agnostic of React Aria's Dialog and only needs
- * to wire the id onto its heading (for `aria-labelledby`).
- */
-const HeaderTitle = ({ children }: { children: React.ReactNode }) => {
-  const racTitle = useSlottedContext(RACHeadingContext, 'title');
-  return <Provider values={[[HeaderContext, { _titleId: racTitle?.id }]]}>{children}</Provider>;
-};
-
 type DialogProps = RACDialogProps & {
   children: React.ReactNode;
 };
@@ -141,7 +127,7 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
           ],
         ]}
       >
-        <HeaderTitle>{children}</HeaderTitle>
+        {children}
       </Provider>
     )}
   </RACDialog>

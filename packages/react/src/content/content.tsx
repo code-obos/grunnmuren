@@ -1,11 +1,13 @@
 import { Close } from '@obosbbl/grunnmuren-icons-react';
 import { cva, cx, type VariantProps } from 'cva';
 import { createContext, type HTMLProps, type Ref } from 'react';
+import { HeadingContext as RACHeadingContext } from 'react-aria-components/Heading';
 import {
   DEFAULT_SLOT,
   type ContextValue,
   Provider,
   useContextProps,
+  useSlottedContext,
 } from 'react-aria-components/slots';
 
 import { ButtonContext } from '../button';
@@ -148,34 +150,28 @@ const Footer = (props: FooterProps) => <div {...props} data-slot="footer" />;
 
 type HeaderProps = HTMLProps<HTMLDivElement> & {
   children: React.ReactNode;
-  /** @private Set by Modal/Drawer to the dialog's title id, wired onto the heading for `aria-labelledby` */
-  _titleId?: string;
-  /** Ref for the element. */
-  ref?: Ref<HTMLDivElement>;
 };
-
-const HeaderContext = createContext<ContextValue<Partial<HeaderProps>, HTMLDivElement>>({});
 
 /**
  * Wraps the title of a Modal/Drawer (and, optionally, a `<Button slot="close" />`).
  *
- * Renders a `data-slot="header"` element that consumers can style freely,
- * e.g. `className="sticky top-0 bg-white"`. A `Heading` placed inside gets the
- * title styling, and — inside a Modal/Drawer — the dialog's accessible name is
- * wired up automatically (via the injected `_titleId`), so no `slot="title"` is
- * needed. A `<Button slot="close" />` inside gets its icon and styling injected,
- * so the consumer only writes the bare button.
+ * Renders a `data-slot="header"` element consumers can style freely, e.g.
+ * `className="sticky top-0 bg-white"`. A `Heading` inside gets the title styling,
+ * and — inside a Modal/Drawer — is wired as the dialog's accessible name
+ * automatically (no `slot="title"` needed). A bare `<Button slot="close" />`
+ * inside gets its icon and styling injected.
  */
-const Header = ({ ref = null, ...props }: HeaderProps) => {
-  [props, ref] = useContextProps(props, ref, HeaderContext);
-  const { children, className, _titleId: titleId, ...restProps } = props;
+const Header = ({ children, ...props }: HeaderProps) => {
+  // React Aria's Dialog exposes the generated title id through its HeadingContext;
+  // we read it and wire it onto the heading for `aria-labelledby`.
+  const racTitle = useSlottedContext(RACHeadingContext, 'title');
   const locale = useLocale();
 
   return (
-    <div ref={ref} {...restProps} className={className} data-slot="header">
+    <div {...props} data-slot="header">
       <Provider
         values={[
-          [HeadingContext, { className: 'heading-s', id: titleId }],
+          [HeadingContext, { className: 'heading-s', id: racTitle?.id }],
           // Appearance for a bare `<Button slot="close" />` inside the header. The
           // close behaviour (onPress) is provided by the Modal/Drawer's Dialog.
           [
@@ -206,7 +202,6 @@ export {
   ContentContext,
   Footer,
   Header,
-  HeaderContext,
   Heading,
   HeadingContext,
   Media,
