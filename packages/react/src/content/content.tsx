@@ -1,6 +1,12 @@
 import { cva, cx, type VariantProps } from 'cva';
-import { createContext, type HTMLProps, type Ref } from 'react';
-import { type ContextValue, useContextProps } from 'react-aria-components/slots';
+import { createContext, type HTMLProps, type ReactNode, type Ref } from 'react';
+import { HeadingContext as RACHeadingContext } from 'react-aria-components/Heading';
+import {
+  type ContextValue,
+  Provider,
+  useContextProps,
+  useSlottedContext,
+} from 'react-aria-components/slots';
 
 type HeadingProps = Omit<HTMLProps<HTMLHeadingElement>, 'size'> &
   VariantProps<typeof headingVariants> & {
@@ -136,11 +142,50 @@ const Caption = ({ className, ...restProps }: CaptionProps) => (
 
 const Footer = (props: FooterProps) => <div {...props} data-slot="footer" />;
 
+type HeaderProps = HTMLProps<HTMLDivElement> & {
+  children: React.ReactNode;
+  /** @private Used by Modal/Drawer to inject the close button into the header */
+  _action?: ReactNode;
+  /** Ref for the element. */
+  ref?: Ref<HTMLDivElement>;
+};
+
+const HeaderContext = createContext<ContextValue<Partial<HeaderProps>, HTMLDivElement>>({});
+
+/**
+ * Wraps the title (and optional close button) of a Modal/Drawer.
+ *
+ * Renders a `data-slot="header"` element that consumers can style freely,
+ * e.g. `className="sticky top-0 bg-white"`. A `Heading` placed inside
+ * automatically gets the title styling and is wired as the dialog's accessible
+ * name, so no `slot="title"` is needed.
+ */
+const Header = ({ ref = null, ...props }: HeaderProps) => {
+  [props, ref] = useContextProps(props, ref, HeaderContext);
+  const { children, className, _action: action, ...restProps } = props;
+
+  // React Aria's Dialog exposes the generated title id through its own
+  // HeadingContext. We forward it to our Heading so the dialog gets an
+  // accessible name via aria-labelledby.
+  const racTitle = useSlottedContext(RACHeadingContext, 'title');
+
+  return (
+    <div ref={ref} {...restProps} className={className} data-slot="header">
+      <Provider values={[[HeadingContext, { className: 'heading-s', id: racTitle?.id }]]}>
+        {children}
+      </Provider>
+      {action}
+    </div>
+  );
+};
+
 export {
   Caption,
   Content,
   ContentContext,
   Footer,
+  Header,
+  HeaderContext,
   Heading,
   HeadingContext,
   Media,
@@ -148,6 +193,7 @@ export {
   type CaptionProps,
   type ContentProps,
   type FooterProps,
+  type HeaderProps,
   type HeadingProps,
   type MediaProps,
 };

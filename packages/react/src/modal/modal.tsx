@@ -17,7 +17,7 @@ import {
 import { DEFAULT_SLOT, Provider } from 'react-aria-components/slots';
 
 import { Button } from '../button';
-import { HeadingContext } from '../content';
+import { HeaderContext } from '../content';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 
@@ -75,30 +75,21 @@ const Modal = ({
     <Provider
       values={[
         [
-          HeadingContext,
+          HeaderContext,
           {
-            slots: {
-              [DEFAULT_SLOT]: {}, // RAC requires a default slot in order to support non-slotted components
-              title: {
-                className: 'heading-s',
-                _outerWrapper: (children) => (
-                  <div className="flex items-center justify-between gap-x-2">
-                    {children}
-                    {isDismissable && (
-                      <Button
-                        slot="close" // RAC Dialog supports one close button out of the box, so we utilize that here. For other close buttons we use ButtonContext
-                        variant="tertiary"
-                        className="data-focus-visible:outline-focus-inset px-2.5!"
-                        aria-label={translations.close[locale]}
-                        onPress={() => onOpenChange?.(false)}
-                      >
-                        <Close />
-                      </Button>
-                    )}
-                  </div>
-                ),
-              },
-            },
+            // The close button is injected into the Header. RAC Dialog supports
+            // one "close" slot out of the box, which we utilize here.
+            _action: isDismissable ? (
+              <Button
+                slot="close"
+                variant="tertiary"
+                className="data-focus-visible:outline-focus-inset px-2.5!"
+                aria-label={translations.close[locale]}
+                onPress={() => onOpenChange?.(false)}
+              >
+                <Close />
+              </Button>
+            ) : undefined,
           },
         ],
       ]}
@@ -141,6 +132,8 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
     className={cx(
       className,
       'relative flex flex-col gap-y-5 p-4 outline-none',
+      // Header
+      '**:data-[slot="header"]:flex **:data-[slot="header"]:items-center **:data-[slot="header"]:justify-between **:data-[slot="header"]:gap-x-2',
       // Footer
       '**:data-[slot="footer"]:flex **:data-[slot="footer"]:gap-x-2',
     )}

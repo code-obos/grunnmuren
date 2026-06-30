@@ -5,10 +5,10 @@ import {
   ModalOverlay as RACModalOverlay,
   type ModalOverlayProps as RACModalOverlayProps,
 } from 'react-aria-components/Modal';
-import { DEFAULT_SLOT, Provider } from 'react-aria-components/slots';
+import { Provider } from 'react-aria-components/slots';
 
 import { Button } from '../button';
-import { HeadingContext } from '../content';
+import { HeaderContext } from '../content';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 
@@ -66,30 +66,21 @@ const Drawer = ({
     <Provider
       values={[
         [
-          HeadingContext,
+          HeaderContext,
           {
-            slots: {
-              [DEFAULT_SLOT]: {}, // RAC requires a default slot in order to support non-slotted components
-              title: {
-                className: 'heading-s',
-                _outerWrapper: (children) => (
-                  <div className="flex items-center justify-between gap-x-2">
-                    {children}
-                    {isDismissable && (
-                      <Button
-                        slot="close" // RAC Dialog supports one close button out of the box, so we utilize that here
-                        variant="tertiary"
-                        className="data-focus-visible:outline-focus-inset px-2.5!"
-                        aria-label={translations.close[locale]}
-                        onPress={() => onOpenChange?.(false)}
-                      >
-                        <Close />
-                      </Button>
-                    )}
-                  </div>
-                ),
-              },
-            },
+            // The close button is injected into the Header. RAC Dialog supports
+            // one "close" slot out of the box, which we utilize here.
+            _action: isDismissable ? (
+              <Button
+                slot="close"
+                variant="tertiary"
+                className="data-focus-visible:outline-focus-inset px-2.5!"
+                aria-label={translations.close[locale]}
+                onPress={() => onOpenChange?.(false)}
+              >
+                <Close />
+              </Button>
+            ) : undefined,
           },
         ],
       ]}
