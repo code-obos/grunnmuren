@@ -1,18 +1,8 @@
-import { Close } from '@obosbbl/grunnmuren-icons-react';
 import { cva, cx, type VariantProps } from 'cva';
-import { createContext, type HTMLProps, type Ref } from 'react';
-import { HeadingContext as RACHeadingContext } from 'react-aria-components/Heading';
-import {
-  DEFAULT_SLOT,
-  type ContextValue,
-  Provider,
-  useContextProps,
-  useSlottedContext,
-} from 'react-aria-components/slots';
+import { createContext, type HTMLProps, type Ref, useContext } from 'react';
+import { type ContextValue, Provider, useContextProps } from 'react-aria-components/slots';
 
-import { ButtonContext } from '../button';
-import { translations } from '../translations';
-import { useLocale } from '../use-locale';
+import { ButtonContext, type ButtonProps } from '../button';
 
 type HeadingProps = Omit<HTMLProps<HTMLHeadingElement>, 'size'> &
   VariantProps<typeof headingVariants> & {
@@ -152,46 +142,33 @@ type HeaderProps = HTMLProps<HTMLDivElement> & {
   children: React.ReactNode;
 };
 
+// The two contexts a Modal/Drawer wraps the header content in (typed explicitly
+// so the values pass through context and into `Provider` without casts).
+type HeaderProviderValues = [
+  [typeof HeadingContext, ContextValue<Partial<HeadingProps>, HTMLHeadingElement>],
+  [typeof ButtonContext, ContextValue<ButtonProps, HTMLButtonElement | HTMLAnchorElement>],
+];
+
+const HeaderContext = createContext<{
+  /** @private Set by Modal/Drawer with the contexts to wrap the header content in */
+  _providerValues?: HeaderProviderValues;
+}>({});
+
 /**
  * Wraps the title of a Modal/Drawer (and, optionally, a `<Button slot="close" />`).
  *
  * Renders a `data-slot="header"` element consumers can style freely, e.g.
- * `className="sticky top-0 bg-white"`. A `Heading` inside gets the title styling,
- * and — inside a Modal/Drawer — is wired as the dialog's accessible name
- * automatically (no `slot="title"` needed). A bare `<Button slot="close" />`
- * inside gets its icon and styling injected.
+ * `className="sticky top-0 bg-white"`. Inside a Modal/Drawer the dialog provides
+ * (via `HeaderContext`) the contexts to wrap the content in — wiring the title's
+ * accessible name (`aria-labelledby`) and the close button's appearance — so the
+ * consumer only writes a `Heading` and a bare `<Button slot="close" />`, with no
+ * `slot="title"` needed.
  */
 const Header = ({ children, ...props }: HeaderProps) => {
-  // React Aria's Dialog exposes the generated title id through its HeadingContext;
-  // we read it and wire it onto the heading for `aria-labelledby`.
-  const racTitle = useSlottedContext(RACHeadingContext, 'title');
-  const locale = useLocale();
-
+  const { _providerValues } = useContext(HeaderContext);
   return (
     <div {...props} data-slot="header">
-      <Provider
-        values={[
-          [HeadingContext, { className: 'heading-s', id: racTitle?.id }],
-          // Appearance for a bare `<Button slot="close" />` inside the header. The
-          // close behaviour (onPress) is provided by the Modal/Drawer's Dialog.
-          [
-            ButtonContext,
-            {
-              slots: {
-                [DEFAULT_SLOT]: {},
-                close: {
-                  variant: 'tertiary',
-                  'aria-label': translations.close[locale],
-                  className: 'data-focus-visible:outline-focus-inset px-2.5!',
-                  children: <Close />,
-                },
-              },
-            },
-          ],
-        ]}
-      >
-        {children}
-      </Provider>
+      {_providerValues ? <Provider values={_providerValues}>{children}</Provider> : children}
     </div>
   );
 };
@@ -202,6 +179,7 @@ export {
   ContentContext,
   Footer,
   Header,
+  HeaderContext,
   Heading,
   HeadingContext,
   Media,

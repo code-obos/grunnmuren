@@ -1,6 +1,7 @@
+import { Close } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
 import { useContext } from 'react';
-import { ButtonContext } from 'react-aria-components/Button';
+import { ButtonContext as RACButtonContext } from 'react-aria-components/Button';
 import {
   OverlayTriggerStateContext,
   Dialog as RACDialog,
@@ -8,12 +9,18 @@ import {
   DialogTrigger as RACDialogTrigger,
   type DialogTriggerProps as RACDialogTriggerProps,
 } from 'react-aria-components/Dialog';
+import { HeadingContext as RACHeadingContext } from 'react-aria-components/Heading';
 import {
   Modal as RACModal,
   ModalOverlay as RACModalOverlay,
   type ModalOverlayProps as RACModalOverlayProps,
 } from 'react-aria-components/Modal';
-import { DEFAULT_SLOT, Provider } from 'react-aria-components/slots';
+import { DEFAULT_SLOT, Provider, useSlottedContext } from 'react-aria-components/slots';
+
+import { ButtonContext } from '../button';
+import { HeaderContext, HeadingContext } from '../content';
+import { translations } from '../translations';
+import { useLocale } from '../use-locale';
 
 type DialogTriggerProps = RACDialogTriggerProps;
 
@@ -90,6 +97,49 @@ const Modal = ({
   </_ModalOverlay>
 );
 
+/**
+ * Rendered inside RACDialog (where React Aria exposes the generated title id via
+ * its HeadingContext). Builds the contexts the header content needs and hands them
+ * to `Header` through `HeaderContext`, so `Header` only has to render a `Provider`
+ * around its own children — no knowledge of the dialog, close icon or locale.
+ */
+const HeaderTitle = ({ children }: { children: React.ReactNode }) => {
+  const racTitle = useSlottedContext(RACHeadingContext, 'title');
+  const locale = useLocale();
+  return (
+    <Provider
+      values={[
+        [
+          HeaderContext,
+          {
+            _providerValues: [
+              [HeadingContext, { className: 'heading-s', id: racTitle?.id }],
+              [
+                ButtonContext,
+                {
+                  slots: {
+                    [DEFAULT_SLOT]: {},
+                    // Appearance for a bare `<Button slot="close" />`; the close
+                    // behaviour (onPress) comes from the Dialog's ButtonContext below.
+                    close: {
+                      variant: 'tertiary',
+                      'aria-label': translations.close[locale],
+                      className: 'data-focus-visible:outline-focus-inset px-2.5!',
+                      children: <Close />,
+                    },
+                  },
+                },
+              ],
+            ],
+          },
+        ],
+      ]}
+    >
+      {children}
+    </Provider>
+  );
+};
+
 type DialogProps = RACDialogProps & {
   children: React.ReactNode;
 };
@@ -110,7 +160,7 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
       <Provider
         values={[
           [
-            ButtonContext,
+            RACButtonContext,
             {
               // This is necessary to support multiple close buttons
               slots: {
@@ -127,7 +177,7 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
           ],
         ]}
       >
-        {children}
+        <HeaderTitle>{children}</HeaderTitle>
       </Provider>
     )}
   </RACDialog>
@@ -141,7 +191,7 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
 export const _ModalButtonContextReset = ({ children }: { children: React.ReactNode }) => {
   const isInsideOverlay = !!useContext(OverlayTriggerStateContext);
   return isInsideOverlay ? (
-    <Provider values={[[ButtonContext, null]]}>{children}</Provider>
+    <Provider values={[[RACButtonContext, null]]}>{children}</Provider>
   ) : (
     children
   );
