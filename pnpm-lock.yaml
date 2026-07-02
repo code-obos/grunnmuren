@@ -24,8 +24,8 @@ importers:
         specifier: workspace:*
         version: link:packages/tailwind
       '@react-aria/optimize-locales-plugin':
-        specifier: 1.2.1
-        version: 1.2.1
+        specifier: 2.0.0
+        version: 2.0.0
       '@storybook/addon-docs':
         specifier: 10.3.5
         version: 10.3.5(@types/react@19.2.17)(esbuild@0.27.3)(rollup@4.52.5)(storybook@10.3.5(@testing-library/dom@10.4.0)(prettier@3.8.1)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(vite@8.0.8(@types/node@25.9.3)(esbuild@0.27.3)(jiti@2.7.0)(terser@5.37.0)(tsx@4.21.0)(yaml@2.9.0))
@@ -199,8 +199,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tailwind
       '@react-aria/optimize-locales-plugin':
-        specifier: 1.2.1
-        version: 1.2.1
+        specifier: 2.0.0
+        version: 2.0.0
       '@tailwindcss/vite':
         specifier: 'catalog:'
         version: 4.2.2(vite@8.0.8(@types/node@25.9.3)(esbuild@0.27.3)(jiti@2.7.0)(terser@5.37.0)(tsx@4.21.0)(yaml@2.9.0))
@@ -2903,8 +2903,8 @@ packages:
   '@protobufjs/utf8@1.1.0':
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
 
-  '@react-aria/optimize-locales-plugin@1.2.1':
-    resolution: {integrity: sha512-cozjylSJNotHobYx1D4qZLLhcO00HZxI+XO1+MXP4Hv7y8gKzcH1QTJ4iqgzxywJcKkQLV6B21cBFHP6faWd0A==}
+  '@react-aria/optimize-locales-plugin@2.0.0':
+    resolution: {integrity: sha512-tXQiC+ud+EDzJfwlbTY6J33pU51V+PMB4PcxYN6PYHGlRpq938zq6IKhquPJkVGqKLTnOeMtSjns/yvRR5wfww==}
 
   '@react-aria/utils@3.34.1':
     resolution: {integrity: sha512-H6+rGZL+0f58bBNaUMfctEnT+NogqwAk+nHiB8sR3K+YlQ37GTuCijy2U/pPvQtFMS5mURrjZeBH5JNNXsx14A==}
@@ -9260,6 +9260,7 @@ packages:
   tsconfck@3.1.4:
     resolution: {integrity: sha512-kdqWFGVJqe+KGYvlSO9NIaWn9jT1Ny4oKVzAJsKii5eoE9snzTJzL4+MMVOMn+fikWGFmKEylcXL710V/kIPJQ==}
     engines: {node: ^18 || >=20}
+    deprecated: unmaintained
     hasBin: true
     peerDependencies:
       typescript: ^5.0.0
@@ -9433,10 +9434,6 @@ packages:
   unplugin-utils@0.3.1:
     resolution: {integrity: sha512-5lWVjgi6vuHhJ526bI4nlCOmkCIF3nnfXkCMDeMJrtdvxTs6ZFCM8oNufGTsDbKv/tJ/xj8RpvXjRuPBZJuJog==}
     engines: {node: '>=20.19.0'}
-
-  unplugin@1.16.1:
-    resolution: {integrity: sha512-4/u/j4FrCKdi17jaxuJA0jClGxB1AvU2hw/IuayPc4ay1XGaJs/rbb4v5WKwAjNifjmXK9PIFyuPiaK8azyR9w==}
-    engines: {node: '>=14.0.0'}
 
   unplugin@2.3.11:
     resolution: {integrity: sha512-5uKD0nqiYVzlmCRs01Fhs2BdkEgBS3SAVP6ndrBsuK42iC2+JHyxM05Rm9G8+5mkmRtzMZGY8Ct5+mliZxU/Ww==}
@@ -13084,9 +13081,9 @@ snapshots:
 
   '@protobufjs/utf8@1.1.0': {}
 
-  '@react-aria/optimize-locales-plugin@1.2.1':
+  '@react-aria/optimize-locales-plugin@2.0.0':
     dependencies:
-      unplugin: 1.16.1
+      unplugin: 2.3.11
 
   '@react-aria/utils@3.34.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
     dependencies:
@@ -20838,11 +20835,6 @@ snapshots:
     dependencies:
       pathe: 2.0.3
       picomatch: 4.0.4
-
-  unplugin@1.16.1:
-    dependencies:
-      acorn: 8.15.0
-      webpack-virtual-modules: 0.6.2
 
   unplugin@2.3.11:
     dependencies:
