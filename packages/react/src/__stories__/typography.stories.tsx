@@ -55,6 +55,12 @@ export const Lead = () => (
   </p>
 );
 
+export const LeadSm = () => (
+  <p className="lead-sm">
+    Dokumentavgift er en avgift som du må betale til staten når du kjøper en fast eiendom.
+  </p>
+);
+
 export const Body = () => {
   return (
     <>
