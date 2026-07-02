@@ -9,6 +9,8 @@
 ));
 @custom-variant prose-lead (&
 :is([class~="lead"]):not(:where([class~="not-prose"], [class~="not-prose"] *)));
+@custom-variant prose-lead-sm (&
+:is([class~="lead-sm"]):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-h1 (&
 :is(h1):not(:where([class~="not-prose"], [class~="not-prose"] *)));
 @custom-variant prose-h2 (&
@@ -94,6 +96,12 @@
 
     &:where([class~='lead']) {
       @apply text-[1.4375rem]/[2.25rem] font-medium lg:text-[1.625rem]/[2.5625rem];
+      margin-top: 1.2em;
+      margin-bottom: 1.2em;
+    }
+
+    &:where([class~='lead-sm']) {
+      @apply text-[1.1875rem]/[1.875rem] font-normal lg:text-[1.375rem]/[2.1875rem];
       margin-top: 1.2em;
       margin-bottom: 1.2em;
     }
