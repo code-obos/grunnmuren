@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@code-obos/logger": "4.0.0-20260421111144",
-    "@code-obos/sanity-auth": "1.4.4",
+    "@code-obos/sanity-auth": "1.4.6",
     "@obosbbl/grunnmuren-icons-react": "workspace:*",
     "@obosbbl/grunnmuren-icons-svg": "workspace:*",
     "@obosbbl/grunnmuren-react": "workspace:*",
