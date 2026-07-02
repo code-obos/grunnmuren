@@ -1,6 +1,8 @@
 import { cva, cx, type VariantProps } from 'cva';
-import { createContext, type HTMLProps, type Ref } from 'react';
-import { type ContextValue, useContextProps } from 'react-aria-components/slots';
+import { createContext, type HTMLProps, type Ref, useContext } from 'react';
+import { type ContextValue, Provider, useContextProps } from 'react-aria-components/slots';
+
+import { ButtonContext, type ButtonProps } from '../button';
 
 type HeadingProps = Omit<HTMLProps<HTMLHeadingElement>, 'size'> &
   VariantProps<typeof headingVariants> & {
@@ -136,11 +138,48 @@ const Caption = ({ className, ...restProps }: CaptionProps) => (
 
 const Footer = (props: FooterProps) => <div {...props} data-slot="footer" />;
 
+type HeaderProps = HTMLProps<HTMLDivElement> & {
+  children: React.ReactNode;
+};
+
+// The two contexts a Modal/Drawer wraps the header content in (typed explicitly
+// so the values pass through context and into `Provider` without casts).
+type HeaderProviderValues = [
+  [typeof HeadingContext, ContextValue<Partial<HeadingProps>, HTMLHeadingElement>],
+  [typeof ButtonContext, ContextValue<ButtonProps, HTMLButtonElement | HTMLAnchorElement>],
+];
+
+const HeaderContext = createContext<{
+  /** @private Set by Modal/Drawer with the contexts to wrap the header content in */
+  _providerValues?: HeaderProviderValues;
+}>({});
+
+/**
+ * Wraps the title of a Modal/Drawer (and, optionally, a `<Button slot="close" />`).
+ *
+ * Renders a `data-slot="header"` element consumers can style freely, e.g.
+ * `className="sticky top-0 bg-white"`. Inside a Modal/Drawer the dialog provides
+ * (via `HeaderContext`) the contexts to wrap the content in — wiring the title's
+ * accessible name (`aria-labelledby`) and the close button's appearance — so the
+ * consumer only writes a `Heading` and a bare `<Button slot="close" />`, with no
+ * `slot="title"` needed.
+ */
+const Header = ({ children, ...props }: HeaderProps) => {
+  const { _providerValues } = useContext(HeaderContext);
+  return (
+    <div {...props} data-slot="header">
+      {_providerValues ? <Provider values={_providerValues}>{children}</Provider> : children}
+    </div>
+  );
+};
+
 export {
   Caption,
   Content,
   ContentContext,
   Footer,
+  Header,
+  HeaderContext,
   Heading,
   HeadingContext,
   Media,
@@ -148,6 +187,7 @@ export {
   type CaptionProps,
   type ContentProps,
   type FooterProps,
+  type HeaderProps,
   type HeadingProps,
   type MediaProps,
 };

@@ -1,7 +1,7 @@
 import { Close } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
 import { useContext } from 'react';
-import { ButtonContext } from 'react-aria-components/Button';
+import { ButtonContext as RACButtonContext } from 'react-aria-components/Button';
 import {
   OverlayTriggerStateContext,
   Dialog as RACDialog,
@@ -9,15 +9,16 @@ import {
   DialogTrigger as RACDialogTrigger,
   type DialogTriggerProps as RACDialogTriggerProps,
 } from 'react-aria-components/Dialog';
+import { HeadingContext as RACHeadingContext } from 'react-aria-components/Heading';
 import {
   Modal as RACModal,
   ModalOverlay as RACModalOverlay,
   type ModalOverlayProps as RACModalOverlayProps,
 } from 'react-aria-components/Modal';
-import { DEFAULT_SLOT, Provider } from 'react-aria-components/slots';
+import { DEFAULT_SLOT, Provider, useSlottedContext } from 'react-aria-components/slots';
 
-import { Button } from '../button';
-import { HeadingContext } from '../content';
+import { ButtonContext } from '../button';
+import { HeaderContext, HeadingContext } from '../content';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 
@@ -69,64 +70,72 @@ const Modal = ({
   zIndex,
   fullscreen = false,
   ...restProps
-}: ModalProps) => {
+}: ModalProps) => (
+  <_ModalOverlay
+    isOpen={isOpen}
+    onOpenChange={onOpenChange}
+    defaultOpen={defaultOpen}
+    isDismissable={isDismissable}
+    isKeyboardDismissDisabled={!isDismissable}
+    zIndex={zIndex}
+    fullscreen={fullscreen}
+  >
+    <RACModal
+      {...restProps}
+      className={({ isEntering, isExiting }) =>
+        cx(
+          className,
+          'overflow-auto bg-white text-left shadow-xl',
+          fullscreen ? 'fixed inset-0' : 'w-full max-w-md rounded-2xl align-middle',
+          isEntering && 'zoom-in-95 animate-in duration-300 ease-out',
+          isExiting && 'zoom-out-95 animate-out duration-200 ease-in',
+          // Using the motion-safe class does not work, so we use motion-reduce to overwrite instead
+          'motion-reduce:animate-none',
+        )
+      }
+    />
+  </_ModalOverlay>
+);
+
+/**
+ * Rendered inside RACDialog (where React Aria exposes the generated title id via
+ * its HeadingContext). Builds the contexts the header content needs and hands them
+ * to `Header` through `HeaderContext`, so `Header` only has to render a `Provider`
+ * around its own children — no knowledge of the dialog, close icon or locale.
+ */
+const HeaderTitle = ({ children }: { children: React.ReactNode }) => {
+  const racTitle = useSlottedContext(RACHeadingContext, 'title');
   const locale = useLocale();
   return (
     <Provider
       values={[
         [
-          HeadingContext,
+          HeaderContext,
           {
-            slots: {
-              [DEFAULT_SLOT]: {}, // RAC requires a default slot in order to support non-slotted components
-              title: {
-                className: 'heading-s',
-                _outerWrapper: (children) => (
-                  <div className="flex items-center justify-between gap-x-2">
-                    {children}
-                    {isDismissable && (
-                      <Button
-                        slot="close" // RAC Dialog supports one close button out of the box, so we utilize that here. For other close buttons we use ButtonContext
-                        variant="tertiary"
-                        className="data-focus-visible:outline-focus-inset px-2.5!"
-                        aria-label={translations.close[locale]}
-                        onPress={() => onOpenChange?.(false)}
-                      >
-                        <Close />
-                      </Button>
-                    )}
-                  </div>
-                ),
-              },
-            },
+            _providerValues: [
+              [HeadingContext, { className: 'heading-s', id: racTitle?.id }],
+              [
+                ButtonContext,
+                {
+                  slots: {
+                    [DEFAULT_SLOT]: {},
+                    // Appearance for a bare `<Button slot="close" />`; the close
+                    // behaviour (onPress) comes from the Dialog's ButtonContext below.
+                    close: {
+                      variant: 'tertiary',
+                      'aria-label': translations.close[locale],
+                      className: 'data-focus-visible:outline-focus-inset px-2.5!',
+                      children: <Close />,
+                    },
+                  },
+                },
+              ],
+            ],
           },
         ],
       ]}
     >
-      <_ModalOverlay
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        defaultOpen={defaultOpen}
-        isDismissable={isDismissable}
-        isKeyboardDismissDisabled={!isDismissable}
-        zIndex={zIndex}
-        fullscreen={fullscreen}
-      >
-        <RACModal
-          {...restProps}
-          className={({ isEntering, isExiting }) =>
-            cx(
-              className,
-              'overflow-auto bg-white text-left shadow-xl',
-              fullscreen ? 'fixed inset-0' : 'w-full max-w-md rounded-2xl align-middle',
-              isEntering && 'zoom-in-95 animate-in duration-300 ease-out',
-              isExiting && 'zoom-out-95 animate-out duration-200 ease-in',
-              // Using the motion-safe class does not work, so we use motion-reduce to overwrite instead
-              'motion-reduce:animate-none',
-            )
-          }
-        />
-      </_ModalOverlay>
+      {children}
     </Provider>
   );
 };
@@ -141,6 +150,8 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
     className={cx(
       className,
       'relative flex flex-col gap-y-5 p-4 outline-none',
+      // Header
+      '**:data-[slot="header"]:flex **:data-[slot="header"]:items-center **:data-[slot="header"]:justify-between **:data-[slot="header"]:gap-x-2',
       // Footer
       '**:data-[slot="footer"]:flex **:data-[slot="footer"]:gap-x-2',
     )}
@@ -149,7 +160,7 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
       <Provider
         values={[
           [
-            ButtonContext,
+            RACButtonContext,
             {
               // This is necessary to support multiple close buttons
               slots: {
@@ -166,7 +177,7 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
           ],
         ]}
       >
-        {children}
+        <HeaderTitle>{children}</HeaderTitle>
       </Provider>
     )}
   </RACDialog>
@@ -180,7 +191,7 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
 export const _ModalButtonContextReset = ({ children }: { children: React.ReactNode }) => {
   const isInsideOverlay = !!useContext(OverlayTriggerStateContext);
   return isInsideOverlay ? (
-    <Provider values={[[ButtonContext, null]]}>{children}</Provider>
+    <Provider values={[[RACButtonContext, null]]}>{children}</Provider>
   ) : (
     children
   );

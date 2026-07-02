@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 import { Button } from '../button';
 import { TabbedImageGallery } from '../carousel/carousel.stories';
-import { Footer, Heading } from '../content';
+import { Footer, Header, Heading } from '../content';
 import {
   UNSAFE_Dialog as Dialog,
   UNSAFE_DialogTrigger as DialogTrigger,
@@ -23,9 +23,10 @@ const meta = {
           <Button>Åpne</Button>
           <Modal>
             <Dialog>
-              <Heading slot="title" level={2}>
-                Hvitevarer
-              </Heading>
+              <Header>
+                <Heading level={2}>Hvitevarer</Heading>
+                <Button slot="close" />
+              </Header>
               <p>
                 Denne boligen har tilvalg om hvitevarer fra HTH. Mulighet for vaskemaskin,
                 tørketrommel, oppvaskmaskin eller å avstå dette tilbudet.
@@ -65,9 +66,10 @@ export const MultipleActions: Story = {
         <Button>Åpne</Button>
         <Modal>
           <Dialog>
-            <Heading slot="title" level={2}>
-              Hvitevarer
-            </Heading>
+            <Header>
+              <Heading level={2}>Hvitevarer</Heading>
+              <Button slot="close" />
+            </Header>
             <p>
               Denne boligen har tilvalg om hvitevarer fra HTH. Mulighet for vaskemaskin,
               tørketrommel, oppvaskmaskin eller å avstå dette tilbudet.
@@ -96,9 +98,10 @@ export const Controlled: Story = {
           <Button onPress={() => setIsOpen(true)}>Open Modal</Button>
           <Modal isOpen={isOpen} onOpenChange={setIsOpen}>
             <Dialog>
-              <Heading slot="title" level={2}>
-                Tittel
-              </Heading>
+              <Header>
+                <Heading level={2}>Tittel</Heading>
+                <Button slot="close" />
+              </Header>
               <p>Denne modalen er controlled.</p>
               <Button onPress={() => setIsOpen(false)} slot="close">
                 Lukk
@@ -142,9 +145,9 @@ export const AsyncControlled: Story = {
           <Button onPress={() => setIsOpen(true)}>Open Modal</Button>
           <Modal isOpen={isOpen} onOpenChange={setIsOpen} isDismissable={false}>
             <Dialog>
-              <Heading slot="title" level={2}>
-                Tittel
-              </Heading>
+              <Header>
+                <Heading level={2}>Tittel</Heading>
+              </Header>
               <p>Denne modalen er controlled.</p>
               {countdown > 0 && <strong>Lukkes om {countdown} s.</strong>}
               <Button onPress={handleClose}>Lukk</Button>
@@ -163,9 +166,10 @@ export const CustomZIndex: Story = {
         <Button>Åpne</Button>
         <Modal zIndex={50}>
           <Dialog>
-            <Heading slot="title" level={2}>
-              Hvitevarer
-            </Heading>
+            <Header>
+              <Heading level={2}>Hvitevarer</Heading>
+              <Button slot="close" />
+            </Header>
             <p>
               Denne boligen har tilvalg om hvitevarer fra HTH. Mulighet for vaskemaskin,
               tørketrommel, oppvaskmaskin eller å avstå dette tilbudet.
@@ -198,9 +202,10 @@ export const Fullscreen: Story = {
         <Button>Åpne fullskjerm</Button>
         <Modal fullscreen>
           <Dialog>
-            <Heading slot="title" level={2}>
-              Fullskjerm modal
-            </Heading>
+            <Header>
+              <Heading level={2}>Fullskjerm modal</Heading>
+              <Button slot="close" />
+            </Header>
             <p>Denne modalen dekker hele skjermen.</p>
             <Button slot="close">Lukk</Button>
           </Dialog>
@@ -217,9 +222,10 @@ export const ImageGalleryModal: Story = {
         <Button>Åpne bildegalleri</Button>
         <Modal fullscreen>
           <Dialog className="container h-full">
-            <Heading slot="title" level={2}>
-              Bildegalleri - Eksempel
-            </Heading>
+            <Header>
+              <Heading level={2}>Bildegalleri - Eksempel</Heading>
+              <Button slot="close" />
+            </Header>
             <TabbedImageGallery />
           </Dialog>
         </Modal>
