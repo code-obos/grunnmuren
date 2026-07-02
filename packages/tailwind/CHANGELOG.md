@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.5.0
+
+### Minor Changes
+
+- d7b4898: Add a `lead-sm` typography utility — a smaller, supplementary lead (19px mobile / 22px desktop, regular weight) for the right size contrast against `heading-l`. Works both as a standalone utility and inside `prose`.
+
 ## 2.4.12
 
 ### Patch Changes
