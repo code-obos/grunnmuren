@@ -80,19 +80,26 @@ const cardVariants = cva({
         '**:data-[slot="media"]:rounded-t-2xl', // Both Top corners are rounded
       ],
       horizontal: [
-        // Use more gap for horizontal cards that have media
-        // Since this does not affect the layout before the flex direction is set (at breakpoint @2xl for Card with Media), we can set it here
-        'has-data-[slot=media]:layout-gap-x not-has-data-[slot=media]:gap-x-4',
+        // Column gap between media and content (only takes effect at @2xl, when the direction is row).
+        // Content adds its own 12px inner padding on top, so the visible image→text gap reads ~36px.
+        'not-has-data-[slot=media]:gap-x-4 has-data-[slot=media]:gap-x-6',
         // **** With Media ****
         '[&:has(>[data-slot="media"]:last-child)]:flex-col-reverse', // Always display the media at the top of the card
         'has-data-[slot=media]:@2xl:flex-row!', // We need !important to override the specificity (first-/last-child) of the flex-col-reverse and flex-col classes
 
-        '*:data-[slot=media]:@2xl:h-fit', // Fail-safe for rounded corners on media content
-        'has-data-[slot=media]:*:@2xl:basis-1/2', // Ensures a 50/50 split of the media and content on medium screens
-        // Position media at the edges of the card
-        '*:data-[slot=media]:@2xl:mb-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
-        '*:data-[slot=media]:first:@2xl:mr-0',
-        '*:data-[slot=media]:last:@2xl:ml-0',
+        // 50/50 split. flex-1 (not basis-1/2) so the columns fill the space after the gap and the
+        // media's negative margin reaches the edge (basis-1/2 would overflow and get shrunk back).
+        'has-data-[slot=media]:*:@2xl:flex-1',
+
+        // Inset via Content instead of the card, so the media stays flush to the edges no matter the
+        // Media/Content order (incl. CSS `order`) — no first/last-child margins. Card drops its
+        // padding, media bleeds just the 1px border (symmetric), Content carries the padding.
+        'has-data-[slot=media]:@2xl:p-0',
+        'has-data-[slot=media]:@2xl:**:data-[slot=content]:p-3',
+        '*:data-[slot=media]:@2xl:-m-px!', // !important to beat the base media margins (which assume the card padding)
+        // Media stretches to full height and the image fills via min-h-full, so it reaches top/bottom
+        // even when Content is taller. Keeps its 3:2 aspect as min height, so short cards are unchanged.
+        '[&_[data-slot=media]>img]:@2xl:min-h-full',
 
         // Make sure the card link is clickable when the media is on the right side
         // This is necessary because the media content is positioned after the card link in the DOM
