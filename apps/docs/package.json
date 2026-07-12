@@ -21,7 +21,6 @@
     "start": "node .output/server/index.mjs"
   },
   "dependencies": {
-    "@code-obos/logger": "4.0.0-20260421111144",
     "@code-obos/sanity-auth": "1.4.6",
     "@obosbbl/grunnmuren-icons-react": "workspace:*",
     "@obosbbl/grunnmuren-icons-svg": "workspace:*",
@@ -56,7 +55,7 @@
     "use-debounce": "10.1.1"
   },
   "devDependencies": {
-    "@code-obos/azure-env": "1.0.2",
+    "@code-obos/azure-env": "1.0.3",
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
     "@react-aria/optimize-locales-plugin": "2.0.0",
     "@tailwindcss/vite": "catalog:",
