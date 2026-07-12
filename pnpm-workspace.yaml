@@ -3,5 +3,5 @@ packages:
   - 'apps/**'
 
 catalog:
-  '@tailwindcss/vite': 4.2.2
-  tailwindcss: 4.2.2
+  '@tailwindcss/vite': 4.3.2
+  tailwindcss: 4.3.2
