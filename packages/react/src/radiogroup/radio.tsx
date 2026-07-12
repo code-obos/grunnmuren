@@ -15,7 +15,7 @@ const defaultClasses = cx([
   // For the ::before psuedo element the line height of the label is always 1em.
   // When we know the height of the label we use the height of the radio to push it down to align with the label's first line
   // TODO: 1.75 here is the unit less lineheight, altough we use 1.75rem as the line height, so there is a mismatch here. Revisit this when we've worked on typography in v2. Should this be a CSS custom property instead?
-  'before:mt-[calc((1em*1.75-24px)/2)] before:h-[24px] before:w-[24px]',
+  'before:mt-[calc((1em*1.75-24px)/2)] before:size-[24px]',
   // selected
   'data-selected:before:bg-blue data-selected:before:border-black data-selected:before:shadow-[inset_0_0_0_4px_rgb(255,255,255)]',
   // hover

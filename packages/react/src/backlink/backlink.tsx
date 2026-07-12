@@ -37,7 +37,7 @@ function Backlink(props: BacklinkProps) {
 
   const content = (
     <>
-      <ChevronLeft className={cx('-ml-[0.5em] duration-300')} />
+      <ChevronLeft className={cx('ml-[-0.5em] duration-300')} />
       {/* This wrapper is required in order to support the custom underline created with border-bottom when the text spans over multiple lines */}
       <span>
         <span
