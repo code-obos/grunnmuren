@@ -40,7 +40,7 @@
     "@tanstack/react-router": "1.170.17",
     "@tanstack/react-start": "1.168.27",
     "@vitejs/plugin-react": "6.0.3",
-    "cva": "1.0.0-beta.4",
+    "cva": "1.0.0-beta.8",
     "groq": "6.4.0",
     "pino-opentelemetry-transport": "3.0.0",
     "prism-react-renderer": "2.4.1",
