@@ -60,7 +60,7 @@
     "@react-aria/optimize-locales-plugin": "2.0.0",
     "@tailwindcss/vite": "catalog:",
     "@tanstack/react-router-devtools": "1.167.0",
-    "marked": "18.0.5",
+    "marked": "18.0.7",
     "react-docgen-typescript": "2.4.0",
     "tailwindcss": "catalog:",
     "vite": "8.0.8",
