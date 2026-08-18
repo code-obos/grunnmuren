@@ -11,4 +11,6 @@ allowBuilds:
 
 catalog:
   '@tailwindcss/vite': 4.3.2
+  react: 19.2.8
+  react-dom: 19.2.8
   tailwindcss: 4.3.2
