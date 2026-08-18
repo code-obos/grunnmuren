@@ -41,8 +41,8 @@
     "oxfmt": "0.45.0",
     "oxlint": "1.60.0",
     "oxlint-tsgolint": "0.20.0",
-    "react": "19.2.8",
-    "react-dom": "19.2.8",
+    "react": "catalog:",
+    "react-dom": "catalog:",
     "storybook": "10.4.6",
     "tailwindcss": "catalog:",
     "typescript": "5.9.3",
@@ -51,5 +51,5 @@
   "engines": {
     "node": ">=22.11 <25"
   },
-  "packageManager": "pnpm@10.33.0"
+  "packageManager": "pnpm@11.21.0"
 }
