@@ -14,7 +14,7 @@
     "node"
   ],
   "jsPlugins": ["eslint-plugin-better-tailwindcss"],
-  "ignorePatterns": ["sanity.types.ts", "routeTree.gen.ts"],
+  "ignorePatterns": ["sanity.types.ts", "routeTree.gen.ts", ".agents"],
   "options": {
     "typeAware": true,
     "typeCheck": true
