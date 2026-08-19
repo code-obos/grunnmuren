@@ -21,7 +21,7 @@
     "start": "node .output/server/index.mjs"
   },
   "dependencies": {
-    "@code-obos/sanity-auth": "1.4.6",
+    "@code-obos/sanity-auth": "2.0.0",
     "@obosbbl/grunnmuren-icons-react": "workspace:*",
     "@obosbbl/grunnmuren-icons-svg": "workspace:*",
     "@obosbbl/grunnmuren-react": "workspace:*",
