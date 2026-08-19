@@ -1,5 +1,12 @@
 # @obosbbl/grunnmuren-react
 
+## 3.9.1
+
+### Patch Changes
+
+- bbd5fd6: Fix `Accordion`/`Disclosure` so only the chevron rotates when expanding. Icons placed in the heading no longer flip upside down along with it.
+- 282da08: Fix horizontal `Card` so the media stays flush to the card edges regardless of Media/Content order (including reordering with CSS `order`) and fills the full card height when the content is the taller column.
+
 ## 3.9.0
 
 ### Minor Changes
