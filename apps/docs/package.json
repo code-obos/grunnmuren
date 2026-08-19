@@ -45,7 +45,7 @@
     "pino-opentelemetry-transport": "4.0.2",
     "prism-react-renderer": "2.4.1",
     "react": "catalog:",
-    "react-aria-components": "1.18.0",
+    "react-aria-components": "1.20.0",
     "react-dom": "catalog:",
     "react-element-to-jsx-string": "17.0.1",
     "react-live": "4.1.8",
@@ -57,7 +57,7 @@
   "devDependencies": {
     "@code-obos/azure-env": "1.0.3",
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
-    "@react-aria/optimize-locales-plugin": "2.0.0",
+    "@react-aria/optimize-locales-plugin": "2.0.1",
     "@tailwindcss/vite": "catalog:",
     "@tanstack/react-router-devtools": "1.167.1",
     "marked": "18.0.9",
