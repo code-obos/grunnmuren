@@ -35,10 +35,6 @@ const disclosureButtonVariants = cva({
     'data-accordion:-m-2.5',
   ],
   variants: {
-    withChevron: {
-      true: '[&[aria-expanded="true"]_svg]:rotate-180',
-      false: null,
-    },
     /**
      * When the button is without text, but with a single icon.
      * @default false
@@ -49,7 +45,6 @@ const disclosureButtonVariants = cva({
     },
   },
   defaultVariants: {
-    withChevron: false,
     isIconOnly: false,
   },
 });
@@ -57,6 +52,11 @@ const disclosureButtonVariants = cva({
 type DisclosureButtonProps = Omit<ButtonProps, 'children'> &
   VariantProps<typeof disclosureButtonVariants> & {
     children?: React.ReactNode;
+    /**
+     * Renders a chevron that flips when the disclosure is expanded.
+     * @default false
+     */
+    withChevron?: boolean;
   } & RefAttributes<HTMLButtonElement>;
 
 const DisclosureButton = ({
@@ -81,14 +81,13 @@ const DisclosureButton = ({
       ref={ref}
       className={disclosureButtonVariants({
         className,
-        withChevron,
         isIconOnly,
       })}
       slot={hasContext ? 'trigger' : undefined}
     >
       {children}
       {withChevron && (
-        <ChevronDown className="flex-none transition-transform duration-300 motion-reduce:transition-none" />
+        <ChevronDown className="flex-none transition-transform duration-300 in-aria-expanded:rotate-180 motion-reduce:transition-none" />
       )}
     </Button>
   );
