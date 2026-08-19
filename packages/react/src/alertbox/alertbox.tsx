@@ -40,7 +40,7 @@ const alertVariants = cva({
       info: 'bg-sky-light border-[#1A7FA7]',
       success: 'bg-mint-light border-[#0F9B6E]',
       warning: 'border-[#C57C13] bg-[#FFF2DE]',
-      danger: 'bg-red-light border-[#C0385D]',
+      danger: 'bg-red-light border-red',
     },
   },
   defaultVariants: {
