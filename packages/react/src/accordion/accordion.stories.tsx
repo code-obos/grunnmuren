@@ -1,3 +1,4 @@
+import { CreditCard, House } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useReducer } from 'react';
 
@@ -159,6 +160,42 @@ const ColoredStandaloneTemplate = (args: AccordionItemProps) => {
   );
 };
 
+// Icons in the heading should stay put when the accordion expands, only the chevron flips
+const WithIconsInHeadingTemplate = (args: AccordionItemProps) => {
+  return (
+    <Accordion>
+      <AccordionItem
+        onExpandedChange={args.onExpandedChange}
+        defaultExpanded={args.defaultExpanded}
+      >
+        <Heading level={2}>
+          <span className="flex items-center gap-2">
+            <CreditCard className="flex-none" />
+            Prisinformasjon
+          </span>
+        </Heading>
+        <Content className="prose">
+          <p>Felleskostnader og andre kostnader knyttet til boligen.</p>
+        </Content>
+      </AccordionItem>
+      <AccordionItem
+        onExpandedChange={args.onExpandedChange}
+        defaultExpanded={args.defaultExpanded}
+      >
+        <Heading level={2}>
+          <span className="flex items-center gap-2">
+            <House className="flex-none" />
+            Størrelse
+          </span>
+        </Heading>
+        <Content className="prose">
+          <p>BRA-i: 79 m&sup2;</p>
+        </Content>
+      </AccordionItem>
+    </Accordion>
+  );
+};
+
 const meta = {
   title: 'Accordion',
   component: AccordionItem,
@@ -197,5 +234,13 @@ export const ColoredStandalone: Story = {
   render: ColoredStandaloneTemplate,
   args: {
     ...defaultProps,
+  },
+};
+
+export const WithIconsInHeading: Story = {
+  render: WithIconsInHeadingTemplate,
+  args: {
+    ...defaultProps,
+    defaultExpanded: true,
   },
 };
