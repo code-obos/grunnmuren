@@ -42,7 +42,7 @@
     "@vitejs/plugin-react": "6.0.3",
     "cva": "1.0.0-beta.4",
     "groq": "6.9.2",
-    "pino-opentelemetry-transport": "3.0.0",
+    "pino-opentelemetry-transport": "4.0.2",
     "prism-react-renderer": "2.4.1",
     "react": "catalog:",
     "react-aria-components": "1.18.0",
