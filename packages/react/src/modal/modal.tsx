@@ -197,11 +197,4 @@ export const _ModalButtonContextReset = ({ children }: { children: React.ReactNo
   );
 };
 
-export {
-  Dialog as UNSAFE_Dialog,
-  DialogTrigger as UNSAFE_DialogTrigger,
-  Modal as UNSAFE_Modal,
-  type DialogProps as UNSAFE_DialogProps,
-  type DialogTriggerProps as UNSAFE_DialogTriggerProps,
-  type ModalProps as UNSAFE_ModalProps,
-};
+export { Dialog, DialogTrigger, Modal, type DialogProps, type DialogTriggerProps, type ModalProps };
