@@ -4,11 +4,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '../button';
 import { TabbedImageGallery } from '../carousel/carousel.stories';
 import { Footer, Header, Heading } from '../content';
-import {
-  UNSAFE_Dialog as Dialog,
-  UNSAFE_DialogTrigger as DialogTrigger,
-  UNSAFE_Modal as Modal,
-} from './modal';
+import { Dialog, DialogTrigger, Modal } from './modal';
 
 const meta = {
   title: 'Modal',

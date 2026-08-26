@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import { Button } from '../button';
 import { Footer, Header, Heading } from '../content';
-import { UNSAFE_Dialog as Dialog, UNSAFE_DialogTrigger as DialogTrigger } from '../modal';
+import { Dialog, DialogTrigger } from '../modal';
 import { UNSAFE_Drawer as Drawer } from './drawer';
 
 const meta = {
