@@ -60,7 +60,7 @@
     "@react-aria/optimize-locales-plugin": "2.0.1",
     "@tailwindcss/vite": "catalog:",
     "@tanstack/react-router-devtools": "1.167.1",
-    "marked": "18.0.9",
+    "marked": "18.0.11",
     "otlp-logger": "2.1.1",
     "react-docgen-typescript": "2.4.0",
     "tailwindcss": "catalog:",
