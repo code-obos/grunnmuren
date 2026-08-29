@@ -23,7 +23,7 @@
     "test": "test-storybook"
   },
   "dependencies": {
-    "@changesets/cli": "3.0.0",
+    "@changesets/cli": "3.0.1",
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
     "@react-aria/optimize-locales-plugin": "2.0.1",
     "@storybook/addon-docs": "10.5.8",
