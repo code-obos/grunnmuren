@@ -279,7 +279,7 @@ importers:
         version: link:../tailwind
       cva:
         specifier: ^1.0.0-0
-        version: 1.0.0-beta.4(typescript@5.9.3)
+        version: 1.0.0-beta.9(typescript@5.9.3)
       embla-carousel-autoplay:
         specifier: ^8.6.0
         version: 8.6.0(embla-carousel@8.6.0)
@@ -6240,6 +6240,14 @@ packages:
     resolution: {integrity: sha512-F/JS9hScapq4DBVQXcK85l9U91M6ePeXoBMSp7vypzShoefUBxjQTo3g3935PUHgQd+IW77DjbPRIxugy4/GCQ==}
     peerDependencies:
       typescript: '>= 4.5.5'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
+  cva@1.0.0-beta.9:
+    resolution: {integrity: sha512-hSiw3E2Z5IBAUhqSBcH32Zu5A73oZnCXCb7h5vWRs2QTMVLnqtj1dUGYVRcT7p0nqEJOJJ7jT0EvqkSA35Z5ZA==}
+    peerDependencies:
+      typescript: '>= 6.0.0'
     peerDependenciesMeta:
       typescript:
         optional: true
@@ -17245,6 +17253,12 @@ snapshots:
   custom-media-element@1.4.6: {}
 
   cva@1.0.0-beta.4(typescript@5.9.3):
+    dependencies:
+      clsx: 2.1.1
+    optionalDependencies:
+      typescript: 5.9.3
+
+  cva@1.0.0-beta.9(typescript@5.9.3):
     dependencies:
       clsx: 2.1.1
     optionalDependencies:
