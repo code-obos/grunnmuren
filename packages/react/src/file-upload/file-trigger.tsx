@@ -1,12 +1,18 @@
-import type { HTMLAttributes, RefObject } from 'react';
-import type { FileTriggerProps as RACFileTriggerProps } from 'react-aria-components/FileTrigger';
-import { Input } from 'react-aria-components/Input';
 /**
  * This is a modified version of the original file-trigger from react-aria-components.
  * We need to modify it to support it in forms (e.g. adding a name prop).
  * We also modify the hiding of it, so that it works with the built in auto focusing of RAC.
+ *
+ * Unlike the original, it doesn't wire up the press handling itself. RAC's version uses
+ * `PressResponder` from react-aria, which only works if the responder and the pressed
+ * button read the exact same `PressResponderContext`. RAC pins react-aria to an exact
+ * version while we use a range, so an app can easily end up with two react-aria copies,
+ * and then the button silently stops opening the file dialog. FileUpload passes `onPress`
+ * through RAC's ButtonContext instead, which it already provides anyway.
  */
-import { PressResponder } from 'react-aria/private/interactions/PressResponder';
+import type { HTMLAttributes, RefObject } from 'react';
+import type { FileTriggerProps as RACFileTriggerProps } from 'react-aria-components/FileTrigger';
+import { Input } from 'react-aria-components/Input';
 import { useObjectRef } from 'react-aria/useObjectRef';
 import type { useFormValidationState } from 'react-stately/private/form/useFormValidationState';
 
@@ -41,16 +47,7 @@ export const FileTrigger = (props: FileTriggerProps) => {
 
   return (
     <>
-      <PressResponder
-        onPress={() => {
-          if (inputRef.current?.value) {
-            inputRef.current.value = '';
-          }
-          inputRef.current?.click();
-        }}
-      >
-        {children}
-      </PressResponder>
+      {children}
       <Input
         {...rest}
         required={isRequired}

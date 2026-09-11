@@ -1,5 +1,6 @@
 import type { Meta } from '@storybook/react-vite';
 import { useState } from 'react';
+import { expect, fn, userEvent, within } from 'storybook/test';
 
 import { Button } from '../button';
 import { Description, Label } from '../label';
@@ -27,7 +28,27 @@ const meta = {
 
 export default meta;
 
-export const FileUploadStory = {};
+export const FileUploadStory = {
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvasElement.querySelector<HTMLInputElement>('input[type="file"]');
+
+    if (!input) {
+      throw new Error('FileUpload did not render a file input');
+    }
+
+    // Stub the click, so the test doesn't open an actual file dialog we can't close
+    const click = fn();
+    input.click = click;
+
+    // The label is connected to the button, so that's the button's accessible name
+    await userEvent.click(canvas.getByRole('button', { name: 'Last opp fil' }));
+
+    // The button is connected to the input through ButtonContext. That connection has broken
+    // silently before (duplicate react-aria instances), so it's worth asserting on.
+    await expect(click).toHaveBeenCalled();
+  },
+};
 
 export const AllowsMultiple = {
   render: () => {
