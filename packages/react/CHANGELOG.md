@@ -1,5 +1,27 @@
 # @obosbbl/grunnmuren-react
 
+## 3.10.0
+
+### Minor Changes
+
+- 6bec434: Modal: out of BETA 🚀
+  
+  The `UNSAFE_` prefix has been removed from `Modal`, `Dialog` and `DialogTrigger` (and their props types). Update your imports:
+  
+  ### Before
+  ``` tsx
+  import { UNSAFE_Modal as Modal } from '@obosbbl/grunnmuren-react';
+  ```
+  
+  ### Now
+  ``` tsx
+  import { Modal } from '@obosbbl/grunnmuren-react';
+  ```
+
+### Patch Changes
+
+- ae3dc83: `FileUpload` no longer relies on react-aria's `PressResponder` to open the file dialog. It passes `onPress` through RAC's `ButtonContext` instead, which it already provides. `PressResponder` only works if the responder and the button read the exact same `PressResponderContext`, and since RAC pins `react-aria` to an exact version while we use a range, an app could easily end up with two react-aria copies. The button would then silently stop opening the file dialog, with no error to go on.
+
 ## 3.9.1
 
 ### Patch Changes
