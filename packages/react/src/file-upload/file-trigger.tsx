@@ -3,12 +3,8 @@
  * We need to modify it to support it in forms (e.g. adding a name prop).
  * We also modify the hiding of it, so that it works with the built in auto focusing of RAC.
  *
- * Unlike the original, it doesn't wire up the press handling itself. RAC's version uses
- * `PressResponder` from react-aria, which only works if the responder and the pressed
- * button read the exact same `PressResponderContext`. RAC pins react-aria to an exact
- * version while we use a range, so an app can easily end up with two react-aria copies,
- * and then the button silently stops opening the file dialog. FileUpload passes `onPress`
- * through RAC's ButtonContext instead, which it already provides anyway.
+ * It also skips react-aria's `PressResponder`, which breaks silently if an app ends up with
+ * two react-aria copies. FileUpload passes `onPress` through RAC's ButtonContext instead.
  */
 import type { HTMLAttributes, RefObject } from 'react';
 import type { FileTriggerProps as RACFileTriggerProps } from 'react-aria-components/FileTrigger';

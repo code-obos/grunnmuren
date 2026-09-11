@@ -44,8 +44,8 @@ export const FileUploadStory = {
     // The label is connected to the button, so that's the button's accessible name
     await userEvent.click(canvas.getByRole('button', { name: 'Last opp fil' }));
 
-    // The button is connected to the input through ButtonContext. That connection has broken
-    // silently before (duplicate react-aria instances), so it's worth asserting on.
+    // The button reaches the input through ButtonContext. That has broken silently before,
+    // so it's worth asserting on.
     await expect(click).toHaveBeenCalled();
   },
 };
