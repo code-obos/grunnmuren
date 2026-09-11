@@ -268,6 +268,16 @@ const FileUpload = ({
                 // Needed for RAC auto-focusing behavior to work
                 ref: buttonRef,
                 className: 'w-fit',
+                // Opens the file dialog. Not react-aria's PressResponder, since that breaks
+                // silently if an app has two react-aria copies. useContextProps merges with
+                // mergeProps, so a consumer's own onPress on the button still runs.
+                onPress: () => {
+                  // Reset the value first, so picking the same file twice still fires onChange
+                  if (inputRef.current?.value) {
+                    inputRef.current.value = '';
+                  }
+                  inputRef.current?.click();
+                },
               },
             ],
             [InputContext, fieldProps],
