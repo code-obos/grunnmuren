@@ -87,6 +87,18 @@ const preview: Preview = {
 
       return Story();
     },
+    (Story, context) => {
+      const { theme, color } = context.globals;
+
+      // Set on the document rather than a wrapper element, so portalled content
+      // (modals, drawers, popovers) picks up the theme too. Done during render
+      // rather than in an effect, because `storybook/preview-api`'s hooks are shared
+      // with the story and an extra one throws the story's own hook order off.
+      document.documentElement.dataset.theme = theme;
+      document.documentElement.dataset.color = color;
+
+      return Story();
+    },
     (Story) => (
       <GrunnmurenProvider locale="nb">
         <Story />
@@ -116,8 +128,22 @@ const preview: Preview = {
       },
     },
   },
+  // `snapshotVariants` decides which combinations the visual regression tests
+  // snapshot. Add a value here and an entry there to get baselines for it.
+  globalTypes: {
+    theme: {
+      description: 'Value of `data-theme` on the preview document',
+      toolbar: { icon: 'paintbrush', items: ['default'], dynamicTitle: true },
+    },
+    color: {
+      description: 'Value of `data-color` on the preview document',
+      toolbar: { icon: 'contrast', items: ['default'], dynamicTitle: true },
+    },
+  },
   initialGlobals: {
     backgrounds: { value: 'white' },
+    theme: 'default',
+    color: 'default',
   },
 };
 
