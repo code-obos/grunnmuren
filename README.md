@@ -73,6 +73,47 @@ Runs the docs app for local development, at http://localhost:3000.
 pnpm dev:docs
 ```
 
+#### Testing
+
+```bash
+pnpm test
+```
+
+Two layers, both run on every pull request:
+
+- **Token parity** (`packages/tailwind/tests`) compiles `tailwind-base.css` in memory and
+  records what each utility computes to. `utility-pairs.ts` is the record of which
+  utility maps to which as components move to the new token set, and which of those
+  pairs are supposed to change value. Update it in the same PR as the migration.
+- **Visual regression** turns every story into a screenshot via
+  [`@storybook/addon-vitest`](https://storybook.js.org/docs/writing-tests/integrations/vitest-addon).
+  The first run needs a browser: `pnpm exec playwright install chromium`.
+
+Run one layer at a time with `pnpm vitest run --project=tokens` or
+`pnpm vitest run --project='storybook:*'`.
+
+##### Updating baselines when a change is intentional
+
+Token snapshots are platform independent, so update them locally and commit the diff:
+
+```bash
+pnpm vitest run --project=tokens --update
+```
+
+Screenshot baselines are not. macOS and Linux render text differently, so a baseline
+generated on a laptop turns CI red for everyone else. Local ones are gitignored, and
+the real baselines come from CI:
+
+1. Push your branch.
+2. Run the **Update screenshot baselines** workflow from the Actions tab with your
+   branch selected. It regenerates the baselines on Linux and pushes a commit to your
+   branch.
+3. Review the images in that commit. They are the diff, so they should show exactly the
+   change you meant to make and nothing else.
+
+When a screenshot test fails in CI, the reference, actual and diff images are attached
+to the run as a `screenshot-diffs` artifact.
+
 ### Releases and changelogs
 
 We use an automated release process based on [changesets](https://github.com/changesets/changesets) and Github actions to version, release and publish the packages.

@@ -5,7 +5,7 @@ import { mergeConfig } from 'vite';
 
 const config: StorybookConfig = {
   stories: ['../packages/react/src/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
-  addons: ['@storybook/addon-docs'],
+  addons: ['@storybook/addon-docs', '@storybook/addon-vitest'],
 
   framework: {
     name: '@storybook/react-vite',
@@ -23,7 +23,10 @@ const config: StorybookConfig = {
   viteFinal(config) {
     // Merge custom configuration into the default config
     return mergeConfig(config, {
-      base: '/storybook/', // Add this line
+      // The docs site serves the built Storybook from /storybook/. The Vitest browser
+      // runner serves from the root and can't reach the page behind a base it doesn't
+      // know about, so drop it there.
+      base: process.env.VITEST ? '/' : '/storybook/',
 
       plugins: [
         {

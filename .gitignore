@@ -20,3 +20,11 @@ next-env.d.ts
 .FIGMA_TOKEN
 .vercel
 packages/icons-react/icons.tsx
+
+# Reference, actual and diff images from a failed screenshot test
+.vitest-attachments
+
+# Screenshot baselines are generated in CI on Linux. macOS and Windows render text
+# differently, so a locally generated baseline turns CI red for everyone else.
+**/__screenshots__/**/*-darwin.png
+**/__screenshots__/**/*-win32.png

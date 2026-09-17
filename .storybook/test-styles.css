@@ -1,0 +1,65 @@
+/*
+ * Test-only stylesheet. Loaded after the preview so it wins over `tailwind-base.css`.
+ */
+
+/*
+ * `tailwind-base.css` pulls the woff2 files from https://www.obos.no/fonts/, which
+ * makes every snapshot depend on the network: a slow response renders the story in
+ * the Arial fallback instead. The same files are in the repo, so point at those.
+ * `font-display: block` keeps a half-loaded face from being captured.
+ */
+@font-face {
+  font-family: OBOSText;
+  font-weight: 400;
+  font-style: normal;
+  src: url('../packages/tailwind/fonts/OBOSText-Regular.woff2') format('woff2');
+  font-display: block;
+}
+
+@font-face {
+  font-family: OBOSText;
+  font-weight: 400;
+  font-style: italic;
+  src: url('../packages/tailwind/fonts/OBOSText-Italic.woff2') format('woff2');
+  font-display: block;
+}
+
+@font-face {
+  font-family: OBOSText;
+  font-weight: 500;
+  font-style: normal;
+  src: url('../packages/tailwind/fonts/OBOSText-Medium.woff2') format('woff2');
+  font-display: block;
+}
+
+@font-face {
+  font-family: OBOSText;
+  font-weight: 500;
+  font-style: italic;
+  src: url('../packages/tailwind/fonts/OBOSText-MediumItalic.woff2') format('woff2');
+  font-display: block;
+}
+
+@font-face {
+  font-family: OBOSDisplay;
+  font-weight: 600;
+  font-style: normal;
+  src: url('../packages/tailwind/fonts/OBOSDisplay-SemiBold.woff2') format('woff2');
+  font-display: block;
+}
+
+/*
+ * tw-animate-css and the React Aria transitions blink into the screenshots, and the
+ * text caret blinks on anything focused. None of it is deterministic.
+ */
+*,
+*::before,
+*::after {
+  animation-delay: 0ms !important;
+  animation-duration: 0ms !important;
+  animation-iteration-count: 1 !important;
+  transition-delay: 0ms !important;
+  transition-duration: 0ms !important;
+  caret-color: transparent !important;
+  scroll-behavior: auto !important;
+}
