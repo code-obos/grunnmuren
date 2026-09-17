@@ -12,18 +12,18 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as DocsRouteImport } from './routes/_docs'
 import { Route as StudioRouteRouteImport } from './routes/studio/route'
 import { Route as DocsIndexRouteImport } from './routes/_docs/index'
-import { Route as StudioSplatRouteImport } from './routes/studio/$'
-import { Route as ApiPreviewRouteImport } from './routes/api/preview'
-import { Route as ApiHealthRouteImport } from './routes/api/health'
-import { Route as ApiDraftTokenRouteImport } from './routes/api/draft-token'
 import { Route as DocsSlugRouteImport } from './routes/_docs/$slug'
-import { Route as DocsReferanseskjemaIndexRouteImport } from './routes/_docs/referanseskjema/index'
-import { Route as DocsProfilIndexRouteImport } from './routes/_docs/profil/index'
+import { Route as ApiDraftTokenRouteImport } from './routes/api/draft-token'
+import { Route as ApiHealthRouteImport } from './routes/api/health'
+import { Route as ApiPreviewRouteImport } from './routes/api/preview'
+import { Route as StudioSplatRouteImport } from './routes/studio/$'
 import { Route as DocsKomponenterIndexRouteImport } from './routes/_docs/komponenter/index'
-import { Route as DocsProfilLayoutRouteImport } from './routes/_docs/profil/layout'
-import { Route as DocsProfilIkonerRouteImport } from './routes/_docs/profil/ikoner'
-import { Route as DocsProfilFargerRouteImport } from './routes/_docs/profil/farger'
 import { Route as DocsKomponenterSlugRouteImport } from './routes/_docs/komponenter/$slug'
+import { Route as DocsProfilIndexRouteImport } from './routes/_docs/profil/index'
+import { Route as DocsProfilFargerRouteImport } from './routes/_docs/profil/farger'
+import { Route as DocsProfilIkonerRouteImport } from './routes/_docs/profil/ikoner'
+import { Route as DocsProfilLayoutRouteImport } from './routes/_docs/profil/layout'
+import { Route as DocsReferanseskjemaIndexRouteImport } from './routes/_docs/referanseskjema/index'
 
 const DocsRoute = DocsRouteImport.update({
   id: '/_docs',
@@ -39,14 +39,14 @@ const DocsIndexRoute = DocsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DocsRoute,
 } as any)
-const StudioSplatRoute = StudioSplatRouteImport.update({
-  id: '/$',
-  path: '/$',
-  getParentRoute: () => StudioRouteRoute,
+const DocsSlugRoute = DocsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => DocsRoute,
 } as any)
-const ApiPreviewRoute = ApiPreviewRouteImport.update({
-  id: '/api/preview',
-  path: '/api/preview',
+const ApiDraftTokenRoute = ApiDraftTokenRouteImport.update({
+  id: '/api/draft-token',
+  path: '/api/draft-token',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiHealthRoute = ApiHealthRouteImport.update({
@@ -54,14 +54,44 @@ const ApiHealthRoute = ApiHealthRouteImport.update({
   path: '/api/health',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiDraftTokenRoute = ApiDraftTokenRouteImport.update({
-  id: '/api/draft-token',
-  path: '/api/draft-token',
+const ApiPreviewRoute = ApiPreviewRouteImport.update({
+  id: '/api/preview',
+  path: '/api/preview',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DocsSlugRoute = DocsSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
+const StudioSplatRoute = StudioSplatRouteImport.update({
+  id: '/$',
+  path: '/$',
+  getParentRoute: () => StudioRouteRoute,
+} as any)
+const DocsKomponenterIndexRoute = DocsKomponenterIndexRouteImport.update({
+  id: '/komponenter/',
+  path: '/komponenter/',
+  getParentRoute: () => DocsRoute,
+} as any)
+const DocsKomponenterSlugRoute = DocsKomponenterSlugRouteImport.update({
+  id: '/komponenter/$slug',
+  path: '/komponenter/$slug',
+  getParentRoute: () => DocsRoute,
+} as any)
+const DocsProfilIndexRoute = DocsProfilIndexRouteImport.update({
+  id: '/profil/',
+  path: '/profil/',
+  getParentRoute: () => DocsRoute,
+} as any)
+const DocsProfilFargerRoute = DocsProfilFargerRouteImport.update({
+  id: '/profil/farger',
+  path: '/profil/farger',
+  getParentRoute: () => DocsRoute,
+} as any)
+const DocsProfilIkonerRoute = DocsProfilIkonerRouteImport.update({
+  id: '/profil/ikoner',
+  path: '/profil/ikoner',
+  getParentRoute: () => DocsRoute,
+} as any)
+const DocsProfilLayoutRoute = DocsProfilLayoutRouteImport.update({
+  id: '/profil/layout',
+  path: '/profil/layout',
   getParentRoute: () => DocsRoute,
 } as any)
 const DocsReferanseskjemaIndexRoute =
@@ -70,36 +100,6 @@ const DocsReferanseskjemaIndexRoute =
     path: '/referanseskjema/',
     getParentRoute: () => DocsRoute,
   } as any)
-const DocsProfilIndexRoute = DocsProfilIndexRouteImport.update({
-  id: '/profil/',
-  path: '/profil/',
-  getParentRoute: () => DocsRoute,
-} as any)
-const DocsKomponenterIndexRoute = DocsKomponenterIndexRouteImport.update({
-  id: '/komponenter/',
-  path: '/komponenter/',
-  getParentRoute: () => DocsRoute,
-} as any)
-const DocsProfilLayoutRoute = DocsProfilLayoutRouteImport.update({
-  id: '/profil/layout',
-  path: '/profil/layout',
-  getParentRoute: () => DocsRoute,
-} as any)
-const DocsProfilIkonerRoute = DocsProfilIkonerRouteImport.update({
-  id: '/profil/ikoner',
-  path: '/profil/ikoner',
-  getParentRoute: () => DocsRoute,
-} as any)
-const DocsProfilFargerRoute = DocsProfilFargerRouteImport.update({
-  id: '/profil/farger',
-  path: '/profil/farger',
-  getParentRoute: () => DocsRoute,
-} as any)
-const DocsKomponenterSlugRoute = DocsKomponenterSlugRouteImport.update({
-  id: '/komponenter/$slug',
-  path: '/komponenter/$slug',
-  getParentRoute: () => DocsRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/studio': typeof StudioRouteRouteWithChildren
@@ -234,18 +234,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsIndexRouteImport
       parentRoute: typeof DocsRoute
     }
-    '/studio/$': {
-      id: '/studio/$'
-      path: '/$'
-      fullPath: '/studio/$'
-      preLoaderRoute: typeof StudioSplatRouteImport
-      parentRoute: typeof StudioRouteRoute
+    '/_docs/$slug': {
+      id: '/_docs/$slug'
+      path: '/$slug'
+      fullPath: '/$slug'
+      preLoaderRoute: typeof DocsSlugRouteImport
+      parentRoute: typeof DocsRoute
     }
-    '/api/preview': {
-      id: '/api/preview'
-      path: '/api/preview'
-      fullPath: '/api/preview'
-      preLoaderRoute: typeof ApiPreviewRouteImport
+    '/api/draft-token': {
+      id: '/api/draft-token'
+      path: '/api/draft-token'
+      fullPath: '/api/draft-token'
+      preLoaderRoute: typeof ApiDraftTokenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/health': {
@@ -255,25 +255,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiHealthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/draft-token': {
-      id: '/api/draft-token'
-      path: '/api/draft-token'
-      fullPath: '/api/draft-token'
-      preLoaderRoute: typeof ApiDraftTokenRouteImport
+    '/api/preview': {
+      id: '/api/preview'
+      path: '/api/preview'
+      fullPath: '/api/preview'
+      preLoaderRoute: typeof ApiPreviewRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_docs/$slug': {
-      id: '/_docs/$slug'
-      path: '/$slug'
-      fullPath: '/$slug'
-      preLoaderRoute: typeof DocsSlugRouteImport
+    '/studio/$': {
+      id: '/studio/$'
+      path: '/$'
+      fullPath: '/studio/$'
+      preLoaderRoute: typeof StudioSplatRouteImport
+      parentRoute: typeof StudioRouteRoute
+    }
+    '/_docs/komponenter/': {
+      id: '/_docs/komponenter/'
+      path: '/komponenter'
+      fullPath: '/komponenter/'
+      preLoaderRoute: typeof DocsKomponenterIndexRouteImport
       parentRoute: typeof DocsRoute
     }
-    '/_docs/referanseskjema/': {
-      id: '/_docs/referanseskjema/'
-      path: '/referanseskjema'
-      fullPath: '/referanseskjema/'
-      preLoaderRoute: typeof DocsReferanseskjemaIndexRouteImport
+    '/_docs/komponenter/$slug': {
+      id: '/_docs/komponenter/$slug'
+      path: '/komponenter/$slug'
+      fullPath: '/komponenter/$slug'
+      preLoaderRoute: typeof DocsKomponenterSlugRouteImport
       parentRoute: typeof DocsRoute
     }
     '/_docs/profil/': {
@@ -283,18 +290,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsProfilIndexRouteImport
       parentRoute: typeof DocsRoute
     }
-    '/_docs/komponenter/': {
-      id: '/_docs/komponenter/'
-      path: '/komponenter'
-      fullPath: '/komponenter/'
-      preLoaderRoute: typeof DocsKomponenterIndexRouteImport
-      parentRoute: typeof DocsRoute
-    }
-    '/_docs/profil/layout': {
-      id: '/_docs/profil/layout'
-      path: '/profil/layout'
-      fullPath: '/profil/layout'
-      preLoaderRoute: typeof DocsProfilLayoutRouteImport
+    '/_docs/profil/farger': {
+      id: '/_docs/profil/farger'
+      path: '/profil/farger'
+      fullPath: '/profil/farger'
+      preLoaderRoute: typeof DocsProfilFargerRouteImport
       parentRoute: typeof DocsRoute
     }
     '/_docs/profil/ikoner': {
@@ -304,18 +304,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsProfilIkonerRouteImport
       parentRoute: typeof DocsRoute
     }
-    '/_docs/profil/farger': {
-      id: '/_docs/profil/farger'
-      path: '/profil/farger'
-      fullPath: '/profil/farger'
-      preLoaderRoute: typeof DocsProfilFargerRouteImport
+    '/_docs/profil/layout': {
+      id: '/_docs/profil/layout'
+      path: '/profil/layout'
+      fullPath: '/profil/layout'
+      preLoaderRoute: typeof DocsProfilLayoutRouteImport
       parentRoute: typeof DocsRoute
     }
-    '/_docs/komponenter/$slug': {
-      id: '/_docs/komponenter/$slug'
-      path: '/komponenter/$slug'
-      fullPath: '/komponenter/$slug'
-      preLoaderRoute: typeof DocsKomponenterSlugRouteImport
+    '/_docs/referanseskjema/': {
+      id: '/_docs/referanseskjema/'
+      path: '/referanseskjema'
+      fullPath: '/referanseskjema/'
+      preLoaderRoute: typeof DocsReferanseskjemaIndexRouteImport
       parentRoute: typeof DocsRoute
     }
   }

@@ -16,44 +16,51 @@ const SNAPSHOT_FONTS = [
   '600 16px OBOSDisplay',
 ];
 
-// A `loading="lazy"` image that never enters the viewport never resolves, and the
-// stories that pull images off cdn.sanity.io are at the mercy of the network. Cap the
-// wait rather than letting the hook time out.
-const MEDIA_TIMEOUT_MS = 10_000;
+// Per item, not for the whole wait. A single element that never settles then costs
+// this much instead of stalling everything behind it.
+const MEDIA_TIMEOUT_MS = 2_000;
 
-const waitForImages = () =>
-  Promise.all(
-    [...document.images]
-      .filter((image) => !image.complete)
-      // A broken src rejects, and a story that renders one is still worth capturing
-      .map((image) => image.decode().catch(() => undefined)),
-  );
+const settled = (promise: Promise<unknown>) =>
+  Promise.race([
+    promise.catch(() => undefined),
+    new Promise((resolve) => setTimeout(resolve, MEDIA_TIMEOUT_MS)),
+  ]);
 
-/** Holds every video on the first frame, so the screenshot doesn't depend on playback. */
-const freezeVideos = () =>
-  Promise.all(
-    [...document.querySelectorAll('video')]
-      .map((video) => {
-        video.pause();
-        return video;
-      })
-      .filter((video) => video.currentTime !== 0)
-      .map(
-        (video) =>
-          new Promise((resolve) => {
-            video.addEventListener('seeked', resolve, { once: true });
-            video.currentTime = 0;
-          }),
-      ),
-  );
+const once = (target: HTMLMediaElement, event: string) =>
+  new Promise((resolve) => target.addEventListener(event, resolve, { once: true }));
+
+/**
+ * Holds a video on its first frame, so the screenshot doesn't depend on playback.
+ * Seeking before the video has data is the trap: `seeked` never fires, and the
+ * screenshot ends up being of an empty video element.
+ */
+const freezeVideo = async (video: HTMLVideoElement) => {
+  video.pause();
+
+  if (video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) {
+    await settled(once(video, 'loadeddata'));
+  }
+
+  if (video.currentTime === 0) return;
+
+  video.currentTime = 0;
+  await settled(once(video, 'seeked'));
+};
+
+/**
+ * A `loading="lazy"` image that hasn't started loading never resolves `decode()`,
+ * so give every image its own deadline rather than waiting on the slowest one.
+ */
+const waitForImage = (image: HTMLImageElement) =>
+  image.complete ? undefined : settled(image.decode());
 
 /** Lets style and layout settle before anything is captured. */
 const nextFrame = () => new Promise((resolve) => requestAnimationFrame(resolve));
 
 const waitForMedia = () =>
-  Promise.race([
-    Promise.all([waitForImages(), freezeVideos()]),
-    new Promise((resolve) => setTimeout(resolve, MEDIA_TIMEOUT_MS)),
+  Promise.all([
+    ...[...document.images].map(waitForImage),
+    ...[...document.querySelectorAll('video')].map(freezeVideo),
   ]);
 
 beforeAll(async () => {
