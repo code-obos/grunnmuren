@@ -100,6 +100,9 @@ const meta = {
       </Carousel>
     );
   },
+  // Helpers the stories below compose. Without this they're picked up as stories of
+  // their own and rendered without args, which throws.
+  excludeStories: ['galleryImages', 'galleryImagesExterior', 'Gallery', 'TabbedImageGallery'],
 } satisfies Meta<typeof Carousel>;
 
 export default meta;
