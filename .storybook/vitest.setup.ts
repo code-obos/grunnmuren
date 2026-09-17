@@ -1,5 +1,5 @@
-import { page } from '@vitest/browser/context';
 import { afterEach, beforeAll, expect } from 'vitest';
+import { page } from 'vitest/browser';
 
 // Imported for its side effects, and last on purpose: the font and animation
 // overrides have to win over the preview's stylesheet. See the file header.

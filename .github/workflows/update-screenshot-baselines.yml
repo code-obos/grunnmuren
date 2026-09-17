@@ -9,6 +9,11 @@ name: Update screenshot baselines
 on:
   workflow_dispatch:
 
+# One run per branch, so two pushes can't race each other
+concurrency:
+  group: screenshot-baselines@${{ github.ref_name }}
+  cancel-in-progress: true
+
 permissions:
   contents: write
   packages: read
@@ -19,6 +24,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # A job-level `if` would skip and report green, which looks the same as a run
+      # that worked. Fail instead, so picking the wrong branch is obvious.
       - name: Refuse to run on the default branch
         if: github.ref_name == github.event.repository.default_branch
         run: |
@@ -26,6 +33,8 @@ jobs:
           exit 1
 
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.ref_name }}
       - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
       - name: Use Node.js 24.x
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
@@ -42,7 +51,7 @@ jobs:
         run: pnpm run build
 
       - name: Install Playwright browser
-        run: pnpm exec playwright install --with-deps chromium
+        run: pnpm exec playwright install --with-deps --only-shell chromium
 
       - name: Update baselines
         run: pnpm test:screenshots:update
@@ -54,9 +63,16 @@ jobs:
           git add '**/__screenshots__'
 
           if git diff --cached --quiet; then
-            echo "Baselines unchanged, nothing to commit"
+            echo "Baselines unchanged, nothing to commit" >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
 
-          git commit -m "chore: update screenshot baselines"
-          git push
+          git commit -m "test: update screenshot baselines" -m \
+            "Co-authored-by: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>"
+          git push origin "${{ github.ref_name }}"
+
+          {
+            echo "### Updated baselines"
+            echo
+            git show --stat --oneline HEAD | tail -n +2
+          } >> "$GITHUB_STEP_SUMMARY"
