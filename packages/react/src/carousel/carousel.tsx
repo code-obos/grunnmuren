@@ -220,6 +220,22 @@ const Carousel = ({
     };
   }, [emblaApi, onSelect, onSettled]);
 
+  // Embla can emit `init` and the first `slidesInView` before the effect above has subscribed, and never replays
+  // them, which leaves slides `inert` until the first scroll. An empty list just means the observer hasn't run yet.
+  useEffect(() => {
+    if (!emblaApi) {
+      return;
+    }
+
+    const currentSlidesInView = emblaApi.slidesInView();
+    if (currentSlidesInView.length > 0) {
+      setSlidesInView(currentSlidesInView);
+    }
+
+    setCanScrollNext(emblaApi.canScrollNext());
+    setCanScrollPrev(emblaApi.canScrollPrev());
+  }, [emblaApi]);
+
   const handleNextPress = useCallback(() => {
     if (!emblaApi) {
       return;
