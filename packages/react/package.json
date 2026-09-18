@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@obosbbl/grunnmuren-icons-react": "workspace:^",
-    "cva": "^1.0.0-0",
+    "cva": "^1.0.0-beta.11",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
     "embla-carousel-wheel-gestures": "^8.1.0",
