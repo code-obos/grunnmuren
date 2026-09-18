@@ -45,7 +45,6 @@ type TextFieldProps = {
 
 const inputVariants = cva({
   composes: input,
-  base: '',
   variants: {
     textAlign: {
       right: 'text-right',
