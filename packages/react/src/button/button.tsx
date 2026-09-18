@@ -1,5 +1,5 @@
 import { LoadingSpinner } from '@obosbbl/grunnmuren-icons-react';
-import { compose, cva, type VariantProps } from 'cva';
+import { cva, type VariantProps } from 'cva';
 import { createContext, type Ref } from 'react';
 import {
   Button as RACButton,
@@ -17,106 +17,104 @@ import { useLocale } from '../use-locale';
  * Figma: https://www.figma.com/file/9OvSg0ZXI5E1eQYi7AWiWn/Grunnmuren-2.0-%E2%94%82-Designsystem?node-id=30%3A2574&mode=dev
  */
 
-const buttonVariants = compose(
-  animateIconVariants,
-  cva({
-    base: [
-      'focus-visible:outline-focus-offset inline-flex min-h-[44px] cursor-pointer items-center justify-center rounded-lg font-medium whitespace-nowrap transition-colors duration-200',
-    ],
-    variants: {
-      /**
-       * The variant of the button
-       * @default primary
-       */
-      variant: {
-        primary: 'no-underline',
-        // by using an inset box-shadow to emulate a border instead of an actual border, the button size will be equal regardless of the variant
-        secondary: 'border-2 border-current no-underline hover:border-transparent',
-        tertiary: 'underline hover:no-underline',
-      },
-      /**
-       * Adjusts the color of the button for usage on different backgrounds.
-       * @default blue
-       */
-      color: {
-        blue: 'focus-visible:outline-focus',
-        mint: 'focus-visible:outline-focus focus-visible:outline-mint',
-        white: 'focus-visible:outline-focus focus-visible:outline-white',
-      },
-      /**
-       * When the button is without text, but with a single icon.
-       * @default false
-       */
-      isIconOnly: {
-        true: 'p-2 [&>svg]:size-7',
-        false: 'gap-2.5 px-4 py-2',
-      },
-      // Make the content of the button transparent to hide it's content, but keep the button width
-      isPending: { true: 'relative text-transparent!', false: null },
+const buttonVariants = cva({
+  composes: animateIconVariants,
+  base: [
+    'focus-visible:outline-focus-offset inline-flex min-h-[44px] cursor-pointer items-center justify-center rounded-lg font-medium whitespace-nowrap transition-colors duration-200',
+  ],
+  variants: {
+    /**
+     * The variant of the button
+     * @default primary
+     */
+    variant: {
+      primary: 'no-underline',
+      // by using an inset box-shadow to emulate a border instead of an actual border, the button size will be equal regardless of the variant
+      secondary: 'border-2 border-current no-underline hover:border-transparent',
+      tertiary: 'underline hover:no-underline',
     },
-    compoundVariants: [
-      {
-        color: 'blue',
-        variant: 'primary',
-        // Darken bg by 20% on hover. The color is manually crafted
-        className:
-          'bg-blue-dark hover:bg-blue text-white active:bg-[#0536A0] active:text-white **:[[role="progressbar"]]:text-white',
-      },
-      {
-        color: 'blue',
-        variant: 'secondary',
-        className:
-          'text-blue-dark hover:bg-blue hover:text-blue-dark **:[[role="progressbar"]]:text-blue-dark hover:border-transparent hover:text-white active:bg-[#0536A0] [&:hover_[role="progressbar"]]:text-white',
-      },
-      {
-        color: 'blue',
-        variant: 'tertiary',
-        className: '**:[[role="progressbar"]]:text-black',
-      },
-      {
-        color: 'mint',
-        variant: 'primary',
-        // Darken bg by 20% on hover. The color is manually crafted
-        className:
-          'bg-mint active:[#9ddac6] text-black hover:bg-[#8dd4bd] **:[[role="progressbar"]]:text-black',
-      },
-      {
-        color: 'mint',
-        variant: 'secondary',
-        className:
-          'text-mint hover:bg-mint **:[[role="progressbar"]]:text-mint hover:text-black [&:hover_[role="progressbar"]]:text-black',
-      },
-      {
-        color: 'mint',
-        variant: 'tertiary',
-        className: 'text-mint **:[[role="progressbar"]]:text-mint',
-      },
-      {
-        color: 'white',
-        variant: 'primary',
-        className:
-          'hover:bg-sky active:bg-sky-light bg-white text-black **:[[role="progressbar"]]:text-black',
-      },
-      {
-        color: 'white',
-        variant: 'secondary',
-        className:
-          'text-white hover:bg-white hover:text-black [&:hover_[role="progressbar"]]:text-black **:[[role="progressbar"]]:text-white',
-      },
-      {
-        color: 'white',
-        variant: 'tertiary',
-        className: 'text-white **:[[role="progressbar"]]:text-white',
-      },
-    ],
-    defaultVariants: {
-      variant: 'primary',
+    /**
+     * Adjusts the color of the button for usage on different backgrounds.
+     * @default blue
+     */
+    color: {
+      blue: 'focus-visible:outline-focus',
+      mint: 'focus-visible:outline-focus focus-visible:outline-mint',
+      white: 'focus-visible:outline-focus focus-visible:outline-white',
+    },
+    /**
+     * When the button is without text, but with a single icon.
+     * @default false
+     */
+    isIconOnly: {
+      true: 'p-2 [&>svg]:size-7',
+      false: 'gap-2.5 px-4 py-2',
+    },
+    // Make the content of the button transparent to hide it's content, but keep the button width
+    isPending: { true: 'relative text-transparent!', false: null },
+  },
+  compoundVariants: [
+    {
       color: 'blue',
-      isIconOnly: false,
-      isPending: false,
+      variant: 'primary',
+      // Darken bg by 20% on hover. The color is manually crafted
+      className:
+        'bg-blue-dark hover:bg-blue text-white active:bg-[#0536A0] active:text-white **:[[role="progressbar"]]:text-white',
     },
-  }),
-);
+    {
+      color: 'blue',
+      variant: 'secondary',
+      className:
+        'text-blue-dark hover:bg-blue hover:text-blue-dark **:[[role="progressbar"]]:text-blue-dark hover:border-transparent hover:text-white active:bg-[#0536A0] [&:hover_[role="progressbar"]]:text-white',
+    },
+    {
+      color: 'blue',
+      variant: 'tertiary',
+      className: '**:[[role="progressbar"]]:text-black',
+    },
+    {
+      color: 'mint',
+      variant: 'primary',
+      // Darken bg by 20% on hover. The color is manually crafted
+      className:
+        'bg-mint active:[#9ddac6] text-black hover:bg-[#8dd4bd] **:[[role="progressbar"]]:text-black',
+    },
+    {
+      color: 'mint',
+      variant: 'secondary',
+      className:
+        'text-mint hover:bg-mint **:[[role="progressbar"]]:text-mint hover:text-black [&:hover_[role="progressbar"]]:text-black',
+    },
+    {
+      color: 'mint',
+      variant: 'tertiary',
+      className: 'text-mint **:[[role="progressbar"]]:text-mint',
+    },
+    {
+      color: 'white',
+      variant: 'primary',
+      className:
+        'hover:bg-sky active:bg-sky-light bg-white text-black **:[[role="progressbar"]]:text-black',
+    },
+    {
+      color: 'white',
+      variant: 'secondary',
+      className:
+        'text-white hover:bg-white hover:text-black [&:hover_[role="progressbar"]]:text-black **:[[role="progressbar"]]:text-white',
+    },
+    {
+      color: 'white',
+      variant: 'tertiary',
+      className: 'text-white **:[[role="progressbar"]]:text-white',
+    },
+  ],
+  defaultVariants: {
+    variant: 'primary',
+    color: 'blue',
+    isIconOnly: false,
+    isPending: false,
+  },
+});
 
 type ButtonOrLinkProps = VariantProps<typeof buttonVariants> & {
   children?: React.ReactNode;

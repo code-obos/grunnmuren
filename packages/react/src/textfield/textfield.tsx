@@ -1,4 +1,4 @@
-import { compose, cva, cx } from 'cva';
+import { cva, cx } from 'cva';
 import type { Ref } from 'react';
 import { Group } from 'react-aria-components/Group';
 import { Input } from 'react-aria-components/Input';
@@ -43,22 +43,20 @@ type TextFieldProps = {
   ref?: Ref<HTMLInputElement>;
 } & Omit<RACTextFieldProps, 'className' | 'isReadOnly' | 'isDisabled' | 'children' | 'style'>;
 
-const inputVariants = compose(
-  input,
-  cva({
-    base: '',
-    variants: {
-      textAlign: {
-        right: 'text-right',
-        left: '',
-      },
-      autoWidth: {
-        true: 'max-w-fit',
-        false: '',
-      },
+const inputVariants = cva({
+  composes: input,
+  base: '',
+  variants: {
+    textAlign: {
+      right: 'text-right',
+      left: '',
     },
-  }),
-);
+    autoWidth: {
+      true: 'max-w-fit',
+      false: '',
+    },
+  },
+});
 
 function TextField(props: TextFieldProps) {
   const {
