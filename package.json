@@ -40,7 +40,7 @@
     "http-server": "14.1.1",
     "oxfmt": "0.45.0",
     "oxlint": "1.60.0",
-    "oxlint-tsgolint": "0.20.0",
+    "oxlint-tsgolint": "7.0.2001",
     "react": "catalog:",
     "react-dom": "catalog:",
     "storybook": "10.5.8",
