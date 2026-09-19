@@ -279,7 +279,7 @@ importers:
         version: link:../tailwind
       cva:
         specifier: ^1.0.0-0
-        version: 1.0.0-beta.4(typescript@5.9.3)
+        version: 1.0.0-beta.11(typescript@5.9.3)
       embla-carousel-autoplay:
         specifier: ^8.6.0
         version: 8.6.0(embla-carousel@8.6.0)
@@ -6081,6 +6081,14 @@ packages:
   custom-media-element@1.4.6:
     resolution: {integrity: sha512-/HRYqJOa1ob5ik4q7FIJVYxTJCFs/FL3+cQPAJjUf2uiqrDEzbTgB315gQ2rG8oK3w094W9m5tcB8S5Qah+caA==}
 
+  cva@1.0.0-beta.11:
+    resolution: {integrity: sha512-UqjHhjuziR0StvDr7iSS/Rq0+aayUFhUV9P8UMpxWO7sbBIfuriCjAC0U/eRmuo1HYYfFmFHWpTnkQgfmgOULQ==}
+    peerDependencies:
+      typescript: '>= 6.0.0'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
   cva@1.0.0-beta.4:
     resolution: {integrity: sha512-F/JS9hScapq4DBVQXcK85l9U91M6ePeXoBMSp7vypzShoefUBxjQTo3g3935PUHgQd+IW77DjbPRIxugy4/GCQ==}
     peerDependencies:
@@ -9145,6 +9153,7 @@ packages:
   sanity@6.9.2:
     resolution: {integrity: sha512-1HCdwyzo4xUxHnpO/dulWafnVJaOL008pfod8nQb1NE3D0wtEt3lbsS2A5v9ea2cTFWZYYmZ5JTXzN9KbEZRVQ==}
     engines: {node: '>=22.12'}
+    deprecated: 'This version of Sanity Studio has a potential data-loss bug when working with Portable Text fields. This issue is resolved in 6.14.1. Upgrade with: npm install sanity@latest. See https://www.sanity.io/docs/studio/upgrade'
     hasBin: true
     peerDependencies:
       react: ^19.2.2
@@ -16951,6 +16960,12 @@ snapshots:
   csstype@3.2.3: {}
 
   custom-media-element@1.4.6: {}
+
+  cva@1.0.0-beta.11(typescript@5.9.3):
+    dependencies:
+      clsx: 2.1.1
+    optionalDependencies:
+      typescript: 5.9.3
 
   cva@1.0.0-beta.4(typescript@5.9.3):
     dependencies:
