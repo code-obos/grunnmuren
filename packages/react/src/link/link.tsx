@@ -1,5 +1,5 @@
 import { ArrowRight, Download, LinkExternal } from '@obosbbl/grunnmuren-icons-react';
-import { compose, cva, type VariantProps } from 'cva';
+import { cva, type VariantProps } from 'cva';
 import { useContext } from 'react';
 import { Link as _Link, type LinkProps as _LinkProps } from 'react-aria-components/Link';
 
@@ -8,12 +8,10 @@ import { LinkListContext } from '../link-list/link-list';
 import { translations } from '../translations';
 import { useLocale } from '../use-locale';
 
-const linkVariants = compose(
-  animateIconVariants,
-  cva({
-    base: 'focus-visible:outline-focus-offset inline-flex cursor-pointer items-center gap-1 font-medium hover:no-underline focus-visible:outline-current data-disabled:cursor-default data-disabled:font-normal data-disabled:no-underline',
-  }),
-);
+const linkVariants = cva({
+  composes: animateIconVariants,
+  base: 'focus-visible:outline-focus-offset inline-flex cursor-pointer items-center gap-1 font-medium hover:no-underline focus-visible:outline-current data-disabled:cursor-default data-disabled:font-normal data-disabled:no-underline',
+});
 
 type LinkProps = VariantProps<typeof linkVariants> &
   _LinkProps &
