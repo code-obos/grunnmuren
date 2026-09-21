@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-react
 
+## 3.10.2
+
+### Patch Changes
+
+- 1f4d5f1: Fix compatibility with cva beta.11+ by migrating from the removed `compose` export to the `composes` config key.
+
 ## 3.10.1
 
 ### Patch Changes
