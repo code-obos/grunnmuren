@@ -45,7 +45,7 @@
     "http-server": "14.1.1",
     "oxfmt": "0.45.0",
     "oxlint": "1.60.0",
-    "oxlint-tsgolint": "0.20.0",
+    "oxlint-tsgolint": "7.0.2002",
     "playwright": "1.63.0",
     "react": "catalog:",
     "react-dom": "catalog:",
