@@ -51,7 +51,7 @@
     "react-dom": "catalog:",
     "storybook": "10.5.8",
     "tailwindcss": "catalog:",
-    "typescript": "5.9.3",
+    "typescript": "7.0.2",
     "vite": "8.2.2",
     "vitest": "4.1.11"
   },
