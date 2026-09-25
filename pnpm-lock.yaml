@@ -63,8 +63,8 @@ importers:
         specifier: 4.4.1
         version: 4.4.1(oxlint@1.60.0(oxlint-tsgolint@0.20.0))(tailwindcss@4.3.3)(typescript@5.9.3)
       fontaine:
-        specifier: 0.8.1
-        version: 0.8.1(postcss@8.5.26)
+        specifier: 0.8.2
+        version: 0.8.2(postcss@8.5.26)
       http-server:
         specifier: 14.1.1
         version: 14.1.1(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)
@@ -6717,8 +6717,8 @@ packages:
       debug:
         optional: true
 
-  fontaine@0.8.1:
-    resolution: {integrity: sha512-IA3MDtmvstTwnyuZTUD1IL42qTR6lI6ND3DEGBHLT5alcBeC/0jo+4jN5XFgG+E7HoPqJqlAUuIL+MhGonyCbQ==}
+  fontaine@0.8.2:
+    resolution: {integrity: sha512-l/aOgAnNqSocAxVmVLuN3P+RIFCWHe6ej3oFugRlW3olsnnQwaxHYdfyyF8aFyhhwUFy4k+Ah3ofEp54RIDMWQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     peerDependencies:
       postcss: ^8.4.31
@@ -17561,7 +17561,7 @@ snapshots:
     optionalDependencies:
       debug: 4.4.3(supports-color@10.2.2)
 
-  fontaine@0.8.1(postcss@8.5.26):
+  fontaine@0.8.2(postcss@8.5.26):
     dependencies:
       '@capsizecss/unpack': 4.0.0
       css-tree: 3.2.1
