@@ -1,0 +1,194 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`computed values > 'bg-blue-dark' 1`] = `
+[
+  "background-color: #002169",
+]
+`;
+
+exports[`computed values > 'bg-blue-light' 1`] = `
+[
+  "background-color: #bedfec",
+]
+`;
+
+exports[`computed values > 'bg-blue-lightest' 1`] = `
+[
+  "background-color: #deeff5",
+]
+`;
+
+exports[`computed values > 'bg-green-light' 1`] = `
+[
+  "background-color: #cdece2",
+]
+`;
+
+exports[`computed values > 'bg-green-lightest' 1`] = `
+[
+  "background-color: #e6f5f0",
+]
+`;
+
+exports[`computed values > 'border-blue-light' 1`] = `
+[
+  "border-color: #bedfec",
+]
+`;
+
+exports[`computed values > 'heading-l' 1`] = `
+[
+  "font-family: OBOSDisplay, __OBOSDisplay_Fallback, sans-serif",
+  "font-size: 1.8125rem",
+  "line-height: 2.75rem",
+  "--tw-font-weight: 600",
+  "font-weight: 600",
+  "@media (width >= 64rem) { font-size: 2.25rem }",
+  "@media (width >= 64rem) { line-height: 3.5rem }",
+]
+`;
+
+exports[`computed values > 'heading-m' 1`] = `
+[
+  "font-family: OBOSText, __OBOSText_Fallback, sans-serif",
+  "font-size: 1.4375rem",
+  "line-height: 2.25rem",
+  "--tw-font-weight: 500",
+  "font-weight: 500",
+  "@media (width >= 64rem) { font-size: 1.625rem }",
+  "@media (width >= 64rem) { line-height: 2.5625rem }",
+]
+`;
+
+exports[`computed values > 'heading-s' 1`] = `
+[
+  "font-family: OBOSText, __OBOSText_Fallback, sans-serif",
+  "font-size: 1.1875rem",
+  "line-height: 1.875rem",
+  "--tw-font-weight: 500",
+  "font-weight: 500",
+  "@media (width >= 64rem) { font-size: 1.3125rem }",
+  "@media (width >= 64rem) { line-height: 2.125rem }",
+]
+`;
+
+exports[`computed values > 'heading-xl' 1`] = `
+[
+  "font-family: OBOSDisplay, __OBOSDisplay_Fallback, sans-serif",
+  "font-size: 2.8125rem",
+  "line-height: 3.625rem",
+  "--tw-font-weight: 600",
+  "font-weight: 600",
+  "@media (width >= 64rem) { font-size: 3.9375rem }",
+  "@media (width >= 64rem) { line-height: 5.125rem }",
+]
+`;
+
+exports[`computed values > 'heading-xs' 1`] = `
+[
+  "font-family: OBOSText, __OBOSText_Fallback, sans-serif",
+  "font-size: 1.125rem",
+  "line-height: 1.75rem",
+  "--tw-font-weight: 500",
+  "font-weight: 500",
+  "@media (width >= 64rem) { font-size: 1.1875rem }",
+  "@media (width >= 64rem) { line-height: 1.9375rem }",
+]
+`;
+
+exports[`computed values > 'hover:bg-blue' 1`] = `
+[
+  "@media (hover: hover) &:hover { background-color: #0047ba }",
+]
+`;
+
+exports[`computed values > 'text-blue-light' 1`] = `
+[
+  "color: #bedfec",
+]
+`;
+
+exports[`computed values > the token set matches the snapshot 1`] = `
+{
+  "--animate-accordion-down": "accordion-down var(--tw-animation-duration,var(--tw-duration,.2s))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+  "--animate-accordion-up": "accordion-up var(--tw-animation-duration,var(--tw-duration,.2s))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+  "--animate-caret-blink": "caret-blink 1.25s ease-out infinite",
+  "--animate-collapsible-down": "collapsible-down var(--tw-animation-duration,var(--tw-duration,.2s))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+  "--animate-collapsible-up": "collapsible-up var(--tw-animation-duration,var(--tw-duration,.2s))var(--tw-ease,ease-out)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+  "--animate-in": "enter var(--tw-animation-duration,var(--tw-duration,.15s))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+  "--animate-out": "exit var(--tw-animation-duration,var(--tw-duration,.15s))var(--tw-ease,ease)var(--tw-animation-delay,0s)var(--tw-animation-iteration-count,1)var(--tw-animation-direction,normal)var(--tw-animation-fill-mode,none)",
+  "--animation-delay-0": "0s",
+  "--animation-delay-100": ".1s",
+  "--animation-delay-1000": "1s",
+  "--animation-delay-150": ".15s",
+  "--animation-delay-200": ".2s",
+  "--animation-delay-300": ".3s",
+  "--animation-delay-500": ".5s",
+  "--animation-delay-700": ".7s",
+  "--animation-delay-75": "75ms",
+  "--animation-direction-alternate": "alternate",
+  "--animation-direction-alternate-reverse": "alternate-reverse",
+  "--animation-direction-normal": "normal",
+  "--animation-direction-reverse": "reverse",
+  "--animation-fill-mode-backwards": "backwards",
+  "--animation-fill-mode-both": "both",
+  "--animation-fill-mode-forwards": "forwards",
+  "--animation-fill-mode-none": "none",
+  "--animation-repeat-0": "0",
+  "--animation-repeat-1": "1",
+  "--animation-repeat-infinite": "infinite",
+  "--breakpoint-3xl": "108rem",
+  "--breakpoint-4xl": "120rem",
+  "--color-black": "#333",
+  "--color-blue": "#0047ba",
+  "--color-blue-dark": "#002169",
+  "--color-blue-light": "#bedfec",
+  "--color-blue-lightest": "#deeff5",
+  "--color-gray": "#818181",
+  "--color-gray-dark": "#595959",
+  "--color-gray-light": "#e6e6e6",
+  "--color-gray-lightest": "#f1f1f1",
+  "--color-green": "#008761",
+  "--color-green-dark": "#00524c",
+  "--color-green-light": "#cdece2",
+  "--color-green-lightest": "#e6f5f0",
+  "--color-mint": "#cdece2",
+  "--color-mint-light": "#e6f5f0",
+  "--color-mint-lightest": "#f0f9f6",
+  "--color-orange": "#e8a74a",
+  "--color-orange-light": "#f8e5c9",
+  "--color-red": "#c0385d",
+  "--color-red-light": "#faedef",
+  "--color-sky": "#bedfec",
+  "--color-sky-light": "#deeff5",
+  "--color-sky-lightest": "#ebf5f9",
+  "--color-white": "#fff",
+  "--color-yellow": "#fff5d2",
+  "--container-gutter-width": "1rem",
+  "--container-width": "92rem",
+  "--font-display": "OBOSDisplay, __OBOSDisplay_Fallback, sans-serif",
+  "--font-text": "OBOSText, __OBOSText_Fallback, sans-serif",
+  "--percentage-0": "0",
+  "--percentage-10": ".1",
+  "--percentage-100": "1",
+  "--percentage-15": ".15",
+  "--percentage-20": ".2",
+  "--percentage-25": ".25",
+  "--percentage-30": ".3",
+  "--percentage-35": ".35",
+  "--percentage-40": ".4",
+  "--percentage-45": ".45",
+  "--percentage-5": ".05",
+  "--percentage-50": ".5",
+  "--percentage-55": ".55",
+  "--percentage-60": ".6",
+  "--percentage-65": ".65",
+  "--percentage-70": ".7",
+  "--percentage-75": ".75",
+  "--percentage-80": ".8",
+  "--percentage-85": ".85",
+  "--percentage-90": ".9",
+  "--percentage-95": ".95",
+  "--percentage-translate-full": "1",
+}
+`;

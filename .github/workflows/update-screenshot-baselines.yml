@@ -1,0 +1,78 @@
+# Screenshot baselines have to be generated on the same platform CI compares them on.
+# A baseline made on macOS renders text differently and turns CI red for everyone, so
+# they are only ever produced by this workflow, on a feature branch, never on main.
+#
+# Run it from the Actions tab with your branch selected. It pushes a commit with the
+# updated baselines back to that branch.
+name: Update screenshot baselines
+
+on:
+  workflow_dispatch:
+
+# One run per branch, so two pushes can't race each other
+concurrency:
+  group: screenshot-baselines@${{ github.ref_name }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  packages: read
+
+jobs:
+  update-baselines:
+    name: Update screenshot baselines
+    runs-on: ubuntu-latest
+
+    steps:
+      # A job-level `if` would skip and report green, which looks the same as a run
+      # that worked. Fail instead, so picking the wrong branch is obvious.
+      - name: Refuse to run on the default branch
+        if: github.ref_name == github.event.repository.default_branch
+        run: |
+          echo "Baselines are committed from a feature branch, not from ${{ github.ref_name }}." >&2
+          exit 1
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
+      - name: Use Node.js 24.x
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24.x
+          registry-url: 'https://npm.pkg.github.com'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build packages
+        run: pnpm run build
+
+      - name: Install Playwright browser
+        run: pnpm exec playwright install --with-deps --only-shell chromium
+
+      - name: Update baselines
+        run: pnpm test:screenshots:update
+
+      - name: Commit baselines
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ':(glob)**/__screenshots__/**'
+
+          if git diff --cached --quiet; then
+            echo "Baselines unchanged, nothing to commit" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          git commit -m "test: update screenshot baselines" -m \
+            "Co-authored-by: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>"
+          git push origin "${{ github.ref_name }}"
+
+          {
+            echo "### Updated baselines"
+            echo
+            git show --stat --oneline HEAD | tail -n +2
+          } >> "$GITHUB_STEP_SUMMARY"
