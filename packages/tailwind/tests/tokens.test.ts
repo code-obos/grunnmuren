@@ -41,6 +41,14 @@ describe('utility parity', () => {
       'does not compile to anything',
     );
   });
+
+  // Variants that only touch the selector would otherwise collapse into the same
+  // declarations, so a pair with the wrong variant on `to` would pass as a rename
+  test('variants that only change the selector are kept apart', async () => {
+    expect(await declarationsFor('hover:bg-blue')).not.toEqual(
+      await declarationsFor('focus-visible:bg-blue'),
+    );
+  });
 });
 
 describe('computed values', () => {

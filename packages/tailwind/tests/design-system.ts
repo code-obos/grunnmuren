@@ -26,7 +26,10 @@ type AstNode = ReturnType<DesignSystem['candidatesToAst']>[number][number];
 
 /** A single CSS declaration a utility compiles to, with theme variables resolved to literal values. */
 export type ResolvedDeclaration = {
-  /** The at-rule chain the declaration sits under, e.g. `@media (width >= 64rem)`. Empty at the top level. */
+  /**
+   * The at-rules and variant selector the declaration sits under, e.g. `@media (hover: hover) &:hover`,
+   * with `&` standing in for the utility's own class. Empty at the top level.
+   */
   condition: string;
   property: string;
   value: string;
@@ -56,9 +59,18 @@ const resolveThemeVariables = (designSystem: DesignSystem, value: string, depth 
   return resolved === value ? resolved : resolveThemeVariables(designSystem, resolved, depth + 1);
 };
 
+// Same escaping as `CSS.escape`, which isn't available in Node
+const escapeClassName = (candidate: string) =>
+  candidate
+    .replaceAll(/[^\w-]/g, '\\$&')
+    .replace(/^\d/, (digit) => `\\${digit.charCodeAt(0).toString(16)} `);
+
+const toCondition = (...parts: Array<string>) => parts.filter(Boolean).join(' ');
+
 const collectDeclarations = (
   designSystem: DesignSystem,
   nodes: Array<AstNode>,
+  className: string,
   condition = '',
 ): Array<ResolvedDeclaration> =>
   nodes.flatMap((node): Array<ResolvedDeclaration> => {
@@ -73,10 +85,26 @@ const collectDeclarations = (
           },
         ];
 
-      case 'rule':
+      // The utility's own class differs within every pair by definition, so only what
+      // the variant adds to the selector (`:hover`, `.group:hover *`) is compared
+      case 'rule': {
+        if (!node.selector.includes(className)) {
+          throw new Error(
+            `Unexpected selector \`${node.selector}\`, expected it to contain \`${className}\``,
+          );
+        }
+        const variantSelector = node.selector.replace(className, '&');
+        return collectDeclarations(
+          designSystem,
+          node.nodes,
+          className,
+          variantSelector === '&' ? condition : toCondition(condition, variantSelector),
+        );
+      }
+
       case 'at-root':
       case 'context':
-        return collectDeclarations(designSystem, node.nodes, condition);
+        return collectDeclarations(designSystem, node.nodes, className, condition);
 
       case 'at-rule':
         // `@property` only declares the contract for a `--tw-*` custom property,
@@ -85,7 +113,8 @@ const collectDeclarations = (
         return collectDeclarations(
           designSystem,
           node.nodes,
-          [condition, `${node.name} ${node.params}`].filter(Boolean).join(' '),
+          className,
+          toCondition(condition, `${node.name} ${node.params}`),
         );
 
       default:
@@ -106,7 +135,7 @@ export const resolveUtility = async (candidate: string): Promise<Array<ResolvedD
     throw new Error(`\`${candidate}\` does not compile to anything in tailwind-base.css`);
   }
 
-  return collectDeclarations(designSystem, ast);
+  return collectDeclarations(designSystem, ast, `.${escapeClassName(candidate)}`);
 };
 
 /** Renders declarations as stable one-liners, for snapshots and assertion messages. */

@@ -98,7 +98,7 @@ exports[`computed values > 'heading-xs' 1`] = `
 
 exports[`computed values > 'hover:bg-blue' 1`] = `
 [
-  "@media (hover: hover) { background-color: #0047ba }",
+  "@media (hover: hover) &:hover { background-color: #0047ba }",
 ]
 `;
 
