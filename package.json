@@ -41,7 +41,7 @@
     "@vitest/browser-playwright": "4.1.11",
     "bunchee": "6.12.2",
     "eslint-plugin-better-tailwindcss": "4.4.1",
-    "fontaine": "0.8.1",
+    "fontaine": "1.0.0",
     "http-server": "14.1.1",
     "oxfmt": "0.45.0",
     "oxlint": "1.60.0",
