@@ -9,7 +9,8 @@
   "files": [
     "tailwind-base.css",
     "tailwind-typography.css",
-    "font.css"
+    "font.css",
+    "tokens"
   ],
   "type": "commonjs",
   "exports": {

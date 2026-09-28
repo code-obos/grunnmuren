@@ -4,6 +4,7 @@ import { dirname, resolve } from 'node:path';
 import { __unstable__loadDesignSystem } from '@tailwindcss/node';
 
 const TAILWIND_BASE_CSS = resolve(import.meta.dirname, '../tailwind-base.css');
+const TOKENS_INDEX_CSS = resolve(import.meta.dirname, '../tokens/index.css');
 
 // Tailwind flags theme entries that come from its own `@theme default` block with
 // this bit. Everything without it is a token we declare ourselves.
@@ -17,6 +18,14 @@ const MAX_RESOLVE_DEPTH = 10;
 // fallback is what the browser uses when the property isn't set at runtime.
 const THEME_VARIABLE = /var\((--[\w-]+)\)/g;
 const THEME_VARIABLE_REFERENCE = /var\((--[\w-]+)/g;
+
+const CSS_COMMENT = /\/\*[\s\S]*?\*\//g;
+const CSS_IMPORT = /@import\s+['"]([^'"]+)['"]/g;
+const CUSTOM_PROPERTY = /^\s*(--[\w-]+)\s*:\s*([^;]+?)\s*$/;
+
+// Tokens mix `#fff` and `#FFFFFF`. Normalising means two values only compare as
+// different when the colour is, instead of when the spelling is.
+const HEX_COLOR = /#([0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})\b/gi;
 
 // `--tw-*` are custom properties Tailwind sets on the element at runtime, not tokens.
 const isThemeToken = (token: string) => !token.startsWith('--tw-');
@@ -48,16 +57,101 @@ export const loadDesignSystem = () => {
   return designSystem;
 };
 
-const resolveThemeVariables = (designSystem: DesignSystem, value: string, depth = 0): string => {
+/**
+ * Splits a stylesheet into its top-level blocks as `[prelude, body]`. Only goes one level
+ * deep, which is all the token files need: an at-rule like `@media` comes back as a single
+ * block, so the `:root` nested inside the reduced-motion query is never read.
+ */
+const topLevelBlocks = (css: string): Array<[string, string]> => {
+  const blocks: Array<[string, string]> = [];
+  let depth = 0;
+  let start = 0;
+  let prelude = '';
+
+  for (let index = 0; index < css.length; index++) {
+    if (css[index] === '{') {
+      if (depth === 0) {
+        // Statements like `@import` end in `;` and sit in front of the next selector
+        prelude = css.slice(start, index).split(';').at(-1)?.trim() ?? '';
+        start = index + 1;
+      }
+      depth++;
+    } else if (css[index] === '}') {
+      depth--;
+      if (depth === 0) {
+        blocks.push([prelude, css.slice(start, index)]);
+        start = index + 1;
+      }
+    }
+  }
+
+  return blocks;
+};
+
+const readRootCustomProperties = async (file: string): Promise<Array<[string, string]>> => {
+  const css = (await readFile(file, 'utf8')).replaceAll(CSS_COMMENT, '');
+
+  return topLevelBlocks(css)
+    .filter(([prelude]) => prelude === ':root')
+    .flatMap(([, body]) =>
+      body.split(';').flatMap((declaration): Array<[string, string]> => {
+        const match = declaration.match(CUSTOM_PROPERTY);
+        return match ? [[match[1], match[2]]] : [];
+      }),
+    );
+};
+
+let rootCustomProperties: Promise<Map<string, string>> | undefined;
+
+/**
+ * The `--gm-*` custom properties the token files declare on a top-level `:root`, in
+ * import order. Tailwind's design system only models `@theme`, so without this every
+ * `@theme inline` mapping would resolve to an unresolvable `var(--gm-…)`.
+ *
+ * Only the default `:root` is read. Theme and `data-color` overrides are selectors of
+ * their own, and the reduced-motion values sit inside an `@media`, so neither leaks in.
+ */
+export const loadRootCustomProperties = () => {
+  rootCustomProperties ??= readFile(TOKENS_INDEX_CSS, 'utf8').then(async (index) => {
+    const files = [...index.replaceAll(CSS_COMMENT, '').matchAll(CSS_IMPORT)].map(([, path]) =>
+      resolve(dirname(TOKENS_INDEX_CSS), path),
+    );
+    // Later files win, same as the cascade does for two `:root` rules
+    return new Map((await Promise.all(files.map(readRootCustomProperties))).flat());
+  });
+  return rootCustomProperties;
+};
+
+const normalizeHexColors = (value: string) =>
+  value.replaceAll(HEX_COLOR, (_, hex: string) => {
+    const expanded = hex.length <= 4 ? hex.replaceAll(/./g, '$&$&') : hex;
+    return `#${expanded.toLowerCase()}`;
+  });
+
+const resolveVariables = (
+  designSystem: DesignSystem,
+  rootProperties: Map<string, string>,
+  value: string,
+  depth = 0,
+): string => {
   if (depth >= MAX_RESOLVE_DEPTH) return value;
 
   const resolved = value.replaceAll(
     THEME_VARIABLE,
-    (variable, token: string) => designSystem.resolveThemeValue(token) ?? variable,
+    (variable, token: string) =>
+      designSystem.resolveThemeValue(token) ?? rootProperties.get(token) ?? variable,
   );
 
-  return resolved === value ? resolved : resolveThemeVariables(designSystem, resolved, depth + 1);
+  return resolved === value
+    ? resolved
+    : resolveVariables(designSystem, rootProperties, resolved, depth + 1);
 };
+
+const resolveThemeVariables = (
+  designSystem: DesignSystem,
+  rootProperties: Map<string, string>,
+  value: string,
+) => normalizeHexColors(resolveVariables(designSystem, rootProperties, value));
 
 // Same escaping as `CSS.escape`, which isn't available in Node
 const escapeClassName = (candidate: string) =>
@@ -69,6 +163,7 @@ const toCondition = (...parts: Array<string>) => parts.filter(Boolean).join(' ')
 
 const collectDeclarations = (
   designSystem: DesignSystem,
+  rootProperties: Map<string, string>,
   nodes: Array<AstNode>,
   className: string,
   condition = '',
@@ -81,7 +176,7 @@ const collectDeclarations = (
           {
             condition,
             property: node.property,
-            value: resolveThemeVariables(designSystem, node.value),
+            value: resolveThemeVariables(designSystem, rootProperties, node.value),
           },
         ];
 
@@ -96,6 +191,7 @@ const collectDeclarations = (
         const variantSelector = node.selector.replace(className, '&');
         return collectDeclarations(
           designSystem,
+          rootProperties,
           node.nodes,
           className,
           variantSelector === '&' ? condition : toCondition(condition, variantSelector),
@@ -104,7 +200,7 @@ const collectDeclarations = (
 
       case 'at-root':
       case 'context':
-        return collectDeclarations(designSystem, node.nodes, className, condition);
+        return collectDeclarations(designSystem, rootProperties, node.nodes, className, condition);
 
       case 'at-rule':
         // `@property` only declares the contract for a `--tw-*` custom property,
@@ -112,6 +208,7 @@ const collectDeclarations = (
         if (node.name === '@property') return [];
         return collectDeclarations(
           designSystem,
+          rootProperties,
           node.nodes,
           className,
           toCondition(condition, `${node.name} ${node.params}`),
@@ -128,14 +225,17 @@ const collectDeclarations = (
  * fails the test instead of silently comparing nothing.
  */
 export const resolveUtility = async (candidate: string): Promise<Array<ResolvedDeclaration>> => {
-  const designSystem = await loadDesignSystem();
+  const [designSystem, rootProperties] = await Promise.all([
+    loadDesignSystem(),
+    loadRootCustomProperties(),
+  ]);
   const [ast] = designSystem.candidatesToAst([candidate]);
 
   if (!ast || ast.length === 0) {
     throw new Error(`\`${candidate}\` does not compile to anything in tailwind-base.css`);
   }
 
-  return collectDeclarations(designSystem, ast, `.${escapeClassName(candidate)}`);
+  return collectDeclarations(designSystem, rootProperties, ast, `.${escapeClassName(candidate)}`);
 };
 
 /** Renders declarations as stable one-liners, for snapshots and assertion messages. */
@@ -146,18 +246,44 @@ export const formatDeclarations = (declarations: Array<ResolvedDeclaration>): Ar
 
 /** The tokens Grunnmuren declares on top of Tailwind, without Tailwind's own palette and scales. */
 export const getGrunnmurenTokens = async (): Promise<Record<string, string>> => {
-  const designSystem = await loadDesignSystem();
+  const [designSystem, rootProperties] = await Promise.all([
+    loadDesignSystem(),
+    loadRootCustomProperties(),
+  ]);
 
   return Object.fromEntries(
     [...designSystem.theme.entries()]
       .filter(([, entry]) => (entry.options & TAILWIND_DEFAULT_TOKEN) === 0)
-      .map(([token, entry]) => [token, resolveThemeVariables(designSystem, entry.value)]),
+      .map(([token, entry]) => [
+        token,
+        resolveThemeVariables(designSystem, rootProperties, entry.value),
+      ]),
   );
 };
 
 /**
+ * A single token resolved to its literal value, whether it lives in `@theme` or is one of
+ * the `--gm-*` custom properties. Throws when it resolves to nothing, so a typo in a test
+ * fails instead of comparing an unresolved `var()` against itself.
+ */
+export const resolveToken = async (token: string): Promise<string> => {
+  const [designSystem, rootProperties] = await Promise.all([
+    loadDesignSystem(),
+    loadRootCustomProperties(),
+  ]);
+  const value = resolveThemeVariables(designSystem, rootProperties, `var(${token})`);
+
+  if (value.includes('var(')) {
+    throw new Error(`\`${token}\` does not resolve to a value, got \`${value}\``);
+  }
+
+  return value;
+};
+
+/**
  * Tokens whose value points at a token that doesn't exist, reported as `from -> to`.
- * Catches drift between the `@theme` block and whatever maps onto it.
+ * Catches drift between the `@theme` block and whatever maps onto it, including an
+ * `@theme inline` mapping that points at a `--gm-*` property nobody declared.
  */
 export const findBrokenTokenReferences = async (): Promise<Array<string>> => {
   const designSystem = await loadDesignSystem();

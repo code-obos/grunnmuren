@@ -1,0 +1,42 @@
+/*
+ * Generated from the token set in AB#140595 (v2026-08-18). Edit the values here, not
+ * in a copy, and keep the three layers apart: components read semantic tokens, never
+ * primitives.
+ */
+
+:root {
+  --gm-ease-industrial: cubic-bezier(0.65, 0, 0.35, 1);
+  --gm-ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
+  --gm-ease-curtain-in: cubic-bezier(0.16, 1, 0.3, 1);
+  --gm-ease-curtain-out: cubic-bezier(0.7, 0, 0.84, 0);
+  --gm-ease-slide: cubic-bezier(0.5, 0.95, 0.75, 1);
+
+  --gm-duration-instant: 200ms;
+  --gm-duration-fast: 250ms;
+  --gm-duration-quick: 350ms;
+  --gm-duration-base: 500ms;
+  --gm-duration-medium: 600ms;
+  --gm-duration-curtain: 720ms;
+  --gm-duration-slow: 900ms;
+  --gm-duration-reveal: 950ms;
+  --gm-duration-slide: 1050ms;
+}
+
+/*
+ * Reduced motion lives in the core, so a theme can pick its own easing and durations
+ * without being able to build this away by accident. Durations go to 0.01ms rather than
+ * 0 so transitionend still fires.
+ */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --gm-duration-instant: 0.01ms;
+    --gm-duration-fast: 0.01ms;
+    --gm-duration-quick: 0.01ms;
+    --gm-duration-base: 0.01ms;
+    --gm-duration-medium: 0.01ms;
+    --gm-duration-curtain: 0.01ms;
+    --gm-duration-slow: 0.01ms;
+    --gm-duration-reveal: 0.01ms;
+    --gm-duration-slide: 0.01ms;
+  }
+}

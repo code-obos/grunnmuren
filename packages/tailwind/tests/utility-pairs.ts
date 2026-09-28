@@ -26,9 +26,18 @@ export const utilityPairs: Array<UtilityPair> = [
   { from: 'text-blue-light', to: 'text-sky' },
   { from: 'border-blue-light', to: 'border-sky' },
 
-  // Waiting on the new tokens. `to` goes in as each one lands.
-  { from: 'bg-blue-dark', change: 'primary button switches to a different blue' },
-  { from: 'hover:bg-blue', change: 'hover goes darker instead of lighter' },
+  // The primary button. Both values change on purpose, see AB#140595.
+  {
+    from: 'bg-blue-dark',
+    to: 'bg-primary-base-default',
+    change: 'primary button switches to a different blue',
+  },
+  {
+    from: 'hover:bg-blue',
+    to: 'hover:bg-primary-base-hover',
+    change: 'hover goes darker instead of lighter',
+  },
+  // Waiting on the fluid type decision. `to` goes in when the heading tokens are wired up.
   { from: 'heading-xl', change: 'fluid typography replaces the breakpoint step' },
   { from: 'heading-l', change: 'fluid typography replaces the breakpoint step' },
   { from: 'heading-m', change: 'fluid typography replaces the breakpoint step' },
