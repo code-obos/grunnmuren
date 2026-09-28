@@ -31,7 +31,13 @@ const CONTRAST_RULES: Array<ContrastRule> = [
     backgrounds: ['base-default', 'base-hover', 'base-active'],
   },
   // WCAG 2.2 AA 1.4.11
-  { name: 'button on page', minimum: 3, foregrounds: ['base-default'], backgrounds: [PAGE] },
+  // Every state, since a hovered or pressed button has to stand out from the page too
+  {
+    name: 'button on page',
+    minimum: 3,
+    foregrounds: ['base-default', 'base-hover', 'base-active'],
+    backgrounds: [PAGE],
+  },
   {
     name: 'graphics on page',
     minimum: 3,
@@ -51,6 +57,8 @@ const KNOWN_VIOLATIONS = new Set([
   // orange-500 on white, 2.09:1. The token file itself notes orange-500 isn't fit for a
   // border, and a button fill needs the same 3:1.
   '--gm-color-warning-base-default on --gm-white',
+  // orange-600 on white, 2.79:1
+  '--gm-color-warning-base-hover on --gm-white',
 ]);
 
 type ContrastPair = { rule: string; minimum: number; foreground: string; background: string };
