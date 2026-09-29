@@ -1,7 +1,6 @@
 /*
- * Generated from the token set in AB#140595 (v2026-08-18). Edit the values here, not
- * in a copy, and keep the three layers apart: components read semantic tokens, never
- * primitives.
+ * Generated from tokens/source/grunnmuren-tokens.json by build-tokens.ts. Don't edit by
+ * hand: change the source and run `pnpm tokens:build`.
  */
 
 /*
@@ -10,8 +9,8 @@
  * utility. With it the utility reads `var(--gm-x)` directly.
  *
  * Only the full role tokens are mapped. The short ones behind `data-color` land with the
- * theme seam, and spacing and type stay off Tailwind's own keys. Radius uses Tailwind's scale
- * as it is.
+ * theme seam, and spacing and type stay off Tailwind's own keys. Radius uses Tailwind's
+ * scale as it is.
  */
 @theme inline {
   --color-primary-background-default: var(--gm-color-primary-background-default);

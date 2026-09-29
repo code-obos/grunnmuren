@@ -22,7 +22,8 @@
     "serve-storybook": "http-server ./apps/docs/public/storybook -p 6006 --silent",
     "test": "vitest run",
     "test:screenshots:update": "vitest run --project='storybook:*' --update",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "tokens:build": "vitest run --project tokens -u -t \"generated token css\""
   },
   "dependencies": {
     "@changesets/cli": "3.0.3",

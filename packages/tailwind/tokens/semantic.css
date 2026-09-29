@@ -1,10 +1,8 @@
 /*
- * Generated from the token set in AB#140595 (v2026-08-18). Edit the values here, not
- * in a copy, and keep the three layers apart: components read semantic tokens, never
- * primitives.
+ * Generated from tokens/source/grunnmuren-tokens.json by build-tokens.ts. Don't edit by
+ * hand: change the source and run `pnpm tokens:build`.
  */
 :root {
-  /* primary. OBOS Blue. Note that this is not the same role as `accent` in Designsystemet. */
   --gm-color-primary-background-default: var(--gm-white);
   --gm-color-primary-background-tinted: var(--gm-sky-100);
   --gm-color-primary-surface-default: var(--gm-white);
@@ -21,8 +19,6 @@
   --gm-color-primary-base-active: var(--gm-blue-800);
   --gm-color-primary-base-contrast-subtle: var(--gm-sky-200);
   --gm-color-primary-base-contrast-default: var(--gm-white);
-
-  /* accent. OBOS Green, the secondary brand colour. Shares its values with `success` for now. */
   --gm-color-accent-background-default: var(--gm-white);
   --gm-color-accent-background-tinted: var(--gm-mint-100);
   --gm-color-accent-surface-default: var(--gm-white);
@@ -39,8 +35,6 @@
   --gm-color-accent-base-active: var(--gm-green-700);
   --gm-color-accent-base-contrast-subtle: var(--gm-mint-200);
   --gm-color-accent-base-contrast-default: var(--gm-white);
-
-  /* neutral */
   --gm-color-neutral-background-default: var(--gm-white);
   --gm-color-neutral-background-tinted: var(--gm-gray-100);
   --gm-color-neutral-surface-default: var(--gm-white);
@@ -57,8 +51,6 @@
   --gm-color-neutral-base-active: var(--gm-gray-1000);
   --gm-color-neutral-base-contrast-subtle: var(--gm-gray-200);
   --gm-color-neutral-base-contrast-default: var(--gm-white);
-
-  /* success. Can diverge from `accent` later, which is why it is its own role. */
   --gm-color-success-background-tinted: var(--gm-mint-100);
   --gm-color-success-surface-tinted: var(--gm-mint-200);
   --gm-color-success-border-default: var(--gm-green-500);
@@ -67,35 +59,29 @@
   --gm-color-success-base-hover: var(--gm-green-600);
   --gm-color-success-base-active: var(--gm-green-700);
   --gm-color-success-base-contrast-default: var(--gm-white);
-
-  /* danger */
   --gm-color-danger-background-tinted: var(--gm-red-100);
   --gm-color-danger-surface-tinted: var(--gm-red-100);
-  --gm-color-danger-surface-hover: var(--gm-red-100); /* placeholder, not decided */
-  --gm-color-danger-surface-active: var(--gm-red-100); /* placeholder, not decided */
+  --gm-color-danger-surface-hover: var(--gm-red-100);
+  --gm-color-danger-surface-active: var(--gm-red-100);
   --gm-color-danger-border-default: var(--gm-red-500);
   --gm-color-danger-text-default: var(--gm-red-700);
   --gm-color-danger-base-default: var(--gm-red-500);
   --gm-color-danger-base-hover: var(--gm-red-600);
   --gm-color-danger-base-active: var(--gm-red-700);
   --gm-color-danger-base-contrast-default: var(--gm-white);
-
-  /* warning. The contrast colour is Coal, not white, since orange is too light for white text. */
   --gm-color-warning-background-tinted: var(--gm-yellow-100);
   --gm-color-warning-surface-tinted: var(--gm-orange-100);
-  --gm-color-warning-surface-hover: var(--gm-orange-100); /* placeholder, not decided */
-  --gm-color-warning-surface-active: var(--gm-orange-100); /* placeholder, not decided */
+  --gm-color-warning-surface-hover: var(--gm-orange-100);
+  --gm-color-warning-surface-active: var(--gm-orange-100);
   --gm-color-warning-border-default: var(--gm-orange-700);
   --gm-color-warning-text-default: var(--gm-gray-900);
   --gm-color-warning-base-default: var(--gm-orange-500);
   --gm-color-warning-base-hover: var(--gm-orange-600);
   --gm-color-warning-base-active: var(--gm-orange-700);
   --gm-color-warning-base-contrast-default: var(--gm-gray-900);
-
-  /* info */
   --gm-color-info-background-tinted: var(--gm-sky-100);
-  --gm-color-info-surface-hover: var(--gm-sky-200); /* placeholder, not decided */
-  --gm-color-info-surface-active: var(--gm-sky-250); /* placeholder, not decided */
+  --gm-color-info-surface-hover: var(--gm-sky-200);
+  --gm-color-info-surface-active: var(--gm-sky-250);
   --gm-color-info-border-default: var(--gm-blue-500);
   --gm-color-info-text-default: var(--gm-blue-900);
   --gm-color-info-base-default: var(--gm-blue-500);

@@ -1,59 +1,52 @@
 /*
- * Generated from the token set in AB#140595 (v2026-08-18). Edit the values here, not
- * in a copy, and keep the three layers apart: components read semantic tokens, never
- * primitives.
- */
-
-/*
- * Fluid type, one size per level instead of a shared scale factor. Declared here but not
- * used by the heading-* utilities yet, since switching them is a visual change on every
- * page and waits for the per-level vs scale-factor decision.
+ * Generated from tokens/source/grunnmuren-tokens.json by build-tokens.ts. Don't edit by
+ * hand: change the source and run `pnpm tokens:build`.
  */
 :root {
+  --gm-heading-xl-letter-spacing: 0em;
   --gm-heading-xl-font-size: clamp(2.8125rem, 2.4375rem + 1.875vw, 3.9375rem);
+  --gm-heading-l-letter-spacing: 0em;
+  --gm-heading-l-font-size: clamp(1.8125rem, 1.6667rem + 0.7292vw, 2.25rem);
+  --gm-heading-m-letter-spacing: 0em;
+  --gm-heading-m-font-size: clamp(1.4375rem, 1.375rem + 0.3125vw, 1.625rem);
+  --gm-heading-s-letter-spacing: 0em;
+  --gm-heading-s-font-size: clamp(1.1875rem, 1.1458rem + 0.2083vw, 1.3125rem);
+  --gm-heading-xs-letter-spacing: 0em;
+  --gm-heading-xs-font-size: clamp(1.125rem, 1.1042rem + 0.1042vw, 1.1875rem);
+  --gm-lead-letter-spacing: 0em;
+  --gm-lead-font-size: clamp(1.4375rem, 1.375rem + 0.3125vw, 1.625rem);
+  --gm-lead-sm-letter-spacing: 0em;
+  --gm-lead-sm-font-size: clamp(1.1875rem, 1.125rem + 0.3125vw, 1.375rem);
+  --gm-paragraph-letter-spacing: 0em;
+  --gm-paragraph-font-size: 1rem;
+  --gm-description-letter-spacing: 0em;
+  --gm-description-font-size: 0.875rem;
+  --gm-button-letter-spacing: 0em;
+  --gm-button-font-size: 1rem;
+  --gm-button-link-sm-letter-spacing: 0em;
+  --gm-button-link-sm-font-size: 1rem;
   --gm-heading-xl-font-weight: var(--gm-font-weight-semibold);
   --gm-heading-xl-line-height: var(--gm-line-height-md);
-  --gm-heading-xl-letter-spacing: 0em;
-  --gm-heading-l-font-size: clamp(1.8125rem, 1.6667rem + 0.7292vw, 2.25rem);
   --gm-heading-l-font-weight: var(--gm-font-weight-semibold);
   --gm-heading-l-line-height: var(--gm-line-height-md);
-  --gm-heading-l-letter-spacing: 0em;
-  --gm-heading-m-font-size: clamp(1.4375rem, 1.375rem + 0.3125vw, 1.625rem);
   --gm-heading-m-font-weight: var(--gm-font-weight-medium);
   --gm-heading-m-line-height: var(--gm-line-height-md);
-  --gm-heading-m-letter-spacing: 0em;
-  --gm-heading-s-font-size: clamp(1.1875rem, 1.1458rem + 0.2083vw, 1.3125rem);
   --gm-heading-s-font-weight: var(--gm-font-weight-medium);
   --gm-heading-s-line-height: var(--gm-line-height-md);
-  --gm-heading-s-letter-spacing: 0em;
-  --gm-heading-xs-font-size: clamp(1.125rem, 1.1042rem + 0.1042vw, 1.1875rem);
   --gm-heading-xs-font-weight: var(--gm-font-weight-medium);
   --gm-heading-xs-line-height: var(--gm-line-height-md);
-  --gm-heading-xs-letter-spacing: 0em;
-  --gm-lead-font-size: clamp(1.4375rem, 1.375rem + 0.3125vw, 1.625rem);
   --gm-lead-font-weight: var(--gm-font-weight-medium);
   --gm-lead-line-height: var(--gm-line-height-md);
-  --gm-lead-letter-spacing: 0em;
-  --gm-lead-sm-font-size: clamp(1.1875rem, 1.125rem + 0.3125vw, 1.375rem);
   --gm-lead-sm-font-weight: var(--gm-font-weight-regular);
   --gm-lead-sm-line-height: var(--gm-line-height-md);
-  --gm-lead-sm-letter-spacing: 0em;
-  --gm-paragraph-font-size: 1rem;
   --gm-paragraph-font-weight: var(--gm-font-weight-regular);
-  --gm-paragraph-medium-font-weight: var(--gm-font-weight-medium);
   --gm-paragraph-line-height: var(--gm-line-height-md);
-  --gm-paragraph-letter-spacing: 0em;
-  --gm-description-font-size: 0.875rem;
+  --gm-paragraph-medium-font-weight: var(--gm-font-weight-medium);
   --gm-description-font-weight: var(--gm-font-weight-regular);
-  --gm-description-medium-font-weight: var(--gm-font-weight-medium);
   --gm-description-line-height: var(--gm-line-height-md);
-  --gm-description-letter-spacing: 0em;
-  --gm-button-font-size: 1rem;
+  --gm-description-medium-font-weight: var(--gm-font-weight-medium);
   --gm-button-font-weight: var(--gm-font-weight-medium);
   --gm-button-line-height: var(--gm-line-height-md);
-  --gm-button-letter-spacing: 0em;
-  --gm-button-link-sm-font-size: 1rem;
   --gm-button-link-sm-font-weight: var(--gm-font-weight-medium);
   --gm-button-link-sm-line-height: var(--gm-line-height-md);
-  --gm-button-link-sm-letter-spacing: 0em;
 }
