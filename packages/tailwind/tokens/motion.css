@@ -24,18 +24,14 @@
 
 /*
  * Reduced motion lives in the core, so a theme can pick its own easing and durations
- * without being able to build this away by accident. Durations go to 0.01ms rather than
- * 0 so transitionend still fires.
+ * without being able to build this away by accident. Only the durations that are made
+ * for movement are zeroed, so colour and opacity fades still ease. A component that
+ * moves things on one of the generic durations has to handle `motion-reduce:` itself.
+ * Durations go to 0.01ms rather than 0 so transitionend still fires.
  */
 @media (prefers-reduced-motion: reduce) {
   :root {
-    --gm-duration-instant: 0.01ms;
-    --gm-duration-fast: 0.01ms;
-    --gm-duration-quick: 0.01ms;
-    --gm-duration-base: 0.01ms;
-    --gm-duration-medium: 0.01ms;
     --gm-duration-curtain: 0.01ms;
-    --gm-duration-slow: 0.01ms;
     --gm-duration-reveal: 0.01ms;
     --gm-duration-slide: 0.01ms;
   }

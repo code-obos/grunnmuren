@@ -6,4 +6,4 @@ Add the semantic token layer from the design team's token set. Every `--gm-*` pr
 
 This is purely additive. No existing utility, colour or rule changes, and nothing uses the new tokens yet. Spacing and type tokens are exposed as custom properties only and are not mapped onto Tailwind's own keys. Radius keeps using Tailwind's own scale.
 
-Also adds a `prefers-reduced-motion` block that zeroes the new duration tokens.
+Also adds a `prefers-reduced-motion` block that zeroes the movement durations (`curtain`, `reveal`, `slide`).
