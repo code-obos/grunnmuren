@@ -1,0 +1,415 @@
+{
+  "$description": "Grunnmuren design tokens — DTCG / Tokens Studio-format. Tre lag: primitives → semantic → (component). Semantiske tokens refererer primitiver, slik at et tema kan bytte primitivene uten å røre komponentene. Nivå 3-tema (tenant, f.eks. Oslo K) ligger som egen seksjon nederst og overstyrer kun det guarded theming tillater.",
+  "$version": "2026-08-18",
+  "$changelog": "Konsoliderer tidligere grunnmuren-tokens.json (farger, radius, border-width, typografi-px) med spacing-skala, ikon-stroke-width, fluid typografi og animasjonstokens fra skjermbildene delt 2026-08-18, samt Oslo K nivå 3-funn fra oslo-k-tokens.html. Se designtoken-referanse-changelog.md for detaljer, navneendringer og åpne punkter.",
+
+  "primitives": {
+    "color": {
+      "white":  { "$type": "color", "$value": "#FFFFFF" },
+      "gray": {
+        "100": { "$type": "color", "$value": "#F1F1F1", "$description": "Concrete / lightest gray" },
+        "200": { "$type": "color", "$value": "#E6E6E6", "$description": "light gray" },
+        "500": { "$type": "color", "$value": "#818181", "$description": "gray — OBS: 3.9:1 på hvit, IKKE tekst" },
+        "700": { "$type": "color", "$value": "#595959", "$description": "dark gray — 7:1 på hvit" },
+        "900": { "$type": "color", "$value": "#333333", "$description": "Coal / body" },
+        "950": { "$type": "color", "$value": "#2C2C2C", "$description": "generert — neutral base-hover" },
+        "1000": { "$type": "color", "$value": "#262626", "$description": "generert — neutral base-active" }
+      },
+      "blue": {
+        "500": { "$type": "color", "$value": "#0047BA", "$description": "OBOS Blue — primary base-default" },
+        "700": { "$type": "color", "$value": "#003DA0", "$description": "generert — primary base-hover (9.65:1 hvit)" },
+        "800": { "$type": "color", "$value": "#00358A", "$description": "generert — primary base-active (11.19:1 hvit)" },
+        "900": { "$type": "color", "$value": "#002169", "$description": "Ocean / dark blue" }
+      },
+      "sky": {
+        "100": { "$type": "color", "$value": "#EBF5F9", "$description": "Pale Sky" },
+        "200": { "$type": "color", "$value": "#DEEFF5", "$description": "Haze Sky" },
+        "250": { "$type": "color", "$value": "#CBE5F0", "$description": "generert — sky surface-hover" },
+        "300": { "$type": "color", "$value": "#BEDFEC", "$description": "Sky" },
+        "400": { "$type": "color", "$value": "#A3C0CB", "$description": "generert — info border-strong" }
+      },
+      "green": {
+        "500": { "$type": "color", "$value": "#008761", "$description": "OBOS Green — accent(brand1)/success base (4.53:1 hvit, grense)" },
+        "600": { "$type": "color", "$value": "#007453", "$description": "generert — base-hover (5.8:1)" },
+        "700": { "$type": "color", "$value": "#006448", "$description": "generert — base-active (7.2:1)" },
+        "900": { "$type": "color", "$value": "#00524C", "$description": "Forest / dark green" }
+      },
+      "mint": {
+        "100": { "$type": "color", "$value": "#F0F9F6", "$description": "Pale Mint" },
+        "200": { "$type": "color", "$value": "#E6F5F0", "$description": "Haze Mint" },
+        "250": { "$type": "color", "$value": "#D7F0E8", "$description": "generert — mint surface-hover" },
+        "300": { "$type": "color", "$value": "#CDECE2", "$description": "Mint" }
+      },
+      "red": {
+        "100": { "$type": "color", "$value": "#FAEDEF", "$description": "Light Red" },
+        "500": { "$type": "color", "$value": "#C0385D", "$description": "Red — danger base (5.3:1 hvit)" },
+        "600": { "$type": "color", "$value": "#A53050", "$description": "generert — danger base-hover (6.69:1)" },
+        "700": { "$type": "color", "$value": "#8E2945", "$description": "generert — danger base-active (8.22:1)" }
+      },
+      "orange": {
+        "100": { "$type": "color", "$value": "#F8E5C9", "$description": "Light Orange" },
+        "500": { "$type": "color", "$value": "#E8A74A", "$description": "Orange — warning base. OBS: 2.09:1 på hvit, IKKE border/strek" },
+        "600": { "$type": "color", "$value": "#C89040", "$description": "generert — warning base-hover" },
+        "700": { "$type": "color", "$value": "#AC7C37", "$description": "generert — warning base-active" }
+      },
+      "yellow": {
+        "100": { "$type": "color", "$value": "#FFF5D2", "$description": "Yellow" }
+      }
+    },
+
+    "spacing": {
+      "$description": "Padding, space-between og width/height er slått sammen til én felles skala. Formel: px = token-tall × 4. NB: kildedokumentet (skjermbilde) hadde en regnefeil i rem-kolonnen for space-28 t.o.m. space-60 — rem-verdiene under er korrigert til px/16.",
+      "0":    { "$type": "dimension", "$value": "0rem" },
+      "px":   { "$type": "dimension", "$value": "1px", "$description": "Hairline — ikke en del av rem-skalaen" },
+      "0-5":  { "$type": "dimension", "$value": "0.125rem" },
+      "1":    { "$type": "dimension", "$value": "0.25rem" },
+      "1-5":  { "$type": "dimension", "$value": "0.375rem" },
+      "2":    { "$type": "dimension", "$value": "0.5rem" },
+      "2-5":  { "$type": "dimension", "$value": "0.625rem" },
+      "3":    { "$type": "dimension", "$value": "0.75rem" },
+      "3-5":  { "$type": "dimension", "$value": "0.875rem" },
+      "4":    { "$type": "dimension", "$value": "1rem" },
+      "5":    { "$type": "dimension", "$value": "1.25rem" },
+      "6":    { "$type": "dimension", "$value": "1.5rem" },
+      "7":    { "$type": "dimension", "$value": "1.75rem" },
+      "8":    { "$type": "dimension", "$value": "2rem" },
+      "9":    { "$type": "dimension", "$value": "2.25rem" },
+      "10":   { "$type": "dimension", "$value": "2.5rem" },
+      "11":   { "$type": "dimension", "$value": "2.75rem" },
+      "12":   { "$type": "dimension", "$value": "3rem" },
+      "14":   { "$type": "dimension", "$value": "3.5rem" },
+      "16":   { "$type": "dimension", "$value": "4rem" },
+      "20":   { "$type": "dimension", "$value": "5rem" },
+      "24":   { "$type": "dimension", "$value": "6rem" },
+      "28":   { "$type": "dimension", "$value": "7rem", "$description": "KORRIGERT fra kildens '6rem' — 112px / 16 = 7rem" },
+      "32":   { "$type": "dimension", "$value": "8rem", "$description": "KORRIGERT fra kildens '7rem'" },
+      "36":   { "$type": "dimension", "$value": "9rem", "$description": "KORRIGERT fra kildens '8rem'" },
+      "40":   { "$type": "dimension", "$value": "10rem", "$description": "KORRIGERT fra kildens '9rem'" },
+      "44":   { "$type": "dimension", "$value": "11rem", "$description": "KORRIGERT fra kildens '10rem'" },
+      "48":   { "$type": "dimension", "$value": "12rem", "$description": "KORRIGERT fra kildens '11rem'" },
+      "52":   { "$type": "dimension", "$value": "13rem", "$description": "KORRIGERT fra kildens '12rem'" },
+      "56":   { "$type": "dimension", "$value": "14rem", "$description": "KORRIGERT fra kildens '13rem'" },
+      "60":   { "$type": "dimension", "$value": "15rem", "$description": "KORRIGERT fra kildens '14rem'" },
+      "64":   { "$type": "dimension", "$value": "16rem" },
+      "72":   { "$type": "dimension", "$value": "18rem" },
+      "80":   { "$type": "dimension", "$value": "20rem" },
+      "96":   { "$type": "dimension", "$value": "24rem" }
+    },
+
+    "radius": {
+      "$description": "Skala parameterisert av base + scale, så et tema kan skru hele settet (f.eks. Oslo K som bruker kun none/full).",
+      "base":  { "$type": "number", "$value": "4px" },
+      "scale": { "$type": "number", "$value": 1 },
+      "none":  { "$type": "dimension", "$value": "0rem" },
+      "sm":    { "$type": "dimension", "$value": "0.125rem" },
+      "md-sm": { "$type": "dimension", "$value": "0.25rem" },
+      "md":    { "$type": "dimension", "$value": "0.375rem" },
+      "lg":    { "$type": "dimension", "$value": "0.5rem" },
+      "2xl":   { "$type": "dimension", "$value": "1rem" },
+      "3xl":   { "$type": "dimension", "$value": "1.5rem" },
+      "full":  { "$type": "dimension", "$value": "9999px" }
+    },
+
+    "border-width": {
+      "1": { "$type": "dimension", "$value": "1px" },
+      "2": { "$type": "dimension", "$value": "2px" },
+      "3": { "$type": "dimension", "$value": "3px" },
+      "4": { "$type": "dimension", "$value": "4px" }
+    },
+
+    "icon-stroke-width": {
+      "0":   { "$type": "dimension", "$value": "0px" },
+      "0-3": { "$type": "dimension", "$value": "0.3px" },
+      "0-5": { "$type": "dimension", "$value": "0.5px" },
+      "1":   { "$type": "dimension", "$value": "1px" },
+      "1-5": { "$type": "dimension", "$value": "1.5px" },
+      "2":   { "$type": "dimension", "$value": "2px" },
+      "3":   { "$type": "dimension", "$value": "3px" },
+      "4":   { "$type": "dimension", "$value": "4px" }
+    },
+
+    "font-family": {
+      "$description": "Tema-knapp: byttes ut av tenant-temaer (Oslo K, Vibbo o.l.).",
+      "display": { "$type": "fontFamily", "$value": "OBOS Display" },
+      "text":    { "$type": "fontFamily", "$value": "OBOS Text" }
+    },
+
+    "font-weight": {
+      "regular":  { "$type": "fontWeight", "$value": 400 },
+      "medium":   { "$type": "fontWeight", "$value": 500 },
+      "semibold": { "$type": "fontWeight", "$value": 600 },
+      "bold":     { "$type": "fontWeight", "$value": 700 }
+    },
+
+    "line-height": {
+      "sm": { "$type": "number", "$value": 1.3, "$description": "IKKE BESTEMT — flagget i kilden, ta opp til diskusjon" },
+      "md": { "$type": "number", "$value": 1.5 },
+      "lg": { "$type": "number", "$value": 1.7, "$description": "IKKE BESTEMT — flagget i kilden, ta opp til diskusjon" }
+    },
+
+    "letter-spacing": {
+      "1": { "$type": "number", "$value": "-0.01em" },
+      "2": { "$type": "number", "$value": "-0.005em", "$description": "IKKE BESTEMT — flagget i kilden sammen med steg 3–4" },
+      "3": { "$type": "number", "$value": "-0.0025em", "$description": "IKKE BESTEMT — flagget i kilden sammen med steg 2 og 4" },
+      "4": { "$type": "number", "$value": "-0.0015em", "$description": "IKKE BESTEMT — flagget i kilden sammen med steg 2–3" },
+      "5": { "$type": "number", "$value": "0em" },
+      "6": { "$type": "number", "$value": "0.0015em" },
+      "7": { "$type": "number", "$value": "0.0025em" },
+      "8": { "$type": "number", "$value": "0.005em" },
+      "9": { "$type": "number", "$value": "0.015em" }
+    },
+
+    "motion": {
+      "$description": "Finnes ikke i obos.no-oppsettet ennå. Utledet av Oslo K nivå 3-prototypen (48 transition-deklarasjoner). Se designtoken-tillegg-animasjon.md for metode og WCAG-avvik (prefers-reduced-motion mangler helt).",
+      "easing": {
+        "industrial":  { "$type": "cubicBezier", "$value": "cubic-bezier(0.65, 0, 0.35, 1)", "$description": "Symmetrisk inn/ut. Mekanisk, jevn." },
+        "reveal":      { "$type": "cubicBezier", "$value": "cubic-bezier(0.22, 1, 0.36, 1)", "$description": "Quint-out. Arbeidshest, 11 bruksteder." },
+        "curtain-in":  { "$type": "cubicBezier", "$value": "cubic-bezier(0.16, 1, 0.3, 1)", "$description": "Expo-out." },
+        "curtain-out": { "$type": "cubicBezier", "$value": "cubic-bezier(0.7, 0, 0.84, 0)", "$description": "Expo-in, speiling av curtain-in." },
+        "slide":       { "$type": "cubicBezier", "$value": "cubic-bezier(0.5, 0.95, 0.75, 1)", "$description": "Målt ut av referansevideo, 2.8% avvik." }
+      },
+      "duration": {
+        "instant": { "$type": "duration", "$value": "200ms" },
+        "fast":    { "$type": "duration", "$value": "250ms" },
+        "quick":   { "$type": "duration", "$value": "350ms" },
+        "base":    { "$type": "duration", "$value": "500ms" },
+        "medium":  { "$type": "duration", "$value": "600ms" },
+        "curtain": { "$type": "duration", "$value": "720ms" },
+        "slow":    { "$type": "duration", "$value": "900ms" },
+        "reveal":  { "$type": "duration", "$value": "950ms" },
+        "slide":   { "$type": "duration", "$value": "1050ms" }
+      },
+      "stagger": {
+        "band": { "$type": "duration", "$value": "0ms / 70ms / 140ms" },
+        "menu": { "$type": "duration", "$value": "80ms" },
+        "line": { "$type": "duration", "$value": "60ms" }
+      },
+      "delay": {
+        "title":  { "$type": "duration", "$value": "60ms / 150ms" },
+        "number": { "$type": "duration", "$value": "540ms" },
+        "arrow":  { "$type": "duration", "$value": "1950ms" }
+      },
+      "reduced-motion": {
+        "$description": "MANGLER I PROTOTYPEN — må leveres av Core, ikke overlates til tenant. Se designtoken-tillegg-animasjon.md punkt 4.",
+        "rule": "@media (prefers-reduced-motion: reduce) { alle duration-tokens → 0.01ms, sluttilstand beholdes, teppe-overganger erstattes av umiddelbart skift }"
+      }
+    }
+  },
+
+  "semantic": {
+    "$description": "Light mode. Komponenter bruker KUN disse — aldri primitiver direkte. Bytt primitivene i et tema → disse regenereres kontrast-trygt. NB: rollen som tidligere het 'accent' (blå, juni-notatet) heter nå 'primary'. 'accent' betegner nå merkevarens grønnfarge (tidl. 'brand1') — se changelog.",
+
+    "color": {
+      "primary": {
+        "$description": "OBOS Blue. Primær, interaktiv rolle (tidligere kalt 'accent').",
+        "background-default":   { "$type": "color", "$value": "{primitives.color.white}" },
+        "background-tinted":    { "$type": "color", "$value": "{primitives.color.sky.100}" },
+        "surface-default":      { "$type": "color", "$value": "{primitives.color.white}" },
+        "surface-tinted":       { "$type": "color", "$value": "{primitives.color.sky.100}" },
+        "surface-hover":        { "$type": "color", "$value": "{primitives.color.sky.200}" },
+        "surface-active":       { "$type": "color", "$value": "{primitives.color.sky.250}" },
+        "border-subtle":        { "$type": "color", "$value": "{primitives.color.sky.300}" },
+        "border-default":       { "$type": "color", "$value": "{primitives.color.blue.500}" },
+        "border-strong":        { "$type": "color", "$value": "{primitives.color.blue.700}" },
+        "text-subtle":          { "$type": "color", "$value": "{primitives.color.blue.700}" },
+        "text-default":         { "$type": "color", "$value": "{primitives.color.blue.900}" },
+        "base-default":         { "$type": "color", "$value": "{primitives.color.blue.500}" },
+        "base-hover":           { "$type": "color", "$value": "{primitives.color.blue.700}" },
+        "base-active":          { "$type": "color", "$value": "{primitives.color.blue.800}", "$description": "KORRIGERT: kildedokumentasjonen (skjermbilde) viser feilaktig samme verdi som base-default, flagget med '?' i kilden. Denne verdien er den WCAG-verifiserte, riktige." },
+        "base-contrast-subtle": { "$type": "color", "$value": "{primitives.color.sky.200}" },
+        "base-contrast-default":{ "$type": "color", "$value": "{primitives.color.white}" }
+      },
+
+      "accent": {
+        "$description": "OBOS Green — sekundær merkevarefarge (tidligere kalt 'brand1'). Deler primitiv-familie med 'success', men er en egen semantisk rolle for merkevarebruk (ikke statusmelding). Åpent punkt: bør accent og success ha ulik verdi for å unngå at en merkevareknapp tolkes som en bekreftelsesknapp? Se changelog.",
+        "background-default":   { "$type": "color", "$value": "{primitives.color.white}" },
+        "background-tinted":    { "$type": "color", "$value": "{primitives.color.mint.100}" },
+        "surface-default":      { "$type": "color", "$value": "{primitives.color.white}" },
+        "surface-tinted":       { "$type": "color", "$value": "{primitives.color.mint.200}" },
+        "surface-hover":        { "$type": "color", "$value": "{primitives.color.mint.250}" },
+        "surface-active":       { "$type": "color", "$value": "{primitives.color.mint.300}" },
+        "border-subtle":        { "$type": "color", "$value": "{primitives.color.mint.300}" },
+        "border-default":       { "$type": "color", "$value": "{primitives.color.green.500}" },
+        "border-strong":        { "$type": "color", "$value": "{primitives.color.green.700}" },
+        "text-subtle":          { "$type": "color", "$value": "{primitives.color.green.700}" },
+        "text-default":         { "$type": "color", "$value": "{primitives.color.green.900}" },
+        "base-default":         { "$type": "color", "$value": "{primitives.color.green.500}" },
+        "base-hover":           { "$type": "color", "$value": "{primitives.color.green.600}" },
+        "base-active":          { "$type": "color", "$value": "{primitives.color.green.700}" },
+        "base-contrast-subtle": { "$type": "color", "$value": "{primitives.color.mint.200}" },
+        "base-contrast-default":{ "$type": "color", "$value": "{primitives.color.white}" }
+      },
+
+      "neutral": {
+        "background-default":   { "$type": "color", "$value": "{primitives.color.white}" },
+        "background-tinted":    { "$type": "color", "$value": "{primitives.color.gray.100}" },
+        "surface-default":      { "$type": "color", "$value": "{primitives.color.white}" },
+        "surface-tinted":       { "$type": "color", "$value": "{primitives.color.gray.100}" },
+        "surface-hover":        { "$type": "color", "$value": "{primitives.color.gray.200}" },
+        "surface-active":       { "$type": "color", "$value": "{primitives.color.gray.200}" },
+        "border-subtle":        { "$type": "color", "$value": "{primitives.color.gray.200}" },
+        "border-default":       { "$type": "color", "$value": "{primitives.color.gray.500}" },
+        "border-strong":        { "$type": "color", "$value": "{primitives.color.gray.900}" },
+        "text-subtle":          { "$type": "color", "$value": "{primitives.color.gray.700}", "$description": "gray-dark 7:1 — KORRIGERT fra gray-light i tidligere versjon" },
+        "text-default":         { "$type": "color", "$value": "{primitives.color.gray.900}", "$description": "Coal 12.6:1" },
+        "base-default":         { "$type": "color", "$value": "{primitives.color.gray.900}" },
+        "base-hover":           { "$type": "color", "$value": "{primitives.color.gray.950}" },
+        "base-active":          { "$type": "color", "$value": "{primitives.color.gray.1000}" },
+        "base-contrast-subtle": { "$type": "color", "$value": "{primitives.color.gray.200}" },
+        "base-contrast-default":{ "$type": "color", "$value": "{primitives.color.white}" }
+      },
+
+      "success": {
+        "background-default":   { "$type": "color", "$value": "{primitives.color.white}" },
+        "background-tinted":    { "$type": "color", "$value": "{primitives.color.mint.100}" },
+        "surface-default":      { "$type": "color", "$value": "{primitives.color.white}" },
+        "surface-tinted":       { "$type": "color", "$value": "{primitives.color.mint.200}" },
+        "surface-hover":        { "$type": "color", "$value": "{primitives.color.mint.250}" },
+        "surface-active":       { "$type": "color", "$value": "{primitives.color.mint.300}" },
+        "border-subtle":        { "$type": "color", "$value": "{primitives.color.mint.300}" },
+        "border-default":       { "$type": "color", "$value": "{primitives.color.green.500}" },
+        "border-strong":        { "$type": "color", "$value": "{primitives.color.green.700}" },
+        "text-subtle":          { "$type": "color", "$value": "{primitives.color.green.700}" },
+        "text-default":         { "$type": "color", "$value": "{primitives.color.green.900}" },
+        "base-default":         { "$type": "color", "$value": "{primitives.color.green.500}" },
+        "base-hover":           { "$type": "color", "$value": "{primitives.color.green.600}" },
+        "base-active":          { "$type": "color", "$value": "{primitives.color.green.700}" },
+        "base-contrast-subtle": { "$type": "color", "$value": "{primitives.color.mint.200}" },
+        "base-contrast-default":{ "$type": "color", "$value": "{primitives.color.white}" }
+      },
+
+      "danger": {
+        "background-default":   { "$type": "color", "$value": "{primitives.color.white}" },
+        "background-tinted":    { "$type": "color", "$value": "{primitives.color.red.100}" },
+        "surface-default":      { "$type": "color", "$value": "{primitives.color.white}" },
+        "surface-tinted":       { "$type": "color", "$value": "{primitives.color.red.100}" },
+        "surface-hover":        { "$type": "color", "$value": "{primitives.color.red.100}", "$description": "IKKE BESTEMT — placeholder, se changelog" },
+        "surface-active":       { "$type": "color", "$value": "{primitives.color.red.100}", "$description": "IKKE BESTEMT — placeholder, se changelog" },
+        "border-subtle":        { "$type": "color", "$value": "{primitives.color.red.100}" },
+        "border-default":       { "$type": "color", "$value": "{primitives.color.red.500}" },
+        "border-strong":        { "$type": "color", "$value": "{primitives.color.red.700}" },
+        "text-subtle":          { "$type": "color", "$value": "{primitives.color.red.600}" },
+        "text-default":         { "$type": "color", "$value": "{primitives.color.red.700}" },
+        "base-default":         { "$type": "color", "$value": "{primitives.color.red.500}" },
+        "base-hover":           { "$type": "color", "$value": "{primitives.color.red.600}" },
+        "base-active":          { "$type": "color", "$value": "{primitives.color.red.700}" },
+        "base-contrast-subtle": { "$type": "color", "$value": "{primitives.color.red.100}" },
+        "base-contrast-default":{ "$type": "color", "$value": "{primitives.color.white}" }
+      },
+
+      "warning": {
+        "background-default":   { "$type": "color", "$value": "{primitives.color.white}" },
+        "background-tinted":    { "$type": "color", "$value": "{primitives.color.yellow.100}" },
+        "surface-default":      { "$type": "color", "$value": "{primitives.color.white}" },
+        "surface-tinted":       { "$type": "color", "$value": "{primitives.color.orange.100}" },
+        "surface-hover":        { "$type": "color", "$value": "{primitives.color.orange.100}", "$description": "IKKE BESTEMT — placeholder, se changelog" },
+        "surface-active":       { "$type": "color", "$value": "{primitives.color.orange.100}", "$description": "IKKE BESTEMT — placeholder, se changelog" },
+        "border-subtle":        { "$type": "color", "$value": "{primitives.color.orange.100}" },
+        "border-default":       { "$type": "color", "$value": "{primitives.color.orange.700}", "$description": "mørkere steg — orange-500 stryker 3:1 på hvit" },
+        "border-strong":        { "$type": "color", "$value": "{primitives.color.orange.700}" },
+        "text-subtle":          { "$type": "color", "$value": "{primitives.color.orange.700}" },
+        "text-default":         { "$type": "color", "$value": "{primitives.color.gray.900}" },
+        "base-default":         { "$type": "color", "$value": "{primitives.color.orange.500}" },
+        "base-hover":           { "$type": "color", "$value": "{primitives.color.orange.600}" },
+        "base-active":          { "$type": "color", "$value": "{primitives.color.orange.700}" },
+        "base-contrast-subtle": { "$type": "color", "$value": "{primitives.color.gray.900}" },
+        "base-contrast-default":{ "$type": "color", "$value": "{primitives.color.gray.900}", "$description": "Coal — orange er lys, hvit tekst stryker (2.09:1)" }
+      },
+
+      "info": {
+        "background-default":   { "$type": "color", "$value": "{primitives.color.white}" },
+        "background-tinted":    { "$type": "color", "$value": "{primitives.color.sky.100}" },
+        "surface-default":      { "$type": "color", "$value": "{primitives.color.white}" },
+        "surface-tinted":       { "$type": "color", "$value": "{primitives.color.sky.100}" },
+        "surface-hover":        { "$type": "color", "$value": "{primitives.color.sky.200}", "$description": "IKKE BESTEMT — placeholder, se changelog" },
+        "surface-active":       { "$type": "color", "$value": "{primitives.color.sky.250}", "$description": "IKKE BESTEMT — placeholder, se changelog" },
+        "border-subtle":        { "$type": "color", "$value": "{primitives.color.sky.300}" },
+        "border-default":       { "$type": "color", "$value": "{primitives.color.blue.500}" },
+        "border-strong":        { "$type": "color", "$value": "{primitives.color.blue.700}" },
+        "text-subtle":          { "$type": "color", "$value": "{primitives.color.blue.700}" },
+        "text-default":         { "$type": "color", "$value": "{primitives.color.blue.900}" },
+        "base-default":         { "$type": "color", "$value": "{primitives.color.blue.500}" },
+        "base-hover":           { "$type": "color", "$value": "{primitives.color.blue.700}" },
+        "base-active":          { "$type": "color", "$value": "{primitives.color.blue.800}" },
+        "base-contrast-subtle": { "$type": "color", "$value": "{primitives.color.sky.200}" },
+        "base-contrast-default":{ "$type": "color", "$value": "{primitives.color.white}" }
+      }
+    },
+
+    "typography": {
+      "$description": "Fluid type via clamp(). Font-size er eget token per nivå, ikke arvet via global skaleringsfaktor — se changelog for hoveddiskusjonspunktet med utviklerne.",
+      "heading": {
+        "xl": { "font-weight": "{primitives.font-weight.semibold}", "line-height": "{primitives.line-height.md}", "letter-spacing": "0em", "font-size": { "$type": "dimension", "$value": "clamp(2.8125rem, 2.4375rem + 1.875vw, 3.9375rem)" } },
+        "l":  { "font-weight": "{primitives.font-weight.semibold}", "line-height": "{primitives.line-height.md}", "letter-spacing": "0em", "font-size": { "$type": "dimension", "$value": "clamp(1.8125rem, 1.6667rem + 0.7292vw, 2.25rem)" } },
+        "m":  { "font-weight": "{primitives.font-weight.medium}", "line-height": "{primitives.line-height.md}", "letter-spacing": "0em", "font-size": { "$type": "dimension", "$value": "clamp(1.4375rem, 1.375rem + 0.3125vw, 1.625rem)" } },
+        "s":  { "font-weight": "{primitives.font-weight.medium}", "line-height": "{primitives.line-height.md}", "letter-spacing": "0em", "font-size": { "$type": "dimension", "$value": "clamp(1.1875rem, 1.1458rem + 0.2083vw, 1.3125rem)" } },
+        "xs": { "font-weight": "{primitives.font-weight.medium}", "line-height": "{primitives.line-height.md}", "letter-spacing": "0em", "font-size": { "$type": "dimension", "$value": "clamp(1.125rem, 1.1042rem + 0.1042vw, 1.1875rem)" } }
+      },
+      "lead": {
+        "default": { "font-weight": "{primitives.font-weight.medium}", "line-height": "{primitives.line-height.md}", "letter-spacing": "0em", "font-size": { "$type": "dimension", "$value": "clamp(1.4375rem, 1.375rem + 0.3125vw, 1.625rem)" } },
+        "sm":      { "font-weight": "{primitives.font-weight.regular}", "line-height": "{primitives.line-height.md}", "letter-spacing": "0em", "font-size": { "$type": "dimension", "$value": "clamp(1.1875rem, 1.125rem + 0.3125vw, 1.375rem)" } }
+      },
+      "paragraph": {
+        "default": { "font-weight": "{primitives.font-weight.regular}", "line-height": "{primitives.line-height.md}", "letter-spacing": "0em", "font-size": { "$type": "dimension", "$value": "1rem" } },
+        "medium":  { "font-weight": "{primitives.font-weight.medium}", "line-height": "{primitives.line-height.md}", "letter-spacing": "0em", "font-size": { "$type": "dimension", "$value": "1rem" } }
+      },
+      "description": {
+        "default": { "font-weight": "{primitives.font-weight.regular}", "line-height": "{primitives.line-height.md}", "letter-spacing": "0em", "font-size": { "$type": "dimension", "$value": "0.875rem" } },
+        "medium":  { "font-weight": "{primitives.font-weight.medium}", "line-height": "{primitives.line-height.md}", "letter-spacing": "0em", "font-size": { "$type": "dimension", "$value": "0.875rem" } }
+      },
+      "button": {
+        "default":  { "font-weight": "{primitives.font-weight.medium}", "line-height": "{primitives.line-height.md}", "letter-spacing": "0em", "font-size": { "$type": "dimension", "$value": "1rem" } },
+        "link-sm":  { "font-weight": "{primitives.font-weight.medium}", "line-height": "{primitives.line-height.md}", "letter-spacing": "0em", "font-size": { "$type": "dimension", "$value": "1rem" }, "$description": "Vurderes slått sammen med button.default — se changelog" }
+      }
+    }
+  },
+
+  "tenant-oslo-k": {
+    "$description": "Nivå 3-eksempel. Overstyrer KUN det guarded theming tillater (merkevarefarge, typografi, radius, animasjon, padding/margin). Verdier hentet ut av de fungerende prototypene oslo-k-forside.html og oslo-k-kontor-402.html — ikke satt opp for anledningen. IKKE en del av Core; distribueres som egen temapakke.",
+    "color": {
+      "background-default":  { "$type": "color", "$value": "#42443F", "$description": "Industrial olive — sidebakgrunn" },
+      "background-inverse":  { "$type": "color", "$value": "#FFFFFF", "$description": "Kontorside / lys seksjon" },
+      "background-overlay":  { "$type": "color", "$value": "#000000", "$description": "Meny- og drawer-flate" },
+      "surface-default":     { "$type": "color", "$value": "#3F443C", "$description": "Deep olive — galleriflate" },
+      "surface-alt":         { "$type": "color", "$value": "#736F69", "$description": "Concrete warm — alternerende galleriflate" },
+      "surface-scrim":       { "$type": "color", "$value": "rgba(0,0,0,0.25)" },
+      "surface-lightbox":    { "$type": "color", "$value": "rgba(20,20,20,0.94)" },
+      "border-default":      { "$type": "color", "$value": "#FFFFFF" },
+      "border-subtle":       { "$type": "color", "$value": "rgba(66,68,63,0.15)" },
+      "border-divider":      { "$type": "color", "$value": "rgba(241,237,224,0.3)" },
+      "text-default":        { "$type": "color", "$value": "#000000" },
+      "text-inverse":        { "$type": "color", "$value": "#FFFFFF" },
+      "base-curtain":        { "$type": "color", "$value": "#000000" },
+      "base-curtain-alt":    { "$type": "color", "$value": "#3F443C" }
+    },
+    "radius": {
+      "none": { "$type": "dimension", "$value": "0px", "$description": "Alle flater, bilder og knapper" },
+      "full": { "$type": "dimension", "$value": "9999px", "$description": "Markør- og lukkeknapper" }
+    },
+    "border-width": {
+      "hairline": { "$type": "dimension", "$value": "1.5px", "$description": "AVVIKER FRA SKALA — hamburger-strek" }
+    },
+    "spacing-exceptions": {
+      "$description": "5 av 22 brukte spacing-verdier ligger utenfor fellesskalaen — store, komposisjonelle avstander hentet direkte fra Figma-mål.",
+      "72px":  "Bunnpadding tittelseksjon",
+      "100px": "Toppadding drawer / neste-lokale",
+      "110px": "Avstand tall → SCROLL-etikett",
+      "145px": "Toppluft over tittel",
+      "175px": "Luft mellom bildeseksjoner"
+    },
+    "typography": {
+      "font-family-display": { "$type": "fontFamily", "$value": "Baskervville" },
+      "font-family-text":    { "$type": "fontFamily", "$value": "Assistant" },
+      "display-hero":  { "$type": "dimension", "$value": "clamp(3.5rem, 0.621rem + 11.81vw, 11.25rem)" },
+      "display-menu":  { "$type": "dimension", "$value": "clamp(2.75rem, 1.445rem + 5.339vw, 6.25rem)" },
+      "numeral-xl":    { "$type": "dimension", "$value": "clamp(2.5rem, 1rem + 5vw, 4.5rem)" },
+      "numeral-lg":    { "$type": "dimension", "$value": "75px" },
+      "body":          { "$type": "dimension", "$value": "16px" },
+      "logo-text":     { "$type": "dimension", "$value": "20px", "font-weight": 700 },
+      "marker":        { "$type": "dimension", "$value": "13px" }
+    },
+    "motion": {
+      "$description": "Se primitives.motion for delte easing/duration-navn — Oslo K bruker samme tokens, ingen egne verdier. prefers-reduced-motion MANGLER i prototypen, se designtoken-tillegg-animasjon.md punkt 4."
+    }
+  }
+}
