@@ -1,0 +1,103 @@
+/*
+ * Generated from the token set in AB#140595 (v2026-08-18). Edit the values here, not
+ * in a copy, and keep the three layers apart: components read semantic tokens, never
+ * primitives.
+ */
+:root {
+  /* primary. OBOS Blue. Note that this is not the same role as `accent` in Designsystemet. */
+  --gm-color-primary-background-default: var(--gm-white);
+  --gm-color-primary-background-tinted: var(--gm-sky-100);
+  --gm-color-primary-surface-default: var(--gm-white);
+  --gm-color-primary-surface-tinted: var(--gm-sky-100);
+  --gm-color-primary-surface-hover: var(--gm-sky-200);
+  --gm-color-primary-surface-active: var(--gm-sky-250);
+  --gm-color-primary-border-subtle: var(--gm-sky-300);
+  --gm-color-primary-border-default: var(--gm-blue-500);
+  --gm-color-primary-border-strong: var(--gm-blue-700);
+  --gm-color-primary-text-subtle: var(--gm-blue-700);
+  --gm-color-primary-text-default: var(--gm-blue-900);
+  --gm-color-primary-base-default: var(--gm-blue-500);
+  --gm-color-primary-base-hover: var(--gm-blue-700);
+  --gm-color-primary-base-active: var(--gm-blue-800);
+  --gm-color-primary-base-contrast-subtle: var(--gm-sky-200);
+  --gm-color-primary-base-contrast-default: var(--gm-white);
+
+  /* accent. OBOS Green, the secondary brand colour. Shares its values with `success` for now. */
+  --gm-color-accent-background-default: var(--gm-white);
+  --gm-color-accent-background-tinted: var(--gm-mint-100);
+  --gm-color-accent-surface-default: var(--gm-white);
+  --gm-color-accent-surface-tinted: var(--gm-mint-200);
+  --gm-color-accent-surface-hover: var(--gm-mint-250);
+  --gm-color-accent-surface-active: var(--gm-mint-300);
+  --gm-color-accent-border-subtle: var(--gm-mint-300);
+  --gm-color-accent-border-default: var(--gm-green-500);
+  --gm-color-accent-border-strong: var(--gm-green-700);
+  --gm-color-accent-text-subtle: var(--gm-green-700);
+  --gm-color-accent-text-default: var(--gm-green-900);
+  --gm-color-accent-base-default: var(--gm-green-500);
+  --gm-color-accent-base-hover: var(--gm-green-600);
+  --gm-color-accent-base-active: var(--gm-green-700);
+  --gm-color-accent-base-contrast-subtle: var(--gm-mint-200);
+  --gm-color-accent-base-contrast-default: var(--gm-white);
+
+  /* neutral */
+  --gm-color-neutral-background-default: var(--gm-white);
+  --gm-color-neutral-background-tinted: var(--gm-gray-100);
+  --gm-color-neutral-surface-default: var(--gm-white);
+  --gm-color-neutral-surface-tinted: var(--gm-gray-100);
+  --gm-color-neutral-surface-hover: var(--gm-gray-200);
+  --gm-color-neutral-surface-active: var(--gm-gray-200);
+  --gm-color-neutral-border-subtle: var(--gm-gray-200);
+  --gm-color-neutral-border-default: var(--gm-gray-500);
+  --gm-color-neutral-border-strong: var(--gm-gray-900);
+  --gm-color-neutral-text-subtle: var(--gm-gray-700);
+  --gm-color-neutral-text-default: var(--gm-gray-900);
+  --gm-color-neutral-base-default: var(--gm-gray-900);
+  --gm-color-neutral-base-hover: var(--gm-gray-950);
+  --gm-color-neutral-base-active: var(--gm-gray-1000);
+  --gm-color-neutral-base-contrast-subtle: var(--gm-gray-200);
+  --gm-color-neutral-base-contrast-default: var(--gm-white);
+
+  /* success. Can diverge from `accent` later, which is why it is its own role. */
+  --gm-color-success-background-tinted: var(--gm-mint-100);
+  --gm-color-success-surface-tinted: var(--gm-mint-200);
+  --gm-color-success-border-default: var(--gm-green-500);
+  --gm-color-success-text-default: var(--gm-green-900);
+  --gm-color-success-base-default: var(--gm-green-500);
+  --gm-color-success-base-hover: var(--gm-green-600);
+  --gm-color-success-base-active: var(--gm-green-700);
+  --gm-color-success-base-contrast-default: var(--gm-white);
+
+  /* danger */
+  --gm-color-danger-background-tinted: var(--gm-red-100);
+  --gm-color-danger-surface-tinted: var(--gm-red-100);
+  --gm-color-danger-surface-hover: var(--gm-red-100); /* placeholder, not decided */
+  --gm-color-danger-surface-active: var(--gm-red-100); /* placeholder, not decided */
+  --gm-color-danger-border-default: var(--gm-red-500);
+  --gm-color-danger-text-default: var(--gm-red-700);
+  --gm-color-danger-base-default: var(--gm-red-500);
+  --gm-color-danger-base-hover: var(--gm-red-600);
+  --gm-color-danger-base-active: var(--gm-red-700);
+  --gm-color-danger-base-contrast-default: var(--gm-white);
+
+  /* warning. The contrast colour is Coal, not white, since orange is too light for white text. */
+  --gm-color-warning-background-tinted: var(--gm-yellow-100);
+  --gm-color-warning-surface-tinted: var(--gm-orange-100);
+  --gm-color-warning-surface-hover: var(--gm-orange-100); /* placeholder, not decided */
+  --gm-color-warning-surface-active: var(--gm-orange-100); /* placeholder, not decided */
+  --gm-color-warning-border-default: var(--gm-orange-700);
+  --gm-color-warning-text-default: var(--gm-gray-900);
+  --gm-color-warning-base-default: var(--gm-orange-500);
+  --gm-color-warning-base-hover: var(--gm-orange-600);
+  --gm-color-warning-base-active: var(--gm-orange-700);
+  --gm-color-warning-base-contrast-default: var(--gm-gray-900);
+
+  /* info */
+  --gm-color-info-background-tinted: var(--gm-sky-100);
+  --gm-color-info-surface-hover: var(--gm-sky-200); /* placeholder, not decided */
+  --gm-color-info-surface-active: var(--gm-sky-250); /* placeholder, not decided */
+  --gm-color-info-border-default: var(--gm-blue-500);
+  --gm-color-info-text-default: var(--gm-blue-900);
+  --gm-color-info-base-default: var(--gm-blue-500);
+  --gm-color-info-base-contrast-default: var(--gm-white);
+}

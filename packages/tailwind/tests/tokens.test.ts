@@ -4,8 +4,10 @@ import {
   findBrokenTokenReferences,
   formatDeclarations,
   getGrunnmurenTokens,
+  resolveToken,
   resolveUtility,
 } from './design-system.ts';
+import { legacyPalette } from './legacy-palette.ts';
 import { utilityPairs, type UtilityPair } from './utility-pairs.ts';
 
 type MappedPair = UtilityPair & { to: string };
@@ -64,5 +66,21 @@ describe('computed values', () => {
 
   test('no token points at a token that does not exist', async () => {
     expect(await findBrokenTokenReferences()).toEqual([]);
+  });
+});
+
+const ROLE_TOKEN = /^--color-(primary|accent|neutral|success|danger|warning|info)-/;
+
+describe('ported primitives', () => {
+  test.for(Object.entries(legacyPalette))('%s survives as %s', async ([legacy, primitive]) => {
+    expect(await resolveToken(primitive)).toBe(await resolveToken(legacy));
+  });
+
+  // Otherwise a colour added to the palette later would never get checked above
+  test('every colour in the palette is accounted for', async () => {
+    const palette = Object.keys(await getGrunnmurenTokens()).filter(
+      (token) => token.startsWith('--color-') && !ROLE_TOKEN.test(token),
+    );
+    expect(palette.toSorted()).toEqual(Object.keys(legacyPalette).toSorted());
   });
 });

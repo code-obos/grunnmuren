@@ -1,0 +1,100 @@
+/*
+ * Generated from the token set in AB#140595 (v2026-08-18). Edit the values here, not
+ * in a copy, and keep the three layers apart: components read semantic tokens, never
+ * primitives.
+ */
+
+/*
+ * `inline` is load-bearing. Without it Tailwind emits `--color-x: var(--gm-x)` on :root,
+ * the var resolves there, and a theme override further down the tree never reaches the
+ * utility. With it the utility reads `var(--gm-x)` directly.
+ *
+ * Only the full role tokens are mapped. The short ones behind `data-color` land with the
+ * theme seam, and spacing and type stay off Tailwind's own keys. Radius uses Tailwind's scale
+ * as it is.
+ */
+@theme inline {
+  --color-primary-background-default: var(--gm-color-primary-background-default);
+  --color-primary-background-tinted: var(--gm-color-primary-background-tinted);
+  --color-primary-surface-default: var(--gm-color-primary-surface-default);
+  --color-primary-surface-tinted: var(--gm-color-primary-surface-tinted);
+  --color-primary-surface-hover: var(--gm-color-primary-surface-hover);
+  --color-primary-surface-active: var(--gm-color-primary-surface-active);
+  --color-primary-border-subtle: var(--gm-color-primary-border-subtle);
+  --color-primary-border-default: var(--gm-color-primary-border-default);
+  --color-primary-border-strong: var(--gm-color-primary-border-strong);
+  --color-primary-text-subtle: var(--gm-color-primary-text-subtle);
+  --color-primary-text-default: var(--gm-color-primary-text-default);
+  --color-primary-base-default: var(--gm-color-primary-base-default);
+  --color-primary-base-hover: var(--gm-color-primary-base-hover);
+  --color-primary-base-active: var(--gm-color-primary-base-active);
+  --color-primary-base-contrast-subtle: var(--gm-color-primary-base-contrast-subtle);
+  --color-primary-base-contrast-default: var(--gm-color-primary-base-contrast-default);
+  --color-accent-background-default: var(--gm-color-accent-background-default);
+  --color-accent-background-tinted: var(--gm-color-accent-background-tinted);
+  --color-accent-surface-default: var(--gm-color-accent-surface-default);
+  --color-accent-surface-tinted: var(--gm-color-accent-surface-tinted);
+  --color-accent-surface-hover: var(--gm-color-accent-surface-hover);
+  --color-accent-surface-active: var(--gm-color-accent-surface-active);
+  --color-accent-border-subtle: var(--gm-color-accent-border-subtle);
+  --color-accent-border-default: var(--gm-color-accent-border-default);
+  --color-accent-border-strong: var(--gm-color-accent-border-strong);
+  --color-accent-text-subtle: var(--gm-color-accent-text-subtle);
+  --color-accent-text-default: var(--gm-color-accent-text-default);
+  --color-accent-base-default: var(--gm-color-accent-base-default);
+  --color-accent-base-hover: var(--gm-color-accent-base-hover);
+  --color-accent-base-active: var(--gm-color-accent-base-active);
+  --color-accent-base-contrast-subtle: var(--gm-color-accent-base-contrast-subtle);
+  --color-accent-base-contrast-default: var(--gm-color-accent-base-contrast-default);
+  --color-neutral-background-default: var(--gm-color-neutral-background-default);
+  --color-neutral-background-tinted: var(--gm-color-neutral-background-tinted);
+  --color-neutral-surface-default: var(--gm-color-neutral-surface-default);
+  --color-neutral-surface-tinted: var(--gm-color-neutral-surface-tinted);
+  --color-neutral-surface-hover: var(--gm-color-neutral-surface-hover);
+  --color-neutral-surface-active: var(--gm-color-neutral-surface-active);
+  --color-neutral-border-subtle: var(--gm-color-neutral-border-subtle);
+  --color-neutral-border-default: var(--gm-color-neutral-border-default);
+  --color-neutral-border-strong: var(--gm-color-neutral-border-strong);
+  --color-neutral-text-subtle: var(--gm-color-neutral-text-subtle);
+  --color-neutral-text-default: var(--gm-color-neutral-text-default);
+  --color-neutral-base-default: var(--gm-color-neutral-base-default);
+  --color-neutral-base-hover: var(--gm-color-neutral-base-hover);
+  --color-neutral-base-active: var(--gm-color-neutral-base-active);
+  --color-neutral-base-contrast-subtle: var(--gm-color-neutral-base-contrast-subtle);
+  --color-neutral-base-contrast-default: var(--gm-color-neutral-base-contrast-default);
+  --color-success-background-tinted: var(--gm-color-success-background-tinted);
+  --color-success-surface-tinted: var(--gm-color-success-surface-tinted);
+  --color-success-border-default: var(--gm-color-success-border-default);
+  --color-success-text-default: var(--gm-color-success-text-default);
+  --color-success-base-default: var(--gm-color-success-base-default);
+  --color-success-base-hover: var(--gm-color-success-base-hover);
+  --color-success-base-active: var(--gm-color-success-base-active);
+  --color-success-base-contrast-default: var(--gm-color-success-base-contrast-default);
+  --color-danger-background-tinted: var(--gm-color-danger-background-tinted);
+  --color-danger-surface-tinted: var(--gm-color-danger-surface-tinted);
+  --color-danger-surface-hover: var(--gm-color-danger-surface-hover);
+  --color-danger-surface-active: var(--gm-color-danger-surface-active);
+  --color-danger-border-default: var(--gm-color-danger-border-default);
+  --color-danger-text-default: var(--gm-color-danger-text-default);
+  --color-danger-base-default: var(--gm-color-danger-base-default);
+  --color-danger-base-hover: var(--gm-color-danger-base-hover);
+  --color-danger-base-active: var(--gm-color-danger-base-active);
+  --color-danger-base-contrast-default: var(--gm-color-danger-base-contrast-default);
+  --color-warning-background-tinted: var(--gm-color-warning-background-tinted);
+  --color-warning-surface-tinted: var(--gm-color-warning-surface-tinted);
+  --color-warning-surface-hover: var(--gm-color-warning-surface-hover);
+  --color-warning-surface-active: var(--gm-color-warning-surface-active);
+  --color-warning-border-default: var(--gm-color-warning-border-default);
+  --color-warning-text-default: var(--gm-color-warning-text-default);
+  --color-warning-base-default: var(--gm-color-warning-base-default);
+  --color-warning-base-hover: var(--gm-color-warning-base-hover);
+  --color-warning-base-active: var(--gm-color-warning-base-active);
+  --color-warning-base-contrast-default: var(--gm-color-warning-base-contrast-default);
+  --color-info-background-tinted: var(--gm-color-info-background-tinted);
+  --color-info-surface-hover: var(--gm-color-info-surface-hover);
+  --color-info-surface-active: var(--gm-color-info-surface-active);
+  --color-info-border-default: var(--gm-color-info-border-default);
+  --color-info-text-default: var(--gm-color-info-text-default);
+  --color-info-base-default: var(--gm-color-info-base-default);
+  --color-info-base-contrast-default: var(--gm-color-info-base-contrast-default);
+}
