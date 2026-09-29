@@ -211,16 +211,16 @@
       "96": { "$type": "dimension", "$value": "24rem" }
     },
     "radius": {
-      "$description": "Skala parameterisert av base + scale, så et tema kan skru hele settet (f.eks. Oslo K som bruker kun none/full).",
-      "base": { "$type": "number", "$value": "4px" },
-      "scale": { "$type": "number", "$value": 1 },
+      "$description": "Tailwind's own radius scale, so Figma and code share one set of steps. none and full are fixed utilities in Tailwind and exist here for Figma.",
       "none": { "$type": "dimension", "$value": "0rem" },
-      "sm": { "$type": "dimension", "$value": "0.125rem" },
-      "md-sm": { "$type": "dimension", "$value": "0.25rem" },
+      "xs": { "$type": "dimension", "$value": "0.125rem" },
+      "sm": { "$type": "dimension", "$value": "0.25rem" },
       "md": { "$type": "dimension", "$value": "0.375rem" },
       "lg": { "$type": "dimension", "$value": "0.5rem" },
+      "xl": { "$type": "dimension", "$value": "0.75rem" },
       "2xl": { "$type": "dimension", "$value": "1rem" },
       "3xl": { "$type": "dimension", "$value": "1.5rem" },
+      "4xl": { "$type": "dimension", "$value": "2rem" },
       "full": { "$type": "dimension", "$value": "9999px" }
     },
     "border-width": {
@@ -316,6 +316,7 @@
         }
       },
       "duration": {
+        "$description": "MANGLER I PROTOTYPEN — må leveres av Core, ikke overlates til tenant. Se designtoken-tillegg-animasjon.md punkt 4. @media (prefers-reduced-motion: reduce) { alle duration-tokens → 0.01ms, sluttilstand beholdes, teppe-overganger erstattes av umiddelbart skift }",
         "instant": { "$type": "duration", "$value": "200ms" },
         "fast": { "$type": "duration", "$value": "250ms" },
         "quick": { "$type": "duration", "$value": "350ms" },
@@ -325,20 +326,6 @@
         "slow": { "$type": "duration", "$value": "900ms" },
         "reveal": { "$type": "duration", "$value": "950ms" },
         "slide": { "$type": "duration", "$value": "1050ms" }
-      },
-      "stagger": {
-        "band": { "$type": "duration", "$value": "0ms / 70ms / 140ms" },
-        "menu": { "$type": "duration", "$value": "80ms" },
-        "line": { "$type": "duration", "$value": "60ms" }
-      },
-      "delay": {
-        "title": { "$type": "duration", "$value": "60ms / 150ms" },
-        "number": { "$type": "duration", "$value": "540ms" },
-        "arrow": { "$type": "duration", "$value": "1950ms" }
-      },
-      "reduced-motion": {
-        "$description": "MANGLER I PROTOTYPEN — må leveres av Core, ikke overlates til tenant. Se designtoken-tillegg-animasjon.md punkt 4.",
-        "rule": "@media (prefers-reduced-motion: reduce) { alle duration-tokens → 0.01ms, sluttilstand beholdes, teppe-overganger erstattes av umiddelbart skift }"
       }
     }
   },
@@ -523,45 +510,45 @@
       "$description": "Fluid type via clamp(). Font-size er eget token per nivå, ikke arvet via global skaleringsfaktor — se changelog for hoveddiskusjonspunktet med utviklerne.",
       "heading": {
         "xl": {
-          "font-weight": "{primitives.font-weight.semibold}",
-          "line-height": "{primitives.line-height.md}",
-          "letter-spacing": "0em",
+          "font-weight": { "$type": "fontWeight", "$value": "{primitives.font-weight.semibold}" },
+          "line-height": { "$type": "number", "$value": "{primitives.line-height.md}" },
+          "letter-spacing": { "$type": "number", "$value": "0em" },
           "font-size": {
             "$type": "dimension",
             "$value": "clamp(2.8125rem, 2.4375rem + 1.875vw, 3.9375rem)"
           }
         },
         "l": {
-          "font-weight": "{primitives.font-weight.semibold}",
-          "line-height": "{primitives.line-height.md}",
-          "letter-spacing": "0em",
+          "font-weight": { "$type": "fontWeight", "$value": "{primitives.font-weight.semibold}" },
+          "line-height": { "$type": "number", "$value": "{primitives.line-height.md}" },
+          "letter-spacing": { "$type": "number", "$value": "0em" },
           "font-size": {
             "$type": "dimension",
             "$value": "clamp(1.8125rem, 1.6667rem + 0.7292vw, 2.25rem)"
           }
         },
         "m": {
-          "font-weight": "{primitives.font-weight.medium}",
-          "line-height": "{primitives.line-height.md}",
-          "letter-spacing": "0em",
+          "font-weight": { "$type": "fontWeight", "$value": "{primitives.font-weight.medium}" },
+          "line-height": { "$type": "number", "$value": "{primitives.line-height.md}" },
+          "letter-spacing": { "$type": "number", "$value": "0em" },
           "font-size": {
             "$type": "dimension",
             "$value": "clamp(1.4375rem, 1.375rem + 0.3125vw, 1.625rem)"
           }
         },
         "s": {
-          "font-weight": "{primitives.font-weight.medium}",
-          "line-height": "{primitives.line-height.md}",
-          "letter-spacing": "0em",
+          "font-weight": { "$type": "fontWeight", "$value": "{primitives.font-weight.medium}" },
+          "line-height": { "$type": "number", "$value": "{primitives.line-height.md}" },
+          "letter-spacing": { "$type": "number", "$value": "0em" },
           "font-size": {
             "$type": "dimension",
             "$value": "clamp(1.1875rem, 1.1458rem + 0.2083vw, 1.3125rem)"
           }
         },
         "xs": {
-          "font-weight": "{primitives.font-weight.medium}",
-          "line-height": "{primitives.line-height.md}",
-          "letter-spacing": "0em",
+          "font-weight": { "$type": "fontWeight", "$value": "{primitives.font-weight.medium}" },
+          "line-height": { "$type": "number", "$value": "{primitives.line-height.md}" },
+          "letter-spacing": { "$type": "number", "$value": "0em" },
           "font-size": {
             "$type": "dimension",
             "$value": "clamp(1.125rem, 1.1042rem + 0.1042vw, 1.1875rem)"
@@ -570,18 +557,18 @@
       },
       "lead": {
         "default": {
-          "font-weight": "{primitives.font-weight.medium}",
-          "line-height": "{primitives.line-height.md}",
-          "letter-spacing": "0em",
+          "font-weight": { "$type": "fontWeight", "$value": "{primitives.font-weight.medium}" },
+          "line-height": { "$type": "number", "$value": "{primitives.line-height.md}" },
+          "letter-spacing": { "$type": "number", "$value": "0em" },
           "font-size": {
             "$type": "dimension",
             "$value": "clamp(1.4375rem, 1.375rem + 0.3125vw, 1.625rem)"
           }
         },
         "sm": {
-          "font-weight": "{primitives.font-weight.regular}",
-          "line-height": "{primitives.line-height.md}",
-          "letter-spacing": "0em",
+          "font-weight": { "$type": "fontWeight", "$value": "{primitives.font-weight.regular}" },
+          "line-height": { "$type": "number", "$value": "{primitives.line-height.md}" },
+          "letter-spacing": { "$type": "number", "$value": "0em" },
           "font-size": {
             "$type": "dimension",
             "$value": "clamp(1.1875rem, 1.125rem + 0.3125vw, 1.375rem)"
@@ -590,43 +577,43 @@
       },
       "paragraph": {
         "default": {
-          "font-weight": "{primitives.font-weight.regular}",
-          "line-height": "{primitives.line-height.md}",
-          "letter-spacing": "0em",
+          "font-weight": { "$type": "fontWeight", "$value": "{primitives.font-weight.regular}" },
+          "line-height": { "$type": "number", "$value": "{primitives.line-height.md}" },
+          "letter-spacing": { "$type": "number", "$value": "0em" },
           "font-size": { "$type": "dimension", "$value": "1rem" }
         },
         "medium": {
-          "font-weight": "{primitives.font-weight.medium}",
-          "line-height": "{primitives.line-height.md}",
-          "letter-spacing": "0em",
+          "font-weight": { "$type": "fontWeight", "$value": "{primitives.font-weight.medium}" },
+          "line-height": { "$type": "number", "$value": "{primitives.line-height.md}" },
+          "letter-spacing": { "$type": "number", "$value": "0em" },
           "font-size": { "$type": "dimension", "$value": "1rem" }
         }
       },
       "description": {
         "default": {
-          "font-weight": "{primitives.font-weight.regular}",
-          "line-height": "{primitives.line-height.md}",
-          "letter-spacing": "0em",
+          "font-weight": { "$type": "fontWeight", "$value": "{primitives.font-weight.regular}" },
+          "line-height": { "$type": "number", "$value": "{primitives.line-height.md}" },
+          "letter-spacing": { "$type": "number", "$value": "0em" },
           "font-size": { "$type": "dimension", "$value": "0.875rem" }
         },
         "medium": {
-          "font-weight": "{primitives.font-weight.medium}",
-          "line-height": "{primitives.line-height.md}",
-          "letter-spacing": "0em",
+          "font-weight": { "$type": "fontWeight", "$value": "{primitives.font-weight.medium}" },
+          "line-height": { "$type": "number", "$value": "{primitives.line-height.md}" },
+          "letter-spacing": { "$type": "number", "$value": "0em" },
           "font-size": { "$type": "dimension", "$value": "0.875rem" }
         }
       },
       "button": {
         "default": {
-          "font-weight": "{primitives.font-weight.medium}",
-          "line-height": "{primitives.line-height.md}",
-          "letter-spacing": "0em",
+          "font-weight": { "$type": "fontWeight", "$value": "{primitives.font-weight.medium}" },
+          "line-height": { "$type": "number", "$value": "{primitives.line-height.md}" },
+          "letter-spacing": { "$type": "number", "$value": "0em" },
           "font-size": { "$type": "dimension", "$value": "1rem" }
         },
         "link-sm": {
-          "font-weight": "{primitives.font-weight.medium}",
-          "line-height": "{primitives.line-height.md}",
-          "letter-spacing": "0em",
+          "font-weight": { "$type": "fontWeight", "$value": "{primitives.font-weight.medium}" },
+          "line-height": { "$type": "number", "$value": "{primitives.line-height.md}" },
+          "letter-spacing": { "$type": "number", "$value": "0em" },
           "font-size": { "$type": "dimension", "$value": "1rem" },
           "$description": "Vurderes slått sammen med button.default — se changelog"
         }
@@ -693,11 +680,11 @@
     },
     "spacing-exceptions": {
       "$description": "5 av 22 brukte spacing-verdier ligger utenfor fellesskalaen — store, komposisjonelle avstander hentet direkte fra Figma-mål.",
-      "72px": "Bunnpadding tittelseksjon",
-      "100px": "Toppadding drawer / neste-lokale",
-      "110px": "Avstand tall → SCROLL-etikett",
-      "145px": "Toppluft over tittel",
-      "175px": "Luft mellom bildeseksjoner"
+      "72px": { "$type": "dimension", "$value": "Bunnpadding tittelseksjon" },
+      "100px": { "$type": "dimension", "$value": "Toppadding drawer / neste-lokale" },
+      "110px": { "$type": "dimension", "$value": "Avstand tall → SCROLL-etikett" },
+      "145px": { "$type": "dimension", "$value": "Toppluft over tittel" },
+      "175px": { "$type": "dimension", "$value": "Luft mellom bildeseksjoner" }
     },
     "typography": {
       "font-family-display": { "$type": "fontFamily", "$value": "Baskervville" },
@@ -717,7 +704,17 @@
       "marker": { "$type": "dimension", "$value": "13px" }
     },
     "motion": {
-      "$description": "Se primitives.motion for delte easing/duration-navn — Oslo K bruker samme tokens, ingen egne verdier. prefers-reduced-motion MANGLER i prototypen, se designtoken-tillegg-animasjon.md punkt 4."
+      "$description": "Se primitives.motion for delte easing/duration-navn — Oslo K bruker samme tokens, ingen egne verdier. prefers-reduced-motion MANGLER i prototypen, se designtoken-tillegg-animasjon.md punkt 4.",
+      "stagger": {
+        "band": { "$type": "duration", "$value": "0ms / 70ms / 140ms" },
+        "menu": { "$type": "duration", "$value": "80ms" },
+        "line": { "$type": "duration", "$value": "60ms" }
+      },
+      "delay": {
+        "title": { "$type": "duration", "$value": "60ms / 150ms" },
+        "number": { "$type": "duration", "$value": "540ms" },
+        "arrow": { "$type": "duration", "$value": "1950ms" }
+      }
     }
   }
 }
