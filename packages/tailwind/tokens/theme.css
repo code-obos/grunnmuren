@@ -10,7 +10,8 @@
  * utility. With it the utility reads `var(--gm-x)` directly.
  *
  * Only the full role tokens are mapped. The short ones behind `data-color` land with the
- * theme seam, and radius, spacing and type stay off Tailwind's own keys.
+ * theme seam, and spacing and type stay off Tailwind's own keys. Radius uses Tailwind's scale
+ * as it is.
  */
 @theme inline {
   --color-primary-background-default: var(--gm-color-primary-background-default);
