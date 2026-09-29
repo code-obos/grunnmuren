@@ -19,8 +19,12 @@
   --gm-lead-sm-font-size: clamp(1.1875rem, 1.125rem + 0.3125vw, 1.375rem);
   --gm-paragraph-letter-spacing: 0em;
   --gm-paragraph-font-size: 1rem;
+  --gm-paragraph-medium-letter-spacing: 0em;
+  --gm-paragraph-medium-font-size: 1rem;
   --gm-description-letter-spacing: 0em;
   --gm-description-font-size: 0.875rem;
+  --gm-description-medium-letter-spacing: 0em;
+  --gm-description-medium-font-size: 0.875rem;
   --gm-button-letter-spacing: 0em;
   --gm-button-font-size: 1rem;
   --gm-button-link-sm-letter-spacing: 0em;
@@ -42,9 +46,11 @@
   --gm-paragraph-font-weight: var(--gm-font-weight-regular);
   --gm-paragraph-line-height: var(--gm-line-height-md);
   --gm-paragraph-medium-font-weight: var(--gm-font-weight-medium);
+  --gm-paragraph-medium-line-height: var(--gm-line-height-md);
   --gm-description-font-weight: var(--gm-font-weight-regular);
   --gm-description-line-height: var(--gm-line-height-md);
   --gm-description-medium-font-weight: var(--gm-font-weight-medium);
+  --gm-description-medium-line-height: var(--gm-line-height-md);
   --gm-button-font-weight: var(--gm-font-weight-medium);
   --gm-button-line-height: var(--gm-line-height-md);
   --gm-button-link-sm-font-weight: var(--gm-font-weight-medium);

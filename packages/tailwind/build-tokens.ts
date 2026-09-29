@@ -55,47 +55,6 @@ const toCssName = (path: Array<string>): string => {
   throw new Error(`No CSS name for \`${path.join('.')}\`, add it to toCssName`);
 };
 
-// Held back for this commit only, so the generated CSS matches what #1904 shipped
-// exactly. They exist in the source but never made it into the hand-ported CSS. The next
-// commit drops this list.
-const HELD_BACK = new Set([
-  'gm-color-danger-background-default',
-  'gm-color-danger-base-contrast-subtle',
-  'gm-color-danger-border-strong',
-  'gm-color-danger-border-subtle',
-  'gm-color-danger-surface-default',
-  'gm-color-danger-text-subtle',
-  'gm-color-info-background-default',
-  'gm-color-info-base-active',
-  'gm-color-info-base-contrast-subtle',
-  'gm-color-info-base-hover',
-  'gm-color-info-border-strong',
-  'gm-color-info-border-subtle',
-  'gm-color-info-surface-default',
-  'gm-color-info-surface-tinted',
-  'gm-color-info-text-subtle',
-  'gm-color-success-background-default',
-  'gm-color-success-base-contrast-subtle',
-  'gm-color-success-border-strong',
-  'gm-color-success-border-subtle',
-  'gm-color-success-surface-active',
-  'gm-color-success-surface-default',
-  'gm-color-success-surface-hover',
-  'gm-color-success-text-subtle',
-  'gm-color-warning-background-default',
-  'gm-color-warning-base-contrast-subtle',
-  'gm-color-warning-border-strong',
-  'gm-color-warning-border-subtle',
-  'gm-color-warning-surface-default',
-  'gm-color-warning-text-subtle',
-  'gm-description-medium-font-size',
-  'gm-description-medium-letter-spacing',
-  'gm-description-medium-line-height',
-  'gm-paragraph-medium-font-size',
-  'gm-paragraph-medium-letter-spacing',
-  'gm-paragraph-medium-line-height',
-]);
-
 const isIn = (token: TransformedToken, ...prefix: Array<string>) =>
   prefix.every((part, index) => token.path[index] === part);
 
@@ -107,10 +66,8 @@ const isPrimitive = (token: TransformedToken) =>
   !isIn(token, 'primitives', 'motion');
 const isMotion = (token: TransformedToken) => isIn(token, 'primitives', 'motion');
 const isDuration = (token: TransformedToken) => isIn(token, 'primitives', 'motion', 'duration');
-const isRoleColor = (token: TransformedToken) =>
-  isIn(token, 'semantic', 'color') && !HELD_BACK.has(token.name);
-const isTypography = (token: TransformedToken) =>
-  isIn(token, 'semantic', 'typography') && !HELD_BACK.has(token.name);
+const isRoleColor = (token: TransformedToken) => isIn(token, 'semantic', 'color');
+const isTypography = (token: TransformedToken) => isIn(token, 'semantic', 'typography');
 
 const variables = (dictionary: Dictionary, indentation = '  ') =>
   formattedVariables({
