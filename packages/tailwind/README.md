@@ -38,6 +38,43 @@ The preset includes a (local) fallback font to prevent [CLS](https://web.dev/art
 
 The fallback font metrics is generated with a script that can be run with `pnpm font-fallback` (requires [Bun](https://bun.sh/)). If the fonts are changed, the script must be rerun and the resulting file commited.
 
+## Themes
+
+Themes live in your app, not in Grunnmuren. A theme is a `[data-theme='…']` rule that sets `--gm-*` tokens, placed after the preset:
+
+```css
+@import '@obosbbl/grunnmuren-tailwind';
+
+[data-theme='my-project'] {
+  /* role colours */
+  --gm-color-primary-base-default: #2d3a26;
+  --gm-color-primary-base-hover: #404c39;
+  /* or primitives, and every role that uses them follows */
+  --gm-green-500: #2d3a26;
+  --gm-radius-lg: 0;
+}
+```
+
+```html
+<section data-theme="my-project">…</section>
+```
+
+Anything the theme doesn't set comes from the defaults. `data-theme` works on part of a page, and a theme inside another starts over from the defaults. `data-color` (`primary`, `accent` or `neutral`) picks the role the short utilities such as `bg-base-default` point at. It's `primary` without it, and inside a new `data-theme` too.
+
+### What a theme can set
+
+These are public API, and renaming or removing one is a breaking change:
+
+- the primitives in `tokens/primitives.css`: colours (`--gm-blue-500`), spacing (`--gm-space-4`), radius (`--gm-radius-lg`), border widths, icon stroke widths and the type primitives (font families, weights, line heights, letter spacing)
+- the role colours: `--gm-color-{role}-{group}-{variant}` for `primary`, `accent`, `neutral`, `success`, `danger`, `warning` and `info`
+
+A few things a theme can't change:
+
+- reduced motion always wins: with `prefers-reduced-motion` the durations are zeroed whatever a theme sets
+- contrast is the theme's responsibility. Grunnmuren's own roles are checked against WCAG 2.2 AA, a theme you write isn't
+
+Tailwind's `--radius-*` overridden in your own `@theme` doesn't reach inside a `data-theme`, so set `--gm-radius-*` instead.
+
 ## Migrating from v1?
 
 To ease the transition from v1 to v2 of Grunnmuren, it is possible to configure the preset to be (partially) compatible with v1. This allows you to use v2 of the Tailwind preset with v1 of the React components, and upgrade your application over time instead of a full migration.

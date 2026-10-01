@@ -11,7 +11,8 @@
     "tailwind-typography.css",
     "font.css",
     "tokens",
-    "!tokens/source"
+    "!tokens/source",
+    "!tokens/themes"
   ],
   "type": "commonjs",
   "exports": {

@@ -21,19 +21,21 @@
 
 /*
  * Reduced motion lives in the core, so a theme can pick its own easing and durations
- * without being able to build this away by accident. Durations go to 0.01ms rather than
- * 0 so transitionend still fires.
+ * without being able to build this away by accident. `!important` because a theme
+ * the app writes itself comes later with the same specificity, and would otherwise win.
+ * Durations go to 0.01ms rather than 0 so transitionend still fires.
  */
 @media (prefers-reduced-motion: reduce) {
-  :root {
-    --gm-duration-instant: 0.01ms;
-    --gm-duration-fast: 0.01ms;
-    --gm-duration-quick: 0.01ms;
-    --gm-duration-base: 0.01ms;
-    --gm-duration-medium: 0.01ms;
-    --gm-duration-curtain: 0.01ms;
-    --gm-duration-slow: 0.01ms;
-    --gm-duration-reveal: 0.01ms;
-    --gm-duration-slide: 0.01ms;
+  :root,
+  [data-theme] {
+    --gm-duration-instant: 0.01ms !important;
+    --gm-duration-fast: 0.01ms !important;
+    --gm-duration-quick: 0.01ms !important;
+    --gm-duration-base: 0.01ms !important;
+    --gm-duration-medium: 0.01ms !important;
+    --gm-duration-curtain: 0.01ms !important;
+    --gm-duration-slow: 0.01ms !important;
+    --gm-duration-reveal: 0.01ms !important;
+    --gm-duration-slide: 0.01ms !important;
   }
 }

@@ -133,11 +133,15 @@ const preview: Preview = {
   globalTypes: {
     theme: {
       description: 'Value of `data-theme` on the preview document',
-      toolbar: { icon: 'paintbrush', items: ['default'], dynamicTitle: true },
+      toolbar: { icon: 'paintbrush', items: ['default', 'froen-hage'], dynamicTitle: true },
     },
     color: {
       description: 'Value of `data-color` on the preview document',
-      toolbar: { icon: 'contrast', items: ['default'], dynamicTitle: true },
+      toolbar: {
+        icon: 'contrast',
+        items: ['default', 'primary', 'accent', 'neutral'],
+        dynamicTitle: true,
+      },
     },
   },
   initialGlobals: {

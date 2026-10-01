@@ -1,0 +1,60 @@
+/*
+ * Generated from tokens/source/grunnmuren-tokens.json by build-tokens.ts. Don't edit by
+ * hand: change the source and run `pnpm tokens:build`.
+ */
+
+/*
+ * An example, not part of the package. A theme an app writes itself looks the same, and
+ * goes after the Grunnmuren stylesheet: it has the same specificity as the defaults, so
+ * the one that comes last wins.
+ */
+[data-theme="froen-hage"] {
+  --gm-color-primary-background-default: #FFFFFF;
+  --gm-color-primary-background-tinted: #2D3A26;
+  --gm-color-primary-surface-default: #FFFFFF;
+  --gm-color-primary-surface-tinted: #2D3A26;
+  --gm-color-primary-surface-hover: #404C39;
+  --gm-color-primary-surface-active: #545E4E;
+  --gm-color-primary-border-subtle: #B9BDB6;
+  --gm-color-primary-border-default: #737B6E;
+  --gm-color-primary-border-strong: #566050;
+  --gm-color-primary-text-subtle: #CCCFCA;
+  --gm-color-primary-text-default: #EDEAE1;
+  --gm-color-primary-base-default: #EDEAE1;
+  --gm-color-primary-base-hover: #DDD6C2;
+  --gm-color-primary-base-active: #BFBDB6;
+  --gm-color-primary-base-contrast-subtle: #CCCFCA;
+  --gm-color-primary-base-contrast-default: #2C2B2A;
+  --gm-color-accent-background-default: #FFFFFF;
+  --gm-color-accent-background-tinted: #F3F4F3;
+  --gm-color-accent-surface-default: #FFFFFF;
+  --gm-color-accent-surface-tinted: #E7E9E7;
+  --gm-color-accent-surface-hover: #D8DBD7;
+  --gm-color-accent-surface-active: #C8CBC6;
+  --gm-color-accent-border-subtle: #B9BDB6;
+  --gm-color-accent-border-default: #737B6E;
+  --gm-color-accent-border-strong: #566050;
+  --gm-color-accent-text-subtle: #566050;
+  --gm-color-accent-text-default: #242E1E;
+  --gm-color-accent-base-default: #2D3A26;
+  --gm-color-accent-base-hover: #404C39;
+  --gm-color-accent-base-active: #545E4E;
+  --gm-color-accent-base-contrast-subtle: #CCCFCA;
+  --gm-color-accent-base-contrast-default: #FFFFFF;
+  --gm-color-neutral-background-default: #F5F2ED;
+  --gm-color-neutral-background-tinted: #EDEAE1;
+  --gm-color-neutral-surface-default: #DCD6C4;
+  --gm-color-neutral-surface-tinted: #C8C1A7;
+  --gm-color-neutral-surface-hover: #DDDAD1;
+  --gm-color-neutral-surface-active: #CCCAC2;
+  --gm-color-neutral-border-subtle: #BEBCB4;
+  --gm-color-neutral-border-default: #7A7974;
+  --gm-color-neutral-border-strong: #5E5D5A;
+  --gm-color-neutral-text-subtle: #5E5D5A;
+  --gm-color-neutral-text-default: #2C2B2A;
+  --gm-color-neutral-base-default: #635D4C;
+  --gm-color-neutral-base-hover: #4F4A3C;
+  --gm-color-neutral-base-active: #3B382E;
+  --gm-color-neutral-base-contrast-subtle: #DCD6C4;
+  --gm-color-neutral-base-contrast-default: #EDEAE1;
+}

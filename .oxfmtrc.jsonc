@@ -11,6 +11,7 @@
     "packages/tailwind/tokens/typography.css",
     "packages/tailwind/tokens/motion.css",
     "packages/tailwind/tokens/theme.css",
+    "packages/tailwind/tokens/themes/*.css",
   ],
   "singleQuote": true,
   "sortPackageJson": {

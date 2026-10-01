@@ -2,7 +2,8 @@
  * Generated from tokens/source/grunnmuren-tokens.json by build-tokens.ts. Don't edit by
  * hand: change the source and run `pnpm tokens:build`.
  */
-:root {
+:root,
+[data-theme] {
   --gm-color-primary-background-default: var(--gm-white);
   --gm-color-primary-background-tinted: var(--gm-sky-100);
   --gm-color-primary-surface-default: var(--gm-white);
@@ -115,4 +116,69 @@
   --gm-color-info-base-active: var(--gm-blue-800);
   --gm-color-info-base-contrast-subtle: var(--gm-sky-200);
   --gm-color-info-base-contrast-default: var(--gm-white);
+}
+
+/*
+ * The short tokens point at whichever role `data-color` picks, so a component can be
+ * written once against `base-default` and be primary, accent or neutral depending on
+ * where it sits. Primary without the attribute. A [data-theme] starts over at primary
+ * too, since it has to work the short tokens out again from its own primitives.
+ */
+:root,
+[data-theme],
+[data-color="primary"] {
+  --gm-color-background-default: var(--gm-color-primary-background-default);
+  --gm-color-background-tinted: var(--gm-color-primary-background-tinted);
+  --gm-color-surface-default: var(--gm-color-primary-surface-default);
+  --gm-color-surface-tinted: var(--gm-color-primary-surface-tinted);
+  --gm-color-surface-hover: var(--gm-color-primary-surface-hover);
+  --gm-color-surface-active: var(--gm-color-primary-surface-active);
+  --gm-color-border-subtle: var(--gm-color-primary-border-subtle);
+  --gm-color-border-default: var(--gm-color-primary-border-default);
+  --gm-color-border-strong: var(--gm-color-primary-border-strong);
+  --gm-color-text-subtle: var(--gm-color-primary-text-subtle);
+  --gm-color-text-default: var(--gm-color-primary-text-default);
+  --gm-color-base-default: var(--gm-color-primary-base-default);
+  --gm-color-base-hover: var(--gm-color-primary-base-hover);
+  --gm-color-base-active: var(--gm-color-primary-base-active);
+  --gm-color-base-contrast-subtle: var(--gm-color-primary-base-contrast-subtle);
+  --gm-color-base-contrast-default: var(--gm-color-primary-base-contrast-default);
+}
+
+[data-color="accent"] {
+  --gm-color-background-default: var(--gm-color-accent-background-default);
+  --gm-color-background-tinted: var(--gm-color-accent-background-tinted);
+  --gm-color-surface-default: var(--gm-color-accent-surface-default);
+  --gm-color-surface-tinted: var(--gm-color-accent-surface-tinted);
+  --gm-color-surface-hover: var(--gm-color-accent-surface-hover);
+  --gm-color-surface-active: var(--gm-color-accent-surface-active);
+  --gm-color-border-subtle: var(--gm-color-accent-border-subtle);
+  --gm-color-border-default: var(--gm-color-accent-border-default);
+  --gm-color-border-strong: var(--gm-color-accent-border-strong);
+  --gm-color-text-subtle: var(--gm-color-accent-text-subtle);
+  --gm-color-text-default: var(--gm-color-accent-text-default);
+  --gm-color-base-default: var(--gm-color-accent-base-default);
+  --gm-color-base-hover: var(--gm-color-accent-base-hover);
+  --gm-color-base-active: var(--gm-color-accent-base-active);
+  --gm-color-base-contrast-subtle: var(--gm-color-accent-base-contrast-subtle);
+  --gm-color-base-contrast-default: var(--gm-color-accent-base-contrast-default);
+}
+
+[data-color="neutral"] {
+  --gm-color-background-default: var(--gm-color-neutral-background-default);
+  --gm-color-background-tinted: var(--gm-color-neutral-background-tinted);
+  --gm-color-surface-default: var(--gm-color-neutral-surface-default);
+  --gm-color-surface-tinted: var(--gm-color-neutral-surface-tinted);
+  --gm-color-surface-hover: var(--gm-color-neutral-surface-hover);
+  --gm-color-surface-active: var(--gm-color-neutral-surface-active);
+  --gm-color-border-subtle: var(--gm-color-neutral-border-subtle);
+  --gm-color-border-default: var(--gm-color-neutral-border-default);
+  --gm-color-border-strong: var(--gm-color-neutral-border-strong);
+  --gm-color-text-subtle: var(--gm-color-neutral-text-subtle);
+  --gm-color-text-default: var(--gm-color-neutral-text-default);
+  --gm-color-base-default: var(--gm-color-neutral-base-default);
+  --gm-color-base-hover: var(--gm-color-neutral-base-hover);
+  --gm-color-base-active: var(--gm-color-neutral-base-active);
+  --gm-color-base-contrast-subtle: var(--gm-color-neutral-base-contrast-subtle);
+  --gm-color-base-contrast-default: var(--gm-color-neutral-base-contrast-default);
 }

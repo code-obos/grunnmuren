@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 import StyleDictionary from 'style-dictionary';
@@ -19,6 +20,18 @@ const FONT_STACKS: Record<string, string> = {
   'OBOS Text': 'OBOSText, __OBOSText_Fallback, sans-serif',
   'OBOS Display': 'OBOSDisplay, __OBOSDisplay_Fallback, sans-serif',
 };
+
+// The roles `data-color` can point the short tokens at. Primary is what you get without it.
+const DATA_COLORS = ['primary', 'accent', 'neutral'];
+
+// Tailwind has `rounded-none` and `rounded-full` as fixed utilities, so those two are only
+// in the source for Figma and never become variables.
+const FIXED_RADII = new Set(['none', 'full']);
+
+// Example themes for Storybook and the tests. Not published, an app writes its own
+const THEMES = Object.keys(JSON.parse(readFileSync(SOURCE, 'utf8')).themes ?? {}).filter(
+  (key) => !key.startsWith('$'),
+);
 
 /**
  * The CSS name for a token path, without the leading `--`. Written out rather than
@@ -45,6 +58,10 @@ const toCssName = (path: Array<string>): string => {
     }
   }
 
+  // A theme mirrors the defaults' `primitives` and `semantic`, so its tokens get the names
+  // of the ones they override. `group` is the theme's name here.
+  if (layer === 'themes') return toCssName(rest);
+
   if (layer === 'semantic' && group === 'color') return `gm-color-${rest.join('-')}`;
 
   if (layer === 'semantic' && group === 'typography') {
@@ -58,16 +75,17 @@ const toCssName = (path: Array<string>): string => {
 const isIn = (token: TransformedToken, ...prefix: Array<string>) =>
   prefix.every((part, index) => token.path[index] === part);
 
-// Radius waits for the theme seam, where it comes back as --gm-radius-* with Tailwind's
-// values and Tailwind's own --radius-* pointing at it. Tenants aren't built yet either.
+const isRadius = (token: TransformedToken) =>
+  isIn(token, 'primitives', 'radius') && !FIXED_RADII.has(token.path[2]);
 const isPrimitive = (token: TransformedToken) =>
   isIn(token, 'primitives') &&
-  !isIn(token, 'primitives', 'radius') &&
-  !isIn(token, 'primitives', 'motion');
+  !isIn(token, 'primitives', 'motion') &&
+  (!isIn(token, 'primitives', 'radius') || isRadius(token));
 const isMotion = (token: TransformedToken) => isIn(token, 'primitives', 'motion');
 const isDuration = (token: TransformedToken) => isIn(token, 'primitives', 'motion', 'duration');
 const isRoleColor = (token: TransformedToken) => isIn(token, 'semantic', 'color');
 const isTypography = (token: TransformedToken) => isIn(token, 'semantic', 'typography');
+const isTheme = (theme: string) => (token: TransformedToken) => isIn(token, 'themes', theme);
 
 const variables = (dictionary: Dictionary, indentation = '  ') =>
   formattedVariables({
@@ -77,6 +95,50 @@ const variables = (dictionary: Dictionary, indentation = '  ') =>
     usesDtcg: true,
     formatting: { commentStyle: 'none', indentation },
   });
+
+const declarations = (entries: Array<[string, string]>) =>
+  entries.map(([name, value]) => `  --${name}: ${value};`).join('\n');
+
+// A custom property that points at another one is resolved on the element that declares
+// it, and only the result is inherited. Declared on :root alone, a theme further down
+// the tree would change the primitives and nothing that reads them. Declaring the layer
+// on every [data-theme] as well makes each theme work out its own values, which is the
+// pattern Designsystemet uses for [data-color]:
+// https://github.com/digdir/designsystemet (MIT, Copyright Digitaliseringsdirektoratet (Digdir))
+const THEMED = ':root,\n[data-theme]';
+
+/**
+ * The short `--gm-color-{group}-{variant}` names, with each `data-color` role's full
+ * token behind them. Throws if the roles don't declare the same set, since a short token
+ * missing from one role would silently keep the previous role's value.
+ */
+const shortColorTokens = (dictionary: Dictionary) => {
+  const roles = DATA_COLORS.map((role) => {
+    const prefix = `gm-color-${role}-`;
+    const names = dictionary.allTokens
+      .filter((token) => token.name.startsWith(prefix))
+      .map((token) => token.name.slice(prefix.length));
+    return { role, names };
+  });
+
+  const [{ names }] = roles;
+  for (const { role, names: other } of roles) {
+    if (other.join() !== names.join()) {
+      throw new Error(`\`${role}\` doesn't have the same tokens as \`${DATA_COLORS[0]}\``);
+    }
+  }
+
+  return {
+    names: names.map((name) => `gm-color-${name}`),
+    roles: roles.map(({ role }) => ({
+      role,
+      entries: names.map((name): [string, string] => [
+        `gm-color-${name}`,
+        `var(--gm-color-${role}-${name})`,
+      ]),
+    })),
+  };
+};
 
 const CONFIG: Config = {
   source: [SOURCE],
@@ -103,12 +165,37 @@ const CONFIG: Config = {
       },
     },
     formats: {
-      'gm/root': ({ dictionary }) => `${HEADER}:root {\n${variables(dictionary)}\n}\n`,
+      'gm/themed': ({ dictionary }) => `${HEADER}${THEMED} {\n${variables(dictionary)}\n}\n`,
+
+      'gm/semantic': ({ dictionary }) => {
+        const [primary, ...others] = shortColorTokens(dictionary).roles;
+        const short = others
+          .map(({ role, entries }) => `[data-color="${role}"] {\n${declarations(entries)}\n}`)
+          .join('\n\n');
+
+        return `${HEADER}${THEMED} {
+${variables(dictionary)}
+}
+
+/*
+ * The short tokens point at whichever role \`data-color\` picks, so a component can be
+ * written once against \`base-default\` and be primary, accent or neutral depending on
+ * where it sits. Primary without the attribute. A [data-theme] starts over at primary
+ * too, since it has to work the short tokens out again from its own primitives.
+ */
+${THEMED},
+[data-color="${primary.role}"] {
+${declarations(primary.entries)}
+}
+
+${short}
+`;
+      },
 
       'gm/motion': ({ dictionary }) => {
         const durations = dictionary.allTokens
           .filter(isDuration)
-          .map((token) => `    --${token.name}: 0.01ms;`)
+          .map((token) => `    --${token.name}: 0.01ms !important;`)
           .join('\n');
 
         return `${HEADER}:root {
@@ -117,21 +204,30 @@ ${variables(dictionary)}
 
 /*
  * Reduced motion lives in the core, so a theme can pick its own easing and durations
- * without being able to build this away by accident. Durations go to 0.01ms rather than
- * 0 so transitionend still fires.
+ * without being able to build this away by accident. \`!important\` because a theme
+ * the app writes itself comes later with the same specificity, and would otherwise win.
+ * Durations go to 0.01ms rather than 0 so transitionend still fires.
  */
 @media (prefers-reduced-motion: reduce) {
-  :root {
+  :root,
+  [data-theme] {
 ${durations}
   }
 }
 `;
       },
 
-      'gm/theme-inline': ({ dictionary }) => {
-        const mappings = dictionary.allTokens
-          .map((token) => `  --${token.name.replace(/^gm-/, '')}: var(--${token.name});`)
-          .join('\n');
+      'gm/tailwind': ({ dictionary }) => {
+        const roles = dictionary.allTokens.filter(isRoleColor).map((token) => token.name);
+        const colors = [...roles, ...shortColorTokens(dictionary).names].map(
+          (name): [string, string] => [name.replace(/^gm-/, ''), `var(--${name})`],
+        );
+        const radii = dictionary.allTokens
+          .filter(isRadius)
+          .map((token): [string, string] => [
+            token.name.replace(/^gm-/, ''),
+            `var(--${token.name})`,
+          ]);
 
         return `${HEADER}
 /*
@@ -139,26 +235,59 @@ ${durations}
  * the var resolves there, and a theme override further down the tree never reaches the
  * utility. With it the utility reads \`var(--gm-x)\` directly.
  *
- * Only the full role tokens are mapped. The short ones behind \`data-color\` land with the
- * theme seam, and spacing and type stay off Tailwind's own keys. Radius uses Tailwind's
- * scale as it is.
+ * Spacing and type stay off Tailwind's own keys.
  */
 @theme inline {
-${mappings}
+${declarations(colors)}
+}
+
+/*
+ * Radius is Tailwind's own scale, so it can't be \`inline\`: that would stop Tailwind
+ * emitting \`--radius-*\`, and anything reading \`var(--radius-lg)\` would break. Plain
+ * \`@theme\` resolves on :root instead, so the mapping is declared again on every
+ * [data-theme] for a theme's \`--gm-radius-*\` to reach \`rounded-*\`.
+ */
+@theme {
+${declarations(radii)}
+}
+
+[data-theme] {
+${declarations(radii)}
 }
 `;
       },
+
+      'gm/theme': ({ dictionary, options }) => `${HEADER}
+/*
+ * An example, not part of the package. A theme an app writes itself looks the same, and
+ * goes after the Grunnmuren stylesheet: it has the same specificity as the defaults, so
+ * the one that comes last wins.
+ */
+[data-theme="${options.theme}"] {
+${variables(dictionary)}
+}
+`,
     },
   },
   platforms: {
     css: {
       transforms: ['name/gm', 'fontFamily/gm'],
       files: [
-        { destination: 'primitives.css', format: 'gm/root', filter: isPrimitive },
-        { destination: 'semantic.css', format: 'gm/root', filter: isRoleColor },
-        { destination: 'typography.css', format: 'gm/root', filter: isTypography },
+        { destination: 'primitives.css', format: 'gm/themed', filter: isPrimitive },
+        { destination: 'semantic.css', format: 'gm/semantic', filter: isRoleColor },
+        { destination: 'typography.css', format: 'gm/themed', filter: isTypography },
         { destination: 'motion.css', format: 'gm/motion', filter: isMotion },
-        { destination: 'theme.css', format: 'gm/theme-inline', filter: isRoleColor },
+        {
+          destination: 'theme.css',
+          format: 'gm/tailwind',
+          filter: (token) => isRoleColor(token) || isRadius(token),
+        },
+        ...THEMES.map((theme) => ({
+          destination: `themes/${theme}.css`,
+          format: 'gm/theme',
+          filter: isTheme(theme),
+          options: { theme },
+        })),
       ],
     },
   },
@@ -166,19 +295,40 @@ ${mappings}
 
 /**
  * Builds the token CSS from the source, in memory. Returns each file's contents keyed by
- * its name under `tokens/`. Throws when two tokens end up with the same CSS name.
+ * its path under `tokens/`. Throws when two tokens end up with the same CSS name, or a
+ * theme sets something other than a primitive or a role colour.
  */
 export const buildTokenCss = async (): Promise<Map<string, string>> => {
   const styleDictionary = new StyleDictionary(CONFIG);
   await styleDictionary.hasInitialized;
 
   const { allTokens } = await styleDictionary.getPlatformTokens('css');
+  const themeable = new Set(
+    allTokens
+      .filter((token) => isPrimitive(token) || isRoleColor(token))
+      .map((token) => token.name),
+  );
   const seen = new Map<string, string>();
+
   for (const token of allTokens) {
     const path = token.path.join('.');
-    const other = seen.get(token.name);
+    const [layer, theme] = token.path;
+
+    // Themes reuse the defaults' names on purpose, so names only have to be unique
+    // within the defaults and within each theme
+    const scope = layer === 'themes' ? theme : '';
+    const other = seen.get(`${scope} ${token.name}`);
     if (other) throw new Error(`\`${path}\` and \`${other}\` both become --${token.name}`);
-    seen.set(token.name, path);
+    seen.set(`${scope} ${token.name}`, path);
+
+    // Guarded theming: a theme can change colours and the scales a theme is allowed to
+    // change, and every role it ends up with is held to the same contrast checks as the
+    // defaults. Typography and motion, reduced motion included, stay out of its reach.
+    if (layer === 'themes' && !themeable.has(token.name)) {
+      throw new Error(
+        `\`${path}\` isn't a primitive or a role colour, which is all a theme can set`,
+      );
+    }
   }
 
   const outputs = await styleDictionary.formatPlatform('css');

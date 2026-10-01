@@ -8,9 +8,7 @@
  * the var resolves there, and a theme override further down the tree never reaches the
  * utility. With it the utility reads `var(--gm-x)` directly.
  *
- * Only the full role tokens are mapped. The short ones behind `data-color` land with the
- * theme seam, and spacing and type stay off Tailwind's own keys. Radius uses Tailwind's
- * scale as it is.
+ * Spacing and type stay off Tailwind's own keys.
  */
 @theme inline {
   --color-primary-background-default: var(--gm-color-primary-background-default);
@@ -125,4 +123,48 @@
   --color-info-base-active: var(--gm-color-info-base-active);
   --color-info-base-contrast-subtle: var(--gm-color-info-base-contrast-subtle);
   --color-info-base-contrast-default: var(--gm-color-info-base-contrast-default);
+  --color-background-default: var(--gm-color-background-default);
+  --color-background-tinted: var(--gm-color-background-tinted);
+  --color-surface-default: var(--gm-color-surface-default);
+  --color-surface-tinted: var(--gm-color-surface-tinted);
+  --color-surface-hover: var(--gm-color-surface-hover);
+  --color-surface-active: var(--gm-color-surface-active);
+  --color-border-subtle: var(--gm-color-border-subtle);
+  --color-border-default: var(--gm-color-border-default);
+  --color-border-strong: var(--gm-color-border-strong);
+  --color-text-subtle: var(--gm-color-text-subtle);
+  --color-text-default: var(--gm-color-text-default);
+  --color-base-default: var(--gm-color-base-default);
+  --color-base-hover: var(--gm-color-base-hover);
+  --color-base-active: var(--gm-color-base-active);
+  --color-base-contrast-subtle: var(--gm-color-base-contrast-subtle);
+  --color-base-contrast-default: var(--gm-color-base-contrast-default);
+}
+
+/*
+ * Radius is Tailwind's own scale, so it can't be `inline`: that would stop Tailwind
+ * emitting `--radius-*`, and anything reading `var(--radius-lg)` would break. Plain
+ * `@theme` resolves on :root instead, so the mapping is declared again on every
+ * [data-theme] for a theme's `--gm-radius-*` to reach `rounded-*`.
+ */
+@theme {
+  --radius-xs: var(--gm-radius-xs);
+  --radius-sm: var(--gm-radius-sm);
+  --radius-md: var(--gm-radius-md);
+  --radius-lg: var(--gm-radius-lg);
+  --radius-xl: var(--gm-radius-xl);
+  --radius-2xl: var(--gm-radius-2xl);
+  --radius-3xl: var(--gm-radius-3xl);
+  --radius-4xl: var(--gm-radius-4xl);
+}
+
+[data-theme] {
+  --radius-xs: var(--gm-radius-xs);
+  --radius-sm: var(--gm-radius-sm);
+  --radius-md: var(--gm-radius-md);
+  --radius-lg: var(--gm-radius-lg);
+  --radius-xl: var(--gm-radius-xl);
+  --radius-2xl: var(--gm-radius-2xl);
+  --radius-3xl: var(--gm-radius-3xl);
+  --radius-4xl: var(--gm-radius-4xl);
 }
