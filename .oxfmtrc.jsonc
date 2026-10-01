@@ -6,6 +6,11 @@
     "CHANGELOG.md",
     ".changeset/*.md",
     ".agents",
+    "packages/tailwind/tokens/primitives.css",
+    "packages/tailwind/tokens/semantic.css",
+    "packages/tailwind/tokens/typography.css",
+    "packages/tailwind/tokens/motion.css",
+    "packages/tailwind/tokens/theme.css",
   ],
   "singleQuote": true,
   "sortPackageJson": {

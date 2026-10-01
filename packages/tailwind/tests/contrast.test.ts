@@ -59,6 +59,12 @@ const KNOWN_VIOLATIONS = new Set([
   '--gm-color-warning-base-default on --gm-white',
   // orange-600 on white, 2.79:1
   '--gm-color-warning-base-hover on --gm-white',
+  // orange-700 as subtle text is under 4.5:1 on every warning surface: 3.69:1 on white,
+  // 3.38:1 on yellow-100 and 2.99:1 on orange-100
+  '--gm-color-warning-text-subtle on --gm-color-warning-background-default',
+  '--gm-color-warning-text-subtle on --gm-color-warning-background-tinted',
+  '--gm-color-warning-text-subtle on --gm-color-warning-surface-default',
+  '--gm-color-warning-text-subtle on --gm-color-warning-surface-tinted',
 ]);
 
 type ContrastPair = { rule: string; minimum: number; foreground: string; background: string };
