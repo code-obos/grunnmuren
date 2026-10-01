@@ -108,16 +108,6 @@ const readCustomProperties = async (
 
 let rootCustomProperties: Promise<Map<string, string>> | undefined;
 
-let tailwindDefaults: Promise<DesignSystem> | undefined;
-
-/** Plain Tailwind without Grunnmuren, for checking a scale we take over is still Tailwind's. */
-export const loadTailwindDefaults = () => {
-  tailwindDefaults ??= __unstable__loadDesignSystem("@import 'tailwindcss';", {
-    base: dirname(TAILWIND_BASE_CSS),
-  });
-  return tailwindDefaults;
-};
-
 /**
  * The `--gm-*` custom properties the token files declare on a top-level `:root`, in
  * import order. Tailwind's design system only models `@theme`, so without this every

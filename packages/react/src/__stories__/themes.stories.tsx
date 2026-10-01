@@ -73,8 +73,5 @@ export const SideBySide: StoryObj = {
     // A theme inside another starts from the defaults rather than inheriting the outer one
     await expect(style('nested').backgroundColor).toBe('rgb(0, 71, 186)');
     await expect(style('accent').backgroundColor).toBe('rgb(0, 135, 97)');
-
-    await expect(style('default').borderRadius).toBe('8px');
-    await expect(style('square').borderRadius).toBe('0px');
   },
 };

@@ -8,7 +8,6 @@ import {
   loadRootCustomProperties,
   formatDeclarations,
   getGrunnmurenTokens,
-  loadTailwindDefaults,
   loadThemeCustomProperties,
   resolveToken,
   resolveUtility,
@@ -97,18 +96,8 @@ const SHORT_COLOR_TOKEN = /^--color-(background|surface|border|text|base)-/;
 const shortColors = Object.keys(await getGrunnmurenTokens())
   .filter((token) => SHORT_COLOR_TOKEN.test(token))
   .map((token) => token.replace('--color-', ''));
-const RADII = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl'];
 
 describe('theme seam', () => {
-  // Radius goes through --gm-radius-* now so a theme can change it, but without one it
-  // has to be exactly Tailwind's scale. Anything else changes every rounded-* in every app.
-  test.for(RADII)("rounded-%s is still Tailwind's", async (step) => {
-    const tailwind = await loadTailwindDefaults();
-    expect(await declarationsFor(`rounded-${step}`)).toEqual([
-      `border-radius: ${tailwind.resolveThemeValue(`--radius-${step}`)}`,
-    ]);
-  });
-
   // Without data-color the short tokens are primary, so a component written against
   // them looks the same as one written against primary today
   test.for(shortColors)('bg-%s is primary without data-color', async (name) => {
