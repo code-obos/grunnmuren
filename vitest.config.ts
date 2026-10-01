@@ -4,10 +4,12 @@ import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import { playwright } from '@vitest/browser-playwright';
 import { defineConfig, type TestProjectConfiguration } from 'vitest/config';
 
+import { serveRemoteMedia, takeUnservedMedia } from './.storybook/remote-media.ts';
 import { type SnapshotVariant, snapshotVariants } from './.storybook/snapshot-variants.ts';
 
-// Vitest's default screenshot path has no project in it, so every variant would compare
-// against the same file. The default keeps the plain name, so its baselines stay put.
+// Vitest's default screenshot and diff paths have no project in them, so every variant would
+// compare against the same file and write its diffs over the other's. The default keeps
+// the plain name, so its baselines stay put.
 const variantSuffix = (variant: SnapshotVariant) =>
   variant.name === 'default' ? '' : `-${variant.name}`;
 
@@ -28,6 +30,7 @@ const defineSnapshotProject = (variant: SnapshotVariant): TestProjectConfigurati
       provider: playwright(),
       headless: true,
       instances: [{ browser: 'chromium', viewport: { width: 1280, height: 720 } }],
+      commands: { serveRemoteMedia, takeUnservedMedia },
       expect: {
         toMatchScreenshot: {
           comparatorName: 'pixelmatch',
@@ -48,6 +51,24 @@ const defineSnapshotProject = (variant: SnapshotVariant): TestProjectConfigurati
               root,
               testFileDirectory,
               screenshotDirectory,
+              testFileName,
+              `${arg}${variantSuffix(variant)}-${browserName}-${platform}${ext}`,
+            ),
+          // Covers the actual screenshot too, as `<arg>-actual`
+          resolveDiffPath: ({
+            arg,
+            ext,
+            root,
+            attachmentsDir,
+            testFileDirectory,
+            testFileName,
+            browserName,
+            platform,
+          }) =>
+            resolve(
+              root,
+              attachmentsDir,
+              testFileDirectory,
               testFileName,
               `${arg}${variantSuffix(variant)}-${browserName}-${platform}${ext}`,
             ),
