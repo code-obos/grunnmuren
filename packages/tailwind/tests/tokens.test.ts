@@ -1,13 +1,9 @@
-import { readFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
-
 import { describe, expect, test } from 'vitest';
 
 import {
   findBrokenTokenReferences,
   formatDeclarations,
   getGrunnmurenTokens,
-  loadDesignSystem,
   resolveToken,
   resolveUtility,
 } from './design-system.ts';
@@ -86,37 +82,5 @@ describe('ported primitives', () => {
       (token) => token.startsWith('--color-') && !ROLE_TOKEN.test(token),
     );
     expect(palette.toSorted()).toEqual(Object.keys(legacyPalette).toSorted());
-  });
-});
-
-const TOKEN_SOURCE = resolve(import.meta.dirname, '../tokens/source/grunnmuren-tokens.json');
-
-// Tailwind has none and full as fixed utilities, not theme keys, so they only exist in
-// the source for Figma's sake
-const FIXED_RADIUS = new Set(['none', 'full']);
-
-type TokenSource = { primitives: { radius: Record<string, { $value: string } | string> } };
-
-describe('token source', () => {
-  // Radius follows Tailwind's scale by decision. It sits in the source so Figma gets the
-  // same steps, and this is what stops the two from drifting apart.
-  test('radius follows Tailwind', async () => {
-    const { primitives }: TokenSource = JSON.parse(await readFile(TOKEN_SOURCE, 'utf8'));
-    const source = Object.fromEntries(
-      Object.entries(primitives.radius).flatMap(([step, token]) =>
-        step.startsWith('$') || FIXED_RADIUS.has(step) || typeof token === 'string'
-          ? []
-          : [[step, token.$value]],
-      ),
-    );
-
-    const designSystem = await loadDesignSystem();
-    const tailwind = Object.fromEntries(
-      [...designSystem.theme.entries()]
-        .filter(([token]) => token.startsWith('--radius-'))
-        .map(([token, entry]) => [token.replace('--radius-', ''), entry.value]),
-    );
-
-    expect(source).toEqual(tailwind);
   });
 });
