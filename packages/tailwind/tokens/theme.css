@@ -158,7 +158,7 @@
   --radius-4xl: var(--gm-radius-4xl);
 }
 
-[data-theme] {
+:where([data-theme]) {
   --radius-xs: var(--gm-radius-xs);
   --radius-sm: var(--gm-radius-sm);
   --radius-md: var(--gm-radius-md);

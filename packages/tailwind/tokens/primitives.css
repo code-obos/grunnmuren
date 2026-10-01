@@ -2,8 +2,7 @@
  * Generated from tokens/source/grunnmuren-tokens.json by build-tokens.ts. Don't edit by
  * hand: change the source and run `pnpm tokens:build`.
  */
-:root,
-[data-theme] {
+:where(:root, [data-theme="default"]) {
   --gm-white: #FFFFFF;
   --gm-gray-100: #F1F1F1;
   --gm-gray-200: #E6E6E6;

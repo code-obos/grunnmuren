@@ -99,13 +99,23 @@ const variables = (dictionary: Dictionary, indentation = '  ') =>
 const declarations = (entries: Array<[string, string]>) =>
   entries.map(([name, value]) => `  --${name}: ${value};`).join('\n');
 
+// Every default sits in :where(), which gives it no specificity, so any rule an app
+// writes wins over it whatever order the CSS loads in. Next's app router doesn't keep a
+// stable order between CSS chunks, so "load your theme after Grunnmuren" can't be the rule.
+const defaults = (...selectors: Array<string>) => `:where(${selectors.join(', ')})`;
+
+// Primitives are plain values and inherit as they are, so a theme further down keeps what
+// the page around it set, including an app's own `:root` overrides. Only
+// `data-theme="default"` goes back to Grunnmuren's own values.
+const PRIMITIVES = defaults(':root', '[data-theme="default"]');
+
 // A custom property that points at another one is resolved on the element that declares
 // it, and only the result is inherited. Declared on :root alone, a theme further down
-// the tree would change the primitives and nothing that reads them. Declaring the layer
-// on every [data-theme] as well makes each theme work out its own values, which is the
-// pattern Designsystemet uses for [data-color]:
+// the tree would change the primitives and nothing that reads them. Declaring the tokens
+// that point at others on every [data-theme] as well makes each theme work out its own
+// values, which is the pattern Designsystemet uses for [data-color]:
 // https://github.com/digdir/designsystemet (MIT, Copyright Digitaliseringsdirektoratet (Digdir))
-const THEMED = ':root,\n[data-theme]';
+const THEMED = defaults(':root', '[data-theme]');
 
 /**
  * The short `--gm-color-{group}-{variant}` names, with each `data-color` role's full
@@ -165,7 +175,8 @@ const CONFIG: Config = {
       },
     },
     formats: {
-      'gm/themed': ({ dictionary }) => `${HEADER}${THEMED} {\n${variables(dictionary)}\n}\n`,
+      'gm/declare': ({ dictionary, options }) =>
+        `${HEADER}${options.selector} {\n${variables(dictionary)}\n}\n`,
 
       'gm/semantic': ({ dictionary }) => {
         const [primary, ...others] = shortColorTokens(dictionary).roles;
@@ -181,10 +192,9 @@ ${variables(dictionary)}
  * The short tokens point at whichever role \`data-color\` picks, so a component can be
  * written once against \`base-default\` and be primary, accent or neutral depending on
  * where it sits. Primary without the attribute. A [data-theme] starts over at primary
- * too, since it has to work the short tokens out again from its own primitives.
+ * too, since it has to work the short tokens out again from its own roles.
  */
-${THEMED},
-[data-color="${primary.role}"] {
+${defaults(':root', '[data-theme]', `[data-color="${primary.role}"]`)} {
 ${declarations(primary.entries)}
 }
 
@@ -198,14 +208,14 @@ ${short}
           .map((token) => `    --${token.name}: 0.01ms !important;`)
           .join('\n');
 
-        return `${HEADER}:root {
+        return `${HEADER}${defaults(':root')} {
 ${variables(dictionary)}
 }
 
 /*
  * Reduced motion lives in the core, so a theme can pick its own easing and durations
- * without being able to build this away by accident. \`!important\` because a theme
- * the app writes itself comes later with the same specificity, and would otherwise win.
+ * without being able to build this away by accident. \`!important\` because every
+ * default is in :where(), so any duration a theme sets would otherwise win.
  * Durations go to 0.01ms rather than 0 so transitionend still fires.
  */
 @media (prefers-reduced-motion: reduce) {
@@ -251,7 +261,7 @@ ${declarations(colors)}
 ${declarations(radii)}
 }
 
-[data-theme] {
+${defaults('[data-theme]')} {
 ${declarations(radii)}
 }
 `;
@@ -260,8 +270,7 @@ ${declarations(radii)}
       'gm/theme': ({ dictionary, options }) => `${HEADER}
 /*
  * An example, not part of the package. A theme an app writes itself looks the same, and
- * goes after the Grunnmuren stylesheet: it has the same specificity as the defaults, so
- * the one that comes last wins.
+ * can load in any order: the defaults are in :where(), so this wins either way.
  */
 [data-theme="${options.theme}"] {
 ${variables(dictionary)}
@@ -273,9 +282,19 @@ ${variables(dictionary)}
     css: {
       transforms: ['name/gm', 'fontFamily/gm'],
       files: [
-        { destination: 'primitives.css', format: 'gm/themed', filter: isPrimitive },
+        {
+          destination: 'primitives.css',
+          format: 'gm/declare',
+          filter: isPrimitive,
+          options: { selector: PRIMITIVES },
+        },
         { destination: 'semantic.css', format: 'gm/semantic', filter: isRoleColor },
-        { destination: 'typography.css', format: 'gm/themed', filter: isTypography },
+        {
+          destination: 'typography.css',
+          format: 'gm/declare',
+          filter: isTypography,
+          options: { selector: THEMED },
+        },
         { destination: 'motion.css', format: 'gm/motion', filter: isMotion },
         {
           destination: 'theme.css',

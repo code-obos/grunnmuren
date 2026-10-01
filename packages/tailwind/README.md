@@ -40,7 +40,7 @@ The fallback font metrics is generated with a script that can be run with `pnpm 
 
 ## Themes
 
-Themes live in your app, not in Grunnmuren. A theme is a `[data-theme='…']` rule that sets `--gm-*` tokens, placed after the preset:
+Themes live in your app, not in Grunnmuren. A theme is a `[data-theme='…']` rule that sets `--gm-*` tokens. It can load before or after the preset: Grunnmuren's defaults have no specificity, so your theme always wins.
 
 ```css
 @import '@obosbbl/grunnmuren-tailwind';
@@ -59,7 +59,7 @@ Themes live in your app, not in Grunnmuren. A theme is a `[data-theme='…']` ru
 <section data-theme="my-project">…</section>
 ```
 
-Anything the theme doesn't set comes from the defaults. `data-theme` works on part of a page, and a theme inside another starts over from the defaults. `data-color` (`primary`, `accent` or `neutral`) picks the role the short utilities such as `bg-base-default` point at. It's `primary` without it, and inside a new `data-theme` too.
+Anything the theme doesn't set comes from the page around it, which is the defaults unless you've overridden them on `:root`. `data-theme` works on part of a page, and a theme inside another builds on the outer one. `data-theme="default"` goes back to Grunnmuren's own values. `data-color` (`primary`, `accent` or `neutral`) picks the role the short utilities such as `bg-base-default` point at. It's `primary` without it, and inside a new `data-theme` too.
 
 ### What a theme can set
 

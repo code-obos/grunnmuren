@@ -2,7 +2,7 @@
  * Generated from tokens/source/grunnmuren-tokens.json by build-tokens.ts. Don't edit by
  * hand: change the source and run `pnpm tokens:build`.
  */
-:root {
+:where(:root) {
   --gm-ease-industrial: cubic-bezier(0.65, 0, 0.35, 1);
   --gm-ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
   --gm-ease-curtain-in: cubic-bezier(0.16, 1, 0.3, 1);
@@ -21,8 +21,8 @@
 
 /*
  * Reduced motion lives in the core, so a theme can pick its own easing and durations
- * without being able to build this away by accident. `!important` because a theme
- * the app writes itself comes later with the same specificity, and would otherwise win.
+ * without being able to build this away by accident. `!important` because every
+ * default is in :where(), so any duration a theme sets would otherwise win.
  * Durations go to 0.01ms rather than 0 so transitionend still fires.
  */
 @media (prefers-reduced-motion: reduce) {
