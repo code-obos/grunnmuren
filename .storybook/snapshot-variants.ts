@@ -8,7 +8,10 @@
  * tokens. It's here so that move shows up as a diff against a baseline taken before it.
  */
 export type SnapshotVariant = {
-  /** Used in the Vitest project name and therefore in the baseline file names. */
+  /**
+   * Used in the Vitest project name, and in the baseline file names for every variant
+   * but `default`. See `resolveScreenshotPath` in vitest.config.ts.
+   */
   name: string;
   theme: string;
   color: string;

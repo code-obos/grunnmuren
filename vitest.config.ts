@@ -1,8 +1,15 @@
+import { resolve } from 'node:path';
+
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import { playwright } from '@vitest/browser-playwright';
 import { defineConfig, type TestProjectConfiguration } from 'vitest/config';
 
 import { type SnapshotVariant, snapshotVariants } from './.storybook/snapshot-variants.ts';
+
+// Vitest's default screenshot path has no project in it, so every variant would compare
+// against the same file. The default keeps the plain name, so its baselines stay put.
+const variantSuffix = (variant: SnapshotVariant) =>
+  variant.name === 'default' ? '' : `-${variant.name}`;
 
 const defineSnapshotProject = (variant: SnapshotVariant): TestProjectConfiguration => ({
   extends: true,
@@ -27,6 +34,23 @@ const defineSnapshotProject = (variant: SnapshotVariant): TestProjectConfigurati
           // Anti-aliasing differs slightly between runs on the same platform. Enough
           // slack to absorb that, not enough to hide something that moved.
           comparatorOptions: { threshold: 0.2, allowedMismatchedPixelRatio: 0.01 },
+          resolveScreenshotPath: ({
+            arg,
+            ext,
+            root,
+            screenshotDirectory,
+            testFileDirectory,
+            testFileName,
+            browserName,
+            platform,
+          }) =>
+            resolve(
+              root,
+              testFileDirectory,
+              screenshotDirectory,
+              testFileName,
+              `${arg}${variantSuffix(variant)}-${browserName}-${platform}${ext}`,
+            ),
         },
       },
     },
