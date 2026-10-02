@@ -13,12 +13,12 @@ const badgeVariants = cva({
   base: ['inline-flex w-fit items-center justify-center gap-1.5 rounded-lg [&_svg]:shrink-0'],
   variants: {
     color: {
-      'gray-dark': 'bg-gray-dark text-white',
-      mint: 'bg-mint text-black',
-      sky: 'bg-sky text-black',
-      white: 'bg-white text-black',
-      'blue-dark': 'bg-blue-dark text-white',
-      'green-dark': 'bg-green-dark text-white',
+      'gray-dark': 'bg-neutral-base-default text-neutral-base-contrast-default',
+      mint: 'bg-accent-surface-active text-neutral-text-default',
+      sky: 'bg-primary-surface-active text-neutral-text-default',
+      white: 'bg-neutral-surface-default text-neutral-text-default',
+      'blue-dark': 'bg-primary-base-default text-primary-base-contrast-default',
+      'green-dark': 'bg-accent-base-default text-accent-base-contrast-default',
     },
     size: {
       small: 'description px-2 py-0.5 [&_svg]:size-4',
