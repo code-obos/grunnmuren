@@ -43,7 +43,9 @@ function Backlink(props: BacklinkProps) {
         <span
           className={cx(
             'border-y border-transparent transition-colors duration-300',
-            withUnderline ? 'border-b-black' : 'group-hover:border-b-black',
+            withUnderline
+              ? 'border-b-neutral-border-strong'
+              : 'group-hover:border-b-neutral-border-strong',
           )}
         >
           {children}

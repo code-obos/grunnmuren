@@ -27,7 +27,7 @@ const Avatar = ({ src, alt = '', className, onError, loading = 'lazy', ...rest }
       className={cx(
         className,
         baseClassName,
-        'bg-gray-light text-gray-dark grid place-items-center',
+        'bg-neutral-surface-tinted text-neutral-text-subtle grid place-items-center',
       )}
     >
       <User className="scale-[2.25]" />
