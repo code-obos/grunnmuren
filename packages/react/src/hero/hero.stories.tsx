@@ -10,6 +10,7 @@ import {
   office,
   podcastStudio,
   residentialArea,
+  videoLoop,
 } from '../__stories__/media';
 import { Badge } from '../badge';
 import { Button } from '../button';
@@ -137,9 +138,9 @@ export const StandardWithCarousel = () => (
             <CarouselItem>
               <Media>
                 <VideoLoop
-                  src="https://res.cloudinary.com/obosit-prd-ch-clry/video/upload/v1732199756/Mellom%20husene/Frysja_Loop2.mp4"
+                  src={videoLoop}
                   format="mp4"
-                  alt="En postbil kjører rundt i det moderne nabolaget på Frysja. Her finnes det fine uteområder, med husker og kafeer."
+                  alt="Svømmere i røde drakter tøyer ut på bassengkanten i en svømmehall."
                 />
               </Media>
             </CarouselItem>
@@ -178,9 +179,9 @@ export const FullBleedWithVideoLoop = () => (
       <Logo />
       <Media>
         <VideoLoop
-          src="https://res.cloudinary.com/obosit-prd-ch-clry/video/upload/v1732199756/Mellom%20husene/Frysja_Loop2.mp4"
+          src={videoLoop}
           format="mp4"
-          alt="En postbil kjører rundt i det moderne nabolaget på Frysja. Her finnes det fine uteområder, med husker og kafeer."
+          alt="Svømmere i røde drakter tøyer ut på bassengkanten i en svømmehall."
         />
       </Media>
     </Hero>

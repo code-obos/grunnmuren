@@ -1,8 +1,8 @@
 /// <reference types="vite/client" />
 
 /*
- * The images the stories use, committed instead of loaded from cdn.sanity.io and friends.
- * A slow response got captured half-loaded in the screenshot run.
+ * The images and video the stories use, committed instead of loaded from cdn.sanity.io and
+ * friends. A slow response got captured half-loaded in the screenshot run.
  *
  * The AVIFs are what Sanity served for `?auto=format`, which is what the baselines were
  * taken with. Imported rather than linked so Vite gets the URL right under the docs
@@ -17,3 +17,4 @@ export { default as office } from './media/office.avif';
 export { default as podcastStudio } from './media/podcast-studio.avif';
 export { default as portrait } from './media/portrait.avif';
 export { default as residentialArea } from './media/residential-area.avif';
+export { default as videoLoop } from './media/video-loop.mp4';
