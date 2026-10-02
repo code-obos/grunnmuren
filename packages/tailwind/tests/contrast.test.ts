@@ -1,7 +1,14 @@
+import { readdir } from 'node:fs/promises';
+import { basename, resolve } from 'node:path';
+
 import { describe, expect, test } from 'vitest';
 
 import { contrastRatio } from './contrast.ts';
-import { loadRootCustomProperties, resolveToken } from './design-system.ts';
+import {
+  loadRootCustomProperties,
+  loadThemeCustomProperties,
+  resolveToken,
+} from './design-system.ts';
 
 const ROLES = ['primary', 'accent', 'neutral', 'success', 'danger', 'warning', 'info'];
 
@@ -51,7 +58,7 @@ const CONTRAST_RULES: Array<ContrastRule> = [
  * every run, and the test flips to failing the moment one is fixed, so the entry gets
  * removed instead of lingering. Fix the value, don't add to this list to get a build green.
  */
-const KNOWN_VIOLATIONS = new Set([
+const DEFAULT_VIOLATIONS = [
   // Coal on orange-700, 3.42:1
   '--gm-color-warning-base-contrast-default on --gm-color-warning-base-active',
   // orange-500 on white, 2.09:1. The token file itself notes orange-500 isn't fit for a
@@ -65,7 +72,33 @@ const KNOWN_VIOLATIONS = new Set([
   '--gm-color-warning-text-subtle on --gm-color-warning-background-tinted',
   '--gm-color-warning-text-subtle on --gm-color-warning-surface-default',
   '--gm-color-warning-text-subtle on --gm-color-warning-surface-tinted',
-]);
+];
+
+/**
+ * The same, per theme. A theme only lists what it adds: the defaults' violations carry
+ * over for every role it doesn't set.
+ */
+const THEME_VIOLATIONS: Record<string, Array<string>> = {
+  'froen-hage': [
+    // Primary is set up as a dark role: light text and buttons meant for the dark green
+    // tinted surfaces, where they pass at 10:1. But background-default and
+    // surface-default are still white, and on white the light text is 1.20:1 (default)
+    // and 1.57:1 (subtle)
+    '--gm-color-primary-text-default on --gm-color-primary-background-default',
+    '--gm-color-primary-text-default on --gm-color-primary-surface-default',
+    '--gm-color-primary-text-subtle on --gm-color-primary-background-default',
+    '--gm-color-primary-text-subtle on --gm-color-primary-surface-default',
+    // The light buttons disappear on a light page: 1.20:1, 1.45:1 and 1.88:1 on white
+    '--gm-color-primary-base-default on --gm-white',
+    '--gm-color-primary-base-hover on --gm-white',
+    '--gm-color-primary-base-active on --gm-white',
+    // 3.65:1
+    '--gm-color-neutral-text-subtle on --gm-color-neutral-surface-tinted',
+  ],
+};
+
+const violationsIn = (theme: string) =>
+  new Set([...DEFAULT_VIOLATIONS, ...(THEME_VIOLATIONS[theme] ?? [])]);
 
 type ContrastPair = { rule: string; minimum: number; foreground: string; background: string };
 
@@ -95,26 +128,50 @@ const contrastPairs = ROLES.flatMap((role) =>
   ({ foreground, background }) => rootProperties.has(foreground) && rootProperties.has(background),
 );
 
-const passingPairs = contrastPairs.filter((pair) => !KNOWN_VIOLATIONS.has(label(pair)));
-const violatingPairs = contrastPairs.filter((pair) => KNOWN_VIOLATIONS.has(label(pair)));
+// Every theme is held to the same rules as the defaults. A theme only changes primitives,
+// so this is where a brand colour that's too light shows up, before any component uses it.
+const THEMES_DIR = resolve(import.meta.dirname, '../tokens/themes');
+const themes = [
+  { name: 'default', overrides: new Map<string, string>() },
+  ...(await Promise.all(
+    (
+      await readdir(THEMES_DIR)
+    ).map(async (file) => {
+      const name = basename(file, '.css');
+      return { name, overrides: await loadThemeCustomProperties(name) };
+    }),
+  )),
+];
 
-const ratioFor = async ({ foreground, background }: ContrastPair) =>
-  contrastRatio(await resolveToken(foreground), await resolveToken(background));
+const ratioFor = async ({ foreground, background }: ContrastPair, overrides: Map<string, string>) =>
+  contrastRatio(
+    await resolveToken(foreground, overrides),
+    await resolveToken(background, overrides),
+  );
+
+for (const { name, overrides } of themes) {
+  const violations = violationsIn(name);
+  const passingPairs = contrastPairs.filter((pair) => !violations.has(label(pair)));
+  const violatingPairs = contrastPairs.filter((pair) => violations.has(label(pair)));
+
+  describe(`contrast in ${name}`, () => {
+    test.for(passingPairs)('$foreground on $background ($rule)', async (pair) => {
+      expect(await ratioFor(pair, overrides)).toBeGreaterThanOrEqual(pair.minimum);
+    });
+
+    for (const pair of violatingPairs) {
+      test.fails(`${label(pair)} (${pair.rule}, known violation)`, async () => {
+        expect(await ratioFor(pair, overrides)).toBeGreaterThanOrEqual(pair.minimum);
+      });
+    }
+  });
+}
 
 describe('contrast', () => {
-  test.for(passingPairs)('$foreground on $background ($rule)', async (pair) => {
-    expect(await ratioFor(pair)).toBeGreaterThanOrEqual(pair.minimum);
-  });
-
-  for (const pair of violatingPairs) {
-    test.fails(`${label(pair)} (${pair.rule}, known violation)`, async () => {
-      expect(await ratioFor(pair)).toBeGreaterThanOrEqual(pair.minimum);
-    });
-  }
-
   test('every known violation is a pair that is actually checked', () => {
     const checked = new Set(contrastPairs.map(label));
-    expect([...KNOWN_VIOLATIONS].filter((violation) => !checked.has(violation))).toEqual([]);
+    const known = [...DEFAULT_VIOLATIONS, ...Object.values(THEME_VIOLATIONS).flat()];
+    expect(known.filter((violation) => !checked.has(violation))).toEqual([]);
   });
 
   test('the checked pairs match the snapshot', () => {

@@ -2,7 +2,7 @@
  * Generated from tokens/source/grunnmuren-tokens.json by build-tokens.ts. Don't edit by
  * hand: change the source and run `pnpm tokens:build`.
  */
-:root {
+:where(:root, [data-theme]) {
   --gm-heading-xl-letter-spacing: 0em;
   --gm-heading-xl-font-size: clamp(2.8125rem, 2.4375rem + 1.875vw, 3.9375rem);
   --gm-heading-l-letter-spacing: 0em;

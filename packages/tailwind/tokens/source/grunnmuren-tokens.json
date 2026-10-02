@@ -621,6 +621,71 @@
     }
   },
 
+  "themes": {
+    "$description": "Example themes, one per data-theme value, built to tokens/themes/<name>.css. They are for Storybook and the tests and aren't published: an app writes its own theme, so Grunnmuren doesn't sit between a brand and its colours. A theme sets primitives, role colours or both, and anything it doesn't set comes from the defaults.",
+    "froen-hage": {
+      "$description": "Frøen Hage's premium project pages, which nybolig-nettsider owns. Here as a real theme to test against, with the values nybolig-nettsider builds with Designsystemet's CLI in apps/designtokens (CLI v1.18.0). Their secondary is accent here. Set on the roles rather than the primitives, since primary is a dark role with light text and buttons, which the default primitives can't express. Status roles, radius and type aren't taken: the premium pages only use the colours.",
+      "semantic": {
+        "color": {
+          "primary": {
+            "background-default": { "$type": "color", "$value": "#FFFFFF" },
+            "background-tinted": { "$type": "color", "$value": "#2D3A26" },
+            "surface-default": { "$type": "color", "$value": "#FFFFFF" },
+            "surface-tinted": { "$type": "color", "$value": "#2D3A26" },
+            "surface-hover": { "$type": "color", "$value": "#404C39" },
+            "surface-active": { "$type": "color", "$value": "#545E4E" },
+            "border-subtle": { "$type": "color", "$value": "#B9BDB6" },
+            "border-default": { "$type": "color", "$value": "#737B6E" },
+            "border-strong": { "$type": "color", "$value": "#566050" },
+            "text-subtle": { "$type": "color", "$value": "#CCCFCA" },
+            "text-default": { "$type": "color", "$value": "#EDEAE1" },
+            "base-default": { "$type": "color", "$value": "#EDEAE1" },
+            "base-hover": { "$type": "color", "$value": "#DDD6C2" },
+            "base-active": { "$type": "color", "$value": "#BFBDB6" },
+            "base-contrast-subtle": { "$type": "color", "$value": "#CCCFCA" },
+            "base-contrast-default": { "$type": "color", "$value": "#2C2B2A" }
+          },
+          "accent": {
+            "background-default": { "$type": "color", "$value": "#FFFFFF" },
+            "background-tinted": { "$type": "color", "$value": "#F3F4F3" },
+            "surface-default": { "$type": "color", "$value": "#FFFFFF" },
+            "surface-tinted": { "$type": "color", "$value": "#E7E9E7" },
+            "surface-hover": { "$type": "color", "$value": "#D8DBD7" },
+            "surface-active": { "$type": "color", "$value": "#C8CBC6" },
+            "border-subtle": { "$type": "color", "$value": "#B9BDB6" },
+            "border-default": { "$type": "color", "$value": "#737B6E" },
+            "border-strong": { "$type": "color", "$value": "#566050" },
+            "text-subtle": { "$type": "color", "$value": "#566050" },
+            "text-default": { "$type": "color", "$value": "#242E1E" },
+            "base-default": { "$type": "color", "$value": "#2D3A26" },
+            "base-hover": { "$type": "color", "$value": "#404C39" },
+            "base-active": { "$type": "color", "$value": "#545E4E" },
+            "base-contrast-subtle": { "$type": "color", "$value": "#CCCFCA" },
+            "base-contrast-default": { "$type": "color", "$value": "#FFFFFF" }
+          },
+          "neutral": {
+            "background-default": { "$type": "color", "$value": "#F5F2ED" },
+            "background-tinted": { "$type": "color", "$value": "#EDEAE1" },
+            "surface-default": { "$type": "color", "$value": "#DCD6C4" },
+            "surface-tinted": { "$type": "color", "$value": "#C8C1A7" },
+            "surface-hover": { "$type": "color", "$value": "#DDDAD1" },
+            "surface-active": { "$type": "color", "$value": "#CCCAC2" },
+            "border-subtle": { "$type": "color", "$value": "#BEBCB4" },
+            "border-default": { "$type": "color", "$value": "#7A7974" },
+            "border-strong": { "$type": "color", "$value": "#5E5D5A" },
+            "text-subtle": { "$type": "color", "$value": "#5E5D5A" },
+            "text-default": { "$type": "color", "$value": "#2C2B2A" },
+            "base-default": { "$type": "color", "$value": "#635D4C" },
+            "base-hover": { "$type": "color", "$value": "#4F4A3C" },
+            "base-active": { "$type": "color", "$value": "#3B382E" },
+            "base-contrast-subtle": { "$type": "color", "$value": "#DCD6C4" },
+            "base-contrast-default": { "$type": "color", "$value": "#EDEAE1" }
+          }
+        }
+      }
+    }
+  },
+
   "tenant-oslo-k": {
     "$description": "Nivå 3-eksempel. Overstyrer KUN det guarded theming tillater (merkevarefarge, typografi, radius, animasjon, padding/margin). Verdier hentet ut av de fungerende prototypene oslo-k-forside.html og oslo-k-kontor-402.html — ikke satt opp for anledningen. IKKE en del av Core; distribueres som egen temapakke.",
     "color": {

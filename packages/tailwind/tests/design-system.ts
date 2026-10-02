@@ -88,11 +88,21 @@ const topLevelBlocks = (css: string): Array<[string, string]> => {
   return blocks;
 };
 
-const readRootCustomProperties = async (file: string): Promise<Array<[string, string]>> => {
+// The defaults are wrapped in `:where()` to keep their specificity at zero. That changes
+// nothing about which elements they match, so it's unwrapped before comparing.
+const WHERE = /^:where\(([\s\S]*)\)$/;
+
+const selectors = (prelude: string) =>
+  (prelude.match(WHERE)?.[1] ?? prelude).split(',').map((selector) => selector.trim());
+
+const readCustomProperties = async (
+  file: string,
+  selector: string,
+): Promise<Array<[string, string]>> => {
   const css = (await readFile(file, 'utf8')).replaceAll(CSS_COMMENT, '');
 
   return topLevelBlocks(css)
-    .filter(([prelude]) => prelude === ':root')
+    .filter(([prelude]) => selectors(prelude).includes(selector))
     .flatMap(([, body]) =>
       body.split(';').flatMap((declaration): Array<[string, string]> => {
         const match = declaration.match(CUSTOM_PROPERTY);
@@ -108,8 +118,9 @@ let rootCustomProperties: Promise<Map<string, string>> | undefined;
  * import order. Tailwind's design system only models `@theme`, so without this every
  * `@theme inline` mapping would resolve to an unresolvable `var(--gm-…)`.
  *
- * Only the default `:root` is read. Theme and `data-color` overrides are selectors of
- * their own, and the reduced-motion values sit inside an `@media`, so neither leaks in.
+ * Only rules that include `:root` are read, which is the defaults. A theme and the other
+ * `data-color` roles are selectors of their own, and the reduced-motion values sit inside
+ * an `@media`, so none of them leak in.
  */
 export const loadRootCustomProperties = () => {
   rootCustomProperties ??= readFile(TOKENS_INDEX_CSS, 'utf8').then(async (index) => {
@@ -117,10 +128,21 @@ export const loadRootCustomProperties = () => {
       resolve(dirname(TOKENS_INDEX_CSS), path),
     );
     // Later files win, same as the cascade does for two `:root` rules
-    return new Map((await Promise.all(files.map(readRootCustomProperties))).flat());
+    return new Map(
+      (await Promise.all(files.map((file) => readCustomProperties(file, ':root')))).flat(),
+    );
   });
   return rootCustomProperties;
 };
+
+/** What a theme in `tokens/themes/` sets on its `[data-theme]`, by the theme's name. */
+export const loadThemeCustomProperties = async (theme: string) =>
+  new Map(
+    await readCustomProperties(
+      resolve(dirname(TOKENS_INDEX_CSS), `themes/${theme}.css`),
+      `[data-theme="${theme}"]`,
+    ),
+  );
 
 const normalizeHexColors = (value: string) =>
   value.replaceAll(HEX_COLOR, (_, hex: string) => {
@@ -265,13 +287,24 @@ export const getGrunnmurenTokens = async (): Promise<Record<string, string>> => 
  * A single token resolved to its literal value, whether it lives in `@theme` or is one of
  * the `--gm-*` custom properties. Throws when it resolves to nothing, so a typo in a test
  * fails instead of comparing an unresolved `var()` against itself.
+ *
+ * `overrides` are laid over the defaults before resolving, the way a theme's primitives
+ * are on a `[data-theme]` element. Works because the token layers are declared again on
+ * every `[data-theme]`, so the roles there are computed from the theme's primitives.
  */
-export const resolveToken = async (token: string): Promise<string> => {
+export const resolveToken = async (
+  token: string,
+  overrides: Map<string, string> = new Map(),
+): Promise<string> => {
   const [designSystem, rootProperties] = await Promise.all([
     loadDesignSystem(),
     loadRootCustomProperties(),
   ]);
-  const value = resolveThemeVariables(designSystem, rootProperties, `var(${token})`);
+  const value = resolveThemeVariables(
+    designSystem,
+    new Map([...rootProperties, ...overrides]),
+    `var(${token})`,
+  );
 
   if (value.includes('var(')) {
     throw new Error(`\`${token}\` does not resolve to a value, got \`${value}\``);

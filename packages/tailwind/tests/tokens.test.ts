@@ -1,9 +1,14 @@
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+
 import { describe, expect, test } from 'vitest';
 
 import {
   findBrokenTokenReferences,
+  loadRootCustomProperties,
   formatDeclarations,
   getGrunnmurenTokens,
+  loadThemeCustomProperties,
   resolveToken,
   resolveUtility,
 } from './design-system.ts';
@@ -69,7 +74,9 @@ describe('computed values', () => {
   });
 });
 
-const ROLE_TOKEN = /^--color-(primary|accent|neutral|success|danger|warning|info)-/;
+// The full role tokens, and the short ones `data-color` points at a role
+const ROLE_TOKEN =
+  /^--color-((primary|accent|neutral|success|danger|warning|info)-)?(background|surface|border|text|base)-/;
 
 describe('ported primitives', () => {
   test.for(Object.entries(legacyPalette))('%s survives as %s', async ([legacy, primitive]) => {
@@ -82,5 +89,46 @@ describe('ported primitives', () => {
       (token) => token.startsWith('--color-') && !ROLE_TOKEN.test(token),
     );
     expect(palette.toSorted()).toEqual(Object.keys(legacyPalette).toSorted());
+  });
+});
+
+const SHORT_COLOR_TOKEN = /^--color-(background|surface|border|text|base)-/;
+const shortColors = Object.keys(await getGrunnmurenTokens())
+  .filter((token) => SHORT_COLOR_TOKEN.test(token))
+  .map((token) => token.replace('--color-', ''));
+
+describe('theme seam', () => {
+  // Without data-color the short tokens are primary, so a component written against
+  // them looks the same as one written against primary today
+  test.for(shortColors)('bg-%s is primary without data-color', async (name) => {
+    expect(await declarationsFor(`bg-${name}`)).toEqual(
+      await declarationsFor(`bg-primary-${name}`),
+    );
+  });
+
+  // The contrast run checks every theme, which proves nothing if the theme never got
+  // as far as the roles. The short tokens are worked out from the roles on the same
+  // element, so they have to pick the theme up too.
+  test('a theme reaches the roles and the short tokens', async () => {
+    const froenHage = await loadThemeCustomProperties('froen-hage');
+    expect(await resolveToken('--gm-color-primary-base-default', froenHage)).toBe('#edeae1');
+    expect(await resolveToken('--gm-color-base-default', froenHage)).toBe('#edeae1');
+  });
+
+  // Reduced motion is one of the things a theme must not be able to turn off, and an app's
+  // own theme never goes through our build. So the block itself has to win: on every
+  // [data-theme], where a theme sets its durations, and over a theme that comes later.
+  test('reduced motion wins over any theme', async () => {
+    const css = await readFile(resolve(import.meta.dirname, '../tokens/motion.css'), 'utf8');
+    const reducedMotion = css.slice(css.indexOf('@media (prefers-reduced-motion: reduce)'));
+    const durations = [...(await loadRootCustomProperties()).keys()].filter((token) =>
+      token.startsWith('--gm-duration-'),
+    );
+
+    expect(reducedMotion).toMatch(/:root,\s*\[data-theme\]\s*\{/);
+    expect(durations.length).toBeGreaterThan(0);
+    for (const duration of durations) {
+      expect(reducedMotion).toContain(`${duration}: 0.01ms !important;`);
+    }
   });
 });

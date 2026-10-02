@@ -1,4 +1,5 @@
 @import '@obosbbl/grunnmuren-tailwind';
+@import '../packages/tailwind/tokens/themes/froen-hage.css';
 
 #storybook-root {
   max-width: 100%;

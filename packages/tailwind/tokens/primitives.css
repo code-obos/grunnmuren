@@ -2,7 +2,7 @@
  * Generated from tokens/source/grunnmuren-tokens.json by build-tokens.ts. Don't edit by
  * hand: change the source and run `pnpm tokens:build`.
  */
-:root {
+:where(:root, [data-theme="default"]) {
   --gm-white: #FFFFFF;
   --gm-gray-100: #F1F1F1;
   --gm-gray-200: #E6E6E6;
@@ -72,6 +72,14 @@
   --gm-space-1-5: 0.375rem;
   --gm-space-2-5: 0.625rem;
   --gm-space-3-5: 0.875rem;
+  --gm-radius-xs: 0.125rem;
+  --gm-radius-sm: 0.25rem;
+  --gm-radius-md: 0.375rem;
+  --gm-radius-lg: 0.5rem;
+  --gm-radius-xl: 0.75rem;
+  --gm-radius-2xl: 1rem;
+  --gm-radius-3xl: 1.5rem;
+  --gm-radius-4xl: 2rem;
   --gm-border-width-1: 1px;
   --gm-border-width-2: 2px;
   --gm-border-width-3: 3px;
