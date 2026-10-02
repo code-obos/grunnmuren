@@ -88,7 +88,12 @@ const topLevelBlocks = (css: string): Array<[string, string]> => {
   return blocks;
 };
 
-const selectors = (prelude: string) => prelude.split(',').map((selector) => selector.trim());
+// The defaults are wrapped in `:where()` to keep their specificity at zero. That changes
+// nothing about which elements they match, so it's unwrapped before comparing.
+const WHERE = /^:where\(([\s\S]*)\)$/;
+
+const selectors = (prelude: string) =>
+  (prelude.match(WHERE)?.[1] ?? prelude).split(',').map((selector) => selector.trim());
 
 const readCustomProperties = async (
   file: string,

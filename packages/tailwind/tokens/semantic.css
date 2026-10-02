@@ -2,8 +2,7 @@
  * Generated from tokens/source/grunnmuren-tokens.json by build-tokens.ts. Don't edit by
  * hand: change the source and run `pnpm tokens:build`.
  */
-:root,
-[data-theme] {
+:where(:root, [data-theme]) {
   --gm-color-primary-background-default: var(--gm-white);
   --gm-color-primary-background-tinted: var(--gm-sky-100);
   --gm-color-primary-surface-default: var(--gm-white);
@@ -122,11 +121,9 @@
  * The short tokens point at whichever role `data-color` picks, so a component can be
  * written once against `base-default` and be primary, accent or neutral depending on
  * where it sits. Primary without the attribute. A [data-theme] starts over at primary
- * too, since it has to work the short tokens out again from its own primitives.
+ * too, since it has to work the short tokens out again from its own roles.
  */
-:root,
-[data-theme],
-[data-color="primary"] {
+:where(:root, [data-theme], [data-color="primary"]) {
   --gm-color-background-default: var(--gm-color-primary-background-default);
   --gm-color-background-tinted: var(--gm-color-primary-background-tinted);
   --gm-color-surface-default: var(--gm-color-primary-surface-default);

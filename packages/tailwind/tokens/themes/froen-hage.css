@@ -5,8 +5,7 @@
 
 /*
  * An example, not part of the package. A theme an app writes itself looks the same, and
- * goes after the Grunnmuren stylesheet: it has the same specificity as the defaults, so
- * the one that comes last wins.
+ * can load in any order: the defaults are in :where(), so this wins either way.
  */
 [data-theme="froen-hage"] {
   --gm-color-primary-background-default: #FFFFFF;
