@@ -82,8 +82,27 @@ afterEach(async () => {
   await waitForMedia();
   await nextFrame();
 
-  // The assertion belongs in the hook on purpose: it's the same for all 260-odd
-  // stories, and adding it to each story file by hand is how it goes stale.
-  // oxlint-disable-next-line jest/no-standalone-expect
-  await expect(page.elementLocator(document.body)).toMatchScreenshot();
+  // The stories render in an iframe the size of the viewport, and whatever is outside it
+  // comes out blank in the screenshot. So a tall story gets an iframe tall enough to hold
+  // it first. One that fits keeps the viewport it was laid out in, which means nothing
+  // that depends on the viewport height moves.
+  const { innerWidth: width, innerHeight: viewportHeight } = window;
+  const height = document.documentElement.scrollHeight;
+  const isTall = height > viewportHeight;
+
+  try {
+    if (isTall) {
+      await page.viewport(width, height);
+      // Lazy images below the fold only start loading once they're inside the viewport
+      await waitForMedia();
+      await nextFrame();
+    }
+
+    // The assertion belongs in the hook on purpose: it's the same for all 260-odd
+    // stories, and adding it to each story file by hand is how it goes stale.
+    // oxlint-disable-next-line jest/no-standalone-expect
+    await expect(page.elementLocator(document.body)).toMatchScreenshot();
+  } finally {
+    if (isTall) await page.viewport(width, viewportHeight);
+  }
 });
