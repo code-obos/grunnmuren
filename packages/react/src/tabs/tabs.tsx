@@ -184,14 +184,14 @@ function TabList({ className, children, ...restProps }: TabListProps) {
           // Ensure tabs don't shrink and maintain min-width
           '*:min-w-fit *:shrink-0',
           // Divider line
-          'border-gray-light',
+          'border-neutral-border-subtle',
           'data-[orientation=horizontal]:border-b',
           'data-[orientation=vertical]:border-r',
           // Selection highlight based on orientation
           'data-[orientation=horizontal]:*:border-y-2',
-          'data-[orientation=horizontal]:*:data-selected:border-b-blue-dark',
+          'data-[orientation=horizontal]:*:data-selected:border-b-primary-border-strong',
           'data-[orientation=vertical]:*:border-r-2',
-          'data-[orientation=vertical]:*:data-selected:border-r-blue-dark',
+          'data-[orientation=vertical]:*:data-selected:border-r-primary-border-strong',
 
           // Flex direction based on orientation
           'data-[orientation=vertical]:flex-col',
@@ -237,12 +237,12 @@ function Tab(props: TabProps) {
         // Hide disabled tabs entirely — the design system avoids disabled states (see https://grunnmuren.obos.no/disabled-state)
         'data-disabled:hidden',
         // Selection
-        'data-selected:text-blue-dark data-selected:font-medium',
+        'data-selected:text-primary-text-default data-selected:font-medium',
         // Hover with layout shift prevention using pseudo-element
         'after:invisible after:block after:h-0 after:overflow-hidden after:font-medium after:content-[attr(data-text)]',
         'data-hovered:font-medium',
         // Pressed
-        'data-pressed:text-blue-dark data-pressed:font-medium',
+        'data-pressed:text-primary-text-default data-pressed:font-medium',
       )}
       data-text={typeof children === 'string' ? children : ''}
     >

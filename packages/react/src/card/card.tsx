@@ -67,7 +67,7 @@ const cardVariants = cva({
         // **** Media styles ****
         '**:data-[slot="media"]:rounded-2xl', // All corners are rounded
       ],
-      outlined: 'border border-black',
+      outlined: 'border-neutral-border-strong border',
     },
     /**
      * The layout of the card

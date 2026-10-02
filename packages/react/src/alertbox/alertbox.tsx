@@ -37,10 +37,10 @@ const alertVariants = cva({
      * @default info
      */
     variant: {
-      info: 'bg-sky-light border-[#1A7FA7]',
-      success: 'bg-mint-light border-[#0F9B6E]',
-      warning: 'border-[#C57C13] bg-[#FFF2DE]',
-      danger: 'bg-red-light border-red',
+      info: 'bg-info-surface-tinted border-info-border-default',
+      success: 'bg-success-surface-tinted border-success-border-default',
+      warning: 'bg-warning-surface-tinted border-warning-border-default',
+      danger: 'bg-danger-surface-tinted border-danger-border-default',
     },
   },
   defaultVariants: {
@@ -156,7 +156,7 @@ const Alertbox = ({
             'relative col-span-full row-start-2 -my-3 inline-flex max-w-fit cursor-pointer items-center gap-1 py-3 text-sm/6',
             // Focus styles:
             'outline-none after:absolute after:inset-x-0 after:bottom-3 after:h-0',
-            'focus-visible:after:h-0.5 focus-visible:after:bg-black',
+            'focus-visible:after:bg-neutral-border-strong focus-visible:after:h-0.5',
           )}
           onClick={() => setIsExpanded((prevState) => !prevState)}
           aria-expanded={isExpanded}

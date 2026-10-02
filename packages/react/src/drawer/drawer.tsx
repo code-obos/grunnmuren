@@ -6,7 +6,10 @@ import {
 } from 'react-aria-components/Modal';
 
 const drawerVariants = cva({
-  base: ['fixed overflow-auto bg-white text-left shadow-xl', 'motion-reduce:animate-none'],
+  base: [
+    'bg-neutral-surface-default fixed overflow-auto text-left shadow-xl',
+    'motion-reduce:animate-none',
+  ],
   variants: {
     placement: {
       right: 'top-0 right-0 h-dvh w-full max-w-md rounded-l-2xl',
@@ -63,7 +66,7 @@ const Drawer = ({
     style={{ zIndex, ...style }}
     className={({ isEntering, isExiting }) =>
       cx(
-        'fixed inset-0 bg-black/25 backdrop-blur-sm',
+        'bg-neutral-base-default/25 fixed inset-0 backdrop-blur-sm',
         isEntering && 'fade-in animate-in duration-300 ease-out',
         isExiting && 'fade-out animate-out duration-200 ease-in',
         // Using the motion-safe class does not work, so we use motion-reduce to overwrite instead
