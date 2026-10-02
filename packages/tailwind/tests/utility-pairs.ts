@@ -36,6 +36,24 @@ export const utilityPairs: Array<UtilityPair> = [
   },
   // Same for the dark green, which is accent
   { from: 'bg-green-dark', to: 'bg-accent-base-default' },
+
+  // classes.ts: the recipes every form field shares
+  { from: 'bg-white', to: 'bg-neutral-surface-default' },
+  { from: 'ring-black', to: 'ring-neutral-border-strong' },
+  { from: 'border-black', to: 'border-neutral-border-strong' },
+  { from: 'ring-red', to: 'ring-danger-border-default' },
+  { from: 'bg-red-light', to: 'bg-danger-surface-tinted' },
+  {
+    from: 'text-red',
+    to: 'text-danger-text-subtle',
+    change: 'error text goes from red-500 to red-600, 4.65:1 to 5.87:1 on red-100',
+  },
+  {
+    from: 'placeholder-[#727070]',
+    to: 'placeholder-neutral-text-subtle',
+    change: 'placeholder goes from a hardcoded grey to gray-700, 4.92:1 to 7:1 on white',
+  },
+
   // Waiting on the fluid type decision. `to` goes in when the heading tokens are wired up.
   { from: 'heading-xl', change: 'fluid typography replaces the breakpoint step' },
   { from: 'heading-l', change: 'fluid typography replaces the breakpoint step' },
