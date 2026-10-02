@@ -4,7 +4,6 @@ import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import { playwright } from '@vitest/browser-playwright';
 import { defineConfig, type TestProjectConfiguration } from 'vitest/config';
 
-import { serveRemoteMedia, takeUnservedMedia } from './.storybook/remote-media.ts';
 import { type SnapshotVariant, snapshotVariants } from './.storybook/snapshot-variants.ts';
 
 // Vitest's default screenshot and diff paths have no project in them, so every variant would
@@ -30,7 +29,6 @@ const defineSnapshotProject = (variant: SnapshotVariant): TestProjectConfigurati
       provider: playwright(),
       headless: true,
       instances: [{ browser: 'chromium', viewport: { width: 1280, height: 720 } }],
-      commands: { serveRemoteMedia, takeUnservedMedia },
       expect: {
         toMatchScreenshot: {
           comparatorName: 'pixelmatch',

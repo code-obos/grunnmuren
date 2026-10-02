@@ -1,5 +1,7 @@
 import type { Meta } from '@storybook/react-vite';
 
+import { obosLogo } from './media';
+
 export const Default = () => {
   return (
     <div className="grid gap-8">
@@ -23,11 +25,7 @@ export const Default = () => {
         Klassen <code>description</code> kan f.eks. brukes for bildetekster:
       </p>
       <figure>
-        <img
-          className="bg-blue-dark mb-4 max-w-96 p-4"
-          src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/9a29374fde57a12bedf17149525c325a8c3254ae-850x180.svg?auto=format"
-          alt="OBOS logo"
-        />
+        <img className="bg-blue-dark mb-4 max-w-96 p-4" src={obosLogo} alt="OBOS logo" />
         <figcaption className="description">
           OBOS sin logo har hvit tekst, og bildet må derfor ha en mørk bakgrunn. Slik at man kan se
           hva det står.

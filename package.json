@@ -21,7 +21,6 @@
     "sanity:schema:deploy": "pnpm --filter @obosbbl/grunnmuren-docs sanity:schema:deploy",
     "serve-storybook": "http-server ./apps/docs/public/storybook -p 6006 --silent",
     "test": "vitest run",
-    "test:screenshots:media": "RECORD_REMOTE_MEDIA=1 vitest run --project=storybook:default --update",
     "test:screenshots:update": "vitest run --project='storybook:*' --update",
     "test:watch": "vitest",
     "tokens:build": "vitest run --project tokens -u -t \"generated token css\""

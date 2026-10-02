@@ -2,6 +2,15 @@ import { ArrowRight, InfoCircle } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Group } from 'react-aria-components/Group';
 
+import {
+  movingDay,
+  newApartmentBlocks,
+  nordrLogo,
+  obosLogo,
+  office,
+  podcastStudio,
+  residentialArea,
+} from '../__stories__/media';
 import { Badge } from '../badge';
 import { Button } from '../button';
 import {
@@ -41,19 +50,12 @@ const meta = {
             <CarouselItems>
               <CarouselItem>
                 <Media>
-                  <img
-                    src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
-                    alt=""
-                  />
+                  <img src={newApartmentBlocks} alt="" />
                 </Media>
               </CarouselItem>
               <CarouselItem>
                 <Media>
-                  <img
-                    src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
-                    alt=""
-                    loading="lazy"
-                  />
+                  <img src={newApartmentBlocks} alt="" loading="lazy" />
                 </Media>
               </CarouselItem>
             </CarouselItems>
@@ -99,10 +101,7 @@ export const TwoColumn = () => (
         </Group>
       </Content>
       <Media>
-        <img
-          src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/da49bd3a8e2175a547da4c69c9dbce718c077fcb-1920x1280.jpg?auto=format"
-          alt=""
-        />
+        <img src={office} alt="" />
       </Media>
     </Hero>
   </main>
@@ -119,10 +118,7 @@ export const StandardPageWithCTA = () => (
         <ArrowRight className="transition-transform group-hover:motion-safe:translate-x-1" />
       </Button>
       <Media>
-        <img
-          src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/da49bd3a8e2175a547da4c69c9dbce718c077fcb-1920x1280.jpg?auto=format"
-          alt=""
-        />
+        <img src={office} alt="" />
       </Media>
     </Hero>
   </main>
@@ -149,19 +145,12 @@ export const StandardWithCarousel = () => (
             </CarouselItem>
             <CarouselItem>
               <Media fit="contain">
-                <img
-                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/9a29374fde57a12bedf17149525c325a8c3254ae-850x180.svg?auto=format"
-                  alt=""
-                  loading="lazy"
-                />
+                <img src={obosLogo} alt="" loading="lazy" />
               </Media>
             </CarouselItem>
             <CarouselItem>
               <Media>
-                <img
-                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
-                  alt=""
-                />
+                <img src={newApartmentBlocks} alt="" />
               </Media>
             </CarouselItem>
           </CarouselItems>
@@ -175,13 +164,7 @@ export const StandardWithCarousel = () => (
   </main>
 );
 
-const Logo = () => (
-  <img
-    alt=""
-    src="https://brauten-eiendom.no/wp-content/uploads/sites/13/2021/08/Nordr.png"
-    className="h-12"
-  />
-);
+const Logo = () => <img alt="" src={nordrLogo} className="h-12" />;
 
 export const FullBleedWithVideoLoop = () => (
   <main className="container grid gap-y-8">
@@ -215,10 +198,7 @@ export const FullBleedWithImageAndBadge = () => (
         <InfoCircle />I salg
       </Badge>
       <Media>
-        <img
-          src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/da49bd3a8e2175a547da4c69c9dbce718c077fcb-1920x1280.jpg?auto=format"
-          alt=""
-        />
+        <img src={office} alt="" />
       </Media>
     </Hero>
   </main>
@@ -239,37 +219,22 @@ export const FullBleedWithCarousel = () => (
           <CarouselItems>
             <CarouselItem>
               <Media>
-                <img
-                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
-                  alt=""
-                />
+                <img src={newApartmentBlocks} alt="" />
               </Media>
             </CarouselItem>
             <CarouselItem>
               <Media>
-                <img
-                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/7d2285ccee9b9545e018115b8e0ecc8b06aa0729-1620x1080.jpg?auto=format"
-                  alt=""
-                  loading="lazy"
-                />
+                <img src={movingDay} alt="" loading="lazy" />
               </Media>
             </CarouselItem>
             <CarouselItem>
               <Media fit="contain">
-                <img
-                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/32a53eec782e6cbe15d75961f82ecca48dbe30ed-1920x1080.png?auto=format"
-                  alt=""
-                  loading="lazy"
-                />
+                <img src={podcastStudio} alt="" loading="lazy" />
               </Media>
             </CarouselItem>
             <CarouselItem>
               <Media>
-                <img
-                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/a3c4b263f72128f5c6259333a224054ed3b539fe-1440x788.heif?auto=format"
-                  alt=""
-                  loading="lazy"
-                />
+                <img src={residentialArea} alt="" loading="lazy" />
               </Media>
             </CarouselItem>
           </CarouselItems>

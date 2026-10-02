@@ -3,6 +3,15 @@ import { cva } from 'cva';
 import { useEffect, useRef, useState } from 'react';
 import { fn } from 'storybook/test';
 
+import {
+  movingDay,
+  newApartmentBlocks,
+  obosLogoBlue,
+  office,
+  podcastStudio,
+  portrait,
+  residentialArea,
+} from '../__stories__/media';
 import { Badge } from '../badge';
 import {
   UNSAFE_Carousel as Carousel,
@@ -58,37 +67,22 @@ const meta = {
           <CarouselItems className={itemsVariants(props)}>
             <CarouselItem>
               <Media>
-                <img
-                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
-                  alt=""
-                />
+                <img src={newApartmentBlocks} alt="" />
               </Media>
             </CarouselItem>
             <CarouselItem>
               <Media>
-                <img
-                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/7d2285ccee9b9545e018115b8e0ecc8b06aa0729-1620x1080.jpg?auto=format"
-                  alt=""
-                  loading="lazy"
-                />
+                <img src={movingDay} alt="" loading="lazy" />
               </Media>
             </CarouselItem>
             <CarouselItem>
               <Media fit="contain">
-                <img
-                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/32a53eec782e6cbe15d75961f82ecca48dbe30ed-1920x1080.png?auto=format"
-                  alt=""
-                  loading="lazy"
-                />
+                <img src={podcastStudio} alt="" loading="lazy" />
               </Media>
             </CarouselItem>
             <CarouselItem>
               <Media>
-                <img
-                  src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/a3c4b263f72128f5c6259333a224054ed3b539fe-1440x788.heif?auto=format"
-                  alt=""
-                  loading="lazy"
-                />
+                <img src={residentialArea} alt="" loading="lazy" />
               </Media>
             </CarouselItem>
           </CarouselItems>
@@ -170,54 +164,54 @@ export const VerticalOrientation: Story = {
 
 export const galleryImages = [
   {
-    src: 'https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format',
+    src: newApartmentBlocks,
     alt: 'Nye boligblokker i sentrum',
   },
   {
-    src: 'https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/7d2285ccee9b9545e018115b8e0ecc8b06aa0729-1620x1080.jpg?auto=format',
+    src: movingDay,
     alt: 'Live på flyttefot',
   },
   {
-    src: 'https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/da49bd3a8e2175a547da4c69c9dbce718c077fcb-1920x1280.jpg?auto=format',
+    src: office,
     alt: 'På kontoret',
   },
   {
-    src: 'https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/32a53eec782e6cbe15d75961f82ecca48dbe30ed-1920x1080.png?auto=format',
+    src: podcastStudio,
     alt: 'Podcast i studio',
   },
   {
-    src: 'https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/99ef2e1ea751dbdebd992a6bc54f6b6c91915697-1600x837.jpg?auto=format',
+    src: obosLogoBlue,
     alt: 'OBOS logo',
   },
   {
-    src: 'https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/a3c4b263f72128f5c6259333a224054ed3b539fe-1440x788.heif?auto=format',
+    src: residentialArea,
     alt: 'Boligområde',
   },
   {
-    src: 'https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/3c7245912b338f058f6f555a4b6c964911658d46-820x447.jpg?auto=format',
+    src: portrait,
     alt: 'Daniel Kjørberg Siraj',
   },
 ];
 
 export const galleryImagesExterior = [
   {
-    src: 'https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/da49bd3a8e2175a547da4c69c9dbce718c077fcb-1920x1280.jpg?auto=format',
+    src: office,
     alt: 'På kontoret',
   },
   {
-    src: 'https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/99ef2e1ea751dbdebd992a6bc54f6b6c91915697-1600x837.jpg?auto=format',
+    src: obosLogoBlue,
     alt: 'OBOS logo',
   },
   {
-    src: 'https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/a3c4b263f72128f5c6259333a224054ed3b539fe-1440x788.heif?auto=format',
+    src: residentialArea,
     alt: 'Boligområde',
   },
   {
-    src: 'https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/3c7245912b338f058f6f555a4b6c964911658d46-820x447.jpg?auto=format',
+    src: portrait,
     alt: 'Daniel Kjørberg Siraj',
   },
   {
-    src: 'https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format',
+    src: newApartmentBlocks,
     alt: 'Nye boligblokker i sentrum',
   },
 ];

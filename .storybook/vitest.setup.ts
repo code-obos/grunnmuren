@@ -1,5 +1,5 @@
 import { afterEach, beforeAll, expect } from 'vitest';
-import { commands, page } from 'vitest/browser';
+import { page } from 'vitest/browser';
 
 // Imported for its side effects, and last on purpose: the font and animation
 // overrides have to win over the preview's stylesheet. See the file header.
@@ -64,10 +64,6 @@ const waitForMedia = () =>
   ]);
 
 beforeAll(async () => {
-  // Before anything renders, so the first image doesn't go out to the network.
-  // See remote-media.ts.
-  await commands.serveRemoteMedia();
-
   const loaded = await Promise.all(SNAPSHOT_FONTS.map((font) => document.fonts.load(font)));
   await document.fonts.ready;
 
@@ -85,14 +81,6 @@ beforeAll(async () => {
 afterEach(async () => {
   await waitForMedia();
   await nextFrame();
-
-  const unserved = await commands.takeUnservedMedia();
-
-  if (unserved.length > 0) {
-    throw new Error(
-      `No fixture for ${unserved.join(', ')}. Record it with \`pnpm test:screenshots:media\`.`,
-    );
-  }
 
   // The assertion belongs in the hook on purpose: it's the same for all 260-odd
   // stories, and adding it to each story file by hand is how it goes stale.
