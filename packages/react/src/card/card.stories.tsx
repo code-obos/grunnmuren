@@ -9,6 +9,7 @@ import {
 import type { Meta } from '@storybook/react-vite';
 import { cx } from 'cva';
 
+import { newApartmentBlocks, obosLogoBlue, portrait } from '../__stories__/media';
 import { Avatar } from '../avatar';
 import { Badge } from '../badge';
 import { Button } from '../button';
@@ -57,10 +58,7 @@ export const WithBackground = () => {
 export const WithImage = () => (
   <Card>
     <Media>
-      <img
-        alt=""
-        src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/99ef2e1ea751dbdebd992a6bc54f6b6c91915697-1600x837.jpg?auto=format"
-      />
+      <img alt="" src={obosLogoBlue} />
     </Media>
     <Content>
       <Heading level={3}>Kort med bilde</Heading>
@@ -72,10 +70,7 @@ export const WithImage = () => (
 export const OutlinedWithImageAnd = () => (
   <Card variant="outlined">
     <Media>
-      <img
-        alt=""
-        src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/99ef2e1ea751dbdebd992a6bc54f6b6c91915697-1600x837.jpg?auto=format"
-      />
+      <img alt="" src={obosLogoBlue} />
     </Media>
     <Content>
       <Heading level={3}>Kort med bilde og border</Heading>
@@ -201,10 +196,7 @@ export const ClickableWithIcon = () => (
 export const ClickableWithImage = () => (
   <Card>
     <Media>
-      <img
-        alt=""
-        src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/99ef2e1ea751dbdebd992a6bc54f6b6c91915697-1600x837.jpg?auto=format"
-      />
+      <img alt="" src={obosLogoBlue} />
     </Media>
     <Content>
       <Heading level={3}>
@@ -233,10 +225,7 @@ export const ClickableWithBackground = () => (
 export const ClickableWithImageAndCTA = () => (
   <Card>
     <Media>
-      <img
-        alt=""
-        src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/99ef2e1ea751dbdebd992a6bc54f6b6c91915697-1600x837.jpg?auto=format"
-      />
+      <img alt="" src={obosLogoBlue} />
     </Media>
     <Content>
       <Heading level={3}>Med bilde og CTA</Heading>
@@ -270,10 +259,7 @@ export const ClickableWithOtherClickableElements = () => (
   <div className="flex gap-10">
     <Card variant="outlined" className="w-72">
       <Media>
-        <img
-          alt=""
-          src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
-        />
+        <img alt="" src={newApartmentBlocks} />
       </Media>
       <Content className="grow">
         <div className="grid gap-1">
@@ -311,10 +297,7 @@ export const ClickableWithOtherClickableElements = () => (
 export const ClickableWithOtherClickableElementsAndBackgroundColor = () => (
   <Card variant="outlined" className="bg-blue-dark text-mint w-72">
     <Media>
-      <img
-        alt=""
-        src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
-      />
+      <img alt="" src={newApartmentBlocks} />
     </Media>
     <Content>
       <div className="grid gap-1">
@@ -351,10 +334,7 @@ export const ClickableWithOtherClickableElementsAndBackgroundColor = () => (
 export const ClickableWithBadge = () => (
   <Card variant="outlined" className="bg-blue-dark text-mint w-72">
     <Media>
-      <img
-        alt=""
-        src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
-      />
+      <img alt="" src={newApartmentBlocks} />
     </Media>
     <Content>
       <div className="grid gap-1">
@@ -395,10 +375,7 @@ export const ClickableWithBadge = () => (
 export const ClickableWithBadgeRight = () => (
   <Card variant="outlined" className="bg-blue-dark text-mint w-72">
     <Media>
-      <img
-        alt=""
-        src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
-      />
+      <img alt="" src={newApartmentBlocks} />
     </Media>
     <Content>
       <div className="grid gap-1">
@@ -439,10 +416,7 @@ export const ClickableWithBadgeRight = () => (
 export const HorizontalLeft = () => (
   <Card layout="horizontal">
     <Media>
-      <img
-        alt=""
-        src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/99ef2e1ea751dbdebd992a6bc54f6b6c91915697-1600x837.jpg?auto=format"
-      />
+      <img alt="" src={obosLogoBlue} />
     </Media>
     <Content>
       <Heading level={3}>Med bilde til venstre</Heading>
@@ -470,10 +444,7 @@ export const HorizontalRight = () => (
       </CardLink>
     </Content>
     <Media>
-      <img
-        alt=""
-        src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/99ef2e1ea751dbdebd992a6bc54f6b6c91915697-1600x837.jpg?auto=format"
-      />
+      <img alt="" src={obosLogoBlue} />
     </Media>
   </Card>
 );
@@ -508,7 +479,7 @@ export const HorizontalWithIconRight = () => (
 
 export const WithAvatar = () => (
   <Card layout="horizontal" variant="outlined" className="w-96 max-w-full">
-    <Avatar src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/3c7245912b338f058f6f555a4b6c964911658d46-820x447.jpg?auto=format" />
+    <Avatar src={portrait} />
     <Content>
       <div className="flex flex-col-reverse gap-2">
         <Heading level={3}>Daniel Kjørberg Siraj</Heading>

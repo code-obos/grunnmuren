@@ -72,4 +72,6 @@ jobs:
         with:
           name: screenshot-diffs
           path: .vitest-attachments/
+          # upload-artifact skips dot directories by default, and this is one
+          include-hidden-files: true
           retention-days: 7
