@@ -40,7 +40,7 @@ const buttonVariants = cva({
     color: {
       blue: 'focus-visible:outline-focus',
       mint: 'focus-visible:outline-focus focus-visible:outline-mint',
-      white: 'focus-visible:outline-focus focus-visible:outline-white',
+      white: 'focus-visible:outline-focus focus-visible:outline-primary-base-contrast-default',
     },
     /**
      * When the button is without text, but with a single icon.
@@ -57,21 +57,23 @@ const buttonVariants = cva({
     {
       color: 'blue',
       variant: 'primary',
-      // Darken bg by 20% on hover. The color is manually crafted
+      // Every state is darker than the one before it
       className:
-        'bg-blue-dark hover:bg-blue text-white active:bg-[#0536A0] active:text-white **:[[role="progressbar"]]:text-white',
+        'bg-primary-base-default hover:bg-primary-base-hover text-primary-base-contrast-default active:bg-primary-base-active active:text-primary-base-contrast-default **:[[role="progressbar"]]:text-primary-base-contrast-default',
     },
     {
       color: 'blue',
       variant: 'secondary',
       className:
-        'text-blue-dark hover:bg-blue hover:text-blue-dark **:[[role="progressbar"]]:text-blue-dark hover:border-transparent hover:text-white active:bg-[#0536A0] [&:hover_[role="progressbar"]]:text-white',
+        'text-primary-text-default hover:bg-primary-base-hover **:[[role="progressbar"]]:text-primary-text-default hover:text-primary-base-contrast-default active:bg-primary-base-active [&:hover_[role="progressbar"]]:text-primary-base-contrast-default hover:border-transparent',
     },
     {
       color: 'blue',
       variant: 'tertiary',
-      className: '**:[[role="progressbar"]]:text-black',
+      className: '**:[[role="progressbar"]]:text-neutral-text-default',
     },
+    // Mint stays on the palette for now. The role set has nothing for a button on a dark
+    // background, and nothing darker than mint-300 to hover to. Waiting on the designer.
     {
       color: 'mint',
       variant: 'primary',
@@ -94,18 +96,19 @@ const buttonVariants = cva({
       color: 'white',
       variant: 'primary',
       className:
-        'hover:bg-sky active:bg-sky-light bg-white text-black **:[[role="progressbar"]]:text-black',
+        'hover:bg-primary-surface-hover active:bg-primary-surface-active bg-neutral-surface-default text-neutral-text-default **:[[role="progressbar"]]:text-neutral-text-default',
     },
     {
       color: 'white',
       variant: 'secondary',
       className:
-        'text-white hover:bg-white hover:text-black [&:hover_[role="progressbar"]]:text-black **:[[role="progressbar"]]:text-white',
+        'text-primary-base-contrast-default hover:bg-neutral-surface-default hover:text-neutral-text-default [&:hover_[role="progressbar"]]:text-neutral-text-default **:[[role="progressbar"]]:text-primary-base-contrast-default',
     },
     {
       color: 'white',
       variant: 'tertiary',
-      className: 'text-white **:[[role="progressbar"]]:text-white',
+      className:
+        'text-primary-base-contrast-default **:[[role="progressbar"]]:text-primary-base-contrast-default',
     },
   ],
   defaultVariants: {

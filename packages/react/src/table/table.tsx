@@ -38,8 +38,8 @@ const tableRowVariants = cva({
   base: [
     'group/row',
     'data-focus-visible:outline-focus-inset',
-    'group-data-[variant=zebra-striped]/table:odd:bg-white',
-    'group-data-[variant=zebra-striped]/table:even:bg-sky-lightest',
+    'group-data-[variant=zebra-striped]/table:odd:bg-neutral-surface-default',
+    'group-data-[variant=zebra-striped]/table:even:bg-primary-surface-tinted',
     // When the row has expandable children, the chevron button makes the
     // row taller than a plain text row. Center-align the cells' content so
     // the chevron icon lines up with text in sibling cells.
@@ -206,7 +206,10 @@ function ResizableTableContainer({
  */
 function TableHeader({ className, children, ...restProps }: TableHeaderProps) {
   return (
-    <RACTableHeader {...restProps} className={cx(className, 'border-b border-black')}>
+    <RACTableHeader
+      {...restProps}
+      className={cx(className, 'border-neutral-border-strong border-b')}
+    >
       {children}
     </RACTableHeader>
   );
@@ -220,7 +223,7 @@ function TableColumn(props: TableColumnProps) {
       {...restProps}
       className={cx(
         className,
-        'px-4 py-3 text-left text-sm font-medium text-black',
+        'text-neutral-text-default px-4 py-3 text-left text-sm font-medium',
         'data-focus-visible:outline-focus-inset',
         '[&_:not([data-slot="table-column-resizer"]):focus-visible]:outline-focus-offset',
         'min-w-fit whitespace-nowrap',
@@ -240,7 +243,7 @@ const TableColumnResizer = ({ className, ...restProps }: TableColumnResizerProps
       className,
       '-my-3 -mr-4.5 size-11 flex-none',
       'cursor-ew-resize',
-      'relative after:absolute after:inset-y-2 after:right-5 after:w-px after:bg-black',
+      'after:bg-neutral-border-strong relative after:absolute after:inset-y-2 after:right-5 after:w-px',
       'data-focused:after:outline-focus-offset',
     )}
     data-slot="table-column-resizer"
@@ -276,7 +279,7 @@ function TableCell(props: TableCellProps) {
       {...restProps}
       className={cx(
         className,
-        'px-4 py-3 text-sm/relaxed text-black',
+        'text-neutral-text-default px-4 py-3 text-sm/relaxed',
         'min-w-fit whitespace-nowrap',
         'align-top',
         'data-focus-visible:outline-focus-inset',
