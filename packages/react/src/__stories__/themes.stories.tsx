@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { ReactNode } from 'react';
+import { type ReactNode, useLayoutEffect, useRef, useState } from 'react';
 import { expect, within } from 'storybook/test';
 
 const meta: Meta = {
@@ -87,4 +87,143 @@ export const SideBySide: StoryObj = {
     await expect(style('app').backgroundColor).toBe('rgb(255, 0, 0)');
     await expect(style('app').borderRadius).toBe('0px');
   },
+};
+
+type ColorToken = { name: string; group: string };
+
+const ROLES = ['primary', 'accent', 'neutral', 'success', 'danger', 'warning', 'info'];
+const HEX = /^#[0-9a-f]{3,8}$/i;
+
+/**
+ * The colour tokens as the stylesheet declares them, so the page can't drift from the
+ * source. Primitives are the hex values on the default `:root`, the roles and the short
+ * tokens come from the rules the semantic layer declares them in.
+ */
+const readColorTokens = () => {
+  const primitives: Array<ColorToken> = [];
+  const roles: Array<ColorToken> = [];
+  const short: Array<ColorToken> = [];
+
+  for (const sheet of document.styleSheets) {
+    let rules: CSSRuleList;
+    try {
+      rules = sheet.cssRules;
+    } catch {
+      // A stylesheet from another origin can't be read, and has no tokens of ours anyway
+      continue;
+    }
+
+    for (const rule of rules) {
+      if (!(rule instanceof CSSStyleRule) || !rule.selectorText.includes(':root')) continue;
+      const { selectorText, style } = rule;
+
+      for (const name of style) {
+        if (!name.startsWith('--gm-')) continue;
+        const value = style.getPropertyValue(name).trim();
+
+        if (selectorText.includes('[data-theme="default"]') && HEX.test(value)) {
+          primitives.push({ name, group: name.replace(/^--gm-/, '').replace(/-\d+$/, '') });
+        } else if (selectorText.includes('[data-color="primary"]')) {
+          short.push({ name, group: name.replace(/^--gm-color-/, '').split('-')[0] });
+        } else if (name.startsWith('--gm-color-')) {
+          const role = ROLES.find((candidate) => name.startsWith(`--gm-color-${candidate}-`));
+          if (role) roles.push({ name, group: role });
+        }
+      }
+    }
+  }
+
+  return { primitives, roles, short };
+};
+
+const groupBy = (tokens: Array<ColorToken>) => Map.groupBy(tokens, (token) => token.group);
+
+const toHex = (color: string) => {
+  const channels = color
+    .match(/\d+(\.\d+)?/g)
+    ?.slice(0, 3)
+    .map(Number);
+  return channels?.length === 3
+    ? `#${channels.map((channel) => Math.round(channel).toString(16).padStart(2, '0')).join('')}`
+    : color;
+};
+
+const Swatch = ({ name }: { name: string }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [value, setValue] = useState('');
+
+  useLayoutEffect(() => {
+    if (ref.current) setValue(toHex(getComputedStyle(ref.current).backgroundColor));
+  }, []);
+
+  return (
+    <div className="flex items-center gap-3">
+      <div
+        ref={ref}
+        className="size-10 shrink-0 rounded-md border border-black/15"
+        style={{ backgroundColor: `var(${name})` }}
+      />
+      <div className="min-w-0 text-sm">
+        <code className="block truncate">{name}</code>
+        <span className="text-gray-dark">{value}</span>
+      </div>
+    </div>
+  );
+};
+
+const TokenGroups = ({ title, tokens }: { title: string; tokens: Array<ColorToken> }) => (
+  <section className="grid gap-6">
+    <h2 className="heading-m">{title}</h2>
+    {[...groupBy(tokens)].map(([group, members]) => (
+      <div key={group} className="grid gap-3">
+        <h3 className="heading-xs">{group}</h3>
+        <div className="grid grid-cols-4 gap-4">
+          {members.map(({ name }) => (
+            <Swatch key={name} name={name} />
+          ))}
+        </div>
+      </div>
+    ))}
+  </section>
+);
+
+// The toolbar sets data-theme and data-color on <html>. Counting the changes and using it
+// as a key makes every swatch read its value again.
+const useDocumentThemeVersion = () => {
+  const [version, setVersion] = useState(0);
+
+  useLayoutEffect(() => {
+    const observer = new MutationObserver(() => setVersion((current) => current + 1));
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme', 'data-color'],
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  return version;
+};
+
+const ColorTokens = () => {
+  const [tokens, setTokens] = useState<ReturnType<typeof readColorTokens>>();
+  const version = useDocumentThemeVersion();
+  useLayoutEffect(() => setTokens(readColorTokens()), []);
+
+  if (!tokens) return null;
+
+  return (
+    <div key={version} className="grid gap-12">
+      <TokenGroups title="Roller" tokens={tokens.roles} />
+      <TokenGroups title="Korte tokens (data-color)" tokens={tokens.short} />
+      <TokenGroups title="Primitiver" tokens={tokens.primitives} />
+    </div>
+  );
+};
+
+/**
+ * Alle fargetokens med navn og verdi. Følger `theme` og `color` i toolbaren, så du ser hva
+ * et tema faktisk gir.
+ */
+export const Farger: StoryObj = {
+  render: () => <ColorTokens />,
 };
