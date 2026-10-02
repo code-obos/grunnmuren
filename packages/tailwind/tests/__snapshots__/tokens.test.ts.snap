@@ -1,5 +1,11 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`computed values > 'bg-black' 1`] = `
+[
+  "background-color: #333333",
+]
+`;
+
 exports[`computed values > 'bg-blue' 1`] = `
 [
   "background-color: #0047ba",
@@ -48,6 +54,12 @@ exports[`computed values > 'bg-gray-light' 2`] = `
 ]
 `;
 
+exports[`computed values > 'bg-gray-lightest' 1`] = `
+[
+  "background-color: #f1f1f1",
+]
+`;
+
 exports[`computed values > 'bg-green-dark' 1`] = `
 [
   "background-color: #00524c",
@@ -72,7 +84,19 @@ exports[`computed values > 'bg-mint' 1`] = `
 ]
 `;
 
+exports[`computed values > 'bg-red' 1`] = `
+[
+  "background-color: #c0385d",
+]
+`;
+
 exports[`computed values > 'bg-red-light' 1`] = `
+[
+  "background-color: #faedef",
+]
+`;
+
+exports[`computed values > 'bg-red-light' 2`] = `
 [
   "background-color: #faedef",
 ]
@@ -87,6 +111,12 @@ exports[`computed values > 'bg-sky' 1`] = `
 exports[`computed values > 'bg-sky' 2`] = `
 [
   "background-color: #bedfec",
+]
+`;
+
+exports[`computed values > 'bg-sky-lightest' 1`] = `
+[
+  "background-color: #ebf5f9",
 ]
 `;
 
@@ -108,9 +138,39 @@ exports[`computed values > 'border-black' 1`] = `
 ]
 `;
 
+exports[`computed values > 'border-blue' 1`] = `
+[
+  "border-color: #0047ba",
+]
+`;
+
+exports[`computed values > 'border-blue-dark' 1`] = `
+[
+  "border-color: #002169",
+]
+`;
+
 exports[`computed values > 'border-blue-light' 1`] = `
 [
   "border-color: #bedfec",
+]
+`;
+
+exports[`computed values > 'border-gray' 1`] = `
+[
+  "border-color: #818181",
+]
+`;
+
+exports[`computed values > 'border-gray-light' 1`] = `
+[
+  "border-color: #e6e6e6",
+]
+`;
+
+exports[`computed values > 'border-red' 1`] = `
+[
+  "border-color: #c0385d",
 ]
 `;
 
@@ -180,6 +240,12 @@ exports[`computed values > 'hover:bg-blue' 1`] = `
 ]
 `;
 
+exports[`computed values > 'outline-red' 1`] = `
+[
+  "outline-color: #c0385d",
+]
+`;
+
 exports[`computed values > 'placeholder-[#727070]' 1`] = `
 [
   "&::placeholder { color: #727070 }",
@@ -198,9 +264,27 @@ exports[`computed values > 'ring-red' 1`] = `
 ]
 `;
 
+exports[`computed values > 'shadow-red' 1`] = `
+[
+  "--tw-shadow-color: color-mix(in oklab, #c0385d var(--tw-shadow-alpha), transparent)",
+]
+`;
+
+exports[`computed values > 'text-[#727070]' 1`] = `
+[
+  "color: #727070",
+]
+`;
+
 exports[`computed values > 'text-black' 1`] = `
 [
   "color: #333333",
+]
+`;
+
+exports[`computed values > 'text-blue-dark' 1`] = `
+[
+  "color: #002169",
 ]
 `;
 
@@ -217,6 +301,12 @@ exports[`computed values > 'text-gray-dark' 1`] = `
 `;
 
 exports[`computed values > 'text-red' 1`] = `
+[
+  "color: #c0385d",
+]
+`;
+
+exports[`computed values > 'text-red' 2`] = `
 [
   "color: #c0385d",
 ]

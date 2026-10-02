@@ -95,6 +95,36 @@ export const utilityPairs: Array<UtilityPair> = [
     change: 'avatar placeholder goes from gray-200 to gray-100, 5.61:1 to 6.2:1',
   },
 
+  // The form components: checkbox, radio, file-upload, select and the listbox. A hovered
+  // checkbox or radio reuses the tag's bg-sky and bg-blue-dark pairs above.
+  { from: 'border-blue', to: 'border-primary-border-default' },
+  { from: 'border-red', to: 'border-danger-border-default' },
+  { from: 'outline-red', to: 'outline-danger-border-default' },
+  { from: 'shadow-red', to: 'shadow-danger-border-default' },
+  { from: 'bg-red', to: 'bg-danger-base-default' },
+  { from: 'text-red', to: 'text-danger-base-default' },
+  { from: 'bg-red-light', to: 'bg-danger-surface-hover' },
+  { from: 'border-gray', to: 'border-neutral-border-default' },
+  { from: 'border-gray-light', to: 'border-neutral-border-subtle' },
+  { from: 'bg-gray-lightest', to: 'bg-neutral-surface-tinted' },
+  { from: 'bg-black', to: 'bg-neutral-border-strong' },
+  { from: 'text-blue-dark', to: 'text-primary-text-default' },
+  {
+    from: 'border-blue-dark',
+    to: 'border-primary-border-strong',
+    change: 'hovered selected checkbox and radio go from blue-900 to blue-700',
+  },
+  {
+    from: 'bg-sky-lightest',
+    to: 'bg-primary-surface-hover',
+    change: 'focused listbox option goes from sky-100 to sky-200, a hover like the rest',
+  },
+  {
+    from: 'text-[#727070]',
+    to: 'text-neutral-text-subtle',
+    change: 'select placeholder goes from a hardcoded grey to gray-700, like the other fields',
+  },
+
   // Waiting on the fluid type decision. `to` goes in when the heading tokens are wired up.
   { from: 'heading-xl', change: 'fluid typography replaces the breakpoint step' },
   { from: 'heading-l', change: 'fluid typography replaces the breakpoint step' },
