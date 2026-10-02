@@ -1,3 +1,3 @@
 export function InputAddonDivider() {
-  return <span className="block h-6 w-px flex-none bg-black" />;
+  return <span className="bg-neutral-border-strong block h-6 w-px flex-none" />;
 }

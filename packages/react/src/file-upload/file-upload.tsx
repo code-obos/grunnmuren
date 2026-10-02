@@ -326,16 +326,20 @@ const FileUpload = ({
                   <div
                     className={cx(
                       'flex items-center justify-between gap-3 rounded-lg border p-1.5',
-                      hasError ? 'border-red bg-red-light' : 'border-gray',
+                      hasError
+                        ? 'border-danger-border-default bg-danger-surface-tinted'
+                        : 'border-neutral-border-default',
                     )}
                   >
                     <div className="flex items-center gap-3">
-                      <div className="footnote border-gray-light bg-gray-lightest rounded-md border px-2.5 py-2">
+                      <div className="footnote border-neutral-border-subtle bg-neutral-surface-tinted rounded-md border px-2.5 py-2">
                         {getFileExtension(file)}
                       </div>
                       <div className="flex flex-col">
                         <span className="description truncate font-medium">{fileName}</span>
-                        <span className="footnote text-gray-dark">{formatFileSize(file.size)}</span>
+                        <span className="footnote text-neutral-text-subtle">
+                          {formatFileSize(file.size)}
+                        </span>
                       </div>
                     </div>
                     <button
