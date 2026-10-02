@@ -1,8 +1,32 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`computed values > 'active:bg-[#0536A0]' 1`] = `
+[
+  "&:active { background-color: #0536a0 }",
+]
+`;
+
+exports[`computed values > 'active:bg-sky-light' 1`] = `
+[
+  "&:active { background-color: #deeff5 }",
+]
+`;
+
+exports[`computed values > 'bg-[#FFF2DE]' 1`] = `
+[
+  "background-color: #fff2de",
+]
+`;
+
 exports[`computed values > 'bg-black' 1`] = `
 [
   "background-color: #333333",
+]
+`;
+
+exports[`computed values > 'bg-black/25' 1`] = `
+[
+  "background-color: color-mix(in oklab, #333333 25%, transparent)",
 ]
 `;
 
@@ -84,6 +108,12 @@ exports[`computed values > 'bg-mint' 1`] = `
 ]
 `;
 
+exports[`computed values > 'bg-mint-light' 1`] = `
+[
+  "background-color: #e6f5f0",
+]
+`;
+
 exports[`computed values > 'bg-red' 1`] = `
 [
   "background-color: #c0385d",
@@ -102,6 +132,12 @@ exports[`computed values > 'bg-red-light' 2`] = `
 ]
 `;
 
+exports[`computed values > 'bg-red-light' 3`] = `
+[
+  "background-color: #faedef",
+]
+`;
+
 exports[`computed values > 'bg-sky' 1`] = `
 [
   "background-color: #bedfec",
@@ -114,7 +150,19 @@ exports[`computed values > 'bg-sky' 2`] = `
 ]
 `;
 
+exports[`computed values > 'bg-sky-light' 1`] = `
+[
+  "background-color: #deeff5",
+]
+`;
+
 exports[`computed values > 'bg-sky-lightest' 1`] = `
+[
+  "background-color: #ebf5f9",
+]
+`;
+
+exports[`computed values > 'bg-sky-lightest' 2`] = `
 [
   "background-color: #ebf5f9",
 ]
@@ -126,13 +174,43 @@ exports[`computed values > 'bg-white' 1`] = `
 ]
 `;
 
+exports[`computed values > 'border-[#0F9B6E]' 1`] = `
+[
+  "border-color: #0f9b6e",
+]
+`;
+
+exports[`computed values > 'border-[#1A7FA7]' 1`] = `
+[
+  "border-color: #1a7fa7",
+]
+`;
+
+exports[`computed values > 'border-[#C57C13]' 1`] = `
+[
+  "border-color: #c57c13",
+]
+`;
+
 exports[`computed values > 'border-b-black' 1`] = `
 [
   "border-bottom-color: #333333",
 ]
 `;
 
+exports[`computed values > 'border-b-blue-dark' 1`] = `
+[
+  "border-bottom-color: #002169",
+]
+`;
+
 exports[`computed values > 'border-black' 1`] = `
+[
+  "border-color: #333333",
+]
+`;
+
+exports[`computed values > 'border-black' 2`] = `
 [
   "border-color: #333333",
 ]
@@ -145,6 +223,12 @@ exports[`computed values > 'border-blue' 1`] = `
 `;
 
 exports[`computed values > 'border-blue-dark' 1`] = `
+[
+  "border-color: #002169",
+]
+`;
+
+exports[`computed values > 'border-blue-dark' 2`] = `
 [
   "border-color: #002169",
 ]
@@ -171,6 +255,12 @@ exports[`computed values > 'border-gray-light' 1`] = `
 exports[`computed values > 'border-red' 1`] = `
 [
   "border-color: #c0385d",
+]
+`;
+
+exports[`computed values > 'border-sky' 1`] = `
+[
+  "border-color: #bedfec",
 ]
 `;
 
@@ -243,6 +333,12 @@ exports[`computed values > 'hover:bg-blue' 1`] = `
 exports[`computed values > 'outline-red' 1`] = `
 [
   "outline-color: #c0385d",
+]
+`;
+
+exports[`computed values > 'outline-white' 1`] = `
+[
+  "outline-color: #ffffff",
 ]
 `;
 

@@ -47,7 +47,7 @@ const _ModalOverlay = ({
     {...restProps}
     className={({ isEntering, isExiting }) =>
       cx(
-        'fixed inset-0 flex min-h-full items-center justify-center overflow-y-auto bg-black/25 text-center backdrop-blur-sm',
+        'bg-neutral-base-default/25 fixed inset-0 flex min-h-full items-center justify-center overflow-y-auto text-center backdrop-blur-sm',
         !fullscreen && 'p-4',
         isEntering && 'fade-in animate-in duration-300 ease-out',
         isExiting && 'fade-out animate-out duration-200 ease-in',
@@ -85,7 +85,7 @@ const Modal = ({
       className={({ isEntering, isExiting }) =>
         cx(
           className,
-          'overflow-auto bg-white text-left shadow-xl',
+          'bg-neutral-surface-default overflow-auto text-left shadow-xl',
           fullscreen ? 'fixed inset-0' : 'w-full max-w-md rounded-2xl align-middle',
           isEntering && 'zoom-in-95 animate-in duration-300 ease-out',
           isExiting && 'zoom-out-95 animate-out duration-200 ease-in',

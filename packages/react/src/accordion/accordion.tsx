@@ -28,13 +28,17 @@ function Accordion(props: AccordionProps) {
   const childCount = Children.count(children);
 
   return (
-    <div {...restProps} data-accordion className={cx('rounded-lg bg-white', className)}>
+    <div
+      {...restProps}
+      data-accordion
+      className={cx('bg-neutral-surface-default rounded-lg', className)}
+    >
       {Children.map(children, (child, index) => (
         <>
           {child}
           {index < childCount - 1 && (
             // Margin is added to enable support for containers with a background color
-            <hr className="border-gray-light mx-2" aria-hidden />
+            <hr className="border-neutral-border-subtle mx-2" aria-hidden />
           )}
         </>
       ))}
@@ -96,7 +100,7 @@ function AccordionItem(props: AccordionItemProps) {
             {
               className:
                 // Uses pseudo elements for vertical padding, since that doesn't affect the height when the accordion is closed
-                'text-sm font-light leading-6 px-3.5 data-[expanded]:after:h-3.5 relative overflow-hidden border-sky border-l-[3px] before:relative before:block before:h-1.5 after:relative after:block after:h-1.5',
+                'text-sm font-light leading-6 px-3.5 data-[expanded]:after:h-3.5 relative overflow-hidden border-primary-border-subtle border-l-[3px] before:relative before:block before:h-1.5 after:relative after:block after:h-1.5',
               _outerWrapper: (children) => (
                 <DisclosurePanel aria-labelledby={buttonId} role="region">
                   {children}

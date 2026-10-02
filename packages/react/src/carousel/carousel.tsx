@@ -555,7 +555,7 @@ const CarouselItem = ({ className, children, ...rest }: CarouselItemProps) => {
         '*:data-[slot=media]:lg:aspect-2/1',
         '*:data-[slot=media]:*:h-full',
         '*:data-[slot=media]:*:w-full',
-        '*:data-[slot=media]:data-[fit="contain"]:bg-blue-dark',
+        '*:data-[slot=media]:data-[fit="contain"]:bg-primary-base-default',
       )}
       data-slot="carousel-item"
       role={shouldUseAriaCarouselPattern ? 'group' : undefined}
