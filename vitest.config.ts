@@ -6,6 +6,12 @@ import { defineConfig, type TestProjectConfiguration } from 'vitest/config';
 
 import { type SnapshotVariant, snapshotVariants } from './.storybook/snapshot-variants.ts';
 
+// Storybook's Vitest plugin lays every story out in 1200x900, whatever the instance below
+// says. Room for that and for the tallest stories, and anything taller still gets
+// captured whole, just scaled down to fit.
+const STORY_VIEWPORT = { width: 1200, height: 900 };
+const CONTEXT_VIEWPORT = { width: STORY_VIEWPORT.width, height: 4096 };
+
 // Vitest's default screenshot and diff paths have no project in them, so every variant would
 // compare against the same file and write its diffs over the other's. The default keeps
 // the plain name, so its baselines stay put.
@@ -26,9 +32,12 @@ const defineSnapshotProject = (variant: SnapshotVariant): TestProjectConfigurati
     setupFiles: ['./.storybook/vitest.setup.ts'],
     browser: {
       enabled: true,
-      provider: playwright(),
+      // The stories render in an iframe inside this page, scaled down to fit when the page
+      // is smaller. Room enough keeps the scale at 1, so a screenshot is the story pixel
+      // for pixel, and a tall story that gets a taller iframe isn't shrunk to fit.
+      provider: playwright({ contextOptions: { viewport: CONTEXT_VIEWPORT } }),
       headless: true,
-      instances: [{ browser: 'chromium', viewport: { width: 1280, height: 720 } }],
+      instances: [{ browser: 'chromium', viewport: STORY_VIEWPORT }],
       expect: {
         toMatchScreenshot: {
           comparatorName: 'pixelmatch',
