@@ -20,29 +20,29 @@ function CheckmarkBox() {
   return (
     <span
       className={cx([
-        'relative left-0 grid flex-none place-content-center rounded-sm border-2 border-black text-white',
+        'border-neutral-border-strong text-primary-base-contrast-default relative left-0 grid flex-none place-content-center rounded-sm border-2',
         // to vertically align the radio we need to calculate the label's height, which is equal to it's font size multiplied by the line height.
         // For the ::before psuedo element the line height of the label is always 1em.
         // When we know the height of the label we use the height of the radio to push it down to align with the label's first line
         // TODO: 1.75 here is the unit less lineheight, altough we use 1.75rem as the line height, so there is a mismatch here. Revisit this when we've worked on typography in v2. Should this be a CSS custom property instead?
         'mt-[calc((1em*1.75-24px)/2)] size-[24px]',
         // selected
-        'group-data-selected:group-not-data-hovered:group-not-data-invalid:border-blue group-data-selected:group-not-data-hovered:group-not-data-invalid:bg-blue',
-        'group-data-selected:group-not-data-hovered:group-data-invalid:border-red group-data-selected:group-not-data-hovered:group-data-invalid:bg-red',
+        'group-data-selected:group-not-data-hovered:group-not-data-invalid:border-primary-base-default group-data-selected:group-not-data-hovered:group-not-data-invalid:bg-primary-base-default',
+        'group-data-selected:group-not-data-hovered:group-data-invalid:border-danger-border-default group-data-selected:group-not-data-hovered:group-data-invalid:bg-danger-base-default',
         // focus
         'group-data-focus-visible:outline-focus-offset',
         // hovered
-        'group-data-hovered:group-data-invalid:bg-red-light',
-        'group-data-hovered:border-blue',
-        'group-data-hovered:bg-sky',
-        'group-data-hovered:group-data-selected:group-not-data-invalid:border-blue-dark',
-        'group-data-hovered:group-data-selected:group-not-data-invalid:bg-blue-dark',
+        'group-data-hovered:group-data-invalid:bg-danger-surface-hover',
+        'group-data-hovered:border-primary-border-default',
+        'group-data-hovered:bg-primary-surface-hover',
+        'group-data-hovered:group-data-selected:group-not-data-invalid:border-primary-border-strong',
+        'group-data-hovered:group-data-selected:group-not-data-invalid:bg-primary-base-hover',
         // invalid - The border is 1 px thicker when invalid. We don't actually want to change the border width, as that causes the element's size to change
         // so we use an inner shadow of 1 px instead to pad the actual border
-        'group-data-invalid:border-red group-data-invalid:shadow-red group-data-invalid:shadow-[inset_0_0_0_1px]',
+        'group-data-invalid:border-danger-border-default group-data-invalid:shadow-danger-border-default group-data-invalid:shadow-[inset_0_0_0_1px]',
       ])}
     >
-      <CheckIcon className="group-data-invalid:group-data-hovered:group-data-selected:text-red size-full opacity-0 group-data-selected:opacity-100" />
+      <CheckIcon className="group-data-invalid:group-data-hovered:group-data-selected:text-danger-base-default size-full opacity-0 group-data-selected:opacity-100" />
     </span>
   );
 }

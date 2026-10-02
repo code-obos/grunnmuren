@@ -31,7 +31,7 @@ const ListBoxItem = (props: ListBoxItemProps) => {
       {...props}
       className={cx(
         props.className,
-        'data-focused:bg-sky-lightest flex cursor-pointer px-6 py-3 leading-6 outline-none',
+        'data-focused:bg-primary-surface-hover flex cursor-pointer px-6 py-3 leading-6 outline-none',
       )}
       textValue={textValue}
     >
@@ -63,7 +63,10 @@ const ListBoxSection = <T extends object>({ className, ...restProps }: ListBoxSe
 const ListBoxHeader = (props: ListBoxHeaderProps) => (
   <Header
     {...props}
-    className={cx(props.className, 'text-blue-dark mx-6 cursor-default py-2 leading-6 font-medium')}
+    className={cx(
+      props.className,
+      'text-primary-text-default mx-6 cursor-default py-2 leading-6 font-medium',
+    )}
   />
 );
 
