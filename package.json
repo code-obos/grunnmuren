@@ -26,6 +26,7 @@
     "tokens:build": "vitest run --project tokens -u -t \"generated token css\""
   },
   "dependencies": {
+    "@arethetypeswrong/core": "0.18.5",
     "@changesets/cli": "3.0.3",
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
     "@react-aria/optimize-locales-plugin": "2.0.2",
@@ -40,7 +41,6 @@
     "@types/react-dom": "19.2.3",
     "@vitest/browser": "4.1.11",
     "@vitest/browser-playwright": "4.1.11",
-    "bunchee": "6.12.2",
     "eslint-plugin-better-tailwindcss": "4.4.1",
     "fontaine": "0.8.1",
     "http-server": "14.1.1",
@@ -48,10 +48,12 @@
     "oxlint": "1.60.0",
     "oxlint-tsgolint": "0.20.0",
     "playwright": "1.63.0",
+    "publint": "0.3.24",
     "react": "catalog:",
     "react-dom": "catalog:",
     "storybook": "10.6.0",
     "tailwindcss": "catalog:",
+    "tsdown": "0.23.0",
     "typescript": "5.9.3",
     "vite": "8.2.2",
     "vitest": "4.1.11"

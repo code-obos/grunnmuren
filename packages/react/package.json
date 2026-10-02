@@ -18,7 +18,7 @@
     }
   },
   "scripts": {
-    "build": "bunchee"
+    "build": "tsdown"
   },
   "dependencies": {
     "@obosbbl/grunnmuren-icons-react": "workspace:^",
