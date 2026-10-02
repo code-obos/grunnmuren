@@ -15,22 +15,22 @@ const tagVariants = cva({
   base: [
     'relative flex cursor-pointer items-center gap-1 rounded-lg px-2 py-1 text-sm font-medium transition-colors duration-200',
     // Resting
-    'border-2 border-black bg-white text-black',
+    'border-neutral-border-strong bg-neutral-surface-default text-neutral-text-default border-2',
     //Focus
     'focus-visible:outline-focus-offset',
     // Hover
-    'data-hovered:bg-sky',
+    'data-hovered:bg-primary-surface-hover',
     // Selected
     // Allows removing
     'data-allows-removing:border-transparent',
-    'data-allows-removing:bg-blue',
-    'data-allows-removing:data-hovered:bg-blue-dark',
-    'data-allows-removing:text-white',
+    'data-allows-removing:bg-primary-base-default',
+    'data-allows-removing:data-hovered:bg-primary-base-hover',
+    'data-allows-removing:text-primary-base-contrast-default',
     // Selected
     'aria-selected:border-transparent',
-    'aria-selected:bg-blue',
-    'aria-selected:data-hovered:bg-blue-dark',
-    'aria-selected:text-white',
+    'aria-selected:bg-primary-base-default',
+    'aria-selected:data-hovered:bg-primary-base-hover',
+    'aria-selected:text-primary-base-contrast-default',
     //Icons
     '[&_svg]:h-4 [&_svg]:w-4',
   ],

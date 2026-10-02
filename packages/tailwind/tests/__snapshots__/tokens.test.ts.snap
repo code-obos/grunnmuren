@@ -1,6 +1,18 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`computed values > bg-blue 1`] = `
+[
+  "background-color: #0047ba",
+]
+`;
+
 exports[`computed values > bg-blue-dark 1`] = `
+[
+  "background-color: #002169",
+]
+`;
+
+exports[`computed values > bg-blue-dark 2`] = `
 [
   "background-color: #002169",
 ]
@@ -15,6 +27,24 @@ exports[`computed values > bg-blue-light 1`] = `
 exports[`computed values > bg-blue-lightest 1`] = `
 [
   "background-color: #deeff5",
+]
+`;
+
+exports[`computed values > bg-gray-dark 1`] = `
+[
+  "background-color: #595959",
+]
+`;
+
+exports[`computed values > bg-gray-light 1`] = `
+[
+  "background-color: #e6e6e6",
+]
+`;
+
+exports[`computed values > bg-gray-light 2`] = `
+[
+  "background-color: #e6e6e6",
 ]
 `;
 
@@ -36,15 +66,39 @@ exports[`computed values > bg-green-lightest 1`] = `
 ]
 `;
 
+exports[`computed values > bg-mint 1`] = `
+[
+  "background-color: #cdece2",
+]
+`;
+
 exports[`computed values > bg-red-light 1`] = `
 [
   "background-color: #faedef",
 ]
 `;
 
+exports[`computed values > bg-sky 1`] = `
+[
+  "background-color: #bedfec",
+]
+`;
+
+exports[`computed values > bg-sky 2`] = `
+[
+  "background-color: #bedfec",
+]
+`;
+
 exports[`computed values > bg-white 1`] = `
 [
   "background-color: #ffffff",
+]
+`;
+
+exports[`computed values > border-b-black 1`] = `
+[
+  "border-bottom-color: #333333",
 ]
 `;
 
@@ -144,15 +198,45 @@ exports[`computed values > ring-red 1`] = `
 ]
 `;
 
+exports[`computed values > text-black 1`] = `
+[
+  "color: #333333",
+]
+`;
+
 exports[`computed values > text-blue-light 1`] = `
 [
   "color: #bedfec",
 ]
 `;
 
+exports[`computed values > text-gray-dark 1`] = `
+[
+  "color: #595959",
+]
+`;
+
 exports[`computed values > text-red 1`] = `
 [
   "color: #c0385d",
+]
+`;
+
+exports[`computed values > text-white 1`] = `
+[
+  "color: #ffffff",
+]
+`;
+
+exports[`computed values > text-white 2`] = `
+[
+  "color: #ffffff",
+]
+`;
+
+exports[`computed values > text-white 3`] = `
+[
+  "color: #ffffff",
 ]
 `;
 

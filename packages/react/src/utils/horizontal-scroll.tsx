@@ -36,7 +36,7 @@ export function ScrollButton({
         // Base scroll button styling
         'flex cursor-pointer items-center justify-center',
         'absolute top-0 size-11',
-        'group/scroll-button text-black',
+        'group/scroll-button text-neutral-text-default',
         direction === 'left'
           ? 'bg-[linear-gradient(90deg,white,white_calc(100%-10px),transparent)]'
           : 'bg-[linear-gradient(90deg,transparent,white_calc(10px),white)]',
