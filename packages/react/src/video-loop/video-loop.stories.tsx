@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
+import { videoLoop } from '../__stories__/media';
 import { VideoLoop } from './video-loop';
 
 const meta = {
@@ -9,9 +10,9 @@ const meta = {
     layout: 'centered',
   },
   args: {
-    src: 'https://res.cloudinary.com/obosit-prd-ch-clry/video/upload/v1732199756/Mellom%20husene/Frysja_Loop2.mp4',
+    src: videoLoop,
     format: 'mp4',
-    alt: 'En postbil kjører rundt i det moderne nabolaget på Frysja. Her finnes det fine uteområder, med husker og kafeer.',
+    alt: 'Svømmere i røde drakter tøyer ut på bassengkanten i en svømmehall.',
   },
 } satisfies Meta<typeof VideoLoop>;
 

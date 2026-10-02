@@ -4,6 +4,7 @@ import type { Meta } from '@storybook/react-vite';
 import { Card, CardLink } from '../card';
 import { Content, Heading, Media } from '../content';
 import { Hero } from '../hero';
+import { newApartmentBlocks } from './media';
 
 const meta: Meta = {
   title: 'Layout',
@@ -24,10 +25,7 @@ export const GridContainer = () => (
         </p>
       </Content>
       <Media>
-        <img
-          src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
-          alt=""
-        />
+        <img src={newApartmentBlocks} alt="" />
       </Media>
     </Hero>
   </main>
@@ -80,17 +78,9 @@ export const GridContainerWithSubGrids = () => (
 export const OverridedColSpans = () => (
   <main className="layout-grid-container">
     <h1 className="heading-xl sm:col-end-9">Dette er OBOS</h1>
-    <img
-      className="sm:col-end-8"
-      src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
-      alt=""
-    />
+    <img className="sm:col-end-8" src={newApartmentBlocks} alt="" />
     <p className="sm:col-start-6 sm:col-end-12">Som er ett nettsted for alt om OBOS.</p>
-    <img
-      className="sm:col-span-6 sm:col-start-6"
-      src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
-      alt=""
-    />
+    <img className="sm:col-span-6 sm:col-start-6" src={newApartmentBlocks} alt="" />
     <p className="sm:col-end-15">
       Masse tekst for å teste grid container med sub grids. Lorem ipsum dolor sit amet, consectetur
       adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -99,10 +89,6 @@ export const OverridedColSpans = () => (
       fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
       officia deserunt mollit anim id est laborum.
     </p>
-    <img
-      className="sm:col-span-full"
-      src="https://cdn.sanity.io/media-libraries/mln4u7f3Hc8r/images/410001cfde5211194e0072bf39abd3214befb1c2-1920x1080.jpg?auto=format"
-      alt=""
-    />
+    <img className="sm:col-span-full" src={newApartmentBlocks} alt="" />
   </main>
 );
