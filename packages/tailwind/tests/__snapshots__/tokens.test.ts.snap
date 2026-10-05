@@ -1,42 +1,42 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`computed values > 'bg-blue-dark' 1`] = `
+exports[`computed values > bg-blue-dark 1`] = `
 [
   "background-color: #002169",
 ]
 `;
 
-exports[`computed values > 'bg-blue-light' 1`] = `
+exports[`computed values > bg-blue-light 1`] = `
 [
   "background-color: #bedfec",
 ]
 `;
 
-exports[`computed values > 'bg-blue-lightest' 1`] = `
+exports[`computed values > bg-blue-lightest 1`] = `
 [
   "background-color: #deeff5",
 ]
 `;
 
-exports[`computed values > 'bg-green-light' 1`] = `
+exports[`computed values > bg-green-light 1`] = `
 [
   "background-color: #cdece2",
 ]
 `;
 
-exports[`computed values > 'bg-green-lightest' 1`] = `
+exports[`computed values > bg-green-lightest 1`] = `
 [
   "background-color: #e6f5f0",
 ]
 `;
 
-exports[`computed values > 'border-blue-light' 1`] = `
+exports[`computed values > border-blue-light 1`] = `
 [
   "border-color: #bedfec",
 ]
 `;
 
-exports[`computed values > 'heading-l' 1`] = `
+exports[`computed values > heading-l 1`] = `
 [
   "font-family: OBOSDisplay, __OBOSDisplay_Fallback, sans-serif",
   "font-size: 1.8125rem",
@@ -48,7 +48,7 @@ exports[`computed values > 'heading-l' 1`] = `
 ]
 `;
 
-exports[`computed values > 'heading-m' 1`] = `
+exports[`computed values > heading-m 1`] = `
 [
   "font-family: OBOSText, __OBOSText_Fallback, sans-serif",
   "font-size: 1.4375rem",
@@ -60,7 +60,7 @@ exports[`computed values > 'heading-m' 1`] = `
 ]
 `;
 
-exports[`computed values > 'heading-s' 1`] = `
+exports[`computed values > heading-s 1`] = `
 [
   "font-family: OBOSText, __OBOSText_Fallback, sans-serif",
   "font-size: 1.1875rem",
@@ -72,7 +72,7 @@ exports[`computed values > 'heading-s' 1`] = `
 ]
 `;
 
-exports[`computed values > 'heading-xl' 1`] = `
+exports[`computed values > heading-xl 1`] = `
 [
   "font-family: OBOSDisplay, __OBOSDisplay_Fallback, sans-serif",
   "font-size: 2.8125rem",
@@ -84,7 +84,7 @@ exports[`computed values > 'heading-xl' 1`] = `
 ]
 `;
 
-exports[`computed values > 'heading-xs' 1`] = `
+exports[`computed values > heading-xs 1`] = `
 [
   "font-family: OBOSText, __OBOSText_Fallback, sans-serif",
   "font-size: 1.125rem",
@@ -96,13 +96,13 @@ exports[`computed values > 'heading-xs' 1`] = `
 ]
 `;
 
-exports[`computed values > 'hover:bg-blue' 1`] = `
+exports[`computed values > hover:bg-blue 1`] = `
 [
   "@media (hover: hover) &:hover { background-color: #0047ba }",
 ]
 `;
 
-exports[`computed values > 'text-blue-light' 1`] = `
+exports[`computed values > text-blue-light 1`] = `
 [
   "color: #bedfec",
 ]
