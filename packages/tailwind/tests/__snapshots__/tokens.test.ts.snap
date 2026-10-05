@@ -18,6 +18,12 @@ exports[`computed values > bg-blue-lightest 1`] = `
 ]
 `;
 
+exports[`computed values > bg-green-dark 1`] = `
+[
+  "background-color: #00524c",
+]
+`;
+
 exports[`computed values > bg-green-light 1`] = `
 [
   "background-color: #cdece2",
@@ -144,7 +150,7 @@ exports[`computed values > the token set matches the snapshot 1`] = `
   "--color-accent-base-active": "#006448",
   "--color-accent-base-contrast-default": "#ffffff",
   "--color-accent-base-contrast-subtle": "#e6f5f0",
-  "--color-accent-base-default": "#008761",
+  "--color-accent-base-default": "#00524c",
   "--color-accent-base-hover": "#007453",
   "--color-accent-border-default": "#008761",
   "--color-accent-border-strong": "#006448",
@@ -160,7 +166,7 @@ exports[`computed values > the token set matches the snapshot 1`] = `
   "--color-base-active": "#00358a",
   "--color-base-contrast-default": "#ffffff",
   "--color-base-contrast-subtle": "#deeff5",
-  "--color-base-default": "#0047ba",
+  "--color-base-default": "#002169",
   "--color-base-hover": "#003da0",
   "--color-black": "#333333",
   "--color-blue": "#0047ba",
@@ -236,7 +242,7 @@ exports[`computed values > the token set matches the snapshot 1`] = `
   "--color-primary-base-active": "#00358a",
   "--color-primary-base-contrast-default": "#ffffff",
   "--color-primary-base-contrast-subtle": "#deeff5",
-  "--color-primary-base-default": "#0047ba",
+  "--color-primary-base-default": "#002169",
   "--color-primary-base-hover": "#003da0",
   "--color-primary-border-default": "#0047ba",
   "--color-primary-border-strong": "#003da0",
