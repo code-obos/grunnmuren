@@ -54,7 +54,7 @@
     "storybook": "10.6.1",
     "tailwindcss": "catalog:",
     "tsdown": "0.23.0",
-    "typescript": "5.9.3",
+    "typescript": "7.0.2",
     "vite": "8.3.2",
     "vitest": "5.0.3"
   },
