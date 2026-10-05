@@ -39,7 +39,7 @@ const Panel = ({ title, testId, theme, color, children }: PanelProps) => (
 // A theme the way an app writes one: primitives only, so the roles have to follow on
 // their own. Loaded before Grunnmuren's CSS on purpose, since an app can't count on the
 // order its CSS loads in.
-const APP_THEME = `[data-theme='app'] { --gm-blue-500: #ff0000; --gm-radius-lg: 0px; }`;
+const APP_THEME = `[data-theme='app'] { --gm-blue-900: #ff0000; --gm-radius-lg: 0px; }`;
 
 const loadAppTheme = () => {
   if (document.getElementById('app-theme')) return;
@@ -74,15 +74,15 @@ export const SideBySide: StoryObj = {
     const canvas = within(canvasElement);
     const style = (testId: string) => getComputedStyle(canvas.getByTestId(testId));
 
-    await expect(style('default').backgroundColor).toBe('rgb(0, 71, 186)');
+    await expect(style('default').backgroundColor).toBe('rgb(0, 33, 105)');
     await expect(style('froen-hage').backgroundColor).toBe('rgb(237, 234, 225)');
     // data-color inside a theme picks the theme's role, not the default one
     await expect(style('froen-hage-neutral').backgroundColor).toBe('rgb(99, 93, 76)');
     // data-theme="default" inside another theme goes back to the defaults
-    await expect(style('nested').backgroundColor).toBe('rgb(0, 71, 186)');
+    await expect(style('nested').backgroundColor).toBe('rgb(0, 33, 105)');
     await expect(style('accent').backgroundColor).toBe('rgb(0, 135, 97)');
 
-    // The app's theme only sets --gm-blue-500 and --gm-radius-lg. The roles and rounded-lg
+    // The app's theme only sets --gm-blue-900 and --gm-radius-lg. The roles and rounded-lg
     // follow on that subtree, and it wins although it loaded first
     await expect(style('app').backgroundColor).toBe('rgb(255, 0, 0)');
     await expect(style('app').borderRadius).toBe('0px');

@@ -26,16 +26,13 @@ export const utilityPairs: Array<UtilityPair> = [
   { from: 'text-blue-light', to: 'text-sky' },
   { from: 'border-blue-light', to: 'border-sky' },
 
-  // The primary button. Both values change on purpose, see AB#140595.
-  {
-    from: 'bg-blue-dark',
-    to: 'bg-primary-base-default',
-    change: 'primary button switches to a different blue',
-  },
+  // The primary button stays dark blue, since dark blue is primary at OBOS. Hover keeps
+  // going lighter than the base, like it does today, just a step less.
+  { from: 'bg-blue-dark', to: 'bg-primary-base-default' },
   {
     from: 'hover:bg-blue',
     to: 'hover:bg-primary-base-hover',
-    change: 'hover goes darker instead of lighter',
+    change: 'hover goes from blue-500 to blue-700, still lighter than the base',
   },
   // Waiting on the fluid type decision. `to` goes in when the heading tokens are wired up.
   { from: 'heading-xl', change: 'fluid typography replaces the breakpoint step' },
