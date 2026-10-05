@@ -34,6 +34,8 @@ export const utilityPairs: Array<UtilityPair> = [
     to: 'hover:bg-primary-base-hover',
     change: 'hover goes from blue-500 to blue-700, still lighter than the base',
   },
+  // Same for the dark green, which is accent
+  { from: 'bg-green-dark', to: 'bg-accent-base-default' },
   // Waiting on the fluid type decision. `to` goes in when the heading tokens are wired up.
   { from: 'heading-xl', change: 'fluid typography replaces the breakpoint step' },
   { from: 'heading-l', change: 'fluid typography replaces the breakpoint step' },

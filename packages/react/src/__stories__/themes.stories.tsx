@@ -80,7 +80,7 @@ export const SideBySide: StoryObj = {
     await expect(style('froen-hage-neutral').backgroundColor).toBe('rgb(99, 93, 76)');
     // data-theme="default" inside another theme goes back to the defaults
     await expect(style('nested').backgroundColor).toBe('rgb(0, 33, 105)');
-    await expect(style('accent').backgroundColor).toBe('rgb(0, 135, 97)');
+    await expect(style('accent').backgroundColor).toBe('rgb(0, 82, 76)');
 
     // The app's theme only sets --gm-blue-900 and --gm-radius-lg. The roles and rounded-lg
     // follow on that subtree, and it wins although it loaded first
