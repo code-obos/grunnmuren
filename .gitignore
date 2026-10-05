@@ -22,7 +22,7 @@ next-env.d.ts
 packages/icons-react/icons.tsx
 
 # Reference, actual and diff images from a failed screenshot test
-.vitest-attachments
+.vitest
 
 # Screenshot baselines are generated in CI on Linux. macOS and Windows render text
 # differently, so a locally generated baseline turns CI red for everyone else.
