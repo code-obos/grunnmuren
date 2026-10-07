@@ -132,3 +132,26 @@ describe('theme seam', () => {
     }
   });
 });
+
+const TYPE_UTILITIES = [
+  'heading-xl',
+  'heading-l',
+  'heading-m',
+  'heading-s',
+  'heading-xs',
+  'lead',
+  'lead-sm',
+];
+
+describe('typography', () => {
+  // The headings and leads scale with the viewport through the clamp() tokens, instead of
+  // jumping at lg. The snapshot is what turns a change in the type scale into a diff.
+  test.for(TYPE_UTILITIES)('%s', async (utility) => {
+    expect(await declarationsFor(utility)).toMatchSnapshot();
+  });
+
+  test.for(TYPE_UTILITIES)('%s has no breakpoint step', async (utility) => {
+    const declarations = await resolveUtility(utility);
+    expect(declarations.filter(({ condition }) => condition !== '')).toEqual([]);
+  });
+});

@@ -270,66 +270,6 @@ exports[`computed values > border-sky 1`] = `
 ]
 `;
 
-exports[`computed values > heading-l 1`] = `
-[
-  "font-family: OBOSDisplay, __OBOSDisplay_Fallback, sans-serif",
-  "font-size: 1.8125rem",
-  "line-height: 2.75rem",
-  "--tw-font-weight: 600",
-  "font-weight: 600",
-  "@media (width >= 64rem) { font-size: 2.25rem }",
-  "@media (width >= 64rem) { line-height: 3.5rem }",
-]
-`;
-
-exports[`computed values > heading-m 1`] = `
-[
-  "font-family: OBOSText, __OBOSText_Fallback, sans-serif",
-  "font-size: 1.4375rem",
-  "line-height: 2.25rem",
-  "--tw-font-weight: 500",
-  "font-weight: 500",
-  "@media (width >= 64rem) { font-size: 1.625rem }",
-  "@media (width >= 64rem) { line-height: 2.5625rem }",
-]
-`;
-
-exports[`computed values > heading-s 1`] = `
-[
-  "font-family: OBOSText, __OBOSText_Fallback, sans-serif",
-  "font-size: 1.1875rem",
-  "line-height: 1.875rem",
-  "--tw-font-weight: 500",
-  "font-weight: 500",
-  "@media (width >= 64rem) { font-size: 1.3125rem }",
-  "@media (width >= 64rem) { line-height: 2.125rem }",
-]
-`;
-
-exports[`computed values > heading-xl 1`] = `
-[
-  "font-family: OBOSDisplay, __OBOSDisplay_Fallback, sans-serif",
-  "font-size: 2.8125rem",
-  "line-height: 3.625rem",
-  "--tw-font-weight: 600",
-  "font-weight: 600",
-  "@media (width >= 64rem) { font-size: 3.9375rem }",
-  "@media (width >= 64rem) { line-height: 5.125rem }",
-]
-`;
-
-exports[`computed values > heading-xs 1`] = `
-[
-  "font-family: OBOSText, __OBOSText_Fallback, sans-serif",
-  "font-size: 1.125rem",
-  "line-height: 1.75rem",
-  "--tw-font-weight: 500",
-  "font-weight: 500",
-  "@media (width >= 64rem) { font-size: 1.1875rem }",
-  "@media (width >= 64rem) { line-height: 1.9375rem }",
-]
-`;
-
 exports[`computed values > hover:bg-blue 1`] = `
 [
   "@media (hover: hover) &:hover { background-color: #0047ba }",
@@ -651,4 +591,72 @@ exports[`computed values > the token set matches the snapshot 1`] = `
   "--radius-xl": "0.75rem",
   "--radius-xs": "0.125rem",
 }
+`;
+
+exports[`typography > heading-l 1`] = `
+[
+  "font-family: OBOSDisplay, __OBOSDisplay_Fallback, sans-serif",
+  "font-size: clamp(1.8125rem, 1.6667rem + 0.7292vw, 2.25rem)",
+  "line-height: 1.5",
+  "font-weight: 600",
+  "letter-spacing: 0em",
+]
+`;
+
+exports[`typography > heading-m 1`] = `
+[
+  "font-family: OBOSText, __OBOSText_Fallback, sans-serif",
+  "font-size: clamp(1.4375rem, 1.375rem + 0.3125vw, 1.625rem)",
+  "line-height: 1.5",
+  "font-weight: 500",
+  "letter-spacing: 0em",
+]
+`;
+
+exports[`typography > heading-s 1`] = `
+[
+  "font-family: OBOSText, __OBOSText_Fallback, sans-serif",
+  "font-size: clamp(1.1875rem, 1.1458rem + 0.2083vw, 1.3125rem)",
+  "line-height: 1.5",
+  "font-weight: 500",
+  "letter-spacing: 0em",
+]
+`;
+
+exports[`typography > heading-xl 1`] = `
+[
+  "font-family: OBOSDisplay, __OBOSDisplay_Fallback, sans-serif",
+  "font-size: clamp(2.8125rem, 2.4375rem + 1.875vw, 3.9375rem)",
+  "line-height: 1.5",
+  "font-weight: 600",
+  "letter-spacing: 0em",
+]
+`;
+
+exports[`typography > heading-xs 1`] = `
+[
+  "font-family: OBOSText, __OBOSText_Fallback, sans-serif",
+  "font-size: clamp(1.125rem, 1.1042rem + 0.1042vw, 1.1875rem)",
+  "line-height: 1.5",
+  "font-weight: 500",
+  "letter-spacing: 0em",
+]
+`;
+
+exports[`typography > lead 1`] = `
+[
+  "font-size: clamp(1.4375rem, 1.375rem + 0.3125vw, 1.625rem)",
+  "line-height: 1.5",
+  "font-weight: 500",
+  "letter-spacing: 0em",
+]
+`;
+
+exports[`typography > lead-sm 1`] = `
+[
+  "font-size: clamp(1.1875rem, 1.125rem + 0.3125vw, 1.375rem)",
+  "line-height: 1.5",
+  "font-weight: 400",
+  "letter-spacing: 0em",
+]
 `;

@@ -179,11 +179,4 @@ export const utilityPairs: Array<UtilityPair> = [
   // The selected tab and the progress bar keep the primary dark blue
   { from: 'border-blue-dark', to: 'border-primary-base-default' },
   { from: 'border-b-blue-dark', to: 'border-b-primary-base-default' },
-
-  // Waiting on the fluid type decision. `to` goes in when the heading tokens are wired up.
-  { from: 'heading-xl', change: 'fluid typography replaces the breakpoint step' },
-  { from: 'heading-l', change: 'fluid typography replaces the breakpoint step' },
-  { from: 'heading-m', change: 'fluid typography replaces the breakpoint step' },
-  { from: 'heading-s', change: 'fluid typography replaces the breakpoint step' },
-  { from: 'heading-xs', change: 'fluid typography replaces the breakpoint step' },
 ];
