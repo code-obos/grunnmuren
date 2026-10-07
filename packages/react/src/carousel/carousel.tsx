@@ -198,7 +198,10 @@ const Carousel = ({
           setSlidesInView(emblaApi.slidesInView());
           break;
         }
-        case 'init': {
+        // Embla emits `reInit` when it measures again, e.g. on resize. Without it the next
+        // button can stay disabled if the carousel was set up before its layout was final.
+        case 'init':
+        case 'reInit': {
           setSlidesInView(emblaApi.slidesInView());
           setCanScrollNext(emblaApi.canScrollNext());
           setCanScrollPrev(emblaApi.canScrollPrev());
@@ -211,12 +214,14 @@ const Carousel = ({
     emblaApi.on('slidesInView', emblaHandler);
     emblaApi.on('settle', emblaHandler);
     emblaApi.on('init', emblaHandler);
+    emblaApi.on('reInit', emblaHandler);
 
     return () => {
       emblaApi.off('select', emblaHandler);
       emblaApi.off('settle', emblaHandler);
       emblaApi.off('slidesInView', emblaHandler);
       emblaApi.off('init', emblaHandler);
+      emblaApi.off('reInit', emblaHandler);
     };
   }, [emblaApi, onSelect, onSettled]);
 

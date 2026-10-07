@@ -41,9 +41,9 @@ const defineSnapshotProject = (variant: SnapshotVariant): TestProjectConfigurati
       expect: {
         toMatchScreenshot: {
           comparatorName: 'pixelmatch',
-          // Anti-aliasing differs slightly between runs on the same platform. Enough
-          // slack to absorb that, not enough to hide something that moved.
-          comparatorOptions: { threshold: 0.2, allowedMismatchedPixelRatio: 0.01 },
+          // 0.02 catches the smallest step in the token set (sky-300 to sky-250). The 10
+          // pixels absorb a glyph edge that now and then differs between CI runs.
+          comparatorOptions: { threshold: 0.02, allowedMismatchedPixels: 10 },
           resolveScreenshotPath: ({
             arg,
             ext,
