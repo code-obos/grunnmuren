@@ -41,12 +41,8 @@ const defineSnapshotProject = (variant: SnapshotVariant): TestProjectConfigurati
       expect: {
         toMatchScreenshot: {
           comparatorName: 'pixelmatch',
-          // Strict on purpose. At 0.2 a pixel had to change more than blue-500 to blue-900
-          // to count at all, and 1% of the image could differ on top of that, so most of a
-          // colour migration went through unseen. 0.02 catches the smallest step in the
-          // token set (sky-300 to sky-250 needs under 0.033). Pixelmatch leaves most
-          // anti-aliasing out itself, but now and then a single glyph edge differs between CI
-          // runs, so a handful of pixels can. The smallest real change seen is 189 pixels.
+          // 0.02 catches the smallest step in the token set (sky-300 to sky-250). The 10
+          // pixels absorb a glyph edge that now and then differs between CI runs.
           comparatorOptions: { threshold: 0.02, allowedMismatchedPixels: 10 },
           resolveScreenshotPath: ({
             arg,

@@ -198,9 +198,8 @@ const Carousel = ({
           setSlidesInView(emblaApi.slidesInView());
           break;
         }
-        // Embla measures again on resize and emits `reInit`, not `init`. Without it, a
-        // carousel set up before its layout was final keeps the old scroll limits, and the
-        // next button stays disabled until someone scrolls.
+        // Embla emits `reInit` when it measures again, e.g. on resize. Without it the next
+        // button can stay disabled if the carousel was set up before its layout was final.
         case 'init':
         case 'reInit': {
           setSlidesInView(emblaApi.slidesInView());
