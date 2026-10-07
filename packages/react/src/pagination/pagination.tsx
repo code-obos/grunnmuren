@@ -121,7 +121,7 @@ const Pagination = (props: PaginationProps) => {
         <Button
           aria-disabled={!canGoPrev}
           aria-label={translations.previousPage[locale]}
-          color="white"
+          color="contrast"
           href={canGoPrev ? getItemHref(currentPage - 1) : undefined}
           isIconOnly
           onPress={
@@ -163,7 +163,7 @@ const Pagination = (props: PaginationProps) => {
         <Button
           aria-disabled={!canGoNext}
           aria-label={translations.nextPage[locale]}
-          color="white"
+          color="contrast"
           href={canGoNext ? getItemHref(currentPage + 1) : undefined}
           isIconOnly
           onPress={

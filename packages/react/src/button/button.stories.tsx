@@ -17,7 +17,7 @@ const meta: Meta<typeof Button> = {
     isIconOnly: false,
     animateIcon: undefined,
     variant: 'primary',
-    color: 'blue',
+    color: 'primary',
   },
   argTypes: {
     animateIcon: {
@@ -26,12 +26,7 @@ const meta: Meta<typeof Button> = {
   },
   decorators: [
     (Story, context) => {
-      let bgColor = '';
-      if (context.args.color === 'mint') {
-        bgColor = 'bg-blue-dark';
-      } else if (context.args.color === 'white') {
-        bgColor = 'bg-blue';
-      }
+      const bgColor = context.args.color === 'contrast' ? 'bg-primary-base-default' : '';
 
       return <div className={cx(bgColor, 'flex gap-4 p-6')}>{Story()}</div>;
     },
@@ -135,28 +130,44 @@ export const ButtonSandbox = () => {
         </div>
       </div>
 
-      <div className="bg-blue-dark">
-        <div className="flex gap-8 p-8">
-          <Button color="white">Primary</Button>
-          <Button color="white" variant="secondary">
-            Secondary
-          </Button>
-          <Button color="white" variant="tertiary">
-            Tertiary
-          </Button>
-        </div>
+      <div className="flex gap-8 p-8">
+        <Button color="accent">Primary</Button>
+        <Button color="accent" variant="secondary">
+          Secondary
+        </Button>
+        <Button color="accent" variant="tertiary">
+          Tertiary
+        </Button>
       </div>
 
-      <div className="bg-green-dark p-8">
-        <div className="flex gap-8">
-          <Button color="mint">Primary</Button>
-          <Button color="mint" variant="secondary">
-            Secondary
-          </Button>
-          <Button color="mint" variant="tertiary">
-            Tertiary
-          </Button>
-        </div>
+      <div className="flex gap-8 p-8">
+        <Button color="neutral">Primary</Button>
+        <Button color="neutral" variant="secondary">
+          Secondary
+        </Button>
+        <Button color="neutral" variant="tertiary">
+          Tertiary
+        </Button>
+      </div>
+
+      <div className="bg-primary-base-default flex gap-8 p-8">
+        <Button color="contrast">Primary</Button>
+        <Button color="contrast" variant="secondary">
+          Secondary
+        </Button>
+        <Button color="contrast" variant="tertiary">
+          Tertiary
+        </Button>
+      </div>
+
+      <div className="bg-accent-base-default flex gap-8 p-8">
+        <Button color="contrast">Primary</Button>
+        <Button color="contrast" variant="secondary">
+          Secondary
+        </Button>
+        <Button color="contrast" variant="tertiary">
+          Tertiary
+        </Button>
       </div>
     </div>
   );

@@ -340,8 +340,8 @@ export function Gallery({
             <span>{images.length}</span>
           </Badge>
           <CarouselControls>
-            <CarouselButton slot="prev" color="white" variant="primary" />
-            <CarouselButton slot="next" color="white" variant="primary" />
+            <CarouselButton slot="prev" color="contrast" variant="primary" />
+            <CarouselButton slot="next" color="contrast" variant="primary" />
           </CarouselControls>
         </div>
       </Carousel>
