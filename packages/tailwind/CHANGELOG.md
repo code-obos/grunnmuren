@@ -1,5 +1,30 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.6.0
+
+> [!WARNING]
+> We're in the middle of introducing design tokens. Even though this is a minor release, the token layer, `data-theme` and `data-color` are very experimental. Names, values and which tokens a theme can set may still change in a minor or patch release, so don't build anything critical on top of them yet.
+
+### Minor Changes
+
+- 8a7bd6f: Adds the rest of the role colours from the design team's token set: all 16 roles for `success`, `danger`, `warning` and `info`, each with a utility such as `bg-success-surface-default` or `text-danger-text-subtle`. Also adds size, line height and letter spacing for `--gm-paragraph-medium-*` and `--gm-description-medium-*`, next to the font weight that was already there.
+  
+  The token CSS is now generated from that token set instead of being ported by hand. Every existing variable keeps its name and value.
+- 3371197: Add the semantic token layer from the design team's token set. Every `--gm-*` primitive and role token (`primary`, `accent`, `neutral`, `success`, `danger`, `warning`, `info`) is now available as a CSS custom property, and each role colour gets a utility such as `bg-primary-base-default` or `text-neutral-text-subtle`.
+  
+  This is purely additive. No existing utility, colour or rule changes, and nothing uses the new tokens yet. Spacing and type tokens are exposed as custom properties only and are not mapped onto Tailwind's own keys. Radius keeps using Tailwind's own scale.
+  
+  Also adds a `prefers-reduced-motion` block that zeroes the movement durations (`curtain`, `reveal`, `slide`).
+- 5c32652: Adds `data-theme` and `data-color`, so an app can theme Grunnmuren itself. A theme is a `[data-theme='…']` rule in the app's own CSS that sets `--gm-*` primitives or role colours, and it works on part of a page too. The README lists which tokens a theme can set. Those are now public API. `data-color` picks which role (`primary`, `accent` or `neutral`) the new short utilities such as `bg-base-default` and `text-text-default` use.
+  
+  Radius now goes through `--gm-radius-*` so a theme can change it. The values are still Tailwind's, so no `rounded-*` changes. Note that if you override `--radius-*` in your own `@theme` and also use `data-theme`, the override doesn't reach inside the `data-theme`: set `--gm-radius-*` instead.
+  
+  The reduced-motion durations are now `!important`, so a theme can't turn reduced motion off by setting its own durations.
+
+### Patch Changes
+
+- 4d43ae3: `primary-base-default` is dark blue (`#002169`, blue-900) and `accent-base-default` dark green (`#00524C`, green-900), instead of blue-500 and green-500. Dark blue and dark green are OBOS' colours, so `bg-primary-base-default` and `bg-accent-base-default` now match `bg-blue-dark` and `bg-green-dark`.
+
 ## 2.5.0
 
 ### Minor Changes
