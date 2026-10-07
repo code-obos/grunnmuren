@@ -156,6 +156,12 @@ exports[`computed values > bg-sky-light 1`] = `
 ]
 `;
 
+exports[`computed values > bg-sky-light 2`] = `
+[
+  "background-color: #deeff5",
+]
+`;
+
 exports[`computed values > bg-sky-lightest 1`] = `
 [
   "background-color: #ebf5f9",
@@ -171,6 +177,12 @@ exports[`computed values > bg-sky-lightest 2`] = `
 exports[`computed values > bg-white 1`] = `
 [
   "background-color: #ffffff",
+]
+`;
+
+exports[`computed values > bg-yellow 1`] = `
+[
+  "background-color: #fff5d2",
 ]
 `;
 
@@ -267,6 +279,12 @@ exports[`computed values > border-red 1`] = `
 exports[`computed values > border-sky 1`] = `
 [
   "border-color: #bedfec",
+]
+`;
+
+exports[`computed values > border-white 1`] = `
+[
+  "border-color: #ffffff",
 ]
 `;
 

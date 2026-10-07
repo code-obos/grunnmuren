@@ -180,6 +180,11 @@ export const utilityPairs: Array<UtilityPair> = [
   { from: 'border-blue-dark', to: 'border-primary-base-default' },
   { from: 'border-b-blue-dark', to: 'border-b-primary-base-default' },
 
+  // The component CSS in tailwind-base.css: toggletip, pagination and stepper
+  { from: 'bg-yellow', to: 'bg-warning-background-tinted' },
+  { from: 'border-white', to: 'border-primary-base-contrast-default' },
+  { from: 'bg-sky-light', to: 'bg-primary-surface-hover' },
+
   // Waiting on the fluid type decision. `to` goes in when the heading tokens are wired up.
   { from: 'heading-xl', change: 'fluid typography replaces the breakpoint step' },
   { from: 'heading-l', change: 'fluid typography replaces the breakpoint step' },

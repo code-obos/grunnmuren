@@ -87,7 +87,7 @@
   }
 
   html {
-    @apply font-text font-normal text-black antialiased;
+    @apply font-text text-neutral-text-default font-normal antialiased;
   }
 
   b {
@@ -103,7 +103,7 @@
   }
 
   ::selection {
-    @apply bg-mint text-black;
+    @apply bg-accent-surface-active text-neutral-text-default;
   }
 }
 
@@ -113,7 +113,7 @@
 }
 
 @utility page-layout-main {
-  @apply grow bg-white;
+  @apply bg-neutral-background-default grow;
 }
 
 /** Grid column spacing */
@@ -358,7 +358,7 @@
     @apply cursor-default opacity-30;
 
     &:hover {
-      @apply bg-white;
+      @apply bg-neutral-surface-default;
     }
   }
 
@@ -386,7 +386,7 @@
 
   /* Info variant — a 44×44 icon button with an inset focus ring. */
   &[data-variant='info'] {
-    @apply text-blue-dark inline-grid size-11 place-content-center rounded-full;
+    @apply text-primary-text-default inline-grid size-11 place-content-center rounded-full;
 
     &[data-focus-visible] {
       @apply outline-focus-inset;
@@ -403,7 +403,7 @@
     @apply rounded-xs underline decoration-dashed decoration-1 underline-offset-4;
 
     &[aria-expanded='true'] {
-      @apply bg-yellow;
+      @apply bg-warning-background-tinted;
     }
   }
 }
@@ -431,7 +431,7 @@
 
     &::before {
       content: '';
-      @apply bg-blue-dark block size-full;
+      @apply bg-primary-base-default block size-full;
       clip-path: polygon(0 100%, 50% 0, 100% 100%); /* points up */
     }
   }
@@ -453,7 +453,7 @@
 
   /* Dialog body. */
   & [data-slot='toggletip-dialog'] {
-    @apply bg-blue-dark relative rounded-lg p-4 pr-12 text-white outline-none;
+    @apply bg-primary-base-default text-primary-base-contrast-default relative rounded-lg p-4 pr-12 outline-none;
   }
 
   /* Close button — positioned top-right with an inset white focus ring (white
@@ -515,7 +515,7 @@
 
       &::before {
         content: counter(step-counter);
-        @apply border-blue-dark grid size-8 shrink-0 place-content-center rounded-full border-2 font-semibold;
+        @apply border-primary-base-default grid size-8 shrink-0 place-content-center rounded-full border-2 font-semibold;
       }
 
       /** Place the focus styles on the ::before element instead of the link, since the link text is not visible on smaller screens */
@@ -533,24 +533,24 @@
       }
 
       &::before {
-        @apply text-blue-dark bg-white;
+        @apply text-primary-text-default bg-neutral-surface-default;
       }
 
       &[data-state='completed'] {
         &::before {
-          @apply bg-blue-dark text-white;
+          @apply bg-primary-base-default text-primary-base-contrast-default;
         }
       }
 
       /* order matters here, as data-current selector needs to come after completed state selector */
       &[data-current='true'] {
         &::before {
-          @apply bg-sky-light text-blue-dark border-4;
+          @apply bg-primary-surface-hover text-primary-text-default border-4;
         }
       }
 
       svg {
-        @apply bg-blue-dark absolute -top-1.5 left-4.5 size-5 rounded-full border-2 border-white text-white;
+        @apply bg-primary-base-default border-primary-base-contrast-default text-primary-base-contrast-default absolute -top-1.5 left-4.5 size-5 rounded-full border-2;
       }
 
       [data-slot='progress-bar'] {
