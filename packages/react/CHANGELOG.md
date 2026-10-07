@@ -1,5 +1,41 @@
 # @obosbbl/grunnmuren-react
 
+## 3.11.0
+
+### Minor Changes
+
+- 6e82a99: Button, Alertbox, Card, Carousel, Accordion, Modal, Drawer, Table, Tabs and ProgressBar now read the role tokens instead of the palette, so they follow a `data-theme`. This is the one that moves the most pixels:
+  
+  - the primary button stays dark blue. Hover still goes lighter, a step less than today (blue-500 to blue-700), and pressed goes from a hardcoded blue to blue-800
+  - `active:[#9ddac6]` on the mint button was never a valid class and never rendered, so nothing changes there yet. When mint moves, a pressed state shows up where there wasn't one
+  - the white button's pressed state is now darker than its hover
+  - the alertbox borders go from hardcoded values to blue-500, green-500 and orange-700, the warning background to orange-100 and the info background a step lighter
+  
+  The mint button stays on the palette for now. All of the above still pass WCAG AA.
+- e2a8c66: The form fields (textfield, textarea, numberfield, select, combobox) now read the role tokens instead of the palette, so they follow a `data-theme`. Two colours change on purpose: the error message text goes from red-500 to red-600, and the placeholder from a hardcoded `#727070` to gray-700. Both are darker and easier to read.
+  
+  If your app overrides `--color-neutral-*` or `--color-danger-*` names in its own `@theme`, the form fields pick those values up now.
+- a49517b: Checkbox, Radio, FileUpload, Select and the listbox in Select and Combobox now read the role tokens instead of the palette, so they follow a `data-theme`. Some colours change on purpose:
+  
+  - a selected checkbox or radio goes from blue-500 to the primary button's dark blue, and hovers lighter to blue-700 like the button. Today it's lighter at rest and darker on hover
+  - a hovered checkbox or radio goes from sky-300 to sky-200
+  - the focused option in a listbox goes from sky-100 to sky-200
+  - the Select placeholder goes from a hardcoded `#727070` to gray-700, like the other form fields
+  
+  All of them still pass WCAG AA.
+- e947796: Badge, TagGroup, Avatar, Backlink and LinkList now read the role tokens instead of the palette, so they follow a `data-theme`. Some colours change on purpose:
+  
+  - the `gray-dark` badge goes darker, from gray-700 to gray-900
+  - the `sky` badge and hovered tags go a step lighter, since there is no surface at sky-300
+  - a selected tag goes from blue-500 to the primary button's dark blue, and hovers lighter to blue-700 like the button does
+  - the avatar placeholder goes from gray-200 to gray-100
+  
+  All of them still pass WCAG AA.
+
+### Patch Changes
+
+- 2332f3e: Carousel: the previous and next buttons update when the carousel is measured again, for instance after a resize. Before, a carousel set up before its layout was final could keep its next button disabled until someone scrolled.
+
 ## 3.10.2
 
 ### Patch Changes
