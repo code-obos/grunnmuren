@@ -36,6 +36,24 @@ exports[`computed values > bg-green-lightest 1`] = `
 ]
 `;
 
+exports[`computed values > bg-red-light 1`] = `
+[
+  "background-color: #faedef",
+]
+`;
+
+exports[`computed values > bg-white 1`] = `
+[
+  "background-color: #ffffff",
+]
+`;
+
+exports[`computed values > border-black 1`] = `
+[
+  "border-color: #333333",
+]
+`;
+
 exports[`computed values > border-blue-light 1`] = `
 [
   "border-color: #bedfec",
@@ -108,9 +126,33 @@ exports[`computed values > hover:bg-blue 1`] = `
 ]
 `;
 
+exports[`computed values > placeholder-[#727070] 1`] = `
+[
+  "&::placeholder { color: #727070 }",
+]
+`;
+
+exports[`computed values > ring-black 1`] = `
+[
+  "--tw-ring-color: #333333",
+]
+`;
+
+exports[`computed values > ring-red 1`] = `
+[
+  "--tw-ring-color: #c0385d",
+]
+`;
+
 exports[`computed values > text-blue-light 1`] = `
 [
   "color: #bedfec",
+]
+`;
+
+exports[`computed values > text-red 1`] = `
+[
+  "color: #c0385d",
 ]
 `;
 
