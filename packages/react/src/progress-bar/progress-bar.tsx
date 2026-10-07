@@ -36,9 +36,9 @@ const ProgressBar = ({ children, className, ...restProps }: ProgressBarProps) =>
           {typeof children === 'function'
             ? children({ percentage, valueText, ...restArgs })
             : children}
-          <div className="border-blue-dark bg-gray-light relative rounded border">
+          <div className="border-primary-base-default bg-neutral-surface-tinted relative rounded border">
             <div
-              className="bg-blue-dark h-1 rounded transition-all duration-300 ease-in-out"
+              className="bg-primary-base-default h-1 rounded transition-all duration-300 ease-in-out"
               style={{ width: `${percentage}%` }}
             />
           </div>

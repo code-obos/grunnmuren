@@ -132,6 +132,54 @@ export const utilityPairs: Array<UtilityPair> = [
     change: 'select placeholder goes from a hardcoded grey to gray-700, like the other fields',
   },
 
+  // The composites: button, alertbox, card, carousel, accordion, modal, drawer, table,
+  // tabs and progress-bar. The mint button isn't here, see button.tsx.
+  { from: 'border-black', to: 'border-neutral-border-strong' },
+  { from: 'border-sky', to: 'border-primary-border-subtle' },
+  { from: 'bg-mint-light', to: 'bg-success-surface-tinted' },
+  { from: 'bg-red-light', to: 'bg-danger-surface-tinted' },
+  { from: 'bg-sky-lightest', to: 'bg-primary-surface-tinted' },
+  { from: 'bg-black/25', to: 'bg-neutral-base-default/25' },
+  { from: 'outline-white', to: 'outline-primary-base-contrast-default' },
+  {
+    from: 'active:bg-[#0536A0]',
+    to: 'active:bg-primary-base-active',
+    change: 'pressed primary button goes from a hardcoded blue to blue-800',
+  },
+  {
+    from: 'active:bg-sky-light',
+    to: 'active:bg-primary-surface-active',
+    change: 'pressed white button goes from sky-200 to sky-250, so it is darker than hover',
+  },
+  {
+    from: 'bg-sky-light',
+    to: 'bg-info-surface-tinted',
+    change: 'info alertbox goes from sky-200 to sky-100, like the other status surfaces',
+  },
+  {
+    from: 'border-[#1A7FA7]',
+    to: 'border-info-border-default',
+    change: 'info alertbox border goes from a hardcoded blue to blue-500',
+  },
+  {
+    from: 'border-[#0F9B6E]',
+    to: 'border-success-border-default',
+    change: 'success alertbox border goes from a hardcoded green to green-500',
+  },
+  {
+    from: 'border-[#C57C13]',
+    to: 'border-warning-border-default',
+    change: 'warning alertbox border goes from a hardcoded orange to orange-700',
+  },
+  {
+    from: 'bg-[#FFF2DE]',
+    to: 'bg-warning-surface-tinted',
+    change: 'warning alertbox goes from a hardcoded cream to orange-100',
+  },
+  // The selected tab and the progress bar keep the primary dark blue
+  { from: 'border-blue-dark', to: 'border-primary-base-default' },
+  { from: 'border-b-blue-dark', to: 'border-b-primary-base-default' },
+
   // Waiting on the fluid type decision. `to` goes in when the heading tokens are wired up.
   { from: 'heading-xl', change: 'fluid typography replaces the breakpoint step' },
   { from: 'heading-l', change: 'fluid typography replaces the breakpoint step' },
