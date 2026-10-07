@@ -109,7 +109,7 @@ const StoryRenderer = ({
 const StoryMenu = ({ id, storyUrl }: { id: string; storyUrl: string }) => {
   return (
     <MenuTrigger>
-      <Button aria-label="Meny" className="absolute right-0 z-10" color="white" isIconOnly>
+      <Button aria-label="Meny" className="absolute right-0 z-10" color="contrast" isIconOnly>
         <span className="size-7">...</span>
       </Button>
       <Popover

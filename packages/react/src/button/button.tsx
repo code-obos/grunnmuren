@@ -34,13 +34,15 @@ const buttonVariants = cva({
       tertiary: 'underline hover:no-underline',
     },
     /**
-     * Adjusts the color of the button for usage on different backgrounds.
-     * @default blue
+     * The role the button takes its colours from. `contrast` is the white button for dark
+     * backgrounds.
+     * @default primary
      */
     color: {
-      blue: 'focus-visible:outline-focus',
-      mint: 'focus-visible:outline-focus focus-visible:outline-mint',
-      white: 'focus-visible:outline-focus focus-visible:outline-primary-base-contrast-default',
+      primary: 'focus-visible:outline-focus',
+      accent: 'focus-visible:outline-focus',
+      neutral: 'focus-visible:outline-focus',
+      contrast: 'focus-visible:outline-focus focus-visible:outline-primary-base-contrast-default',
     },
     /**
      * When the button is without text, but with a single icon.
@@ -54,58 +56,39 @@ const buttonVariants = cva({
     isPending: { true: 'relative text-transparent!', false: null },
   },
   compoundVariants: [
+    // The button sets data-color to its role, so the short tokens point at that role and the
+    // three share one set of classes. Hover and pressed get lighter than the fill.
     {
-      color: 'blue',
+      color: ['primary', 'accent', 'neutral'],
       variant: 'primary',
-      // Every state is darker than the one before it
       className:
-        'bg-primary-base-default hover:bg-primary-base-hover text-primary-base-contrast-default active:bg-primary-base-active active:text-primary-base-contrast-default **:[[role="progressbar"]]:text-primary-base-contrast-default',
+        'bg-base-default hover:bg-base-hover text-base-contrast-default active:bg-base-active active:text-base-contrast-default **:[[role="progressbar"]]:text-base-contrast-default',
     },
     {
-      color: 'blue',
+      color: ['primary', 'accent', 'neutral'],
       variant: 'secondary',
       className:
-        'text-primary-text-default hover:bg-primary-base-hover **:[[role="progressbar"]]:text-primary-text-default hover:text-primary-base-contrast-default active:bg-primary-base-active [&:hover_[role="progressbar"]]:text-primary-base-contrast-default hover:border-transparent',
+        'text-text-default hover:bg-base-hover **:[[role="progressbar"]]:text-text-default hover:text-base-contrast-default active:bg-base-active [&:hover_[role="progressbar"]]:text-base-contrast-default hover:border-transparent',
     },
     {
-      color: 'blue',
+      color: ['primary', 'accent', 'neutral'],
       variant: 'tertiary',
       className: '**:[[role="progressbar"]]:text-neutral-text-default',
     },
-    // Mint stays on the palette for now. The role set has nothing for a button on a dark
-    // background, and nothing darker than mint-300 to hover to. Waiting on the designer.
     {
-      color: 'mint',
-      variant: 'primary',
-      // Darken bg by 20% on hover. The color is manually crafted
-      className:
-        'bg-mint active:[#9ddac6] text-black hover:bg-[#8dd4bd] **:[[role="progressbar"]]:text-black',
-    },
-    {
-      color: 'mint',
-      variant: 'secondary',
-      className:
-        'text-mint hover:bg-mint **:[[role="progressbar"]]:text-mint hover:text-black [&:hover_[role="progressbar"]]:text-black',
-    },
-    {
-      color: 'mint',
-      variant: 'tertiary',
-      className: 'text-mint **:[[role="progressbar"]]:text-mint',
-    },
-    {
-      color: 'white',
+      color: 'contrast',
       variant: 'primary',
       className:
         'hover:bg-primary-surface-hover active:bg-primary-surface-active bg-neutral-surface-default text-neutral-text-default **:[[role="progressbar"]]:text-neutral-text-default',
     },
     {
-      color: 'white',
+      color: 'contrast',
       variant: 'secondary',
       className:
         'text-primary-base-contrast-default hover:bg-neutral-surface-default hover:text-neutral-text-default [&:hover_[role="progressbar"]]:text-neutral-text-default **:[[role="progressbar"]]:text-primary-base-contrast-default',
     },
     {
-      color: 'white',
+      color: 'contrast',
       variant: 'tertiary',
       className:
         'text-primary-base-contrast-default **:[[role="progressbar"]]:text-primary-base-contrast-default',
@@ -113,13 +96,28 @@ const buttonVariants = cva({
   ],
   defaultVariants: {
     variant: 'primary',
-    color: 'blue',
+    color: 'primary',
     isIconOnly: false,
     isPending: false,
   },
 });
 
-type ButtonOrLinkProps = VariantProps<typeof buttonVariants> & {
+type ButtonColor = NonNullable<VariantProps<typeof buttonVariants>['color']>;
+
+// The palette names from before the roles. Kept so existing code doesn't break, and
+// removed in the next major.
+const legacyColors = { blue: 'primary', mint: 'contrast', white: 'contrast' } as const;
+
+type ButtonOrLinkProps = Omit<VariantProps<typeof buttonVariants>, 'color'> & {
+  /**
+   * The role the button takes its colours from. `contrast` is the white button for dark
+   * backgrounds.
+   *
+   * `blue`, `mint` and `white` are deprecated: use `primary` instead of `blue`, and
+   * `contrast` instead of `mint` and `white`.
+   * @default primary
+   */
+  color?: ButtonColor | keyof typeof legacyColors;
   children?: React.ReactNode;
   href?: RACLinkProps['href'];
   /** Additional style properties for the element. */
@@ -150,11 +148,16 @@ function Button({ ref = null, ...props }: ButtonProps) {
     ...restProps
   } = props;
 
+  const resolvedColor: ButtonColor =
+    color && color in legacyColors
+      ? legacyColors[color as keyof typeof legacyColors]
+      : ((color as ButtonColor | undefined) ?? 'primary');
+
   const className = buttonVariants({
     // Don't animate the icon when we're pending, as it affects the loading spinner
     animateIcon: isPending ? undefined : animateIcon,
     className: props.className,
-    color,
+    color: resolvedColor,
     isIconOnly,
     variant,
     isPending,
@@ -180,6 +183,7 @@ function Button({ ref = null, ...props }: ButtonProps) {
     <RACLink
       {...(restProps as RACLinkProps)}
       className={className}
+      data-color={resolvedColor === 'contrast' ? undefined : resolvedColor}
       data-slot="button"
       ref={ref as Ref<HTMLAnchorElement>}
     >
@@ -189,6 +193,7 @@ function Button({ ref = null, ...props }: ButtonProps) {
     <RACButton
       {...(restProps as RACButtonProps)}
       className={className}
+      data-color={resolvedColor === 'contrast' ? undefined : resolvedColor}
       data-slot="button"
       isPending={isPending}
       ref={ref as Ref<HTMLButtonElement>}

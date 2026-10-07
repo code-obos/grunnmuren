@@ -318,7 +318,7 @@ const Carousel = ({
 
   const hasHeroContext = !!useContext(HeroContext);
   const nextPrevStyles = hasHeroContext
-    ? { color: 'white' as const, variant: 'primary' as const }
+    ? { color: 'contrast' as const, variant: 'primary' as const }
     : { variant: 'tertiary' as const };
 
   const shouldUseAriaCarouselPattern = !autoPlayDelay;

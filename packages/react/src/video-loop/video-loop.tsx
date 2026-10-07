@@ -100,7 +100,7 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
           }
           isIconOnly
           variant="primary"
-          color="white"
+          color="contrast"
           onPress={togglePlayback}
           className={cx(
             // Centered in small containers; moved to the bottom-left corner in larger ones
