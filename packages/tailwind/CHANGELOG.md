@@ -2,6 +2,9 @@
 
 ## 2.6.0
 
+> [!WARNING]
+> We're in the middle of introducing design tokens. Even though this is a minor release, the token layer, `data-theme` and `data-color` are very experimental. Names, values and which tokens a theme can set may still change in a minor or patch release, so don't build anything critical on top of them yet.
+
 ### Minor Changes
 
 - 8a7bd6f: Adds the rest of the role colours from the design team's token set: all 16 roles for `success`, `danger`, `warning` and `info`, each with a utility such as `bg-success-surface-default` or `text-danger-text-subtle`. Also adds size, line height and letter spacing for `--gm-paragraph-medium-*` and `--gm-description-medium-*`, next to the font weight that was already there.
