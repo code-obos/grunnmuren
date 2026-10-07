@@ -75,9 +75,10 @@ export const SideBySide: StoryObj = {
     const style = (testId: string) => getComputedStyle(canvas.getByTestId(testId));
 
     await expect(style('default').backgroundColor).toBe('rgb(0, 33, 105)');
-    await expect(style('froen-hage').backgroundColor).toBe('rgb(237, 234, 225)');
-    // data-color inside a theme picks the theme's role, not the default one
-    await expect(style('froen-hage-neutral').backgroundColor).toBe('rgb(99, 93, 76)');
+    await expect(style('froen-hage').backgroundColor).toBe('rgb(45, 58, 38)');
+    // data-color inside a theme picks the theme's role. Frøen Hage leaves the neutral
+    // fill to the core, so it's the core's grey
+    await expect(style('froen-hage-neutral').backgroundColor).toBe('rgb(51, 51, 51)');
     // data-theme="default" inside another theme goes back to the defaults
     await expect(style('nested').backgroundColor).toBe('rgb(0, 33, 105)');
     await expect(style('accent').backgroundColor).toBe('rgb(0, 82, 76)');
