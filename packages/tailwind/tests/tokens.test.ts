@@ -111,8 +111,8 @@ describe('theme seam', () => {
   // element, so they have to pick the theme up too.
   test('a theme reaches the roles and the short tokens', async () => {
     const froenHage = await loadThemeCustomProperties('froen-hage');
-    expect(await resolveToken('--gm-color-primary-base-default', froenHage)).toBe('#edeae1');
-    expect(await resolveToken('--gm-color-base-default', froenHage)).toBe('#edeae1');
+    expect(await resolveToken('--gm-color-primary-base-default', froenHage)).toBe('#2d3a26');
+    expect(await resolveToken('--gm-color-base-default', froenHage)).toBe('#2d3a26');
   });
 
   // Reduced motion is one of the things a theme must not be able to turn off, and an app's

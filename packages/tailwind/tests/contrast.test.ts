@@ -80,20 +80,9 @@ const DEFAULT_VIOLATIONS = [
  */
 const THEME_VIOLATIONS: Record<string, Array<string>> = {
   'froen-hage': [
-    // Primary is set up as a dark role: light text and buttons meant for the dark green
-    // tinted surfaces, where they pass at 10:1. But background-default and
-    // surface-default are still white, and on white the light text is 1.20:1 (default)
-    // and 1.57:1 (subtle)
-    '--gm-color-primary-text-default on --gm-color-primary-background-default',
-    '--gm-color-primary-text-default on --gm-color-primary-surface-default',
-    '--gm-color-primary-text-subtle on --gm-color-primary-background-default',
-    '--gm-color-primary-text-subtle on --gm-color-primary-surface-default',
-    // The light buttons disappear on a light page: 1.20:1, 1.45:1 and 1.88:1 on white
-    '--gm-color-primary-base-default on --gm-white',
-    '--gm-color-primary-base-hover on --gm-white',
-    '--gm-color-primary-base-active on --gm-white',
-    // 3.65:1
-    '--gm-color-neutral-text-subtle on --gm-color-neutral-surface-tinted',
+    // beige-900 on beige-300, 3.64:1. Muted text on their section colour, which the
+    // design team's own file says not to do
+    '--gm-color-neutral-text-subtle on --gm-color-neutral-background-tinted',
   ],
 };
 
