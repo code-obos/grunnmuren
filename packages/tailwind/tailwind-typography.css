@@ -95,13 +95,13 @@
     }
 
     &:where([class~='lead']) {
-      @apply text-[1.4375rem]/[2.25rem] font-medium lg:text-[1.625rem]/[2.5625rem];
+      @apply lead;
       margin-top: 1.2em;
       margin-bottom: 1.2em;
     }
 
     &:where([class~='lead-sm']) {
-      @apply text-[1.1875rem]/[1.875rem] font-normal lg:text-[1.375rem]/[2.1875rem];
+      @apply lead-sm;
       margin-top: 1.2em;
       margin-bottom: 1.2em;
     }
