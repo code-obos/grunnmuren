@@ -43,7 +43,6 @@ const buttonVariants = cva({
       accent: 'focus-visible:outline-focus',
       neutral: 'focus-visible:outline-focus',
       contrast: 'focus-visible:outline-focus focus-visible:outline-primary-base-contrast-default',
-      /** @deprecated Use `contrast` */
       mint: 'focus-visible:outline-focus focus-visible:outline-mint',
     },
     /**
@@ -59,7 +58,7 @@ const buttonVariants = cva({
   },
   compoundVariants: [
     // The button sets data-color to its role, so the short tokens point at that role and the
-    // three share one set of classes. Hover and pressed get lighter than the fill.
+    // three share one set of classes
     {
       color: ['primary', 'accent', 'neutral'],
       variant: 'primary',
@@ -123,11 +122,29 @@ const buttonVariants = cva({
   },
 });
 
-type ButtonColor = NonNullable<VariantProps<typeof buttonVariants>['color']>;
+type ColorConfig = {
+  variant: NonNullable<VariantProps<typeof buttonVariants>['color']>;
+  role?: 'primary' | 'accent' | 'neutral';
+};
 
-// The palette names from before the roles that look the same as a role. Kept so existing
-// code doesn't break, and removed in the next major. Mint has no role, so it's a variant.
-const legacyColors = { blue: 'primary', white: 'contrast' } as const;
+/**
+ * What each `color` renders as, and the role it sets as `data-color`. Only the roles have
+ * short tokens to point at, so `contrast` and `mint` set none.
+ *
+ * `blue`, `white` and `mint` are the palette names from before the roles, removed in the
+ * next major. TypeScript can't mark a string literal as deprecated, so the prop doc is
+ * the only place that says so.
+ */
+const colors = {
+  primary: { variant: 'primary', role: 'primary' },
+  accent: { variant: 'accent', role: 'accent' },
+  neutral: { variant: 'neutral', role: 'neutral' },
+  contrast: { variant: 'contrast' },
+  blue: { variant: 'primary', role: 'primary' },
+  white: { variant: 'contrast' },
+  // Has no role, so it stays its own variant on the palette and keeps looking mint
+  mint: { variant: 'mint' },
+} as const satisfies Record<string, ColorConfig>;
 
 type ButtonOrLinkProps = Omit<VariantProps<typeof buttonVariants>, 'color'> & {
   /**
@@ -136,9 +153,11 @@ type ButtonOrLinkProps = Omit<VariantProps<typeof buttonVariants>, 'color'> & {
    *
    * `blue`, `mint` and `white` are deprecated: use `primary` instead of `blue`, and
    * `contrast` instead of `mint` and `white`. `mint` still renders mint until it's removed.
+   *
+   * The button sets `data-color` to its role, unless you pass `data-color` yourself.
    * @default primary
    */
-  color?: ButtonColor | keyof typeof legacyColors;
+  color?: keyof typeof colors;
   children?: React.ReactNode;
   href?: RACLinkProps['href'];
   /** Additional style properties for the element. */
@@ -169,20 +188,13 @@ function Button({ ref = null, ...props }: ButtonProps) {
     ...restProps
   } = props;
 
-  const resolvedColor: ButtonColor =
-    color && color in legacyColors
-      ? legacyColors[color as keyof typeof legacyColors]
-      : ((color as ButtonColor | undefined) ?? 'primary');
-
-  // Only the roles have short tokens to point at
-  const dataColor =
-    resolvedColor === 'contrast' || resolvedColor === 'mint' ? undefined : resolvedColor;
+  const { variant: colorVariant, role }: ColorConfig = colors[color ?? 'primary'];
 
   const className = buttonVariants({
     // Don't animate the icon when we're pending, as it affects the loading spinner
     animateIcon: isPending ? undefined : animateIcon,
     className: props.className,
-    color: resolvedColor,
+    color: colorVariant,
     isIconOnly,
     variant,
     isPending,
@@ -206,9 +218,9 @@ function Button({ ref = null, ...props }: ButtonProps) {
 
   return isLinkProps(restProps) ? (
     <RACLink
+      data-color={role}
       {...(restProps as RACLinkProps)}
       className={className}
-      data-color={dataColor}
       data-slot="button"
       ref={ref as Ref<HTMLAnchorElement>}
     >
@@ -216,9 +228,9 @@ function Button({ ref = null, ...props }: ButtonProps) {
     </RACLink>
   ) : (
     <RACButton
+      data-color={role}
       {...(restProps as RACButtonProps)}
       className={className}
-      data-color={dataColor}
       data-slot="button"
       isPending={isPending}
       ref={ref as Ref<HTMLButtonElement>}
