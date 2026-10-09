@@ -43,6 +43,8 @@ const buttonVariants = cva({
       accent: 'focus-visible:outline-focus',
       neutral: 'focus-visible:outline-focus',
       contrast: 'focus-visible:outline-focus focus-visible:outline-primary-base-contrast-default',
+      /** @deprecated Use `contrast` */
+      mint: 'focus-visible:outline-focus focus-visible:outline-mint',
     },
     /**
      * When the button is without text, but with a single icon.
@@ -93,6 +95,25 @@ const buttonVariants = cva({
       className:
         'text-primary-base-contrast-default **:[[role="progressbar"]]:text-primary-base-contrast-default',
     },
+    // Deprecated, and stays on the palette so it looks the same as before in every theme.
+    // Hover and pressed are hand picked, there's nothing darker than mint-300 to use.
+    {
+      color: 'mint',
+      variant: 'primary',
+      className:
+        'bg-mint text-black hover:bg-[#8dd4bd] active:bg-[#9ddac6] **:[[role="progressbar"]]:text-black',
+    },
+    {
+      color: 'mint',
+      variant: 'secondary',
+      className:
+        'text-mint hover:bg-mint **:[[role="progressbar"]]:text-mint hover:text-black [&:hover_[role="progressbar"]]:text-black',
+    },
+    {
+      color: 'mint',
+      variant: 'tertiary',
+      className: 'text-mint **:[[role="progressbar"]]:text-mint',
+    },
   ],
   defaultVariants: {
     variant: 'primary',
@@ -104,9 +125,9 @@ const buttonVariants = cva({
 
 type ButtonColor = NonNullable<VariantProps<typeof buttonVariants>['color']>;
 
-// The palette names from before the roles. Kept so existing code doesn't break, and
-// removed in the next major.
-const legacyColors = { blue: 'primary', mint: 'contrast', white: 'contrast' } as const;
+// The palette names from before the roles that look the same as a role. Kept so existing
+// code doesn't break, and removed in the next major. Mint has no role, so it's a variant.
+const legacyColors = { blue: 'primary', white: 'contrast' } as const;
 
 type ButtonOrLinkProps = Omit<VariantProps<typeof buttonVariants>, 'color'> & {
   /**
@@ -114,7 +135,7 @@ type ButtonOrLinkProps = Omit<VariantProps<typeof buttonVariants>, 'color'> & {
    * backgrounds.
    *
    * `blue`, `mint` and `white` are deprecated: use `primary` instead of `blue`, and
-   * `contrast` instead of `mint` and `white`.
+   * `contrast` instead of `mint` and `white`. `mint` still renders mint until it's removed.
    * @default primary
    */
   color?: ButtonColor | keyof typeof legacyColors;
@@ -153,6 +174,10 @@ function Button({ ref = null, ...props }: ButtonProps) {
       ? legacyColors[color as keyof typeof legacyColors]
       : ((color as ButtonColor | undefined) ?? 'primary');
 
+  // Only the roles have short tokens to point at
+  const dataColor =
+    resolvedColor === 'contrast' || resolvedColor === 'mint' ? undefined : resolvedColor;
+
   const className = buttonVariants({
     // Don't animate the icon when we're pending, as it affects the loading spinner
     animateIcon: isPending ? undefined : animateIcon,
@@ -183,7 +208,7 @@ function Button({ ref = null, ...props }: ButtonProps) {
     <RACLink
       {...(restProps as RACLinkProps)}
       className={className}
-      data-color={resolvedColor === 'contrast' ? undefined : resolvedColor}
+      data-color={dataColor}
       data-slot="button"
       ref={ref as Ref<HTMLAnchorElement>}
     >
@@ -193,7 +218,7 @@ function Button({ ref = null, ...props }: ButtonProps) {
     <RACButton
       {...(restProps as RACButtonProps)}
       className={className}
-      data-color={resolvedColor === 'contrast' ? undefined : resolvedColor}
+      data-color={dataColor}
       data-slot="button"
       isPending={isPending}
       ref={ref as Ref<HTMLButtonElement>}
