@@ -2,6 +2,7 @@ import { ArrowRight, Edit, Search } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { cx } from 'cva';
 
+import { Badge } from '../badge';
 import { Button } from './button';
 
 // Note: we cannot use the `satisfie` CSF here, because the resulting union type is too wide for TS to typecheck
@@ -17,7 +18,7 @@ const meta: Meta<typeof Button> = {
     isIconOnly: false,
     animateIcon: undefined,
     variant: 'primary',
-    color: 'blue',
+    color: 'primary',
   },
   argTypes: {
     animateIcon: {
@@ -26,12 +27,8 @@ const meta: Meta<typeof Button> = {
   },
   decorators: [
     (Story, context) => {
-      let bgColor = '';
-      if (context.args.color === 'mint') {
-        bgColor = 'bg-blue-dark';
-      } else if (context.args.color === 'white') {
-        bgColor = 'bg-blue';
-      }
+      const onDark = ['contrast', 'mint', 'white'].includes(context.args.color ?? '');
+      const bgColor = onDark ? 'bg-primary-base-default' : '';
 
       return <div className={cx(bgColor, 'flex gap-4 p-6')}>{Story()}</div>;
     },
@@ -135,29 +132,81 @@ export const ButtonSandbox = () => {
         </div>
       </div>
 
-      <div className="bg-blue-dark">
-        <div className="flex gap-8 p-8">
-          <Button color="white">Primary</Button>
-          <Button color="white" variant="secondary">
-            Secondary
-          </Button>
-          <Button color="white" variant="tertiary">
-            Tertiary
-          </Button>
-        </div>
+      <div className="flex gap-8 p-8">
+        <Button color="accent">Primary</Button>
+        <Button color="accent" variant="secondary">
+          Secondary
+        </Button>
+        <Button color="accent" variant="tertiary">
+          Tertiary
+        </Button>
       </div>
 
-      <div className="bg-green-dark p-8">
-        <div className="flex gap-8">
-          <Button color="mint">Primary</Button>
-          <Button color="mint" variant="secondary">
-            Secondary
-          </Button>
-          <Button color="mint" variant="tertiary">
-            Tertiary
-          </Button>
-        </div>
+      <div className="flex gap-8 p-8">
+        <Button color="neutral">Primary</Button>
+        <Button color="neutral" variant="secondary">
+          Secondary
+        </Button>
+        <Button color="neutral" variant="tertiary">
+          Tertiary
+        </Button>
+      </div>
+
+      <div className="bg-primary-base-default flex gap-8 p-8">
+        <Button color="contrast">Primary</Button>
+        <Button color="contrast" variant="secondary">
+          Secondary
+        </Button>
+        <Button color="contrast" variant="tertiary">
+          Tertiary
+        </Button>
+      </div>
+
+      <div className="bg-accent-base-default flex gap-8 p-8">
+        <Button color="contrast">Primary</Button>
+        <Button color="contrast" variant="secondary">
+          Secondary
+        </Button>
+        <Button color="contrast" variant="tertiary">
+          Tertiary
+        </Button>
       </div>
     </div>
   );
 };
+
+const LEGACY_COLORS = [
+  { color: 'blue', replacement: 'primary', background: '' },
+  { color: 'mint', replacement: 'contrast', background: 'bg-green-dark' },
+  { color: 'white', replacement: 'contrast', background: 'bg-blue-dark' },
+] as const;
+
+/**
+ * `blue`, `mint` og `white` funker fortsatt, men er deprecated og forsvinner i neste major.
+ * Bruk `primary` i stedet for `blue`, og `contrast` i stedet for `mint` og `white`.
+ */
+export const LegacyColors = () => (
+  <div className="flex flex-col">
+    {LEGACY_COLORS.map(({ color, replacement, background }) => (
+      <div key={color} className={cx(background, 'grid gap-4 p-8')}>
+        <div className="flex items-center gap-3">
+          <Badge color="white" size="small" className="border-neutral-border-default border">
+            Deprecated
+          </Badge>
+          <code className={cx('text-sm', background && 'text-white')}>
+            <span className="line-through">color="{color}"</span> → color="{replacement}"
+          </code>
+        </div>
+        <div className="flex gap-8">
+          <Button color={color}>Primary</Button>
+          <Button color={color} variant="secondary">
+            Secondary
+          </Button>
+          <Button color={color} variant="tertiary">
+            Tertiary
+          </Button>
+        </div>
+      </div>
+    ))}
+  </div>
+);

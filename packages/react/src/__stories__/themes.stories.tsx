@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { type ReactNode, useLayoutEffect, useRef, useState } from 'react';
 import { expect, within } from 'storybook/test';
 
+import { Badge } from '../badge';
+
 const meta: Meta = {
   title: 'Temaer',
 };
@@ -149,7 +151,13 @@ const toHex = (color: string) => {
     : color;
 };
 
-const Swatch = ({ name }: { name: string }) => {
+type SwatchProps = {
+  name: string;
+  /** Paints the swatch with a utility class instead of `var(name)` */
+  className?: string;
+};
+
+const Swatch = ({ name, className }: SwatchProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [value, setValue] = useState('');
 
@@ -161,8 +169,8 @@ const Swatch = ({ name }: { name: string }) => {
     <div className="flex items-center gap-3">
       <div
         ref={ref}
-        className="size-10 shrink-0 rounded-md border border-black/15"
-        style={{ backgroundColor: `var(${name})` }}
+        className={`size-10 shrink-0 rounded-md border border-black/15 ${className ?? ''}`}
+        style={className ? undefined : { backgroundColor: `var(${name})` }}
       />
       <div className="min-w-0 text-sm">
         <code className="block truncate">{name}</code>
@@ -205,6 +213,57 @@ const useDocumentThemeVersion = () => {
   return version;
 };
 
+// Written out as classes so Tailwind generates them, which is what a consumer gets from
+// `bg-blue-dark` today. Plain hex, so they don't follow a theme.
+const LEGACY_COLORS = [
+  ['black', 'bg-black'],
+  ['white', 'bg-white'],
+  ['gray', 'bg-gray'],
+  ['gray-dark', 'bg-gray-dark'],
+  ['gray-light', 'bg-gray-light'],
+  ['gray-lightest', 'bg-gray-lightest'],
+  ['sky', 'bg-sky'],
+  ['sky-light', 'bg-sky-light'],
+  ['sky-lightest', 'bg-sky-lightest'],
+  ['mint', 'bg-mint'],
+  ['mint-light', 'bg-mint-light'],
+  ['mint-lightest', 'bg-mint-lightest'],
+  ['blue', 'bg-blue'],
+  ['blue-light', 'bg-blue-light'],
+  ['blue-lightest', 'bg-blue-lightest'],
+  ['blue-dark', 'bg-blue-dark'],
+  ['green', 'bg-green'],
+  ['green-dark', 'bg-green-dark'],
+  ['green-light', 'bg-green-light'],
+  ['green-lightest', 'bg-green-lightest'],
+  ['red', 'bg-red'],
+  ['red-light', 'bg-red-light'],
+  ['orange', 'bg-orange'],
+  ['orange-light', 'bg-orange-light'],
+  ['yellow', 'bg-yellow'],
+] as const;
+
+const LegacyColors = () => (
+  <section className="grid gap-6">
+    <div className="grid gap-2">
+      <h2 className="heading-m flex items-center gap-3">
+        Legacy-farger
+        <Badge color="white" size="small" className="border-neutral-border-default border">
+          Deprecated
+        </Badge>
+      </h2>
+      <p className="text-neutral-text-subtle max-w-prose">
+        Finnes fortsatt, så eksisterende kode funker, men bruk rollene over i ny kode.
+      </p>
+    </div>
+    <div className="grid grid-cols-4 gap-4 [&_code]:line-through">
+      {LEGACY_COLORS.map(([name, className]) => (
+        <Swatch key={name} name={`--color-${name}`} className={className} />
+      ))}
+    </div>
+  </section>
+);
+
 const ColorTokens = () => {
   const [tokens, setTokens] = useState<ReturnType<typeof readColorTokens>>();
   const version = useDocumentThemeVersion();
@@ -217,6 +276,7 @@ const ColorTokens = () => {
       <TokenGroups title="Roller" tokens={tokens.roles} />
       <TokenGroups title="Korte tokens (data-color)" tokens={tokens.short} />
       <TokenGroups title="Primitiver" tokens={tokens.primitives} />
+      <LegacyColors />
     </div>
   );
 };

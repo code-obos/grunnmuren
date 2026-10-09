@@ -72,7 +72,7 @@ const ToggletipContent = ({
           <>
             <Button
               aria-label={translations.close[locale]}
-              color="white"
+              color="contrast"
               isIconOnly
               onPress={close}
               variant="tertiary"
