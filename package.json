@@ -48,7 +48,7 @@
     "oxlint": "1.60.0",
     "oxlint-tsgolint": "0.20.0",
     "playwright": "1.63.0",
-    "publint": "0.3.24",
+    "publint": "0.3.25",
     "react": "catalog:",
     "react-dom": "catalog:",
     "storybook": "10.6.1",
