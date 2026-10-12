@@ -72,7 +72,6 @@ const ToggletipContent = ({
 
   return (
     <>
-      {!isOpen && <span hidden> {children}</span>}
       <RACPopover {...restProps} className={cx('gm-toggletip', className)} offset={8}>
         <RACOverlayArrow data-slot="toggletip-arrow" />
         <RACDialog aria-label={ariaLabel} data-slot="toggletip-dialog">
@@ -92,6 +91,7 @@ const ToggletipContent = ({
           )}
         </RACDialog>
       </RACPopover>
+      {!isOpen && <span hidden> {children}</span>}
     </>
   );
 };
