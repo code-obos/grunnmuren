@@ -4,7 +4,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { basename, extname } from 'node:path';
 import { parseArgs } from 'node:util';
 
-import { buildTheme, EXAMPLE_TOKENS } from './index.mjs';
+import { buildTheme, EXAMPLE_TOKENS, toThemeName } from './index.mjs';
 
 const HELP = `Builds a Grunnmuren theme from colour tokens, and checks it.
 
@@ -15,7 +15,7 @@ Usage:
 Options:
   -n, --name     The theme's name, what goes in data-theme="…". Defaults to the file's name
   -o, --out      Write the CSS to this file instead of stdout
-      --strict   Fail on contrast below WCAG 2.2 AA too, not just on errors
+      --strict   Fail on contrast below WCAG 2.2 AA too, without writing any CSS
       --example  Print every role token at its default, to start from
   -h, --help     Show this
 
@@ -69,7 +69,7 @@ if (values.example) {
 
 const [file, ...rest] = positionals;
 if (!file || rest.length > 0) fail(HELP);
-const name = values.name ?? basename(file, extname(file));
+const name = values.name ?? toThemeName(basename(file, extname(file)));
 
 const read = async () => {
   try {
@@ -85,7 +85,11 @@ if (errors.length > 0) {
   fail(
     [
       `${errors.length} ${errors.length === 1 ? 'error' : 'errors'} in ${file}:`,
-      ...errors.map(({ message }) => `  ${message}`),
+      ...errors.map(({ code, message }) =>
+        code === 'invalid-name' && !values.name
+          ? `  ${message}. The name comes from the file, pass one with --name`
+          : `  ${message}`,
+      ),
     ].join('\n'),
   );
 }
@@ -106,6 +110,7 @@ if (failing.length > 0) {
       '',
     ].join('\n'),
   );
+  if (values.strict) fail('Wrote no CSS, since --strict fails on contrast below WCAG 2.2 AA.');
 }
 
 if (values.out) {
@@ -114,5 +119,3 @@ if (values.out) {
 } else {
   process.stdout.write(css);
 }
-
-process.exitCode = values.strict && failing.length > 0 ? 1 : 0;

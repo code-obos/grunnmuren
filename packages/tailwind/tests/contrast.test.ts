@@ -3,8 +3,28 @@ import { basename, resolve } from 'node:path';
 
 import { describe, expect, test } from 'vitest';
 
-import { CONTRAST_PAIRS, contrastRatio, type ContrastPair } from '../theme/index.mjs';
+import { CONTRAST_PAIRS, contrastRatio } from '../theme/contrast.mjs';
+import colors from '../tokens/colors.json' with { type: 'json' };
 import { loadThemeCustomProperties, resolveToken } from './design-system.ts';
+
+const cssNames = new Map(
+  colors.roles.flatMap(({ tokens }) => tokens.map(({ path, name }) => [path, `--${name}`])),
+);
+
+const toCssName = (path: string) => {
+  const name = cssNames.get(path);
+  if (!name) throw new Error(`\`${path}\` isn't a role colour`);
+  return name;
+};
+
+// The pairs by CSS name, which is what the CSS is resolved by
+const pairs = CONTRAST_PAIRS.map((pair) => ({
+  ...pair,
+  foreground: toCssName(pair.foreground),
+  background: toCssName(pair.background),
+}));
+
+type ContrastPair = (typeof pairs)[number];
 
 /**
  * Pairs in the token set from AB#140595 that are below the minimum today. They show up in
@@ -16,9 +36,9 @@ const DEFAULT_VIOLATIONS = [
   '--gm-color-warning-base-contrast-default on --gm-color-warning-base-active',
   // orange-500 on white, 2.09:1. The token file itself notes orange-500 isn't fit for a
   // border, and a button fill needs the same 3:1.
-  '--gm-color-warning-base-default on --gm-white',
+  '--gm-color-warning-base-default on --gm-color-warning-background-default',
   // orange-600 on white, 2.79:1
-  '--gm-color-warning-base-hover on --gm-white',
+  '--gm-color-warning-base-hover on --gm-color-warning-background-default',
   // orange-700 as subtle text is under 4.5:1 on every warning surface: 3.69:1 on white,
   // 3.38:1 on yellow-100 and 2.99:1 on orange-100
   '--gm-color-warning-text-subtle on --gm-color-warning-background-default',
@@ -70,8 +90,8 @@ const ratioFor = async ({ foreground, background }: ContrastPair, overrides: Map
 
 for (const { name, overrides } of themes) {
   const violations = violationsIn(name);
-  const passingPairs = CONTRAST_PAIRS.filter((pair) => !violations.has(label(pair)));
-  const violatingPairs = CONTRAST_PAIRS.filter((pair) => violations.has(label(pair)));
+  const passingPairs = pairs.filter((pair) => !violations.has(label(pair)));
+  const violatingPairs = pairs.filter((pair) => violations.has(label(pair)));
 
   describe(`contrast in ${name}`, () => {
     test.for(passingPairs)('$foreground on $background ($rule)', async (pair) => {
@@ -88,12 +108,12 @@ for (const { name, overrides } of themes) {
 
 describe('contrast', () => {
   test('every known violation is a pair that is actually checked', () => {
-    const checked = new Set(CONTRAST_PAIRS.map(label));
+    const checked = new Set(pairs.map(label));
     const known = [...DEFAULT_VIOLATIONS, ...Object.values(THEME_VIOLATIONS).flat()];
     expect(known.filter((violation) => !checked.has(violation))).toEqual([]);
   });
 
   test('the checked pairs match the snapshot', () => {
-    expect(CONTRAST_PAIRS.map((pair) => `${label(pair)} >= ${pair.minimum}`)).toMatchSnapshot();
+    expect(pairs.map((pair) => `${label(pair)} >= ${pair.minimum}`)).toMatchSnapshot();
   });
 });

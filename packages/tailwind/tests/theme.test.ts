@@ -6,7 +6,8 @@ import { promisify } from 'node:util';
 
 import { afterAll, describe, expect, test } from 'vitest';
 
-import { buildTheme, EXAMPLE_TOKENS } from '../theme/index.mjs';
+import { buildTheme, EXAMPLE_TOKENS, toThemeName } from '../theme/index.mjs';
+import colors from '../tokens/colors.json' with { type: 'json' };
 
 const build = (tokens: unknown) => buildTheme(tokens, { name: 'nybolig' });
 
@@ -43,7 +44,8 @@ describe('buildTheme', () => {
     });
 
     const hoverOnPage = contrast.find(
-      ({ foreground, background }) => foreground === 'primary.base-hover' && background === 'white',
+      ({ foreground, background }) =>
+        foreground === 'primary.base-hover' && background === 'primary.background-default',
     );
     expect(hoverOnPage?.ratio).toBe(21);
   });
@@ -72,6 +74,28 @@ describe('buildTheme', () => {
     const { errors } = build({ '--gm-color-primary-base-default': '#2d3a26' });
     expect(errors[0]?.suggestion).toBe('primary.base-default');
   });
+
+  test.for([
+    ['rgb(0, 0, 0)', 21],
+    ['rgba(0, 0, 0, 0.5)', 3.98],
+    ['rgb(0 0 0)', 21],
+    ['rgb(0 0 0 / 50%)', 3.98],
+  ] as const)('%s is a colour, with its contrast on white', ([color, ratio]) => {
+    const { errors, contrast } = build({ primary: { 'text-default': color } });
+
+    expect(errors).toEqual([]);
+    const onPage = contrast.find(({ background }) => background === 'primary.background-default');
+    expect(onPage?.ratio).toBeCloseTo(ratio, 2);
+  });
+
+  test.for(['rgb(1 2, 3)', 'rgb(0 0 0 0.5)', 'rgb(0, 0, 0 / 0.5)', 'rgb(0 0 0 /)'])(
+    '%s mixes or breaks the two rgb() forms, and is an error',
+    (color) => {
+      expect(build({ primary: { 'text-default': color } }).errors).toEqual([
+        expect.objectContaining({ code: 'invalid-color', path: 'primary.text-default' }),
+      ]);
+    },
+  );
 
   test('a value that is not a colour is an error', () => {
     const { css, errors } = build({ primary: { 'base-default': 'green' } });
@@ -120,12 +144,38 @@ describe('buildTheme', () => {
     expect(contrast.every(({ foreground }) => foreground === 'primary.text-default')).toBe(true);
   });
 
-  test('the example builds to the same values as the defaults', () => {
-    const { errors, contrast } = buildTheme(EXAMPLE_TOKENS, { name: 'example' });
+  test('the example points every role at its default, and changes no contrast', () => {
+    const { css, errors, contrast } = buildTheme(EXAMPLE_TOKENS, { name: 'example' });
+    const defaults = colors.roles.flatMap(({ tokens }) =>
+      tokens.map(({ name, refName }) => `  --${name}: var(--${refName});\n`),
+    );
 
     expect(errors).toEqual([]);
-    // The known violations in contrast.test.ts, and nothing else
-    expect(contrast.filter(({ passes }) => !passes)).toHaveLength(7);
+    expect(css).toBe(`[data-theme='example'] {\n${defaults.join('')}}\n`);
+    expect(contrast).toEqual([]);
+  });
+
+  test.for(['{blue.900}', '#002169', '#002169FF', 'rgb(0 33 105)'])(
+    'restating a default as %s reports no contrast',
+    (value) => {
+      expect(build({ primary: { 'text-default': value } }).contrast).toEqual([]);
+    },
+  );
+
+  test('"default" is not a theme name, it resets to the defaults', () => {
+    expect(buildTheme({}, { name: 'default' }).errors).toEqual([
+      expect.objectContaining({ code: 'invalid-name' }),
+    ]);
+  });
+});
+
+describe('toThemeName', () => {
+  test.for([
+    ['Frøen Hage', 'froen-hage'],
+    ['Blåbær_Æble 2', 'blabaer_aeble-2'],
+    ['  --Nytt tema!-- ', 'nytt-tema'],
+  ])('%s is %s', ([input, name]) => {
+    expect(toThemeName(input)).toBe(name);
   });
 });
 
@@ -135,8 +185,8 @@ const directory = await mkdtemp(join(tmpdir(), 'grunnmuren-theme-'));
 afterAll(() => rm(directory, { recursive: true }));
 
 /** Runs the CLI with `tokens` in a file, and resolves to its output and exit code either way. */
-const cli = async (tokens: unknown, ...args: Array<string>) => {
-  const file = join(directory, 'tokens.json');
+const cliWithFile = async (fileName: string, tokens: unknown, ...args: Array<string>) => {
+  const file = join(directory, fileName);
   await writeFile(file, JSON.stringify(tokens));
   try {
     const { stdout, stderr } = await run('node', [CLI, file, ...args]);
@@ -146,6 +196,9 @@ const cli = async (tokens: unknown, ...args: Array<string>) => {
     return { stdout, stderr, code };
   }
 };
+
+const cli = (tokens: unknown, ...args: Array<string>) =>
+  cliWithFile('tokens.json', tokens, ...args);
 
 describe('grunnmuren-theme', () => {
   test('prints the CSS', async () => {
@@ -158,6 +211,21 @@ describe('grunnmuren-theme', () => {
   test('names the theme after the file without --name', async () => {
     const { stdout } = await cli({ primary: { 'base-default': '#2d3a26' } });
     expect(stdout).toMatch(/^\[data-theme='tokens'\]/);
+  });
+
+  test('makes a theme name out of the file name', async () => {
+    const { stdout } = await cliWithFile('Frøen Hage.json', {
+      primary: { 'base-default': '#000' },
+    });
+    expect(stdout).toMatch(/^\[data-theme='froen-hage'\]/);
+  });
+
+  test('points to --name when the file name makes an invalid theme name', async () => {
+    const { stdout, stderr, code } = await cliWithFile('default.json', {});
+
+    expect(code).toBe(1);
+    expect(stdout).toBe('');
+    expect(stderr).toContain('--name');
   });
 
   test('writes the CSS to --out', async () => {
@@ -182,5 +250,22 @@ describe('grunnmuren-theme', () => {
     expect(lenient.code).toBe(0);
     expect(lenient.stderr).toContain('primary.text-default on primary.background-default');
     expect(strict.code).toBe(1);
+  });
+
+  test('writes no CSS when --strict fails on contrast', async () => {
+    const out = join(directory, 'strict.css');
+    const { stdout, stderr, code } = await cli(
+      { primary: { 'text-default': '#cccccc' } },
+      '-n',
+      'x',
+      '--strict',
+      '--out',
+      out,
+    );
+
+    expect(code).toBe(1);
+    expect(stdout).toBe('');
+    expect(stderr).toContain('Wrote no CSS');
+    await expect(readFile(out, 'utf8')).rejects.toThrow(/ENOENT/);
   });
 });

@@ -11,6 +11,7 @@ import {
 import {
   buildTheme,
   EXAMPLE_TOKENS,
+  toThemeName,
   type ContrastResult,
   type ThemeIssue,
 } from '@obosbbl/grunnmuren-tailwind/theme';
@@ -32,14 +33,6 @@ export const Route = createFileRoute('/_docs/profil/temaer')({
 });
 
 const README_THEMES = 'https://github.com/code-obos/grunnmuren/tree/main/packages/tailwind#themes';
-
-/** A theme name that works unquoted in `data-theme` and as a file name */
-const toThemeName = (input: string) =>
-  input
-    .trim()
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
 
 const download = (fileName: string, contents: string, type: string) => {
   const url = URL.createObjectURL(new Blob([contents], { type }));
@@ -67,7 +60,8 @@ const STARTER = `{
 const PREVIEW_THEME = 'temaer-forhandsvisning';
 
 const ISSUES: Record<ThemeIssue['code'], (issue: ThemeIssue) => string> = {
-  'invalid-name': () => 'Navnet kan bare ha bokstaver, tall, - og _.',
+  'invalid-name': () =>
+    'Navnet kan bare ha bokstaver, tall, - og _, og kan ikke være default, som er Grunnmuren sine egne verdier.',
   'not-an-object': () => 'Tokenene må være et JSON-objekt, gruppert per rolle.',
   'unknown-token': ({ path, suggestion }) =>
     `${path} finnes ikke i Grunnmuren.${suggestion ? ` Mente du ${suggestion}?` : ''}`,
