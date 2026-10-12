@@ -75,6 +75,8 @@ A few things a theme can't change:
 
 Tailwind's `--radius-*` overridden in your own `@theme` doesn't reach inside a `data-theme`, so set `--gm-radius-*` instead.
 
+The docs have a [guide to writing a theme](https://grunnmuren.obos.no/profil/temaer), with a template of every role colour to start from.
+
 ## Migrating from v1?
 
 To ease the transition from v1 to v2 of Grunnmuren, it is possible to configure the preset to be (partially) compatible with v1. This allows you to use v2 of the Tailwind preset with v1 of the React components, and upgrade your application over time instead of a full migration.
