@@ -1,5 +1,16 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.7.0
+
+### Minor Changes
+
+- 52fb04a: The CSS in the Tailwind package reads the role tokens too, so it follows a `data-theme` like the components: the page text and background, text selection, Pagination, Toggletip, Stepper and `prose`. Nearly all of it computes to the same colours as before.
+  
+  `prose` no longer reads Tailwind's own grey palette. Captions, code, `kbd`, the `pre` background and the table borders move from Tailwind's cool greys to the OBOS greys. The focus outlines stay as they are on purpose, a theme can't change them.
+- abbbfa7: `heading-xl` to `heading-xs`, `lead` and `lead-sm` scale smoothly with the viewport through the `clamp()` tokens, instead of jumping in size at `lg`. The smallest and largest sizes are the same as before, but everything in between changes, so every heading on every page moves a little.
+  
+  The line height comes from the tokens too, 1.5 on every level. That's looser than today on `heading-xl` (about 1.3) and slightly tighter on the others (about 1.55 to 1.6).
+
 ## 2.6.0
 
 > [!WARNING]
