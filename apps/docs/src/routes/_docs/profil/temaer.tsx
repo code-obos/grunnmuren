@@ -1,11 +1,25 @@
-import { Button, Link, TextField } from '@obosbbl/grunnmuren-react';
+import {
+  Alertbox,
+  Badge,
+  Button,
+  Content,
+  Heading,
+  Link,
+  TextArea,
+  TextField,
+} from '@obosbbl/grunnmuren-react';
+import {
+  buildTheme,
+  EXAMPLE_TOKENS,
+  type ContrastResult,
+  type ThemeIssue,
+} from '@obosbbl/grunnmuren-tailwind/theme';
 import { createFileRoute } from '@tanstack/react-router';
 import { useState } from 'react';
+import { DropZone, FileTrigger } from 'react-aria-components';
 
 import { AnchorHeading } from '@/ui/anchor-heading';
 import { Code } from '@/ui/code';
-
-import { tokenColors } from '../../../../token-colors';
 
 export const Route = createFileRoute('/_docs/profil/temaer')({
   component: RouteComponent,
@@ -27,19 +41,8 @@ const toThemeName = (input: string) =>
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
 
-/** Every role colour, set to what it is by default, for an app to replace with its own */
-const themeTemplate = (name: string) => {
-  const roles = tokenColors.roles.map(({ role, tokens }) =>
-    [`  /* ${role} */`, ...tokens.map((token) => `  --${token.name}: var(--${token.ref});`)].join(
-      '\n',
-    ),
-  );
-
-  return `[data-theme='${name}'] {\n${roles.join('\n\n')}\n}\n`;
-};
-
-const download = (fileName: string, contents: string) => {
-  const url = URL.createObjectURL(new Blob([contents], { type: 'text/css' }));
+const download = (fileName: string, contents: string, type: string) => {
+  const url = URL.createObjectURL(new Blob([contents], { type }));
   const link = document.createElement('a');
   link.href = url;
   link.download = fileName;
@@ -47,13 +50,144 @@ const download = (fileName: string, contents: string) => {
   URL.revokeObjectURL(url);
 };
 
-const TemplateGenerator = () => {
-  const [input, setInput] = useState('mitt-tema');
-  const name = toThemeName(input) || 'mitt-tema';
-  const css = themeTemplate(name);
+const STARTER = `{
+  "primary": {
+    "base-default": "#2d3a26",
+    "base-hover": "#24301e",
+    "base-active": { "$value": "{primary.base-hover}" },
+    "text-default": "{primary.base-default}"
+  },
+  "accent": {
+    "base-default": "#8b674b"
+  }
+}
+`;
+
+// The preview gets a name of its own, so a theme called `default` can't take over the page
+const PREVIEW_THEME = 'temaer-forhandsvisning';
+
+const ISSUES: Record<ThemeIssue['code'], (issue: ThemeIssue) => string> = {
+  'invalid-name': () => 'Navnet kan bare ha bokstaver, tall, - og _.',
+  'not-an-object': () => 'Tokenene må være et JSON-objekt, gruppert per rolle.',
+  'unknown-token': ({ path, suggestion }) =>
+    `${path} finnes ikke i Grunnmuren.${suggestion ? ` Mente du ${suggestion}?` : ''}`,
+  'invalid-value': ({ path }) =>
+    `${path} må være en streng, eller et DTCG-token med fargen i $value.`,
+  'invalid-color': ({ path }) =>
+    `${path} er ikke en farge. Bruk hex, rgb() eller en referanse som {primary.base-default}.`,
+  'unresolved-reference': ({ path, suggestion }) =>
+    `${path} peker på et token som ikke finnes.${suggestion ? ` Mente du ${suggestion}?` : ''}`,
+  'circular-reference': ({ path }) => `${path} ender opp med å peke på seg selv.`,
+};
+
+const RULES: Record<string, string> = {
+  'text on surface': 'tekst på flate',
+  'text in button': 'tekst i knapp',
+  'button on page': 'knapp mot siden',
+  'graphics on page': 'kant mot siden',
+};
+
+// Floored, so a ratio that fails never shows as one that passes
+const formatRatio = (ratio: number) =>
+  `${(Math.floor(ratio * 100) / 100).toFixed(2).replace('.', ',')}:1`;
+
+const parse = (json: string): { tokens: unknown } | { error: string } => {
+  try {
+    return { tokens: JSON.parse(json) };
+  } catch (error) {
+    return { error: error instanceof Error ? error.message : String(error) };
+  }
+};
+
+const ContrastTable = ({ contrast }: { contrast: Array<ContrastResult> }) => {
+  if (contrast.length === 0) {
+    return <p>Temaet endrer ingen av parene vi sjekker kontrasten på.</p>;
+  }
+
+  const failing = contrast.filter(({ passes }) => !passes).length;
+  const sorted = contrast.toSorted((a, b) => Number(a.passes) - Number(b.passes));
 
   return (
-    <div className="grid gap-4">
+    <>
+      <p>
+        {failing === 0
+          ? `Alle ${contrast.length} parene temaet endrer holder WCAG 2.2 AA.`
+          : `${failing} av ${contrast.length} par temaet endrer er under WCAG 2.2 AA.`}
+      </p>
+      <div className="max-h-96 overflow-auto">
+        <table>
+          <thead>
+            <tr>
+              <th>Par</th>
+              <th>Kontrast</th>
+              <th>Krav</th>
+              <th>Ok?</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sorted.map(({ foreground, background, ratio, minimum, rule, passes }) => (
+              <tr key={`${foreground} ${background}`}>
+                <td>
+                  <code>{foreground}</code> på <code>{background}</code>
+                </td>
+                <td>{formatRatio(ratio)}</td>
+                <td>
+                  {String(minimum).replace('.', ',')}:1 ({RULES[rule] ?? rule})
+                </td>
+                <td>{passes ? 'Ok' : <strong>Ikke ok</strong>}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  );
+};
+
+const Preview = ({ css }: { css: string }) => (
+  <div
+    data-theme={PREVIEW_THEME}
+    className="bg-background-default text-text-default grid gap-6 rounded-xl border border-black/15 p-6"
+  >
+    <style>{css}</style>
+    <div className="flex flex-wrap gap-4">
+      <Button>Primary</Button>
+      {/* Button doesn't set data-color from `color` yet, so the role is picked here */}
+      <div data-color="accent" className="contents">
+        <Button color="accent">Accent</Button>
+      </div>
+      <Button variant="secondary">Sekundær</Button>
+    </div>
+    <div className="flex flex-wrap gap-2">
+      <Badge color="blue-dark">Primary</Badge>
+      <Badge color="sky">Primary surface</Badge>
+      <Badge color="green-dark">Accent</Badge>
+    </div>
+    <Alertbox variant="info" role="none">
+      <Heading level={3}>Sånn ser en info-boks ut</Heading>
+      <Content>
+        <p>Den bruker info-rollen, og følger med hvis temaet setter den.</p>
+      </Content>
+    </Alertbox>
+  </div>
+);
+
+const ThemeBuilder = () => {
+  const [input, setInput] = useState('mitt-tema');
+  const [json, setJson] = useState(STARTER);
+  const name = toThemeName(input) || 'mitt-tema';
+
+  const loadFile = async (file: File | undefined) => {
+    if (file) setJson(await file.text());
+  };
+
+  const parsed = parse(json);
+  const result = 'tokens' in parsed ? buildTheme(parsed.tokens, { name }) : undefined;
+  const preview =
+    'tokens' in parsed ? buildTheme(parsed.tokens, { name: PREVIEW_THEME }) : undefined;
+
+  return (
+    <div className="grid gap-8">
       <div className="flex flex-wrap items-end gap-4">
         <TextField
           label="Navn på temaet"
@@ -65,56 +199,99 @@ const TemplateGenerator = () => {
           value={input}
           onChange={setInput}
         />
-        <Button variant="secondary" onPress={() => download(`${name}.css`, css)}>
-          Last ned {name}.css
+        <FileTrigger
+          acceptedFileTypes={['application/json', '.json']}
+          onSelect={(files) => loadFile(files?.[0])}
+        >
+          <Button variant="secondary">Last opp JSON</Button>
+        </FileTrigger>
+        <Button
+          variant="tertiary"
+          onPress={() =>
+            download(
+              'eksempel.json',
+              `${JSON.stringify(EXAMPLE_TOKENS, null, 2)}\n`,
+              'application/json',
+            )
+          }
+        >
+          Last ned eksempel-JSON
         </Button>
       </div>
-      <div className="max-h-128 overflow-auto">
-        <Code code={css} language="css" />
-      </div>
+
+      <DropZone
+        className="data-drop-target:outline-focus rounded-lg"
+        onDrop={async ({ items }) => {
+          const item = items.find((dropped) => dropped.kind === 'file');
+          if (item?.kind === 'file') await loadFile(await item.getFile());
+        }}
+      >
+        <TextArea
+          label="Tokens"
+          description="Lim inn JSON, eller slipp en fil her."
+          rows={14}
+          className="[&_textarea]:font-mono"
+          value={json}
+          onChange={setJson}
+          errorMessage={'error' in parsed ? `Ikke gyldig JSON: ${parsed.error}` : undefined}
+        />
+      </DropZone>
+
+      {result && result.errors.length > 0 && (
+        <Alertbox variant="danger" role="alert">
+          <Heading level={3}>
+            {result.errors.length === 1 ? 'Én ting' : `${result.errors.length} ting`} å fikse
+          </Heading>
+          <Content>
+            <ul>
+              {result.errors.map((issue) => (
+                <li key={`${issue.code} ${issue.path}`}>{ISSUES[issue.code](issue)}</li>
+              ))}
+            </ul>
+          </Content>
+        </Alertbox>
+      )}
+
+      {result && result.errors.length === 0 && (
+        <>
+          <section className="prose">
+            <h3 className="heading-s">Kontrast</h3>
+            <ContrastTable contrast={result.contrast} />
+          </section>
+
+          <section className="grid gap-4">
+            <h3 className="heading-s">Sånn ser det ut</h3>
+            <Preview css={preview?.css ?? ''} />
+          </section>
+
+          <section className="grid gap-4">
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <h3 className="heading-s">CSS</h3>
+              <Button
+                variant="secondary"
+                onPress={() => download(`${name}.css`, result.css, 'text/css')}
+              >
+                Last ned {name}.css
+              </Button>
+            </div>
+            <div className="max-h-128 overflow-auto">
+              <Code code={result.css} language="css" />
+            </div>
+          </section>
+        </>
+      )}
     </div>
   );
 };
 
-const STYLE_DICTIONARY_MAPPING = `{
-  "gm": {
-    "color": {
-      "primary": {
-        "base-default": { "$type": "color", "$value": "{color.brand.dark}" },
-        "base-hover": { "$type": "color", "$value": "{color.brand.darker}" },
-        "base-contrast-default": { "$type": "color", "$value": "{color.white}" }
-      }
-    }
-  }
-}`;
-
-const STYLE_DICTIONARY_CONFIG = `import StyleDictionary from 'style-dictionary';
-
-const sd = new StyleDictionary({
-  // Your own tokens, plus the file that maps them to Grunnmuren's names
-  source: ['tokens/**/*.json', 'grunnmuren.json'],
-  platforms: {
-    grunnmuren: {
-      transformGroup: 'css',
-      buildPath: 'dist/',
-      files: [
-        {
-          destination: 'grunnmuren-theme.css',
-          format: 'css/variables',
-          filter: (token) => token.path[0] === 'gm',
-          options: { selector: "[data-theme='nybolig']" },
-        },
-      ],
-    },
+const FORMAT_EXAMPLE = `{
+  "primary": {
+    "base-default": "#2d3a26",
+    "base-hover": { "$value": "{primary.base-active}" }
   },
-});
-
-await sd.buildAllPlatforms();`;
-
-const STYLE_DICTIONARY_OUTPUT = `[data-theme='nybolig'] {
-  --gm-color-primary-base-default: #2d3a26;
-  --gm-color-primary-base-hover: #24301e;
-  --gm-color-primary-base-contrast-default: #ffffff;
+  "blue": {
+    "900": "#1f2a44"
+  }
 }`;
 
 function RouteComponent() {
@@ -191,37 +368,65 @@ function RouteComponent() {
 
       <section className="mb-12 grid gap-6">
         <div className="prose">
-          <AnchorHeading level={2} id="mal" className="heading-m">
-            Lag en mal
+          <AnchorHeading level={2} id="lag-temaet" className="heading-m">
+            Lag temaet
           </AnchorHeading>
           <p>
-            Her er alle rollene, satt til det de er som standard. Last ned, bytt ut verdiene med
-            dine egne og slett det du vil beholde som det er. Malen lages fra tokenene, så den er
-            alltid oppdatert.
+            Skriv fargene som JSON med Grunnmuren sine navn, så lager vi CSS-en. Det viktigste er
+            sjekken: en skrivefeil i en CSS-variabel gjør ingenting uten å si fra, og ingen sjekker
+            kontrasten i temaet ditt. Det gjør denne.
+          </p>
+          <p>
+            Eksempel-JSON-en har alle rollene, og peker på det de er som standard, så den er et
+            greit sted å starte. Bytt ut det du vil endre og slett resten.
           </p>
         </div>
-        <TemplateGenerator />
+        <ThemeBuilder />
       </section>
 
       <section className="prose mb-12">
-        <AnchorHeading level={2} id="style-dictionary" className="heading-m">
-          Fra din egen tokenfil
+        <AnchorHeading level={2} id="tokenfila" className="heading-m">
+          Tokenfila
+        </AnchorHeading>
+        <Code language="json" code={FORMAT_EXAMPLE} />
+        <ul>
+          <li>
+            Rollene (<code>primary</code>, <code>accent</code>, <code>neutral</code>,{' '}
+            <code>success</code>, <code>danger</code>, <code>warning</code> og <code>info</code>)
+            har de samme navnene som på <Link href="/profil/farger">Farger</Link>.
+          </li>
+          <li>
+            Primitivene er fargefamilien, som <code>&quot;blue&quot;: {'{ "900": … }'}</code> og{' '}
+            <code>&quot;white&quot;</code>.
+          </li>
+          <li>
+            En verdi er hex, <code>rgb()</code> eller en referanse som{' '}
+            <code>{'{primary.base-active}'}</code>. En referanse til noe fila ikke setter, peker på
+            Grunnmuren sin verdi.
+          </li>
+          <li>
+            DTCG funker, både <code>$value</code> og fargeobjektet Figma eksporterer.
+          </li>
+          <li>Det du ikke setter, arver. Et tema med tre farger er helt greit.</li>
+        </ul>
+      </section>
+
+      <section className="prose mb-12">
+        <AnchorHeading level={2} id="kommandolinja" className="heading-m">
+          Fra kommandolinja
         </AnchorHeading>
         <p>
-          Har dere paletten som DTCG-tokens, kan Style Dictionary lage temaet for dere. Lag en fil
-          som gir tokenene deres Grunnmuren sine navn:
-        </p>
-        <Code language="json" code={STYLE_DICTIONARY_MAPPING} caption="grunnmuren.json" />
-        <p>
-          Og bygg den med det innebygde formatet <code>css/variables</code>, med temaet som{' '}
-          <code>selector</code>:
+          Den samme sjekken følger med <code>@obosbbl/grunnmuren-tailwind</code>, så temaet kan
+          bygges og sjekkes i appen din:
         </p>
         <Code
-          language="js"
-          code={STYLE_DICTIONARY_CONFIG}
-          caption="build.mjs (Style Dictionary 5)"
+          language="bash"
+          code="npx grunnmuren-theme tokens.json --name mitt-tema --out mitt-tema.css"
         />
-        <Code language="css" code={STYLE_DICTIONARY_OUTPUT} caption="dist/grunnmuren-theme.css" />
+        <p>
+          Feil stopper bygget. Kontrast under kravet er en advarsel, med <code>--strict</code>{' '}
+          stopper den også. <code>npx grunnmuren-theme --example</code> skriver ut eksempelet.
+        </p>
       </section>
 
       <section className="prose mb-12">
@@ -235,8 +440,13 @@ function RouteComponent() {
             alltid, uansett hva temaet setter.
           </li>
           <li>
-            Kontrasten er temaets ansvar. Grunnmuren sjekker bare sine egne roller mot WCAG 2.2 AA,
-            som er 4.5:1 for tekst og 3:1 for kanter, ikoner og andre UI-elementer.
+            Verktøyet over tar bare farger. Radius, spacing og fonter skriver du i CSS-en selv, ved
+            siden av det verktøyet lager.
+          </li>
+          <li>
+            Kontrasten er temaets ansvar. Grunnmuren sjekker sine egne roller mot WCAG 2.2 AA, som
+            er 4.5:1 for tekst og 3:1 for kanter, ikoner og andre UI-elementer. Verktøyet over
+            sjekker de samme parene i ditt.
           </li>
           <li>
             Tailwind sine <code>--radius-*</code> i din egen <code>@theme</code> når ikke inn i en{' '}

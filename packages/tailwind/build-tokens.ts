@@ -283,8 +283,8 @@ ${declarations(radii)}
 `;
       },
 
-      // The colour tokens as data, for the docs' colour page. `path` is what a theme file
-      // calls a token: `primary.base-default`, `blue.900`.
+      // The colour tokens as data, for the docs' colour page and the theme builder in theme/.
+      // `path` is what a theme file calls a token: `primary.base-default`, `blue.900`.
       'gm/colors': ({ dictionary }) => {
         const roles = Map.groupBy(
           dictionary.allTokens.filter(isRoleColor),
