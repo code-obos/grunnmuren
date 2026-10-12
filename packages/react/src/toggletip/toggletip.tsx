@@ -53,12 +53,7 @@ const ToggletipTrigger = ({ variant, className, ...restProps }: ToggletipTrigger
 type ToggletipContentProps = Omit<RACPopoverProps, 'children' | 'className'> & {
   /** Accessible label for the dialog. Required, since the content has no heading. */
   'aria-label': string;
-  /**
-   * The content of the toggletip. While closed, it is also rendered in a `hidden`
-   * element right after the trigger, so it is part of the server-rendered HTML and
-   * can be indexed by search engines. Use phrasing content only (no `<p>` or `<div>`),
-   * since the trigger is often placed inside a paragraph.
-   */
+  /** Also rendered hidden while closed, so search engines can index it. Phrasing content only. */
   children: React.ReactNode;
   /** Additional class name for the popover. */
   className?: string;
@@ -77,7 +72,6 @@ const ToggletipContent = ({
 
   return (
     <>
-      {/* The popover is unmounted while closed, so this keeps the content in the DOM for search engines */}
       {!isOpen && <span hidden> {children}</span>}
       <RACPopover {...restProps} className={cx('gm-toggletip', className)} offset={8}>
         <RACOverlayArrow data-slot="toggletip-arrow" />
