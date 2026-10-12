@@ -95,13 +95,11 @@
     }
 
     &:where([class~='lead']) {
-      @apply lead;
       margin-top: 1.2em;
       margin-bottom: 1.2em;
     }
 
     &:where([class~='lead-sm']) {
-      @apply lead-sm;
       margin-top: 1.2em;
       margin-bottom: 1.2em;
     }
