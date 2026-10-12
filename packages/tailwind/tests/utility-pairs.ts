@@ -179,4 +179,9 @@ export const utilityPairs: Array<UtilityPair> = [
   // The selected tab and the progress bar keep the primary dark blue
   { from: 'border-blue-dark', to: 'border-primary-base-default' },
   { from: 'border-b-blue-dark', to: 'border-b-primary-base-default' },
+
+  // The component CSS in tailwind-base.css: toggletip, pagination and stepper
+  { from: 'bg-yellow', to: 'bg-warning-background-tinted' },
+  { from: 'border-white', to: 'border-primary-base-contrast-default' },
+  { from: 'bg-sky-light', to: 'bg-primary-surface-hover' },
 ];
