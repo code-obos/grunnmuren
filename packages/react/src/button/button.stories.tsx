@@ -135,11 +135,21 @@ export const RoleColors: Story = {
     const canvas = within(canvasElement);
     const background = (name: string) =>
       getComputedStyle(canvas.getByRole('button', { name })).backgroundColor;
+    // Read from the role's own token, since the story also runs under other themes
+    const roleColor = (role: string) => {
+      const probe = document.createElement('div');
+      probe.style.backgroundColor = `var(--gm-color-${role}-base-default)`;
+      canvasElement.append(probe);
+      const color = getComputedStyle(probe).backgroundColor;
+      probe.remove();
+      return color;
+    };
 
-    await expect(background('Primary')).toBe('rgb(0, 33, 105)');
-    await expect(background('Accent')).toBe('rgb(0, 82, 76)');
-    await expect(background('Neutral')).toBe('rgb(51, 51, 51)');
-    await expect(background('Overridden')).toBe('rgb(0, 82, 76)');
+    await expect(roleColor('accent')).not.toBe(roleColor('primary'));
+    await expect(background('Primary')).toBe(roleColor('primary'));
+    await expect(background('Accent')).toBe(roleColor('accent'));
+    await expect(background('Neutral')).toBe(roleColor('neutral'));
+    await expect(background('Overridden')).toBe(roleColor('accent'));
   },
 };
 
