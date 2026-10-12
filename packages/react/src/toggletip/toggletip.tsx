@@ -53,7 +53,7 @@ const ToggletipTrigger = ({ variant, className, ...restProps }: ToggletipTrigger
 type ToggletipContentProps = Omit<RACPopoverProps, 'children' | 'className'> & {
   /** Accessible label for the dialog. Required, since the content has no heading. */
   'aria-label': string;
-  /** Also rendered hidden while closed, so search engines can index it. Phrasing content only. */
+  /** Also rendered in a hidden `<span>` while closed, so search engines can index it. Inline content only. */
   children: React.ReactNode;
   /** Additional class name for the popover. */
   className?: string;
