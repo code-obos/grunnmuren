@@ -230,8 +230,9 @@ function RouteComponent() {
         </AnchorHeading>
         <ul>
           <li>
-            Typografien (<code>heading-*</code>, <code>description</code> osv.) og motion er ikke en
-            del av temaet. Reduced motion vinner alltid, uansett hva temaet setter.
+            Tekststilene (<code>heading-*</code>, <code>lead</code> osv.) og motion kan ikke
+            overstyres. Fontfamilie og vekter er primitiver, så de kan. Reduced motion vinner
+            alltid, uansett hva temaet setter.
           </li>
           <li>
             Kontrasten er temaets ansvar. Grunnmuren sjekker bare sine egne roller mot WCAG 2.2 AA,
