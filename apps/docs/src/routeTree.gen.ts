@@ -23,6 +23,7 @@ import { Route as DocsProfilIndexRouteImport } from './routes/_docs/profil/index
 import { Route as DocsProfilFargerRouteImport } from './routes/_docs/profil/farger'
 import { Route as DocsProfilIkonerRouteImport } from './routes/_docs/profil/ikoner'
 import { Route as DocsProfilLayoutRouteImport } from './routes/_docs/profil/layout'
+import { Route as DocsProfilTemaerRouteImport } from './routes/_docs/profil/temaer'
 import { Route as DocsReferanseskjemaIndexRouteImport } from './routes/_docs/referanseskjema/index'
 
 const DocsRoute = DocsRouteImport.update({
@@ -94,6 +95,11 @@ const DocsProfilLayoutRoute = DocsProfilLayoutRouteImport.update({
   path: '/profil/layout',
   getParentRoute: () => DocsRoute,
 } as any)
+const DocsProfilTemaerRoute = DocsProfilTemaerRouteImport.update({
+  id: '/profil/temaer',
+  path: '/profil/temaer',
+  getParentRoute: () => DocsRoute,
+} as any)
 const DocsReferanseskjemaIndexRoute =
   DocsReferanseskjemaIndexRouteImport.update({
     id: '/referanseskjema/',
@@ -113,6 +119,7 @@ export interface FileRoutesByFullPath {
   '/profil/farger': typeof DocsProfilFargerRoute
   '/profil/ikoner': typeof DocsProfilIkonerRoute
   '/profil/layout': typeof DocsProfilLayoutRoute
+  '/profil/temaer': typeof DocsProfilTemaerRoute
   '/komponenter/': typeof DocsKomponenterIndexRoute
   '/profil/': typeof DocsProfilIndexRoute
   '/referanseskjema/': typeof DocsReferanseskjemaIndexRoute
@@ -129,6 +136,7 @@ export interface FileRoutesByTo {
   '/profil/farger': typeof DocsProfilFargerRoute
   '/profil/ikoner': typeof DocsProfilIkonerRoute
   '/profil/layout': typeof DocsProfilLayoutRoute
+  '/profil/temaer': typeof DocsProfilTemaerRoute
   '/komponenter': typeof DocsKomponenterIndexRoute
   '/profil': typeof DocsProfilIndexRoute
   '/referanseskjema': typeof DocsReferanseskjemaIndexRoute
@@ -147,6 +155,7 @@ export interface FileRoutesById {
   '/_docs/profil/farger': typeof DocsProfilFargerRoute
   '/_docs/profil/ikoner': typeof DocsProfilIkonerRoute
   '/_docs/profil/layout': typeof DocsProfilLayoutRoute
+  '/_docs/profil/temaer': typeof DocsProfilTemaerRoute
   '/_docs/komponenter/': typeof DocsKomponenterIndexRoute
   '/_docs/profil/': typeof DocsProfilIndexRoute
   '/_docs/referanseskjema/': typeof DocsReferanseskjemaIndexRoute
@@ -165,6 +174,7 @@ export interface FileRouteTypes {
     | '/profil/farger'
     | '/profil/ikoner'
     | '/profil/layout'
+    | '/profil/temaer'
     | '/komponenter/'
     | '/profil/'
     | '/referanseskjema/'
@@ -181,6 +191,7 @@ export interface FileRouteTypes {
     | '/profil/farger'
     | '/profil/ikoner'
     | '/profil/layout'
+    | '/profil/temaer'
     | '/komponenter'
     | '/profil'
     | '/referanseskjema'
@@ -198,6 +209,7 @@ export interface FileRouteTypes {
     | '/_docs/profil/farger'
     | '/_docs/profil/ikoner'
     | '/_docs/profil/layout'
+    | '/_docs/profil/temaer'
     | '/_docs/komponenter/'
     | '/_docs/profil/'
     | '/_docs/referanseskjema/'
@@ -311,6 +323,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsProfilLayoutRouteImport
       parentRoute: typeof DocsRoute
     }
+    '/_docs/profil/temaer': {
+      id: '/_docs/profil/temaer'
+      path: '/profil/temaer'
+      fullPath: '/profil/temaer'
+      preLoaderRoute: typeof DocsProfilTemaerRouteImport
+      parentRoute: typeof DocsRoute
+    }
     '/_docs/referanseskjema/': {
       id: '/_docs/referanseskjema/'
       path: '/referanseskjema'
@@ -340,6 +359,7 @@ interface DocsRouteChildren {
   DocsProfilFargerRoute: typeof DocsProfilFargerRoute
   DocsProfilIkonerRoute: typeof DocsProfilIkonerRoute
   DocsProfilLayoutRoute: typeof DocsProfilLayoutRoute
+  DocsProfilTemaerRoute: typeof DocsProfilTemaerRoute
   DocsKomponenterIndexRoute: typeof DocsKomponenterIndexRoute
   DocsProfilIndexRoute: typeof DocsProfilIndexRoute
   DocsReferanseskjemaIndexRoute: typeof DocsReferanseskjemaIndexRoute
@@ -352,6 +372,7 @@ const DocsRouteChildren: DocsRouteChildren = {
   DocsProfilFargerRoute: DocsProfilFargerRoute,
   DocsProfilIkonerRoute: DocsProfilIkonerRoute,
   DocsProfilLayoutRoute: DocsProfilLayoutRoute,
+  DocsProfilTemaerRoute: DocsProfilTemaerRoute,
   DocsKomponenterIndexRoute: DocsKomponenterIndexRoute,
   DocsProfilIndexRoute: DocsProfilIndexRoute,
   DocsReferanseskjemaIndexRoute: DocsReferanseskjemaIndexRoute,

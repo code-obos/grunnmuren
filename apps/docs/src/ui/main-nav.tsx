@@ -63,6 +63,10 @@ const mainNavItems = [
         title: 'Farger',
       },
       {
+        to: '/profil/temaer',
+        title: 'Temaer',
+      },
+      {
         to: '/profil/ikoner',
         title: 'Ikoner',
       },

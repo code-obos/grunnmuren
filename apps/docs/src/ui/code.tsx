@@ -4,7 +4,7 @@ import ShikiHighlighter from 'react-shiki/web';
 
 type Props = {
   code: string;
-  language?: 'tsx' | 'bash';
+  language?: 'tsx' | 'bash' | 'css' | 'js' | 'json';
   caption?: string;
 };
 
