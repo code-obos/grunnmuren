@@ -1,0 +1,1024 @@
+{
+  "roles": [
+    {
+      "role": "primary",
+      "tokens": [
+        {
+          "name": "gm-color-primary-background-default",
+          "group": "background",
+          "variant": "default",
+          "ref": "gm-white",
+          "value": "#FFFFFF"
+        },
+        {
+          "name": "gm-color-primary-background-tinted",
+          "group": "background",
+          "variant": "tinted",
+          "ref": "gm-sky-100",
+          "value": "#EBF5F9"
+        },
+        {
+          "name": "gm-color-primary-surface-default",
+          "group": "surface",
+          "variant": "default",
+          "ref": "gm-white",
+          "value": "#FFFFFF"
+        },
+        {
+          "name": "gm-color-primary-surface-tinted",
+          "group": "surface",
+          "variant": "tinted",
+          "ref": "gm-sky-100",
+          "value": "#EBF5F9"
+        },
+        {
+          "name": "gm-color-primary-surface-hover",
+          "group": "surface",
+          "variant": "hover",
+          "ref": "gm-sky-200",
+          "value": "#DEEFF5"
+        },
+        {
+          "name": "gm-color-primary-surface-active",
+          "group": "surface",
+          "variant": "active",
+          "ref": "gm-sky-250",
+          "value": "#CBE5F0"
+        },
+        {
+          "name": "gm-color-primary-border-subtle",
+          "group": "border",
+          "variant": "subtle",
+          "ref": "gm-sky-300",
+          "value": "#BEDFEC"
+        },
+        {
+          "name": "gm-color-primary-border-default",
+          "group": "border",
+          "variant": "default",
+          "ref": "gm-blue-500",
+          "value": "#0047BA"
+        },
+        {
+          "name": "gm-color-primary-border-strong",
+          "group": "border",
+          "variant": "strong",
+          "ref": "gm-blue-700",
+          "value": "#003DA0"
+        },
+        {
+          "name": "gm-color-primary-text-subtle",
+          "group": "text",
+          "variant": "subtle",
+          "ref": "gm-blue-700",
+          "value": "#003DA0"
+        },
+        {
+          "name": "gm-color-primary-text-default",
+          "group": "text",
+          "variant": "default",
+          "ref": "gm-blue-900",
+          "value": "#002169"
+        },
+        {
+          "name": "gm-color-primary-base-default",
+          "group": "base",
+          "variant": "default",
+          "ref": "gm-blue-900",
+          "value": "#002169"
+        },
+        {
+          "name": "gm-color-primary-base-hover",
+          "group": "base",
+          "variant": "hover",
+          "ref": "gm-blue-700",
+          "value": "#003DA0"
+        },
+        {
+          "name": "gm-color-primary-base-active",
+          "group": "base",
+          "variant": "active",
+          "ref": "gm-blue-800",
+          "value": "#00358A"
+        },
+        {
+          "name": "gm-color-primary-base-contrast-subtle",
+          "group": "base",
+          "variant": "contrast-subtle",
+          "ref": "gm-sky-200",
+          "value": "#DEEFF5"
+        },
+        {
+          "name": "gm-color-primary-base-contrast-default",
+          "group": "base",
+          "variant": "contrast-default",
+          "ref": "gm-white",
+          "value": "#FFFFFF"
+        }
+      ]
+    },
+    {
+      "role": "accent",
+      "tokens": [
+        {
+          "name": "gm-color-accent-background-default",
+          "group": "background",
+          "variant": "default",
+          "ref": "gm-white",
+          "value": "#FFFFFF"
+        },
+        {
+          "name": "gm-color-accent-background-tinted",
+          "group": "background",
+          "variant": "tinted",
+          "ref": "gm-mint-100",
+          "value": "#F0F9F6"
+        },
+        {
+          "name": "gm-color-accent-surface-default",
+          "group": "surface",
+          "variant": "default",
+          "ref": "gm-white",
+          "value": "#FFFFFF"
+        },
+        {
+          "name": "gm-color-accent-surface-tinted",
+          "group": "surface",
+          "variant": "tinted",
+          "ref": "gm-mint-200",
+          "value": "#E6F5F0"
+        },
+        {
+          "name": "gm-color-accent-surface-hover",
+          "group": "surface",
+          "variant": "hover",
+          "ref": "gm-mint-250",
+          "value": "#D7F0E8"
+        },
+        {
+          "name": "gm-color-accent-surface-active",
+          "group": "surface",
+          "variant": "active",
+          "ref": "gm-mint-300",
+          "value": "#CDECE2"
+        },
+        {
+          "name": "gm-color-accent-border-subtle",
+          "group": "border",
+          "variant": "subtle",
+          "ref": "gm-mint-300",
+          "value": "#CDECE2"
+        },
+        {
+          "name": "gm-color-accent-border-default",
+          "group": "border",
+          "variant": "default",
+          "ref": "gm-green-500",
+          "value": "#008761"
+        },
+        {
+          "name": "gm-color-accent-border-strong",
+          "group": "border",
+          "variant": "strong",
+          "ref": "gm-green-700",
+          "value": "#006448"
+        },
+        {
+          "name": "gm-color-accent-text-subtle",
+          "group": "text",
+          "variant": "subtle",
+          "ref": "gm-green-700",
+          "value": "#006448"
+        },
+        {
+          "name": "gm-color-accent-text-default",
+          "group": "text",
+          "variant": "default",
+          "ref": "gm-green-900",
+          "value": "#00524C"
+        },
+        {
+          "name": "gm-color-accent-base-default",
+          "group": "base",
+          "variant": "default",
+          "ref": "gm-green-900",
+          "value": "#00524C"
+        },
+        {
+          "name": "gm-color-accent-base-hover",
+          "group": "base",
+          "variant": "hover",
+          "ref": "gm-green-600",
+          "value": "#007453"
+        },
+        {
+          "name": "gm-color-accent-base-active",
+          "group": "base",
+          "variant": "active",
+          "ref": "gm-green-700",
+          "value": "#006448"
+        },
+        {
+          "name": "gm-color-accent-base-contrast-subtle",
+          "group": "base",
+          "variant": "contrast-subtle",
+          "ref": "gm-mint-200",
+          "value": "#E6F5F0"
+        },
+        {
+          "name": "gm-color-accent-base-contrast-default",
+          "group": "base",
+          "variant": "contrast-default",
+          "ref": "gm-white",
+          "value": "#FFFFFF"
+        }
+      ]
+    },
+    {
+      "role": "neutral",
+      "tokens": [
+        {
+          "name": "gm-color-neutral-background-default",
+          "group": "background",
+          "variant": "default",
+          "ref": "gm-white",
+          "value": "#FFFFFF"
+        },
+        {
+          "name": "gm-color-neutral-background-tinted",
+          "group": "background",
+          "variant": "tinted",
+          "ref": "gm-gray-100",
+          "value": "#F1F1F1"
+        },
+        {
+          "name": "gm-color-neutral-surface-default",
+          "group": "surface",
+          "variant": "default",
+          "ref": "gm-white",
+          "value": "#FFFFFF"
+        },
+        {
+          "name": "gm-color-neutral-surface-tinted",
+          "group": "surface",
+          "variant": "tinted",
+          "ref": "gm-gray-100",
+          "value": "#F1F1F1"
+        },
+        {
+          "name": "gm-color-neutral-surface-hover",
+          "group": "surface",
+          "variant": "hover",
+          "ref": "gm-gray-200",
+          "value": "#E6E6E6"
+        },
+        {
+          "name": "gm-color-neutral-surface-active",
+          "group": "surface",
+          "variant": "active",
+          "ref": "gm-gray-200",
+          "value": "#E6E6E6"
+        },
+        {
+          "name": "gm-color-neutral-border-subtle",
+          "group": "border",
+          "variant": "subtle",
+          "ref": "gm-gray-200",
+          "value": "#E6E6E6"
+        },
+        {
+          "name": "gm-color-neutral-border-default",
+          "group": "border",
+          "variant": "default",
+          "ref": "gm-gray-500",
+          "value": "#818181"
+        },
+        {
+          "name": "gm-color-neutral-border-strong",
+          "group": "border",
+          "variant": "strong",
+          "ref": "gm-gray-900",
+          "value": "#333333"
+        },
+        {
+          "name": "gm-color-neutral-text-subtle",
+          "group": "text",
+          "variant": "subtle",
+          "ref": "gm-gray-700",
+          "value": "#595959"
+        },
+        {
+          "name": "gm-color-neutral-text-default",
+          "group": "text",
+          "variant": "default",
+          "ref": "gm-gray-900",
+          "value": "#333333"
+        },
+        {
+          "name": "gm-color-neutral-base-default",
+          "group": "base",
+          "variant": "default",
+          "ref": "gm-gray-900",
+          "value": "#333333"
+        },
+        {
+          "name": "gm-color-neutral-base-hover",
+          "group": "base",
+          "variant": "hover",
+          "ref": "gm-gray-950",
+          "value": "#2C2C2C"
+        },
+        {
+          "name": "gm-color-neutral-base-active",
+          "group": "base",
+          "variant": "active",
+          "ref": "gm-gray-1000",
+          "value": "#262626"
+        },
+        {
+          "name": "gm-color-neutral-base-contrast-subtle",
+          "group": "base",
+          "variant": "contrast-subtle",
+          "ref": "gm-gray-200",
+          "value": "#E6E6E6"
+        },
+        {
+          "name": "gm-color-neutral-base-contrast-default",
+          "group": "base",
+          "variant": "contrast-default",
+          "ref": "gm-white",
+          "value": "#FFFFFF"
+        }
+      ]
+    },
+    {
+      "role": "success",
+      "tokens": [
+        {
+          "name": "gm-color-success-background-default",
+          "group": "background",
+          "variant": "default",
+          "ref": "gm-white",
+          "value": "#FFFFFF"
+        },
+        {
+          "name": "gm-color-success-background-tinted",
+          "group": "background",
+          "variant": "tinted",
+          "ref": "gm-mint-100",
+          "value": "#F0F9F6"
+        },
+        {
+          "name": "gm-color-success-surface-default",
+          "group": "surface",
+          "variant": "default",
+          "ref": "gm-white",
+          "value": "#FFFFFF"
+        },
+        {
+          "name": "gm-color-success-surface-tinted",
+          "group": "surface",
+          "variant": "tinted",
+          "ref": "gm-mint-200",
+          "value": "#E6F5F0"
+        },
+        {
+          "name": "gm-color-success-surface-hover",
+          "group": "surface",
+          "variant": "hover",
+          "ref": "gm-mint-250",
+          "value": "#D7F0E8"
+        },
+        {
+          "name": "gm-color-success-surface-active",
+          "group": "surface",
+          "variant": "active",
+          "ref": "gm-mint-300",
+          "value": "#CDECE2"
+        },
+        {
+          "name": "gm-color-success-border-subtle",
+          "group": "border",
+          "variant": "subtle",
+          "ref": "gm-mint-300",
+          "value": "#CDECE2"
+        },
+        {
+          "name": "gm-color-success-border-default",
+          "group": "border",
+          "variant": "default",
+          "ref": "gm-green-500",
+          "value": "#008761"
+        },
+        {
+          "name": "gm-color-success-border-strong",
+          "group": "border",
+          "variant": "strong",
+          "ref": "gm-green-700",
+          "value": "#006448"
+        },
+        {
+          "name": "gm-color-success-text-subtle",
+          "group": "text",
+          "variant": "subtle",
+          "ref": "gm-green-700",
+          "value": "#006448"
+        },
+        {
+          "name": "gm-color-success-text-default",
+          "group": "text",
+          "variant": "default",
+          "ref": "gm-green-900",
+          "value": "#00524C"
+        },
+        {
+          "name": "gm-color-success-base-default",
+          "group": "base",
+          "variant": "default",
+          "ref": "gm-green-500",
+          "value": "#008761"
+        },
+        {
+          "name": "gm-color-success-base-hover",
+          "group": "base",
+          "variant": "hover",
+          "ref": "gm-green-600",
+          "value": "#007453"
+        },
+        {
+          "name": "gm-color-success-base-active",
+          "group": "base",
+          "variant": "active",
+          "ref": "gm-green-700",
+          "value": "#006448"
+        },
+        {
+          "name": "gm-color-success-base-contrast-subtle",
+          "group": "base",
+          "variant": "contrast-subtle",
+          "ref": "gm-mint-200",
+          "value": "#E6F5F0"
+        },
+        {
+          "name": "gm-color-success-base-contrast-default",
+          "group": "base",
+          "variant": "contrast-default",
+          "ref": "gm-white",
+          "value": "#FFFFFF"
+        }
+      ]
+    },
+    {
+      "role": "danger",
+      "tokens": [
+        {
+          "name": "gm-color-danger-background-default",
+          "group": "background",
+          "variant": "default",
+          "ref": "gm-white",
+          "value": "#FFFFFF"
+        },
+        {
+          "name": "gm-color-danger-background-tinted",
+          "group": "background",
+          "variant": "tinted",
+          "ref": "gm-red-100",
+          "value": "#FAEDEF"
+        },
+        {
+          "name": "gm-color-danger-surface-default",
+          "group": "surface",
+          "variant": "default",
+          "ref": "gm-white",
+          "value": "#FFFFFF"
+        },
+        {
+          "name": "gm-color-danger-surface-tinted",
+          "group": "surface",
+          "variant": "tinted",
+          "ref": "gm-red-100",
+          "value": "#FAEDEF"
+        },
+        {
+          "name": "gm-color-danger-surface-hover",
+          "group": "surface",
+          "variant": "hover",
+          "ref": "gm-red-100",
+          "value": "#FAEDEF"
+        },
+        {
+          "name": "gm-color-danger-surface-active",
+          "group": "surface",
+          "variant": "active",
+          "ref": "gm-red-100",
+          "value": "#FAEDEF"
+        },
+        {
+          "name": "gm-color-danger-border-subtle",
+          "group": "border",
+          "variant": "subtle",
+          "ref": "gm-red-100",
+          "value": "#FAEDEF"
+        },
+        {
+          "name": "gm-color-danger-border-default",
+          "group": "border",
+          "variant": "default",
+          "ref": "gm-red-500",
+          "value": "#C0385D"
+        },
+        {
+          "name": "gm-color-danger-border-strong",
+          "group": "border",
+          "variant": "strong",
+          "ref": "gm-red-700",
+          "value": "#8E2945"
+        },
+        {
+          "name": "gm-color-danger-text-subtle",
+          "group": "text",
+          "variant": "subtle",
+          "ref": "gm-red-600",
+          "value": "#A53050"
+        },
+        {
+          "name": "gm-color-danger-text-default",
+          "group": "text",
+          "variant": "default",
+          "ref": "gm-red-700",
+          "value": "#8E2945"
+        },
+        {
+          "name": "gm-color-danger-base-default",
+          "group": "base",
+          "variant": "default",
+          "ref": "gm-red-500",
+          "value": "#C0385D"
+        },
+        {
+          "name": "gm-color-danger-base-hover",
+          "group": "base",
+          "variant": "hover",
+          "ref": "gm-red-600",
+          "value": "#A53050"
+        },
+        {
+          "name": "gm-color-danger-base-active",
+          "group": "base",
+          "variant": "active",
+          "ref": "gm-red-700",
+          "value": "#8E2945"
+        },
+        {
+          "name": "gm-color-danger-base-contrast-subtle",
+          "group": "base",
+          "variant": "contrast-subtle",
+          "ref": "gm-red-100",
+          "value": "#FAEDEF"
+        },
+        {
+          "name": "gm-color-danger-base-contrast-default",
+          "group": "base",
+          "variant": "contrast-default",
+          "ref": "gm-white",
+          "value": "#FFFFFF"
+        }
+      ]
+    },
+    {
+      "role": "warning",
+      "tokens": [
+        {
+          "name": "gm-color-warning-background-default",
+          "group": "background",
+          "variant": "default",
+          "ref": "gm-white",
+          "value": "#FFFFFF"
+        },
+        {
+          "name": "gm-color-warning-background-tinted",
+          "group": "background",
+          "variant": "tinted",
+          "ref": "gm-yellow-100",
+          "value": "#FFF5D2"
+        },
+        {
+          "name": "gm-color-warning-surface-default",
+          "group": "surface",
+          "variant": "default",
+          "ref": "gm-white",
+          "value": "#FFFFFF"
+        },
+        {
+          "name": "gm-color-warning-surface-tinted",
+          "group": "surface",
+          "variant": "tinted",
+          "ref": "gm-orange-100",
+          "value": "#F8E5C9"
+        },
+        {
+          "name": "gm-color-warning-surface-hover",
+          "group": "surface",
+          "variant": "hover",
+          "ref": "gm-orange-100",
+          "value": "#F8E5C9"
+        },
+        {
+          "name": "gm-color-warning-surface-active",
+          "group": "surface",
+          "variant": "active",
+          "ref": "gm-orange-100",
+          "value": "#F8E5C9"
+        },
+        {
+          "name": "gm-color-warning-border-subtle",
+          "group": "border",
+          "variant": "subtle",
+          "ref": "gm-orange-100",
+          "value": "#F8E5C9"
+        },
+        {
+          "name": "gm-color-warning-border-default",
+          "group": "border",
+          "variant": "default",
+          "ref": "gm-orange-700",
+          "value": "#AC7C37"
+        },
+        {
+          "name": "gm-color-warning-border-strong",
+          "group": "border",
+          "variant": "strong",
+          "ref": "gm-orange-700",
+          "value": "#AC7C37"
+        },
+        {
+          "name": "gm-color-warning-text-subtle",
+          "group": "text",
+          "variant": "subtle",
+          "ref": "gm-orange-700",
+          "value": "#AC7C37"
+        },
+        {
+          "name": "gm-color-warning-text-default",
+          "group": "text",
+          "variant": "default",
+          "ref": "gm-gray-900",
+          "value": "#333333"
+        },
+        {
+          "name": "gm-color-warning-base-default",
+          "group": "base",
+          "variant": "default",
+          "ref": "gm-orange-500",
+          "value": "#E8A74A"
+        },
+        {
+          "name": "gm-color-warning-base-hover",
+          "group": "base",
+          "variant": "hover",
+          "ref": "gm-orange-600",
+          "value": "#C89040"
+        },
+        {
+          "name": "gm-color-warning-base-active",
+          "group": "base",
+          "variant": "active",
+          "ref": "gm-orange-700",
+          "value": "#AC7C37"
+        },
+        {
+          "name": "gm-color-warning-base-contrast-subtle",
+          "group": "base",
+          "variant": "contrast-subtle",
+          "ref": "gm-gray-900",
+          "value": "#333333"
+        },
+        {
+          "name": "gm-color-warning-base-contrast-default",
+          "group": "base",
+          "variant": "contrast-default",
+          "ref": "gm-gray-900",
+          "value": "#333333"
+        }
+      ]
+    },
+    {
+      "role": "info",
+      "tokens": [
+        {
+          "name": "gm-color-info-background-default",
+          "group": "background",
+          "variant": "default",
+          "ref": "gm-white",
+          "value": "#FFFFFF"
+        },
+        {
+          "name": "gm-color-info-background-tinted",
+          "group": "background",
+          "variant": "tinted",
+          "ref": "gm-sky-100",
+          "value": "#EBF5F9"
+        },
+        {
+          "name": "gm-color-info-surface-default",
+          "group": "surface",
+          "variant": "default",
+          "ref": "gm-white",
+          "value": "#FFFFFF"
+        },
+        {
+          "name": "gm-color-info-surface-tinted",
+          "group": "surface",
+          "variant": "tinted",
+          "ref": "gm-sky-100",
+          "value": "#EBF5F9"
+        },
+        {
+          "name": "gm-color-info-surface-hover",
+          "group": "surface",
+          "variant": "hover",
+          "ref": "gm-sky-200",
+          "value": "#DEEFF5"
+        },
+        {
+          "name": "gm-color-info-surface-active",
+          "group": "surface",
+          "variant": "active",
+          "ref": "gm-sky-250",
+          "value": "#CBE5F0"
+        },
+        {
+          "name": "gm-color-info-border-subtle",
+          "group": "border",
+          "variant": "subtle",
+          "ref": "gm-sky-300",
+          "value": "#BEDFEC"
+        },
+        {
+          "name": "gm-color-info-border-default",
+          "group": "border",
+          "variant": "default",
+          "ref": "gm-blue-500",
+          "value": "#0047BA"
+        },
+        {
+          "name": "gm-color-info-border-strong",
+          "group": "border",
+          "variant": "strong",
+          "ref": "gm-blue-700",
+          "value": "#003DA0"
+        },
+        {
+          "name": "gm-color-info-text-subtle",
+          "group": "text",
+          "variant": "subtle",
+          "ref": "gm-blue-700",
+          "value": "#003DA0"
+        },
+        {
+          "name": "gm-color-info-text-default",
+          "group": "text",
+          "variant": "default",
+          "ref": "gm-blue-900",
+          "value": "#002169"
+        },
+        {
+          "name": "gm-color-info-base-default",
+          "group": "base",
+          "variant": "default",
+          "ref": "gm-blue-500",
+          "value": "#0047BA"
+        },
+        {
+          "name": "gm-color-info-base-hover",
+          "group": "base",
+          "variant": "hover",
+          "ref": "gm-blue-700",
+          "value": "#003DA0"
+        },
+        {
+          "name": "gm-color-info-base-active",
+          "group": "base",
+          "variant": "active",
+          "ref": "gm-blue-800",
+          "value": "#00358A"
+        },
+        {
+          "name": "gm-color-info-base-contrast-subtle",
+          "group": "base",
+          "variant": "contrast-subtle",
+          "ref": "gm-sky-200",
+          "value": "#DEEFF5"
+        },
+        {
+          "name": "gm-color-info-base-contrast-default",
+          "group": "base",
+          "variant": "contrast-default",
+          "ref": "gm-white",
+          "value": "#FFFFFF"
+        }
+      ]
+    }
+  ],
+  "shortTokens": [
+    "background-default",
+    "background-tinted",
+    "surface-default",
+    "surface-tinted",
+    "surface-hover",
+    "surface-active",
+    "border-subtle",
+    "border-default",
+    "border-strong",
+    "text-subtle",
+    "text-default",
+    "base-default",
+    "base-hover",
+    "base-active",
+    "base-contrast-subtle",
+    "base-contrast-default"
+  ],
+  "primitives": [
+    {
+      "family": "white",
+      "tokens": [
+        {
+          "name": "gm-white",
+          "value": "#FFFFFF"
+        }
+      ]
+    },
+    {
+      "family": "gray",
+      "tokens": [
+        {
+          "name": "gm-gray-100",
+          "value": "#F1F1F1"
+        },
+        {
+          "name": "gm-gray-200",
+          "value": "#E6E6E6"
+        },
+        {
+          "name": "gm-gray-500",
+          "value": "#818181"
+        },
+        {
+          "name": "gm-gray-700",
+          "value": "#595959"
+        },
+        {
+          "name": "gm-gray-900",
+          "value": "#333333"
+        },
+        {
+          "name": "gm-gray-950",
+          "value": "#2C2C2C"
+        },
+        {
+          "name": "gm-gray-1000",
+          "value": "#262626"
+        }
+      ]
+    },
+    {
+      "family": "blue",
+      "tokens": [
+        {
+          "name": "gm-blue-500",
+          "value": "#0047BA"
+        },
+        {
+          "name": "gm-blue-700",
+          "value": "#003DA0"
+        },
+        {
+          "name": "gm-blue-800",
+          "value": "#00358A"
+        },
+        {
+          "name": "gm-blue-900",
+          "value": "#002169"
+        }
+      ]
+    },
+    {
+      "family": "sky",
+      "tokens": [
+        {
+          "name": "gm-sky-100",
+          "value": "#EBF5F9"
+        },
+        {
+          "name": "gm-sky-200",
+          "value": "#DEEFF5"
+        },
+        {
+          "name": "gm-sky-250",
+          "value": "#CBE5F0"
+        },
+        {
+          "name": "gm-sky-300",
+          "value": "#BEDFEC"
+        },
+        {
+          "name": "gm-sky-400",
+          "value": "#A3C0CB"
+        }
+      ]
+    },
+    {
+      "family": "green",
+      "tokens": [
+        {
+          "name": "gm-green-500",
+          "value": "#008761"
+        },
+        {
+          "name": "gm-green-600",
+          "value": "#007453"
+        },
+        {
+          "name": "gm-green-700",
+          "value": "#006448"
+        },
+        {
+          "name": "gm-green-900",
+          "value": "#00524C"
+        }
+      ]
+    },
+    {
+      "family": "mint",
+      "tokens": [
+        {
+          "name": "gm-mint-100",
+          "value": "#F0F9F6"
+        },
+        {
+          "name": "gm-mint-200",
+          "value": "#E6F5F0"
+        },
+        {
+          "name": "gm-mint-250",
+          "value": "#D7F0E8"
+        },
+        {
+          "name": "gm-mint-300",
+          "value": "#CDECE2"
+        }
+      ]
+    },
+    {
+      "family": "red",
+      "tokens": [
+        {
+          "name": "gm-red-100",
+          "value": "#FAEDEF"
+        },
+        {
+          "name": "gm-red-500",
+          "value": "#C0385D"
+        },
+        {
+          "name": "gm-red-600",
+          "value": "#A53050"
+        },
+        {
+          "name": "gm-red-700",
+          "value": "#8E2945"
+        }
+      ]
+    },
+    {
+      "family": "orange",
+      "tokens": [
+        {
+          "name": "gm-orange-100",
+          "value": "#F8E5C9"
+        },
+        {
+          "name": "gm-orange-500",
+          "value": "#E8A74A"
+        },
+        {
+          "name": "gm-orange-600",
+          "value": "#C89040"
+        },
+        {
+          "name": "gm-orange-700",
+          "value": "#AC7C37"
+        }
+      ]
+    },
+    {
+      "family": "yellow",
+      "tokens": [
+        {
+          "name": "gm-yellow-100",
+          "value": "#FFF5D2"
+        }
+      ]
+    }
+  ]
+}

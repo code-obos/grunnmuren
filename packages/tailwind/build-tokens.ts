@@ -84,6 +84,7 @@ const isPrimitive = (token: TransformedToken) =>
 const isMotion = (token: TransformedToken) => isIn(token, 'primitives', 'motion');
 const isDuration = (token: TransformedToken) => isIn(token, 'primitives', 'motion', 'duration');
 const isRoleColor = (token: TransformedToken) => isIn(token, 'semantic', 'color');
+const isColorPrimitive = (token: TransformedToken) => isIn(token, 'primitives', 'color');
 const isTypography = (token: TransformedToken) => isIn(token, 'semantic', 'typography');
 const isTheme = (theme: string) => (token: TransformedToken) => isIn(token, 'themes', theme);
 
@@ -148,6 +149,13 @@ const shortColorTokens = (dictionary: Dictionary) => {
       ]),
     })),
   };
+};
+
+/** The CSS name of what a role colour points at: `gm-blue-900` for `{primitives.color.blue.900}`. */
+const referencedName = (token: TransformedToken) => {
+  const reference = /^\{(.+)\}$/.exec(String(token.original.$value))?.[1];
+  if (!reference) throw new Error(`\`${token.path.join('.')}\` isn't a reference to a primitive`);
+  return toCssName(reference.split('.'));
 };
 
 const CONFIG: Config = {
@@ -267,6 +275,44 @@ ${declarations(radii)}
 `;
       },
 
+      // What the colour page and the theme template in the docs app are drawn from, so
+      // neither can drift from the source
+      'gm/docs': ({ dictionary }) => {
+        const roles = Map.groupBy(
+          dictionary.allTokens.filter(isRoleColor),
+          (token) => token.path[2],
+        );
+        const primitives = Map.groupBy(
+          dictionary.allTokens.filter(isColorPrimitive),
+          (token) => token.path[2],
+        );
+
+        const docs = {
+          roles: [...roles].map(([role, tokens]) => ({
+            role,
+            tokens: tokens.map((token) => {
+              const [group, ...variant] = token.path[3].split('-');
+              return {
+                name: token.name,
+                group,
+                variant: variant.join('-'),
+                ref: referencedName(token),
+                value: token.$value,
+              };
+            }),
+          })),
+          shortTokens: shortColorTokens(dictionary).names.map((name) =>
+            name.replace(/^gm-color-/, ''),
+          ),
+          primitives: [...primitives].map(([family, tokens]) => ({
+            family,
+            tokens: tokens.map((token) => ({ name: token.name, value: token.$value })),
+          })),
+        };
+
+        return `${JSON.stringify(docs, null, 2)}\n`;
+      },
+
       'gm/theme': ({ dictionary, options }) => `${HEADER}
 /*
  * An example, not part of the package. A theme an app writes itself looks the same, and
@@ -300,6 +346,11 @@ ${variables(dictionary)}
           destination: 'theme.css',
           format: 'gm/tailwind',
           filter: (token) => isRoleColor(token) || isRadius(token),
+        },
+        {
+          destination: 'docs/colors.json',
+          format: 'gm/docs',
+          filter: (token) => isRoleColor(token) || isColorPrimitive(token),
         },
         ...THEMES.map((theme) => ({
           destination: `themes/${theme}.css`,
