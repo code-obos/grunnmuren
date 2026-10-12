@@ -16,12 +16,12 @@
     "theme",
     "tokens",
     "!tokens/source",
-    "!tokens/themes",
-    "!tokens/colors.json"
+    "!tokens/themes"
   ],
   "type": "commonjs",
   "exports": {
     ".": "./tailwind-base.css",
+    "./colors.json": "./tokens/colors.json",
     "./theme": {
       "types": "./theme/index.d.mts",
       "default": "./theme/index.mjs"
