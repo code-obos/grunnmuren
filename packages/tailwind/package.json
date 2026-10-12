@@ -6,6 +6,9 @@
   "repository": {
     "url": "https://github.com/code-obos/grunnmuren"
   },
+  "bin": {
+    "grunnmuren-theme": "./theme/cli.mjs"
+  },
   "files": [
     "tailwind-base.css",
     "tailwind-typography.css",

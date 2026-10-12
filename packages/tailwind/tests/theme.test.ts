@@ -1,4 +1,10 @@
-import { describe, expect, test } from 'vitest';
+import { execFile } from 'node:child_process';
+import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join, resolve } from 'node:path';
+import { promisify } from 'node:util';
+
+import { afterAll, describe, expect, test } from 'vitest';
 
 import { buildTheme, EXAMPLE_TOKENS } from '../theme/index.mjs';
 
@@ -120,5 +126,56 @@ describe('buildTheme', () => {
     expect(errors).toEqual([]);
     // The known violations in contrast.test.ts, and nothing else
     expect(contrast.filter(({ passes }) => !passes)).toHaveLength(7);
+  });
+});
+
+const CLI = resolve(import.meta.dirname, '../theme/cli.mjs');
+const run = promisify(execFile);
+const directory = await mkdtemp(join(tmpdir(), 'grunnmuren-theme-'));
+afterAll(() => rm(directory, { recursive: true }));
+
+/** Runs the CLI with `tokens` in a file, and resolves to its output and exit code either way. */
+const cli = async (tokens: unknown, ...args: Array<string>) => {
+  const file = join(directory, 'tokens.json');
+  await writeFile(file, JSON.stringify(tokens));
+  try {
+    const { stdout, stderr } = await run('node', [CLI, file, ...args]);
+    return { stdout, stderr, code: 0 };
+  } catch (error) {
+    const { stdout, stderr, code } = error as { stdout: string; stderr: string; code: number };
+    return { stdout, stderr, code };
+  }
+};
+
+describe('grunnmuren-theme', () => {
+  test('prints the CSS', async () => {
+    const { stdout, code } = await cli({ primary: { 'base-default': '#2d3a26' } }, '-n', 'x');
+
+    expect(code).toBe(0);
+    expect(stdout).toBe("[data-theme='x'] {\n  --gm-color-primary-base-default: #2d3a26;\n}\n");
+  });
+
+  test('writes the CSS to --out', async () => {
+    const out = join(directory, 'x.css');
+    await cli({ primary: { 'base-default': '#2d3a26' } }, '-n', 'x', '--out', out);
+    expect(await readFile(out, 'utf8')).toContain('--gm-color-primary-base-default: #2d3a26;');
+  });
+
+  test('fails on errors, and prints no CSS', async () => {
+    const { stdout, stderr, code } = await cli({ primary: { 'base-default': 'green' } }, '-n', 'x');
+
+    expect(code).toBe(1);
+    expect(stdout).toBe('');
+    expect(stderr).toContain('"green" in "primary.base-default" isn\'t a colour');
+  });
+
+  test('warns about contrast, and only fails on it with --strict', async () => {
+    const tokens = { primary: { 'text-default': '#cccccc' } };
+    const lenient = await cli(tokens, '-n', 'x');
+    const strict = await cli(tokens, '-n', 'x', '--strict');
+
+    expect(lenient.code).toBe(0);
+    expect(lenient.stderr).toContain('primary.text-default on primary.background-default');
+    expect(strict.code).toBe(1);
   });
 });
