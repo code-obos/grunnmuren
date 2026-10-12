@@ -200,13 +200,13 @@ export const CustomBackground: Story = {
               <Heading level={2} className="text-mint">
                 Mørk drawer
               </Heading>
-              <Button slot="close" color="mint" />
+              <Button slot="close" color="contrast" />
             </Header>
             <p>
               Bakgrunnsfargen kan inntil videre overstyres med `!`-prefiks, og innholdsfarger settes
               på `Heading` og tekstelementer etter behov.
             </p>
-            <Button slot="close" color="mint">
+            <Button slot="close" color="contrast">
               Lukk
             </Button>
           </Dialog>
