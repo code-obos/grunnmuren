@@ -182,8 +182,8 @@ const LEGACY_COLORS = [
 ] as const;
 
 /**
- * `blue`, `mint` og `white` funker fortsatt, men er deprecated og forsvinner i neste major.
- * Bruk `primary` i stedet for `blue`, og `contrast` i stedet for `mint` og `white`.
+ * `blue`, `mint` and `white` still work, but are deprecated and removed in the next major.
+ * Use `primary` instead of `blue`, and `contrast` instead of `mint` and `white`.
  */
 export const LegacyColors = () => (
   <div className="flex flex-col">

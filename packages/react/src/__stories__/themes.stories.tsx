@@ -52,10 +52,10 @@ const loadAppTheme = () => {
 };
 
 /**
- * Temaer side om side på samme side, som er det `data-theme` må tåle: et tema på en del av
- * siden, `default` inni et annet tema, og `data-color` innenfor et tema. Det første panelet
- * har ingen attributter, så det følger `theme` og `color` i toolbaren. Apptemaet setter
- * bare primitiver og lastes før Grunnmuren, sånn som en app sitt eget tema kan bli.
+ * Themes side by side on one page, which is what `data-theme` has to handle: a theme on part
+ * of the page, `default` inside another theme, and `data-color` within a theme. The first
+ * panel has no attributes, so it follows `theme` and `color` in the toolbar. The app theme
+ * only sets primitives and loads before Grunnmuren, the way an app's own theme might.
  */
 export const SideBySide: StoryObj = {
   render: () => (
@@ -282,8 +282,8 @@ const ColorTokens = () => {
 };
 
 /**
- * Alle fargetokens med navn og verdi. Følger `theme` og `color` i toolbaren, så du ser hva
- * et tema faktisk gir.
+ * Every colour token with its name and value. Follows `theme` and `color` in the toolbar, so
+ * you see what a theme actually gives you.
  */
 export const Farger: StoryObj = {
   render: () => <ColorTokens />,

@@ -128,9 +128,6 @@ type ColorConfig = {
 };
 
 /**
- * What each `color` renders as, and the role it sets as `data-color`. Only the roles have
- * short tokens to point at, so `contrast` and `mint` set none.
- *
  * `blue`, `white` and `mint` are the palette names from before the roles, removed in the
  * next major. TypeScript can't mark a string literal as deprecated, so the prop doc is
  * the only place that says so.
@@ -188,7 +185,7 @@ function Button({ ref = null, ...props }: ButtonProps) {
     ...restProps
   } = props;
 
-  const { variant: colorVariant, role }: ColorConfig = colors[color ?? 'primary'];
+  const { variant: colorVariant }: ColorConfig = colors[color ?? 'primary'];
 
   const className = buttonVariants({
     // Don't animate the icon when we're pending, as it affects the loading spinner
@@ -218,7 +215,6 @@ function Button({ ref = null, ...props }: ButtonProps) {
 
   return isLinkProps(restProps) ? (
     <RACLink
-      data-color={role}
       {...(restProps as RACLinkProps)}
       className={className}
       data-slot="button"
@@ -228,7 +224,6 @@ function Button({ ref = null, ...props }: ButtonProps) {
     </RACLink>
   ) : (
     <RACButton
-      data-color={role}
       {...(restProps as RACButtonProps)}
       className={className}
       data-slot="button"
