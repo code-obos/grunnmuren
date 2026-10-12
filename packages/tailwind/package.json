@@ -10,6 +10,7 @@
     "tailwind-base.css",
     "tailwind-typography.css",
     "font.css",
+    "theme",
     "tokens",
     "!tokens/source",
     "!tokens/themes",
@@ -17,7 +18,11 @@
   ],
   "type": "commonjs",
   "exports": {
-    ".": "./tailwind-base.css"
+    ".": "./tailwind-base.css",
+    "./theme": {
+      "types": "./theme/index.d.mts",
+      "default": "./theme/index.mjs"
+    }
   },
   "scripts": {
     "font-fallback": "bun --cwd=./fonts ./generate-font-fallback.ts"
