@@ -78,7 +78,7 @@ const ToggletipContent = ({
   return (
     <>
       {/* The popover is unmounted while closed, so this keeps the content in the DOM for search engines */}
-      {!isOpen && <span hidden>{children}</span>}
+      {!isOpen && <span hidden> {children}</span>}
       <RACPopover {...restProps} className={cx('gm-toggletip', className)} offset={8}>
         <RACOverlayArrow data-slot="toggletip-arrow" />
         <RACDialog aria-label={ariaLabel} data-slot="toggletip-dialog">
