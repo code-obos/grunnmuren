@@ -59,7 +59,7 @@ Themes live in your app, not in Grunnmuren. A theme is a `[data-theme='…']` ru
 <section data-theme="my-project">…</section>
 ```
 
-Anything the theme doesn't set comes from the page around it, which is the defaults unless you've overridden them on `:root`. `data-theme` works on part of a page, and a theme inside another builds on the outer one. `data-theme="default"` goes back to Grunnmuren's own values. `data-color` (`primary`, `accent` or `neutral`) picks the role the short utilities such as `bg-base-default` point at. It's `primary` without it, and inside a new `data-theme` too.
+`data-theme` works on part of a page. Primitives the theme doesn't set come from the page around it, `:root` overrides included. Role colours start over from the defaults on every `data-theme`, worked out from the primitives there, so a theme inside another theme, or inside a `:root` that overrides roles, only gets the outer primitives. `data-theme="default"` goes back to Grunnmuren's own values. `data-color` (`primary`, `accent` or `neutral`) picks the role the short utilities such as `bg-base-default` point at. It's `primary` without it, and inside a new `data-theme` too.
 
 ### What a theme can set
 
@@ -71,7 +71,7 @@ These are public API, and renaming or removing one is a breaking change:
 A few things a theme can't change:
 
 - reduced motion always wins: with `prefers-reduced-motion` the durations are zeroed whatever a theme sets
-- contrast is the theme's responsibility. Grunnmuren's own roles are checked against WCAG 2.2 AA, a theme you write isn't
+- contrast is the theme's responsibility. Grunnmuren's own roles are checked against WCAG 2.2 AA, and so is a theme built with [`grunnmuren-theme`](#building-a-theme-from-tokens). Custom properties written by hand aren't checked
 
 Tailwind's `--radius-*` overridden in your own `@theme` doesn't reach inside a `data-theme`, so set `--gm-radius-*` instead.
 
@@ -96,13 +96,13 @@ npx grunnmuren-theme my-project.json --out my-project.css
 ```
 
 - Roles are nested by role, primitives by colour family. A value is a hex or `rgb()` colour, or a `{reference}` to another token, which falls back to Grunnmuren's value when the file doesn't set it. DTCG `$value` works too.
-- Only what the file sets ends up in the CSS, the rest inherits.
+- Only what the file sets ends up in the CSS.
 - An unknown token, an invalid colour or a circular reference is an error, and exits with 1.
-- Contrast is checked with the same pairs as Grunnmuren's own roles, for the pairs the theme changes. A pair below WCAG 2.2 AA is a warning, and with `--strict` an error.
-- The theme is named after the file, `--name` sets something else.
+- Contrast is checked with the same pairs as Grunnmuren's own roles, for the pairs where the theme changes a colour. A pair below WCAG 2.2 AA is a warning, and with `--strict` an error and no CSS.
+- The theme is named after the file, lowercased and with anything but letters, digits, `-` and `_` turned into `-`. `--name` sets something else. `default` can't be a name, since it resets to Grunnmuren's own values.
 - `--example` prints every role token pointing at its default, to start from.
 
-It's the same check as the docs page, and `@obosbbl/grunnmuren-tailwind/theme` exports it as `buildTheme(tokens, { name })` if you'd rather call it yourself.
+It's the same check as the docs page, and `@obosbbl/grunnmuren-tailwind/theme` exports it as `buildTheme(tokens, { name })` if you'd rather call it yourself, with `toThemeName` for the file name rule.
 
 ## Migrating from v1?
 

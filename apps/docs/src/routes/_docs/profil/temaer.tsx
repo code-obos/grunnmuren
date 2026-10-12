@@ -331,9 +331,11 @@ function RouteComponent() {
             <code>:where()</code>, så temaet ditt vinner uansett.
           </li>
           <li>
-            Det temaet ikke setter, kommer fra siden rundt. Et tema inni et annet bygger på det
-            ytre, og <code>data-theme=&quot;default&quot;</code> går tilbake til Grunnmuren sine
-            egne verdier.
+            Primitivene temaet ikke setter, kommer fra siden rundt. Rollene starter derimot på nytt
+            fra standardverdiene på hver <code>data-theme</code>, regnet ut fra primitivene der. Så
+            et tema inni et annet, eller under en <code>:root</code> som overstyrer rollene, får
+            bare primitivene derfra. <code>data-theme=&quot;default&quot;</code> går tilbake til
+            Grunnmuren sine egne verdier.
           </li>
           <li>
             <code>data-color</code> (<code>primary</code>, <code>accent</code> eller{' '}
@@ -401,7 +403,7 @@ function RouteComponent() {
           <li>
             DTCG funker, både <code>$value</code> og fargeobjektet Figma eksporterer.
           </li>
-          <li>Det du ikke setter, arver. Et tema med tre farger er helt greit.</li>
+          <li>Bare det du setter havner i CSS-en. Et tema med tre farger er helt greit.</li>
         </ul>
       </section>
 
@@ -438,7 +440,7 @@ function RouteComponent() {
           <li>
             Kontrasten er temaets ansvar. Grunnmuren sjekker sine egne roller mot WCAG 2.2 AA, som
             er 4.5:1 for tekst og 3:1 for kanter, ikoner og andre UI-elementer. Verktøyet over
-            sjekker de samme parene i ditt.
+            sjekker de samme parene i ditt, der det endrer en farge.
           </li>
           <li>
             Tailwind sine <code>--radius-*</code> i din egen <code>@theme</code> når ikke inn i en{' '}
