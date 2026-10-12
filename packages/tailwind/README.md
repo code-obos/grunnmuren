@@ -92,13 +92,14 @@ A typo in a custom property silently does nothing, and nothing checks a theme's 
 ```
 
 ```sh
-npx grunnmuren-theme tokens.json --name my-project --out my-project.css
+npx grunnmuren-theme my-project.json --out my-project.css
 ```
 
 - Roles are nested by role, primitives by colour family. A value is a hex or `rgb()` colour, or a `{reference}` to another token, which falls back to Grunnmuren's value when the file doesn't set it. DTCG `$value` works too.
 - Only what the file sets ends up in the CSS, the rest inherits.
 - An unknown token, an invalid colour or a circular reference is an error, and exits with 1.
 - Contrast is checked with the same pairs as Grunnmuren's own roles, for the pairs the theme changes. A pair below WCAG 2.2 AA is a warning, and with `--strict` an error.
+- The theme is named after the file, `--name` sets something else.
 - `--example` prints every role token pointing at its default, to start from.
 
 It's the same check as the docs page, and `@obosbbl/grunnmuren-tailwind/theme` exports it as `buildTheme(tokens, { name })` if you'd rather call it yourself.

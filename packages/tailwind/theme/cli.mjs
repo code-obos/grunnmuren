@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // @ts-check
 import { readFile, writeFile } from 'node:fs/promises';
+import { basename, extname } from 'node:path';
 import { parseArgs } from 'node:util';
 
 import { buildTheme, EXAMPLE_TOKENS } from './index.mjs';
@@ -8,11 +9,11 @@ import { buildTheme, EXAMPLE_TOKENS } from './index.mjs';
 const HELP = `Builds a Grunnmuren theme from colour tokens, and checks it.
 
 Usage:
-  grunnmuren-theme <tokens.json> --name <theme> [--out <file.css>] [--strict]
+  grunnmuren-theme <tokens.json> [--name <theme>] [--out <file.css>] [--strict]
   grunnmuren-theme --example > tokens.json
 
 Options:
-  -n, --name     The theme's name, what goes in data-theme="…"
+  -n, --name     The theme's name, what goes in data-theme="…". Defaults to the file's name
   -o, --out      Write the CSS to this file instead of stdout
       --strict   Fail on contrast below WCAG 2.2 AA too, not just on errors
       --example  Print every role token at its default, to start from
@@ -67,7 +68,8 @@ if (values.example) {
 }
 
 const [file, ...rest] = positionals;
-if (!file || !values.name || rest.length > 0) fail(HELP);
+if (!file || rest.length > 0) fail(HELP);
+const name = values.name ?? basename(file, extname(file));
 
 const read = async () => {
   try {
@@ -77,7 +79,7 @@ const read = async () => {
   }
 };
 
-const { css, errors, contrast } = buildTheme(await read(), { name: values.name });
+const { css, errors, contrast } = buildTheme(await read(), { name });
 
 if (errors.length > 0) {
   fail(

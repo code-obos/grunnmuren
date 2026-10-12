@@ -155,6 +155,11 @@ describe('grunnmuren-theme', () => {
     expect(stdout).toBe("[data-theme='x'] {\n  --gm-color-primary-base-default: #2d3a26;\n}\n");
   });
 
+  test('names the theme after the file without --name', async () => {
+    const { stdout } = await cli({ primary: { 'base-default': '#2d3a26' } });
+    expect(stdout).toMatch(/^\[data-theme='tokens'\]/);
+  });
+
   test('writes the CSS to --out', async () => {
     const out = join(directory, 'x.css');
     await cli({ primary: { 'base-default': '#2d3a26' } }, '-n', 'x', '--out', out);

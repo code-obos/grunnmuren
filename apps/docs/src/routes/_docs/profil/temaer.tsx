@@ -419,13 +419,11 @@ function RouteComponent() {
           Den samme sjekken følger med <code>@obosbbl/grunnmuren-tailwind</code>, så temaet kan
           bygges og sjekkes i appen din:
         </p>
-        <Code
-          language="bash"
-          code="npx grunnmuren-theme tokens.json --name mitt-tema --out mitt-tema.css"
-        />
+        <Code language="bash" code="npx grunnmuren-theme mitt-tema.json --out mitt-tema.css" />
         <p>
-          Feil stopper bygget. Kontrast under kravet er en advarsel, med <code>--strict</code>{' '}
-          stopper den også. <code>npx grunnmuren-theme --example</code> skriver ut eksempelet.
+          Temaet får navnet til fila, eller det du gir <code>--name</code>. Feil stopper bygget.
+          Kontrast under kravet er en advarsel, med <code>--strict</code> stopper den også.{' '}
+          <code>npx grunnmuren-theme --example</code> skriver ut eksempelet.
         </p>
       </section>
 
