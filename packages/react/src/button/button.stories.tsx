@@ -1,6 +1,7 @@
 import { ArrowRight, Edit, Search } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { cx } from 'cva';
+import { expect, within } from 'storybook/test';
 
 import { Badge } from '../badge';
 import { Button } from './button';
@@ -112,6 +113,33 @@ export const IsIconOnly: Story = {
         <Search />
       </Button>
     );
+  },
+};
+
+/**
+ * `color` sets `data-color` to the role, so the button takes that role's colours. A
+ * `data-color` you pass yourself wins.
+ */
+export const RoleColors: Story = {
+  render: () => (
+    <div className="flex gap-8 p-8">
+      <Button color="primary">Primary</Button>
+      <Button color="accent">Accent</Button>
+      <Button color="neutral">Neutral</Button>
+      <Button color="primary" data-color="accent">
+        Overridden
+      </Button>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const background = (name: string) =>
+      getComputedStyle(canvas.getByRole('button', { name })).backgroundColor;
+
+    await expect(background('Primary')).toBe('rgb(0, 33, 105)');
+    await expect(background('Accent')).toBe('rgb(0, 82, 76)');
+    await expect(background('Neutral')).toBe('rgb(51, 51, 51)');
+    await expect(background('Overridden')).toBe('rgb(0, 82, 76)');
   },
 };
 
