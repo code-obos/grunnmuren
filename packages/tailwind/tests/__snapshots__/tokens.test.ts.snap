@@ -282,75 +282,12 @@ exports[`computed values > border-sky 1`] = `
 ]
 `;
 
-<<<<<<< HEAD
-=======
 exports[`computed values > border-white 1`] = `
 [
   "border-color: #ffffff",
 ]
 `;
 
-exports[`computed values > heading-l 1`] = `
-[
-  "font-family: OBOSDisplay, __OBOSDisplay_Fallback, sans-serif",
-  "font-size: 1.8125rem",
-  "line-height: 2.75rem",
-  "--tw-font-weight: 600",
-  "font-weight: 600",
-  "@media (width >= 64rem) { font-size: 2.25rem }",
-  "@media (width >= 64rem) { line-height: 3.5rem }",
-]
-`;
-
-exports[`computed values > heading-m 1`] = `
-[
-  "font-family: OBOSText, __OBOSText_Fallback, sans-serif",
-  "font-size: 1.4375rem",
-  "line-height: 2.25rem",
-  "--tw-font-weight: 500",
-  "font-weight: 500",
-  "@media (width >= 64rem) { font-size: 1.625rem }",
-  "@media (width >= 64rem) { line-height: 2.5625rem }",
-]
-`;
-
-exports[`computed values > heading-s 1`] = `
-[
-  "font-family: OBOSText, __OBOSText_Fallback, sans-serif",
-  "font-size: 1.1875rem",
-  "line-height: 1.875rem",
-  "--tw-font-weight: 500",
-  "font-weight: 500",
-  "@media (width >= 64rem) { font-size: 1.3125rem }",
-  "@media (width >= 64rem) { line-height: 2.125rem }",
-]
-`;
-
-exports[`computed values > heading-xl 1`] = `
-[
-  "font-family: OBOSDisplay, __OBOSDisplay_Fallback, sans-serif",
-  "font-size: 2.8125rem",
-  "line-height: 3.625rem",
-  "--tw-font-weight: 600",
-  "font-weight: 600",
-  "@media (width >= 64rem) { font-size: 3.9375rem }",
-  "@media (width >= 64rem) { line-height: 5.125rem }",
-]
-`;
-
-exports[`computed values > heading-xs 1`] = `
-[
-  "font-family: OBOSText, __OBOSText_Fallback, sans-serif",
-  "font-size: 1.125rem",
-  "line-height: 1.75rem",
-  "--tw-font-weight: 500",
-  "font-weight: 500",
-  "@media (width >= 64rem) { font-size: 1.1875rem }",
-  "@media (width >= 64rem) { line-height: 1.9375rem }",
-]
-`;
-
->>>>>>> 86e62518 (move the tailwind package's own css onto the role tokens)
 exports[`computed values > hover:bg-blue 1`] = `
 [
   "@media (hover: hover) &:hover { background-color: #0047ba }",
