@@ -1,19 +1,29 @@
-import json from '../../packages/tailwind/tokens/docs/colors.json';
+import json from '../../packages/tailwind/tokens/colors.json';
 
 export type RoleToken = {
-  /** `gm-color-primary-base-default` */
+  /** What a theme file calls it, `primary.base-default` */
+  path: string;
+  /** The custom property without `--`, `gm-color-primary-base-default` */
   name: string;
   /** `base` */
   group: string;
   /** `default` */
   variant: string;
-  /** The primitive it points at, `gm-blue-900` */
+  /** The primitive it points at, by path: `blue.900` */
   ref: string;
+  /** The same primitive's custom property without `--`, `gm-blue-900` */
+  refName: string;
   /** The default value, `#002169` */
   value: string;
 };
 
-export type PrimitiveToken = { name: string; value: string };
+export type PrimitiveToken = {
+  /** `blue.900`, or `white` for a primitive without steps */
+  path: string;
+  /** `gm-blue-900` */
+  name: string;
+  value: string;
+};
 
 export type TokenColors = {
   roles: Array<{ role: string; tokens: Array<RoleToken> }>;

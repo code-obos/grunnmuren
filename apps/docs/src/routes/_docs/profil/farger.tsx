@@ -144,7 +144,7 @@ const RoleSection = ({
                 key={token.name}
                 name={token.name}
                 utility={utilityFor(shortName, `${role}-${shortName}`)}
-                pointsAt={token.ref}
+                pointsAt={token.refName}
                 value={token.value}
                 theme={theme}
               />

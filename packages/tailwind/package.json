@@ -13,7 +13,7 @@
     "tokens",
     "!tokens/source",
     "!tokens/themes",
-    "!tokens/docs"
+    "!tokens/colors.json"
   ],
   "type": "commonjs",
   "exports": {

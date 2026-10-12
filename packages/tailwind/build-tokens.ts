@@ -151,11 +151,13 @@ const shortColorTokens = (dictionary: Dictionary) => {
   };
 };
 
-/** The CSS name of what a role colour points at: `gm-blue-900` for `{primitives.color.blue.900}`. */
-const referencedName = (token: TransformedToken) => {
-  const reference = /^\{(.+)\}$/.exec(String(token.original.$value))?.[1];
-  if (!reference) throw new Error(`\`${token.path.join('.')}\` isn't a reference to a primitive`);
-  return toCssName(reference.split('.'));
+/** The primitive a role colour points at, as the path under `primitives.color` and its CSS name. */
+const referencedPrimitive = (token: TransformedToken) => {
+  const reference = /^\{(.+)\}$/.exec(String(token.original.$value))?.[1].split('.');
+  if (reference?.[0] !== 'primitives' || reference[1] !== 'color') {
+    throw new Error(`\`${token.path.join('.')}\` isn't a reference to a colour primitive`);
+  }
+  return { ref: reference.slice(2).join('.'), refName: toCssName(reference) };
 };
 
 const CONFIG: Config = {
@@ -275,9 +277,9 @@ ${declarations(radii)}
 `;
       },
 
-      // What the colour page and the theme template in the docs app are drawn from, so
-      // neither can drift from the source
-      'gm/docs': ({ dictionary }) => {
+      // The colour tokens as data, for the docs' colour page. `path` is what a theme file
+      // calls a token: `primary.base-default`, `blue.900`.
+      'gm/colors': ({ dictionary }) => {
         const roles = Map.groupBy(
           dictionary.allTokens.filter(isRoleColor),
           (token) => token.path[2],
@@ -287,16 +289,17 @@ ${declarations(radii)}
           (token) => token.path[2],
         );
 
-        const docs = {
+        const colors = {
           roles: [...roles].map(([role, tokens]) => ({
             role,
             tokens: tokens.map((token) => {
               const [group, ...variant] = token.path[3].split('-');
               return {
+                path: token.path.slice(2).join('.'),
                 name: token.name,
                 group,
                 variant: variant.join('-'),
-                ref: referencedName(token),
+                ...referencedPrimitive(token),
                 value: token.$value,
               };
             }),
@@ -306,11 +309,15 @@ ${declarations(radii)}
           ),
           primitives: [...primitives].map(([family, tokens]) => ({
             family,
-            tokens: tokens.map((token) => ({ name: token.name, value: token.$value })),
+            tokens: tokens.map((token) => ({
+              path: token.path.slice(2).join('.'),
+              name: token.name,
+              value: token.$value,
+            })),
           })),
         };
 
-        return `${JSON.stringify(docs, null, 2)}\n`;
+        return `${JSON.stringify(colors, null, 2)}\n`;
       },
 
       'gm/theme': ({ dictionary, options }) => `${HEADER}
@@ -348,8 +355,8 @@ ${variables(dictionary)}
           filter: (token) => isRoleColor(token) || isRadius(token),
         },
         {
-          destination: 'docs/colors.json',
-          format: 'gm/docs',
+          destination: 'colors.json',
+          format: 'gm/colors',
           filter: (token) => isRoleColor(token) || isColorPrimitive(token),
         },
         ...THEMES.map((theme) => ({
