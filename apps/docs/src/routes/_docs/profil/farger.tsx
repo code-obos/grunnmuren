@@ -60,6 +60,12 @@ const toHex = (color: string) => {
     .join('')}`.toUpperCase();
 };
 
+/** `#fff` and `#FFFFFF` are the same colour, so hex is compared lowercased and expanded */
+const normalizeHex = (color: string) =>
+  /^#[\da-f]{3}$/i.test(color)
+    ? color.replaceAll(/[\da-f]/gi, '$&$&').toLowerCase()
+    : color.toLowerCase();
+
 type SwatchProps = {
   /** The custom property without `--` */
   name: string;
@@ -87,7 +93,7 @@ const Swatch = ({ name, utility, pointsAt, value, theme }: SwatchProps) => {
     }
   }, [theme]);
 
-  const isOverridden = liveValue !== value;
+  const isOverridden = normalizeHex(liveValue) !== normalizeHex(value);
 
   return (
     <div className="grid content-start gap-2">
