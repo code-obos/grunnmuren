@@ -1,5 +1,6 @@
 import { Close } from '@obosbbl/grunnmuren-icons-react';
 import { cx } from 'cva';
+import { useContext } from 'react';
 import {
   Button as RACButton,
   type ButtonProps as RACButtonProps,
@@ -8,6 +9,7 @@ import {
   Dialog as RACDialog,
   DialogTrigger as RACDialogTrigger,
   type DialogTriggerProps as RACDialogTriggerProps,
+  OverlayTriggerStateContext as RACOverlayTriggerStateContext,
 } from 'react-aria-components/Dialog';
 import {
   OverlayArrow as RACOverlayArrow,
@@ -51,6 +53,12 @@ const ToggletipTrigger = ({ variant, className, ...restProps }: ToggletipTrigger
 type ToggletipContentProps = Omit<RACPopoverProps, 'children' | 'className'> & {
   /** Accessible label for the dialog. Required, since the content has no heading. */
   'aria-label': string;
+  /**
+   * The content of the toggletip. While closed, it is also rendered in a `hidden`
+   * element right after the trigger, so it is part of the server-rendered HTML and
+   * can be indexed by search engines. Use phrasing content only (no `<p>` or `<div>`),
+   * since the trigger is often placed inside a paragraph.
+   */
   children: React.ReactNode;
   /** Additional class name for the popover. */
   className?: string;
@@ -64,26 +72,33 @@ const ToggletipContent = ({
   ...restProps
 }: ToggletipContentProps) => {
   const locale = useLocale();
+  const state = useContext(RACOverlayTriggerStateContext);
+  const isOpen = restProps.isOpen ?? state?.isOpen;
+
   return (
-    <RACPopover {...restProps} className={cx('gm-toggletip', className)} offset={8}>
-      <RACOverlayArrow data-slot="toggletip-arrow" />
-      <RACDialog aria-label={ariaLabel} data-slot="toggletip-dialog">
-        {({ close }) => (
-          <>
-            <Button
-              aria-label={translations.close[locale]}
-              color="contrast"
-              isIconOnly
-              onPress={close}
-              variant="tertiary"
-            >
-              <Close />
-            </Button>
-            {children}
-          </>
-        )}
-      </RACDialog>
-    </RACPopover>
+    <>
+      {/* The popover is unmounted while closed, so this keeps the content in the DOM for search engines */}
+      {!isOpen && <span hidden>{children}</span>}
+      <RACPopover {...restProps} className={cx('gm-toggletip', className)} offset={8}>
+        <RACOverlayArrow data-slot="toggletip-arrow" />
+        <RACDialog aria-label={ariaLabel} data-slot="toggletip-dialog">
+          {({ close }) => (
+            <>
+              <Button
+                aria-label={translations.close[locale]}
+                color="contrast"
+                isIconOnly
+                onPress={close}
+                variant="tertiary"
+              >
+                <Close />
+              </Button>
+              {children}
+            </>
+          )}
+        </RACDialog>
+      </RACPopover>
+    </>
   );
 };
 

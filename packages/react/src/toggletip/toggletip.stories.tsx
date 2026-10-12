@@ -21,6 +21,10 @@ export default meta;
  * The `definition` variant renders an inline term with a dashed underline. It is
  * meant for explaining a word in running text — clicking the term opens a small
  * dialog with the explanation. The term is highlighted yellow while open.
+ *
+ * While closed, the content is also rendered in a `hidden` element after the
+ * trigger, so search engines can index it. Keep it to phrasing content (no `<p>`),
+ * since it ends up inside the paragraph.
  */
 export const Definition = () => (
   <p className="max-w-prose text-base">
