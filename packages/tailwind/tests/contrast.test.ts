@@ -125,10 +125,13 @@ const themes = [
   ...(await Promise.all(
     (
       await readdir(THEMES_DIR)
-    ).map(async (file) => {
-      const name = basename(file, '.css');
-      return { name, overrides: await loadThemeCustomProperties(name) };
-    }),
+    )
+      // The folder also has the themes' colours as data, for the docs
+      .filter((file) => file.endsWith('.css'))
+      .map(async (file) => {
+        const name = basename(file, '.css');
+        return { name, overrides: await loadThemeCustomProperties(name) };
+      }),
   )),
 ];
 

@@ -1,3 +1,5 @@
 @import '@obosbbl/grunnmuren-tailwind';
+/* The example theme the colour page switches to. It isn't in the published package */
+@import '../../../../packages/tailwind/tokens/themes/froen-hage.css';
 
 @source '../../node_modules/@obosbbl/grunnmuren-react/dist';

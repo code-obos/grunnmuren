@@ -6,16 +6,17 @@ console.log(`Writing to "${outputPath}"...\n`);
 try {
   const file = fs.readFileSync('node_modules/@obosbbl/grunnmuren-tailwind/tailwind-base.css');
 
-  const colorVarPrefix = '--color-';
+  // Only the legacy palette, which is plain hex. A `--color-*` that points at a token is a
+  // role colour, and the colour page reads those from the tokens instead.
+  const legacyColor = /^\s*--color-([\w-]+):\s*(#[\da-f]+);/i;
 
   const colors = Object.fromEntries(
     file
       .toString()
       .split('\n')
-      .filter((line) => line.includes(colorVarPrefix))
-      .map((line) => {
-        const [name, value] = line.split(':');
-        return [name.replace(colorVarPrefix, '').trim(), value.replace(';', '').trim()];
+      .flatMap((line) => {
+        const match = legacyColor.exec(line);
+        return match ? [[match[1], match[2]]] : [];
       }),
   );
 

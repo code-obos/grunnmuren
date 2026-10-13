@@ -12,7 +12,8 @@
     "font.css",
     "tokens",
     "!tokens/source",
-    "!tokens/themes"
+    "!tokens/themes",
+    "!tokens/colors.json"
   ],
   "type": "commonjs",
   "exports": {
