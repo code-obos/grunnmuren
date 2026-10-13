@@ -147,10 +147,7 @@ const Preview = ({ css }: { css: string }) => (
     <style>{css}</style>
     <div className="flex flex-wrap gap-4">
       <Button>Primary</Button>
-      {/* Button doesn't set data-color from `color` yet, so the role is picked here */}
-      <div data-color="accent" className="contents">
-        <Button color="accent">Accent</Button>
-      </div>
+      <Button color="accent">Accent</Button>
       <Button variant="secondary">Sekundær</Button>
     </div>
     <div className="flex flex-wrap gap-2">
