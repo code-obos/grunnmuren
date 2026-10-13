@@ -97,21 +97,6 @@ describe('buildTheme', () => {
     ]);
   });
 
-  test("Designsystemet's { light } is read as the colour", () => {
-    const { css, errors } = build({ primary: { 'base-default': { light: '#2d3a26' } } });
-    expect(errors).toEqual([]);
-    expect(css).toContain('--gm-color-primary-base-default: #2d3a26;');
-  });
-
-  test('a dark value is an error, since there is no dark mode yet', () => {
-    const { errors } = build({
-      primary: { 'base-default': { light: '#2d3a26', dark: '#dcd6c4' } },
-    });
-    expect(errors).toEqual([
-      expect.objectContaining({ code: 'color-scheme', path: 'primary.base-default' }),
-    ]);
-  });
-
   test.for([
     ['rgb(0, 0, 0)', 21],
     ['rgba(0, 0, 0, 0.5)', 3.98],

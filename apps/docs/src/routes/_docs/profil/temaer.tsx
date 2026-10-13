@@ -73,8 +73,6 @@ const ISSUES: Record<ThemeIssue['code'], (issue: ThemeIssue) => string> = {
     `${path} peker på et token som ikke finnes.${suggestion ? ` Mente du ${suggestion}?` : ''}`,
   'circular-reference': ({ path }) => `${path} ender opp med å peke på seg selv.`,
   'duplicate-token': ({ path }) => `${path} er satt to ganger i fila.`,
-  'color-scheme': ({ path }) =>
-    `${path} har en mørk farge, men Grunnmuren har ikke mørk modus ennå. Fjern dark, light brukes som den er.`,
 };
 
 const RULES: Record<string, string> = {
@@ -406,9 +404,7 @@ function RouteComponent() {
             DTCG funker, både <code>$value</code> og fargeobjektet Figma eksporterer.
           </li>
           <li>
-            Stiene fra Designsystemet funker også, som <code>color.primary.base-default</code>, og{' '}
-            <code>{'{ "light": … }'}</code> leses som fargen. <code>dark</code> er en feil til vi
-            har mørk modus.
+            Stiene fra Designsystemet funker også, som <code>color.primary.base-default</code>.
           </li>
           <li>Bare det du setter havner i CSS-en. Et tema med tre farger er helt greit.</li>
         </ul>

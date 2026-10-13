@@ -8,8 +8,7 @@ export type ThemeIssue = {
     | 'invalid-color'
     | 'unresolved-reference'
     | 'circular-reference'
-    | 'duplicate-token'
-    | 'color-scheme';
+    | 'duplicate-token';
   /** The token's path in the file, `primary.base-default`. Empty for the file as a whole. */
   path: string;
   /** What's wrong, in English. */
@@ -56,8 +55,7 @@ export type ThemeResult = {
  *
  * Roles are `primary`, `accent`, `neutral`, `success`, `danger`, `warning` and `info`,
  * primitives their colour family (`blue`, `white`). A value is a hex or `rgb()` colour or a
- * `{reference}`. Designsystemet's paths (`color.primary.base-default`) and `{ "light": … }`
- * read too, while `dark` is an error until Grunnmuren has a dark mode. Only what the file sets ends up in the CSS. References resolve against the
+ * `{reference}`. Designsystemet's paths, `color.primary.base-default`, read too. Only what the file sets ends up in the CSS. References resolve against the
  * file first and Grunnmuren's defaults after. `default` isn't a valid name, it's what resets
  * to Grunnmuren's own values.
  */

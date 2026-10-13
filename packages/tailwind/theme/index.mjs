@@ -83,16 +83,6 @@ export const toThemeName = (input) =>
 const isRecord = (value) => typeof value === 'object' && value !== null && !Array.isArray(value);
 
 /**
- * Designsystemet's `{ light, dark }`, a colour for each colour scheme.
- * @param {unknown} value
- * @returns {value is { light?: unknown; dark?: unknown }}
- */
-const isSchemeValue = (value) =>
-  isRecord(value) &&
-  Object.keys(value).length > 0 &&
-  Object.keys(value).every((key) => key === 'light' || key === 'dark');
-
-/**
  * The token a path in the file means, so Designsystemet's paths read as ours.
  * @param {string} path
  */
@@ -150,7 +140,7 @@ const didYouMean = (message, suggestion) =>
  * @param {unknown} token
  */
 const rawValue = (token) => {
-  const value = isRecord(token) && '$value' in token ? token.$value : token;
+  const value = isRecord(token) ? token.$value : token;
   if (!isRecord(value) || typeof value.hex !== 'string') return value;
   if (typeof value.alpha !== 'number' || value.alpha >= 1) return value.hex;
   return `${value.hex}${Math.round(value.alpha * 255)
@@ -160,7 +150,7 @@ const rawValue = (token) => {
 
 /**
  * Every token in a group as `[path, token]`. `$` keys are DTCG metadata, and an object
- * with a `$value`, or with `light` and `dark`, is a token rather than a group.
+ * with a `$value` is a token rather than a group.
  * @param {Record<string, unknown>} group
  * @param {string} [prefix]
  * @returns {Array<[string, unknown]>}
@@ -169,9 +159,7 @@ const flatten = (group, prefix) =>
   Object.entries(group).flatMap(([key, token]) => {
     if (key.startsWith('$')) return [];
     const path = prefix ? `${prefix}.${key}` : key;
-    return isRecord(token) && !('$value' in token) && !isSchemeValue(token)
-      ? flatten(token, path)
-      : [[path, token]];
+    return isRecord(token) && !('$value' in token) ? flatten(token, path) : [[path, token]];
   });
 
 /**
@@ -191,16 +179,6 @@ const parseToken = (path, token) => {
   }
 
   const value = rawValue(token);
-  if (isSchemeValue(value)) {
-    if ('dark' in value) {
-      return {
-        code: 'color-scheme',
-        path,
-        message: `"${path}" has a dark colour, but Grunnmuren has no dark mode yet. Leave out "dark", "light" is used as it is`,
-      };
-    }
-    return parseToken(path, value.light);
-  }
   if (typeof value !== 'string') {
     return {
       code: 'invalid-value',

@@ -96,7 +96,7 @@ npx grunnmuren-theme my-project.json --out my-project.css
 ```
 
 - Roles are nested by role, primitives by colour family. A value is a hex or `rgb()` colour, or a `{reference}` to another token, which falls back to Grunnmuren's value when the file doesn't set it. DTCG `$value` works too.
-- Designsystemet's paths (`color.primary.base-default`) read as the same tokens, and its `{ "light": … }` as the colour. `dark` is an error until Grunnmuren has a dark mode, so a file written for Designsystemet only needs its dark values taken out.
+- Designsystemet's paths (`color.primary.base-default`) read as the same tokens.
 - Only what the file sets ends up in the CSS.
 - An unknown token, an invalid colour, a circular reference or a token set twice is an error, and exits with 1.
 - Contrast is checked with the same pairs as Grunnmuren's own roles, for the pairs where the theme changes a colour. A pair below WCAG 2.2 AA is a warning, and with `--strict` an error and no CSS.

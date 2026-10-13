@@ -8,7 +8,7 @@ New `grunnmuren-theme` CLI, which builds a theme's colours from a JSON file with
 npx grunnmuren-theme my-project.json --out my-project.css
 ```
 
-It reads Designsystemet's token paths (`color.primary.base-default`) and `{ "light": … }` too, so a file written for Designsystemet only needs its dark values taken out.
+It reads Designsystemet's token paths (`color.primary.base-default`) too.
 
 `data-color` takes every role now, `success`, `danger`, `warning` and `info` too, like it does in Designsystemet.
 
