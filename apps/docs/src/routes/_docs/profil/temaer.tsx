@@ -308,10 +308,7 @@ function RouteComponent() {
         <AnchorHeading level={2} id="hva-er-et-tema" className="heading-m">
           Hva er et tema
         </AnchorHeading>
-        <p>
-          Et tema er en <code>[data-theme=&apos;navn&apos;]</code>-regel med <code>--gm-*</code>
-          -variabler, i appens egen CSS.
-        </p>
+        <p>Et tema er litt CSS i appen din som bytter ut fargene våre med dine:</p>
         <Code
           language="css"
           code={`@import '@obosbbl/grunnmuren-tailwind';
@@ -324,23 +321,11 @@ function RouteComponent() {
         <p>Og så setter du attributtet der temaet skal gjelde:</p>
         <Code language="tsx" code={`<section data-theme="mitt-tema">…</section>`} />
         <ul>
+          <li>Det funker på en del av siden, ikke bare på hele siden.</li>
+          <li>Rekkefølgen CSS-en lastes i spiller ingen rolle, temaet ditt vinner.</li>
           <li>
-            Det funker på en del av siden, ikke bare på <code>&lt;html&gt;</code>.
-          </li>
-          <li>
-            Rekkefølgen CSS-en lastes i spiller ingen rolle. Standardverdiene ligger i{' '}
-            <code>:where()</code>, så temaet ditt vinner uansett.
-          </li>
-          <li>
-            Primitivene temaet ikke setter, kommer fra siden rundt. Rollene starter derimot på nytt
-            fra standardverdiene på hver <code>data-theme</code>, regnet ut fra primitivene der. Så
-            et tema inni et annet, eller under en <code>:root</code> som overstyrer rollene, får
-            bare primitivene derfra. <code>data-theme=&quot;default&quot;</code> går tilbake til
-            Grunnmuren sine egne verdier.
-          </li>
-          <li>
-            <code>data-color</code> (hvilken som helst av rollene) velger hvilken rolle de korte
-            utilities som <code>bg-base-default</code> peker på. Uten er det <code>primary</code>.
+            Tema inni tema funker, men bare primitivene arves fra temaet utenfor.{' '}
+            <code>data-theme=&quot;default&quot;</code> går tilbake til Grunnmuren sine egne farger.
           </li>
         </ul>
       </section>
@@ -356,7 +341,8 @@ function RouteComponent() {
         </p>
         <h3 className="heading-s">Overstyr primitivene</h3>
         <p>
-          Raskt, siden alle rollene som peker på en primitiv følger med. Men{' '}
+          Primitivene er fargene rollene peker på, som <code>--gm-blue-900</code>. Det går raskt,
+          siden alle rollene som peker på en primitiv følger med. Men{' '}
           <code>--gm-blue-900: #2d3a26</code> leser rart når fargen er grønn, så bruk det bare til å
           justere OBOS sin egen palett.
         </p>
@@ -400,12 +386,7 @@ function RouteComponent() {
             <code>{'{primary.base-active}'}</code>. En referanse til noe fila ikke setter, peker på
             Grunnmuren sin verdi.
           </li>
-          <li>
-            DTCG funker, både <code>$value</code> og fargeobjektet Figma eksporterer.
-          </li>
-          <li>
-            Stiene fra Designsystemet funker også, som <code>color.primary.base-default</code>.
-          </li>
+          <li>Filer fra Figma (DTCG) og Designsystemet funker også.</li>
           <li>Bare det du setter havner i CSS-en. Et tema med tre farger er helt greit.</li>
         </ul>
       </section>
@@ -432,9 +413,8 @@ function RouteComponent() {
         </AnchorHeading>
         <ul>
           <li>
-            Tekststilene (<code>heading-*</code>, <code>lead</code> osv.) og motion kan ikke
-            overstyres. Fontfamilie og vekter er primitiver, så de kan. Reduced motion vinner
-            alltid, uansett hva temaet setter.
+            Tekststiler og animasjon kan ikke endres. Fontfamilie og vekter kan, siden de er
+            primitiver.
           </li>
           <li>
             Verktøyet over tar bare farger. Radius, spacing og fonter skriver du i CSS-en selv, ved
@@ -445,13 +425,9 @@ function RouteComponent() {
             er 4.5:1 for tekst og 3:1 for kanter, ikoner og andre UI-elementer. Verktøyet over
             sjekker de samme parene i ditt, der det endrer en farge.
           </li>
-          <li>
-            Tailwind sine <code>--radius-*</code> i din egen <code>@theme</code> når ikke inn i en{' '}
-            <code>data-theme</code>. Sett <code>--gm-radius-*</code> i temaet i stedet.
-          </li>
         </ul>
         <p>
-          Hele kontrakten, med alt et tema kan sette, står i{' '}
+          Alt et tema kan sette, med detaljene, står i{' '}
           <Link href={README_THEMES}>README-en til grunnmuren-tailwind</Link>.
         </p>
       </section>

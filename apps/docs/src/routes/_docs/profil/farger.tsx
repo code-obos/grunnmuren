@@ -1,10 +1,20 @@
 import { Check } from '@obosbbl/grunnmuren-icons-react';
-import { Badge, Radio, RadioGroup, Tab, TabList, TabPanel, Tabs } from '@obosbbl/grunnmuren-react';
+import {
+  Badge,
+  Link,
+  Radio,
+  RadioGroup,
+  Tab,
+  TabList,
+  TabPanel,
+  Tabs,
+} from '@obosbbl/grunnmuren-react';
 import { createFileRoute, useLocation } from '@tanstack/react-router';
 import { cx } from 'cva';
 import { useEffect, useRef, useState } from 'react';
 
 import { AnchorHeading } from '@/ui/anchor-heading';
+import { Code } from '@/ui/code';
 
 import legacyColors from '../../../../colors';
 import { type RoleToken, themeColors, tokenColors } from '../../../../token-colors';
@@ -156,25 +166,49 @@ const Roles = () => {
     <div className="grid gap-12">
       <div className="prose">
         <p>
-          Rollene er fargene du bruker i kode. I OBOS-temaet er <code>primary</code> mørk blå,{' '}
-          <code>accent</code> mørk grønn og <code>neutral</code> gråtoner. I tillegg finnes
-          statusrollene <code>success</code>, <code>danger</code>, <code>warning</code> og{' '}
-          <code>info</code>.
+          I OBOS-temaet er <code>primary</code> mørk blå, <code>accent</code> mørk grønn og{' '}
+          <code>neutral</code> gråtoner. I tillegg finnes statusrollene <code>success</code>,{' '}
+          <code>danger</code>, <code>warning</code> og <code>info</code>.
+        </p>
+        <p>Hver rolle har de samme tokenene, delt i fem grupper:</p>
+        <ul>
+          <li>
+            <code>background</code>: bakgrunnen på siden eller en seksjon
+          </li>
+          <li>
+            <code>surface</code>: kort, paneler og andre flater oppå bakgrunnen. Med{' '}
+            <code>hover</code> og <code>active</code> for det du kan klikke på
+          </li>
+          <li>
+            <code>border</code>: kanter og skillelinjer
+          </li>
+          <li>
+            <code>text</code>: tekst. <code>default</code> for vanlig tekst, <code>subtle</code> for
+            det som er mindre viktig
+          </li>
+          <li>
+            <code>base</code>: fylte flater, som knapper. <code>base-contrast</code> er tekst og
+            ikoner oppå
+          </li>
+        </ul>
+        <p>
+          Klassen er rolle, gruppe og variant satt sammen, feks <code>bg-primary-base-default</code>{' '}
+          eller <code>text-neutral-text-subtle</code>.
         </p>
         <p>
-          Hver rolle har de samme tokenene, delt i <code>background</code>, <code>surface</code>,{' '}
-          <code>border</code>, <code>text</code> og <code>base</code>. Utilityen er rolle, gruppe og
-          variant, feks <code>bg-primary-base-default</code> eller{' '}
-          <code>text-neutral-text-subtle</code>.
+          Skal en komponent bytte farge etter hvor den står? Bruk klassene uten rolle i navnet, som{' '}
+          <code>bg-base-default</code>. De henter fargen fra <code>data-color</code> på et element
+          lenger opp, og er <code>primary</code> uten.
         </p>
+        <Code
+          language="tsx"
+          code={`<div data-color="accent">
+  <button className="bg-base-default text-base-contrast-default">Lagre</button>
+</div>`}
+        />
         <p>
-          De korte utilities som <code>bg-base-default</code> har ingen rolle i navnet. De følger{' '}
-          <code>data-color</code> på et element over, som kan være hvilken som helst av rollene, og
-          er <code>primary</code> uten. Sånn kan en komponent skrives én gang og likevel skifte
-          farge der den står.
-        </p>
-        <p>
-          Fargene følger temaet. Velg Frøen Hage under for å se hvordan et tema overstyrer rollene.
+          Fargene følger temaet, se <Link href="/profil/temaer">Temaer</Link>. Velg Frøen Hage under
+          for å se hvordan det ser ut.
         </p>
       </div>
 
@@ -201,7 +235,7 @@ const Roles = () => {
                 Korte tokens
               </AnchorHeading>
               <p>
-                Peker på rollen <code>data-color</code> velger. Her uten attributtet, så de er{' '}
+                Klassene uten rolle i navnet. Her uten <code>data-color</code>, så de viser{' '}
                 <code>primary</code>.
               </p>
             </div>
@@ -239,8 +273,8 @@ const Palette = () => (
           Primitiver
         </AnchorHeading>
         <p>
-          Fargene rollene peker på. Bruk rollene i kode, ikke disse direkte. Et tema kan justere
-          dem, men det er rollene som er kontrakten.
+          Fargene rollene peker på. Bruk rollene i kode, ikke disse. Det er rollene vi lover holder
+          seg stabile.
         </p>
       </div>
       {tokenColors.primitives.map(({ family, tokens }) => (
@@ -316,6 +350,27 @@ function RouteComponent() {
   return (
     <>
       <h1 className="heading-l my-12">Farger</h1>
+      <div className="prose mb-12">
+        <p>
+          Her er fargene sånn du bruker dem i kode. Hvordan OBOS bruker farger i merkevaren, står på{' '}
+          <Link href="/farger">Farger under Designspråk</Link>.
+        </p>
+        <ul>
+          <li>
+            <strong>Rolle</strong>: hva en farge brukes til, som <code>primary</code> eller{' '}
+            <code>danger</code>. Det er rollene du bruker i kode.
+          </li>
+          <li>
+            <strong>Token</strong>: én farge i en rolle, som <code>primary-base-default</code>.
+            Finnes både som Tailwind-klasse (<code>bg-primary-base-default</code>) og som
+            CSS-variabel (<code>--gm-color-primary-base-default</code>).
+          </li>
+          <li>
+            <strong>Primitiv</strong>: den faktiske fargen en rolle peker på, som{' '}
+            <code>blue.900</code>. Bruk den ikke direkte.
+          </li>
+        </ul>
+      </div>
       <Tabs className="mb-12" selectedKey={tab} onSelectionChange={(key) => setTab(String(key))}>
         <TabList aria-label="Farger">
           <Tab id="roller">Roller</Tab>
