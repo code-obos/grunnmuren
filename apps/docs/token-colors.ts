@@ -30,6 +30,8 @@ export type TokenColors = {
   /** The `group-variant` names `data-color` switches, `base-default` */
   shortTokens: Array<string>;
   primitives: Array<{ family: string; tokens: Array<PrimitiveToken> }>;
+  /** What each example theme sets, roles and primitives, by CSS name without `--` */
+  themes: Record<string, Record<string, string>>;
 };
 
 // Written by `pnpm tokens:build` in the tailwind package. The annotation is what checks the

@@ -85,6 +85,9 @@ const isMotion = (token: TransformedToken) => isIn(token, 'primitives', 'motion'
 const isDuration = (token: TransformedToken) => isIn(token, 'primitives', 'motion', 'duration');
 const isRoleColor = (token: TransformedToken) => isIn(token, 'semantic', 'color');
 const isColorPrimitive = (token: TransformedToken) => isIn(token, 'primitives', 'color');
+// A theme's `primitives.color` or `semantic.color`, at `themes.{theme}.{layer}.color`
+const isThemeColor = (token: TransformedToken) =>
+  isIn(token, 'themes') && token.path[3] === 'color';
 const isTypography = (token: TransformedToken) => isIn(token, 'semantic', 'typography');
 const isTheme = (theme: string) => (token: TransformedToken) => isIn(token, 'themes', theme);
 
@@ -123,10 +126,10 @@ const THEMED = defaults(':root', '[data-theme]');
  * token behind them. Throws if the roles don't declare the same set, since a short token
  * missing from one role would silently keep the previous role's value.
  */
-const shortColorTokens = (dictionary: Dictionary) => {
+const shortColorTokens = (tokens: Array<TransformedToken>) => {
   const roles = DATA_COLORS.map((role) => {
     const prefix = `gm-color-${role}-`;
-    const names = dictionary.allTokens
+    const names = tokens
       .filter((token) => token.name.startsWith(prefix))
       .map((token) => token.name.slice(prefix.length));
     return { role, names };
@@ -189,7 +192,7 @@ const CONFIG: Config = {
         `${HEADER}${options.selector} {\n${variables(dictionary)}\n}\n`,
 
       'gm/semantic': ({ dictionary }) => {
-        const [primary, ...others] = shortColorTokens(dictionary).roles;
+        const [primary, ...others] = shortColorTokens(dictionary.allTokens).roles;
         const short = others
           .map(({ role, entries }) => `[data-color="${role}"] {\n${declarations(entries)}\n}`)
           .join('\n\n');
@@ -239,7 +242,7 @@ ${durations}
 
       'gm/tailwind': ({ dictionary }) => {
         const roles = dictionary.allTokens.filter(isRoleColor).map((token) => token.name);
-        const colors = [...roles, ...shortColorTokens(dictionary).names].map(
+        const colors = [...roles, ...shortColorTokens(dictionary.allTokens).names].map(
           (name): [string, string] => [name.replace(/^gm-/, ''), `var(--${name})`],
         );
         const radii = dictionary.allTokens
@@ -278,7 +281,9 @@ ${declarations(radii)}
       },
 
       // The colour tokens as data, for the docs' colour page. `path` is what a theme file
-      // calls a token: `primary.base-default`, `blue.900`.
+      // calls a token: `primary.base-default`, `blue.900`. `themes` is what each example
+      // theme sets, by CSS name, so the page can show a theme's values without reading them
+      // back from the DOM.
       'gm/colors': ({ dictionary }) => {
         const roles = Map.groupBy(
           dictionary.allTokens.filter(isRoleColor),
@@ -304,8 +309,8 @@ ${declarations(radii)}
               };
             }),
           })),
-          shortTokens: shortColorTokens(dictionary).names.map((name) =>
-            name.replace(/^gm-color-/, ''),
+          shortTokens: shortColorTokens(dictionary.allTokens.filter(isRoleColor)).names.map(
+            (name) => name.replace(/^gm-color-/, ''),
           ),
           primitives: [...primitives].map(([family, tokens]) => ({
             family,
@@ -315,6 +320,16 @@ ${declarations(radii)}
               value: token.$value,
             })),
           })),
+          themes: Object.fromEntries(
+            THEMES.map((theme) => [
+              theme,
+              Object.fromEntries(
+                dictionary.allTokens
+                  .filter(isTheme(theme))
+                  .map((token) => [token.name, token.$value]),
+              ),
+            ]),
+          ),
         };
 
         return `${JSON.stringify(colors, null, 2)}\n`;
@@ -357,7 +372,7 @@ ${variables(dictionary)}
         {
           destination: 'colors.json',
           format: 'gm/colors',
-          filter: (token) => isRoleColor(token) || isColorPrimitive(token),
+          filter: (token) => isRoleColor(token) || isColorPrimitive(token) || isThemeColor(token),
         },
         ...THEMES.map((theme) => ({
           destination: `themes/${theme}.css`,
