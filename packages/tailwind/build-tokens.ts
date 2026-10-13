@@ -154,11 +154,14 @@ const shortColorTokens = (tokens: Array<TransformedToken>) => {
   };
 };
 
-/** The primitive a role colour points at, as the path under `primitives.color` and its CSS name. */
+/**
+ * The primitive a role colour points at, as the path under `primitives.color` and its CSS
+ * name. Nothing when it's a value of its own or points somewhere else.
+ */
 const referencedPrimitive = (token: TransformedToken) => {
   const reference = /^\{(.+)\}$/.exec(String(token.original.$value))?.[1].split('.');
   if (reference?.[0] !== 'primitives' || reference[1] !== 'color') {
-    throw new Error(`\`${token.path.join('.')}\` isn't a reference to a colour primitive`);
+    return {};
   }
   return { ref: reference.slice(2).join('.'), refName: toCssName(reference) };
 };
@@ -295,17 +298,18 @@ ${declarations(radii)}
         const colors = {
           roles: [...roles].map(([role, tokens]) => ({
             role,
-            tokens: tokens.map((token) => {
-              const [group, ...variant] = token.path[3].split('-');
-              return {
-                path: token.path.slice(2).join('.'),
-                name: token.name,
+            groups: [...Map.groupBy(tokens, (token) => token.path[3].split('-')[0])].map(
+              ([group, members]) => ({
                 group,
-                variant: variant.join('-'),
-                ...referencedPrimitive(token),
-                value: token.$value,
-              };
-            }),
+                tokens: members.map((token) => ({
+                  path: token.path.slice(2).join('.'),
+                  name: token.name,
+                  variant: token.path[3].slice(group.length + 1),
+                  ...referencedPrimitive(token),
+                  value: token.$value,
+                })),
+              }),
+            ),
           })),
           shortTokens: shortColorTokens(dictionary.allTokens.filter(isRoleColor)).names.map(
             (name) => name.replace(/^gm-color-/, ''),

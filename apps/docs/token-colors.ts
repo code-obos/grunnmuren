@@ -6,14 +6,12 @@ export type RoleToken = {
   path: string;
   /** The custom property without `--`, `gm-color-primary-base-default` */
   name: string;
-  /** `base` */
-  group: string;
   /** `default` */
   variant: string;
-  /** The primitive it points at, by path: `blue.900` */
-  ref: string;
+  /** The primitive it points at, by path: `blue.900`. Missing when it doesn't point at one */
+  ref?: string;
   /** The same primitive's custom property without `--`, `gm-blue-900` */
-  refName: string;
+  refName?: string;
   /** The default value, `#002169` */
   value: string;
 };
@@ -27,7 +25,7 @@ export type PrimitiveToken = {
 };
 
 export type TokenColors = {
-  roles: Array<{ role: string; tokens: Array<RoleToken> }>;
+  roles: Array<{ role: string; groups: Array<{ group: string; tokens: Array<RoleToken> }> }>;
   /** The `group-variant` names `data-color` switches, `base-default` */
   shortTokens: Array<string>;
   primitives: Array<{ family: string; tokens: Array<PrimitiveToken> }>;

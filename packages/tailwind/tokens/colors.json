@@ -2,1044 +2,1107 @@
   "roles": [
     {
       "role": "primary",
-      "tokens": [
+      "groups": [
         {
-          "path": "primary.background-default",
-          "name": "gm-color-primary-background-default",
           "group": "background",
-          "variant": "default",
-          "ref": "white",
-          "refName": "gm-white",
-          "value": "#FFFFFF"
+          "tokens": [
+            {
+              "path": "primary.background-default",
+              "name": "gm-color-primary-background-default",
+              "variant": "default",
+              "ref": "white",
+              "refName": "gm-white",
+              "value": "#FFFFFF"
+            },
+            {
+              "path": "primary.background-tinted",
+              "name": "gm-color-primary-background-tinted",
+              "variant": "tinted",
+              "ref": "sky.100",
+              "refName": "gm-sky-100",
+              "value": "#EBF5F9"
+            }
+          ]
         },
         {
-          "path": "primary.background-tinted",
-          "name": "gm-color-primary-background-tinted",
-          "group": "background",
-          "variant": "tinted",
-          "ref": "sky.100",
-          "refName": "gm-sky-100",
-          "value": "#EBF5F9"
-        },
-        {
-          "path": "primary.surface-default",
-          "name": "gm-color-primary-surface-default",
           "group": "surface",
-          "variant": "default",
-          "ref": "white",
-          "refName": "gm-white",
-          "value": "#FFFFFF"
+          "tokens": [
+            {
+              "path": "primary.surface-default",
+              "name": "gm-color-primary-surface-default",
+              "variant": "default",
+              "ref": "white",
+              "refName": "gm-white",
+              "value": "#FFFFFF"
+            },
+            {
+              "path": "primary.surface-tinted",
+              "name": "gm-color-primary-surface-tinted",
+              "variant": "tinted",
+              "ref": "sky.100",
+              "refName": "gm-sky-100",
+              "value": "#EBF5F9"
+            },
+            {
+              "path": "primary.surface-hover",
+              "name": "gm-color-primary-surface-hover",
+              "variant": "hover",
+              "ref": "sky.200",
+              "refName": "gm-sky-200",
+              "value": "#DEEFF5"
+            },
+            {
+              "path": "primary.surface-active",
+              "name": "gm-color-primary-surface-active",
+              "variant": "active",
+              "ref": "sky.250",
+              "refName": "gm-sky-250",
+              "value": "#CBE5F0"
+            }
+          ]
         },
         {
-          "path": "primary.surface-tinted",
-          "name": "gm-color-primary-surface-tinted",
-          "group": "surface",
-          "variant": "tinted",
-          "ref": "sky.100",
-          "refName": "gm-sky-100",
-          "value": "#EBF5F9"
-        },
-        {
-          "path": "primary.surface-hover",
-          "name": "gm-color-primary-surface-hover",
-          "group": "surface",
-          "variant": "hover",
-          "ref": "sky.200",
-          "refName": "gm-sky-200",
-          "value": "#DEEFF5"
-        },
-        {
-          "path": "primary.surface-active",
-          "name": "gm-color-primary-surface-active",
-          "group": "surface",
-          "variant": "active",
-          "ref": "sky.250",
-          "refName": "gm-sky-250",
-          "value": "#CBE5F0"
-        },
-        {
-          "path": "primary.border-subtle",
-          "name": "gm-color-primary-border-subtle",
           "group": "border",
-          "variant": "subtle",
-          "ref": "sky.300",
-          "refName": "gm-sky-300",
-          "value": "#BEDFEC"
+          "tokens": [
+            {
+              "path": "primary.border-subtle",
+              "name": "gm-color-primary-border-subtle",
+              "variant": "subtle",
+              "ref": "sky.300",
+              "refName": "gm-sky-300",
+              "value": "#BEDFEC"
+            },
+            {
+              "path": "primary.border-default",
+              "name": "gm-color-primary-border-default",
+              "variant": "default",
+              "ref": "blue.500",
+              "refName": "gm-blue-500",
+              "value": "#0047BA"
+            },
+            {
+              "path": "primary.border-strong",
+              "name": "gm-color-primary-border-strong",
+              "variant": "strong",
+              "ref": "blue.700",
+              "refName": "gm-blue-700",
+              "value": "#003DA0"
+            }
+          ]
         },
         {
-          "path": "primary.border-default",
-          "name": "gm-color-primary-border-default",
-          "group": "border",
-          "variant": "default",
-          "ref": "blue.500",
-          "refName": "gm-blue-500",
-          "value": "#0047BA"
-        },
-        {
-          "path": "primary.border-strong",
-          "name": "gm-color-primary-border-strong",
-          "group": "border",
-          "variant": "strong",
-          "ref": "blue.700",
-          "refName": "gm-blue-700",
-          "value": "#003DA0"
-        },
-        {
-          "path": "primary.text-subtle",
-          "name": "gm-color-primary-text-subtle",
           "group": "text",
-          "variant": "subtle",
-          "ref": "blue.700",
-          "refName": "gm-blue-700",
-          "value": "#003DA0"
+          "tokens": [
+            {
+              "path": "primary.text-subtle",
+              "name": "gm-color-primary-text-subtle",
+              "variant": "subtle",
+              "ref": "blue.700",
+              "refName": "gm-blue-700",
+              "value": "#003DA0"
+            },
+            {
+              "path": "primary.text-default",
+              "name": "gm-color-primary-text-default",
+              "variant": "default",
+              "ref": "blue.900",
+              "refName": "gm-blue-900",
+              "value": "#002169"
+            }
+          ]
         },
         {
-          "path": "primary.text-default",
-          "name": "gm-color-primary-text-default",
-          "group": "text",
-          "variant": "default",
-          "ref": "blue.900",
-          "refName": "gm-blue-900",
-          "value": "#002169"
-        },
-        {
-          "path": "primary.base-default",
-          "name": "gm-color-primary-base-default",
           "group": "base",
-          "variant": "default",
-          "ref": "blue.900",
-          "refName": "gm-blue-900",
-          "value": "#002169"
-        },
-        {
-          "path": "primary.base-hover",
-          "name": "gm-color-primary-base-hover",
-          "group": "base",
-          "variant": "hover",
-          "ref": "blue.700",
-          "refName": "gm-blue-700",
-          "value": "#003DA0"
-        },
-        {
-          "path": "primary.base-active",
-          "name": "gm-color-primary-base-active",
-          "group": "base",
-          "variant": "active",
-          "ref": "blue.800",
-          "refName": "gm-blue-800",
-          "value": "#00358A"
-        },
-        {
-          "path": "primary.base-contrast-subtle",
-          "name": "gm-color-primary-base-contrast-subtle",
-          "group": "base",
-          "variant": "contrast-subtle",
-          "ref": "sky.200",
-          "refName": "gm-sky-200",
-          "value": "#DEEFF5"
-        },
-        {
-          "path": "primary.base-contrast-default",
-          "name": "gm-color-primary-base-contrast-default",
-          "group": "base",
-          "variant": "contrast-default",
-          "ref": "white",
-          "refName": "gm-white",
-          "value": "#FFFFFF"
+          "tokens": [
+            {
+              "path": "primary.base-default",
+              "name": "gm-color-primary-base-default",
+              "variant": "default",
+              "ref": "blue.900",
+              "refName": "gm-blue-900",
+              "value": "#002169"
+            },
+            {
+              "path": "primary.base-hover",
+              "name": "gm-color-primary-base-hover",
+              "variant": "hover",
+              "ref": "blue.700",
+              "refName": "gm-blue-700",
+              "value": "#003DA0"
+            },
+            {
+              "path": "primary.base-active",
+              "name": "gm-color-primary-base-active",
+              "variant": "active",
+              "ref": "blue.800",
+              "refName": "gm-blue-800",
+              "value": "#00358A"
+            },
+            {
+              "path": "primary.base-contrast-subtle",
+              "name": "gm-color-primary-base-contrast-subtle",
+              "variant": "contrast-subtle",
+              "ref": "sky.200",
+              "refName": "gm-sky-200",
+              "value": "#DEEFF5"
+            },
+            {
+              "path": "primary.base-contrast-default",
+              "name": "gm-color-primary-base-contrast-default",
+              "variant": "contrast-default",
+              "ref": "white",
+              "refName": "gm-white",
+              "value": "#FFFFFF"
+            }
+          ]
         }
       ]
     },
     {
       "role": "accent",
-      "tokens": [
+      "groups": [
         {
-          "path": "accent.background-default",
-          "name": "gm-color-accent-background-default",
           "group": "background",
-          "variant": "default",
-          "ref": "white",
-          "refName": "gm-white",
-          "value": "#FFFFFF"
+          "tokens": [
+            {
+              "path": "accent.background-default",
+              "name": "gm-color-accent-background-default",
+              "variant": "default",
+              "ref": "white",
+              "refName": "gm-white",
+              "value": "#FFFFFF"
+            },
+            {
+              "path": "accent.background-tinted",
+              "name": "gm-color-accent-background-tinted",
+              "variant": "tinted",
+              "ref": "mint.100",
+              "refName": "gm-mint-100",
+              "value": "#F0F9F6"
+            }
+          ]
         },
         {
-          "path": "accent.background-tinted",
-          "name": "gm-color-accent-background-tinted",
-          "group": "background",
-          "variant": "tinted",
-          "ref": "mint.100",
-          "refName": "gm-mint-100",
-          "value": "#F0F9F6"
-        },
-        {
-          "path": "accent.surface-default",
-          "name": "gm-color-accent-surface-default",
           "group": "surface",
-          "variant": "default",
-          "ref": "white",
-          "refName": "gm-white",
-          "value": "#FFFFFF"
+          "tokens": [
+            {
+              "path": "accent.surface-default",
+              "name": "gm-color-accent-surface-default",
+              "variant": "default",
+              "ref": "white",
+              "refName": "gm-white",
+              "value": "#FFFFFF"
+            },
+            {
+              "path": "accent.surface-tinted",
+              "name": "gm-color-accent-surface-tinted",
+              "variant": "tinted",
+              "ref": "mint.200",
+              "refName": "gm-mint-200",
+              "value": "#E6F5F0"
+            },
+            {
+              "path": "accent.surface-hover",
+              "name": "gm-color-accent-surface-hover",
+              "variant": "hover",
+              "ref": "mint.250",
+              "refName": "gm-mint-250",
+              "value": "#D7F0E8"
+            },
+            {
+              "path": "accent.surface-active",
+              "name": "gm-color-accent-surface-active",
+              "variant": "active",
+              "ref": "mint.300",
+              "refName": "gm-mint-300",
+              "value": "#CDECE2"
+            }
+          ]
         },
         {
-          "path": "accent.surface-tinted",
-          "name": "gm-color-accent-surface-tinted",
-          "group": "surface",
-          "variant": "tinted",
-          "ref": "mint.200",
-          "refName": "gm-mint-200",
-          "value": "#E6F5F0"
-        },
-        {
-          "path": "accent.surface-hover",
-          "name": "gm-color-accent-surface-hover",
-          "group": "surface",
-          "variant": "hover",
-          "ref": "mint.250",
-          "refName": "gm-mint-250",
-          "value": "#D7F0E8"
-        },
-        {
-          "path": "accent.surface-active",
-          "name": "gm-color-accent-surface-active",
-          "group": "surface",
-          "variant": "active",
-          "ref": "mint.300",
-          "refName": "gm-mint-300",
-          "value": "#CDECE2"
-        },
-        {
-          "path": "accent.border-subtle",
-          "name": "gm-color-accent-border-subtle",
           "group": "border",
-          "variant": "subtle",
-          "ref": "mint.300",
-          "refName": "gm-mint-300",
-          "value": "#CDECE2"
+          "tokens": [
+            {
+              "path": "accent.border-subtle",
+              "name": "gm-color-accent-border-subtle",
+              "variant": "subtle",
+              "ref": "mint.300",
+              "refName": "gm-mint-300",
+              "value": "#CDECE2"
+            },
+            {
+              "path": "accent.border-default",
+              "name": "gm-color-accent-border-default",
+              "variant": "default",
+              "ref": "green.500",
+              "refName": "gm-green-500",
+              "value": "#008761"
+            },
+            {
+              "path": "accent.border-strong",
+              "name": "gm-color-accent-border-strong",
+              "variant": "strong",
+              "ref": "green.700",
+              "refName": "gm-green-700",
+              "value": "#006448"
+            }
+          ]
         },
         {
-          "path": "accent.border-default",
-          "name": "gm-color-accent-border-default",
-          "group": "border",
-          "variant": "default",
-          "ref": "green.500",
-          "refName": "gm-green-500",
-          "value": "#008761"
-        },
-        {
-          "path": "accent.border-strong",
-          "name": "gm-color-accent-border-strong",
-          "group": "border",
-          "variant": "strong",
-          "ref": "green.700",
-          "refName": "gm-green-700",
-          "value": "#006448"
-        },
-        {
-          "path": "accent.text-subtle",
-          "name": "gm-color-accent-text-subtle",
           "group": "text",
-          "variant": "subtle",
-          "ref": "green.700",
-          "refName": "gm-green-700",
-          "value": "#006448"
+          "tokens": [
+            {
+              "path": "accent.text-subtle",
+              "name": "gm-color-accent-text-subtle",
+              "variant": "subtle",
+              "ref": "green.700",
+              "refName": "gm-green-700",
+              "value": "#006448"
+            },
+            {
+              "path": "accent.text-default",
+              "name": "gm-color-accent-text-default",
+              "variant": "default",
+              "ref": "green.900",
+              "refName": "gm-green-900",
+              "value": "#00524C"
+            }
+          ]
         },
         {
-          "path": "accent.text-default",
-          "name": "gm-color-accent-text-default",
-          "group": "text",
-          "variant": "default",
-          "ref": "green.900",
-          "refName": "gm-green-900",
-          "value": "#00524C"
-        },
-        {
-          "path": "accent.base-default",
-          "name": "gm-color-accent-base-default",
           "group": "base",
-          "variant": "default",
-          "ref": "green.900",
-          "refName": "gm-green-900",
-          "value": "#00524C"
-        },
-        {
-          "path": "accent.base-hover",
-          "name": "gm-color-accent-base-hover",
-          "group": "base",
-          "variant": "hover",
-          "ref": "green.600",
-          "refName": "gm-green-600",
-          "value": "#007453"
-        },
-        {
-          "path": "accent.base-active",
-          "name": "gm-color-accent-base-active",
-          "group": "base",
-          "variant": "active",
-          "ref": "green.700",
-          "refName": "gm-green-700",
-          "value": "#006448"
-        },
-        {
-          "path": "accent.base-contrast-subtle",
-          "name": "gm-color-accent-base-contrast-subtle",
-          "group": "base",
-          "variant": "contrast-subtle",
-          "ref": "mint.200",
-          "refName": "gm-mint-200",
-          "value": "#E6F5F0"
-        },
-        {
-          "path": "accent.base-contrast-default",
-          "name": "gm-color-accent-base-contrast-default",
-          "group": "base",
-          "variant": "contrast-default",
-          "ref": "white",
-          "refName": "gm-white",
-          "value": "#FFFFFF"
+          "tokens": [
+            {
+              "path": "accent.base-default",
+              "name": "gm-color-accent-base-default",
+              "variant": "default",
+              "ref": "green.900",
+              "refName": "gm-green-900",
+              "value": "#00524C"
+            },
+            {
+              "path": "accent.base-hover",
+              "name": "gm-color-accent-base-hover",
+              "variant": "hover",
+              "ref": "green.600",
+              "refName": "gm-green-600",
+              "value": "#007453"
+            },
+            {
+              "path": "accent.base-active",
+              "name": "gm-color-accent-base-active",
+              "variant": "active",
+              "ref": "green.700",
+              "refName": "gm-green-700",
+              "value": "#006448"
+            },
+            {
+              "path": "accent.base-contrast-subtle",
+              "name": "gm-color-accent-base-contrast-subtle",
+              "variant": "contrast-subtle",
+              "ref": "mint.200",
+              "refName": "gm-mint-200",
+              "value": "#E6F5F0"
+            },
+            {
+              "path": "accent.base-contrast-default",
+              "name": "gm-color-accent-base-contrast-default",
+              "variant": "contrast-default",
+              "ref": "white",
+              "refName": "gm-white",
+              "value": "#FFFFFF"
+            }
+          ]
         }
       ]
     },
     {
       "role": "neutral",
-      "tokens": [
+      "groups": [
         {
-          "path": "neutral.background-default",
-          "name": "gm-color-neutral-background-default",
           "group": "background",
-          "variant": "default",
-          "ref": "white",
-          "refName": "gm-white",
-          "value": "#FFFFFF"
+          "tokens": [
+            {
+              "path": "neutral.background-default",
+              "name": "gm-color-neutral-background-default",
+              "variant": "default",
+              "ref": "white",
+              "refName": "gm-white",
+              "value": "#FFFFFF"
+            },
+            {
+              "path": "neutral.background-tinted",
+              "name": "gm-color-neutral-background-tinted",
+              "variant": "tinted",
+              "ref": "gray.100",
+              "refName": "gm-gray-100",
+              "value": "#F1F1F1"
+            }
+          ]
         },
         {
-          "path": "neutral.background-tinted",
-          "name": "gm-color-neutral-background-tinted",
-          "group": "background",
-          "variant": "tinted",
-          "ref": "gray.100",
-          "refName": "gm-gray-100",
-          "value": "#F1F1F1"
-        },
-        {
-          "path": "neutral.surface-default",
-          "name": "gm-color-neutral-surface-default",
           "group": "surface",
-          "variant": "default",
-          "ref": "white",
-          "refName": "gm-white",
-          "value": "#FFFFFF"
+          "tokens": [
+            {
+              "path": "neutral.surface-default",
+              "name": "gm-color-neutral-surface-default",
+              "variant": "default",
+              "ref": "white",
+              "refName": "gm-white",
+              "value": "#FFFFFF"
+            },
+            {
+              "path": "neutral.surface-tinted",
+              "name": "gm-color-neutral-surface-tinted",
+              "variant": "tinted",
+              "ref": "gray.100",
+              "refName": "gm-gray-100",
+              "value": "#F1F1F1"
+            },
+            {
+              "path": "neutral.surface-hover",
+              "name": "gm-color-neutral-surface-hover",
+              "variant": "hover",
+              "ref": "gray.200",
+              "refName": "gm-gray-200",
+              "value": "#E6E6E6"
+            },
+            {
+              "path": "neutral.surface-active",
+              "name": "gm-color-neutral-surface-active",
+              "variant": "active",
+              "ref": "gray.200",
+              "refName": "gm-gray-200",
+              "value": "#E6E6E6"
+            }
+          ]
         },
         {
-          "path": "neutral.surface-tinted",
-          "name": "gm-color-neutral-surface-tinted",
-          "group": "surface",
-          "variant": "tinted",
-          "ref": "gray.100",
-          "refName": "gm-gray-100",
-          "value": "#F1F1F1"
-        },
-        {
-          "path": "neutral.surface-hover",
-          "name": "gm-color-neutral-surface-hover",
-          "group": "surface",
-          "variant": "hover",
-          "ref": "gray.200",
-          "refName": "gm-gray-200",
-          "value": "#E6E6E6"
-        },
-        {
-          "path": "neutral.surface-active",
-          "name": "gm-color-neutral-surface-active",
-          "group": "surface",
-          "variant": "active",
-          "ref": "gray.200",
-          "refName": "gm-gray-200",
-          "value": "#E6E6E6"
-        },
-        {
-          "path": "neutral.border-subtle",
-          "name": "gm-color-neutral-border-subtle",
           "group": "border",
-          "variant": "subtle",
-          "ref": "gray.200",
-          "refName": "gm-gray-200",
-          "value": "#E6E6E6"
+          "tokens": [
+            {
+              "path": "neutral.border-subtle",
+              "name": "gm-color-neutral-border-subtle",
+              "variant": "subtle",
+              "ref": "gray.200",
+              "refName": "gm-gray-200",
+              "value": "#E6E6E6"
+            },
+            {
+              "path": "neutral.border-default",
+              "name": "gm-color-neutral-border-default",
+              "variant": "default",
+              "ref": "gray.500",
+              "refName": "gm-gray-500",
+              "value": "#818181"
+            },
+            {
+              "path": "neutral.border-strong",
+              "name": "gm-color-neutral-border-strong",
+              "variant": "strong",
+              "ref": "gray.900",
+              "refName": "gm-gray-900",
+              "value": "#333333"
+            }
+          ]
         },
         {
-          "path": "neutral.border-default",
-          "name": "gm-color-neutral-border-default",
-          "group": "border",
-          "variant": "default",
-          "ref": "gray.500",
-          "refName": "gm-gray-500",
-          "value": "#818181"
-        },
-        {
-          "path": "neutral.border-strong",
-          "name": "gm-color-neutral-border-strong",
-          "group": "border",
-          "variant": "strong",
-          "ref": "gray.900",
-          "refName": "gm-gray-900",
-          "value": "#333333"
-        },
-        {
-          "path": "neutral.text-subtle",
-          "name": "gm-color-neutral-text-subtle",
           "group": "text",
-          "variant": "subtle",
-          "ref": "gray.700",
-          "refName": "gm-gray-700",
-          "value": "#595959"
+          "tokens": [
+            {
+              "path": "neutral.text-subtle",
+              "name": "gm-color-neutral-text-subtle",
+              "variant": "subtle",
+              "ref": "gray.700",
+              "refName": "gm-gray-700",
+              "value": "#595959"
+            },
+            {
+              "path": "neutral.text-default",
+              "name": "gm-color-neutral-text-default",
+              "variant": "default",
+              "ref": "gray.900",
+              "refName": "gm-gray-900",
+              "value": "#333333"
+            }
+          ]
         },
         {
-          "path": "neutral.text-default",
-          "name": "gm-color-neutral-text-default",
-          "group": "text",
-          "variant": "default",
-          "ref": "gray.900",
-          "refName": "gm-gray-900",
-          "value": "#333333"
-        },
-        {
-          "path": "neutral.base-default",
-          "name": "gm-color-neutral-base-default",
           "group": "base",
-          "variant": "default",
-          "ref": "gray.900",
-          "refName": "gm-gray-900",
-          "value": "#333333"
-        },
-        {
-          "path": "neutral.base-hover",
-          "name": "gm-color-neutral-base-hover",
-          "group": "base",
-          "variant": "hover",
-          "ref": "gray.950",
-          "refName": "gm-gray-950",
-          "value": "#2C2C2C"
-        },
-        {
-          "path": "neutral.base-active",
-          "name": "gm-color-neutral-base-active",
-          "group": "base",
-          "variant": "active",
-          "ref": "gray.1000",
-          "refName": "gm-gray-1000",
-          "value": "#262626"
-        },
-        {
-          "path": "neutral.base-contrast-subtle",
-          "name": "gm-color-neutral-base-contrast-subtle",
-          "group": "base",
-          "variant": "contrast-subtle",
-          "ref": "gray.200",
-          "refName": "gm-gray-200",
-          "value": "#E6E6E6"
-        },
-        {
-          "path": "neutral.base-contrast-default",
-          "name": "gm-color-neutral-base-contrast-default",
-          "group": "base",
-          "variant": "contrast-default",
-          "ref": "white",
-          "refName": "gm-white",
-          "value": "#FFFFFF"
+          "tokens": [
+            {
+              "path": "neutral.base-default",
+              "name": "gm-color-neutral-base-default",
+              "variant": "default",
+              "ref": "gray.900",
+              "refName": "gm-gray-900",
+              "value": "#333333"
+            },
+            {
+              "path": "neutral.base-hover",
+              "name": "gm-color-neutral-base-hover",
+              "variant": "hover",
+              "ref": "gray.950",
+              "refName": "gm-gray-950",
+              "value": "#2C2C2C"
+            },
+            {
+              "path": "neutral.base-active",
+              "name": "gm-color-neutral-base-active",
+              "variant": "active",
+              "ref": "gray.1000",
+              "refName": "gm-gray-1000",
+              "value": "#262626"
+            },
+            {
+              "path": "neutral.base-contrast-subtle",
+              "name": "gm-color-neutral-base-contrast-subtle",
+              "variant": "contrast-subtle",
+              "ref": "gray.200",
+              "refName": "gm-gray-200",
+              "value": "#E6E6E6"
+            },
+            {
+              "path": "neutral.base-contrast-default",
+              "name": "gm-color-neutral-base-contrast-default",
+              "variant": "contrast-default",
+              "ref": "white",
+              "refName": "gm-white",
+              "value": "#FFFFFF"
+            }
+          ]
         }
       ]
     },
     {
       "role": "success",
-      "tokens": [
+      "groups": [
         {
-          "path": "success.background-default",
-          "name": "gm-color-success-background-default",
           "group": "background",
-          "variant": "default",
-          "ref": "white",
-          "refName": "gm-white",
-          "value": "#FFFFFF"
+          "tokens": [
+            {
+              "path": "success.background-default",
+              "name": "gm-color-success-background-default",
+              "variant": "default",
+              "ref": "white",
+              "refName": "gm-white",
+              "value": "#FFFFFF"
+            },
+            {
+              "path": "success.background-tinted",
+              "name": "gm-color-success-background-tinted",
+              "variant": "tinted",
+              "ref": "mint.100",
+              "refName": "gm-mint-100",
+              "value": "#F0F9F6"
+            }
+          ]
         },
         {
-          "path": "success.background-tinted",
-          "name": "gm-color-success-background-tinted",
-          "group": "background",
-          "variant": "tinted",
-          "ref": "mint.100",
-          "refName": "gm-mint-100",
-          "value": "#F0F9F6"
-        },
-        {
-          "path": "success.surface-default",
-          "name": "gm-color-success-surface-default",
           "group": "surface",
-          "variant": "default",
-          "ref": "white",
-          "refName": "gm-white",
-          "value": "#FFFFFF"
+          "tokens": [
+            {
+              "path": "success.surface-default",
+              "name": "gm-color-success-surface-default",
+              "variant": "default",
+              "ref": "white",
+              "refName": "gm-white",
+              "value": "#FFFFFF"
+            },
+            {
+              "path": "success.surface-tinted",
+              "name": "gm-color-success-surface-tinted",
+              "variant": "tinted",
+              "ref": "mint.200",
+              "refName": "gm-mint-200",
+              "value": "#E6F5F0"
+            },
+            {
+              "path": "success.surface-hover",
+              "name": "gm-color-success-surface-hover",
+              "variant": "hover",
+              "ref": "mint.250",
+              "refName": "gm-mint-250",
+              "value": "#D7F0E8"
+            },
+            {
+              "path": "success.surface-active",
+              "name": "gm-color-success-surface-active",
+              "variant": "active",
+              "ref": "mint.300",
+              "refName": "gm-mint-300",
+              "value": "#CDECE2"
+            }
+          ]
         },
         {
-          "path": "success.surface-tinted",
-          "name": "gm-color-success-surface-tinted",
-          "group": "surface",
-          "variant": "tinted",
-          "ref": "mint.200",
-          "refName": "gm-mint-200",
-          "value": "#E6F5F0"
-        },
-        {
-          "path": "success.surface-hover",
-          "name": "gm-color-success-surface-hover",
-          "group": "surface",
-          "variant": "hover",
-          "ref": "mint.250",
-          "refName": "gm-mint-250",
-          "value": "#D7F0E8"
-        },
-        {
-          "path": "success.surface-active",
-          "name": "gm-color-success-surface-active",
-          "group": "surface",
-          "variant": "active",
-          "ref": "mint.300",
-          "refName": "gm-mint-300",
-          "value": "#CDECE2"
-        },
-        {
-          "path": "success.border-subtle",
-          "name": "gm-color-success-border-subtle",
           "group": "border",
-          "variant": "subtle",
-          "ref": "mint.300",
-          "refName": "gm-mint-300",
-          "value": "#CDECE2"
+          "tokens": [
+            {
+              "path": "success.border-subtle",
+              "name": "gm-color-success-border-subtle",
+              "variant": "subtle",
+              "ref": "mint.300",
+              "refName": "gm-mint-300",
+              "value": "#CDECE2"
+            },
+            {
+              "path": "success.border-default",
+              "name": "gm-color-success-border-default",
+              "variant": "default",
+              "ref": "green.500",
+              "refName": "gm-green-500",
+              "value": "#008761"
+            },
+            {
+              "path": "success.border-strong",
+              "name": "gm-color-success-border-strong",
+              "variant": "strong",
+              "ref": "green.700",
+              "refName": "gm-green-700",
+              "value": "#006448"
+            }
+          ]
         },
         {
-          "path": "success.border-default",
-          "name": "gm-color-success-border-default",
-          "group": "border",
-          "variant": "default",
-          "ref": "green.500",
-          "refName": "gm-green-500",
-          "value": "#008761"
-        },
-        {
-          "path": "success.border-strong",
-          "name": "gm-color-success-border-strong",
-          "group": "border",
-          "variant": "strong",
-          "ref": "green.700",
-          "refName": "gm-green-700",
-          "value": "#006448"
-        },
-        {
-          "path": "success.text-subtle",
-          "name": "gm-color-success-text-subtle",
           "group": "text",
-          "variant": "subtle",
-          "ref": "green.700",
-          "refName": "gm-green-700",
-          "value": "#006448"
+          "tokens": [
+            {
+              "path": "success.text-subtle",
+              "name": "gm-color-success-text-subtle",
+              "variant": "subtle",
+              "ref": "green.700",
+              "refName": "gm-green-700",
+              "value": "#006448"
+            },
+            {
+              "path": "success.text-default",
+              "name": "gm-color-success-text-default",
+              "variant": "default",
+              "ref": "green.900",
+              "refName": "gm-green-900",
+              "value": "#00524C"
+            }
+          ]
         },
         {
-          "path": "success.text-default",
-          "name": "gm-color-success-text-default",
-          "group": "text",
-          "variant": "default",
-          "ref": "green.900",
-          "refName": "gm-green-900",
-          "value": "#00524C"
-        },
-        {
-          "path": "success.base-default",
-          "name": "gm-color-success-base-default",
           "group": "base",
-          "variant": "default",
-          "ref": "green.500",
-          "refName": "gm-green-500",
-          "value": "#008761"
-        },
-        {
-          "path": "success.base-hover",
-          "name": "gm-color-success-base-hover",
-          "group": "base",
-          "variant": "hover",
-          "ref": "green.600",
-          "refName": "gm-green-600",
-          "value": "#007453"
-        },
-        {
-          "path": "success.base-active",
-          "name": "gm-color-success-base-active",
-          "group": "base",
-          "variant": "active",
-          "ref": "green.700",
-          "refName": "gm-green-700",
-          "value": "#006448"
-        },
-        {
-          "path": "success.base-contrast-subtle",
-          "name": "gm-color-success-base-contrast-subtle",
-          "group": "base",
-          "variant": "contrast-subtle",
-          "ref": "mint.200",
-          "refName": "gm-mint-200",
-          "value": "#E6F5F0"
-        },
-        {
-          "path": "success.base-contrast-default",
-          "name": "gm-color-success-base-contrast-default",
-          "group": "base",
-          "variant": "contrast-default",
-          "ref": "white",
-          "refName": "gm-white",
-          "value": "#FFFFFF"
+          "tokens": [
+            {
+              "path": "success.base-default",
+              "name": "gm-color-success-base-default",
+              "variant": "default",
+              "ref": "green.500",
+              "refName": "gm-green-500",
+              "value": "#008761"
+            },
+            {
+              "path": "success.base-hover",
+              "name": "gm-color-success-base-hover",
+              "variant": "hover",
+              "ref": "green.600",
+              "refName": "gm-green-600",
+              "value": "#007453"
+            },
+            {
+              "path": "success.base-active",
+              "name": "gm-color-success-base-active",
+              "variant": "active",
+              "ref": "green.700",
+              "refName": "gm-green-700",
+              "value": "#006448"
+            },
+            {
+              "path": "success.base-contrast-subtle",
+              "name": "gm-color-success-base-contrast-subtle",
+              "variant": "contrast-subtle",
+              "ref": "mint.200",
+              "refName": "gm-mint-200",
+              "value": "#E6F5F0"
+            },
+            {
+              "path": "success.base-contrast-default",
+              "name": "gm-color-success-base-contrast-default",
+              "variant": "contrast-default",
+              "ref": "white",
+              "refName": "gm-white",
+              "value": "#FFFFFF"
+            }
+          ]
         }
       ]
     },
     {
       "role": "danger",
-      "tokens": [
+      "groups": [
         {
-          "path": "danger.background-default",
-          "name": "gm-color-danger-background-default",
           "group": "background",
-          "variant": "default",
-          "ref": "white",
-          "refName": "gm-white",
-          "value": "#FFFFFF"
+          "tokens": [
+            {
+              "path": "danger.background-default",
+              "name": "gm-color-danger-background-default",
+              "variant": "default",
+              "ref": "white",
+              "refName": "gm-white",
+              "value": "#FFFFFF"
+            },
+            {
+              "path": "danger.background-tinted",
+              "name": "gm-color-danger-background-tinted",
+              "variant": "tinted",
+              "ref": "red.100",
+              "refName": "gm-red-100",
+              "value": "#FAEDEF"
+            }
+          ]
         },
         {
-          "path": "danger.background-tinted",
-          "name": "gm-color-danger-background-tinted",
-          "group": "background",
-          "variant": "tinted",
-          "ref": "red.100",
-          "refName": "gm-red-100",
-          "value": "#FAEDEF"
-        },
-        {
-          "path": "danger.surface-default",
-          "name": "gm-color-danger-surface-default",
           "group": "surface",
-          "variant": "default",
-          "ref": "white",
-          "refName": "gm-white",
-          "value": "#FFFFFF"
+          "tokens": [
+            {
+              "path": "danger.surface-default",
+              "name": "gm-color-danger-surface-default",
+              "variant": "default",
+              "ref": "white",
+              "refName": "gm-white",
+              "value": "#FFFFFF"
+            },
+            {
+              "path": "danger.surface-tinted",
+              "name": "gm-color-danger-surface-tinted",
+              "variant": "tinted",
+              "ref": "red.100",
+              "refName": "gm-red-100",
+              "value": "#FAEDEF"
+            },
+            {
+              "path": "danger.surface-hover",
+              "name": "gm-color-danger-surface-hover",
+              "variant": "hover",
+              "ref": "red.100",
+              "refName": "gm-red-100",
+              "value": "#FAEDEF"
+            },
+            {
+              "path": "danger.surface-active",
+              "name": "gm-color-danger-surface-active",
+              "variant": "active",
+              "ref": "red.100",
+              "refName": "gm-red-100",
+              "value": "#FAEDEF"
+            }
+          ]
         },
         {
-          "path": "danger.surface-tinted",
-          "name": "gm-color-danger-surface-tinted",
-          "group": "surface",
-          "variant": "tinted",
-          "ref": "red.100",
-          "refName": "gm-red-100",
-          "value": "#FAEDEF"
-        },
-        {
-          "path": "danger.surface-hover",
-          "name": "gm-color-danger-surface-hover",
-          "group": "surface",
-          "variant": "hover",
-          "ref": "red.100",
-          "refName": "gm-red-100",
-          "value": "#FAEDEF"
-        },
-        {
-          "path": "danger.surface-active",
-          "name": "gm-color-danger-surface-active",
-          "group": "surface",
-          "variant": "active",
-          "ref": "red.100",
-          "refName": "gm-red-100",
-          "value": "#FAEDEF"
-        },
-        {
-          "path": "danger.border-subtle",
-          "name": "gm-color-danger-border-subtle",
           "group": "border",
-          "variant": "subtle",
-          "ref": "red.100",
-          "refName": "gm-red-100",
-          "value": "#FAEDEF"
+          "tokens": [
+            {
+              "path": "danger.border-subtle",
+              "name": "gm-color-danger-border-subtle",
+              "variant": "subtle",
+              "ref": "red.100",
+              "refName": "gm-red-100",
+              "value": "#FAEDEF"
+            },
+            {
+              "path": "danger.border-default",
+              "name": "gm-color-danger-border-default",
+              "variant": "default",
+              "ref": "red.500",
+              "refName": "gm-red-500",
+              "value": "#C0385D"
+            },
+            {
+              "path": "danger.border-strong",
+              "name": "gm-color-danger-border-strong",
+              "variant": "strong",
+              "ref": "red.700",
+              "refName": "gm-red-700",
+              "value": "#8E2945"
+            }
+          ]
         },
         {
-          "path": "danger.border-default",
-          "name": "gm-color-danger-border-default",
-          "group": "border",
-          "variant": "default",
-          "ref": "red.500",
-          "refName": "gm-red-500",
-          "value": "#C0385D"
-        },
-        {
-          "path": "danger.border-strong",
-          "name": "gm-color-danger-border-strong",
-          "group": "border",
-          "variant": "strong",
-          "ref": "red.700",
-          "refName": "gm-red-700",
-          "value": "#8E2945"
-        },
-        {
-          "path": "danger.text-subtle",
-          "name": "gm-color-danger-text-subtle",
           "group": "text",
-          "variant": "subtle",
-          "ref": "red.600",
-          "refName": "gm-red-600",
-          "value": "#A53050"
+          "tokens": [
+            {
+              "path": "danger.text-subtle",
+              "name": "gm-color-danger-text-subtle",
+              "variant": "subtle",
+              "ref": "red.600",
+              "refName": "gm-red-600",
+              "value": "#A53050"
+            },
+            {
+              "path": "danger.text-default",
+              "name": "gm-color-danger-text-default",
+              "variant": "default",
+              "ref": "red.700",
+              "refName": "gm-red-700",
+              "value": "#8E2945"
+            }
+          ]
         },
         {
-          "path": "danger.text-default",
-          "name": "gm-color-danger-text-default",
-          "group": "text",
-          "variant": "default",
-          "ref": "red.700",
-          "refName": "gm-red-700",
-          "value": "#8E2945"
-        },
-        {
-          "path": "danger.base-default",
-          "name": "gm-color-danger-base-default",
           "group": "base",
-          "variant": "default",
-          "ref": "red.500",
-          "refName": "gm-red-500",
-          "value": "#C0385D"
-        },
-        {
-          "path": "danger.base-hover",
-          "name": "gm-color-danger-base-hover",
-          "group": "base",
-          "variant": "hover",
-          "ref": "red.600",
-          "refName": "gm-red-600",
-          "value": "#A53050"
-        },
-        {
-          "path": "danger.base-active",
-          "name": "gm-color-danger-base-active",
-          "group": "base",
-          "variant": "active",
-          "ref": "red.700",
-          "refName": "gm-red-700",
-          "value": "#8E2945"
-        },
-        {
-          "path": "danger.base-contrast-subtle",
-          "name": "gm-color-danger-base-contrast-subtle",
-          "group": "base",
-          "variant": "contrast-subtle",
-          "ref": "red.100",
-          "refName": "gm-red-100",
-          "value": "#FAEDEF"
-        },
-        {
-          "path": "danger.base-contrast-default",
-          "name": "gm-color-danger-base-contrast-default",
-          "group": "base",
-          "variant": "contrast-default",
-          "ref": "white",
-          "refName": "gm-white",
-          "value": "#FFFFFF"
+          "tokens": [
+            {
+              "path": "danger.base-default",
+              "name": "gm-color-danger-base-default",
+              "variant": "default",
+              "ref": "red.500",
+              "refName": "gm-red-500",
+              "value": "#C0385D"
+            },
+            {
+              "path": "danger.base-hover",
+              "name": "gm-color-danger-base-hover",
+              "variant": "hover",
+              "ref": "red.600",
+              "refName": "gm-red-600",
+              "value": "#A53050"
+            },
+            {
+              "path": "danger.base-active",
+              "name": "gm-color-danger-base-active",
+              "variant": "active",
+              "ref": "red.700",
+              "refName": "gm-red-700",
+              "value": "#8E2945"
+            },
+            {
+              "path": "danger.base-contrast-subtle",
+              "name": "gm-color-danger-base-contrast-subtle",
+              "variant": "contrast-subtle",
+              "ref": "red.100",
+              "refName": "gm-red-100",
+              "value": "#FAEDEF"
+            },
+            {
+              "path": "danger.base-contrast-default",
+              "name": "gm-color-danger-base-contrast-default",
+              "variant": "contrast-default",
+              "ref": "white",
+              "refName": "gm-white",
+              "value": "#FFFFFF"
+            }
+          ]
         }
       ]
     },
     {
       "role": "warning",
-      "tokens": [
+      "groups": [
         {
-          "path": "warning.background-default",
-          "name": "gm-color-warning-background-default",
           "group": "background",
-          "variant": "default",
-          "ref": "white",
-          "refName": "gm-white",
-          "value": "#FFFFFF"
+          "tokens": [
+            {
+              "path": "warning.background-default",
+              "name": "gm-color-warning-background-default",
+              "variant": "default",
+              "ref": "white",
+              "refName": "gm-white",
+              "value": "#FFFFFF"
+            },
+            {
+              "path": "warning.background-tinted",
+              "name": "gm-color-warning-background-tinted",
+              "variant": "tinted",
+              "ref": "yellow.100",
+              "refName": "gm-yellow-100",
+              "value": "#FFF5D2"
+            }
+          ]
         },
         {
-          "path": "warning.background-tinted",
-          "name": "gm-color-warning-background-tinted",
-          "group": "background",
-          "variant": "tinted",
-          "ref": "yellow.100",
-          "refName": "gm-yellow-100",
-          "value": "#FFF5D2"
-        },
-        {
-          "path": "warning.surface-default",
-          "name": "gm-color-warning-surface-default",
           "group": "surface",
-          "variant": "default",
-          "ref": "white",
-          "refName": "gm-white",
-          "value": "#FFFFFF"
+          "tokens": [
+            {
+              "path": "warning.surface-default",
+              "name": "gm-color-warning-surface-default",
+              "variant": "default",
+              "ref": "white",
+              "refName": "gm-white",
+              "value": "#FFFFFF"
+            },
+            {
+              "path": "warning.surface-tinted",
+              "name": "gm-color-warning-surface-tinted",
+              "variant": "tinted",
+              "ref": "orange.100",
+              "refName": "gm-orange-100",
+              "value": "#F8E5C9"
+            },
+            {
+              "path": "warning.surface-hover",
+              "name": "gm-color-warning-surface-hover",
+              "variant": "hover",
+              "ref": "orange.100",
+              "refName": "gm-orange-100",
+              "value": "#F8E5C9"
+            },
+            {
+              "path": "warning.surface-active",
+              "name": "gm-color-warning-surface-active",
+              "variant": "active",
+              "ref": "orange.100",
+              "refName": "gm-orange-100",
+              "value": "#F8E5C9"
+            }
+          ]
         },
         {
-          "path": "warning.surface-tinted",
-          "name": "gm-color-warning-surface-tinted",
-          "group": "surface",
-          "variant": "tinted",
-          "ref": "orange.100",
-          "refName": "gm-orange-100",
-          "value": "#F8E5C9"
-        },
-        {
-          "path": "warning.surface-hover",
-          "name": "gm-color-warning-surface-hover",
-          "group": "surface",
-          "variant": "hover",
-          "ref": "orange.100",
-          "refName": "gm-orange-100",
-          "value": "#F8E5C9"
-        },
-        {
-          "path": "warning.surface-active",
-          "name": "gm-color-warning-surface-active",
-          "group": "surface",
-          "variant": "active",
-          "ref": "orange.100",
-          "refName": "gm-orange-100",
-          "value": "#F8E5C9"
-        },
-        {
-          "path": "warning.border-subtle",
-          "name": "gm-color-warning-border-subtle",
           "group": "border",
-          "variant": "subtle",
-          "ref": "orange.100",
-          "refName": "gm-orange-100",
-          "value": "#F8E5C9"
+          "tokens": [
+            {
+              "path": "warning.border-subtle",
+              "name": "gm-color-warning-border-subtle",
+              "variant": "subtle",
+              "ref": "orange.100",
+              "refName": "gm-orange-100",
+              "value": "#F8E5C9"
+            },
+            {
+              "path": "warning.border-default",
+              "name": "gm-color-warning-border-default",
+              "variant": "default",
+              "ref": "orange.700",
+              "refName": "gm-orange-700",
+              "value": "#AC7C37"
+            },
+            {
+              "path": "warning.border-strong",
+              "name": "gm-color-warning-border-strong",
+              "variant": "strong",
+              "ref": "orange.700",
+              "refName": "gm-orange-700",
+              "value": "#AC7C37"
+            }
+          ]
         },
         {
-          "path": "warning.border-default",
-          "name": "gm-color-warning-border-default",
-          "group": "border",
-          "variant": "default",
-          "ref": "orange.700",
-          "refName": "gm-orange-700",
-          "value": "#AC7C37"
-        },
-        {
-          "path": "warning.border-strong",
-          "name": "gm-color-warning-border-strong",
-          "group": "border",
-          "variant": "strong",
-          "ref": "orange.700",
-          "refName": "gm-orange-700",
-          "value": "#AC7C37"
-        },
-        {
-          "path": "warning.text-subtle",
-          "name": "gm-color-warning-text-subtle",
           "group": "text",
-          "variant": "subtle",
-          "ref": "orange.700",
-          "refName": "gm-orange-700",
-          "value": "#AC7C37"
+          "tokens": [
+            {
+              "path": "warning.text-subtle",
+              "name": "gm-color-warning-text-subtle",
+              "variant": "subtle",
+              "ref": "orange.700",
+              "refName": "gm-orange-700",
+              "value": "#AC7C37"
+            },
+            {
+              "path": "warning.text-default",
+              "name": "gm-color-warning-text-default",
+              "variant": "default",
+              "ref": "gray.900",
+              "refName": "gm-gray-900",
+              "value": "#333333"
+            }
+          ]
         },
         {
-          "path": "warning.text-default",
-          "name": "gm-color-warning-text-default",
-          "group": "text",
-          "variant": "default",
-          "ref": "gray.900",
-          "refName": "gm-gray-900",
-          "value": "#333333"
-        },
-        {
-          "path": "warning.base-default",
-          "name": "gm-color-warning-base-default",
           "group": "base",
-          "variant": "default",
-          "ref": "orange.500",
-          "refName": "gm-orange-500",
-          "value": "#E8A74A"
-        },
-        {
-          "path": "warning.base-hover",
-          "name": "gm-color-warning-base-hover",
-          "group": "base",
-          "variant": "hover",
-          "ref": "orange.600",
-          "refName": "gm-orange-600",
-          "value": "#C89040"
-        },
-        {
-          "path": "warning.base-active",
-          "name": "gm-color-warning-base-active",
-          "group": "base",
-          "variant": "active",
-          "ref": "orange.700",
-          "refName": "gm-orange-700",
-          "value": "#AC7C37"
-        },
-        {
-          "path": "warning.base-contrast-subtle",
-          "name": "gm-color-warning-base-contrast-subtle",
-          "group": "base",
-          "variant": "contrast-subtle",
-          "ref": "gray.900",
-          "refName": "gm-gray-900",
-          "value": "#333333"
-        },
-        {
-          "path": "warning.base-contrast-default",
-          "name": "gm-color-warning-base-contrast-default",
-          "group": "base",
-          "variant": "contrast-default",
-          "ref": "gray.900",
-          "refName": "gm-gray-900",
-          "value": "#333333"
+          "tokens": [
+            {
+              "path": "warning.base-default",
+              "name": "gm-color-warning-base-default",
+              "variant": "default",
+              "ref": "orange.500",
+              "refName": "gm-orange-500",
+              "value": "#E8A74A"
+            },
+            {
+              "path": "warning.base-hover",
+              "name": "gm-color-warning-base-hover",
+              "variant": "hover",
+              "ref": "orange.600",
+              "refName": "gm-orange-600",
+              "value": "#C89040"
+            },
+            {
+              "path": "warning.base-active",
+              "name": "gm-color-warning-base-active",
+              "variant": "active",
+              "ref": "orange.700",
+              "refName": "gm-orange-700",
+              "value": "#AC7C37"
+            },
+            {
+              "path": "warning.base-contrast-subtle",
+              "name": "gm-color-warning-base-contrast-subtle",
+              "variant": "contrast-subtle",
+              "ref": "gray.900",
+              "refName": "gm-gray-900",
+              "value": "#333333"
+            },
+            {
+              "path": "warning.base-contrast-default",
+              "name": "gm-color-warning-base-contrast-default",
+              "variant": "contrast-default",
+              "ref": "gray.900",
+              "refName": "gm-gray-900",
+              "value": "#333333"
+            }
+          ]
         }
       ]
     },
     {
       "role": "info",
-      "tokens": [
+      "groups": [
         {
-          "path": "info.background-default",
-          "name": "gm-color-info-background-default",
           "group": "background",
-          "variant": "default",
-          "ref": "white",
-          "refName": "gm-white",
-          "value": "#FFFFFF"
+          "tokens": [
+            {
+              "path": "info.background-default",
+              "name": "gm-color-info-background-default",
+              "variant": "default",
+              "ref": "white",
+              "refName": "gm-white",
+              "value": "#FFFFFF"
+            },
+            {
+              "path": "info.background-tinted",
+              "name": "gm-color-info-background-tinted",
+              "variant": "tinted",
+              "ref": "sky.100",
+              "refName": "gm-sky-100",
+              "value": "#EBF5F9"
+            }
+          ]
         },
         {
-          "path": "info.background-tinted",
-          "name": "gm-color-info-background-tinted",
-          "group": "background",
-          "variant": "tinted",
-          "ref": "sky.100",
-          "refName": "gm-sky-100",
-          "value": "#EBF5F9"
-        },
-        {
-          "path": "info.surface-default",
-          "name": "gm-color-info-surface-default",
           "group": "surface",
-          "variant": "default",
-          "ref": "white",
-          "refName": "gm-white",
-          "value": "#FFFFFF"
+          "tokens": [
+            {
+              "path": "info.surface-default",
+              "name": "gm-color-info-surface-default",
+              "variant": "default",
+              "ref": "white",
+              "refName": "gm-white",
+              "value": "#FFFFFF"
+            },
+            {
+              "path": "info.surface-tinted",
+              "name": "gm-color-info-surface-tinted",
+              "variant": "tinted",
+              "ref": "sky.100",
+              "refName": "gm-sky-100",
+              "value": "#EBF5F9"
+            },
+            {
+              "path": "info.surface-hover",
+              "name": "gm-color-info-surface-hover",
+              "variant": "hover",
+              "ref": "sky.200",
+              "refName": "gm-sky-200",
+              "value": "#DEEFF5"
+            },
+            {
+              "path": "info.surface-active",
+              "name": "gm-color-info-surface-active",
+              "variant": "active",
+              "ref": "sky.250",
+              "refName": "gm-sky-250",
+              "value": "#CBE5F0"
+            }
+          ]
         },
         {
-          "path": "info.surface-tinted",
-          "name": "gm-color-info-surface-tinted",
-          "group": "surface",
-          "variant": "tinted",
-          "ref": "sky.100",
-          "refName": "gm-sky-100",
-          "value": "#EBF5F9"
-        },
-        {
-          "path": "info.surface-hover",
-          "name": "gm-color-info-surface-hover",
-          "group": "surface",
-          "variant": "hover",
-          "ref": "sky.200",
-          "refName": "gm-sky-200",
-          "value": "#DEEFF5"
-        },
-        {
-          "path": "info.surface-active",
-          "name": "gm-color-info-surface-active",
-          "group": "surface",
-          "variant": "active",
-          "ref": "sky.250",
-          "refName": "gm-sky-250",
-          "value": "#CBE5F0"
-        },
-        {
-          "path": "info.border-subtle",
-          "name": "gm-color-info-border-subtle",
           "group": "border",
-          "variant": "subtle",
-          "ref": "sky.300",
-          "refName": "gm-sky-300",
-          "value": "#BEDFEC"
+          "tokens": [
+            {
+              "path": "info.border-subtle",
+              "name": "gm-color-info-border-subtle",
+              "variant": "subtle",
+              "ref": "sky.300",
+              "refName": "gm-sky-300",
+              "value": "#BEDFEC"
+            },
+            {
+              "path": "info.border-default",
+              "name": "gm-color-info-border-default",
+              "variant": "default",
+              "ref": "blue.500",
+              "refName": "gm-blue-500",
+              "value": "#0047BA"
+            },
+            {
+              "path": "info.border-strong",
+              "name": "gm-color-info-border-strong",
+              "variant": "strong",
+              "ref": "blue.700",
+              "refName": "gm-blue-700",
+              "value": "#003DA0"
+            }
+          ]
         },
         {
-          "path": "info.border-default",
-          "name": "gm-color-info-border-default",
-          "group": "border",
-          "variant": "default",
-          "ref": "blue.500",
-          "refName": "gm-blue-500",
-          "value": "#0047BA"
-        },
-        {
-          "path": "info.border-strong",
-          "name": "gm-color-info-border-strong",
-          "group": "border",
-          "variant": "strong",
-          "ref": "blue.700",
-          "refName": "gm-blue-700",
-          "value": "#003DA0"
-        },
-        {
-          "path": "info.text-subtle",
-          "name": "gm-color-info-text-subtle",
           "group": "text",
-          "variant": "subtle",
-          "ref": "blue.700",
-          "refName": "gm-blue-700",
-          "value": "#003DA0"
+          "tokens": [
+            {
+              "path": "info.text-subtle",
+              "name": "gm-color-info-text-subtle",
+              "variant": "subtle",
+              "ref": "blue.700",
+              "refName": "gm-blue-700",
+              "value": "#003DA0"
+            },
+            {
+              "path": "info.text-default",
+              "name": "gm-color-info-text-default",
+              "variant": "default",
+              "ref": "blue.900",
+              "refName": "gm-blue-900",
+              "value": "#002169"
+            }
+          ]
         },
         {
-          "path": "info.text-default",
-          "name": "gm-color-info-text-default",
-          "group": "text",
-          "variant": "default",
-          "ref": "blue.900",
-          "refName": "gm-blue-900",
-          "value": "#002169"
-        },
-        {
-          "path": "info.base-default",
-          "name": "gm-color-info-base-default",
           "group": "base",
-          "variant": "default",
-          "ref": "blue.500",
-          "refName": "gm-blue-500",
-          "value": "#0047BA"
-        },
-        {
-          "path": "info.base-hover",
-          "name": "gm-color-info-base-hover",
-          "group": "base",
-          "variant": "hover",
-          "ref": "blue.700",
-          "refName": "gm-blue-700",
-          "value": "#003DA0"
-        },
-        {
-          "path": "info.base-active",
-          "name": "gm-color-info-base-active",
-          "group": "base",
-          "variant": "active",
-          "ref": "blue.800",
-          "refName": "gm-blue-800",
-          "value": "#00358A"
-        },
-        {
-          "path": "info.base-contrast-subtle",
-          "name": "gm-color-info-base-contrast-subtle",
-          "group": "base",
-          "variant": "contrast-subtle",
-          "ref": "sky.200",
-          "refName": "gm-sky-200",
-          "value": "#DEEFF5"
-        },
-        {
-          "path": "info.base-contrast-default",
-          "name": "gm-color-info-base-contrast-default",
-          "group": "base",
-          "variant": "contrast-default",
-          "ref": "white",
-          "refName": "gm-white",
-          "value": "#FFFFFF"
+          "tokens": [
+            {
+              "path": "info.base-default",
+              "name": "gm-color-info-base-default",
+              "variant": "default",
+              "ref": "blue.500",
+              "refName": "gm-blue-500",
+              "value": "#0047BA"
+            },
+            {
+              "path": "info.base-hover",
+              "name": "gm-color-info-base-hover",
+              "variant": "hover",
+              "ref": "blue.700",
+              "refName": "gm-blue-700",
+              "value": "#003DA0"
+            },
+            {
+              "path": "info.base-active",
+              "name": "gm-color-info-base-active",
+              "variant": "active",
+              "ref": "blue.800",
+              "refName": "gm-blue-800",
+              "value": "#00358A"
+            },
+            {
+              "path": "info.base-contrast-subtle",
+              "name": "gm-color-info-base-contrast-subtle",
+              "variant": "contrast-subtle",
+              "ref": "sky.200",
+              "refName": "gm-sky-200",
+              "value": "#DEEFF5"
+            },
+            {
+              "path": "info.base-contrast-default",
+              "name": "gm-color-info-base-contrast-default",
+              "variant": "contrast-default",
+              "ref": "white",
+              "refName": "gm-white",
+              "value": "#FFFFFF"
+            }
+          ]
         }
       ]
     }

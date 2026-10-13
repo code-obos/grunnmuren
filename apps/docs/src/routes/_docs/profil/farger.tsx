@@ -63,9 +63,11 @@ const utilityFor = (shortName: string, colorName: string) => {
  */
 const resolveRole = (token: RoleToken, overrides: Overrides) => {
   const own = overrides[token.name];
-  return own
-    ? { value: own, setByTheme: true }
-    : { value: overrides[token.refName] ?? token.value, setByTheme: false };
+  if (own) {
+    return { value: own, setByTheme: true };
+  }
+  const primitive = token.refName ? overrides[token.refName] : undefined;
+  return { value: primitive ?? token.value, setByTheme: false };
 };
 
 type SwatchProps = {
@@ -77,11 +79,19 @@ type SwatchProps = {
   value: string;
   /** The theme sets the token itself, so it no longer points at `pointsAt` */
   setByTheme?: boolean;
+  /**
+   * What the swatch is painted with. The variable by default, so it shows what components
+   * get from the cascade even if the label's value drifts from the CSS.
+   */
+  fill?: string;
 };
 
-const Swatch = ({ name, utility, pointsAt, value, setByTheme }: SwatchProps) => (
+const Swatch = ({ name, utility, pointsAt, value, setByTheme, fill }: SwatchProps) => (
   <div className="grid content-start gap-2">
-    <div className="h-14 rounded-lg border border-black/15" style={{ backgroundColor: value }} />
+    <div
+      className="h-14 rounded-lg border border-black/15"
+      style={{ backgroundColor: fill ?? `var(--${name})` }}
+    />
     <div className="grid justify-items-start text-sm">
       {utility && <CopyButton text={utility} label={`Kopier utility ${utility}`} />}
       <CopyButton text={`--${name}`} label={`Kopier variabelnavn --${name}`} />
@@ -101,11 +111,11 @@ const SwatchGrid = ({ children }: { children: React.ReactNode }) => (
 
 const RoleSection = ({
   role,
-  tokens,
+  groups,
   overrides,
 }: {
   role: string;
-  tokens: Array<RoleToken>;
+  groups: Array<{ group: string; tokens: Array<RoleToken> }>;
   overrides: Overrides;
 }) => (
   <section className="grid gap-6">
@@ -115,12 +125,12 @@ const RoleSection = ({
       </AnchorHeading>
       <p>{ROLE_DESCRIPTIONS[role]}</p>
     </div>
-    {[...Map.groupBy(tokens, (token) => token.group)].map(([group, members]) => (
+    {groups.map(({ group, tokens }) => (
       <div key={group} className="grid gap-3">
         <h3 className="heading-xs">{group}</h3>
         <SwatchGrid>
-          {members.map((token) => {
-            const shortName = `${token.group}-${token.variant}`;
+          {tokens.map((token) => {
+            const shortName = `${group}-${token.variant}`;
             return (
               <Swatch
                 key={token.name}
@@ -180,8 +190,8 @@ const Roles = () => {
         data-theme={theme}
         className="bg-background-default text-text-default grid gap-16 rounded-xl border border-black/15 p-6"
       >
-        {tokenColors.roles.map(({ role, tokens }) => (
-          <RoleSection key={role} role={role} tokens={tokens} overrides={overrides} />
+        {tokenColors.roles.map(({ role, groups }) => (
+          <RoleSection key={role} role={role} groups={groups} overrides={overrides} />
         ))}
 
         {primary && (
@@ -197,9 +207,9 @@ const Roles = () => {
             </div>
             <SwatchGrid>
               {tokenColors.shortTokens.flatMap((shortName) => {
-                const token = primary.tokens.find(
-                  ({ group, variant }) => `${group}-${variant}` === shortName,
-                );
+                const token = primary.groups
+                  .flatMap(({ tokens }) => tokens)
+                  .find(({ name }) => name === `gm-color-primary-${shortName}`);
                 // A short token always points at the role, whatever the theme sets on it
                 return token
                   ? [
@@ -260,7 +270,15 @@ const Palette = () => (
       </div>
       <SwatchGrid>
         {Object.entries(legacyColors).map(([name, value]) => (
-          <Swatch key={name} name={`color-${name}`} utility={`bg-${name}`} value={value} />
+          // Tailwind only emits the legacy `--color-*` something uses, so these are painted
+          // with the value instead of the variable
+          <Swatch
+            key={name}
+            name={`color-${name}`}
+            utility={`bg-${name}`}
+            value={value}
+            fill={value}
+          />
         ))}
       </SwatchGrid>
     </section>
@@ -284,7 +302,9 @@ function RouteComponent() {
   // can't scroll to a heading in it. Open the heading's tab first, then scroll once it shows.
   useEffect(() => {
     const target = TAB_FOR_ANCHOR[hash];
-    if (!target || scrolledTo.current === hash) return;
+    if (!target || scrolledTo.current === hash) {
+      return;
+    }
     if (target !== tab) {
       setTab(target);
       return;
