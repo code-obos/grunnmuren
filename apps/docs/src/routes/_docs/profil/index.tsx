@@ -24,6 +24,12 @@ function Page() {
         </Card>
         <Card variant="outlined">
           <Heading level={2}>
+            <CardLink href="/profil/temaer">Temaer</CardLink>
+          </Heading>
+          Lag et tema med dine egne farger
+        </Card>
+        <Card variant="outlined">
+          <Heading level={2}>
             <CardLink href="/profil/ikoner">Ikoner</CardLink>
           </Heading>
           Utforsk ikonsettet vårt

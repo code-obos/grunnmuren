@@ -139,7 +139,7 @@ const preview: Preview = {
       description: 'Value of `data-color` on the preview document',
       toolbar: {
         icon: 'contrast',
-        items: ['default', 'primary', 'accent', 'neutral'],
+        items: ['default', 'primary', 'accent', 'neutral', 'success', 'danger', 'warning', 'info'],
         dynamicTitle: true,
       },
     },

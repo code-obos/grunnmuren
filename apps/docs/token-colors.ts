@@ -1,4 +1,5 @@
-import json from '../../packages/tailwind/tokens/colors.json';
+import json from '@obosbbl/grunnmuren-tailwind/colors.json';
+
 import themeJson from '../../packages/tailwind/tokens/themes/colors.json';
 
 export type RoleToken = {

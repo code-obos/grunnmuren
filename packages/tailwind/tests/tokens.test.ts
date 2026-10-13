@@ -3,8 +3,10 @@ import { resolve } from 'node:path';
 
 import { describe, expect, test } from 'vitest';
 
+import colors from '../tokens/colors.json' with { type: 'json' };
 import {
   findBrokenTokenReferences,
+  loadDataColorCustomProperties,
   loadRootCustomProperties,
   formatDeclarations,
   getGrunnmurenTokens,
@@ -105,6 +107,21 @@ describe('theme seam', () => {
       await declarationsFor(`bg-primary-${name}`),
     );
   });
+
+  // A component written against the short tokens takes the colour of whichever role it
+  // sits in, the status roles too. A short token missing from a role would quietly keep
+  // primary's colour.
+  test.for(colors.roles.map(({ role }) => role))(
+    'data-color="%s" points every short token at the role',
+    async (role) => {
+      const dataColor = await loadDataColorCustomProperties(role);
+      for (const name of shortColors) {
+        expect(await resolveToken(`--gm-color-${name}`, dataColor)).toBe(
+          await resolveToken(`--gm-color-${role}-${name}`),
+        );
+      }
+    },
+  );
 
   // The contrast run checks every theme, which proves nothing if the theme never got
   // as far as the roles. The short tokens are worked out from the roles on the same

@@ -6,18 +6,26 @@
   "repository": {
     "url": "https://github.com/code-obos/grunnmuren"
   },
+  "bin": {
+    "grunnmuren-theme": "./theme/cli.mjs"
+  },
   "files": [
     "tailwind-base.css",
     "tailwind-typography.css",
     "font.css",
+    "theme",
     "tokens",
     "!tokens/source",
-    "!tokens/themes",
-    "!tokens/colors.json"
+    "!tokens/themes"
   ],
   "type": "commonjs",
   "exports": {
-    ".": "./tailwind-base.css"
+    ".": "./tailwind-base.css",
+    "./colors.json": "./tokens/colors.json",
+    "./theme": {
+      "types": "./theme/index.d.mts",
+      "default": "./theme/index.mjs"
+    }
   },
   "scripts": {
     "font-fallback": "bun --cwd=./fonts ./generate-font-fallback.ts"

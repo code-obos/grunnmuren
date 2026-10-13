@@ -1,0 +1,15 @@
+---
+'@obosbbl/grunnmuren-tailwind': minor
+---
+
+New `grunnmuren-theme` CLI, which builds a theme's colours from a JSON file with Grunnmuren's token names. A typo in a hand-written custom property silently does nothing and nobody checks a theme's contrast, so it fails on unknown tokens, invalid colours and circular references, and warns about contrast below WCAG 2.2 AA, using the same pairs as Grunnmuren's own roles wherever the theme changes a colour. `--strict` fails on contrast too, and then writes no CSS.
+
+```sh
+npx grunnmuren-theme my-project.json --out my-project.css
+```
+
+It reads Designsystemet's token paths (`color.primary.base-default`) too.
+
+`data-color` takes every role now, `success`, `danger`, `warning` and `info` too, like it does in Designsystemet.
+
+The same check is exported as `buildTheme` from `@obosbbl/grunnmuren-tailwind/theme`, which is also what the theme guide in the docs runs on. The colour tokens are exported as data from `@obosbbl/grunnmuren-tailwind/colors.json`.

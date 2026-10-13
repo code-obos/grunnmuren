@@ -119,8 +119,8 @@
 
 /*
  * The short tokens point at whichever role `data-color` picks, so a component can be
- * written once against `base-default` and be primary, accent or neutral depending on
- * where it sits. Primary without the attribute. A [data-theme] starts over at primary
+ * written once against `base-default` and take the colour of whichever role it sits
+ * in. Primary without the attribute. A [data-theme] starts over at primary
  * too, since it has to work the short tokens out again from its own roles.
  */
 :where(:root, [data-theme], [data-color="primary"]) {
@@ -178,4 +178,80 @@
   --gm-color-base-active: var(--gm-color-neutral-base-active);
   --gm-color-base-contrast-subtle: var(--gm-color-neutral-base-contrast-subtle);
   --gm-color-base-contrast-default: var(--gm-color-neutral-base-contrast-default);
+}
+
+[data-color="success"] {
+  --gm-color-background-default: var(--gm-color-success-background-default);
+  --gm-color-background-tinted: var(--gm-color-success-background-tinted);
+  --gm-color-surface-default: var(--gm-color-success-surface-default);
+  --gm-color-surface-tinted: var(--gm-color-success-surface-tinted);
+  --gm-color-surface-hover: var(--gm-color-success-surface-hover);
+  --gm-color-surface-active: var(--gm-color-success-surface-active);
+  --gm-color-border-subtle: var(--gm-color-success-border-subtle);
+  --gm-color-border-default: var(--gm-color-success-border-default);
+  --gm-color-border-strong: var(--gm-color-success-border-strong);
+  --gm-color-text-subtle: var(--gm-color-success-text-subtle);
+  --gm-color-text-default: var(--gm-color-success-text-default);
+  --gm-color-base-default: var(--gm-color-success-base-default);
+  --gm-color-base-hover: var(--gm-color-success-base-hover);
+  --gm-color-base-active: var(--gm-color-success-base-active);
+  --gm-color-base-contrast-subtle: var(--gm-color-success-base-contrast-subtle);
+  --gm-color-base-contrast-default: var(--gm-color-success-base-contrast-default);
+}
+
+[data-color="danger"] {
+  --gm-color-background-default: var(--gm-color-danger-background-default);
+  --gm-color-background-tinted: var(--gm-color-danger-background-tinted);
+  --gm-color-surface-default: var(--gm-color-danger-surface-default);
+  --gm-color-surface-tinted: var(--gm-color-danger-surface-tinted);
+  --gm-color-surface-hover: var(--gm-color-danger-surface-hover);
+  --gm-color-surface-active: var(--gm-color-danger-surface-active);
+  --gm-color-border-subtle: var(--gm-color-danger-border-subtle);
+  --gm-color-border-default: var(--gm-color-danger-border-default);
+  --gm-color-border-strong: var(--gm-color-danger-border-strong);
+  --gm-color-text-subtle: var(--gm-color-danger-text-subtle);
+  --gm-color-text-default: var(--gm-color-danger-text-default);
+  --gm-color-base-default: var(--gm-color-danger-base-default);
+  --gm-color-base-hover: var(--gm-color-danger-base-hover);
+  --gm-color-base-active: var(--gm-color-danger-base-active);
+  --gm-color-base-contrast-subtle: var(--gm-color-danger-base-contrast-subtle);
+  --gm-color-base-contrast-default: var(--gm-color-danger-base-contrast-default);
+}
+
+[data-color="warning"] {
+  --gm-color-background-default: var(--gm-color-warning-background-default);
+  --gm-color-background-tinted: var(--gm-color-warning-background-tinted);
+  --gm-color-surface-default: var(--gm-color-warning-surface-default);
+  --gm-color-surface-tinted: var(--gm-color-warning-surface-tinted);
+  --gm-color-surface-hover: var(--gm-color-warning-surface-hover);
+  --gm-color-surface-active: var(--gm-color-warning-surface-active);
+  --gm-color-border-subtle: var(--gm-color-warning-border-subtle);
+  --gm-color-border-default: var(--gm-color-warning-border-default);
+  --gm-color-border-strong: var(--gm-color-warning-border-strong);
+  --gm-color-text-subtle: var(--gm-color-warning-text-subtle);
+  --gm-color-text-default: var(--gm-color-warning-text-default);
+  --gm-color-base-default: var(--gm-color-warning-base-default);
+  --gm-color-base-hover: var(--gm-color-warning-base-hover);
+  --gm-color-base-active: var(--gm-color-warning-base-active);
+  --gm-color-base-contrast-subtle: var(--gm-color-warning-base-contrast-subtle);
+  --gm-color-base-contrast-default: var(--gm-color-warning-base-contrast-default);
+}
+
+[data-color="info"] {
+  --gm-color-background-default: var(--gm-color-info-background-default);
+  --gm-color-background-tinted: var(--gm-color-info-background-tinted);
+  --gm-color-surface-default: var(--gm-color-info-surface-default);
+  --gm-color-surface-tinted: var(--gm-color-info-surface-tinted);
+  --gm-color-surface-hover: var(--gm-color-info-surface-hover);
+  --gm-color-surface-active: var(--gm-color-info-surface-active);
+  --gm-color-border-subtle: var(--gm-color-info-border-subtle);
+  --gm-color-border-default: var(--gm-color-info-border-default);
+  --gm-color-border-strong: var(--gm-color-info-border-strong);
+  --gm-color-text-subtle: var(--gm-color-info-text-subtle);
+  --gm-color-text-default: var(--gm-color-info-text-default);
+  --gm-color-base-default: var(--gm-color-info-base-default);
+  --gm-color-base-hover: var(--gm-color-info-base-hover);
+  --gm-color-base-active: var(--gm-color-info-base-active);
+  --gm-color-base-contrast-subtle: var(--gm-color-info-base-contrast-subtle);
+  --gm-color-base-contrast-default: var(--gm-color-info-base-contrast-default);
 }
