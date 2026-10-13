@@ -21,6 +21,7 @@ Options:
 
 The tokens are named like Grunnmuren's, nested by role or colour family:
   { "primary": { "base-default": "#2d3a26", "base-hover": "{primary.base-active}" } }
+Designsystemet's paths, like color.primary.base-default, work too.
 
 Guide: https://grunnmuren.obos.no/profil/temaer
 `;

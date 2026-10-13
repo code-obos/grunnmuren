@@ -75,6 +75,43 @@ describe('buildTheme', () => {
     expect(errors[0]?.suggestion).toBe('primary.base-default');
   });
 
+  test("Designsystemet's paths, with color. in front, are the same tokens", () => {
+    const { css, errors } = build({
+      color: {
+        primary: { 'base-default': '#2d3a26', 'base-hover': '{color.primary.base-active}' },
+      },
+    });
+
+    expect(errors).toEqual([]);
+    expect(css).toContain('--gm-color-primary-base-default: #2d3a26;');
+    expect(css).toContain('--gm-color-primary-base-hover: var(--gm-color-primary-base-active);');
+  });
+
+  test('a token set twice is an error', () => {
+    const { errors } = build({
+      primary: { 'base-default': '#2d3a26' },
+      color: { primary: { 'base-default': '#ffffff' } },
+    });
+    expect(errors).toEqual([
+      expect.objectContaining({ code: 'duplicate-token', path: 'color.primary.base-default' }),
+    ]);
+  });
+
+  test("Designsystemet's { light } is read as the colour", () => {
+    const { css, errors } = build({ primary: { 'base-default': { light: '#2d3a26' } } });
+    expect(errors).toEqual([]);
+    expect(css).toContain('--gm-color-primary-base-default: #2d3a26;');
+  });
+
+  test('a dark value is an error, since there is no dark mode yet', () => {
+    const { errors } = build({
+      primary: { 'base-default': { light: '#2d3a26', dark: '#dcd6c4' } },
+    });
+    expect(errors).toEqual([
+      expect.objectContaining({ code: 'color-scheme', path: 'primary.base-default' }),
+    ]);
+  });
+
   test.for([
     ['rgb(0, 0, 0)', 21],
     ['rgba(0, 0, 0, 0.5)', 3.98],

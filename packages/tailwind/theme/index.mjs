@@ -59,6 +59,8 @@ const DEFAULT_COLORS = new Map(
 );
 
 const REFERENCE = /^\{([^{}]+)\}$/;
+// Designsystemet calls a role token `color.primary.base-default`
+const DESIGNSYSTEMET_PREFIX = 'color.';
 const THEME_NAME = /^[\w-]+$/;
 // `data-theme="default"` is what puts Grunnmuren's own values back
 const RESERVED_THEME_NAME = 'default';
@@ -79,6 +81,27 @@ export const toThemeName = (input) =>
 
 /** @param {unknown} value @returns {value is Record<string, unknown>} */
 const isRecord = (value) => typeof value === 'object' && value !== null && !Array.isArray(value);
+
+/**
+ * Designsystemet's `{ light, dark }`, a colour for each colour scheme.
+ * @param {unknown} value
+ * @returns {value is { light?: unknown; dark?: unknown }}
+ */
+const isSchemeValue = (value) =>
+  isRecord(value) &&
+  Object.keys(value).length > 0 &&
+  Object.keys(value).every((key) => key === 'light' || key === 'dark');
+
+/**
+ * The token a path in the file means, so Designsystemet's paths read as ours.
+ * @param {string} path
+ */
+const toTokenPath = (path) => {
+  const unprefixed = path.startsWith(DESIGNSYSTEMET_PREFIX)
+    ? path.slice(DESIGNSYSTEMET_PREFIX.length)
+    : path;
+  return !TOKENS.has(path) && TOKENS.has(unprefixed) ? unprefixed : path;
+};
 
 /** @param {string} a @param {string} b */
 const editDistance = (a, b) => {
@@ -127,7 +150,7 @@ const didYouMean = (message, suggestion) =>
  * @param {unknown} token
  */
 const rawValue = (token) => {
-  const value = isRecord(token) ? token.$value : token;
+  const value = isRecord(token) && '$value' in token ? token.$value : token;
   if (!isRecord(value) || typeof value.hex !== 'string') return value;
   if (typeof value.alpha !== 'number' || value.alpha >= 1) return value.hex;
   return `${value.hex}${Math.round(value.alpha * 255)
@@ -137,7 +160,7 @@ const rawValue = (token) => {
 
 /**
  * Every token in a group as `[path, token]`. `$` keys are DTCG metadata, and an object
- * with a `$value` is a token rather than a group.
+ * with a `$value`, or with `light` and `dark`, is a token rather than a group.
  * @param {Record<string, unknown>} group
  * @param {string} [prefix]
  * @returns {Array<[string, unknown]>}
@@ -146,16 +169,18 @@ const flatten = (group, prefix) =>
   Object.entries(group).flatMap(([key, token]) => {
     if (key.startsWith('$')) return [];
     const path = prefix ? `${prefix}.${key}` : key;
-    return isRecord(token) && !('$value' in token) ? flatten(token, path) : [[path, token]];
+    return isRecord(token) && !('$value' in token) && !isSchemeValue(token)
+      ? flatten(token, path)
+      : [[path, token]];
   });
 
 /**
- * @param {string} path
+ * @param {string} path The path in the file, which issues are reported by
  * @param {unknown} token
  * @returns {TokenValue | ThemeIssue}
  */
 const parseToken = (path, token) => {
-  if (!TOKENS.has(path)) {
+  if (!TOKENS.has(toTokenPath(path))) {
     const suggestion = suggest(path);
     return {
       code: 'unknown-token',
@@ -166,6 +191,16 @@ const parseToken = (path, token) => {
   }
 
   const value = rawValue(token);
+  if (isSchemeValue(value)) {
+    if ('dark' in value) {
+      return {
+        code: 'color-scheme',
+        path,
+        message: `"${path}" has a dark colour, but Grunnmuren has no dark mode yet. Leave out "dark", "light" is used as it is`,
+      };
+    }
+    return parseToken(path, value.light);
+  }
   if (typeof value !== 'string') {
     return {
       code: 'invalid-value',
@@ -184,7 +219,7 @@ const parseToken = (path, token) => {
     };
   }
 
-  if (TOKENS.has(reference)) return { ref: reference };
+  if (TOKENS.has(toTokenPath(reference))) return { ref: toTokenPath(reference) };
   const suggestion = suggest(reference) && `{${suggest(reference)}}`;
   return {
     code: 'unresolved-reference',
@@ -237,12 +272,29 @@ export const buildTheme = (input, { name }) => {
 
   /** @type {Map<string, TokenValue>} */
   const theme = new Map();
+  /** Where in the file each token is set, by its path @type {Map<string, string>} */
+  const setAt = new Map();
   /** @type {Array<ThemeIssue>} */
   const errors = [];
-  for (const [path, token] of flatten(input)) {
-    const parsed = parseToken(path, token);
-    if ('code' in parsed) errors.push(parsed);
-    else theme.set(path, parsed);
+  for (const [filePath, token] of flatten(input)) {
+    const parsed = parseToken(filePath, token);
+    if ('code' in parsed) {
+      errors.push(parsed);
+      continue;
+    }
+
+    const path = toTokenPath(filePath);
+    const earlier = setAt.get(path);
+    if (earlier) {
+      errors.push({
+        code: 'duplicate-token',
+        path: filePath,
+        message: `"${filePath}" and "${earlier}" are the same token. Set it once`,
+      });
+      continue;
+    }
+    setAt.set(path, filePath);
+    theme.set(path, parsed);
   }
 
   const resolve = resolveIn(theme);
