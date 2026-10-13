@@ -45,6 +45,14 @@ const DEFAULT_VIOLATIONS = [
   '--gm-color-warning-text-subtle on --gm-color-warning-background-tinted',
   '--gm-color-warning-text-subtle on --gm-color-warning-surface-default',
   '--gm-color-warning-text-subtle on --gm-color-warning-surface-tinted',
+  // Found when hover and active surfaces and base-contrast-subtle joined the pairs, to
+  // match what Designsystemet promises. orange-700 on orange-100, 2.99:1
+  '--gm-color-warning-text-subtle on --gm-color-warning-surface-hover',
+  '--gm-color-warning-text-subtle on --gm-color-warning-surface-active',
+  // mint-200 on green-500, 4.03:1
+  '--gm-color-success-base-contrast-subtle on --gm-color-success-base-default',
+  // Coal on orange-700, 3.42:1, like base-contrast-default above
+  '--gm-color-warning-base-contrast-subtle on --gm-color-warning-base-active',
 ];
 
 /**
@@ -56,6 +64,12 @@ const THEME_VIOLATIONS: Record<string, Array<string>> = {
     // beige-900 on beige-300, 3.64:1. Muted text on their section colour, which the
     // design team's own file says not to do
     '--gm-color-neutral-text-subtle on --gm-color-neutral-background-tinted',
+    // The same beige-900 on beige-300, as the pressed surface, 3.64:1
+    '--gm-color-neutral-text-subtle on --gm-color-neutral-surface-active',
+    '--gm-color-primary-text-subtle on --gm-color-primary-surface-active',
+    // Brown on beige-100 hovered, 4.22:1, and on beige-200 pressed, 3.49:1
+    '--gm-color-accent-text-default on --gm-color-accent-surface-hover',
+    '--gm-color-accent-text-default on --gm-color-accent-surface-active',
   ],
 };
 

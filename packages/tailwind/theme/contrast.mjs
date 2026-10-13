@@ -12,12 +12,21 @@ const CONTRAST_RULES = [
     name: 'text on surface',
     minimum: 4.5,
     foregrounds: ['text-default', 'text-subtle'],
-    backgrounds: ['background-default', 'background-tinted', 'surface-default', 'surface-tinted'],
+    // Hover and active too, since a row or a card stays readable while you point at it
+    backgrounds: [
+      'background-default',
+      'background-tinted',
+      'surface-default',
+      'surface-tinted',
+      'surface-hover',
+      'surface-active',
+    ],
   },
   {
     name: 'text in button',
     minimum: 4.5,
-    foregrounds: ['base-contrast-default'],
+    // Subtle too, which Designsystemet also holds to 4.5:1 on the base colours
+    foregrounds: ['base-contrast-default', 'base-contrast-subtle'],
     backgrounds: ['base-default', 'base-hover', 'base-active'],
   },
   // WCAG 2.2 AA 1.4.11
