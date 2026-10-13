@@ -168,8 +168,10 @@ describe('buildTheme', () => {
 
   test('the example points every role at its default, and changes no contrast', () => {
     const { css, errors, contrast } = buildTheme(EXAMPLE_TOKENS, { name: 'example' });
-    const defaults = colors.roles.flatMap(({ tokens }) =>
-      tokens.map(({ name, refName }) => `  --${name}: var(--${refName});\n`),
+    const defaults = colors.roles.flatMap(({ groups }) =>
+      groups.flatMap(({ tokens }) =>
+        tokens.map(({ name, refName }) => `  --${name}: var(--${refName});\n`),
+      ),
     );
 
     expect(errors).toEqual([]);

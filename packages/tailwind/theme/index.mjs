@@ -23,10 +23,16 @@ const TOKENS = new Map([
       ({ path, name, value }) => [path, { cssName: name, fallback: { color: value } }],
     ),
   ),
-  ...colors.roles.flatMap(({ tokens }) =>
-    tokens.map(
-      /** @returns {[string, Token]} */
-      ({ path, name, ref }) => [path, { cssName: name, fallback: { ref } }],
+  ...colors.roles.flatMap(({ groups }) =>
+    groups.flatMap(({ tokens }) =>
+      tokens.map(
+        /** @returns {[string, Token]} */
+        ({ path, name, ref, value }) => [
+          path,
+          // A role that doesn't point at a primitive falls back to its own value
+          { cssName: name, fallback: ref ? { ref } : { color: value } },
+        ],
+      ),
     ),
   ),
 ]);
@@ -346,8 +352,12 @@ export const buildTheme = (input, { name }) => {
  * @type {Record<string, Record<string, string>>}
  */
 export const EXAMPLE_TOKENS = Object.fromEntries(
-  colors.roles.map(({ role, tokens }) => [
+  colors.roles.map(({ role, groups }) => [
     role,
-    Object.fromEntries(tokens.map(({ path, ref }) => [path.split('.')[1], `{${ref}}`])),
+    Object.fromEntries(
+      groups
+        .flatMap(({ tokens }) => tokens)
+        .map(({ path, ref, value }) => [path.split('.')[1], ref ? `{${ref}}` : value]),
+    ),
   ]),
 );

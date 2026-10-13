@@ -8,7 +8,9 @@ import colors from '../tokens/colors.json' with { type: 'json' };
 import { loadThemeCustomProperties, resolveToken } from './design-system.ts';
 
 const cssNames = new Map(
-  colors.roles.flatMap(({ tokens }) => tokens.map(({ path, name }) => [path, `--${name}`])),
+  colors.roles.flatMap(({ groups }) =>
+    groups.flatMap(({ tokens }) => tokens.map(({ path, name }) => [path, `--${name}`])),
+  ),
 );
 
 const toCssName = (path: string) => {
