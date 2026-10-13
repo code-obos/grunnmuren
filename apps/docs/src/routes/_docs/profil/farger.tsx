@@ -169,9 +169,9 @@ const Roles = () => {
         </p>
         <p>
           De korte utilities som <code>bg-base-default</code> har ingen rolle i navnet. De følger{' '}
-          <code>data-color</code> (<code>primary</code>, <code>accent</code> eller{' '}
-          <code>neutral</code>) på et element over, og er <code>primary</code> uten. Sånn kan en
-          komponent skrives én gang og likevel skifte farge der den står.
+          <code>data-color</code> på et element over, som kan være hvilken som helst av rollene, og
+          er <code>primary</code> uten. Sånn kan en komponent skrives én gang og likevel skifte
+          farge der den står.
         </p>
         <p>
           Fargene følger temaet. Velg Frøen Hage under for å se hvordan et tema overstyrer rollene.

@@ -338,9 +338,8 @@ function RouteComponent() {
             Grunnmuren sine egne verdier.
           </li>
           <li>
-            <code>data-color</code> (<code>primary</code>, <code>accent</code> eller{' '}
-            <code>neutral</code>) velger hvilken rolle de korte utilities som{' '}
-            <code>bg-base-default</code> peker på. Uten er det <code>primary</code>.
+            <code>data-color</code> (hvilken som helst av rollene) velger hvilken rolle de korte
+            utilities som <code>bg-base-default</code> peker på. Uten er det <code>primary</code>.
           </li>
         </ul>
       </section>

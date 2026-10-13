@@ -21,8 +21,9 @@ const FONT_STACKS: Record<string, string> = {
   'OBOS Display': 'OBOSDisplay, __OBOSDisplay_Fallback, sans-serif',
 };
 
-// The roles `data-color` can point the short tokens at. Primary is what you get without it.
-const DATA_COLORS = ['primary', 'accent', 'neutral'];
+// The roles `data-color` can point the short tokens at, every role like Designsystemet
+// does it. Primary is what you get without it.
+const DATA_COLORS = ['primary', 'accent', 'neutral', 'success', 'danger', 'warning', 'info'];
 
 // Tailwind has `rounded-none` and `rounded-full` as fixed utilities, so those two are only
 // in the source for Figma and never become variables.
@@ -206,8 +207,8 @@ ${variables(dictionary)}
 
 /*
  * The short tokens point at whichever role \`data-color\` picks, so a component can be
- * written once against \`base-default\` and be primary, accent or neutral depending on
- * where it sits. Primary without the attribute. A [data-theme] starts over at primary
+ * written once against \`base-default\` and take the colour of whichever role it sits
+ * in. Primary without the attribute. A [data-theme] starts over at primary
  * too, since it has to work the short tokens out again from its own roles.
  */
 ${defaults(':root', '[data-theme]', `[data-color="${primary.role}"]`)} {

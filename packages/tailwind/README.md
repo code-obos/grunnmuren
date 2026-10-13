@@ -59,7 +59,7 @@ Themes live in your app, not in Grunnmuren. A theme is a `[data-theme='…']` ru
 <section data-theme="my-project">…</section>
 ```
 
-`data-theme` works on part of a page. Primitives the theme doesn't set come from the page around it, `:root` overrides included. Role colours start over from the defaults on every `data-theme`, worked out from the primitives there, so a theme inside another theme, or inside a `:root` that overrides roles, only gets the outer primitives. `data-theme="default"` goes back to Grunnmuren's own values. `data-color` (`primary`, `accent` or `neutral`) picks the role the short utilities such as `bg-base-default` point at. It's `primary` without it, and inside a new `data-theme` too.
+`data-theme` works on part of a page. Primitives the theme doesn't set come from the page around it, `:root` overrides included. Role colours start over from the defaults on every `data-theme`, worked out from the primitives there, so a theme inside another theme, or inside a `:root` that overrides roles, only gets the outer primitives. `data-theme="default"` goes back to Grunnmuren's own values. `data-color` (any role, `primary` to `info`) picks the role the short utilities such as `bg-base-default` point at. It's `primary` without it, and inside a new `data-theme` too.
 
 ### What a theme can set
 
