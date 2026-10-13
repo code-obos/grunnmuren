@@ -1,4 +1,5 @@
 import json from '../../packages/tailwind/tokens/colors.json';
+import themeJson from '../../packages/tailwind/tokens/themes/colors.json';
 
 export type RoleToken = {
   /** What a theme file calls it, `primary.base-default` */
@@ -30,10 +31,14 @@ export type TokenColors = {
   /** The `group-variant` names `data-color` switches, `base-default` */
   shortTokens: Array<string>;
   primitives: Array<{ family: string; tokens: Array<PrimitiveToken> }>;
-  /** What each example theme sets, roles and primitives, by CSS name without `--` */
-  themes: Record<string, Record<string, string>>;
 };
 
 // Written by `pnpm tokens:build` in the tailwind package. The annotation is what checks the
 // file still has the shape this app reads.
 export const tokenColors: TokenColors = json;
+
+/**
+ * What each example theme sets, roles and primitives, by CSS name without `--`. A file of
+ * its own, since the example themes aren't in the package.
+ */
+export const themeColors: Record<string, Record<string, string>> = themeJson;

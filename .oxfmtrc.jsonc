@@ -12,6 +12,7 @@
     "packages/tailwind/tokens/motion.css",
     "packages/tailwind/tokens/theme.css",
     "packages/tailwind/tokens/themes/*.css",
+    "packages/tailwind/tokens/themes/*.json",
     "packages/tailwind/tokens/colors.json",
   ],
   "singleQuote": true,

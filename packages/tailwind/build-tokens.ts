@@ -281,9 +281,7 @@ ${declarations(radii)}
       },
 
       // The colour tokens as data, for the docs' colour page. `path` is what a theme file
-      // calls a token: `primary.base-default`, `blue.900`. `themes` is what each example
-      // theme sets, by CSS name, so the page can show a theme's values without reading them
-      // back from the DOM.
+      // calls a token: `primary.base-default`, `blue.900`.
       'gm/colors': ({ dictionary }) => {
         const roles = Map.groupBy(
           dictionary.allTokens.filter(isRoleColor),
@@ -320,19 +318,26 @@ ${declarations(radii)}
               value: token.$value,
             })),
           })),
-          themes: Object.fromEntries(
-            THEMES.map((theme) => [
-              theme,
-              Object.fromEntries(
-                dictionary.allTokens
-                  .filter(isTheme(theme))
-                  .map((token) => [token.name, token.$value]),
-              ),
-            ]),
-          ),
         };
 
         return `${JSON.stringify(colors, null, 2)}\n`;
+      },
+
+      // What each example theme sets, by CSS name, so the docs can show a theme's values
+      // without reading them back from the DOM. Next to the theme CSS, since the example
+      // themes aren't in the package.
+      'gm/theme-colors': ({ dictionary }) => {
+        const themes = Object.fromEntries(
+          THEMES.map((theme) => [
+            theme,
+            Object.fromEntries(
+              dictionary.allTokens
+                .filter(isTheme(theme))
+                .map((token) => [token.name, token.$value]),
+            ),
+          ]),
+        );
+        return `${JSON.stringify(themes, null, 2)}\n`;
       },
 
       'gm/theme': ({ dictionary, options }) => `${HEADER}
@@ -372,8 +377,9 @@ ${variables(dictionary)}
         {
           destination: 'colors.json',
           format: 'gm/colors',
-          filter: (token) => isRoleColor(token) || isColorPrimitive(token) || isThemeColor(token),
+          filter: (token) => isRoleColor(token) || isColorPrimitive(token),
         },
+        { destination: 'themes/colors.json', format: 'gm/theme-colors', filter: isThemeColor },
         ...THEMES.map((theme) => ({
           destination: `themes/${theme}.css`,
           format: 'gm/theme',

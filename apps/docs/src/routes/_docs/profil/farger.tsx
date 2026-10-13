@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import { AnchorHeading } from '@/ui/anchor-heading';
 
 import legacyColors from '../../../../colors';
-import { type RoleToken, tokenColors } from '../../../../token-colors';
+import { type RoleToken, themeColors, tokenColors } from '../../../../token-colors';
 
 export const Route = createFileRoute('/_docs/profil/farger')({
   component: RouteComponent,
@@ -140,7 +140,7 @@ const RoleSection = ({
 const Roles = () => {
   const [theme, setTheme] = useState<Theme>('default');
   const primary = tokenColors.roles.find(({ role }) => role === 'primary');
-  const overrides: Overrides = theme === 'default' ? {} : tokenColors.themes[theme];
+  const overrides: Overrides = theme === 'default' ? {} : themeColors[theme];
 
   return (
     <div className="grid gap-12">

@@ -1278,50 +1278,5 @@
         }
       ]
     }
-  ],
-  "themes": {
-    "froen-hage": {
-      "gm-color-primary-background-default": "#F5F2ED",
-      "gm-color-primary-background-tinted": "#EDEAE1",
-      "gm-color-primary-surface-default": "#EDEAE1",
-      "gm-color-primary-surface-tinted": "#EDEAE1",
-      "gm-color-primary-surface-hover": "#DCD6C4",
-      "gm-color-primary-surface-active": "#C8C1A7",
-      "gm-color-primary-border-subtle": "#C8C1A7",
-      "gm-color-primary-border-default": "#83805C",
-      "gm-color-primary-border-strong": "#2D3A26",
-      "gm-color-primary-text-subtle": "#635D4C",
-      "gm-color-primary-text-default": "#2D3A26",
-      "gm-color-primary-base-default": "#2D3A26",
-      "gm-color-primary-base-hover": "#24301E",
-      "gm-color-primary-base-active": "#24301E",
-      "gm-color-primary-base-contrast-subtle": "#DCD6C4",
-      "gm-color-primary-base-contrast-default": "#F5F2ED",
-      "gm-color-accent-background-default": "#F5F2ED",
-      "gm-color-accent-background-tinted": "#F5F2ED",
-      "gm-color-accent-surface-default": "#FFFFFF",
-      "gm-color-accent-surface-tinted": "#F5F2ED",
-      "gm-color-accent-surface-hover": "#EDEAE1",
-      "gm-color-accent-surface-active": "#DCD6C4",
-      "gm-color-accent-border-subtle": "#C8C1A7",
-      "gm-color-accent-border-default": "#8B674B",
-      "gm-color-accent-border-strong": "#231F20",
-      "gm-color-accent-text-subtle": "#635D4C",
-      "gm-color-accent-text-default": "#8B674B",
-      "gm-color-accent-base-default": "#8B674B",
-      "gm-color-accent-base-hover": "#231F20",
-      "gm-color-accent-base-active": "#231F20",
-      "gm-color-accent-base-contrast-subtle": "#F5F2ED",
-      "gm-color-accent-base-contrast-default": "#FFFFFF",
-      "gm-color-neutral-background-default": "#F5F2ED",
-      "gm-color-neutral-background-tinted": "#C8C1A7",
-      "gm-color-neutral-surface-default": "#EDEAE1",
-      "gm-color-neutral-surface-tinted": "#EDEAE1",
-      "gm-color-neutral-surface-hover": "#DCD6C4",
-      "gm-color-neutral-surface-active": "#C8C1A7",
-      "gm-color-neutral-border-subtle": "rgba(35, 31, 32, 0.15)",
-      "gm-color-neutral-text-subtle": "#635D4C",
-      "gm-color-neutral-text-default": "#231F20"
-    }
-  }
+  ]
 }
