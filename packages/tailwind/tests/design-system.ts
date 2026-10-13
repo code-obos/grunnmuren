@@ -144,6 +144,15 @@ export const loadThemeCustomProperties = async (theme: string) =>
     ),
   );
 
+/** What `[data-color="…"]` points the short tokens at, by the role's name. */
+export const loadDataColorCustomProperties = async (role: string) =>
+  new Map(
+    await readCustomProperties(
+      resolve(dirname(TOKENS_INDEX_CSS), 'semantic.css'),
+      `[data-color="${role}"]`,
+    ),
+  );
+
 const normalizeHexColors = (value: string) =>
   value.replaceAll(HEX_COLOR, (_, hex: string) => {
     const expanded = hex.length <= 4 ? hex.replaceAll(/./g, '$&$&') : hex;
