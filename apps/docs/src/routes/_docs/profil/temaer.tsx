@@ -173,7 +173,9 @@ const ThemeBuilder = () => {
   const name = toThemeName(input) || 'mitt-tema';
 
   const loadFile = async (file: File | undefined) => {
-    if (file) setJson(await file.text());
+    if (file) {
+      setJson(await file.text());
+    }
   };
 
   const parsed = parse(json);
@@ -218,7 +220,9 @@ const ThemeBuilder = () => {
         className="data-drop-target:outline-focus rounded-lg"
         onDrop={async ({ items }) => {
           const item = items.find((dropped) => dropped.kind === 'file');
-          if (item?.kind === 'file') await loadFile(await item.getFile());
+          if (item?.kind === 'file') {
+            await loadFile(await item.getFile());
+          }
         }}
       >
         <TextArea

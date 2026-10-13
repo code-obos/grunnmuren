@@ -41,23 +41,14 @@ export type ThemeResult = {
 };
 
 /**
- * Builds a Grunnmuren theme from colour tokens named like Grunnmuren's, and checks it.
+ * Builds a theme's CSS from colour tokens named like Grunnmuren's, and checks it.
  *
- * ```json
- * {
- *   "blue": { "900": "#1f2a44" },
- *   "primary": {
- *     "base-default": "#2d3a26",
- *     "base-hover": { "$value": "{primary.base-active}" }
- *   }
- * }
+ * ```js
+ * buildTheme({ primary: { 'base-default': '#2d3a26' } }, { name: 'my-project' });
  * ```
  *
- * Roles are `primary`, `accent`, `neutral`, `success`, `danger`, `warning` and `info`,
- * primitives their colour family (`blue`, `white`). A value is a hex or `rgb()` colour or a
- * `{reference}`. Designsystemet's paths, `color.primary.base-default`, read too. Only what the file sets ends up in the CSS. References resolve against the
- * file first and Grunnmuren's defaults after. `default` isn't a valid name, it's what resets
- * to Grunnmuren's own values.
+ * The token format is in the README:
+ * https://github.com/code-obos/grunnmuren/tree/main/packages/tailwind#building-a-theme-from-tokens
  */
 export declare const buildTheme: (input: unknown, options: { name: string }) => ThemeResult;
 

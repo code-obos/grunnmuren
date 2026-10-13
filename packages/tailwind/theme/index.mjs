@@ -39,7 +39,9 @@ const TOKENS = new Map([
 const resolveIn = (theme) => {
   /** @type {(path: string, chain?: Array<string>) => Resolved} */
   const resolve = (path, chain = []) => {
-    if (chain.includes(path)) return { cycle: [...chain.slice(chain.indexOf(path)), path] };
+    if (chain.includes(path)) {
+      return { cycle: [...chain.slice(chain.indexOf(path)), path] };
+    }
     const value = theme.get(path) ?? /** @type {Token} */ (TOKENS.get(path)).fallback;
     return 'color' in value ? value : resolve(value.ref, [...chain, path]);
   };
@@ -118,11 +120,15 @@ const editDistance = (a, b) => {
 const suggest = (path) => {
   const cssName = path.replace(/^-+/, '');
   const byCssName = [...TOKENS].find(([, token]) => token.cssName === cssName)?.[0];
-  if (byCssName) return byCssName;
+  if (byCssName) {
+    return byCssName;
+  }
 
   const paths = [...TOKENS.keys()];
   const wrapped = paths.find((valid) => path.endsWith(`.${valid}`));
-  if (wrapped) return wrapped;
+  if (wrapped) {
+    return wrapped;
+  }
 
   const nearest = paths
     .map((valid) => ({ valid, distance: editDistance(path, valid) }))
@@ -141,8 +147,12 @@ const didYouMean = (message, suggestion) =>
  */
 const rawValue = (token) => {
   const value = isRecord(token) ? token.$value : token;
-  if (!isRecord(value) || typeof value.hex !== 'string') return value;
-  if (typeof value.alpha !== 'number' || value.alpha >= 1) return value.hex;
+  if (!isRecord(value) || typeof value.hex !== 'string') {
+    return value;
+  }
+  if (typeof value.alpha !== 'number' || value.alpha >= 1) {
+    return value.hex;
+  }
   return `${value.hex}${Math.round(value.alpha * 255)
     .toString(16)
     .padStart(2, '0')}`;
@@ -157,7 +167,9 @@ const rawValue = (token) => {
  */
 const flatten = (group, prefix) =>
   Object.entries(group).flatMap(([key, token]) => {
-    if (key.startsWith('$')) return [];
+    if (key.startsWith('$')) {
+      return [];
+    }
     const path = prefix ? `${prefix}.${key}` : key;
     return isRecord(token) && !('$value' in token) ? flatten(token, path) : [[path, token]];
   });
@@ -189,7 +201,9 @@ const parseToken = (path, token) => {
 
   const reference = REFERENCE.exec(value.trim())?.[1].trim();
   if (reference == null) {
-    if (parseColor(value)) return { color: value.trim() };
+    if (parseColor(value)) {
+      return { color: value.trim() };
+    }
     return {
       code: 'invalid-color',
       path,
@@ -197,7 +211,9 @@ const parseToken = (path, token) => {
     };
   }
 
-  if (TOKENS.has(toTokenPath(reference))) return { ref: toTokenPath(reference) };
+  if (TOKENS.has(toTokenPath(reference))) {
+    return { ref: toTokenPath(reference) };
+  }
   const suggestion = suggest(reference) && `{${suggest(reference)}}`;
   return {
     code: 'unresolved-reference',
@@ -214,11 +230,7 @@ const parseToken = (path, token) => {
 const failed = (error) => ({ css: '', errors: [error], contrast: [] });
 
 /**
- * Builds a Grunnmuren theme from colour tokens, and checks it.
- *
- * Only what the tokens set ends up in the CSS. A reference resolves against the file first
- * and Grunnmuren's defaults after. The CSS is empty when there are errors. Contrast is
- * checked for every pair where the theme changes a colour from the default.
+ * Builds and checks a theme. Documented in index.d.mts and the README.
  *
  * @param {unknown} input
  * @param {{ name: string }} options
@@ -289,11 +301,15 @@ export const buildTheme = (input, { name }) => {
     }
   }
 
-  if (errors.length > 0) return { css: '', errors, contrast: [] };
+  if (errors.length > 0) {
+    return { css: '', errors, contrast: [] };
+  }
 
   const declarations = [...TOKENS].flatMap(([path, { cssName }]) => {
     const value = theme.get(path);
-    if (!value) return [];
+    if (!value) {
+      return [];
+    }
     const css =
       'color' in value
         ? value.color
@@ -306,12 +322,16 @@ export const buildTheme = (input, { name }) => {
     const fg = resolve(foreground);
     const bg = resolve(background);
     // Unreachable, a cycle is an error and returned above
-    if ('cycle' in fg || 'cycle' in bg) return [];
+    if ('cycle' in fg || 'cycle' in bg) {
+      return [];
+    }
     // A theme isn't held to account for the defaults it leaves as they are
     const changed =
       sameColorKey(fg.color) !== DEFAULT_COLORS.get(foreground) ||
       sameColorKey(bg.color) !== DEFAULT_COLORS.get(background);
-    if (!changed) return [];
+    if (!changed) {
+      return [];
+    }
 
     const ratio = contrastRatio(fg.color, bg.color);
     return [{ rule, minimum, foreground, background, ratio, passes: ratio >= minimum }];

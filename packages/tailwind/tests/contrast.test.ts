@@ -13,7 +13,9 @@ const cssNames = new Map(
 
 const toCssName = (path: string) => {
   const name = cssNames.get(path);
-  if (!name) throw new Error(`\`${path}\` isn't a role colour`);
+  if (!name) {
+    throw new Error(`\`${path}\` isn't a role colour`);
+  }
   return name;
 };
 

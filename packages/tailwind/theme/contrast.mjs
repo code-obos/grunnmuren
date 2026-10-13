@@ -66,7 +66,9 @@ const NUMBER = /^(\d*\.?\d+)(%?)$/;
 /** @param {string} part @param {number} max */
 const parseChannel = (part, max) => {
   const match = NUMBER.exec(part);
-  if (!match) return undefined;
+  if (!match) {
+    return undefined;
+  }
   const value = match[2] ? (Number(match[1]) / 100) * max : Number(match[1]);
   return value <= max ? value : undefined;
 };
@@ -77,12 +79,18 @@ const parseChannel = (part, max) => {
  * @param {string} inside
  */
 const rgbParts = (inside) => {
-  if (inside.includes(',')) return inside.split(',').map((part) => part.trim());
+  if (inside.includes(',')) {
+    return inside.split(',').map((part) => part.trim());
+  }
 
   const [channels, alpha, ...rest] = inside.split('/').map((part) => part.trim());
-  if (rest.length > 0 || alpha === '') return undefined;
+  if (rest.length > 0 || alpha === '') {
+    return undefined;
+  }
   const parts = channels.split(/\s+/);
-  if (parts.length !== 3) return undefined;
+  if (parts.length !== 3) {
+    return undefined;
+  }
   return alpha == null ? parts : [...parts, alpha];
 };
 
@@ -105,11 +113,15 @@ export const parseColor = (value) => {
 
   const inside = RGB.exec(color)?.[1].trim();
   const parts = inside == null ? undefined : rgbParts(inside);
-  if (parts?.length !== 3 && parts?.length !== 4) return undefined;
+  if (parts?.length !== 3 && parts?.length !== 4) {
+    return undefined;
+  }
 
   const [red, green, blue] = parts.slice(0, 3).map((part) => parseChannel(part, 255));
   const alpha = parts[3] == null ? 1 : parseChannel(parts[3], 1);
-  if (red == null || green == null || blue == null || alpha == null) return undefined;
+  if (red == null || green == null || blue == null || alpha == null) {
+    return undefined;
+  }
   return { red, green, blue, alpha };
 };
 
@@ -137,7 +149,9 @@ const relativeLuminance = ({ red, green, blue }) =>
 /** @param {string} value */
 const parseOrThrow = (value) => {
   const color = parseColor(value);
-  if (!color) throw new Error(`Expected a hex or rgb() colour, got \`${value}\``);
+  if (!color) {
+    throw new Error(`Expected a hex or rgb() colour, got \`${value}\``);
+  }
   return color;
 };
 

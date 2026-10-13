@@ -69,7 +69,9 @@ if (values.example) {
 }
 
 const [file, ...rest] = positionals;
-if (!file || rest.length > 0) fail(HELP);
+if (!file || rest.length > 0) {
+  fail(HELP);
+}
 const name = values.name ?? toThemeName(basename(file, extname(file)));
 
 const read = async () => {
@@ -111,7 +113,9 @@ if (failing.length > 0) {
       '',
     ].join('\n'),
   );
-  if (values.strict) fail('Wrote no CSS, since --strict fails on contrast below WCAG 2.2 AA.');
+  if (values.strict) {
+    fail('Wrote no CSS, since --strict fails on contrast below WCAG 2.2 AA.');
+  }
 }
 
 if (values.out) {
