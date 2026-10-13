@@ -1,6 +1,7 @@
 import { ArrowRight, Edit, Search } from '@obosbbl/grunnmuren-icons-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { cx } from 'cva';
+import { expect, within } from 'storybook/test';
 
 import { Badge } from '../badge';
 import { Button } from './button';
@@ -112,6 +113,43 @@ export const IsIconOnly: Story = {
         <Search />
       </Button>
     );
+  },
+};
+
+/**
+ * `color` sets `data-color` to the role, so the button takes that role's colours. A
+ * `data-color` you pass yourself wins.
+ */
+export const RoleColors: Story = {
+  render: () => (
+    <div className="flex gap-8 p-8">
+      <Button color="primary">Primary</Button>
+      <Button color="accent">Accent</Button>
+      <Button color="neutral">Neutral</Button>
+      <Button color="primary" data-color="accent">
+        Overridden
+      </Button>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const background = (name: string) =>
+      getComputedStyle(canvas.getByRole('button', { name })).backgroundColor;
+    // Read from the role's own token, since the story also runs under other themes
+    const roleColor = (role: string) => {
+      const probe = document.createElement('div');
+      probe.style.backgroundColor = `var(--gm-color-${role}-base-default)`;
+      canvasElement.append(probe);
+      const color = getComputedStyle(probe).backgroundColor;
+      probe.remove();
+      return color;
+    };
+
+    await expect(roleColor('accent')).not.toBe(roleColor('primary'));
+    await expect(background('Primary')).toBe(roleColor('primary'));
+    await expect(background('Accent')).toBe(roleColor('accent'));
+    await expect(background('Neutral')).toBe(roleColor('neutral'));
+    await expect(background('Overridden')).toBe(roleColor('accent'));
   },
 };
 
