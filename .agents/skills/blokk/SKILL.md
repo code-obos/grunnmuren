@@ -190,3 +190,12 @@ If the user asks to set up CI/CD, configure pipelines, or get deployment working
 - Do not create Dockerfiles (those are the developer's responsibility)
 - Do not add secrets as plaintext values
 - Do not change `activeRevisionsMode` without understanding revision management implications
+
+---
+
+## CloudID and Identity Permissions
+
+- Use CloudID for application identity work and related Entra-backed configuration, such as app registrations, identities, credentials, federation, and app roles. Do not direct developers to manage these through the Entra admin center; they do not have direct permissions there.
+- Treat identity IDs in Blokk environment files as references to identities managed elsewhere, not as identity definitions. If identity or directory-permission changes are needed, use CloudID where supported and identify the owning infrastructure repository for Azure resource or role assignments.
+- CloudID access and Azure RBAC are separate. Subscription and Key Vault operations may require Azure roles. Some directory interactions require Entra permissions that CloudID performs using application permissions; if CloudID cannot perform a required action, refer the user to a CloudID administrator or the platform team.
+- If the user cannot sign in to CloudID, tell them to request the **CloudID** access package through My Access and membership in the appropriate team. CloudID teams are created by a CloudID administrator.
