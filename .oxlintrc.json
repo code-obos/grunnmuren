@@ -26,7 +26,27 @@
         "case": "kebabCase"
       }
     ],
-    "better-tailwindcss/enforce-canonical-classes": "error"
+    "better-tailwindcss/enforce-canonical-classes": "error",
+    "better-tailwindcss/no-restricted-classes": [
+      "error",
+      {
+        "selectors": [
+          { "kind": "attribute", "name": "^class(?:Name)?$" },
+          { "kind": "callee", "name": "^cx$", "match": [{ "type": "strings" }] },
+          {
+            "kind": "callee",
+            "name": "^cva$",
+            "match": [{ "type": "strings" }, { "type": "objectValues" }]
+          }
+        ],
+        "restrict": [
+          {
+            "pattern": "\\[[^\\]]*=[\"']",
+            "message": "Leave attribute values in arbitrary variants unquoted, e.g. [data-slot=media]. tsdown escapes the quotes in the bundle, and consumers' Tailwind then generates selectors that never match."
+          }
+        ]
+      }
+    ]
   },
   "settings": {
     "better-tailwindcss": {
