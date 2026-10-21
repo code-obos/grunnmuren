@@ -23,13 +23,13 @@ const alertVariants = cva({
   base: [
     'grid grid-cols-[auto_1fr_auto] gap-2 rounded-md border-2 px-3 py-2',
     // Icon styles:
-    '[&:has([data-slot="heading"])>svg]:mt-0.5',
+    '[&:has([data-slot=heading])>svg]:mt-0.5',
     // Heading styles:
-    '**:data-[slot="heading"]:text-base **:data-[slot="heading"]:leading-7 **:data-[slot="heading"]:font-medium',
+    '**:data-[slot=heading]:text-base **:data-[slot=heading]:leading-7 **:data-[slot=heading]:font-medium',
     // Content styles:
-    '**:data-[slot="content"]:text-sm **:data-[slot="content"]:leading-6 [&:has([data-slot="heading"])_[data-slot="content"]]:col-span-full',
+    '**:data-[slot=content]:text-sm **:data-[slot=content]:leading-6 [&:has([data-slot=heading])_[data-slot=content]]:col-span-full',
     // Footer styles:
-    '**:data-[slot="footer"]:col-span-full **:data-[slot="footer"]:text-xs **:data-[slot="footer"]:leading-6 **:data-[slot="footer"]:font-light',
+    '**:data-[slot=footer]:col-span-full **:data-[slot=footer]:text-xs **:data-[slot=footer]:leading-6 **:data-[slot=footer]:font-light',
   ],
   variants: {
     /**
@@ -176,7 +176,7 @@ const Alertbox = ({
         <div
           className={cx(
             'col-span-full grid gap-y-4',
-            isCollapsed && '[&>*:not([data-slot="footer"])]:hidden',
+            isCollapsed && '[&>*:not([data-slot=footer])]:hidden',
           )}
           id={id}
         >

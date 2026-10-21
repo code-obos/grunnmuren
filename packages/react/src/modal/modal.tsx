@@ -151,9 +151,9 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
       className,
       'relative flex flex-col gap-y-5 p-4 outline-none',
       // Header
-      '**:data-[slot="header"]:flex **:data-[slot="header"]:items-center **:data-[slot="header"]:justify-between **:data-[slot="header"]:gap-x-2',
+      '**:data-[slot=header]:flex **:data-[slot=header]:items-center **:data-[slot=header]:justify-between **:data-[slot=header]:gap-x-2',
       // Footer
-      '**:data-[slot="footer"]:flex **:data-[slot="footer"]:gap-x-2',
+      '**:data-[slot=footer]:flex **:data-[slot=footer]:gap-x-2',
     )}
   >
     {({ close }) => (

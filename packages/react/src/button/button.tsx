@@ -63,36 +63,36 @@ const buttonVariants = cva({
       color: ['primary', 'accent', 'neutral'],
       variant: 'primary',
       className:
-        'bg-base-default hover:bg-base-hover text-base-contrast-default active:bg-base-active active:text-base-contrast-default **:[[role="progressbar"]]:text-base-contrast-default',
+        'bg-base-default hover:bg-base-hover text-base-contrast-default active:bg-base-active active:text-base-contrast-default **:[[role=progressbar]]:text-base-contrast-default',
     },
     {
       color: ['primary', 'accent', 'neutral'],
       variant: 'secondary',
       className:
-        'text-text-default hover:bg-base-hover **:[[role="progressbar"]]:text-text-default hover:text-base-contrast-default active:bg-base-active [&:hover_[role="progressbar"]]:text-base-contrast-default hover:border-transparent',
+        'text-text-default hover:bg-base-hover **:[[role=progressbar]]:text-text-default hover:text-base-contrast-default active:bg-base-active [&:hover_[role=progressbar]]:text-base-contrast-default hover:border-transparent',
     },
     {
       color: ['primary', 'accent', 'neutral'],
       variant: 'tertiary',
-      className: '**:[[role="progressbar"]]:text-neutral-text-default',
+      className: '**:[[role=progressbar]]:text-neutral-text-default',
     },
     {
       color: 'contrast',
       variant: 'primary',
       className:
-        'hover:bg-primary-surface-hover active:bg-primary-surface-active bg-neutral-surface-default text-neutral-text-default **:[[role="progressbar"]]:text-neutral-text-default',
+        'hover:bg-primary-surface-hover active:bg-primary-surface-active bg-neutral-surface-default text-neutral-text-default **:[[role=progressbar]]:text-neutral-text-default',
     },
     {
       color: 'contrast',
       variant: 'secondary',
       className:
-        'text-primary-base-contrast-default hover:bg-neutral-surface-default hover:text-neutral-text-default [&:hover_[role="progressbar"]]:text-neutral-text-default **:[[role="progressbar"]]:text-primary-base-contrast-default',
+        'text-primary-base-contrast-default hover:bg-neutral-surface-default hover:text-neutral-text-default [&:hover_[role=progressbar]]:text-neutral-text-default **:[[role=progressbar]]:text-primary-base-contrast-default',
     },
     {
       color: 'contrast',
       variant: 'tertiary',
       className:
-        'text-primary-base-contrast-default **:[[role="progressbar"]]:text-primary-base-contrast-default',
+        'text-primary-base-contrast-default **:[[role=progressbar]]:text-primary-base-contrast-default',
     },
     // Deprecated, and stays on the palette so it looks the same as before in every theme.
     // Hover and pressed are hand picked, there's nothing darker than mint-300 to use.
@@ -100,18 +100,18 @@ const buttonVariants = cva({
       color: 'mint',
       variant: 'primary',
       className:
-        'bg-mint text-black hover:bg-[#8dd4bd] active:bg-[#9ddac6] **:[[role="progressbar"]]:text-black',
+        'bg-mint text-black hover:bg-[#8dd4bd] active:bg-[#9ddac6] **:[[role=progressbar]]:text-black',
     },
     {
       color: 'mint',
       variant: 'secondary',
       className:
-        'text-mint hover:bg-mint **:[[role="progressbar"]]:text-mint hover:text-black [&:hover_[role="progressbar"]]:text-black',
+        'text-mint hover:bg-mint **:[[role=progressbar]]:text-mint hover:text-black [&:hover_[role=progressbar]]:text-black',
     },
     {
       color: 'mint',
       variant: 'tertiary',
-      className: 'text-mint **:[[role="progressbar"]]:text-mint',
+      className: 'text-mint **:[[role=progressbar]]:text-mint',
     },
   ],
   defaultVariants: {

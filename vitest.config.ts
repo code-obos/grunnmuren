@@ -95,6 +95,13 @@ export default defineConfig({
           environment: 'node',
         },
       },
+      {
+        test: {
+          name: 'react-classes',
+          include: ['packages/react/tests/**/*.test.ts'],
+          environment: 'node',
+        },
+      },
 
       ...snapshotVariants.map(defineSnapshotProject),
     ],

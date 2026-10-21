@@ -225,7 +225,7 @@ function TableColumn(props: TableColumnProps) {
         className,
         'text-neutral-text-default px-4 py-3 text-left text-sm font-medium',
         'data-focus-visible:outline-focus-inset',
-        '[&_:not([data-slot="table-column-resizer"]):focus-visible]:outline-focus-offset',
+        '[&_:not([data-slot=table-column-resizer]):focus-visible]:outline-focus-offset',
         'min-w-fit whitespace-nowrap',
         'has-data-[slot=table-column-resizer]:*:data-[slot=content]:flex has-data-[slot=table-column-resizer]:*:data-[slot=content]:justify-between has-data-[slot=table-column-resizer]:*:data-[slot=content]:gap-2',
       )}
