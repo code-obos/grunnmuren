@@ -554,13 +554,13 @@ const CarouselItem = ({ className, children, ...rest }: CarouselItemProps) => {
         className,
         'min-w-0 shrink-0 grow-0',
         '*:data-[slot=media]:aspect-square',
-        '*:data-[slot=media]:max-sm:data-[fit="contain"]:*:object-cover',
+        '*:data-[slot=media]:max-sm:data-[fit=contain]:*:object-cover',
         '*:data-[slot=media]:sm:aspect-4/3',
         '*:data-[slot=media]:md:aspect-3/2',
         '*:data-[slot=media]:lg:aspect-2/1',
         '*:data-[slot=media]:*:h-full',
         '*:data-[slot=media]:*:w-full',
-        '*:data-[slot=media]:data-[fit="contain"]:bg-primary-base-default',
+        '*:data-[slot=media]:data-[fit=contain]:bg-primary-base-default',
       )}
       data-slot="carousel-item"
       role={shouldUseAriaCarouselPattern ? 'group' : undefined}

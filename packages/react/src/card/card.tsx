@@ -19,35 +19,35 @@ const cardVariants = cva({
     'relative', // Needed for positiong of the clickable pseudo-element (and can also be used for other absolute positioned elements the consumer might add)
 
     // **** Content ****
-    '[&_[data-slot="content"]]:flex [&_[data-slot="content"]]:flex-col [&_[data-slot="content"]]:gap-y-4',
+    '[&_[data-slot=content]]:flex [&_[data-slot=content]]:flex-col [&_[data-slot=content]]:gap-y-4',
 
     // **** Media ****
-    '[&_[data-slot="media"]_*]:pointer-events-none', // Passes clicks through the media content to card link (if present)
-    '[&_[data-slot="media"]]:overflow-hidden', // Prevent content from overflowing the rounded corners
-    '[&_[data-slot="media"]]:relative', // Needed for positioning the <Badge> component (if present)
+    '[&_[data-slot=media]_*]:pointer-events-none', // Passes clicks through the media content to card link (if present)
+    '[&_[data-slot=media]]:overflow-hidden', // Prevent content from overflowing the rounded corners
+    '[&_[data-slot=media]]:relative', // Needed for positioning the <Badge> component (if present)
     // Position media at the edges of the card (because of these negative margins the media-element must be a wrapper around the actual image or other media content)
-    '[&_[data-slot="media"]]:mx-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))] [&_[data-slot="media"]]:mt-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
+    '[&_[data-slot=media]]:mx-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))] [&_[data-slot=media]]:mt-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
 
     // Sets the aspect ratio of the media content (width: 100% is necessary to make aspect ratio work on images in FF)
-    '[&_[data-slot="media"]>*:not([data-slot="badge"])]:aspect-3/2 [&_[data-slot="media"]>img]:w-full [&_[data-slot="media"]>img]:object-cover',
+    '[&_[data-slot=media]>*:not([data-slot=badge])]:aspect-3/2 [&_[data-slot=media]>img]:w-full [&_[data-slot=media]>img]:object-cover',
     // Prepare zoom animation for hover effects. The hover effect can also be enabled by classes on the parent component, so it is always prepared here.
-    '[&_[data-slot="media"]>*]:duration-300 [&_[data-slot="media"]>*]:ease-in-out [&_[data-slot="media"]>*]:motion-safe:transition-transform',
+    '[&_[data-slot=media]>*]:duration-300 [&_[data-slot=media]>*]:ease-in-out [&_[data-slot=media]>*]:motion-safe:transition-transform',
 
     // **** Card link ****
     // **** Hover ****
     // Enables the zoom hover effect on media (note that we can't use group-hover/card here, because there might be other clickable elements in the card aside from the heading)
-    '[&:has([data-slot="card-link"]_a:hover)_[data-slot="media"]>img]:scale-110',
-    '[&:has([data-slot="heading"]_[data-slot="card-link"]:hover)_[data-slot="media"]>img]:scale-110',
+    '[&:has([data-slot=card-link]_a:hover)_[data-slot=media]>img]:scale-110',
+    '[&:has([data-slot=heading]_[data-slot=card-link]:hover)_[data-slot=media]>img]:scale-110',
 
     // **** Fail-safe for interactive elements ****
     // Make interactive elements clickable by themselves, while the rest of the card is clickable as a whole
     // The card is made clickable by a pseudo-element on the heading that covers the entire card
-    '[&_button]:relative [&_input]:relative [&:not(:has([data-slot="card-link"]_a))_a:not([data-slot="card-link"])]:relative',
+    '[&_button]:relative [&_input]:relative [&:not(:has([data-slot=card-link]_a))_a:not([data-slot=card-link])]:relative',
     // Our Button component has position: relative by default, so we need to override that if it is used in a CardLink (to make the entire card clickable)
-    '[&_[data-slot="card-link"]_a]:static',
+    '[&_[data-slot=card-link]_a]:static',
     // Place other interactive on top of the pseudo-element that makes the entire card clickable
     // by setting a higher z-index than the pseudo-element (which implicitly z-index 0)
-    '[&_a:not([data-slot="card-link"])]:z-[1] [&_button]:z-[1] [&_input]:z-[1]',
+    '[&_a:not([data-slot=card-link])]:z-[1] [&_button]:z-[1] [&_input]:z-[1]',
 
     // **** Badge ****
     '*:data-[slot=media]:*:data-[slot=badge]:absolute',
@@ -65,7 +65,7 @@ const cardVariants = cva({
       subtle: [
         'border-transparent',
         // **** Media styles ****
-        '**:data-[slot="media"]:rounded-2xl', // All corners are rounded
+        '**:data-[slot=media]:rounded-2xl', // All corners are rounded
       ],
       outlined: 'border-neutral-border-strong border',
     },
@@ -77,14 +77,14 @@ const cardVariants = cva({
       vertical: [
         'flex-col',
         // **** Media ****
-        '**:data-[slot="media"]:rounded-t-2xl', // Both Top corners are rounded
+        '**:data-[slot=media]:rounded-t-2xl', // Both Top corners are rounded
       ],
       horizontal: [
         // Column gap between media and content (only takes effect at @2xl, when the direction is row).
         // Content adds its own 12px inner padding on top, so the visible image→text gap reads ~36px.
         'not-has-data-[slot=media]:gap-x-4 has-data-[slot=media]:gap-x-6',
         // **** With Media ****
-        '[&:has(>[data-slot="media"]:last-child)]:flex-col-reverse', // Always display the media at the top of the card
+        '[&:has(>[data-slot=media]:last-child)]:flex-col-reverse', // Always display the media at the top of the card
         'has-data-[slot=media]:@2xl:flex-row!', // We need !important to override the specificity (first-/last-child) of the flex-col-reverse and flex-col classes
 
         // 50/50 split. flex-1 (not basis-1/2) so the columns fill the space after the gap and the
@@ -103,14 +103,14 @@ const cardVariants = cva({
 
         // Make sure the card link is clickable when the media is on the right side
         // This is necessary because the media content is positioned after the card link in the DOM
-        '[&:has(>[data-slot="media"]:last-child)_[data-slot="card-link"]]:z-1',
+        '[&:has(>[data-slot=media]:last-child)_[data-slot=card-link]]:z-1',
 
         // **** Without Media ****
         'not-has-data-[slot=media]:@md:flex-row',
         // Make the layout responsive: when the Content reaches a minimum width of 12rem, the layout switches to vertical. Also makes sure Content takes up the remaining space available.
         'not-has-data-[slot=media]:**:data-[slot=content]:grow',
         // Make sure svg's etc. are not shrinkable
-        '[&>:not([data-slot="content"],[data-slot="media"])]:shrink-0',
+        '[&>:not([data-slot=content],[data-slot=media])]:shrink-0',
       ],
     },
   },
@@ -125,13 +125,13 @@ const cardVariants = cva({
       className: [
         // **** Media ****
         // Some rounded corners are removed when the card is outlined
-        '**:data-[slot="media"]:rounded-t-2xl', // On small screens, the top corners are rounded
+        '**:data-[slot=media]:rounded-t-2xl', // On small screens, the top corners are rounded
         '*:data-[slot=media]:first:@2xl:rounded-tr-none *:data-[slot=media]:first:@2xl:rounded-bl-2xl', // Both left corners are rounded when media is on the left side
         '*:data-[slot=media]:last:@2xl:rounded-tl-none *:data-[slot=media]:last:@2xl:rounded-br-2xl', // Both right corners are rounded when media is on the right side
         // **** Badge ****
         // Override default corner radius of the badge to match the media border radius
-        '[&_[data-slot="media"]:first-child_[data-slot="badge"]:last-child]:@2xl:rounded-tr-none',
-        '[&_[data-slot="media"]:last-child_[data-slot="badge"]:first-child]:@2xl:rounded-tl-none',
+        '[&_[data-slot=media]:first-child_[data-slot=badge]:last-child]:@2xl:rounded-tr-none',
+        '[&_[data-slot=media]:last-child_[data-slot=badge]:first-child]:@2xl:rounded-tl-none',
       ],
     },
   ],
@@ -162,16 +162,16 @@ const Card = ({ children, className, variant, layout, ...restProps }: CardProps)
                   // **** Card link in Heading ****
                   // Border (bottom/top) is set to transparent to make sure the bottom underline is not visible when the card is hovered
                   // Border top is set to even out the border bottom used for the underline
-                  '*:data-[slot="card-link"]:no-underline',
-                  '*:data-[slot="card-link"]:border-y-2',
-                  '*:data-[slot="card-link"]:border-y-transparent',
-                  '*:data-[slot="card-link"]:transition-colors',
-                  '*:data-[slot="card-link"]:hover:border-b-current',
+                  '*:data-[slot=card-link]:no-underline',
+                  '*:data-[slot=card-link]:border-y-2',
+                  '*:data-[slot=card-link]:border-y-transparent',
+                  '*:data-[slot=card-link]:transition-colors',
+                  '*:data-[slot=card-link]:hover:border-b-current',
                   // Mimic heading styles for the card link if placed in the heading slot. This is necessary to make the custom underline align with the link text
-                  '*:data-[slot="card-link"]:font-inherit',
-                  '*:data-[slot="card-link"]:text-pretty',
-                  '*:data-[slot="card-link"]:hyphens-auto',
-                  '*:data-[slot="card-link"]:[word-break:break-word]', // necessary to make hyphens work in grid containers in Safari
+                  '*:data-[slot=card-link]:font-inherit',
+                  '*:data-[slot=card-link]:text-pretty',
+                  '*:data-[slot=card-link]:hyphens-auto',
+                  '*:data-[slot=card-link]:[word-break:break-word]', // necessary to make hyphens work in grid containers in Safari
                 ]),
               },
             ],
