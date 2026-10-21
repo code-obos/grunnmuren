@@ -150,10 +150,11 @@ const Dialog = ({ className, children, ...restProps }: DialogProps) => (
     className={cx(
       className,
       'relative flex flex-col gap-y-5 p-4 outline-none',
+      // Attribute values are unquoted: the build escapes inner double quotes, which Tailwind can't scan in dist
       // Header
-      '**:data-[slot="header"]:flex **:data-[slot="header"]:items-center **:data-[slot="header"]:justify-between **:data-[slot="header"]:gap-x-2',
+      '**:data-[slot=header]:flex **:data-[slot=header]:items-center **:data-[slot=header]:justify-between **:data-[slot=header]:gap-x-2',
       // Footer
-      '**:data-[slot="footer"]:flex **:data-[slot="footer"]:gap-x-2',
+      '**:data-[slot=footer]:flex **:data-[slot=footer]:gap-x-2',
     )}
   >
     {({ close }) => (
