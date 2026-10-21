@@ -21,6 +21,7 @@ test('Tailwind arbitrary variants have no quoted attribute values', () => {
   const offenders = sourceFiles(srcDir).flatMap((file) =>
     readFileSync(file, 'utf8')
       .split(/\s+/)
+      // `]:not(` is a runtime querySelector in Carousel, not a class
       .filter((token) => /\]:(?!not\()/.test(token) && /=["']/.test(token))
       .map((token) => `${file.slice(srcDir.length + 1)}: ${token}`),
   );
