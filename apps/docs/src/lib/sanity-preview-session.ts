@@ -1,4 +1,5 @@
-import { clearSession, updateSession, useSession } from '@tanstack/react-start/server';
+import { deleteCookie, getCookie, setCookie } from '@tanstack/react-start/server';
+import { sealData, unsealData } from 'iron-session';
 
 export const PREVIEW_SESSION_COOKIE = 'sanity-preview-session';
 
@@ -9,7 +10,7 @@ export const PREVIEW_SESSION_COOKIE = 'sanity-preview-session';
  *   - verify the session belongs to the current Sanity project
  *   - know whether to fetch drafts in loaders / API routes
  *
- * TanStack Start's session utilities seal the value with
+ * iron-session seals the value with
  * `SANITY_PREVIEW_SESSION_SECRET`, so it cannot be forged client-side.
  */
 
@@ -19,41 +20,43 @@ type PreviewSessionData = {
   projectId?: string;
 };
 
-function getSessionConfig() {
+function getPassword() {
   const password = process.env.SANITY_PREVIEW_SESSION_SECRET;
 
   if (!password) {
     throw new Error('Missing SANITY_PREVIEW_SESSION_SECRET environment variable');
   }
 
-  return {
-    password,
-    name: PREVIEW_SESSION_COOKIE,
-    maxAge: ONE_WEEK_SECONDS,
-    cookie: {
-      path: '/',
-      // SameSite=None + Secure is required so the cookie works inside the
-      // Sanity Studio iframe (cross-origin). HttpOnly is intentionally
-      // disabled so client code can detect preview mode via document.cookie.
-      sameSite: 'none' as const,
-      secure: true,
-      httpOnly: false,
-    },
-  };
+  return password;
 }
+
+const cookieOptions = {
+  path: '/',
+  // SameSite=None + Secure is required so the cookie works inside the
+  // Sanity Studio iframe (cross-origin). HttpOnly is intentionally
+  // disabled so client code can detect preview mode via document.cookie.
+  sameSite: 'none',
+  secure: true,
+  httpOnly: false,
+} as const;
 
 /** Read and decrypt the preview session. Returns `{}` if no session. */
 export async function getPreviewSession(): Promise<PreviewSessionData> {
-  const session = await useSession<PreviewSessionData>(getSessionConfig());
-  return session.data;
+  const seal = getCookie(PREVIEW_SESSION_COOKIE);
+  if (!seal) {
+    return {};
+  }
+
+  return unsealData<PreviewSessionData>(seal, { password: getPassword(), ttl: ONE_WEEK_SECONDS });
 }
 
 /** Activate preview mode by sealing the given data into the session cookie. */
 export async function commitPreviewSession(data: PreviewSessionData): Promise<void> {
-  await updateSession(getSessionConfig(), data);
+  const seal = await sealData(data, { password: getPassword(), ttl: ONE_WEEK_SECONDS });
+  setCookie(PREVIEW_SESSION_COOKIE, seal, { ...cookieOptions, maxAge: ONE_WEEK_SECONDS });
 }
 
 /** Clear the preview session cookie. */
 export async function destroyPreviewSession(): Promise<void> {
-  await clearSession(getSessionConfig());
+  deleteCookie(PREVIEW_SESSION_COOKIE, cookieOptions);
 }
