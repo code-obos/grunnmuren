@@ -42,7 +42,7 @@
     "@vitest/browser": "5.0.3",
     "@vitest/browser-playwright": "5.0.3",
     "eslint-plugin-better-tailwindcss": "4.4.1",
-    "fontaine": "1.0.0",
+    "fontaine": "1.0.1",
     "http-server": "14.1.1",
     "oxfmt": "0.45.0",
     "oxlint": "1.60.0",
