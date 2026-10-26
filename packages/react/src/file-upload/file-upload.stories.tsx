@@ -183,16 +183,16 @@ export const ServerValidation = {
   render: () => (
     <RACForm
       className="flex w-72 max-w-full flex-col items-start gap-4 p-4"
-      validationErrors={{ file: 'Medlemsbeviset er utløpt' }}
+      validationErrors={{ file: 'The membership card has expired' }}
     >
       <FileUpload name="file">
-        <Label>Last opp medlemsbevis</Label>
-        <Button variant="secondary">Velg fil</Button>
+        <Label>Upload membership card</Label>
+        <Button variant="secondary">Choose file</Button>
       </FileUpload>
     </RACForm>
   ),
   play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
-    await expect(within(canvasElement).getByText('Medlemsbeviset er utløpt')).toBeVisible();
+    await expect(within(canvasElement).getByText('The membership card has expired')).toBeVisible();
   },
 };
 
@@ -203,19 +203,19 @@ export const ServerValidationWithDuplicateReactStately = {
   render: () => (
     <FormContext.Provider
       value={{
-        validationErrors: { file: 'Medlemsbeviset er utløpt' },
+        validationErrors: { file: 'The membership card has expired' },
         validationBehavior: 'native',
       }}
     >
       <div className="w-72 max-w-full p-4">
         <FileUpload name="file">
-          <Label>Last opp medlemsbevis</Label>
-          <Button variant="secondary">Velg fil</Button>
+          <Label>Upload membership card</Label>
+          <Button variant="secondary">Choose file</Button>
         </FileUpload>
       </div>
     </FormContext.Provider>
   ),
   play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
-    await expect(within(canvasElement).getByText('Medlemsbeviset er utløpt')).toBeVisible();
+    await expect(within(canvasElement).getByText('The membership card has expired')).toBeVisible();
   },
 };
