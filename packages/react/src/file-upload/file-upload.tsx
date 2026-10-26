@@ -395,12 +395,8 @@ const FileUploadField = ({
   );
 };
 
-/**
- * RAC's Form provides server errors through react-stately's FormValidationContext, but
- * useFormValidationState reads it from our react-stately copy. If an app ends up with two
- * copies, the errors never reach the file upload. RAC's FormContext carries the same
- * validationErrors, so we pass them on to our copy from there.
- */
+// RAC's Form provides server errors on its own react-stately copy, which may not be ours.
+// Its FormContext carries the same validationErrors, so pass them on to our copy from there.
 const FileUpload = (props: FileUploadProps) => {
   const formContext = useSlottedContext(FormContext);
   const validationErrors = useContext(FormValidationContext);
