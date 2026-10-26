@@ -5,6 +5,7 @@ import {
   type ReactNode,
   type SetStateAction,
   useCallback,
+  useContext,
   useEffect,
   useId,
   useRef,
@@ -20,7 +21,10 @@ import { useFormValidation } from 'react-aria/private/form/useFormValidation';
 import { useFormReset } from 'react-aria/private/utils/useFormReset';
 import { useUpdateEffect } from 'react-aria/private/utils/useUpdateEffect';
 import { useField } from 'react-aria/useField';
-import { useFormValidationState } from 'react-stately/private/form/useFormValidationState';
+import {
+  FormValidationContext,
+  useFormValidationState,
+} from 'react-stately/private/form/useFormValidationState';
 import { useControlledState } from 'react-stately/useControlledState';
 
 import { ErrorMessage } from '../label';
@@ -149,7 +153,7 @@ function uniqueFileNames(files: File[]) {
   });
 }
 
-const FileUpload = ({
+const FileUploadField = ({
   children,
   files: _files,
   onChange,
@@ -388,6 +392,23 @@ const FileUpload = ({
         )}
       </div>
     </Provider>
+  );
+};
+
+/**
+ * RAC's Form provides server errors through react-stately's FormValidationContext, but
+ * useFormValidationState reads it from our react-stately copy. If an app ends up with two
+ * copies, the errors never reach the file upload. RAC's FormContext carries the same
+ * validationErrors, so we pass them on to our copy from there.
+ */
+const FileUpload = (props: FileUploadProps) => {
+  const formContext = useSlottedContext(FormContext);
+  const validationErrors = useContext(FormValidationContext);
+
+  return (
+    <FormValidationContext.Provider value={formContext?.validationErrors ?? validationErrors}>
+      <FileUploadField {...props} />
+    </FormValidationContext.Provider>
   );
 };
 
