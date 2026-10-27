@@ -1,5 +1,6 @@
 import type { Meta } from '@storybook/react-vite';
 import { useState } from 'react';
+import { Form as RACForm, FormContext } from 'react-aria-components/Form';
 import { expect, fn, userEvent, within } from 'storybook/test';
 
 import { Button } from '../button';
@@ -177,3 +178,44 @@ export const InForm = () => (
     <Button type="submit">Send inn</Button>
   </form>
 );
+
+export const ServerValidation = {
+  render: () => (
+    <RACForm
+      className="flex w-72 max-w-full flex-col items-start gap-4 p-4"
+      validationErrors={{ file: 'The membership card has expired' }}
+    >
+      <FileUpload name="file">
+        <Label>Upload membership card</Label>
+        <Button variant="secondary">Choose file</Button>
+      </FileUpload>
+    </RACForm>
+  ),
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    await expect(within(canvasElement).getByText('The membership card has expired')).toBeVisible();
+  },
+};
+
+// What an app with two react-stately copies looks like to FileUpload: RAC's FormContext has the
+// server errors, but our copy's FormValidationContext is empty.
+export const ServerValidationWithDuplicateReactStately = {
+  tags: ['!dev', '!autodocs'],
+  render: () => (
+    <FormContext.Provider
+      value={{
+        validationErrors: { file: 'The membership card has expired' },
+        validationBehavior: 'native',
+      }}
+    >
+      <div className="w-72 max-w-full p-4">
+        <FileUpload name="file">
+          <Label>Upload membership card</Label>
+          <Button variant="secondary">Choose file</Button>
+        </FileUpload>
+      </div>
+    </FormContext.Provider>
+  ),
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    await expect(within(canvasElement).getByText('The membership card has expired')).toBeVisible();
+  },
+};
