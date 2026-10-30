@@ -1,7 +1,8 @@
-FROM node:24.21.0-alpine AS base
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
+# pnpm is taken from its own standalone image (the Alpine variant, to match the
+# libc of the runtime stage below), which is how pnpm documents installing it
+# (https://pnpm.io/docker). It has no `node`, so pnpm downloads the runtime
+# declared in package.json's `devEngines.runtime` when it is needed.
+FROM ghcr.io/pnpm/pnpm:12.15.0-alpine@sha256:f164ca19f7736a0994dae195b81756cd969542a93ef692f5ab466759d06c1da9 AS base
 
 FROM base AS prod-deps
 COPY . /app
@@ -40,7 +41,7 @@ RUN --mount=type=secret,id=sanity_studio_deploy_token \
   SANITY_AUTH_TOKEN=$(cat /run/secrets/sanity_studio_deploy_token) \
   pnpm sanity:schema:deploy
 
-FROM base
+FROM node:26-alpine@sha256:c6ad9e9c1d80f6eb607c26b4b0a132ff7a2344fad1c78ea3baa2a7d4c8de6d94
 WORKDIR /app/apps/docs
 ENV NODE_ENV="production"
 
