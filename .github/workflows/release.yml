@@ -29,14 +29,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Configure GitHub Packages auth
-        # pnpm/setup has no `registry-url` equivalent, so write the token into
-        # the runner's own (ephemeral, never committed) user-level .npmrc
-        # before pnpm/setup installs dependencies below.
-        run: echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" >> ~/.npmrc
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Setup pnpm, node and install dependencies
         uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
         with:
@@ -44,6 +36,17 @@ jobs:
           # `packageManager` and `devEngines.runtime` fields.
           cache: true
           install: true
+        # GitHub Packages auth for @code-obos (the registry itself is mapped in
+        # the project .npmrc). Step-level env covers this action's install.
+        env:
+          pnpm_config__auth: |
+            {
+              "https://npm.pkg.github.com": {
+                "@code-obos": {
+                  "authToken": ${{ toJSON(secrets.GITHUB_TOKEN) }}
+                }
+              }
+            }
 
       - name: Create Release Pull Request
         uses: changesets/action@ae32849d5ba541f9ae29e40e22a623bc13562f51 # v2.1.2
