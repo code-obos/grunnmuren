@@ -29,21 +29,21 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
-        with:
-          node-version: 24.x
-
-      - name: Setup npm credentials
-        run: |
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
-
-      - name: Install Dependencies
-        run: pnpm --filter "./packages/**" install --frozen-lockfile
+      - name: Configure GitHub Packages auth
+        # pnpm/setup has no `registry-url` equivalent, so write the token into
+        # the runner's own (ephemeral, never committed) user-level .npmrc
+        # before pnpm/setup installs dependencies below.
+        run: echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" >> ~/.npmrc
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup pnpm, node and install dependencies
+        uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
+        with:
+          # pnpm version and node runtime are read from package.json's
+          # `packageManager` and `devEngines.runtime` fields.
+          cache: true
+          install: true
 
       - name: Create Release Pull Request
         uses: changesets/action@ae32849d5ba541f9ae29e40e22a623bc13562f51 # v2.1.2
