@@ -4,6 +4,10 @@
 # declared in package.json's `devEngines.runtime` when it is needed.
 FROM ghcr.io/pnpm/pnpm:12.15.0-alpine@sha256:f164ca19f7736a0994dae195b81756cd969542a93ef692f5ab466759d06c1da9 AS base
 
+# The musl Node.js runtime that pnpm downloads is linked against libatomic,
+# which the pnpm Alpine image doesn't ship.
+RUN apk add --no-cache libatomic
+
 FROM base AS prod-deps
 COPY . /app
 WORKDIR /app
