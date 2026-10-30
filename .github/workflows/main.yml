@@ -31,7 +31,7 @@ jobs:
         with:
           # pnpm version and node runtime are read from package.json's
           # `packageManager` and `devEngines.runtime` fields.
-          cache: false
+          cache: true
           install: true
         # GitHub Packages auth for @code-obos (the registry itself is mapped in
         # the project .npmrc). Step-level env covers this action's install.
