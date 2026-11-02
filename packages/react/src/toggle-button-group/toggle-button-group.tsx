@@ -1,4 +1,4 @@
-import { cx } from 'cva';
+import { cva, cx, type VariantProps } from 'cva';
 import type { RefAttributes } from 'react';
 import {
   ToggleButton as RACToggleButton,
@@ -9,6 +9,32 @@ import {
   type ToggleButtonGroupProps as RACToggleButtonGroupProps,
 } from 'react-aria-components/ToggleButtonGroup';
 
+const toggleButtonVariants = cva({
+  base: [
+    'inline-flex min-h-[44px] cursor-pointer items-center justify-center gap-2 rounded-md font-medium transition-colors duration-200',
+    'text-neutral-text-default',
+    'focus-visible:outline-focus focus-visible:-outline-offset-2',
+    'data-selected:focus-visible:outline-focus-inset data-selected:focus-visible:outline-white',
+    'data-hovered:bg-primary-surface-hover',
+    'data-selected:bg-primary-base-default data-selected:text-primary-base-contrast-default data-selected:data-hovered:bg-primary-base-hover',
+    'data-disabled:hidden',
+    '[&_svg]:size-5 [&_svg]:shrink-0',
+  ],
+  variants: {
+    /**
+     * When the button has a single icon and no text. Makes the button square.
+     * @default false
+     */
+    isIconOnly: {
+      true: 'min-w-[44px]',
+      false: 'px-4',
+    },
+  },
+  defaultVariants: {
+    isIconOnly: false,
+  },
+});
+
 type ToggleButtonGroupProps = Omit<RACToggleButtonGroupProps, 'className'> &
   RefAttributes<HTMLDivElement> & {
     /** CSS classes to apply to the group */
@@ -16,16 +42,12 @@ type ToggleButtonGroupProps = Omit<RACToggleButtonGroupProps, 'className'> &
   };
 
 type ToggleButtonProps = Omit<RACToggleButtonProps, 'className' | 'id' | 'children'> &
+  VariantProps<typeof toggleButtonVariants> &
   RefAttributes<HTMLButtonElement> & {
     /** Unique key of the button within its group. Used for `selectedKeys`. */
     id: string;
     /** Text, icon and text, or only an icon. An icon-only button needs an `aria-label`. */
     children: React.ReactNode;
-    /**
-     * When the button has a single icon and no text. Makes the button square.
-     * @default false
-     */
-    isIconOnly?: boolean;
     /** CSS classes to apply to the button */
     className?: string;
   };
@@ -53,23 +75,10 @@ function ToggleButtonGroup(props: ToggleButtonGroupProps) {
 
 /** A button within a `ToggleButtonGroup` that can be toggled on and off. */
 function ToggleButton(props: ToggleButtonProps) {
-  const { className, isIconOnly = false, ...restProps } = props;
+  const { className, isIconOnly, ...restProps } = props;
 
   return (
-    <RACToggleButton
-      {...restProps}
-      className={cx(
-        'inline-flex min-h-[44px] cursor-pointer items-center justify-center gap-2 rounded-md font-medium transition-colors duration-200',
-        isIconOnly ? 'min-w-[44px]' : 'px-4',
-        'text-neutral-text-default',
-        'focus-visible:outline-focus-inset data-selected:focus-visible:outline-white',
-        'data-hovered:bg-primary-surface-hover',
-        'data-selected:bg-primary-base-default data-selected:text-primary-base-contrast-default data-selected:data-hovered:bg-primary-base-hover',
-        'data-disabled:hidden',
-        '[&_svg]:size-5 [&_svg]:shrink-0',
-        className,
-      )}
-    />
+    <RACToggleButton {...restProps} className={toggleButtonVariants({ className, isIconOnly })} />
   );
 }
 
