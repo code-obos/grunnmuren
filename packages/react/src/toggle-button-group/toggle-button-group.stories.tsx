@@ -207,3 +207,17 @@ export const Vertical = () => (
     </ToggleButton>
   </ToggleButtonGroup>
 );
+
+export const VerticalIconOnly = () => (
+  <ToggleButtonGroup aria-label="Visning" orientation="vertical" defaultSelectedKeys={['list']}>
+    <ToggleButton id="list" aria-label="Liste" isIconOnly>
+      <List />
+    </ToggleButton>
+    <ToggleButton id="map" aria-label="Kart" isIconOnly>
+      <MapPin />
+    </ToggleButton>
+    <ToggleButton id="grid" aria-label="Rutenett" isIconOnly>
+      <LayoutGrid />
+    </ToggleButton>
+  </ToggleButtonGroup>
+);
