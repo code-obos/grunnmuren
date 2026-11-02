@@ -62,7 +62,7 @@ function ToggleButton(props: ToggleButtonProps) {
         'inline-flex min-h-[44px] cursor-pointer items-center justify-center gap-2 rounded-md font-medium transition-colors duration-200',
         isIconOnly ? 'min-w-[44px]' : 'px-4',
         'text-neutral-text-default',
-        'focus-visible:outline-focus-inset focus-visible:outline-white',
+        'focus-visible:outline-focus-inset data-selected:focus-visible:outline-white',
         'data-hovered:bg-primary-surface-hover',
         'data-selected:bg-primary-base-default data-selected:text-primary-base-contrast-default data-selected:data-hovered:bg-primary-base-hover',
         'data-disabled:hidden',
