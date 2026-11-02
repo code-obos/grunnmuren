@@ -1,4 +1,11 @@
-import { Calendar, List, MapPin } from '@obosbbl/grunnmuren-icons-react';
+import {
+  ArrowsRightLeft,
+  Calendar,
+  LayoutGrid,
+  List,
+  Lock,
+  MapPin,
+} from '@obosbbl/grunnmuren-icons-react';
 import type { Meta } from '@storybook/react-vite';
 import { useState } from 'react';
 import type { Selection } from 'react-aria-components/GridList';
@@ -21,8 +28,14 @@ export default meta;
 /** Only one button can be selected at a time. This is the default selection mode. */
 export const SingleSelection = () => (
   <ToggleButtonGroup aria-label="Rentetype" defaultSelectedKeys={['fixed']} disallowEmptySelection>
-    <ToggleButton id="fixed">Fastrente</ToggleButton>
-    <ToggleButton id="floating">Flytende rente</ToggleButton>
+    <ToggleButton id="fixed">
+      <Lock />
+      Fastrente
+    </ToggleButton>
+    <ToggleButton id="floating">
+      <ArrowsRightLeft />
+      Flytende rente
+    </ToggleButton>
   </ToggleButtonGroup>
 );
 
@@ -33,14 +46,6 @@ export const MultipleSelection = () => (
     selectionMode="multiple"
     defaultSelectedKeys={['list', 'map']}
   >
-    <ToggleButton id="list">Liste</ToggleButton>
-    <ToggleButton id="map">Kart</ToggleButton>
-    <ToggleButton id="calendar">Kalender</ToggleButton>
-  </ToggleButtonGroup>
-);
-
-export const WithIcons = () => (
-  <ToggleButtonGroup aria-label="Visning" defaultSelectedKeys={['list']}>
     <ToggleButton id="list">
       <List />
       Liste
@@ -78,15 +83,28 @@ export const Disabled = () => (
       isDisabled
       defaultSelectedKeys={['list']}
     >
-      <ToggleButton id="list">Liste</ToggleButton>
-      <ToggleButton id="map">Kart</ToggleButton>
-    </ToggleButtonGroup>
-    <ToggleButtonGroup aria-label="Én knapp deaktivert" defaultSelectedKeys={['list']}>
-      <ToggleButton id="list">Liste</ToggleButton>
-      <ToggleButton id="map" isDisabled>
+      <ToggleButton id="list">
+        <List />
+        Liste
+      </ToggleButton>
+      <ToggleButton id="map">
+        <MapPin />
         Kart
       </ToggleButton>
-      <ToggleButton id="calendar">Kalender</ToggleButton>
+    </ToggleButtonGroup>
+    <ToggleButtonGroup aria-label="Én knapp deaktivert" defaultSelectedKeys={['list']}>
+      <ToggleButton id="list">
+        <List />
+        Liste
+      </ToggleButton>
+      <ToggleButton id="map" isDisabled>
+        <MapPin />
+        Kart
+      </ToggleButton>
+      <ToggleButton id="calendar">
+        <Calendar />
+        Kalender
+      </ToggleButton>
     </ToggleButtonGroup>
   </div>
 );
@@ -101,8 +119,14 @@ export const Controlled = () => {
         selectedKeys={selected}
         onSelectionChange={setSelected}
       >
-        <ToggleButton id="fixed">Fastrente</ToggleButton>
-        <ToggleButton id="floating">Flytende rente</ToggleButton>
+        <ToggleButton id="fixed">
+          <Lock />
+          Fastrente
+        </ToggleButton>
+        <ToggleButton id="floating">
+          <ArrowsRightLeft />
+          Flytende rente
+        </ToggleButton>
       </ToggleButtonGroup>
       <p>Valgt: {selected === 'all' ? 'alle' : [...selected].join(', ') || 'ingen'}</p>
     </div>
@@ -111,8 +135,17 @@ export const Controlled = () => {
 
 export const Vertical = () => (
   <ToggleButtonGroup aria-label="Visning" orientation="vertical" defaultSelectedKeys={['list']}>
-    <ToggleButton id="list">Liste</ToggleButton>
-    <ToggleButton id="map">Kart</ToggleButton>
-    <ToggleButton id="grid">Rutenett</ToggleButton>
+    <ToggleButton id="list">
+      <List />
+      Liste
+    </ToggleButton>
+    <ToggleButton id="map">
+      <MapPin />
+      Kart
+    </ToggleButton>
+    <ToggleButton id="grid">
+      <LayoutGrid />
+      Rutenett
+    </ToggleButton>
   </ToggleButtonGroup>
 );

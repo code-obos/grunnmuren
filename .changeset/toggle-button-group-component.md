@@ -6,7 +6,13 @@ Add `UNSAFE_ToggleButtonGroup` and `UNSAFE_ToggleButton` components (beta). A se
 
 ```tsx
 <UNSAFE_ToggleButtonGroup aria-label="Rentetype" defaultSelectedKeys={['fixed']}>
-  <UNSAFE_ToggleButton id="fixed">Fastrente</UNSAFE_ToggleButton>
-  <UNSAFE_ToggleButton id="floating">Flytende rente</UNSAFE_ToggleButton>
+  <UNSAFE_ToggleButton id="fixed">
+    <Lock />
+    Fastrente
+  </UNSAFE_ToggleButton>
+  <UNSAFE_ToggleButton id="floating">
+    <ArrowsRightLeft />
+    Flytende rente
+  </UNSAFE_ToggleButton>
 </UNSAFE_ToggleButtonGroup>
 ```
