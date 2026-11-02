@@ -120,38 +120,51 @@ export const IconOnly = () => (
   </ToggleButtonGroup>
 );
 
-export const Disabled = () => (
-  <div className="flex flex-col gap-6">
-    <ToggleButtonGroup
-      aria-label="Hele gruppen deaktivert"
-      isDisabled
-      defaultSelectedKeys={['list']}
-    >
-      <ToggleButton id="list">
-        <List />
-        Liste
-      </ToggleButton>
-      <ToggleButton id="map">
-        <MapPin />
-        Kart
-      </ToggleButton>
-    </ToggleButtonGroup>
-    <ToggleButtonGroup aria-label="Én knapp deaktivert" defaultSelectedKeys={['list']}>
-      <ToggleButton id="list">
-        <List />
-        Liste
-      </ToggleButton>
-      <ToggleButton id="map" isDisabled>
-        <MapPin />
-        Kart
-      </ToggleButton>
-      <ToggleButton id="calendar">
-        <Calendar />
-        Kalender
-      </ToggleButton>
-    </ToggleButtonGroup>
-  </div>
-);
+/**
+ * Disabled buttons and groups are hidden entirely, since the design system avoids disabled states.
+ * Here only «Liste» and «Kalender» are shown, and the fully disabled group is not rendered.
+ */
+export const Disabled: Story = {
+  render: () => (
+    <div className="flex flex-col items-start gap-6">
+      <ToggleButtonGroup
+        aria-label="Hele gruppen deaktivert"
+        isDisabled
+        defaultSelectedKeys={['list']}
+      >
+        <ToggleButton id="list">
+          <List />
+          Liste
+        </ToggleButton>
+        <ToggleButton id="map">
+          <MapPin />
+          Kart
+        </ToggleButton>
+      </ToggleButtonGroup>
+      <ToggleButtonGroup aria-label="Én knapp deaktivert" defaultSelectedKeys={['list']}>
+        <ToggleButton id="list">
+          <List />
+          Liste
+        </ToggleButton>
+        <ToggleButton id="map" isDisabled>
+          <MapPin />
+          Kart
+        </ToggleButton>
+        <ToggleButton id="calendar">
+          <Calendar />
+          Kalender
+        </ToggleButton>
+      </ToggleButtonGroup>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.queryByRole('radiogroup', { name: 'Hele gruppen deaktivert' })).toBeNull();
+    const group = canvas.getByRole('radiogroup', { name: 'Én knapp deaktivert' });
+    await expect(within(group).queryByRole('radio', { name: 'Kart' })).toBeNull();
+    await expect(within(group).getAllByRole('radio')).toHaveLength(2);
+  },
+};
 
 export const Controlled = () => {
   const [selected, setSelected] = useState<Set<Key>>(new Set(['fixed']));

@@ -43,6 +43,8 @@ function ToggleButtonGroup(props: ToggleButtonGroupProps) {
       className={cx(
         'border-neutral-border-strong bg-neutral-surface-default inline-flex gap-1 rounded-lg border-2 p-1',
         'data-[orientation=vertical]:flex-col',
+        // Hide disabled groups and buttons entirely — the design system avoids disabled states (see https://grunnmuren.obos.no/disabled-state)
+        'data-disabled:hidden',
         className,
       )}
     />
@@ -63,7 +65,7 @@ function ToggleButton(props: ToggleButtonProps) {
         'focus-visible:outline-focus-inset focus-visible:outline-white',
         'data-hovered:bg-primary-surface-hover',
         'data-selected:bg-primary-base-default data-selected:text-primary-base-contrast-default data-selected:data-hovered:bg-primary-base-hover',
-        'data-disabled:cursor-not-allowed data-disabled:opacity-50',
+        'data-disabled:hidden',
         '[&_svg]:size-5 [&_svg]:shrink-0',
         className,
       )}
