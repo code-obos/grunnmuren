@@ -1,5 +1,5 @@
 import { cva, cx } from 'cva';
-import { type RefAttributes, useContext, useEffect } from 'react';
+import { createContext, type RefAttributes, useContext, useEffect } from 'react';
 import {
   Tab as RACTab,
   TabList as RACTabList,
@@ -24,6 +24,69 @@ const tabsVariants = cva({
   },
 });
 
+type TabsVariant = 'primary' | 'secondary';
+
+const TabsVariantContext = createContext<TabsVariant>('secondary');
+
+const tabListVariants = cva({
+  base: [
+    'group/tablist',
+    // Ensure the tab list is scrollable
+    'scrollbar-hidden overflow-x-auto',
+    'flex w-fit max-w-full',
+    // Ensure tabs don't shrink and maintain min-width
+    '*:min-w-fit *:shrink-0',
+    // Flex direction based on orientation
+    'data-[orientation=vertical]:flex-col',
+  ],
+  variants: {
+    variant: {
+      primary: 'border-primary-base-default gap-1 rounded-xl border-2 p-1',
+      secondary: [
+        // Divider line
+        'border-neutral-border-subtle',
+        'data-[orientation=horizontal]:border-b',
+        'data-[orientation=vertical]:border-r',
+        // Selection highlight based on orientation
+        'data-[orientation=horizontal]:*:border-y-2',
+        'data-[orientation=horizontal]:*:data-selected:border-b-primary-base-default',
+        'data-[orientation=vertical]:*:border-r-2',
+        'data-[orientation=vertical]:*:data-selected:border-r-primary-base-default',
+      ],
+    },
+  },
+});
+
+const tabVariants = cva({
+  base: [
+    'description h-11 cursor-pointer px-4 py-[0.71875rem] font-light',
+    // Transition
+    'duration-150 ease-out',
+    // Hide disabled tabs entirely — the design system avoids disabled states (see https://grunnmuren.obos.no/disabled-state)
+    'data-disabled:hidden',
+    // Hover with layout shift prevention using pseudo-element
+    'after:invisible after:block after:h-0 after:overflow-hidden after:font-medium after:content-[attr(data-text)]',
+    'data-hovered:font-medium data-pressed:font-medium data-selected:font-medium',
+  ],
+  variants: {
+    variant: {
+      primary: [
+        'data-focus-visible:outline-focus-inset rounded-lg',
+        // Not transition-colors: animating outline-color makes the focus ring flash dark on the selected tab
+        'transition-[color,background-color]',
+        'data-selected:bg-primary-base-default data-selected:text-primary-base-contrast-default',
+        'data-selected:data-focus-visible:outline-primary-base-contrast-default',
+        'data-hovered:not-data-selected:bg-primary-surface-hover',
+      ],
+      secondary: [
+        'data-focus-visible:outline-focus data-focus-visible:-outline-offset-10',
+        'border-transparent transition-colors',
+        'data-selected:text-primary-text-default data-pressed:text-primary-text-default',
+      ],
+    },
+  },
+});
+
 type TabsProps = Omit<RACTabsProps, 'className'> &
   RefAttributes<HTMLDivElement> & {
     /**
@@ -31,6 +94,11 @@ type TabsProps = Omit<RACTabsProps, 'className'> &
      */
     className?: string;
     orientation?: 'horizontal' | 'vertical';
+    /**
+     * The visual style of the tabs
+     * @default secondary
+     */
+    variant?: TabsVariant;
   };
 
 type TabListProps = Omit<RACTabListProps<object>, 'className'> &
@@ -64,16 +132,24 @@ type TabPanelProps = Omit<RACTabPanelProps, 'className'> &
  * and allows users to navigate between them.
  */
 function Tabs(props: TabsProps) {
-  const { className, children, orientation = 'horizontal', ...restProps } = props;
+  const {
+    className,
+    children,
+    orientation = 'horizontal',
+    variant = 'secondary',
+    ...restProps
+  } = props;
 
   return (
-    <RACTabs
-      {...restProps}
-      orientation={orientation}
-      className={tabsVariants({ className, orientation })}
-    >
-      {children}
-    </RACTabs>
+    <TabsVariantContext value={variant}>
+      <RACTabs
+        {...restProps}
+        orientation={orientation}
+        className={tabsVariants({ className, orientation })}
+      >
+        {children}
+      </RACTabs>
+    </TabsVariantContext>
   );
 }
 
@@ -96,6 +172,7 @@ type _TabListStateContextType = {
  */
 function TabList({ className, children, ...restProps }: TabListProps) {
   const state = useContext(TabListStateContext) as _TabListStateContextType;
+  const variant = useContext(TabsVariantContext);
 
   const { scrollContainerRef, canScrollLeft, canScrollRight, hasScrollingOccurred } =
     useHorizontalScroll<HTMLDivElement>();
@@ -175,27 +252,7 @@ function TabList({ className, children, ...restProps }: TabListProps) {
         {...restProps}
         ref={scrollContainerRef}
         data-scroll-animation={false}
-        className={cx(
-          className,
-          'group/tablist',
-          // Ensure the tab list is scrollable
-          'scrollbar-hidden overflow-x-auto',
-          'flex w-fit max-w-full',
-          // Ensure tabs don't shrink and maintain min-width
-          '*:min-w-fit *:shrink-0',
-          // Divider line
-          'border-neutral-border-subtle',
-          'data-[orientation=horizontal]:border-b',
-          'data-[orientation=vertical]:border-r',
-          // Selection highlight based on orientation
-          'data-[orientation=horizontal]:*:border-y-2',
-          'data-[orientation=horizontal]:*:data-selected:border-b-primary-base-default',
-          'data-[orientation=vertical]:*:border-r-2',
-          'data-[orientation=vertical]:*:data-selected:border-r-primary-base-default',
-
-          // Flex direction based on orientation
-          'data-[orientation=vertical]:flex-col',
-        )}
+        className={cx(className, tabListVariants({ variant }))}
         style={{
           WebkitOverflowScrolling: 'touch', // Smooth scrolling on iOS
         }}
@@ -224,26 +281,12 @@ function TabList({ className, children, ...restProps }: TabListProps) {
  */
 function Tab(props: TabProps) {
   const { className, children, ...restProps } = props;
+  const variant = useContext(TabsVariantContext);
 
   return (
     <RACTab
       {...restProps}
-      className={cx(
-        className,
-        'data-focus-visible:outline-focus data-focus-visible:-outline-offset-10',
-        'description h-11 cursor-pointer border-transparent px-4 py-[0.71875rem] font-light',
-        // Transition
-        'transition-colors duration-150 ease-out',
-        // Hide disabled tabs entirely — the design system avoids disabled states (see https://grunnmuren.obos.no/disabled-state)
-        'data-disabled:hidden',
-        // Selection
-        'data-selected:text-primary-text-default data-selected:font-medium',
-        // Hover with layout shift prevention using pseudo-element
-        'after:invisible after:block after:h-0 after:overflow-hidden after:font-medium after:content-[attr(data-text)]',
-        'data-hovered:font-medium',
-        // Pressed
-        'data-pressed:text-primary-text-default data-pressed:font-medium',
-      )}
+      className={cx(className, tabVariants({ variant }))}
       data-text={typeof children === 'string' ? children : ''}
     >
       {children}
