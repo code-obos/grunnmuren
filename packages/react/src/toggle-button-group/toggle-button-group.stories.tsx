@@ -6,9 +6,10 @@ import {
   Lock,
   MapPin,
 } from '@obosbbl/grunnmuren-icons-react';
-import type { Meta } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import type { Selection } from 'react-aria-components/GridList';
+import type { Key } from 'react-aria-components';
+import { expect, userEvent, within } from 'storybook/test';
 
 import {
   UNSAFE_ToggleButton as ToggleButton,
@@ -25,41 +26,84 @@ const meta = {
 
 export default meta;
 
+type Story = StoryObj<typeof meta>;
+
 /** Only one button can be selected at a time. This is the default selection mode. */
-export const SingleSelection = () => (
-  <ToggleButtonGroup aria-label="Rentetype" defaultSelectedKeys={['fixed']} disallowEmptySelection>
-    <ToggleButton id="fixed">
-      <Lock />
-      Fastrente
-    </ToggleButton>
-    <ToggleButton id="floating">
-      <ArrowsRightLeft />
-      Flytende rente
-    </ToggleButton>
-  </ToggleButtonGroup>
-);
+export const SingleSelection: Story = {
+  render: () => (
+    <ToggleButtonGroup
+      aria-label="Rentetype"
+      defaultSelectedKeys={['fixed']}
+      disallowEmptySelection
+    >
+      <ToggleButton id="fixed">
+        <Lock />
+        Fastrente
+      </ToggleButton>
+      <ToggleButton id="floating">
+        <ArrowsRightLeft />
+        Flytende rente
+      </ToggleButton>
+    </ToggleButtonGroup>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('radiogroup', { name: 'Rentetype' })).toBeInTheDocument();
+    const fixed = canvas.getByRole('radio', { name: 'Fastrente' });
+    const floating = canvas.getByRole('radio', { name: 'Flytende rente' });
+    await expect(fixed).toHaveAttribute('aria-checked', 'true');
+
+    await userEvent.click(floating);
+    await expect(floating).toHaveAttribute('aria-checked', 'true');
+    await expect(fixed).toHaveAttribute('aria-checked', 'false');
+
+    await userEvent.keyboard('{ArrowLeft}');
+    await expect(fixed).toHaveFocus();
+    await userEvent.keyboard(' ');
+    await expect(fixed).toHaveAttribute('aria-checked', 'true');
+  },
+};
 
 /** Several buttons can be selected at the same time. */
-export const MultipleSelection = () => (
-  <ToggleButtonGroup
-    aria-label="Visning"
-    selectionMode="multiple"
-    defaultSelectedKeys={['list', 'map']}
-  >
-    <ToggleButton id="list">
-      <List />
-      Liste
-    </ToggleButton>
-    <ToggleButton id="map">
-      <MapPin />
-      Kart
-    </ToggleButton>
-    <ToggleButton id="calendar">
-      <Calendar />
-      Kalender
-    </ToggleButton>
-  </ToggleButtonGroup>
-);
+export const MultipleSelection: Story = {
+  render: () => (
+    <ToggleButtonGroup
+      aria-label="Visning"
+      selectionMode="multiple"
+      defaultSelectedKeys={['list', 'map']}
+    >
+      <ToggleButton id="list">
+        <List />
+        Liste
+      </ToggleButton>
+      <ToggleButton id="map">
+        <MapPin />
+        Kart
+      </ToggleButton>
+      <ToggleButton id="calendar">
+        <Calendar />
+        Kalender
+      </ToggleButton>
+    </ToggleButtonGroup>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('toolbar', { name: 'Visning' })).toBeInTheDocument();
+    const calendar = canvas.getByRole('button', { name: 'Kalender' });
+    await expect(canvas.getByRole('button', { name: 'Liste' })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
+    await expect(calendar).toHaveAttribute('aria-pressed', 'false');
+
+    await userEvent.click(calendar);
+    await expect(calendar).toHaveAttribute('aria-pressed', 'true');
+    await expect(canvas.getByRole('button', { name: 'Kart' })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
+  },
+};
 
 /** Icon-only buttons are square and need an `aria-label`. */
 export const IconOnly = () => (
@@ -110,7 +154,7 @@ export const Disabled = () => (
 );
 
 export const Controlled = () => {
-  const [selected, setSelected] = useState<Selection>(new Set(['fixed']));
+  const [selected, setSelected] = useState<Set<Key>>(new Set(['fixed']));
 
   return (
     <div className="flex flex-col items-start gap-4">
@@ -118,6 +162,7 @@ export const Controlled = () => {
         aria-label="Rentetype"
         selectedKeys={selected}
         onSelectionChange={setSelected}
+        disallowEmptySelection
       >
         <ToggleButton id="fixed">
           <Lock />
@@ -128,7 +173,7 @@ export const Controlled = () => {
           Flytende rente
         </ToggleButton>
       </ToggleButtonGroup>
-      <p>Valgt: {selected === 'all' ? 'alle' : [...selected].join(', ') || 'ingen'}</p>
+      <p>Valgt: {[...selected].join(', ')}</p>
     </div>
   );
 };

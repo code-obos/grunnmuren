@@ -5,7 +5,11 @@
 Add `UNSAFE_ToggleButtonGroup` and `UNSAFE_ToggleButton` components (beta). A segmented control where one or several buttons can be selected.
 
 ```tsx
-<UNSAFE_ToggleButtonGroup aria-label="Rentetype" defaultSelectedKeys={['fixed']}>
+<UNSAFE_ToggleButtonGroup
+  aria-label="Rentetype"
+  defaultSelectedKeys={['fixed']}
+  disallowEmptySelection
+>
   <UNSAFE_ToggleButton id="fixed">
     <Lock />
     Fastrente
