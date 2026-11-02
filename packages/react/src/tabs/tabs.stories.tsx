@@ -191,3 +191,15 @@ export const PrimaryVertical: Story = {
   },
   render: (args) => <HousingTypeTabs {...args} />,
 };
+
+export const PrimaryWithOverflow: Story = {
+  args: {
+    variant: 'primary',
+    defaultSelectedKey: 'enebolig',
+  },
+  render: (args) => (
+    <div className="max-w-xs">
+      <HousingTypeTabs {...args} />
+    </div>
+  ),
+};

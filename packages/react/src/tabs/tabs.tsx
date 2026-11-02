@@ -57,6 +57,9 @@ const tabListVariants = cva({
   },
 });
 
+// ScrollButton is sized for the 44px secondary list; `!` because cx doesn't merge its position classes
+const primaryScrollButtonClassName = 'inset-y-0.5! h-auto! rounded-lg';
+
 const tabVariants = cva({
   base: [
     'description h-11 cursor-pointer px-4 py-[0.71875rem] font-light',
@@ -76,6 +79,8 @@ const tabVariants = cva({
         'transition-[color,background-color]',
         'data-selected:bg-primary-base-default data-selected:text-primary-base-contrast-default',
         'data-selected:data-focus-visible:outline-primary-base-contrast-default',
+        // Background colours are dropped in forced colors mode, so the selected tab needs a system colour
+        'forced-colors:data-selected:bg-[SelectedItem] forced-colors:data-selected:text-[SelectedItemText]',
         'data-hovered:not-data-selected:bg-primary-surface-hover',
       ],
       secondary: [
@@ -264,6 +269,9 @@ function TabList({ className, children, ...restProps }: TabListProps) {
         onClick={onPrev}
         isVisible={canScrollLeft}
         hasScrollingOccurred={hasScrollingOccurred}
+        className={
+          variant === 'primary' ? cx(primaryScrollButtonClassName, 'left-0.5!') : undefined
+        }
       />
 
       <ScrollButton
@@ -271,6 +279,9 @@ function TabList({ className, children, ...restProps }: TabListProps) {
         onClick={onNext}
         isVisible={canScrollRight}
         hasScrollingOccurred={hasScrollingOccurred}
+        className={
+          variant === 'primary' ? cx(primaryScrollButtonClassName, 'right-0.5!') : undefined
+        }
       />
     </div>
   );
