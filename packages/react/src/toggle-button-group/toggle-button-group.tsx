@@ -63,7 +63,7 @@ function ToggleButtonGroup(props: ToggleButtonGroupProps) {
     <RACToggleButtonGroup
       {...restProps}
       className={cx(
-        'border-neutral-border-strong bg-neutral-surface-default inline-flex gap-1 rounded-lg border-2 p-1',
+        'border-neutral-border-subtle bg-neutral-surface-default inline-flex gap-1 rounded-lg border-2 p-1',
         'data-[orientation=vertical]:flex-col',
         // Hide disabled groups and buttons entirely — the design system avoids disabled states (see https://grunnmuren.obos.no/disabled-state)
         'data-disabled:hidden',
