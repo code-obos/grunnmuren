@@ -41,7 +41,7 @@ const tabListVariants = cva({
   ],
   variants: {
     variant: {
-      primary: 'border-primary-base-default gap-1 rounded-xl border-2 p-1',
+      primary: 'border-neutral-border-subtle gap-1 rounded-xl border-2 p-1',
       secondary: [
         // Divider line
         'border-neutral-border-subtle',
