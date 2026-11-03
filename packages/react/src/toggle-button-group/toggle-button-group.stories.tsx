@@ -61,6 +61,9 @@ export const SingleSelection: Story = {
     await expect(fixed).toHaveFocus();
     await userEvent.keyboard(' ');
     await expect(fixed).toHaveAttribute('aria-checked', 'true');
+
+    // The screenshot is taken right after play, so let the colour transition finish first
+    await Promise.all(document.getAnimations().map((animation) => animation.finished));
   },
 };
 
@@ -102,6 +105,8 @@ export const MultipleSelection: Story = {
       'aria-pressed',
       'true',
     );
+
+    await Promise.all(document.getAnimations().map((animation) => animation.finished));
   },
 };
 
