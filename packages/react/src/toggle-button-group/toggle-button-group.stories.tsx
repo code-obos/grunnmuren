@@ -62,7 +62,8 @@ export const SingleSelection: Story = {
     await userEvent.keyboard(' ');
     await expect(fixed).toHaveAttribute('aria-checked', 'true');
 
-    // The screenshot is taken right after play, so let the colour transition finish first
+    // The screenshot is taken right after play, so leave no hover and let the colour transition finish
+    await userEvent.unhover(floating);
     await Promise.all(document.getAnimations().map((animation) => animation.finished));
   },
 };
@@ -106,6 +107,7 @@ export const MultipleSelection: Story = {
       'true',
     );
 
+    await userEvent.unhover(calendar);
     await Promise.all(document.getAnimations().map((animation) => animation.finished));
   },
 };
