@@ -245,12 +245,9 @@ function TableColumn(props: TableColumnProps) {
               )}
             >
               <ArrowDown
-                key={sortDirection ?? 'none'}
                 className={cx(
-                  'transform-3d motion-reduce:animate-none',
-                  sortDirection === 'descending'
-                    ? 'animate-sort-flip-reverse'
-                    : 'animate-sort-flip rotate-z-180',
+                  'transition-transform duration-300 transform-3d motion-reduce:transition-none',
+                  sortDirection !== 'descending' && 'rotate-x-180',
                 )}
               />
             </span>
