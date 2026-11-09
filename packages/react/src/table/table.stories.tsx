@@ -11,6 +11,7 @@ import {
   UNSAFE_ResizableTableContainer as ResizableTableContainer,
   UNSAFE_TableHeader as TableHeader,
   UNSAFE_TableRow as TableRow,
+  type UNSAFE_SortDescriptor as SortDescriptor,
 } from './table';
 
 const meta = {
@@ -369,6 +370,46 @@ export const ExpandableRows = () => {
                 <TableCell>1 620 kr</TableCell>
               </TableRow>
             ))}
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+};
+
+export const Sortable = () => {
+  const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
+    column: 'product',
+    direction: 'ascending',
+  });
+
+  const sortedData = [...sampleData].sort((a, b) => {
+    const first = a[sortDescriptor.column as 'product' | 'rate'];
+    const second = b[sortDescriptor.column as 'product' | 'rate'];
+    const result = first.localeCompare(second, 'nb', { numeric: true });
+
+    return sortDescriptor.direction === 'descending' ? -result : result;
+  });
+
+  return (
+    <Table
+      aria-label="Sparekonto oversikt"
+      sortDescriptor={sortDescriptor}
+      onSortChange={setSortDescriptor}
+    >
+      <TableHeader>
+        <TableColumn id="product" isRowHeader allowsSorting>
+          Produkt
+        </TableColumn>
+        <TableColumn id="rate" allowsSorting>
+          Gjeldende rente
+        </TableColumn>
+      </TableHeader>
+      <TableBody>
+        {sortedData.map((item) => (
+          <TableRow key={item.id}>
+            <TableCell>{item.product}</TableCell>
+            <TableCell>{item.rate}</TableCell>
           </TableRow>
         ))}
       </TableBody>

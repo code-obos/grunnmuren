@@ -1,4 +1,4 @@
-import { ChevronRight } from '@obosbbl/grunnmuren-icons-react';
+import { ArrowDown, ArrowUp, ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 import { cva, cx } from 'cva';
 import { createContext, type RefAttributes, useCallback, useContext, useState } from 'react';
 import { composeRenderProps } from 'react-aria-components/composeRenderProps';
@@ -9,6 +9,7 @@ import {
   type ColumnProps as RACColumnProps,
   ColumnResizer as RACColumnResizer,
   type ColumnResizerProps as RACColumnResizerProps,
+  type SortDescriptor,
   Row as RACRow,
   type RowProps as RACRowProps,
   Table as RACTable,
@@ -63,10 +64,7 @@ type TableProps = Omit<RACTableProps, 'aria-label' | 'aria-labelledby'> &
 
 type TableHeaderProps = RACTableHeaderProps<object> & RefAttributes<HTMLTableSectionElement>;
 
-type TableColumnProps = RACColumnProps &
-  RefAttributes<HTMLTableCellElement> & {
-    children: React.ReactNode;
-  };
+type TableColumnProps = RACColumnProps & RefAttributes<HTMLTableCellElement>;
 
 type TableBodyProps = RACTableBodyProps<object> & RefAttributes<HTMLTableSectionElement>;
 
@@ -223,6 +221,8 @@ function TableColumn(props: TableColumnProps) {
       {...restProps}
       className={cx(
         className,
+        'group/column',
+        'data-allows-sorting:cursor-pointer',
         'text-neutral-text-default px-4 py-3 text-left text-sm font-medium',
         'data-focus-visible:outline-focus-inset',
         '[&_:not([data-slot=table-column-resizer]):focus-visible]:outline-focus-offset',
@@ -231,7 +231,24 @@ function TableColumn(props: TableColumnProps) {
       )}
       data-slot="table-column"
     >
-      {children}
+      {composeRenderProps(children, (resolved, { allowsSorting, sortDirection }) => (
+        <>
+          {resolved}
+          {allowsSorting && (
+            <span
+              data-slot="sort-indicator"
+              aria-hidden
+              className={cx(
+                'ml-1 inline-block align-middle [&_svg]:size-4',
+                !sortDirection &&
+                  'invisible group-data-focus-visible/column:visible group-data-hovered/column:visible',
+              )}
+            >
+              {sortDirection === 'descending' ? <ArrowDown /> : <ArrowUp />}
+            </span>
+          )}
+        </>
+      ))}
     </RACColumn>
   );
 }
@@ -328,6 +345,7 @@ export {
   UNSAFE_TableContainer,
   TableHeader as UNSAFE_TableHeader,
   TableRow as UNSAFE_TableRow,
+  type SortDescriptor as UNSAFE_SortDescriptor,
   type TableColumnResizerProps as UNSAFE_TableColumnResizerProps,
   type TableBodyProps as UNSAFE_TableBodyProps,
   type TableCellProps as UNSAFE_TableCellProps,
