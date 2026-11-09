@@ -247,7 +247,7 @@ function TableColumn(props: TableColumnProps) {
               <ArrowDown
                 className={cx(
                   'transition-transform duration-300 motion-reduce:transition-none',
-                  sortDirection !== 'descending' && 'rotate-180',
+                  sortDirection !== 'descending' && 'rotate-z-180',
                 )}
               />
             </span>
