@@ -585,3 +585,23 @@
     }
   }
 }
+
+@theme {
+  --animate-sort-flip: sort-flip 300ms ease-in-out;
+  --animate-sort-flip-reverse: sort-flip 300ms ease-in-out reverse;
+
+  @keyframes sort-flip {
+    0% {
+      rotate: z 0deg;
+      transform: rotateX(0deg);
+    }
+    50% {
+      rotate: z 90deg;
+      transform: rotateX(60deg);
+    }
+    100% {
+      rotate: z 180deg;
+      transform: rotateX(0deg);
+    }
+  }
+}

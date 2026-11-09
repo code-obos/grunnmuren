@@ -239,15 +239,18 @@ function TableColumn(props: TableColumnProps) {
               data-slot="sort-indicator"
               aria-hidden
               className={cx(
-                'ml-1 inline-block align-middle [&_svg]:size-4',
+                'ml-1 inline-block align-middle perspective-normal [&_svg]:size-4',
                 !sortDirection &&
                   'invisible group-data-focus-visible/column:visible group-data-hovered/column:visible',
               )}
             >
               <ArrowDown
+                key={sortDirection ?? 'none'}
                 className={cx(
-                  'transition-transform duration-300 transform-3d motion-reduce:transition-none',
-                  sortDirection !== 'descending' && 'rotate-z-180',
+                  'transform-3d motion-reduce:animate-none',
+                  sortDirection === 'descending'
+                    ? 'animate-sort-flip-reverse'
+                    : 'animate-sort-flip rotate-z-180',
                 )}
               />
             </span>
