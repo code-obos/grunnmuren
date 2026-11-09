@@ -1,4 +1,4 @@
-import { ChevronDown, ChevronRight } from '@obosbbl/grunnmuren-icons-react';
+import { ArrowDown, ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 import { cva, cx } from 'cva';
 import { createContext, type RefAttributes, useCallback, useContext, useState } from 'react';
 import { composeRenderProps } from 'react-aria-components/composeRenderProps';
@@ -244,7 +244,7 @@ function TableColumn(props: TableColumnProps) {
                   'invisible group-data-focus-visible/column:visible group-data-hovered/column:visible',
               )}
             >
-              <ChevronDown
+              <ArrowDown
                 className={cx(
                   'transition-transform duration-300 motion-reduce:transition-none',
                   sortDirection !== 'descending' && 'rotate-180',
