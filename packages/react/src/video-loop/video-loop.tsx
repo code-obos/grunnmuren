@@ -19,10 +19,12 @@ type VideoLoopProps = {
    * Think of this just as an alt text, but for a muted video - this text will not be visible, but read by screen readers.
    * */
   alt?: string;
+  /** Image shown before the video plays, e.g. when the browser blocks autoplay. Defaults to the first frame of the video. */
+  poster?: string;
   className?: string;
 };
 
-export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
+export const VideoLoop = ({ src, format, alt, poster, className }: VideoLoopProps) => {
   // Control the video playback state, so that the user can pause and play the video at will, also control the video autoplay
   const [shouldPlay, setShouldPlay] = useState(false);
   // Needed to show the pause button when the video is actually playing (refer to google's autoplay policy: https://developers.google.com/web/updates/2017/09/autoplay-policy-changes)
@@ -32,30 +34,39 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
+  // Follow google's autoplay policy: https://developers.google.com/web/updates/2017/09/autoplay-policy-changes
+  // The play promise can reject (e.g. iOS Low Power Mode), so only show the pause button once playback has actually started
+  const play = () => {
+    setShouldPlay(true);
+    videoRef.current
+      ?.play()
+      .then(() => setIsPlaying(true))
+      .catch(() => {
+        setIsPlaying(false);
+        setShouldPlay(false);
+      });
+  };
+
+  const pause = () => {
+    videoRef.current?.pause();
+    setShouldPlay(false);
+    setIsPlaying(false);
+  };
+
   useEffect(() => {
-    // Autoplay the video if the user does not prefer reduced motion
-    setShouldPlay(!prefersReducedMotion);
+    if (prefersReducedMotion === false) {
+      play();
+    }
   }, [prefersReducedMotion]);
 
-  // Follow google's autoplay policy: https://developers.google.com/web/updates/2017/09/autoplay-policy-changes
-  // "Don't assume a video will play, and don't show a pause button when the video is not actually playing."
-  // "You should always look at the Promise returned by the play function to see if it was rejected:"
-  // This is why we use the promise returned by the play function, and an extra state variable to determine if the video is actually playing or not
-  useEffect(() => {
-    if (!videoRef.current) return;
-
-    if (shouldPlay) {
-      videoRef.current
-        .play()
-        .then(() => setIsPlaying(true))
-        .catch(() => setIsPlaying(false));
+  // Called synchronously from the event handlers so Safari treats it as a user gesture
+  const togglePlayback = () => {
+    if (videoRef.current?.paused) {
+      play();
     } else {
-      videoRef.current.pause();
-      setIsPlaying(false);
+      pause();
     }
-  }, [shouldPlay]);
-
-  const togglePlayback = () => setShouldPlay((prevState) => !prevState);
+  };
 
   const locale = useLocale();
 
@@ -78,6 +89,8 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
         loop={prefersReducedMotion === false}
         autoPlay={prefersReducedMotion === false}
         muted
+        poster={poster}
+        preload="metadata"
         onClick={togglePlayback}
         onEnded={(event) => {
           if (prefersReducedMotion) {
@@ -89,7 +102,11 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
         }}
         data-slot="video"
       >
-        <source src={src} type={`video/${format}`} />
+        {/* The media fragment makes iOS Safari render the first frame when there is no poster */}
+        <source
+          src={!poster && !src.includes('#') ? `${src}#t=0.001` : src}
+          type={`video/${format}`}
+        />
       </video>
       {/* Before the button so the description is read before the control */}
       {alt && <p className="sr-only">{alt}</p>}
