@@ -19,10 +19,12 @@ type VideoLoopProps = {
    * Think of this just as an alt text, but for a muted video - this text will not be visible, but read by screen readers.
    * */
   alt?: string;
+  /** Image shown before the video plays, e.g. when the browser blocks autoplay. Defaults to the first frame of the video. */
+  poster?: string;
   className?: string;
 };
 
-export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
+export const VideoLoop = ({ src, format, alt, poster, className }: VideoLoopProps) => {
   // Control the video playback state, so that the user can pause and play the video at will, also control the video autoplay
   const [shouldPlay, setShouldPlay] = useState(false);
   // Needed to show the pause button when the video is actually playing (refer to google's autoplay policy: https://developers.google.com/web/updates/2017/09/autoplay-policy-changes)
@@ -48,7 +50,11 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
       videoRef.current
         .play()
         .then(() => setIsPlaying(true))
-        .catch(() => setIsPlaying(false));
+        .catch(() => {
+          // Autoplay can be blocked (e.g. iOS Low Power Mode), so reset to show the play button
+          setIsPlaying(false);
+          setShouldPlay(false);
+        });
     } else {
       videoRef.current.pause();
       setIsPlaying(false);
@@ -56,6 +62,9 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
   }, [shouldPlay]);
 
   const togglePlayback = () => setShouldPlay((prevState) => !prevState);
+
+  // Without a poster, iOS Safari doesn't paint a frame until the video plays. The media fragment makes it load the first one.
+  const videoSrc = poster || src.includes('#') ? src : `${src}#t=0.001`;
 
   const locale = useLocale();
 
@@ -78,6 +87,8 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
         loop={prefersReducedMotion === false}
         autoPlay={prefersReducedMotion === false}
         muted
+        poster={poster}
+        preload="metadata"
         onClick={togglePlayback}
         onEnded={(event) => {
           if (prefersReducedMotion) {
@@ -89,7 +100,7 @@ export const VideoLoop = ({ src, format, alt, className }: VideoLoopProps) => {
         }}
         data-slot="video"
       >
-        <source src={src} type={`video/${format}`} />
+        <source src={videoSrc} type={`video/${format}`} />
       </video>
       {/* Before the button so the description is read before the control */}
       {alt && <p className="sr-only">{alt}</p>}
