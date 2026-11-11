@@ -34,34 +34,37 @@ export const VideoLoop = ({ src, format, alt, poster, className }: VideoLoopProp
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  // Follow google's autoplay policy: https://developers.google.com/web/updates/2017/09/autoplay-policy-changes
-  // The play promise can reject (e.g. iOS Low Power Mode), so only show the pause button once playback has actually started
-  const play = () => {
-    setShouldPlay(true);
-    videoRef.current?.play().catch(() => setShouldPlay(false));
-  };
-
-  const pause = () => videoRef.current?.pause();
-
   useEffect(() => {
-    if (prefersReducedMotion === false) {
-      play();
-    } else if (prefersReducedMotion) {
-      pause();
-    }
+    // Autoplay the video if the user does not prefer reduced motion
+    setShouldPlay(!prefersReducedMotion);
   }, [prefersReducedMotion]);
 
-  // Without a poster, iOS Safari doesn't paint a frame until the video plays. The media fragment makes it load the first one.
-  const sourceSrc = poster || src.includes('#') ? src : `${src}#t=0.001`;
+  // Follow google's autoplay policy: https://developers.google.com/web/updates/2017/09/autoplay-policy-changes
+  // "Don't assume a video will play, and don't show a pause button when the video is not actually playing."
+  // "You should always look at the Promise returned by the play function to see if it was rejected:"
+  // This is why we use the promise returned by the play function, and an extra state variable to determine if the video is actually playing or not
+  useEffect(() => {
+    if (!videoRef.current) return;
 
-  // Called synchronously from the event handlers so Safari treats it as a user gesture
-  const togglePlayback = () => {
-    if (videoRef.current?.paused) {
-      play();
+    if (shouldPlay) {
+      videoRef.current
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch(() => {
+          // Autoplay can be blocked (e.g. iOS Low Power Mode), so reset to show the play button
+          setIsPlaying(false);
+          setShouldPlay(false);
+        });
     } else {
-      pause();
+      videoRef.current.pause();
+      setIsPlaying(false);
     }
-  };
+  }, [shouldPlay]);
+
+  const togglePlayback = () => setShouldPlay((prevState) => !prevState);
+
+  // Without a poster, iOS Safari doesn't paint a frame until the video plays. The media fragment makes it load the first one.
+  const videoSrc = poster || src.includes('#') ? src : `${src}#t=0.001`;
 
   const locale = useLocale();
 
@@ -79,11 +82,7 @@ export const VideoLoop = ({ src, format, alt, poster, className }: VideoLoopProp
         aria-hidden
         ref={videoRef}
         // Click anywhere on the video to toggle playback (in addition to the button)
-        className={cx(
-          'size-full max-h-[inherit] cursor-pointer rounded-[inherit] object-cover',
-          // iOS shows its own start button when autoplay is blocked, on top of ours
-          '[&::-webkit-media-controls-start-playback-button]:hidden',
-        )}
+        className="size-full max-h-[inherit] cursor-pointer rounded-[inherit] object-cover"
         playsInline
         loop={prefersReducedMotion === false}
         autoPlay={prefersReducedMotion === false}
@@ -91,21 +90,17 @@ export const VideoLoop = ({ src, format, alt, poster, className }: VideoLoopProp
         poster={poster}
         preload="metadata"
         onClick={togglePlayback}
-        // The browser can pause the video on its own (e.g. iOS when it scrolls out of view), so the state follows the element
-        onPlaying={() => setIsPlaying(true)}
-        onPause={() => {
-          setIsPlaying(false);
-          setShouldPlay(false);
-        }}
         onEnded={(event) => {
           if (prefersReducedMotion) {
             // Reset the video to the beginning if the user prefers reduced motion, since the video will not loop
             event.currentTarget.currentTime = 0;
+            setShouldPlay(false);
+            setIsPlaying(false);
           }
         }}
         data-slot="video"
       >
-        <source src={sourceSrc} type={`video/${format}`} />
+        <source src={videoSrc} type={`video/${format}`} />
       </video>
       {/* Before the button so the description is read before the control */}
       {alt && <p className="sr-only">{alt}</p>}
