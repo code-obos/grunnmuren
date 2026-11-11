@@ -38,26 +38,21 @@ export const VideoLoop = ({ src, format, alt, poster, className }: VideoLoopProp
   // The play promise can reject (e.g. iOS Low Power Mode), so only show the pause button once playback has actually started
   const play = () => {
     setShouldPlay(true);
-    videoRef.current
-      ?.play()
-      .then(() => setIsPlaying(true))
-      .catch(() => {
-        setIsPlaying(false);
-        setShouldPlay(false);
-      });
+    videoRef.current?.play().catch(() => setShouldPlay(false));
   };
 
-  const pause = () => {
-    videoRef.current?.pause();
-    setShouldPlay(false);
-    setIsPlaying(false);
-  };
+  const pause = () => videoRef.current?.pause();
 
   useEffect(() => {
     if (prefersReducedMotion === false) {
       play();
+    } else if (prefersReducedMotion) {
+      pause();
     }
   }, [prefersReducedMotion]);
+
+  // Without a poster, iOS Safari doesn't paint a frame until the video plays. The media fragment makes it load the first one.
+  const sourceSrc = poster || src.includes('#') ? src : `${src}#t=0.001`;
 
   // Called synchronously from the event handlers so Safari treats it as a user gesture
   const togglePlayback = () => {
@@ -84,7 +79,11 @@ export const VideoLoop = ({ src, format, alt, poster, className }: VideoLoopProp
         aria-hidden
         ref={videoRef}
         // Click anywhere on the video to toggle playback (in addition to the button)
-        className="size-full max-h-[inherit] cursor-pointer rounded-[inherit] object-cover"
+        className={cx(
+          'size-full max-h-[inherit] cursor-pointer rounded-[inherit] object-cover',
+          // iOS shows its own start button when autoplay is blocked, on top of ours
+          '[&::-webkit-media-controls-start-playback-button]:hidden',
+        )}
         playsInline
         loop={prefersReducedMotion === false}
         autoPlay={prefersReducedMotion === false}
@@ -92,21 +91,21 @@ export const VideoLoop = ({ src, format, alt, poster, className }: VideoLoopProp
         poster={poster}
         preload="metadata"
         onClick={togglePlayback}
+        // The browser can pause the video on its own (e.g. iOS when it scrolls out of view), so the state follows the element
+        onPlaying={() => setIsPlaying(true)}
+        onPause={() => {
+          setIsPlaying(false);
+          setShouldPlay(false);
+        }}
         onEnded={(event) => {
           if (prefersReducedMotion) {
             // Reset the video to the beginning if the user prefers reduced motion, since the video will not loop
             event.currentTarget.currentTime = 0;
-            setShouldPlay(false);
-            setIsPlaying(false);
           }
         }}
         data-slot="video"
       >
-        {/* The media fragment makes iOS Safari render the first frame when there is no poster */}
-        <source
-          src={!poster && !src.includes('#') ? `${src}#t=0.001` : src}
-          type={`video/${format}`}
-        />
+        <source src={sourceSrc} type={`video/${format}`} />
       </video>
       {/* Before the button so the description is read before the control */}
       {alt && <p className="sr-only">{alt}</p>}
