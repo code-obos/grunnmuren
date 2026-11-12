@@ -1,5 +1,15 @@
 # @obosbbl/grunnmuren-react
 
+## 3.12.0
+
+### Minor Changes
+
+- 14b4103: VideoLoop: show the first frame and a visible play button when autoplay is blocked (e.g. iOS Low Power Mode), and add an optional `poster` prop.
+
+### Patch Changes
+
+- b276c91: VideoLoop: keep the play/pause button in sync when the browser pauses the video on its own, and hide iOS' native start button.
+
 ## 3.11.4
 
 ### Patch Changes
