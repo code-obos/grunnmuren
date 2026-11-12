@@ -257,7 +257,7 @@
 }
 
 @utility heading-m {
-  @apply font-text;
+  @apply font-display;
   font-size: var(--gm-heading-m-font-size);
   line-height: var(--gm-heading-m-line-height);
   font-weight: var(--gm-heading-m-font-weight);
