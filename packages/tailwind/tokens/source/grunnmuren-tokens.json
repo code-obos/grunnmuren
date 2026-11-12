@@ -511,7 +511,7 @@
       "heading": {
         "xl": {
           "font-weight": { "$type": "fontWeight", "$value": "{primitives.font-weight.semibold}" },
-          "line-height": { "$type": "number", "$value": "{primitives.line-height.md}" },
+          "line-height": { "$type": "number", "$value": 1.22 },
           "letter-spacing": { "$type": "number", "$value": "0em" },
           "font-size": {
             "$type": "dimension",
@@ -520,7 +520,7 @@
         },
         "l": {
           "font-weight": { "$type": "fontWeight", "$value": "{primitives.font-weight.semibold}" },
-          "line-height": { "$type": "number", "$value": "{primitives.line-height.md}" },
+          "line-height": { "$type": "number", "$value": 1.33 },
           "letter-spacing": { "$type": "number", "$value": "0em" },
           "font-size": {
             "$type": "dimension",
@@ -528,8 +528,8 @@
           }
         },
         "m": {
-          "font-weight": { "$type": "fontWeight", "$value": "{primitives.font-weight.medium}" },
-          "line-height": { "$type": "number", "$value": "{primitives.line-height.md}" },
+          "font-weight": { "$type": "fontWeight", "$value": "{primitives.font-weight.semibold}" },
+          "line-height": { "$type": "number", "$value": 1.38 },
           "letter-spacing": { "$type": "number", "$value": "0em" },
           "font-size": {
             "$type": "dimension",
@@ -566,12 +566,12 @@
           }
         },
         "sm": {
-          "font-weight": { "$type": "fontWeight", "$value": "{primitives.font-weight.regular}" },
+          "font-weight": { "$type": "fontWeight", "$value": "{primitives.font-weight.medium}" },
           "line-height": { "$type": "number", "$value": "{primitives.line-height.md}" },
           "letter-spacing": { "$type": "number", "$value": "0em" },
           "font-size": {
             "$type": "dimension",
-            "$value": "clamp(1.1875rem, 1.125rem + 0.3125vw, 1.375rem)"
+            "$value": "clamp(1.1875rem, 1.1667rem + 0.1042vw, 1.25rem)"
           }
         }
       },
