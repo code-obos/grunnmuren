@@ -1,5 +1,11 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.9.0
+
+### Minor Changes
+
+- 764a5af: Tighten the line-height of heading-xl, heading-l and heading-m, use the display font for heading-m, and adjust lead-sm to 20px medium.
+
 ## 2.8.0
 
 ### Minor Changes
