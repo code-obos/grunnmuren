@@ -29,34 +29,34 @@
     "@arethetypeswrong/core": "0.18.5",
     "@changesets/cli": "3.0.3",
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
-    "@react-aria/optimize-locales-plugin": "2.0.2",
-    "@storybook/addon-docs": "10.6.3",
-    "@storybook/addon-vitest": "10.6.3",
-    "@storybook/builder-vite": "10.6.3",
-    "@storybook/react-vite": "10.6.3",
+    "@react-aria/optimize-locales-plugin": "2.1.0",
+    "@storybook/addon-docs": "10.6.7",
+    "@storybook/addon-vitest": "10.6.7",
+    "@storybook/builder-vite": "10.6.7",
+    "@storybook/react-vite": "10.6.7",
     "@tailwindcss/node": "catalog:",
     "@tailwindcss/vite": "catalog:",
     "@types/bun": "1.4.4",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
-    "@vitest/browser": "5.0.5",
-    "@vitest/browser-playwright": "5.0.5",
+    "@vitest/browser": "5.1.0",
+    "@vitest/browser-playwright": "5.1.0",
     "eslint-plugin-better-tailwindcss": "4.4.1",
-    "fontaine": "1.0.1",
+    "fontaine": "1.0.3",
     "http-server": "14.1.1",
     "oxfmt": "0.45.0",
     "oxlint": "1.60.0",
-    "oxlint-tsgolint": "0.20.0",
-    "playwright": "1.64.1",
+    "oxlint-tsgolint": "0.25.0",
+    "playwright": "1.65.0",
     "publint": "0.3.25",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "storybook": "10.6.3",
+    "storybook": "10.6.7",
     "tailwindcss": "catalog:",
-    "tsdown": "0.23.0",
+    "tsdown": "0.23.7",
     "typescript": "5.9.3",
-    "vite": "8.3.4",
-    "vitest": "5.0.5"
+    "vite": "8.3.8",
+    "vitest": "5.1.0"
   },
   "devEngines": {
     "runtime": {
@@ -65,5 +65,5 @@
       "onFail": "download"
     }
   },
-  "packageManager": "pnpm@12.15.0+sha512.b3951d6d6ff4a9f13dc7cf56cd28d2b8eb37dbcc9c68e52e1e1191873ea9f82a017287ab50baadc5ccc494f036c67c0e47eb13608c2fa36f47711b61ea128e61"
+  "packageManager": "pnpm@12.18.0+sha512.9d7882d5dc82147ecfc4e062aa34834e0ad0296710a1837a1115ae012127d36b7109e321ac1598a1dd0a65597681b1e99917e12ed0d749eae91187943363beb3"
 }
