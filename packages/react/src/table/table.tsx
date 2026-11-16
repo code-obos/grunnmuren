@@ -162,7 +162,7 @@ function Table(props: TableProps) {
     <ScrollWrapper>
       <RACTable
         {...restProps}
-        className={cx(className, 'group/table w-full min-w-fit')}
+        className={cx(className, 'group/table bg-neutral-background-default w-full min-w-fit')}
         data-variant={variant}
       >
         {children}
