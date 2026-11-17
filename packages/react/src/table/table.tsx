@@ -111,7 +111,7 @@ function ScrollWrapper({ children }: { children: React.ReactNode }) {
   const touchStyle = { WebkitOverflowScrolling: 'touch' as const };
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden rounded-lg">
       {containerCtx ? (
         <RACResizableTableContainer
           {...containerCtx.resizableProps}
