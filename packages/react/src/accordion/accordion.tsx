@@ -38,7 +38,7 @@ function Accordion(props: AccordionProps) {
           {child}
           {index < childCount - 1 && (
             // Margin is added to enable support for containers with a background color
-            <hr className="border-neutral-border-subtle mx-2" aria-hidden />
+            <hr className="border-neutral-border-subtle mx-3.5" aria-hidden />
           )}
         </>
       ))}
@@ -68,7 +68,7 @@ function AccordionItem(props: AccordionItemProps) {
   return (
     <Disclosure
       {...restProps}
-      className={cx('relative px-2', className)}
+      className={cx('relative px-3.5', className)}
       defaultExpanded={_defaultExpanded}
       onExpandedChange={_onExpandedChange}
       isExpanded={_isExpanded}
@@ -79,13 +79,13 @@ function AccordionItem(props: AccordionItemProps) {
             HeadingContext,
             {
               // Negative margin to strech the button to the entire with of the accordion (to support containers with a background color)
-              className: 'font-medium leading-7 -mx-2 text-base',
+              className: 'font-medium leading-7 -mx-3.5 text-base',
               // Supply a default level here to make this typecheck ok. Will be overwritten with the consumers set heading level anyways
               level: 3,
               _innerWrapper: (children) => (
                 <DisclosureButton
                   // Use outline with offset as focus indicator, this does not cover the left sky border on the expanded content and works with or without a background color on the accordion container
-                  className="focus-visible:outline-focus-inset! flex min-h-11 w-full gap-1.5 rounded-lg px-2 py-3.5 text-left"
+                  className="focus-visible:outline-focus-inset! flex min-h-11 w-full gap-1.5 rounded-lg p-3.5 text-left"
                   type="button"
                   withChevron
                   id={buttonId}

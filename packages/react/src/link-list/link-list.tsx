@@ -23,7 +23,7 @@ const linkStyles = [
 const linkListContainerVariants = cva({
   base: [
     '*:data-[slot=link-list]:overflow-visible',
-    '*:data-[slot=heading]:p-1.25',
+    '*:data-[slot=heading]:px-3.5 *:data-[slot=heading]:py-1.25',
     '*:data-[slot=heading]:*:data-[slot=link]:py-2.25',
     '**:[svg]:text-base',
     'has-data-[slot=heading]:*:data-[slot=link-list]:overflow-visible',
@@ -114,7 +114,7 @@ const LinkListItem = ({ children, className, ...props }: LinkListItemProps) => (
     {...props}
     className={cx(
       className,
-      'after:bg-neutral-border-subtle relative p-1.25 after:absolute after:inset-x-0 after:-top-px after:h-px after:w-full',
+      'after:bg-neutral-border-subtle relative px-3.5 py-1.25 after:absolute after:inset-x-3.5 after:-top-px after:h-px',
       '*:data-[slot=link]:paragraph',
       ...linkStyles,
     )}
