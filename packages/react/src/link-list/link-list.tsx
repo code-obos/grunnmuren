@@ -23,7 +23,7 @@ const linkStyles = [
 const linkListContainerVariants = cva({
   base: [
     '*:data-[slot=link-list]:overflow-visible',
-    '*:data-[slot=heading]:p-1.25',
+    '*:data-[slot=heading]:px-3.5 *:data-[slot=heading]:py-1.25',
     '*:data-[slot=heading]:*:data-[slot=link]:py-2.25',
     '**:[svg]:text-base',
     'has-data-[slot=heading]:*:data-[slot=link-list]:overflow-visible',
