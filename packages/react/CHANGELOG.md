@@ -1,5 +1,14 @@
 # @obosbbl/grunnmuren-react
 
+## 3.12.1
+
+### Patch Changes
+
+- f87e2a8: Make `Table` work on any background color
+- 61a2d47: Increasing the padding of the `<Card>` component from 0.75rem to 1.5rem
+- 2df4d36: Align horizontal padding with vertical padding in `<Accordion>` and `<LinkList>`
+- 7c01c6b: Make `LinkList` work on any background color
+
 ## 3.12.0
 
 ### Minor Changes
