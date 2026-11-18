@@ -17,7 +17,8 @@ const linkStyles = [
   '*:data-[slot=link]:gap-x-2',
   '*:data-[slot=link]:py-3.5',
   '*:data-[slot=link]:no-underline',
-  '*:data-[slot=link]:focus-visible:outline-focus',
+  '*:data-[slot=link]:text-current',
+  '*:data-[slot=link]:focus-visible:outline-current',
 ];
 
 const linkListContainerVariants = cva({
@@ -114,7 +115,7 @@ const LinkListItem = ({ children, className, ...props }: LinkListItemProps) => (
     {...props}
     className={cx(
       className,
-      'after:bg-neutral-border-subtle relative p-1.25 after:absolute after:inset-x-0 after:-top-px after:h-px after:w-full',
+      'relative p-1.25 after:absolute after:inset-x-0 after:-top-px after:h-px after:w-full after:bg-current/12',
       '*:data-[slot=link]:paragraph',
       ...linkStyles,
     )}
