@@ -26,7 +26,7 @@ const cardVariants = cva({
     '[&_[data-slot=media]]:overflow-hidden', // Prevent content from overflowing the rounded corners
     '[&_[data-slot=media]]:relative', // Needed for positioning the <Badge> component (if present)
     // Position media at the edges of the card (because of these negative margins the media-element must be a wrapper around the actual image or other media content)
-    '[&_[data-slot=media]]:mx-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))] [&_[data-slot=media]]:mt-[calc(theme(space.3)*-1-theme(borderWidth.DEFAULT))]',
+    '[&_[data-slot=media]]:mx-[calc(theme(space.6)*-1-theme(borderWidth.DEFAULT))] [&_[data-slot=media]]:mt-[calc(theme(space.6)*-1-theme(borderWidth.DEFAULT))]',
 
     // Sets the aspect ratio of the media content (width: 100% is necessary to make aspect ratio work on images in FF)
     '[&_[data-slot=media]>*:not([data-slot=badge])]:aspect-3/2 [&_[data-slot=media]>img]:w-full [&_[data-slot=media]>img]:object-cover',
