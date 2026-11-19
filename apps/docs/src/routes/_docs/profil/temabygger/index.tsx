@@ -25,10 +25,11 @@ function RouteComponent() {
 
   return (
     <>
-      <div className="mt-12 mb-6 flex items-start justify-between gap-4">
-        <h1 className="heading-l">Temabygger</h1>
+      {/* No height, so it floats over the page and stays in reach while you scroll */}
+      <div className="sticky top-6 z-20 mt-12 flex h-0 justify-end">
         <SettingsPopover builder={builder} />
       </div>
+      <h1 className="heading-l mb-6">Temabygger</h1>
       <p className="mb-12 max-w-prose">
         Lag et tema basert på Grunnmuren. Legg inn merkevarefargene, så genereres hele
         fargesystemet. Har du en designmanual fra et designbyrå, kan du legge inn verdiene derfra og

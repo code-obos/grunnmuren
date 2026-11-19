@@ -133,7 +133,7 @@ export const SettingsPopover = ({ builder }: { builder: ThemeBuilder }) => {
     <DialogTrigger>
       <RACButton
         aria-label="Temainnstillinger"
-        className="bg-primary-background-tinted border-primary-base-default focus-visible:outline-focus-offset hover:bg-primary-surface-hover pressed:bg-primary-surface-active grid size-11 flex-none cursor-pointer place-items-center rounded-full border"
+        className="bg-primary-background-tinted border-primary-base-default focus-visible:outline-focus-offset hover:bg-primary-surface-hover pressed:bg-primary-surface-active grid size-11 flex-none cursor-pointer place-items-center rounded-full border shadow-md"
       >
         <Settings className="size-6" />
       </RACButton>
