@@ -81,8 +81,8 @@ const cardVariants = cva({
       ],
       horizontal: [
         // Column gap between media and content (only takes effect at @2xl, when the direction is row).
-        // Content adds its own 12px inner padding on top, so the visible image→text gap reads ~36px.
-        'not-has-data-[slot=media]:gap-x-4 has-data-[slot=media]:gap-x-6',
+        // Content adds 12px (p-3) on its side, so the card gap is the grid gutter minus 12px to make the visible image→text space match it.
+        'gap-x-[calc(var(--layout-grid-gap-x-sm)-0.75rem)] has-data-[slot=media]:md:gap-x-[calc(var(--layout-grid-gap-x-md)-0.75rem)] has-data-[slot=media]:lg:gap-x-[calc(var(--layout-grid-gap-x-lg)-0.75rem)] has-data-[slot=media]:xl:gap-x-[calc(var(--layout-grid-gap-x-xl)-0.75rem)]',
         // **** With Media ****
         '[&:has(>[data-slot=media]:last-child)]:flex-col-reverse', // Always display the media at the top of the card
         'has-data-[slot=media]:@2xl:flex-row!', // We need !important to override the specificity (first-/last-child) of the flex-col-reverse and flex-col classes
@@ -96,6 +96,8 @@ const cardVariants = cva({
         // padding, media bleeds just the 1px border (symmetric), Content carries the padding.
         'has-data-[slot=media]:@2xl:p-0',
         'has-data-[slot=media]:@2xl:**:data-[slot=content]:p-3',
+        // self-center instead of items-center, so the media still stretches to full height (min-h-full)
+        'has-data-[slot=media]:@2xl:**:data-[slot=content]:self-center',
         '*:data-[slot=media]:@2xl:-m-px!', // !important to beat the base media margins (which assume the card padding)
         // Media stretches to full height and the image fills via min-h-full, so it reaches top/bottom
         // even when Content is taller. Keeps its 3:2 aspect as min height, so short cards are unchanged.

@@ -13,6 +13,12 @@
   --container-width: 92rem;
   --container-gutter-width: 1rem;
 
+  /*** Grid column gap (shared by layout-grid-gap-x and Card) ***/
+  --layout-grid-gap-x-sm: 1rem;
+  --layout-grid-gap-x-md: 2.25rem;
+  --layout-grid-gap-x-lg: 3rem;
+  --layout-grid-gap-x-xl: 4rem;
+
   /*** Colors ***/
   --color-black: #333;
   --color-white: #fff;
@@ -118,7 +124,7 @@
 
 /** Grid column spacing */
 @utility layout-grid-gap-x {
-  @apply sm:gap-x-4 md:gap-x-9 lg:gap-x-12 xl:gap-x-16;
+  @apply sm:gap-x-(--layout-grid-gap-x-sm) md:gap-x-(--layout-grid-gap-x-md) lg:gap-x-(--layout-grid-gap-x-lg) xl:gap-x-(--layout-grid-gap-x-xl);
 }
 
 /** Grid base, defines the grid columns and their spacing */
