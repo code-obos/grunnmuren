@@ -25,6 +25,7 @@ import { Route as DocsProfilIkonerRouteImport } from './routes/_docs/profil/ikon
 import { Route as DocsProfilLayoutRouteImport } from './routes/_docs/profil/layout'
 import { Route as DocsProfilTemaerRouteImport } from './routes/_docs/profil/temaer'
 import { Route as DocsReferanseskjemaIndexRouteImport } from './routes/_docs/referanseskjema/index'
+import { Route as DocsProfilTemabyggerIndexRouteImport } from './routes/_docs/profil/temabygger/index'
 
 const DocsRoute = DocsRouteImport.update({
   id: '/_docs',
@@ -106,6 +107,12 @@ const DocsReferanseskjemaIndexRoute =
     path: '/referanseskjema/',
     getParentRoute: () => DocsRoute,
   } as any)
+const DocsProfilTemabyggerIndexRoute =
+  DocsProfilTemabyggerIndexRouteImport.update({
+    id: '/profil/temabygger/',
+    path: '/profil/temabygger/',
+    getParentRoute: () => DocsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/studio': typeof StudioRouteRouteWithChildren
@@ -123,6 +130,7 @@ export interface FileRoutesByFullPath {
   '/komponenter/': typeof DocsKomponenterIndexRoute
   '/profil/': typeof DocsProfilIndexRoute
   '/referanseskjema/': typeof DocsReferanseskjemaIndexRoute
+  '/profil/temabygger/': typeof DocsProfilTemabyggerIndexRoute
 }
 export interface FileRoutesByTo {
   '/studio': typeof StudioRouteRouteWithChildren
@@ -140,6 +148,7 @@ export interface FileRoutesByTo {
   '/komponenter': typeof DocsKomponenterIndexRoute
   '/profil': typeof DocsProfilIndexRoute
   '/referanseskjema': typeof DocsReferanseskjemaIndexRoute
+  '/profil/temabygger': typeof DocsProfilTemabyggerIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -159,6 +168,7 @@ export interface FileRoutesById {
   '/_docs/komponenter/': typeof DocsKomponenterIndexRoute
   '/_docs/profil/': typeof DocsProfilIndexRoute
   '/_docs/referanseskjema/': typeof DocsReferanseskjemaIndexRoute
+  '/_docs/profil/temabygger/': typeof DocsProfilTemabyggerIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -178,6 +188,7 @@ export interface FileRouteTypes {
     | '/komponenter/'
     | '/profil/'
     | '/referanseskjema/'
+    | '/profil/temabygger/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/studio'
@@ -195,6 +206,7 @@ export interface FileRouteTypes {
     | '/komponenter'
     | '/profil'
     | '/referanseskjema'
+    | '/profil/temabygger'
   id:
     | '__root__'
     | '/studio'
@@ -213,6 +225,7 @@ export interface FileRouteTypes {
     | '/_docs/komponenter/'
     | '/_docs/profil/'
     | '/_docs/referanseskjema/'
+    | '/_docs/profil/temabygger/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -337,6 +350,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsReferanseskjemaIndexRouteImport
       parentRoute: typeof DocsRoute
     }
+    '/_docs/profil/temabygger/': {
+      id: '/_docs/profil/temabygger/'
+      path: '/profil/temabygger'
+      fullPath: '/profil/temabygger/'
+      preLoaderRoute: typeof DocsProfilTemabyggerIndexRouteImport
+      parentRoute: typeof DocsRoute
+    }
   }
 }
 
@@ -363,6 +383,7 @@ interface DocsRouteChildren {
   DocsKomponenterIndexRoute: typeof DocsKomponenterIndexRoute
   DocsProfilIndexRoute: typeof DocsProfilIndexRoute
   DocsReferanseskjemaIndexRoute: typeof DocsReferanseskjemaIndexRoute
+  DocsProfilTemabyggerIndexRoute: typeof DocsProfilTemabyggerIndexRoute
 }
 
 const DocsRouteChildren: DocsRouteChildren = {
@@ -376,6 +397,7 @@ const DocsRouteChildren: DocsRouteChildren = {
   DocsKomponenterIndexRoute: DocsKomponenterIndexRoute,
   DocsProfilIndexRoute: DocsProfilIndexRoute,
   DocsReferanseskjemaIndexRoute: DocsReferanseskjemaIndexRoute,
+  DocsProfilTemabyggerIndexRoute: DocsProfilTemabyggerIndexRoute,
 }
 
 const DocsRouteWithChildren = DocsRoute._addFileChildren(DocsRouteChildren)

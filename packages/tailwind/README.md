@@ -105,6 +105,14 @@ npx grunnmuren-theme my-project.json --out my-project.css
 
 It's the same check as the docs page, and `@obosbbl/grunnmuren-tailwind/theme` exports it as `buildTheme(tokens, { name })` if you'd rather call it yourself, with `toThemeName` for the file name rule.
 
+Don't have every value? `generateRole(color)` makes a whole role from one colour. It keeps the hue and chroma and gives each variant the lightness of Grunnmuren's own roles, so the contrast pairs hold:
+
+```js
+import { buildTheme, generateRole } from '@obosbbl/grunnmuren-tailwind/theme';
+
+buildTheme({ primary: generateRole('#2d3a26') }, { name: 'my-project' });
+```
+
 ## Migrating from v1?
 
 To ease the transition from v1 to v2 of Grunnmuren, it is possible to configure the preset to be (partially) compatible with v1. This allows you to use v2 of the Tailwind preset with v1 of the React components, and upgrade your application over time instead of a full migration.

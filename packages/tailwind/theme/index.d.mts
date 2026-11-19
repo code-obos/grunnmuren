@@ -1,3 +1,5 @@
+export { CONTRAST_PAIRS, contrastRatio, type ContrastPair } from './contrast.d.mts';
+
 /** Something in a theme file that keeps it from building. */
 export type ThemeIssue = {
   code:
@@ -60,3 +62,15 @@ export declare const EXAMPLE_TOKENS: Record<string, Record<string, string>>;
  * å spelled out, and anything but letters, digits, `-` and `_` turned into `-`.
  */
 export declare const toThemeName: (input: string) => string;
+
+/**
+ * Every variant of a role from one colour, by variant: `{ 'base-default': '#0047BA', … }`.
+ * Only the hue and chroma are used. Each variant gets the lightness of Grunnmuren's own
+ * roles, so the contrast pairs hold whatever colour goes in. Throws on anything but hex or
+ * `rgb()`.
+ *
+ * ```js
+ * buildTheme({ primary: generateRole('#2d3a26') }, { name: 'my-project' });
+ * ```
+ */
+export declare const generateRole: (color: string) => Record<string, string>;
