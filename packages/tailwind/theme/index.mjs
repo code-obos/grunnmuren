@@ -4,6 +4,9 @@
 import colors from '../tokens/colors.json' with { type: 'json' };
 import { CONTRAST_PAIRS, contrastRatio, parseColor } from './contrast.mjs';
 
+export { CONTRAST_PAIRS, contrastRatio } from './contrast.mjs';
+export { generateRole } from './generate.mjs';
+
 /**
  * @import { ContrastResult, ThemeIssue, ThemeResult } from './index.d.mts'
  * @typedef {{ color: string } | { ref: string }} TokenValue

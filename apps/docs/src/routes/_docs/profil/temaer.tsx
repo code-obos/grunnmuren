@@ -19,6 +19,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { useState } from 'react';
 import { DropZone, FileTrigger } from 'react-aria-components';
 
+import { download } from '@/lib/download';
 import { AnchorHeading } from '@/ui/anchor-heading';
 import { Code } from '@/ui/code';
 
@@ -33,15 +34,6 @@ export const Route = createFileRoute('/_docs/profil/temaer')({
 });
 
 const README_THEMES = 'https://github.com/code-obos/grunnmuren/tree/main/packages/tailwind#themes';
-
-const download = (fileName: string, contents: string, type: string) => {
-  const url = URL.createObjectURL(new Blob([contents], { type }));
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = fileName;
-  link.click();
-  URL.revokeObjectURL(url);
-};
 
 const STARTER = `{
   "primary": {

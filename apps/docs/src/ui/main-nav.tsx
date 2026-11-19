@@ -67,6 +67,10 @@ const mainNavItems = [
         title: 'Temaer',
       },
       {
+        to: '/profil/temabygger',
+        title: 'Temabygger',
+      },
+      {
         to: '/profil/ikoner',
         title: 'Ikoner',
       },

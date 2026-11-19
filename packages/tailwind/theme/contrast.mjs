@@ -1,5 +1,5 @@
 // @ts-check
-// Not exported from the package. The theme builder and the token tests share it.
+// The theme builder, the token tests and the docs' theme builder share it.
 import colors from '../tokens/colors.json' with { type: 'json' };
 
 /**
