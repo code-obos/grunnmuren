@@ -249,6 +249,22 @@ const Gallery = ({ role }: { role: BrandRole }) => {
             <p className="pt-4">Egen tomt og hage i rolige strøk.</p>
           </TabPanel>
         </Tabs>
+        <Tabs variant="primary" defaultSelectedKey="leilighet">
+          <TabList aria-label="Boligtyper">
+            <Tab id="leilighet">Leilighet</Tab>
+            <Tab id="rekkehus">Rekkehus</Tab>
+            <Tab id="enebolig">Enebolig</Tab>
+          </TabList>
+          <TabPanel id="leilighet">
+            <p className="pt-4">Leiligheter fra 1 til 5 rom i hele landet.</p>
+          </TabPanel>
+          <TabPanel id="rekkehus">
+            <p className="pt-4">Egen uteplass uten vedlikeholdet til en enebolig.</p>
+          </TabPanel>
+          <TabPanel id="enebolig">
+            <p className="pt-4">Egen tomt og hage i rolige strøk.</p>
+          </TabPanel>
+        </Tabs>
         <Stepper activeStep={step} onStepChange={setStep}>
           {['Personalia', 'Kontaktinformasjon', 'Samtykke', 'Oppsummering'].map((label) => (
             <Step key={label}>
