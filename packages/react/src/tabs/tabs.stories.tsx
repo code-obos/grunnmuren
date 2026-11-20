@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { ComponentProps } from 'react';
 
 import { Tab, TabList, TabPanel, Tabs } from './tabs';
 
@@ -9,6 +10,11 @@ const meta = {
     layout: 'padded',
   },
   argTypes: {
+    variant: {
+      control: 'select',
+      options: ['primary', 'secondary'],
+      description: 'The visual style of the tabs',
+    },
     selectedKey: {
       control: 'text',
       description: 'The currently selected tab key',
@@ -28,8 +34,8 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  render: (args) => (
+function HousingTypeTabs(args: ComponentProps<typeof Tabs>) {
+  return (
     <Tabs {...args}>
       <TabList aria-label="Boligtyper">
         <Tab id="leilighet">Leilighet</Tab>
@@ -74,7 +80,11 @@ export const Default: Story = {
         </p>
       </TabPanel>
     </Tabs>
-  ),
+  );
+}
+
+export const Default: Story = {
+  render: (args) => <HousingTypeTabs {...args} />,
 };
 
 export const WithDefaultSelection: Story = {
@@ -164,5 +174,32 @@ export const WithVerticalOrientation: Story = {
         </p>
       </TabPanel>
     </Tabs>
+  ),
+};
+
+export const Primary: Story = {
+  args: {
+    variant: 'primary',
+  },
+  render: (args) => <HousingTypeTabs {...args} />,
+};
+
+export const PrimaryVertical: Story = {
+  args: {
+    variant: 'primary',
+    orientation: 'vertical',
+  },
+  render: (args) => <HousingTypeTabs {...args} />,
+};
+
+export const PrimaryWithOverflow: Story = {
+  args: {
+    variant: 'primary',
+    defaultSelectedKey: 'enebolig',
+  },
+  render: (args) => (
+    <div className="max-w-xs">
+      <HousingTypeTabs {...args} />
+    </div>
   ),
 };
