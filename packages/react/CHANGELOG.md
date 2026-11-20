@@ -1,5 +1,16 @@
 # @obosbbl/grunnmuren-react
 
+## 3.13.0
+
+### Minor Changes
+
+- 5d754f2: Add `variant` prop to `Tabs` with a new `primary` variant (segmented control style). `secondary` is the default and matches the current look.
+
+### Patch Changes
+
+- 919d6fd: Make the horizontal `<Card>` gap between media and content match the grid column gap
+- abc8dae: Spacing adjustments in the `<Hero>` component.
+
 ## 3.12.2
 
 ### Patch Changes
