@@ -41,7 +41,7 @@ const tabListVariants = cva({
   ],
   variants: {
     variant: {
-      primary: 'border-neutral-border-subtle gap-1 rounded-xl border-2 p-1',
+      primary: '',
       secondary: [
         // Divider line
         'border-neutral-border-subtle',
@@ -57,12 +57,9 @@ const tabListVariants = cva({
   },
 });
 
-// ScrollButton is sized for the 44px secondary list; `!` because cx doesn't merge its position classes
-const primaryScrollButtonClassName = 'inset-y-0.5! h-auto! rounded-lg';
-
 const tabVariants = cva({
   base: [
-    'description h-11 cursor-pointer px-4 py-[0.71875rem] font-light',
+    'description h-11 cursor-pointer py-[0.71875rem] font-light',
     // Transition
     'duration-150 ease-out',
     // Hide disabled tabs entirely — the design system avoids disabled states (see https://grunnmuren.obos.no/disabled-state)
@@ -74,7 +71,10 @@ const tabVariants = cva({
   variants: {
     variant: {
       primary: [
-        'data-focus-visible:outline-focus-inset rounded-lg',
+        'data-focus-visible:outline-focus-inset px-3.5',
+        // Rounded on the outer edge only: top when horizontal, left (right-aligned text) when vertical
+        'group-data-[orientation=horizontal]/tablist:rounded-t-2xl',
+        'group-data-[orientation=vertical]/tablist:rounded-l-2xl group-data-[orientation=vertical]/tablist:text-right',
         // Not transition-colors: animating outline-color makes the focus ring flash dark on the selected tab
         'transition-[color,background-color]',
         'data-selected:bg-primary-base-default data-selected:text-primary-base-contrast-default',
@@ -85,7 +85,7 @@ const tabVariants = cva({
       ],
       secondary: [
         'data-focus-visible:outline-focus data-focus-visible:-outline-offset-10',
-        'border-transparent transition-colors',
+        'border-transparent px-4 transition-colors',
         'data-selected:text-primary-text-default data-pressed:text-primary-text-default',
       ],
     },
@@ -269,9 +269,6 @@ function TabList({ className, children, ...restProps }: TabListProps) {
         onClick={onPrev}
         isVisible={canScrollLeft}
         hasScrollingOccurred={hasScrollingOccurred}
-        className={
-          variant === 'primary' ? cx(primaryScrollButtonClassName, 'left-0.5!') : undefined
-        }
       />
 
       <ScrollButton
@@ -279,9 +276,6 @@ function TabList({ className, children, ...restProps }: TabListProps) {
         onClick={onNext}
         isVisible={canScrollRight}
         hasScrollingOccurred={hasScrollingOccurred}
-        className={
-          variant === 'primary' ? cx(primaryScrollButtonClassName, 'right-0.5!') : undefined
-        }
       />
     </div>
   );
