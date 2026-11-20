@@ -59,7 +59,7 @@ const tabListVariants = cva({
 
 const tabVariants = cva({
   base: [
-    'description h-11 cursor-pointer py-[0.71875rem] font-light',
+    'h-11 cursor-pointer',
     // Transition
     'duration-150 ease-out',
     // Hide disabled tabs entirely — the design system avoids disabled states (see https://grunnmuren.obos.no/disabled-state)
@@ -71,10 +71,10 @@ const tabVariants = cva({
   variants: {
     variant: {
       primary: [
-        'data-focus-visible:outline-focus-inset px-3.5',
+        'data-focus-visible:outline-focus-inset px-3.5 py-2 font-normal',
         // Rounded on the outer edge only: top when horizontal, left (right-aligned text) when vertical
-        'group-data-[orientation=horizontal]/tablist:rounded-t-2xl',
-        'group-data-[orientation=vertical]/tablist:rounded-l-2xl group-data-[orientation=vertical]/tablist:text-right',
+        'group-data-[orientation=horizontal]/tablist:rounded-t-lg',
+        'group-data-[orientation=vertical]/tablist:rounded-l-lg group-data-[orientation=vertical]/tablist:text-right',
         // Not transition-colors: animating outline-color makes the focus ring flash dark on the selected tab
         'transition-[color,background-color]',
         'data-selected:bg-primary-base-default data-selected:text-primary-base-contrast-default',
@@ -85,7 +85,7 @@ const tabVariants = cva({
       ],
       secondary: [
         'data-focus-visible:outline-focus data-focus-visible:-outline-offset-10',
-        'border-transparent px-4 transition-colors',
+        'description border-transparent px-4 py-[0.71875rem] font-light transition-colors',
         'data-selected:text-primary-text-default data-pressed:text-primary-text-default',
       ],
     },
