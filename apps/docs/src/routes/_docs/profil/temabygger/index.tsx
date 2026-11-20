@@ -37,7 +37,7 @@ function RouteComponent() {
       </p>
 
       <div className="mb-12">
-        <Tabs>
+        <Tabs variant="primary">
           <TabList aria-label="Temabygger">
             <Tab id="farger">Fargesystem</Tab>
             <Tab id="komponenter">Komponenter</Tab>
