@@ -45,11 +45,11 @@ const variants = cva({
     'container px-0', // We want to eliminate the default padding on the container, as this component will typically be put inside a container
     // Grid variant to position the Hero's content
     'grid lg:grid-cols-12 lg:gap-x-12 xl:gap-x-16',
-    'gap-y-10 lg:gap-y-12',
+    'gap-y-8',
     // Enable vertical gap within <Content>
     '*:data-[slot=content]:grid',
     // Vertical spacing in the <Content>
-    '*:data-[slot=content]:gap-y-3',
+    '*:data-[slot=content]:gap-y-6',
     // Make sure <Media> content fills any available vertical and horizontal space
     '*:data-[slot=media]:*:object-cover',
     '*:data-[slot=carousel]:overflow-hidden *:data-[slot=carousel]:rounded-3xl',
@@ -142,7 +142,7 @@ const Hero = ({ variant, className, children, ...rest }: HeroProps) => {
             // Prevents the group from being announced as a group by screen readers
             // The Group component is used to group the Hero's CTA buttons together visually, and has no semantic meaning
             role: 'presentation',
-            className: 'flex flex-wrap gap-3 *:w-fit',
+            className: 'flex flex-wrap gap-4 *:w-fit',
           },
         ],
       ]}
