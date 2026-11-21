@@ -36,7 +36,7 @@ jobs:
         with:
           ref: ${{ github.ref_name }}
       - name: Setup pnpm, node and install dependencies
-        uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
+        uses: pnpm/setup@731dfb6463bbd11c11fd0ee11fe00ed0e36d48a1 # v3.2.0
         with:
           # pnpm version and node runtime are read from package.json's
           # `packageManager` and `devEngines.runtime` fields.
