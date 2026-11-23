@@ -6,12 +6,6 @@ exports[`computed values > active:bg-[#0536A0] 1`] = `
 ]
 `;
 
-exports[`computed values > active:bg-[#9ddac6] 1`] = `
-[
-  "&:active { background-color: #9ddac6 }",
-]
-`;
-
 exports[`computed values > active:bg-sky-light 1`] = `
 [
   "&:active { background-color: #deeff5 }",
@@ -109,12 +103,6 @@ exports[`computed values > bg-green-lightest 1`] = `
 `;
 
 exports[`computed values > bg-mint 1`] = `
-[
-  "background-color: #cdece2",
-]
-`;
-
-exports[`computed values > bg-mint 2`] = `
 [
   "background-color: #cdece2",
 ]
@@ -300,21 +288,9 @@ exports[`computed values > border-white 1`] = `
 ]
 `;
 
-exports[`computed values > hover:bg-[#8dd4bd] 1`] = `
-[
-  "@media (hover: hover) &:hover { background-color: #8dd4bd }",
-]
-`;
-
 exports[`computed values > hover:bg-blue 1`] = `
 [
   "@media (hover: hover) &:hover { background-color: #0047ba }",
-]
-`;
-
-exports[`computed values > outline-mint 1`] = `
-[
-  "outline-color: #cdece2",
 ]
 `;
 
@@ -381,12 +357,6 @@ exports[`computed values > text-blue-light 1`] = `
 exports[`computed values > text-gray-dark 1`] = `
 [
   "color: #595959",
-]
-`;
-
-exports[`computed values > text-mint 1`] = `
-[
-  "color: #cdece2",
 ]
 `;
 

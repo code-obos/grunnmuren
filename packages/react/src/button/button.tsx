@@ -45,6 +45,7 @@ const buttonVariants = cva({
       contrast: 'focus-visible:outline-focus focus-visible:outline-primary-base-contrast-default',
       'contrast-subtle':
         'focus-visible:outline-focus focus-visible:outline-accent-base-contrast-subtle',
+      mint: 'focus-visible:outline-focus focus-visible:outline-mint',
     },
     /**
      * When the button is without text, but with a single icon.
@@ -113,6 +114,25 @@ const buttonVariants = cva({
       className:
         'text-accent-base-contrast-subtle **:[[role=progressbar]]:text-accent-base-contrast-subtle',
     },
+    // Deprecated, and stays on the palette so it looks the same as before in every theme.
+    // Hover and pressed are hand picked, there's nothing darker than mint-300 to use.
+    {
+      color: 'mint',
+      variant: 'primary',
+      className:
+        'bg-mint text-black hover:bg-[#8dd4bd] active:bg-[#9ddac6] **:[[role=progressbar]]:text-black',
+    },
+    {
+      color: 'mint',
+      variant: 'secondary',
+      className:
+        'text-mint hover:bg-mint **:[[role=progressbar]]:text-mint hover:text-black [&:hover_[role=progressbar]]:text-black',
+    },
+    {
+      color: 'mint',
+      variant: 'tertiary',
+      className: 'text-mint **:[[role=progressbar]]:text-mint',
+    },
   ],
   defaultVariants: {
     variant: 'primary',
@@ -140,7 +160,8 @@ const colors = {
   'contrast-subtle': { variant: 'contrast-subtle' },
   blue: { variant: 'primary', role: 'primary' },
   white: { variant: 'contrast' },
-  mint: { variant: 'contrast-subtle' },
+  // Has no role, so it stays its own variant on the palette and keeps looking mint
+  mint: { variant: 'mint' },
 } as const satisfies Record<string, ColorConfig>;
 
 type ButtonOrLinkProps = Omit<VariantProps<typeof buttonVariants>, 'color'> & {
@@ -149,7 +170,8 @@ type ButtonOrLinkProps = Omit<VariantProps<typeof buttonVariants>, 'color'> & {
    * backgrounds, `contrast-subtle` is the tinted one, in the accent role's light shade.
    *
    * `blue`, `mint` and `white` are deprecated: use `primary` instead of `blue`,
-   * `contrast-subtle` instead of `mint`, and `contrast` instead of `white`.
+   * `contrast-subtle` instead of `mint`, and `contrast` instead of `white`. `mint` still
+   * renders mint until it's removed.
    *
    * The button sets `data-color` to its role, unless you pass `data-color` yourself.
    * @default primary
