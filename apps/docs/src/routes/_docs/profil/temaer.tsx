@@ -401,6 +401,36 @@ function RouteComponent() {
       </section>
 
       <section className="prose mb-12">
+        <AnchorHeading level={2} id="radius" className="heading-m">
+          Radius
+        </AnchorHeading>
+        <p>
+          Alle <code>rounded-*</code>-trinnene er multipler av <code>--gm-radius-base</code>, som er{' '}
+          <code>0.25rem</code> som standard. Så én verdi runder av eller gjør hele skalaen
+          firkantet:
+        </p>
+        <Code
+          language="css"
+          code={`[data-theme='mitt-tema'] {
+  --gm-radius-base: 0;
+}`}
+        />
+        <ul>
+          <li>
+            <code>rounded-full</code> og <code>rounded-none</code> følger ikke basen.
+          </li>
+          <li>
+            Vil du endre ett trinn, setter du det for seg, feks{' '}
+            <code>--gm-radius-2xl: 1.25rem</code>. Det vinner over basen.
+          </li>
+          <li>
+            De store trinnene har ikke noe tak, så en stor base gir veldig runde kort og bilder.
+            Sett de trinnene selv hvis det blir for mye.
+          </li>
+        </ul>
+      </section>
+
+      <section className="prose mb-12">
         <AnchorHeading level={2} id="begrensninger" className="heading-m">
           Det et tema ikke kan
         </AnchorHeading>
@@ -410,8 +440,8 @@ function RouteComponent() {
             primitiver.
           </li>
           <li>
-            Verktøyet over tar bare farger. Radius, spacing og fonter skriver du i CSS-en selv, ved
-            siden av det verktøyet lager.
+            Et tema kan sette radius, men verktøyet over lager bare fargene. Radius legger du til
+            selv i den samme CSS-fila, se <a href="#radius">Radius</a>.
           </li>
           <li>
             Kontrasten er temaets ansvar. Grunnmuren sjekker sine egne roller mot WCAG 2.2 AA, som
