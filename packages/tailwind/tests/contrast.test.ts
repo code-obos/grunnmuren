@@ -124,6 +124,29 @@ for (const { name, overrides } of themes) {
   });
 }
 
+// Components that mix roles, which the pairs above can't express since they stay
+// within one role
+const COMPONENT_PAIRS = ['base-contrast-subtle', 'surface-hover', 'surface-active'].map(
+  (background) => ({
+    foreground: '--gm-color-neutral-text-default',
+    background: `--gm-color-accent-${background}`,
+    minimum: 4.5,
+  }),
+);
+
+for (const { name, overrides } of themes) {
+  describe(`component contrast in ${name}`, () => {
+    test.for(COMPONENT_PAIRS)('$foreground on $background', async (pair) => {
+      expect(
+        contrastRatio(
+          await resolveToken(pair.foreground, overrides),
+          await resolveToken(pair.background, overrides),
+        ),
+      ).toBeGreaterThanOrEqual(pair.minimum);
+    });
+  });
+}
+
 describe('contrast', () => {
   test('every known violation is a pair that is actually checked', () => {
     const checked = new Set(pairs.map(label));

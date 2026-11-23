@@ -35,7 +35,7 @@ const buttonVariants = cva({
     },
     /**
      * The role the button takes its colours from. `contrast` is the white button for dark
-     * backgrounds.
+     * backgrounds, `contrast-subtle` is the tinted one, in the accent role's light shade.
      * @default primary
      */
     color: {
@@ -43,6 +43,8 @@ const buttonVariants = cva({
       accent: 'focus-visible:outline-focus',
       neutral: 'focus-visible:outline-focus',
       contrast: 'focus-visible:outline-focus focus-visible:outline-primary-base-contrast-default',
+      'contrast-subtle':
+        'focus-visible:outline-focus focus-visible:outline-accent-base-contrast-subtle',
       mint: 'focus-visible:outline-focus focus-visible:outline-mint',
     },
     /**
@@ -94,6 +96,24 @@ const buttonVariants = cva({
       className:
         'text-primary-base-contrast-default **:[[role=progressbar]]:text-primary-base-contrast-default',
     },
+    {
+      color: 'contrast-subtle',
+      variant: 'primary',
+      className:
+        'bg-accent-base-contrast-subtle text-neutral-text-default hover:bg-accent-surface-hover active:bg-accent-surface-active **:[[role=progressbar]]:text-neutral-text-default',
+    },
+    {
+      color: 'contrast-subtle',
+      variant: 'secondary',
+      className:
+        'text-accent-base-contrast-subtle hover:bg-accent-base-contrast-subtle hover:text-neutral-text-default **:[[role=progressbar]]:text-accent-base-contrast-subtle [&:hover_[role=progressbar]]:text-neutral-text-default',
+    },
+    {
+      color: 'contrast-subtle',
+      variant: 'tertiary',
+      className:
+        'text-accent-base-contrast-subtle **:[[role=progressbar]]:text-accent-base-contrast-subtle',
+    },
     // Deprecated, and stays on the palette so it looks the same as before in every theme.
     // Hover and pressed are hand picked, there's nothing darker than mint-300 to use.
     {
@@ -137,6 +157,7 @@ const colors = {
   accent: { variant: 'accent', role: 'accent' },
   neutral: { variant: 'neutral', role: 'neutral' },
   contrast: { variant: 'contrast' },
+  'contrast-subtle': { variant: 'contrast-subtle' },
   blue: { variant: 'primary', role: 'primary' },
   white: { variant: 'contrast' },
   // Has no role, so it stays its own variant on the palette and keeps looking mint
@@ -146,10 +167,11 @@ const colors = {
 type ButtonOrLinkProps = Omit<VariantProps<typeof buttonVariants>, 'color'> & {
   /**
    * The role the button takes its colours from. `contrast` is the white button for dark
-   * backgrounds.
+   * backgrounds, `contrast-subtle` is the tinted one, in the accent role's light shade.
    *
-   * `blue`, `mint` and `white` are deprecated: use `primary` instead of `blue`, and
-   * `contrast` instead of `mint` and `white`. `mint` still renders mint until it's removed.
+   * `blue`, `mint` and `white` are deprecated: use `primary` instead of `blue`,
+   * `contrast-subtle` instead of `mint`, and `contrast` instead of `white`. `mint` still
+   * renders mint until it's removed.
    *
    * The button sets `data-color` to its role, unless you pass `data-color` yourself.
    * @default primary

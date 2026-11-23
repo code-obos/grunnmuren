@@ -4,7 +4,14 @@ import { cx } from 'cva';
 import { expect, within } from 'storybook/test';
 
 import { Badge } from '../badge';
-import { Button } from './button';
+import { Button, type ButtonProps } from './button';
+
+const DARK_BACKGROUNDS: Partial<Record<NonNullable<ButtonProps['color']>, string>> = {
+  contrast: 'bg-primary-base-default',
+  white: 'bg-primary-base-default',
+  'contrast-subtle': 'bg-accent-base-default',
+  mint: 'bg-accent-base-default',
+};
 
 // Note: we cannot use the `satisfie` CSF here, because the resulting union type is too wide for TS to typecheck
 // This is because of the complexity of the union type of the button (both a link and a button)
@@ -28,8 +35,7 @@ const meta: Meta<typeof Button> = {
   },
   decorators: [
     (Story, context) => {
-      const onDark = ['contrast', 'mint', 'white'].includes(context.args.color ?? '');
-      const bgColor = onDark ? 'bg-primary-base-default' : '';
+      const bgColor = context.args.color && DARK_BACKGROUNDS[context.args.color];
 
       return <div className={cx(bgColor, 'flex gap-4 p-6')}>{Story()}</div>;
     },
@@ -209,19 +215,30 @@ export const ButtonSandbox = () => {
           Tertiary
         </Button>
       </div>
+
+      <div className="bg-accent-base-default flex gap-8 p-8">
+        <Button color="contrast-subtle">Primary</Button>
+        <Button color="contrast-subtle" variant="secondary">
+          Secondary
+        </Button>
+        <Button color="contrast-subtle" variant="tertiary">
+          Tertiary
+        </Button>
+      </div>
     </div>
   );
 };
 
 const LEGACY_COLORS = [
   { color: 'blue', replacement: 'primary', background: '' },
-  { color: 'mint', replacement: 'contrast', background: 'bg-green-dark' },
+  { color: 'mint', replacement: 'contrast-subtle', background: 'bg-green-dark' },
   { color: 'white', replacement: 'contrast', background: 'bg-blue-dark' },
 ] as const;
 
 /**
  * `blue`, `mint` and `white` still work, but are deprecated and removed in the next major.
- * Use `primary` instead of `blue`, and `contrast` instead of `mint` and `white`.
+ * Use `primary` instead of `blue`, `contrast-subtle` instead of `mint`, and `contrast` instead
+ * of `white`.
  */
 export const LegacyColors = () => (
   <div className="flex flex-col">
