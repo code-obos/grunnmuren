@@ -332,6 +332,22 @@ function TableCell(props: TableCellProps) {
   );
 }
 
+type TableCaptionProps = React.ComponentProps<'div'>;
+
+/**
+ * Visible caption rendered above a Table. Table requires an explicit
+ * `aria-labelledby`, so pass the caption's `id` to it.
+ */
+function TableCaption({ className, ...restProps }: TableCaptionProps) {
+  return (
+    <div
+      {...restProps}
+      className={cx(className, 'text-neutral-text-default px-4 pb-3 text-sm font-medium')}
+      data-slot="table-caption"
+    />
+  );
+}
+
 // Deprecated aliases kept for backwards compatibility during the UNSAFE_ phase.
 // Remove these once the Table component is stabilized and the UNSAFE_ prefix
 // is dropped.
@@ -341,6 +357,7 @@ const UNSAFE_TableContainer = ResizableTableContainer;
 type UNSAFE_TableContainerProps = ResizableTableContainerProps;
 
 export {
+  TableCaption as UNSAFE_TableCaption,
   TableColumnResizer as UNSAFE_TableColumnResizer,
   Table as UNSAFE_Table,
   TableBody as UNSAFE_TableBody,
@@ -351,6 +368,7 @@ export {
   TableHeader as UNSAFE_TableHeader,
   TableRow as UNSAFE_TableRow,
   type SortDescriptor as UNSAFE_SortDescriptor,
+  type TableCaptionProps as UNSAFE_TableCaptionProps,
   type TableColumnResizerProps as UNSAFE_TableColumnResizerProps,
   type TableBodyProps as UNSAFE_TableBodyProps,
   type TableCellProps as UNSAFE_TableCellProps,
