@@ -604,14 +604,14 @@ exports[`computed values > the token set matches the snapshot 1`] = `
   "--percentage-90": ".9",
   "--percentage-95": ".95",
   "--percentage-translate-full": "1",
-  "--radius-2xl": "1rem",
-  "--radius-3xl": "1.5rem",
-  "--radius-4xl": "2rem",
-  "--radius-lg": "0.5rem",
-  "--radius-md": "0.375rem",
+  "--radius-2xl": "calc(0.25rem * 4)",
+  "--radius-3xl": "calc(0.25rem * 6)",
+  "--radius-4xl": "calc(0.25rem * 8)",
+  "--radius-lg": "calc(0.25rem * 2)",
+  "--radius-md": "calc(0.25rem * 1.5)",
   "--radius-sm": "0.25rem",
-  "--radius-xl": "0.75rem",
-  "--radius-xs": "0.125rem",
+  "--radius-xl": "calc(0.25rem * 3)",
+  "--radius-xs": "calc(0.25rem * 0.5)",
 }
 `;
 

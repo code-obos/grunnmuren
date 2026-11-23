@@ -78,6 +78,9 @@ const isIn = (token: TransformedToken, ...prefix: Array<string>) =>
 
 const isRadius = (token: TransformedToken) =>
   isIn(token, 'primitives', 'radius') && !FIXED_RADII.has(token.path[2]);
+const isRadiusBase = (token: TransformedToken) => isIn(token, 'primitives', 'radius', 'base');
+// The steps `rounded-*` reads, worked out from the base in radius.css
+const isRadiusStep = (token: TransformedToken) => isRadius(token) && !isRadiusBase(token);
 const isPrimitive = (token: TransformedToken) =>
   isIn(token, 'primitives') &&
   !isIn(token, 'primitives', 'motion') &&
@@ -91,6 +94,14 @@ const isThemeColor = (token: TransformedToken) =>
   isIn(token, 'themes') && token.path[3] === 'color';
 const isTypography = (token: TransformedToken) => isIn(token, 'semantic', 'typography');
 const isTheme = (theme: string) => (token: TransformedToken) => isIn(token, 'themes', theme);
+
+const toRem = (token: TransformedToken) => {
+  const rem = /^(-?\d*\.?\d+)rem$/.exec(String(token.$value))?.[1];
+  if (rem == null) {
+    throw new Error(`\`${token.path.join('.')}\` has to be in rem, got \`${token.$value}\``);
+  }
+  return Number(rem);
+};
 
 const variables = (dictionary: Dictionary, indentation = '  ') =>
   formattedVariables({
@@ -219,6 +230,34 @@ ${short}
 `;
       },
 
+      'gm/radius': ({ dictionary }) => {
+        const base = dictionary.allTokens.find(isRadiusBase);
+        if (!base) throw new Error('`primitives.radius.base` is missing from the source');
+        const baseRem = toRem(base);
+        // A theme can set the base to 0, but the steps are found by dividing by this one
+        if (baseRem === 0) throw new Error("`primitives.radius.base` can't be 0 in the defaults");
+
+        const steps = dictionary.allTokens.filter(isRadiusStep).map((token): [string, string] => {
+          // toFixed drops float noise like 1.4999999, so a step reads the way it's meant
+          const factor = Number((toRem(token) / baseRem).toFixed(4));
+          const value =
+            factor === 1 ? `var(--${base.name})` : `calc(var(--${base.name}) * ${factor})`;
+          return [token.name, value];
+        });
+
+        return `${HEADER}
+/*
+ * Every step is a multiple of --${base.name}, so a theme rounds or squares off the whole
+ * scale with one value, and can still set a step on its own. The steps point at the base,
+ * so they're worked out again on every [data-theme], same as the semantic layer: declared
+ * on :root alone, a theme's base would never reach them.
+ */
+${THEMED} {
+${declarations(steps)}
+}
+`;
+      },
+
       'gm/motion': ({ dictionary }) => {
         const durations = dictionary.allTokens
           .filter(isDuration)
@@ -250,7 +289,7 @@ ${durations}
           (name): [string, string] => [name.replace(/^gm-/, ''), `var(--${name})`],
         );
         const radii = dictionary.allTokens
-          .filter(isRadius)
+          .filter(isRadiusStep)
           .map((token): [string, string] => [
             token.name.replace(/^gm-/, ''),
             `var(--${token.name})`,
@@ -363,9 +402,10 @@ ${variables(dictionary)}
         {
           destination: 'primitives.css',
           format: 'gm/declare',
-          filter: isPrimitive,
+          filter: (token) => isPrimitive(token) && !isRadiusStep(token),
           options: { selector: PRIMITIVES },
         },
+        { destination: 'radius.css', format: 'gm/radius', filter: isRadius },
         { destination: 'semantic.css', format: 'gm/semantic', filter: isRoleColor },
         {
           destination: 'typography.css',
@@ -377,7 +417,7 @@ ${variables(dictionary)}
         {
           destination: 'theme.css',
           format: 'gm/tailwind',
-          filter: (token) => isRoleColor(token) || isRadius(token),
+          filter: (token) => isRoleColor(token) || isRadiusStep(token),
         },
         {
           destination: 'colors.json',

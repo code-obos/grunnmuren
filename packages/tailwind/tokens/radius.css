@@ -1,0 +1,21 @@
+/*
+ * Generated from tokens/source/grunnmuren-tokens.json by build-tokens.ts. Don't edit by
+ * hand: change the source and run `pnpm tokens:build`.
+ */
+
+/*
+ * Every step is a multiple of --gm-radius-base, so a theme rounds or squares off the whole
+ * scale with one value, and can still set a step on its own. The steps point at the base,
+ * so they're worked out again on every [data-theme], same as the semantic layer: declared
+ * on :root alone, a theme's base would never reach them.
+ */
+:where(:root, [data-theme]) {
+  --gm-radius-xs: calc(var(--gm-radius-base) * 0.5);
+  --gm-radius-sm: var(--gm-radius-base);
+  --gm-radius-md: calc(var(--gm-radius-base) * 1.5);
+  --gm-radius-lg: calc(var(--gm-radius-base) * 2);
+  --gm-radius-xl: calc(var(--gm-radius-base) * 3);
+  --gm-radius-2xl: calc(var(--gm-radius-base) * 4);
+  --gm-radius-3xl: calc(var(--gm-radius-base) * 6);
+  --gm-radius-4xl: calc(var(--gm-radius-base) * 8);
+}

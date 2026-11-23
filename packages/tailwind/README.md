@@ -51,7 +51,8 @@ Themes live in your app, not in Grunnmuren. A theme is a `[data-theme='…']` ru
   --gm-color-primary-base-hover: #404c39;
   /* or primitives, and every role that uses them follows */
   --gm-green-500: #2d3a26;
-  --gm-radius-lg: 0;
+  /* square corners everywhere, see Radius below */
+  --gm-radius-base: 0;
 }
 ```
 
@@ -65,13 +66,26 @@ Themes live in your app, not in Grunnmuren. A theme is a `[data-theme='…']` ru
 
 These are public API, and renaming or removing one is a breaking change:
 
-- the primitives in `tokens/primitives.css`: colours (`--gm-blue-500`), spacing (`--gm-space-4`), radius (`--gm-radius-lg`), border widths, icon stroke widths and the type primitives (font families, weights, line heights, letter spacing)
+- the primitives in `tokens/primitives.css`: colours (`--gm-blue-500`), spacing (`--gm-space-4`), the radius base (`--gm-radius-base`), border widths, icon stroke widths and the type primitives (font families, weights, line heights, letter spacing)
+- the radius steps in `tokens/radius.css`: `--gm-radius-xs` to `--gm-radius-4xl`
 - the role colours: `--gm-color-{role}-{group}-{variant}` for `primary`, `accent`, `neutral`, `success`, `danger`, `warning` and `info`
 
 A few things a theme can't change:
 
 - reduced motion always wins: with `prefers-reduced-motion` the durations are zeroed whatever a theme sets
 - contrast is the theme's responsibility. Grunnmuren's own roles are checked against WCAG 2.2 AA, and so is a theme built with [`grunnmuren-theme`](#building-a-theme-from-tokens). Custom properties written by hand aren't checked
+
+### Radius
+
+Every `rounded-*` step is a multiple of `--gm-radius-base`, which is `0.25rem` by default (`rounded-sm` is 1×, `rounded-lg` 2×, `rounded-2xl` 4× and so on). So one value rounds or squares off the whole scale:
+
+```css
+[data-theme='my-project'] {
+  --gm-radius-base: 0; /* square everywhere */
+}
+```
+
+`rounded-full` and `rounded-none` don't follow the base. To change a single step, set it on its own, e.g. `--gm-radius-2xl: 1.25rem`, and it wins over the base. There's no cap on the big steps, so a large base makes cards and images very round: set those steps yourself if that's too much.
 
 Tailwind's `--radius-*` overridden in your own `@theme` doesn't reach inside a `data-theme`, so set `--gm-radius-*` instead.
 
