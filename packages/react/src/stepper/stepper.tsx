@@ -162,7 +162,6 @@ const Step = ({
           [
             LinkContext,
             {
-              // @ts-expect-error this works even though it's a type error
               'aria-current': isCurrent ? 'step' : undefined,
               isDisabled,
               className: 'underline',
