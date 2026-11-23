@@ -682,3 +682,11 @@ exports[`typography > lead-sm 1`] = `
   "letter-spacing: 0em",
 ]
 `;
+
+exports[`typography > paragraph 1`] = `
+[
+  "font-size: 1rem",
+  "line-height: 1.5",
+  "letter-spacing: 0em",
+]
+`;

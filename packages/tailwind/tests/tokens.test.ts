@@ -190,6 +190,7 @@ const TYPE_UTILITIES = [
   'heading-xs',
   'lead',
   'lead-sm',
+  'paragraph',
 ];
 
 describe('typography', () => {
