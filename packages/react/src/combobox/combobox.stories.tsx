@@ -26,9 +26,9 @@ const Template = <T extends object>(args: ComboboxProps<T>) => {
       {counties.map((county) =>
         county.municipalities.map((municipality) => (
           <ComboboxItem
-            key={municipality.name}
+            key={`${county.name}-${municipality.name}`}
             textValue={municipality.name}
-            id={municipality.name}
+            id={`${county.name}-${municipality.name}`}
             className="flex gap-2"
           >
             {municipality.name}
@@ -108,7 +108,9 @@ const GroupedTemplate = <T extends object>(args: ComboboxProps<T>) => (
       <ComboboxSection key={county.name}>
         <ComboboxHeader>{county.name}</ComboboxHeader>
         {county.municipalities.map((municipality) => (
-          <ComboboxItem key={municipality.name}>{municipality.name}</ComboboxItem>
+          <ComboboxItem key={`${county.name}-${municipality.name}`}>
+            {municipality.name}
+          </ComboboxItem>
         ))}
       </ComboboxSection>
     ))}
