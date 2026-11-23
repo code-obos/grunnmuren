@@ -1,6 +1,16 @@
 import { ArrowDown, ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 import { cva, cx } from 'cva';
-import { createContext, type RefAttributes, useCallback, useContext, useState } from 'react';
+import {
+  Children,
+  cloneElement,
+  createContext,
+  isValidElement,
+  type RefAttributes,
+  useCallback,
+  useContext,
+  useId,
+  useState,
+} from 'react';
 import { composeRenderProps } from 'react-aria-components/composeRenderProps';
 import {
   Cell as RACCell,
@@ -60,6 +70,8 @@ type TableProps = Omit<RACTableProps, 'aria-label' | 'aria-labelledby'> &
   } & (
     | { 'aria-label': string; 'aria-labelledby'?: never }
     | { 'aria-label'?: never; 'aria-labelledby': string }
+    // Labelled by a <TableCaption> child, which is wired up automatically.
+    | { 'aria-label'?: never; 'aria-labelledby'?: never }
   );
 
 type TableHeaderProps = RACTableHeaderProps<object> & RefAttributes<HTMLTableSectionElement>;
@@ -157,17 +169,33 @@ function ScrollWrapper({ children }: { children: React.ReactNode }) {
  */
 function Table(props: TableProps) {
   const { className, children, variant = 'default', ...restProps } = props;
+  const generatedCaptionId = useId();
+
+  // The caption renders outside RAC's collection, so pull it out of the children
+  // and label the table with it instead of asking the consumer to pass an id.
+  const childArray = Children.toArray(children);
+  const captionElement = childArray.find(
+    (child): child is React.ReactElement<TableCaptionProps> =>
+      isValidElement(child) && child.type === TableCaption,
+  );
+  const tableChildren = childArray.filter((child) => child !== captionElement);
 
   return (
-    <ScrollWrapper>
-      <RACTable
-        {...restProps}
-        className={cx(className, 'group/table bg-neutral-background-default w-full min-w-fit')}
-        data-variant={variant}
-      >
-        {children}
-      </RACTable>
-    </ScrollWrapper>
+    <>
+      {captionElement && cloneElement(captionElement, { id: generatedCaptionId })}
+      <ScrollWrapper>
+        <RACTable
+          {...restProps}
+          aria-labelledby={
+            restProps['aria-labelledby'] ?? (captionElement ? generatedCaptionId : undefined)
+          }
+          className={cx(className, 'group/table bg-neutral-background-default w-full min-w-fit')}
+          data-variant={variant}
+        >
+          {tableChildren}
+        </RACTable>
+      </ScrollWrapper>
+    </>
   );
 }
 
@@ -335,8 +363,8 @@ function TableCell(props: TableCellProps) {
 type TableCaptionProps = React.ComponentProps<'div'>;
 
 /**
- * Visible caption rendered above a Table. Table requires an explicit
- * `aria-labelledby`, so pass the caption's `id` to it.
+ * Visible caption for a Table. Place it as a child of <Table>; the Table labels
+ * itself with it.
  */
 function TableCaption({ className, ...restProps }: TableCaptionProps) {
   return (

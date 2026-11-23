@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react-vite';
-import { useId, useState } from 'react';
+import { useState } from 'react';
 
 import { Content } from '../content';
 import {
@@ -154,34 +154,28 @@ export const Simple = () => (
   </Table>
 );
 
-export const WithCaption = () => {
-  const captionId = useId();
-
-  return (
-    <>
-      <TableCaption id={captionId}>Eiendomsforvaltere i Oslo</TableCaption>
-      <Table aria-labelledby={captionId}>
-        <TableHeader>
-          <TableColumn>Navn</TableColumn>
-          <TableColumn>E-post</TableColumn>
-          <TableColumn>Område</TableColumn>
-        </TableHeader>
-        <TableBody>
-          <TableRow>
-            <TableCell>Kari Hansen</TableCell>
-            <TableCell>kari.hansen@obos.no</TableCell>
-            <TableCell>Grünerløkka</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Lars Olsen</TableCell>
-            <TableCell>lars.olsen@obos.no</TableCell>
-            <TableCell>Frogner</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </>
-  );
-};
+export const WithCaption = () => (
+  <Table>
+    <TableCaption>Eiendomsforvaltere i Oslo</TableCaption>
+    <TableHeader>
+      <TableColumn>Navn</TableColumn>
+      <TableColumn>E-post</TableColumn>
+      <TableColumn>Område</TableColumn>
+    </TableHeader>
+    <TableBody>
+      <TableRow>
+        <TableCell>Kari Hansen</TableCell>
+        <TableCell>kari.hansen@obos.no</TableCell>
+        <TableCell>Grünerløkka</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Lars Olsen</TableCell>
+        <TableCell>lars.olsen@obos.no</TableCell>
+        <TableCell>Frogner</TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+);
 
 export const ZebraVariant = () => (
   <Table aria-label="Eiendomsforvaltere med zebra-stripete rader" variant="zebra-striped">
