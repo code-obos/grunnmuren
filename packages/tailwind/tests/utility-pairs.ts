@@ -133,7 +133,7 @@ export const utilityPairs: Array<UtilityPair> = [
   },
 
   // The composites: button, alertbox, card, carousel, accordion, modal, drawer, table,
-  // tabs and progress-bar. The mint button isn't here, see button.tsx.
+  // tabs and progress-bar.
   { from: 'border-black', to: 'border-neutral-border-strong' },
   { from: 'border-sky', to: 'border-primary-border-subtle' },
   { from: 'bg-mint-light', to: 'bg-success-surface-tinted' },
