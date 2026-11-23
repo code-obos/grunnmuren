@@ -71,12 +71,21 @@ const TableCell = (props: TableCellProps) => {
   return <Cell {...props} />;
 };
 
+type CaptionProps = React.ComponentProps<'caption'>;
+
+// Must be the first child of Table. The native caption names the table, so aria-labelledby is only needed to override it.
+const Caption = ({ className, ...restProps }: CaptionProps) => (
+  <caption className={cx(className, 'px-3 py-2 text-left')} {...restProps} />
+);
+
 export {
+  Caption as UNSTABLE_Caption,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
+  type CaptionProps,
   type TableBodyProps,
   type TableCellProps,
   type TableHeadProps,
