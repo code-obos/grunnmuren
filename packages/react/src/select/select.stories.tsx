@@ -20,9 +20,7 @@ const Template = <T extends object>(args: SelectProps<T>) => {
     <Select {...args}>
       {counties.map((county) =>
         county.municipalities.map((municipality) => (
-          <SelectItem key={`${county.name}-${municipality.name}`}>
-            {municipality.name}
-          </SelectItem>
+          <SelectItem key={`${county.name}-${municipality.name}`}>{municipality.name}</SelectItem>
         )),
       )}
     </Select>
@@ -60,9 +58,7 @@ const GroupedTemplate = <T extends object>(args: SelectProps<T>) => (
       <SelectSection key={county}>
         <SelectHeader>{county}</SelectHeader>
         {municipalities.map(({ name: municipality }) => (
-          <SelectItem key={`${county}-${municipality}`}>
-            {municipality}
-          </SelectItem>
+          <SelectItem key={`${county}-${municipality}`}>{municipality}</SelectItem>
         ))}
       </SelectSection>
     ))}
