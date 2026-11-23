@@ -211,7 +211,12 @@
       "96": { "$type": "dimension", "$value": "24rem" }
     },
     "radius": {
-      "$description": "Tailwind's own radius scale, so Figma and code share one set of steps. none and full are fixed utilities in Tailwind and exist here for Figma.",
+      "$description": "Tailwind's own radius scale, so Figma and code share one set of steps. none and full are fixed utilities in Tailwind and exist here for Figma. In CSS every other step is its value here divided by base, times --gm-radius-base, so a theme rounds or squares off the whole scale with one value. The big steps aren't capped the way Designsystemet does it: a theme that wants something in between sets that step on its own.",
+      "base": {
+        "$type": "dimension",
+        "$value": "0.25rem",
+        "$description": "What the steps are multiples of. 0 gives square corners everywhere except full."
+      },
       "none": { "$type": "dimension", "$value": "0rem" },
       "xs": { "$type": "dimension", "$value": "0.125rem" },
       "sm": { "$type": "dimension", "$value": "0.25rem" },

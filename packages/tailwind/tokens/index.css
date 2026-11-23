@@ -1,5 +1,6 @@
 /* Order matters: primitives before the semantic layer that points at them. */
 @import './primitives.css';
+@import './radius.css';
 @import './semantic.css';
 @import './typography.css';
 @import './motion.css';

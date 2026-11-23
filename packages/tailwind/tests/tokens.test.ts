@@ -150,6 +150,38 @@ describe('theme seam', () => {
   });
 });
 
+const source = JSON.parse(
+  await readFile(resolve(import.meta.dirname, '../tokens/source/grunnmuren-tokens.json'), 'utf8'),
+);
+// The steps `rounded-*` reads. base is what they're made from, none and full are fixed.
+const RADIUS_STEPS: Array<[string, number]> = Object.entries(source.primitives.radius)
+  .filter(([step]) => !step.startsWith('$') && !['base', 'none', 'full'].includes(step))
+  .map(([step, token]) => [step, Number.parseFloat((token as { $value: string }).$value)]);
+
+// A step resolves to `calc(0.25rem * 1.5)`, so it's worked out to compare by the length
+const toRem = (value: string) => {
+  const [, rem, factor = '1'] = /^(?:calc\()?([\d.]+)rem(?: \* ([\d.]+)\))?$/.exec(value) ?? [];
+  if (rem == null) throw new Error(`Can't read \`${value}\` as rem`);
+  return Number(rem) * Number(factor);
+};
+
+describe('radius', () => {
+  test('there are steps to check', () => {
+    expect(RADIUS_STEPS.length).toBeGreaterThan(0);
+  });
+
+  // Working the steps out from the base must not move a single corner
+  test.for(RADIUS_STEPS)('rounded-%s is the same as in the source', async ([step, rem]) => {
+    expect(toRem(await resolveToken(`--radius-${step}`))).toBeCloseTo(rem);
+  });
+
+  // What a tenant does: one value, and the whole scale follows
+  test.for(RADIUS_STEPS)("a theme's base reaches rounded-%s", async ([step, rem]) => {
+    const theme = new Map([['--gm-radius-base', '0.5rem']]);
+    expect(toRem(await resolveToken(`--radius-${step}`, theme))).toBeCloseTo(rem * 2);
+  });
+});
+
 const TYPE_UTILITIES = [
   'heading-xl',
   'heading-l',

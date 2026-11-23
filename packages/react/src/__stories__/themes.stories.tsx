@@ -41,7 +41,8 @@ const Panel = ({ title, testId, theme, color, children }: PanelProps) => (
 // A theme the way an app writes one: primitives only, so the roles have to follow on
 // their own. Loaded before Grunnmuren's CSS on purpose, since an app can't count on the
 // order its CSS loads in.
-const APP_THEME = `[data-theme='app'] { --gm-blue-900: #ff0000; --gm-radius-lg: 0px; }`;
+const APP_THEME = `[data-theme='app'] { --gm-blue-900: #ff0000; --gm-radius-lg: 0px; }
+[data-theme='app-radius'] { --gm-radius-base: 0.5rem; }`;
 
 const loadAppTheme = () => {
   if (document.getElementById('app-theme')) return;
@@ -59,7 +60,7 @@ const loadAppTheme = () => {
  */
 export const SideBySide: StoryObj = {
   render: () => (
-    <div className="grid grid-cols-5 gap-4">
+    <div className="grid grid-cols-6 gap-4">
       <Panel title="fra toolbaren" testId="toolbar" />
       <Panel title="default" testId="default" theme="default" />
       <Panel title="froen-hage" testId="froen-hage" theme="froen-hage">
@@ -68,6 +69,9 @@ export const SideBySide: StoryObj = {
       </Panel>
       <Panel title="data-color=accent" testId="accent" theme="default" color="accent" />
       <Panel title="apptema" testId="app" theme="app" />
+      <Panel title="radius-base" testId="app-radius" theme="app-radius">
+        <Panel title="default inni radius-base" testId="app-radius-nested" theme="default" />
+      </Panel>
     </div>
   ),
   // The screenshot shows it, these say which value is the right one
@@ -89,6 +93,13 @@ export const SideBySide: StoryObj = {
     // follow on that subtree, and it wins although it loaded first
     await expect(style('app').backgroundColor).toBe('rgb(255, 0, 0)');
     await expect(style('app').borderRadius).toBe('0px');
+
+    // Without a theme rounded-lg is what it always was
+    await expect(style('default').borderRadius).toBe('8px');
+    // One base for the whole scale: rounded-lg is twice the base. data-theme="default"
+    // inside it goes back to Grunnmuren's base, same as it does for the colours
+    await expect(style('app-radius').borderRadius).toBe('16px');
+    await expect(style('app-radius-nested').borderRadius).toBe('8px');
   },
 };
 
