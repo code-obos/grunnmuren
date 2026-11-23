@@ -152,6 +152,31 @@ export const utilityPairs: Array<UtilityPair> = [
     change: 'pressed white button goes from sky-200 to sky-250, so it is darker than hover',
   },
   {
+    from: 'bg-mint',
+    to: 'bg-accent-base-contrast-subtle',
+    change: 'mint button goes from mint-300 to mint-200',
+  },
+  {
+    from: 'hover:bg-[#8dd4bd]',
+    to: 'hover:bg-accent-surface-hover',
+    change: 'hovered mint button goes from a hardcoded green to mint-250',
+  },
+  {
+    from: 'active:bg-[#9ddac6]',
+    to: 'active:bg-accent-surface-active',
+    change: 'pressed mint button goes from a hardcoded green to mint-300',
+  },
+  {
+    from: 'text-mint',
+    to: 'text-accent-base-contrast-subtle',
+    change: 'secondary and tertiary mint button text goes from mint-300 to mint-200',
+  },
+  {
+    from: 'outline-mint',
+    to: 'outline-accent-base-contrast-subtle',
+    change: 'mint button focus outline goes from mint-300 to mint-200',
+  },
+  {
     from: 'bg-sky-light',
     to: 'bg-info-surface-tinted',
     change: 'info alertbox goes from sky-200 to sky-100, like the other status surfaces',
