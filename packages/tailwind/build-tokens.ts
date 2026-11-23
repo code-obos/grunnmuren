@@ -79,6 +79,7 @@ const isIn = (token: TransformedToken, ...prefix: Array<string>) =>
 const isRadius = (token: TransformedToken) =>
   isIn(token, 'primitives', 'radius') && !FIXED_RADII.has(token.path[2]);
 const isRadiusBase = (token: TransformedToken) => isIn(token, 'primitives', 'radius', 'base');
+const isFontFamily = (token: TransformedToken) => isIn(token, 'primitives', 'font-family');
 // The steps `rounded-*` reads, worked out from the base in radius.css
 const isRadiusStep = (token: TransformedToken) => isRadius(token) && !isRadiusBase(token);
 const isPrimitive = (token: TransformedToken) =>
@@ -294,6 +295,11 @@ ${durations}
             token.name.replace(/^gm-/, ''),
             `var(--${token.name})`,
           ]);
+        // `font-text` and `font-display`, named after the family in the source
+        const fonts = dictionary.allTokens
+          .filter(isFontFamily)
+          .map((token): [string, string] => [`font-${token.path[2]}`, `var(--${token.name})`]);
+        const ownScales = [...radii, ...fonts];
 
         return `${HEADER}
 /*
@@ -308,17 +314,18 @@ ${declarations(colors)}
 }
 
 /*
- * Radius is Tailwind's own scale, so it can't be \`inline\`: that would stop Tailwind
- * emitting \`--radius-*\`, and anything reading \`var(--radius-lg)\` would break. Plain
- * \`@theme\` resolves on :root instead, so the mapping is declared again on every
- * [data-theme] for a theme's \`--gm-radius-*\` to reach \`rounded-*\`.
+ * Radius and the font families are Tailwind keys an app may read as variables, so they
+ * can't be \`inline\`: that would stop Tailwind emitting \`--radius-*\` and \`--font-*\`, and
+ * anything reading \`var(--radius-lg)\` or \`var(--font-text)\` would break. Plain \`@theme\`
+ * resolves on :root instead, so the mapping is declared again on every [data-theme] for a
+ * theme's \`--gm-radius-*\` and \`--gm-font-family*\` to reach \`rounded-*\` and \`font-*\`.
  */
 @theme {
-${declarations(radii)}
+${declarations(ownScales)}
 }
 
 ${defaults('[data-theme]')} {
-${declarations(radii)}
+${declarations(ownScales)}
 }
 `;
       },
@@ -417,7 +424,7 @@ ${variables(dictionary)}
         {
           destination: 'theme.css',
           format: 'gm/tailwind',
-          filter: (token) => isRoleColor(token) || isRadiusStep(token),
+          filter: (token) => isRoleColor(token) || isRadiusStep(token) || isFontFamily(token),
         },
         {
           destination: 'colors.json',

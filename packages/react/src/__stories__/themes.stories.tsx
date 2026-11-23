@@ -42,7 +42,8 @@ const Panel = ({ title, testId, theme, color, children }: PanelProps) => (
 // their own. Loaded before Grunnmuren's CSS on purpose, since an app can't count on the
 // order its CSS loads in.
 const APP_THEME = `[data-theme='app'] { --gm-blue-900: #ff0000; --gm-radius-lg: 0px; }
-[data-theme='app-radius'] { --gm-radius-base: 0.5rem; }`;
+[data-theme='app-radius'] { --gm-radius-base: 0.5rem; }
+[data-theme='app-font'] { --gm-font-family: Georgia, serif; --gm-font-family-display: 'Courier New', monospace; }`;
 
 const loadAppTheme = () => {
   if (document.getElementById('app-theme')) return;
@@ -60,7 +61,7 @@ const loadAppTheme = () => {
  */
 export const SideBySide: StoryObj = {
   render: () => (
-    <div className="grid grid-cols-6 gap-4">
+    <div className="grid grid-cols-4 gap-4">
       <Panel title="fra toolbaren" testId="toolbar" />
       <Panel title="default" testId="default" theme="default" />
       <Panel title="froen-hage" testId="froen-hage" theme="froen-hage">
@@ -71,6 +72,12 @@ export const SideBySide: StoryObj = {
       <Panel title="apptema" testId="app" theme="app" />
       <Panel title="radius-base" testId="app-radius" theme="app-radius">
         <Panel title="default inni radius-base" testId="app-radius-nested" theme="default" />
+      </Panel>
+      <Panel title="font" testId="app-font" theme="app-font">
+        <p data-testid="app-font-display" className="heading-m">
+          Display
+        </p>
+        <Panel title="default inni font" testId="app-font-nested" theme="default" />
       </Panel>
     </div>
   ),
@@ -100,6 +107,14 @@ export const SideBySide: StoryObj = {
     // inside it goes back to Grunnmuren's base, same as it does for the colours
     await expect(style('app-radius').borderRadius).toBe('16px');
     await expect(style('app-radius-nested').borderRadius).toBe('8px');
+
+    // Without a theme the text is OBOS Text, as before
+    await expect(style('default').fontFamily).toMatch(/^OBOSText,/);
+    // The testId element has no font class, so this checks inherited text picks up the
+    // theme's font too. The headings that use font-display get the theme's display font.
+    await expect(style('app-font').fontFamily).toBe('Georgia, serif');
+    await expect(style('app-font-display').fontFamily).toBe('"Courier New", monospace');
+    await expect(style('app-font-nested').fontFamily).toMatch(/^OBOSText,/);
   },
 };
 

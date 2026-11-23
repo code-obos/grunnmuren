@@ -431,17 +431,44 @@ function RouteComponent() {
       </section>
 
       <section className="prose mb-12">
+        <AnchorHeading level={2} id="fonter" className="heading-m">
+          Fonter
+        </AnchorHeading>
+        <p>
+          <code>--gm-font-family</code> er fonten for tekst, og{' '}
+          <code>--gm-font-family-display</code> den de store overskriftene bruker. All tekst inni
+          temaet følger med, også tekst uten font-klasse:
+        </p>
+        <Code
+          language="css"
+          code={`[data-theme='mitt-tema'] {
+  --gm-font-family: Assistant, sans-serif;
+  --gm-font-family-display: Baskervville, serif;
+}`}
+        />
+        <ul>
+          <li>
+            Fontfilene laster appen selv, med sin egen <code>@font-face</code>.
+          </li>
+          <li>
+            Grunnmuren har fallback-metrikker, som hindrer at siden hopper mens fonten lastes, bare
+            for OBOS sine fonter.
+          </li>
+        </ul>
+      </section>
+
+      <section className="prose mb-12">
         <AnchorHeading level={2} id="begrensninger" className="heading-m">
           Det et tema ikke kan
         </AnchorHeading>
         <ul>
           <li>
-            Tekststiler og animasjon kan ikke endres. Fontfamilie og vekter kan, siden de er
-            primitiver.
+            Tekststørrelser og vekter er ikke laget for temaer ennå, og animasjon kan ikke endres.
           </li>
           <li>
-            Et tema kan sette radius, men verktøyet over lager bare fargene. Radius legger du til
-            selv i den samme CSS-fila, se <a href="#radius">Radius</a>.
+            Et tema kan sette radius og fonter, men verktøyet over lager bare fargene. Dem legger du
+            til selv i den samme CSS-fila, se <a href="#radius">Radius</a> og{' '}
+            <a href="#fonter">Fonter</a>.
           </li>
           <li>
             Kontrasten er temaets ansvar. Grunnmuren sjekker sine egne roller mot WCAG 2.2 AA, som

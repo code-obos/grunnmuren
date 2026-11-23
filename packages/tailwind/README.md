@@ -66,7 +66,7 @@ Themes live in your app, not in Grunnmuren. A theme is a `[data-theme='…']` ru
 
 These are public API, and renaming or removing one is a breaking change:
 
-- the primitives in `tokens/primitives.css`: colours (`--gm-blue-500`), spacing (`--gm-space-4`), the radius base (`--gm-radius-base`), border widths, icon stroke widths and the type primitives (font families, weights, line heights, letter spacing)
+- the primitives in `tokens/primitives.css`: colours (`--gm-blue-500`), spacing (`--gm-space-4`), the radius base (`--gm-radius-base`), border widths, icon stroke widths, the font families (`--gm-font-family`, `--gm-font-family-display`) and the other type primitives (weights, line heights, letter spacing). The weights, line heights and letter spacing only reach the headings and `lead` for now
 - the radius steps in `tokens/radius.css`: `--gm-radius-xs` to `--gm-radius-4xl`
 - the role colours: `--gm-color-{role}-{group}-{variant}` for `primary`, `accent`, `neutral`, `success`, `danger`, `warning` and `info`
 
@@ -88,6 +88,19 @@ Every `rounded-*` step is a multiple of `--gm-radius-base`, which is `0.25rem` b
 `rounded-full` and `rounded-none` don't follow the base. To change a single step, set it on its own, e.g. `--gm-radius-2xl: 1.25rem`, and it wins over the base. There's no cap on the big steps, so a large base makes cards and images very round: set those steps yourself if that's too much.
 
 Tailwind's `--radius-*` overridden in your own `@theme` doesn't reach inside a `data-theme`, so set `--gm-radius-*` instead.
+
+### Fonts
+
+`--gm-font-family` is the text font and `--gm-font-family-display` the one the big headings use. `font-text` and `font-display` read them, and so does text without a font class inside the theme:
+
+```css
+[data-theme='my-project'] {
+  --gm-font-family: Assistant, sans-serif;
+  --gm-font-family-display: Baskervville, serif;
+}
+```
+
+Your app loads the font files itself, with its own `@font-face`. The fallback metrics in `font.css`, which stop the page jumping while the font loads, are only made for OBOS Text and OBOS Display. Font sizes and weights aren't made for themes yet.
 
 The docs have a [guide to writing a theme](https://grunnmuren.obos.no/profil/temaer), where you can build one from your colours and see how it looks.
 

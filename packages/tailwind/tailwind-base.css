@@ -4,11 +4,8 @@
 @import './font';
 @import './tokens/index.css';
 
+/* The font stacks are --font-text and --font-display in tokens/theme.css */
 @theme {
-  /*** Font stacks ***/
-  --font-text: OBOSText, __OBOSText_Fallback, sans-serif;
-  --font-display: OBOSDisplay, __OBOSDisplay_Fallback, sans-serif;
-
   /*** Widths ***/
   --container-width: 92rem;
   --container-gutter-width: 1rem;
@@ -94,6 +91,14 @@
 
   html {
     @apply font-text text-neutral-text-default font-normal antialiased;
+  }
+
+  /*
+   * Text without a font class inherits the font html resolved, which is the page's. A
+   * theme on part of the page sets its own here, so that text picks up the theme's font.
+   */
+  :where([data-theme]) {
+    @apply font-text;
   }
 
   b {
