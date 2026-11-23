@@ -4,12 +4,21 @@ import { createContext, useContext } from 'react';
 type TableProps = {
   children: React.ReactNode;
   className?: string;
+  variant?: 'default' | 'zebra-striped';
   'aria-label'?: string;
   'aria-labelledby'?: string;
 };
 
-const Table = ({ children, className, ...restProps }: TableProps) => (
-  <table className={cx(className, 'not-prose mb-8 w-full text-sm')} {...restProps}>
+const Table = ({ children, className, variant = 'default', ...restProps }: TableProps) => (
+  <table
+    className={cx(
+      className,
+      'not-prose mb-8 w-full text-sm',
+      'data-[variant=zebra-striped]:[&>tbody>*]:even:bg-sky-lightest',
+    )}
+    data-variant={variant}
+    {...restProps}
+  >
     {children}
   </table>
 );
