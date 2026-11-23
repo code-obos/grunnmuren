@@ -2,4 +2,4 @@
 '@obosbbl/grunnmuren-react': minor
 ---
 
-Add `contrast-subtle` colour to Button, and render the deprecated `mint` with it.
+Reintroduce the mint button as the `contrast-subtle` colour on Button. The `mint` name renders with it.
