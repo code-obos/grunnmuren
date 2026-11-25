@@ -177,7 +177,7 @@ export const SettingsPopover = ({ builder }: { builder: ThemeBuilder }) => {
                 <ToggleButton id="generate">Generer</ToggleButton>
                 <ToggleButton id="manual">Sett hver verdi</ToggleButton>
               </ToggleButtonGroup>
-              <p className="footnote">
+              <p className="description">
                 {builder.mode === 'generate'
                   ? `Skalaen utledes fra én hex per rolle, kalibrert mot OBOS-rollene.${overrideCount > 0 ? ` Du har ${overrideCount} egne verdier lagret, de brukes når «Sett hver verdi» er valgt.` : ''}`
                   : 'Start fra de genererte verdiene og endre de du har fra designmanualen. Resten beholder generert verdi.'}

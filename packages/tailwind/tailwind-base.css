@@ -329,6 +329,11 @@
   letter-spacing: var(--gm-description-letter-spacing);
 }
 
+/*
+ * @deprecated Use `description` instead. `footnote` has no design token and isn't in
+ * Figma, and Grunnmuren doesn't use it anymore. It stays as it is until the next major,
+ * where it's removed.
+ */
 @utility footnote {
   @apply text-[0.75rem]/[1.3125rem];
 }
