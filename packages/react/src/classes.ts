@@ -2,7 +2,7 @@ import { cva, cx } from 'cva';
 
 const formField = cx('group flex flex-col gap-2');
 const formFieldError = cx(
-  'bg-danger-surface-tinted text-danger-text-subtle w-fit px-2 py-1 text-sm/6',
+  'bg-danger-surface-tinted text-danger-text-subtle description w-fit px-2 py-1',
   'group-data-[slot=file-upload]:rounded-lg',
 );
 
@@ -14,7 +14,7 @@ const input = cva({
     // Setting min-height to prevent the input from collapsing in Safari
     // Combining these with a padding-y as base classes makes it easier to standardize the height (44px) of all inputs
     'box-content min-h-6 py-2.5',
-    'placeholder-neutral-text-subtle ring-neutral-border-strong rounded-md text-base leading-6 font-normal ring-1 outline-hidden',
+    'placeholder-neutral-text-subtle ring-neutral-border-strong paragraph rounded-md font-normal ring-1 outline-hidden',
     // invalid styles
     'group-data-invalid:ring-focus group-data-invalid:ring-danger-border-default',
     // Fix invisible ring on safari: https://github.com/tailwindlabs/tailwindcss.com/issues/1135
@@ -40,7 +40,7 @@ const input = cva({
 });
 
 const inputGroup = cx([
-  'focus-within:ring-focus bg-neutral-surface-default ring-neutral-border-strong inline-flex items-center gap-3 overflow-hidden rounded-md px-3 text-base ring-1',
+  'focus-within:ring-focus bg-neutral-surface-default ring-neutral-border-strong paragraph inline-flex items-center gap-3 overflow-hidden rounded-md px-3 ring-1',
   'group-data-invalid:ring-focus group-data-invalid:ring-danger-border-default group-data-invalid:focus-within:ring-danger-border-default group-data-invalid:focus-within:ring-3',
 ]);
 
@@ -49,7 +49,7 @@ const dropdown = {
     'data-entering:fade-in data-exiting:fade-out data-entering:animate-in data-exiting:animate-out border-neutral-border-strong bg-neutral-surface-default min-w-(--trigger-width) overflow-y-auto rounded-md border shadow-sm',
   ),
   // overflow-x-hidden is needed to prevent visible vertical scrollbars from overflowing the border radius of the popover
-  listbox: cx('max-h-100 overflow-x-hidden text-sm outline-hidden'),
+  listbox: cx('description max-h-100 overflow-x-hidden outline-hidden'),
   chevronIcon: cx(
     'text-base transition-transform duration-150 group-data-open:rotate-180 motion-reduce:transition-none',
   ),

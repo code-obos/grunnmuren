@@ -13,7 +13,7 @@ import {
 
 const tagVariants = cva({
   base: [
-    'relative flex cursor-pointer items-center gap-1 rounded-lg px-2 py-1 text-sm font-medium transition-colors duration-200',
+    'description relative flex cursor-pointer items-center gap-1 rounded-lg px-2 py-1 font-medium transition-colors duration-200',
     // Resting
     'border-neutral-border-strong bg-neutral-surface-default text-neutral-text-default border-2',
     //Focus
