@@ -82,12 +82,21 @@
   --tw-prose-th-borders: var(--gm-color-neutral-border-default);
   --tw-prose-td-borders: var(--gm-color-neutral-border-subtle);
 
-  font-size: 1rem;
-  line-height: 1.75;
+  /*
+   * Body text in prose is paragraph text, lists and all. The paragraph line height is
+   * unitless, so anything inside with a bigger font still gets room.
+   */
+  font-size: var(--gm-paragraph-font-size);
+  line-height: var(--gm-paragraph-line-height);
   color: var(--tw-prose-body);
   max-width: 696px;
 
   :not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+    /*
+     * Looks like a repeat of the root, but it isn't: on the p itself it wins over a size
+     * class on the prose container, e.g. the Accordion's `text-sm`, so paragraphs stay
+     * paragraph-sized.
+     */
     &:where(p) {
       @apply paragraph;
       margin-top: 1.25em;
