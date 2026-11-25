@@ -21,7 +21,7 @@ function Breadcrumbs(props: BreadcrumbsProps) {
   const { className, children, ...restProps } = props;
 
   return (
-    <RACBreadcrumbs {...restProps} className={cx(className, 'flex flex-wrap description')}>
+    <RACBreadcrumbs {...restProps} className={cx(className, 'description flex flex-wrap')}>
       {children}
     </RACBreadcrumbs>
   );

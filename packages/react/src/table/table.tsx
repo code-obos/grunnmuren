@@ -223,7 +223,7 @@ function TableColumn(props: TableColumnProps) {
         className,
         'group/column',
         'data-allows-sorting:cursor-pointer',
-        'text-neutral-text-default px-4 py-3 text-left description font-medium',
+        'text-neutral-text-default description px-4 py-3 text-left font-medium',
         'data-focus-visible:outline-focus-inset',
         '[&_:not([data-slot=table-column-resizer]):focus-visible]:outline-focus-offset',
         'min-w-fit whitespace-nowrap',
@@ -301,7 +301,7 @@ function TableCell(props: TableCellProps) {
       {...restProps}
       className={cx(
         className,
-        'text-neutral-text-default px-4 py-3 description',
+        'text-neutral-text-default description px-4 py-3',
         'min-w-fit whitespace-nowrap',
         'align-top',
         'data-focus-visible:outline-focus-inset',

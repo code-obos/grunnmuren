@@ -29,7 +29,7 @@ const alertVariants = cva({
     // Content styles:
     '**:data-[slot=content]:description [&:has([data-slot=heading])_[data-slot=content]]:col-span-full',
     // Footer styles:
-    '**:data-[slot=footer]:col-span-full **:data-[slot=footer]:description **:data-[slot=footer]:font-light',
+    '**:data-[slot=footer]:description **:data-[slot=footer]:col-span-full **:data-[slot=footer]:font-light',
   ],
   variants: {
     /**
@@ -153,7 +153,7 @@ const Alertbox = ({
       {isExpandable && (
         <button
           className={cx(
-            'relative col-span-full row-start-2 -my-3 inline-flex max-w-fit cursor-pointer items-center gap-1 py-3 description',
+            'description relative col-span-full row-start-2 -my-3 inline-flex max-w-fit cursor-pointer items-center gap-1 py-3',
             // Focus styles:
             'outline-none after:absolute after:inset-x-0 after:bottom-3 after:h-0',
             'focus-visible:after:bg-neutral-border-strong focus-visible:after:h-0.5',
