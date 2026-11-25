@@ -1,0 +1,13 @@
+/*
+ * Generated from tokens/source/grunnmuren-tokens.json by build-tokens.ts. Don't edit by
+ * hand: change the source and run `pnpm tokens:build`.
+ */
+
+/*
+ * What dims the page behind a Modal or Drawer: the neutral base colour at
+ * --gm-opacity-scrim. Worked out on every [data-theme], so it follows a theme's neutral
+ * and its opacity. The same colour-mix() Tailwind makes for `bg-neutral-base-default/25`.
+ */
+:where(:root, [data-theme]) {
+  --gm-color-scrim: color-mix(in oklab, var(--gm-color-neutral-base-default) calc(var(--gm-opacity-scrim) * 100%), transparent);
+}

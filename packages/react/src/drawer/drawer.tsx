@@ -66,7 +66,7 @@ const Drawer = ({
     style={{ zIndex, ...style }}
     className={({ isEntering, isExiting }) =>
       cx(
-        'bg-neutral-base-default/25 fixed inset-0 backdrop-blur-sm',
+        'bg-scrim fixed inset-0 backdrop-blur-sm',
         isEntering && 'fade-in animate-in duration-300 ease-out',
         isExiting && 'fade-out animate-out duration-200 ease-in',
         // Using the motion-safe class does not work, so we use motion-reduce to overwrite instead

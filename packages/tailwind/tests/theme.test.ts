@@ -242,6 +242,24 @@ describe('buildTheme', () => {
     });
   });
 
+  describe('scrim', () => {
+    test('the opacity ends up in the CSS', () => {
+      const { css, errors } = build({ opacity: { scrim: '0.6' } });
+      expect(errors).toEqual([]);
+      expect(css).toBe(`[data-theme='nybolig'] {\n  --gm-opacity-scrim: 0.6;\n}\n`);
+    });
+
+    test.for(['0', '1', '0.4', '.4', 0.4, 1, { $value: 0.4 }])('%o is an opacity', (value) => {
+      expect(build({ opacity: { scrim: value } }).errors).toEqual([]);
+    });
+
+    test.for(['1.5', '-0.2', '40%', 'dark', 2])('%o is not an opacity', (value) => {
+      expect(build({ opacity: { scrim: value } }).errors).toEqual([
+        expect.objectContaining({ code: 'invalid-opacity', path: 'opacity.scrim' }),
+      ]);
+    });
+  });
+
   test('"default" is not a theme name, it resets to the defaults', () => {
     expect(buildTheme({}, { name: 'default' }).errors).toEqual([
       expect.objectContaining({ code: 'invalid-name' }),

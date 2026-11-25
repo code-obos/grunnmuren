@@ -20,9 +20,14 @@ import {
   Combobox,
   ComboboxItem,
   Content,
+  Dialog,
+  DialogTrigger,
+  Footer,
+  Header,
   Heading,
   Label,
   Link,
+  Modal,
   NumberField,
   Radio,
   RadioGroup,
@@ -51,6 +56,7 @@ import {
   UNSAFE_ToggletipTrigger as ToggletipTrigger,
 } from '@obosbbl/grunnmuren-react';
 import { type ReactNode, useState } from 'react';
+import { UNSAFE_PortalProvider as PortalProvider } from 'react-aria';
 
 import {
   BRAND_ROLES,
@@ -97,6 +103,72 @@ const APARTMENTS = [
   ['403', '54 m²', '4', 'blue-dark', 'Solgt'],
   ['501', '98 m²', '5', 'gray-dark', 'Reservert'],
 ] as const;
+
+/**
+ * A Modal opens in a portal at the end of the page, outside the preview's `data-theme`, and
+ * would get Grunnmuren's own scrim, radius and colours. The PortalProvider opens it inside
+ * the preview instead, so it shows the theme.
+ */
+const ModalExample = () => {
+  const [container, setContainer] = useState<HTMLElement | null>(null);
+
+  return (
+    <>
+      <div ref={setContainer} />
+      {container && (
+        <PortalProvider getContainer={() => container}>
+          <DialogTrigger>
+            <Button variant="secondary">Åpne dialog</Button>
+            <Modal>
+              <Dialog>
+                <Header>
+                  <Heading level={2}>Reserver leilighet 402</Heading>
+                  <Button slot="close" />
+                </Header>
+                <p>
+                  Vi holder av leiligheten til deg i 48 timer. Du kan angre helt frem til da, uten
+                  at det koster noe.
+                </p>
+                <Footer>
+                  <Button slot="close" variant="secondary">
+                    Avbryt
+                  </Button>
+                  <Button slot="close">Reserver</Button>
+                </Footer>
+              </Dialog>
+            </Modal>
+          </DialogTrigger>
+        </PortalProvider>
+      )}
+    </>
+  );
+};
+
+/**
+ * A page with an open dialog, drawn in place. The real Modal only shows the scrim while it's
+ * open, so this is what changes as you drag Bakgrunnsdemping.
+ */
+const ScrimExample = () => (
+  <div
+    aria-hidden
+    className="bg-background-default relative grid h-56 gap-3 overflow-hidden rounded-lg border border-black/15 p-6"
+  >
+    <p className="heading-s">Leiligheter i Fornebu Nord</p>
+    <p className="description max-w-sm">
+      Tre ledige leiligheter fra 54 til 98 m², med balkong og parkering i kjeller.
+    </p>
+    <div className="flex gap-3">
+      <span className="bg-base-default h-10 w-28 rounded-lg" />
+      <span className="border-base-default h-10 w-28 rounded-lg border-2" />
+    </div>
+    <div className="bg-scrim absolute inset-0 grid place-items-center backdrop-blur-sm">
+      <div className="bg-neutral-surface-default grid w-64 gap-2 rounded-2xl p-5 shadow-xl">
+        <p className="paragraph font-medium">Reserver leilighet 402</p>
+        <p className="description">Vi holder av leiligheten til deg i 48 timer.</p>
+      </div>
+    </div>
+  </div>
+);
 
 const Gallery = ({ role }: { role: BrandRole }) => {
   const [step, setStep] = useState(1);
@@ -323,6 +395,13 @@ const Gallery = ({ role }: { role: BrandRole }) => {
             </ToggletipContent>
           </Toggletip>
         </p>
+      </Section>
+
+      <Section title="Dialog" components="Modal">
+        <ScrimExample />
+        <Row>
+          <ModalExample />
+        </Row>
       </Section>
 
       <Section title="Tabell" components="Table*">

@@ -53,6 +53,12 @@
       "name": "gm-radius-4xl",
       "type": "dimension",
       "value": "2rem"
+    },
+    {
+      "path": "opacity.scrim",
+      "name": "gm-opacity-scrim",
+      "type": "opacity",
+      "value": 0.25
     }
   ]
 }

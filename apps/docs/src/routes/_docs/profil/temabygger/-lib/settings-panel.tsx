@@ -17,7 +17,7 @@ import { useState } from 'react';
 import { Button as RACButton, Dialog, DialogTrigger, Popover } from 'react-aria-components';
 
 import { ColorField } from './color-field';
-import { RadiusSlider } from './radius-slider';
+import { ThemeSlider } from './theme-slider';
 import {
   BRAND_ROLES,
   GROUPS,
@@ -160,7 +160,38 @@ export const SettingsPopover = ({ builder }: { builder: ThemeBuilder }) => {
                 <ColorSettings builder={builder} overrideCount={overrideCount} />
               </TabPanel>
               <TabPanel id="form" className="grid gap-6 pt-6">
-                <RadiusSlider value={builder.radius} onChange={builder.setRadius} />
+                <ThemeSlider
+                  label="Hjørner"
+                  description="Dra slideren for å stille corner radius på komponentene."
+                  value={builder.radius}
+                  onChange={builder.setRadius}
+                  minValue={0}
+                  maxValue={16}
+                  step={1}
+                  format={(px) => `${px} px`}
+                />
+                <ThemeSlider
+                  label="Bakgrunnsdemping"
+                  description="Hvor mørk siden bak blir når en dialog eller skuff er åpen."
+                  info={
+                    <>
+                      <p>
+                        Når en dialog eller skuff åpnes, legges et mørkt, halvgjennomsiktig lag over
+                        resten av siden. Det trekker blikket mot det som er åpent og viser at siden
+                        bak ikke kan brukes akkurat nå. 0 betyr ingen demping, 1 betyr helt mørk.
+                      </p>
+                      <p className="mt-3">
+                        Token: <code className="whitespace-nowrap">--gm-opacity-scrim</code>
+                      </p>
+                    </>
+                  }
+                  value={builder.scrim}
+                  onChange={builder.setScrim}
+                  minValue={0}
+                  maxValue={1}
+                  step={0.05}
+                  format={(opacity) => opacity.toFixed(2)}
+                />
               </TabPanel>
             </Tabs>
           </>

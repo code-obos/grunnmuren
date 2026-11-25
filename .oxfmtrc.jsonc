@@ -10,6 +10,7 @@
     "packages/tailwind/tokens/semantic.css",
     "packages/tailwind/tokens/typography.css",
     "packages/tailwind/tokens/motion.css",
+    "packages/tailwind/tokens/scrim.css",
     "packages/tailwind/tokens/theme.css",
     "packages/tailwind/tokens/themes/*.css",
     "packages/tailwind/tokens/themes/*.json",

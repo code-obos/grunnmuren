@@ -79,6 +79,7 @@ const isIn = (token: TransformedToken, ...prefix: Array<string>) =>
 const isRadius = (token: TransformedToken) =>
   isIn(token, 'primitives', 'radius') && !FIXED_RADII.has(token.path[2]);
 const isRadiusBase = (token: TransformedToken) => isIn(token, 'primitives', 'radius', 'base');
+const isScrimOpacity = (token: TransformedToken) => isIn(token, 'primitives', 'opacity', 'scrim');
 // The steps `rounded-*` reads, worked out from the base in radius.css
 const isRadiusStep = (token: TransformedToken) => isRadius(token) && !isRadiusBase(token);
 const isPrimitive = (token: TransformedToken) =>
@@ -230,6 +231,20 @@ ${short}
 `;
       },
 
+      'gm/scrim': ({ dictionary }) => {
+        const [opacity] = dictionary.allTokens.filter(isScrimOpacity);
+        return `${HEADER}
+/*
+ * What dims the page behind a Modal or Drawer: the neutral base colour at
+ * --${opacity.name}. Worked out on every [data-theme], so it follows a theme's neutral
+ * and its opacity. The same colour-mix() Tailwind makes for \`bg-neutral-base-default/25\`.
+ */
+${THEMED} {
+  --gm-color-scrim: color-mix(in oklab, var(--gm-color-neutral-base-default) calc(var(--${opacity.name}) * 100%), transparent);
+}
+`;
+      },
+
       'gm/radius': ({ dictionary }) => {
         const base = dictionary.allTokens.find(isRadiusBase);
         if (!base) throw new Error('`primitives.radius.base` is missing from the source');
@@ -285,7 +300,9 @@ ${durations}
 
       'gm/tailwind': ({ dictionary }) => {
         const roles = dictionary.allTokens.filter(isRoleColor).map((token) => token.name);
-        const colors = [...roles, ...shortColorTokens(dictionary.allTokens).names].map(
+        // The scrim is a colour worked out in scrim.css, so it's added by name
+        const scrim = dictionary.allTokens.some(isScrimOpacity) ? ['gm-color-scrim'] : [];
+        const colors = [...roles, ...shortColorTokens(dictionary.allTokens).names, ...scrim].map(
           (name): [string, string] => [name.replace(/^gm-/, ''), `var(--${name})`],
         );
         const radii = dictionary.allTokens
@@ -373,7 +390,8 @@ ${declarations(radii)}
         const tokens = dictionary.allTokens.map((token) => ({
           path: token.path.slice(1).join('.'),
           name: token.name,
-          type: token.$type,
+          // An opacity is a plain number in the source, but a theme can only set it from 0 to 1
+          type: isScrimOpacity(token) ? 'opacity' : token.$type,
           value: token.$value,
         }));
         return `${JSON.stringify({ tokens }, null, 2)}\n`;
@@ -429,14 +447,19 @@ ${variables(dictionary)}
         {
           destination: 'theme.css',
           format: 'gm/tailwind',
-          filter: (token) => isRoleColor(token) || isRadiusStep(token),
+          filter: (token) => isRoleColor(token) || isRadiusStep(token) || isScrimOpacity(token),
         },
         {
           destination: 'colors.json',
           format: 'gm/colors',
           filter: (token) => isRoleColor(token) || isColorPrimitive(token),
         },
-        { destination: 'themeable.json', format: 'gm/themeable', filter: isRadius },
+        { destination: 'scrim.css', format: 'gm/scrim', filter: isScrimOpacity },
+        {
+          destination: 'themeable.json',
+          format: 'gm/themeable',
+          filter: (token) => isRadius(token) || isScrimOpacity(token),
+        },
         { destination: 'themes/colors.json', format: 'gm/theme-colors', filter: isThemeColor },
         ...THEMES.map((theme) => ({
           destination: `themes/${theme}.css`,

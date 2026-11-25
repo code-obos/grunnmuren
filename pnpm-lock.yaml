@@ -368,6 +368,9 @@ importers:
       react:
         specifier: 'catalog:'
         version: 19.3.1
+      react-aria:
+        specifier: 3.53.1
+        version: 3.53.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       react-aria-components:
         specifier: 1.22.1
         version: 1.22.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -12072,7 +12075,7 @@ snapshots:
 
   '@internationalized/number@3.6.9':
     dependencies:
-      '@swc/helpers': 0.5.18
+      '@swc/helpers': 0.5.23
 
   '@internationalized/string@3.2.10':
     dependencies:
@@ -18820,7 +18823,7 @@ snapshots:
       '@internationalized/number': 3.6.9
       '@internationalized/string': 3.2.10
       '@react-types/shared': 3.37.0(react@19.3.1)
-      '@swc/helpers': 0.5.18
+      '@swc/helpers': 0.5.23
       aria-hidden: 1.2.6
       clsx: 2.1.1
       react: 19.3.1
