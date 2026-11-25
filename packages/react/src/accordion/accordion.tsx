@@ -79,7 +79,7 @@ function AccordionItem(props: AccordionItemProps) {
             HeadingContext,
             {
               // Negative margin to strech the button to the entire with of the accordion (to support containers with a background color)
-              className: 'font-medium leading-7 -mx-3.5 text-base',
+              className: 'paragraph font-medium -mx-3.5',
               // Supply a default level here to make this typecheck ok. Will be overwritten with the consumers set heading level anyways
               level: 3,
               _innerWrapper: (children) => (
@@ -100,7 +100,7 @@ function AccordionItem(props: AccordionItemProps) {
             {
               className:
                 // Uses pseudo elements for vertical padding, since that doesn't affect the height when the accordion is closed
-                'text-sm font-light leading-6 px-3.5 data-[expanded]:after:h-3.5 relative overflow-hidden border-primary-border-subtle border-l-[3px] before:relative before:block before:h-1.5 after:relative after:block after:h-1.5',
+                'description font-light px-3.5 data-[expanded]:after:h-3.5 relative overflow-hidden border-primary-border-subtle border-l-[3px] before:relative before:block before:h-1.5 after:relative after:block after:h-1.5',
               _outerWrapper: (children) => (
                 <DisclosurePanel aria-labelledby={buttonId} role="region">
                   {children}

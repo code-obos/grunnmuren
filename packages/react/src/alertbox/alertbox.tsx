@@ -25,11 +25,11 @@ const alertVariants = cva({
     // Icon styles:
     '[&:has([data-slot=heading])>svg]:mt-0.5',
     // Heading styles:
-    '**:data-[slot=heading]:text-base **:data-[slot=heading]:leading-7 **:data-[slot=heading]:font-medium',
+    '**:data-[slot=heading]:paragraph **:data-[slot=heading]:font-medium',
     // Content styles:
-    '**:data-[slot=content]:text-sm **:data-[slot=content]:leading-6 [&:has([data-slot=heading])_[data-slot=content]]:col-span-full',
+    '**:data-[slot=content]:description [&:has([data-slot=heading])_[data-slot=content]]:col-span-full',
     // Footer styles:
-    '**:data-[slot=footer]:col-span-full **:data-[slot=footer]:text-xs **:data-[slot=footer]:leading-6 **:data-[slot=footer]:font-light',
+    '**:data-[slot=footer]:col-span-full **:data-[slot=footer]:description **:data-[slot=footer]:font-light',
   ],
   variants: {
     /**
@@ -153,7 +153,7 @@ const Alertbox = ({
       {isExpandable && (
         <button
           className={cx(
-            'relative col-span-full row-start-2 -my-3 inline-flex max-w-fit cursor-pointer items-center gap-1 py-3 text-sm/6',
+            'relative col-span-full row-start-2 -my-3 inline-flex max-w-fit cursor-pointer items-center gap-1 py-3 description',
             // Focus styles:
             'outline-none after:absolute after:inset-x-0 after:bottom-3 after:h-0',
             'focus-visible:after:bg-neutral-border-strong focus-visible:after:h-0.5',
