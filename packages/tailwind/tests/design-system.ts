@@ -213,10 +213,12 @@ const collectDeclarations = (
 
       // The utility's own class differs within every pair by definition, so only what
       // the variant adds to the selector (`:hover`, `.group:hover *`) is compared
+      // A custom `@utility` that applies a variant (`@apply before:…`) nests it as `&::before`
+      // instead of repeating the class, so `&` counts as the utility's own class too
       case 'rule': {
-        if (!node.selector.includes(className)) {
+        if (!node.selector.includes(className) && !node.selector.includes('&')) {
           throw new Error(
-            `Unexpected selector \`${node.selector}\`, expected it to contain \`${className}\``,
+            `Unexpected selector \`${node.selector}\`, expected it to contain \`${className}\` or \`&\``,
           );
         }
         const variantSelector = node.selector.replace(className, '&');

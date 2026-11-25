@@ -191,6 +191,7 @@ const TYPE_UTILITIES = [
   'lead',
   'lead-sm',
   'paragraph',
+  'description',
 ];
 
 describe('typography', () => {
@@ -203,5 +204,16 @@ describe('typography', () => {
   test.for(TYPE_UTILITIES)('%s has no breakpoint step', async (utility) => {
     const declarations = await resolveUtility(utility);
     expect(declarations.filter(({ condition }) => condition !== '')).toEqual([]);
+  });
+
+  // The quote mark sits in ::before, so it has a condition of its own. What it mustn't
+  // have is a media query: the mark follows the text size in em instead.
+  test('blockquote', async () => {
+    expect(await declarationsFor('blockquote')).toMatchSnapshot();
+  });
+
+  test('blockquote has no breakpoint step', async () => {
+    const declarations = await resolveUtility('blockquote');
+    expect(declarations.filter(({ condition }) => condition.includes('@media'))).toEqual([]);
   });
 });
