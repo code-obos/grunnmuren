@@ -336,12 +336,12 @@ const FileUploadField = ({
                     )}
                   >
                     <div className="flex items-center gap-3">
-                      <div className="footnote border-neutral-border-subtle bg-neutral-surface-tinted rounded-md border px-2.5 py-2">
+                      <div className="description border-neutral-border-subtle bg-neutral-surface-tinted rounded-md border px-2.5 py-2">
                         {getFileExtension(file)}
                       </div>
                       <div className="flex flex-col">
                         <span className="description truncate font-medium">{fileName}</span>
-                        <span className="footnote text-neutral-text-subtle">
+                        <span className="description text-neutral-text-subtle">
                           {formatFileSize(file.size)}
                         </span>
                       </div>
