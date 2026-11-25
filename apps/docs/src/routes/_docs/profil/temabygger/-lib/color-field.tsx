@@ -59,9 +59,9 @@ export const ColorField = ({ label, value, onChange, description }: ColorFieldPr
         </span>
       </div>
       {isInvalid && (
-        <p className="footnote text-danger-text-default">Skriv fargen som hex, feks #2D3A26</p>
+        <p className="description text-danger-text-default">Skriv fargen som hex, feks #2D3A26</p>
       )}
-      {description && <p className="footnote px-3">{description}</p>}
+      {description && <p className="description px-3">{description}</p>}
     </div>
   );
 };
