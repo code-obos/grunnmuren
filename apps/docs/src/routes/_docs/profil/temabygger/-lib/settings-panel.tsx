@@ -5,6 +5,7 @@ import {
   Badge,
   Content,
   Heading,
+  NumberField,
   TextField,
   UNSAFE_ToggleButton as ToggleButton,
   UNSAFE_ToggleButtonGroup as ToggleButtonGroup,
@@ -157,6 +158,15 @@ export const SettingsPopover = ({ builder }: { builder: ThemeBuilder }) => {
               placeholder="Grunnmuren"
               value={builder.name}
               onChange={builder.setName}
+            />
+            <NumberField
+              label="Radius"
+              description="Alle hjørner er multipler av denne. 4 er Grunnmuren, 0 gir firkantet."
+              value={builder.radius}
+              onChange={builder.setRadius}
+              minValue={0}
+              maxValue={16}
+              rightAddon="px"
             />
             <div className="grid gap-2">
               <h3 className="paragraph font-medium">Merkevarefarger</h3>

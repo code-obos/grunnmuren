@@ -367,6 +367,18 @@ ${declarations(radii)}
         return `${JSON.stringify(colors, null, 2)}\n`;
       },
 
+      // The tokens other than colours a theme file can set, for the theme builder in theme/.
+      // `path` is what a theme file calls a token: `radius.base`.
+      'gm/themeable': ({ dictionary }) => {
+        const tokens = dictionary.allTokens.map((token) => ({
+          path: token.path.slice(1).join('.'),
+          name: token.name,
+          type: token.$type,
+          value: token.$value,
+        }));
+        return `${JSON.stringify({ tokens }, null, 2)}\n`;
+      },
+
       // What each example theme sets, by CSS name, so the docs can show a theme's values
       // without reading them back from the DOM. Next to the theme CSS, since the example
       // themes aren't in the package.
@@ -424,6 +436,7 @@ ${variables(dictionary)}
           format: 'gm/colors',
           filter: (token) => isRoleColor(token) || isColorPrimitive(token),
         },
+        { destination: 'themeable.json', format: 'gm/themeable', filter: isRadius },
         { destination: 'themes/colors.json', format: 'gm/theme-colors', filter: isThemeColor },
         ...THEMES.map((theme) => ({
           destination: `themes/${theme}.css`,

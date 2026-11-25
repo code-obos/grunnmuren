@@ -93,7 +93,7 @@ The docs have a [guide to writing a theme](https://grunnmuren.obos.no/profil/tem
 
 ### Building a theme from tokens
 
-A typo in a custom property silently does nothing, and nothing checks a theme's contrast. `grunnmuren-theme` builds the colour part of a theme from a JSON file with Grunnmuren's token names, and checks both:
+A typo in a custom property silently does nothing, and nothing checks a theme's contrast. `grunnmuren-theme` builds the colours and radius of a theme from a JSON file with Grunnmuren's token names, and checks both:
 
 ```json
 {
@@ -101,7 +101,8 @@ A typo in a custom property silently does nothing, and nothing checks a theme's 
     "base-default": "#2d3a26",
     "base-hover": { "$value": "{primary.base-active}" }
   },
-  "blue": { "900": "#1f2a44" }
+  "blue": { "900": "#1f2a44" },
+  "radius": { "base": "0.5rem" }
 }
 ```
 
@@ -111,8 +112,9 @@ npx grunnmuren-theme my-project.json --out my-project.css
 
 - Roles are nested by role, primitives by colour family. A value is a hex or `rgb()` colour, or a `{reference}` to another token, which falls back to Grunnmuren's value when the file doesn't set it. DTCG `$value` works too.
 - Designsystemet's paths (`color.primary.base-default`) read as the same tokens.
+- Radius is `radius.base`, plus single steps like `radius.lg` if you want them (see [Radius](#radius)). A value is a length in rem, px or em, or `0`, and a DTCG dimension (`{ "value": 0.5, "unit": "rem" }`) works too. `none` and `full` aren't tokens.
 - Only what the file sets ends up in the CSS.
-- An unknown token, an invalid colour, a circular reference or a token set twice is an error, and exits with 1.
+- An unknown token, an invalid colour or length, a circular reference or a token set twice is an error, and exits with 1.
 - Contrast is checked with the same pairs as Grunnmuren's own roles, for the pairs where the theme changes a colour. A pair below WCAG 2.2 AA is a warning, and with `--strict` an error and no CSS.
 - The theme is named after the file, lowercased and with anything but letters, digits, `-` and `_` turned into `-`. `--name` sets something else. `default` can't be a name, since it resets to Grunnmuren's own values.
 - `--example` prints every role token pointing at its default, to start from.

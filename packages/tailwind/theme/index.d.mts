@@ -8,10 +8,11 @@ export type ThemeIssue = {
     | 'unknown-token'
     | 'invalid-value'
     | 'invalid-color'
+    | 'invalid-dimension'
     | 'unresolved-reference'
     | 'circular-reference'
     | 'duplicate-token';
-  /** The token's path in the file, `primary.base-default`. Empty for the file as a whole. */
+  /** The token's path in the file, `primary.base-default` or `radius.base`. Empty for the file as a whole. */
   path: string;
   /** What's wrong, in English. */
   message: string;
@@ -43,7 +44,7 @@ export type ThemeResult = {
 };
 
 /**
- * Builds a theme's CSS from colour tokens named like Grunnmuren's, and checks it.
+ * Builds a theme's CSS from colour and radius tokens named like Grunnmuren's, and checks it.
  *
  * ```js
  * buildTheme({ primary: { 'base-default': '#2d3a26' } }, { name: 'my-project' });

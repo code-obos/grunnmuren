@@ -61,6 +61,8 @@ const ISSUES: Record<ThemeIssue['code'], (issue: ThemeIssue) => string> = {
     `${path} må være en streng, eller et DTCG-token med fargen i $value.`,
   'invalid-color': ({ path }) =>
     `${path} er ikke en farge. Bruk hex, rgb() eller en referanse som {primary.base-default}.`,
+  'invalid-dimension': ({ path }) =>
+    `${path} er ikke en gyldig lengde. Bruk rem, px eller em, som 0.5rem, eller 0.`,
   'unresolved-reference': ({ path, suggestion }) =>
     `${path} peker på et token som ikke finnes.${suggestion ? ` Mente du ${suggestion}?` : ''}`,
   'circular-reference': ({ path }) => `${path} ender opp med å peke på seg selv.`,
@@ -379,6 +381,11 @@ function RouteComponent() {
             <code>{'{primary.base-active}'}</code>. En referanse til noe fila ikke setter, peker på
             Grunnmuren sin verdi.
           </li>
+          <li>
+            Radius er <code>&quot;radius&quot;: {'{ "base": "0.5rem" }'}</code>, og kan ha
+            enkelttrinn som <code>&quot;lg&quot;</code> i tillegg. Verdien er en lengde i rem, px
+            eller em, eller <code>0</code>. Se <a href="#radius">Radius</a>.
+          </li>
           <li>Filer fra Figma (DTCG) og Designsystemet funker også.</li>
           <li>Bare det du setter havner i CSS-en. Et tema med tre farger er helt greit.</li>
         </ul>
@@ -439,10 +446,7 @@ function RouteComponent() {
             Tekststiler og animasjon kan ikke endres. Fontfamilie og vekter kan, siden de er
             primitiver.
           </li>
-          <li>
-            Et tema kan sette radius, men verktøyet over lager bare fargene. Radius legger du til
-            selv i den samme CSS-fila, se <a href="#radius">Radius</a>.
-          </li>
+          <li>Verktøyet over tar farger og radius. Resten skriver du selv i den samme CSS-fila.</li>
           <li>
             Kontrasten er temaets ansvar. Grunnmuren sjekker sine egne roller mot WCAG 2.2 AA, som
             er 4.5:1 for tekst og 3:1 for kanter, ikoner og andre UI-elementer. Verktøyet over
