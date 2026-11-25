@@ -182,6 +182,17 @@ describe('radius', () => {
   });
 });
 
+describe('font family', () => {
+  // A site's own fonts, in place of OBOS Text and OBOS Display
+  test.for([
+    ['--font-text', '--gm-font-family'],
+    ['--font-display', '--gm-font-family-display'],
+  ])("a theme's %s reaches %s", async ([tailwind, token]) => {
+    const theme = new Map([[token, 'Assistant, sans-serif']]);
+    expect(await resolveToken(tailwind, theme)).toBe('Assistant, sans-serif');
+  });
+});
+
 const TYPE_UTILITIES = [
   'heading-xl',
   'heading-l',

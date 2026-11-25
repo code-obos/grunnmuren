@@ -142,10 +142,11 @@
 }
 
 /*
- * Radius is Tailwind's own scale, so it can't be `inline`: that would stop Tailwind
- * emitting `--radius-*`, and anything reading `var(--radius-lg)` would break. Plain
- * `@theme` resolves on :root instead, so the mapping is declared again on every
- * [data-theme] for a theme's `--gm-radius-*` to reach `rounded-*`.
+ * Radius and the font families are Tailwind keys an app may read as variables, so they
+ * can't be `inline`: that would stop Tailwind emitting `--radius-*` and `--font-*`, and
+ * anything reading `var(--radius-lg)` or `var(--font-text)` would break. Plain `@theme`
+ * resolves on :root instead, so the mapping is declared again on every [data-theme] for a
+ * theme's `--gm-radius-*` and `--gm-font-family*` to reach `rounded-*` and `font-*`.
  */
 @theme {
   --radius-xs: var(--gm-radius-xs);
@@ -156,6 +157,8 @@
   --radius-2xl: var(--gm-radius-2xl);
   --radius-3xl: var(--gm-radius-3xl);
   --radius-4xl: var(--gm-radius-4xl);
+  --font-display: var(--gm-font-family-display);
+  --font-text: var(--gm-font-family);
 }
 
 :where([data-theme]) {
@@ -167,4 +170,6 @@
   --radius-2xl: var(--gm-radius-2xl);
   --radius-3xl: var(--gm-radius-3xl);
   --radius-4xl: var(--gm-radius-4xl);
+  --font-display: var(--gm-font-family-display);
+  --font-text: var(--gm-font-family);
 }
