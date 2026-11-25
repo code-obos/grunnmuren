@@ -89,7 +89,7 @@
 
   :not(:where([class~='not-prose'], [class~='not-prose'] *)) {
     &:where(p) {
-      @apply text-[1rem]/[1.625rem];
+      @apply paragraph;
       margin-top: 1.25em;
       margin-bottom: 1.25em;
     }

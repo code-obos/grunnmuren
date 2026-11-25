@@ -286,8 +286,14 @@
   letter-spacing: var(--gm-heading-xs-letter-spacing);
 }
 
+/*
+ * No font-weight, unlike the headings: paragraph is used with `font-medium` (e.g.
+ * `paragraph font-medium`), and two utilities setting it would come down to their order.
+ */
 @utility paragraph {
-  @apply text-[1rem]/[1.625rem];
+  font-size: var(--gm-paragraph-font-size);
+  line-height: var(--gm-paragraph-line-height);
+  letter-spacing: var(--gm-paragraph-letter-spacing);
 }
 
 @utility lead {
