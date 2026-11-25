@@ -615,6 +615,38 @@ exports[`computed values > the token set matches the snapshot 1`] = `
 }
 `;
 
+exports[`typography > blockquote 1`] = `
+[
+  "display: grid",
+  "grid-template-columns: 2.25em 1fr",
+  "column-gap: 0.3em",
+  "padding-top: calc(0.25rem * 4)",
+  "font-style: italic",
+  "&::before { content: var(--tw-content) }",
+  "&::before { font-family: OBOSDisplay, __OBOSDisplay_Fallback, sans-serif }",
+  "&::before { content: var(--tw-content) }",
+  "&::before { font-size: 3em }",
+  "&::before { line-height: 0.45 }",
+  "&::before { content: var(--tw-content) }",
+  "&::before { font-style: normal }",
+  "&::before { content: var(--tw-content) }",
+  "&::before { --tw-content: "“" }",
+  "&::before { content: var(--tw-content) }",
+  "font-size: clamp(1.1875rem, 1.1458rem + 0.2083vw, 1.3125rem)",
+  "line-height: 1.6",
+  "font-weight: 500",
+  "letter-spacing: 0em",
+]
+`;
+
+exports[`typography > description 1`] = `
+[
+  "font-size: 0.875rem",
+  "line-height: 1.5",
+  "letter-spacing: 0em",
+]
+`;
+
 exports[`typography > heading-l 1`] = `
 [
   "font-family: OBOSDisplay, __OBOSDisplay_Fallback, sans-serif",
