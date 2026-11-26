@@ -260,6 +260,32 @@ const Roles = () => {
             </SwatchGrid>
           </section>
         )}
+
+        <section className="grid gap-6">
+          <div className="prose">
+            <AnchorHeading level={2} id="bakgrunnsdemping" className="heading-s">
+              Bakgrunnsdemping
+            </AnchorHeading>
+            <p>
+              Den dempede bakgrunnen bak Modal og Drawer. Lager du et eget overlay, som en lightbox,
+              bruk <code>bg-scrim</code> i stedet for <code>bg-neutral-base-default/25</code>, så
+              følger den temaet.
+            </p>
+            <p>
+              Det er <code>neutral-base-default</code> med opasiteten fra{' '}
+              <code>--gm-opacity-scrim</code>, som er 0.25 i OBOS-temaet. Et tema kan endre
+              opasiteten, se <Link href="/profil/temaer">Temaer</Link>.
+            </p>
+          </div>
+          <SwatchGrid>
+            <Swatch
+              name="gm-color-scrim"
+              utility="bg-scrim"
+              pointsAt="gm-color-neutral-base-default"
+              value="25 %"
+            />
+          </SwatchGrid>
+        </section>
       </div>
     </div>
   );
@@ -323,6 +349,7 @@ const Palette = () => (
 const TAB_FOR_ANCHOR: Record<string, string> = {
   ...Object.fromEntries(tokenColors.roles.map(({ role }) => [role, 'roller'])),
   'korte-tokens': 'roller',
+  bakgrunnsdemping: 'roller',
   primitiver: 'palett',
   legacy: 'palett',
 };
