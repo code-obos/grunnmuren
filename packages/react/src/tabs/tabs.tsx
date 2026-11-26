@@ -59,7 +59,7 @@ const tabListVariants = cva({
 
 const tabVariants = cva({
   base: [
-    'h-11 cursor-pointer',
+    'h-[44px] cursor-pointer',
     // Transition
     'duration-150 ease-out',
     // Hide disabled tabs entirely — the design system avoids disabled states (see https://grunnmuren.obos.no/disabled-state)

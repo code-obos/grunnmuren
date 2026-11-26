@@ -85,7 +85,7 @@ function AccordionItem(props: AccordionItemProps) {
               _innerWrapper: (children) => (
                 <DisclosureButton
                   // Use outline with offset as focus indicator, this does not cover the left sky border on the expanded content and works with or without a background color on the accordion container
-                  className="focus-visible:outline-focus-inset! flex min-h-11 w-full gap-1.5 rounded-lg p-3.5 text-left"
+                  className="focus-visible:outline-focus-inset! flex min-h-[44px] w-full gap-1.5 rounded-lg p-3.5 text-left"
                   type="button"
                   withChevron
                   id={buttonId}

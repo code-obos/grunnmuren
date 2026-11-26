@@ -350,7 +350,7 @@ const FileUploadField = ({
                       type="button"
                       aria-label={translations.remove[locale]}
                       className={cx(
-                        '-m-2 grid size-11 shrink-0 cursor-pointer place-items-center rounded-xl',
+                        '-m-2 grid size-[44px] shrink-0 cursor-pointer place-items-center rounded-xl',
                         // Focus styles
                         'focus-visible:outline-focus focus-visible:-outline-offset-8',
                       )}
