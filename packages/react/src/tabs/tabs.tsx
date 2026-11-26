@@ -59,7 +59,7 @@ const tabListVariants = cva({
 
 const tabVariants = cva({
   base: [
-    'h-11 cursor-pointer',
+    'min-h-[44px] cursor-pointer',
     // Transition
     'duration-150 ease-out',
     // Hide disabled tabs entirely — the design system avoids disabled states (see https://grunnmuren.obos.no/disabled-state)
@@ -85,7 +85,7 @@ const tabVariants = cva({
       ],
       secondary: [
         'data-focus-visible:outline-focus data-focus-visible:-outline-offset-10',
-        'description border-transparent px-4 py-[0.71875rem] font-light transition-colors',
+        'description border-transparent px-4 py-[0.59375rem] font-light transition-colors',
         'data-selected:text-primary-text-default data-pressed:text-primary-text-default',
       ],
     },
