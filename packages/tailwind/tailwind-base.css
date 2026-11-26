@@ -374,13 +374,13 @@
   /* Every <li> slot is fixed 44px wide and doesn't shrink — keeps the layout
      stable when an ellipsis is swapped in for a page number. */
   & > li {
-    @apply w-[44px] shrink-0;
+    @apply min-w-[44px] shrink-0;
   }
 
   /* Ellipsis slot — flex-centered "…" with an sr-only label describing the
      skipped range. */
   & > li[data-slot='ellipsis'] {
-    @apply flex size-[44px] items-center justify-center;
+    @apply flex min-h-[44px] min-w-[44px] items-center justify-center;
 
     /* The label span is the one without `aria-hidden` (the visible "…" has
        it). Selecting via the attribute absence avoids adding another marker. */
@@ -389,13 +389,14 @@
     }
   }
 
-  /* Page-number buttons hold text, not an icon — force a square 44×44
-     (the Button `isIconOnly` variant is for icons). `transition-none`
+  /* Page-number buttons hold text, not an icon — at least 44×44 and no
+     padding, so a single digit stays square (the Button `isIconOnly` variant
+     is for icons). `transition-none`
      prevents the hover-colour transition from flickering when rapid clicks
      change which button is active. `:not(:has(svg))` distinguishes them
      from prev/next which contain a chevron icon. */
   & [data-slot='button']:not(:has(svg)) {
-    @apply size-[44px] transition-none;
+    @apply min-h-[44px] min-w-[44px] px-0 transition-none;
   }
 
   /* color="white" sets outline-white for focus — invisible on white page
@@ -440,7 +441,7 @@
 
   /* Info variant — a 44×44 icon button with an inset focus ring. */
   &[data-variant='info'] {
-    @apply text-primary-text-default inline-grid size-[44px] place-content-center rounded-full;
+    @apply text-primary-text-default inline-grid min-h-[44px] min-w-[44px] place-content-center rounded-full;
 
     &[data-focus-visible] {
       @apply outline-focus-inset;
