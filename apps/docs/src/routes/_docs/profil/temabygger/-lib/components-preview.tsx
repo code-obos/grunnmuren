@@ -177,10 +177,6 @@ const Gallery = ({ role }: { role: BrandRole }) => {
 
   return (
     <div className="grid gap-12">
-      <Section title="Avstand" components="--gm-space-base">
-        <SpacingExample />
-      </Section>
-
       <Section title="Knapper" components="Button">
         <Row>
           <Button color={role}>Primær</Button>
@@ -434,6 +430,10 @@ const Gallery = ({ role }: { role: BrandRole }) => {
             </TableBody>
           </Table>
         </div>
+      </Section>
+
+      <Section title="Avstand" components="--gm-space-base">
+        <SpacingExample />
       </Section>
     </div>
   );
