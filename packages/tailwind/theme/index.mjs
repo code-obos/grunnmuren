@@ -2,6 +2,7 @@
 // Plain JavaScript because it runs from node_modules in the CLI, where Node won't strip
 // types. The types are in index.d.mts.
 import colors from '../tokens/colors.json' with { type: 'json' };
+import themeable from '../tokens/themeable.json' with { type: 'json' };
 import { CONTRAST_PAIRS, contrastRatio, parseColor } from './contrast.mjs';
 
 export { CONTRAST_PAIRS, contrastRatio } from './contrast.mjs';
@@ -39,6 +40,38 @@ const TOKENS = new Map([
     ),
   ),
 ]);
+
+/**
+ * The tokens other than colours a theme file can set, by path: `radius.base`. They don't
+ * take part in references or contrast, so they're kept apart from the colours. A new kind of
+ * token is an entry in the build's themeable.json and a type in VALUE_TYPES.
+ * @type {Map<string, { cssName: string; type: string }>}
+ */
+const OTHER_TOKENS = new Map(
+  themeable.tokens.map(({ path, name, type }) => [path, { cssName: name, type }]),
+);
+
+// A length that can't go below zero: `0`, or a number in px, rem or em
+const DIMENSION = /^(0|\d*\.?\d+(px|rem|em))$/;
+// A plain number, which an opacity also has to keep from 0 to 1
+const NUMBER = /^\d*\.?\d+$/;
+
+/**
+ * What a valid value of each type is, and the error when it isn't.
+ * @type {Record<string, { isValid: (value: string) => boolean; code: ThemeIssue['code']; expected: string }>}
+ */
+const VALUE_TYPES = {
+  dimension: {
+    isValid: (value) => DIMENSION.test(value),
+    code: 'invalid-dimension',
+    expected: 'a length like 0.5rem, 8px or 0',
+  },
+  opacity: {
+    isValid: (value) => NUMBER.test(value) && Number(value) <= 1,
+    code: 'invalid-opacity',
+    expected: 'a number from 0 to 1, like 0.4',
+  },
+};
 
 /**
  * What a token ends up as with `theme` laid over the defaults.
@@ -128,12 +161,14 @@ const editDistance = (a, b) => {
  */
 const suggest = (path) => {
   const cssName = path.replace(/^-+/, '');
-  const byCssName = [...TOKENS].find(([, token]) => token.cssName === cssName)?.[0];
+  const byCssName = [...TOKENS, ...OTHER_TOKENS].find(
+    ([, token]) => token.cssName === cssName,
+  )?.[0];
   if (byCssName) {
     return byCssName;
   }
 
-  const paths = [...TOKENS.keys()];
+  const paths = [...TOKENS.keys(), ...OTHER_TOKENS.keys()];
   const wrapped = paths.find((valid) => path.endsWith(`.${valid}`));
   if (wrapped) {
     return wrapped;
@@ -156,6 +191,10 @@ const didYouMean = (message, suggestion) =>
  */
 const rawValue = (token) => {
   const value = isRecord(token) ? token.$value : token;
+  // A DTCG dimension, `{ value: 0.5, unit: 'rem' }`
+  if (isRecord(value) && typeof value.value === 'number' && typeof value.unit === 'string') {
+    return `${value.value}${value.unit}`;
+  }
   if (!isRecord(value) || typeof value.hex !== 'string') {
     return value;
   }
@@ -184,18 +223,45 @@ const flatten = (group, prefix) =>
   });
 
 /**
+ * A token that isn't a colour, checked against what its type allows.
+ * @param {string} path
+ * @param {unknown} token
+ * @param {string} type
+ * @returns {{ other: string } | ThemeIssue}
+ */
+const parseOtherToken = (path, token, type) => {
+  const raw = rawValue(token);
+  // JSON and DTCG write an opacity as a number, which is the same as its string
+  const value = typeof raw === 'number' ? String(raw) : raw;
+  const { isValid, code, expected } = VALUE_TYPES[type];
+  if (typeof value === 'string' && isValid(value.trim())) {
+    return { other: value.trim() };
+  }
+  return {
+    code,
+    path,
+    message: `${JSON.stringify(value)} in "${path}" isn't valid. Use ${expected}`,
+  };
+};
+
+/**
  * @param {string} path The path in the file, which issues are reported by
  * @param {unknown} token
- * @returns {TokenValue | ThemeIssue}
+ * @returns {TokenValue | { other: string } | ThemeIssue}
  */
 const parseToken = (path, token) => {
+  const other = OTHER_TOKENS.get(path);
+  if (other) {
+    return parseOtherToken(path, token, other.type);
+  }
+
   if (!TOKENS.has(toTokenPath(path))) {
     const suggestion = suggest(path);
     return {
       code: 'unknown-token',
       path,
       suggestion,
-      message: didYouMean(`"${path}" isn't one of Grunnmuren's colour tokens`, suggestion),
+      message: didYouMean(`"${path}" isn't one of the tokens a theme can set`, suggestion),
     };
   }
 
@@ -271,6 +337,8 @@ export const buildTheme = (input, { name }) => {
 
   /** @type {Map<string, TokenValue>} */
   const theme = new Map();
+  /** The tokens that aren't colours, by path @type {Map<string, string>} */
+  const others = new Map();
   /** Where in the file each token is set, by its path @type {Map<string, string>} */
   const setAt = new Map();
   /** @type {Array<ThemeIssue>} */
@@ -293,7 +361,11 @@ export const buildTheme = (input, { name }) => {
       continue;
     }
     setAt.set(path, filePath);
-    theme.set(path, parsed);
+    if ('other' in parsed) {
+      others.set(path, parsed.other);
+    } else {
+      theme.set(path, parsed);
+    }
   }
 
   const resolve = resolveIn(theme);
@@ -325,6 +397,12 @@ export const buildTheme = (input, { name }) => {
         : `var(--${/** @type {Token} */ (TOKENS.get(value.ref)).cssName})`;
     return [`  --${cssName}: ${css};\n`];
   });
+  for (const [path, { cssName }] of OTHER_TOKENS) {
+    const value = others.get(path);
+    if (value != null) {
+      declarations.push(`  --${cssName}: ${value};\n`);
+    }
+  }
 
   /** @type {Array<ContrastResult>} */
   const contrast = CONTRAST_PAIRS.flatMap(({ rule, minimum, foreground, background }) => {

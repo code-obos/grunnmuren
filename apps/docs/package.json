@@ -46,6 +46,7 @@
     "pino-opentelemetry-transport": "4.0.2",
     "prism-react-renderer": "2.4.1",
     "react": "catalog:",
+    "react-aria": "3.53.1",
     "react-aria-components": "1.22.1",
     "react-dom": "catalog:",
     "react-element-to-jsx-string": "17.0.1",

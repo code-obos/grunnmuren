@@ -25,14 +25,14 @@ export const ColorField = ({ label, value, onChange, description }: ColorFieldPr
   const update = (hex: string) => startTransition(() => onChange(hex));
 
   return (
-    <div className="grid gap-1">
+    <div className="grid grid-cols-1 gap-1">
       <div className="flex items-end gap-2">
         <TextField
           label={label}
           value={draft ?? value}
           spellCheck="false"
           autoComplete="off"
-          className="w-36 flex-none"
+          className="min-w-0 flex-1"
           isInvalid={isInvalid}
           onChange={(text) => {
             setDraft(text);

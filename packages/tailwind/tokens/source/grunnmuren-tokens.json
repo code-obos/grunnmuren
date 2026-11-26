@@ -228,6 +228,14 @@
       "4xl": { "$type": "dimension", "$value": "2rem" },
       "full": { "$type": "dimension", "$value": "9999px" }
     },
+    "opacity": {
+      "$description": "Added in code and not in Figma yet.",
+      "scrim": {
+        "$type": "number",
+        "$value": 0.25,
+        "$description": "How dark the page behind a Modal or Drawer gets, from 0 (not at all) to 1 (solid). In CSS --gm-color-scrim is the neutral base colour at this opacity."
+      }
+    },
     "border-width": {
       "1": { "$type": "dimension", "$value": "1px" },
       "2": { "$type": "dimension", "$value": "2px" },

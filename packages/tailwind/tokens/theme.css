@@ -139,6 +139,7 @@
   --color-base-active: var(--gm-color-base-active);
   --color-base-contrast-subtle: var(--gm-color-base-contrast-subtle);
   --color-base-contrast-default: var(--gm-color-base-contrast-default);
+  --color-scrim: var(--gm-color-scrim);
 }
 
 /*

@@ -186,6 +186,80 @@ describe('buildTheme', () => {
     },
   );
 
+  describe('radius', () => {
+    test('the base and a single step end up in the CSS, after the colours', () => {
+      const { css, errors, contrast } = build({
+        radius: { base: '0', lg: '1rem' },
+        primary: { 'base-default': '#2d3a26' },
+      });
+
+      expect(errors).toEqual([]);
+      expect(css).toBe(`[data-theme='nybolig'] {
+  --gm-color-primary-base-default: #2d3a26;
+  --gm-radius-base: 0;
+  --gm-radius-lg: 1rem;
+}
+`);
+      // Radius has nothing to do with contrast
+      expect(contrast.every(({ foreground }) => foreground.startsWith('primary.'))).toBe(true);
+    });
+
+    test.for([
+      '0',
+      '8px',
+      '0.5rem',
+      '.5rem',
+      '1em',
+      { $value: '4px' },
+      { $value: { value: 0.5, unit: 'rem' } },
+    ])('%o is a radius', (value) => {
+      expect(build({ radius: { base: value } }).errors).toEqual([]);
+    });
+
+    test.for(['-4px', '4', 'big', '{radius.sm}', '#2d3a26', 4])('%o is not a radius', (value) => {
+      const { css, errors } = build({ radius: { base: value } });
+      expect(css).toBe('');
+      expect(errors).toEqual([
+        expect.objectContaining({ code: 'invalid-dimension', path: 'radius.base' }),
+      ]);
+    });
+
+    test('an unknown step names the closest one', () => {
+      expect(build({ radius: { bse: '0' } }).errors).toEqual([
+        expect.objectContaining({ code: 'unknown-token', suggestion: 'radius.base' }),
+      ]);
+    });
+
+    test('a radius CSS name is pointed to its token', () => {
+      expect(build({ '--gm-radius-base': '0' }).errors[0]?.suggestion).toBe('radius.base');
+    });
+
+    // The fixed utilities aren't tokens, so a theme can't set them
+    test.for(['none', 'full'])('radius.%s is not a token', (step) => {
+      expect(build({ radius: { [step]: '0' } }).errors).toEqual([
+        expect.objectContaining({ code: 'unknown-token', path: `radius.${step}` }),
+      ]);
+    });
+  });
+
+  describe('scrim', () => {
+    test('the opacity ends up in the CSS', () => {
+      const { css, errors } = build({ opacity: { scrim: '0.6' } });
+      expect(errors).toEqual([]);
+      expect(css).toBe(`[data-theme='nybolig'] {\n  --gm-opacity-scrim: 0.6;\n}\n`);
+    });
+
+    test.for(['0', '1', '0.4', '.4', 0.4, 1, { $value: 0.4 }])('%o is an opacity', (value) => {
+      expect(build({ opacity: { scrim: value } }).errors).toEqual([]);
+    });
+
+    test.for(['1.5', '-0.2', '40%', 'dark', 2])('%o is not an opacity', (value) => {
+      expect(build({ opacity: { scrim: value } }).errors).toEqual([
+        expect.objectContaining({ code: 'invalid-opacity', path: 'opacity.scrim' }),
+      ]);
+    });
+  });
+
   test('"default" is not a theme name, it resets to the defaults', () => {
     expect(buildTheme({}, { name: 'default' }).errors).toEqual([
       expect.objectContaining({ code: 'invalid-name' }),
