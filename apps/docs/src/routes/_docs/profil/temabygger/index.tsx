@@ -33,7 +33,8 @@ function RouteComponent() {
       <p className="mb-12 max-w-prose">
         Lag et tema basert på Grunnmuren. Legg inn merkevarefargene, så genereres hele
         fargesystemet. Har du en designmanual fra et designbyrå, kan du legge inn verdiene derfra og
-        se med en gang om kontrasten holder. Radius setter du i samme panel.
+        se med en gang om kontrasten holder. Radius, avstand og bakgrunnsdemping setter du i samme
+        panel.
       </p>
 
       <div className="mb-12">

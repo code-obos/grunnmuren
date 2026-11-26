@@ -171,6 +171,29 @@ export const SettingsPopover = ({ builder }: { builder: ThemeBuilder }) => {
                   format={(px) => `${px} px`}
                 />
                 <ThemeSlider
+                  label="Avstand"
+                  description="Grunnenheten all luft i og mellom komponentene er bygd på."
+                  info={
+                    <>
+                      <p>
+                        All padding, marg og avstand er et antall ganger grunnenheten, så{' '}
+                        <code>p-4</code> er 4 × 4 px = 16 px som standard. Endrer du den, blir alt
+                        luftigere eller tettere i samme takt. Størrelser som <code>size-6</code>{' '}
+                        følger også, men touch targets holder seg på minst 44 px.
+                      </p>
+                      <p className="mt-3">
+                        Token: <code className="whitespace-nowrap">--gm-space-base</code>
+                      </p>
+                    </>
+                  }
+                  value={builder.spacing}
+                  onChange={builder.setSpacing}
+                  minValue={2}
+                  maxValue={6}
+                  step={0.5}
+                  format={(px) => `${px} px`}
+                />
+                <ThemeSlider
                   label="Bakgrunnsdemping"
                   description="Hvor mørk siden bak blir når en dialog eller skuff er åpen."
                   info={

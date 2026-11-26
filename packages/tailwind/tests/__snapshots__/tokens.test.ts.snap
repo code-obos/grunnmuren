@@ -613,6 +613,7 @@ exports[`computed values > the token set matches the snapshot 1`] = `
   "--radius-sm": "0.25rem",
   "--radius-xl": "calc(0.25rem * 3)",
   "--radius-xs": "calc(0.25rem * 0.5)",
+  "--spacing": "0.25rem",
 }
 `;
 

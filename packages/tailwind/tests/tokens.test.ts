@@ -235,3 +235,23 @@ describe('typography', () => {
     expect(declarations.filter(({ condition }) => condition.includes('@media'))).toEqual([]);
   });
 });
+
+describe('spacing', () => {
+  // Tailwind's own scale reads the base, so moving it to a token moved no utility
+  test('--spacing is the base', async () => {
+    expect(toRem(await resolveToken('--spacing'))).toBeCloseTo(0.25);
+  });
+
+  // What a tenant does: one value, and every p-*, m-*, gap-* and --gm-space-* follows
+  test("a theme's base reaches the utilities and the steps", async () => {
+    const theme = new Map([['--gm-space-base', '0.5rem']]);
+    expect(toRem(await resolveToken('--spacing', theme))).toBeCloseTo(0.5);
+    expect(toRem(await resolveToken('--gm-space-4', theme))).toBeCloseTo(2);
+    expect(toRem(await resolveToken('--gm-space-2-5', theme))).toBeCloseTo(1.25);
+  });
+
+  test('the hairline stays 1px', async () => {
+    const theme = new Map([['--gm-space-base', '0.5rem']]);
+    expect(await resolveToken('--gm-space-px', theme)).toBe('1px');
+  });
+});

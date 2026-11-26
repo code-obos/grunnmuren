@@ -388,6 +388,10 @@ function RouteComponent() {
             eller em, eller <code>0</code>. Se <a href="#radius">Radius</a>.
           </li>
           <li>
+            Avstand er <code>&quot;spacing&quot;: {'{ "base": "0.3125rem" }'}</code>, en lengde som
+            for radius. Se <a href="#avstand">Avstand</a>.
+          </li>
+          <li>
             Bakgrunnsdempingen bak Modal og Drawer er{' '}
             <code>&quot;opacity&quot;: {'{ "scrim": 0.4 }'}</code>, et tall fra 0 til 1. Fargen er
             neutral-rollen, så 1 gir en helt mørk bakgrunn.
@@ -444,6 +448,38 @@ function RouteComponent() {
       </section>
 
       <section className="prose mb-12">
+        <AnchorHeading level={2} id="avstand" className="heading-m">
+          Avstand
+        </AnchorHeading>
+        <p>
+          Alle <code>p-*</code>, <code>m-*</code>, <code>gap-*</code>, <code>w-*</code> og{' '}
+          <code>h-*</code> er et antall ganger <code>--gm-space-base</code>, som er{' '}
+          <code>0.25rem</code> (4px) som standard. Så én verdi gjør alt luftigere eller tettere,
+          både i Grunnmuren og i appen din:
+        </p>
+        <Code
+          language="css"
+          code={`[data-theme='mitt-tema'] {
+  /* p-4 blir 20px i stedet for 16px */
+  --gm-space-base: 0.3125rem;
+}`}
+        />
+        <ul>
+          <li>
+            Størrelser følger også, så <code>size-6</code> vokser med basen. Touch targets i
+            komponentene er faste 44px, så de holder WCAG-kravet uansett.
+          </li>
+          <li>
+            Faste verdier som <code>p-[3px]</code> følger ikke basen.
+          </li>
+          <li>
+            Du kan ikke sette ett trinn for seg. <code>p-4</code> er basen ganger 4, ikke{' '}
+            <code>--gm-space-4</code>.
+          </li>
+        </ul>
+      </section>
+
+      <section className="prose mb-12">
         <AnchorHeading level={2} id="begrensninger" className="heading-m">
           Det et tema ikke kan
         </AnchorHeading>
@@ -453,8 +489,8 @@ function RouteComponent() {
             primitiver.
           </li>
           <li>
-            Verktøyet over tar farger, radius og bakgrunnsdemping. Resten skriver du selv i den
-            samme CSS-fila.
+            Verktøyet over tar farger, radius, avstand og bakgrunnsdemping. Resten skriver du selv i
+            den samme CSS-fila.
           </li>
           <li>
             Kontrasten er temaets ansvar. Grunnmuren sjekker sine egne roller mot WCAG 2.2 AA, som

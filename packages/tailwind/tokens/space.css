@@ -1,0 +1,47 @@
+/*
+ * Generated from tokens/source/grunnmuren-tokens.json by build-tokens.ts. Don't edit by
+ * hand: change the source and run `pnpm tokens:build`.
+ */
+
+/*
+ * Every step is a multiple of --gm-space-base, so a theme tightens or loosens the whole
+ * scale with one value.
+ * The steps point at the base, so they're worked out again on every [data-theme], same as
+ * the semantic layer: declared on :root alone, a theme's base would never reach them.
+ */
+:where(:root, [data-theme]) {
+  --gm-space-0: 0rem;
+  --gm-space-1: var(--gm-space-base);
+  --gm-space-2: calc(var(--gm-space-base) * 2);
+  --gm-space-3: calc(var(--gm-space-base) * 3);
+  --gm-space-4: calc(var(--gm-space-base) * 4);
+  --gm-space-5: calc(var(--gm-space-base) * 5);
+  --gm-space-6: calc(var(--gm-space-base) * 6);
+  --gm-space-7: calc(var(--gm-space-base) * 7);
+  --gm-space-8: calc(var(--gm-space-base) * 8);
+  --gm-space-9: calc(var(--gm-space-base) * 9);
+  --gm-space-10: calc(var(--gm-space-base) * 10);
+  --gm-space-11: calc(var(--gm-space-base) * 11);
+  --gm-space-12: calc(var(--gm-space-base) * 12);
+  --gm-space-14: calc(var(--gm-space-base) * 14);
+  --gm-space-16: calc(var(--gm-space-base) * 16);
+  --gm-space-20: calc(var(--gm-space-base) * 20);
+  --gm-space-24: calc(var(--gm-space-base) * 24);
+  --gm-space-28: calc(var(--gm-space-base) * 28);
+  --gm-space-32: calc(var(--gm-space-base) * 32);
+  --gm-space-36: calc(var(--gm-space-base) * 36);
+  --gm-space-40: calc(var(--gm-space-base) * 40);
+  --gm-space-44: calc(var(--gm-space-base) * 44);
+  --gm-space-48: calc(var(--gm-space-base) * 48);
+  --gm-space-52: calc(var(--gm-space-base) * 52);
+  --gm-space-56: calc(var(--gm-space-base) * 56);
+  --gm-space-60: calc(var(--gm-space-base) * 60);
+  --gm-space-64: calc(var(--gm-space-base) * 64);
+  --gm-space-72: calc(var(--gm-space-base) * 72);
+  --gm-space-80: calc(var(--gm-space-base) * 80);
+  --gm-space-96: calc(var(--gm-space-base) * 96);
+  --gm-space-0-5: calc(var(--gm-space-base) * 0.5);
+  --gm-space-1-5: calc(var(--gm-space-base) * 1.5);
+  --gm-space-2-5: calc(var(--gm-space-base) * 2.5);
+  --gm-space-3-5: calc(var(--gm-space-base) * 3.5);
+}
