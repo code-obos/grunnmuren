@@ -63,6 +63,7 @@ const ISSUES: Record<ThemeIssue['code'], (issue: ThemeIssue) => string> = {
     `${path} er ikke en farge. Bruk hex, rgb() eller en referanse som {primary.base-default}.`,
   'invalid-dimension': ({ path }) =>
     `${path} er ikke en gyldig lengde. Bruk rem, px eller em, som 0.5rem, eller 0.`,
+  'invalid-opacity': ({ path }) => `${path} må være et tall fra 0 til 1, som 0.4.`,
   'unresolved-reference': ({ path, suggestion }) =>
     `${path} peker på et token som ikke finnes.${suggestion ? ` Mente du ${suggestion}?` : ''}`,
   'circular-reference': ({ path }) => `${path} ender opp med å peke på seg selv.`,
@@ -386,6 +387,11 @@ function RouteComponent() {
             enkelttrinn som <code>&quot;lg&quot;</code> i tillegg. Verdien er en lengde i rem, px
             eller em, eller <code>0</code>. Se <a href="#radius">Radius</a>.
           </li>
+          <li>
+            Bakgrunnsdempingen bak Modal og Drawer er{' '}
+            <code>&quot;opacity&quot;: {'{ "scrim": 0.4 }'}</code>, et tall fra 0 til 1. Fargen er
+            neutral-rollen, så 1 gir en helt mørk bakgrunn.
+          </li>
           <li>Filer fra Figma (DTCG) og Designsystemet funker også.</li>
           <li>Bare det du setter havner i CSS-en. Et tema med tre farger er helt greit.</li>
         </ul>
@@ -446,7 +452,10 @@ function RouteComponent() {
             Tekststiler og animasjon kan ikke endres. Fontfamilie og vekter kan, siden de er
             primitiver.
           </li>
-          <li>Verktøyet over tar farger og radius. Resten skriver du selv i den samme CSS-fila.</li>
+          <li>
+            Verktøyet over tar farger, radius og bakgrunnsdemping. Resten skriver du selv i den
+            samme CSS-fila.
+          </li>
           <li>
             Kontrasten er temaets ansvar. Grunnmuren sjekker sine egne roller mot WCAG 2.2 AA, som
             er 4.5:1 for tekst og 3:1 for kanter, ikoner og andre UI-elementer. Verktøyet over

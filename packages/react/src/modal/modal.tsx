@@ -47,7 +47,7 @@ const _ModalOverlay = ({
     {...restProps}
     className={({ isEntering, isExiting }) =>
       cx(
-        'bg-neutral-base-default/25 fixed inset-0 flex min-h-full items-center justify-center overflow-y-auto text-center backdrop-blur-sm',
+        'bg-scrim fixed inset-0 flex min-h-full items-center justify-center overflow-y-auto text-center backdrop-blur-sm',
         !fullscreen && 'p-4',
         isEntering && 'fade-in animate-in duration-300 ease-out',
         isExiting && 'fade-out animate-out duration-200 ease-in',

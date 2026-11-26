@@ -9,6 +9,7 @@ export type ThemeIssue = {
     | 'invalid-value'
     | 'invalid-color'
     | 'invalid-dimension'
+    | 'invalid-opacity'
     | 'unresolved-reference'
     | 'circular-reference'
     | 'duplicate-token';
@@ -44,7 +45,7 @@ export type ThemeResult = {
 };
 
 /**
- * Builds a theme's CSS from colour and radius tokens named like Grunnmuren's, and checks it.
+ * Builds a theme's CSS from colour, radius and scrim tokens named like Grunnmuren's, and checks it.
  *
  * ```js
  * buildTheme({ primary: { 'base-default': '#2d3a26' } }, { name: 'my-project' });

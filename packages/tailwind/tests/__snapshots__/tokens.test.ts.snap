@@ -531,6 +531,7 @@ exports[`computed values > the token set matches the snapshot 1`] = `
   "--color-primary-text-subtle": "#003da0",
   "--color-red": "#c0385d",
   "--color-red-light": "#faedef",
+  "--color-scrim": "color-mix(in oklab, #333333 calc(0.25 * 100%), transparent)",
   "--color-sky": "#bedfec",
   "--color-sky-light": "#deeff5",
   "--color-sky-lightest": "#ebf5f9",

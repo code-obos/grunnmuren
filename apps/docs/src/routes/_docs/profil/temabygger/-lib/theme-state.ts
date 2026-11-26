@@ -52,6 +52,9 @@ export type Mode = 'generate' | 'manual';
 /** Grunnmuren's `--gm-radius-base` in px. Every `rounded-*` step is a multiple of it */
 export const DEFAULT_RADIUS = 4;
 
+/** Grunnmuren's `--gm-opacity-scrim`, how dark the page gets behind a Modal or Drawer */
+export const DEFAULT_SCRIM = 0.25;
+
 /** `0` or `0.5rem`, what the theme file and the CSS get for a radius in px */
 const toRem = (px: number) => (px === 0 ? '0' : `${px / 16}rem`);
 
@@ -78,6 +81,7 @@ export const useThemeBuilder = () => {
   // Kept when going back to Generer, so a value from the design manual isn't lost
   const [overrides, setOverrides] = useState<Partial<Record<Role, RoleColors>>>({});
   const [radius, setRadius] = useState(DEFAULT_RADIUS);
+  const [scrim, setScrim] = useState(DEFAULT_SCRIM);
 
   const generated = useMemo(
     () =>
@@ -118,8 +122,9 @@ export const useThemeBuilder = () => {
           return changed.length > 0 ? [[role, Object.fromEntries(changed)]] : [];
         }),
         ...(radius === DEFAULT_RADIUS ? [] : [['radius', { base: toRem(radius) }]]),
+        ...(scrim === DEFAULT_SCRIM ? [] : [['opacity', { scrim: String(scrim) }]]),
       ]) as Record<string, Record<string, string>>,
-    [final, radius],
+    [final, radius, scrim],
   );
 
   const themeName = toThemeName(name) || 'grunnmuren';
@@ -169,6 +174,9 @@ export const useThemeBuilder = () => {
     radius,
     // NumberField gives NaN when it's emptied, which counts as Grunnmuren's own value
     setRadius: (px: number) => setRadius(Number.isNaN(px) ? DEFAULT_RADIUS : px),
+    scrim,
+    // Steps of 0.05 add up to 0.35000000000000003, so it's rounded to what the slider shows
+    setScrim: (opacity: number) => setScrim(Math.round(opacity * 100) / 100),
     generated,
     final,
     tokens,

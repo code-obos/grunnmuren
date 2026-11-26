@@ -53,6 +53,8 @@ const OTHER_TOKENS = new Map(
 
 // A length that can't go below zero: `0`, or a number in px, rem or em
 const DIMENSION = /^(0|\d*\.?\d+(px|rem|em))$/;
+// A plain number, which an opacity also has to keep from 0 to 1
+const NUMBER = /^\d*\.?\d+$/;
 
 /**
  * What a valid value of each type is, and the error when it isn't.
@@ -63,6 +65,11 @@ const VALUE_TYPES = {
     isValid: (value) => DIMENSION.test(value),
     code: 'invalid-dimension',
     expected: 'a length like 0.5rem, 8px or 0',
+  },
+  opacity: {
+    isValid: (value) => NUMBER.test(value) && Number(value) <= 1,
+    code: 'invalid-opacity',
+    expected: 'a number from 0 to 1, like 0.4',
   },
 };
 
@@ -223,7 +230,9 @@ const flatten = (group, prefix) =>
  * @returns {{ other: string } | ThemeIssue}
  */
 const parseOtherToken = (path, token, type) => {
-  const value = rawValue(token);
+  const raw = rawValue(token);
+  // JSON and DTCG write an opacity as a number, which is the same as its string
+  const value = typeof raw === 'number' ? String(raw) : raw;
   const { isValid, code, expected } = VALUE_TYPES[type];
   if (typeof value === 'string' && isValid(value.trim())) {
     return { other: value.trim() };

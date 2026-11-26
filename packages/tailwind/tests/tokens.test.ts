@@ -76,9 +76,10 @@ describe('computed values', () => {
   });
 });
 
-// The full role tokens, and the short ones `data-color` points at a role
+// The full role tokens, the short ones `data-color` points at a role, and the scrim,
+// which is worked out from the neutral role
 const ROLE_TOKEN =
-  /^--color-((primary|accent|neutral|success|danger|warning|info)-)?(background|surface|border|text|base)-/;
+  /^--color-(((primary|accent|neutral|success|danger|warning|info)-)?(background|surface|border|text|base)-|scrim$)/;
 
 describe('ported primitives', () => {
   test.for(Object.entries(legacyPalette))('%s survives as %s', async ([legacy, primitive]) => {
@@ -147,6 +148,23 @@ describe('theme seam', () => {
     for (const duration of durations) {
       expect(reducedMotion).toContain(`${duration}: 0.01ms !important;`);
     }
+  });
+});
+
+// `calc(0.25 * 100%)` worked out to `25%`, so it compares with what Tailwind writes for /25
+const evaluatePercent = (value: string) =>
+  value.replace(/calc\(([\d.]+) \* 100%\)/, (_, opacity: string) => `${Number(opacity) * 100}%`);
+
+describe('scrim', () => {
+  // Modal and Drawer used bg-neutral-base-default/25 before they had a token
+  test('bg-scrim is what Modal and Drawer had before', async () => {
+    const before = (await resolveUtility('bg-neutral-base-default/25')).at(-1);
+    expect(evaluatePercent(await resolveToken('--color-scrim'))).toBe(before?.value);
+  });
+
+  test("a theme's opacity reaches bg-scrim", async () => {
+    const theme = new Map([['--gm-opacity-scrim', '0.6']]);
+    expect(evaluatePercent(await resolveToken('--color-scrim', theme))).toContain(' 60%,');
   });
 });
 
