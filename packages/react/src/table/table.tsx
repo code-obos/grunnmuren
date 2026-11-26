@@ -39,8 +39,6 @@ const tableRowVariants = cva({
   base: [
     'group/row',
     'data-focus-visible:outline-focus-inset',
-    'group-data-[variant=zebra-striped]/table:odd:bg-neutral-surface-default',
-    'group-data-[variant=zebra-striped]/table:even:bg-primary-surface-tinted',
     // When the row has expandable children, the chevron button makes the
     // row taller than a plain text row. Center-align the cells' content so
     // the chevron icon lines up with text in sibling cells.
@@ -162,7 +160,14 @@ function Table(props: TableProps) {
     <ScrollWrapper>
       <RACTable
         {...restProps}
-        className={cx(className, 'group/table bg-neutral-background-default w-full min-w-fit')}
+        className={cx(
+          className,
+          'group/table bg-neutral-background-default w-full min-w-fit',
+          // Child combinators keep the stripes to this table's own rows, so a
+          // zebra table does not stripe rows in a table nested inside a cell.
+          'data-[variant=zebra-striped]:[&>tbody>*]:odd:bg-neutral-surface-default',
+          'data-[variant=zebra-striped]:[&>tbody>*]:even:bg-primary-surface-tinted',
+        )}
         data-variant={variant}
       >
         {children}

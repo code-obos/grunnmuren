@@ -416,3 +416,56 @@ export const Sortable = () => {
     </Table>
   );
 };
+
+export const NestedZebraTables = () => (
+  <Table aria-label="Eiendommer med leiligheter i nestet tabell" variant="zebra-striped">
+    <TableHeader>
+      <TableColumn>Eiendom</TableColumn>
+      <TableColumn>Leiligheter</TableColumn>
+    </TableHeader>
+    <TableBody>
+      <TableRow>
+        <TableCell>Sagene</TableCell>
+        <TableCell>
+          <Table aria-label="Leiligheter på Sagene">
+            <TableHeader>
+              <TableColumn>Adresse</TableColumn>
+              <TableColumn>Type</TableColumn>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell>Sagveien 1</TableCell>
+                <TableCell>2 rom</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Sagveien 3</TableCell>
+                <TableCell>3 rom</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Frogner</TableCell>
+        <TableCell>
+          <Table aria-label="Leiligheter på Frogner">
+            <TableHeader>
+              <TableColumn>Adresse</TableColumn>
+              <TableColumn>Type</TableColumn>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell>Frognerveien 5</TableCell>
+                <TableCell>4 rom</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Frognerveien 7</TableCell>
+                <TableCell>1 rom</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+);
