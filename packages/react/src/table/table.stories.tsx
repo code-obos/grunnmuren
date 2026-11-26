@@ -418,15 +418,18 @@ export const Sortable = () => {
 };
 
 export const NestedZebraTables = () => (
-  <Table aria-label="Eiendommer med leiligheter i nestet tabell" variant="zebra-striped">
+  <Table aria-label="Eiendommer med leiligheter i subtabell" variant="zebra-striped">
     <TableHeader>
       <TableColumn>Eiendom</TableColumn>
-      <TableColumn>Leiligheter</TableColumn>
+      <TableColumn>Antall leiligheter</TableColumn>
     </TableHeader>
     <TableBody>
       <TableRow>
         <TableCell>Sagene</TableCell>
-        <TableCell>
+        <TableCell>2</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell colSpan={2}>
           <Table aria-label="Leiligheter på Sagene">
             <TableHeader>
               <TableColumn>Adresse</TableColumn>
@@ -447,24 +450,7 @@ export const NestedZebraTables = () => (
       </TableRow>
       <TableRow>
         <TableCell>Frogner</TableCell>
-        <TableCell>
-          <Table aria-label="Leiligheter på Frogner">
-            <TableHeader>
-              <TableColumn>Adresse</TableColumn>
-              <TableColumn>Type</TableColumn>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell>Frognerveien 5</TableCell>
-                <TableCell>4 rom</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Frognerveien 7</TableCell>
-                <TableCell>1 rom</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableCell>
+        <TableCell>2</TableCell>
       </TableRow>
     </TableBody>
   </Table>

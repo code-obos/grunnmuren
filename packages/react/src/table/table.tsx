@@ -1,6 +1,17 @@
 import { ArrowDown, ChevronRight } from '@obosbbl/grunnmuren-icons-react';
 import { cva, cx } from 'cva';
-import { createContext, type RefAttributes, useCallback, useContext, useState } from 'react';
+import {
+  createContext,
+  type Ref,
+  type RefAttributes,
+  type RefObject,
+  useCallback,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import { composeRenderProps } from 'react-aria-components/composeRenderProps';
 import {
   Cell as RACCell,
@@ -150,23 +161,73 @@ function ScrollWrapper({ children }: { children: React.ReactNode }) {
   );
 }
 
+// Layout effects warn during SSR, so fall back to the plain effect there.
+const useIsomorphicLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
+
+/**
+ * Numbers the body rows of a zebra table in document order, including rows in
+ * tables nested inside it, so a subtable continues the stripes of its parent.
+ * CSS cannot count rows across nested tables, so this runs in the DOM.
+ */
+function useZebraStripes(tableRef: RefObject<HTMLElement | null>, enabled: boolean) {
+  useIsomorphicLayoutEffect(() => {
+    const table = tableRef.current;
+    if (!enabled || !table) {
+      return;
+    }
+
+    const stripe = () => {
+      let index = 0;
+      for (const row of table.querySelectorAll<HTMLTableRowElement>('tbody > tr')) {
+        // A row that holds a nested table is only a container, so it is not a stripe.
+        if (row.querySelector('table')) {
+          row.removeAttribute('data-zebra');
+          continue;
+        }
+        index += 1;
+        row.dataset.zebra = index % 2 === 1 ? 'odd' : 'even';
+      }
+    };
+
+    stripe();
+    const observer = new MutationObserver(stripe);
+    observer.observe(table, { childList: true, subtree: true });
+    return () => observer.disconnect();
+  }, [tableRef, enabled]);
+}
+
+function assignRef<T>(ref: Ref<T> | undefined, value: T | null) {
+  if (typeof ref === 'function') {
+    ref(value);
+  } else if (ref) {
+    (ref as { current: T | null }).current = value;
+  }
+}
+
 /**
  * A container component for displaying tabular data with horizontal scrolling support.
  */
 function Table(props: TableProps) {
-  const { className, children, variant = 'default', ...restProps } = props;
+  const { className, children, variant = 'default', ref, ...restProps } = props;
+  const tableRef = useRef<HTMLElement | null>(null);
+  const isZebra = variant === 'zebra-striped';
+
+  useZebraStripes(tableRef, isZebra);
 
   return (
     <ScrollWrapper>
       <RACTable
         {...restProps}
+        ref={(node: HTMLElement | null) => {
+          tableRef.current = node;
+          assignRef(ref, node as HTMLTableElement | null);
+        }}
         className={cx(
           className,
           'group/table bg-neutral-background-default w-full min-w-fit',
-          // Child combinators keep the stripes to this table's own rows, so a
-          // zebra table does not stripe rows in a table nested inside a cell.
-          'data-[variant=zebra-striped]:[&>tbody>*]:odd:bg-neutral-surface-default',
-          'data-[variant=zebra-striped]:[&>tbody>*]:even:bg-primary-surface-tinted',
+          // Stripes are set per row by useZebraStripes, so nested rows follow the parent pattern.
+          'data-[variant=zebra-striped]:[&_tr[data-zebra=odd]]:bg-neutral-surface-default',
+          'data-[variant=zebra-striped]:[&_tr[data-zebra=even]]:bg-primary-surface-tinted',
         )}
         data-variant={variant}
       >
