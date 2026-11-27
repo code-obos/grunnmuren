@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Content } from '../content';
 import {
   UNSAFE_Table as Table,
+  UNSAFE_TableCaption as TableCaption,
   UNSAFE_TableBody as TableBody,
   UNSAFE_TableCell as TableCell,
   UNSAFE_TableColumn as TableColumn,
@@ -148,6 +149,29 @@ export const Simple = () => (
         <TableCell>Ingrid Svendsen</TableCell>
         <TableCell>ingrid.svendsen@obos.no</TableCell>
         <TableCell>Majorstuen</TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+);
+
+export const WithCaption = () => (
+  <Table>
+    <TableCaption>Eiendomsforvaltere i Oslo</TableCaption>
+    <TableHeader>
+      <TableColumn>Navn</TableColumn>
+      <TableColumn>E-post</TableColumn>
+      <TableColumn>Område</TableColumn>
+    </TableHeader>
+    <TableBody>
+      <TableRow>
+        <TableCell>Kari Hansen</TableCell>
+        <TableCell>kari.hansen@obos.no</TableCell>
+        <TableCell>Grünerløkka</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Lars Olsen</TableCell>
+        <TableCell>lars.olsen@obos.no</TableCell>
+        <TableCell>Frogner</TableCell>
       </TableRow>
     </TableBody>
   </Table>
