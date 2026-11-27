@@ -1,0 +1,48 @@
+{
+  "name": "@obosbbl/grunnmuren-forms",
+  "version": "0.0.0",
+  "description": "Grunnmuren form fields built on TanStack Form, with zod schemas and an agent skill",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/code-obos/grunnmuren"
+  },
+  "files": [
+    "dist",
+    "skills"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    },
+    "./schemas": {
+      "types": "./dist/schemas/index.d.mts",
+      "default": "./dist/schemas/index.mjs"
+    }
+  },
+  "scripts": {
+    "build": "tsdown"
+  },
+  "dependencies": {
+    "@navikt/fnrvalidator": "^2.2.1",
+    "@react-types/shared": "^3.37.0",
+    "personnummer": "^3.3.1",
+    "react-aria-components": "^1.17.0",
+    "react-stately": "^3.46.0"
+  },
+  "devDependencies": {
+    "@obosbbl/grunnmuren-react": "workspace:*",
+    "@tanstack/react-form": "2.0.0-alpha.3",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "zod": "^4.6.7"
+  },
+  "peerDependencies": {
+    "@obosbbl/grunnmuren-react": "^3.11.0",
+    "@tanstack/react-form": "2.0.0-alpha.3",
+    "react": "^19",
+    "zod": "^4"
+  }
+}
