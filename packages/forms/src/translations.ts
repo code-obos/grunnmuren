@@ -22,7 +22,7 @@ export const fieldTranslations: Record<Locale, FieldTranslations> = {
     file: { label: 'Vedlegg', buttonText: 'Last opp' },
   },
   sv: {
-    phone: { label: 'Mobilnummer' },
+    phone: { label: 'Mobil' },
     email: { label: 'E-post' },
     firstName: { label: 'Förnamn' },
     lastName: { label: 'Efternamn' },

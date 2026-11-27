@@ -56,7 +56,7 @@ test.each([
       'Du må fylle ut en gyldig e-post.',
       'E-posten er for lang. Maks lengde er 102 tegn.',
       'E-postadressen kan ikke inneholde spesialtegn, Æ, Ø eller Å.',
-      'E-postadressen kan ikke inneholde "+".',
+      "E-postadressen kan ikke inneholde '+'.",
     ],
   ],
   [

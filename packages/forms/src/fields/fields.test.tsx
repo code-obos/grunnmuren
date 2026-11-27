@@ -64,14 +64,15 @@ test.each([
   expect(html).toContain('name="phone"');
 });
 
-test('PhoneField sv: Mobilnummer and no addon', () => {
+test('PhoneField sv: Mobil and no addon', () => {
   const html = renderDomain('sv', 'phone');
-  expect(html).toContain('Mobilnummer');
+  expect(html).toContain('Mobil');
+  expect(html).not.toContain('Mobilnummer');
   expect(html).not.toContain('+47');
 });
 
 test.each([
-  ['nb', 'email', 'E-post', 'type="email"', 'autoComplete="email"'],
+  ['nb', 'email', 'E-post', 'inputMode="email"', 'autoComplete="email"'],
   ['sv', 'email', 'E-post', 'type="email"', 'autoComplete="email"'],
   ['en', 'email', 'E-mail', 'type="email"', 'autoComplete="email"'],
   ['nb', 'first', 'Fornavn og mellomnavn', '', 'autoComplete="given-name"'],
@@ -453,4 +454,21 @@ test('Form: passes <form> attributes and chains onSubmit', () => {
   const html = renderToStaticMarkup(<Test />);
   expect(html).toContain('<form aria-label="Skjema" id="f" noValidate=""');
   expect(html).toContain('<div class="grid gap-2">');
+});
+
+test.each(['first', 'last', 'birth'] as const)('%s field is required by default', (name) => {
+  expect(renderDomain('nb', name)).toContain('aria-required="true"');
+});
+
+test('Form: defaults to a single column, max 500px', () => {
+  const { useAppForm } = hook;
+  function Test() {
+    const form = useAppForm({ defaultValues: { text: '' } });
+    return (
+      <form.AppForm>
+        <form.Form>x</form.Form>
+      </form.AppForm>
+    );
+  }
+  expect(renderToStaticMarkup(<Test />)).toContain('<div class="grid max-w-[500px] gap-6">');
 });

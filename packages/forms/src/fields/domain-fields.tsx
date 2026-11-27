@@ -37,6 +37,7 @@ function EmailInput({ field, ...props }: DomainProps) {
     <TextInput
       label={fieldTranslations[locale].email.label}
       type="email"
+      inputMode="email"
       autoComplete="email"
       {...props}
       field={field}
@@ -49,6 +50,7 @@ export function FirstNameInput({ field, ...props }: DomainProps) {
   return (
     <TextInput
       label={fieldTranslations[locale].firstName.label}
+      isRequired
       autoComplete="given-name"
       {...props}
       field={field}
@@ -61,6 +63,7 @@ export function LastNameInput({ field, ...props }: DomainProps) {
   return (
     <TextInput
       label={fieldTranslations[locale].lastName.label}
+      isRequired
       autoComplete="family-name"
       {...props}
       field={field}
@@ -97,6 +100,7 @@ function BirthDateInput({
     <>
       <DateInput
         label={fieldTranslations[locale].birthDate.label}
+        isRequired
         autoComplete="bday"
         size={10}
         {...props}

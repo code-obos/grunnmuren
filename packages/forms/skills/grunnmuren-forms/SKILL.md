@@ -65,7 +65,7 @@ function Form({ children }: { children: ReactNode }) {
         void form.handleSubmit();
       }}
     >
-      <div className="grid gap-6 md:gap-8">{children}</div>
+      <div className="grid max-w-[500px] gap-6">{children}</div>
     </form>
   );
 }
@@ -165,7 +165,7 @@ Rules:
 
 - Fields are rendered as `<form.Field name="x">{(field) => <field.XxxField />}</form.Field>`. The field component name is checked against the type of `defaultValues.x`: `field.PhoneField` on a boolean is a type error.
 - Wrap everything in `form.AppForm` (provides the form context for `form.Form` and `form.SubmitButton`).
-- `form.Form` renders `<form noValidate>` with prevent-default + `form.handleSubmit()` and a `grid gap-6 md:gap-8` wrapper. Props: `id`, `className` (replaces the grid class), `children`.
+- `form.Form` renders `<form noValidate>` with prevent-default + `form.handleSubmit()` and a `grid max-w-[500px] gap-6` wrapper. Props: `id`, `className` (replaces the grid class), `children`.
 - `form.SubmitButton` is a Grunnmuren `Button type="submit"` that shows pending while submitting. Props are the Button props minus `type`, `isPending`, `href`.
 - Validation: pass the whole zod object as one validator. Field errors are routed by issue path to the matching field. `triggers` lists when it runs (`'change'`, `'blur'`, ...).
 - Submit with `validatorOutputs[0]` (parsed output, in validator order), never `value`: `value` is the raw editable state, so it still has spaces and original casing.
@@ -177,29 +177,7 @@ Rules:
 - Every field takes the Grunnmuren props (`label`, `description`, `isRequired`, `isDisabled`, `className`, ...). Domain fields have a locale default for `label` and others; any prop you pass overrides it.
 - Select, Combobox, RadioGroup and CheckboxGroup take children: `SelectItem`, `ComboboxItem`, `Radio` and `Checkbox`, all re-exported from `@obosbbl/grunnmuren-forms`.
 
-```tsx
-import { Radio, SelectItem } from '@obosbbl/grunnmuren-forms';
-
-<form.Field name="seats">{(field) => <field.NumberField label="Antall plasser" minValue={1} />}</form.Field>
-<form.Field name="county">
-  {(field) => (
-    <field.SelectField label="Fylke" isRequired>
-      <SelectItem id="oslo">Oslo</SelectItem>
-      <SelectItem id="vestland">Vestland</SelectItem>
-    </field.SelectField>
-  )}
-</form.Field>
-<form.Field name="contactBy">
-  {(field) => (
-    <field.RadioGroupField label="Kontakt meg på">
-      <Radio value="email">E-post</Radio>
-      <Radio value="phone">Telefon</Radio>
-    </field.RadioGroupField>
-  )}
-</form.Field>
-```
-
-with `defaultValues: { seats: null as number | null, county: '', contactBy: '' }`.
+Example: `<field.RadioGroupField label="Kontakt meg på"><Radio value="email">E-post</Radio>...</field.RadioGroupField>`, `<field.SelectField label="Fylke"><SelectItem id="oslo">Oslo</SelectItem>...`. Defaults: `contactBy: ''`, `county: ''`, `seats: null as number | null`.
 
 For engine details (form options modes, `validatorOutputs`, error visibility, field groups, arrays, type errors) load the upstream skills instead of guessing: `react-form-composition-setup`, `schema-driven-forms`, `choosing-form-options-modes`, `error-visibility-workflows`, `reusable-form-policies`, `type-error-debugging`.
 
@@ -269,6 +247,22 @@ Conventions:
 ## Address fields
 
 The package has no address field. The autocomplete is `@code-obos/grunnmuren-address-autocomplete`, private on GitHub Packages, so each app wires it in itself as a custom field with a zod schema, Swedish manual entry and c/o. Read `references/address-field.md` for the install (`.npmrc`, token, Tailwind `@source`), a complete `AddressField`, and the `key` remount that the uncontrolled component needs. Do not hand-roll it from the README.
+
+## Form design rules
+
+From the Grunnmuren reference form (`referanseskjema` in the docs) and grunnmuren.obos.no/skjemadesign. Follow them unless the design says otherwise.
+
+- Single column, max 500px (`form.Form` does this). Related short fields may share a row (postal code + city). Width follows the expected input: phone `size={11}`, postal code `size={4}`, birth date `size={10}`.
+- Label above the field, 1-3 words, normal capitalization, no colon. Never use `placeholder` as label or hint: put format hints in `description`.
+- Mark optional fields with the label text `(valgfri)`, not asterisks. Required fields get `isRequired`.
+- Errors show next to the field, on submit or when the user leaves the field, say what to fix ("E-postadressen mangler @"), never just "Ugyldig", and vanish when fixed. Do not rely on a banner at the top.
+- Use the domain fields for phone (`type="tel"`, `+47` addon on nb), email, names, fødselsnummer (numeric keypad), birth date (native `type="date"`, value `yyyy-MM-dd`).
+- When the data is about someone else (guardian, deceased, recipient), override `label` ("Foresattes mobil") and turn `autoComplete` off, so the browser does not fill in the user's own data.
+- 2-6 options: `RadioGroupField` or `CheckboxGroupField`. `SelectField` only for many options.
+- Consent checkboxes start unchecked (`false`), opt-in only.
+- Submit button: an action verb ("Send inn", "Meld inn"), never "OK", "Ferdig" or "Klikk her". `form.SubmitButton` is `w-fit`. Multi-step forms use "Forrige" / "Neste" and an action verb on the last step.
+- Ask only for data with a clear purpose, and pre-fill what you already know.
+- Validation messages come from the factories in the right locale. Plain zod rules need your own messages in the same language.
 
 ## Overriding props
 
