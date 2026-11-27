@@ -13,7 +13,7 @@ import {
   UNSAFE_ToggleButton as ToggleButton,
   UNSAFE_ToggleButtonGroup as ToggleButtonGroup,
 } from '@obosbbl/grunnmuren-react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button as RACButton } from 'react-aria-components';
 
 import { ColorField } from './color-field';
@@ -135,11 +135,32 @@ export const SettingsPopover = ({ builder }: { builder: ThemeBuilder }) => {
 
   const [isOpen, setOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  // Esc closes it from anywhere inside, unless something in it (a toggletip) took the Esc first
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (
+        event.key === 'Escape' &&
+        !event.defaultPrevented &&
+        event.target instanceof Node &&
+        wrapperRef.current?.contains(event.target)
+      ) {
+        setOpen(false);
+        buttonRef.current?.focus();
+      }
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [isOpen]);
 
   // Not a popover: react-aria locks the page scroll under a modal one and closes a non-modal one
   // on scroll, and the point is to scroll the preview while you tweak. Esc closes it.
   return (
-    <div className="relative self-start">
+    <div ref={wrapperRef} className="relative self-start">
       <RACButton
         ref={buttonRef}
         aria-label="Temainnstillinger"
@@ -154,12 +175,6 @@ export const SettingsPopover = ({ builder }: { builder: ThemeBuilder }) => {
         <section
           id="tema-innstillinger-panel"
           aria-labelledby="tema-innstillinger"
-          onKeyDown={(event) => {
-            if (event.key === 'Escape' && !event.defaultPrevented) {
-              setOpen(false);
-              buttonRef.current?.focus();
-            }
-          }}
           className="bg-neutral-background-default border-primary-base-default absolute top-full right-0 mt-2 grid max-h-[calc(100dvh-6rem)] w-[min(22rem,calc(100vw-2rem))] gap-6 overflow-y-auto overscroll-contain rounded-lg border p-4.5 shadow-md"
         >
           <>
