@@ -235,7 +235,7 @@ export function DisplayStep({ onPrevious, sampleData }: StepProps) {
                 <span className="font-semibold">Feilkode:</span>
                 <code>101</code>
               </p>
-              <Footer>{new Date().toISOString()}</Footer>
+              <Footer>2025-01-01T12:00:00.000Z</Footer>
             </Content>
           </Alertbox>
         </ExampleBlock>

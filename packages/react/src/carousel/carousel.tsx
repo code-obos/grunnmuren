@@ -232,8 +232,10 @@ const Carousel = ({
       return;
     }
 
+    // Syncing from Embla, which is an external system, so setting state here is the point
     const currentSlidesInView = emblaApi.slidesInView();
     if (currentSlidesInView.length > 0) {
+      // oxlint-disable-next-line react/set-state-in-effect
       setSlidesInView(currentSlidesInView);
     }
 
@@ -426,7 +428,21 @@ type CarouselItemsProps = HTMLProps<HTMLDivElement> & {
 
 const CarouselItems = ({ className, children, ...restProps }: CarouselItemsProps) => {
   const { orientation } = useContext(CarouselContext);
+  // Each element gets its index among the items, text and other non-element children are skipped
+  const items: Array<React.ReactNode> = [];
   let itemIndex = 0;
+  for (const child of Children.toArray(children)) {
+    if (isValidElement(child)) {
+      items.push(
+        <CarouselItemIndexContext.Provider key={child.key} value={itemIndex}>
+          {child}
+        </CarouselItemIndexContext.Provider>,
+      );
+      itemIndex++;
+    } else {
+      items.push(child);
+    }
+  }
 
   return (
     <div
@@ -434,17 +450,7 @@ const CarouselItems = ({ className, children, ...restProps }: CarouselItemsProps
       data-slot="carousel-items"
       {...restProps}
     >
-      {Children.map(children, (child) => {
-        if (isValidElement(child)) {
-          const currentIndex = itemIndex++;
-          return (
-            <CarouselItemIndexContext.Provider value={currentIndex}>
-              {child}
-            </CarouselItemIndexContext.Provider>
-          );
-        }
-        return child;
-      })}
+      {items}
     </div>
   );
 };

@@ -152,8 +152,7 @@
         [class^='sm:col-span'],
         [class*=' sm:col-span'],
         [class^='sm:col-end'],
-        [class*=' sm:col-end'],
-
+        [class*=' sm:col-end']
       )
     ) {
     @apply sm:col-span-12;
@@ -173,8 +172,7 @@
         [class^='sm:col-start'],
         [class*=' sm:col-start'],
         [class^='sm:col-span-full'],
-        [class*=' sm:col-span-full'],
-
+        [class*=' sm:col-span-full']
       )
     ) {
     @apply sm:col-start-2;

@@ -88,9 +88,7 @@ const THEMES_DIR = resolve(import.meta.dirname, '../tokens/themes');
 const themes = [
   { name: 'default', overrides: new Map<string, string>() },
   ...(await Promise.all(
-    (
-      await readdir(THEMES_DIR)
-    )
+    (await readdir(THEMES_DIR))
       // The folder also has the themes' colours as data, for the docs
       .filter((file) => file.endsWith('.css'))
       .map(async (file) => {

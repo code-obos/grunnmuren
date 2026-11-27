@@ -1,4 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
+
+const query = '(prefers-reduced-motion: reduce)';
+
+const subscribe = (onChange: () => void) => {
+  const mediaQuery = window.matchMedia(query);
+  mediaQuery.addEventListener('change', onChange);
+  return () => mediaQuery.removeEventListener('change', onChange);
+};
+
+const getSnapshot = () => window.matchMedia(query).matches;
 
 /**
  * Hook that detects the user's preference for reduced motion.
@@ -9,22 +19,5 @@ import { useEffect, useState } from 'react';
  * The default initial value is `false` as this aligns with most users. This is to prevent unecessary rerenders on mount for the common user.
  */
 export function usePrefersReducedMotion(initialValue: boolean | null = false): boolean | null {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(initialValue);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReducedMotion(mediaQuery.matches);
-
-    const changeListener = (event: MediaQueryListEvent) => {
-      setPrefersReducedMotion(event.matches);
-    };
-
-    mediaQuery.addEventListener('change', changeListener);
-
-    return () => {
-      mediaQuery.removeEventListener('change', changeListener);
-    };
-  }, []);
-
-  return prefersReducedMotion;
+  return useSyncExternalStore(subscribe, getSnapshot, () => initialValue);
 }

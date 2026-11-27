@@ -356,18 +356,22 @@ const TAB_FOR_ANCHOR: Record<string, string> = {
 
 function RouteComponent() {
   const hash = useLocation({ select: (location) => location.hash });
-  const [tab, setTab] = useState('roller');
+  const [tab, setTab] = useState(() => TAB_FOR_ANCHOR[hash] ?? 'roller');
+  const [tabHash, setTabHash] = useState(hash);
   const scrolledTo = useRef('');
 
   // Both panels are mounted, but the one that isn't selected is hidden, so the browser
-  // can't scroll to a heading in it. Open the heading's tab first, then scroll once it shows.
-  useEffect(() => {
+  // can't scroll to a heading in it. Open the heading's tab when the hash changes, then scroll once it shows.
+  if (hash !== tabHash) {
+    setTabHash(hash);
     const target = TAB_FOR_ANCHOR[hash];
-    if (!target || scrolledTo.current === hash) {
-      return;
-    }
-    if (target !== tab) {
+    if (target) {
       setTab(target);
+    }
+  }
+
+  useEffect(() => {
+    if (TAB_FOR_ANCHOR[hash] !== tab || scrolledTo.current === hash) {
       return;
     }
     scrolledTo.current = hash;

@@ -62,11 +62,11 @@ function MyScrollableComponent() {
         onClick={() => handleScroll('left')}
         isVisible={canScrollLeft}
         hasScrollingOccurred={hasScrollingOccurred}
-        className="absolute left-0 top-1/2 -translate-y-1/2 h-10 w-10"
+        className="absolute top-1/2 left-0 h-10 w-10 -translate-y-1/2"
         iconClassName="h-5 w-5"
       />
 
-      <div ref={scrollContainerRef} className="overflow-x-auto scrollbar-hidden">
+      <div ref={scrollContainerRef} className="scrollbar-hidden overflow-x-auto">
         {/* Your content */}
       </div>
 
@@ -75,7 +75,7 @@ function MyScrollableComponent() {
         onClick={() => handleScroll('right')}
         isVisible={canScrollRight}
         hasScrollingOccurred={hasScrollingOccurred}
-        className="absolute right-0 top-1/2 -translate-y-1/2 h-10 w-10"
+        className="absolute top-1/2 right-0 h-10 w-10 -translate-y-1/2"
         iconClassName="h-5 w-5"
       />
     </div>
@@ -91,7 +91,7 @@ function MyScrollableComponent() {
   onClick={() => handleScroll('left')}
   isVisible={canScrollLeft}
   hasScrollingOccurred={hasScrollingOccurred}
-  className="-translate-y-1/2 -left-3 absolute top-5 z-10 h-11 w-11"
+  className="absolute top-5 -left-3 z-10 h-11 w-11 -translate-y-1/2"
   iconClassName="h-5 w-5"
 />
 ```
@@ -104,7 +104,7 @@ function MyScrollableComponent() {
   onClick={onPrev}
   isVisible={canScrollLeft}
   hasScrollingOccurred={hasScrollingOccurred}
-  className="-left-3 absolute bottom-0.25 size-11"
+  className="absolute bottom-0.25 -left-3 size-11"
   iconClassName="mt-0.25 h-6 w-full text-black"
 />
 ```

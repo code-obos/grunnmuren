@@ -276,11 +276,8 @@ const LegacyColors = () => (
 );
 
 const ColorTokens = () => {
-  const [tokens, setTokens] = useState<ReturnType<typeof readColorTokens>>();
+  const [tokens] = useState(readColorTokens);
   const version = useDocumentThemeVersion();
-  useLayoutEffect(() => setTokens(readColorTokens()), []);
-
-  if (!tokens) return null;
 
   return (
     <div key={version} className="grid gap-12">
