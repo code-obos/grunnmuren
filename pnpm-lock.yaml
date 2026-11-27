@@ -438,6 +438,9 @@ importers:
       '@navikt/fnrvalidator':
         specifier: ^2.2.1
         version: 2.2.1
+      '@obosbbl/grunnmuren-icons-react':
+        specifier: workspace:^
+        version: link:../icons-react
       '@react-types/shared':
         specifier: ^3.37.0
         version: 3.37.0(react@19.3.1)
