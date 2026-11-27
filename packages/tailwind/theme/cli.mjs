@@ -6,7 +6,7 @@ import { parseArgs } from 'node:util';
 
 import { buildTheme, EXAMPLE_TOKENS, toThemeName } from './index.mjs';
 
-const HELP = `Builds a Grunnmuren theme from colour, radius and scrim tokens, and checks it.
+const HELP = `Builds a Grunnmuren theme from colour, radius, spacing and scrim tokens, and checks it.
 
 Usage:
   grunnmuren-theme <tokens.json> [--name <theme>] [--out <file.css>] [--strict]
@@ -22,6 +22,7 @@ Options:
 The tokens are named like Grunnmuren's, nested by role or colour family:
   { "primary": { "base-default": "#2d3a26", "base-hover": "{primary.base-active}" } }
 Radius is { "radius": { "base": "0.5rem" } }, and single steps like "lg" work too.
+Spacing is { "spacing": { "base": "0.3125rem" } }, and every p-*, m-*, gap-* and so on follows it.
 The scrim behind Modal and Drawer is { "opacity": { "scrim": 0.4 } }, from 0 to 1.
 Designsystemet's paths, like color.primary.base-default, work too.
 

@@ -13,8 +13,8 @@ export const ExportPanel = ({ builder }: { builder: ThemeBuilder }) => {
   if (Object.keys(tokens).length === 0) {
     return (
       <p>
-        Temaet er likt Grunnmuren, så det er ingenting å eksportere ennå. Endre en farge eller
-        radius i panelet, så dukker CSS-en opp her.
+        Temaet er likt Grunnmuren, så det er ingenting å eksportere ennå. Endre en farge, radius
+        eller avstand i panelet, så dukker CSS-en opp her.
       </p>
     );
   }

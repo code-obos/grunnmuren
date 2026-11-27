@@ -58,6 +58,7 @@ import {
 import { type ReactNode, useState } from 'react';
 import { UNSAFE_PortalProvider as PortalProvider } from 'react-aria';
 
+import { SpacingExample } from './spacing-example';
 import {
   BRAND_ROLES,
   type BrandRole,
@@ -429,6 +430,10 @@ const Gallery = ({ role }: { role: BrandRole }) => {
             </TableBody>
           </Table>
         </div>
+      </Section>
+
+      <Section title="Avstand" components="--gm-space-base">
+        <SpacingExample />
       </Section>
     </div>
   );

@@ -66,8 +66,9 @@ Themes live in your app, not in Grunnmuren. A theme is a `[data-theme='…']` ru
 
 These are public API, and renaming or removing one is a breaking change:
 
-- the primitives in `tokens/primitives.css`: colours (`--gm-blue-500`), spacing (`--gm-space-4`), the radius base (`--gm-radius-base`), the scrim opacity behind Modal and Drawer (`--gm-opacity-scrim`), border widths, icon stroke widths and the type primitives (font families, weights, line heights, letter spacing)
+- the primitives in `tokens/primitives.css`: colours (`--gm-blue-500`), the spacing base (`--gm-space-base`), the radius base (`--gm-radius-base`), the scrim opacity behind Modal and Drawer (`--gm-opacity-scrim`), border widths, icon stroke widths and the type primitives (font families, weights, line heights, letter spacing)
 - the radius steps in `tokens/radius.css`: `--gm-radius-xs` to `--gm-radius-4xl`
+- the spacing steps in `tokens/space.css`: `--gm-space-0` to `--gm-space-96`
 - the role colours: `--gm-color-{role}-{group}-{variant}` for `primary`, `accent`, `neutral`, `success`, `danger`, `warning` and `info`
 
 A few things a theme can't change:
@@ -89,11 +90,28 @@ Every `rounded-*` step is a multiple of `--gm-radius-base`, which is `0.25rem` b
 
 Tailwind's `--radius-*` overridden in your own `@theme` doesn't reach inside a `data-theme`, so set `--gm-radius-*` instead.
 
+### Spacing
+
+Tailwind works out every `p-*`, `m-*`, `gap-*`, `w-*`, `h-*` and so on as `--spacing` times the step, and `--spacing` is `--gm-space-base`, which is `0.25rem` by default. So one value tightens or loosens all the spacing in Grunnmuren and in your app:
+
+```css
+[data-theme='my-project'] {
+  --gm-space-base: 0.3125rem; /* p-4 is 20px instead of 16px */
+}
+```
+
+- the `--gm-space-*` steps follow the base too. `--gm-space-px` is a hairline and stays 1px
+- sizes follow it as well, so `size-6` grows with the base. Touch targets are a fixed `44px` in the components, so a smaller base can't take them below WCAG's minimum
+- arbitrary values like `p-[3px]` don't follow it
+- there are no single steps: `p-4` is `--spacing * 4`, not `--gm-space-4`, so setting a step would only change the variable
+
+Tailwind's `--spacing` overridden in your own `@theme` doesn't reach inside a `data-theme`, so set `--gm-space-base` instead.
+
 The docs have a [guide to writing a theme](https://grunnmuren.obos.no/profil/temaer), where you can build one from your colours and see how it looks.
 
 ### Building a theme from tokens
 
-A typo in a custom property silently does nothing, and nothing checks a theme's contrast. `grunnmuren-theme` builds the colours, radius and scrim of a theme from a JSON file with Grunnmuren's token names, and checks both:
+A typo in a custom property silently does nothing, and nothing checks a theme's contrast. `grunnmuren-theme` builds the colours, radius, spacing and scrim of a theme from a JSON file with Grunnmuren's token names, and checks both:
 
 ```json
 {
@@ -113,6 +131,7 @@ npx grunnmuren-theme my-project.json --out my-project.css
 - Roles are nested by role, primitives by colour family. A value is a hex or `rgb()` colour, or a `{reference}` to another token, which falls back to Grunnmuren's value when the file doesn't set it. DTCG `$value` works too.
 - Designsystemet's paths (`color.primary.base-default`) read as the same tokens.
 - Radius is `radius.base`, plus single steps like `radius.lg` if you want them (see [Radius](#radius)). A value is a length in rem, px or em, or `0`, and a DTCG dimension (`{ "value": 0.5, "unit": "rem" }`) works too. `none` and `full` aren't tokens.
+- Spacing is `spacing.base`, a length like for radius (see [Spacing](#spacing)). There are no single steps.
 - The scrim behind Modal and Drawer is `opacity.scrim`, a number from 0 to 1. It's the neutral base colour at that opacity, `0.25` by default.
 - Only what the file sets ends up in the CSS.
 - An unknown token, an invalid colour, length or opacity, a circular reference or a token set twice is an error, and exits with 1.

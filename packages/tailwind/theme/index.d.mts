@@ -45,7 +45,7 @@ export type ThemeResult = {
 };
 
 /**
- * Builds a theme's CSS from colour, radius and scrim tokens named like Grunnmuren's, and checks it.
+ * Builds a theme's CSS from colour, radius, spacing and scrim tokens named like Grunnmuren's, and checks it.
  *
  * ```js
  * buildTheme({ primary: { 'base-default': '#2d3a26' } }, { name: 'my-project' });
