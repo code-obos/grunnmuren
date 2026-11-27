@@ -13,8 +13,8 @@ import {
   UNSAFE_ToggleButton as ToggleButton,
   UNSAFE_ToggleButtonGroup as ToggleButtonGroup,
 } from '@obosbbl/grunnmuren-react';
-import { useState } from 'react';
-import { Button as RACButton, Dialog, DialogTrigger, Popover } from 'react-aria-components';
+import { useRef, useState } from 'react';
+import { Button as RACButton } from 'react-aria-components';
 
 import { ColorField } from './color-field';
 import { ThemeSlider } from './theme-slider';
@@ -130,25 +130,40 @@ export const SettingsPopover = ({ builder }: { builder: ThemeBuilder }) => {
     (sum, colors) => sum + Object.keys(colors ?? {}).length,
     0,
   );
-  // Kept here rather than in the Tabs, so the popover remembers it between openings
+  // Kept here rather than in the Tabs, so the panel remembers it between openings
   const [tab, setTab] = useState<SettingsTab>('farger');
 
+  const [isOpen, setOpen] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  // Not a popover: react-aria locks the page scroll under a modal one and closes a non-modal one
+  // on scroll, and the point is to scroll the preview while you tweak. Esc closes it.
   return (
-    <DialogTrigger>
+    <div className="relative self-start">
       <RACButton
+        ref={buttonRef}
         aria-label="Temainnstillinger"
+        aria-expanded={isOpen}
+        aria-controls="tema-innstillinger-panel"
+        onPress={() => setOpen((open) => !open)}
         className="bg-primary-background-tinted border-primary-base-default focus-visible:outline-focus-offset hover:bg-primary-surface-hover pressed:bg-primary-surface-active grid size-11 flex-none cursor-pointer place-items-center rounded-full border shadow-md"
       >
         <Settings className="size-6" />
       </RACButton>
-      <Popover
-        placement="bottom end"
-        offset={8}
-        className="bg-neutral-background-default border-primary-base-default max-h-(--visual-viewport-height) w-[min(22rem,calc(100vw-2rem))] overflow-y-auto rounded-lg border outline-none"
-      >
-        <Dialog aria-labelledby="tema-innstillinger" className="grid gap-6 p-4.5 outline-none">
+      {isOpen && (
+        <section
+          id="tema-innstillinger-panel"
+          aria-labelledby="tema-innstillinger"
+          onKeyDown={(event) => {
+            if (event.key === 'Escape' && !event.defaultPrevented) {
+              setOpen(false);
+              buttonRef.current?.focus();
+            }
+          }}
+          className="bg-neutral-background-default border-primary-base-default absolute top-full right-0 mt-2 grid max-h-[calc(100dvh-6rem)] w-[min(22rem,calc(100vw-2rem))] gap-6 overflow-y-auto overscroll-contain rounded-lg border p-4.5 shadow-md"
+        >
           <>
-            <Heading slot="title" id="tema-innstillinger" level={2} className="heading-m">
+            <Heading id="tema-innstillinger" level={2} className="heading-m">
               Tema
             </Heading>
             <Tabs selectedKey={tab} onSelectionChange={(key) => setTab(key as SettingsTab)}>
@@ -218,9 +233,9 @@ export const SettingsPopover = ({ builder }: { builder: ThemeBuilder }) => {
               </TabPanel>
             </Tabs>
           </>
-        </Dialog>
-      </Popover>
-    </DialogTrigger>
+        </section>
+      )}
+    </div>
   );
 };
 
