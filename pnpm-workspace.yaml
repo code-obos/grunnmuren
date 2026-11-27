@@ -2,6 +2,20 @@ packages:
   - 'packages/**'
   - 'apps/**'
 
+skills:
+  dirs:
+    - .agents/skills
+
+permissions:
+  '@tanstack/react-form':
+    skills:
+      - react-form-composition-setup
+      - error-visibility-workflows
+      - schema-driven-forms
+      - reusable-form-policies
+      - type-error-debugging
+      - choosing-form-options-modes
+
 allowBuilds:
   '@parcel/watcher': false
   '@swc/core': false

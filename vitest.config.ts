@@ -90,6 +90,13 @@ export default defineConfig({
     projects: [
       {
         test: {
+          name: 'forms',
+          include: ['packages/forms/src/**/*.test.{ts,tsx}'],
+          environment: 'node',
+        },
+      },
+      {
+        test: {
           name: 'tokens',
           include: ['packages/tailwind/tests/**/*.test.ts'],
           environment: 'node',
