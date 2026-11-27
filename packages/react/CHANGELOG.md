@@ -1,5 +1,27 @@
 # @obosbbl/grunnmuren-react
 
+## 3.14.0
+
+### Minor Changes
+
+- 0dd902b: Add `contrast-subtle` colour to Button, the role-based replacement for the deprecated `mint`.
+
+### Patch Changes
+
+- 25c5f54: `footnote` is deprecated, use `description` instead. It has no design token and isn't in Figma. It still works as before, and is removed in the next major.
+  
+  `<FileUpload>` uses `description` for the file extension and size, so that text is 14px instead of 12px.
+- 96496e0: The touch targets in the components are at least `44px` (`min-h-[44px]` and `min-w-[44px]`) instead of the 11 step. They keep WCAG's minimum even if `--spacing` changes later, and grow with bigger text instead of cutting it off. The text in the secondary Tabs sits 2px higher, centred in the tab.
+- f02ed16: - `<VideoLoop>` and `<Carousel>` read the reduced motion preference with `useSyncExternalStore`, so a client-side render gets the right value straight away instead of on the next render.
+  - `<Carousel>` numbers its items without changing a variable during render.
+- 4352d04: Add `--gm-radius-base`. Every `rounded-*` step is now a multiple of it, so a theme can round or square off the whole scale with one value, e.g. `[data-theme='x'] { --gm-radius-base: 0; }`. A theme can still set a single step like `--gm-radius-lg`. Without a theme every corner is the same as before.
+  
+  For now that's for themes written in CSS. `grunnmuren-theme` and the theme builder in the docs only do colours, and radius support there comes later.
+  
+  `<ProgressBar>` uses `rounded-sm` instead of `rounded`, which is the same size but follows the theme.
+- 007939d: The components use the `paragraph` and `description` text styles instead of Tailwind's `text-xs`, `text-sm` and `text-base`, so their text follows the design tokens and a theme. Line heights follow the tokens too, so Accordion, Alertbox, Breadcrumbs, Table, Tag Group and the error message on form fields are a bit tighter, and the Alertbox footer is 14px instead of 12px. Tailwind's own `text-*` classes are unchanged.
+- 81134dd: Add `--gm-opacity-scrim` (0.25) and `--gm-color-scrim`, the neutral base colour at that opacity, with a `bg-scrim` utility. `<Modal>` and `<Drawer>` use it for the dimmed page behind them, which looks exactly as before. A theme can set the opacity, and `grunnmuren-theme` takes it as `{ "opacity": { "scrim": 0.4 } }`.
+
 ## 3.13.0
 
 ### Minor Changes
