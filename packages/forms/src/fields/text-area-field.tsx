@@ -7,11 +7,13 @@ import { firstErrorMessage } from '../first-error-message';
 
 export type TextAreaFieldProps = Omit<
   ComponentProps<typeof TextArea>,
-  'name' | 'value' | 'onChange' | 'onBlur' | 'errorMessage'
+  'name' | 'value' | 'errorMessage' | 'validationBehavior'
 >;
 
 function TextAreaInput({
   field,
+  onChange,
+  onBlur,
   ...props
 }: TextAreaFieldProps & { field: FieldWithValue<string> }) {
   return (
@@ -20,8 +22,14 @@ function TextAreaInput({
       validationBehavior="aria"
       name={field.name}
       value={field.value}
-      onChange={field.handleChange}
-      onBlur={field.handleBlur}
+      onChange={(value) => {
+        field.handleChange(value);
+        onChange?.(value);
+      }}
+      onBlur={(event) => {
+        field.handleBlur();
+        onBlur?.(event);
+      }}
       errorMessage={firstErrorMessage(field)}
     />
   );

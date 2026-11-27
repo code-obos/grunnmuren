@@ -1,12 +1,11 @@
 'use client';
 import { Button, type ButtonProps } from '@obosbbl/grunnmuren-react';
 import type { AnyReactFormApi } from '@tanstack/react-form';
-import type { ReactNode } from 'react';
+import type { ComponentProps, ReactNode } from 'react';
 
-export type FormProps = {
-  id?: string;
+export type FormProps = Omit<ComponentProps<'form'>, 'noValidate' | 'children' | 'className'> & {
   children: ReactNode;
-  /** Replaces the default grid layout class. */
+  /** Replaces the default grid layout class on the inner div (not the `<form>` element). */
   className?: string;
 };
 
@@ -14,14 +13,15 @@ export type SubmitButtonProps = Omit<ButtonProps, 'type' | 'isPending' | 'href'>
 
 /** The form is read lazily, because the context hook only exists once the hook factory has run. */
 export function createFormComponents(useFormContext: () => AnyReactFormApi) {
-  function Form({ id, children, className = 'grid gap-6 md:gap-8' }: FormProps) {
+  function Form({ children, className = 'grid gap-6 md:gap-8', onSubmit, ...props }: FormProps) {
     const form = useFormContext();
     return (
       <form
-        id={id}
+        {...props}
         noValidate
         onSubmit={(event) => {
           event.preventDefault();
+          onSubmit?.(event);
           void form.handleSubmit();
         }}
       >

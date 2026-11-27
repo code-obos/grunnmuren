@@ -218,11 +218,13 @@ import type { ComponentProps } from 'react';
 
 type PostalCodeFieldProps = Omit<
   ComponentProps<typeof TextField>,
-  'name' | 'value' | 'onChange' | 'onBlur' | 'errorMessage'
+  'name' | 'value' | 'errorMessage' | 'validationBehavior'
 >;
 
 function PostalCodeInput({
   field,
+  onChange,
+  onBlur,
   ...props
 }: PostalCodeFieldProps & { field: FieldWithValue<string> }) {
   return (
@@ -235,8 +237,14 @@ function PostalCodeInput({
       validationBehavior="aria"
       name={field.name}
       value={field.value}
-      onChange={field.handleChange}
-      onBlur={field.handleBlur}
+      onChange={(value) => {
+        field.handleChange(value);
+        onChange?.(value);
+      }}
+      onBlur={(event) => {
+        field.handleBlur();
+        onBlur?.(event);
+      }}
       errorMessage={firstErrorMessage(field)}
     />
   );
@@ -252,11 +260,15 @@ export const { useAppForm } = createGrunnmurenFormHook({
 Conventions:
 
 - `fieldComponent.strict(Component, 'field')`: the second argument is the prop that receives the field; the value type of `FieldWithValue<T>` is what TanStack matches against `defaultValues`.
-- Always `validationBehavior="aria"` (no native browser validation bubbles), `name={field.name}`, `onBlur={field.handleBlur}`, `errorMessage={firstErrorMessage(field)}`.
-- `Omit` the props the field controls from the Grunnmuren props, so everything else passes through.
+- Always `validationBehavior="aria"` (no native browser validation bubbles), `name={field.name}`, `errorMessage={firstErrorMessage(field)}`.
+- `Omit` the props the field controls from the Grunnmuren props, so everything else passes through. Call the form's `handleChange`/`handleBlur` first, then the consumer's `onChange`/`onBlur`.
 - Map between the form state and what React Aria wants in the field (`'' <-> null`, `null <-> NaN`), not in the form.
 - No error-visibility logic: `field.errors` is already filtered by the form's `errorVisibility`.
 - Register it via `fieldComponents` in `createGrunnmurenFormHook`, so it is typed like the built-ins.
+
+## Overriding props
+
+Every Grunnmuren prop passes through the fields and wins over the field's defaults (`<f.PhoneField label="Telefon" size={8} />`). `onChange`/`onBlur` (`onSelectionChange` on Select and Combobox) run after the form's own handlers, and get the raw Grunnmuren value (`NaN` for an empty NumberField, `null` for a cleared Select). `name`, `value`/`selectedKey`, `errorMessage` and `validationBehavior` are owned by the form: passing them is a type error. `form.Form` takes all `<form>` attributes; `onSubmit` runs before `handleSubmit`, and `className` styles the inner grid div.
 
 ## Common mistakes
 

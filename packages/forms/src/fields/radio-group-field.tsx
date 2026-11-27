@@ -7,11 +7,13 @@ import { firstErrorMessage } from '../first-error-message';
 
 export type RadioGroupFieldProps = Omit<
   ComponentProps<typeof RadioGroup>,
-  'name' | 'value' | 'onChange' | 'onBlur' | 'errorMessage'
+  'name' | 'value' | 'errorMessage' | 'validationBehavior'
 >;
 
 function RadioGroupInput({
   field,
+  onChange,
+  onBlur,
   ...props
 }: RadioGroupFieldProps & { field: FieldWithValue<string> }) {
   return (
@@ -21,8 +23,14 @@ function RadioGroupInput({
       name={field.name}
       // '' means nothing selected, React Aria wants null for that
       value={field.value === '' ? null : field.value}
-      onChange={field.handleChange}
-      onBlur={field.handleBlur}
+      onChange={(value) => {
+        field.handleChange(value);
+        onChange?.(value);
+      }}
+      onBlur={(event) => {
+        field.handleBlur();
+        onBlur?.(event);
+      }}
       errorMessage={firstErrorMessage(field)}
     />
   );

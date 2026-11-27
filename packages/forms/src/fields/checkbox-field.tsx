@@ -7,11 +7,13 @@ import { firstErrorMessage } from '../first-error-message';
 
 export type CheckboxFieldProps = Omit<
   ComponentProps<typeof Checkbox>,
-  'name' | 'isSelected' | 'onChange' | 'onBlur' | 'errorMessage'
+  'name' | 'isSelected' | 'errorMessage' | 'validationBehavior'
 >;
 
 function CheckboxInput({
   field,
+  onChange,
+  onBlur,
   ...props
 }: CheckboxFieldProps & { field: FieldWithValue<boolean> }) {
   return (
@@ -20,8 +22,14 @@ function CheckboxInput({
       validationBehavior="aria"
       name={field.name}
       isSelected={field.value}
-      onChange={field.handleChange}
-      onBlur={field.handleBlur}
+      onChange={(value) => {
+        field.handleChange(value);
+        onChange?.(value);
+      }}
+      onBlur={(event) => {
+        field.handleBlur();
+        onBlur?.(event);
+      }}
       errorMessage={firstErrorMessage(field)}
     />
   );

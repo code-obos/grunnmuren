@@ -9,9 +9,9 @@ import { useFormsLocale } from '../use-forms-locale';
 
 type FileUploadProps = ComponentProps<typeof UNSAFE_FileUpload>;
 
-export type FileFieldProps = Pick<
+export type FileFieldProps = Omit<
   FileUploadProps,
-  'acceptedFileTypes' | 'allowsMultiple' | 'isRequired' | 'validate'
+  'files' | 'errorMessage' | 'validationBehavior' | 'children' | 'name'
 > & {
   label?: ReactNode;
   description?: ReactNode;
@@ -24,6 +24,7 @@ export function FileInput({
   label,
   description,
   buttonText,
+  onChange,
   ...props
 }: FileFieldProps & { field: FieldWithValue<File[]> }) {
   const locale = useFormsLocale();
@@ -38,6 +39,7 @@ export function FileInput({
         field.handleChange(typeof next === 'function' ? next(field.value) : next);
         // FileUpload has no onBlur, so mark the field as touched on every change.
         field.handleBlur();
+        onChange?.(next);
       }}
       errorMessage={firstErrorMessage(field) ?? undefined}
     >

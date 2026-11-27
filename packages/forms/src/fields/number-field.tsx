@@ -7,11 +7,13 @@ import { firstErrorMessage } from '../first-error-message';
 
 export type NumberFieldProps = Omit<
   ComponentProps<typeof GrunnmurenNumberField>,
-  'name' | 'value' | 'onChange' | 'onBlur' | 'errorMessage'
+  'name' | 'value' | 'errorMessage' | 'validationBehavior'
 >;
 
 function NumberInput({
   field,
+  onChange,
+  onBlur,
   ...props
 }: NumberFieldProps & { field: FieldWithValue<number | null> }) {
   return (
@@ -21,8 +23,14 @@ function NumberInput({
       name={field.name}
       // React Aria uses NaN for "empty", the form state uses null
       value={field.value ?? Number.NaN}
-      onChange={(value) => field.handleChange(Number.isNaN(value) ? null : value)}
-      onBlur={field.handleBlur}
+      onChange={(value) => {
+        field.handleChange(Number.isNaN(value) ? null : value);
+        onChange?.(value);
+      }}
+      onBlur={(event) => {
+        field.handleBlur();
+        onBlur?.(event);
+      }}
       errorMessage={firstErrorMessage(field)}
     />
   );
