@@ -4,7 +4,15 @@ import { z } from 'zod';
 
 import { createGrunnmurenFormHook } from '../create-grunnmuren-form-hook';
 import { Radio, SelectItem } from '../index';
-import { birthDate, email, mobileNumber, nationalIdNumber, requiredText } from '../schemas';
+import {
+  birthDate,
+  email,
+  file,
+  memberNumber,
+  mobileNumber,
+  nationalIdNumber,
+  requiredText,
+} from '../schemas';
 
 const meta: Meta = {
   title: 'Forms',
@@ -14,7 +22,7 @@ export default meta;
 type Story = StoryObj;
 
 // Module level on purpose: the hook must not be recreated on every render
-const { useAppForm } = createGrunnmurenFormHook();
+const { useAppForm, NameFields } = createGrunnmurenFormHook();
 
 const contactSchema = z.object({
   firstName: requiredText({ locale: 'nb', max: 100 }),
@@ -23,6 +31,8 @@ const contactSchema = z.object({
   phone: mobileNumber({ locale: 'nb' }),
   nationalIdNumber: nationalIdNumber({ locale: 'nb' }),
   birthDate: birthDate({ locale: 'nb' }),
+  memberNumber: memberNumber({ locale: 'nb' }),
+  attachments: file({ locale: 'nb' }),
   message: requiredText({ locale: 'nb', max: 1000 }),
   topic: z.string().min(1, 'Velg et tema'),
   contactMethod: z.string().min(1, 'Velg hvordan du vil bli kontaktet'),
@@ -38,6 +48,8 @@ function ContactFormExample() {
       phone: '',
       nationalIdNumber: '',
       birthDate: '',
+      memberNumber: '',
+      attachments: [] as File[],
       message: '',
       topic: '',
       contactMethod: '',
@@ -53,14 +65,18 @@ function ContactFormExample() {
   return (
     <form.AppForm>
       <form.Form className="container-prose grid gap-6">
-        <form.Field name="firstName">{(field) => <field.FirstNameField isRequired />}</form.Field>
-        <form.Field name="lastName">{(field) => <field.LastNameField isRequired />}</form.Field>
+        <NameFields form={form} fields={{ firstName: 'firstName', lastName: 'lastName' }} />
         <form.Field name="email">{(field) => <field.EmailField isRequired />}</form.Field>
         <form.Field name="phone">{(field) => <field.PhoneField isRequired />}</form.Field>
         <form.Field name="nationalIdNumber">
           {(field) => <field.NationalIdNumberField isRequired />}
         </form.Field>
         <form.Field name="birthDate">{(field) => <field.BirthDateField isRequired />}</form.Field>
+        <form.Field name="memberNumber">
+          {(field) => (
+            <field.TextField label="Medlemsnummer" inputMode="numeric" size={8} isRequired />
+          )}
+        </form.Field>
         <form.Field name="topic">
           {(field) => (
             <field.SelectField label="Tema" placeholder="Velg tema" isRequired>
@@ -80,6 +96,11 @@ function ContactFormExample() {
         </form.Field>
         <form.Field name="message">
           {(field) => <field.TextAreaField label="Melding" isRequired />}
+        </form.Field>
+        <form.Field name="attachments">
+          {(field) => (
+            <field.FileField description="PDF, JPG eller PNG, maks 5 MB" allowsMultiple />
+          )}
         </form.Field>
         <form.Field name="acceptTerms">
           {(field) => <field.CheckboxField>Jeg godtar vilkårene</field.CheckboxField>}

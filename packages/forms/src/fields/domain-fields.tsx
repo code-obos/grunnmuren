@@ -1,5 +1,6 @@
 'use client';
 import { type FieldWithValue, getFormHookHelpers } from '@tanstack/react-form';
+import { useId } from 'react';
 
 import { marketFor } from '../locale';
 import { fieldTranslations } from '../translations';
@@ -43,7 +44,7 @@ function EmailInput({ field, ...props }: DomainProps) {
   );
 }
 
-function FirstNameInput({ field, ...props }: DomainProps) {
+export function FirstNameInput({ field, ...props }: DomainProps) {
   const locale = useFormsLocale();
   return (
     <TextInput
@@ -55,7 +56,7 @@ function FirstNameInput({ field, ...props }: DomainProps) {
   );
 }
 
-function LastNameInput({ field, ...props }: DomainProps) {
+export function LastNameInput({ field, ...props }: DomainProps) {
   const locale = useFormsLocale();
   return (
     <TextInput
@@ -84,15 +85,29 @@ function NationalIdNumberInput({ field, ...props }: DomainProps) {
   );
 }
 
-function BirthDateInput({ field, ...props }: DateFieldProps & { field: FieldWithValue<string> }) {
+function BirthDateInput({
+  field,
+  className,
+  ...props
+}: DateFieldProps & { field: FieldWithValue<string> }) {
   const locale = useFormsLocale();
+  const hintId = useId();
   return (
-    <DateInput
-      label={fieldTranslations[locale].birthDate.label}
-      autoComplete="bday"
-      {...props}
-      field={field}
-    />
+    <>
+      <DateInput
+        label={fieldTranslations[locale].birthDate.label}
+        autoComplete="bday"
+        size={10}
+        // Tells screen reader users this is a date picker, not just a date to read out.
+        aria-describedby={hintId}
+        className={['[&>input]:w-fit [&>input]:min-w-32', className].filter(Boolean).join(' ')}
+        {...props}
+        field={field}
+      />
+      <span id={hintId} className="sr-only">
+        {fieldTranslations[locale].birthDate.hint}
+      </span>
+    </>
   );
 }
 
