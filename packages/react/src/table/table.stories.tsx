@@ -416,3 +416,42 @@ export const Sortable = () => {
     </Table>
   );
 };
+
+export const NestedZebraTables = () => (
+  <Table aria-label="Eiendommer med leiligheter i subtabell" variant="zebra-striped">
+    <TableHeader>
+      <TableColumn>Eiendom</TableColumn>
+      <TableColumn>Antall leiligheter</TableColumn>
+    </TableHeader>
+    <TableBody>
+      <TableRow>
+        <TableCell>Sagene</TableCell>
+        <TableCell>2</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell colSpan={2}>
+          <Table aria-label="Leiligheter på Sagene">
+            <TableHeader>
+              <TableColumn>Adresse</TableColumn>
+              <TableColumn>Type</TableColumn>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell>Sagveien 1</TableCell>
+                <TableCell>2 rom</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Sagveien 3</TableCell>
+                <TableCell>3 rom</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Frogner</TableCell>
+        <TableCell>2</TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+);
