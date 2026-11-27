@@ -1,6 +1,6 @@
 ---
 name: grunnmuren-forms
-description: Use whenever you build, change or review a form, a form field (text, textarea, number, phone, email, first/last name, fødselsnummer/personnummer, date, birth date, select, combobox, checkbox, checkbox group, radio group) or form validation in a React app that uses Grunnmuren (obos.no, obos.se, medlem-frontend and similar). Use @obosbbl/grunnmuren-forms, which wraps TanStack Form v2 and Grunnmuren with shared fields, zod schemas and nb/sv/en messages, instead of hand-wiring Grunnmuren inputs with useState, react-hook-form or plain TanStack fields. Covers install, GrunnmurenProvider locale, hook setup, complete forms with validation, submit and server errors, custom fields and common mistakes.
+description: Use whenever you build, change or review a form, a form field (text, textarea, number, phone, email, first/last name, member number, file upload, fødselsnummer/personnummer, date, birth date, select, combobox, checkbox, checkbox group, radio group) or form validation in a React app that uses Grunnmuren (obos.no, obos.se, medlem-frontend and similar). Use @obosbbl/grunnmuren-forms, which wraps TanStack Form v2 and Grunnmuren with shared fields, zod schemas and nb/sv/en messages, instead of hand-wiring Grunnmuren inputs with useState, react-hook-form or plain TanStack fields. Covers install, GrunnmurenProvider locale, hook setup, complete forms with validation, submit and server errors, custom fields and common mistakes.
 ---
 
 # Grunnmuren forms (`@obosbbl/grunnmuren-forms`)
@@ -13,7 +13,7 @@ Shared form layer for apps using Grunnmuren: TanStack Form v2 (engine) + Grunnmu
 - Reviewing a form that hand-wires Grunnmuren `TextField` with `useState`, or uses another form library: migrate it.
 - Field catalog and schema signatures: `references/fields.md`. Read it before picking fields.
 
-Do not use it for file upload or address autocomplete: not in the package.
+Do not use it for address autocomplete: not in the package.
 
 ## Install
 
@@ -43,7 +43,7 @@ Create the hook once per app, at module level, in a client module. There is no l
 'use client';
 import { createGrunnmurenFormHook } from '@obosbbl/grunnmuren-forms';
 
-export const { useAppForm, useFormContext } = createGrunnmurenFormHook();
+export const { useAppForm, useFormContext, NameFields } = createGrunnmurenFormHook();
 ```
 
 - Never call `createGrunnmurenFormHook` inside a component or render: it creates new component types every render and remounts all fields.
@@ -86,7 +86,13 @@ Schema in a server-safe module (can be imported by API routes). Use factories fr
 
 ```ts
 // src/app/no/kontakt/schema.ts  (no 'use client', no React)
-import { email, mobileNumber, requiredText } from '@obosbbl/grunnmuren-forms/schemas';
+import {
+  email,
+  file,
+  memberNumber,
+  mobileNumber,
+  requiredText,
+} from '@obosbbl/grunnmuren-forms/schemas';
 import { z } from 'zod';
 
 export const contactSchema = z.object({
@@ -94,6 +100,8 @@ export const contactSchema = z.object({
   lastName: requiredText({ locale: 'nb', max: 50 }),
   email: email({ locale: 'nb' }),
   phone: mobileNumber({ locale: 'nb' }),
+  memberNumber: memberNumber({ locale: 'nb' }),
+  attachments: file({ locale: 'nb' }),
   message: z.string().min(1, 'Du må skrive en melding.'),
   acceptTerms: z.literal(true, { error: 'Du må godta vilkårene.' }),
 });
@@ -103,7 +111,7 @@ Form component:
 
 ```tsx
 'use client';
-import { useAppForm } from '@/lib/forms';
+import { NameFields, useAppForm } from '@/lib/forms';
 
 import { contactSchema } from './schema';
 
@@ -114,6 +122,8 @@ export function ContactForm() {
       lastName: '',
       email: '',
       phone: '',
+      memberNumber: '',
+      attachments: [] as File[],
       message: '',
       acceptTerms: false,
     },
@@ -131,10 +141,13 @@ export function ContactForm() {
   return (
     <form.AppForm>
       <form.Form>
-        <form.Field name="firstName">{(field) => <field.FirstNameField isRequired />}</form.Field>
-        <form.Field name="lastName">{(field) => <field.LastNameField isRequired />}</form.Field>
+        <NameFields form={form} />
         <form.Field name="email">{(field) => <field.EmailField isRequired />}</form.Field>
         <form.Field name="phone">{(field) => <field.PhoneField isRequired />}</form.Field>
+        <form.Field name="memberNumber">
+          {(field) => <field.TextField label="Medlemsnummer" inputMode="numeric" isRequired />}
+        </form.Field>
+        <form.Field name="attachments">{(field) => <field.FileField allowsMultiple />}</form.Field>
         <form.Field name="message">
           {(field) => <field.TextAreaField label="Melding" isRequired />}
         </form.Field>
@@ -157,6 +170,9 @@ Rules:
 - Validation: pass the whole zod object as one validator. Field errors are routed by issue path to the matching field. `triggers` lists when it runs (`'change'`, `'blur'`, ...).
 - Submit with `validatorOutputs[0]` (parsed output, in validator order), never `value`: `value` is the raw editable state, so it still has spaces and original casing.
 - Server errors: return `createValidationError({ fields: { name: 'message' } })` from `onSubmit`. Throw only for transient failures. For schema-shaped issues use `parseIssues`.
+- `NameFields` (from the hook, see setup) renders first and last name together: `<NameFields form={form} fields={{ firstName: 'guardian.given', lastName: 'guardian.family' }} />`. `fields` is optional when the form has top-level `firstName` and `lastName`. Props: `isRequired` (default `true`), `autoComplete` (`false` drops `given-name`/`family-name`), `firstNameProps`, `lastNameProps`. Both values must be `string`.
+- `FileField` has value `File[]` (`[] as File[]`) and wraps Grunnmuren `UNSAFE_FileUpload`. Pass `acceptedFileTypes`, `allowsMultiple`, `label`, `description`, `buttonText`. Validate with the `file({ locale })` schema (max 3 files, 5 MB each, jpg/png/pdf by default; `maxFiles`, `maxSize`, `acceptedTypes` override). Keep `acceptedFileTypes` in sync with `acceptedTypes`. Actually uploading is up to the app.
+- `email` uses the medlem rules and rejects æøå and `+` on purpose, so addresses work in the member systems. Do not loosen it in the app. It also lowercases and trims, max 102 characters.
 - Empty values per field type are in `references/fields.md`; `defaultValues` must use them.
 - Every field takes the Grunnmuren props (`label`, `description`, `isRequired`, `isDisabled`, `className`, ...). Domain fields have a locale default for `label` and others; any prop you pass overrides it.
 - Select, Combobox, RadioGroup and CheckboxGroup take children: `SelectItem`, `ComboboxItem`, `Radio` and `Checkbox`, all re-exported from `@obosbbl/grunnmuren-forms`.
@@ -244,7 +260,7 @@ Conventions:
 
 ## Common mistakes
 
-- Wrong `defaultValues` type: `NumberField` needs `null as number | null` (not `0` or `''`), `SelectField`/`ComboboxField`/`RadioGroupField` need `''` for "none" (not `null`/`undefined`), `CheckboxGroupField` needs `string[]`, `CheckboxField` needs `boolean`, `DateField`/`BirthDateField` need `''` or `yyyy-MM-dd`.
+- Wrong `defaultValues` type: `NumberField` needs `null as number | null` (not `0` or `''`), `SelectField`/`ComboboxField`/`RadioGroupField` need `''` for "none" (not `null`/`undefined`), `CheckboxGroupField` needs `string[]`, `CheckboxField` needs `boolean`, `FileField` needs `File[]`, `DateField`/`BirthDateField` need `''` or `yyyy-MM-dd`.
 - No `GrunnmurenProvider` above the form: react-aria then uses the browser's language, so labels can come out in English, and in Swedish for `sv` browsers on a Norwegian site. Always wrap the app in `GrunnmurenProvider` with the site's locale.
 - Calling `createGrunnmurenFormHook` inside a component or per render. Create it at module level, once.
 - Importing the schema from a `'use client'` module or from `@obosbbl/grunnmuren-forms` in a server route. Schemas live in a plain module and come from `@obosbbl/grunnmuren-forms/schemas`, which has no React or Grunnmuren imports.

@@ -82,6 +82,13 @@ export function SignupForm() {
 }
 ```
 
+## Fields and schemas
+
+- Fields: `TextField`, `TextAreaField`, `NumberField`, `CheckboxField`, `CheckboxGroupField`, `RadioGroupField`, `SelectField`, `ComboboxField`, `DateField`, `FileField`, plus the domain fields `PhoneField`, `EmailField`, `FirstNameField`, `LastNameField`, `NationalIdNumberField` and `BirthDateField`.
+- `NameFields`: returned by `createGrunnmurenFormHook()`, renders first and last name together: `<NameFields form={form} fields={{ firstName: 'firstName', lastName: 'lastName' }} />`.
+- Schemas: `email`, `mobileNumber`, `phonePrefix`, `memberNumber`, `nationalIdNumber`, `birthDate`, `requiredText` and `file`, plus the `ACCEPTED_FILE_TYPES`, `MAXIMUM_FILE_SIZE` and `MAXIMUM_NUMBER_OF_FILES` constants.
+- `email` follows the medlem rules: trimmed, lowercased, max 102 characters, and no æøå or `+`, on purpose.
+
 ## Entry points
 
 - `@obosbbl/grunnmuren-forms`: hook factory, fields, form components. Client code.

@@ -93,7 +93,7 @@ test.each([
 );
 
 test.each([
-  ['nb', 'Fødselsnummer', '11 siffer'],
+  ['nb', 'Fødsels- og personnummer', '11 siffer'],
   ['en', 'National identity number', '11 digits'],
 ] as const)('NationalIdNumberField %s: Norwegian rules, numeric', (locale, label, description) => {
   const html = renderDomain(locale, 'id');
@@ -110,6 +110,97 @@ test('NationalIdNumberField sv: Personnummer, format hint, no numeric mode', () 
   expect(html).toContain('ÅÅÅÅMMDD-XXXX');
   expect(html).not.toContain('inputMode');
   expect(html).toContain('size="13"');
+});
+
+test.each([
+  ['nb', 'Datovelger'],
+  ['sv', 'Datumväljare'],
+  ['en', 'Date picker'],
+] as const)('BirthDateField %s: sr-only hint linked with aria-describedby', (locale, hint) => {
+  const html = renderDomain(locale, 'birth');
+  const hintId = html.match(/<span id="([^"]+)" class="sr-only">/)?.[1];
+  expect(hintId).toBeTruthy();
+  expect(html).toContain(hint);
+  expect(html).toContain(`>${hint}</span>`);
+  expect(html).toMatch(new RegExp(`aria-describedby="[^"]*${hintId}`));
+  expect(html).toContain('size="10"');
+  expect(html).toContain('min-w-32');
+});
+
+test.each([
+  ['nb', 'Fornavn og mellomnavn', 'Etternavn'],
+  ['sv', 'Förnamn', 'Efternamn'],
+  ['en', 'First and middle name', 'Last name'],
+] as const)('NameFields %s: both inputs bound to the given paths', (locale, first, last) => {
+  const { useAppForm, NameFields } = hook;
+  function Test() {
+    const form = useAppForm({ defaultValues: { guardian: { given: 'Ola', family: '' } } });
+    return (
+      <NameFields
+        form={form}
+        fields={{ firstName: 'guardian.given', lastName: 'guardian.family' }}
+      />
+    );
+  }
+  const html = renderToStaticMarkup(withLocale(locale, <Test />));
+  expect(html).toContain(first);
+  expect(html).toContain(last);
+  expect(html).toContain('name="guardian.given"');
+  expect(html).toContain('name="guardian.family"');
+  expect(html).toContain('value="Ola"');
+  expect(html).toContain('autoComplete="given-name"');
+  expect(html).toContain('autoComplete="family-name"');
+  expect(html).toContain('required');
+});
+
+test('NameFields: autoComplete opt-out and optional', () => {
+  const { useAppForm, NameFields } = hook;
+  function Test() {
+    const form = useAppForm({ defaultValues: { firstName: '', lastName: '' } });
+    return <NameFields form={form} autoComplete={false} isRequired={false} />;
+  }
+  const html = renderToStaticMarkup(withLocale('nb', <Test />));
+  expect(html).not.toContain('autoComplete');
+  expect(html).not.toContain('aria-required');
+});
+
+test.each([
+  ['nb', 'Vedlegg', 'Last opp'],
+  ['sv', 'Bilagor', 'Ladda upp'],
+  ['en', 'Attachments', 'Upload'],
+] as const)('FileField %s: default label and button text', (locale, label, button) => {
+  const { useAppForm } = hook;
+  function Test() {
+    const form = useAppForm({ defaultValues: { files: [] as File[] } });
+    return (
+      <form.Field name="files">
+        {(f) => <f.FileField acceptedFileTypes={['application/pdf']} allowsMultiple />}
+      </form.Field>
+    );
+  }
+  const html = renderToStaticMarkup(withLocale(locale, <Test />));
+  expect(html).toContain(label);
+  expect(html).toContain(button);
+  expect(html).toContain('type="file"');
+  expect(html).toContain('accept="application/pdf"');
+  expect(html).toContain('multiple');
+  expect(html).toContain('name="files"');
+});
+
+test('FileField: label, description and button text are overridable', () => {
+  const { useAppForm } = hook;
+  function Test() {
+    const form = useAppForm({ defaultValues: { files: [] as File[] } });
+    return (
+      <form.Field name="files">
+        {(f) => <f.FileField label="Legitimasjon" description="Maks 5 MB" buttonText="Velg fil" />}
+      </form.Field>
+    );
+  }
+  const html = renderToStaticMarkup(withLocale('nb', <Test />));
+  expect(html).toContain('Legitimasjon');
+  expect(html).toContain('Maks 5 MB');
+  expect(html).toContain('Velg fil');
 });
 
 test('generic fields render for every value kind', () => {

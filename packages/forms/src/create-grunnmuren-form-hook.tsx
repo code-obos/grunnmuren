@@ -19,6 +19,8 @@ import {
   NationalIdNumberField,
   PhoneField,
 } from './fields/domain-fields';
+import { FileField } from './fields/file-field';
+import { createNameFields } from './fields/name-fields';
 import { NumberField } from './fields/number-field';
 import { RadioGroupField } from './fields/radio-group-field';
 import { SelectField } from './fields/select-field';
@@ -31,7 +33,7 @@ export const showAfterBlurOrSubmit = createErrorVisibility(
   ({ fieldState, state }) => fieldState.meta.isBlurred || state.submissionAttempts > 0,
 );
 
-const defaultFieldComponents = {
+const defaultFieldComponents: DefaultFieldComponents = {
   TextField,
   TextAreaField,
   NumberField,
@@ -47,9 +49,27 @@ const defaultFieldComponents = {
   LastNameField,
   NationalIdNumberField,
   BirthDateField,
+  FileField,
 };
 
-type DefaultFieldComponents = typeof defaultFieldComponents;
+interface DefaultFieldComponents {
+  TextField: typeof TextField;
+  TextAreaField: typeof TextAreaField;
+  NumberField: typeof NumberField;
+  CheckboxField: typeof CheckboxField;
+  CheckboxGroupField: typeof CheckboxGroupField;
+  RadioGroupField: typeof RadioGroupField;
+  SelectField: typeof SelectField;
+  ComboboxField: typeof ComboboxField;
+  DateField: typeof DateField;
+  PhoneField: typeof PhoneField;
+  EmailField: typeof EmailField;
+  FirstNameField: typeof FirstNameField;
+  LastNameField: typeof LastNameField;
+  NationalIdNumberField: typeof NationalIdNumberField;
+  BirthDateField: typeof BirthDateField;
+  FileField: typeof FileField;
+}
 type DefaultFormComponents = ReturnType<typeof createFormComponents>;
 /** Consumer components replace same-named defaults and keep their own types. */
 type Overridden<TDefaults, TExtra> = Omit<TDefaults, keyof TExtra> & TExtra;
@@ -91,5 +111,5 @@ export function createGrunnmurenFormHook<
   });
 
   readFormContext = hook.useFormContext;
-  return hook;
+  return { ...hook, NameFields: createNameFields(hook.defineAppFieldGroup) };
 }

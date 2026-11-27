@@ -7,7 +7,8 @@ export type FieldTranslations = {
   firstName: { label: string };
   lastName: { label: string };
   nationalIdNumber: { label: string; description: string };
-  birthDate: { label: string };
+  birthDate: { label: string; hint: string };
+  file: { label: string; buttonText: string };
 };
 
 export const fieldTranslations: Record<Locale, FieldTranslations> = {
@@ -16,8 +17,9 @@ export const fieldTranslations: Record<Locale, FieldTranslations> = {
     email: { label: 'E-post' },
     firstName: { label: 'Fornavn og mellomnavn' },
     lastName: { label: 'Etternavn' },
-    nationalIdNumber: { label: 'Fødselsnummer', description: '11 siffer' },
-    birthDate: { label: 'Fødselsdato' },
+    nationalIdNumber: { label: 'Fødsels- og personnummer', description: '11 siffer' },
+    birthDate: { label: 'Fødselsdato', hint: 'Datovelger' },
+    file: { label: 'Vedlegg', buttonText: 'Last opp' },
   },
   sv: {
     phone: { label: 'Mobilnummer' },
@@ -25,7 +27,8 @@ export const fieldTranslations: Record<Locale, FieldTranslations> = {
     firstName: { label: 'Förnamn' },
     lastName: { label: 'Efternamn' },
     nationalIdNumber: { label: 'Personnummer', description: 'ÅÅÅÅMMDD-XXXX' },
-    birthDate: { label: 'Födelsedatum' },
+    birthDate: { label: 'Födelsedatum', hint: 'Datumväljare' },
+    file: { label: 'Bilagor', buttonText: 'Ladda upp' },
   },
   en: {
     phone: { label: 'Mobile number' },
@@ -33,6 +36,7 @@ export const fieldTranslations: Record<Locale, FieldTranslations> = {
     firstName: { label: 'First and middle name' },
     lastName: { label: 'Last name' },
     nationalIdNumber: { label: 'National identity number', description: '11 digits' },
-    birthDate: { label: 'Date of birth' },
+    birthDate: { label: 'Date of birth', hint: 'Date picker' },
+    file: { label: 'Attachments', buttonText: 'Upload' },
   },
 };

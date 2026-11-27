@@ -1,8 +1,27 @@
 import type { Locale } from '../locale';
 
+function joinList(items: string[], conjunction: string) {
+  return items.length < 2
+    ? items.join('')
+    : `${items.slice(0, -1).join(', ')} ${conjunction} ${items.at(-1)}`;
+}
+
 export type SchemaMessages = {
   mobileNumber: { required: string; invalid: string };
-  email: { required: string; invalid: string; tooLong: string };
+  email: {
+    required: string;
+    invalid: string;
+    tooLong: string;
+    specialCharacters: string;
+    plusSign: string;
+  };
+  memberNumber: { required: string; invalid: string };
+  phonePrefix: { required: string; tooLong: string };
+  file: {
+    invalidType: (extensions: string[]) => string;
+    tooLarge: (maxSizeInMB: number) => string;
+    tooMany: (maxFiles: number) => string;
+  };
   nationalIdNumber: { required: string; invalid: string; invalidWithDNumber: string };
   requiredText: { required: string; tooLong: (max: number) => string };
   birthDate: {
@@ -23,7 +42,22 @@ export const schemaMessages: Record<Locale, SchemaMessages> = {
     email: {
       required: 'Du må fylle ut e-post.',
       invalid: 'Du må fylle ut en gyldig e-post.',
-      tooLong: 'E-posten er for lang. Maks lengde er 254 tegn.',
+      tooLong: 'E-posten er for lang. Maks lengde er 102 tegn.',
+      specialCharacters: 'E-postadressen kan ikke inneholde spesialtegn, Æ, Ø eller Å.',
+      plusSign: 'E-postadressen kan ikke inneholde "+".',
+    },
+    memberNumber: {
+      required: 'Du må fylle ut medlemsnummer.',
+      invalid: 'Du må fylle ut et gyldig medlemsnummer.',
+    },
+    phonePrefix: {
+      required: 'Du må fylle ut landskode for mobil.',
+      tooLong: 'Landskoden for mobil er for lang. Maks lengde er 10 tegn.',
+    },
+    file: {
+      invalidType: (extensions) => `Kun ${joinList(extensions, 'og')} er tillatt`,
+      tooLarge: (maxSizeInMB) => `Maksimal filstørrelse per fil er ${maxSizeInMB}MB`,
+      tooMany: (maxFiles) => `Du kan ikke laste opp mer enn ${maxFiles} filer`,
     },
     nationalIdNumber: {
       required: 'Du må fylle ut fødselsnummer.',
@@ -48,9 +82,24 @@ export const schemaMessages: Record<Locale, SchemaMessages> = {
       invalid: 'Du måste fylla i ett giltigt mobilnummer.',
     },
     email: {
-      required: 'Du måste fylla i e-post.',
-      invalid: 'Du måste fylla i en giltig e-postadress.',
-      tooLong: 'E-postadressen är för lång. Max längd är 254 tecken.',
+      required: 'Du måste fylla i din e-post.',
+      invalid: 'Du måste ange en giltig e-postadress.',
+      tooLong: 'E-postmeddelandet är för långt. Max längd är 102 tecken.',
+      specialCharacters: 'E-postadressen får inte innehålla specialtecken, Å, Ä eller Ö.',
+      plusSign: 'E-postadressen får inte innehålla "+".',
+    },
+    memberNumber: {
+      required: 'Du måste fylla i medlemsnummer.',
+      invalid: 'Du måste fylla i ett giltigt medlemsnummer.',
+    },
+    phonePrefix: {
+      required: 'Du måste fylla i landskoden för mobil.',
+      tooLong: 'Landskoden för mobil är för lång. Max längd är 10 tecken.',
+    },
+    file: {
+      invalidType: (extensions) => `Endast ${joinList(extensions, 'och')} är tillåtna`,
+      tooLarge: (maxSizeInMB) => `Maximal filstorlek är ${maxSizeInMB}MB`,
+      tooMany: (maxFiles) => `Du kan inte ladda upp fler än ${maxFiles} filer`,
     },
     nationalIdNumber: {
       required: 'Du måste fylla i personnummer.',
@@ -77,7 +126,22 @@ export const schemaMessages: Record<Locale, SchemaMessages> = {
     email: {
       required: 'Please enter an email address.',
       invalid: 'Please enter a valid email address.',
-      tooLong: 'The email address is too long. The maximum length is 254 characters.',
+      tooLong: 'The email address is too long. The maximum length is 102 characters.',
+      specialCharacters: 'The email address cannot contain special characters, Æ, Ø or Å.',
+      plusSign: 'The email address cannot contain "+".',
+    },
+    memberNumber: {
+      required: 'Please enter a member number.',
+      invalid: 'Please enter a valid member number.',
+    },
+    phonePrefix: {
+      required: 'Please enter the country code for the mobile number.',
+      tooLong: 'The country code is too long. The maximum length is 10 characters.',
+    },
+    file: {
+      invalidType: (extensions) => `Only ${joinList(extensions, 'and')} are allowed`,
+      tooLarge: (maxSizeInMB) => `The maximum file size per file is ${maxSizeInMB}MB`,
+      tooMany: (maxFiles) => `You cannot upload more than ${maxFiles} files`,
     },
     nationalIdNumber: {
       required: 'Please enter a national identity number.',
