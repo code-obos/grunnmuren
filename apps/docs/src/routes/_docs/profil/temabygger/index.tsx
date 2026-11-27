@@ -20,6 +20,9 @@ export const Route = createFileRoute('/_docs/profil/temabygger/')({
   }),
 });
 
+// The frame every tab sits in, square under the first tab so the tab and frame read as one
+const PANEL = 'rounded-b-xl rounded-tr-xl border border-black/15 bg-white p-5 sm:p-8';
+
 function RouteComponent() {
   const builder = useThemeBuilder();
 
@@ -38,19 +41,19 @@ function RouteComponent() {
       </p>
 
       <div className="mb-12">
-        <Tabs variant="primary">
+        <Tabs variant="primary" className="gap-y-0">
           <TabList aria-label="Temabygger">
             <Tab id="farger">Fargesystem</Tab>
             <Tab id="komponenter">Komponenter</Tab>
             <Tab id="eksport">Eksport</Tab>
           </TabList>
-          <TabPanel id="farger" className="pt-6">
+          <TabPanel id="farger" className={PANEL}>
             <ColorMatrix builder={builder} />
           </TabPanel>
-          <TabPanel id="komponenter" className="pt-6">
+          <TabPanel id="komponenter" className={PANEL}>
             <ComponentsPreview builder={builder} />
           </TabPanel>
-          <TabPanel id="eksport" className="pt-6">
+          <TabPanel id="eksport" className={PANEL}>
             <ExportPanel builder={builder} />
           </TabPanel>
         </Tabs>

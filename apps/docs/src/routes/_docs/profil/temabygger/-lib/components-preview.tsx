@@ -466,7 +466,7 @@ export const ComponentsPreview = ({ builder }: { builder: ThemeBuilder }) => {
       <div
         data-theme={PREVIEW_THEME}
         data-color={role}
-        className="bg-background-default text-text-default rounded-xl border border-black/15 p-4 sm:p-8"
+        className="bg-background-default text-text-default"
       >
         <style>{builder.previewCss}</style>
         <Gallery role={role} />
