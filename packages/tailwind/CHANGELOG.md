@@ -1,5 +1,31 @@
 # @obosbbl/grunnmuren-tailwind
 
+## 2.11.0
+
+### Minor Changes
+
+- b5cb8fb: Add `--gm-blockquote-*` tokens. `blockquote` reads them and grows smoothly from 19px to 21px with the viewport instead of jumping at lg, with the quote mark and its column in em so they follow the text. A theme can set the tokens too.
+- 4352d04: Add `--gm-radius-base`. Every `rounded-*` step is now a multiple of it, so a theme can round or square off the whole scale with one value, e.g. `[data-theme='x'] { --gm-radius-base: 0; }`. A theme can still set a single step like `--gm-radius-lg`. Without a theme every corner is the same as before.
+  
+  For now that's for themes written in CSS. `grunnmuren-theme` and the theme builder in the docs only do colours, and radius support there comes later.
+  
+  `<ProgressBar>` uses `rounded-sm` instead of `rounded`, which is the same size but follows the theme.
+- 81134dd: `grunnmuren-theme` and `buildTheme` take radius too: `{ "radius": { "base": "0.5rem" } }`, and single steps like `radius.lg`. A value is a length in rem, px or em, or `0`, and anything else is an `invalid-dimension` error. The radius tokens are listed in `tokens/themeable.json`, which is where other kinds of tokens, like fonts, go later.
+- 81134dd: Add `--gm-opacity-scrim` (0.25) and `--gm-color-scrim`, the neutral base colour at that opacity, with a `bg-scrim` utility. `<Modal>` and `<Drawer>` use it for the dimmed page behind them, which looks exactly as before. A theme can set the opacity, and `grunnmuren-theme` takes it as `{ "opacity": { "scrim": 0.4 } }`.
+- f4598cc: Add `--gm-space-base` (0.25rem), which Tailwind's `--spacing` now reads, so a theme tightens or loosens every `p-*`, `m-*`, `gap-*`, `w-*`, `h-*` and so on with one value. The `--gm-space-*` steps are worked out from it too, apart from `--gm-space-px`. Nothing changes without a theme. `grunnmuren-theme` takes it as `{ "spacing": { "base": "0.3125rem" } }`.
+
+### Patch Changes
+
+- 25c5f54: `footnote` is deprecated, use `description` instead. It has no design token and isn't in Figma. It still works as before, and is removed in the next major.
+  
+  `<FileUpload>` uses `description` for the file extension and size, so that text is 14px instead of 12px.
+- b5cb8fb: `description` reads the `--gm-description-*` tokens, so its line height is 21px like in Figma, instead of 22px (23px from lg). It also follows a theme that sets those tokens.
+- 96496e0: The touch targets in the components are at least `44px` (`min-h-[44px]` and `min-w-[44px]`) instead of the 11 step. They keep WCAG's minimum even if `--spacing` changes later, and grow with bigger text instead of cutting it off. The text in the secondary Tabs sits 2px higher, centred in the tab.
+- f02ed16: - `<VideoLoop>` and `<Carousel>` read the reduced motion preference with `useSyncExternalStore`, so a client-side render gets the right value straight away instead of on the next render.
+  - `<Carousel>` numbers its items without changing a variable during render.
+- c322108: `paragraph` and paragraphs in `prose` read the `--gm-paragraph-*` tokens, so their line height is now 24px instead of 26px, the same as in Figma. They also follow a theme that sets those tokens.
+- ff66218: `prose` reads the `--gm-paragraph-*` tokens on its root too, so its line height is 24px instead of 28px and lists line up with the paragraphs. A theme that changes the paragraph tokens reaches lists and other body text in `prose`, not just paragraphs.
+
 ## 2.10.0
 
 ### Minor Changes
