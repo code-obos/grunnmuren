@@ -1,6 +1,6 @@
 ---
 name: grunnmuren-forms
-description: Use whenever you build, change or review a form, a form field (text, textarea, number, phone, email, first/last name, member number, file upload, fødselsnummer/personnummer, address/adresse autocomplete with c/o, date, birth date, select, combobox, checkbox, checkbox group, radio group) or form validation, in a React app that uses Grunnmuren (obos.no, obos.se, medlem-frontend and similar). Use @obosbbl/grunnmuren-forms, which wraps TanStack Form v2 and Grunnmuren with shared fields, zod schemas and nb/sv/en messages, instead of hand-wiring Grunnmuren inputs with useState, react-hook-form or plain TanStack fields. Covers install, GrunnmurenProvider locale, hook setup, complete forms with validation, submit and server errors, custom fields and common mistakes.
+description: Use whenever you build, change or review a form, a form field (text, textarea, number, phone, email, first/last name, member number, file upload, fødselsnummer/personnummer, address/adresse autocomplete with c/o, date, birth date, select, combobox, checkbox, checkbox group, radio group) or form validation, or a multi-step form (stepper, steg, wizard, summary/oppsummering, progress indicator) in a React app that uses Grunnmuren (obos.no, obos.se, medlem-frontend and similar). Use @obosbbl/grunnmuren-forms, which wraps TanStack Form v2 and Grunnmuren with shared fields, zod schemas and nb/sv/en messages, instead of hand-wiring Grunnmuren inputs with useState, react-hook-form or plain TanStack fields. Covers install, GrunnmurenProvider locale, hook setup, complete forms with validation, submit and server errors, custom fields and common mistakes.
 ---
 
 # Grunnmuren forms (`@obosbbl/grunnmuren-forms`)
@@ -243,6 +243,10 @@ Conventions:
 - Map between the form state and what React Aria wants in the field (`'' <-> null`, `null <-> NaN`), not in the form.
 - No error-visibility logic: `field.errors` is already filtered by the form's `errorVisibility`.
 - Register it via `fieldComponents` in `createGrunnmurenFormHook`, so it is typed like the built-ins.
+
+## Multi-step forms
+
+Stepper, wizard or steg flows use one `useAppForm` with one TanStack form group per step: `useFormSteps`, `FormStepper`, `StepForm` (Back/Next), `SummaryCard` and `SummaryItem`. Each Next validates only its own step and the summary submits everything. Read `references/stepper.md` for the complete 3-step example, per-step validation, edit from the summary, server errors, analytics hook points and receipt options. Do not use `form.Form` inside a step: it submits the whole form.
 
 ## Address fields
 

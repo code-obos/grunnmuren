@@ -40,3 +40,32 @@ export const fieldTranslations: Record<Locale, FieldTranslations> = {
     file: { label: 'Attachments', buttonText: 'Upload' },
   },
 };
+
+/** Default texts for the stepper, step navigation and summary components. */
+export type StepTranslations = {
+  stepperLabel: string;
+  previousStep: string;
+  nextStep: string;
+  edit: string;
+};
+
+export const stepTranslations: Record<Locale, StepTranslations> = {
+  nb: {
+    stepperLabel: 'Progressindikator',
+    previousStep: 'Forrige steg',
+    nextStep: 'Neste steg',
+    edit: 'Endre',
+  },
+  sv: {
+    stepperLabel: 'Framstegsindikator',
+    previousStep: 'Föregående steg',
+    nextStep: 'Nästa steg',
+    edit: 'Ändra',
+  },
+  en: {
+    stepperLabel: 'Progress',
+    previousStep: 'Previous step',
+    nextStep: 'Next step',
+    edit: 'Edit',
+  },
+};

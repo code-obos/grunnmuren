@@ -1,9 +1,18 @@
 import { GrunnmurenProvider } from '@obosbbl/grunnmuren-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useState } from 'react';
 import { z } from 'zod';
 
 import { createGrunnmurenFormHook } from '../create-grunnmuren-form-hook';
-import { Radio, SelectItem } from '../index';
+import {
+  FormStepper,
+  Radio,
+  SelectItem,
+  StepForm,
+  SummaryCard,
+  SummaryItem,
+  useFormSteps,
+} from '../index';
 import {
   birthDate,
   email,
@@ -148,4 +157,117 @@ export const ContactForm: Story = {
 
 export const Swedish: Story = {
   render: () => <SwedishExample />,
+};
+
+const steps = [
+  { id: 'contact', label: 'Kontakt' },
+  { id: 'details', label: 'Detaljer' },
+  { id: 'summary', label: 'Oppsummering' },
+];
+
+const stepContactSchema = z.object({
+  firstName: requiredText({ locale: 'nb', max: 100 }),
+  lastName: requiredText({ locale: 'nb', max: 100 }),
+  email: email({ locale: 'nb' }),
+});
+const stepDetailsSchema = z.object({
+  phone: mobileNumber({ locale: 'nb' }),
+  birthDate: birthDate({ locale: 'nb' }),
+});
+const stepFlowSchema = z.object({ contact: stepContactSchema, details: stepDetailsSchema });
+
+function MultiStepExample() {
+  const stepper = useFormSteps({ steps });
+  const [sent, setSent] = useState(false);
+  const form = useAppForm({
+    defaultValues: {
+      contact: { firstName: '', lastName: '', email: '' },
+      details: { phone: '', birthDate: '' },
+    },
+    // Whole form, runs on the final submit only. Each step validates its own group.
+    validators: [{ run: stepFlowSchema, triggers: [] }],
+    onSubmit: () => setSent(true),
+  });
+
+  return (
+    <form.AppForm>
+      <div className="flex flex-col gap-8 lg:flex-row">
+        <aside className="shrink-0 lg:w-64">
+          <FormStepper {...stepper} />
+        </aside>
+        <div className="max-w-2xl flex-1">
+          <h2 ref={stepper.headingRef} tabIndex={-1} className="heading-m mb-6 outline-none">
+            {stepper.activeStep.label}
+          </h2>
+
+          {stepper.activeStep.id === 'contact' && (
+            <form.FormGroup
+              name="contact"
+              validators={[{ run: stepContactSchema, triggers: ['change', 'blur'] }]}
+              onSubmit={stepper.goToNext}
+            >
+              {(group) => (
+                <StepForm group={group} steps={stepper}>
+                  <group.Field name="firstName">
+                    {(field) => <field.FirstNameField isRequired />}
+                  </group.Field>
+                  <group.Field name="lastName">
+                    {(field) => <field.LastNameField isRequired />}
+                  </group.Field>
+                  <group.Field name="email">
+                    {(field) => <field.EmailField isRequired />}
+                  </group.Field>
+                </StepForm>
+              )}
+            </form.FormGroup>
+          )}
+
+          {stepper.activeStep.id === 'details' && (
+            <form.FormGroup
+              name="details"
+              validators={[{ run: stepDetailsSchema, triggers: ['change', 'blur'] }]}
+              onSubmit={stepper.goToNext}
+            >
+              {(group) => (
+                <StepForm group={group} steps={stepper}>
+                  <group.Field name="phone">
+                    {(field) => <field.PhoneField isRequired />}
+                  </group.Field>
+                  <group.Field name="birthDate">
+                    {(field) => <field.BirthDateField isRequired />}
+                  </group.Field>
+                </StepForm>
+              )}
+            </form.FormGroup>
+          )}
+
+          {stepper.activeStep.id === 'summary' && (
+            <form.Subscribe selector={(state) => state.values}>
+              {(values) => (
+                <form.Form className="grid gap-6">
+                  <SummaryCard title="Kontakt" onEdit={() => stepper.goTo('contact')}>
+                    <SummaryItem
+                      label="Navn"
+                      value={`${values.contact.firstName} ${values.contact.lastName}`}
+                    />
+                    <SummaryItem label="E-post" value={values.contact.email} />
+                  </SummaryCard>
+                  <SummaryCard title="Detaljer" onEdit={() => stepper.goTo('details')}>
+                    <SummaryItem label="Mobil" value={values.details.phone} />
+                    <SummaryItem label="Fødselsdato" value={values.details.birthDate} />
+                  </SummaryCard>
+                  <form.SubmitButton>Send inn</form.SubmitButton>
+                  {sent && <output>Takk, skjemaet er sendt inn.</output>}
+                </form.Form>
+              )}
+            </form.Subscribe>
+          )}
+        </div>
+      </div>
+    </form.AppForm>
+  );
+}
+
+export const MultiStep: Story = {
+  render: () => <MultiStepExample />,
 };
