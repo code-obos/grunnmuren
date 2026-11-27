@@ -29,6 +29,9 @@ const DATA_COLORS = ['primary', 'accent', 'neutral', 'success', 'danger', 'warni
 // in the source for Figma and never become variables.
 const FIXED_RADII = new Set(['none', 'full']);
 
+// `px` is a hairline, not a step on the scale, so it stays 1px whatever the base is
+const FIXED_SPACING = new Set(['px']);
+
 // Example themes for Storybook and the tests. Not published, an app writes its own
 const THEMES = Object.keys(JSON.parse(readFileSync(SOURCE, 'utf8')).themes ?? {}).filter(
   (key) => !key.startsWith('$'),
@@ -79,6 +82,11 @@ const isIn = (token: TransformedToken, ...prefix: Array<string>) =>
 const isRadius = (token: TransformedToken) =>
   isIn(token, 'primitives', 'radius') && !FIXED_RADII.has(token.path[2]);
 const isRadiusBase = (token: TransformedToken) => isIn(token, 'primitives', 'radius', 'base');
+const isSpacing = (token: TransformedToken) => isIn(token, 'primitives', 'spacing');
+const isSpacingBase = (token: TransformedToken) => isIn(token, 'primitives', 'spacing', 'base');
+// The steps worked out from the base in space.css
+const isSpacingStep = (token: TransformedToken) =>
+  isSpacing(token) && !isSpacingBase(token) && !FIXED_SPACING.has(token.path[2]);
 const isScrimOpacity = (token: TransformedToken) => isIn(token, 'primitives', 'opacity', 'scrim');
 // The steps `rounded-*` reads, worked out from the base in radius.css
 const isRadiusStep = (token: TransformedToken) => isRadius(token) && !isRadiusBase(token);
@@ -102,6 +110,41 @@ const toRem = (token: TransformedToken) => {
     throw new Error(`\`${token.path.join('.')}\` has to be in rem, got \`${token.$value}\``);
   }
   return Number(rem);
+};
+
+/** A scale where every step is a multiple of a base token, as `calc(var(--base) * 1.5)` */
+const scale = (
+  base: TransformedToken | undefined,
+  steps: Array<TransformedToken>,
+  what: string,
+) => {
+  if (!base) throw new Error('A scale is missing its `base` in the source');
+  const baseRem = toRem(base);
+  // A theme can set the base to 0, but the steps are found by dividing by this one
+  if (baseRem === 0) throw new Error(`\`${base.path.join('.')}\` can't be 0 in the defaults`);
+
+  const entries = steps.map((token): [string, string] => {
+    // toFixed drops float noise like 1.4999999, so a step reads the way it's meant
+    const factor = Number((toRem(token) / baseRem).toFixed(4));
+    const value =
+      factor === 0
+        ? '0rem'
+        : factor === 1
+          ? `var(--${base.name})`
+          : `calc(var(--${base.name}) * ${factor})`;
+    return [token.name, value];
+  });
+
+  return `${HEADER}
+/*
+ * Every step is a multiple of --${base.name}, so a theme ${what}.
+ * The steps point at the base, so they're worked out again on every [data-theme], same as
+ * the semantic layer: declared on :root alone, a theme's base would never reach them.
+ */
+${THEMED} {
+${declarations(entries)}
+}
+`;
 };
 
 const variables = (dictionary: Dictionary, indentation = '  ') =>
@@ -245,33 +288,19 @@ ${THEMED} {
 `;
       },
 
-      'gm/radius': ({ dictionary }) => {
-        const base = dictionary.allTokens.find(isRadiusBase);
-        if (!base) throw new Error('`primitives.radius.base` is missing from the source');
-        const baseRem = toRem(base);
-        // A theme can set the base to 0, but the steps are found by dividing by this one
-        if (baseRem === 0) throw new Error("`primitives.radius.base` can't be 0 in the defaults");
+      'gm/radius': ({ dictionary }) =>
+        scale(
+          dictionary.allTokens.find(isRadiusBase),
+          dictionary.allTokens.filter(isRadiusStep),
+          'rounds or squares off the whole\n * scale with one value, and can still set a step on its own',
+        ),
 
-        const steps = dictionary.allTokens.filter(isRadiusStep).map((token): [string, string] => {
-          // toFixed drops float noise like 1.4999999, so a step reads the way it's meant
-          const factor = Number((toRem(token) / baseRem).toFixed(4));
-          const value =
-            factor === 1 ? `var(--${base.name})` : `calc(var(--${base.name}) * ${factor})`;
-          return [token.name, value];
-        });
-
-        return `${HEADER}
-/*
- * Every step is a multiple of --${base.name}, so a theme rounds or squares off the whole
- * scale with one value, and can still set a step on its own. The steps point at the base,
- * so they're worked out again on every [data-theme], same as the semantic layer: declared
- * on :root alone, a theme's base would never reach them.
- */
-${THEMED} {
-${declarations(steps)}
-}
-`;
-      },
+      'gm/space': ({ dictionary }) =>
+        scale(
+          dictionary.allTokens.find(isSpacingBase),
+          dictionary.allTokens.filter(isSpacingStep),
+          'tightens or loosens the whole\n * scale with one value',
+        ),
 
       'gm/motion': ({ dictionary }) => {
         const durations = dictionary.allTokens
@@ -311,6 +340,11 @@ ${durations}
             token.name.replace(/^gm-/, ''),
             `var(--${token.name})`,
           ]);
+        // Tailwind works out every p-*, m-*, gap-*, w-*, h-* and so on as `--spacing * n`
+        const spacing = dictionary.allTokens
+          .filter(isSpacingBase)
+          .map((token): [string, string] => ['spacing', `var(--${token.name})`]);
+        const ownScales = [...radii, ...spacing];
 
         return `${HEADER}
 /*
@@ -318,24 +352,25 @@ ${durations}
  * the var resolves there, and a theme override further down the tree never reaches the
  * utility. With it the utility reads \`var(--gm-x)\` directly.
  *
- * Spacing and type stay off Tailwind's own keys.
+ * Type stays off Tailwind's own keys.
  */
 @theme inline {
 ${declarations(colors)}
 }
 
 /*
- * Radius is Tailwind's own scale, so it can't be \`inline\`: that would stop Tailwind
- * emitting \`--radius-*\`, and anything reading \`var(--radius-lg)\` would break. Plain
- * \`@theme\` resolves on :root instead, so the mapping is declared again on every
- * [data-theme] for a theme's \`--gm-radius-*\` to reach \`rounded-*\`.
+ * Radius and spacing are Tailwind's own scales, so they can't be \`inline\`: that would
+ * stop Tailwind emitting \`--radius-*\` and \`--spacing\`, and anything reading
+ * \`var(--radius-lg)\` or \`var(--spacing)\` would break. Plain \`@theme\` resolves on :root
+ * instead, so the mapping is declared again on every [data-theme] for a theme's
+ * \`--gm-radius-*\` and \`--gm-space-base\` to reach the utilities.
  */
 @theme {
-${declarations(radii)}
+${declarations(ownScales)}
 }
 
 ${defaults('[data-theme]')} {
-${declarations(radii)}
+${declarations(ownScales)}
 }
 `;
       },
@@ -432,10 +467,11 @@ ${variables(dictionary)}
         {
           destination: 'primitives.css',
           format: 'gm/declare',
-          filter: (token) => isPrimitive(token) && !isRadiusStep(token),
+          filter: (token) => isPrimitive(token) && !isRadiusStep(token) && !isSpacingStep(token),
           options: { selector: PRIMITIVES },
         },
         { destination: 'radius.css', format: 'gm/radius', filter: isRadius },
+        { destination: 'space.css', format: 'gm/space', filter: isSpacing },
         { destination: 'semantic.css', format: 'gm/semantic', filter: isRoleColor },
         {
           destination: 'typography.css',
@@ -447,7 +483,11 @@ ${variables(dictionary)}
         {
           destination: 'theme.css',
           format: 'gm/tailwind',
-          filter: (token) => isRoleColor(token) || isRadiusStep(token) || isScrimOpacity(token),
+          filter: (token) =>
+            isRoleColor(token) ||
+            isRadiusStep(token) ||
+            isSpacingBase(token) ||
+            isScrimOpacity(token),
         },
         {
           destination: 'colors.json',
@@ -458,7 +498,8 @@ ${variables(dictionary)}
         {
           destination: 'themeable.json',
           format: 'gm/themeable',
-          filter: (token) => isRadius(token) || isScrimOpacity(token),
+          // Only the spacing base: a single step would only change var(--gm-space-4), not p-4
+          filter: (token) => isRadius(token) || isSpacingBase(token) || isScrimOpacity(token),
         },
         { destination: 'themes/colors.json', format: 'gm/theme-colors', filter: isThemeColor },
         ...THEMES.map((theme) => ({

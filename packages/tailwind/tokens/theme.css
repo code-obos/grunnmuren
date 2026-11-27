@@ -8,7 +8,7 @@
  * the var resolves there, and a theme override further down the tree never reaches the
  * utility. With it the utility reads `var(--gm-x)` directly.
  *
- * Spacing and type stay off Tailwind's own keys.
+ * Type stays off Tailwind's own keys.
  */
 @theme inline {
   --color-primary-background-default: var(--gm-color-primary-background-default);
@@ -143,10 +143,11 @@
 }
 
 /*
- * Radius is Tailwind's own scale, so it can't be `inline`: that would stop Tailwind
- * emitting `--radius-*`, and anything reading `var(--radius-lg)` would break. Plain
- * `@theme` resolves on :root instead, so the mapping is declared again on every
- * [data-theme] for a theme's `--gm-radius-*` to reach `rounded-*`.
+ * Radius and spacing are Tailwind's own scales, so they can't be `inline`: that would
+ * stop Tailwind emitting `--radius-*` and `--spacing`, and anything reading
+ * `var(--radius-lg)` or `var(--spacing)` would break. Plain `@theme` resolves on :root
+ * instead, so the mapping is declared again on every [data-theme] for a theme's
+ * `--gm-radius-*` and `--gm-space-base` to reach the utilities.
  */
 @theme {
   --radius-xs: var(--gm-radius-xs);
@@ -157,6 +158,7 @@
   --radius-2xl: var(--gm-radius-2xl);
   --radius-3xl: var(--gm-radius-3xl);
   --radius-4xl: var(--gm-radius-4xl);
+  --spacing: var(--gm-space-base);
 }
 
 :where([data-theme]) {
@@ -168,4 +170,5 @@
   --radius-2xl: var(--gm-radius-2xl);
   --radius-3xl: var(--gm-radius-3xl);
   --radius-4xl: var(--gm-radius-4xl);
+  --spacing: var(--gm-space-base);
 }

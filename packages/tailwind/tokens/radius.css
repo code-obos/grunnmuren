@@ -5,9 +5,9 @@
 
 /*
  * Every step is a multiple of --gm-radius-base, so a theme rounds or squares off the whole
- * scale with one value, and can still set a step on its own. The steps point at the base,
- * so they're worked out again on every [data-theme], same as the semantic layer: declared
- * on :root alone, a theme's base would never reach them.
+ * scale with one value, and can still set a step on its own.
+ * The steps point at the base, so they're worked out again on every [data-theme], same as
+ * the semantic layer: declared on :root alone, a theme's base would never reach them.
  */
 :where(:root, [data-theme]) {
   --gm-radius-xs: calc(var(--gm-radius-base) * 0.5);

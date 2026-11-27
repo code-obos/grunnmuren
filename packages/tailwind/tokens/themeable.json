@@ -1,6 +1,12 @@
 {
   "tokens": [
     {
+      "path": "spacing.base",
+      "name": "gm-space-base",
+      "type": "dimension",
+      "value": "0.25rem"
+    },
+    {
       "path": "radius.base",
       "name": "gm-radius-base",
       "type": "dimension",

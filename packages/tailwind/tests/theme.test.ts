@@ -242,6 +242,28 @@ describe('buildTheme', () => {
     });
   });
 
+  describe('spacing', () => {
+    test('the base ends up in the CSS', () => {
+      const { css, errors } = build({ spacing: { base: '3px' } });
+      expect(errors).toEqual([]);
+      expect(css).toBe(`[data-theme='nybolig'] {\n  --gm-space-base: 3px;\n}\n`);
+    });
+
+    test('-2px is not a spacing', () => {
+      expect(build({ spacing: { base: '-2px' } }).errors).toEqual([
+        expect.objectContaining({ code: 'invalid-dimension', path: 'spacing.base' }),
+      ]);
+    });
+
+    // p-4 is Tailwind's --spacing times 4, not --gm-space-4, so a single step would only
+    // change the variable and leave the utility as it was
+    test('a single step is not a token', () => {
+      expect(build({ spacing: { 4: '1rem' } }).errors).toEqual([
+        expect.objectContaining({ code: 'unknown-token', path: 'spacing.4' }),
+      ]);
+    });
+  });
+
   describe('scrim', () => {
     test('the opacity ends up in the CSS', () => {
       const { css, errors } = build({ opacity: { scrim: '0.6' } });

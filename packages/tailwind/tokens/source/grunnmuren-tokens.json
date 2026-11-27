@@ -134,6 +134,11 @@
     },
     "spacing": {
       "$description": "Padding, space-between og width/height er slått sammen til én felles skala. Formel: px = token-tall × 4. NB: kildedokumentet (skjermbilde) hadde en regnefeil i rem-kolonnen for space-28 t.o.m. space-60 — rem-verdiene under er korrigert til px/16.",
+      "base": {
+        "$type": "dimension",
+        "$value": "0.25rem",
+        "$description": "What the steps are multiples of, and Tailwind's --spacing, so every p-*, m-*, gap-*, w-* and h-* follows it."
+      },
       "0": { "$type": "dimension", "$value": "0rem" },
       "px": {
         "$type": "dimension",
