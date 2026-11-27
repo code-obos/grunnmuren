@@ -67,6 +67,8 @@ export function ComponentInfo({ name, description, props, children }: ComponentI
 
 export function CountryDiffBox({ children }: { children: React.ReactNode }) {
   return (
+    // Alertbox requires a role prop, so it can't be swapped for <output>
+    // oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
     <Alertbox variant="info" role="status">
       <Heading level={3} className="not-prose">
         Norge vs Sverige

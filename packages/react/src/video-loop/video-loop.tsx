@@ -45,6 +45,8 @@ export const VideoLoop = ({ src, format, alt, poster, className }: VideoLoopProp
 
   useEffect(() => {
     if (prefersReducedMotion === false) {
+      // Starts the video element, an external system, and play() has to set state to hide the button
+      // oxlint-disable-next-line react/set-state-in-effect
       play();
     } else if (prefersReducedMotion) {
       pause();

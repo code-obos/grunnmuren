@@ -12,6 +12,8 @@ interface PropsTableProps {
 
 export const PropsTable = ({ componentName }: PropsTableProps) => {
   const cleanedComponentName = stegaClean(componentName);
+  // The component name comes from Sanity, so the lookup has to be dynamic
+  // oxlint-disable-next-line import/namespace
   const componentEntry = props[cleanedComponentName];
 
   if (!componentEntry) {

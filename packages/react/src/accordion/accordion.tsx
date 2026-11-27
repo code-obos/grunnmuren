@@ -102,6 +102,8 @@ function AccordionItem(props: AccordionItemProps) {
                 // Uses pseudo elements for vertical padding, since that doesn't affect the height when the accordion is closed
                 'description font-light px-3.5 data-[expanded]:after:h-3.5 relative overflow-hidden border-primary-border-subtle border-l-[3px] before:relative before:block before:h-1.5 after:relative after:block after:h-1.5',
               _outerWrapper: (children) => (
+                // DisclosurePanel renders its own element, role="region" is the supported way to make it one
+                // oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
                 <DisclosurePanel aria-labelledby={buttonId} role="region">
                   {children}
                 </DisclosurePanel>

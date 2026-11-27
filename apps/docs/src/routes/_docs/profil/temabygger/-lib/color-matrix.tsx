@@ -137,9 +137,7 @@ export const ColorMatrix = ({ builder }: { builder: ThemeBuilder }) => {
           ))}
         </TableBody>
       </Table>
-      <p className="sr-only" role="status">
-        {copied}
-      </p>
+      <output className="sr-only">{copied}</output>
     </div>
   );
 };

@@ -3,9 +3,9 @@ import { Link } from '@tanstack/react-router';
 
 import logoUrl from '@/assets/OBOS_Svart_Liggende.svg?url';
 
-export function Footer() {
-  const currentYear = new Date().getFullYear();
+const currentYear = new Date().getFullYear();
 
+export function Footer() {
   return (
     <footer className="border-t-gray-light mt-8 border-t">
       <div className="grid grid-flow-col py-8">

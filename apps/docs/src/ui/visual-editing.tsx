@@ -28,8 +28,6 @@ function getStudioUrl(): string {
  */
 function VisualEditingInner({ client: _client }: { client: SanityClient }) {
   const router = useRouter();
-  const routerRef = useRef(router);
-  routerRef.current = router;
 
   const navigateRef = useRef<HistoryAdapterNavigate | undefined>(undefined);
 
@@ -44,11 +42,11 @@ function VisualEditingInner({ client: _client }: { client: SanityClient }) {
       update(update) {
         switch (update.type) {
           case 'push':
-            return routerRef.current.navigate({ to: update.url });
+            return router.navigate({ to: update.url });
           case 'replace':
-            return routerRef.current.navigate({ to: update.url, replace: true });
+            return router.navigate({ to: update.url, replace: true });
           case 'pop':
-            return routerRef.current.history.back();
+            return router.history.back();
           default:
             throw new Error(
               `Unknown history update type: ${String((update as { type: string }).type)}`,
@@ -56,7 +54,7 @@ function VisualEditingInner({ client: _client }: { client: SanityClient }) {
         }
       },
     }),
-    [],
+    [router],
   );
 
   // Enable Studio overlays + live mutation refresh.
