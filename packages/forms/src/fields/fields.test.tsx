@@ -6,6 +6,7 @@ import { expect, test } from 'vitest';
 import { createGrunnmurenFormHook } from '../create-grunnmuren-form-hook';
 import { Checkbox, ComboboxItem, Radio, SelectItem } from '../index';
 import type { Locale } from '../locale';
+import { TextInput } from './text-field';
 
 const hook = createGrunnmurenFormHook();
 
@@ -318,4 +319,138 @@ test('field components are matched to the value type', () => {
     );
   }
   expect(Test).toBeTypeOf('function');
+});
+
+test('TextField: consumer onChange and onBlur run after the form handlers', () => {
+  const calls: string[] = [];
+  const field = {
+    name: 'name',
+    value: '',
+    errors: [],
+    handleChange: (value: string) => calls.push(`form change ${value}`),
+    handleBlur: () => calls.push('form blur'),
+  } as unknown as Parameters<typeof TextInput>[0]['field'];
+  const element = TextInput({
+    field,
+    label: 'Navn',
+    onChange: (value) => calls.push(`consumer change ${value}`),
+    onBlur: () => calls.push('consumer blur'),
+  });
+  element.props.onChange('a');
+  element.props.onBlur({});
+  expect(calls).toEqual(['form change a', 'consumer change a', 'form blur', 'consumer blur']);
+});
+
+test('event props are accepted on every field', () => {
+  const { useAppForm } = hook;
+  function Test() {
+    const form = useAppForm({
+      defaultValues: { text: '', num: null as number | null, on: false, many: [] as string[] },
+    });
+    return (
+      <>
+        <form.Field name="text">
+          {(f) => (
+            <>
+              <f.TextField label="a" onChange={(v: string) => v} onBlur={() => {}} />
+              <f.TextAreaField label="a" onChange={(v: string) => v} onBlur={() => {}} />
+              <f.RadioGroupField label="a" onChange={(v: string) => v} onBlur={() => {}}>
+                <Radio value="a">A</Radio>
+              </f.RadioGroupField>
+              <f.PhoneField onChange={(v: string) => v} onBlur={() => {}} />
+              <f.SelectField label="a" onSelectionChange={() => {}} onBlur={() => {}}>
+                <SelectItem id="a">A</SelectItem>
+              </f.SelectField>
+              <f.ComboboxField label="a" onSelectionChange={() => {}} onBlur={() => {}}>
+                <ComboboxItem id="a">A</ComboboxItem>
+              </f.ComboboxField>
+            </>
+          )}
+        </form.Field>
+        <form.Field name="num">
+          {(f) => <f.NumberField label="a" onChange={(v: number) => v} onBlur={() => {}} />}
+        </form.Field>
+        <form.Field name="on">
+          {(f) => (
+            <f.CheckboxField onChange={(v: boolean) => v} onBlur={() => {}}>
+              ok
+            </f.CheckboxField>
+          )}
+        </form.Field>
+        <form.Field name="many">
+          {(f) => (
+            <f.CheckboxGroupField label="a" onChange={(v: string[]) => v}>
+              <Checkbox value="a">A</Checkbox>
+            </f.CheckboxGroupField>
+          )}
+        </form.Field>
+      </>
+    );
+  }
+  expect(Test).toBeTypeOf('function');
+});
+
+test('validationBehavior is owned by the form', () => {
+  const { useAppForm } = hook;
+  function Test() {
+    const form = useAppForm({ defaultValues: { text: '' } });
+    return (
+      <form.Field name="text">
+        {(f) => (
+          <>
+            {/* @ts-expect-error validationBehavior is forced to "aria" */}
+            <f.TextField label="a" validationBehavior="native" />
+            {/* @ts-expect-error validationBehavior is forced to "aria" */}
+            <f.PhoneField validationBehavior="native" />
+          </>
+        )}
+      </form.Field>
+    );
+  }
+  expect(Test).toBeTypeOf('function');
+});
+
+test('FileField: other FileUpload props pass through', () => {
+  const { useAppForm } = hook;
+  function Test() {
+    const form = useAppForm({ defaultValues: { files: [] as File[] } });
+    return (
+      <form.Field name="files">
+        {(f) => <f.FileField title="Last opp vedlegg" onChange={() => {}} />}
+      </form.Field>
+    );
+  }
+  expect(renderToStaticMarkup(withLocale('nb', <Test />))).toContain('title="Last opp vedlegg"');
+});
+
+test('BirthDateField: merges consumer aria-describedby with the hint id', () => {
+  const { useAppForm } = hook;
+  function Test() {
+    const form = useAppForm({ defaultValues: { birth: '' } });
+    return (
+      <form.Field name="birth">
+        {(f) => <f.BirthDateField aria-describedby="extra-id" />}
+      </form.Field>
+    );
+  }
+  const html = renderToStaticMarkup(withLocale('nb', <Test />));
+  const hintId = html.match(/<span id="([^"]+)" class="sr-only">/)?.[1];
+  expect(html).toContain(`${hintId} extra-id"`);
+});
+
+test('Form: passes <form> attributes and chains onSubmit', () => {
+  const { useAppForm } = hook;
+  function Test() {
+    const form = useAppForm({ defaultValues: { text: '' } });
+    return (
+      <form.AppForm>
+        <form.Form aria-label="Skjema" id="f" onSubmit={() => {}} className="grid gap-2">
+          x
+        </form.Form>
+      </form.AppForm>
+    );
+  }
+  const html = renderToStaticMarkup(<Test />);
+  expect(html).toContain('<form aria-label="Skjema" id="f" noValidate=""');
+  expect(html).toContain('<div class="grid gap-2">');
 });

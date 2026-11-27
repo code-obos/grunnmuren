@@ -6,10 +6,15 @@ import { firstErrorMessage } from '../first-error-message';
 
 export type SelectFieldProps = Omit<
   SelectProps<object>,
-  'name' | 'selectedKey' | 'defaultSelectedKey' | 'onSelectionChange' | 'onBlur' | 'errorMessage'
+  'name' | 'selectedKey' | 'defaultSelectedKey' | 'errorMessage' | 'validationBehavior'
 >;
 
-function SelectInput({ field, ...props }: SelectFieldProps & { field: FieldWithValue<string> }) {
+function SelectInput({
+  field,
+  onSelectionChange,
+  onBlur,
+  ...props
+}: SelectFieldProps & { field: FieldWithValue<string> }) {
   return (
     <Select
       {...props}
@@ -17,8 +22,14 @@ function SelectInput({ field, ...props }: SelectFieldProps & { field: FieldWithV
       name={field.name}
       // '' means nothing selected, React Aria wants null for that
       selectedKey={field.value === '' ? null : field.value}
-      onSelectionChange={(key) => field.handleChange(key == null ? '' : String(key))}
-      onBlur={field.handleBlur}
+      onSelectionChange={(key) => {
+        field.handleChange(key == null ? '' : String(key));
+        onSelectionChange?.(key);
+      }}
+      onBlur={(event) => {
+        field.handleBlur();
+        onBlur?.(event);
+      }}
       errorMessage={firstErrorMessage(field)}
     />
   );

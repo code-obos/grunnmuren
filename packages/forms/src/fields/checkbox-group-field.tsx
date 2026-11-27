@@ -7,11 +7,13 @@ import { firstErrorMessage } from '../first-error-message';
 
 export type CheckboxGroupFieldProps = Omit<
   ComponentProps<typeof CheckboxGroup>,
-  'name' | 'value' | 'onChange' | 'onBlur' | 'errorMessage'
+  'name' | 'value' | 'errorMessage' | 'validationBehavior'
 >;
 
 function CheckboxGroupInput({
   field,
+  onChange,
+  onBlur,
   ...props
 }: CheckboxGroupFieldProps & { field: FieldWithValue<string[]> }) {
   return (
@@ -20,8 +22,14 @@ function CheckboxGroupInput({
       validationBehavior="aria"
       name={field.name}
       value={field.value}
-      onChange={field.handleChange}
-      onBlur={field.handleBlur}
+      onChange={(value) => {
+        field.handleChange(value);
+        onChange?.(value);
+      }}
+      onBlur={(event) => {
+        field.handleBlur();
+        onBlur?.(event);
+      }}
       errorMessage={firstErrorMessage(field)}
     />
   );

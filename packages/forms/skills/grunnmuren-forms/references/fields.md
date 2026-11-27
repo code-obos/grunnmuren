@@ -23,6 +23,10 @@ Item components are exported from `@obosbbl/grunnmuren-forms`: `Radio`, `SelectI
 
 Select/Combobox props are Grunnmuren's `SelectProps<object>` / `ComboboxProps<object>` minus `selectedKey`, `defaultSelectedKey`, `onSelectionChange`.
 
+## Overriding props
+
+Every Grunnmuren prop passes through and wins over the field's defaults. `onChange`/`onBlur` (`onSelectionChange` on Select and Combobox) are chained after the form's own handlers and receive the raw Grunnmuren value. `name`, `value`/`selectedKey`, `errorMessage` and `validationBehavior` are owned by the form and are type errors if passed. `FileField` takes `FileUpload` props (minus `files`, `children`, `errorMessage`, `name`) plus `label`, `description`, `buttonText`.
+
 ## Domain fields
 
 Built on `TextField` (value `string`, empty `''`). Labels and attributes follow the `GrunnmurenProvider` locale. All defaults go first, so any prop you pass overrides them (including `label`).
@@ -65,7 +69,7 @@ Pair them with the schema factories below, with the same locale as the provider.
 
 ## Form components
 
-- `form.Form` (props `id?`, `className?`, `children`): `<form noValidate>`, prevent-default, `form.handleSubmit()`, children in a `grid gap-6 md:gap-8` div.
+- `form.Form` (props: any `<form>` attribute except `noValidate`, plus `className?` for the inner grid div and `children`): `<form noValidate>`, prevent-default, consumer `onSubmit` if any, then `form.handleSubmit()`, children in a `grid gap-6 md:gap-8` div.
 - `form.SubmitButton`: Grunnmuren `Button type="submit"`, pending while `isSubmitting`. Props: Button props minus `type`, `isPending`, `href`.
 
 ## Other exports

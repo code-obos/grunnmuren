@@ -7,18 +7,29 @@ import { firstErrorMessage } from '../first-error-message';
 
 export type TextFieldProps = Omit<
   ComponentProps<typeof GrunnmurenTextField>,
-  'name' | 'value' | 'onChange' | 'onBlur' | 'errorMessage'
+  'name' | 'value' | 'errorMessage' | 'validationBehavior'
 >;
 
-export function TextInput({ field, ...props }: TextFieldProps & { field: FieldWithValue<string> }) {
+export function TextInput({
+  field,
+  onChange,
+  onBlur,
+  ...props
+}: TextFieldProps & { field: FieldWithValue<string> }) {
   return (
     <GrunnmurenTextField
       {...props}
       validationBehavior="aria"
       name={field.name}
       value={field.value}
-      onChange={field.handleChange}
-      onBlur={field.handleBlur}
+      onChange={(value) => {
+        field.handleChange(value);
+        onChange?.(value);
+      }}
+      onBlur={(event) => {
+        field.handleBlur();
+        onBlur?.(event);
+      }}
       errorMessage={firstErrorMessage(field)}
     />
   );

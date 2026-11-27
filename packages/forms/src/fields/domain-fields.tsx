@@ -88,6 +88,7 @@ function NationalIdNumberInput({ field, ...props }: DomainProps) {
 function BirthDateInput({
   field,
   className,
+  'aria-describedby': describedBy,
   ...props
 }: DateFieldProps & { field: FieldWithValue<string> }) {
   const locale = useFormsLocale();
@@ -98,10 +99,10 @@ function BirthDateInput({
         label={fieldTranslations[locale].birthDate.label}
         autoComplete="bday"
         size={10}
-        // Tells screen reader users this is a date picker, not just a date to read out.
-        aria-describedby={hintId}
-        className={['[&>input]:w-fit [&>input]:min-w-32', className].filter(Boolean).join(' ')}
         {...props}
+        // Tells screen reader users this is a date picker, not just a date to read out.
+        aria-describedby={[hintId, describedBy].filter(Boolean).join(' ')}
+        className={['[&>input]:w-fit [&>input]:min-w-32', className].filter(Boolean).join(' ')}
         field={field}
       />
       <span id={hintId} className="sr-only">
