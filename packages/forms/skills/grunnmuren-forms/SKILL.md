@@ -1,6 +1,6 @@
 ---
 name: grunnmuren-forms
-description: Use whenever you build, change or review a form, a form field (text, textarea, number, phone, email, first/last name, member number, file upload, fødselsnummer/personnummer, date, birth date, select, combobox, checkbox, checkbox group, radio group) or form validation in a React app that uses Grunnmuren (obos.no, obos.se, medlem-frontend and similar). Use @obosbbl/grunnmuren-forms, which wraps TanStack Form v2 and Grunnmuren with shared fields, zod schemas and nb/sv/en messages, instead of hand-wiring Grunnmuren inputs with useState, react-hook-form or plain TanStack fields. Covers install, GrunnmurenProvider locale, hook setup, complete forms with validation, submit and server errors, custom fields and common mistakes.
+description: Use whenever you build, change or review a form, a form field (text, textarea, number, phone, email, first/last name, member number, file upload, fødselsnummer/personnummer, address/adresse autocomplete with c/o, date, birth date, select, combobox, checkbox, checkbox group, radio group) or form validation, in a React app that uses Grunnmuren (obos.no, obos.se, medlem-frontend and similar). Use @obosbbl/grunnmuren-forms, which wraps TanStack Form v2 and Grunnmuren with shared fields, zod schemas and nb/sv/en messages, instead of hand-wiring Grunnmuren inputs with useState, react-hook-form or plain TanStack fields. Covers install, GrunnmurenProvider locale, hook setup, complete forms with validation, submit and server errors, custom fields and common mistakes.
 ---
 
 # Grunnmuren forms (`@obosbbl/grunnmuren-forms`)
@@ -13,7 +13,7 @@ Shared form layer for apps using Grunnmuren: TanStack Form v2 (engine) + Grunnmu
 - Reviewing a form that hand-wires Grunnmuren `TextField` with `useState`, or uses another form library: migrate it.
 - Field catalog and schema signatures: `references/fields.md`. Read it before picking fields.
 
-Do not use it for address autocomplete: not in the package.
+Address autocomplete is not in the package (private `@code-obos` dependency): see "Address fields".
 
 ## Install
 
@@ -265,6 +265,10 @@ Conventions:
 - Map between the form state and what React Aria wants in the field (`'' <-> null`, `null <-> NaN`), not in the form.
 - No error-visibility logic: `field.errors` is already filtered by the form's `errorVisibility`.
 - Register it via `fieldComponents` in `createGrunnmurenFormHook`, so it is typed like the built-ins.
+
+## Address fields
+
+The package has no address field. The autocomplete is `@code-obos/grunnmuren-address-autocomplete`, private on GitHub Packages, so each app wires it in itself as a custom field with a zod schema, Swedish manual entry and c/o. Read `references/address-field.md` for the install (`.npmrc`, token, Tailwind `@source`), a complete `AddressField`, and the `key` remount that the uncontrolled component needs. Do not hand-roll it from the README.
 
 ## Overriding props
 
