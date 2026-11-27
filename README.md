@@ -43,6 +43,8 @@ pnpm install
 
 #### Linting
 
+A [lefthook](https://lefthook.dev) pre-commit hook runs `oxfmt` and `oxlint --fix` on staged files, and is installed by `pnpm install`.
+
 The following command runs oxlint.
 
 ```bash

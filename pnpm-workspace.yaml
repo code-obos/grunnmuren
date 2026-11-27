@@ -6,6 +6,7 @@ allowBuilds:
   '@parcel/watcher': false
   '@swc/core': false
   esbuild: false
+  lefthook: true
   protobufjs: false
   unrs-resolver: false
 
