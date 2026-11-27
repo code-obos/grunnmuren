@@ -5,7 +5,7 @@ import type { ComponentProps, ReactNode } from 'react';
 
 export type FormProps = Omit<ComponentProps<'form'>, 'noValidate' | 'children' | 'className'> & {
   children: ReactNode;
-  /** Replaces the default grid layout class on the inner div (not the `<form>` element). */
+  /** Replaces the default layout classes (single column, max 500px) on the inner div, not the `<form>`. */
   className?: string;
 };
 
@@ -13,7 +13,12 @@ export type SubmitButtonProps = Omit<ButtonProps, 'type' | 'isPending' | 'href'>
 
 /** The form is read lazily, because the context hook only exists once the hook factory has run. */
 export function createFormComponents(useFormContext: () => AnyReactFormApi) {
-  function Form({ children, className = 'grid gap-6 md:gap-8', onSubmit, ...props }: FormProps) {
+  function Form({
+    children,
+    className = 'grid max-w-[500px] gap-6',
+    onSubmit,
+    ...props
+  }: FormProps) {
     const form = useFormContext();
     return (
       <form

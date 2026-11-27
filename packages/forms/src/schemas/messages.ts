@@ -44,7 +44,7 @@ export const schemaMessages: Record<Locale, SchemaMessages> = {
       invalid: 'Du må fylle ut en gyldig e-post.',
       tooLong: 'E-posten er for lang. Maks lengde er 102 tegn.',
       specialCharacters: 'E-postadressen kan ikke inneholde spesialtegn, Æ, Ø eller Å.',
-      plusSign: 'E-postadressen kan ikke inneholde "+".',
+      plusSign: "E-postadressen kan ikke inneholde '+'.",
     },
     memberNumber: {
       required: 'Du må fylle ut medlemsnummer.',
@@ -60,9 +60,9 @@ export const schemaMessages: Record<Locale, SchemaMessages> = {
       tooMany: (maxFiles) => `Du kan ikke laste opp mer enn ${maxFiles} filer`,
     },
     nationalIdNumber: {
-      required: 'Du må fylle ut fødselsnummer.',
-      invalid: 'Du må fylle ut et gyldig fødselsnummer.',
-      invalidWithDNumber: 'Du må fylle ut et gyldig fødselsnummer eller d-nummer.',
+      required: 'Du må fylle ut fødsels- og personnummer.',
+      invalid: 'Du må fylle ut et gyldig fødsels- og personnummer.',
+      invalidWithDNumber: 'Du må fylle ut et gyldig fødsels- og personnummer eller d-nummer.',
     },
     requiredText: {
       required: 'Du må fylle ut dette feltet.',

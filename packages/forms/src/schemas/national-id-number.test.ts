@@ -56,8 +56,8 @@ test('nb accepts a d-number only when allowed', () => {
 });
 
 test.each([
-  ['nb', false, 'Du må fylle ut et gyldig fødselsnummer.'],
-  ['nb', true, 'Du må fylle ut et gyldig fødselsnummer eller d-nummer.'],
+  ['nb', false, 'Du må fylle ut et gyldig fødsels- og personnummer.'],
+  ['nb', true, 'Du må fylle ut et gyldig fødsels- og personnummer eller d-nummer.'],
   ['sv', false, 'Du måste fylla i ett giltigt personnummer.'],
   ['en', false, 'Please enter a valid national identity number.'],
   ['en', true, 'Please enter a valid national identity number or D number.'],
@@ -66,7 +66,7 @@ test.each([
 });
 
 test.each([
-  ['nb', 'Du må fylle ut fødselsnummer.'],
+  ['nb', 'Du må fylle ut fødsels- og personnummer.'],
   ['sv', 'Du måste fylla i personnummer.'],
   ['en', 'Please enter a national identity number.'],
 ] as const)('%s has the exact required message', (locale, message) => {

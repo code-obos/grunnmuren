@@ -295,6 +295,23 @@ Existing package fields only: `CheckboxField` toggles, `TextField` takes the nam
 
 with `defaultValues: { address: null as Address | null, useCareOf: false, careOfName: '' }`. Swedish: label `c/o (namn på person)`, `Använd c/o-adress`.
 
+The reference form (grunnmuren docs, `referanseskjema`) also shows the picked address under the combobox, so the user sees what will be submitted (`nb` label `Adressen du har valgt`, translate for other locales). Show it only when `address` is set. The c/o checkbox starts unchecked.
+
+```tsx
+<div>
+  <p className="font-semibold">Adressen du har valgt</p>
+  <div className="bg-gray-lightest flex flex-col rounded-lg p-4">
+    <span>
+      {address.streetAddress} {address.houseNumber}
+      {address.entranceNumber}
+    </span>
+    <span>
+      {address.postalCode} {address.postalDistrict}
+    </span>
+  </div>
+</div>
+```
+
 Schema, max 150 characters, required only when checked:
 
 ```ts
