@@ -1,0 +1,13 @@
+# https://lefthook.dev/configuration/
+pre-commit:
+  piped: true
+  jobs:
+    - name: fmt
+      glob: '*.{js,jsx,ts,tsx,mjs,cjs,json,jsonc,css,md,yml,yaml}'
+      exclude: '*.lock.yml'
+      run: pnpm exec oxfmt --no-error-on-unmatched-pattern {staged_files}
+      stage_fixed: true
+    - name: lint
+      glob: '*.{js,jsx,ts,tsx,mjs,cjs}'
+      run: pnpm exec oxlint --fix {staged_files}
+      stage_fixed: true
