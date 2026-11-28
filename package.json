@@ -31,10 +31,10 @@
     "@changesets/cli": "3.0.3",
     "@obosbbl/grunnmuren-tailwind": "workspace:*",
     "@react-aria/optimize-locales-plugin": "2.1.0",
-    "@storybook/addon-docs": "10.6.7",
-    "@storybook/addon-vitest": "10.6.7",
-    "@storybook/builder-vite": "10.6.7",
-    "@storybook/react-vite": "10.6.7",
+    "@storybook/addon-docs": "10.6.9",
+    "@storybook/addon-vitest": "10.6.9",
+    "@storybook/builder-vite": "10.6.9",
+    "@storybook/react-vite": "10.6.9",
     "@tailwindcss/node": "catalog:",
     "@tailwindcss/vite": "catalog:",
     "@types/bun": "1.4.4",
@@ -52,7 +52,7 @@
     "publint": "0.3.25",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "storybook": "10.6.7",
+    "storybook": "10.6.9",
     "tailwindcss": "catalog:",
     "tsdown": "0.23.7",
     "typescript": "5.9.3",
@@ -60,7 +60,7 @@
     "vitest": "5.1.1"
   },
   "devDependencies": {
-    "lefthook": "2.2.2"
+    "lefthook": "2.2.3"
   },
   "devEngines": {
     "runtime": {
@@ -69,5 +69,5 @@
       "onFail": "download"
     }
   },
-  "packageManager": "pnpm@12.21.0+sha512.66fd8278ee28935ce951792d34367ff3af5c432a2756445823029533835b8da529bbe0be5130afd56ed0713fb8789e47bad82d93bd5ae2fe54b15562d6276ef0"
+  "packageManager": "pnpm@12.23.0+sha512.02da94ffaf133f46074322afe552f90d40b5f71ae259aefbccdacc5085b1d617e98d65e0131f5748b9b67445978ee5055d7d59a473f1eef0d504854fefcd5975"
 }
